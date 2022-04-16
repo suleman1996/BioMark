@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import {NativeBaseProvider} from 'native-base';
+import React, {useState} from 'react';
 import {
-  Platform, SafeAreaView, StatusBar,
-  StyleSheet, useColorScheme
+  Platform,
+  
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
 } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
-import { MenuProvider } from 'react-native-popup-menu';
-import { } from 'react-native-safe-area-context';
+import {MenuProvider} from 'react-native-popup-menu';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from './app/assets/colors/colors';
 import AppNavigator from './app/navigation/app-navigator';
 import AuthNavigator from './app/navigation/autth-navigator';
 import AuthContext from './app/utils/auth-context';
-
-
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
@@ -19,7 +21,7 @@ const App = () => {
   const [user, setUser] = useState('');
 
   return (
-    <>
+    <NativeBaseProvider>
       <AuthContext.Provider value={{user, setUser}}>
         <MenuProvider>
           <StatusBar
@@ -37,7 +39,7 @@ const App = () => {
         </MenuProvider>
       </AuthContext.Provider>
       <FlashMessage floating position="top" />
-    </>
+    </NativeBaseProvider>
   );
 };
 
