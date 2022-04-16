@@ -1,17 +1,46 @@
+import React, { useState } from 'react';
 import {
-  Center,
-  NativeBaseProvider, Text
-} from 'native-base';
-import React from 'react';
+  Platform, SafeAreaView, StatusBar,
+  StyleSheet, useColorScheme
+} from 'react-native';
+import FlashMessage from 'react-native-flash-message';
+import { MenuProvider } from 'react-native-popup-menu';
+import { } from 'react-native-safe-area-context';
+import colors from './src/assets/colors/colors';
+import AppNavigator from './src/navigation/app-navigator';
+import AuthNavigator from './src/navigation/autth-navigator';
+import AuthContext from './src/utils/auth-context';
+
 
 
 const App = () => {
+  const isDarkMode = useColorScheme() === 'light';
+
+  const [user, setUser] = useState('');
+
   return (
-    <NativeBaseProvider>
-      <Center>
-        <Text>Base Project</Text>
-      </Center>
-    </NativeBaseProvider>
+    <>
+      <AuthContext.Provider value={{user, setUser}}>
+        <MenuProvider>
+          <StatusBar
+            backgroundColor={colors.blue}
+            barStyle={
+              Platform.OS === 'android' && isDarkMode
+                ? 'light-content'
+                : 'dark-content'
+            }
+          />
+
+          <SafeAreaView edges={['top']} style={{flex: 1}}>
+            {user ? <AppNavigator /> : <AuthNavigator />}
+          </SafeAreaView>
+        </MenuProvider>
+      </AuthContext.Provider>
+      <FlashMessage floating position="top" />
+    </>
   );
 };
+
+const styles = StyleSheet.create({});
+
 export default App;
