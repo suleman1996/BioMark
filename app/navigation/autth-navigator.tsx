@@ -8,8 +8,8 @@ import CreatePassword from '../screens/create-password/create-password';
 import ForgotPassword from '../screens/forgot-password/forgot-password';
 import PasswordOTP from '../screens/otp-verification-password/otp-password';
 import PasswordChanged from '../screens/password-changed/password-changed';
+import Signup from '../screens/auth/signup';
 import SignupVerification from '../screens/signup-verification/signup-verification';
-import Signup from '../screens/signup/signup'; //signup-1
 import Splash from '../screens/splash/splash';
 import { navigationRef } from '../services/navRef';
 

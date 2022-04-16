@@ -1,31 +1,22 @@
+import { useNavigation } from '@react-navigation/native';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import {
-  StyleSheet,
-  FlatList,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Keyboard,
+  FlatList, Keyboard, ScrollView, Text, TouchableOpacity, View
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import styles from './styles';
-import TextInput from '../../components/input-field/text-input';
-import EyeOn from '../../assets/svgs/eye-on';
-import EyeOff from '../../assets/svgs/eye-off';
-import Button from '../../components/button/button';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
-import BackIcon from '../../assets/svgs/back';
+import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
-import DatePicker from '../../components/date-picker/date-picker';
-import CheckBox from '../../components/check-box/check-box';
-import PhoneNumber from '../../components/phone-number/phone-number';
-import {useNavigation} from '@react-navigation/native';
-import {Formik} from 'formik';
 import * as Yup from 'yup';
-import ActivityIndicator from '../../components/loader/activity-indicator';
-import {signup} from '../../services/auth-service';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import colors from '../../../assets/colors/colors';
+import BackIcon from '../../../assets/svgs/back';
+import Button from '../../../components/button/button';
+import CheckBox from '../../../components/check-box/check-box';
+import DatePicker from '../../../components/date-picker/date-picker';
+import TextInput from '../../../components/input-field/text-input';
+import ActivityIndicator from '../../../components/loader/activity-indicator';
+import PhoneNumber from '../../../components/phone-number/phone-number';
+import { signup } from '../../../services/auth-service';
+import styles from './styles';
 
 export default function Signup() {
   //initial hooks define
