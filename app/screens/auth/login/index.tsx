@@ -1,38 +1,31 @@
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useNavigation} from '@react-navigation/native';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   Keyboard,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
   Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import React, {useState, useEffect, useContext} from 'react';
-import {useNavigation} from '@react-navigation/native';
-import CountryPicker, {DEFAULT_THEME} from 'react-native-country-picker-modal';
-import Logo from '../../assets/svgs/logo-name';
-import styles from './styles';
+import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
+import {showMessage} from 'react-native-flash-message';
+import colors from '../../../assets/colors/colors';
+import fonts from '../../../assets/fonts/fonts';
+import Apple from '../../../assets/svgs/apple';
+import Facebook from '../../../assets/svgs/facebook';
+import Google from '../../../assets/svgs/google';
+import Logo from '../../../assets/svgs/logo-name';
+import Button from '../../../components/button/button';
+import ErrorModal from '../../../components/error-modal/error-modal';
+import TextInput from '../../../components/input-field/text-input';
+import ActivityIndicator from '../../../components/loader/activity-indicator';
+import PhoneNumber from '../../../components/phone-number/phone-number';
+import {login} from '../../../services/auth-service';
 // import InputField from '../../components/inputField/inputField';
-import AuthContext from '../../utils/auth-context';
-import TextInput from '../../components/input-field/text-input';
-import PhoneNumber from '../../components/phone-number/phone-number';
-import Google from '../../assets/svgs/google';
-import Facebook from '../../assets/svgs/facebook';
-import Button from '../../components/button/button';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
-import Apple from '../../assets/svgs/apple';
-import ActivityIndicator from '../../components/loader/activity-indicator';
-import ErrorModal from '../../components/error-modal/error-modal';
-import {login} from '../../services/auth-service';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {showMessage, hideMessage} from 'react-native-flash-message';
-import {
-  LoginManager,
-  AccessToken,
-  GraphRequest,
-  LoginButton,
-  GraphRequestManager,
-} from 'react-native-fbsdk-next';
+import AuthContext from '../../../utils/auth-context';
+import styles from './styles';
 
 export default function Login() {
   const navigations = useNavigation();

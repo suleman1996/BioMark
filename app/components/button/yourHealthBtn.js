@@ -1,23 +1,23 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import Covid19 from '../../../src/assets/svgs/covid-19';
 import fonts from '../../assets/fonts/fonts';
-import { Button } from 'react-native-paper';
 import colors from '../../assets/colors/colors';
+import YourHealth from '../../../app/assets/svgs/your-health';
+import { Button } from 'react-native-paper';
 // import styles from 'react-native-indicators/src/components/ball-indicator/styles';
 
-export default function Covid19Btn({ text, onPress }) {
+export default function YourHealthBtn({ text, onPress }) {
     return (
         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
             <TouchableOpacity>
                 <View style={styles.circleBtn}>
-                    <Covid19 />
+                    <YourHealth />
                 </View>
             </TouchableOpacity>
             <View>
-                <Text style={{ fontFamily: fonts.bold, fontSize: 15, color: colors.heading }}>COVID-19</Text>
+                <Text style={{ fontFamily: fonts.bold, fontSize: 15, color: colors.heading }}>Your Health</Text>
             </View>
-        </View>
+        </View >
     )
 }
 

@@ -5,7 +5,6 @@ import {StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
 import Splash from '../screens/splash/splash';
-import Login from '../screens/login/login';
 import {navigationRef} from '../services/navRef';
 import ForgotPassword from '../screens/forgot-password/forgot-password';
 import PasswordOTP from '../screens/otp-verification-password/otp-password';
@@ -17,6 +16,7 @@ import Confirmation from '../screens/confirmation/confirmation';
 import {MainStack} from './main-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { Nav_Screens } from './constants';
+import Login from '../screens/auth/login';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,14 +45,14 @@ const StackNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="AuthenticationStack"
         component={AuthenticationStack}
-      /> */}
-      <Stack.Screen
+      />
+      {/* <Stack.Screen
         name={Nav_Screens.Main_Navigator}
         component={BottomTabNavigator}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

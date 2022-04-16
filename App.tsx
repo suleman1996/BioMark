@@ -6,10 +6,10 @@ import {
 import FlashMessage from 'react-native-flash-message';
 import { MenuProvider } from 'react-native-popup-menu';
 import { } from 'react-native-safe-area-context';
-import colors from './src/assets/colors/colors';
-import AppNavigator from './src/navigation/app-navigator';
-import AuthNavigator from './src/navigation/autth-navigator';
-import AuthContext from './src/utils/auth-context';
+import colors from './app/assets/colors/colors';
+import AppNavigator from './app/navigation/app-navigator';
+import AuthNavigator from './app/navigation/autth-navigator';
+import AuthContext from './app/utils/auth-context';
 
 
 
