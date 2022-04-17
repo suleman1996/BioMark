@@ -1,22 +1,16 @@
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-  TouchableOpacity,
+  Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View
 } from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useState, useRef, useEffect} from 'react';
+import { showMessage } from 'react-native-flash-message';
+import colors from '../../../assets/colors/colors';
+import Button from '../../../components/button/button';
+import Header from '../../../components/header/header';
+import ActivityIndicator from '../../../components/loader/activity-indicator';
+import OtpInput from '../../../components/otp/otpInput';
+import { forgotPassword } from '../../../services/auth-service';
 import styles from './style';
-import Header from '../../components/header/header';
-import Button from '../../components/button/button';
-import OtpInput from '../../components/otp/otpInput';
-import colors from '../../assets/colors/colors';
-import {TouchableRipple} from 'react-native-paper';
-import ActivityIndicator from '../../components/loader/activity-indicator';
-import {forgotPassword, otpConfirmation} from '../../services/auth-service';
-import {showMessage, hideMessage} from 'react-native-flash-message';
 
 export default function OtpPassword() {
   const navigations = useNavigation();

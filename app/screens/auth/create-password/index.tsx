@@ -7,16 +7,16 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
-import Header from '../../components/header/header';
-import Button from '../../components/button/button';
-import InputField from '../../components/input-field/input-field';
-import TextInput from '../../components/input-field/text-input';
+import Header from '../../../components/header/header';
+import Button from '../../../components/button/button';
+import InputField from '../../../components/input-field/input-field';
+import TextInput from '../../../components/input-field/text-input';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {changePassword} from '../../services/auth-service';
+import {changePassword} from '../../../services/auth-service';
 import {showMessage, hideMessage} from 'react-native-flash-message';
-import ActivityIndicator from '../../components/loader/activity-indicator';
+import ActivityIndicator from '../../../components/loader/activity-indicator';
 
 export default function CreatePassword() {
   const navigations = useNavigation();

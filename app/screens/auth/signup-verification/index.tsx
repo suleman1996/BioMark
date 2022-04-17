@@ -7,18 +7,18 @@ import {
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import styles from './styles';
-import Button from '../../components/button/button';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
-import BackIcon from '../../assets/svgs/back';
+import Button from '../../../components/button/button';
+import colors from '../../../assets/colors/colors';
+import fonts from '../../../assets/fonts/fonts';
+import BackIcon from '../../../assets/svgs/back';
 import StepIndicator from 'react-native-step-indicator';
-import OtpInput from '../../components/otp/otpInput';
+import OtpInput from '../../../components/otp/otpInput';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import ActivityIndicator from '../../components/loader/activity-indicator';
+import ActivityIndicator from '../../../components/loader/activity-indicator';
 import {
   resendAccountCode,
   signupAccountConfirm,
-} from '../../services/auth-service';
+} from '../../../services/auth-service';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 
 export default function SignupVerification() {

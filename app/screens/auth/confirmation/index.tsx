@@ -7,9 +7,9 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
-import Button from '../../components/button/button';
+import Button from '../../../components/button/button';
 import StepIndicator from 'react-native-step-indicator';
-import SetToGo from '../../assets/svgs/set-to-go';
+import SetToGo from '../../../assets/svgs/set-to-go';
 import {useNavigation} from '@react-navigation/native';
 
 export default function Confirmation() {

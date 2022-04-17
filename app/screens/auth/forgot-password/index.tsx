@@ -1,19 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
+  Keyboard, Text, TouchableWithoutFeedback, View
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import { showMessage } from 'react-native-flash-message';
+import Button from '../../../components/button/button';
+import Header from '../../../components/header/header';
+import ActivityIndicator from '../../../components/loader/activity-indicator';
+import PhoneNumber from '../../../components/phone-number/phone-number';
+import { forgotPassword } from '../../../services/auth-service';
 import styles from './styles';
-import Header from '../../components/header/header';
-import PhoneNumber from '../../components/phone-number/phone-number';
-import Button from '../../components/button/button';
-import {showMessage, hideMessage} from 'react-native-flash-message';
-import ActivityIndicator from '../../components/loader/activity-indicator';
-import {forgotPassword} from '../../services/auth-service';
 
 export default function ForgotPassword() {
   const navigations = useNavigation();

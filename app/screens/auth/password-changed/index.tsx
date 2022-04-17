@@ -1,9 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import fonts from '../../assets/fonts/fonts';
-import colors from '../../assets/colors/colors';
-import Lock from '../../assets/svgs/lock';
+import fonts from '../../../assets/fonts/fonts';
+import colors from '../../../assets/colors/colors';
+import Lock from '../../../assets/svgs/lock';
 
 export default function PasswordChanged() {
   const navigation = useNavigation();
