@@ -1,19 +1,18 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import {View, StyleSheet, processColor, Platform} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
-
-import Home from '../screens/home/home-page/home';
-import Inbox from '../screens/Inbox/index';
 import colors from '../assets/colors/colors';
-
-import InboxIcon from '../assets/svgs/inbox';
-import AppointmentIcon from '../assets/svgs/appoinment';
-import AccountIcon from '../assets/svgs/account';
-import HomeIcon from '../assets/svgs/home';
 import fonts from '../assets/fonts/fonts';
-import {AccountNavigator} from './account-navigator'
+import AccountIcon from '../assets/svgs/account';
+import AppointmentIcon from '../assets/svgs/appoinment';
+import HomeIcon from '../assets/svgs/home';
+import InboxIcon from '../assets/svgs/inbox';
+import Inbox from '../screens/main/Inbox/index';
+import Home from '../screens/main/home-page';
+import { AccountNavigator } from './account-navigator';
+import AppointmentScreen from '../screens/main/appointment';
+
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,7 +43,7 @@ const AppointmentStack = () => (
     screenOptions={{
       headerShown: false,
     }}>
-    <Stack.Screen name="HomeScreen" component={Inbox} />
+    <Stack.Screen name="HomeScreen" component={AppointmentScreen} />
   </Stack.Navigator>
 );
 

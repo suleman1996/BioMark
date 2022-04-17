@@ -59,7 +59,7 @@ const App = () => {
             />
 
             <SafeAreaView edges={['top']} style={{flex: 1}}>
-              {user ? <AppNavigator /> : <AuthNavigator />}
+              {true ? <AppNavigator /> : <AuthNavigator />}
             </SafeAreaView>
           </MenuProvider>
         </AuthContext.Provider>

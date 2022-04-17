@@ -10,7 +10,7 @@ import SmallBtn from '../../../components/button/small-button';
 import YourHealthBtn from '../../../components/button/yourHealthBtn';
 import SearchBarWithLeftScanIcon from '../../../components/higher-order/searchBarWithLeftScanIcon';
 // import BottomBar from '../../../components/bottom-nav/bottom-bar';
-import styles from './style';
+import styles from './styles';
 
 
 
