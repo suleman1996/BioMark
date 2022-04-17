@@ -1,6 +1,11 @@
 const Account_Screen = 'Account_Screen';
 
 export const Nav_Screens = {
+
+  // Auth
+  Forgot_Password: 'ForgotPassword',
+  Sign_Up: 'Signup',
+
   Account_Screen: 'Account_Screen',
   Dependants_Screen: 'DependantsScreen',
   Add_Dependants: 'AddDependantScreen',

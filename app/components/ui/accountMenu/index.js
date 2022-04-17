@@ -14,8 +14,13 @@ import { Nav_Screens } from '../../../navigation/constants';
 import {navigate} from '../../../services/navRef'
 import { GlobalStyles } from './../../../utils/theme/globalStyles';
 import { Switch } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../store/auth/authActions';
 
 const AccountMenu = ({}) => {
+  const dispatch = useDispatch();
+
+
   const [isAutoLogout, setIsAutoLogout] = useState(false);
   const onToggleAutoLogout = () => {
     setIsAutoLogout(!isAutoLogout);
@@ -149,7 +154,7 @@ const AccountMenu = ({}) => {
       </Pressable>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable style={styles.singleItem}>
+      <Pressable onPress={() => dispatch(logout())} style={styles.singleItem}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <MaterialCommunityIcons
             name="logout"

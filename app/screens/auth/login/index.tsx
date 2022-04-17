@@ -1,16 +1,17 @@
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useNavigation} from '@react-navigation/native';
-import React, {useContext, useEffect, useState} from 'react';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { useNavigation } from '@react-navigation/native';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Keyboard,
   Platform,
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
-import {showMessage} from 'react-native-flash-message';
+import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
+import { showMessage } from 'react-native-flash-message';
+import { useDispatch, useSelector } from 'react-redux';
 import colors from '../../../assets/colors/colors';
 import fonts from '../../../assets/fonts/fonts';
 import Apple from '../../../assets/svgs/apple';
@@ -22,12 +23,23 @@ import ErrorModal from '../../../components/error-modal/error-modal';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
-import {login} from '../../../services/auth-service';
+import { Nav_Screens } from '../../../navigation/constants';
+import { navigate } from '../../../services/navRef';
+import { reduxLogin } from '../../../store/auth/authActions';
+import { IAppState } from '../../../store/IAppState';
 // import InputField from '../../components/inputField/inputField';
 import AuthContext from '../../../utils/auth-context';
 import styles from './styles';
 
 export default function Login() {
+
+  // redux
+  const dispatch = useDispatch();
+  const {loggingIn, errorMessageLogin} = useSelector(
+    (state: IAppState) => state.auth,
+  );
+
+
   const navigations = useNavigation();
   const authcontext = useContext(AuthContext);
 
@@ -41,6 +53,8 @@ export default function Login() {
   const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
   const [userGoogleInfo, setUserGoogleInfo] = useState({});
   const [loaded, setLoaded] = useState(false);
+
+  
 
   GoogleSignin.configure({
     webClientId:
@@ -79,7 +93,7 @@ export default function Login() {
       });
   };
 
-  const FacebookLogin = async props => {
+  const FacebookLogin = async () => {
     LoginManager.logOut();
     await LoginManager.logInWithPermissions().then(
       async function (result) {
@@ -102,7 +116,7 @@ export default function Login() {
     );
   };
 
-  const initUser = token => {
+  const initUser = (token: any) => {
     // props.navigation.navigate(TOP_TAB_BAR);
     fetch(
       'https://graph.facebook.com/v2.5/me?fields=email,first_name,last_name,picture.type(large),friends&access_token=' +
@@ -129,46 +143,25 @@ export default function Login() {
       });
   };
 
-  const handleLogin = async () => {
-    try {
-      setLoading(true);
-      Keyboard.dismiss();
-      const result = await login({
-        session: {
-          username: `+${selectCountryCode}${phoneNumber}`,
-          password: password,
-        },
+  // redux error check
+  useEffect(() => {
+    if(errorMessageLogin){
+      showMessage({
+        message: errorMessageLogin,
+        type: 'danger',
       });
-      console.log('login success result ', result.data);
-      // alert('Login Successfull');
-      authcontext.setUser(result.data.access_token);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error.errMsg);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: "User not exist's",
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        // showMessage({
-        //   message: error.errMsg.data.message,
-        //   type: 'danger',
-        // });
-        setLoginError(true);
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
     }
+  }, [errorMessageLogin])
+
+  const handleLogin = async () => {
+    const username = `+${selectCountryCode}${phoneNumber}`;
+    Keyboard.dismiss();
+    dispatch(reduxLogin(username, password));
   };
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator visible={loading} />
+      <ActivityIndicator visible={loggingIn} />
       <ErrorModal
         onPress={() => setLoginError(!loginError)}
         visible={loginError}
@@ -206,7 +199,7 @@ export default function Login() {
           onEyePress={() => {
             setHidePassword(!hidePassword);
           }}
-          onChange={value => setPassword(value)}
+          onChange={setPassword}
           margin={20}
         />
         {password !== '' && password.length < 8 && (
@@ -217,7 +210,7 @@ export default function Login() {
         <View style={{alignSelf: 'center'}}>
           <TouchableOpacity
             style={{marginVertical: 30}}
-            onPress={() => navigations.navigate('ForgotPassword')}>
+            onPress={() => navigate(Nav_Screens.Forgot_Password)}>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
@@ -260,7 +253,7 @@ export default function Login() {
         </View>
 
         <View style={{alignSelf: 'center'}}>
-          <TouchableOpacity onPress={() => navigations.navigate('Signup')}>
+          <TouchableOpacity onPress={() => navigate(Nav_Screens.Sign_Up)}>
             <Text style={styles.noAccountTxt}>
               <Text style={{color: colors.black}}>Dont have an account?</Text>
               <Text style={{color: colors.blue}}> SignUp</Text>

@@ -1,25 +1,50 @@
-import {extendTheme, NativeBaseProvider} from 'native-base';
-import React, {useState} from 'react';
+import { extendTheme, NativeBaseProvider } from 'native-base';
+import React, { useEffect, useState } from 'react';
 import {
   Platform,
-  
+
   StatusBar,
   StyleSheet,
-  useColorScheme,
+  useColorScheme
 } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
-import {MenuProvider} from 'react-native-popup-menu';
+import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import colors from './app/assets/colors/colors';
 import AppNavigator from './app/navigation/app-navigator';
 import AuthNavigator from './app/navigation/autth-navigator';
+import { getAuthAsyncStorage } from './app/services/async-storage/auth-async-storage';
+import { loggedIn } from './app/store/auth/authActions';
+import { IAppState } from './app/store/IAppState';
 import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
 import { GlobalFonts } from './app/utils/theme/fonts';
-import { GlobalColors } from './app/utils/theme/globalColors';
+
+
+const NavigationCheckIfLoggedIn = () => {
+  const dispatch = useDispatch();
+
+  async function getAuthTokenIfInAsyncStorage() {
+    const data = await getAuthAsyncStorage();
+    // logNow('Auth Async Storage', data)
+    dispatch(loggedIn(data));
+  }
+
+  useEffect(() => {
+    getAuthTokenIfInAsyncStorage();
+  }, []);
+
+  
+ const auth = useSelector((state: IAppState) => state.auth);
+ const userToken = auth.userToken ? auth.userToken : null;
+
+  return <>{userToken ? <AppNavigator /> : <AuthNavigator />}</>;
+}
+
 
 const App = () => {
+  
   const isDarkMode = useColorScheme() === 'light';
 
   const [user, setUser] = useState('');
@@ -59,7 +84,7 @@ const App = () => {
             />
 
             <SafeAreaView edges={['top']} style={{flex: 1}}>
-              {true ? <AppNavigator /> : <AuthNavigator />}
+              <NavigationCheckIfLoggedIn />
             </SafeAreaView>
           </MenuProvider>
         </AuthContext.Provider>

@@ -36,11 +36,15 @@ import {
       }
   
       case AUTH_LOGGED_IN: {
-        let {user, token} = action.payload;
+        let {userToken, refreshToken, isFirstLogin, hasProfile, expiresIin} =
+          action.payload;
         return {
           ...state,
-          user,
-          token,
+          userToken,
+          refreshToken,
+          isFirstLogin,
+          hasProfile,
+          expiresIin,
           errorMessageLogin: null,
           loggingIn: false,
         };

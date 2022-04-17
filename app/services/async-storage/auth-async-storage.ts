@@ -1,18 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LoginResponse } from '../../types/auth/LoginResponse';
 import {logNow} from '../../utils/functions/logBinder';
 
 async function getAuthAsyncStorage() {
-  const token = await AsyncStorage.getItem('userToken');
+  const userToken = await AsyncStorage.getItem('userToken');
+  const refreshToken = await AsyncStorage.getItem('refreshToken');
   const user: any = await AsyncStorage.getItem('userData');
   return {
-    token,
+    userToken,
+    refreshToken,
     user: JSON.parse(user),
   };
 }
 
-async function setAuthAsyncStorage(response: any) {
-  await AsyncStorage.setItem('userToken', response.data.access_token);
-  await AsyncStorage.setItem('refreshToken', response.data.refresh_token);
+async function setAuthAsyncStorage(response: LoginResponse) {
+  await AsyncStorage.setItem('userToken', response.access_token);
+  await AsyncStorage.setItem('refreshToken', response.refresh_token);
   // await AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
 }
 
@@ -23,6 +26,7 @@ async function setAuthUserAsyncStorage(response: any) {
 async function resetAuthAsyncStorage() {
   await AsyncStorage.removeItem('userData');
   await AsyncStorage.removeItem('userToken');
+  await AsyncStorage.removeItem('refreshToken');
 }
 
 async function Get_Token() {
