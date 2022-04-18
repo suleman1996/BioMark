@@ -3,6 +3,7 @@ const Account_Screen = 'Account_Screen';
 export const Nav_Screens = {
   // Auth
   Forgot_Password: 'ForgotPassword',
+  PasswordOTPScreen: 'PasswordOTP',
   Sign_Up: 'Signup',
 
   // NestedAccountNavigator

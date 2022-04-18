@@ -1,3 +1,4 @@
+import { ForgotPasswordErrorResponse, ForgotPasswordSuccessResponse } from '../../types/auth/ForgotPassword';
 import { LoginResponse, LoginErrorResponse } from '../../types/auth/LoginResponse';
 import { logNow } from '../../utils/functions/logBinder';
 import {
@@ -36,6 +37,31 @@ function login(username: string, password: string) {
 }
 
 
+function forgotPassword(username: string) {
+  return new Promise<ForgotPasswordSuccessResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.FORGOT_PASSWORD, {
+        password: {
+          username,
+        },
+      })
+      .then(async response => {
+        try {
+           logNow('Forgot password success response',response.data)
+          resolve(response.data);
+        } catch (e) {
+          logNow('Forgot password error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ForgotPasswordErrorResponse) => {
+        logNow('Forgot password error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
+
 async function logout() {
   await resetAuthAsyncStorage();
 }
@@ -43,4 +69,5 @@ async function logout() {
 export const userService = {
   login,
   logout,
+  forgotPassword,
 };

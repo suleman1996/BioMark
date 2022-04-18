@@ -10,6 +10,7 @@ import PasswordChanged from '../screens/auth/password-changed';
 import Signup from '../screens/auth/signup';
 import SignupVerification from '../screens/auth/signup-verification';
 import Splash from '../screens/splash/splash';
+import { Nav_Screens } from './constants';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,7 @@ const AuthenticationStack = () => (
     <Stack.Screen name="Splash" component={Splash} />
     <Stack.Screen name="Login" component={Login} />
     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-    <Stack.Screen name="PasswordOTP" component={PasswordOTP} />
+    <Stack.Screen name={Nav_Screens.PasswordOTPScreen} component={PasswordOTP} />
     <Stack.Screen name="CreatePassword" component={CreatePassword} />
     <Stack.Screen name="PasswordChanged" component={PasswordChanged} />
     <Stack.Screen name="Signup" component={Signup} />
