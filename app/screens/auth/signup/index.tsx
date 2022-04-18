@@ -15,7 +15,13 @@ import DatePicker from '../../../components/date-picker/date-picker';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
+import { Nav_Screens } from '../../../navigation/constants';
 import { signup } from '../../../services/auth-service';
+import { navigate } from '../../../services/navRef';
+import {userService} from '../../../services/user-service/userService';
+import { RegisterUserErrorResponse } from '../../../types/auth/RegisterUser';
+import { logNow } from '../../../utils/functions/logBinder';
+
 import styles from './styles';
 
 export default function Signup() {
@@ -49,46 +55,28 @@ export default function Signup() {
     }
   }, [selectCountryCode]);
 
-  const signupApi = async password => {
-    try {
-      setLoading(true);
-      Keyboard.dismiss();
-      const result = await signup({
-        registration: {
-          username: `+${selectCountryCode}${phoneNumber}`,
-          password: password,
-          terms: true,
-          group: 'patient',
-        },
-      });
-      console.log('login success result ', result.data);
-      navigations.navigate('SignupVerification', {
-        useName: `+${selectCountryCode}${phoneNumber}`,
-        password: password,
-      });
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: "User already exist's",
+  const signupApi = async (password: string) => {
+     setLoading(true);
+     Keyboard.dismiss();
+     const username = `+${selectCountryCode}${phoneNumber}`;
+     userService
+       .registerUser(username, password)
+       .then(res => {
+         logNow('signup res', res);
+         navigate(Nav_Screens.SignupVerificationScreen, {username, password});
+       })
+       .catch((err: RegisterUserErrorResponse) => {
+         logNow('error signup', err.errMsg.data.message);
+          showMessage({
+          message: err?.errMsg.data.message || 'Please try again later',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.message,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
+       })
+       .finally(() => {
+         setLoading(false);
+       });
   };
-  const handleSignup = async ({password}) => {
+  const handleSignup = async ({password}: {password: string}) => {
     if (phoneNumber == '' || gender == '') {
     } else if (checked == true) {
       console.log('trye');
