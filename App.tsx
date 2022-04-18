@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { extendTheme, NativeBaseProvider } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import {
@@ -15,6 +16,7 @@ import colors from './app/assets/colors/colors';
 import AppNavigator from './app/navigation/app-navigator';
 import AuthNavigator from './app/navigation/autth-navigator';
 import { getAuthAsyncStorage } from './app/services/async-storage/auth-async-storage';
+import { navigationRef } from './app/services/navRef';
 import { loggedIn } from './app/store/auth/authActions';
 import { IAppState } from './app/store/IAppState';
 import { store } from './app/store/store';
@@ -39,7 +41,13 @@ const NavigationCheckIfLoggedIn = () => {
  const auth = useSelector((state: IAppState) => state.auth);
  const userToken = auth.userToken ? auth.userToken : null;
 
-  return <>{userToken ? <AppNavigator /> : <AuthNavigator />}</>;
+  return (
+    <>
+      <NavigationContainer ref={navigationRef}>
+        {userToken ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </>
+  );
 }
 
 

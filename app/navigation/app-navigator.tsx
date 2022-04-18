@@ -1,13 +1,13 @@
-import {createStackNavigator} from '@react-navigation/stack';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
+import { AccountNavigator } from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
+import { Nav_Screens } from './constants';
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = () => {
+const AppNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="BottomTabNavigator"
@@ -15,16 +15,14 @@ const StackNavigator = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
+      <Stack.Screen
+        name={Nav_Screens.NestedAccountNavigator}
+        component={AccountNavigator}
+      />
     </Stack.Navigator>
   );
 };
 
-export default function AuthNavigator() {
-  return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
-  );
-}
+export default AppNavigator;
 
 const styles = StyleSheet.create({});

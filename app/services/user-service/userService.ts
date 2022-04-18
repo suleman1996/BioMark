@@ -20,7 +20,7 @@ function login(username: string, password: string) {
      })
      .then(async (response) => {
        try {
-         logNow('userService login',response.data)
+        //  logNow('userService login',response.data)
          await setAuthAsyncStorage(response.data);
          resolve(response.data);
        } catch (e) {

@@ -48,7 +48,11 @@ const AccountMenu = ({}) => {
       {/* divider */}
       <View style={styles.divider} />
       <Pressable
-        onPress={() => navigate(Nav_Screens.Dependants_Screen)}
+        onPress={() =>
+          navigate(Nav_Screens.NestedAccountNavigator, {
+            screen: Nav_Screens.Dependants_Screen,
+          })
+        }
         style={styles.singleItem}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <FontAwesome
@@ -175,7 +179,11 @@ const AccountMenu = ({}) => {
           />
           <Text style={styles.text}>Auto Logout</Text>
         </View>
-        <Switch color={GlobalColors.darkPrimary} value={isAutoLogout} onValueChange={onToggleAutoLogout} />
+        <Switch
+          color={GlobalColors.darkPrimary}
+          value={isAutoLogout}
+          onValueChange={onToggleAutoLogout}
+        />
       </Pressable>
     </View>
   );
