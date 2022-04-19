@@ -4,12 +4,14 @@ import {useNavigation} from '@react-navigation/native';
 import fonts from '../../../assets/fonts/fonts';
 import colors from '../../../assets/colors/colors';
 import Lock from '../../../assets/svgs/lock';
+import { navigate } from '../../../services/navRef';
+import { Nav_Screens } from '../../../navigation/constants';
 
 export default function PasswordChanged() {
   const navigation = useNavigation();
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Login');
+      navigate(Nav_Screens.LoginScreen);
     }, 2000);
   }, []);
 

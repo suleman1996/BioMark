@@ -9,10 +9,21 @@ import Button from '../../../components/button/button';
 import Header from '../../../components/header/header';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import OtpInput from '../../../components/otp/otpInput';
+import { Nav_Screens } from '../../../navigation/constants';
 import { forgotPassword } from '../../../services/auth-service';
+import { navigate } from '../../../services/navRef';
+import { userService } from '../../../services/user-service/userService';
+import { logNow } from '../../../utils/functions/logBinder';
 import styles from './style';
 
-export default function OtpPassword() {
+type Props = {
+  route: any
+}
+
+export default function OtpPassword(props: Props) {
+  
+  const {phone} = props.route.params;
+
   const navigations = useNavigation();
   const route = useRoute();
   let initialMinutes = 1;
@@ -47,8 +58,8 @@ export default function OtpPassword() {
   const handleOTP = async () => {
     try {
       setLoading(true);
-      navigations.navigate('CreatePassword', {
-        phone: route.params.phone,
+      navigate(Nav_Screens.CreatePasswordScreen, {
+        phone,
         otp: code,
       });
       setLoading(false);
@@ -60,34 +71,28 @@ export default function OtpPassword() {
   const resendOTP = async () => {
     setSeconds(initialSeconds);
     setMinutes(initialMinutes);
-    try {
-      setLoading(true);
 
-      const result = await forgotPassword({
-        password: {username: route?.params?.phone},
-      });
-      console.log('Resend Success API ', result.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error.errMsg);
-      if (error.errMsg.status == '500') {
+     setLoading(true);
+
+     const username = phone;
+
+    userService.forgotPassword(username).then(res => {
+      logNow('response for forgot password on otp verify', res);
+    }).catch(err => {
+      logNow('error on forgot password on otp verify', err);
+      if (err.errMsg.status == '500') {
         showMessage({
           message: "User not exist's",
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.message,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
       }
-    }
+      showMessage({
+          message: err.errMsg.data.message,
+          type: 'danger',
+        });
+    }).finally(() => {
+      setLoading(false);
+    })
   };
 
   return (

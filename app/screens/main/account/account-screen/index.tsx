@@ -1,20 +1,26 @@
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 import React from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Images from '../../../../assets/images/images';
 import TitleWithSearchBarLayout from '../../../../components/layouts/titleWithSearchBar';
+import AccountMenu from '../../../../components/ui/accountMenu';
+import { Nav_Screens } from '../../../../navigation/constants';
+import { navigate } from '../../../../services/navRef';
 import {
   heightToDp,
-  widthToDp,
+  widthToDp
 } from '../../../../utils/functions/responsiveDimentions';
-import Images from '../../../../assets/images/images';
-import {GlobalFonts} from '../../../../utils/theme/fonts';
-import {responsiveFontSize} from '../../../../utils/functions/responsiveText';
-import {GlobalColors} from '../../../../utils/theme/globalColors';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MenuListItem from '../../../../components/higher-order/menuListItem';
-import AccountMenu from '../../../../components/ui/accountMenu';
-import { navigate } from '../../../../services/navRef';
-import { Nav_Screens } from '../../../../navigation/constants';
-const AccountScreen = () => {
+import { responsiveFontSize } from '../../../../utils/functions/responsiveText';
+import { GlobalFonts } from '../../../../utils/theme/fonts';
+import { GlobalColors } from '../../../../utils/theme/globalColors';
+
+
+type Props = {
+
+}
+
+
+const AccountScreen = (props: Props) => {
   return (
     <>
       <TitleWithSearchBarLayout title={'Account'}>
@@ -25,10 +31,9 @@ const AccountScreen = () => {
               <Text style={styles.name}>Gerold Mordeno</Text>
               <Pressable
                 onPress={() =>
-                  navigate(
-                    Nav_Screens.NestedAccountNavigator,
-                    {screen: Nav_Screens.Edit_Profile},
-                  )
+                  navigate(Nav_Screens.NestedAccountNavigator, {
+                    screen: Nav_Screens.Edit_Profile,
+                  })
                 }
                 style={{flexDirection: 'row', alignItems: 'center'}}>
                 <MaterialCommunityIcons
