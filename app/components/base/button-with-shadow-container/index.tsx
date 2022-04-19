@@ -1,11 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { GlobalColors } from './../../../utils/theme/globalColors';
-import ButtonComponent from './../button/index';
+import { GlobalColors } from '../../../utils/theme/globalColors';
+import ButtonComponent from '../button/index';
 import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalStyles } from './../../../utils/theme/globalStyles';
+import { GlobalStyles } from '../../../utils/theme/globalStyles';
 
-const ButtonWithShadowContainer = ({title, onPress}) => {
+
+type Props = {
+  onPress: any;
+  title: string;
+};
+
+const ButtonWithShadowContainer = ({title, onPress}: Props) => {
   return (
     <View style={styles.container}>
       <ButtonComponent
@@ -14,7 +20,7 @@ const ButtonWithShadowContainer = ({title, onPress}) => {
       />
     </View>
   );
-}
+};
 
 export default ButtonWithShadowContainer
 

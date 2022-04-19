@@ -4,16 +4,21 @@ import {Picker} from '@react-native-picker/picker';
 import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
 import { GlobalColors } from '../../../utils/theme/globalColors';
 
-const DropdownMenuComponent = ({options, setSelectedDropdown}) => {
+type Props = {
+  options: any;
+  setSelectedDropdown: any
+};
+
+const DropdownMenuComponent = ({options, setSelectedDropdown}: Props) => {
   return (
     <View style={styles.container}>
       <Picker
         mode="dropdown"
         selectedValue={setSelectedDropdown}
-        onValueChange={(itemValue, itemIndex) =>
-          setSelectedLanguage(itemValue)
+        onValueChange={(itemValue: string, itemIndex: number) =>
+          setSelectedDropdown(itemValue)
         }>
-        {options?.map((item, index) => {
+        {options?.map((item: any, index: number) => {
           return (
             <Picker.Item key={index} label={item.title} value={item.title} />
           );

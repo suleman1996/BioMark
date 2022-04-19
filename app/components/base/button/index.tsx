@@ -3,15 +3,20 @@ import React from 'react'
 import {GlobalColors} from '../../../utils/theme/globalColors'
 import {GlobalFonts} from '../../../utils/theme/fonts';
 import {heightToDp, widthToDp} from '../../../utils/functions/responsiveDimentions'
-import { responsiveFontSize } from './../../../utils/functions/responsiveText';
+import { responsiveFontSize } from '../../../utils/functions/responsiveText';
 
-const ButtonComponent = ({onPress, title}) => {
+type Props = {
+  onPress: any,
+  title: string
+}
+
+const ButtonComponent = ({onPress, title}: Props) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-        <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
-}
+};
 
 export default ButtonComponent;
 
