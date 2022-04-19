@@ -6,11 +6,11 @@ import colors from '../../assets/colors/colors';
 const MyComponent = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
-  const onChangeSearch = query => setSearchQuery(query);
+  const onChangeSearch = (query: string) => setSearchQuery(query);
 
   return (
     <Searchbar
-    style={{ marginLeft:15, border:0, borderRadius:8, borderBottomLeftRadius:0,borderTopLeftRadius:0,borderBottomRightRadius:8,borderTopRightRadius:8}}
+    style={{ marginLeft:15, borderWidth: 0, borderRadius:8, borderBottomLeftRadius:0,borderTopLeftRadius:0,borderBottomRightRadius:8,borderTopRightRadius:8}}
       placeholder="Search Biomark app"
       placeholderTextColor={'#8493AE'}
       iconColor={colors.blue}

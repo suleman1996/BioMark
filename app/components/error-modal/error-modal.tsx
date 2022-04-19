@@ -5,7 +5,12 @@ import colors from '../../assets/colors/colors';
 import fonts from '../../assets/fonts/fonts';
 import Button from '../button/button';
 
-export default function ErrorModal({visible = false, onPress}) {
+type Props = {
+  onPress: any;
+  visible: boolean;
+};
+
+export default function ErrorModal({visible = false, onPress}: Props) {
   if (!visible) return null;
   return (
     <View style={styles.overLay}>

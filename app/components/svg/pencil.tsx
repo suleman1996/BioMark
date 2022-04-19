@@ -9,7 +9,7 @@ const xml = `
 
 `;
 
-export default props => (
+export default (props: {width: number, height: number}) => (
   <SvgXml
     xml={xml}
     width={widthToDp(props.width)}

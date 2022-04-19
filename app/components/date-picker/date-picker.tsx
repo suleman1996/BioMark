@@ -4,14 +4,14 @@ import DatePicker from 'react-native-datepicker';
 import colors from '../../assets/colors/colors';
 import fonts from '../../assets/fonts/fonts';
 
-const App = props => {
+const App = (props: { width: any; }) => {
   const {width} = props;
   let otherStyles = [];
 
   if (width) {
     otherStyles.push({width: width});
   }
-  const [date, setDate] = useState(date);
+  const [date, setDate] = useState(new Date());
 
   return (
     <SafeAreaView>
@@ -19,7 +19,7 @@ const App = props => {
         <DatePicker
           style={styles.datePickerStyle}
           mode="date"
-          placeholder={date}
+          placeholder={date.toISOString()}
           date={date}
           format="DD-MM-YYYY"
           minDate="01-01-1950"
@@ -43,7 +43,7 @@ const App = props => {
               letterSpacing: 5,
             },
           }}
-          onDateChange={date => {
+          onDateChange={(date: any) => {
             setDate(date);
           }}
         />

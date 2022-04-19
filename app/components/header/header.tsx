@@ -6,7 +6,11 @@ import ArrowBack from '../../assets/svgs/arrow-back';
 import colors from '../../assets/colors/colors';
 import fonts from '../../assets/fonts/fonts';
 
-export default function header(props) {
+type Props = {
+  title: string
+}
+
+export default function header(props: Props) {
   const navigations = useNavigation();
   return (
     <>

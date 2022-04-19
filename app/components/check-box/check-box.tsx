@@ -2,7 +2,12 @@ import * as React from 'react';
 import {Checkbox} from 'react-native-paper';
 import colors from '../../assets/colors/colors';
 
-const CheckBox = props => {
+type Props = {
+  checked: boolean;
+  setChecked: any
+};
+
+const CheckBox = (props: Props) => {
   return (
     <Checkbox
       status={props.checked ? 'checked' : 'unchecked'}

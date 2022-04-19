@@ -1,12 +1,22 @@
-import {StyleSheet, Text, View, TextInput} from 'react-native';
-import React, {useState} from 'react';
-import CountryPicker, {DEFAULT_THEME} from 'react-native-country-picker-modal';
+import React, { useState } from 'react';
+import { TextInput, View } from 'react-native';
+import CountryPicker, { DEFAULT_THEME } from 'react-native-country-picker-modal';
 import colors from '../../assets/colors/colors';
 import styles from './styles';
 
-export default function phoneNumber(props) {
+type Props = {
+  width: string | number;
+  setCountryCode: any;
+  setSelectCountryCode: any;
+  countryCode: any;
+  maxLength: any;
+  phoneNumber: string;
+  setPhoneNumber: any
+};
+
+export default function phoneNumber(props: Props) {
   const {width} = props;
-  const onSelect = Country => {
+  const onSelect = (Country: any) => {
     props.setCountryCode(Country.cca2);
     props.setSelectCountryCode(Country.callingCode[0]);
     console.log(Country);

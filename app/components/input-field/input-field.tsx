@@ -9,7 +9,19 @@ import React from 'react';
 import colors from '../../assets/colors/colors';
 import fonts from '../../assets/fonts/fonts';
 
-export default function inputField(props) {
+type Props = {
+  margin?: any;
+  svg: any;
+  placeholder: string;
+  value: string;
+  secureTextEntry?: boolean;
+  onChange: any;
+  onBlur?: any;
+  onEyePress?: any;
+  eye?: any
+};
+
+export default function inputField(props: Props) {
   return (
     <View
       style={[styles.loginInputContainer, {marginHorizontal: props.margin}]}>

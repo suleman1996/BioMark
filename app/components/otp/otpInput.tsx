@@ -1,16 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useRef} from 'react';
-import {useIsFocused} from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 
-export default function otpInput({
-  code,
-  setCode,
-  clearOTP,
-  setClearOTP,
-  OTPRef,
-}) {
+type Props = {
+  code: string;
+  setCode: any;
+  clearOTP: any;
+  setClearOTP: any;
+  OTPRef: any;
+};
+
+export default function otpInput({code, setCode, clearOTP, setClearOTP, OTPRef}: Props) {
   const focused = useIsFocused();
 
   React.useEffect(() => {

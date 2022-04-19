@@ -3,7 +3,21 @@ import React from 'react';
 import {TextInput} from 'react-native-paper';
 import colors from '../../assets/colors/colors';
 
-export default function textInput(props) {
+type Props = {
+  margin?: any;
+  svg: any;
+  placeholder: string;
+  value: string;
+  secureTextEntry?: boolean;
+  onChange: any;
+  onBlur?: any;
+  onEyePress?: any;
+  eye?: any;
+  Keyboardtype?: string
+};
+
+
+export default function textInput(props: Props) {
   const [text, setText] = React.useState('');
   return (
     <View style={[styles.container, {marginHorizontal: props.margin}]}>
