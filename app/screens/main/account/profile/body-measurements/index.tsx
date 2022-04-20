@@ -6,6 +6,7 @@ import {
   heightToDp,
   widthToDp
 } from '../../../../../utils/functions/responsiveDimentions';
+import Button from '../../../../../components/button/button';
 import { GlobalColors } from '../../../../../utils/theme/globalColors';
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
@@ -14,13 +15,18 @@ import { GlobalFonts } from '../../../../../utils/theme/fonts';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>
-        <HeightChooserComponent height={15} label="Height" textAlign="right" />
-        <WeightChooserComponent height={15} label="Weight" textAlign="right" />
+        <HeightChooserComponent height={15} label="Height" textAlign="right" onChangeText={(text)=>setHeight(text)}/>
+        <WeightChooserComponent height={15} label="Weight" textAlign="right" onChangeText={(text)=>setWeight(text)}/>
       </ScrollView>
-      <ButtonWithShadowContainer />
+      <Button
+        disabled={height.length > 0 && weight.length > 0 ? false : true}
+        title="Save & Continue" />
+      {/* <ButtonWithShadowContainer /> */}
     </TitleWithBackLayout>
   );
 };
@@ -32,7 +38,6 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalColors.white,
     flex: 1,
     paddingHorizontal: widthToDp(4),
-    marginBottom: heightToDp(15)
   },
   label: {
     fontSize: responsiveFontSize(22),
