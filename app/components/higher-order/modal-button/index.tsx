@@ -6,7 +6,13 @@ import { responsiveFontSize } from '../../../utils/functions/responsiveText'
 import { GlobalFonts } from '../../../utils/theme/fonts'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ModalButtonComponent = ({title, setIsModal, isModal}) => {
+type Props = {
+  title: string,
+  setIsModal: any,
+  isModal: boolean
+}
+
+const ModalButtonComponent = ({title, setIsModal, isModal}: Props) => {
 
   const textColor = isModal ? {color: GlobalColors.white} : {color: GlobalColors.black};
   const bgColor = isModal ? {backgroundColor: GlobalColors.darkPrimary} : {backgroundColor: GlobalColors.white}

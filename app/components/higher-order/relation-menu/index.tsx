@@ -1,32 +1,29 @@
+import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
-  Pressable,
-  FlatList,
-  TouchableOpacity,
+  View
 } from 'react-native';
-import React, {useRef, useState} from 'react';
-import {GlobalStyles} from '../../../utils/theme/globalStyles';
+import {
+  Menu, MenuOption, MenuOptions,
+  MenuTrigger
+} from 'react-native-popup-menu';
+import colors from '../../../assets/colors/colors';
 import {
   heightToDp,
-  widthToDp,
+  widthToDp
 } from '../../../utils/functions/responsiveDimentions';
-import {responsiveFontSize} from '../../../utils/functions/responsiveText';
-import {GlobalColors} from '../../../utils/theme/globalColors';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {
-  Menu,
-  MenuOptions,
-  MenuTrigger,
-  MenuOption,
-} from 'react-native-popup-menu';
-import InputWithLabel from '../../base/inputWithLabel/index';
-import InputField from '../../input-field/input-field'
-import colors from '../../../assets/colors/colors';
+import { responsiveFontSize } from '../../../utils/functions/responsiveText';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/globalColors';
 
-const RelationMenu = ({options, label}) => {
-          const menuRef = useRef();
+type Props = {
+  options?: any,
+  label: string
+}
+
+const RelationMenu = ({options, label}: Props) => {
+  const menuRef = useRef<any>();
   const [selected, setSelected] = useState();
   const selectedStyles = {backgroundColor: GlobalColors.primary};
   const selectedTextStyle = {color: GlobalColors.white};
@@ -50,7 +47,7 @@ const RelationMenu = ({options, label}) => {
           />
           <MenuOption value="Grandparents" text="Grandparents" />
           <MenuOption value="Guardian" text="Guardian" />
-          <MenuOption value="Others" text="Others"/>
+          <MenuOption value="Others" text="Others" />
         </MenuOptions>
       </Menu>
     </View>
