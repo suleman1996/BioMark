@@ -3,7 +3,15 @@ import React from 'react';
 import { Button } from 'react-native-paper';
 import colors from '../../assets/colors/colors';
 
-export default function button(props) {
+type Props = {
+  marginHorizontal?: number;
+  marginVertical?: number;
+  disabled?: boolean;
+  onPress: any;
+  title?: string;
+};
+
+export default function button(props: Props) {
   const horizontal = props.marginHorizontal ? props.marginHorizontal : 20;
   const vertical = props.marginVertical ? props.marginVertical : 20;
   return (
