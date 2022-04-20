@@ -5,9 +5,9 @@ import {GlobalFonts} from '../../../utils/theme/fonts';
 import {heightToDp, widthToDp} from '../../../utils/functions/responsiveDimentions'
 import { responsiveFontSize } from './../../../utils/functions/responsiveText';
 
-const ButtonComponent = ({onPress, title}) => {
+const ButtonComponent = ({onPress, title,disabled}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container} disabled={disabled}>
         <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

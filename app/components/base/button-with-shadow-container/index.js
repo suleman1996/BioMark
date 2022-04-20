@@ -5,11 +5,12 @@ import ButtonComponent from './../button/index';
 import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
 import { GlobalStyles } from './../../../utils/theme/globalStyles';
 
-const ButtonWithShadowContainer = ({title, onPress}) => {
+const ButtonWithShadowContainer = ({title, onPress,disabled}) => {
   return (
     <View style={styles.container}>
       <ButtonComponent
         onPress={onPress}
+        disabled={disabled}
         title={title ? title : 'Save & Continue'}
       />
     </View>

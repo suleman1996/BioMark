@@ -7,11 +7,11 @@ import { GlobalColors } from './../../../utils/theme/globalColors';
 import { heightToDp } from '../../../utils/functions/responsiveDimentions';
 
 
-const InputWithLabel = ({label, placeholder,}) => {
+const InputWithLabel = ({label, placeholder,onChange}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <InputField placeholder={placeholder} />
+      <InputField placeholder={placeholder} onChange={onChange}/>
     </View>
   );
 }
