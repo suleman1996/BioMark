@@ -43,15 +43,12 @@ const PersonalInformationScreen = () => {
             <Text style={styles.radioText}>Female</Text>
           </View>
         </RadioButton.Group>
-        <View>
-        </View>
+        <View></View>
       </ScrollView>
-          <Button
-            disabled={
-              firstName.length > 0 && lastName.length > 0 ? false : true
-            }
-            title="Save & Continue"
-          />
+      <Button
+        disabled={firstName.length > 0 && lastName.length > 0 ? false : true}
+        title="Save & Continue"
+      />
     </TitleWithBackLayout>
   );
 };
