@@ -14,8 +14,8 @@ const PersonalInformationScreen = () => {
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>
-        <InputWithLabel label="First Name" />
-        <InputWithLabel label="Last Name" />
+        <InputWithLabel label="First Name" placeholder={''} />
+        <InputWithLabel label="Last Name" placeholder={''} />
         <Text style={styles.label}>Date of Birth</Text>
         <DatePicker width={'100%'} />
         <Text style={styles.label}>Gender</Text>
@@ -32,7 +32,7 @@ const PersonalInformationScreen = () => {
           </View>
         </RadioButton.Group>
       </ScrollView>
-      <ButtonWithShadowContainer />
+      <ButtonWithShadowContainer onPress={undefined} title={''} />
     </TitleWithBackLayout>
   );
 }

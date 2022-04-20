@@ -17,10 +17,10 @@ const BodyMeasurementScreen = () => {
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>
-        <HeightChooserComponent height={15} label="Height" textAlign="right" />
-        <WeightChooserComponent height={15} label="Weight" textAlign="right" />
+        <HeightChooserComponent height={15} label="Height" textAlign="right" placeholder={''} />
+        <WeightChooserComponent height={15} label="Weight" textAlign="right" placeholder={undefined} />
       </ScrollView>
-      <ButtonWithShadowContainer />
+      <ButtonWithShadowContainer onPress={undefined} title={''} />
     </TitleWithBackLayout>
   );
 };

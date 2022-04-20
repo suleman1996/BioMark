@@ -10,8 +10,20 @@ import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDiment
 import { responsiveFontSize } from '../../../utils/functions/responsiveText';
 import colors from '../../../assets/colors/colors';
 
-const HeightChooserComponent = ({label, placeholder, height, textAlign}) => {
-  const menuRef = useRef();
+type Props = {
+  label: string,
+  placeholder: string,
+  height: number| string,
+  textAlign: string|number,
+}
+
+const HeightChooserComponent = ({
+  label,
+  placeholder,
+  height,
+  textAlign,
+}: Props) => {
+  const menuRef = useRef<any>();
   const [value, setValue] = useState(0);
   const [selectedType, setSelectedType] = useState(1);
 
@@ -38,7 +50,7 @@ const HeightChooserComponent = ({label, placeholder, height, textAlign}) => {
           value={value}
           autoFocus={true}
           underlineColor="transparent"
-          activeUnderlineColor='transparent'
+          activeUnderlineColor="transparent"
           borderBottomWidth={0}
           //         onBlur={props.onBlur}
         />

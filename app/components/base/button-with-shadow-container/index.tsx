@@ -8,7 +8,7 @@ import { GlobalStyles } from '../../../utils/theme/globalStyles';
 
 type Props = {
   onPress: any;
-  title: string;
+  title?: string;
 };
 
 const ButtonWithShadowContainer = ({title, onPress}: Props) => {

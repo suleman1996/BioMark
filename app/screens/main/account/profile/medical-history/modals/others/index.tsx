@@ -3,7 +3,12 @@ import { StyleSheet } from 'react-native';
 import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
 import TagsCloudInputComponent from '../../../../../../../components/higher-order/tags-cloud-input';
 
-const OthersModal = ({isVisible, setIsVisible}) => {
+type Props = {
+  isVisible: boolean,
+  setIsVisible: any,
+};
+
+const OthersModal = ({isVisible, setIsVisible}: Props) => {
   //    Have you been diagnosed with Gout?
   const [ans1, setAns1] = useState(false);
 

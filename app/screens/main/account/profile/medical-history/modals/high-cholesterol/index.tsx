@@ -3,8 +3,13 @@ import { StyleSheet } from 'react-native';
 import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
 import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
 
-const GoutModal = ({isVisible, setIsVisible}) => {
-  //    Have you been diagnosed with Gout?
+type Props = {
+  isVisible: boolean,
+  setIsVisible: any
+}
+
+const HighCholesterolModal = ({isVisible, setIsVisible}: Props) => {
+  //    Have you been diagnosed with high cholesterol?
   const [ans1, setAns1] = useState(false);
 
   // Are you taking any medications for this?
@@ -13,12 +18,12 @@ const GoutModal = ({isVisible, setIsVisible}) => {
   return (
     <ModalWithBottomBtn
       isVisible={isVisible}
-      title="Gout"
+      title={'High Cholesterol'}
       onPress={() => console.log('clicked')}>
       <RadioButtonQuestionComponent
         isTrue={ans1}
         setIsTrue={setAns1}
-        question="Have you been diagnosed with Gout?"
+        question="Have you been diagnosed with high cholesterol?"
       />
       <RadioButtonQuestionComponent
         isTrue={ans2}
@@ -29,6 +34,6 @@ const GoutModal = ({isVisible, setIsVisible}) => {
   );
 };
 
-export default GoutModal;
+export default HighCholesterolModal;
 
 const styles = StyleSheet.create({});

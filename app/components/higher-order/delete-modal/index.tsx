@@ -6,7 +6,14 @@ import { responsiveFontSize } from '../../../utils/functions/responsiveText'
 import { GlobalFonts } from '../../../utils/theme/fonts'
 import { GlobalColors } from '../../../utils/theme/globalColors'
 
-const DeleteModalComponent = ({isVisible, setIsVisible}) => {
+type Props = {
+  heading: string;
+  isVisible: boolean;
+  setIsVisible: any;
+  subHeading: string
+};
+
+const DeleteModalComponent = ({isVisible, setIsVisible}: Props) => {
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
@@ -25,7 +32,7 @@ const DeleteModalComponent = ({isVisible, setIsVisible}) => {
       </View>
     </ModalComponent>
   );
-}
+};
 
 export default DeleteModalComponent
 

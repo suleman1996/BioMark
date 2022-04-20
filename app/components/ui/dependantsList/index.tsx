@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { GlobalColors } from '../../../utils/theme/globalColors'
 import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import { responsiveFontSize } from './../../../utils/functions/responsiveText';
-import { GlobalFonts } from './../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../utils/functions/responsiveText';
+import { GlobalFonts } from '../../../utils/theme/fonts';
 import { GlobalStyles } from '../../../utils/theme/globalStyles';
-import { navigate } from './../../../services/navRef';
-import { Nav_Screens } from './../../../navigation/constants/index';
+import { navigate } from '../../../services/navRef';
+import { Nav_Screens } from '../../../navigation/constants/index';
 import DeleteModalComponent from '../../higher-order/delete-modal';
 const DependantsList = () => {
   const [isDelete, setIsDelete] = useState(false);
@@ -27,9 +27,11 @@ const DependantsList = () => {
                 <View style={styles.header}>
                   <Text style={styles.headerTitle}>Deku Midoriya</Text>
                   <View style={styles.headerEnd}>
-                    <View style={styles.editBtn}>
+                    <Pressable
+                      onPress={() => navigate(Nav_Screens.Edit_Dependants)}
+                      style={styles.editBtn}>
                       <Text style={styles.editText}>Edit</Text>
-                    </View>
+                    </Pressable>
                     <Pressable onPress={() => setIsDelete(true)}>
                       <AntDesign name="delete" size={responsiveFontSize(22)} />
                     </Pressable>
