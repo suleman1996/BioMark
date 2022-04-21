@@ -20,6 +20,7 @@ export const Nav_Screens = {
   Medical_History: 'MedicalHistoryScreen',
   // edit profile
   Edit_Profile: 'EditProfile',
+  Smoking: 'Smoking',
 
   // Bottom Nav_Screens
   Main_Navigator: 'MainBottomTabsNavigator',
