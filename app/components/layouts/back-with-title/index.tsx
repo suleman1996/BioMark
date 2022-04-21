@@ -1,16 +1,20 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native'
 import React from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { responsiveFontSize } from './../../../utils/functions/responsiveText';
+import { responsiveFontSize } from '../../../utils/functions/responsiveText';
 import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from './../../../utils/theme/globalColors';
-import { GlobalFonts } from './../../../utils/theme/fonts';
-import { GlobalStyles } from './../../../utils/theme/globalStyles';
-import { hitSlop } from './../../../constants/hitSlop';
-import { goBack } from './../../../services/navRef';
+import { GlobalColors } from '../../../utils/theme/globalColors';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalStyles } from '../../../utils/theme/globalStyles';
+import { hitSlop } from '../../../constants/hitSlop';
+import { goBack } from '../../../services/navRef';
 
-const TitleWithBackLayout = ({children, title}) => {
-  
+type Props = {
+  children: any,
+  title: string
+}
+
+const TitleWithBackLayout = ({children, title}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -28,13 +32,13 @@ const TitleWithBackLayout = ({children, title}) => {
       {children}
     </View>
   );
-}
+};
 
 export default TitleWithBackLayout;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   header: {
     width: widthToDp(100),

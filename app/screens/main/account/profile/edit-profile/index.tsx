@@ -131,7 +131,8 @@ const EditProfileScreen = () => {
                 color={GlobalColors.darkPrimary}
               />
             </View>
-            <View style={styles.menuOption}>
+
+            <Pressable onPress={()=>navigate(Nav_Screens.Smoking)} style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="smoking"
@@ -145,7 +146,8 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
+
             <View style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialIcons

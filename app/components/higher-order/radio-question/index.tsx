@@ -6,7 +6,13 @@ import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDiment
 import { responsiveFontSize } from '../../../utils/functions/responsiveText';
 import { GlobalFonts } from '../../../utils/theme/fonts';
 
-const RadioButtonQuestionComponent = ({question, isTrue, setIsTrue}) => {
+type Props = {
+  question: string,
+  isTrue: boolean,
+  setIsTrue: any,
+}
+
+const RadioButtonQuestionComponent = ({question, isTrue, setIsTrue}: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.qText}>{question}</Text>

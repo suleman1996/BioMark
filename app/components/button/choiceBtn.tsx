@@ -3,7 +3,11 @@ import React from 'react';
 import {Button} from 'react-native-paper';
 import colors from '../../assets/colors/colors';
 
-export default function Choicebtn(props) {
+type Props = {
+  title: string
+}
+
+export default function Choicebtn(props: Props) {
   return (
     <View style={styles.btnContainer}>
       <Button

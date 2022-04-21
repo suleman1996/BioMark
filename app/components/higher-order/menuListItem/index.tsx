@@ -6,7 +6,11 @@ import {GlobalFonts} from '../../../utils/theme/fonts';
 import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-const MenuListItem = ({top, bottom, title, subTitle, Icon, isRightArrow}) => {
+type Props = {
+  Icon?: any;
+};
+
+const MenuListItem = ({Icon}: Props) => {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>

@@ -1,24 +1,32 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import Covid19 from '../../../app/assets/svgs/covid-19';
 import fonts from '../../assets/fonts/fonts';
-import { Button } from 'react-native-paper';
 import colors from '../../assets/colors/colors';
+import YourHealth from '../../assets/svgs/your-health';
+import { Button } from 'react-native-paper';
 // import styles from 'react-native-indicators/src/components/ball-indicator/styles';
 
-export default function Covid19Btn({ text, onPress }) {
-    return (
-        <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-            <TouchableOpacity>
-                <View style={styles.circleBtn}>
-                    <Covid19 />
-                </View>
-            </TouchableOpacity>
-            <View>
-                <Text style={{ fontFamily: fonts.bold, fontSize: 15, color: colors.heading }}>COVID-19</Text>
-            </View>
+type Props = {
+    text: string,
+    onPress: any
+}
+
+export default function YourHealthBtn({text, onPress}: Props) {
+  return (
+    <View style={{flexDirection: 'column', alignItems: 'center'}}>
+      <TouchableOpacity>
+        <View style={styles.circleBtn}>
+          <YourHealth />
         </View>
-    )
+      </TouchableOpacity>
+      <View>
+        <Text
+          style={{fontFamily: fonts.bold, fontSize: 15, color: colors.heading}}>
+          Your Health
+        </Text>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

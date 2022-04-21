@@ -56,7 +56,7 @@ function forgotPassword(username: string) {
         }
       })
       .catch(async (err: ForgotPasswordErrorResponse) => {
-        logNow('Forgot password error response 2.', err);
+        logNow('Forgot password error response 2.', e0rr);
         reject(err);
       });
   });
