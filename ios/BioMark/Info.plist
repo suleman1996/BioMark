@@ -75,7 +75,6 @@
 		<string>Mukta-ExtraLight.ttf</string>
 		<string>Mukta-Medium.ttf</string>
 		<string>Mukta-SemiBold.ttf</string>
-		<string>Mukta-Light.ttf</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
  <dict>

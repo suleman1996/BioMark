@@ -30,7 +30,7 @@ import { IAppState } from '../../../store/IAppState';
 // import InputField from '../../components/inputField/inputField';
 import AuthContext from '../../../utils/auth-context';
 import styles from './styles';
-
+import auth from '@react-native-firebase/auth'
 export default function Login() {
 
   // redux
@@ -55,11 +55,8 @@ export default function Login() {
   const [loaded, setLoaded] = useState(false);
 
   
-
   GoogleSignin.configure({
-    webClientId:
-      '871137629206-muidhs147vquoqovf71scmu89ibsaq7s.apps.googleusercontent.com',
-    offlineAccess: false,
+    webClientId: '1078990823809-8us2qk3drov66qh0p59b743v8nj5p77a.apps.googleusercontent.com',
   });
 
   useEffect(() => {
@@ -72,25 +69,32 @@ export default function Login() {
   }, [selectCountryCode]);
 
   const GoogleLogin = async () => {
-    GoogleSignin.signOut();
-    await GoogleSignin.hasPlayServices()
-      .then(response => {
-        console.log('Play Services Response', response);
-        GoogleSignin.signIn()
-          .then(data => {
-            console.log('Google Accounts Data ', Platform.OS, ' ', data.user);
-            GoogleSignin.getTokens().then({});
-            // props.navigation.navigate(TOP_TAB_BAR);
-            authcontext.setUser(data.user.email);
-          })
-          .catch(error => {
-            console.log('SignIn error --->', error);
-          });
-      })
-      .catch(error => {
-        console.log('Play services error --->', error);
-        // Toast.show(error, Toast.LONG);
-      });
+    // GoogleSignin.signOut();
+    // await GoogleSignin.hasPlayServices()
+    //   .then(response => {
+    //     console.log('Play Services Response', response);
+    //     GoogleSignin.signIn()
+    //       .then(data => {
+    //         console.log('Google Accounts Data ', Platform.OS, ' ', data.user);
+    //         GoogleSignin.getTokens().then({});
+    //         // props.navigation.navigate(TOP_TAB_BAR);
+    //         authcontext.setUser(data.user.email);
+    //       })
+    //       .catch(error => {
+    //         console.log('SignIn error --->', error);
+    //       });
+    //   })
+    //   .catch(error => {
+    //     console.log('Play services error --->', error);
+    //     // Toast.show(error, Toast.LONG);
+    //   });
+    const {idToken}= await GoogleSignin.signIn()
+    const googleCrenditial=auth.GoogleAuthProvider.credential(idToken)
+    const user_sign_in=auth().signInWithCredential(googleCrenditial)
+    user_sign_in.then(re=>{
+      console.log("re",re)
+      
+    })
   };
 
   const FacebookLogin = async () => {
@@ -201,7 +205,7 @@ export default function Login() {
           }}
           onChange={setPassword}
           margin={20}
-        />
+        /> 
         {password !== '' && password.length < 8 && (
           <Text style={styles.errorMessage}>
             Password must have 8-11 characters long
