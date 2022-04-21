@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import { GlobalColors } from '../utils/theme/globalColors';
-import { Nav_Screens } from './constants';
+import {GlobalColors} from '../utils/theme/globalColors';
+import {Nav_Screens} from './constants';
 import AccountScreen from '../screens/main/account/account-screen';
 import EditProfileScreen from '../screens/main/account/profile/edit-profile';
 import PersonalInformationScreen from '../screens/main/account/profile/personal-information';
@@ -10,6 +10,9 @@ import MedicalHistoryScreen from '../screens/main/account/profile/medical-histor
 import DependantsScreen from '../screens/main/account/dependants';
 import AddDependantScreen from '../screens/main/account/dependants/add-dependant';
 import EditDependantScreen from '../screens/main/account/dependants/edit-dependant';
+import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking';
+import SleepScreen from '../screens/main/account/profile/edit-profile/sleep/sleep';
+import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking/drinking';
 
 const Stack = createNativeStackNavigator();
 
@@ -77,6 +80,27 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.Medical_History}
         component={MedicalHistoryScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Smoking}
+        component={SmokingScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Sleep}
+        component={SleepScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Drinking}
+        component={DrinkingScreen}
       />
     </Stack.Group>
   </Stack.Navigator>
