@@ -10,7 +10,7 @@ const ButtonWithShadowContainer = ({title, onPress}) => {
     <View style={styles.container}>
       <ButtonComponent
         onPress={onPress}
-        title={title ? title : 'Save & Continue'}
+        title={title ? title : ''}
       />
     </View>
   );
