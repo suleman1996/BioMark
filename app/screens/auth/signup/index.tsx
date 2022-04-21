@@ -282,7 +282,6 @@ export default function Signup() {
                   <Button
                     disabled={false}
                     title="Continue"
-                    // onPress={() => navigations.navigate('SignupVerification')}
                     onPress={() => handleSubmit()}
                   />
                 </TouchableOpacity>

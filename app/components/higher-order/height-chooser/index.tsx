@@ -1,29 +1,39 @@
-import {StyleSheet, Text, View, Pressable} from 'react-native';
-import React, {useState} from 'react';
-import {TextInput} from 'react-native-paper';
-import {Menu, MenuOptions, MenuTrigger} from 'react-native-popup-menu';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useRef} from 'react';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/globalColors';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsiveDimentions';
-import {responsiveFontSize} from '../../../utils/functions/responsiveText';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { TextInput } from 'react-native-paper';
+import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useRef } from 'react';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/globalColors';
+import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
+import { responsiveFontSize } from '../../../utils/functions/responsiveText';
+import InputField from '../../input-field/input-field'
 import colors from '../../../assets/colors/colors';
 
-const WeightChooserComponent = ({label, placeholder, height, textAlign,onChangeText}) => {
-  const menuRef = useRef();
+type Props = {
+  label: string,
+  placeholder: string,
+  height: number| string,
+  textAlign: string|number,
+}
+
+const HeightChooserComponent = ({
+  label,
+  placeholder,
+  height,
+  textAlign,
+}: Props) => {
+  const menuRef = useRef<any>();
   const [value, setValue] = useState(0);
   const [selectedType, setSelectedType] = useState(1);
 
   var otherStyle = [];
   if (height) {
-    otherStyle.push({height: heightToDp(height)});
+    otherStyle.push({ height: heightToDp(height) });
   }
   if (textAlign) {
-    otherStyle.push({textAlign: textAlign});
+    otherStyle.push({ textAlign: textAlign });
   }
   const convertedCentoFeet = (values = 30) => {
     setValue(values);
@@ -43,17 +53,16 @@ const WeightChooserComponent = ({label, placeholder, height, textAlign,onChangeT
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           borderBottomWidth={0}
-          //         onBlur={props.onBlur}
         />
         <Menu ref={menuRef}>
-          <MenuTrigger style={{flexDirection: 'row', alignItems: 'center'}}>
+          <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
                 color: GlobalColors.primary,
                 fontFamily: GlobalFonts.regular,
                 fontSize: responsiveFontSize(20),
               }}>
-              {selectedType == 1 ? 'lbs' : 'kg'}
+              {selectedType == 1 ? 'ft/in' : 'cm'}
             </Text>
 
             <MaterialCommunityIcons
@@ -70,9 +79,9 @@ const WeightChooserComponent = ({label, placeholder, height, textAlign,onChangeT
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 1 ? {backgroundColor: GlobalColors.gray} : {},
+                selectedType == 1 ? { backgroundColor: GlobalColors.gray } : {},
               ]}>
-              <Text style={styles.menuText}>lbs</Text>
+              <Text style={styles.menuText}>ft/in</Text>
             </Pressable>
             <Pressable
               onPress={() => {
@@ -81,9 +90,9 @@ const WeightChooserComponent = ({label, placeholder, height, textAlign,onChangeT
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 2 ? {backgroundColor: GlobalColors.gray} : {},
+                selectedType == 2 ? { backgroundColor: GlobalColors.gray } : {},
               ]}>
-              <Text style={styles.menuText}>kg</Text>
+              <Text style={styles.menuText}>cm</Text>
             </Pressable>
           </MenuOptions>
         </Menu>
@@ -92,7 +101,7 @@ const WeightChooserComponent = ({label, placeholder, height, textAlign,onChangeT
   );
 };
 
-export default WeightChooserComponent;
+export default HeightChooserComponent;
 
 const styles = StyleSheet.create({
   container: {
