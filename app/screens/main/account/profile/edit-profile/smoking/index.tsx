@@ -17,23 +17,45 @@ export default function SmokingScreen() {
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const [options, setOptions] = useState([
-    { title: '----' },
-    { title: 'Caucasian' },
-    { title: 'Chinese' },
-    { title: 'Filipino' },
-    { title: 'Indian' },
-    { title: 'Malay' },
-    { title: 'Other / NA' },
-  ])
-  const options2 = [
-    { title: '----' }, { title: '2020' }
+  const options = [
+    { title: null },
+    { title: '1990' },
+    { title: '1991' },
+    { title: '1992' },
+    { title: '1993' },
+    { title: '1994' },
+    { title: '1995' },
+    { title: '1996' },
+    { title: '1997' },
+    { title: '1998' },
+    { title: '1999' },
+    { title: '2000' },
+    { title: '2001' },
+    { title: '2002' },
+    { title: '2003' },
+    { title: '2004' },
+    { title: '2005' },
+    { title: '2006' },
+    { title: '2007' },
+    { title: '2008' },
+    { title: '2009' },
+    { title: '2010' },
+    { title: '2011' },
+    { title: '2012' },
+    { title: '2013' },
+    { title: '2014' },
+    { title: '2015' },
+    { title: '2016' },
+    { title: '2017' },
+    { title: '2018' },
+    { title: '2019' },
+    { title: '2020' },
+    { title: '2021' },
+    { title: '2022' },
   ]
-  // const [options2, setOptions2] = useState([
-  //   { title: '----' },
-  //   { title: '2022' },
-  //   { title: '2021' },
-  // ])
+  const options2 = [
+    { title: null }, { title: '2020' },{ title:'2021'}
+  ]
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -65,7 +87,7 @@ export default function SmokingScreen() {
               <Text style={styles.label}>How many cigarettes did you smoke per day?</Text>
               <View style={[styles.textinputView, { borderWidth: day ? 1 : null, borderRadius: day ? 5 : null }]}>
                 <TextInput
-                  placeholder="eg 1"
+                  placeholder="eg : 1"
                   value={day}
                   onChange={setDay}
                   margin={0}
@@ -78,18 +100,13 @@ export default function SmokingScreen() {
                 <Picker
                   selectedValue={startSmoke}
                   onValueChange={(itemValue, itemIndex) => setStartSmoke(itemValue)}>
-                  <Picker.Item label="----" value=" " />
-                  <Picker.Item label="Caucasian" value="Caucasian" />
-                  <Picker.Item label="Chinese" value="Chinese" />
-                  <Picker.Item label="Filipino" value="Filipino" />
-                  <Picker.Item label="Indian" value="Indian" />
-                  <Picker.Item label="Malay" value="Malay" />
-                  <Picker.Item label="Other / NA" value="Other / NA" />
+                  {options?.map((item, index) => {
+                    return (
+                      <Picker.Item key={index} label={item.title} value={item.title} />
+                    );
+                  })}
                 </Picker>
-                {/* <DropdownMenuComponent
-                  options={options}
-                  setSelectedDropdown={setOptions}
-                /> */}
+
               </View>
 
               {value == 'third' ?
@@ -99,15 +116,12 @@ export default function SmokingScreen() {
                     <Picker
                       selectedValue={stopSmoke}
                       onValueChange={(itemValue, itemIndex) => setStopSmoke(itemValue)}>
-                      <Picker.Item label="----" value=" " />
-                      <Picker.Item label="2020" value="2020" />
-                      <Picker.Item label="2021" value="2021" />
+                      {options2?.map((item, index) => {
+                        return (
+                          <Picker.Item key={index} label={item.title} value={item.title} />
+                        );
+                      })}
                     </Picker>
-                    {/* <DropdownMenuComponent
-                      options={options2}
-                      onValueChange={(title)=>{setStopSmoke(title)}}
-                      // setSelectedDropdown={setOptions2}
-                    /> */}
                   </View>
                 </View>
                 : null}
