@@ -88,6 +88,8 @@ export default function Login() {
     //     console.log('Play services error --->', error);
     //     // Toast.show(error, Toast.LONG);
     //   });
+  
+  
     const {idToken}= await GoogleSignin.signIn()
     const googleCrenditial=auth.GoogleAuthProvider.credential(idToken)
     const user_sign_in=auth().signInWithCredential(googleCrenditial)
