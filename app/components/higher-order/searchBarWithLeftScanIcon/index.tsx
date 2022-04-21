@@ -1,26 +1,26 @@
+import React, { useRef } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
   Image,
-  Modal,
+  Modal, StyleSheet,
+  Text, TextInput,
+  TouchableOpacity, View
 } from 'react-native';
-import React, { useRef } from 'react'
-import SearchBarLeftIcon from '../../svg/searchBarLeftIcon';
-import { GlobalColors } from '../../../utils/theme/globalColors';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MyImage from '../../../assets/images/images';
-import colors from '../../../assets/colors/colors';
-import { Button } from 'react-native-paper';
+import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
+import { responsiveFontSize } from '../../../utils/functions/responsiveText';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/globalColors';
+import SearchBarLeftIcon from '../../svg/searchBarLeftIcon';
 
-const QrInputPopup = ({ visible, children }) => {
+type Props = {
+  visible: boolean,
+  children: any
+}
+
+const QrInputPopup = ({visible, children}: Props) => {
   const [showModal, setShowModal] = React.useState(visible);
   React.useEffect(() => {
     togglePopUp();
@@ -31,13 +31,11 @@ const QrInputPopup = ({ visible, children }) => {
     } else {
       setShowModal(false);
     }
-  }
+  };
   return (
     <Modal transparent visible={showModal}>
       <View style={styles.popUpBackground}>
-        <View style={styles.popUpContainer}>
-          {children}
-        </View>
+        <View style={styles.popUpContainer}>{children}</View>
       </View>
     </Modal>
   );
@@ -47,7 +45,7 @@ const SearchBarWithLeftScanIcon = () => {
 
   const [visible, setVisible] = React.useState(false);
 
-  const menuRef = useRef();
+  const menuRef = useRef<any>();
   return (
     <>
       <View style={styles.searchBar}>
@@ -65,7 +63,7 @@ const SearchBarWithLeftScanIcon = () => {
 
                 />
 
-                <Text style={styles.menuText} fontSize={responsiveFontSize(15)}>
+                <Text style={styles.menuText}>
                   Scan QR/Barcode
                 </Text>
               </TouchableOpacity>
@@ -91,7 +89,7 @@ const SearchBarWithLeftScanIcon = () => {
                   color={GlobalColors.primary}
                   onPress={() => setVisible(true)}
                 />
-                <Text style={styles.menuText} fontSize={responsiveFontSize(15)}>
+                <Text style={styles.menuText}>
                   Input Barcode
                 </Text>
 
@@ -102,7 +100,7 @@ const SearchBarWithLeftScanIcon = () => {
                   size={responsiveFontSize(22)}
                   color={GlobalColors.primary}
                 />
-                <Text style={styles.menuText} fontSize={responsiveFontSize(15)}>
+                <Text style={styles.menuText}>
                   Upload Results
                 </Text>
               </TouchableOpacity>
@@ -139,12 +137,12 @@ const styles = StyleSheet.create({
     borderRadius: widthToDp(2),
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.20,
+    shadowOpacity: 0.2,
     shadowRadius: 1.41,
 
     elevation: 2,
@@ -177,19 +175,18 @@ const styles = StyleSheet.create({
     width: widthToDp(45),
     padding: widthToDp(1),
     marginTop: 30,
-
   },
   singleMenuItem: {
     paddingHorizontal: widthToDp(3),
     paddingVertical: widthToDp(1),
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   menuText: {
     paddingLeft: widthToDp(2),
     fontFamily: GlobalFonts.regular,
     color: '#8493AE',
-    fontSize: 13,
+    fontSize: responsiveFontSize(15),
   },
   popUpBackground: {
     flex: 1,
@@ -210,5 +207,4 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
   },
-
 });

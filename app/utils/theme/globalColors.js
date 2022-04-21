@@ -7,4 +7,5 @@ export const GlobalColors = {
   gray: '#EBEFF2',
   red: 'red',
   transparentBlack: 'rgba(52, 52, 52, 0.8)',
+  black: '#000'
 };
