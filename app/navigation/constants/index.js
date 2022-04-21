@@ -23,4 +23,5 @@ export const Nav_Screens = {
 
   // Bottom Nav_Screens
   Main_Navigator: 'MainBottomTabsNavigator',
+  FamilyMedicalHistory:'FamilyMedicalHistory'
 };

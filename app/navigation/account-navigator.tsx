@@ -10,6 +10,7 @@ import MedicalHistoryScreen from '../screens/main/account/profile/medical-histor
 import DependantsScreen from '../screens/main/account/dependants';
 import AddDependantScreen from '../screens/main/account/dependants/add-dependant';
 import EditDependantScreen from '../screens/main/account/dependants/edit-dependant';
+import FamilyMedicalHistory from '../screens/main/account/profile/familyMedicalHistory';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,14 @@ export const AccountNavigator = () => (
         name={Nav_Screens.Medical_History}
         component={MedicalHistoryScreen}
       />
+        <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.FamilyMedicalHistory}
+        component={FamilyMedicalHistory}
+      />
+      
     </Stack.Group>
   </Stack.Navigator>
 );
