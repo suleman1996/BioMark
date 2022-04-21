@@ -21,6 +21,8 @@ export const Nav_Screens = {
   // edit profile
   Edit_Profile: 'EditProfile',
   Smoking: 'Smoking',
+  Sleep: 'Sleep',
+  Drinking: 'Drinking',
 
   // Bottom Nav_Screens
   Main_Navigator: 'MainBottomTabsNavigator',
