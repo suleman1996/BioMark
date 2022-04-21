@@ -9,4 +9,5 @@ export const GlobalColors = {
   transparentBlack: 'rgba(52, 52, 52, 0.8)',
   heading: '#06599E',
   blue: '#1B96D8',
+  black: '#000',
 };

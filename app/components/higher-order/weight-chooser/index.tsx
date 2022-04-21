@@ -13,8 +13,22 @@ import {
 import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 import colors from '../../../assets/colors/colors';
 
-const WeightChooserComponent = ({label, placeholder, height, textAlign,onChangeText}) => {
-  const menuRef = useRef();
+type Props = {
+  label: string;
+  placeholder: string;
+  height: number;
+  textAlign: string;
+  onChangeText: () => void;
+};
+
+const WeightChooserComponent = ({
+  label,
+  placeholder,
+  height,
+  textAlign,
+  onChangeText,
+}: Props) => {
+  const menuRef = useRef<any>();
   const [value, setValue] = useState(0);
   const [selectedType, setSelectedType] = useState(1);
 

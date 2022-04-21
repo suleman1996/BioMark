@@ -10,7 +10,14 @@ import {GlobalColors} from '../../../utils/theme/globalColors';
 import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 import {GlobalFonts} from '../../../utils/theme/fonts';
 
-const ModalWithBottomBtn = ({isVisible, children, onPress, title}) => {
+type Props = {
+  isVisible: boolean,
+  children: any,
+  onPress: any,
+  title: string
+}
+
+const ModalWithBottomBtn = ({isVisible, children, onPress, title}: Props) => {
   const [isModal, setIsModal] = useState(isVisible);
 
   useEffect(() => {
@@ -26,8 +33,8 @@ const ModalWithBottomBtn = ({isVisible, children, onPress, title}) => {
         <ButtonWithShadowContainer
           title="Save"
           onPress={() => {
-                    setIsModal(false);
-                    onPress();
+            setIsModal(false);
+            onPress();
           }}
         />
       </View>

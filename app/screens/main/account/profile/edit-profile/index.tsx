@@ -156,6 +156,7 @@ const EditProfileScreen = () => {
               />
             </View>
             <View style={styles.menuOption}>
+            <Pressable onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)} style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialIcons
                   name="family-restroom"
@@ -164,6 +165,7 @@ const EditProfileScreen = () => {
                 />
                 <Text style={styles.menuTitleText}>Family Medical History</Text>
               </View>
+              </Pressable>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}

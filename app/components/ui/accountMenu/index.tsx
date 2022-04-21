@@ -12,7 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { Nav_Screens } from '../../../navigation/constants';
 import {navigate} from '../../../services/navRef'
-import { GlobalStyles } from './../../../utils/theme/globalStyles';
+import { GlobalStyles } from '../../../utils/theme/globalStyles';
 import { Switch } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../store/auth/authActions';

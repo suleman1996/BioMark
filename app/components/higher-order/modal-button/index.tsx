@@ -6,10 +6,17 @@ import { responsiveFontSize } from '../../../utils/functions/responsiveText'
 import { GlobalFonts } from '../../../utils/theme/fonts'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ModalButtonComponent = ({title, setIsModal, isModal}) => {
+type Props = {
+  title: string,
+  setIsModal: any,
+  isModal: boolean,
+  drop:boolean
+}
 
-  const textColor = isModal ? {color: GlobalColors.white} : {color: GlobalColors.black};
-  const bgColor = isModal ? {backgroundColor: GlobalColors.darkPrimary} : {backgroundColor: GlobalColors.white}
+const ModalButtonComponent = ({title, setIsModal, isModal,drop}: Props) => {
+
+  const textColor = isModal ? { color: GlobalColors.white } : { color: GlobalColors.black };
+  const bgColor = isModal ? { backgroundColor: GlobalColors.darkPrimary } : { backgroundColor: GlobalColors.white }
   return (
     <Pressable
       onPress={() => {
@@ -17,11 +24,11 @@ const ModalButtonComponent = ({title, setIsModal, isModal}) => {
       }}
       style={[styles.container, bgColor]}>
       <Text numberOfLines={1} style={[styles.label, textColor]}>{title}</Text>
-      <MaterialCommunityIcons
+      {drop ? (<MaterialCommunityIcons
         size={responsiveFontSize(20)}
         name="chevron-down"
         color={isModal ? GlobalColors.white : GlobalColors.black}
-      />
+      />) : null}
     </Pressable>
   );
 }
@@ -38,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   label: {
-            fontSize: responsiveFontSize(18),
-            fontFamily: GlobalFonts.regular
+    fontSize: responsiveFontSize(18),
+    fontFamily: GlobalFonts.regular
   }
 });
