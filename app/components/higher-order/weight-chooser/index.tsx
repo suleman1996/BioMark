@@ -14,17 +14,19 @@ import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 import colors from '../../../assets/colors/colors';
 
 type Props = {
-  label: string,
-  placeholder: string,
-  height: number,
-  textAlign: string
-}
+  label: string;
+  placeholder: string;
+  height: number;
+  textAlign: string;
+  onChangeText: () => void;
+};
 
 const WeightChooserComponent = ({
   label,
   placeholder,
   height,
   textAlign,
+  onChangeText,
 }: Props) => {
   const menuRef = useRef<any>();
   const [value, setValue] = useState(0);
@@ -49,7 +51,7 @@ const WeightChooserComponent = ({
           placeholderTextColor={colors.placeHolder}
           style={[styles.textFieldStyle, otherStyle]}
           //   keyboardType={'email-address'}
-          onChangeText={convertedCentoFeet}
+          onChangeText={onChangeText}
           value={value}
           autoFocus={true}
           underlineColor="transparent"

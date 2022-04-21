@@ -1,16 +1,22 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import React, { useState } from 'react'
+import React, {useState} from 'react';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
+import Button from '../../../../../components/button/button';
 import InputWithLabel from '../../../../../components/base/inputWithLabel/index';
-import { GlobalColors } from '../../../../../utils/theme/globalColors';
-import { heightToDp, widthToDp } from '../../../../../utils/functions/responsiveDimentions';
+import {GlobalColors} from '../../../../../utils/theme/globalColors';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../../../utils/functions/responsiveDimentions';
 import DatePicker from '../../../../../components/date-picker/date-picker';
-import { responsiveFontSize } from '../../../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
+import {GlobalFonts} from '../../../../../utils/theme/fonts';
 import {Provider, Appbar, RadioButton} from 'react-native-paper';
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 const PersonalInformationScreen = () => {
-          const [value, setValue] = useState('');
+  const [value, setValue] = useState('first');
+  const [firstName, setFirstName] = useState(false);
+  const [lastName, setLastName] = useState('');
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>
@@ -31,13 +37,14 @@ const PersonalInformationScreen = () => {
             <Text style={styles.radioText}>Female</Text>
           </View>
         </RadioButton.Group>
+        <View></View>
       </ScrollView>
       <ButtonWithShadowContainer onPress={undefined} title={''} />
     </TitleWithBackLayout>
   );
-}
+};
 
-export default PersonalInformationScreen
+export default PersonalInformationScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   radioText: {
-            fontSize: responsiveFontSize(18),
-            fontFamily: GlobalFonts.light
-  }
+    fontSize: responsiveFontSize(18),
+    fontFamily: GlobalFonts.light,
+  },
 });

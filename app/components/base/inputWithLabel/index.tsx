@@ -15,7 +15,7 @@ const InputWithLabel = ({label, placeholder}: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <InputField placeholder={placeholder} />
+      <InputField placeholder={placeholder} onChange={onChange}/>
     </View>
   );
 };
