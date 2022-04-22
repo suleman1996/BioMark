@@ -9,7 +9,7 @@ import {Nav_Screens} from '../../../../../../navigation/constants';
 
 type Props = {};
 
-const sleep = (props: Props) => {
+const Sleep = (props: Props) => {
   const sleepOptions = [
     {title: null},
     {title: 'less than 4 hours'},
@@ -54,4 +54,4 @@ const sleep = (props: Props) => {
   );
 };
 
-export default sleep;
+export default Sleep;
