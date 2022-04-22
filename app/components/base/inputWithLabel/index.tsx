@@ -9,9 +9,10 @@ import { heightToDp } from '../../../utils/functions/responsiveDimentions';
 type Props = {
   label: string,
   placeholder: string
+  
 }
 
-const InputWithLabel = ({label, placeholder}: Props) => {
+const InputWithLabel = ({label, placeholder,onChange}: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>

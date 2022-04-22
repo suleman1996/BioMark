@@ -272,7 +272,9 @@ const EditProfileScreen = () => {
                 color={GlobalColors.darkPrimary}
               />
             </Pressable>
-            <View style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Exercise)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="dumbbell"
@@ -286,7 +288,7 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
             <Pressable
               onPress={() => navigate(Nav_Screens.Sleep)}
               style={styles.menuOption}>
