@@ -12,14 +12,9 @@ import AddDependantScreen from '../screens/main/account/dependants/add-dependant
 import EditDependantScreen from '../screens/main/account/dependants/edit-dependant';
 import FamilyMedicalHistory from '../screens/main/account/profile/familyMedicalHistory';
 import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking';
-<<<<<<< HEAD
-import SleepScreen from '../screens/main/account/profile/edit-profile/sleep/sleep';
-import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking/drinking';
-import ExerciseScreen from '../screens/main/account/profile/edit-profile/exercise/index';
-=======
+import ExerciseScreen from '../screens/main/account/profile/edit-profile/exercise';
 import SleepScreen from '../screens/main/account/profile/edit-profile/sleep';
 import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking';
->>>>>>> 1168840d3e386a7954e27b40af68a230991f9393
 
 const Stack = createNativeStackNavigator();
 
