@@ -24,6 +24,7 @@ export const Nav_Screens = {
   Vaccination : 'Vaccination',
   Sleep: 'Sleep',
   Drinking: 'Drinking',
+  Allergies: 'Allergies',
 
   // Bottom Nav_Screens
   Main_Navigator: 'MainBottomTabsNavigator',

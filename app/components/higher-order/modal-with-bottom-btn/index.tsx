@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(27),
     color: GlobalColors.darkPrimary,
     fontFamily: GlobalFonts.medium,
-    paddingHorizontal: widthToDp(4),
+    paddingHorizontal: heightToDp(5),
     paddingTop: heightToDp(2),
   },
 });

@@ -9,6 +9,7 @@ import DropdownMenuComponent from '../../../../../../components/base/dropdown-me
 import { GlobalColors } from '../../../../../../utils/theme/globalColors';
 import TextInput from '../../../../../../components/input-field/text-input';
 import { Picker } from '@react-native-picker/picker';
+import { options } from './year';
 import { styles } from './styles';
 
 export default function SmokingScreen() {
@@ -17,42 +18,6 @@ export default function SmokingScreen() {
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const options = [
-    { title: null },
-    { title: '1990' },
-    { title: '1991' },
-    { title: '1992' },
-    { title: '1993' },
-    { title: '1994' },
-    { title: '1995' },
-    { title: '1996' },
-    { title: '1997' },
-    { title: '1998' },
-    { title: '1999' },
-    { title: '2000' },
-    { title: '2001' },
-    { title: '2002' },
-    { title: '2003' },
-    { title: '2004' },
-    { title: '2005' },
-    { title: '2006' },
-    { title: '2007' },
-    { title: '2008' },
-    { title: '2009' },
-    { title: '2010' },
-    { title: '2011' },
-    { title: '2012' },
-    { title: '2013' },
-    { title: '2014' },
-    { title: '2015' },
-    { title: '2016' },
-    { title: '2017' },
-    { title: '2018' },
-    { title: '2019' },
-    { title: '2020' },
-    { title: '2021' },
-    { title: '2022' },
-  ]
   const options2 = [
     { title: null }, { title: '2020' },{ title:'2021'}
   ]
@@ -66,17 +31,17 @@ export default function SmokingScreen() {
             onValueChange={newValue => setValue(newValue)}
             value={value}>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'first' ? '#054E8B' : null }]}>
+            <View style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
               <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
             </View>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? '#054E8B' : null }]}>
+            <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
               <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />
               <Text style={[styles.radioText, { color: value == 'second' ? '#ffffff' : '#000000' }]}>Yes</Text>
             </View>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'third' ? '#054E8B' : null }]}>
+            <View style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue  : null }]}>
               <RadioButton color={value == 'third' ? GlobalColors.white : null} value="third" />
               <Text style={[styles.radioText, { color: value == 'third' ? '#ffffff' : '#000000' }]}>I used to</Text>
             </View>

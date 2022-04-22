@@ -142,7 +142,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
 
-            <View style={styles.menuOption}>
+            <Pressable style={styles.menuOption} onPress={() => navigate(Nav_Screens.Allergies)}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="allergy"
@@ -156,7 +156,8 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
+
             <View style={styles.menuOption}>
             <Pressable onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)} style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>

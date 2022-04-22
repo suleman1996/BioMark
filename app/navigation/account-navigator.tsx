@@ -15,6 +15,7 @@ import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking'
 import VaccinationScreen from '../screens/main/account/profile/edit-profile/vaccination';
 import SleepScreen from '../screens/main/account/profile/edit-profile/sleep/sleep';
 import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking/drinking';
+import AllergiesScreen from '../screens/main/account/profile/edit-profile/allergies';
 
 const Stack = createNativeStackNavigator();
 
@@ -115,8 +116,8 @@ export const AccountNavigator = () => (
         options={{
           headerShown: false,
         }}
-        name={Nav_Screens.Drinking}
-        component={DrinkingScreen}
+        name={Nav_Screens.Allergies}
+        component={AllergiesScreen}
       />
     </Stack.Group>
   </Stack.Navigator>
