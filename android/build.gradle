@@ -4,7 +4,11 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 buildscript {
     ext {
+<<<<<<< HEAD
         buildToolsVersion = "30.0.0"
+=======
+        buildToolsVersion = "30.0.2"
+>>>>>>> f865ecfb2c31c10c5e49408915d8aa4196bcb1d1
         minSdkVersion = 21
         compileSdkVersion = 30
         targetSdkVersion = 30

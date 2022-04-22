@@ -1,5 +1,5 @@
 export const GlobalFonts = {
-  regular: 'Mukta-Regular',
+  regular: 'Mukta',
   bold: 'Mukta-Bold',
   light: 'Mukta-Light',
   medium: 'Mukta-Medium',
