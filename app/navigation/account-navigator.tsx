@@ -14,6 +14,7 @@ import FamilyMedicalHistory from '../screens/main/account/profile/familyMedicalH
 import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking';
 import SleepScreen from '../screens/main/account/profile/edit-profile/sleep/sleep';
 import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking/drinking';
+import ExerciseScreen from '../screens/main/account/profile/edit-profile/exercise/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -110,6 +111,13 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.Drinking}
         component={DrinkingScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Exercise}
+        component={ExerciseScreen}
       />
     </Stack.Group>
   </Stack.Navigator>

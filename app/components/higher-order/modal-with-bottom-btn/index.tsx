@@ -1,5 +1,11 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import ModalComponent from '../../base/modal';
 import ButtonWithShadowContainer from '../../base/button-with-shadow-container';
 import {
@@ -11,11 +17,11 @@ import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 import {GlobalFonts} from '../../../utils/theme/fonts';
 
 type Props = {
-  isVisible: boolean,
-  children: any,
-  onPress: any,
-  title: string
-}
+  isVisible: boolean;
+  children: any;
+  onPress: any;
+  title: string;
+};
 
 const ModalWithBottomBtn = ({isVisible, children, onPress, title}: Props) => {
   const [isModal, setIsModal] = useState(isVisible);
@@ -52,10 +58,11 @@ const styles = StyleSheet.create({
     borderRadius: widthToDp(3),
   },
   title: {
-    fontSize: responsiveFontSize(27),
+    fontSize: responsiveFontSize(25),
     color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.medium,
+    fontFamily: GlobalFonts.bold,
     paddingHorizontal: widthToDp(4),
     paddingTop: heightToDp(2),
+    marginBottom: heightToDp(3),
   },
 });

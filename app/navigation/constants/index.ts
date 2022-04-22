@@ -23,6 +23,7 @@ export const Nav_Screens = {
   Smoking: 'Smoking',
   Sleep: 'Sleep',
   Drinking: 'Drinking',
+  Exercise: 'Exercise',
 
   // Bottom Nav_Screens
   Main_Navigator: 'MainBottomTabsNavigator',

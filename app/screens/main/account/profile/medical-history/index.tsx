@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import DropdownMenuComponent from '../../../../../components/base/dropdown-menu';
 import ModalButtonComponent from '../../../../../components/higher-order/modal-button';
-import { goBack } from '../../../../../services/navRef';
+import {goBack} from '../../../../../services/navRef';
 import {
   heightToDp,
-  widthToDp
+  widthToDp,
 } from '../../../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from '../../../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../../../utils/theme/globalColors';
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import { responsiveFontSize } from '../../../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
+import {GlobalFonts} from '../../../../../utils/theme/fonts';
 import AsthmaModal from './modals/asthma';
 import CancerModal from './modals/cancer';
 import DiabetesModal from './modals/diabetes';
@@ -52,8 +52,8 @@ const MedicalHistoryScreen = () => {
     setIsCancerModal(false);
     setIsOtherModal(false);
     setIsNoneModal(true);
-  }
-  
+  };
+
   return (
     <TitleWithBackLayout title="Medical History">
       {/* modals */}
@@ -75,7 +75,6 @@ const MedicalHistoryScreen = () => {
       <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
       {/* modals */}
       <ScrollView style={styles.container}>
-      
         <Text style={styles.label}>
           Have you ever been diagnosed with any of the following conditions?
         </Text>
@@ -128,9 +127,12 @@ const MedicalHistoryScreen = () => {
           />
         </View>
       </ScrollView>
-      <ButtonWithShadowContainer onPress={() => {
-        goBack();
-      }} />
+      <ButtonWithShadowContainer
+        onPress={() => {
+          goBack();
+        }}
+        title={'Save & Continue'}
+      />
     </TitleWithBackLayout>
   );
 };
@@ -139,7 +141,7 @@ export default MedicalHistoryScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalColors.primaryGray,
+    backgroundColor: GlobalColors.gray,
     flex: 1,
     paddingHorizontal: widthToDp(4),
     paddingTop: heightToDp(3),
@@ -154,5 +156,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: heightToDp(2),
     justifyContent: 'space-between',
+    paddingHorizontal: widthToDp(4),
+    marginBottom: heightToDp(0.5),
   },
 });

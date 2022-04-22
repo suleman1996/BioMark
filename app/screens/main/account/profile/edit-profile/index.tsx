@@ -156,15 +156,19 @@ const EditProfileScreen = () => {
               />
             </View>
             <View style={styles.menuOption}>
-            <Pressable onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)} style={styles.menuOption}>
-              <View style={styles.menuTitleAndIcon}>
-                <MaterialIcons
-                  name="family-restroom"
-                  size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
-                />
-                <Text style={styles.menuTitleText}>Family Medical History</Text>
-              </View>
+              <Pressable
+                onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)}
+                style={styles.menuOption}>
+                <View style={styles.menuTitleAndIcon}>
+                  <MaterialIcons
+                    name="family-restroom"
+                    size={responsiveFontSize(22)}
+                    color={GlobalColors.darkPrimary}
+                  />
+                  <Text style={styles.menuTitleText}>
+                    Family Medical History
+                  </Text>
+                </View>
               </Pressable>
               <Fontisto
                 name="angle-right"
@@ -208,7 +212,9 @@ const EditProfileScreen = () => {
                 color={GlobalColors.darkPrimary}
               />
             </Pressable>
-            <View style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Exercise)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="dumbbell"
@@ -222,7 +228,7 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
             <Pressable
               onPress={() => navigate(Nav_Screens.Sleep)}
               style={styles.menuOption}>
