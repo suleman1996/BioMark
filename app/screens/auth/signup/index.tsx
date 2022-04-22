@@ -1,10 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
-import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {Formik} from 'formik';
+import React, {useEffect, useState} from 'react';
 import {
-  FlatList, Keyboard, ScrollView, Text, TouchableOpacity, View
+  FlatList,
+  Keyboard,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { showMessage } from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
 import colors from '../../../assets/colors/colors';
@@ -15,12 +20,12 @@ import DatePicker from '../../../components/date-picker/date-picker';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { signup } from '../../../services/auth-service';
-import { navigate } from '../../../services/navRef';
+import {Nav_Screens} from '../../../navigation/constants';
+import {signup} from '../../../services/auth-service';
+import {navigate} from '../../../services/navRef';
 import {userService} from '../../../services/user-service/userService';
-import { RegisterUserErrorResponse } from '../../../types/auth/RegisterUser';
-import { logNow } from '../../../utils/functions/logBinder';
+import {RegisterUserErrorResponse} from '../../../types/auth/RegisterUser';
+import {logNow} from '../../../utils/functions/logBinder';
 
 import styles from './styles';
 
@@ -44,6 +49,8 @@ export default function Signup() {
   const [selectedGender, setSelectedGender] = useState('');
   const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
   const [checked, setChecked] = React.useState(false);
+  const [date, setDate] = useState(new Date());
+  const [isPickerShow, setIsPickerShow] = useState(false);
 
   //fuctions
   useEffect(() => {
@@ -56,25 +63,25 @@ export default function Signup() {
   }, [selectCountryCode]);
 
   const signupApi = async (password: string) => {
-     setLoading(true);
-     Keyboard.dismiss();
-     const username = `+${selectCountryCode}${phoneNumber}`;
-     userService
-       .registerUser(username, password)
-       .then(res => {
-         logNow('signup res', res);
-         navigate(Nav_Screens.SignupVerificationScreen, {username, password});
-       })
-       .catch((err: RegisterUserErrorResponse) => {
-         logNow('error signup', err.errMsg.data.message);
-          showMessage({
+    setLoading(true);
+    Keyboard.dismiss();
+    const username = `+${selectCountryCode}${phoneNumber}`;
+    userService
+      .registerUser(username, password)
+      .then(res => {
+        logNow('signup res', res);
+        navigate(Nav_Screens.SignupVerificationScreen, {username, password});
+      })
+      .catch((err: RegisterUserErrorResponse) => {
+        logNow('error signup', err.errMsg.data.message);
+        showMessage({
           message: err?.errMsg.data.message || 'Please try again later',
           type: 'danger',
         });
-       })
-       .finally(() => {
-         setLoading(false);
-       });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
   const handleSignup = async ({password}: {password: string}) => {
     if (phoneNumber == '' || gender == '') {
@@ -119,13 +126,8 @@ export default function Signup() {
 
     lName: Yup.string().required('Please provide your last name'),
 
-    IcPnum: Yup.string()
-      .required('Please type your IC Number')
-      .min(9, 'Invalid.'),
-
-    email: Yup.string()
-      .email('invalid Email.')
-      .required('Please type your e-mail'),
+    IcPnum: Yup.string(),
+    email: Yup.string(),
 
     password: Yup.string().required('Please type your new password').min(8),
   });
@@ -157,7 +159,7 @@ export default function Signup() {
           }}
           onSubmit={handleSignup}
           validationSchema={ResetPassSchema}>
-          {({handleChange, handleSubmit, values, errors}) => (
+          {({handleChange, handleSubmit, values, errors, isValid}) => (
             <>
               <View style={styles.biContainer}>
                 <Text style={styles.heading}>Basic Information</Text>
@@ -194,7 +196,12 @@ export default function Signup() {
                   <Text style={styles.errorMessage}>Please select gender</Text>
                 )}
                 <Text style={styles.inputLablel}>Date of Birth</Text>
-                <DatePicker />
+                <DatePicker
+                  isPickerShow={isPickerShow}
+                  setIsPickerShow={setIsPickerShow}
+                  date={date}
+                  setDate={setDate}
+                />
 
                 <Text style={[styles.inputLablel, {marginTop: 20}]}>
                   Identity Card/Passport Number
@@ -204,9 +211,6 @@ export default function Signup() {
                   onChange={handleChange('IcPnum')}
                   margin={20}
                 />
-                {errors.IcPnum && (
-                  <Text style={styles.errorMessage}>{errors.IcPnum}</Text>
-                )}
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
 
@@ -236,15 +240,13 @@ export default function Signup() {
                     margin={20}
                     Keyboardtype="email-address"
                   />
-                  {errors.email && (
-                    <Text style={styles.errorMessage}>{errors.email}</Text>
-                  )}
+                
 
                   <Text style={styles.inputLablel}>Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."
                     secureTextEntry={hidePassword}
-                    eye={!hidePassword ? 'eye-off' : 'eye'}
+                    eye={!hidePassword ? 'eye' : 'eye-off'}
                     onEyePress={() => setHidePassword(!hidePassword)}
                     onChange={handleChange('password')}
                     margin={20}
@@ -255,7 +257,7 @@ export default function Signup() {
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
-                  <TouchableOpacity>
+                  {/* <TouchableOpacity> */}
                     <Text style={styles.tcTextStyle}>
                       <Text>I accept the </Text>
                       <Text
@@ -276,12 +278,12 @@ export default function Signup() {
                         privacy policy.
                       </Text>
                     </Text>
-                  </TouchableOpacity>
+                  {/* </TouchableOpacity> */}
                 </View>
                 <TouchableOpacity>
                   <Button
-                    disabled={false}
                     title="Continue"
+                    disabled={!isValid}
                     onPress={() => handleSubmit()}
                   />
                 </TouchableOpacity>

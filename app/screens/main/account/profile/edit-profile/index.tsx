@@ -23,12 +23,16 @@ import {navigate} from '../../../../../services/navRef';
 import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
 import {GlobalFonts} from '../../../../../utils/theme/fonts';
 import {GlobalColors} from '../../../../../utils/theme/globalColors';
-import {} from 'react-native-gesture-handler';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import EditProfileModal from '../../../../../components/edit-profile-menu/edit-profile-menu';
+
+let cameraIs = false;
 
 const EditProfileScreen = () => {
   const [edit, setEdit] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
+  const [profilePic, setProfilePic] = React.useState();
+
   const EditProfile = () => (
     <View style={styles.editView}>
       <TouchableOpacity
@@ -47,13 +51,66 @@ const EditProfileScreen = () => {
       </TouchableOpacity>
     </View>
   );
+  const ImagePickerFromGallery = () => {
+    setShowModal(false);
+    if (!cameraIs) {
+      cameraIs = true;
+      let options = {
+        mediaType: 'photo',
+        selectionLimit: 1,
+        // includeBase64: true,
+      };
+      launchImageLibrary(options, res => {
+        if (res.didCancel) {
+          console.log('User cancelled image picker');
+          cameraIs = false;
+        } else if (res.errorMessage) {
+          console.log('ImagePicker Error: ', res.errorMessage);
+          cameraIs = false;
+        } else {
+          console.log('here is the picture from gallery ', res);
+          setProfilePic(res.assets[0]);
+          setEdit(false);
+          cameraIs = false;
+        }
+      });
+    }
+  };
+
+  const ImagePickerFromCamera = () => {
+    setShowModal(false);
+    if (!cameraIs) {
+      cameraIs = true;
+
+      let options = {
+        mediaType: 'photo',
+        // includeBase64: true,
+      };
+      launchCamera(options, res => {
+        if (res.didCancel) {
+          console.log('User cancelled image picker');
+          cameraIs = false;
+        } else if (res.errorMessage) {
+          console.log('Camera error: ', res.errorMessage);
+          cameraIs = false;
+        } else {
+          console.log('Here is the picture from camera', res);
+          // some_array[selectedPictureIndex] = res.assets[0];
+          // setPictures(some_array);
+          setProfilePic(res.assets[0]);
+          setEdit(false);
+          cameraIs = false;
+        }
+      });
+    }
+  };
   return (
     <TitleWithBackLayout title="Your Profile">
       <EditProfileModal
         iconPress={() => setShowModal(false)}
         visible={showModal}
-        onPressGallery={() => console.log('Gallery Press')}
-        onPressPhoto={() => console.log('Photo Press')}
+        onPressGallery={() => ImagePickerFromGallery()}
+        onPressPhoto={() => ImagePickerFromCamera()}
       />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topBg} />
@@ -61,7 +118,10 @@ const EditProfileScreen = () => {
           <View style={styles.profileContainer}>
             {edit && <EditProfile />}
             <TouchableOpacity onPress={() => setEdit(true)}>
-              <Image source={Images.avatar} style={styles.image} />
+              <Image
+                source={!profilePic ? Images.avatar : {uri: profilePic?.uri}}
+                style={styles.image}
+              />
             </TouchableOpacity>
           </View>
           <Text style={styles.name}>Gerold Mordena</Text>
@@ -156,15 +216,19 @@ const EditProfileScreen = () => {
               />
             </View>
             <View style={styles.menuOption}>
-            <Pressable onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)} style={styles.menuOption}>
-              <View style={styles.menuTitleAndIcon}>
-                <MaterialIcons
-                  name="family-restroom"
-                  size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
-                />
-                <Text style={styles.menuTitleText}>Family Medical History</Text>
-              </View>
+              <Pressable
+                onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)}
+                style={styles.menuOption}>
+                <View style={styles.menuTitleAndIcon}>
+                  <MaterialIcons
+                    name="family-restroom"
+                    size={responsiveFontSize(22)}
+                    color={GlobalColors.darkPrimary}
+                  />
+                  <Text style={styles.menuTitleText}>
+                    Family Medical History
+                  </Text>
+                </View>
               </Pressable>
               <Fontisto
                 name="angle-right"
@@ -208,7 +272,9 @@ const EditProfileScreen = () => {
                 color={GlobalColors.darkPrimary}
               />
             </Pressable>
-            <View style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Exercise)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="dumbbell"
@@ -222,7 +288,7 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
             <Pressable
               onPress={() => navigate(Nav_Screens.Sleep)}
               style={styles.menuOption}>

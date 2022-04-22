@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: GlobalColors.white,
     bottom: 0,
-    paddingHorizontal: widthToDp(8),
-    paddingVertical: heightToDp(3),
+    paddingHorizontal: widthToDp(6),
+    paddingVertical: heightToDp(2),
     ...GlobalStyles.shadow,
   },
 });

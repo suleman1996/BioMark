@@ -48,7 +48,7 @@ const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
         setIsTrue={setAns2}
         question="Did you take any medications for this?"
       />
-      <TagsCloudInputComponent question="Please list  medications?" />
+     
     </ModalWithBottomBtn>
   );
 };

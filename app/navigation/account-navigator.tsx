@@ -12,9 +12,10 @@ import AddDependantScreen from '../screens/main/account/dependants/add-dependant
 import EditDependantScreen from '../screens/main/account/dependants/edit-dependant';
 import FamilyMedicalHistory from '../screens/main/account/profile/familyMedicalHistory';
 import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking';
-import SleepScreen from '../screens/main/account/profile/edit-profile/sleep/sleep';
-import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking/drinking';
 import SettingsScreen from '../screens/main/account/settings';
+import ExerciseScreen from '../screens/main/account/profile/edit-profile/exercise';
+import SleepScreen from '../screens/main/account/profile/edit-profile/sleep';
+import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking';
 
 const Stack = createNativeStackNavigator();
 
@@ -119,6 +120,13 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.Drinking}
         component={DrinkingScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Exercise}
+        component={ExerciseScreen}
       />
     </Stack.Group>
   </Stack.Navigator>
