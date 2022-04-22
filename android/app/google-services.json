@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "1078990823809-bkoiutvvsucceacpms3eqm1jq3bn3mq3.apps.googleusercontent.com",
+          "client_id": "1078990823809-bku41lnoejuv4nvmtftvsvlhajk0g1lh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.biomark",
             "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1078990823809-vk3qrdspj0mqm3venpiuqa5lolshis1u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.biomark",
+            "certificate_hash": "d249a0157571385692e63f51afd44cef5d3dd241"
           }
         },
         {

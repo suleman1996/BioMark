@@ -31,6 +31,8 @@ import { IAppState } from '../../../store/IAppState';
 import AuthContext from '../../../utils/auth-context';
 import styles from './styles';
 import auth from '@react-native-firebase/auth'
+import { AppleButton,appleAuth } from '@invertase/react-native-apple-authentication';
+
 export default function Login() {
 
   // redux
@@ -53,12 +55,29 @@ export default function Login() {
   const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
   const [userGoogleInfo, setUserGoogleInfo] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [textToken, setText] = useState("");
 
+  async function onAppleButtonPress() {
+    // performs login request
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+    setText(appleAuthRequestResponse)
+   // console.log("appleAuthRequestResponse",appleAuthRequestResponse);
+    
   
-  GoogleSignin.configure({
-    webClientId: '1078990823809-8us2qk3drov66qh0p59b743v8nj5p77a.apps.googleusercontent.com',
-  });
-
+    // get current authentication state for user
+    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+  
+    // use credentialState response to ensure the user is authenticated
+    if (credentialState === appleAuth.State.AUTHORIZED) {
+      // user is authenticated
+    }
+  }
+ 
+ 
   useEffect(() => {
     if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
     else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
@@ -88,7 +107,11 @@ export default function Login() {
     //     console.log('Play services error --->', error);
     //     // Toast.show(error, Toast.LONG);
     //   });
-  
+    GoogleSignin.signOut();
+    GoogleSignin.configure({
+      webClientId: '1078990823809-1s2m5rup1t61rmmiic4ma5ag847d17u1.apps.googleusercontent.com',
+      offlineAccess:true
+    });
   
     const {idToken}= await GoogleSignin.signIn()
     const googleCrenditial=auth.GoogleAuthProvider.credential(idToken)
@@ -111,11 +134,11 @@ export default function Login() {
               result.grantedPermissions.toString(),
           );
           const data = await AccessToken.getCurrentAccessToken();
-          initUser(data.accessToken);
+          console.log('Facebook data', data?.accessToken);
+          handleFedrationLogin(data?.accessToken)
 
-          console.log('Facebook data is ===>>', data);
         }
-      },
+      }, 
       function (error) {
         console.log('Login fail with error: ' + error);
       },
@@ -132,11 +155,7 @@ export default function Login() {
         response.json().then(
           json => {
             console.log('Json response', json);
-            authcontext.setUser(json.first_name);
-            // const credential = auth.FacebookAuthProvider.credential(token);
-            // console.log('json id is', json.id);
-            let name = `${json.first_name} ${json.last_name}`;
-            // console.log('Credentials', credential);
+         
           },
           error => {
             alert(error.message);
@@ -164,7 +183,10 @@ export default function Login() {
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
   };
-
+  const handleFedrationLogin = async (accessToken:string) => {
+  console.log("accessToken",accessToken);
+  
+  };
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={loggingIn} />
@@ -220,7 +242,7 @@ export default function Login() {
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-
+<Text>{textToken}</Text>
         <Button
           onPress={() => handleLogin()}
           disabled={
@@ -246,7 +268,7 @@ export default function Login() {
         </Text>
         <View style={styles.socialLogins}>
           {Platform.OS === 'ios' && (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => onAppleButtonPress()}>
               <Apple height="24" width="24" />
             </TouchableOpacity>
           )}
