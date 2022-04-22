@@ -15,7 +15,7 @@ import {Nav_Screens} from '../../../../../../navigation/constants';
 
 type Props = {};
 
-const drinking = (props: Props) => {
+const Drinking = (props: Props) => {
   const [value, setValue] = React.useState('');
   const [beer, setBeer] = React.useState(0);
   const [wine, setWine] = React.useState(0);
@@ -159,4 +159,4 @@ const drinking = (props: Props) => {
   );
 };
 
-export default drinking;
+export default Drinking;
