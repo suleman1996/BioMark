@@ -95,17 +95,17 @@ const styles = StyleSheet.create({
   },
   tcText: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 20,
+    // borderWidth: 2,
+    marginHorizontal: 30,
   },
   tcTextStyle: {
-    fontSize: 18,
+    fontSize: 17,
     marginTop: 20,
-    // marginHorizontal: 10,
-    // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
+    // marginHorizontal: 10,
   },
   errorMessage: {
     fontFamily: fonts.regular,

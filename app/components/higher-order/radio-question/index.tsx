@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: widthToDp(4),
   },
   qText: {
-          fontSize: responsiveFontSize(23),
-            fontFamily: GlobalFonts.medium,
+          fontSize: responsiveFontSize(20),
+            fontFamily: GlobalFonts.extraBold,
             color: GlobalColors.darkPrimary,
             marginTop: heightToDp(2),
   },
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginRight: widthToDp(3),
   },
   radioLabel: {
-            fontSize: responsiveFontSize(24),
+            fontSize: responsiveFontSize(20),
             fontFamily: GlobalFonts.regular
   }
 });

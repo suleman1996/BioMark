@@ -15,7 +15,7 @@ type Props = {
 
 const ModalButtonComponent = ({title, setIsModal, isModal,drop}: Props) => {
 
-  const textColor = isModal ? { color: GlobalColors.white } : { color: GlobalColors.black };
+  const textColor = isModal ? { color: GlobalColors.white } : { color: GlobalColors.lightGrey };
   const bgColor = isModal ? { backgroundColor: GlobalColors.darkPrimary } : { backgroundColor: GlobalColors.white }
   return (
     <Pressable
@@ -27,7 +27,7 @@ const ModalButtonComponent = ({title, setIsModal, isModal,drop}: Props) => {
       {drop ? (<MaterialCommunityIcons
         size={responsiveFontSize(20)}
         name="chevron-down"
-        color={isModal ? GlobalColors.white : GlobalColors.black}
+        color={isModal ? GlobalColors.white : 'black'}
       />) : null}
     </Pressable>
   );
@@ -37,15 +37,25 @@ export default ModalButtonComponent
 
 const styles = StyleSheet.create({
   container: {
-    width: widthToDp(44),
-    height: heightToDp(8),
+    width: widthToDp(40),
+    height: heightToDp(7),
     backgroundColor: GlobalColors.white,
     borderRadius: widthToDp(2),
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 1,
+},
+shadowOpacity: 0.20,
+shadowRadius: 1.41,
+
+elevation: 2,
   },
   label: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.regular
+    fontSize: responsiveFontSize(17),
+    fontFamily: GlobalFonts.regular,
+    color: GlobalColors.gray,
   }
 });

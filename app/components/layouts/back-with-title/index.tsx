@@ -1,18 +1,21 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View, Pressable} from 'react-native';
+import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from '../../../utils/theme/globalColors';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalStyles } from '../../../utils/theme/globalStyles';
-import { hitSlop } from '../../../constants/hitSlop';
-import { goBack } from '../../../services/navRef';
+import {responsiveFontSize} from '../../../utils/functions/responsiveText';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsiveDimentions';
+import {GlobalColors} from '../../../utils/theme/globalColors';
+import {GlobalFonts} from '../../../utils/theme/fonts';
+import {GlobalStyles} from '../../../utils/theme/globalStyles';
+import {hitSlop} from '../../../constants/hitSlop';
+import {goBack} from '../../../services/navRef';
 
 type Props = {
-  children: any,
-  title: string
-}
+  children: any;
+  title: string;
+};
 
 const TitleWithBackLayout = ({children, title}: Props) => {
   return (
@@ -46,7 +49,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: widthToDp(4),
     paddingTop: heightToDp(2.5),
     paddingBottom: heightToDp(2),
-    ...GlobalStyles.shadow
+    // ...GlobalStyles.shadow
+    borderBottomWidth: 0.3,
   },
   titleContainer: {
     paddingVertical: heightToDp(1),
@@ -55,6 +59,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(22),
     fontFamily: GlobalFonts.medium,
     marginTop: heightToDp(2),
-    color: GlobalColors.white
-  }
+    color: GlobalColors.white,
+  },
 });
