@@ -14,6 +14,7 @@ import FamilyMedicalHistory from '../screens/main/account/profile/familyMedicalH
 import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking';
 import SleepScreen from '../screens/main/account/profile/edit-profile/sleep/sleep';
 import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking/drinking';
+import SettingsScreen from '../screens/main/account/settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,14 @@ export const AccountNavigator = () => (
         name={Nav_Screens.Edit_Dependants}
         component={EditDependantScreen}
       />
+      {/* Settings */}
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Settings}
+        component={SettingsScreen}
+      />
     </Stack.Group>
     {/* Profile Stack */}
     <Stack.Group>
@@ -82,14 +91,14 @@ export const AccountNavigator = () => (
         name={Nav_Screens.Medical_History}
         component={MedicalHistoryScreen}
       />
-        <Stack.Screen
+      <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={Nav_Screens.FamilyMedicalHistory}
         component={FamilyMedicalHistory}
       />
-      
+
       <Stack.Screen
         options={{
           headerShown: false,
