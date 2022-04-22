@@ -49,6 +49,8 @@ export default function Signup() {
   const [selectedGender, setSelectedGender] = useState('');
   const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
   const [checked, setChecked] = React.useState(false);
+  const [date, setDate] = useState(new Date());
+  const [isPickerShow, setIsPickerShow] = useState(false);
 
   //fuctions
   useEffect(() => {
@@ -194,7 +196,12 @@ export default function Signup() {
                   <Text style={styles.errorMessage}>Please select gender</Text>
                 )}
                 <Text style={styles.inputLablel}>Date of Birth</Text>
-                <DatePicker />
+                <DatePicker
+                  isPickerShow={isPickerShow}
+                  setIsPickerShow={setIsPickerShow}
+                  date={date}
+                  setDate={setDate}
+                />
 
                 <Text style={[styles.inputLablel, {marginTop: 20}]}>
                   Identity Card/Passport Number
