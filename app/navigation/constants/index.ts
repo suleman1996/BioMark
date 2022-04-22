@@ -22,7 +22,10 @@ export const Nav_Screens = {
   Edit_Profile: 'EditProfile',
   Smoking: 'Smoking',
   Vaccination : 'Vaccination',
+  Sleep: 'Sleep',
+  Drinking: 'Drinking',
 
   // Bottom Nav_Screens
   Main_Navigator: 'MainBottomTabsNavigator',
+  FamilyMedicalHistory:'FamilyMedicalHistory'
 };

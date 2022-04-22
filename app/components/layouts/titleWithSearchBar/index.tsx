@@ -9,7 +9,12 @@ import {GlobalFonts} from '../../../utils/theme/fonts';
 import {GlobalColors} from '../../../utils/theme/globalColors';
 import SearchBarWithLeftScanIcon from '../../higher-order/searchBarWithLeftScanIcon';
 
-const TitleWithSearchBarLayout = ({children, title}) => {
+type Props = {
+  children: any,
+  title: string
+}
+
+const TitleWithSearchBarLayout = ({children, title}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleBar}>

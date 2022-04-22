@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { GlobalColors } from '../../../utils/theme/globalColors';
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {GlobalColors} from '../../../utils/theme/globalColors';
 import ButtonComponent from '../button/index';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalStyles } from '../../../utils/theme/globalStyles';
-
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsiveDimentions';
+import {GlobalStyles} from '../../../utils/theme/globalStyles';
 
 type Props = {
   onPress: any;
@@ -22,7 +24,7 @@ const ButtonWithShadowContainer = ({title, onPress}: Props) => {
   );
 };
 
-export default ButtonWithShadowContainer
+export default ButtonWithShadowContainer;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
 import { responsiveFontSize } from '../../../utils/functions/responsiveText';
@@ -6,14 +6,18 @@ import { GlobalFonts } from '../../../utils/theme/fonts';
 import { GlobalColors } from '../../../utils/theme/globalColors';
 import { TextInput } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo'
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-const TagsCloudInputComponent = ({question}) => {
+
+type Props = {
+  question: string
+}
+
+const TagsCloudInputComponent = ({question}: Props) => {
   const [tags, setTags] = useState([]);
 
-  const onDelete = (item, index) => {
+  const onDelete = (item: any, index: number) => {
     setTags(prevState => prevState.filter((_, i) => i !== index));
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -29,7 +33,11 @@ const TagsCloudInputComponent = ({question}) => {
           }}
         />
         <View style={styles.addBtn}>
-          <Ionicons color={GlobalColors.primaryGray} name="add" size={responsiveFontSize(35)} />
+          <Ionicons
+            color={GlobalColors.primaryGray}
+            name="add"
+            size={responsiveFontSize(35)}
+          />
         </View>
       </View>
       <View style={styles.tagsWrapper}>
@@ -37,7 +45,11 @@ const TagsCloudInputComponent = ({question}) => {
           <View style={styles.tag} key={index}>
             <Text style={styles.tagText}>{item}</Text>
             <Pressable onPress={() => onDelete(item, index)}>
-              <Entypo color={'gray'} name="cross" size={responsiveFontSize(18)} />
+              <Entypo
+                color={'gray'}
+                name="cross"
+                size={responsiveFontSize(18)}
+              />
             </Pressable>
           </View>
         ))}

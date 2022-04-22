@@ -5,7 +5,7 @@ import { GlobalColors } from "./globalColors";
 
 export const GlobalStyles = {
   shadow: {
-    shadowOffset: {width: 5, height: -5},
+    shadowOffset: {width: 5, },
     shadowColor: 'lightgray',
     shadowOpacity: 0.4,
     elevation: 2,
@@ -13,7 +13,7 @@ export const GlobalStyles = {
     // backgroundColor: '#0000', // invisible color
   },
   shadow2: {
-    shadowOffset: {width: 5, height: -5},
+    shadowOffset: {width: 5, },
     shadowColor: 'gray',
     shadowOpacity: 0.7,
     elevation: 0.5,
