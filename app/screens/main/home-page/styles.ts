@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import colors from '../../../assets/colors/colors';
 import fonts from '../../../assets/fonts/fonts';
-
 
 const styles = StyleSheet.create({
   navBar: {
@@ -11,20 +10,18 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   navHeading: {
-    flex: 1,
     fontFamily: fonts.bold,
     fontSize: 25,
     color: colors.whiteColor,
     paddingLeft: 21,
     paddingTop: 5,
-
+    paddingBottom: 10,
   },
   navSearch: {
-    flex: 1,
+    // flex: 1,
     width: '100%',
     marginHorizontal: 20,
-    marginTop: 20,
-    
+    // marginTop: 20,
   },
   navSearchInner: {
     // borderWidth:1,
@@ -34,47 +31,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 8,
-    
   },
 
   //Mid Container
   midContainer: {
-    // borderWidth: 1,
-    // backgroundColor: 'red',
-    // height: '50%',
-    // flex: 1,
     width: '100%',
     marginTop: 25,
     paddingHorizontal: 25,
-
+    // justifyContent:'center',
   },
 
   bnHeading: {
     fontFamily: fonts.bold,
     fontSize: 20,
     color: colors.whiteColor,
-    marginTop:10,
+    marginTop: 10,
+    paddingHorizontal: 10,
   },
 
   bookNowC: {
-    // borderWidth: 1,
-    // backgroundColor: 'grey',
-    // borderRadius: 8,
-    // height: 134,
-    // justifyContent:'center',
-    // flexWrap: 'wrap',
-    // paddingHorizontal: 15,
-    // paddingTop: 10,
-    flex: 1,
     width: '100%',
     marginTop: 13,
-    alignContent:'center',
+    alignContent: 'center',
+    borderRadius: 10,
   },
+
   bnInner: {
     // borderWidth: 1,
     // flex: 1,
-    width: '70%',
+    width: '100%',
     marginTop: 5,
+    paddingHorizontal: 10,
+    paddingBottom: 10,
+    justifyContent: 'space-around',
     flexDirection: 'row',
   },
 
@@ -83,7 +72,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-
   },
 
   googleFitC: {
@@ -100,27 +88,29 @@ const styles = StyleSheet.create({
     // flexWrap: 'wrap',
     marginVertical: 5,
     paddingHorizontal: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.20,
+    shadowOpacity: 0.2,
     shadowRadius: 1.41,
 
     elevation: 2,
   },
+
   gfHeading: {
     fontFamily: fonts.bold,
-    fontSize: 22,
+    fontSize: 20,
     color: colors.heading,
     marginTop: 15,
   },
   //bottom nav bar
   bottomNavBar: {
     // marginTop:570,
+    borderWidth: 2,
     height: '12%',
-  }
+  },
 });
 
 export default styles;
