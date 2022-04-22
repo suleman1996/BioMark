@@ -1,10 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
-import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {Formik} from 'formik';
+import React, {useEffect, useState} from 'react';
 import {
-  FlatList, Keyboard, ScrollView, Text, TouchableOpacity, View
+  FlatList,
+  Keyboard,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { showMessage } from 'react-native-flash-message';
+import {showMessage} from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
 import colors from '../../../assets/colors/colors';
@@ -15,12 +20,12 @@ import DatePicker from '../../../components/date-picker/date-picker';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { signup } from '../../../services/auth-service';
-import { navigate } from '../../../services/navRef';
+import {Nav_Screens} from '../../../navigation/constants';
+import {signup} from '../../../services/auth-service';
+import {navigate} from '../../../services/navRef';
 import {userService} from '../../../services/user-service/userService';
-import { RegisterUserErrorResponse } from '../../../types/auth/RegisterUser';
-import { logNow } from '../../../utils/functions/logBinder';
+import {RegisterUserErrorResponse} from '../../../types/auth/RegisterUser';
+import {logNow} from '../../../utils/functions/logBinder';
 
 import styles from './styles';
 
@@ -44,6 +49,8 @@ export default function Signup() {
   const [selectedGender, setSelectedGender] = useState('');
   const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
   const [checked, setChecked] = React.useState(false);
+  const [date, setDate] = useState(new Date());
+  const [isPickerShow, setIsPickerShow] = useState(false);
 
   //fuctions
   useEffect(() => {
@@ -56,25 +63,25 @@ export default function Signup() {
   }, [selectCountryCode]);
 
   const signupApi = async (password: string) => {
-     setLoading(true);
-     Keyboard.dismiss();
-     const username = `+${selectCountryCode}${phoneNumber}`;
-     userService
-       .registerUser(username, password)
-       .then(res => {
-         logNow('signup res', res);
-         navigate(Nav_Screens.SignupVerificationScreen, {username, password});
-       })
-       .catch((err: RegisterUserErrorResponse) => {
-         logNow('error signup', err.errMsg.data.message);
-          showMessage({
+    setLoading(true);
+    Keyboard.dismiss();
+    const username = `+${selectCountryCode}${phoneNumber}`;
+    userService
+      .registerUser(username, password)
+      .then(res => {
+        logNow('signup res', res);
+        navigate(Nav_Screens.SignupVerificationScreen, {username, password});
+      })
+      .catch((err: RegisterUserErrorResponse) => {
+        logNow('error signup', err.errMsg.data.message);
+        showMessage({
           message: err?.errMsg.data.message || 'Please try again later',
           type: 'danger',
         });
-       })
-       .finally(() => {
-         setLoading(false);
-       });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
   const handleSignup = async ({password}: {password: string}) => {
     if (phoneNumber == '' || gender == '') {
@@ -194,7 +201,12 @@ export default function Signup() {
                   <Text style={styles.errorMessage}>Please select gender</Text>
                 )}
                 <Text style={styles.inputLablel}>Date of Birth</Text>
-                <DatePicker />
+                <DatePicker
+                  isPickerShow={isPickerShow}
+                  setIsPickerShow={setIsPickerShow}
+                  date={date}
+                  setDate={setDate}
+                />
 
                 <Text style={[styles.inputLablel, {marginTop: 20}]}>
                   Identity Card/Passport Number
