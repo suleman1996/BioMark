@@ -1,6 +1,8 @@
 import { ForgotPasswordErrorResponse, ForgotPasswordSuccessResponse } from '../../types/auth/ForgotPassword';
 import { LoginResponse, LoginErrorResponse } from '../../types/auth/LoginResponse';
 import { RegisterUserErrorResponse, RegisterUserSuccessResponse } from '../../types/auth/RegisterUser';
+import { ErrorResponse } from '../../types/ErrorResponse';
+import { UserContacts } from '../../types/UserContacts';
 import { logNow } from '../../utils/functions/logBinder';
 import {
   resetAuthAsyncStorage,
@@ -89,6 +91,26 @@ function registerUser(username: string, password: string) {
   });
 }
 
+function getUserContacts(){
+  return new Promise<UserContacts>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_USER_CONTACTS)
+      .then(async response => {
+        try {
+          logNow('Register user success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('Register user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get profile error', err);
+        reject(err);
+      });
+  });
+}
+
 
 async function logout() {
   await resetAuthAsyncStorage();
@@ -99,4 +121,5 @@ export const userService = {
   registerUser,
   logout,
   forgotPassword,
+  getUserContacts,
 };

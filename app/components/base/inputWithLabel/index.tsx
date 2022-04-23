@@ -10,7 +10,8 @@ type Props = {
   label: string;
   placeholder: string;
   labelFontSize?: number;
-  onChange: any
+  onChange: any;
+  value: string
 };
 
 const InputWithLabel = ({
@@ -18,12 +19,20 @@ const InputWithLabel = ({
   placeholder,
   onChange,
   labelFontSize,
+  value,
 }: Props) => {
-  const ifLabelSize = labelFontSize ? {fontSize: responsiveFontSize(labelFontSize)} : {}
+  const ifLabelSize = labelFontSize
+    ? {fontSize: responsiveFontSize(labelFontSize)}
+    : {};
   return (
     <View style={styles.container}>
       <Text style={[styles.label, ifLabelSize]}>{label}</Text>
-      <InputField placeholder={placeholder} onChange={onChange} />
+      <InputField
+        placeholder={placeholder}
+        onChange={onChange}
+        svg={undefined}
+        value={value}
+      />
     </View>
   );
 };

@@ -1,5 +1,6 @@
 import { userService } from '../../services/user-service/userService';
 import { LoginErrorResponse, LoginResponse } from '../../types/auth/LoginResponse';
+import { UserContacts } from '../../types/UserContacts';
 import { logNow } from '../../utils/functions/logBinder';
 import {
   AUTH_ERR_LOG_IN,
@@ -9,6 +10,7 @@ import {
   AUTH_LOGGING_OUT,
   AUTH_LOGOUT,
   AUTH_USER,
+  USER_CONTACTS,
 } from './constants';
 
 export const loggingIn = (loggingIn: boolean) => ({
@@ -29,6 +31,11 @@ export const addUserDetails = (data: any) => ({
 export const errorLogIn = (errorMessage: string) => ({
   type: AUTH_ERR_LOG_IN,
   payload: errorMessage,
+});
+
+export const addUserContactsDetails = (data: UserContacts) => ({
+  type: USER_CONTACTS,
+  payload: data
 });
 
 export const reduxLogin =
