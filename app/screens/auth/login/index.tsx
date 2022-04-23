@@ -142,10 +142,11 @@ export default function Login() {
   // redux error check
   useEffect(() => {
     if (errorMessageLogin) {
-      showMessage({
-        message: errorMessageLogin,
-        type: 'danger',
-      });
+      setLoginError(true);
+      // showMessage({
+      //   message: errorMessageLogin,
+      //   type: 'danger',
+      // });
     }
   }, [errorMessageLogin]);
 
