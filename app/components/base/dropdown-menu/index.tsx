@@ -7,11 +7,7 @@ import {
 } from '../../../utils/functions/responsiveDimentions';
 import {GlobalColors} from '../../../utils/theme/globalColors';
 
-const DropdownMenuComponent = ({
-  options,
-  setSelectedDropdown,
-  onValueChange,
-}) => {
+const DropdownMenuComponent = ({options, setSelectedDropdown,onValueChange}) => {
   return (
     <View style={styles.container}>
       <Picker
