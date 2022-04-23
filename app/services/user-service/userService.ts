@@ -1,4 +1,5 @@
-import {DeviceRegister} from '../../types/auth/DeviceRegisterResponse';
+import {ErrorResponse} from '../../types/ErrorResponse';
+import {UserContacts} from '../../types/UserContacts';
 import {
   ForgotPasswordErrorResponse,
   ForgotPasswordSuccessResponse,
@@ -11,8 +12,7 @@ import {
   RegisterUserErrorResponse,
   RegisterUserSuccessResponse,
 } from '../../types/auth/RegisterUser';
-import {ErrorResponse} from '../../types/ErrorResponse';
-import {UserContacts} from '../../types/UserContacts';
+import {DeviceRegister} from '../../types/auth/DeviceRegisterResponse';
 import {logNow} from '../../utils/functions/logBinder';
 import {
   resetAuthAsyncStorage,
@@ -21,6 +21,7 @@ import {
 } from '../async-storage/auth-async-storage';
 import client from '../client';
 import {API_URLS} from '../url-constants';
+import DeviceInfo from 'react-native-device-info';
 
 function login(username: string, password: string) {
   return new Promise<LoginResponse>((resolve, reject) => {
@@ -145,6 +146,25 @@ function getUserContacts() {
 
 async function logout() {
   await resetAuthAsyncStorage();
+
+  let uniqueId = DeviceInfo.getUniqueId();
+
+  client
+    .post(API_URLS.LOG_OUT, {
+      session: {
+        device_token: uniqueId,
+      },
+    })
+    .then(async response => {
+      try {
+        logNow('response', response.data);
+      } catch (e) {
+        logNow('e', e);
+      }
+    })
+    .catch(async (err: RegisterUserErrorResponse) => {
+      logNow('err', err);
+    });
 }
 
 export const userService = {
