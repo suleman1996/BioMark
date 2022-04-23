@@ -1,8 +1,12 @@
 import React from 'react';
 import {
-  Image, Pressable, ScrollView, StyleSheet,
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
 } from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -10,20 +14,115 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Images from '../../../../../assets/images/images';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import { heightToDp, widthToDp } from '../../../../../utils/functions/responsiveDimentions';
-import { Nav_Screens } from '../../../../../navigation/constants/index';
-import { navigate } from '../../../../../services/navRef';
-import { responsiveFontSize } from '../../../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
-import { GlobalColors } from '../../../../../utils/theme/globalColors';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../../../utils/functions/responsiveDimentions';
+import {Nav_Screens} from '../../../../../navigation/constants/index';
+import {navigate} from '../../../../../services/navRef';
+import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
+import {GlobalFonts} from '../../../../../utils/theme/fonts';
+import {GlobalColors} from '../../../../../utils/theme/globalColors';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import EditProfileModal from '../../../../../components/edit-profile-menu/edit-profile-menu';
+
+let cameraIs = false;
+
 const EditProfileScreen = () => {
+  const [edit, setEdit] = React.useState(false);
+  const [showModal, setShowModal] = React.useState(false);
+  const [profilePic, setProfilePic] = React.useState();
+
+  const EditProfile = () => (
+    <View style={styles.editView}>
+      <TouchableOpacity
+        style={{
+          height: 50,
+          width: 50,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onPress={() => setShowModal(true)}>
+        <MaterialCommunityIcons
+          name={'pencil-outline'}
+          size={responsiveFontSize(22)}
+          color={GlobalColors.white}
+        />
+      </TouchableOpacity>
+    </View>
+  );
+  const ImagePickerFromGallery = () => {
+    setShowModal(false);
+    if (!cameraIs) {
+      cameraIs = true;
+      let options = {
+        mediaType: 'photo',
+        selectionLimit: 1,
+        // includeBase64: true,
+      };
+      launchImageLibrary(options, res => {
+        if (res.didCancel) {
+          console.log('User cancelled image picker');
+          cameraIs = false;
+        } else if (res.errorMessage) {
+          console.log('ImagePicker Error: ', res.errorMessage);
+          cameraIs = false;
+        } else {
+          console.log('here is the picture from gallery ', res);
+          setProfilePic(res.assets[0]);
+          setEdit(false);
+          cameraIs = false;
+        }
+      });
+    }
+  };
+
+  const ImagePickerFromCamera = () => {
+    setShowModal(false);
+    if (!cameraIs) {
+      cameraIs = true;
+
+      let options = {
+        mediaType: 'photo',
+        // includeBase64: true,
+      };
+      launchCamera(options, res => {
+        if (res.didCancel) {
+          console.log('User cancelled image picker');
+          cameraIs = false;
+        } else if (res.errorMessage) {
+          console.log('Camera error: ', res.errorMessage);
+          cameraIs = false;
+        } else {
+          console.log('Here is the picture from camera', res);
+          // some_array[selectedPictureIndex] = res.assets[0];
+          // setPictures(some_array);
+          setProfilePic(res.assets[0]);
+          setEdit(false);
+          cameraIs = false;
+        }
+      });
+    }
+  };
   return (
     <TitleWithBackLayout title="Your Profile">
+      <EditProfileModal
+        iconPress={() => setShowModal(false)}
+        visible={showModal}
+        onPressGallery={() => ImagePickerFromGallery()}
+        onPressPhoto={() => ImagePickerFromCamera()}
+      />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topBg} />
         <View style={styles.contentContainer}>
           <View style={styles.profileContainer}>
-            <Image source={Images.avatar} style={styles.image} />
+            {edit && <EditProfile />}
+            <TouchableOpacity onPress={() => setEdit(true)}>
+              <Image
+                source={!profilePic ? Images.avatar : {uri: profilePic?.uri}}
+                style={styles.image}
+              />
+            </TouchableOpacity>
           </View>
           <Text style={styles.name}>Gerold Mordena</Text>
           <View style={styles.menuContainer}>
@@ -69,7 +168,9 @@ const EditProfileScreen = () => {
                 color={GlobalColors.darkPrimary}
               />
             </Pressable>
-            <Pressable onPress={() => navigate(Nav_Screens.Medical_History)} style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Medical_History)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="plus"
@@ -115,15 +216,19 @@ const EditProfileScreen = () => {
               />
             </View>
             <View style={styles.menuOption}>
-            <Pressable onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)} style={styles.menuOption}>
-              <View style={styles.menuTitleAndIcon}>
-                <MaterialIcons
-                  name="family-restroom"
-                  size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
-                />
-                <Text style={styles.menuTitleText}>Family Medical History</Text>
-              </View>
+              <Pressable
+                onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)}
+                style={styles.menuOption}>
+                <View style={styles.menuTitleAndIcon}>
+                  <MaterialIcons
+                    name="family-restroom"
+                    size={responsiveFontSize(22)}
+                    color={GlobalColors.darkPrimary}
+                  />
+                  <Text style={styles.menuTitleText}>
+                    Family Medical History
+                  </Text>
+                </View>
               </Pressable>
               <Fontisto
                 name="angle-right"
@@ -132,7 +237,9 @@ const EditProfileScreen = () => {
               />
             </View>
 
-            <Pressable onPress={()=>navigate(Nav_Screens.Smoking)} style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Smoking)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="smoking"
@@ -148,7 +255,9 @@ const EditProfileScreen = () => {
               />
             </Pressable>
 
-            <View style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Drinking)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialIcons
                   name="local-drink"
@@ -162,8 +271,10 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
-            <View style={styles.menuOption}>
+            </Pressable>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Exercise)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="dumbbell"
@@ -177,8 +288,10 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
-            <View style={styles.menuOption}>
+            </Pressable>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Sleep)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <Ionicons
                   name="moon"
@@ -192,7 +305,7 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
             <View style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
@@ -213,9 +326,9 @@ const EditProfileScreen = () => {
       </ScrollView>
     </TitleWithBackLayout>
   );
-}
+};
 
-export default EditProfileScreen
+export default EditProfileScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -277,5 +390,17 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(22),
     fontFamily: GlobalFonts.light,
     marginLeft: widthToDp(4),
+  },
+  editView: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    backgroundColor: '#3D3D3D90',
+    borderRadius: widthToDp(12.5),
+    zIndex: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -1,10 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from '../../../utils/theme/globalColors';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsiveDimentions';
+import {GlobalColors} from '../../../utils/theme/globalColors';
 
-const DropdownMenuComponent = ({options, setSelectedDropdown,onValueChange}) => {
+const DropdownMenuComponent = ({
+  options,
+  setSelectedDropdown,
+  onValueChange,
+}) => {
   return (
     <View style={styles.container}>
       <Picker
@@ -13,8 +20,7 @@ const DropdownMenuComponent = ({options, setSelectedDropdown,onValueChange}) => 
         // onValueChange={(itemValue, itemIndex) =>
         //   setSelectedLanguage(itemValue)
         // }
-        onValueChange={onValueChange}
-        >
+        onValueChange={onValueChange}>
         {options?.map((item, index) => {
           return (
             <Picker.Item key={index} label={item.title} value={item.title} />
@@ -25,7 +31,7 @@ const DropdownMenuComponent = ({options, setSelectedDropdown,onValueChange}) => 
   );
 };
 
-export default DropdownMenuComponent
+export default DropdownMenuComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -35,6 +41,5 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: widthToDp(2),
     maxHeight: heightToDp(6.5),
-  
   },
 });

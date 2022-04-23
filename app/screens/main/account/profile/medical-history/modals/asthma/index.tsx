@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
 import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
 
 type Props = {
-  isVisible: boolean,
-  setIsVisible: any,
+  isVisible: boolean;
+  setIsVisible: any;
 };
 
 const AsthmaModal = ({isVisible, setIsVisible}: Props) => {

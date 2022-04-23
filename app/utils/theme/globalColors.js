@@ -5,7 +5,11 @@ export const GlobalColors = {
   white: '#FFFFFF',
   opacityBlack: 'hsla(133, 50%, 7%, 0.18)',
   gray: '#EBEFF2',
+  bg: '#E5E5E5',
   red: 'red',
   transparentBlack: 'rgba(52, 52, 52, 0.8)',
-  black: '#000'
+  heading: '#06599E',
+  blue: '#1B96D8',
+  black: '#000',
+  lightGrey:'#8493AE',
 };

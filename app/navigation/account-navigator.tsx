@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import { GlobalColors } from '../utils/theme/globalColors';
-import { Nav_Screens } from './constants';
+import {GlobalColors} from '../utils/theme/globalColors';
+import {Nav_Screens} from './constants';
 import AccountScreen from '../screens/main/account/account-screen';
 import EditProfileScreen from '../screens/main/account/profile/edit-profile';
 import PersonalInformationScreen from '../screens/main/account/profile/personal-information';
@@ -12,6 +12,13 @@ import AddDependantScreen from '../screens/main/account/dependants/add-dependant
 import EditDependantScreen from '../screens/main/account/dependants/edit-dependant';
 import FamilyMedicalHistory from '../screens/main/account/profile/familyMedicalHistory';
 import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking';
+import SettingsScreen from '../screens/main/account/settings';
+import ExerciseScreen from '../screens/main/account/profile/edit-profile/exercise';
+import SleepScreen from '../screens/main/account/profile/edit-profile/sleep';
+import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking';
+import PasswordChangeScreen from '../screens/main/account/settings/password-change';
+import EmailChangeScreen from '../screens/main/account/settings/email-change';
+import PhoneChangeScreen from '../screens/main/account/settings/phone-change';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +56,35 @@ export const AccountNavigator = () => (
         name={Nav_Screens.Edit_Dependants}
         component={EditDependantScreen}
       />
+      {/* Settings */}
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Settings}
+        component={SettingsScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.PasswordChangeScreen}
+        component={PasswordChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.EmailChangeScreen}
+        component={EmailChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.PhoneChangeScreen}
+        component={PhoneChangeScreen}
+      />
     </Stack.Group>
     {/* Profile Stack */}
     <Stack.Group>
@@ -80,20 +116,41 @@ export const AccountNavigator = () => (
         name={Nav_Screens.Medical_History}
         component={MedicalHistoryScreen}
       />
-        <Stack.Screen
+      <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={Nav_Screens.FamilyMedicalHistory}
         component={FamilyMedicalHistory}
       />
-      
+
       <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={Nav_Screens.Smoking}
         component={SmokingScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Sleep}
+        component={SleepScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Drinking}
+        component={DrinkingScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Exercise}
+        component={ExerciseScreen}
       />
     </Stack.Group>
   </Stack.Navigator>

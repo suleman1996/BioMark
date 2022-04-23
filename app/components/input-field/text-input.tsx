@@ -5,7 +5,7 @@ import colors from '../../assets/colors/colors';
 
 type Props = {
   margin?: any;
-  svg: any;
+  svg?: any;
   placeholder: string;
   value: string;
   secureTextEntry?: boolean;

@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { GlobalColors } from '../../../utils/theme/globalColors';
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {GlobalColors} from '../../../utils/theme/globalColors';
 import ButtonComponent from '../button/index';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalStyles } from '../../../utils/theme/globalStyles';
-
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsiveDimentions';
+import {GlobalStyles} from '../../../utils/theme/globalStyles';
 
 type Props = {
   onPress: any;
@@ -14,15 +16,12 @@ type Props = {
 const ButtonWithShadowContainer = ({title, onPress}: Props) => {
   return (
     <View style={styles.container}>
-      <ButtonComponent
-        onPress={onPress}
-        title={title ? title : 'Save & Continue'}
-      />
+      <ButtonComponent onPress={onPress} title={title ? title : ''} />
     </View>
   );
 };
 
-export default ButtonWithShadowContainer
+export default ButtonWithShadowContainer;
 
 const styles = StyleSheet.create({
   container: {
@@ -30,8 +29,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: GlobalColors.white,
     bottom: 0,
-    paddingHorizontal: widthToDp(8),
-    paddingVertical: heightToDp(3),
+    paddingHorizontal: widthToDp(6),
+    paddingVertical: heightToDp(2),
     ...GlobalStyles.shadow,
   },
 });

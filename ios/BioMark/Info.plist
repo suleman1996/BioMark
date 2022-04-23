@@ -69,6 +69,13 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access Warning</string>
+	<key>Privacy – Camera Usage Description	</key>
+	<string>App needs Camera Access Permission for testing</string>
+	<key>Privacy – Photo Library Additions Usage Description</key>
+	<string>App needs photo library Access
+</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
