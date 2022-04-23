@@ -5,6 +5,11 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import {
+  Platform,
+} from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+import {useDispatch} from 'react-redux';
 import React, {useState, useEffect, useRef} from 'react';
 import styles from './styles';
 import Button from '../../../components/button/button';
@@ -22,6 +27,7 @@ import {
 import {showMessage, hideMessage} from 'react-native-flash-message';
 
 export default function SignupVerification() {
+  const dispatch = useDispatch();
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
 
   let initialMinutes = 1;
@@ -62,7 +68,7 @@ export default function SignupVerification() {
       setLoading(true);
       const result = await resendAccountCode({
         confirmation: {
-          username: route?.params?.useName,
+          username: route?.params?.username,
         },
       });
       console.log('success resend account code ', result.data);
@@ -94,11 +100,13 @@ export default function SignupVerification() {
       setLoading(true);
       const result = await signupAccountConfirm({
         confirmation: {
-          username: route?.params?.useName,
+          username: route?.params?.username,
           password: route?.params?.password,
           code: code,
         },
       });
+      let uniqueId = DeviceInfo.getUniqueId();
+      dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
       console.log('Signup confirmaton ', result.data);
       navigations.navigate('Confirmation');
       setLoading(false);

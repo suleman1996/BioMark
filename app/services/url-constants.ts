@@ -7,7 +7,7 @@ const API_URLS = {
   FORGOT_PASSWORD: '/api/v1/auth/password/forgot',
   CHANGE_PASSWORD: '/api/v1/auth/password/reset',
   RESEND_PASSWORD_OTP: '/api/v1/auth/confirmations/resend_code',
-
+  LOG_OUT: '/api/v1/auth/sessions/logout',
   // Settings
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',
 };

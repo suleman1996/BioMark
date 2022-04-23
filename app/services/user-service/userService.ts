@@ -1,5 +1,5 @@
 import { ForgotPasswordErrorResponse, ForgotPasswordSuccessResponse } from '../../types/auth/ForgotPassword';
-import { LoginResponse, LoginErrorResponse } from '../../types/auth/LoginResponse';
+import { LoginResponse, LoginErrorResponse} from '../../types/auth/LoginResponse';
 import { RegisterUserErrorResponse, RegisterUserSuccessResponse } from '../../types/auth/RegisterUser';
 import { DeviceRegister } from '../../types/auth/DeviceRegisterResponse';
 import { logNow } from '../../utils/functions/logBinder';
@@ -10,6 +10,7 @@ import {
 } from '../async-storage/auth-async-storage';
 import client from '../client'
 import { API_URLS } from '../url-constants'
+import DeviceInfo from 'react-native-device-info';
 
 
 function login(username: string, password: string) {
@@ -117,6 +118,30 @@ function registerUser(username: string, password: string) {
 
 async function logout() {
   await resetAuthAsyncStorage();
+ 
+  let uniqueId = DeviceInfo.getUniqueId();
+ 
+    client
+      .post(API_URLS.LOG_OUT, {
+        session: {
+          device_token:uniqueId
+        },
+      })
+      .then(async response => {
+        try {
+          logNow('response', response.data);
+         
+        } catch (e) {
+          logNow('e', e);
+         
+        }
+      })
+      .catch(async (err: RegisterUserErrorResponse) => {
+        logNow('err', err);
+      
+      });
+      
+
 }
 
 export const userService = {
