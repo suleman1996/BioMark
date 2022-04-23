@@ -1,9 +1,16 @@
-import {userService} from '../../services/user-service/userService';
+import {
+  Platform,
+} from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+import { userService } from '../../services/user-service/userService';
 import {
   LoginErrorResponse,
   LoginResponse,
 } from '../../types/auth/LoginResponse';
-import {logNow} from '../../utils/functions/logBinder';
+import {
+  DeviceRegister
+} from '../../types/auth/DeviceRegisterResponse';
+import { logNow } from '../../utils/functions/logBinder';
 import {
   AUTH_ERR_LOG_IN,
   AUTH_ERR_LOG_OUT,
@@ -12,6 +19,7 @@ import {
   AUTH_LOGGING_OUT,
   AUTH_LOGOUT,
   AUTH_USER,
+  DEVICE_REG
 } from './constants';
 
 export const loggingIn = (loggingIn: boolean) => ({
@@ -21,6 +29,10 @@ export const loggingIn = (loggingIn: boolean) => ({
 
 export const loggedIn = (data: any) => ({
   type: AUTH_LOGGED_IN,
+  payload: data,
+});
+export const deviceReg = (data: any) => ({
+  type: DEVICE_REG,
   payload: data,
 });
 
@@ -37,30 +49,11 @@ export const errorLogIn = (errorMessage: string) => ({
 export const reduxLogin =
   (username: string, password: string) =>
   (dispatch: (arg0: {type: string; payload: any}) => void) => {
-    userService
-      .login(username, password)
-      .then(async (res) => {
-        logNow('auth reducer ==>',res);
-        
-       
-        // await navigate('DashboardScreen');
-      })
-      .catch((err: LoginErrorResponse) => {
-        logNow('User auth login redux action error block', err);
-        dispatch(errorLogIn(err.errMsg.data.error));
-      })
-      .finally(async () => {
-        dispatch(loggingIn(false));
-      });
-  };
-  export const reduxDeviceRegister =
-  (device_token: string, device_type: string) =>
-  (dispatch: (arg0: {type: string; payload: any}) => void) => {
     dispatch(loggingIn(true));
     userService
-      .login(device_token, device_type)
+      .login(username, password)
       .then(async (res: LoginResponse) => {
-        logNow('auth reducer ==>', res);
+        logNow('auth reducer ==>',res);
         const userToken = res?.access_token;
         const refreshToken = res?.refresh_token;
         const isFirstLogin = res?.first_login;
@@ -75,16 +68,45 @@ export const reduxLogin =
             expiresIin,
           }),
         );
+        let uniqueId = DeviceInfo.getUniqueId();
+        console.log("uniqueId",uniqueId);
+        await  dispatch(reduxDeviceRegister(uniqueId, Platform.OS)); 
+        
         // await navigate('DashboardScreen');
       })
       .catch((err: LoginErrorResponse) => {
         logNow('User auth login redux action error block', err);
-        dispatch(errorLogIn(err.errMsg.data.message));
+        dispatch(errorLogIn(err.errMsg.data.error));
       })
       .finally(async () => {
         dispatch(loggingIn(false));
       });
   };
+
+export const reduxDeviceRegister =
+  (device_token: string, device_type: string) =>
+    (dispatch: (arg0: { type: string; payload: any }) => void) => {
+      userService
+        .deviceRegisteration(device_token, device_type)
+        .then(async (res: DeviceRegister) => {
+          logNow('MOB==>', res);
+            const message = res?.message;
+         
+          await dispatch(
+            deviceReg({
+              message
+            }),
+          );
+          // await navigate('DashboardScreen');
+        })
+        .catch((err: LoginErrorResponse) => {
+          logNow('err', err);
+          dispatch(errorLogIn(err.errMsg.data.message));
+        })
+        .finally(async () => {
+          //dispatch(loggingIn(false));
+        });
+    };
 
 export const loggedOut = () => ({
   type: AUTH_LOGOUT,
@@ -101,7 +123,7 @@ export const errorLogOut = (errorMessage: any) => ({
 });
 
 export const logout =
-  () => async (dispatch: (arg0: {type: string; payload?: any}) => void) => {
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     dispatch(loggingOut(true));
     await userService
       .logout()

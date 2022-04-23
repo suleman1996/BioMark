@@ -449,6 +449,8 @@ PODS:
     - React-Core
   - RNDateTimePicker (6.1.2):
     - React-Core
+  - RNDeviceInfo (8.7.0):
+    - React-Core
   - RNFBApp (14.8.0):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
@@ -537,6 +539,7 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -660,6 +663,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-picker/picker"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -747,6 +752,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNCPicker: abc646b53a3d28ccfa3232c927a0ca52e0cf024d
   RNDateTimePicker: 6f1f0b4cf7c71b6e2aea7a3aa62969111084bbd1
+  RNDeviceInfo: 36286df381fcaf1933ff9d2d3c34ba2abeb2d8d8
   RNFBApp: dd24402ca1f28a66e45ef51aee8b6fedee51922f
   RNFBAuth: 4e11cf9ed2ab3d34b0ecb5e03896aab71265546b
   RNGestureHandler: 50e6ffee79932d14ea747d4ea4cc99aac0f24e86

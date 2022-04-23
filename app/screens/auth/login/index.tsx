@@ -25,7 +25,7 @@ import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
 import {Nav_Screens} from '../../../navigation/constants';
 import {navigate} from '../../../services/navRef';
-import {reduxLogin} from '../../../store/auth/authActions';
+import {reduxDeviceRegister, reduxLogin} from '../../../store/auth/authActions';
 import {IAppState} from '../../../store/IAppState';
 // import InputField from '../../components/inputField/inputField';
 import AuthContext from '../../../utils/auth-context';
@@ -36,7 +36,7 @@ import { AppleButton,appleAuth } from '@invertase/react-native-apple-authenticat
 export default function Login() {
   // redux
   const dispatch = useDispatch();
-  const dispatch1 = useDispatch();
+ 
   const {loggingIn, errorMessageLogin} = useSelector(
     (state: IAppState) => state.auth,
   );
@@ -62,7 +62,7 @@ export default function Login() {
     offlineAccess: false,
   });
 
-  useEffect(() => {
+  useEffect(() => {   
     if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
     else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
     else if (selectCountryCode == '65') setNumberCondition({min: 8, max: 8});
@@ -161,12 +161,27 @@ export default function Login() {
       });
     }
   }, [errorMessageLogin]);
-
+  async function onAppleButtonPress() {
+    // performs login request
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+  
+    // get current authentication state for user
+    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+  
+    // use credentialState response to ensure the user is authenticated
+    if (credentialState === appleAuth.State.AUTHORIZED) {
+      // user is authenticated
+    }
+  }
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
-    dispatch(reduxLogin("fsdfjkdsfdsjkfnjdsk", "ios"));
+   
   };
   const handleFedrationLogin = async (accessToken:string) => {
   console.log("accessToken",accessToken);
@@ -253,7 +268,7 @@ export default function Login() {
         </Text>
         <View style={styles.socialLogins}>
           {Platform.OS === 'ios' && (
-            <TouchableOpacity onPress={() => onAppleButtonPress()}>
+            <TouchableOpacity onPress={() => onAppleButtonPress()}> 
               <Apple height="24" width="24" />
             </TouchableOpacity>
           )}
