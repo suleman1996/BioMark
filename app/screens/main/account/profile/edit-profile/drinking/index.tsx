@@ -2,7 +2,7 @@ import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import React from 'react';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import {ScrollView} from 'native-base';
-import {Provider, Appbar, RadioButton} from 'react-native-paper';
+import {Provider, Appbar, RadioButton, Icon} from 'react-native-paper';
 import styles from './styles';
 import {GlobalColors} from '../../../../../../utils/theme/globalColors';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
@@ -10,6 +10,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {GlobalFonts} from '../../../../../../utils/theme/fonts';
 import {responsiveFontSize} from '../../../../../../utils/functions/responsiveText';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 import {navigate} from '../../../../../../services/navRef';
 import {Nav_Screens} from '../../../../../../navigation/constants';
 
@@ -21,24 +25,27 @@ const Drinking = (props: Props) => {
   const [wine, setWine] = React.useState(0);
   const [spirits, setSpiritss] = React.useState(0);
 
-  const RenderDrinking = ({title, quantity, setter, icon, minus, add}) => (
+  const RenderDrinking = props => (
     <View
       style={{
         flexDirection: 'row',
-        height: 40,
+        height: 50,
         alignItems: 'center',
         marginBottom: 20,
-        marginHorizontal: 20,
+        paddingHorizontal: 20,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#ffffff50',
       }}>
       <View style={{width: '50%', flexDirection: 'row', alignItems: 'center'}}>
-        <MaterialCommunityIcons
-          name={icon}
-          size={responsiveFontSize(22)}
-          color={GlobalColors.darkPrimary}
-          style={{marginRight: 10}}
-        />
-        <Text style={{color: GlobalColors.blue, fontFamily: GlobalFonts.light}}>
-          {title}
+        <View style={{width: 40, alignItems: 'center'}}>{props.iconLeft}</View>
+
+        <Text
+          style={{
+            color: GlobalColors.darkPrimary,
+            fontFamily: GlobalFonts.light,
+          }}>
+          {props.title}
         </Text>
       </View>
       <View
@@ -48,23 +55,15 @@ const Drinking = (props: Props) => {
           flexDirection: 'row',
         }}>
         <TouchableOpacity
-          onPress={() => quantity > 0 && setter(quantity - 1)}
+          onPress={() => props.quantity > 0 && props.setter(props.quantity - 1)}
           style={{marginRight: 10}}>
-          <AntDesignIcon
-            name={minus}
-            size={responsiveFontSize(24)}
-            color={GlobalColors.darkPrimary}
-          />
+          {props.Minus}
         </TouchableOpacity>
-        <Text>{quantity}</Text>
+        <Text>{props.quantity}</Text>
         <TouchableOpacity
-          onPress={() => setter(quantity + 1)}
+          onPress={() => props.setter(props.quantity + 1)}
           style={{marginLeft: 10}}>
-          <AntDesignIcon
-            name={add}
-            size={responsiveFontSize(24)}
-            color={GlobalColors.darkPrimary}
-          />
+          {props.Add}
         </TouchableOpacity>
       </View>
     </View>
@@ -123,28 +122,91 @@ const Drinking = (props: Props) => {
                   Do you drink alcoholic beverages.?
                 </Text>
                 <RenderDrinking
-                  title="Point of Beer"
+                  title="Points of Beer"
                   quantity={beer}
                   setter={setBeer}
-                  icon="beer"
-                  add="plus"
-                  minus="minus"
+                  iconLeft={
+                    <FontAwesome
+                      name={'beer'}
+                      size={responsiveFontSize(24)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
+                  Add={
+                    <FontAwesome5
+                      name={'plus'}
+                      size={responsiveFontSize(22)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
+                  Minus={
+                    <FontAwesome5
+                      name={'minus'}
+                      size={responsiveFontSize(22)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
                 />
                 <RenderDrinking
                   title="Glass of Wine"
                   quantity={wine}
                   setter={setWine}
-                  icon="glass-wine"
-                  add="plus"
-                  minus="minus"
+                  iconLeft={
+                    <FontAwesome5
+                      name={'wine-glass-alt'}
+                      size={responsiveFontSize(24)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
+                  Add={
+                    <FontAwesome5
+                      name={'plus'}
+                      size={responsiveFontSize(22)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
+                  Minus={
+                    <FontAwesome5
+                      name={'minus'}
+                      size={responsiveFontSize(22)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
                 />
                 <RenderDrinking
                   title="Shots of Spirits"
                   quantity={spirits}
                   setter={setSpiritss}
-                  icon="glass-pint-outline"
-                  add="plus"
-                  minus="minus"
+                  iconLeft={
+                    <MaterialCommunityIcons
+                      name={'cup'}
+                      size={responsiveFontSize(24)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
+                  Add={
+                    <FontAwesome5
+                      name={'plus'}
+                      size={responsiveFontSize(22)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
+                  Minus={
+                    <FontAwesome5
+                      name={'minus'}
+                      size={responsiveFontSize(22)}
+                      color={GlobalColors.blue}
+                      style={{marginRight: 10}}
+                    />
+                  }
                 />
               </>
             )}

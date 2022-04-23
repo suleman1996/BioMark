@@ -1,17 +1,17 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useNavigation} from '@react-navigation/native';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   Keyboard,
   Platform,
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
-import { showMessage } from 'react-native-flash-message';
-import { useDispatch, useSelector } from 'react-redux';
+import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
+import {showMessage} from 'react-native-flash-message';
+import {useDispatch, useSelector} from 'react-redux';
 import colors from '../../../assets/colors/colors';
 import fonts from '../../../assets/fonts/fonts';
 import Apple from '../../../assets/svgs/apple';
@@ -23,10 +23,10 @@ import ErrorModal from '../../../components/error-modal/error-modal';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { navigate } from '../../../services/navRef';
-import { reduxLogin } from '../../../store/auth/authActions';
-import { IAppState } from '../../../store/IAppState';
+import {Nav_Screens} from '../../../navigation/constants';
+import {navigate} from '../../../services/navRef';
+import {reduxLogin} from '../../../store/auth/authActions';
+import {IAppState} from '../../../store/IAppState';
 // import InputField from '../../components/inputField/inputField';
 import AuthContext from '../../../utils/auth-context';
 import styles from './styles';
@@ -34,14 +34,12 @@ import auth from '@react-native-firebase/auth'
 import { AppleButton,appleAuth } from '@invertase/react-native-apple-authentication';
 
 export default function Login() {
-
   // redux
   const dispatch = useDispatch();
   const dispatch1 = useDispatch();
   const {loggingIn, errorMessageLogin} = useSelector(
     (state: IAppState) => state.auth,
   );
-
 
   const navigations = useNavigation();
   const authcontext = useContext(AuthContext);
@@ -58,27 +56,12 @@ export default function Login() {
   const [loaded, setLoaded] = useState(false);
   const [textToken, setText] = useState("");
 
-  async function onAppleButtonPress() {
-    // performs login request
-    const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: appleAuth.Operation.LOGIN,
-      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    });
-    setText(appleAuthRequestResponse)
-   // console.log("appleAuthRequestResponse",appleAuthRequestResponse);
-    
-  
-    // get current authentication state for user
-    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
-    const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
-  
-    // use credentialState response to ensure the user is authenticated
-    if (credentialState === appleAuth.State.AUTHORIZED) {
-      // user is authenticated
-    }
-  }
- 
- 
+  GoogleSignin.configure({
+    webClientId:
+      '871137629206-muidhs147vquoqovf71scmu89ibsaq7s.apps.googleusercontent.com',
+    offlineAccess: false,
+  });
+
   useEffect(() => {
     if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
     else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
@@ -171,13 +154,13 @@ export default function Login() {
 
   // redux error check
   useEffect(() => {
-    if(errorMessageLogin){
+    if (errorMessageLogin) {
       showMessage({
         message: errorMessageLogin,
         type: 'danger',
       });
     }
-  }, [errorMessageLogin])
+  }, [errorMessageLogin]);
 
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
@@ -224,7 +207,7 @@ export default function Login() {
         <TextInput
           placeholder="Password"
           secureTextEntry={hidePassword}
-          eye={!hidePassword ? 'eye-off' : 'eye'}
+          eye={hidePassword ? 'eye-off' : 'eye'}
           value={password}
           onEyePress={() => {
             setHidePassword(!hidePassword);
