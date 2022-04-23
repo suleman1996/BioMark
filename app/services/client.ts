@@ -53,7 +53,7 @@ request.interceptors.request.use(
     config.headers['x-biomark-group'] = 'patient';
     config.headers[
       'x-biomark-token'
-    ] = `authentication ${userToken}`;
+    ] = `${userToken}`;
     config.headers['Authorization'] = 'user';
 
     return config;
