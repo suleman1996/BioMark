@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { Provider, Appbar, RadioButton } from 'react-native-paper';
 import colors from '../../../../../../assets/colors/colors';
@@ -14,11 +14,12 @@ import { styles } from './styles';
 
 export default function SmokingScreen() {
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('first');
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const options2 = [{ title: null }, { title: '2020' },{ title:'2021'}]
+  const options2 = [{ title: '2020' }, { title: '2021' }]
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -29,20 +30,20 @@ export default function SmokingScreen() {
             onValueChange={newValue => setValue(newValue)}
             value={value}>
 
-            <View  style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
+            <TouchableOpacity onPress={()=>setValue('first')} style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
               <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
+            <TouchableOpacity onPress={()=>setValue('second')} style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />
               <Text style={[styles.radioText, { color: value == 'second' ? '#ffffff' : '#000000' }]}>Yes</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue  : null }]}>
+            <TouchableOpacity onPress={()=>setValue('third')} style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'third' ? GlobalColors.white : null} value="third" />
               <Text style={[styles.radioText, { color: value == 'third' ? '#ffffff' : '#000000' }]}>I used to</Text>
-            </View>
+            </TouchableOpacity>
           </RadioButton.Group>
 
           {value !== 'first' ?
@@ -55,12 +56,14 @@ export default function SmokingScreen() {
                   onChange={setDay}
                   margin={0}
                   Keyboardtype='numeric'
+                  svg={undefined}
                 />
               </View>
 
               <Text style={styles.label}>Which year did you start smoking?</Text>
               <View style={styles.container2}>
                 <Picker
+                  itemStyle={{ height: 500, fontFamily: 'Rubik-Regular' }}
                   selectedValue={startSmoke}
                   onValueChange={(itemValue, itemIndex) => setStartSmoke(itemValue)}>
                   {options?.map((item, index) => {
@@ -91,7 +94,7 @@ export default function SmokingScreen() {
             </View>
             : null}
         </ScrollView>
-        <ButtonWithShadowContainer title='Save' />
+        <ButtonWithShadowContainer title='Save' onPress={undefined} />
       </TitleWithBackLayout>
     </SafeAreaView>
   );

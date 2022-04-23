@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
   },
   label: {
-    fontSize: responsiveFontSize(20),
+    fontSize: responsiveFontSize(19),
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
     marginTop: heightToDp(2),
