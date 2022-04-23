@@ -57,29 +57,9 @@ const App = () => {
 
   const [user, setUser] = useState('');
 
-  const theme = extendTheme({
-    components: {
-      Text: {
-        baseStyle: {
-
-        },
-      },
-    },
-    // Make sure values below matches any of the keys in `fontConfig`
-    fonts: {
-      extrabold: GlobalFonts.extraBold,
-      bold: GlobalFonts.bold,
-      semibold: GlobalFonts.semiBold,
-      medium: GlobalFonts.medium,
-      regular: GlobalFonts.regular,
-      light: GlobalFonts.light,
-      extralight: GlobalFonts.extraLight
-    },
-  });
-
+  
   return (
     <Provider store={store}>
-      <NativeBaseProvider theme={theme}>
         <AuthContext.Provider value={{user, setUser}}>
           <MenuProvider>
             <StatusBar
@@ -97,7 +77,6 @@ const App = () => {
           </MenuProvider>
         </AuthContext.Provider>
         <FlashMessage floating position="top" />
-      </NativeBaseProvider>
     </Provider>
   );
 };

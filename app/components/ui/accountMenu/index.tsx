@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, Pressable} from 'react-native';
 import React, { useState } from 'react';
+import {TouchableRipple } from 'react-native-paper'
 import {widthToDp} from '../../../utils/functions/responsiveDimentions';
 import {GlobalColors} from '../../../utils/theme/globalColors';
 import {GlobalFonts} from '../../../utils/theme/fonts';
@@ -73,21 +74,29 @@ const AccountMenu = ({}) => {
       </Pressable>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <TouchableRipple
+        onPress={() =>
+          navigate(Nav_Screens.NestedAccountNavigator, {
+            screen: Nav_Screens.Settings,
+          })
+        }
+        style={styles.singleItem}>
+        <>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Fontisto
+              name="player-settings"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>Settings</Text>
+          </View>
           <Fontisto
-            name="player-settings"
+            name="angle-right"
             size={responsiveFontSize(22)}
             color={GlobalColors.darkPrimary}
           />
-          <Text style={styles.text}>Settings</Text>
-        </View>
-        <Fontisto
-          name="angle-right"
-          size={responsiveFontSize(22)}
-          color={GlobalColors.darkPrimary}
-        />
-      </Pressable>
+        </>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
       <Pressable style={styles.singleItem}>

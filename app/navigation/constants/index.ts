@@ -18,6 +18,10 @@ export const Nav_Screens = {
   Personal_Information: 'PersonalInformationScreen',
   Body_Measurement: 'BodyMeasurementScreen',
   Medical_History: 'MedicalHistoryScreen',
+  Settings: 'SettingsScreen',
+    PasswordChangeScreen: 'PasswordChangeScreen',
+    EmailChangeScreen: 'EmailChangeScreen',
+    PhoneChangeScreen: 'PhoneChangeScreen',
   // edit profile
   Edit_Profile: 'EditProfile',
   Smoking: 'Smoking',

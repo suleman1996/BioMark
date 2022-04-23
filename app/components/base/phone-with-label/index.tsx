@@ -8,25 +8,30 @@ import {heightToDp} from '../../../utils/functions/responsiveDimentions';
 import PhoneNumber from '../../phone-number/phone-number'
 
 type Props = {
-  label: string;
-  placeholder: string
+  label?: string;
+  placeholder: string;
+  disabled: boolean;
 };
 
-const PhoneNumberWithLabel = ({label, placeholder}: Props) => {
+const PhoneNumberWithLabel = ({label, placeholder, disabled}: Props) => {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <PhoneNumber
-        countryCode={countryCode}
-        setCountryCode={setCountryCode}
-        phoneNumber={phoneNumber}
-        setPhoneNumber={setPhoneNumber}
-        setSelectCountryCode={setSelectCountryCode}
-        width={'100%'}
-      />
+      {label ? <Text style={styles.label}>{label}</Text> : null}
+      <View>
+          {disabled ? <View style={styles.disableContainer} /> : null}
+          <PhoneNumber
+            countryCode={countryCode}
+            setCountryCode={setCountryCode}
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
+            setSelectCountryCode={setSelectCountryCode}
+            width={'100%'}
+            placeholder={placeholder}
+          />
+      </View>
     </View>
   );
 };
@@ -42,4 +47,14 @@ const styles = StyleSheet.create({
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
   },
+  disableContainer: {
+    position: 'absolute',
+    zIndex: 1000,
+    backgroundColor: 'transparent',
+    width: '100%',
+    height: '100%',
+  },
+  phoneContainer: {
+    zIndex: 999
+  }
 });

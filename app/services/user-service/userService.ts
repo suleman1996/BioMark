@@ -10,6 +10,7 @@ import {
   RegisterUserErrorResponse,
   RegisterUserSuccessResponse,
 } from '../../types/auth/RegisterUser';
+import {DeviceRegister} from '../../types/auth/DeviceRegisterResponse';
 import {logNow} from '../../utils/functions/logBinder';
 import {
   resetAuthAsyncStorage,
@@ -33,6 +34,30 @@ function login(username: string, password: string) {
           //  logNow('userService login',response.data)
           await setAuthAsyncStorage(response.data);
           resolve(response.data);
+        } catch (e) {
+          logNow('User login service error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: LoginErrorResponse) => {
+        logNow('User login service error block login.', err);
+        reject(err);
+      });
+  });
+}
+function deviceRegisteration(device_token: string, device_type: string) {
+  return new Promise<DeviceRegister>((resolve, reject) => {
+    client
+      .post(API_URLS.MOBILE_REGISTER, {
+        device: {
+          device_token,
+          device_type,
+        },
+      })
+      .then(async response => {
+        try {
+          resolve(response.data);
+          logNow('userService reg', response);
         } catch (e) {
           logNow('User login service error block login1.', e);
           reject(e);
@@ -102,6 +127,7 @@ async function logout() {
 
 export const userService = {
   login,
+  deviceRegisteration,
   registerUser,
   logout,
   forgotPassword,

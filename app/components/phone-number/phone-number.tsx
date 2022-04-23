@@ -11,11 +11,12 @@ type Props = {
   countryCode: any;
   maxLength: any;
   phoneNumber: string;
-  setPhoneNumber: any
+  setPhoneNumber: any;
+  placeholder: string;
 };
 
 export default function phoneNumber(props: Props) {
-  const {width} = props;
+  const {width, placeholder} = props;
   const onSelect = (Country: any) => {
     props.setCountryCode(Country.cca2);
     props.setSelectCountryCode(Country.callingCode[0]);
@@ -51,7 +52,7 @@ export default function phoneNumber(props: Props) {
         onSelect={Country => onSelect(Country)}
       />
       <TextInput
-        placeholder={'Phone Number'}
+        placeholder={placeholder ? placeholder : 'Phone Number'}
         placeholderTextColor={colors.placeHolder}
         autoCapitalize={'none'}
         maxLength={props.maxLength}
@@ -61,6 +62,7 @@ export default function phoneNumber(props: Props) {
             width: width ? width : '80%',
           },
         ]}
+        
         value={props.phoneNumber}
         keyboardType={'number-pad'}
         onChangeText={value => props.setPhoneNumber(value)}
