@@ -1,24 +1,20 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Images from '../../../../assets/images/images';
-import TitleWithSearchBarLayout from '../../../../components/layouts/titleWithSearchBar';
+import TitleWithSearchBarLayout from '../../../../components/layouts/title-with-search-bar/index';
 import AccountMenu from '../../../../components/ui/accountMenu';
-import { Nav_Screens } from '../../../../navigation/constants';
-import { navigate } from '../../../../services/navRef';
+import {Nav_Screens} from '../../../../navigation/constants';
+import {navigate} from '../../../../services/navRef';
 import {
   heightToDp,
-  widthToDp
+  widthToDp,
 } from '../../../../utils/functions/responsiveDimentions';
-import { responsiveFontSize } from '../../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../../utils/theme/fonts';
-import { GlobalColors } from '../../../../utils/theme/globalColors';
+import {responsiveFontSize} from '../../../../utils/functions/responsiveText';
+import {GlobalFonts} from '../../../../utils/theme/fonts';
+import {GlobalColors} from '../../../../utils/theme/globalColors';
 
-
-type Props = {
-
-}
-
+type Props = {};
 
 const AccountScreen = (props: Props) => {
   return (
@@ -60,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: heightToDp(5),
     justifyContent: 'center',
-    paddingBottom: heightToDp(20)
+    paddingBottom: heightToDp(20),
   },
   image: {
     width: widthToDp(25),
@@ -83,7 +79,7 @@ const styles = StyleSheet.create({
   },
   menuList: {
     paddingTop: widthToDp(7),
-    marginBottom: heightToDp(7)
+    marginBottom: heightToDp(7),
   },
 });
 

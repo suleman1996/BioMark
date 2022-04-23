@@ -12,11 +12,15 @@ import AddDependantScreen from '../screens/main/account/dependants/add-dependant
 import EditDependantScreen from '../screens/main/account/dependants/edit-dependant';
 import FamilyMedicalHistory from '../screens/main/account/profile/familyMedicalHistory';
 import SmokingScreen from '../screens/main/account/profile/edit-profile/smoking';
+import SettingsScreen from '../screens/main/account/settings';
 import ExerciseScreen from '../screens/main/account/profile/edit-profile/exercise';
 import SleepScreen from '../screens/main/account/profile/edit-profile/sleep';
 import VaccinationScreen from '../screens/main/account/profile/edit-profile/vaccination';
 import AllergiesScreen from '../screens/main/account/profile/edit-profile/allergies';
 import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking';
+import PasswordChangeScreen from '../screens/main/account/settings/password-change';
+import EmailChangeScreen from '../screens/main/account/settings/email-change';
+import PhoneChangeScreen from '../screens/main/account/settings/phone-change';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +57,35 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.Edit_Dependants}
         component={EditDependantScreen}
+      />
+      {/* Settings */}
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Settings}
+        component={SettingsScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.PasswordChangeScreen}
+        component={PasswordChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.EmailChangeScreen}
+        component={EmailChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.PhoneChangeScreen}
+        component={PhoneChangeScreen}
       />
     </Stack.Group>
     {/* Profile Stack */}
@@ -100,18 +133,26 @@ export const AccountNavigator = () => (
         name={Nav_Screens.Smoking}
         component={SmokingScreen}
       />
-        <Stack.Screen
+      <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={Nav_Screens.Vaccination}
-        component={VaccinationScreen}/>
+        component={VaccinationScreen}
+      />
       <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={Nav_Screens.Sleep}
         component={SleepScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Drinking}
+        component={DrinkingScreen}
       />
       <Stack.Screen
         options={{

@@ -7,12 +7,12 @@ import {
 import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 import {GlobalFonts} from '../../../utils/theme/fonts';
 import {GlobalColors} from '../../../utils/theme/globalColors';
-import SearchBarWithLeftScanIcon from '../../higher-order/search-bar-with-left-scan-icon';
+import SearchBarWithLeftScanIcon from '../../higher-order/search-bar-with-left-scan-icon/index';
 
 type Props = {
-  children: any,
-  title: string
-}
+  children: any;
+  title: string;
+};
 
 const TitleWithSearchBarLayout = ({children, title}: Props) => {
   return (

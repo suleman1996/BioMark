@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2E6A100189AAD44EAEBF1269 /* libPods-BioMark-BioMarkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 266E47A755F2454FA7A5C69B /* libPods-BioMark-BioMarkTests.a */; };
+		477FB7FA281158D40055B6D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 477FB7F9281158D40055B6D4 /* GoogleService-Info.plist */; };
 		479F8B2E28105BB3007C1715 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479F8B2D28105BB3007C1715 /* File.swift */; };
 		47EBC11B28102636000492F8 /* Mukta-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EBC11428102635000492F8 /* Mukta-Light.ttf */; };
 		47EBC11C28102636000492F8 /* Mukta-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EBC11528102635000492F8 /* Mukta-Medium.ttf */; };
@@ -49,6 +50,8 @@
 		2A5AD0AAA14343EEA8574881 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		321B0D14D57149B29729B10F /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		3F064E5C253D427FBE75B54A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		477FB7F9281158D40055B6D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4797136E2812BA350011E444 /* BioMark.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BioMark.entitlements; path = BioMark/BioMark.entitlements; sourceTree = "<group>"; };
 		479F8B2C28105BB2007C1715 /* BioMark-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioMark-Bridging-Header.h"; sourceTree = "<group>"; };
 		479F8B2D28105BB3007C1715 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		47EBC11428102635000492F8 /* Mukta-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Mukta-Light.ttf"; path = "../app/assets/fonts/Mukta-Light.ttf"; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 		13B07FAE1A68108700A75B9A /* BioMark */ = {
 			isa = PBXGroup;
 			children = (
+				4797136E2812BA350011E444 /* BioMark.entitlements */,
+				477FB7F9281158D40055B6D4 /* GoogleService-Info.plist */,
 				47EBC11628102635000492F8 /* Mukta-Bold.ttf */,
 				47EBC11828102635000492F8 /* Mukta-ExtraBold.ttf */,
 				47EBC11928102635000492F8 /* Mukta-ExtraLight.ttf */,
@@ -265,7 +270,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -308,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47EBC11E28102636000492F8 /* Mukta-SemiBold.ttf in Resources */,
+				477FB7FA281158D40055B6D4 /* GoogleService-Info.plist in Resources */,
 				47EBC12128102636000492F8 /* Mukta.ttf in Resources */,
 				47EBC12028102636000492F8 /* Mukta-ExtraLight.ttf in Resources */,
 				47EBC11C28102636000492F8 /* Mukta-Medium.ttf in Resources */,
@@ -521,7 +527,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = BioMarkTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,7 +552,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = BioMarkTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -569,19 +575,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BioMark/BioMark.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B7WMQDYJCR;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BioMark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.biomark;
 				PRODUCT_NAME = BioMark;
 				SWIFT_OBJC_BRIDGING_HEADER = "BioMark-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -596,18 +605,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BioMark/BioMark.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B7WMQDYJCR;
 				INFOPLIST_FILE = BioMark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.biomark;
 				PRODUCT_NAME = BioMark;
 				SWIFT_OBJC_BRIDGING_HEADER = "BioMark-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -664,7 +676,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -728,7 +740,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -746,6 +758,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 				);
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

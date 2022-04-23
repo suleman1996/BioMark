@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "1078990823809",
+    "project_id": "biomark-ac00b",
+    "storage_bucket": "biomark-ac00b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078990823809:android:661b1744ca8cfdef73c880",
+        "android_client_info": {
+          "package_name": "com.biomark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078990823809-bku41lnoejuv4nvmtftvsvlhajk0g1lh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.biomark",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1078990823809-vk3qrdspj0mqm3venpiuqa5lolshis1u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.biomark",
+            "certificate_hash": "d249a0157571385692e63f51afd44cef5d3dd241"
+          }
+        },
+        {
+          "client_id": "1078990823809-1s2m5rup1t61rmmiic4ma5ag847d17u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFAkbfDsno-ZHPpW2_hQAb7oyoNA2mCgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078990823809-1s2m5rup1t61rmmiic4ma5ag847d17u1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1078990823809-8us2qk3drov66qh0p59b743v8nj5p77a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sprintx.BioMark"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

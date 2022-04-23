@@ -12,7 +12,7 @@ import Covid19Btn from '../../../components/button/covid19';
 import GoogleFit from '../../../components/button/googleFit';
 import SmallBtn from '../../../components/button/small-button';
 import YourHealthBtn from '../../../components/button/yourHealthBtn';
-import SearchBarWithLeftScanIcon from '../../../components/higher-order/search-bar-with-left-scan-icon';
+import SearchBarWithLeftScanIcon from '../../../components/higher-order/search-bar-with-left-scan-icon/index';
 // import BottomBar from '../../../components/bottom-nav/bottom-bar';
 import styles from './styles';
 
