@@ -11,7 +11,6 @@ import TextInput from '../../../../../../components/input-field/text-input';
 import { Picker } from '@react-native-picker/picker';
 import Textinput from '../../../../../../components/Textinput-button/textinput_button';
 import { styles } from './styles';
-import { Alert } from 'native-base';
 
 export default function VaccinationScreen() {
 
@@ -20,7 +19,7 @@ export default function VaccinationScreen() {
   const [users] = useState(['john', 'James', 'ALis'])
 
 
-  const onChangeInput = (event: any) => {
+  const onChangeInput = (event:any) => {
     setTextinput(event)
   }
 
