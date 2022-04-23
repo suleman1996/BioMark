@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
 import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
+import {goBack} from '../../../../../../../services/navRef';
 
 type Props = {
   isVisible: boolean;

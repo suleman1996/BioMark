@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Images from '../../../../../assets/images/images';
+import Cigar from '../../../../../assets/svgs/cigar';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
 import {
   heightToDp,
@@ -186,7 +187,9 @@ const EditProfileScreen = () => {
               />
             </Pressable>
 
-            <Pressable onPress={()=>navigate(Nav_Screens.Vaccination)} style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Vaccination)}
+              style={styles.menuOption}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="needle"
@@ -202,7 +205,9 @@ const EditProfileScreen = () => {
               />
             </Pressable>
 
-            <Pressable style={styles.menuOption} onPress={() => navigate(Nav_Screens.Allergies)}>
+            <Pressable
+              style={styles.menuOption}
+              onPress={() => navigate(Nav_Screens.Allergies)}>
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="allergy"
@@ -249,6 +254,7 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={GlobalColors.darkPrimary}
                 />
+
                 <Text style={styles.menuTitleText}>Smooking</Text>
               </View>
               <Fontisto
@@ -326,6 +332,14 @@ const EditProfileScreen = () => {
             </View>
           </View>
         </View>
+        <Text
+          style={{
+            marginTop: 15,
+            color: GlobalColors.darkPrimary,
+            fontFamily: GlobalFonts.light,
+          }}>
+          v50.18.205
+        </Text>
       </ScrollView>
     </TitleWithBackLayout>
   );
@@ -336,7 +350,7 @@ export default EditProfileScreen;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    paddingBottom: heightToDp(7),
+    paddingBottom: 5,
   },
   topBg: {
     width: widthToDp(100),
