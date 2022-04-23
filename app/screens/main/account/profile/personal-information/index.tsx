@@ -19,6 +19,9 @@ const PersonalInformationScreen = () => {
   const [value, setValue] = useState('first');
   const [firstName, setFirstName] = useState(false);
   const [lastName, setLastName] = useState('');
+
+  const [date, setDate] = useState(new Date());
+  const [isPickerShow, setIsPickerShow] = useState(false);
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>
@@ -31,7 +34,14 @@ const PersonalInformationScreen = () => {
           onChange={text => setLastName(text)}
         />
         <Text style={styles.label}>Date of Birth</Text>
-        <DatePicker width={'100%'} />
+        {/* <DatePicker width={'100%'} /> */}
+        <DatePicker
+          isPickerShow={isPickerShow}
+          setIsPickerShow={setIsPickerShow}
+          date={date}
+          setDate={setDate}
+          width="100%"
+        />
         <Text style={styles.label}>Gender</Text>
         <RadioButton.Group
           onValueChange={newValue => setValue(newValue)}

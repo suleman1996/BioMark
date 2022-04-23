@@ -16,6 +16,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 import {navigate} from '../../../../../../services/navRef';
 import {Nav_Screens} from '../../../../../../navigation/constants';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 type Props = {};
 
@@ -80,7 +81,8 @@ const Drinking = (props: Props) => {
                 setValue(newValue);
               }}
               value={value}>
-              <View
+              <TouchableOpacity
+                onPress={() => setValue('first')}
                 style={[
                   styles.radioContainer,
                   {backgroundColor: value === 'first' ? '#054E8B' : null},
@@ -96,9 +98,10 @@ const Drinking = (props: Props) => {
                   ]}>
                   No
                 </Text>
-              </View>
+              </TouchableOpacity>
 
-              <View
+              <TouchableOpacity
+                onPress={() => setValue('second')}
                 style={[
                   styles.radioContainer,
                   {backgroundColor: value == 'second' ? '#054E8B' : null},
@@ -114,7 +117,7 @@ const Drinking = (props: Props) => {
                   ]}>
                   Yes
                 </Text>
-              </View>
+              </TouchableOpacity>
             </RadioButton.Group>
             {value == 'second' && (
               <>

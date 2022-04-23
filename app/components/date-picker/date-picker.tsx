@@ -25,9 +25,9 @@ const App = (props: {
   return (
     <TouchableOpacity
       onPress={() => {
-        setIsPickerShow(true), console.log('xxx fate ', date);
+        setIsPickerShow(true), console.log('xxx Date ', date);
       }}
-      style={[styles.container, otherStyles]}>
+      style={[styles.container, otherStyles, {width: width ? width : '90%'}]}>
       {isPickerShow && (
         <DateTimePicker
           style={[styles.datePickerStyle]}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 8,
     height: 44,
-    width: '90%',
+    // width: '90%',
     backgroundColor: colors.inputBg,
   },
   datePickerStyle: {
