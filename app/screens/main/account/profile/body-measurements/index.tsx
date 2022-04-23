@@ -14,16 +14,31 @@ import { responsiveFontSize } from '../../../../../utils/functions/responsiveTex
 import { GlobalFonts } from '../../../../../utils/theme/fonts';
 
 const BodyMeasurementScreen = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(0);
+  const [value2, setValue2] = useState(0);
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+
+  const onChangetext=(values = 30)=>{
+    setValue(values)
+    console.log('a ajaaa',values)
+  }
+  const onChangetext2=(values = 30)=>{
+    setValue2(values)
+    console.log('a ajaaa',values)
+  }
+
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>
-        <HeightChooserComponent height={15} label="Height" textAlign="right" placeholder={''} />
-        <WeightChooserComponent height={15} label="Weight" textAlign="right" placeholder={undefined} />
+        <HeightChooserComponent height={15} label="Height" textAlign="right" placeholder={''} onChangeText={onChangetext} value={value}/>
+        <WeightChooserComponent height={15} label="Weight" textAlign="right" placeholder={undefined} onChangeText={onChangetext2} value={value2}/>
       </ScrollView>
-      <ButtonWithShadowContainer onPress={undefined} title={''} />
+      {/* <ButtonWithShadowContainer onPress={undefined} title={'Save $ Continue'} disabled={disabled}/> */}
+      <Button
+        disabled={value > 0 && value2 > 0 ? false : true}
+        title="Save & Continue"
+      />
     </TitleWithBackLayout>
   );
 };

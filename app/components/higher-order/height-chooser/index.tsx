@@ -23,6 +23,7 @@ const HeightChooserComponent = ({
   placeholder,
   height,
   textAlign,
+  onChangeText
 }: Props) => {
   const menuRef = useRef<any>();
   const [value, setValue] = useState(0);

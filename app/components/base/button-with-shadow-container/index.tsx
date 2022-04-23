@@ -13,10 +13,10 @@ type Props = {
   title?: string;
 };
 
-const ButtonWithShadowContainer = ({title, onPress}: Props) => {
+const ButtonWithShadowContainer = ({title, onPress,disabled}: Props) => {
   return (
     <View style={styles.container}>
-      <ButtonComponent onPress={onPress} title={title ? title : ''} />
+      <ButtonComponent onPress={onPress} title={title ? title : ''} disabled={disabled}/>
     </View>
   );
 };

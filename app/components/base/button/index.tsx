@@ -10,9 +10,9 @@ type Props = {
   title: string
 }
 
-const ButtonComponent = ({onPress, title}: Props) => {
+const ButtonComponent = ({onPress, title,disabled}: Props) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container} disabled={disabled}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
