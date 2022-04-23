@@ -30,8 +30,8 @@ const ModalWithBottomBtn = ({isVisible, children, onPress, title}: Props) => {
     setIsModal(isVisible);
   }, [isVisible]);
   return (
-    <ModalComponent isVisible={isModal}>
-      <View style={styles.card}>
+    <ModalComponent isVisible={isModal} >
+      <View style={styles.card} >
         <ScrollView contentContainerStyle={{flex: 1}}>
           <Text style={styles.title}>{title}</Text>
           {children}

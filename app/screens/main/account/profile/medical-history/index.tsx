@@ -78,7 +78,7 @@ const MedicalHistoryScreen = () => {
         <Text style={styles.label}>
           Have you ever been diagnosed with any of the following conditions?
         </Text>
-        <View style={styles.rowContainer}>
+        <View style={styles.rowContainer} >
           <ModalButtonComponent
             title="High Cholesterol"
             isModal={isCholesterolModal}

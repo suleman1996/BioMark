@@ -30,7 +30,7 @@ const WeightChooserComponent = ({
 }: Props) => {
   const menuRef = useRef<any>();
   const [value, setValue] = useState(0);
-  const [selectedType, setSelectedType] = useState(1);
+  const [selectedType, setSelectedType] = useState(2);
 
   var otherStyle = [];
   if (height) {

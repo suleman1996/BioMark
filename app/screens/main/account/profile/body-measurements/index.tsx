@@ -28,7 +28,7 @@ const BodyMeasurementScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Personal Information">
+    <TitleWithBackLayout title="Body Measurements">
       <ScrollView style={styles.container}>
         <HeightChooserComponent
           height={15}
@@ -47,14 +47,18 @@ const BodyMeasurementScreen = () => {
           value={value2}
         />
       </ScrollView>
-      {/* <ButtonWithShadowContainer onPress={undefined} title={'Save $ Continue'} disabled={disabled}/> */}
-      <Button
-        disabled={value > 0 && value2 > 0 ? false : true}
+      <ButtonWithShadowContainer
+        onPress={() => {
+          goBack();
+        }}
+        title={'Save & Continue'}
+      />
+      {/* <Button
         title="Save & Continue"
         onPress={() => {
           goBack();
         }}
-      />
+      /> */}
     </TitleWithBackLayout>
   );
 };
