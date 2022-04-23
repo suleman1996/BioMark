@@ -62,7 +62,7 @@ export default function SignupVerification() {
       setLoading(true);
       const result = await resendAccountCode({
         confirmation: {
-          username: route?.params?.useName,
+          username: route?.params?.username,
         },
       });
       console.log('success resend account code ', result.data);
@@ -94,7 +94,7 @@ export default function SignupVerification() {
       setLoading(true);
       const result = await signupAccountConfirm({
         confirmation: {
-          username: route?.params?.useName,
+          username: route?.params?.username,
           password: route?.params?.password,
           code: code,
         },
@@ -112,7 +112,7 @@ export default function SignupVerification() {
         });
       } else if (error.errMsg.status == false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: error.errMsg.data.message,
           type: 'danger',
         });
       } else {

@@ -1,19 +1,17 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import {
-  Keyboard, Text, TouchableWithoutFeedback, View
-} from 'react-native';
-import { showMessage } from 'react-native-flash-message';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 import Button from '../../../components/button/button';
 import Header from '../../../components/header/header';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { forgotPassword } from '../../../services/auth-service';
-import { navigate } from '../../../services/navRef';
-import { userService } from '../../../services/user-service/userService';
-import { ForgotPasswordErrorResponse } from '../../../types/auth/ForgotPassword';
-import { logNow } from '../../../utils/functions/logBinder';
+import {Nav_Screens} from '../../../navigation/constants';
+import {forgotPassword} from '../../../services/auth-service';
+import {navigate} from '../../../services/navRef';
+import {userService} from '../../../services/user-service/userService';
+import {ForgotPasswordErrorResponse} from '../../../types/auth/ForgotPassword';
+import {logNow} from '../../../utils/functions/logBinder';
 import styles from './styles';
 
 export default function ForgotPassword() {
@@ -38,24 +36,28 @@ export default function ForgotPassword() {
     setLoading(true);
     Keyboard.dismiss();
     const username: string = `+${selectCountryCode}${phoneNumber}`;
-    userService.forgotPassword(username).then(res => {
-      navigate(Nav_Screens.PasswordOTPScreen, {phone: username});
-    }).catch((err: ForgotPasswordErrorResponse) => {
-      logNow(err)
-      if(err.errMsg.status == 500){
-        showMessage({
-          message: 'Please try again later',
-          type: 'danger',
-        });
-      }else{
-        showMessage({
-          message: err.errMsg.data.message,
-          type: 'danger',
-        });
-      }
-    }).finally(() => {
-      setLoading(false);
-    })
+    userService
+      .forgotPassword(username)
+      .then(res => {
+        navigate(Nav_Screens.PasswordOTPScreen, {phone: username});
+      })
+      .catch((err: ForgotPasswordErrorResponse) => {
+        logNow(err);
+        if (err.errMsg.status == 500) {
+          showMessage({
+            message: 'User not found',
+            type: 'danger',
+          });
+        } else {
+          showMessage({
+            message: err.errMsg.data.message,
+            type: 'danger',
+          });
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     // try {
     //   setLoading(true);
     //   Keyboard.dismiss();
