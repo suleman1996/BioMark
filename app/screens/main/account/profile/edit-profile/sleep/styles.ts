@@ -10,7 +10,7 @@ import {
 
 const styles = StyleSheet.create({
   heading: {
-    fontFamily: GlobalFonts.regular,
+    fontFamily: GlobalFonts.semiBold,
     fontSize: responsiveFontSize(18),
     color: GlobalColors.heading,
   },
