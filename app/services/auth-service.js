@@ -27,3 +27,7 @@ export const changePassword = async obj => {
 export const resendOTP = async obj => {
   return client.post(URL.RESEND_PASSWORD_OTP, obj);
 };
+
+export const inputBarcode = async obj => {
+  return client.post(URL.INPUT_BARCODE, obj);
+};
