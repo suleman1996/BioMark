@@ -14,11 +14,10 @@ import { styles } from './styles';
 
 export default function SmokingScreen() {
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('first');
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const [color,setColor] = useState(false);
   const options2 = [{ title: '2020' }, { title: '2021' }]
 
 
@@ -31,20 +30,20 @@ export default function SmokingScreen() {
             onValueChange={newValue => setValue(newValue)}
             value={value}>
 
-            <TouchableOpacity style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
+            <TouchableOpacity onPress={()=>setValue('first')} style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
               <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
             </TouchableOpacity>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue : null }]}>
+            <TouchableOpacity onPress={()=>setValue('second')} style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />
               <Text style={[styles.radioText, { color: value == 'second' ? '#ffffff' : '#000000' }]}>Yes</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue : null }]}>
+            <TouchableOpacity onPress={()=>setValue('third')} style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'third' ? GlobalColors.white : null} value="third" />
               <Text style={[styles.radioText, { color: value == 'third' ? '#ffffff' : '#000000' }]}>I used to</Text>
-            </View>
+            </TouchableOpacity>
           </RadioButton.Group>
 
           {value !== 'first' ?

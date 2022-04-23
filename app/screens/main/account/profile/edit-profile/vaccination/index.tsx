@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { Provider, Appbar, RadioButton } from 'react-native-paper';
 import colors from '../../../../../../assets/colors/colors';
@@ -14,7 +14,7 @@ import { styles } from './styles';
 
 export default function VaccinationScreen() {
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('first');
   const [textinput, setTextinput] = useState('');
   const [users] = useState(['john', 'James', 'ALis'])
 
@@ -41,20 +41,20 @@ export default function VaccinationScreen() {
             onValueChange={newValue => setValue(newValue)}
             value={value}>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue  : null }]}>
+            <TouchableOpacity onPress={()=>setValue('first')} style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue  : null }]}>
               <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
               <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
+            <TouchableOpacity onPress={()=>setValue('second')} style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
               <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />
               <Text style={[styles.radioText, { color: value == 'second' ? '#ffffff' : '#000000' }]}>Yes</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue  : null }]}>
+            <TouchableOpacity onPress={()=>setValue('third')} style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue  : null }]}>
               <RadioButton color={value == 'third' ? GlobalColors.white : null} value="third" />
               <Text style={[styles.radioText, { color: value == 'third' ? '#ffffff' : '#000000' }]}>Yes, but I'm not sure which vaccines</Text>
-            </View>
+            </TouchableOpacity>
           </RadioButton.Group>
 
           {value == 'second' ?
