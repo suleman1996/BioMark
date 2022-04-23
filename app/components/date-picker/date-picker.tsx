@@ -30,9 +30,9 @@ const App = (props: {
       style={[styles.container, otherStyles]}>
       {isPickerShow && (
         <DateTimePicker
-          style={styles.datePickerStyle}
+          style={[styles.datePickerStyle]}
           mode="date"
-          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          display={Platform.OS === 'ios' ? 'default' : 'default'}
           value={new Date(date)}
           minimumDate={new Date(1950, 0, 1)}
           maximumDate={new Date()}

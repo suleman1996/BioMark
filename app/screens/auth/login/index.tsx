@@ -1,17 +1,17 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useNavigation} from '@react-navigation/native';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   Keyboard,
   Platform,
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
-import { showMessage } from 'react-native-flash-message';
-import { useDispatch, useSelector } from 'react-redux';
+import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
+import {showMessage} from 'react-native-flash-message';
+import {useDispatch, useSelector} from 'react-redux';
 import colors from '../../../assets/colors/colors';
 import fonts from '../../../assets/fonts/fonts';
 import Apple from '../../../assets/svgs/apple';
@@ -23,22 +23,20 @@ import ErrorModal from '../../../components/error-modal/error-modal';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { navigate } from '../../../services/navRef';
-import { reduxLogin } from '../../../store/auth/authActions';
-import { IAppState } from '../../../store/IAppState';
+import {Nav_Screens} from '../../../navigation/constants';
+import {navigate} from '../../../services/navRef';
+import {reduxLogin} from '../../../store/auth/authActions';
+import {IAppState} from '../../../store/IAppState';
 // import InputField from '../../components/inputField/inputField';
 import AuthContext from '../../../utils/auth-context';
 import styles from './styles';
 
 export default function Login() {
-
   // redux
   const dispatch = useDispatch();
   const {loggingIn, errorMessageLogin} = useSelector(
     (state: IAppState) => state.auth,
   );
-
 
   const navigations = useNavigation();
   const authcontext = useContext(AuthContext);
@@ -53,8 +51,6 @@ export default function Login() {
   const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
   const [userGoogleInfo, setUserGoogleInfo] = useState({});
   const [loaded, setLoaded] = useState(false);
-
-  
 
   GoogleSignin.configure({
     webClientId:
@@ -145,13 +141,14 @@ export default function Login() {
 
   // redux error check
   useEffect(() => {
-    if(errorMessageLogin){
-      showMessage({
-        message: errorMessageLogin,
-        type: 'danger',
-      });
+    if (errorMessageLogin) {
+      setLoginError(true);
+      // showMessage({
+      //   message: errorMessageLogin,
+      //   type: 'danger',
+      // });
     }
-  }, [errorMessageLogin])
+  }, [errorMessageLogin]);
 
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
@@ -194,7 +191,7 @@ export default function Login() {
         <TextInput
           placeholder="Password"
           secureTextEntry={hidePassword}
-          eye={!hidePassword ? 'eye-off' : 'eye'}
+          eye={hidePassword ? 'eye-off' : 'eye'}
           value={password}
           onEyePress={() => {
             setHidePassword(!hidePassword);

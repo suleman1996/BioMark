@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: 16,
     marginVertical: 20,
+    marginBottom: 10,
   },
   inputLablel: {
     fontFamily: fonts.bold,
