@@ -7,7 +7,7 @@ import {
 import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 import {GlobalFonts} from '../../../utils/theme/fonts';
 import {GlobalColors} from '../../../utils/theme/globalColors';
-import SearchBarWithLeftScanIcon from '../../higher-order/searchBarWithLeftScanIcon';
+import SearchBarWithLeftScanIcon from '../../higher-order/search-bar-with-left-scan-icon';
 
 type Props = {
   children: any,
