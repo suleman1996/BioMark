@@ -1,4 +1,5 @@
 import { View, Text, Pressable } from 'react-native'
+import {TouchableRipple} from 'react-native-paper'
 import React from 'react'
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import {styles} from './styles'
@@ -13,14 +14,16 @@ type Props = {
 const SingleMenuItemWithArrow = (props: Props) => {
           const {onPress, title} = props;
   return (
-    <Pressable onPress={onPress} style={styles.menuItem}>
-      <Text style={styles.menuItemText}>{title}</Text>
-      <Fontisto
-        name="angle-right"
-        size={responsiveFontSize(22)}
-        color={GlobalColors.darkPrimary}
-      />
-    </Pressable>
+    <TouchableRipple onPress={onPress} style={styles.menuItem}>
+      <>
+        <Text style={styles.menuItemText}>{title}</Text>
+        <Fontisto
+          name="angle-right"
+          size={responsiveFontSize(22)}
+          color={GlobalColors.darkPrimary}
+        />
+      </>
+    </TouchableRipple>
   );
 }
 

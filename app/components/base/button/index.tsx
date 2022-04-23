@@ -4,16 +4,30 @@ import {GlobalColors} from '../../../utils/theme/globalColors'
 import {GlobalFonts} from '../../../utils/theme/fonts';
 import {heightToDp, widthToDp} from '../../../utils/functions/responsiveDimentions'
 import { responsiveFontSize } from '../../../utils/functions/responsiveText';
+import { GlobalStyles } from '../../../utils/theme/globalStyles';
 
 type Props = {
-  onPress: any,
-  title: string
-}
+  onPress: any;
+  title: string;
+  disabled: boolean;
+  bg?: string;
+  color?: string
+};
 
-const ButtonComponent = ({onPress, title}: Props) => {
+const ButtonComponent = ({onPress, title, disabled, bg, color}: Props) => {
+  const ifBg = bg ? {backgroundColor: bg} : {};
+  const ifColor = color ? {color: color} : {}
+  const ifDisabled = disabled
+    ? {backgroundColor: 'lightgray'}
+    : {backgroundColor: GlobalColors.primary};
+  const ifDisbaledText = disabled
+    ? {color: 'gray'}
+    : {color: GlobalColors.white};
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+    <TouchableOpacity
+      onPress={disabled ? undefined : onPress}
+      style={[styles.container, ifDisabled, ifBg]}>
+      <Text style={[styles.text, ifDisbaledText, ifColor]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -22,7 +36,6 @@ export default ButtonComponent;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalColors.primary,
     height: heightToDp(6),
     alignItems: 'center',
     justifyContent: 'center',
@@ -30,7 +43,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
-    color: GlobalColors.white,
     fontFamily: GlobalFonts.medium,
     fontSize: responsiveFontSize(20)
   },

@@ -16,6 +16,9 @@ import SettingsScreen from '../screens/main/account/settings';
 import ExerciseScreen from '../screens/main/account/profile/edit-profile/exercise';
 import SleepScreen from '../screens/main/account/profile/edit-profile/sleep';
 import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinking';
+import PasswordChangeScreen from '../screens/main/account/settings/password-change';
+import EmailChangeScreen from '../screens/main/account/settings/email-change';
+import PhoneChangeScreen from '../screens/main/account/settings/phone-change';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +63,27 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.Settings}
         component={SettingsScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.PasswordChangeScreen}
+        component={PasswordChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.EmailChangeScreen}
+        component={EmailChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.PhoneChangeScreen}
+        component={PhoneChangeScreen}
       />
     </Stack.Group>
     {/* Profile Stack */}

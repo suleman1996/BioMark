@@ -7,16 +7,23 @@ import { GlobalColors } from '../../../utils/theme/globalColors';
 import { heightToDp } from '../../../utils/functions/responsiveDimentions';
 
 type Props = {
-  label: string,
-  placeholder: string
-  
-}
+  label: string;
+  placeholder: string;
+  labelFontSize?: number;
+  onChange: any
+};
 
-const InputWithLabel = ({label, placeholder,onChange}: Props) => {
+const InputWithLabel = ({
+  label,
+  placeholder,
+  onChange,
+  labelFontSize,
+}: Props) => {
+  const ifLabelSize = labelFontSize ? {fontSize: responsiveFontSize(labelFontSize)} : {}
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <InputField placeholder={placeholder} onChange={onChange}/>
+      <Text style={[styles.label, ifLabelSize]}>{label}</Text>
+      <InputField placeholder={placeholder} onChange={onChange} />
     </View>
   );
 };
