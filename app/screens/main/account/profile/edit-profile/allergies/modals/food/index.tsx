@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import DropdownMenuComponent from '../../../../../../../../components/base/dropdown-menu';
 import ModalWithBottomBtn from '../../../../../../../../components/higher-order/modal-with-bottom-btn';
 import RadioButtonQuestionComponent from '../../../../../../../../components/higher-order/radio-question';
-import Textinput from '../../../../../../../../components/Text-input-button';
+import Textinput from '../../../../../../../../components/text-input-button';
 import { heightToDp } from '../../../../../../../../utils/functions/responsiveDimentions';
 import { GlobalStyles } from '../../../../../../../../utils/theme/globalStyles';
 

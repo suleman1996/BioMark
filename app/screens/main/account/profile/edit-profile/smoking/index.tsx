@@ -18,9 +18,7 @@ export default function SmokingScreen() {
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const options2 = [
-    { title: null }, { title: '2020' },{ title:'2021'}
-  ]
+  const options2 = [{ title: null }, { title: '2020' },{ title:'2021'}]
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -31,10 +29,10 @@ export default function SmokingScreen() {
             onValueChange={newValue => setValue(newValue)}
             value={value}>
 
-            <TouchableOpacity onPress={()=>alert('fjkkhfjh')} style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
+            <View  style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
               <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
-            </TouchableOpacity>
+            </View>
 
             <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
               <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />
