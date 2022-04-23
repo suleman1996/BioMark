@@ -1,13 +1,14 @@
 import { AuthState } from './AuthState';
 import {
-    AUTH_ERR_LOG_IN,
-    AUTH_ERR_LOG_OUT,
-    AUTH_LOGGED_IN,
-    AUTH_LOGGING_IN,
-    AUTH_LOGGING_OUT,
-    AUTH_LOGOUT,
-    AUTH_USER
-  } from './constants';
+  AUTH_ERR_LOG_IN,
+  AUTH_ERR_LOG_OUT,
+  AUTH_LOGGED_IN,
+  AUTH_LOGGING_IN,
+  AUTH_LOGGING_OUT,
+  AUTH_LOGOUT,
+  AUTH_USER,
+  USER_CONTACTS,
+} from './constants';
   
   const INITIAL_STATE = new AuthState;
   
@@ -47,6 +48,14 @@ import {
           expiresIin,
           errorMessageLogin: null,
           loggingIn: false,
+        };
+      }
+
+      case USER_CONTACTS: {
+        const response = action.payload;
+        return {
+          ...state,
+          userContacts: response
         };
       }
 

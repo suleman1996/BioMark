@@ -6,3 +6,4 @@ export const AUTH_ERR_LOG_OUT = '[AUTH] AUTH_ERR_LOG_OUT';
 export const AUTH_LOGOUT = '[AUTH] LOGOUT';
 export const AUTH_USER = '[AUTH] USERDETAILS';
 export const DEVICE_REG = '[AUTH] DEVICE_REG';
+export const USER_CONTACTS = '[Auth] UserContactsDetails';

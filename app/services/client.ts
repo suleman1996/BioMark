@@ -48,7 +48,7 @@ request.interceptors.request.use(
   async config => {
     // const user = await authStorage.getToken();
     const {userToken}  = await getAuthAsyncStorage();
-    logNow('its userToken', userToken);
+    // logNow('its userToken', userToken);
     // config.headers['clientid'] = '1620112254693';
     config.headers['x-biomark-group'] = 'patient';
     config.headers[

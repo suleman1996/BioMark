@@ -26,7 +26,8 @@ export default function textInput(props: Props) {
         // label={props.placeholder}
         placeholder={props?.placeholder}
         value={props?.value}
-        activeUnderlineColor={colors?.blue}
+        // activeUnderlineColor={colors?.blue}
+        activeUnderlineColor={'transparent'}
         underlineColor={'FFFFFF'}
         placeholderTextColor={'#8493AE'}
         onChangeText={props?.onChange}
