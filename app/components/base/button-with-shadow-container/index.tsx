@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalColors.white,
     bottom: 0,
     paddingHorizontal: widthToDp(6),
-    paddingVertical: heightToDp(2),
+    paddingVertical: heightToDp(3),
     ...GlobalStyles.shadow,
   },
 });
