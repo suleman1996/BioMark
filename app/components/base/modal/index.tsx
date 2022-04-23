@@ -7,7 +7,7 @@ import { GlobalColors } from '../../../utils/theme/globalColors';
 type Props = {
   isVisible: boolean;
   children: any;
-  setIsVisible: any
+  setIsVisible: any;
 };
 
 const ModalComponent = ({isVisible, children, setIsVisible}: Props) => {
