@@ -1,12 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {GlobalColors} from '../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../utils/theme/global-colors';
 import ButtonComponent from '../button/index';
 import {
   heightToDp,
   widthToDp,
-} from '../../../utils/functions/responsiveDimentions';
-import {GlobalStyles} from '../../../utils/theme/globalStyles';
+} from '../../../utils/functions/responsive-dimensions';
+import {GlobalStyles} from '../../../utils/theme/global-styles';
 
 type Props = {
   onPress: any;

@@ -1,20 +1,23 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import ModalComponent from '../../base/modal'
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions'
-import { GlobalColors } from '../../../utils/theme/globalColors'
-import Entypo from 'react-native-vector-icons/Entypo'
-import { responsiveFontSize } from '../../../utils/functions/responsiveText'
-import { GlobalFonts } from '../../../utils/theme/fonts'
-import ButtonComponent from '../../base/button'
+import {Pressable, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import ModalComponent from '../../base/modal';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsive-dimensions';
+import {GlobalColors} from '../../../utils/theme/global-colors';
+import Entypo from 'react-native-vector-icons/Entypo';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import {GlobalFonts} from '../../../utils/theme/fonts';
+import ButtonComponent from '../../base/button';
 
 type Props = {
-          isVisible: boolean;
-          setIsVisible: any
-}
+  isVisible: boolean;
+  setIsVisible: any;
+};
 
 const AccountDeActivateModal = (props: Props) => {
-          const { isVisible, setIsVisible } = props
+  const {isVisible, setIsVisible} = props;
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
@@ -42,9 +45,9 @@ const AccountDeActivateModal = (props: Props) => {
       </View>
     </ModalComponent>
   );
-}
+};
 
-export default AccountDeActivateModal
+export default AccountDeActivateModal;
 
 const styles = StyleSheet.create({
   container: {

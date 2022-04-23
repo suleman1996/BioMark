@@ -3,10 +3,10 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {
   heightToDp,
   widthToDp,
-} from '../../../utils/functions/responsiveDimentions';
-import {responsiveFontSize} from '../../../utils/functions/responsiveText';
+} from '../../../utils/functions/responsive-dimensions';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
 import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../utils/theme/global-colors';
 import SearchBarWithLeftScanIcon from '../../higher-order/search-bar-with-left-scan-icon/index';
 
 type Props = {

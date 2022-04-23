@@ -5,8 +5,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import colors from '../../assets/colors/colors';
 import fonts from '../../assets/fonts/fonts';
 import Button from '../button/button';
-import {responsiveFontSize} from '../../utils/functions/responsiveText';
-import {GlobalColors} from '../../utils/theme/globalColors';
+import {responsiveFontSize} from '../../utils/functions/responsive-text';
+import {GlobalColors} from '../../utils/theme/global-colors';
 
 type Props = {
   onPressPhoto: any;

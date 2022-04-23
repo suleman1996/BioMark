@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import DropdownMenuComponent from '../../../../../../../../components/base/dropdown-menu';
 import ModalWithBottomBtn from '../../../../../../../../components/higher-order/modal-with-bottom-btn';
 import RadioButtonQuestionComponent from '../../../../../../../../components/higher-order/radio-question';
 import Textinput from '../../../../../../../../components/text-input-button';
-import { heightToDp } from '../../../../../../../../utils/functions/responsiveDimentions';
-import { GlobalStyles } from '../../../../../../../../utils/theme/globalStyles';
+import {heightToDp} from '../../../../../../../../utils/functions/responsive-dimensions';
+import {GlobalStyles} from '../../../../../../../../utils/theme/global-styles';
 
-const options =[
-  {title: 'Blood'},
-  {title: 'Breast'}
-]
+const options = [{title: 'Blood'}, {title: 'Breast'}];
 
 type Props = {
-  isVisible: boolean,
-  setIsVisible: any,
+  isVisible: boolean;
+  setIsVisible: any;
 };
 
 const FoodModal = ({isVisible, setIsVisible}: Props) => {
@@ -31,16 +28,15 @@ const FoodModal = ({isVisible, setIsVisible}: Props) => {
       isVisible={isVisible}
       title="Food Allergies"
       onPress={() => console.log('clicked')}>
-      <RadioButtonQuestionComponent
-        isTrue={ans1}
-        setIsTrue={setAns1}
-      />
-     {ans1?(
-      <>
-          <Textinput question='Please list these foods' placeholder='Enter food'/>
+      <RadioButtonQuestionComponent isTrue={ans1} setIsTrue={setAns1} />
+      {ans1 ? (
+        <>
+          <Textinput
+            question="Please list these foods"
+            placeholder="Enter food"
+          />
         </>
-     ):null}
-     
+      ) : null}
     </ModalWithBottomBtn>
   );
 };

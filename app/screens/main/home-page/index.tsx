@@ -9,9 +9,9 @@ import {
 import fonts from '../../../assets/fonts/fonts';
 import MyImage from '../../../assets/images/images';
 import Covid19Btn from '../../../components/button/covid19';
-import GoogleFit from '../../../components/button/googleFit';
+import GoogleFit from '../../../components/button/google-fit';
 import SmallBtn from '../../../components/button/small-button';
-import YourHealthBtn from '../../../components/button/yourHealthBtn';
+import YourHealthBtn from '../../../components/button/your-health-btn';
 import SearchBarWithLeftScanIcon from '../../../components/higher-order/search-bar-with-left-scan-icon/index';
 // import BottomBar from '../../../components/bottom-nav/bottom-bar';
 import styles from './styles';

@@ -5,9 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {
-  Platform,
-} from 'react-native';
+import {Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import {useDispatch} from 'react-redux';
 import React, {useState, useEffect, useRef} from 'react';
@@ -17,7 +15,7 @@ import colors from '../../../assets/colors/colors';
 import fonts from '../../../assets/fonts/fonts';
 import BackIcon from '../../../assets/svgs/back';
 import StepIndicator from 'react-native-step-indicator';
-import OtpInput from '../../../components/otp/otpInput';
+import OtpInput from '../../../components/otp/otp-input';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import {

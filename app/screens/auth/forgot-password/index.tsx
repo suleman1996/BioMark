@@ -3,15 +3,15 @@ import React, {useEffect, useState} from 'react';
 import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import Button from '../../../components/button/button';
-import Header from '../../../components/header/header';
+import Header from '../../../components/header';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number/phone-number';
+import PhoneNumber from '../../../components/phone-number';
 import {Nav_Screens} from '../../../navigation/constants';
 import {forgotPassword} from '../../../services/auth-service';
-import {navigate} from '../../../services/navRef';
-import {userService} from '../../../services/user-service/userService';
+import {navigate} from '../../../services/nav-ref';
+import {userService} from '../../../services/user-service/user-service';
 import {ForgotPasswordErrorResponse} from '../../../types/auth/ForgotPassword';
-import {logNow} from '../../../utils/functions/logBinder';
+import {logNow} from '../../../utils/functions/log-binder';
 import styles from './styles';
 
 export default function ForgotPassword() {

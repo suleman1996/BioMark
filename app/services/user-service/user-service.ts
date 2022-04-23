@@ -13,7 +13,7 @@ import {
   RegisterUserSuccessResponse,
 } from '../../types/auth/RegisterUser';
 import {DeviceRegister} from '../../types/auth/DeviceRegisterResponse';
-import {logNow} from '../../utils/functions/logBinder';
+import {logNow} from '../../utils/functions/log-binder';
 import {
   resetAuthAsyncStorage,
   setAuthAsyncStorage,

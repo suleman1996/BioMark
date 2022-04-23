@@ -1,13 +1,13 @@
 import {Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import {userService} from '../../services/user-service/userService';
+import {userService} from '../../services/user-service/user-service';
 import {DeviceRegister} from '../../types/auth/DeviceRegisterResponse';
 import {
   LoginErrorResponse,
   LoginResponse,
 } from '../../types/auth/LoginResponse';
 import {UserContacts} from '../../types/UserContacts';
-import {logNow} from '../../utils/functions/logBinder';
+import {logNow} from '../../utils/functions/log-binder';
 import {
   AUTH_ERR_LOG_IN,
   AUTH_ERR_LOG_OUT,

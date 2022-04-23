@@ -5,56 +5,45 @@ import {responsiveFontSize} from '../../../utils/functions/responsive-text';
 import {GlobalFonts} from '../../../utils/theme/fonts';
 import {GlobalColors} from '../../../utils/theme/global-colors';
 import {heightToDp} from '../../../utils/functions/responsive-dimensions';
-import TextInput from '../../input-field/text-input';
 
 type Props = {
   label: string;
   placeholder: string;
-  isSecure: boolean;
-  password: string;
-  setHidePassword: any;
-  hidePassword: boolean;
+  labelFontSize?: number;
   onChange: any;
+  value: string;
 };
 
-const PasswordInputWithLabel = ({
+const InputWithLabel = ({
   label,
   placeholder,
-  isSecure,
-  password,
-  setHidePassword,
-  hidePassword,
   onChange,
+  labelFontSize,
+  value,
 }: Props) => {
+  const ifLabelSize = labelFontSize
+    ? {fontSize: responsiveFontSize(labelFontSize)}
+    : {};
   return (
     <View style={styles.container}>
-      <Text style={[styles.inputLablel]}>{label}</Text>
-      <TextInput
+      <Text style={[styles.label, ifLabelSize]}>{label}</Text>
+      <InputField
         placeholder={placeholder}
-        secureTextEntry={isSecure}
-        eye={!isSecure ? 'eye-off' : 'eye'}
-        value={password}
-        onEyePress={() => {
-          setHidePassword(!hidePassword);
-        }}
         onChange={onChange}
+        svg={undefined}
+        value={value}
       />
     </View>
   );
 };
 
-export default PasswordInputWithLabel;
+export default InputWithLabel;
 
 const styles = StyleSheet.create({
   container: {
     marginTop: heightToDp(2),
   },
   label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-  inputLablel: {
     fontSize: responsiveFontSize(22),
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,

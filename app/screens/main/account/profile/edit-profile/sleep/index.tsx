@@ -4,9 +4,9 @@ import TitleWithBackLayout from '../../../../../../components/layouts/back-with-
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import styles from './styles';
 import {Picker} from '@react-native-picker/picker';
-import {navigate} from '../../../../../../services/navRef';
+import {navigate} from '../../../../../../services/nav-ref';
 import {Nav_Screens} from '../../../../../../navigation/constants';
-import {GlobalColors} from '../../../../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../../../../utils/theme/global-colors';
 import colors from '../../../../../../assets/colors/colors';
 import fonts from '../../../../../../assets/fonts/fonts';
 

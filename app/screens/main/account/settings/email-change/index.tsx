@@ -1,26 +1,27 @@
-import { View, Text } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import TitleWithBackWhiteBgLayout from '../../../../../components/layouts/back-with-title-white-bg'
-import { styles } from './styles'
-import InputWithLabel from '../../../../../components/base/inputWithLabel'
-import ButtonComponent from '../../../../../components/base/button'
-import { userService } from '../../../../../services/user-service/userService'
-import { logNow } from '../../../../../utils/functions/logBinder'
-import { useDispatch, useSelector } from 'react-redux'
-import { addUserContactsDetails } from '../../../../../store/auth/authActions'
-import { IAppState } from '../../../../../store/IAppState'
+import {View, Text} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import TitleWithBackWhiteBgLayout from '../../../../../components/layouts/back-with-title-white-bg';
+import {styles} from './styles';
+import InputWithLabel from '../../../../../components/base/input-with-label';
+import ButtonComponent from '../../../../../components/base/button';
+import {userService} from '../../../../../services/user-service/user-service';
+import {logNow} from '../../../../../utils/functions/log-binder';
+import {useDispatch, useSelector} from 'react-redux';
+import {addUserContactsDetails} from '../../../../../store/auth/auth-actions';
+import {IAppState} from '../../../../../store/IAppState';
 import * as Yup from 'yup';
-import { Formik } from 'formik'
-import ErrorLineFullWidth from '../../../../../components/higher-order/errorFullWidthLine'
+import {Formik} from 'formik';
+import ErrorLineFullWidth from '../../../../../components/higher-order/error-full-width-line';
 
-type Props = {}
+type Props = {};
 
 const EmailChangeScreen = (props: Props) => {
-
   const formikRef = useRef<any>();
 
-  const userContacts = useSelector((state: IAppState) => state.auth.userContacts);
+  const userContacts = useSelector(
+    (state: IAppState) => state.auth.userContacts,
+  );
 
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState(userContacts.email_address);
@@ -29,21 +30,21 @@ const EmailChangeScreen = (props: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    userService.getUserContacts().then(res => {
-      dispatch(addUserContactsDetails(res));
-    }).catch(err => {
-
-    }).finally(() => {
-
-    })
-  }, [])
+    userService
+      .getUserContacts()
+      .then(res => {
+        dispatch(addUserContactsDetails(res));
+      })
+      .catch(err => {})
+      .finally(() => {});
+  }, []);
 
   const submitForm = () => {
     const {email, confirmEmail} = formikRef.current.values;
     logNow({email, confirmEmail});
     setIsLoading(true);
     formikRef.current.submitForm();
-  }
+  };
 
   const ResetPassSchema = Yup.object({
     email: Yup.string().email('Invalid email format').required('Required'),
@@ -51,7 +52,7 @@ const EmailChangeScreen = (props: Props) => {
       .email('Invalid email format')
       .required('Required')
       .oneOf([Yup.ref('email'), null], 'Email does not match')
-      .required('Confirm email is required')
+      .required('Confirm email is required'),
   });
 
   return (
@@ -62,7 +63,7 @@ const EmailChangeScreen = (props: Props) => {
           email,
           confirmEmail: '',
         }}
-        onSubmit={(values) => logNow(values)}
+        onSubmit={values => logNow(values)}
         validationSchema={ResetPassSchema}>
         {({handleChange, handleSubmit, values, errors}) => (
           <>
@@ -90,7 +91,13 @@ const EmailChangeScreen = (props: Props) => {
                   handleSubmit();
                 }}
                 title={'Save'}
-                disabled={Object.entries(errors).length === 0 ? values.confirmEmail ? false : true : true}
+                disabled={
+                  Object.entries(errors).length === 0
+                    ? values.confirmEmail
+                      ? false
+                      : true
+                    : true
+                }
               />
             </View>
             <ErrorLineFullWidth />
@@ -99,6 +106,6 @@ const EmailChangeScreen = (props: Props) => {
       </Formik>
     </SafeAreaView>
   );
-}
+};
 
 export default EmailChangeScreen;

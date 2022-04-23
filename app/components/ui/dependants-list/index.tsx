@@ -1,13 +1,16 @@
 import {StyleSheet, Text, View, Pressable, FlatList} from 'react-native';
-import React, { useState } from 'react'
-import { GlobalColors } from '../../../utils/theme/globalColors'
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalStyles } from '../../../utils/theme/globalStyles';
-import { navigate } from '../../../services/navRef';
-import { Nav_Screens } from '../../../navigation/constants/index';
+import React, {useState} from 'react';
+import {GlobalColors} from '../../../utils/theme/global-colors';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsive-dimensions';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import {GlobalFonts} from '../../../utils/theme/fonts';
+import {GlobalStyles} from '../../../utils/theme/global-styles';
+import {navigate} from '../../../services/nav-ref';
+import {Nav_Screens} from '../../../navigation/constants/index';
 import DeleteModalComponent from '../../higher-order/delete-modal';
 const DependantsList = () => {
   const [isDelete, setIsDelete] = useState(false);
@@ -20,38 +23,38 @@ const DependantsList = () => {
         subHeading="Are you sure you want to delete profiles?"
       />
       <FlatList
-          data={['1','2','3','4','5','6','7','8']}
-          renderItem={() => {
-            return (
-              <View style={styles.cardItem}>
-                <View style={styles.header}>
-                  <Text style={styles.headerTitle}>Deku Midoriya</Text>
-                  <View style={styles.headerEnd}>
-                    <Pressable
-                      onPress={() => navigate(Nav_Screens.Edit_Dependants)}
-                      style={styles.editBtn}>
-                      <Text style={styles.editText}>Edit</Text>
-                    </Pressable>
-                    <Pressable onPress={() => setIsDelete(true)}>
-                      <AntDesign name="delete" size={responsiveFontSize(22)} />
-                    </Pressable>
-                  </View>
-                </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={styles.relationText}>Relation: </Text>
-                  <Text style={styles.relationWithText}>
-                    Parents / Parent's in law
-                  </Text>
+        data={['1', '2', '3', '4', '5', '6', '7', '8']}
+        renderItem={() => {
+          return (
+            <View style={styles.cardItem}>
+              <View style={styles.header}>
+                <Text style={styles.headerTitle}>Deku Midoriya</Text>
+                <View style={styles.headerEnd}>
+                  <Pressable
+                    onPress={() => navigate(Nav_Screens.Edit_Dependants)}
+                    style={styles.editBtn}>
+                    <Text style={styles.editText}>Edit</Text>
+                  </Pressable>
+                  <Pressable onPress={() => setIsDelete(true)}>
+                    <AntDesign name="delete" size={responsiveFontSize(22)} />
+                  </Pressable>
                 </View>
               </View>
-            );
-          }}
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text style={styles.relationText}>Relation: </Text>
+                <Text style={styles.relationWithText}>
+                  Parents / Parent's in law
+                </Text>
+              </View>
+            </View>
+          );
+        }}
       />
     </View>
   );
-}
+};
 
-export default DependantsList
+export default DependantsList;
 
 const styles = StyleSheet.create({
   container: {

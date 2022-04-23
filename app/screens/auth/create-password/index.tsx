@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import styles from './styles';
-import Header from '../../../components/header/header';
+import Header from '../../../components/header';
 import Button from '../../../components/button/button';
 import InputField from '../../../components/input-field/input-field';
 import TextInput from '../../../components/input-field/text-input';

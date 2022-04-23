@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import DropdownMenuComponent from '../../../../../components/base/dropdown-menu';
 import ModalButtonComponent from '../../../../../components/higher-order/modal-button';
-import {goBack} from '../../../../../services/navRef';
+import {goBack} from '../../../../../services/nav-ref';
 import {
   heightToDp,
   widthToDp,
-} from '../../../../../utils/functions/responsiveDimentions';
-import {GlobalColors} from '../../../../../utils/theme/globalColors';
+} from '../../../../../utils/functions/responsive-dimensions';
+import {GlobalColors} from '../../../../../utils/theme/global-colors';
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
+import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
 import {GlobalFonts} from '../../../../../utils/theme/fonts';
 import AsthmaModal from './modals/asthma';
 import CancerModal from './modals/cancer';
@@ -78,7 +78,7 @@ const MedicalHistoryScreen = () => {
         <Text style={styles.label}>
           Have you ever been diagnosed with any of the following conditions?
         </Text>
-        <View style={styles.rowContainer} >
+        <View style={styles.rowContainer}>
           <ModalButtonComponent
             title="High Cholesterol"
             isModal={isCholesterolModal}

@@ -1,11 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import InputField from '../../input-field/input-field';
-import {responsiveFontSize} from '../../../utils/functions/responsiveText';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
 import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/globalColors';
-import {heightToDp} from '../../../utils/functions/responsiveDimentions';
-import PhoneNumber from '../../phone-number/phone-number'
+import {GlobalColors} from '../../../utils/theme/global-colors';
+import {heightToDp} from '../../../utils/functions/responsive-dimensions';
+import PhoneNumber from '../../phone-number';
 
 type Props = {
   label?: string;
@@ -21,16 +21,16 @@ const PhoneNumberWithLabel = ({label, placeholder, disabled}: Props) => {
     <View style={styles.container}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
       <View>
-          {disabled ? <View style={styles.disableContainer} /> : null}
-          <PhoneNumber
-            countryCode={countryCode}
-            setCountryCode={setCountryCode}
-            phoneNumber={phoneNumber}
-            setPhoneNumber={setPhoneNumber}
-            setSelectCountryCode={setSelectCountryCode}
-            width={'100%'}
-            placeholder={placeholder}
-          />
+        {disabled ? <View style={styles.disableContainer} /> : null}
+        <PhoneNumber
+          countryCode={countryCode}
+          setCountryCode={setCountryCode}
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
+          setSelectCountryCode={setSelectCountryCode}
+          width={'100%'}
+          placeholder={placeholder}
+        />
       </View>
     </View>
   );
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   phoneContainer: {
-    zIndex: 999
-  }
+    zIndex: 999,
+  },
 });

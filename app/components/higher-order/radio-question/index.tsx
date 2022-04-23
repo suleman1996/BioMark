@@ -1,16 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { RadioButton } from 'react-native-paper';
-import { GlobalColors } from '../../../utils/theme/globalColors';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../utils/theme/fonts';
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {RadioButton} from 'react-native-paper';
+import {GlobalColors} from '../../../utils/theme/global-colors';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsive-dimensions';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import {GlobalFonts} from '../../../utils/theme/fonts';
 
 type Props = {
-  question: string,
-  isTrue: boolean,
-  setIsTrue: any,
-}
+  question: string;
+  isTrue: boolean;
+  setIsTrue: any;
+};
 
 const RadioButtonQuestionComponent = ({question, isTrue, setIsTrue}: Props) => {
   return (
@@ -40,7 +43,7 @@ const RadioButtonQuestionComponent = ({question, isTrue, setIsTrue}: Props) => {
   );
 };
 
-export default RadioButtonQuestionComponent
+export default RadioButtonQuestionComponent;
 
 const styles = StyleSheet.create({
   radioContainer: {
@@ -50,10 +53,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: widthToDp(4),
   },
   qText: {
-          fontSize: responsiveFontSize(20),
-            fontFamily: GlobalFonts.extraBold,
-            color: GlobalColors.darkPrimary,
-            marginTop: heightToDp(2),
+    fontSize: responsiveFontSize(20),
+    fontFamily: GlobalFonts.extraBold,
+    color: GlobalColors.darkPrimary,
+    marginTop: heightToDp(2),
   },
   singleRadioContainer: {
     flexDirection: 'row',
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     marginRight: widthToDp(3),
   },
   radioLabel: {
-            fontSize: responsiveFontSize(20),
-            fontFamily: GlobalFonts.regular
-  }
+    fontSize: responsiveFontSize(20),
+    fontFamily: GlobalFonts.regular,
+  },
 });

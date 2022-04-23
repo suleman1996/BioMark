@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import DropdownMenuComponent from '../../../../../../../../components/base/dropdown-menu';
 import ModalWithBottomBtn from '../../../../../../../../components/higher-order/modal-with-bottom-btn';
 import RadioButtonQuestionComponent from '../../../../../../../../components/higher-order/radio-question';
-import { heightToDp } from '../../../../../../../../utils/functions/responsiveDimentions';
-import { GlobalStyles } from '../../../../../../../../utils/theme/globalStyles';
+import {heightToDp} from '../../../../../../../../utils/functions/responsive-dimensions';
+import {GlobalStyles} from '../../../../../../../../utils/theme/global-styles';
 import Textinput from '../../../../../../../../components/text-input-button';
 
-const options = [
-  { title: 'Blood' },
-  { title: 'Breast' }
-]
+const options = [{title: 'Blood'}, {title: 'Breast'}];
 
 type Props = {
-  isVisible: boolean,
-  setIsVisible: any,
+  isVisible: boolean;
+  setIsVisible: any;
 };
 
-const OtherModal = ({ isVisible, setIsVisible }: Props) => {
+const OtherModal = ({isVisible, setIsVisible}: Props) => {
   //    Have you been diagnosed with Cancer?
   const [ans1, setAns1] = useState(false);
 
@@ -31,16 +28,15 @@ const OtherModal = ({ isVisible, setIsVisible }: Props) => {
       isVisible={isVisible}
       title="Other allergies"
       onPress={() => console.log('clicked')}>
-      <RadioButtonQuestionComponent
-        isTrue={ans1}
-        setIsTrue={setAns1}
-      />
+      <RadioButtonQuestionComponent isTrue={ans1} setIsTrue={setAns1} />
       {ans1 ? (
         <>
-          <Textinput question='Please list these allergies' placeholder='Enter allergies' />
+          <Textinput
+            question="Please list these allergies"
+            placeholder="Enter allergies"
+          />
         </>
       ) : null}
-
     </ModalWithBottomBtn>
   );
 };

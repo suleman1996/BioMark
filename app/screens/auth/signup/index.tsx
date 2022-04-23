@@ -15,17 +15,17 @@ import * as Yup from 'yup';
 import colors from '../../../assets/colors/colors';
 import BackIcon from '../../../assets/svgs/back';
 import Button from '../../../components/button/button';
-import CheckBox from '../../../components/check-box/check-box';
-import DatePicker from '../../../components/date-picker/date-picker';
+import CheckBox from '../../../components/check-box';
+import DatePicker from '../../../components/date-picker';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number/phone-number';
+import PhoneNumber from '../../../components/phone-number';
 import {Nav_Screens} from '../../../navigation/constants';
 import {signup} from '../../../services/auth-service';
-import {navigate} from '../../../services/navRef';
-import {userService} from '../../../services/user-service/userService';
+import {navigate} from '../../../services/nav-ref';
+import {userService} from '../../../services/user-service/user-service';
 import {RegisterUserErrorResponse} from '../../../types/auth/RegisterUser';
-import {logNow} from '../../../utils/functions/logBinder';
+import {logNow} from '../../../utils/functions/log-binder';
 
 import styles from './styles';
 
@@ -240,7 +240,6 @@ export default function Signup() {
                     margin={20}
                     Keyboardtype="email-address"
                   />
-                
 
                   <Text style={styles.inputLablel}>Password</Text>
                   <TextInput
@@ -258,26 +257,26 @@ export default function Signup() {
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
                   {/* <TouchableOpacity> */}
-                    <Text style={styles.tcTextStyle}>
-                      <Text>I accept the </Text>
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}>
-                        terms and condition
-                      </Text>
-                      <Text> and the </Text>
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}>
-                        privacy policy.
-                      </Text>
+                  <Text style={styles.tcTextStyle}>
+                    <Text>I accept the </Text>
+                    <Text
+                      style={{
+                        color: colors.blue,
+                        fontSize: 17,
+                        textDecorationLine: 'underline',
+                      }}>
+                      terms and condition
                     </Text>
+                    <Text> and the </Text>
+                    <Text
+                      style={{
+                        color: colors.blue,
+                        fontSize: 17,
+                        textDecorationLine: 'underline',
+                      }}>
+                      privacy policy.
+                    </Text>
+                  </Text>
                   {/* </TouchableOpacity> */}
                 </View>
                 <TouchableOpacity>

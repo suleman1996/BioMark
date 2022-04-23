@@ -5,12 +5,12 @@ import {Menu, MenuOptions, MenuTrigger} from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useRef} from 'react';
 import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../utils/theme/global-colors';
 import {
   heightToDp,
   widthToDp,
-} from '../../../utils/functions/responsiveDimentions';
-import {responsiveFontSize} from '../../../utils/functions/responsiveText';
+} from '../../../utils/functions/responsive-dimensions';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
 import colors from '../../../assets/colors/colors';
 
 type Props = {

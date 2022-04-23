@@ -19,24 +19,30 @@ import Facebook from '../../../assets/svgs/facebook';
 import Google from '../../../assets/svgs/google';
 import Logo from '../../../assets/svgs/logo-name';
 import Button from '../../../components/button/button';
-import ErrorModal from '../../../components/error-modal/error-modal';
+import ErrorModal from '../../../components/error-modal';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number/phone-number';
+import PhoneNumber from '../../../components/phone-number';
 import {Nav_Screens} from '../../../navigation/constants';
-import {navigate} from '../../../services/navRef';
-import {reduxDeviceRegister, reduxLogin} from '../../../store/auth/authActions';
+import {navigate} from '../../../services/nav-ref';
+import {
+  reduxDeviceRegister,
+  reduxLogin,
+} from '../../../store/auth/auth-actions';
 import {IAppState} from '../../../store/IAppState';
 // import InputField from '../../components/inputField/inputField';
 import AuthContext from '../../../utils/auth-context';
 import styles from './styles';
-import auth from '@react-native-firebase/auth'
-import { AppleButton,appleAuth } from '@invertase/react-native-apple-authentication';
+import auth from '@react-native-firebase/auth';
+import {
+  AppleButton,
+  appleAuth,
+} from '@invertase/react-native-apple-authentication';
 
 export default function Login() {
   // redux
   const dispatch = useDispatch();
- 
+
   const {loggingIn, errorMessageLogin} = useSelector(
     (state: IAppState) => state.auth,
   );
@@ -54,7 +60,7 @@ export default function Login() {
   const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
   const [userGoogleInfo, setUserGoogleInfo] = useState({});
   const [loaded, setLoaded] = useState(false);
-  const [textToken, setText] = useState("");
+  const [textToken, setText] = useState('');
 
   GoogleSignin.configure({
     webClientId:
@@ -62,7 +68,7 @@ export default function Login() {
     offlineAccess: false,
   });
 
-  useEffect(() => {   
+  useEffect(() => {
     if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
     else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
     else if (selectCountryCode == '65') setNumberCondition({min: 8, max: 8});
@@ -93,17 +99,17 @@ export default function Login() {
     //   });
     GoogleSignin.signOut();
     GoogleSignin.configure({
-      webClientId: '1078990823809-1s2m5rup1t61rmmiic4ma5ag847d17u1.apps.googleusercontent.com',
-      offlineAccess:true
+      webClientId:
+        '1078990823809-1s2m5rup1t61rmmiic4ma5ag847d17u1.apps.googleusercontent.com',
+      offlineAccess: true,
     });
-  
-    const {idToken}= await GoogleSignin.signIn()
-    const googleCrenditial=auth.GoogleAuthProvider.credential(idToken)
-    const user_sign_in=auth().signInWithCredential(googleCrenditial)
-    user_sign_in.then(re=>{
-      console.log("re",re)
-      
-    })
+
+    const {idToken} = await GoogleSignin.signIn();
+    const googleCrenditial = auth.GoogleAuthProvider.credential(idToken);
+    const user_sign_in = auth().signInWithCredential(googleCrenditial);
+    user_sign_in.then(re => {
+      console.log('re', re);
+    });
   };
 
   const FacebookLogin = async () => {
@@ -119,10 +125,9 @@ export default function Login() {
           );
           const data = await AccessToken.getCurrentAccessToken();
           console.log('Facebook data', data?.accessToken);
-          handleFedrationLogin(data?.accessToken)
-
+          handleFedrationLogin(data?.accessToken);
         }
-      }, 
+      },
       function (error) {
         console.log('Login fail with error: ' + error);
       },
@@ -139,7 +144,6 @@ export default function Login() {
         response.json().then(
           json => {
             console.log('Json response', json);
-         
           },
           error => {
             alert(error.message);
@@ -168,11 +172,13 @@ export default function Login() {
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
-  
+
     // get current authentication state for user
     // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
-    const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
-  
+    const credentialState = await appleAuth.getCredentialStateForUser(
+      appleAuthRequestResponse.user,
+    );
+
     // use credentialState response to ensure the user is authenticated
     if (credentialState === appleAuth.State.AUTHORIZED) {
       // user is authenticated
@@ -182,11 +188,9 @@ export default function Login() {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
-   
   };
-  const handleFedrationLogin = async (accessToken:string) => {
-  console.log("accessToken",accessToken);
-  
+  const handleFedrationLogin = async (accessToken: string) => {
+    console.log('accessToken', accessToken);
   };
   return (
     <View style={styles.container}>
@@ -230,7 +234,7 @@ export default function Login() {
           }}
           onChange={setPassword}
           margin={20}
-        /> 
+        />
         {password !== '' && password.length < 8 && (
           <Text style={styles.errorMessage}>
             Password must have 8-11 characters long
@@ -243,7 +247,7 @@ export default function Login() {
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-<Text>{textToken}</Text>
+        <Text>{textToken}</Text>
         <Button
           onPress={() => handleLogin()}
           disabled={
@@ -269,7 +273,7 @@ export default function Login() {
         </Text>
         <View style={styles.socialLogins}>
           {Platform.OS === 'ios' && (
-            <TouchableOpacity onPress={() => onAppleButtonPress()}> 
+            <TouchableOpacity onPress={() => onAppleButtonPress()}>
               <Apple height="24" width="24" />
             </TouchableOpacity>
           )}

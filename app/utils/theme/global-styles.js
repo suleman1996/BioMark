@@ -1,11 +1,11 @@
-import { heightToDp, widthToDp } from "../functions/responsiveDimentions";
-import { responsiveFontSize } from "../functions/responsiveText";
-import { GlobalFonts } from "./fonts";
-import { GlobalColors } from "./globalColors";
+import {heightToDp, widthToDp} from '../functions/responsive-dimensions';
+import {responsiveFontSize} from '../functions/responsive-text';
+import {GlobalFonts} from './fonts';
+import {GlobalColors} from './global-colors';
 
 export const GlobalStyles = {
   shadow: {
-    shadowOffset: {width: 5, },
+    shadowOffset: {width: 5},
     shadowColor: 'lightgray',
     shadowOpacity: 0.4,
     elevation: 2,
@@ -13,7 +13,7 @@ export const GlobalStyles = {
     // backgroundColor: '#0000', // invisible color
   },
   shadow2: {
-    shadowOffset: {width: 5, },
+    shadowOffset: {width: 5},
     shadowColor: 'gray',
     shadowOpacity: 0.7,
     elevation: 0.5,
@@ -28,6 +28,6 @@ export const GlobalStyles = {
     marginTop: heightToDp(2),
   },
   paddingHorizontal: {
-    paddingHorizontal: widthToDp(4)
-  }
+    paddingHorizontal: widthToDp(4),
+  },
 };

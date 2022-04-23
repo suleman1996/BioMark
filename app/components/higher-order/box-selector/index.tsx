@@ -1,15 +1,18 @@
 import {StyleSheet, Text, View, Pressable, FlatList} from 'react-native';
-import React, { useState } from 'react'
-import { GlobalStyles } from '../../../utils/theme/globalStyles';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import { GlobalColors } from '../../../utils/theme/globalColors';
-import { GlobalFonts } from '../../../utils/theme/fonts';
+import React, {useState} from 'react';
+import {GlobalStyles} from '../../../utils/theme/global-styles';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsive-dimensions';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import {GlobalColors} from '../../../utils/theme/global-colors';
+import {GlobalFonts} from '../../../utils/theme/fonts';
 
 type Props = {
-  options: any,
-  label: string
-}
+  options: any;
+  label: string;
+};
 
 const BoxSelector = ({options, label}: Props) => {
   const [selected, setSelected] = useState('');
@@ -55,7 +58,7 @@ const BoxSelector = ({options, label}: Props) => {
   );
 };
 
-export default BoxSelector
+export default BoxSelector;
 
 const styles = StyleSheet.create({
   main: {

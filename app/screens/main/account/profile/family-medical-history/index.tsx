@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import {ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import ModalButtonComponent from '../../../../../components/higher-order/modal-button';
-import { goBack } from '../../../../../services/navRef';
+import {goBack} from '../../../../../services/nav-ref';
 import {
   heightToDp,
-  widthToDp
-} from '../../../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from '../../../../../utils/theme/globalColors';
+  widthToDp,
+} from '../../../../../utils/functions/responsive-dimensions';
+import {GlobalColors} from '../../../../../utils/theme/global-colors';
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import { responsiveFontSize } from '../../../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
+import {GlobalFonts} from '../../../../../utils/theme/fonts';
 import CancerModal from './modals/cancer';
 import OthersModal from './modals/others';
 const MedicalHistoryScreen = () => {
@@ -32,23 +32,22 @@ const MedicalHistoryScreen = () => {
     setIsCancerModal(false);
     setIsOtherModal(false);
     setIsNoneModal(true);
-  }
+  };
   const onPressOthers = () => {
-    setIsOtherModal(true)
-  }
+    setIsOtherModal(true);
+  };
   const onPressCancer = () => {
-    setIsCancerModal(true)
-  }
-  
+    setIsCancerModal(true);
+  };
+
   return (
     <TitleWithBackLayout title="Medical History">
-
       <CancerModal isVisible={isCancerModal} setIsVisible={setIsCancerModal} />
-      <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} /> 
+      <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
       <ScrollView style={styles.container}>
-      
         <Text style={styles.label}>
-          Have any of your family members been diagnosed with the following conditions?
+          Have any of your family members been diagnosed with the following
+          conditions?
         </Text>
         <View style={styles.rowContainer}>
           <ModalButtonComponent
@@ -56,7 +55,6 @@ const MedicalHistoryScreen = () => {
             isModal={heartDisease}
             setIsModal={setHeartDisease}
             drop={false}
-           
           />
           <ModalButtonComponent
             title="Stroke"
@@ -108,9 +106,11 @@ const MedicalHistoryScreen = () => {
           />
         </View>
       </ScrollView>
-      <ButtonWithShadowContainer onPress={() => {
-        goBack();
-      }} />
+      <ButtonWithShadowContainer
+        onPress={() => {
+          goBack();
+        }}
+      />
     </TitleWithBackLayout>
   );
 };

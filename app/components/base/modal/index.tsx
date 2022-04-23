@@ -1,8 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import Modal from 'react-native-modal';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from '../../../utils/theme/globalColors';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsive-dimensions';
+import {GlobalColors} from '../../../utils/theme/global-colors';
 
 type Props = {
   isVisible: boolean;
@@ -24,8 +27,8 @@ const ModalComponent = ({isVisible, children, setIsVisible}: Props) => {
   );
 };
 
-export default ModalComponent
+export default ModalComponent;
 
 const styles = StyleSheet.create({
-  mainView: { alignItems: 'center'},
+  mainView: {alignItems: 'center'},
 });

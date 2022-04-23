@@ -1,26 +1,24 @@
-import React, { useRef, useState } from 'react';
+import React, {useRef, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import {
-  Menu, MenuOption, MenuOptions,
-  MenuTrigger
+  Menu,
+  MenuOption,
+  MenuOptions,
+  MenuTrigger,
 } from 'react-native-popup-menu';
 import colors from '../../../assets/colors/colors';
 import {
   heightToDp,
-  widthToDp
-} from '../../../utils/functions/responsiveDimentions';
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/globalColors';
+  widthToDp,
+} from '../../../utils/functions/responsive-dimensions';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import {GlobalFonts} from '../../../utils/theme/fonts';
+import {GlobalColors} from '../../../utils/theme/global-colors';
 
 type Props = {
-  options?: any,
-  label: string
-}
+  options?: any;
+  label: string;
+};
 
 const RelationMenu = ({options, label}: Props) => {
   const menuRef = useRef<any>();
@@ -79,6 +77,6 @@ const styles = StyleSheet.create({
     height: 45,
   },
   popupMenu: {
-            width: widthToDp(70)
-  }
+    width: widthToDp(70),
+  },
 });

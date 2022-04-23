@@ -1,26 +1,24 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
-import React, { useState } from 'react';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
+import {StyleSheet, Text, View, ScrollView, SafeAreaView} from 'react-native';
+import React, {useState} from 'react';
+import {Provider, Appbar, RadioButton} from 'react-native-paper';
 import colors from '../../../../../../assets/colors/colors';
 import fonts from '../../../../../../assets/fonts/fonts';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
-import { GlobalColors } from '../../../../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../../../../utils/theme/global-colors';
 import TextInput from '../../../../../../components/input-field/text-input';
-import { Picker } from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 import Textinput from '../../../../../../components/text-input-button';
-import { styles } from './styles';
+import {styles} from './styles';
 import MedicationModal from './modals/medication';
-import FoodModal from './modals/food'
+import FoodModal from './modals/food';
 import AnimalModal from './modals/animal';
 import EnvironmentModal from './modals/environment';
 import ModalButtonComponent from '../../../../../../components/higher-order/modal-button';
 import OtherModal from './modals/other';
 
-
 export default function AllergiesScreen() {
-
   const [value, setValue] = useState('');
   const [isMedicationModal, setIsMedicationModal] = useState(false);
   const [isFoodModal, setIsFoodModal] = useState(false);
@@ -30,65 +28,117 @@ export default function AllergiesScreen() {
   const [isNotSureModal, setIsNotSureModal] = useState(false);
 
   const onPressMedication = () => {
-    setIsMedicationModal(true)
-  }
+    setIsMedicationModal(true);
+  };
 
   const onPressFood = () => {
-    setIsFoodModal(true)
-  }
+    setIsFoodModal(true);
+  };
 
   const onPressAnimal = () => {
-    setIsAnimalModal(true)
-  }
+    setIsAnimalModal(true);
+  };
 
   const onPressEnvironment = () => {
-    setIsEnvironmnetModal(true)
-  }
+    setIsEnvironmnetModal(true);
+  };
 
   const onPressOther = () => {
-    setIsOtherModal(true)
-  }
+    setIsOtherModal(true);
+  };
 
   const onPressNotSure = () => {
-    setIsNotSureModal(true)
-    setIsMedicationModal(false)
-    setIsFoodModal(false)
-    setIsAnimalModal(false)
-    setIsEnvironmnetModal(false)
-    setIsOtherModal(false)
-  }
-
+    setIsNotSureModal(true);
+    setIsMedicationModal(false);
+    setIsFoodModal(false);
+    setIsAnimalModal(false);
+    setIsEnvironmnetModal(false);
+    setIsOtherModal(false);
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <TitleWithBackLayout title="Allergies">
-        <ScrollView style={{ flex: 1, marginBottom: 100 }}>
+        <ScrollView style={{flex: 1, marginBottom: 100}}>
           <Text style={styles.label}>Do you have any allergies?</Text>
           <RadioButton.Group
             onValueChange={newValue => setValue(newValue)}
             value={value}>
-
-            <View style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue  : null }]}>
-              <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
-              <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
+            <View
+              style={[
+                styles.radioContainer,
+                {
+                  backgroundColor:
+                    value == 'first' ? GlobalColors.navyblue : null,
+                },
+              ]}>
+              <RadioButton
+                color={value == 'first' ? GlobalColors.white : null}
+                value="first"
+              />
+              <Text
+                style={[
+                  styles.radioText,
+                  {color: value == 'first' ? '#ffffff' : '#000000'},
+                ]}>
+                No
+              </Text>
             </View>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
-              <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />
-              <Text style={[styles.radioText, { color: value == 'second' ? '#ffffff' : '#000000' }]}>Yes</Text>
+            <View
+              style={[
+                styles.radioContainer,
+                {
+                  backgroundColor:
+                    value == 'second' ? GlobalColors.navyblue : null,
+                },
+              ]}>
+              <RadioButton
+                color={value == 'second' ? GlobalColors.white : null}
+                value="second"
+              />
+              <Text
+                style={[
+                  styles.radioText,
+                  {color: value == 'second' ? '#ffffff' : '#000000'},
+                ]}>
+                Yes
+              </Text>
             </View>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue  : null }]}>
-              <RadioButton color={value == 'third' ? GlobalColors.white : null} value="third" />
-              <Text style={[styles.radioText, { color: value == 'third' ? '#ffffff' : '#000000' }]}>Not Sure</Text>
+            <View
+              style={[
+                styles.radioContainer,
+                {
+                  backgroundColor:
+                    value == 'third' ? GlobalColors.navyblue : null,
+                },
+              ]}>
+              <RadioButton
+                color={value == 'third' ? GlobalColors.white : null}
+                value="third"
+              />
+              <Text
+                style={[
+                  styles.radioText,
+                  {color: value == 'third' ? '#ffffff' : '#000000'},
+                ]}>
+                Not Sure
+              </Text>
             </View>
           </RadioButton.Group>
 
-          {value == 'second' ?
+          {value == 'second' ? (
             <>
               <Text style={styles.label}>What are you allergic to?</Text>
-              <MedicationModal isVisible={isMedicationModal} setIsVisible={setIsMedicationModal} />
-              <FoodModal isVisible={isFoodModal} setIsVisible={setIsFoodModal} />
+              <MedicationModal
+                isVisible={isMedicationModal}
+                setIsVisible={setIsMedicationModal}
+              />
+              <FoodModal
+                isVisible={isFoodModal}
+                setIsVisible={setIsFoodModal}
+              />
               <View style={styles.rowContainer}>
                 <ModalButtonComponent
                   title="Medication"
@@ -104,8 +154,14 @@ export default function AllergiesScreen() {
                 />
               </View>
 
-              <AnimalModal isVisible={isAnimalModal} setIsVisible={setIsAnimalModal} />
-              <EnvironmentModal isVisible={isEnvironmentModal} setIsVisible={setIsEnvironmnetModal} />
+              <AnimalModal
+                isVisible={isAnimalModal}
+                setIsVisible={setIsAnimalModal}
+              />
+              <EnvironmentModal
+                isVisible={isEnvironmentModal}
+                setIsVisible={setIsEnvironmnetModal}
+              />
               <View style={styles.rowContainer}>
                 <ModalButtonComponent
                   title="Animal"
@@ -121,7 +177,10 @@ export default function AllergiesScreen() {
                 />
               </View>
 
-              <OtherModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
+              <OtherModal
+                isVisible={isOtherModal}
+                setIsVisible={setIsOtherModal}
+              />
               <View style={styles.rowContainer}>
                 <ModalButtonComponent
                   title="Other"
@@ -133,16 +192,14 @@ export default function AllergiesScreen() {
                   title="Not Sure"
                   isModal={isNotSureModal}
                   setIsModal={onPressNotSure}
-                // drop={true}
+                  // drop={true}
                 />
               </View>
             </>
-            : null}
-
+          ) : null}
         </ScrollView>
-        <ButtonWithShadowContainer title='Save' />
+        <ButtonWithShadowContainer title="Save" />
       </TitleWithBackLayout>
     </SafeAreaView>
   );
 }
-

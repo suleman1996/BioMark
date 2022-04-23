@@ -1,9 +1,12 @@
-import { StyleSheet } from "react-native";
-import { heightToDp, widthToDp } from "../../../../../utils/functions/responsiveDimentions";
-import { responsiveFontSize } from "../../../../../utils/functions/responsiveText";
-import { GlobalFonts } from "../../../../../utils/theme/fonts";
-import { GlobalColors } from "../../../../../utils/theme/globalColors";
-import { GlobalStyles } from "../../../../../utils/theme/globalStyles";
+import {StyleSheet} from 'react-native';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../../../utils/functions/responsive-dimensions';
+import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
+import {GlobalFonts} from '../../../../../utils/theme/fonts';
+import {GlobalColors} from '../../../../../utils/theme/global-colors';
+import {GlobalStyles} from '../../../../../utils/theme/global-styles';
 
 export const styles = StyleSheet.create({
   container: {
@@ -22,6 +25,6 @@ export const styles = StyleSheet.create({
   bottomBtnContainer: {
     marginBottom: heightToDp(4),
     marginTop: heightToDp(2),
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
 });

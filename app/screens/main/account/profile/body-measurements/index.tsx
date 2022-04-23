@@ -5,14 +5,14 @@ import WeightChooserComponent from '../../../../../components/higher-order/weigh
 import {
   heightToDp,
   widthToDp,
-} from '../../../../../utils/functions/responsiveDimentions';
+} from '../../../../../utils/functions/responsive-dimensions';
 import Button from '../../../../../components/button/button';
-import {GlobalColors} from '../../../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../../../utils/theme/global-colors';
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
+import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
 import {GlobalFonts} from '../../../../../utils/theme/fonts';
-import {goBack} from '../../../../../services/navRef';
+import {goBack} from '../../../../../services/nav-ref';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);

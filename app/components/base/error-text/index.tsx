@@ -1,29 +1,29 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { GlobalFonts } from '../../../utils/theme/fonts'
-import { responsiveFontSize } from '../../../utils/functions/responsiveText'
-import colors from '../../../assets/colors/colors'
-import { heightToDp } from '../../../utils/functions/responsiveDimentions'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {GlobalFonts} from '../../../utils/theme/fonts';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import colors from '../../../assets/colors/colors';
+import {heightToDp} from '../../../utils/functions/responsive-dimensions';
 
 type Props = {
-          text: string | undefined
-}
+  text: string | undefined;
+};
 
 const ErrorText = (props: Props) => {
-   const {text} = props;
+  const {text} = props;
   return (
     <View style={styles.container}>
       <Text style={styles.errorMessage}>{text}</Text>
     </View>
   );
-}
+};
 
-export default ErrorText
+export default ErrorText;
 
 const styles = StyleSheet.create({
   container: {
-          width: '100%',
-          marginTop: heightToDp(1)
+    width: '100%',
+    marginTop: heightToDp(1),
   },
   errorMessage: {
     fontFamily: GlobalFonts.regular,

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LoginResponse } from '../../types/auth/LoginResponse';
-import {logNow} from '../../utils/functions/logBinder';
+import {LoginResponse} from '../../types/auth/LoginResponse';
+import {logNow} from '../../utils/functions/log-binder';
 
 async function getAuthAsyncStorage() {
   const userToken = await AsyncStorage.getItem('userToken');

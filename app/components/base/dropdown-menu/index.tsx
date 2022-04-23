@@ -4,10 +4,14 @@ import {Picker} from '@react-native-picker/picker';
 import {
   heightToDp,
   widthToDp,
-} from '../../../utils/functions/responsiveDimentions';
-import {GlobalColors} from '../../../utils/theme/globalColors';
+} from '../../../utils/functions/responsive-dimensions';
+import {GlobalColors} from '../../../utils/theme/global-colors';
 
-const DropdownMenuComponent = ({options, setSelectedDropdown,onValueChange}) => {
+const DropdownMenuComponent = ({
+  options,
+  setSelectedDropdown,
+  onValueChange,
+}) => {
   return (
     <View style={styles.container}>
       <Picker

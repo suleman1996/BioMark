@@ -18,14 +18,14 @@ import TitleWithBackLayout from '../../../../../components/layouts/back-with-tit
 import {
   heightToDp,
   widthToDp,
-} from '../../../../../utils/functions/responsiveDimentions';
+} from '../../../../../utils/functions/responsive-dimensions';
 import {Nav_Screens} from '../../../../../navigation/constants/index';
-import {navigate} from '../../../../../services/navRef';
-import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
+import {navigate} from '../../../../../services/nav-ref';
+import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
 import {GlobalFonts} from '../../../../../utils/theme/fonts';
-import {GlobalColors} from '../../../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../../../utils/theme/global-colors';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import EditProfileModal from '../../../../../components/edit-profile-menu/edit-profile-menu';
+import EditProfileModal from '../../../../../components/edit-profile-menu';
 
 let cameraIs = false;
 

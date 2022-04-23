@@ -9,14 +9,14 @@ import {
   Keyboard,
 } from 'react-native';
 import React, {useRef} from 'react';
-import SearchBarLeftIcon from '../../svg/searchBarLeftIcon';
-import {GlobalColors} from '../../../utils/theme/globalColors';
+import SearchBarLeftIcon from '../../svg/search-bar-left-icon';
+import {GlobalColors} from '../../../utils/theme/global-colors';
 import {
   heightToDp,
   widthToDp,
-} from '../../../utils/functions/responsiveDimentions';
+} from '../../../utils/functions/responsive-dimensions';
 import {GlobalFonts} from '../../../utils/theme/fonts';
-import {responsiveFontSize} from '../../../utils/functions/responsiveText';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Menu, MenuOptions, MenuTrigger} from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';

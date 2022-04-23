@@ -1,16 +1,19 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native'
-import React, { useState } from 'react'
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/globalColors';
-import { TextInput } from 'react-native-paper';
-import Entypo from 'react-native-vector-icons/Entypo'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import {StyleSheet, Text, View, Pressable} from 'react-native';
+import React, {useState} from 'react';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsive-dimensions';
+import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import {GlobalFonts} from '../../../utils/theme/fonts';
+import {GlobalColors} from '../../../utils/theme/global-colors';
+import {TextInput} from 'react-native-paper';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type Props = {
-  question: string
-}
+  question: string;
+};
 
 const TagsCloudInputComponent = ({question}: Props) => {
   const [tags, setTags] = useState([]);
@@ -58,7 +61,7 @@ const TagsCloudInputComponent = ({question}: Props) => {
   );
 };
 
-export default TagsCloudInputComponent
+export default TagsCloudInputComponent;
 
 const styles = StyleSheet.create({
   container: {},
@@ -68,8 +71,6 @@ const styles = StyleSheet.create({
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
     marginTop: heightToDp(2),
-
-    
   },
   inputContainer: {
     flexDirection: 'row',
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: widthToDp(2),
     marginTop: heightToDp(2),
     marginRight: widthToDp(2),
-    backgroundColor: GlobalColors.primaryGray
+    backgroundColor: GlobalColors.primaryGray,
   },
   addBtn: {
     width: widthToDp(20),
@@ -110,11 +111,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: widthToDp(3),
-    marginTop: heightToDp(1.5)
+    marginTop: heightToDp(1.5),
   },
   tagText: {
     marginRight: widthToDp(2),
-    fontFamily:  GlobalFonts.regular,
+    fontFamily: GlobalFonts.regular,
     fontSize: responsiveFontSize(15),
-  }
+  },
 });
