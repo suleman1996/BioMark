@@ -5,7 +5,7 @@ import ModalWithBottomBtn from '../../../../../../../../components/higher-order/
 import RadioButtonQuestionComponent from '../../../../../../../../components/higher-order/radio-question';
 import { heightToDp } from '../../../../../../../../utils/functions/responsiveDimentions';
 import { GlobalStyles } from '../../../../../../../../utils/theme/globalStyles';
-import Textinput from '../../../../../../../../components/Textinput-button/textinput_button';
+import Textinput from '../../../../../../../../components/Text-input-button';
 
 const options =[
   {title: 'Blood'},

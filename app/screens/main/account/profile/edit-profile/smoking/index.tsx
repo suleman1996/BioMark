@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { Provider, Appbar, RadioButton } from 'react-native-paper';
 import colors from '../../../../../../assets/colors/colors';
@@ -31,10 +31,10 @@ export default function SmokingScreen() {
             onValueChange={newValue => setValue(newValue)}
             value={value}>
 
-            <View style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
+            <TouchableOpacity onPress={()=>alert('fjkkhfjh')} style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue : null }]}>
               <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
               <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
-            </View>
+            </TouchableOpacity>
 
             <View style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
               <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />

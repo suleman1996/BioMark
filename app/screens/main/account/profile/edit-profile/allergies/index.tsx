@@ -9,7 +9,7 @@ import DropdownMenuComponent from '../../../../../../components/base/dropdown-me
 import { GlobalColors } from '../../../../../../utils/theme/globalColors';
 import TextInput from '../../../../../../components/input-field/text-input';
 import { Picker } from '@react-native-picker/picker';
-import Textinput from '../../../../../../components/Textinput-button/textinput_button';
+import Textinput from '../../../../../../components/Text-input-button';
 import { styles } from './styles';
 import MedicationModal from './modals/medication';
 import FoodModal from './modals/food'
