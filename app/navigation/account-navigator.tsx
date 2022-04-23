@@ -100,18 +100,26 @@ export const AccountNavigator = () => (
         name={Nav_Screens.Smoking}
         component={SmokingScreen}
       />
-        <Stack.Screen
+      <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={Nav_Screens.Vaccination}
-        component={VaccinationScreen}/>
+        component={VaccinationScreen}
+      />
       <Stack.Screen
         options={{
           headerShown: false,
         }}
         name={Nav_Screens.Sleep}
         component={SleepScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Drinking}
+        component={DrinkingScreen}
       />
       <Stack.Screen
         options={{
