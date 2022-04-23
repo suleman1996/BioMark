@@ -70,7 +70,7 @@ export const reduxLogin =
         );
         let uniqueId = DeviceInfo.getUniqueId();
         console.log("uniqueId",uniqueId);
-        await  dispatch(reduxDeviceRegister(uniqueId, Platform.OS)); 
+        await dispatch(reduxDeviceRegister(uniqueId, Platform.OS)); 
         
         // await navigate('DashboardScreen');
       })
