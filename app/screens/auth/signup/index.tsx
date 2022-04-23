@@ -126,13 +126,8 @@ export default function Signup() {
 
     lName: Yup.string().required('Please provide your last name'),
 
-    IcPnum: Yup.string()
-      .required('Please type your IC Number')
-      .min(9, 'Invalid.'),
-
-    email: Yup.string()
-      .email('invalid Email.')
-      .required('Please type your e-mail'),
+    IcPnum: Yup.string(),
+    email: Yup.string(),
 
     password: Yup.string().required('Please type your new password').min(8),
   });
@@ -164,7 +159,7 @@ export default function Signup() {
           }}
           onSubmit={handleSignup}
           validationSchema={ResetPassSchema}>
-          {({handleChange, handleSubmit, values, errors}) => (
+          {({handleChange, handleSubmit, values, errors, isValid}) => (
             <>
               <View style={styles.biContainer}>
                 <Text style={styles.heading}>Basic Information</Text>
@@ -216,9 +211,6 @@ export default function Signup() {
                   onChange={handleChange('IcPnum')}
                   margin={20}
                 />
-                {errors.IcPnum && (
-                  <Text style={styles.errorMessage}>{errors.IcPnum}</Text>
-                )}
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
 
@@ -248,15 +240,13 @@ export default function Signup() {
                     margin={20}
                     Keyboardtype="email-address"
                   />
-                  {errors.email && (
-                    <Text style={styles.errorMessage}>{errors.email}</Text>
-                  )}
+                
 
                   <Text style={styles.inputLablel}>Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."
                     secureTextEntry={hidePassword}
-                    eye={!hidePassword ? 'eye-off' : 'eye'}
+                    eye={!hidePassword ? 'eye' : 'eye-off'}
                     onEyePress={() => setHidePassword(!hidePassword)}
                     onChange={handleChange('password')}
                     margin={20}
@@ -267,7 +257,7 @@ export default function Signup() {
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
-                  <TouchableOpacity>
+                  {/* <TouchableOpacity> */}
                     <Text style={styles.tcTextStyle}>
                       <Text>I accept the </Text>
                       <Text
@@ -288,12 +278,12 @@ export default function Signup() {
                         privacy policy.
                       </Text>
                     </Text>
-                  </TouchableOpacity>
+                  {/* </TouchableOpacity> */}
                 </View>
                 <TouchableOpacity>
                   <Button
-                    disabled={false}
                     title="Continue"
+                    disabled={!isValid}
                     onPress={() => handleSubmit()}
                   />
                 </TouchableOpacity>

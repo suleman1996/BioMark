@@ -32,7 +32,7 @@ const HighBloodPressureModal = ({isVisible, setIsVisible}: Props) => {
         setIsTrue={setAns2}
         question="Are you taking any medications for this?"
       />
-      <TagsCloudInputComponent question="Please list  medications?" />
+     
     </ModalWithBottomBtn>
   );
 };
