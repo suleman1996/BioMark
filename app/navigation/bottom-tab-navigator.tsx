@@ -57,7 +57,7 @@ const BottomTabNavigator = () => {
         headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarLabelStyle: {fontSize: 11, fontFamily: fonts.regular},
-        tabBarStyle: {backgroundColor: colors.whiteColor},
+        tabBarStyle: {backgroundColor: colors.whiteColor, borderTopColor:'rgba(0, 0, 0, 0)'},
         tabBarActiveTintColor: colors.blue,
         tabBarInactiveTintColor: colors.inactive,
       }}>
