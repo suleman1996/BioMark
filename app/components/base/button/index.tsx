@@ -13,9 +13,12 @@ type Props = {
   title: string;
 };
 
-const ButtonComponent = ({onPress, title,disabled}: Props) => {
+const ButtonComponent = ({onPress, title, disabled}: Props) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container} disabled={disabled}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.container}
+      disabled={disabled}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
@@ -25,6 +28,7 @@ export default ButtonComponent;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: GlobalColors.primary,
     height: heightToDp(6),
     alignItems: 'center',
     justifyContent: 'center',
@@ -32,6 +36,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
+    color: GlobalColors.white,
     fontFamily: GlobalFonts.medium,
     fontSize: responsiveFontSize(18),
   },
