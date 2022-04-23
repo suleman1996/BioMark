@@ -10,15 +10,17 @@ import {GlobalStyles} from '../../../utils/theme/globalStyles';
 
 type Props = {
   onPress: any;
+  disabled: boolean;
   title?: string;
 };
 
-const ButtonWithShadowContainer = ({title, onPress}: Props) => {
+const ButtonWithShadowContainer = ({title, onPress, disabled}: Props) => {
   return (
     <View style={styles.container}>
       <ButtonComponent
         onPress={onPress}
-        title={title ? title : ''}
+        title={title ? title : 'Save'}
+        disabled={disabled}
       />
     </View>
   );

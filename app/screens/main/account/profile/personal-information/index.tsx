@@ -1,14 +1,19 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React, { useState } from 'react'
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import React, {useState} from 'react';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
 import Button from '../../../../../components/button/button';
 import InputWithLabel from '../../../../../components/base/inputWithLabel/index';
-import { GlobalColors } from '../../../../../utils/theme/globalColors';
-import { heightToDp, widthToDp } from '../../../../../utils/functions/responsiveDimentions';
+import {GlobalColors} from '../../../../../utils/theme/globalColors';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../../../utils/functions/responsiveDimentions';
 import DatePicker from '../../../../../components/date-picker/date-picker';
-import { responsiveFontSize } from '../../../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
+import {responsiveFontSize} from '../../../../../utils/functions/responsiveText';
+import {GlobalFonts} from '../../../../../utils/theme/fonts';
+import {goBack} from '../../../../../services/navRef';
+import {Provider, Appbar, RadioButton} from 'react-native-paper';
+
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 const PersonalInformationScreen = () => {
   const [value, setValue] = useState('first');
@@ -17,8 +22,14 @@ const PersonalInformationScreen = () => {
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>
-        <InputWithLabel label="First Name" onChange={(text) => setFirstName(text)} />
-        <InputWithLabel label="Last Name" onChange={(text) => setLastName(text)} />
+        <InputWithLabel
+          label="First Name"
+          onChange={text => setFirstName(text)}
+        />
+        <InputWithLabel
+          label="Last Name"
+          onChange={text => setLastName(text)}
+        />
         <Text style={styles.label}>Date of Birth</Text>
         <DatePicker width={'100%'} />
         <Text style={styles.label}>Gender</Text>
@@ -36,14 +47,19 @@ const PersonalInformationScreen = () => {
         </RadioButton.Group>
       </ScrollView>
       <Button
-        disabled={firstName.length > 0 && lastName.length > 0 && value ? false : true}
+        disabled={
+          firstName.length > 0 && lastName.length > 0 && value ? false : true
+        }
         title="Save & Continue"
+        onPress={() => {
+          goBack();
+        }}
       />
     </TitleWithBackLayout>
   );
-}
+};
 
-export default PersonalInformationScreen
+export default PersonalInformationScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -63,6 +79,6 @@ const styles = StyleSheet.create({
   },
   radioText: {
     fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.light
+    fontFamily: GlobalFonts.light,
   },
 });
