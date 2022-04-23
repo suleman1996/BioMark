@@ -59,6 +59,7 @@
     "react-native-screens": "^3.13.1",
     "react-native-step-indicator": "^1.0.3",
     "react-native-svg": "^12.3.0",
+    "react-native-tags-input": "^1.0.10",
     "react-native-ui-xg": "^0.0.6",
     "react-native-vector-icons": "^9.1.0",
     "react-redux": "^7.2.8",

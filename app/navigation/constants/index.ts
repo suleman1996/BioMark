@@ -21,8 +21,10 @@ export const Nav_Screens = {
   // edit profile
   Edit_Profile: 'EditProfile',
   Smoking: 'Smoking',
+  Vaccination : 'Vaccination',
   Sleep: 'Sleep',
   Drinking: 'Drinking',
+  Allergies: 'Allergies',
   Exercise: 'Exercise',
 
   // Bottom Nav_Screens
