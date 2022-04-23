@@ -5,7 +5,7 @@ import FlashMessage from 'react-native-flash-message';
 import {MenuProvider} from 'react-native-popup-menu';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Provider, useDispatch, useSelector} from 'react-redux';
-import colors from './app/assets/colors/colors';
+import colors from './app/assets/colors';
 import AppNavigator from './app/navigation/app-navigator';
 import AuthNavigator from './app/navigation/autth-navigator';
 import {getAuthAsyncStorage} from './app/services/async-storage/auth-async-storage';

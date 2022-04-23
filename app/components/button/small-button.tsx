@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import { Button } from 'react-native-paper';
-import colors from '../../assets/colors/colors';
+import {Button} from 'react-native-paper';
+import colors from '../../assets/colors';
 
 type Props = {
-    disabled?: boolean,
-    onPress: any,
-    title: string
-}
+  disabled?: boolean;
+  onPress: any;
+  title: string;
+};
 
 export default function button(props: Props) {
   return (
@@ -31,8 +31,7 @@ export default function button(props: Props) {
 }
 
 const styles = StyleSheet.create({
-
-    btn: {
-        borderRadius: 8,
-    },
+  btn: {
+    borderRadius: 8,
+  },
 });

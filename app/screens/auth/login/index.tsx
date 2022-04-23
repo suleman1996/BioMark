@@ -12,8 +12,8 @@ import {
 import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
 import {showMessage} from 'react-native-flash-message';
 import {useDispatch, useSelector} from 'react-redux';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
+import colors from '../../../assets/colors';
+import fonts from '../../../assets/fonts';
 import Apple from '../../../assets/svgs/apple';
 import Facebook from '../../../assets/svgs/facebook';
 import Google from '../../../assets/svgs/google';

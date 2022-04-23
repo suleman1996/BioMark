@@ -3,12 +3,12 @@ import {TouchableRipple} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import ArrowBack from '../../assets/svgs/arrow-back';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
+import colors from '../../assets/colors';
+import fonts from '../../assets/fonts';
 
 type Props = {
-  title: string
-}
+  title: string;
+};
 
 export default function header(props: Props) {
   const navigations = useNavigation();

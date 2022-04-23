@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Button} from 'react-native-paper';
-import colors from '../../assets/colors/colors';
+import colors from '../../assets/colors';
 
 type Props = {
   marginHorizontal?: number;
@@ -16,11 +16,11 @@ export default function button(props: Props) {
   const vertical = props.marginVertical ? props.marginVertical : 20;
   return (
     <View
-    style={[
-      styles.btnContainer,
-          {marginHorizontal: horizontal, marginVertical: vertical},
-        ]}>
-          <TouchableOpacity>
+      style={[
+        styles.btnContainer,
+        {marginHorizontal: horizontal, marginVertical: vertical},
+      ]}>
+      <TouchableOpacity>
         <Button
           mode="contained"
           uppercase={false}
@@ -34,8 +34,8 @@ export default function button(props: Props) {
           onPress={props.onPress}>
           {props.title}
         </Button>
-    </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
+    </View>
   );
 }
 

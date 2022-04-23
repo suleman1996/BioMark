@@ -2,8 +2,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
+import colors from '../../assets/colors';
+import fonts from '../../assets/fonts';
 import Button from '../button/button';
 import {responsiveFontSize} from '../../utils/functions/responsive-text';
 import {GlobalColors} from '../../utils/theme/global-colors';

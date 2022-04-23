@@ -1,11 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Button} from 'react-native-paper';
-import colors from '../../assets/colors/colors';
+import colors from '../../assets/colors';
 
 type Props = {
-  title: string
-}
+  title: string;
+};
 
 export default function Choicebtn(props: Props) {
   return (

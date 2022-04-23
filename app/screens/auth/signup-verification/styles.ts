@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
+import colors from '../../../assets/colors';
+import fonts from '../../../assets/fonts';
 
 const styles = StyleSheet.create({
   signupNav: {

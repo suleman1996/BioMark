@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import fonts from '../../../assets/fonts/fonts';
-import MyImage from '../../../assets/images/images';
+import fonts from '../../../assets/fonts';
+import MyImage from '../../../assets/images';
 import Covid19Btn from '../../../components/button/covid19';
 import GoogleFit from '../../../components/button/google-fit';
 import SmallBtn from '../../../components/button/small-button';

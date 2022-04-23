@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Images from '../../../../assets/images/images';
+import Images from '../../../../assets/images';
 import TitleWithSearchBarLayout from '../../../../components/layouts/title-with-search-bar/index';
 import AccountMenu from '../../../../components/ui/account-menu';
 import {Nav_Screens} from '../../../../navigation/constants';

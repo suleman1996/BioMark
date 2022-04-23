@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
-import colors from '../../../../../../assets/colors/colors';
+import colors from '../../../../../../assets/colors';
 import {responsiveFontSize} from '../../../../../../utils/functions/responsive-text';
 import {GlobalFonts} from '../../../../../../utils/theme/fonts';
 import {
   heightToDp,
   widthToDp,
 } from '../../../../../../utils/functions/responsive-dimensions';
-import fonts from '../../../../../../assets/fonts/fonts';
+import fonts from '../../../../../../assets/fonts';
 import {GlobalColors} from '../../../../../../utils/theme/global-colors';
 
 export const styles = StyleSheet.create({

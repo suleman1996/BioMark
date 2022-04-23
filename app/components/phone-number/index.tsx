@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { TextInput, View } from 'react-native';
-import CountryPicker, { DEFAULT_THEME } from 'react-native-country-picker-modal';
-import colors from '../../assets/colors/colors';
+import React, {useState} from 'react';
+import {TextInput, View} from 'react-native';
+import CountryPicker, {DEFAULT_THEME} from 'react-native-country-picker-modal';
+import colors from '../../assets/colors';
 import styles from './styles';
 
 type Props = {
@@ -62,7 +62,6 @@ export default function phoneNumber(props: Props) {
             width: width ? width : '80%',
           },
         ]}
-        
         value={props.phoneNumber}
         keyboardType={'number-pad'}
         onChangeText={value => props.setPhoneNumber(value)}

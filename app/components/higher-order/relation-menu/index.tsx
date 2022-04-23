@@ -6,7 +6,7 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import colors from '../../../assets/colors/colors';
+import colors from '../../../assets/colors';
 import {
   heightToDp,
   widthToDp,

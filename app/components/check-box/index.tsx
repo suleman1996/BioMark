@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {Checkbox} from 'react-native-paper';
-import colors from '../../assets/colors/colors';
+import colors from '../../assets/colors';
 
 type Props = {
   checked: boolean;
-  setChecked: any
+  setChecked: any;
 };
 
 const CheckBox = (props: Props) => {

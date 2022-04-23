@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import { Button } from 'react-native-paper';
-import colors from '../../assets/colors/colors';
+import {Button} from 'react-native-paper';
+import colors from '../../assets/colors';
 
 type Props = {
-    disabled?: boolean;
-    onPress: any
-    title: string
-}
+  disabled?: boolean;
+  onPress: any;
+  title: string;
+};
 
 export default function button(props: Props) {
   return (
@@ -29,13 +29,11 @@ export default function button(props: Props) {
 }
 
 const styles = StyleSheet.create({
-    btnContainer: {
-        // zIndex: 999,
-        // position: 'absolute',
-
-    },
-    btn: {
-
-        borderRadius: 8,
-    },
+  btnContainer: {
+    // zIndex: 999,
+    // position: 'absolute',
+  },
+  btn: {
+    borderRadius: 8,
+  },
 });

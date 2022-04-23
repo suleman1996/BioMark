@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {showMessage} from 'react-native-flash-message';
-import colors from '../../../assets/colors/colors';
+import colors from '../../../assets/colors';
 import Button from '../../../components/button/button';
 import Header from '../../../components/header';
 import ActivityIndicator from '../../../components/loader/activity-indicator';

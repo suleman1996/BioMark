@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
+import colors from '../../assets/colors';
+import fonts from '../../assets/fonts';
 import Button from '../button/button';
 
 type Props = {

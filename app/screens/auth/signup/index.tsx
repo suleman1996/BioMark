@@ -12,7 +12,7 @@ import {
 import {showMessage} from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
-import colors from '../../../assets/colors/colors';
+import colors from '../../../assets/colors';
 import BackIcon from '../../../assets/svgs/back';
 import Button from '../../../components/button/button';
 import CheckBox from '../../../components/check-box';

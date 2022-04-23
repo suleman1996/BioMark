@@ -1,19 +1,17 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
-import colors from '../assets/colors/colors';
-import fonts from '../assets/fonts/fonts';
+import colors from '../assets/colors';
+import fonts from '../assets/fonts';
 import AccountIcon from '../assets/svgs/account';
 import AppointmentIcon from '../assets/svgs/appoinment';
 import HomeIcon from '../assets/svgs/home';
 import InboxIcon from '../assets/svgs/inbox';
 import Inbox from '../screens/main/Inbox/index';
 import Home from '../screens/main/home-page';
-import { AccountNavigator } from './account-navigator';
+import {AccountNavigator} from './account-navigator';
 import AppointmentScreen from '../screens/main/appointment';
 import AccountScreen from '../screens/main/account/account-screen';
-
-
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,8 +46,6 @@ const AppointmentStack = () => (
   </Stack.Navigator>
 );
 
-
-
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
@@ -57,7 +53,10 @@ const BottomTabNavigator = () => {
         headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarLabelStyle: {fontSize: 11, fontFamily: fonts.regular},
-        tabBarStyle: {backgroundColor: colors.whiteColor, borderTopColor:'rgba(0, 0, 0, 0)'},
+        tabBarStyle: {
+          backgroundColor: colors.whiteColor,
+          borderTopColor: 'rgba(0, 0, 0, 0)',
+        },
         tabBarActiveTintColor: colors.blue,
         tabBarInactiveTintColor: colors.inactive,
       }}>

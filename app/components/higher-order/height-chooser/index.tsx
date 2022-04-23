@@ -12,7 +12,7 @@ import {
 } from '../../../utils/functions/responsive-dimensions';
 import {responsiveFontSize} from '../../../utils/functions/responsive-text';
 import InputField from '../../input-field/input-field';
-import colors from '../../../assets/colors/colors';
+import colors from '../../../assets/colors';
 
 type Props = {
   label: string;

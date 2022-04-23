@@ -7,8 +7,8 @@ import {Picker} from '@react-native-picker/picker';
 import {navigate} from '../../../../../../services/nav-ref';
 import {Nav_Screens} from '../../../../../../navigation/constants';
 import {GlobalColors} from '../../../../../../utils/theme/global-colors';
-import colors from '../../../../../../assets/colors/colors';
-import fonts from '../../../../../../assets/fonts/fonts';
+import colors from '../../../../../../assets/colors';
+import fonts from '../../../../../../assets/fonts';
 
 type Props = {};
 

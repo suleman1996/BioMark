@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
+import colors from '../../assets/colors';
+import fonts from '../../assets/fonts';
 
 type Props = {
   margin?: any;
@@ -18,7 +18,7 @@ type Props = {
   onChange: any;
   onBlur?: any;
   onEyePress?: any;
-  eye?: any
+  eye?: any;
 };
 
 export default function inputField(props: Props) {

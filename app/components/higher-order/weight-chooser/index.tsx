@@ -11,7 +11,7 @@ import {
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
 import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import colors from '../../../assets/colors/colors';
+import colors from '../../../assets/colors';
 
 type Props = {
   label: string;

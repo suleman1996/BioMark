@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {BarIndicator} from 'react-native-indicators';
-import colors from '../../assets/colors/colors';
+import colors from '../../assets/colors';
 import {
   heightToDp,
   widthToDp,

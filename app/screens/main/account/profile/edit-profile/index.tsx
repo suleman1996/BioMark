@@ -12,7 +12,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Images from '../../../../../assets/images/images';
+import Images from '../../../../../assets/images';
 import Cigar from '../../../../../assets/svgs/cigar';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
 import {

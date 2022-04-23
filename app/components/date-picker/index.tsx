@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {TouchableOpacity, StyleSheet, Text, View, Platform} from 'react-native';
 // import DatePicker from 'react-native-datepicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
+import colors from '../../assets/colors';
+import fonts from '../../assets/fonts';
 import {} from 'react-native-gesture-handler';
 import moment from 'moment';
 
