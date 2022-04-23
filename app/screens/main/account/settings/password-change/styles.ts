@@ -20,8 +20,8 @@ export const styles = StyleSheet.create({
     fontSize: responsiveFontSize(21),
   },
   bottomBtnContainer: {
-    flex: 1,
-    marginBottom: heightToDp(10),
-    marginTop: heightToDp(2)
+    marginBottom: heightToDp(4),
+    marginTop: heightToDp(2),
+    justifyContent: 'flex-end'
   },
 });
