@@ -1,13 +1,13 @@
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import {userService} from '../../services/user-service/user-service';
-import {DeviceRegister} from '../../types/auth/DeviceRegisterResponse';
+import { userService } from '../../services/user-service/user-service';
+import { DeviceRegister } from '../../types/auth/DeviceRegisterResponse';
 import {
   LoginErrorResponse,
   LoginResponse,
 } from '../../types/auth/LoginResponse';
-import {UserContacts} from '../../types/UserContacts';
-import {logNow} from '../../utils/functions/log-binder';
+import { UserContacts } from '../../types/UserContacts';
+import { logNow } from '../../utils/functions/log-binder';
 import {
   AUTH_ERR_LOG_IN,
   AUTH_ERR_LOG_OUT,
@@ -51,7 +51,7 @@ export const addUserContactsDetails = (data: UserContacts) => ({
 
 export const reduxLogin =
   (username: string, password: string) =>
-  (dispatch: (arg0: {type: string; payload: any}) => void) => {
+  (dispatch: (arg0: { type: string; payload: any }) => void) => {
     dispatch(loggingIn(true));
     userService
       .login(username, password)
@@ -69,7 +69,7 @@ export const reduxLogin =
             isFirstLogin,
             hasProfile,
             expiresIin,
-          }),
+          })
         );
         let uniqueId = DeviceInfo.getUniqueId();
         console.log('uniqueId', uniqueId);
@@ -88,7 +88,7 @@ export const reduxLogin =
 
 export const reduxDeviceRegister =
   (device_token: string, device_type: string) =>
-  (dispatch: (arg0: {type: string; payload: any}) => void) => {
+  (dispatch: (arg0: { type: string; payload: any }) => void) => {
     userService
       .deviceRegisteration(device_token, device_type)
       .then(async (res: DeviceRegister) => {
@@ -98,7 +98,7 @@ export const reduxDeviceRegister =
         await dispatch(
           deviceReg({
             message,
-          }),
+          })
         );
         // await navigate('DashboardScreen');
       })
@@ -126,14 +126,14 @@ export const errorLogOut = (errorMessage: any) => ({
 });
 
 export const logout =
-  () => async (dispatch: (arg0: {type: string; payload?: any}) => void) => {
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     dispatch(loggingOut(true));
     await userService
       .logout()
-      .then(res => {
+      .then((res) => {
         dispatch(loggedOut());
       })
-      .catch(err => {
+      .catch((err) => {
         // After developer alow below function on line 66
         // dispatch(errorLogOut('Error logging out.'));
         dispatch(loggedOut());

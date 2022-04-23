@@ -1,5 +1,5 @@
-import {ErrorResponse} from '../../types/ErrorResponse';
-import {UserContacts} from '../../types/UserContacts';
+import { ErrorResponse } from '../../types/ErrorResponse';
+import { UserContacts } from '../../types/UserContacts';
 import {
   ForgotPasswordErrorResponse,
   ForgotPasswordSuccessResponse,
@@ -12,15 +12,15 @@ import {
   RegisterUserErrorResponse,
   RegisterUserSuccessResponse,
 } from '../../types/auth/RegisterUser';
-import {DeviceRegister} from '../../types/auth/DeviceRegisterResponse';
-import {logNow} from '../../utils/functions/log-binder';
+import { DeviceRegister } from '../../types/auth/DeviceRegisterResponse';
+import { logNow } from '../../utils/functions/log-binder';
 import {
   resetAuthAsyncStorage,
   setAuthAsyncStorage,
   setAuthUserAsyncStorage,
 } from '../async-storage/auth-async-storage';
 import client from '../client';
-import {API_URLS} from '../url-constants';
+import { API_URLS } from '../url-constants';
 import DeviceInfo from 'react-native-device-info';
 
 function login(username: string, password: string) {
@@ -32,7 +32,7 @@ function login(username: string, password: string) {
           password,
         },
       })
-      .then(async response => {
+      .then(async (response) => {
         try {
           //  logNow('userService login',response.data)
           await setAuthAsyncStorage(response.data);
@@ -57,7 +57,7 @@ function deviceRegisteration(device_token: string, device_type: string) {
           device_type,
         },
       })
-      .then(async response => {
+      .then(async (response) => {
         try {
           resolve(response.data);
           logNow('userService reg', response);
@@ -81,7 +81,7 @@ function forgotPassword(username: string) {
           username,
         },
       })
-      .then(async response => {
+      .then(async (response) => {
         try {
           logNow('Forgot password success response', response.data);
           resolve(response.data);
@@ -108,7 +108,7 @@ function registerUser(username: string, password: string) {
           terms: true,
         },
       })
-      .then(async response => {
+      .then(async (response) => {
         try {
           logNow('Register user success response', response.data);
           resolve(response.data);
@@ -128,7 +128,7 @@ function getUserContacts() {
   return new Promise<UserContacts>((resolve, reject) => {
     client
       .get(API_URLS.GET_USER_CONTACTS)
-      .then(async response => {
+      .then(async (response) => {
         try {
           logNow('Register user success response', response.data);
           resolve(response.data);
@@ -155,7 +155,7 @@ async function logout() {
         device_token: uniqueId,
       },
     })
-    .then(async response => {
+    .then(async (response) => {
       try {
         logNow('response', response.data);
       } catch (e) {

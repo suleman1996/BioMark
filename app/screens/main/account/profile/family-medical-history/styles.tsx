@@ -1,11 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   heightToDp,
   widthToDp,
 } from '../../../../../utils/functions/responsive-dimensions';
-import {GlobalFonts} from '../../../../../utils/theme/fonts';
-import {GlobalColors} from '../../../../../utils/theme/global-colors';
-import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import { GlobalColors } from '../../../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
 const styles = StyleSheet.create({
   bottomView: {
     borderWidth: 2,

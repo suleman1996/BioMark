@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Checkbox} from 'react-native-paper';
+import { Checkbox } from 'react-native-paper';
 import colors from '../../assets/colors';
 
 type Props = {

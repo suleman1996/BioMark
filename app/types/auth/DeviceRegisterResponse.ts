@@ -1,4 +1,3 @@
 export type DeviceRegister = {
-    message: string;
+  message: string;
 };
-

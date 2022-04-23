@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import Covid19 from '../../assets/svgs/covid-19';
 import fonts from '../../assets/fonts';
-import {Button} from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import colors from '../../assets/colors';
 // import styles from 'react-native-indicators/src/components/ball-indicator/styles';
 
@@ -11,9 +11,9 @@ type Props = {
   onPress: any;
 };
 
-export default function Covid19Btn({text, onPress}: Props) {
+export default function Covid19Btn({ text, onPress }: Props) {
   return (
-    <View style={{flexDirection: 'column', alignItems: 'center'}}>
+    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity>
         <View style={styles.circleBtn}>
           <Covid19 />
@@ -21,7 +21,12 @@ export default function Covid19Btn({text, onPress}: Props) {
       </TouchableOpacity>
       <View>
         <Text
-          style={{fontFamily: fonts.bold, fontSize: 15, color: colors.heading}}>
+          style={{
+            fontFamily: fonts.bold,
+            fontSize: 15,
+            color: colors.heading,
+          }}
+        >
           COVID-19
         </Text>
       </View>

@@ -1,14 +1,14 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React from 'react';
 import DependantsList from '../../../../../components/ui/dependants-list';
 import {
   heightToDp,
   widthToDp,
 } from '../../../../../utils/functions/responsive-dimensions';
-import {GlobalColors} from '../../../../../utils/theme/global-colors';
-import {GlobalStyles} from '../../../../../utils/theme/global-styles';
-import {GlobalFonts} from '../../../../../utils/theme/fonts';
-import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
+import { GlobalColors } from '../../../../../utils/theme/global-colors';
+import { GlobalStyles } from '../../../../../utils/theme/global-styles';
+import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
 import InputWithLabel from '../../../../../components/base/input-with-label';
 import DocumentTypeChooser from '../../../../../components/ui/document-type-chooser/index';
 import PhoneNumberWithLabel from '../../../../../components/base/phone-with-label/index';
@@ -23,7 +23,8 @@ const EditDependantScreen = () => {
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingBottom: heightToDp(20)}}>
+          contentContainerStyle={{ paddingBottom: heightToDp(20) }}
+        >
           <Text style={styles.headerText}>Enter your Dependant Details</Text>
           <InputWithLabel label="First Name" placeholder={''} />
           <InputWithLabel label="Last Name" placeholder={''} />

@@ -5,17 +5,17 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles';
 import Header from '../../../components/header';
 import Button from '../../../components/button/button';
 import InputField from '../../../components/input-field/input-field';
 import TextInput from '../../../components/input-field/text-input';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {changePassword} from '../../../services/auth-service';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { changePassword } from '../../../services/auth-service';
+import { showMessage, hideMessage } from 'react-native-flash-message';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 
 export default function CreatePassword() {
@@ -27,7 +27,7 @@ export default function CreatePassword() {
   const [hideConfirmPassword, setConfirmHidePassword] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const ResetPassword = async ({password}) => {
+  const ResetPassword = async ({ password }) => {
     try {
       setLoading(true);
       Keyboard.dismiss();
@@ -84,8 +84,9 @@ export default function CreatePassword() {
                 confirmPassword: '',
               }}
               onSubmit={ResetPassword}
-              validationSchema={ResetPassSchema}>
-              {({handleChange, handleSubmit, values, errors}) => (
+              validationSchema={ResetPassSchema}
+            >
+              {({ handleChange, handleSubmit, values, errors }) => (
                 <>
                   <Text style={styles.title}>
                     Please enter your new password.
@@ -105,7 +106,7 @@ export default function CreatePassword() {
                     <Text style={styles.errorMessage}>{errors.password}</Text>
                   )}
 
-                  <View style={{marginTop: 10}}>
+                  <View style={{ marginTop: 10 }}>
                     <TextInput
                       placeholder="Retype your new password..."
                       secureTextEntry={hideConfirmPassword}

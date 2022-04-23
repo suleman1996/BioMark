@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {BarIndicator} from 'react-native-indicators';
+import { StyleSheet, View } from 'react-native';
+import { BarIndicator } from 'react-native-indicators';
 import colors from '../../assets/colors';
 
-export default function ActivityIndicator({visible = false}) {
+export default function ActivityIndicator({ visible = false }) {
   if (!visible) return null;
   return (
     <View style={styles.overLay}>

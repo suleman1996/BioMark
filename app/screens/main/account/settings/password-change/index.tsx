@@ -1,20 +1,20 @@
-import {View, Text, ScrollView} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { View, Text, ScrollView } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import TitleWithBackWhiteBgLayout from '../../../../../components/layouts/back-with-title-white-bg';
-import {settingsService} from '../../../../../services/account-service/settings-service';
-import {logNow} from '../../../../../utils/functions/log-binder';
-import {styles} from './styles';
+import { settingsService } from '../../../../../services/account-service/settings-service';
+import { logNow } from '../../../../../utils/functions/log-binder';
+import { styles } from './styles';
 import PasswordInputWithLabel from '../../../../../components/base/password-input-with-label';
-import {heightToDp} from '../../../../../utils/functions/responsive-dimensions';
+import { heightToDp } from '../../../../../utils/functions/responsive-dimensions';
 import ButtonComponent from '../../../../../components/base/button';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import ErrorText from '../../../../../components/base/error-text';
-import {ErrorResponse} from '../../../../../types/ErrorResponse';
-import {showMessage} from 'react-native-flash-message';
+import { ErrorResponse } from '../../../../../types/ErrorResponse';
+import { showMessage } from 'react-native-flash-message';
 import ActivityIndicator from '../../../../../components/loader/activity-indicator';
-import {goBack} from '../../../../../services/nav-ref';
+import { goBack } from '../../../../../services/nav-ref';
 
 type Props = {};
 
@@ -25,12 +25,12 @@ const PasswordChangeScreen = (props: Props) => {
   const [eConfirm, setEConfirm] = useState(false);
   const formikRef = useRef<any>();
 
-  const resetPassword = async ({password}: any) => {
+  const resetPassword = async ({ password }: any) => {
     logNow('password', password);
   };
 
   const submitForm = () => {
-    const {password, confirmPassword, currentPassword} =
+    const { password, confirmPassword, currentPassword } =
       formikRef.current.values;
     setIsLoading(true);
     formikRef.current.submitForm();
@@ -38,7 +38,7 @@ const PasswordChangeScreen = (props: Props) => {
     logNow(formikRef.current.errors);
     settingsService
       .changePassword(currentPassword, confirmPassword)
-      .then(res => {
+      .then((res) => {
         logNow('res', res);
         showMessage({
           message: 'Password changed successfully',
@@ -70,7 +70,7 @@ const PasswordChangeScreen = (props: Props) => {
   });
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isLoading} />
       <TitleWithBackWhiteBgLayout title="Update Password">
         <View style={styles.container}>
@@ -85,10 +85,11 @@ const PasswordChangeScreen = (props: Props) => {
               confirmPassword: '',
             }}
             onSubmit={resetPassword}
-            validationSchema={ResetPassSchema}>
-            {({handleChange, handleSubmit, values, errors}) => (
+            validationSchema={ResetPassSchema}
+          >
+            {({ handleChange, handleSubmit, values, errors }) => (
               <>
-                <ScrollView style={{flex: 1}}>
+                <ScrollView style={{ flex: 1 }}>
                   <PasswordInputWithLabel
                     label={'Current Password'}
                     placeholder={'Enter your current password'}
@@ -101,7 +102,9 @@ const PasswordChangeScreen = (props: Props) => {
                   {errors.currentPassword && (
                     <ErrorText text={errors.currentPassword} />
                   )}
-                  <Text style={[styles.textHeader, {marginTop: heightToDp(4)}]}>
+                  <Text
+                    style={[styles.textHeader, { marginTop: heightToDp(4) }]}
+                  >
                     Your new password must be at least 8 characters, include a
                     symbol, a capital letter and a number.
                   </Text>

@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import InputField from '../../input-field/input-field';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/global-colors';
-import {heightToDp} from '../../../utils/functions/responsive-dimensions';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
+import { heightToDp } from '../../../utils/functions/responsive-dimensions';
 import TextInput from '../../input-field/text-input';
 
 type Props = {

@@ -42,7 +42,7 @@ const onError = function (error) {
 request.interceptors.response.use(onSuccess, onError);
 
 request.interceptors.request.use(
-  async config => {
+  async (config) => {
     // const user = await authStorage.getToken();
     // config.headers['clientid'] = '1620112254693';
     config.headers['x-biomark-group'] = 'patient';
@@ -50,7 +50,7 @@ request.interceptors.request.use(
 
     return config;
   },
-  error => Promise.reject(error),
+  (error) => Promise.reject(error)
 );
 export default request;
 

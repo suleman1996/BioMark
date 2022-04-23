@@ -1,8 +1,8 @@
-import {logNow} from '../../utils/functions/log-binder';
-import {API_URLS} from '../url-constants';
+import { logNow } from '../../utils/functions/log-binder';
+import { API_URLS } from '../url-constants';
 import client from '../client';
-import {ErrorResponse} from '../../types/ErrorResponse';
-import {ChangePasswordLoggedIn} from '../../types/auth/ChangePasswordLoggedIn';
+import { ErrorResponse } from '../../types/ErrorResponse';
+import { ChangePasswordLoggedIn } from '../../types/auth/ChangePasswordLoggedIn';
 
 function changePassword(current_password: string, new_password: string) {
   return new Promise<ChangePasswordLoggedIn>((resolve, reject) => {
@@ -13,7 +13,7 @@ function changePassword(current_password: string, new_password: string) {
           new_password,
         },
       })
-      .then(async response => {
+      .then(async (response) => {
         try {
           logNow('Register user success response', response.data);
           resolve(response.data);

@@ -1,11 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import fonts from '../../../assets/fonts';
 import colors from '../../../assets/colors';
 import Lock from '../../../assets/svgs/lock';
-import {navigate} from '../../../services/nav-ref';
-import {Nav_Screens} from '../../../navigation/constants';
+import { navigate } from '../../../services/nav-ref';
+import { Nav_Screens } from '../../../navigation/constants';
 
 export default function PasswordChanged() {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ export default function PasswordChanged() {
 
   return (
     <View style={styles.container}>
-      <View style={{marginBottom: 20}}>
+      <View style={{ marginBottom: 20 }}>
         <Lock height={100} width={100} />
       </View>
       <Text style={styles.text}>Your Password has been changed!</Text>

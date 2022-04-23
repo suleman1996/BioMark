@@ -1,5 +1,11 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, StyleSheet, Text, View, Platform} from 'react-native';
+import React, { useState } from 'react';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+} from 'react-native';
 // import DatePicker from 'react-native-datepicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import colors from '../../assets/colors';
@@ -14,11 +20,11 @@ const App = (props: {
   isPickerShow: boolean;
   setIsPickerShow: any;
 }) => {
-  const {width, date, setDate, isPickerShow, setIsPickerShow} = props;
+  const { width, date, setDate, isPickerShow, setIsPickerShow } = props;
   let otherStyles = [];
 
   if (width) {
-    otherStyles.push({width: width});
+    otherStyles.push({ width: width });
   }
   // const [date, setDate] = useState(new Date());
 
@@ -27,7 +33,8 @@ const App = (props: {
       onPress={() => {
         setIsPickerShow(true), console.log('xxx Date ', date);
       }}
-      style={[styles.container, otherStyles, {width: width ? width : '90%'}]}>
+      style={[styles.container, otherStyles, { width: width ? width : '90%' }]}
+    >
       {isPickerShow && (
         <DateTimePicker
           style={[styles.datePickerStyle]}
@@ -36,7 +43,7 @@ const App = (props: {
           value={new Date(date)}
           minimumDate={new Date(1950, 0, 1)}
           maximumDate={new Date()}
-          onChange={date => {
+          onChange={(date) => {
             console.log(date),
               setIsPickerShow(false),
               date.type == 'set' &&
@@ -44,7 +51,7 @@ const App = (props: {
           }}
         />
       )}
-      <Text style={{marginLeft: 15, color: colors.placeHolder}}>
+      <Text style={{ marginLeft: 15, color: colors.placeHolder }}>
         {moment(date).format('MM/DD/YYYY')}
       </Text>
     </TouchableOpacity>

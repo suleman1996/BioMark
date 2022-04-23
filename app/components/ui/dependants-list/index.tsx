@@ -1,16 +1,16 @@
-import {StyleSheet, Text, View, Pressable, FlatList} from 'react-native';
-import React, {useState} from 'react';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { StyleSheet, Text, View, Pressable, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalStyles} from '../../../utils/theme/global-styles';
-import {navigate} from '../../../services/nav-ref';
-import {Nav_Screens} from '../../../navigation/constants/index';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalStyles } from '../../../utils/theme/global-styles';
+import { navigate } from '../../../services/nav-ref';
+import { Nav_Screens } from '../../../navigation/constants/index';
 import DeleteModalComponent from '../../higher-order/delete-modal';
 const DependantsList = () => {
   const [isDelete, setIsDelete] = useState(false);
@@ -32,7 +32,8 @@ const DependantsList = () => {
                 <View style={styles.headerEnd}>
                   <Pressable
                     onPress={() => navigate(Nav_Screens.Edit_Dependants)}
-                    style={styles.editBtn}>
+                    style={styles.editBtn}
+                  >
                     <Text style={styles.editText}>Edit</Text>
                   </Pressable>
                   <Pressable onPress={() => setIsDelete(true)}>
@@ -40,7 +41,7 @@ const DependantsList = () => {
                   </Pressable>
                 </View>
               </View>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={styles.relationText}>Relation: </Text>
                 <Text style={styles.relationWithText}>
                   Parents / Parent's in law

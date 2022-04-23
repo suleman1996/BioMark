@@ -1,5 +1,5 @@
-import { AuthState } from "./auth/AuthState";
+import { AuthState } from './auth/AuthState';
 
 export interface IAppState {
-  auth: AuthState,
+  auth: AuthState;
 }

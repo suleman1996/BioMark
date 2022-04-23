@@ -8,7 +8,6 @@ export type RegisterUserSuccessResponse = {
   user_sub: string;
 };
 
-
 export type RegisterUserErrorResponse = {
   errMsg: {
     status: boolean;

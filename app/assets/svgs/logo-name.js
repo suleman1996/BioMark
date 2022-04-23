@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Svg, {Path, Defs, Pattern, Use, Image} from 'react-native-svg';
+import Svg, { Path, Defs, Pattern, Use, Image } from 'react-native-svg';
 
 function SvgComponent(props) {
   return (
@@ -10,14 +10,16 @@ function SvgComponent(props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      {...props}>
+      {...props}
+    >
       <Path fill="url(#pattern0)" d="M0 0H200V149H0z" />
       <Defs>
         <Pattern
           id="pattern0"
           patternContentUnits="objectBoundingBox"
           width={1}
-          height={1}>
+          height={1}
+        >
           <Use
             xlinkHref="#image0_1548_36218"
             transform="matrix(.00265 0 0 .00355 0 0)"

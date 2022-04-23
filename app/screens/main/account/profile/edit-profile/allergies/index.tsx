@@ -1,16 +1,16 @@
-import {StyleSheet, Text, View, ScrollView, SafeAreaView} from 'react-native';
-import React, {useState} from 'react';
-import {Provider, Appbar, RadioButton} from 'react-native-paper';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { Provider, Appbar, RadioButton } from 'react-native-paper';
 import colors from '../../../../../../assets/colors';
 import fonts from '../../../../../../assets/fonts';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
-import {GlobalColors} from '../../../../../../utils/theme/global-colors';
+import { GlobalColors } from '../../../../../../utils/theme/global-colors';
 import TextInput from '../../../../../../components/input-field/text-input';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import Textinput from '../../../../../../components/text-input-button';
-import {styles} from './styles';
+import { styles } from './styles';
 import MedicationModal from './modals/medication';
 import FoodModal from './modals/food';
 import AnimalModal from './modals/animal';
@@ -57,13 +57,14 @@ export default function AllergiesScreen() {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <TitleWithBackLayout title="Allergies">
-        <ScrollView style={{flex: 1, marginBottom: 100}}>
+        <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>Do you have any allergies?</Text>
           <RadioButton.Group
-            onValueChange={newValue => setValue(newValue)}
-            value={value}>
+            onValueChange={(newValue) => setValue(newValue)}
+            value={value}
+          >
             <View
               style={[
                 styles.radioContainer,
@@ -71,7 +72,8 @@ export default function AllergiesScreen() {
                   backgroundColor:
                     value == 'first' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'first' ? GlobalColors.white : null}
                 value="first"
@@ -79,8 +81,9 @@ export default function AllergiesScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'first' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'first' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 No
               </Text>
             </View>
@@ -92,7 +95,8 @@ export default function AllergiesScreen() {
                   backgroundColor:
                     value == 'second' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'second' ? GlobalColors.white : null}
                 value="second"
@@ -100,8 +104,9 @@ export default function AllergiesScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'second' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'second' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 Yes
               </Text>
             </View>
@@ -113,7 +118,8 @@ export default function AllergiesScreen() {
                   backgroundColor:
                     value == 'third' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'third' ? GlobalColors.white : null}
                 value="third"
@@ -121,8 +127,9 @@ export default function AllergiesScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'third' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'third' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 Not Sure
               </Text>
             </View>

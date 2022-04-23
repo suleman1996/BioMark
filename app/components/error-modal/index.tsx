@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
 import colors from '../../assets/colors';
@@ -10,7 +10,7 @@ type Props = {
   visible: boolean;
 };
 
-export default function ErrorModal({visible = false, onPress}: Props) {
+export default function ErrorModal({ visible = false, onPress }: Props) {
   if (!visible) return null;
   return (
     <View style={styles.overLay}>
@@ -21,7 +21,7 @@ export default function ErrorModal({visible = false, onPress}: Props) {
           try again. If this is your first time with us, please sign up. Thank
           you.
         </Text>
-        <View style={{marginTop: 20}}>
+        <View style={{ marginTop: 20 }}>
           <Button
             onPress={onPress}
             marginHorizontal={10}

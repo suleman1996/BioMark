@@ -1,12 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import colors from '../../assets/colors';
 import fonts from '../../assets/fonts';
 import Button from '../button/button';
-import {responsiveFontSize} from '../../utils/functions/responsive-text';
-import {GlobalColors} from '../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../utils/functions/responsive-text';
+import { GlobalColors } from '../../utils/theme/global-colors';
 
 type Props = {
   onPressPhoto: any;
@@ -29,10 +29,10 @@ export default function EditProfileModal({
         <MaterialCommunityIcons
           name={'close'}
           size={responsiveFontSize(28)}
-          style={{position: 'absolute', right: 20, top: 20}}
+          style={{ position: 'absolute', right: 20, top: 20 }}
           onPress={iconPress}
         />
-        <View style={{marginTop: 20}}>
+        <View style={{ marginTop: 20 }}>
           <Button
             onPress={onPressPhoto}
             marginHorizontal={10}

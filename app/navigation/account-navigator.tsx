@@ -1,7 +1,7 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {GlobalColors} from '../utils/theme/global-colors';
-import {Nav_Screens} from './constants';
+import { GlobalColors } from '../utils/theme/global-colors';
+import { Nav_Screens } from './constants';
 import AccountScreen from '../screens/main/account/account-screen';
 import EditProfileScreen from '../screens/main/account/profile/edit-profile';
 import PersonalInformationScreen from '../screens/main/account/profile/personal-information';
@@ -28,7 +28,8 @@ export const AccountNavigator = () => (
   <Stack.Navigator
     screenOptions={{
       headerShown: false,
-    }}>
+    }}
+  >
     {/* Account Stack */}
     <Stack.Group>
       <Stack.Screen

@@ -1,14 +1,15 @@
 import * as React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {RadioButton, Text} from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { RadioButton, Text } from 'react-native-paper';
 
 const MyComponent = () => {
   const [value, setValue] = React.useState('first');
 
   return (
     <RadioButton.Group
-      onValueChange={newValue => setValue(newValue)}
-      value={value}>
+      onValueChange={(newValue) => setValue(newValue)}
+      value={value}
+    >
       <View style={styles.container}>
         <View style={styles.rBtn}>
           <RadioButton value="first" />
@@ -30,13 +31,12 @@ const styles = StyleSheet.create({
   container: {
     // borderWidth:1,
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
   },
   rBtn: {
-    
     // borderWidth: 1,
-    borderRadius:8,
-    width:'30%',
+    borderRadius: 8,
+    width: '30%',
 
     // shadowColor: '#000',
     // shadowOffset: {

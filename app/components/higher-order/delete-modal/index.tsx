@@ -1,13 +1,13 @@
-import {StyleSheet, Text, View, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import React from 'react';
 import ModalComponent from '../../base/modal';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 
 type Props = {
   heading: string;
@@ -16,7 +16,7 @@ type Props = {
   subHeading: string;
 };
 
-const DeleteModalComponent = ({isVisible, setIsVisible}: Props) => {
+const DeleteModalComponent = ({ isVisible, setIsVisible }: Props) => {
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>

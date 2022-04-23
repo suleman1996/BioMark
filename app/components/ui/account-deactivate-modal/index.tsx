@@ -1,14 +1,14 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import ModalComponent from '../../base/modal';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
 import ButtonComponent from '../../base/button';
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 };
 
 const AccountDeActivateModal = (props: Props) => {
-  const {isVisible, setIsVisible} = props;
+  const { isVisible, setIsVisible } = props;
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>

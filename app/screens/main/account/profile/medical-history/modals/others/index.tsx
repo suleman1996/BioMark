@@ -4,11 +4,11 @@ import ModalWithBottomBtn from '../../../../../../../components/higher-order/mod
 import TagsCloudInputComponent from '../../../../../../../components/higher-order/tags-cloud-input';
 
 type Props = {
-  isVisible: boolean,
-  setIsVisible: any,
+  isVisible: boolean;
+  setIsVisible: any;
 };
 
-const OthersModal = ({isVisible, setIsVisible}: Props) => {
+const OthersModal = ({ isVisible, setIsVisible }: Props) => {
   //    Have you been diagnosed with Gout?
   const [ans1, setAns1] = useState(false);
 
@@ -19,7 +19,8 @@ const OthersModal = ({isVisible, setIsVisible}: Props) => {
     <ModalWithBottomBtn
       isVisible={isVisible}
       title="Other"
-      onPress={() => console.log('clicked')}>
+      onPress={() => console.log('clicked')}
+    >
       <TagsCloudInputComponent question="Which other medical conditions do you have or have had?" />
       <TagsCloudInputComponent question="Please list all other medications that you are currently taking?" />
     </ModalWithBottomBtn>

@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import DropdownMenuComponent from '../../../../../components/base/dropdown-menu';
 import ModalButtonComponent from '../../../../../components/higher-order/modal-button';
-import {goBack} from '../../../../../services/nav-ref';
+import { goBack } from '../../../../../services/nav-ref';
 import {
   heightToDp,
   widthToDp,
 } from '../../../../../utils/functions/responsive-dimensions';
-import {GlobalColors} from '../../../../../utils/theme/global-colors';
+import { GlobalColors } from '../../../../../utils/theme/global-colors';
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../../../utils/theme/fonts';
 import AsthmaModal from './modals/asthma';
 import CancerModal from './modals/cancer';
 import DiabetesModal from './modals/diabetes';
@@ -21,13 +21,13 @@ import HighCholesterolModal from './modals/high-cholesterol';
 import OthersModal from './modals/others';
 
 const options = [
-  {title: '----'},
-  {title: 'Caucasian'},
-  {title: 'Chinese'},
-  {title: 'Filipino'},
-  {title: 'Indian'},
-  {title: 'Malay'},
-  {title: 'Other / NA'},
+  { title: '----' },
+  { title: 'Caucasian' },
+  { title: 'Chinese' },
+  { title: 'Filipino' },
+  { title: 'Indian' },
+  { title: 'Malay' },
+  { title: 'Other / NA' },
 ];
 
 const MedicalHistoryScreen = () => {

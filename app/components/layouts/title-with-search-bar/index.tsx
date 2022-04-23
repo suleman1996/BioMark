@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 import SearchBarWithLeftScanIcon from '../../higher-order/search-bar-with-left-scan-icon/index';
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
   title: string;
 };
 
-const TitleWithSearchBarLayout = ({children, title}: Props) => {
+const TitleWithSearchBarLayout = ({ children, title }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleBar}>

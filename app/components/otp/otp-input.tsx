@@ -1,7 +1,7 @@
-import {useIsFocused} from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import colors from '../../assets/colors';
 
 type Props = {
@@ -31,20 +31,20 @@ export default function otpInput({
   // const OTPRef = useRef(null);
 
   return (
-    <View style={{width: '95%', alignSelf: 'center'}}>
+    <View style={{ width: '95%', alignSelf: 'center' }}>
       <OTPInputView
         selectionColor={colors.blue}
         ref={OTPRef}
         pinCount={6}
         code={code}
         clearInputs={clearOTP}
-        onCodeChanged={code => {
+        onCodeChanged={(code) => {
           setCode(code), setClearOTP(false);
         }}
         autoFocusOnLoad={false}
         codeInputFieldStyle={[styles.codeInputFieldStyle]}
         codeInputHighlightStyle={styles.underlineStyleHighLighted}
-        onCodeFilled={code => {
+        onCodeFilled={(code) => {
           setClearOTP(false);
           console.log(`Code is ${code}, you are good to go!`);
           setCode(code);

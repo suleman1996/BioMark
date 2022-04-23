@@ -9,8 +9,7 @@ type Props = {
   setIsVisible: any;
 };
 
-
-const HighBloodPressureModal = ({isVisible, setIsVisible}: Props) => {
+const HighBloodPressureModal = ({ isVisible, setIsVisible }: Props) => {
   //    Have you been diagnosed with high blood pressure?
   const [ans1, setAns1] = useState(false);
 
@@ -21,7 +20,8 @@ const HighBloodPressureModal = ({isVisible, setIsVisible}: Props) => {
     <ModalWithBottomBtn
       isVisible={isVisible}
       title="High Blood Pressure"
-      onPress={() => console.log('clicked')}>
+      onPress={() => console.log('clicked')}
+    >
       <RadioButtonQuestionComponent
         isTrue={ans1}
         setIsTrue={setAns1}
@@ -32,7 +32,6 @@ const HighBloodPressureModal = ({isVisible, setIsVisible}: Props) => {
         setIsTrue={setAns2}
         question="Are you taking any medications for this?"
       />
-     
     </ModalWithBottomBtn>
   );
 };

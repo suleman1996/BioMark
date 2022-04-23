@@ -18,7 +18,7 @@ import styles from './styles';
 
 export default function Home() {
   return (
-    <View style={{alignSelf: 'center', backgroundColor: 'white'}}>
+    <View style={{ alignSelf: 'center', backgroundColor: 'white' }}>
       <View style={styles.navBar}>
         <Text style={styles.navHeading}>Hello Calvin!</Text>
         <View style={styles.navSearch}>
@@ -35,10 +35,11 @@ export default function Home() {
                 // paddingHorizontal: 15,
                 // borderRadius: 18,
                 // paddingBottom: 5,
-              }}>
+              }}
+            >
               <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
               <View style={styles.bnInner}>
-                <View style={{width: '60%'}}>
+                <View style={{ width: '60%' }}>
                   <Text
                     style={{
                       fontFamily: fonts.regular,
@@ -46,12 +47,13 @@ export default function Home() {
                       color: 'white',
                       lineHeight: 16.36,
                       paddingTop: 3,
-                    }}>
+                    }}
+                  >
                     Planning a COVID-19 Test for you and your Dependant? Place
                     an appiontment with us by clicking "Book Now"
                   </Text>
                 </View>
-                <View style={{width: '35%'}}>
+                <View style={{ width: '35%' }}>
                   <SmallBtn title="Book Now" />
                 </View>
               </View>
@@ -71,7 +73,8 @@ export default function Home() {
                 width: '100%',
                 paddingHorizontal: 15,
                 justifyContent: 'center',
-              }}>
+              }}
+            >
               <TouchableOpacity>
                 <GoogleFit
                   disabled={false}

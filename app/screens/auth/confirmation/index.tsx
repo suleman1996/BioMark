@@ -5,12 +5,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './styles';
 import Button from '../../../components/button/button';
 import StepIndicator from 'react-native-step-indicator';
 import SetToGo from '../../../assets/svgs/set-to-go';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Confirmation() {
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels

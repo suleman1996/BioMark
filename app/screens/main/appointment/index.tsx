@@ -1,9 +1,9 @@
-import {  } from 'react-native'
-import React from 'react'
-import { Text, View } from 'native-base'
-import { styles } from './styles'
+import {} from 'react-native';
+import React from 'react';
+import { Text, View } from 'native-base';
+import { styles } from './styles';
 
-type Props = {}
+type Props = {};
 
 const AppointmentScreen = (props: Props) => {
   return (
@@ -11,6 +11,6 @@ const AppointmentScreen = (props: Props) => {
       <Text style={styles.text}>Coming Soon</Text>
     </View>
   );
-}
+};
 
-export default AppointmentScreen
+export default AppointmentScreen;

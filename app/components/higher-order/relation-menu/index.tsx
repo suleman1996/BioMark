@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import {
   Menu,
   MenuOption,
@@ -11,28 +11,29 @@ import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 
 type Props = {
   options?: any;
   label: string;
 };
 
-const RelationMenu = ({options, label}: Props) => {
+const RelationMenu = ({ options, label }: Props) => {
   const menuRef = useRef<any>();
   const [selected, setSelected] = useState();
-  const selectedStyles = {backgroundColor: GlobalColors.primary};
-  const selectedTextStyle = {color: GlobalColors.white};
+  const selectedStyles = { backgroundColor: GlobalColors.primary };
+  const selectedTextStyle = { color: GlobalColors.white };
   return (
     <View style={styles.main}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
-      <Menu ref={menuRef} onSelect={value => setSelected(value)}>
+      <Menu ref={menuRef} onSelect={(value) => setSelected(value)}>
         <MenuTrigger
           style={styles.input}
           text={selected ? selected : 'Select'}
-          placeholder="Select">
+          placeholder="Select"
+        >
           <Text>{selected}</Text>
         </MenuTrigger>
         <MenuOptions optionsContainerStyle={styles.popupMenu}>

@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {TextInput} from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 import colors from '../../assets/colors';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 export default function textInput(props: Props) {
   const [text, setText] = React.useState('');
   return (
-    <View style={[styles.container, {marginHorizontal: props.margin}]}>
+    <View style={[styles.container, { marginHorizontal: props.margin }]}>
       <TextInput
         // mode="outlined"
         // label={props.placeholder}
@@ -41,7 +41,7 @@ export default function textInput(props: Props) {
             <TextInput.Icon
               name={props?.eye}
               onPress={props?.onEyePress}
-              style={{zIndex: 10}}
+              style={{ zIndex: 10 }}
             />
           )
         }

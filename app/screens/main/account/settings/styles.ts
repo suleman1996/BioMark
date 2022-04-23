@@ -1,12 +1,12 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import fonts from '../../../../assets/fonts';
 import {
   heightToDp,
   widthToDp,
 } from '../../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../../utils/theme/fonts';
-import {GlobalColors} from '../../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../../utils/theme/fonts';
+import { GlobalColors } from '../../../../utils/theme/global-colors';
 
 export const styles = StyleSheet.create({
   menuItem: {

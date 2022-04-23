@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {TouchableRipple} from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import ArrowBack from '../../assets/svgs/arrow-back';
 import colors from '../../assets/colors';
@@ -14,13 +14,14 @@ export default function header(props: Props) {
   const navigations = useNavigation();
   return (
     <>
-      <View style={{overflow: 'hidden', paddingBottom: 5}}>
+      <View style={{ overflow: 'hidden', paddingBottom: 5 }}>
         <View style={styles.header}>
           <TouchableRipple
             borderless
             style={styles.ripple}
             onPress={() => navigations.goBack()}
-            rippleColor={'#8493AE20'}>
+            rippleColor={'#8493AE20'}
+          >
             <ArrowBack />
           </TouchableRipple>
           <Text style={styles.title}>{props.title}</Text>
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: '#fff',
     shadowColor: '#000',
-    shadowOffset: {width: 1, height: 1},
+    shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
     elevation: 5,
@@ -52,5 +53,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     //   backgroundColor: 'red',
   },
-  title: {marginLeft: 5, fontFamily: fonts.regular, fontSize: 16},
+  title: { marginLeft: 5, fontFamily: fonts.regular, fontSize: 16 },
 });

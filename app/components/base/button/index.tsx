@@ -1,24 +1,25 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {GlobalColors} from '../../../utils/theme/global-colors';
-import {GlobalFonts} from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
+import { GlobalFonts } from '../../../utils/theme/fonts';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
 
 type Props = {
   onPress: any;
   title: string;
 };
 
-const ButtonComponent = ({onPress, title, disabled}: Props) => {
+const ButtonComponent = ({ onPress, title, disabled }: Props) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       style={styles.container}
-      disabled={disabled}>
+      disabled={disabled}
+    >
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

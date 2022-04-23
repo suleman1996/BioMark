@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {Button} from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import colors from '../../assets/colors';
 
 type Props = {
@@ -18,20 +18,22 @@ export default function button(props: Props) {
     <View
       style={[
         styles.btnContainer,
-        {marginHorizontal: horizontal, marginVertical: vertical},
-      ]}>
+        { marginHorizontal: horizontal, marginVertical: vertical },
+      ]}
+    >
       <TouchableOpacity>
         <Button
           mode="contained"
           uppercase={false}
           disabled={props.disabled}
-          contentStyle={{height: 50}}
+          contentStyle={{ height: 50 }}
           style={[
             styles.btn,
-            {backgroundColor: props?.disabled ? '#8493AE60' : colors.blue},
+            { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
           ]}
-          labelStyle={{color: colors.whiteColor}}
-          onPress={props.onPress}>
+          labelStyle={{ color: colors.whiteColor }}
+          onPress={props.onPress}
+        >
           {props.title}
         </Button>
       </TouchableOpacity>

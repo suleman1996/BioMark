@@ -1,12 +1,12 @@
-import {StyleSheet, Text, Pressable} from 'react-native';
+import { StyleSheet, Text, Pressable } from 'react-native';
 import React from 'react';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {GlobalColors} from '../../../utils/theme/global-colors';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type Props = {
@@ -16,19 +16,20 @@ type Props = {
   drop: boolean;
 };
 
-const ModalButtonComponent = ({title, setIsModal, isModal, drop}: Props) => {
+const ModalButtonComponent = ({ title, setIsModal, isModal, drop }: Props) => {
   const textColor = isModal
-    ? {color: GlobalColors.white}
-    : {color: GlobalColors.lightGrey};
+    ? { color: GlobalColors.white }
+    : { color: GlobalColors.lightGrey };
   const bgColor = isModal
-    ? {backgroundColor: GlobalColors.darkPrimary}
-    : {backgroundColor: GlobalColors.white};
+    ? { backgroundColor: GlobalColors.darkPrimary }
+    : { backgroundColor: GlobalColors.white };
   return (
     <Pressable
       onPress={() => {
         setIsModal(!isModal);
       }}
-      style={[styles.container, bgColor]}>
+      style={[styles.container, bgColor]}
+    >
       <Text numberOfLines={1} style={[styles.label, textColor]}>
         {title}
       </Text>

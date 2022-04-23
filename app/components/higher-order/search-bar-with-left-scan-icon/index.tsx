@@ -8,17 +8,17 @@ import {
   Modal,
   Keyboard,
 } from 'react-native';
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import SearchBarLeftIcon from '../../svg/search-bar-left-icon';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import {Menu, MenuOptions, MenuTrigger} from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MyImage from '../../../assets/images';
 import colors from '../../../assets/colors';
@@ -26,12 +26,12 @@ import fonts from '../../../assets/fonts';
 import Button from '../../button/button';
 import * as Yup from 'yup';
 import Text_Input from '../../input-field/text-input';
-import {Formik} from 'formik';
-import {inputBarcode} from '../../../services/auth-service';
+import { Formik } from 'formik';
+import { inputBarcode } from '../../../services/auth-service';
 import ActivityIndicator from '../../loader/activity-indicator';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import { showMessage, hideMessage } from 'react-native-flash-message';
 //PopUp Modal
-const QrInputPopup = ({visible, children, loading}) => {
+const QrInputPopup = ({ visible, children, loading }) => {
   const [showModal, setShowModal] = React.useState(visible);
 
   React.useEffect(() => {
@@ -55,7 +55,7 @@ const QrInputPopup = ({visible, children, loading}) => {
 };
 
 //PopUp Error Modal
-const QrInputErrPopup = ({visible, children, loading}) => {
+const QrInputErrPopup = ({ visible, children, loading }) => {
   const [showErrModal, setShowErrModal] = React.useState(visible);
 
   React.useEffect(() => {
@@ -86,7 +86,7 @@ const SearchBarWithLeftScanIcon = () => {
       .required('Please type QR or Barcode.')
       .min(8, 'Invalid.'),
   });
-  const handleCode = async ({qrInput}) => {
+  const handleCode = async ({ qrInput }) => {
     Keyboard.dismiss();
     try {
       setLoading(true);
@@ -134,7 +134,8 @@ const SearchBarWithLeftScanIcon = () => {
                 width: 30,
                 justifyContent: 'center',
                 alignItems: 'center',
-              }}>
+              }}
+            >
               <SearchBarLeftIcon width={5} height={5} />
             </MenuTrigger>
             <MenuOptions optionsContainerStyle={styles.popupMenu}>
@@ -155,10 +156,11 @@ const SearchBarWithLeftScanIcon = () => {
                     qrInput: '',
                   }}
                   validationSchema={QRschemma}
-                  onSubmit={handleCode}>
-                  {({handleChange, handleSubmit, values, errors}) => (
+                  onSubmit={handleCode}
+                >
+                  {({ handleChange, handleSubmit, values, errors }) => (
                     <QrInputPopup loading={loading} visible={visible}>
-                      <View style={{alignItems: 'center', marginBottom: 20}}>
+                      <View style={{ alignItems: 'center', marginBottom: 20 }}>
                         <View style={styles.popUpHeader}>
                           <Text style={styles.popUpHeading}>
                             Input QR or Barcode
@@ -179,11 +181,12 @@ const SearchBarWithLeftScanIcon = () => {
                           fontFamily: fonts.regular,
                           fontSize: 17,
                           color: '#8493AE',
-                        }}>
+                        }}
+                      >
                         This is the number below QR or Barcode.
                       </Text>
                       <Text style={styles.popUpSubHeading}>QR or Barcode</Text>
-                      <View style={{width: '100%'}}>
+                      <View style={{ width: '100%' }}>
                         <Text_Input
                           backgroundColor={colors.inputBg}
                           style={styles.textInput}
@@ -195,7 +198,7 @@ const SearchBarWithLeftScanIcon = () => {
                             {errors.qrInput}
                           </Text>
                         )}
-                        <View style={{marginTop: 40}}>
+                        <View style={{ marginTop: 40 }}>
                           <TouchableOpacity>
                             <Button
                               disabled={false}
@@ -219,7 +222,8 @@ const SearchBarWithLeftScanIcon = () => {
                 <Text
                   style={styles.menuText}
                   fontSize={responsiveFontSize(15)}
-                  onPress={() => setVisible(true)}>
+                  onPress={() => setVisible(true)}
+                >
                   Input Barcode
                 </Text>
               </TouchableOpacity>

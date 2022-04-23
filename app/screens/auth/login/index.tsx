@@ -1,6 +1,6 @@
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useNavigation} from '@react-navigation/native';
-import React, {useContext, useEffect, useState} from 'react';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { useNavigation } from '@react-navigation/native';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Keyboard,
   Platform,
@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
-import {showMessage} from 'react-native-flash-message';
-import {useDispatch, useSelector} from 'react-redux';
+import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
+import { showMessage } from 'react-native-flash-message';
+import { useDispatch, useSelector } from 'react-redux';
 import colors from '../../../assets/colors';
 import fonts from '../../../assets/fonts';
 import Apple from '../../../assets/svgs/apple';
@@ -23,13 +23,13 @@ import ErrorModal from '../../../components/error-modal';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number';
-import {Nav_Screens} from '../../../navigation/constants';
-import {navigate} from '../../../services/nav-ref';
+import { Nav_Screens } from '../../../navigation/constants';
+import { navigate } from '../../../services/nav-ref';
 import {
   reduxDeviceRegister,
   reduxLogin,
 } from '../../../store/auth/auth-actions';
-import {IAppState} from '../../../store/IAppState';
+import { IAppState } from '../../../store/IAppState';
 // import InputField from '../../components/inputField/inputField';
 import AuthContext from '../../../utils/auth-context';
 import styles from './styles';
@@ -43,8 +43,8 @@ export default function Login() {
   // redux
   const dispatch = useDispatch();
 
-  const {loggingIn, errorMessageLogin} = useSelector(
-    (state: IAppState) => state.auth,
+  const { loggingIn, errorMessageLogin } = useSelector(
+    (state: IAppState) => state.auth
   );
 
   const navigations = useNavigation();
@@ -57,7 +57,7 @@ export default function Login() {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
-  const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
   const [userGoogleInfo, setUserGoogleInfo] = useState({});
   const [loaded, setLoaded] = useState(false);
   const [textToken, setText] = useState('');
@@ -69,11 +69,12 @@ export default function Login() {
   });
 
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
-    else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
-    else if (selectCountryCode == '65') setNumberCondition({min: 8, max: 8});
+    if (selectCountryCode == '60') setNumberCondition({ min: 8, max: 11 });
+    else if (selectCountryCode == '63')
+      setNumberCondition({ min: 10, max: 10 });
+    else if (selectCountryCode == '65') setNumberCondition({ min: 8, max: 8 });
     else {
-      setNumberCondition({min: 4, max: 13});
+      setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
 
@@ -104,10 +105,10 @@ export default function Login() {
       offlineAccess: true,
     });
 
-    const {idToken} = await GoogleSignin.signIn();
+    const { idToken } = await GoogleSignin.signIn();
     const googleCrenditial = auth.GoogleAuthProvider.credential(idToken);
     const user_sign_in = auth().signInWithCredential(googleCrenditial);
-    user_sign_in.then(re => {
+    user_sign_in.then((re) => {
       console.log('re', re);
     });
   };
@@ -121,7 +122,7 @@ export default function Login() {
         } else {
           console.log(
             'Login success with permissions: ' +
-              result.grantedPermissions.toString(),
+              result.grantedPermissions.toString()
           );
           const data = await AccessToken.getCurrentAccessToken();
           console.log('Facebook data', data?.accessToken);
@@ -130,7 +131,7 @@ export default function Login() {
       },
       function (error) {
         console.log('Login fail with error: ' + error);
-      },
+      }
     );
   };
 
@@ -138,19 +139,19 @@ export default function Login() {
     // props.navigation.navigate(TOP_TAB_BAR);
     fetch(
       'https://graph.facebook.com/v2.5/me?fields=email,first_name,last_name,picture.type(large),friends&access_token=' +
-        token,
+        token
     )
-      .then(response => {
+      .then((response) => {
         response.json().then(
-          json => {
+          (json) => {
             console.log('Json response', json);
           },
-          error => {
+          (error) => {
             alert(error.message);
-          },
+          }
         );
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('ERROR GETTING DATA FROM FACEBOOK');
         // Toast.show(error.message, Toast.LONG);
       });
@@ -176,7 +177,7 @@ export default function Login() {
     // get current authentication state for user
     // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
     const credentialState = await appleAuth.getCredentialStateForUser(
-      appleAuthRequestResponse.user,
+      appleAuthRequestResponse.user
     );
 
     // use credentialState response to ensure the user is authenticated
@@ -222,8 +223,8 @@ export default function Login() {
           </Text>
         )}
 
-        <View style={{height: 20}} />
-        <Text style={[styles.inputLablel, {marginTop: 20}]}>Password</Text>
+        <View style={{ height: 20 }} />
+        <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
         <TextInput
           placeholder="Password"
           secureTextEntry={hidePassword}
@@ -240,10 +241,11 @@ export default function Login() {
             Password must have 8-11 characters long
           </Text>
         )}
-        <View style={{alignSelf: 'center'}}>
+        <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity
-            style={{marginVertical: 30}}
-            onPress={() => navigate(Nav_Screens.Forgot_Password)}>
+            style={{ marginVertical: 30 }}
+            onPress={() => navigate(Nav_Screens.Forgot_Password)}
+          >
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
@@ -268,7 +270,8 @@ export default function Login() {
             fontFamily: fonts.regular,
             fontSize: 16,
             color: colors.black,
-          }}>
+          }}
+        >
           Login With
         </Text>
         <View style={styles.socialLogins}>
@@ -285,11 +288,11 @@ export default function Login() {
           </TouchableOpacity>
         </View>
 
-        <View style={{alignSelf: 'center'}}>
+        <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity onPress={() => navigate(Nav_Screens.Sign_Up)}>
             <Text style={styles.noAccountTxt}>
-              <Text style={{color: colors.black}}>Dont have an account?</Text>
-              <Text style={{color: colors.blue}}> SignUp</Text>
+              <Text style={{ color: colors.black }}>Dont have an account?</Text>
+              <Text style={{ color: colors.blue }}> SignUp</Text>
             </Text>
           </TouchableOpacity>
         </View>

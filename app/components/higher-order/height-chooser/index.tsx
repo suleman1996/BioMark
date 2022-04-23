@@ -1,16 +1,16 @@
-import {StyleSheet, Text, View, Pressable} from 'react-native';
-import React, {useState} from 'react';
-import {TextInput} from 'react-native-paper';
-import {Menu, MenuOptions, MenuTrigger} from 'react-native-popup-menu';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { TextInput } from 'react-native-paper';
+import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useRef} from 'react';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { useRef } from 'react';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
 import InputField from '../../input-field/input-field';
 import colors from '../../../assets/colors';
 
@@ -34,10 +34,10 @@ const HeightChooserComponent = ({
 
   var otherStyle = [];
   if (height) {
-    otherStyle.push({height: heightToDp(height)});
+    otherStyle.push({ height: heightToDp(height) });
   }
   if (textAlign) {
-    otherStyle.push({textAlign: textAlign});
+    otherStyle.push({ textAlign: textAlign });
   }
   const convertedCentoFeet = (values = 30) => {
     setValue(values);
@@ -59,13 +59,14 @@ const HeightChooserComponent = ({
           borderBottomWidth={0}
         />
         <Menu ref={menuRef}>
-          <MenuTrigger style={{flexDirection: 'row', alignItems: 'center'}}>
+          <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
                 color: GlobalColors.primary,
                 fontFamily: GlobalFonts.regular,
                 fontSize: responsiveFontSize(20),
-              }}>
+              }}
+            >
               {selectedType == 1 ? 'ft/in' : 'cm'}
             </Text>
 
@@ -83,8 +84,9 @@ const HeightChooserComponent = ({
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 1 ? {backgroundColor: GlobalColors.gray} : {},
-              ]}>
+                selectedType == 1 ? { backgroundColor: GlobalColors.gray } : {},
+              ]}
+            >
               <Text style={styles.menuText}>ft/in</Text>
             </Pressable>
             <Pressable
@@ -94,8 +96,9 @@ const HeightChooserComponent = ({
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 2 ? {backgroundColor: GlobalColors.gray} : {},
-              ]}>
+                selectedType == 2 ? { backgroundColor: GlobalColors.gray } : {},
+              ]}
+            >
               <Text style={styles.menuText}>cm</Text>
             </Pressable>
           </MenuOptions>

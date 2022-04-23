@@ -1,8 +1,8 @@
-import {StyleSheet} from 'react-native';
-import {widthToDp} from '../../../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../../../utils/theme/fonts';
-import {GlobalColors} from '../../../../../utils/theme/global-colors';
+import { StyleSheet } from 'react-native';
+import { widthToDp } from '../../../../../utils/functions/responsive-dimensions';
+import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import { GlobalColors } from '../../../../../utils/theme/global-colors';
 
 export const styles = StyleSheet.create({
   container: {

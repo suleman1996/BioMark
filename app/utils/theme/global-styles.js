@@ -1,17 +1,17 @@
-import {heightToDp, widthToDp} from '../functions/responsive-dimensions';
-import {responsiveFontSize} from '../functions/responsive-text';
-import {GlobalFonts} from './fonts';
-import {GlobalColors} from './global-colors';
+import { heightToDp, widthToDp } from '../functions/responsive-dimensions';
+import { responsiveFontSize } from '../functions/responsive-text';
+import { GlobalFonts } from './fonts';
+import { GlobalColors } from './global-colors';
 
 export const GlobalStyles = {
   shadow: {
-    shadowOffset: {width: 5},
+    shadowOffset: { width: 5 },
     shadowColor: 'lightgray',
     shadowOpacity: 0.4,
     elevation: 2,
   },
   shadow2: {
-    shadowOffset: {width: 5},
+    shadowOffset: { width: 5 },
     shadowColor: 'gray',
     shadowOpacity: 0.7,
     elevation: 0.5,

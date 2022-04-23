@@ -1,17 +1,17 @@
-import {View, Text} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { View, Text } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import TitleWithBackWhiteBgLayout from '../../../../../components/layouts/back-with-title-white-bg';
-import {styles} from './styles';
+import { styles } from './styles';
 import InputWithLabel from '../../../../../components/base/input-with-label';
 import ButtonComponent from '../../../../../components/base/button';
-import {userService} from '../../../../../services/user-service/user-service';
-import {logNow} from '../../../../../utils/functions/log-binder';
-import {useDispatch, useSelector} from 'react-redux';
-import {addUserContactsDetails} from '../../../../../store/auth/auth-actions';
-import {IAppState} from '../../../../../store/IAppState';
+import { userService } from '../../../../../services/user-service/user-service';
+import { logNow } from '../../../../../utils/functions/log-binder';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUserContactsDetails } from '../../../../../store/auth/auth-actions';
+import { IAppState } from '../../../../../store/IAppState';
 import * as Yup from 'yup';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import ErrorLineFullWidth from '../../../../../components/higher-order/error-full-width-line';
 
 type Props = {};
@@ -20,7 +20,7 @@ const EmailChangeScreen = (props: Props) => {
   const formikRef = useRef<any>();
 
   const userContacts = useSelector(
-    (state: IAppState) => state.auth.userContacts,
+    (state: IAppState) => state.auth.userContacts
   );
 
   const [isLoading, setIsLoading] = useState(false);
@@ -32,16 +32,16 @@ const EmailChangeScreen = (props: Props) => {
   useEffect(() => {
     userService
       .getUserContacts()
-      .then(res => {
+      .then((res) => {
         dispatch(addUserContactsDetails(res));
       })
-      .catch(err => {})
+      .catch((err) => {})
       .finally(() => {});
   }, []);
 
   const submitForm = () => {
-    const {email, confirmEmail} = formikRef.current.values;
-    logNow({email, confirmEmail});
+    const { email, confirmEmail } = formikRef.current.values;
+    logNow({ email, confirmEmail });
     setIsLoading(true);
     formikRef.current.submitForm();
   };
@@ -56,16 +56,17 @@ const EmailChangeScreen = (props: Props) => {
   });
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Formik
         innerRef={formikRef}
         initialValues={{
           email,
           confirmEmail: '',
         }}
-        onSubmit={values => logNow(values)}
-        validationSchema={ResetPassSchema}>
-        {({handleChange, handleSubmit, values, errors}) => (
+        onSubmit={(values) => logNow(values)}
+        validationSchema={ResetPassSchema}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
           <>
             <TitleWithBackWhiteBgLayout title="Email">
               <View style={styles.container}>

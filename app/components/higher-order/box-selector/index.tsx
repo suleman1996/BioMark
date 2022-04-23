@@ -1,23 +1,23 @@
-import {StyleSheet, Text, View, Pressable, FlatList} from 'react-native';
-import React, {useState} from 'react';
-import {GlobalStyles} from '../../../utils/theme/global-styles';
+import { StyleSheet, Text, View, Pressable, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { GlobalStyles } from '../../../utils/theme/global-styles';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalColors} from '../../../utils/theme/global-colors';
-import {GlobalFonts} from '../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalColors } from '../../../utils/theme/global-colors';
+import { GlobalFonts } from '../../../utils/theme/fonts';
 
 type Props = {
   options: any;
   label: string;
 };
 
-const BoxSelector = ({options, label}: Props) => {
+const BoxSelector = ({ options, label }: Props) => {
   const [selected, setSelected] = useState('');
-  const selectedStyles = {backgroundColor: GlobalColors.primary};
-  const selectedTextStyle = {color: GlobalColors.white};
+  const selectedStyles = { backgroundColor: GlobalColors.primary };
+  const selectedTextStyle = { color: GlobalColors.white };
   return (
     <View style={styles.main}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
@@ -25,11 +25,12 @@ const BoxSelector = ({options, label}: Props) => {
         style={styles.container}
         horizontal
         data={options}
-        renderItem={({item, index}) => (
+        renderItem={({ item, index }) => (
           <Pressable
             onPress={() => setSelected(item)}
             key={index}
-            style={[styles.button, selected == item ? selectedStyles : {}]}>
+            style={[styles.button, selected == item ? selectedStyles : {}]}
+          >
             <Text style={[selected == item ? selectedTextStyle : {}]}>
               {item}
             </Text>

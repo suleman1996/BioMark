@@ -1,9 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {heightToDp} from '../../../../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../../../../utils/functions/responsive-text';
-import {GlobalColors} from '../../../../../../utils/theme/global-colors';
-import {GlobalFonts} from '../../../../../../utils/theme/fonts';
+import { heightToDp } from '../../../../../../utils/functions/responsive-dimensions';
+import { responsiveFontSize } from '../../../../../../utils/functions/responsive-text';
+import { GlobalColors } from '../../../../../../utils/theme/global-colors';
+import { GlobalFonts } from '../../../../../../utils/theme/fonts';
 
 const styles = StyleSheet.create({
   radioContainer: {

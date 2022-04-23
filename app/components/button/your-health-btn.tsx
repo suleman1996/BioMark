@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import fonts from '../../assets/fonts';
 import colors from '../../assets/colors';
 import YourHealth from '../../assets/svgs/your-health';
-import {Button} from 'react-native-paper';
+import { Button } from 'react-native-paper';
 // import styles from 'react-native-indicators/src/components/ball-indicator/styles';
 
 type Props = {
@@ -11,9 +11,9 @@ type Props = {
   onPress: any;
 };
 
-export default function YourHealthBtn({text, onPress}: Props) {
+export default function YourHealthBtn({ text, onPress }: Props) {
   return (
-    <View style={{flexDirection: 'column', alignItems: 'center'}}>
+    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity>
         <View style={styles.circleBtn}>
           <YourHealth />
@@ -21,7 +21,12 @@ export default function YourHealthBtn({text, onPress}: Props) {
       </TouchableOpacity>
       <View>
         <Text
-          style={{fontFamily: fonts.bold, fontSize: 15, color: colors.heading}}>
+          style={{
+            fontFamily: fonts.bold,
+            fontSize: 15,
+            color: colors.heading,
+          }}
+        >
           Your Health
         </Text>
       </View>

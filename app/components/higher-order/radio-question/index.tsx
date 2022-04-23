@@ -1,13 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {RadioButton} from 'react-native-paper';
-import {GlobalColors} from '../../../utils/theme/global-colors';
+import { RadioButton } from 'react-native-paper';
+import { GlobalColors } from '../../../utils/theme/global-colors';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
 
 type Props = {
   question: string;
@@ -15,7 +15,11 @@ type Props = {
   setIsTrue: any;
 };
 
-const RadioButtonQuestionComponent = ({question, isTrue, setIsTrue}: Props) => {
+const RadioButtonQuestionComponent = ({
+  question,
+  isTrue,
+  setIsTrue,
+}: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.qText}>{question}</Text>

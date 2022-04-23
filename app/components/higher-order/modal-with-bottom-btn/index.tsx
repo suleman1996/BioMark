@@ -5,16 +5,16 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalComponent from '../../base/modal';
 import ButtonWithShadowContainer from '../../base/button-with-shadow-container';
 import {
   heightToDp,
   widthToDp,
 } from '../../../utils/functions/responsive-dimensions';
-import {GlobalColors} from '../../../utils/theme/global-colors';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
 
 type Props = {
   isVisible: boolean;
@@ -23,7 +23,7 @@ type Props = {
   title: string;
 };
 
-const ModalWithBottomBtn = ({isVisible, children, onPress, title}: Props) => {
+const ModalWithBottomBtn = ({ isVisible, children, onPress, title }: Props) => {
   const [isModal, setIsModal] = useState(isVisible);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const ModalWithBottomBtn = ({isVisible, children, onPress, title}: Props) => {
   return (
     <ModalComponent isVisible={isModal}>
       <View style={styles.card}>
-        <ScrollView contentContainerStyle={{flex: 1}}>
+        <ScrollView contentContainerStyle={{ flex: 1 }}>
           <Text style={styles.title}>{title}</Text>
           {children}
         </ScrollView>

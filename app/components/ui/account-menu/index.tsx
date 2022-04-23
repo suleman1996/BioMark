@@ -1,22 +1,22 @@
-import {StyleSheet, Text, View, Pressable} from 'react-native';
-import React, {useState} from 'react';
-import {TouchableRipple} from 'react-native-paper';
-import {widthToDp} from '../../../utils/functions/responsive-dimensions';
-import {GlobalColors} from '../../../utils/theme/global-colors';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { TouchableRipple } from 'react-native-paper';
+import { widthToDp } from '../../../utils/functions/responsive-dimensions';
+import { GlobalColors } from '../../../utils/theme/global-colors';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome2 from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {Nav_Screens} from '../../../navigation/constants';
-import {navigate} from '../../../services/nav-ref';
-import {GlobalStyles} from '../../../utils/theme/global-styles';
-import {Switch} from 'react-native-paper';
-import {useDispatch} from 'react-redux';
-import {logout} from '../../../store/auth/auth-actions';
+import { Nav_Screens } from '../../../navigation/constants';
+import { navigate } from '../../../services/nav-ref';
+import { GlobalStyles } from '../../../utils/theme/global-styles';
+import { Switch } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../store/auth/auth-actions';
 
 const AccountMenu = ({}) => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const AccountMenu = ({}) => {
   return (
     <View style={styles.container}>
       <Pressable style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
             name="credit-card-outline"
             size={responsiveFontSize(18)}
@@ -53,8 +53,9 @@ const AccountMenu = ({}) => {
             screen: Nav_Screens.Dependants_Screen,
           })
         }
-        style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        style={styles.singleItem}
+      >
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <FontAwesome
             name="user-friends"
             size={responsiveFontSize(18)}
@@ -79,9 +80,10 @@ const AccountMenu = ({}) => {
             screen: Nav_Screens.Settings,
           })
         }
-        style={styles.singleItem}>
+        style={styles.singleItem}
+      >
         <>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Fontisto
               name="player-settings"
               size={responsiveFontSize(22)}
@@ -99,7 +101,7 @@ const AccountMenu = ({}) => {
       {/* divider */}
       <View style={styles.divider} />
       <Pressable style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <FontAwesome2
             name="bell"
             size={responsiveFontSize(22)}
@@ -116,7 +118,7 @@ const AccountMenu = ({}) => {
       {/* divider */}
       <View style={styles.divider} />
       <Pressable style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <FontAwesome2
             name="support"
             size={responsiveFontSize(22)}
@@ -133,7 +135,7 @@ const AccountMenu = ({}) => {
       {/* divider */}
       <View style={styles.divider} />
       <Pressable style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialIcons
             name="self-improvement"
             size={responsiveFontSize(22)}
@@ -150,7 +152,7 @@ const AccountMenu = ({}) => {
       {/* divider */}
       <View style={styles.divider} />
       <Pressable style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <FontAwesome
             name="book"
             size={responsiveFontSize(22)}
@@ -167,7 +169,7 @@ const AccountMenu = ({}) => {
       {/* divider */}
       <View style={styles.divider} />
       <Pressable onPress={() => dispatch(logout())} style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
             name="logout"
             size={responsiveFontSize(22)}
@@ -179,7 +181,7 @@ const AccountMenu = ({}) => {
       {/* divider */}
       <View style={styles.divider} />
       <Pressable style={styles.singleItem}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Entypo
             name="back-in-time"
             size={responsiveFontSize(22)}

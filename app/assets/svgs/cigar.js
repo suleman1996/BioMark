@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
 function SvgComponent(props) {
   return (
@@ -14,7 +14,7 @@ function SvgComponent(props) {
         transform="translate(-102.65 -124.75)"
       />
     </Svg>
-  )
+  );
 }
 
-export default SvgComponent
+export default SvgComponent;

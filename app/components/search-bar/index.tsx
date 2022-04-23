@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Searchbar} from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
 import QrScanner from '../../assets/svgs/qr-scanner';
 import colors from '../../assets/colors';
 

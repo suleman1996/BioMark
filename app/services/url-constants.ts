@@ -15,4 +15,4 @@ const API_URLS = {
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',
 };
 
-export {API_URLS};
+export { API_URLS };

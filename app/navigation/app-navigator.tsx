@@ -13,7 +13,8 @@ const AppNavigator = () => {
       initialRouteName="BottomTabNavigator"
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+    >
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       <Stack.Screen
         name={Nav_Screens.NestedAccountNavigator}

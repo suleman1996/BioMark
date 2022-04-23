@@ -1,8 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {GlobalColors} from '../../../../../../utils/theme/global-colors';
-import {GlobalFonts} from '../../../../../../utils/theme/fonts';
-import {responsiveFontSize} from '../../../../../../utils/functions/responsive-text';
+import { GlobalColors } from '../../../../../../utils/theme/global-colors';
+import { GlobalFonts } from '../../../../../../utils/theme/fonts';
+import { responsiveFontSize } from '../../../../../../utils/functions/responsive-text';
 import {
   heightToDp,
   widthToDp,

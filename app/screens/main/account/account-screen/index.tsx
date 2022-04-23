@@ -1,18 +1,18 @@
 import React from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Images from '../../../../assets/images';
 import TitleWithSearchBarLayout from '../../../../components/layouts/title-with-search-bar/index';
 import AccountMenu from '../../../../components/ui/account-menu';
-import {Nav_Screens} from '../../../../navigation/constants';
-import {navigate} from '../../../../services/nav-ref';
+import { Nav_Screens } from '../../../../navigation/constants';
+import { navigate } from '../../../../services/nav-ref';
 import {
   heightToDp,
   widthToDp,
 } from '../../../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../../utils/theme/fonts';
-import {GlobalColors} from '../../../../utils/theme/global-colors';
+import { responsiveFontSize } from '../../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../../utils/theme/fonts';
+import { GlobalColors } from '../../../../utils/theme/global-colors';
 
 type Props = {};
 
@@ -21,7 +21,7 @@ const AccountScreen = (props: Props) => {
     <>
       <TitleWithSearchBarLayout title={'Account'}>
         <View style={styles.content}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image source={Images.avatar} style={styles.image} />
             <View style={styles.profile}>
               <Text style={styles.name}>Gerold Mordeno</Text>
@@ -31,7 +31,8 @@ const AccountScreen = (props: Props) => {
                     screen: Nav_Screens.Edit_Profile,
                   })
                 }
-                style={{flexDirection: 'row', alignItems: 'center'}}>
+                style={{ flexDirection: 'row', alignItems: 'center' }}
+              >
                 <MaterialCommunityIcons
                   name="pencil"
                   size={responsiveFontSize(25)}

@@ -1,12 +1,12 @@
-import {View, Text, SafeAreaView} from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import styles from './styles';
-import {Picker} from '@react-native-picker/picker';
-import {navigate} from '../../../../../../services/nav-ref';
-import {Nav_Screens} from '../../../../../../navigation/constants';
-import {GlobalColors} from '../../../../../../utils/theme/global-colors';
+import { Picker } from '@react-native-picker/picker';
+import { navigate } from '../../../../../../services/nav-ref';
+import { Nav_Screens } from '../../../../../../navigation/constants';
+import { GlobalColors } from '../../../../../../utils/theme/global-colors';
 import colors from '../../../../../../assets/colors';
 import fonts from '../../../../../../assets/fonts';
 
@@ -15,16 +15,16 @@ type Props = {};
 const Sleep = (props: Props) => {
   const sleepOptions = [
     // {title: null},
-    {title: 'less than 4 hours'},
-    {title: '4-7 hours'},
-    {title: '7-10 hours'},
-    {title: 'more than 10 hours'},
+    { title: 'less than 4 hours' },
+    { title: '4-7 hours' },
+    { title: '7-10 hours' },
+    { title: 'more than 10 hours' },
   ];
   const [selectedSleep, setSelectedSleep] = React.useState(
-    sleepOptions[0].title,
+    sleepOptions[0].title
   );
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <TitleWithBackLayout title="Sleep">
         <View style={styles.container}>
           <Text style={styles.heading}>
@@ -38,10 +38,11 @@ const Sleep = (props: Props) => {
                   color: colors.placeHolder,
                   fontFamily: fonts.regular,
                 }}
-                itemStyle={{color: 'red'}}
+                itemStyle={{ color: 'red' }}
                 onValueChange={(itemValue, itemIndex) =>
                   setSelectedSleep(itemValue)
-                }>
+                }
+              >
                 {sleepOptions?.map((item, index) => {
                   return (
                     <Picker.Item

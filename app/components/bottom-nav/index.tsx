@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {BottomNavigation, Text} from 'react-native-paper';
+import { BottomNavigation, Text } from 'react-native-paper';
 import colors from '../../assets/colors';
 
 const HomeRoute = () => <Text>Home</Text>;
@@ -10,10 +10,10 @@ const AccountRoute = () => <Text>Account</Text>;
 const MyComponent = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'home', title: 'Home', icon: 'home'},
-    {key: 'inbox', title: 'Inbox', icon: 'inbox'},
-    {key: 'appointment', title: 'Appointment', icon: 'calendar'},
-    {key: 'account', title: 'Account', icon: 'account'},
+    { key: 'home', title: 'Home', icon: 'home' },
+    { key: 'inbox', title: 'Inbox', icon: 'inbox' },
+    { key: 'appointment', title: 'Appointment', icon: 'calendar' },
+    { key: 'account', title: 'Account', icon: 'account' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -25,9 +25,9 @@ const MyComponent = () => {
 
   return (
     <BottomNavigation
-      style={{backgroundColor: colors.blue}}
-      barStyle={{backgroundColor: colors.whiteColor}}
-      navigationState={{index, routes}}
+      style={{ backgroundColor: colors.blue }}
+      barStyle={{ backgroundColor: colors.whiteColor }}
+      navigationState={{ index, routes }}
       activeColor={colors.blue}
       inactiveColor={'#8493AE'}
       onIndexChange={setIndex}

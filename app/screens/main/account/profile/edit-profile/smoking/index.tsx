@@ -6,34 +6,35 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
-import {Provider, Appbar, RadioButton} from 'react-native-paper';
+import React, { useState } from 'react';
+import { Provider, Appbar, RadioButton } from 'react-native-paper';
 import colors from '../../../../../../assets/colors';
 import fonts from '../../../../../../assets/fonts';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
-import {GlobalColors} from '../../../../../../utils/theme/global-colors';
+import { GlobalColors } from '../../../../../../utils/theme/global-colors';
 import TextInput from '../../../../../../components/input-field/text-input';
-import {Picker} from '@react-native-picker/picker';
-import {options} from './year';
-import {styles} from './styles';
+import { Picker } from '@react-native-picker/picker';
+import { options } from './year';
+import { styles } from './styles';
 
 export default function SmokingScreen() {
   const [value, setValue] = useState('first');
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const options2 = [{title: '2020'}, {title: '2021'}];
+  const options2 = [{ title: '2020' }, { title: '2021' }];
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <TitleWithBackLayout title="Smoking">
-        <ScrollView style={{flex: 1, marginBottom: 100}}>
+        <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>Do you smoke?</Text>
           <RadioButton.Group
-            onValueChange={newValue => setValue(newValue)}
-            value={value}>
+            onValueChange={(newValue) => setValue(newValue)}
+            value={value}
+          >
             <TouchableOpacity
               onPress={() => setValue('first')}
               style={[
@@ -42,7 +43,8 @@ export default function SmokingScreen() {
                   backgroundColor:
                     value == 'first' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'first' ? GlobalColors.white : null}
                 value="first"
@@ -50,8 +52,9 @@ export default function SmokingScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'first' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'first' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 No
               </Text>
             </TouchableOpacity>
@@ -64,7 +67,8 @@ export default function SmokingScreen() {
                   backgroundColor:
                     value == 'second' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'second' ? GlobalColors.white : null}
                 value="second"
@@ -72,8 +76,9 @@ export default function SmokingScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'second' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'second' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 Yes
               </Text>
             </TouchableOpacity>
@@ -86,7 +91,8 @@ export default function SmokingScreen() {
                   backgroundColor:
                     value == 'third' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'third' ? GlobalColors.white : null}
                 value="third"
@@ -94,8 +100,9 @@ export default function SmokingScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'third' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'third' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 I used to
               </Text>
             </TouchableOpacity>
@@ -109,8 +116,9 @@ export default function SmokingScreen() {
               <View
                 style={[
                   styles.textinputView,
-                  {borderWidth: day ? 1 : null, borderRadius: day ? 5 : null},
-                ]}>
+                  { borderWidth: day ? 1 : null, borderRadius: day ? 5 : null },
+                ]}
+              >
                 <TextInput
                   placeholder="eg : 1"
                   value={day}
@@ -126,11 +134,12 @@ export default function SmokingScreen() {
               </Text>
               <View style={styles.container2}>
                 <Picker
-                  itemStyle={{height: 500, fontFamily: 'Rubik-Regular'}}
+                  itemStyle={{ height: 500, fontFamily: 'Rubik-Regular' }}
                   selectedValue={startSmoke}
                   onValueChange={(itemValue, itemIndex) =>
                     setStartSmoke(itemValue)
-                  }>
+                  }
+                >
                   {options?.map((item, index) => {
                     return (
                       <Picker.Item
@@ -153,7 +162,8 @@ export default function SmokingScreen() {
                       selectedValue={stopSmoke}
                       onValueChange={(itemValue, itemIndex) =>
                         setStopSmoke(itemValue)
-                      }>
+                      }
+                    >
                       {options2?.map((item, index) => {
                         return (
                           <Picker.Item

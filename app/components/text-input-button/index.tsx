@@ -1,13 +1,13 @@
-import {StyleSheet, Text, View, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import React, { useState } from 'react';
 import {
   heightToDp,
   widthToDp,
 } from '../../utils/functions/responsive-dimensions';
-import {responsiveFontSize} from '../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../utils/theme/fonts';
-import {GlobalColors} from '../../utils/theme/global-colors';
-import {TextInput} from 'react-native-paper';
+import { responsiveFontSize } from '../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../utils/theme/fonts';
+import { GlobalColors } from '../../utils/theme/global-colors';
+import { TextInput } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 

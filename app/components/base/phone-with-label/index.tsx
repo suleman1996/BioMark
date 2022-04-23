@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 import InputField from '../../input-field/input-field';
-import {responsiveFontSize} from '../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/global-colors';
-import {heightToDp} from '../../../utils/functions/responsive-dimensions';
+import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../utils/theme/fonts';
+import { GlobalColors } from '../../../utils/theme/global-colors';
+import { heightToDp } from '../../../utils/functions/responsive-dimensions';
 import PhoneNumber from '../../phone-number';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
   disabled: boolean;
 };
 
-const PhoneNumberWithLabel = ({label, placeholder, disabled}: Props) => {
+const PhoneNumberWithLabel = ({ label, placeholder, disabled }: Props) => {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');

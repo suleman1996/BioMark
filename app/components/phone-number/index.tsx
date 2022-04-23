@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
-import {TextInput, View} from 'react-native';
-import CountryPicker, {DEFAULT_THEME} from 'react-native-country-picker-modal';
+import React, { useState } from 'react';
+import { TextInput, View } from 'react-native';
+import CountryPicker, {
+  DEFAULT_THEME,
+} from 'react-native-country-picker-modal';
 import colors from '../../assets/colors';
 import styles from './styles';
 
@@ -16,7 +18,7 @@ type Props = {
 };
 
 export default function phoneNumber(props: Props) {
-  const {width, placeholder} = props;
+  const { width, placeholder } = props;
   const onSelect = (Country: any) => {
     props.setCountryCode(Country.cca2);
     props.setSelectCountryCode(Country.callingCode[0]);
@@ -34,8 +36,9 @@ export default function phoneNumber(props: Props) {
     <View
       style={[
         styles.countryPickerView,
-        {width: props.width ? props.width : '90%'},
-      ]}>
+        { width: props.width ? props.width : '90%' },
+      ]}
+    >
       <CountryPicker
         withCallingCode={true}
         countryCode={props.countryCode}
@@ -49,7 +52,7 @@ export default function phoneNumber(props: Props) {
           fontSize: 14,
         }}
         containerButtonStyle={styles.pickerButtonStyle}
-        onSelect={Country => onSelect(Country)}
+        onSelect={(Country) => onSelect(Country)}
       />
       <TextInput
         placeholder={placeholder ? placeholder : 'Phone Number'}
@@ -64,7 +67,7 @@ export default function phoneNumber(props: Props) {
         ]}
         value={props.phoneNumber}
         keyboardType={'number-pad'}
-        onChangeText={value => props.setPhoneNumber(value)}
+        onChangeText={(value) => props.setPhoneNumber(value)}
       />
     </View>
   );

@@ -19,12 +19,12 @@ import {
   heightToDp,
   widthToDp,
 } from '../../../../../utils/functions/responsive-dimensions';
-import {Nav_Screens} from '../../../../../navigation/constants/index';
-import {navigate} from '../../../../../services/nav-ref';
-import {responsiveFontSize} from '../../../../../utils/functions/responsive-text';
-import {GlobalFonts} from '../../../../../utils/theme/fonts';
-import {GlobalColors} from '../../../../../utils/theme/global-colors';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { Nav_Screens } from '../../../../../navigation/constants/index';
+import { navigate } from '../../../../../services/nav-ref';
+import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
+import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import { GlobalColors } from '../../../../../utils/theme/global-colors';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import EditProfileModal from '../../../../../components/edit-profile-menu';
 
 let cameraIs = false;
@@ -43,7 +43,8 @@ const EditProfileScreen = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        onPress={() => setShowModal(true)}>
+        onPress={() => setShowModal(true)}
+      >
         <MaterialCommunityIcons
           name={'pencil-outline'}
           size={responsiveFontSize(22)}
@@ -61,7 +62,7 @@ const EditProfileScreen = () => {
         selectionLimit: 1,
         // includeBase64: true,
       };
-      launchImageLibrary(options, res => {
+      launchImageLibrary(options, (res) => {
         if (res.didCancel) {
           console.log('User cancelled image picker');
           cameraIs = false;
@@ -87,7 +88,7 @@ const EditProfileScreen = () => {
         mediaType: 'photo',
         // includeBase64: true,
       };
-      launchCamera(options, res => {
+      launchCamera(options, (res) => {
         if (res.didCancel) {
           console.log('User cancelled image picker');
           cameraIs = false;
@@ -120,7 +121,7 @@ const EditProfileScreen = () => {
             {edit && <EditProfile />}
             <TouchableOpacity onPress={() => setEdit(true)}>
               <Image
-                source={!profilePic ? Images.avatar : {uri: profilePic?.uri}}
+                source={!profilePic ? Images.avatar : { uri: profilePic?.uri }}
                 style={styles.image}
               />
             </TouchableOpacity>
@@ -132,12 +133,14 @@ const EditProfileScreen = () => {
                 fontSize: responsiveFontSize(20),
                 color: GlobalColors.darkPrimary,
                 fontFamily: GlobalFonts.light,
-              }}>
+              }}
+            >
               ABOUT ME
             </Text>
             <Pressable
               onPress={() => navigate(Nav_Screens.Personal_Information)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="human-male"
@@ -154,7 +157,8 @@ const EditProfileScreen = () => {
             </Pressable>
             <Pressable
               onPress={() => navigate(Nav_Screens.Body_Measurement)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="human-male"
@@ -171,7 +175,8 @@ const EditProfileScreen = () => {
             </Pressable>
             <Pressable
               onPress={() => navigate(Nav_Screens.Medical_History)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="plus"
@@ -189,7 +194,8 @@ const EditProfileScreen = () => {
 
             <Pressable
               onPress={() => navigate(Nav_Screens.Vaccination)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="needle"
@@ -207,7 +213,8 @@ const EditProfileScreen = () => {
 
             <Pressable
               style={styles.menuOption}
-              onPress={() => navigate(Nav_Screens.Allergies)}>
+              onPress={() => navigate(Nav_Screens.Allergies)}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="allergy"
@@ -226,7 +233,8 @@ const EditProfileScreen = () => {
             <View style={styles.menuOption}>
               <Pressable
                 onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)}
-                style={styles.menuOption}>
+                style={styles.menuOption}
+              >
                 <View style={styles.menuTitleAndIcon}>
                   <MaterialIcons
                     name="family-restroom"
@@ -247,7 +255,8 @@ const EditProfileScreen = () => {
 
             <Pressable
               onPress={() => navigate(Nav_Screens.Smoking)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="smoking"
@@ -266,7 +275,8 @@ const EditProfileScreen = () => {
 
             <Pressable
               onPress={() => navigate(Nav_Screens.Drinking)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialIcons
                   name="local-drink"
@@ -283,7 +293,8 @@ const EditProfileScreen = () => {
             </Pressable>
             <Pressable
               onPress={() => navigate(Nav_Screens.Exercise)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="dumbbell"
@@ -300,7 +311,8 @@ const EditProfileScreen = () => {
             </Pressable>
             <Pressable
               onPress={() => navigate(Nav_Screens.Sleep)}
-              style={styles.menuOption}>
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <Ionicons
                   name="moon"
@@ -337,7 +349,8 @@ const EditProfileScreen = () => {
             marginTop: 15,
             color: GlobalColors.darkPrimary,
             fontFamily: GlobalFonts.light,
-          }}>
+          }}
+        >
           v50.18.205
         </Text>
       </ScrollView>

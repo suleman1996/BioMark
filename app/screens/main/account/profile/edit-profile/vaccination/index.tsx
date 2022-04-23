@@ -6,18 +6,18 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
-import {Provider, Appbar, RadioButton} from 'react-native-paper';
+import React, { useState } from 'react';
+import { Provider, Appbar, RadioButton } from 'react-native-paper';
 import colors from '../../../../../../assets/colors';
 import fonts from '../../../../../../assets/fonts';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
-import {GlobalColors} from '../../../../../../utils/theme/global-colors';
+import { GlobalColors } from '../../../../../../utils/theme/global-colors';
 import TextInput from '../../../../../../components/input-field/text-input';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import Textinput from '../../../../../../components/text-input-button';
-import {styles} from './styles';
+import { styles } from './styles';
 
 export default function VaccinationScreen() {
   const [value, setValue] = useState('first');
@@ -38,15 +38,16 @@ export default function VaccinationScreen() {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <TitleWithBackLayout title="Vaccinations">
-        <ScrollView style={{flex: 1, marginBottom: 100}}>
+        <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>
             Have you been vaccinated as an adult?
           </Text>
           <RadioButton.Group
-            onValueChange={newValue => setValue(newValue)}
-            value={value}>
+            onValueChange={(newValue) => setValue(newValue)}
+            value={value}
+          >
             <TouchableOpacity
               onPress={() => setValue('first')}
               style={[
@@ -55,7 +56,8 @@ export default function VaccinationScreen() {
                   backgroundColor:
                     value == 'first' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'first' ? GlobalColors.white : null}
                 value="first"
@@ -63,8 +65,9 @@ export default function VaccinationScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'first' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'first' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 No
               </Text>
             </TouchableOpacity>
@@ -77,7 +80,8 @@ export default function VaccinationScreen() {
                   backgroundColor:
                     value == 'second' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'second' ? GlobalColors.white : null}
                 value="second"
@@ -85,8 +89,9 @@ export default function VaccinationScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'second' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'second' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 Yes
               </Text>
             </TouchableOpacity>
@@ -99,7 +104,8 @@ export default function VaccinationScreen() {
                   backgroundColor:
                     value == 'third' ? GlobalColors.navyblue : null,
                 },
-              ]}>
+              ]}
+            >
               <RadioButton
                 color={value == 'third' ? GlobalColors.white : null}
                 value="third"
@@ -107,8 +113,9 @@ export default function VaccinationScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'third' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'third' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 Yes, but I'm not sure which vaccines
               </Text>
             </TouchableOpacity>

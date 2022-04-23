@@ -19,13 +19,13 @@ export const Nav_Screens = {
   Body_Measurement: 'BodyMeasurementScreen',
   Medical_History: 'MedicalHistoryScreen',
   Settings: 'SettingsScreen',
-    PasswordChangeScreen: 'PasswordChangeScreen',
-    EmailChangeScreen: 'EmailChangeScreen',
-    PhoneChangeScreen: 'PhoneChangeScreen',
+  PasswordChangeScreen: 'PasswordChangeScreen',
+  EmailChangeScreen: 'EmailChangeScreen',
+  PhoneChangeScreen: 'PhoneChangeScreen',
   // edit profile
   Edit_Profile: 'EditProfile',
   Smoking: 'Smoking',
-  Vaccination : 'Vaccination',
+  Vaccination: 'Vaccination',
   Sleep: 'Sleep',
   Drinking: 'Drinking',
   Allergies: 'Allergies',
@@ -33,5 +33,5 @@ export const Nav_Screens = {
 
   // Bottom Nav_Screens
   Main_Navigator: 'MainBottomTabsNavigator',
-  FamilyMedicalHistory:'FamilyMedicalHistory'
+  FamilyMedicalHistory: 'FamilyMedicalHistory',
 };

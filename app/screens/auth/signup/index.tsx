@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
-import {Formik} from 'formik';
-import React, {useEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Keyboard,
@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {showMessage} from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
 import colors from '../../../assets/colors';
@@ -20,12 +20,12 @@ import DatePicker from '../../../components/date-picker';
 import TextInput from '../../../components/input-field/text-input';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import PhoneNumber from '../../../components/phone-number';
-import {Nav_Screens} from '../../../navigation/constants';
-import {signup} from '../../../services/auth-service';
-import {navigate} from '../../../services/nav-ref';
-import {userService} from '../../../services/user-service/user-service';
-import {RegisterUserErrorResponse} from '../../../types/auth/RegisterUser';
-import {logNow} from '../../../utils/functions/log-binder';
+import { Nav_Screens } from '../../../navigation/constants';
+import { signup } from '../../../services/auth-service';
+import { navigate } from '../../../services/nav-ref';
+import { userService } from '../../../services/user-service/user-service';
+import { RegisterUserErrorResponse } from '../../../types/auth/RegisterUser';
+import { logNow } from '../../../utils/functions/log-binder';
 
 import styles from './styles';
 
@@ -42,23 +42,24 @@ export default function Signup() {
   const [phoneNumber, setPhoneNumber] = useState(''); //International Phone Picker
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [gender, setGender] = useState([
-    {id: 0, sex: 'Male'},
-    {id: 1, sex: 'Female'},
-    {id: 2, sex: 'Others'},
+    { id: 0, sex: 'Male' },
+    { id: 1, sex: 'Female' },
+    { id: 2, sex: 'Others' },
   ]);
   const [selectedGender, setSelectedGender] = useState('');
-  const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
   const [checked, setChecked] = React.useState(false);
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
 
   //fuctions
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
-    else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
-    else if (selectCountryCode == '65') setNumberCondition({min: 8, max: 8});
+    if (selectCountryCode == '60') setNumberCondition({ min: 8, max: 11 });
+    else if (selectCountryCode == '63')
+      setNumberCondition({ min: 10, max: 10 });
+    else if (selectCountryCode == '65') setNumberCondition({ min: 8, max: 8 });
     else {
-      setNumberCondition({min: 4, max: 13});
+      setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
 
@@ -68,9 +69,9 @@ export default function Signup() {
     const username = `+${selectCountryCode}${phoneNumber}`;
     userService
       .registerUser(username, password)
-      .then(res => {
+      .then((res) => {
         logNow('signup res', res);
-        navigate(Nav_Screens.SignupVerificationScreen, {username, password});
+        navigate(Nav_Screens.SignupVerificationScreen, { username, password });
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);
@@ -83,7 +84,7 @@ export default function Signup() {
         setLoading(false);
       });
   };
-  const handleSignup = async ({password}: {password: string}) => {
+  const handleSignup = async ({ password }: { password: string }) => {
     if (phoneNumber == '' || gender == '') {
     } else if (checked == true) {
       console.log('trye');
@@ -96,7 +97,7 @@ export default function Signup() {
     }
   };
 
-  const RenderRadio = ({item}) => (
+  const RenderRadio = ({ item }) => (
     <TouchableOpacity
       onPress={() => setSelectedGender(item)}
       style={[
@@ -107,7 +108,8 @@ export default function Signup() {
           borderColor:
             item.id === selectedGender.id ? colors.blue : colors.placeHolder,
         },
-      ]}>
+      ]}
+    >
       <Text
         style={
           (styles.radioText,
@@ -115,7 +117,8 @@ export default function Signup() {
             color:
               item.id === selectedGender.id ? colors.whiteColor : colors.blue,
           })
-        }>
+        }
+      >
         {item.sex}
       </Text>
     </TouchableOpacity>
@@ -158,8 +161,9 @@ export default function Signup() {
             password: '',
           }}
           onSubmit={handleSignup}
-          validationSchema={ResetPassSchema}>
-          {({handleChange, handleSubmit, values, errors, isValid}) => (
+          validationSchema={ResetPassSchema}
+        >
+          {({ handleChange, handleSubmit, values, errors, isValid }) => (
             <>
               <View style={styles.biContainer}>
                 <Text style={styles.heading}>Basic Information</Text>
@@ -172,7 +176,7 @@ export default function Signup() {
                 {errors.fName && (
                   <Text style={styles.errorMessage}>{errors.fName}</Text>
                 )}
-                <Text style={[styles.inputLablel, {marginTop: 20}]}>
+                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
                   Last Name
                 </Text>
                 <TextInput
@@ -188,7 +192,7 @@ export default function Signup() {
                   <FlatList
                     data={gender}
                     renderItem={RenderRadio}
-                    keyExtractor={item => item.id}
+                    keyExtractor={(item) => item.id}
                     horizontal
                   />
                 </View>
@@ -203,7 +207,7 @@ export default function Signup() {
                   setDate={setDate}
                 />
 
-                <Text style={[styles.inputLablel, {marginTop: 20}]}>
+                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
                   Identity Card/Passport Number
                 </Text>
                 <TextInput
@@ -264,7 +268,8 @@ export default function Signup() {
                         color: colors.blue,
                         fontSize: 17,
                         textDecorationLine: 'underline',
-                      }}>
+                      }}
+                    >
                       terms and condition
                     </Text>
                     <Text> and the </Text>
@@ -273,7 +278,8 @@ export default function Signup() {
                         color: colors.blue,
                         fontSize: 17,
                         textDecorationLine: 'underline',
-                      }}>
+                      }}
+                    >
                       privacy policy.
                     </Text>
                   </Text>

@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {Button} from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import colors from '../../assets/colors';
 
 type Props = {
@@ -15,9 +15,10 @@ export default function Choicebtn(props: Props) {
         // disabled={props.disabled}
         color={colors.heading}
         uppercase={false}
-        contentStyle={{height: 40, width: 100}}
+        contentStyle={{ height: 40, width: 100 }}
         style={styles.btn}
-        onPress={() => console.log('Pressed')}>
+        onPress={() => console.log('Pressed')}
+      >
         {props.title}
       </Button>
     </View>

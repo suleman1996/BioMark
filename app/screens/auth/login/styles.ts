@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import colors from '../../../assets/colors';
 import fonts from '../../../assets/fonts';
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.black,
   },
-  dash: {height: 0.5, backgroundColor: colors.blue, width: '40%'},
+  dash: { height: 0.5, backgroundColor: colors.blue, width: '40%' },
   orView: {
     flexDirection: 'row',
     alignItems: 'center',

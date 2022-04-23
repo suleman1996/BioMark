@@ -5,10 +5,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import {useDispatch} from 'react-redux';
-import React, {useState, useEffect, useRef} from 'react';
+import { useDispatch } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './styles';
 import Button from '../../../components/button/button';
 import colors from '../../../assets/colors';
@@ -16,13 +16,13 @@ import fonts from '../../../assets/fonts';
 import BackIcon from '../../../assets/svgs/back';
 import StepIndicator from 'react-native-step-indicator';
 import OtpInput from '../../../components/otp/otp-input';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import ActivityIndicator from '../../../components/loader/activity-indicator';
 import {
   resendAccountCode,
   signupAccountConfirm,
 } from '../../../services/auth-service';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import { showMessage, hideMessage } from 'react-native-flash-message';
 
 export default function SignupVerification() {
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ export default function SignupVerification() {
   return (
     <>
       <ActivityIndicator visible={loading} />
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <View style={styles.signupNav}>
           <View style={styles.csNav}>
             <BackIcon onPress={() => navigations.goBack()} />
@@ -148,14 +148,14 @@ export default function SignupVerification() {
         </View>
 
         <View style={styles.OTPContainer}>
-          <ScrollView style={{marginBottom: 40}}>
+          <ScrollView style={{ marginBottom: 40 }}>
             <View>
               <Text style={styles.heading}>Enter your OTP Code</Text>
               <Text style={styles.upperText}>
                 You will receive a verification code with the mobile number you
                 have provided. Check your phone and enter the OTP code below.
               </Text>
-              <View style={{marginTop: 30, height: 50}}>
+              <View style={{ marginTop: 30, height: 50 }}>
                 <OtpInput
                   code={code}
                   setCode={setCode}
@@ -170,7 +170,8 @@ export default function SignupVerification() {
                 onPress={() => {
                   resendOTP();
                 }}
-                style={{marginTop: 30}}>
+                style={{ marginTop: 30 }}
+              >
                 <Text
                   style={{
                     textAlign: 'center',
@@ -178,9 +179,10 @@ export default function SignupVerification() {
                     fontSize: 15,
                     // marginBottom: 170,
                     fontFamily: fonts.regular,
-                  }}>
+                  }}
+                >
                   <Text>Not received? </Text>
-                  <Text style={{color: colors.blue}}>
+                  <Text style={{ color: colors.blue }}>
                     Resend OTP Code {minutes}:
                     {seconds < 10 ? `0${seconds}` : seconds}
                   </Text>
@@ -199,7 +201,8 @@ export default function SignupVerification() {
                       color: colors.blue,
                       fontSize: 15,
                       fontFamily: fonts.bold,
-                    }}>
+                    }}
+                  >
                     contact us
                   </Text>
                 </Text>

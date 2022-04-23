@@ -1,12 +1,12 @@
-import {StyleSheet, Text, View, ScrollView, SafeAreaView} from 'react-native';
-import React, {useState} from 'react';
-import {Provider, Appbar, RadioButton} from 'react-native-paper';
-import {goBack} from '../../../../../../services/nav-ref';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { Provider, Appbar, RadioButton } from 'react-native-paper';
+import { goBack } from '../../../../../../services/nav-ref';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import {GlobalColors} from '../../../../../../utils/theme/global-colors';
-import {Picker} from '@react-native-picker/picker';
-import {styles} from './styles';
+import { GlobalColors } from '../../../../../../utils/theme/global-colors';
+import { Picker } from '@react-native-picker/picker';
+import { styles } from './styles';
 
 export default function ExerciseScreen() {
   const [value, setValue] = useState('first');
@@ -14,41 +14,43 @@ export default function ExerciseScreen() {
   const [exerciseWeek, setexerciseWeek] = useState('');
   const [exerciseSession, setexerciseSession] = useState('');
   const options = [
-    {title: ''},
-    {title: '1'},
-    {title: '2'},
-    {title: '3'},
-    {title: '4'},
-    {title: '5'},
-    {title: '6'},
-    {title: '7'},
-    {title: '8'},
-    {title: '9'},
-    {title: 'more than 10'},
+    { title: '' },
+    { title: '1' },
+    { title: '2' },
+    { title: '3' },
+    { title: '4' },
+    { title: '5' },
+    { title: '6' },
+    { title: '7' },
+    { title: '8' },
+    { title: '9' },
+    { title: 'more than 10' },
   ];
   const options2 = [
-    {title: ''},
-    {title: 'less than 20 mins'},
-    {title: '20-40 mins'},
-    {title: '40-60 mins'},
-    {title: '1-2 hours'},
-    {title: '2-3 hours'},
-    {title: 'more than 3 hours'},
+    { title: '' },
+    { title: 'less than 20 mins' },
+    { title: '20-40 mins' },
+    { title: '40-60 mins' },
+    { title: '1-2 hours' },
+    { title: '2-3 hours' },
+    { title: 'more than 3 hours' },
   ];
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <TitleWithBackLayout title="Exercise">
-        <ScrollView style={{flex: 1, marginBottom: 100}}>
+        <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>Do you exercise?</Text>
           <RadioButton.Group
-            onValueChange={newValue => setValue(newValue)}
-            value={value}>
+            onValueChange={(newValue) => setValue(newValue)}
+            value={value}
+          >
             <View
               style={[
                 styles.radioContainer,
-                {backgroundColor: value == 'first' ? '#054E8B' : null},
-              ]}>
+                { backgroundColor: value == 'first' ? '#054E8B' : null },
+              ]}
+            >
               <RadioButton
                 color={value == 'first' ? GlobalColors.white : null}
                 value="first"
@@ -56,8 +58,9 @@ export default function ExerciseScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'first' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'first' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 No
               </Text>
             </View>
@@ -65,8 +68,9 @@ export default function ExerciseScreen() {
             <View
               style={[
                 styles.radioContainer,
-                {backgroundColor: value == 'second' ? '#054E8B' : null},
-              ]}>
+                { backgroundColor: value == 'second' ? '#054E8B' : null },
+              ]}
+            >
               <RadioButton
                 color={value == 'second' ? GlobalColors.white : null}
                 value="second"
@@ -74,8 +78,9 @@ export default function ExerciseScreen() {
               <Text
                 style={[
                   styles.radioText,
-                  {color: value == 'second' ? '#ffffff' : '#000000'},
-                ]}>
+                  { color: value == 'second' ? '#ffffff' : '#000000' },
+                ]}
+              >
                 Yes
               </Text>
             </View>
@@ -91,7 +96,8 @@ export default function ExerciseScreen() {
                   selectedValue={exerciseWeek}
                   onValueChange={(itemValue, itemIndex) =>
                     setexerciseWeek(itemValue)
-                  }>
+                  }
+                >
                   {options?.map((item, index) => {
                     return (
                       <Picker.Item
@@ -112,7 +118,8 @@ export default function ExerciseScreen() {
                   selectedValue={exerciseSession}
                   onValueChange={(itemValue, itemIndex) =>
                     setexerciseSession(itemValue)
-                  }>
+                  }
+                >
                   {options2?.map((item, index) => {
                     return (
                       <Picker.Item

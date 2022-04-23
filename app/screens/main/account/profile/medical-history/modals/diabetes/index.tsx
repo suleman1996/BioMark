@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import DropdownMenuComponent from '../../../../../../../components/base/dropdown-menu';
 import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
 import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
 import TagsCloudInputComponent from '../../../../../../../components/higher-order/tags-cloud-input';
-import {heightToDp} from '../../../../../../../utils/functions/responsive-dimensions';
-import {GlobalStyles} from '../../../../../../../utils/theme/global-styles';
+import { heightToDp } from '../../../../../../../utils/functions/responsive-dimensions';
+import { GlobalStyles } from '../../../../../../../utils/theme/global-styles';
 
-const options = [{title: 'Type 1 only'}, {title: 'Type 2 only'}];
+const options = [{ title: 'Type 1 only' }, { title: 'Type 2 only' }];
 
 type Props = {
   isVisible: boolean;
   setIsVisible: any;
 };
 
-const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
+const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
   //    Have you been diagnosed with diabetes?
   const [ans1, setAns1] = useState(false);
 
@@ -28,7 +28,8 @@ const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
     <ModalWithBottomBtn
       isVisible={isVisible}
       title="Diabetes"
-      onPress={() => console.log('clicked')}>
+      onPress={() => console.log('clicked')}
+    >
       <RadioButtonQuestionComponent
         isTrue={ans1}
         setIsTrue={setAns1}
@@ -37,7 +38,9 @@ const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
       <Text style={GlobalStyles.qLabel}>
         What type of diabetes have you been diagnosed with?
       </Text>
-      <View style={{height: heightToDp(7), ...GlobalStyles.paddingHorizontal}}>
+      <View
+        style={{ height: heightToDp(7), ...GlobalStyles.paddingHorizontal }}
+      >
         <DropdownMenuComponent
           options={options}
           setSelectedDropdown={setDiagnosedWith}

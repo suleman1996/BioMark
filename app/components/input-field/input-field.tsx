@@ -24,7 +24,8 @@ type Props = {
 export default function inputField(props: Props) {
   return (
     <View
-      style={[styles.loginInputContainer, {marginHorizontal: props.margin}]}>
+      style={[styles.loginInputContainer, { marginHorizontal: props.margin }]}
+    >
       <View style={styles.inputRow}>
         {props.svg}
         <TextInput
