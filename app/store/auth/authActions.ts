@@ -34,9 +34,28 @@ export const errorLogIn = (errorMessage: string) => ({
 export const reduxLogin =
   (username: string, password: string) =>
   (dispatch: (arg0: {type: string; payload: any}) => void) => {
-    dispatch(loggingIn(true));
     userService
       .login(username, password)
+      .then(async (res) => {
+        logNow('auth reducer ==>',res);
+        
+       
+        // await navigate('DashboardScreen');
+      })
+      .catch((err: LoginErrorResponse) => {
+        logNow('User auth login redux action error block', err);
+        dispatch(errorLogIn(err.errMsg.data.error));
+      })
+      .finally(async () => {
+        dispatch(loggingIn(false));
+      });
+  };
+  export const reduxDeviceRegister =
+  (device_token: string, device_type: string) =>
+  (dispatch: (arg0: {type: string; payload: any}) => void) => {
+    dispatch(loggingIn(true));
+    userService
+      .login(device_token, device_type)
       .then(async (res: LoginResponse) => {
         logNow('auth reducer ==>',res);
         const userToken = res?.access_token;

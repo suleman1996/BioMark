@@ -37,6 +37,7 @@ export default function Login() {
 
   // redux
   const dispatch = useDispatch();
+  const dispatch1 = useDispatch();
   const {loggingIn, errorMessageLogin} = useSelector(
     (state: IAppState) => state.auth,
   );
@@ -182,6 +183,7 @@ export default function Login() {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
+    dispatch(reduxLogin("fsdfjkdsfdsjkfnjdsk", "ios"));
   };
   const handleFedrationLogin = async (accessToken:string) => {
   console.log("accessToken",accessToken);
