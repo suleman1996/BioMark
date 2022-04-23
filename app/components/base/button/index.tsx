@@ -1,14 +1,17 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import React from 'react'
-import {GlobalColors} from '../../../utils/theme/globalColors'
+import React from 'react';
+import {GlobalColors} from '../../../utils/theme/globalColors';
 import {GlobalFonts} from '../../../utils/theme/fonts';
-import {heightToDp, widthToDp} from '../../../utils/functions/responsiveDimentions'
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
+import {
+  heightToDp,
+  widthToDp,
+} from '../../../utils/functions/responsiveDimentions';
+import {responsiveFontSize} from '../../../utils/functions/responsiveText';
 
 type Props = {
-  onPress: any,
-  title: string
-}
+  onPress: any;
+  title: string;
+};
 
 const ButtonComponent = ({onPress, title,disabled}: Props) => {
   return (
@@ -32,6 +35,6 @@ const styles = StyleSheet.create({
   text: {
     color: GlobalColors.white,
     fontFamily: GlobalFonts.medium,
-    fontSize: responsiveFontSize(20)
+    fontSize: responsiveFontSize(18),
   },
 });

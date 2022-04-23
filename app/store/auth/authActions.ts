@@ -1,6 +1,9 @@
-import { userService } from '../../services/user-service/userService';
-import { LoginErrorResponse, LoginResponse } from '../../types/auth/LoginResponse';
-import { logNow } from '../../utils/functions/logBinder';
+import {userService} from '../../services/user-service/userService';
+import {
+  LoginErrorResponse,
+  LoginResponse,
+} from '../../types/auth/LoginResponse';
+import {logNow} from '../../utils/functions/logBinder';
 import {
   AUTH_ERR_LOG_IN,
   AUTH_ERR_LOG_OUT,
@@ -38,7 +41,7 @@ export const reduxLogin =
     userService
       .login(username, password)
       .then(async (res: LoginResponse) => {
-        logNow('auth reducer ==>',res);
+        logNow('auth reducer ==>', res);
         const userToken = res?.access_token;
         const refreshToken = res?.refresh_token;
         const isFirstLogin = res?.first_login;
@@ -57,7 +60,7 @@ export const reduxLogin =
       })
       .catch((err: LoginErrorResponse) => {
         logNow('User auth login redux action error block', err);
-        dispatch(errorLogIn(err.errMsg.data.error));
+        dispatch(errorLogIn(err.errMsg.data.message));
       })
       .finally(async () => {
         dispatch(loggingIn(false));
@@ -79,10 +82,7 @@ export const errorLogOut = (errorMessage: any) => ({
 });
 
 export const logout =
-  () =>
-  async (
-    dispatch: (arg0: {type: string; payload?: any}) => void,
-  ) => {
+  () => async (dispatch: (arg0: {type: string; payload?: any}) => void) => {
     dispatch(loggingOut(true));
     await userService
       .logout()

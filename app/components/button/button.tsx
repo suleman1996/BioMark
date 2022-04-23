@@ -30,6 +30,7 @@ export default function button(props: Props) {
             styles.btn,
             {backgroundColor: props?.disabled ? '#8493AE60' : colors.blue},
           ]}
+          labelStyle={{color: colors.whiteColor}}
           onPress={props.onPress}>
           {props.title}
         </Button>
