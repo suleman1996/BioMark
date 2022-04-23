@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react';
 
 const request = axios.create({
   // baseURL: 'https://bm-qa-api.biomarking.com',  prod

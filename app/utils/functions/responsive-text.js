@@ -1,6 +1,6 @@
-import { Dimensions, Platform } from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const ifHeightGreater1520 = height > 1530 ? 1 : 0.9;
 const ifHeightGreater1520IOS = height > 1530 ? 1.1 : 1;
 export function responsiveFontSize(fontSize) {
@@ -16,8 +16,8 @@ export function responsiveFontSize(fontSize) {
           ? 0.75
           : 0.875
         : width > 750
-          ? 1.1
-          : ifHeightGreater1520IOS;
+        ? 1.1
+        : ifHeightGreater1520IOS;
   } else if (Platform.OS === 'android') {
     ratioX =
       width < 361
@@ -25,8 +25,8 @@ export function responsiveFontSize(fontSize) {
           ? 0.75
           : 0.875
         : width >= 750
-          ? 1.1
-          : ifHeightGreater1520;
+        ? 1.1
+        : ifHeightGreater1520;
   }
 
   return ratioX * fontSize;

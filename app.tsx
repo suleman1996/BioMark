@@ -1,7 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {extendTheme, NativeBaseProvider} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {Platform, StatusBar, StyleSheet, useColorScheme} from 'react-native';
+import {Platform, StatusBar, useColorScheme} from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import {MenuProvider} from 'react-native-popup-menu';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -15,14 +14,12 @@ import {loggedIn} from './app/store/auth/auth-actions';
 import {IAppState} from './app/store/IAppState';
 import {store} from './app/store/store';
 import AuthContext from './app/utils/auth-context';
-import {GlobalFonts} from './app/utils/theme/fonts';
 
 const NavigationCheckIfLoggedIn = () => {
   const dispatch = useDispatch();
 
   async function getAuthTokenIfInAsyncStorage() {
     const data = await getAuthAsyncStorage();
-    // logNow('Auth Async Storage', data)
     dispatch(loggedIn(data));
   }
 
@@ -69,7 +66,5 @@ const App = () => {
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default App;

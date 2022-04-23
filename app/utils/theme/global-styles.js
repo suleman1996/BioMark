@@ -9,8 +9,6 @@ export const GlobalStyles = {
     shadowColor: 'lightgray',
     shadowOpacity: 0.4,
     elevation: 2,
-    // background color must be set
-    // backgroundColor: '#0000', // invisible color
   },
   shadow2: {
     shadowOffset: {width: 5},

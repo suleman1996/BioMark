@@ -7,4 +7,3 @@ export const GlobalFonts = {
   extraBold: 'Mukta-ExtraBold',
   extraLight: 'Mukta-ExtraLight',
 };
-
