@@ -8,7 +8,9 @@ import { heightToDp, widthToDp } from '../../../../../utils/functions/responsive
 import DatePicker from '../../../../../components/date-picker/date-picker';
 import { responsiveFontSize } from '../../../../../utils/functions/responsiveText';
 import { GlobalFonts } from '../../../../../utils/theme/fonts';
+import {goBack} from '../../../../../services/navRef';
 import { Provider, Appbar, RadioButton } from 'react-native-paper';
+
 import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
 const PersonalInformationScreen = () => {
   const [value, setValue] = useState('first');
@@ -38,6 +40,10 @@ const PersonalInformationScreen = () => {
       <Button
         disabled={firstName.length > 0 && lastName.length > 0 && value ? false : true}
         title="Save & Continue"
+        onPress={() => {
+          goBack();
+        }}
+        
       />
     </TitleWithBackLayout>
   );

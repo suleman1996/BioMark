@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, ScrollView, SafeAreaView} from 'react-native';
 import React, {useState} from 'react';
 import {Provider, Appbar, RadioButton} from 'react-native-paper';
+import {goBack} from '../../../../../../services/navRef';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import {GlobalColors} from '../../../../../../utils/theme/globalColors';
@@ -124,7 +125,12 @@ export default function ExerciseScreen() {
             </View>
           ) : null}
         </ScrollView>
-        <ButtonWithShadowContainer title="Save" />
+        <ButtonWithShadowContainer
+          title="Save"
+          onPress={() => {
+            goBack();
+          }}
+        />
       </TitleWithBackLayout>
     </SafeAreaView>
   );
