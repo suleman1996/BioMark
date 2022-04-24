@@ -23,7 +23,7 @@ export interface NotificationMessage {
 }
 
 export interface NotificationMessageRequest {
-  unreadBooking: any
+  unreadBooking: any;
 }
 
 export enum NotificationType {
@@ -35,7 +35,7 @@ export enum NotificationType {
   medication_reminder = 'medication_reminder',
   missed_medication = 'missed_medication',
   covid = 'covid',
-  covid_result = 'covid_result'
+  covid_result = 'covid_result',
 }
 
 export interface RegisterDeviceRequest {

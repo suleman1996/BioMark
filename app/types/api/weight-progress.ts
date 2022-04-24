@@ -4,9 +4,9 @@ import { WeightUnit } from 'src/app/modules/progress/models/measurement-units';
 
 export interface WeightProgressEntryRequest {
   medical: {
-    weight: string,
-    is_metric: boolean,
-    date_entry: string
+    weight: string;
+    is_metric: boolean;
+    date_entry: string;
   };
 }
 
@@ -61,9 +61,11 @@ export interface WeightProgressLogsFilters {
 }
 
 export type WeightProgressLogsResponse = ApiResponse<WeightProgressLogsPayload>;
-export type WeightProgressChartDataResponse = ApiResponse<WeightProgressChartDataPayload>;
+export type WeightProgressChartDataResponse =
+  ApiResponse<WeightProgressChartDataPayload>;
 
-export type WeightProgressEntryResponse = ApiResponse<WeightProgressEntryPayload>;
+export type WeightProgressEntryResponse =
+  ApiResponse<WeightProgressEntryPayload>;
 
 export const defaultWeightProgressChartFilters = {
   date: RangeValue.sevenDays,

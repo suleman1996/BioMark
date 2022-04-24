@@ -28,7 +28,7 @@ export interface CreateNewProfileResponse {
 // Biomark enum
 export enum GenderValues {
   male = '1',
-  female = '2'
+  female = '2',
 }
 
 export type Gender = GenderValues.male | GenderValues.female;

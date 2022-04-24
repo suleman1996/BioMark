@@ -1,3 +1,3 @@
 export const customHttpHeaders = {
-  'x-biomark-group': 'patient'
+  'x-biomark-group': 'patient',
 };

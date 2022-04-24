@@ -1,6 +1,6 @@
 import { ApiResponse } from './api-response';
 
-export type BillplzPaymentResponse = ApiResponse<BillplzPayment>
+export type BillplzPaymentResponse = ApiResponse<BillplzPayment>;
 
 export interface BillplzPayment {
   url: string;
@@ -15,5 +15,5 @@ export interface CreateBillplzPaymentRequest {
     email: string;
     callback: string;
     redirect: string;
-  }
+  };
 }

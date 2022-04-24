@@ -30,9 +30,9 @@ export interface VerifyPhoneRequest {
 
 export interface VerifyPhoneResponse {
   status: boolean;
-  data:{
+  data: {
     available: boolean;
-  }
+  };
 }
 
 export interface SignUpResponse {
@@ -50,10 +50,10 @@ export interface SignUpResendRequest {
 }
 
 export interface SignUpResendResponse {
-  status: boolean,
+  status: boolean;
   data: {
     message: string;
-  }
+  };
 }
 
 export interface SignUpConfirmRequest {

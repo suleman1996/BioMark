@@ -31,15 +31,17 @@ export interface LatestHba1CResponse {
 export interface CreateTargetResponse {
   status: boolean;
   data: {
-    message: string
+    message: string;
   };
 }
 
 export interface SetDefaultTargetResponse {
   status: boolean;
-  data: [{
-    message: string
-  }];
+  data: [
+    {
+      message: string;
+    }
+  ];
 }
 
 export interface GetBloodSugarTargetsResponse {
@@ -64,7 +66,6 @@ export interface GetBloodSugarTargetsResponseData {
   target_create_by: string;
   unit_name: string;
 }
-
 
 export interface GetHba1cTargetsResponseData {
   unit_list_id: number;

@@ -1,6 +1,6 @@
 import { ApiResponse } from './api-response';
 
-export type StripePaymentResponse = ApiResponse<StripePayment>
+export type StripePaymentResponse = ApiResponse<StripePayment>;
 
 export interface StripePayment {
   description: string;
@@ -15,10 +15,10 @@ export interface CreateStripePaymentRequest {
     currency: string;
     description: string;
     card_token: string;
-  }
+  };
 }
 
-export type StripeSessionResponse = ApiResponse<StripeSession>
+export type StripeSessionResponse = ApiResponse<StripeSession>;
 
 export interface StripeSession {
   id: string;
@@ -34,7 +34,7 @@ export interface CreateStripeSessionRequest {
     pay_methods: string[];
     items: PaymentItem[];
     voucher: string;
-  }
+  };
 }
 
 export interface PaymentItem {

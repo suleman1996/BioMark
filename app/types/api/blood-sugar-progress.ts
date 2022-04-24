@@ -104,11 +104,15 @@ export interface BloodSugarProgressSetupPayload {
   unit_list: BloodSugarProgressUnitPayload[];
 }
 
-export type BloodSugarProgressLogsResponse = ApiResponse<BloodSugarProgressLogsPayload>;
-export type BloodSugarProgressChartDataResponse = ApiResponse<BloodSugarProgressChartDataPayload>;
+export type BloodSugarProgressLogsResponse =
+  ApiResponse<BloodSugarProgressLogsPayload>;
+export type BloodSugarProgressChartDataResponse =
+  ApiResponse<BloodSugarProgressChartDataPayload>;
 
-export type BloodSugarProgressEntryResponse = ApiResponse<BloodSugarProgressEntryPayload>;
-export type BloodSugarProgressSetupResponse = ApiResponse<BloodSugarProgressSetupPayload>;
+export type BloodSugarProgressEntryResponse =
+  ApiResponse<BloodSugarProgressEntryPayload>;
+export type BloodSugarProgressSetupResponse =
+  ApiResponse<BloodSugarProgressSetupPayload>;
 
 export interface BloodSugarProgressChartFilters {
   date: string;
@@ -125,7 +129,7 @@ export interface BloodSugarProgressLogsFilters {
 export enum BloodSugarTrackerStatus {
   low = 'low',
   normal = 'normal',
-  high = 'high'
+  high = 'high',
 }
 
 export const defaultBloodSugarProgressChartFilters = {
@@ -137,7 +141,7 @@ export const defaultBloodSugarProgressChartFilters = {
 export const defaultBloodSugarProgressLogsFilters = {
   meal: MealTypeUnit.all,
   unit: 1,
-  page: 1
+  page: 1,
 } as BloodSugarProgressLogsFilters;
 
 export interface BloodSugarInfo {

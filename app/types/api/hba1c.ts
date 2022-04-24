@@ -81,7 +81,8 @@ export interface Hba1CProgressLogsFilters {
 }
 
 export type Hba1CProgressLogsResponse = ApiResponse<Hba1CProgressLogsPayload>;
-export type Hba1CProgressChartDataResponse = ApiResponse<Hba1CProgressChartDataPayload>;
+export type Hba1CProgressChartDataResponse =
+  ApiResponse<Hba1CProgressChartDataPayload>;
 
 export type Hba1CProgressEntryResponse = ApiResponse<Hba1CProgressEntryPayload>;
 
@@ -100,10 +101,10 @@ export const defaultHba1CProgressLogsFilters = {
 export enum HbA1CTrackerStatus {
   low = 'low',
   normal = 'normal',
-  high = 'high'
+  high = 'high',
 }
 
-export type HbA1CUnitResponse = ApiResponse<HbA1CUnitResponseData> ;
+export type HbA1CUnitResponse = ApiResponse<HbA1CUnitResponseData>;
 
 export interface HbA1CUnitResponseData {
   unit_list: {

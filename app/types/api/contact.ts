@@ -11,4 +11,3 @@ export interface UpdateEmailRequest {
 export interface Contact {
   email: string;
 }
-

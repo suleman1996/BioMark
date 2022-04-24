@@ -83,7 +83,8 @@ export interface MedicationTrackerSetupEntry {
   record_date: string;
 }
 
-export type MedicationTrackerSetupResponse = ApiResponse<MedicationTrackerSetup>;
+export type MedicationTrackerSetupResponse =
+  ApiResponse<MedicationTrackerSetup>;
 
 export interface MedicationListEntry {
   name: string;

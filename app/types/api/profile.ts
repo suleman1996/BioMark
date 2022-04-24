@@ -3,17 +3,17 @@ import { ApiResponse } from './api-response';
 export type ProfileResponse = ApiResponse<Profile>;
 
 export interface ProfileUpdateRequest {
-  'first_name': string;
-  'last_name': string;
-  'birth_date': string;
-  'gender_id': number;
-  'email': string;
+  first_name: string;
+  last_name: string;
+  birth_date: string;
+  gender_id: number;
+  email: string;
 }
 
 export interface ProfileLangRequest {
   profile: {
-    'app_lang': string;
-  }
+    app_lang: string;
+  };
 }
 
 export interface SetLangProfileResponse {
@@ -46,19 +46,19 @@ export interface Profile {
   eorder_alias: any; // TODO Response type is unkown atm
   gender_attribute: {
     id: number;
-    name: string
+    name: string;
   };
   country_attribute: {
     id: number;
     name: string;
     dial_code: string;
-    code: string
+    code: string;
   };
   ic_attribute: {
     id: number;
     id_number: string;
     id_source: string;
-    status: boolean
+    status: boolean;
   };
   contact_attribute: {
     id: number;
@@ -75,5 +75,5 @@ export enum Ethnicity {
   filipino = 'Filipino',
   indian = 'Indian',
   malay = 'Malay',
-  na = 'Other / NA'
+  na = 'Other / NA',
 }

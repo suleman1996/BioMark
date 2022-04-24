@@ -44,7 +44,16 @@ export interface MedicalTemplateAttribute {
   content: MedicalTemplateContent;
 }
 
-export type MedicalTemplateType = 'personal' | 'family' | 'vaccine' | 'allergy' | 'smoking' | 'drinking' | 'exercise' | 'sleeping' | 'stress';
+export type MedicalTemplateType =
+  | 'personal'
+  | 'family'
+  | 'vaccine'
+  | 'allergy'
+  | 'smoking'
+  | 'drinking'
+  | 'exercise'
+  | 'sleeping'
+  | 'stress';
 
 export interface MedicalTemplateContent {
   name: string;
@@ -67,7 +76,13 @@ export interface MedicalTemplateField {
   dependent_value: string;
 }
 
-export type MedicalTemplateFieldType = 'multi_text' | 'radio' | 'dropdown' | 'dropdown_with_other' | 'multi_select' | 'slider';
+export type MedicalTemplateFieldType =
+  | 'multi_text'
+  | 'radio'
+  | 'dropdown'
+  | 'dropdown_with_other'
+  | 'multi_select'
+  | 'slider';
 
 export enum MedicalRiskFieldId {
   status = 'status',
@@ -93,24 +108,24 @@ export enum MedicalRiskFieldId {
   statusTreatment = 'statusTreatment',
   treatmentType = 'treatmentType',
   otherCondition = 'otherCondition',
-  medications = 'medications'
+  medications = 'medications',
 }
 
 export enum MedicalRiskFieldBoolean {
   true = 'Yes',
-  false = 'No'
+  false = 'No',
 }
 
 export enum MedicalRiskAllergyField {
   'No',
   'Yes',
-  'Not Sure'
+  'Not Sure',
 }
 
 export enum MedicalRiskVaccineField {
   'No',
   'Yes',
-  "Yes, but I'm not sure which vaccines"
+  "Yes, but I'm not sure which vaccines",
 }
 
 // Hard-coded strings from API, hurray!

@@ -44,5 +44,4 @@ export interface DocumentAttachment {
   filetype: 'jpg' | 'png';
 }
 
-
 export type LabUploadResponse = ApiResponse<LabUploadPayload>;

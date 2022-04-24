@@ -40,9 +40,9 @@ export interface DashboardData {
 
 export interface ProgramDetailResponseData {
   barcode: string;
-  onboard_diabetes: boolean,
-  onboard_hypertension: boolean,
-  program_id: number,
-  program_name: string,
-  terms: boolean
+  onboard_diabetes: boolean;
+  onboard_hypertension: boolean;
+  program_id: number;
+  program_name: string;
+  terms: boolean;
 }

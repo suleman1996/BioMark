@@ -1,9 +1,9 @@
 export interface WtfIsMyIpData {
   status: boolean;
   data: {
-    ip: string,
-    location: string,
-    code: string,
+    ip: string;
+    location: string;
+    code: string;
   };
 }
 

@@ -10,7 +10,12 @@ export interface LifestyleResponsePayload {
 
 export type LifestyleResponse = ApiResponse<LifestyleResponsePayload>;
 
-export type LifestyleSection = LifestyleSmoking | LifestyleDrinking | LifestyleExercise | LifestyleSleep | LifestyleStress;
+export type LifestyleSection =
+  | LifestyleSmoking
+  | LifestyleDrinking
+  | LifestyleExercise
+  | LifestyleSleep
+  | LifestyleStress;
 
 export interface LifestyleSmoking {
   is_smoking: string;

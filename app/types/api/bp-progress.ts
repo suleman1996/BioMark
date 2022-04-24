@@ -4,9 +4,9 @@ import { BloodPressureUnit } from '../../modules/progress/models/measurement-uni
 
 export interface BloodPressureProgressEntryRequest {
   medical: {
-    bp_systolic: string,
-    bp_diastolic: string,
-    date_entry: string
+    bp_systolic: string;
+    bp_diastolic: string;
+    date_entry: string;
   };
 }
 
@@ -62,10 +62,13 @@ export interface BloodPressureProgressChartDataPayload {
   chart: BloodPressureProgressChartDataPoint[];
 }
 
-export type BloodPressureProgressLogsResponse = ApiResponse<BloodPressureProgressLogsPayload>;
-export type BloodPressureProgressChartDataResponse = ApiResponse<BloodPressureProgressChartDataPayload>;
+export type BloodPressureProgressLogsResponse =
+  ApiResponse<BloodPressureProgressLogsPayload>;
+export type BloodPressureProgressChartDataResponse =
+  ApiResponse<BloodPressureProgressChartDataPayload>;
 
-export type BloodPressureProgressEntryResponse = ApiResponse<BloodPressureProgressEntryPayload>;
+export type BloodPressureProgressEntryResponse =
+  ApiResponse<BloodPressureProgressEntryPayload>;
 
 export const defaultBloodPressureProgressLogsFilters = {
   date: RangeValue.sevenDays,

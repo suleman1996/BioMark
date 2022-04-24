@@ -107,7 +107,8 @@ export interface LabStatusPayload {
   status_name: string;
 }
 
-export type EncodedResultOverviewResponse = ApiResponse<EncodedResultOverviewPayload>;
+export type EncodedResultOverviewResponse =
+  ApiResponse<EncodedResultOverviewPayload>;
 export type LabResultResponse = ApiResponse<LabResultPayload>;
 
 export interface LabStatusResponse {
@@ -141,12 +142,12 @@ export interface ResultVerifyAvailabilityResponse {
 export interface ResultVerifyResponse {
   status: boolean;
   data: {
-    status: boolean,
-    type: string,
-    method: string,
-    message?: string,
+    status: boolean;
+    type: string;
+    method: string;
+    message?: string;
     data?: {
-      lab_id?: number
+      lab_id?: number;
     };
   };
 }

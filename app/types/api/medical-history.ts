@@ -4,13 +4,16 @@ import { LifestyleResponsePayload } from './lifestyle';
 
 export interface MedicalHistoryRequest {
   medical_history: {
-    ethnic?: string,
-    conditions: MedicalHistoryCondition[]
+    ethnic?: string;
+    conditions: MedicalHistoryCondition[];
   };
 }
 
 export interface MedicalHistoryItemRequest {
-  medical_history: MedicalHistoryCondition | MedicalHistoryCondition[] | MedicalHistoryAllergyRequest;
+  medical_history:
+    | MedicalHistoryCondition
+    | MedicalHistoryCondition[]
+    | MedicalHistoryAllergyRequest;
 }
 
 export interface MedicalHistoryExerciseRequest {
@@ -27,14 +30,14 @@ export interface MedicalHistoryStressRequest {
 }
 
 export interface MedicalHistoryAllergyCondition {
-  has_condition: boolean,
-  allergy_to: string,
-  allergy_type: string
+  has_condition: boolean;
+  allergy_to: string;
+  allergy_type: string;
 }
 
 export interface MedicalHistoryAllergyRequest {
-  has_allergy: number,
-  conditions: MedicalHistoryAllergyCondition[]
+  has_allergy: number;
+  conditions: MedicalHistoryAllergyCondition[];
 }
 
 export interface MedicalHistorySleepingRequest {
@@ -44,8 +47,8 @@ export interface MedicalHistorySleepingRequest {
 }
 
 export interface MedicalHistoryVaccineValue {
-  has_condition: number,
-  vaccine_list: string
+  has_condition: number;
+  vaccine_list: string;
 }
 
 export interface MedicalHistoryCondition {
@@ -85,7 +88,8 @@ export interface MedicalHistoryStressValue {
   question4: string;
 }
 
-export type MedicalHistoryStressResponse = ApiResponse<MedicalHistoryStressValue>;
+export type MedicalHistoryStressResponse =
+  ApiResponse<MedicalHistoryStressValue>;
 export type MedicalHistoryResponse = ApiResponse<MedicalHistoryResponseData>;
 export type MedicalHistoryItemResponse = ApiResponse<MedicalHistoryItem>;
 
@@ -96,8 +100,9 @@ export interface MedicalHistoryResponseData {
   allergy: MedicalHistoryItem | null;
 }
 
-export interface MedicalHistoryWithLifestyle extends MedicalHistoryResponseData, LifestyleResponsePayload {
-}
+export interface MedicalHistoryWithLifestyle
+  extends MedicalHistoryResponseData,
+    LifestyleResponsePayload {}
 
 export interface MedicalHistoryItem {
   id: number;
