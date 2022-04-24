@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import ModalButtonComponent from 'components/higher-order/modal-button';
 import { goBack } from 'services/nav-ref';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from 'components/layouts/back-with-title/index';
@@ -120,12 +120,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalColors.primaryGray,
     flex: 1,
-    paddingHorizontal: widthToDp(4),
+    paddingHorizontal: 15,
     paddingTop: heightToDp(3),
   },
   label: {
     fontSize: responsiveFontSize(16),
-    fontFamily: GlobalFonts.medium,
+    fontFamily: GlobalFonts.semiBold,
     color: GlobalColors.darkPrimary,
     marginTop: heightToDp(2),
   },

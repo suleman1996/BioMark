@@ -2,10 +2,10 @@ import { Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 
-import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
-import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
-import TextInput from '../../../../../../components/text-input-button';
+import TitleWithBackLayout from 'components/layouts/back-with-title';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { GlobalColors } from 'utils/theme/global-colors';
+import TextInput from 'components/text-input-button';
 import { styles } from './styles';
 
 export default function VaccinationScreen() {
