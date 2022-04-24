@@ -1,6 +1,5 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Keyboard,
   Platform,
@@ -29,7 +28,6 @@ import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
-import AuthContext from 'utils/auth-context';
 import styles from './styles';
 
 export default function Login() {
@@ -47,7 +45,6 @@ export default function Login() {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
-  const [textToken, setText] = useState('');
 
   GoogleSignin.configure({
     webClientId:
@@ -137,6 +134,7 @@ export default function Login() {
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
+    console.log('appleAuthRequestResponse', appleAuthRequestResponse);
 
     // get current authentication state for user
     // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
@@ -214,7 +212,6 @@ export default function Login() {
             <Text style={styles.forgotPassword}>Forgot password?</Text>
           </TouchableOpacity>
         </View>
-        <Text>{textToken}</Text>
         <Button
           onPress={() => handleLogin()}
           disabled={

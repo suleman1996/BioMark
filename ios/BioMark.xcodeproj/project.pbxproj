@@ -12,6 +12,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2E6A100189AAD44EAEBF1269 /* libPods-BioMark-BioMarkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 266E47A755F2454FA7A5C69B /* libPods-BioMark-BioMarkTests.a */; };
 		477FB7FA281158D40055B6D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 477FB7F9281158D40055B6D4 /* GoogleService-Info.plist */; };
+		479D527828149A1D000A09CA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		479F8B2E28105BB3007C1715 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479F8B2D28105BB3007C1715 /* File.swift */; };
 		47EBC11B28102636000492F8 /* Mukta-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EBC11428102635000492F8 /* Mukta-Light.ttf */; };
 		47EBC11C28102636000492F8 /* Mukta-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47EBC11528102635000492F8 /* Mukta-Medium.ttf */; };
@@ -312,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479D527828149A1D000A09CA /* Images.xcassets in Resources */,
 				47EBC11E28102636000492F8 /* Mukta-SemiBold.ttf in Resources */,
 				477FB7FA281158D40055B6D4 /* GoogleService-Info.plist in Resources */,
 				47EBC12128102636000492F8 /* Mukta.ttf in Resources */,
