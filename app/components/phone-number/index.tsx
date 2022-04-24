@@ -3,7 +3,8 @@ import { TextInput, View } from 'react-native';
 import CountryPicker, {
   DEFAULT_THEME,
 } from 'react-native-country-picker-modal';
-import colors from '../../assets/colors';
+
+import colors from 'assets/colors';
 import styles from './styles';
 
 type Props = {
@@ -19,11 +20,6 @@ type Props = {
 
 export default function phoneNumber(props: Props) {
   const { width, placeholder } = props;
-  const onSelect = (Country: any) => {
-    props.setCountryCode(Country.cca2);
-    props.setSelectCountryCode(Country.callingCode[0]);
-    console.log(Country);
-  };
   const [preferredCountries, setPreferredCountries] = useState([
     'MY',
     'PH',
@@ -32,6 +28,12 @@ export default function phoneNumber(props: Props) {
     'TH',
     'VN',
   ]);
+
+  const onSelect = (Country: any) => {
+    props.setCountryCode(Country.cca2);
+    props.setSelectCountryCode(Country.callingCode[0]);
+  };
+
   return (
     <View
       style={[

@@ -10,34 +10,27 @@ import {
   View,
 } from 'react-native';
 import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
-import { showMessage } from 'react-native-flash-message';
 import { useDispatch, useSelector } from 'react-redux';
-import colors from '../../../assets/colors';
-import fonts from '../../../assets/fonts';
-import Apple from '../../../assets/svgs/apple';
-import Facebook from '../../../assets/svgs/facebook';
-import Google from '../../../assets/svgs/google';
-import Logo from '../../../assets/svgs/logo-name';
-import Button from '../../../components/button/button';
-import ErrorModal from '../../../components/error-modal';
-import TextInput from '../../../components/input-field/text-input';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { navigate } from '../../../services/nav-ref';
-import {
-  reduxDeviceRegister,
-  reduxLogin,
-} from '../../../store/auth/auth-actions';
-import { IAppState } from '../../../store/IAppState';
-// import InputField from '../../components/inputField/inputField';
-import AuthContext from '../../../utils/auth-context';
-import styles from './styles';
 import auth from '@react-native-firebase/auth';
-import {
-  AppleButton,
-  appleAuth,
-} from '@invertase/react-native-apple-authentication';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import Apple from 'assets/svgs/apple';
+import Facebook from 'assets/svgs/facebook';
+import Google from 'assets/svgs/google';
+import Logo from 'assets/svgs/logo-name';
+import Button from 'components/button/button';
+import ErrorModal from 'components/error-modal';
+import TextInput from 'components/input-field/text-input';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import PhoneNumber from 'components/phone-number';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { reduxLogin } from 'store/auth/auth-actions';
+import { IAppState } from 'store/IAppState';
+import AuthContext from 'utils/auth-context';
+import styles from './styles';
 
 export default function Login() {
   // redux
@@ -47,19 +40,13 @@ export default function Login() {
     (state: IAppState) => state.auth
   );
 
-  const navigations = useNavigation();
-  const authcontext = useContext(AuthContext);
-
   const [hidePassword, setHidePassword] = useState(true);
   const [password, setPassword] = useState('');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [selectCountryCode, setSelectCountryCode] = useState('60');
-  const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
-  const [userGoogleInfo, setUserGoogleInfo] = useState({});
-  const [loaded, setLoaded] = useState(false);
   const [textToken, setText] = useState('');
 
   GoogleSignin.configure({
@@ -78,26 +65,7 @@ export default function Login() {
     }
   }, [selectCountryCode]);
 
-  const GoogleLogin = async () => {
-    // GoogleSignin.signOut();
-    // await GoogleSignin.hasPlayServices()
-    //   .then(response => {
-    //     console.log('Play Services Response', response);
-    //     GoogleSignin.signIn()
-    //       .then(data => {
-    //         console.log('Google Accounts Data ', Platform.OS, ' ', data.user);
-    //         GoogleSignin.getTokens().then({});
-    //         // props.navigation.navigate(TOP_TAB_BAR);
-    //         authcontext.setUser(data.user.email);
-    //       })
-    //       .catch(error => {
-    //         console.log('SignIn error --->', error);
-    //       });
-    //   })
-    //   .catch(error => {
-    //     console.log('Play services error --->', error);
-    //     // Toast.show(error, Toast.LONG);
-    //   });
+  const onGoogleLogin = async () => {
     GoogleSignin.signOut();
     GoogleSignin.configure({
       webClientId:
@@ -113,7 +81,7 @@ export default function Login() {
     });
   };
 
-  const FacebookLogin = async () => {
+  const onFacebookLogin = async () => {
     LoginManager.logOut();
     await LoginManager.logInWithPermissions().then(
       async function (result) {
@@ -161,10 +129,6 @@ export default function Login() {
   useEffect(() => {
     if (errorMessageLogin) {
       setLoginError(true);
-      // showMessage({
-      //   message: errorMessageLogin,
-      //   type: 'danger',
-      // });
     }
   }, [errorMessageLogin]);
   async function onAppleButtonPress() {
@@ -193,6 +157,7 @@ export default function Login() {
   const handleFedrationLogin = async (accessToken: string) => {
     console.log('accessToken', accessToken);
   };
+
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={loggingIn} />
@@ -246,7 +211,7 @@ export default function Login() {
             style={{ marginVertical: 30 }}
             onPress={() => navigate(Nav_Screens.Forgot_Password)}
           >
-            <Text style={styles.forgotPassword}>Forgot Password?</Text>
+            <Text style={styles.forgotPassword}>Forgot password?</Text>
           </TouchableOpacity>
         </View>
         <Text>{textToken}</Text>
@@ -280,10 +245,10 @@ export default function Login() {
               <Apple height="24" width="24" />
             </TouchableOpacity>
           )}
-          <TouchableOpacity onPress={() => FacebookLogin()}>
+          <TouchableOpacity onPress={() => onFacebookLogin()}>
             <Facebook height="20" width="20" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => GoogleLogin()}>
+          <TouchableOpacity onPress={() => onGoogleLogin()}>
             <Google />
           </TouchableOpacity>
         </View>
@@ -292,7 +257,7 @@ export default function Login() {
           <TouchableOpacity onPress={() => navigate(Nav_Screens.Sign_Up)}>
             <Text style={styles.noAccountTxt}>
               <Text style={{ color: colors.black }}>Dont have an account?</Text>
-              <Text style={{ color: colors.blue }}> SignUp</Text>
+              <Text style={{ color: colors.blue }}> Sign up</Text>
             </Text>
           </TouchableOpacity>
         </View>

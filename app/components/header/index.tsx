@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import ArrowBack from '../../assets/svgs/arrow-back';
-import colors from '../../assets/colors';
-import fonts from '../../assets/fonts';
+
+import ArrowBack from 'assets/svgs/arrow-back';
+import fonts from 'assets/fonts';
 
 type Props = {
   title: string;
 };
 
-export default function header(props: Props) {
+export default function Header(props: Props) {
   const navigations = useNavigation();
+
   return (
     <>
       <View style={{ overflow: 'hidden', paddingBottom: 5 }}>
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    //   backgroundColor: 'red',
   },
   title: { marginLeft: 5, fontFamily: fonts.regular, fontSize: 16 },
 });

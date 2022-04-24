@@ -1,16 +1,13 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalStyles } from '../../../utils/theme/global-styles';
-import { hitSlop } from '../../../constants/hit-slop';
-import { goBack } from '../../../services/nav-ref';
+
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { hitSlop } from 'constants/hit-slop';
+import { goBack } from 'services/nav-ref';
 
 type Props = {
   children: any;
@@ -49,7 +46,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: widthToDp(4),
     paddingTop: heightToDp(2.5),
     paddingBottom: heightToDp(2),
-    // ...GlobalStyles.shadow
     borderBottomWidth: 0.3,
   },
   titleContainer: {

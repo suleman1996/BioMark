@@ -1,13 +1,11 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../../../../../assets/colors';
-import { responsiveFontSize } from '../../../../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../../../../utils/theme/fonts';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../../../utils/functions/responsive-dimensions';
-import fonts from '../../../../../../assets/fonts';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
+
+import colors from 'assets/colors';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import fonts from 'assets/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -47,7 +45,6 @@ export const styles = StyleSheet.create({
   },
   container2: {
     marginHorizontal: heightToDp(5),
-    // marginTop:10,
     borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
     backgroundColor: '#EBEFF2',

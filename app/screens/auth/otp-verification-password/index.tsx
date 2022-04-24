@@ -8,16 +8,16 @@ import {
   View,
 } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
-import colors from '../../../assets/colors';
-import Button from '../../../components/button/button';
-import Header from '../../../components/header';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import OtpInput from '../../../components/otp/otp-input';
-import { Nav_Screens } from '../../../navigation/constants';
-import { forgotPassword } from '../../../services/auth-service';
-import { navigate } from '../../../services/nav-ref';
-import { userService } from '../../../services/user-service/user-service';
-import { logNow } from '../../../utils/functions/log-binder';
+
+import colors from 'assets/colors';
+import Button from 'components/button/button';
+import Header from 'components/header';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import OtpInput from 'components/otp/otp-input';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
+import { logNow } from 'utils/functions/log-binder';
 import styles from './style';
 
 type Props = {
@@ -27,8 +27,6 @@ type Props = {
 export default function OtpPassword(props: Props) {
   const { phone } = props.route.params;
 
-  const navigations = useNavigation();
-  const route = useRoute();
   let initialMinutes = 1;
   let initialSeconds = 0;
 

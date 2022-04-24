@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import DropdownMenuComponent from '../../../../../../../../components/base/dropdown-menu';
-import ModalWithBottomBtn from '../../../../../../../../components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from '../../../../../../../../components/higher-order/radio-question';
-import Textinput from '../../../../../../../../components/text-input-button';
-import { heightToDp } from '../../../../../../../../utils/functions/responsive-dimensions';
-import { GlobalStyles } from '../../../../../../../../utils/theme/global-styles';
+
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import TextInput from 'components/text-input-button';
 
 const options = [{ title: 'Blood' }, { title: 'Breast' }];
 
@@ -32,7 +29,7 @@ const FoodModal = ({ isVisible, setIsVisible }: Props) => {
       <RadioButtonQuestionComponent isTrue={ans1} setIsTrue={setAns1} />
       {ans1 ? (
         <>
-          <Textinput
+          <TextInput
             question="Please list these foods"
             placeholder="Enter food"
           />
@@ -43,5 +40,3 @@ const FoodModal = ({ isVisible, setIsVisible }: Props) => {
 };
 
 export default FoodModal;
-
-const styles = StyleSheet.create({});

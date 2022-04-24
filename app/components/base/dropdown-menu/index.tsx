@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
 import { Picker } from '@react-native-picker/picker';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../utils/theme/global-colors';
+
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 const DropdownMenuComponent = ({
   options,
@@ -17,9 +16,6 @@ const DropdownMenuComponent = ({
       <Picker
         mode="dropdown"
         selectedValue={setSelectedDropdown}
-        // onValueChange={(itemValue, itemIndex) =>
-        //   setSelectedLanguage(itemValue)
-        // }
         onValueChange={onValueChange}
       >
         {options?.map((item, index) => {

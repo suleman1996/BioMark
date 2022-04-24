@@ -1,24 +1,21 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { TextInput } from 'react-native-paper';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useRef } from 'react';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import InputField from '../../input-field/input-field';
-import colors from '../../../assets/colors';
+
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import colors from 'assets/colors';
 
 type Props = {
   label: string;
   placeholder: string;
   height: number | string;
   textAlign: string | number;
+  onChangeText: (text: string) => void;
 };
 
 const HeightChooserComponent = ({
@@ -50,7 +47,6 @@ const HeightChooserComponent = ({
           placeholder={placeholder}
           placeholderTextColor={colors.placeHolder}
           style={[styles.textFieldStyle, otherStyle]}
-          //   keyboardType={'email-address'}
           onChangeText={onChangeText}
           value={value}
           autoFocus={true}
@@ -123,7 +119,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(40),
     width: '80%',
     color: '#3D3D3D',
-    // marginHorizontal: 10,
     backgroundColor: GlobalColors.gray,
     fontFamily: GlobalFonts.bold,
     borderWidth: 0,

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import DropdownMenuComponent from '../../../../../../../components/base/dropdown-menu';
-import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
-import { heightToDp } from '../../../../../../../utils/functions/responsive-dimensions';
-import { GlobalStyles } from '../../../../../../../utils/theme/global-styles';
+import { Text, View } from 'react-native';
+
+import DropdownMenuComponent from 'components/base/dropdown-menu';
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalStyles } from 'utils/theme/global-styles';
 
 const options = [{ title: 'Blood' }, { title: 'Breast' }];
 
@@ -52,5 +53,3 @@ const CancerModal = ({ isVisible, setIsVisible }: Props) => {
 };
 
 export default CancerModal;
-
-const styles = StyleSheet.create({});

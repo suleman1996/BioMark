@@ -16,7 +16,7 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
   "rnpm": {
     "assets": [
       "./src/app/assets/fonts/"

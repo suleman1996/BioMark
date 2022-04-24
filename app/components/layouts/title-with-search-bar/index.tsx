@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import SearchBarWithLeftScanIcon from '../../higher-order/search-bar-with-left-scan-icon/index';
+
+import SearchBarWithLeftScanIcon from 'components/higher-order/search-bar-with-left-scan-icon/index';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   children: any;

@@ -1,5 +1,4 @@
 export const options = [
-  // { title: null },
   { title: '1990' },
   { title: '1991' },
   { title: '1992' },

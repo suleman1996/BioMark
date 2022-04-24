@@ -6,14 +6,12 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import colors from '../../../assets/colors';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/global-colors';
+
+import colors from 'assets/colors';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   options?: any;
@@ -23,8 +21,7 @@ type Props = {
 const RelationMenu = ({ options, label }: Props) => {
   const menuRef = useRef<any>();
   const [selected, setSelected] = useState();
-  const selectedStyles = { backgroundColor: GlobalColors.primary };
-  const selectedTextStyle = { color: GlobalColors.white };
+
   return (
     <View style={styles.main}>
       {label ? <Text style={styles.label}>{label}</Text> : null}

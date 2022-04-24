@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import fonts from '../../../assets/fonts';
-import colors from '../../../assets/colors';
-import Lock from '../../../assets/svgs/lock';
-import { navigate } from '../../../services/nav-ref';
-import { Nav_Screens } from '../../../navigation/constants';
+
+import fonts from 'assets/fonts';
+import colors from 'assets/colors';
+import Lock from 'assets/svgs/lock';
+import { navigate } from 'services/nav-ref';
+import { Nav_Screens } from 'navigation/constants';
 
 export default function PasswordChanged() {
-  const navigation = useNavigation();
   useEffect(() => {
     setTimeout(() => {
       navigate(Nav_Screens.LoginScreen);

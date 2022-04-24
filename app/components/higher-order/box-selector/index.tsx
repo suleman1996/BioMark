@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View, Pressable, FlatList } from 'react-native';
 import React, { useState } from 'react';
-import { GlobalStyles } from '../../../utils/theme/global-styles';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { GlobalFonts } from '../../../utils/theme/fonts';
+
+import { GlobalStyles } from 'utils/theme/global-styles';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalFonts } from 'utils/theme/fonts';
 
 type Props = {
   options: any;
@@ -18,6 +16,7 @@ const BoxSelector = ({ options, label }: Props) => {
   const [selected, setSelected] = useState('');
   const selectedStyles = { backgroundColor: GlobalColors.primary };
   const selectedTextStyle = { color: GlobalColors.white };
+
   return (
     <View style={styles.main}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
@@ -37,24 +36,6 @@ const BoxSelector = ({ options, label }: Props) => {
           </Pressable>
         )}
       />
-      {/* <View style={styles.container}>
-        {options
-          ? options.map((item, index) => (
-              <Pressable
-                onPress={() => setSelected(item)}
-                key={index}
-                style={[
-                  styles.button,
-                  {marginRight: widthToDp(2)},
-                  selected == item ? selectedStyles : {}
-                ]}>
-                <Text style={[selected == item ? selectedTextStyle : {}]}>
-                  {item}
-                </Text>
-              </Pressable>
-            ))
-          : null}
-      </View> */}
     </View>
   );
 };

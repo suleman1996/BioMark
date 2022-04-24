@@ -1,22 +1,23 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import { TouchableRipple } from 'react-native-paper';
-import { widthToDp } from '../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome2 from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { Nav_Screens } from '../../../navigation/constants';
-import { navigate } from '../../../services/nav-ref';
-import { GlobalStyles } from '../../../utils/theme/global-styles';
 import { Switch } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../../store/auth/auth-actions';
+
+import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { GlobalStyles } from 'utils/theme/global-styles';
+import { logout } from 'store/auth/auth-actions';
 
 const AccountMenu = ({}) => {
   const dispatch = useDispatch();

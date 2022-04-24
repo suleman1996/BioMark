@@ -1,5 +1,3 @@
-const Account_Screen = 'Account_Screen';
-
 export const Nav_Screens = {
   // Auth
   Forgot_Password: 'ForgotPassword',
@@ -22,6 +20,7 @@ export const Nav_Screens = {
   PasswordChangeScreen: 'PasswordChangeScreen',
   EmailChangeScreen: 'EmailChangeScreen',
   PhoneChangeScreen: 'PhoneChangeScreen',
+
   // edit profile
   Edit_Profile: 'EditProfile',
   Smoking: 'Smoking',

@@ -12,20 +12,17 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Images from '../../../../../assets/images';
-import Cigar from '../../../../../assets/svgs/cigar';
-import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../../utils/functions/responsive-dimensions';
-import { Nav_Screens } from '../../../../../navigation/constants/index';
-import { navigate } from '../../../../../services/nav-ref';
-import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
-import { GlobalColors } from '../../../../../utils/theme/global-colors';
+
+import Images from 'assets/images';
+import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { Nav_Screens } from 'navigation/constants/index';
+import { navigate } from 'services/nav-ref';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import EditProfileModal from '../../../../../components/edit-profile-menu';
+import EditProfileModal from 'components/edit-profile-menu';
 
 let cameraIs = false;
 
@@ -60,7 +57,6 @@ const EditProfileScreen = () => {
       let options = {
         mediaType: 'photo',
         selectionLimit: 1,
-        // includeBase64: true,
       };
       launchImageLibrary(options, (res) => {
         if (res.didCancel) {
@@ -86,7 +82,6 @@ const EditProfileScreen = () => {
 
       let options = {
         mediaType: 'photo',
-        // includeBase64: true,
       };
       launchCamera(options, (res) => {
         if (res.didCancel) {
@@ -96,9 +91,6 @@ const EditProfileScreen = () => {
           console.log('Camera error: ', res.errorMessage);
           cameraIs = false;
         } else {
-          console.log('Here is the picture from camera', res);
-          // some_array[selectedPictureIndex] = res.assets[0];
-          // setPictures(some_array);
           setProfilePic(res.assets[0]);
           setEdit(false);
           cameraIs = false;

@@ -2,16 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
-import Button from '../../../components/button/button';
-import Header from '../../../components/header';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { forgotPassword } from '../../../services/auth-service';
-import { navigate } from '../../../services/nav-ref';
-import { userService } from '../../../services/user-service/user-service';
-import { ForgotPasswordErrorResponse } from '../../../types/auth/ForgotPassword';
-import { logNow } from '../../../utils/functions/log-binder';
+
+import Button from 'components/button/button';
+import Header from 'components/header';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import PhoneNumber from 'components/phone-number';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
+import { ForgotPasswordErrorResponse } from 'types/auth/ForgotPassword';
+import { logNow } from 'utils/functions/log-binder';
 import styles from './styles';
 
 export default function ForgotPassword() {
@@ -59,37 +59,6 @@ export default function ForgotPassword() {
       .finally(() => {
         setLoading(false);
       });
-    // try {
-    //   setLoading(true);
-    //   Keyboard.dismiss();
-    //   const result = await forgotPassword({
-    //     password: {username: `+${selectCountryCode}${phoneNumber}`},
-    //   });
-    //   console.log('Forgot Password Success API ', result.data);
-    //   navigations.navigate('PasswordOTP', {
-    //     phone: `+${selectCountryCode}${phoneNumber}`,
-    //   });
-    //   setLoading(false);
-    // } catch (error) {
-    //   setLoading(false);
-    //   console.log(error.errMsg);
-    //   if (error.errMsg.status == '500') {
-    //     showMessage({
-    //       message: 'Account not found',
-    //       type: 'danger',
-    //     });
-    //   } else if (error.errMsg.status == false) {
-    //     showMessage({
-    //       message: error.errMsg.data.message,
-    //       type: 'danger',
-    //     });
-    //   } else {
-    //     showMessage({
-    //       message: error.errMsg,
-    //       type: 'danger',
-    //     });
-    //   }
-    // }
   };
 
   return (

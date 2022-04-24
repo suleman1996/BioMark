@@ -1,41 +1,22 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
-import colors from '../../../../../../assets/colors';
-import fonts from '../../../../../../assets/fonts';
+import { RadioButton } from 'react-native-paper';
+
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
 import { GlobalColors } from '../../../../../../utils/theme/global-colors';
-import TextInput from '../../../../../../components/input-field/text-input';
-import { Picker } from '@react-native-picker/picker';
-import Textinput from '../../../../../../components/text-input-button';
+import TextInput from '../../../../../../components/text-input-button';
 import { styles } from './styles';
 
 export default function VaccinationScreen() {
   const [value, setValue] = useState('first');
-  const [textinput, setTextinput] = useState('');
-  const [users] = useState(['john', 'James', 'ALis']);
+  const [textInput, setTextInput] = useState('');
 
   const onChangeInput = (event: any) => {
-    setTextinput(event);
+    setTextInput(event);
   };
 
-  const addTags = () => {
-    // setTextinput(prevState => {
-    //   return {
-    //     textinput,
-    //     users: [...prevState.users, prevState.textinput]
-    //   }
-    // })
-  };
+  const addTags = () => {};
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -122,21 +103,13 @@ export default function VaccinationScreen() {
           </RadioButton.Group>
 
           {value == 'second' ? (
-            <Textinput
+            <TextInput
               onPress={addTags}
-              value={textinput}
+              value={textInput}
               onChangeText={onChangeInput}
               question="Please list the vaccines:"
             />
           ) : null}
-
-          {/* {
-            users.map(item => {
-              return (
-                <Text key={item} style={{ color: 'red' }}>{item}</Text>
-              )
-            })
-          } */}
         </ScrollView>
         <ButtonWithShadowContainer title="Save" />
       </TitleWithBackLayout>

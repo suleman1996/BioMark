@@ -1,16 +1,17 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import colors from '../assets/colors';
-import fonts from '../assets/fonts';
-import AccountIcon from '../assets/svgs/account';
-import AppointmentIcon from '../assets/svgs/appoinment';
-import HomeIcon from '../assets/svgs/home';
-import InboxIcon from '../assets/svgs/inbox';
-import Inbox from '../screens/main/Inbox/index';
-import Home from '../screens/main/home-page';
-import AppointmentScreen from '../screens/main/appointment';
-import AccountScreen from '../screens/main/account/account-screen';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import AccountIcon from 'assets/svgs/account';
+import AppointmentIcon from 'assets/svgs/appoinment';
+import HomeIcon from 'assets/svgs/home';
+import InboxIcon from 'assets/svgs/inbox';
+import Inbox from 'screens/main/Inbox/index';
+import Home from 'screens/main/home-page';
+import AppointmentScreen from 'screens/main/appointment';
+import AccountScreen from 'screens/main/account/account-screen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

@@ -1,17 +1,14 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { TextInput } from 'react-native-paper';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useRef } from 'react';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import colors from '../../../assets/colors';
+
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import colors from 'assets/colors';
 
 type Props = {
   label: string;
@@ -42,6 +39,7 @@ const WeightChooserComponent = ({
   const convertedCentoFeet = (values = 30) => {
     setValue(values);
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -50,14 +48,12 @@ const WeightChooserComponent = ({
           placeholder={placeholder}
           placeholderTextColor={colors.placeHolder}
           style={[styles.textFieldStyle, otherStyle]}
-          //   keyboardType={'email-address'}
           onChangeText={onChangeText}
           value={value}
           autoFocus={true}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           borderBottomWidth={0}
-          //         onBlur={props.onBlur}
         />
         <Menu ref={menuRef}>
           <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -124,7 +120,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(40),
     width: '80%',
     color: '#3D3D3D',
-    // marginHorizontal: 10,
     backgroundColor: GlobalColors.gray,
     fontFamily: GlobalFonts.bold,
     borderWidth: 0,

@@ -1,27 +1,24 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useState } from 'react';
-import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import Button from '../../../../../components/button/button';
-import InputWithLabel from '../../../../../components/base/input-with-label';
-import { GlobalColors } from '../../../../../utils/theme/global-colors';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../../utils/functions/responsive-dimensions';
-import DatePicker from '../../../../../components/date-picker';
-import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
-import { goBack } from '../../../../../services/nav-ref';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
+import { RadioButton } from 'react-native-paper';
 
-import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
+import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import Button from 'components/button/button';
+import InputWithLabel from 'components/base/input-with-label';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import DatePicker from 'components/date-picker';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { goBack } from 'services/nav-ref';
+
 const PersonalInformationScreen = () => {
   const [value, setValue] = useState('first');
   const [firstName, setFirstName] = useState(false);
   const [lastName, setLastName] = useState('');
-
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
+
   return (
     <TitleWithBackLayout title="Personal Information">
       <ScrollView style={styles.container}>

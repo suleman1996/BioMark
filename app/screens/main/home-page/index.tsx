@@ -6,14 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import fonts from '../../../assets/fonts';
-import MyImage from '../../../assets/images';
-import Covid19Btn from '../../../components/button/covid19';
-import GoogleFit from '../../../components/button/google-fit';
-import SmallBtn from '../../../components/button/small-button';
-import YourHealthBtn from '../../../components/button/your-health-btn';
-import SearchBarWithLeftScanIcon from '../../../components/higher-order/search-bar-with-left-scan-icon/index';
-// import BottomBar from '../../../components/bottom-nav/bottom-bar';
+
+import fonts from 'assets/fonts';
+import MyImage from 'assets/images';
+import Covid19Btn from 'components/button/covid19';
+import GoogleFit from 'components/button/google-fit';
+import SmallBtn from 'components/button/small-button';
+import YourHealthBtn from 'components/button/your-health-btn';
+import SearchBarWithLeftScanIcon from 'components/higher-order/search-bar-with-left-scan-icon/index';
 import styles from './styles';
 
 export default function Home() {
@@ -32,9 +32,6 @@ export default function Home() {
               source={MyImage.rectangle}
               style={{
                 width: '100%',
-                // paddingHorizontal: 15,
-                // borderRadius: 18,
-                // paddingBottom: 5,
               }}
             >
               <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
@@ -79,7 +76,6 @@ export default function Home() {
                 <GoogleFit
                   disabled={false}
                   title="Connect with Google Fit"
-                  // onPress={() => navigations.navigate('SignupVerification')}
                   onPress={() => console.log('pressed')}
                 />
               </TouchableOpacity>

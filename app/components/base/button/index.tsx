@@ -1,16 +1,14 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+
+import { GlobalFonts } from 'utils/theme/fonts';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   onPress: any;
   title: string;
+  disabled?: boolean;
 };
 
 const ButtonComponent = ({ onPress, title, disabled }: Props) => {

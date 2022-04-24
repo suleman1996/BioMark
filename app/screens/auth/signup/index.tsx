@@ -12,20 +12,20 @@ import {
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
-import colors from '../../../assets/colors';
-import BackIcon from '../../../assets/svgs/back';
-import Button from '../../../components/button/button';
-import CheckBox from '../../../components/check-box';
-import DatePicker from '../../../components/date-picker';
-import TextInput from '../../../components/input-field/text-input';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { signup } from '../../../services/auth-service';
-import { navigate } from '../../../services/nav-ref';
-import { userService } from '../../../services/user-service/user-service';
-import { RegisterUserErrorResponse } from '../../../types/auth/RegisterUser';
-import { logNow } from '../../../utils/functions/log-binder';
+
+import colors from 'assets/colors';
+import BackIcon from 'assets/svgs/back';
+import Button from 'components/button/button';
+import CheckBox from 'components/checkbox';
+import DatePicker from 'components/date-picker';
+import TextInput from 'components/input-field/text-input';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import PhoneNumber from 'components/phone-number';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
+import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
+import { logNow } from 'utils/functions/log-binder';
 
 import styles from './styles';
 
@@ -84,10 +84,10 @@ export default function Signup() {
         setLoading(false);
       });
   };
+
   const handleSignup = async ({ password }: { password: string }) => {
     if (phoneNumber == '' || gender == '') {
     } else if (checked == true) {
-      console.log('trye');
       signupApi(password);
     } else {
       showMessage({
@@ -242,7 +242,7 @@ export default function Signup() {
                     placeholder="E.g. Sample@email.com"
                     onChange={handleChange('email')}
                     margin={20}
-                    Keyboardtype="email-address"
+                    keyboardType="email-address"
                   />
 
                   <Text style={styles.inputLablel}>Password</Text>

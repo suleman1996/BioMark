@@ -1,22 +1,20 @@
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
-import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import { ScrollView } from 'native-base';
-import { Provider, Appbar, RadioButton, Icon } from 'react-native-paper';
-import styles from './styles';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
-import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { GlobalFonts } from '../../../../../../utils/theme/fonts';
-import { responsiveFontSize } from '../../../../../../utils/functions/responsive-text';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import { RadioButton } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
 
-import { navigate } from '../../../../../../services/nav-ref';
-import { Nav_Screens } from '../../../../../../navigation/constants';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import TitleWithBackLayout from 'components/layouts/back-with-title';
+
+import styles from './styles';
+import { GlobalColors } from 'utils/theme/global-colors';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { navigate } from 'services/nav-ref';
+import { Nav_Screens } from 'navigation/constants';
 
 type Props = {};
 

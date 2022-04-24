@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import DropdownMenuComponent from '../../../../../components/base/dropdown-menu';
-import ModalButtonComponent from '../../../../../components/higher-order/modal-button';
-import { goBack } from '../../../../../services/nav-ref';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../../../utils/theme/global-colors';
-import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
-import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
+
+import ModalButtonComponent from 'components/higher-order/modal-button';
+import { goBack } from 'services/nav-ref';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container/index';
+import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
 import AsthmaModal from './modals/asthma';
 import CancerModal from './modals/cancer';
 import DiabetesModal from './modals/diabetes';
@@ -31,9 +28,6 @@ const options = [
 ];
 
 const MedicalHistoryScreen = () => {
-  const [value, setValue] = useState('');
-  const [selectedDropdown, setSelectedDropdown] = useState();
-
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
   const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);
   const [isDiabetesModal, setIsDiabetesModal] = useState(false);

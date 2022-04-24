@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 export const isMountedRef: any = React.createRef();
 export const navigationRef: any = React.createRef();

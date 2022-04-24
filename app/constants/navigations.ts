@@ -1,1 +1,1 @@
-export const GETSTARTED = 'Get Started';
+export const GET_STARTED = 'Get Started';

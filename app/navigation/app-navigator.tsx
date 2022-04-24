@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { AccountNavigator } from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { Nav_Screens } from './constants';
@@ -25,5 +26,3 @@ const AppNavigator = () => {
 };
 
 export default AppNavigator;
-
-const styles = StyleSheet.create({});

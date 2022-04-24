@@ -1,27 +1,24 @@
-import { ErrorResponse } from '../../types/ErrorResponse';
-import { UserContacts } from '../../types/UserContacts';
+import DeviceInfo from 'react-native-device-info';
+
+import { ErrorResponse } from 'types/ErrorResponse';
+import { UserContacts } from 'types/UserContacts';
 import {
   ForgotPasswordErrorResponse,
   ForgotPasswordSuccessResponse,
-} from '../../types/auth/ForgotPassword';
-import {
-  LoginResponse,
-  LoginErrorResponse,
-} from '../../types/auth/LoginResponse';
+} from 'types/auth/ForgotPassword';
+import { LoginResponse, LoginErrorResponse } from 'types/auth/LoginResponse';
 import {
   RegisterUserErrorResponse,
   RegisterUserSuccessResponse,
-} from '../../types/auth/RegisterUser';
-import { DeviceRegister } from '../../types/auth/DeviceRegisterResponse';
-import { logNow } from '../../utils/functions/log-binder';
+} from 'types/auth/RegisterUser';
+import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
+import { logNow } from 'utils/functions/log-binder';
 import {
   resetAuthAsyncStorage,
   setAuthAsyncStorage,
-  setAuthUserAsyncStorage,
 } from '../async-storage/auth-async-storage';
 import client from '../client';
 import { API_URLS } from '../url-constants';
-import DeviceInfo from 'react-native-device-info';
 
 function login(username: string, password: string) {
   return new Promise<LoginResponse>((resolve, reject) => {
@@ -34,7 +31,6 @@ function login(username: string, password: string) {
       })
       .then(async (response) => {
         try {
-          //  logNow('userService login',response.data)
           await setAuthAsyncStorage(response.data);
           resolve(response.data);
         } catch (e) {
@@ -48,7 +44,7 @@ function login(username: string, password: string) {
       });
   });
 }
-function deviceRegisteration(device_token: string, device_type: string) {
+function deviceRegisterAction(device_token: string, device_type: string) {
   return new Promise<DeviceRegister>((resolve, reject) => {
     client
       .post(API_URLS.MOBILE_REGISTER, {
@@ -169,7 +165,7 @@ async function logout() {
 
 export const userService = {
   login,
-  deviceRegisteration,
+  deviceRegisterAction,
   registerUser,
   logout,
   forgotPassword,

@@ -1,9 +1,10 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TitleWithBackWhiteBgLayout from '../../../../../components/layouts/back-with-title-white-bg';
+
+import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
 import { styles } from './styles';
-import PhoneNumberWithLabel from '../../../../../components/base/phone-with-label';
+import PhoneNumberWithLabel from 'components/base/phone-with-label';
 
 type Props = {};
 

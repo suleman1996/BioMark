@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import Covid19 from '../../assets/svgs/covid-19';
-import fonts from '../../assets/fonts';
-import { Button } from 'react-native-paper';
-import colors from '../../assets/colors';
-// import styles from 'react-native-indicators/src/components/ball-indicator/styles';
+
+import Covid19 from 'assets/svgs/covid-19';
+import fonts from 'assets/fonts';
+import colors from 'assets/colors';
 
 type Props = {
   text: string;
@@ -36,7 +35,6 @@ export default function Covid19Btn({ text, onPress }: Props) {
 
 const styles = StyleSheet.create({
   circleBtn: {
-    // borderWidth: 1,
     backgroundColor: 'white',
     borderRadius: 300,
     paddingHorizontal: 15,
@@ -48,7 +46,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.0,
-
     elevation: 10,
     marginBottom: 5,
   },

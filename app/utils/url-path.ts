@@ -6,4 +6,5 @@ export default {
   FORGOT_PASSWORD: '/api/v1/auth/password/forgot',
   CHANGE_PASSWORD: '/api/v1/auth/password/reset',
   RESEND_PASSWORD_OTP: '/api/v1/auth/confirmations/resend_code',
+  INPUT_BARCODE: '/api/v1/patient/scanners/midas',
 };

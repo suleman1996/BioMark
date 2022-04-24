@@ -1,37 +1,30 @@
-import React, { useState } from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-} from 'react-native';
-// import DatePicker from 'react-native-datepicker';
+import React from 'react';
+import { TouchableOpacity, StyleSheet, Text, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import colors from '../../assets/colors';
-import fonts from '../../assets/fonts';
-import {} from 'react-native-gesture-handler';
 import moment from 'moment';
 
-const App = (props: {
+import colors from 'assets/colors';
+
+type Props = {
   width: any;
   date: any;
   setDate: any;
   isPickerShow: boolean;
   setIsPickerShow: any;
-}) => {
+};
+
+const DatePicker = (props: Props) => {
   const { width, date, setDate, isPickerShow, setIsPickerShow } = props;
   let otherStyles = [];
 
   if (width) {
     otherStyles.push({ width: width });
   }
-  // const [date, setDate] = useState(new Date());
 
   return (
     <TouchableOpacity
       onPress={() => {
-        setIsPickerShow(true), console.log('xxx Date ', date);
+        setIsPickerShow(true);
       }}
       style={[styles.container, otherStyles, { width: width ? width : '90%' }]}
     >
@@ -44,8 +37,7 @@ const App = (props: {
           minimumDate={new Date(1950, 0, 1)}
           maximumDate={new Date()}
           onChange={(date) => {
-            console.log(date),
-              setIsPickerShow(false),
+            setIsPickerShow(false),
               date.type == 'set' &&
                 setDate(moment(date.nativeEvent.timestamp).format('L'));
           }}
@@ -58,7 +50,7 @@ const App = (props: {
   );
 };
 
-export default App;
+export default DatePicker;
 
 const styles = StyleSheet.create({
   container: {
@@ -67,12 +59,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 8,
     height: 44,
-    // width: '90%',
     backgroundColor: colors.inputBg,
   },
   datePickerStyle: {
     alignSelf: 'center',
-    // borderWidth: 1,
     width: '100%',
   },
 });

@@ -2,11 +2,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import colors from '../../assets/colors';
-import fonts from '../../assets/fonts';
-import Button from '../button/button';
-import { responsiveFontSize } from '../../utils/functions/responsive-text';
-import { GlobalColors } from '../../utils/theme/global-colors';
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import Button from 'components/button/button';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   onPressPhoto: any;
@@ -22,6 +21,7 @@ export default function EditProfileModal({
   iconPress,
 }: Props) {
   if (!visible) return null;
+
   return (
     <View style={styles.overLay}>
       <View style={styles.view}>
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   view: {
-    // height: 50,
     width: '90%',
     backgroundColor: colors.whiteColor,
     borderRadius: 5,
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.semiBold,
     fontSize: 18,
     color: colors.heading,
-    // alignSelf: 'center',
     marginBottom: 5,
   },
 });

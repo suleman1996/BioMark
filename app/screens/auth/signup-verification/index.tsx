@@ -1,28 +1,20 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { useDispatch } from 'react-redux';
-import React, { useState, useEffect, useRef } from 'react';
-import styles from './styles';
-import Button from '../../../components/button/button';
-import colors from '../../../assets/colors';
-import fonts from '../../../assets/fonts';
-import BackIcon from '../../../assets/svgs/back';
-import StepIndicator from 'react-native-step-indicator';
-import OtpInput from '../../../components/otp/otp-input';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import {
-  resendAccountCode,
-  signupAccountConfirm,
-} from '../../../services/auth-service';
-import { showMessage, hideMessage } from 'react-native-flash-message';
+import React, { useState, useEffect, useRef } from 'react';
+import { showMessage } from 'react-native-flash-message';
+import StepIndicator from 'react-native-step-indicator';
+
+import styles from './styles';
+import Button from 'components/button/button';
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import BackIcon from 'assets/svgs/back';
+import OtpInput from 'components/otp/otp-input';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
 
 export default function SignupVerification() {
   const dispatch = useDispatch();
@@ -69,7 +61,6 @@ export default function SignupVerification() {
           username: route?.params?.username,
         },
       });
-      console.log('success resend account code ', result.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -105,12 +96,10 @@ export default function SignupVerification() {
       });
       let uniqueId = DeviceInfo.getUniqueId();
       dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
-      console.log('Signup confirmaton ', result.data);
       navigations.navigate('Confirmation');
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error.errMsg);
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Invalid Code',

@@ -1,13 +1,11 @@
 import { StyleSheet, Text, Pressable } from 'react-native';
 import React from 'react';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../utils/theme/fonts';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
 
 type Props = {
   title: string;
@@ -23,6 +21,7 @@ const ModalButtonComponent = ({ title, setIsModal, isModal, drop }: Props) => {
   const bgColor = isModal
     ? { backgroundColor: GlobalColors.darkPrimary }
     : { backgroundColor: GlobalColors.white };
+
   return (
     <Pressable
       onPress={() => {
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2,
   },
   label: {

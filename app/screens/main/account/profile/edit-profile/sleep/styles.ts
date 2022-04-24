@@ -1,12 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
-import { GlobalFonts } from '../../../../../../utils/theme/fonts';
-import { responsiveFontSize } from '../../../../../../utils/functions/responsive-text';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../../../utils/functions/responsive-dimensions';
+import { StyleSheet } from 'react-native';
+
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 const styles = StyleSheet.create({
   heading: {

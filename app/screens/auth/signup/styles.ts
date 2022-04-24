@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../../assets/colors';
-import fonts from '../../../assets/fonts';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 const styles = StyleSheet.create({
   signupNav: {
@@ -71,23 +72,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   ChoiceBtnDOB: {
-    // flexDirection: 'row',
-    // height: 50,
     width: '100%',
-    // backgroundColor: 'yellow',
     alignItems: 'center',
     paddingVertical: 10,
   },
   aiContainer: {
-    // flex: 1,
-    // width: '100%',
     borderRadius: 8,
     backgroundColor: colors.whiteColor,
     marginHorizontal: 5,
-    // borderWidth: 1,
     borderColor: 'grey',
     paddingBottom: 15,
-    // elevation: 6,
     marginTop: 20,
   },
   checkbox: {
@@ -97,7 +91,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // borderWidth: 2,
     marginHorizontal: 30,
   },
   tcTextStyle: {
@@ -105,7 +98,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     fontFamily: fonts.regular,
-    // marginHorizontal: 10,
   },
   errorMessage: {
     fontFamily: fonts.regular,

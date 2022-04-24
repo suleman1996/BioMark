@@ -1,21 +1,16 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
-import colors from '../../../../../../assets/colors';
-import fonts from '../../../../../../assets/fonts';
-import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
-import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
-import TextInput from '../../../../../../components/input-field/text-input';
-import { Picker } from '@react-native-picker/picker';
-import Textinput from '../../../../../../components/text-input-button';
+import { RadioButton } from 'react-native-paper';
+
+import TitleWithBackLayout from 'components/layouts/back-with-title';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { GlobalColors } from 'utils/theme/global-colors';
 import { styles } from './styles';
 import MedicationModal from './modals/medication';
 import FoodModal from './modals/food';
 import AnimalModal from './modals/animal';
 import EnvironmentModal from './modals/environment';
-import ModalButtonComponent from '../../../../../../components/higher-order/modal-button';
+import ModalButtonComponent from 'components/higher-order/modal-button';
 import OtherModal from './modals/other';
 
 export default function AllergiesScreen() {
@@ -23,7 +18,7 @@ export default function AllergiesScreen() {
   const [isMedicationModal, setIsMedicationModal] = useState(false);
   const [isFoodModal, setIsFoodModal] = useState(false);
   const [isAnimalModal, setIsAnimalModal] = useState(false);
-  const [isEnvironmentModal, setIsEnvironmnetModal] = useState(false);
+  const [isEnvironmentModal, setIsEnvironmentModal] = useState(false);
   const [isOtherModal, setIsOtherModal] = useState(false);
   const [isNotSureModal, setIsNotSureModal] = useState(false);
 
@@ -40,7 +35,7 @@ export default function AllergiesScreen() {
   };
 
   const onPressEnvironment = () => {
-    setIsEnvironmnetModal(true);
+    setIsEnvironmentModal(true);
   };
 
   const onPressOther = () => {
@@ -52,7 +47,7 @@ export default function AllergiesScreen() {
     setIsMedicationModal(false);
     setIsFoodModal(false);
     setIsAnimalModal(false);
-    setIsEnvironmnetModal(false);
+    setIsEnvironmentModal(false);
     setIsOtherModal(false);
   };
 
@@ -167,7 +162,7 @@ export default function AllergiesScreen() {
               />
               <EnvironmentModal
                 isVisible={isEnvironmentModal}
-                setIsVisible={setIsEnvironmnetModal}
+                setIsVisible={setIsEnvironmentModal}
               />
               <View style={styles.rowContainer}>
                 <ModalButtonComponent
@@ -199,7 +194,6 @@ export default function AllergiesScreen() {
                   title="Not Sure"
                   isModal={isNotSureModal}
                   setIsModal={onPressNotSure}
-                  // drop={true}
                 />
               </View>
             </>

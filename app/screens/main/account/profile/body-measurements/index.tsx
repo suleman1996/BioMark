@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import HeightChooserComponent from '../../../../../components/higher-order/height-chooser/index';
-import WeightChooserComponent from '../../../../../components/higher-order/weight-chooser';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../../utils/functions/responsive-dimensions';
-import Button from '../../../../../components/button/button';
-import { GlobalColors } from '../../../../../utils/theme/global-colors';
-import ButtonWithShadowContainer from '../../../../../components/base/button-with-shadow-container/index';
-import TitleWithBackLayout from '../../../../../components/layouts/back-with-title/index';
-import { responsiveFontSize } from '../../../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
-import { goBack } from '../../../../../services/nav-ref';
+
+import HeightChooserComponent from 'components/higher-order/height-chooser/index';
+import WeightChooserComponent from 'components/higher-order/weight-chooser';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container/index';
+import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { goBack } from 'services/nav-ref';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
   const [value2, setValue2] = useState(0);
-  const [height, setHeight] = useState('');
-  const [weight, setWeight] = useState('');
 
-  const onChangetext = (values = 30) => {
+  const onChangeText = (values = 30) => {
     setValue(values);
   };
-  const onChangetext2 = (values = 30) => {
+  const onChangeText2 = (values = 30) => {
     setValue2(values);
   };
 
@@ -35,7 +30,7 @@ const BodyMeasurementScreen = () => {
           label="Height"
           textAlign="right"
           placeholder={''}
-          onChangeText={onChangetext}
+          onChangeText={onChangeText}
           value={value}
         />
         <WeightChooserComponent
@@ -43,7 +38,7 @@ const BodyMeasurementScreen = () => {
           label="Weight"
           textAlign="right"
           placeholder={undefined}
-          onChangeText={onChangetext2}
+          onChangeText={onChangeText2}
           value={value2}
         />
       </ScrollView>
@@ -53,12 +48,6 @@ const BodyMeasurementScreen = () => {
         }}
         title={'Save & Continue'}
       />
-      {/* <Button
-        title="Save & Continue"
-        onPress={() => {
-          goBack();
-        }}
-      /> */}
     </TitleWithBackLayout>
   );
 };

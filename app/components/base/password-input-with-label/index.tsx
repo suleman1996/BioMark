@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import InputField from '../../input-field/input-field';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { heightToDp } from '../../../utils/functions/responsive-dimensions';
-import TextInput from '../../input-field/text-input';
+
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import TextInput from 'components/input-field/text-input';
 
 type Props = {
   label: string;
@@ -28,7 +28,7 @@ const PasswordInputWithLabel = ({
 }: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.inputLablel]}>{label}</Text>
+      <Text style={[styles.inputLabel]}>{label}</Text>
       <TextInput
         placeholder={placeholder}
         secureTextEntry={isSecure}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
   },
-  inputLablel: {
+  inputLabel: {
     fontSize: responsiveFontSize(22),
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,

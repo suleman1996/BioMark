@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LoginResponse } from '../../types/auth/LoginResponse';
-import { logNow } from '../../utils/functions/log-binder';
+
+import { LoginResponse } from 'types/auth/LoginResponse';
 
 async function getAuthAsyncStorage() {
   const userToken = await AsyncStorage.getItem('userToken');
@@ -16,7 +16,6 @@ async function getAuthAsyncStorage() {
 async function setAuthAsyncStorage(response: LoginResponse) {
   await AsyncStorage.setItem('userToken', response.access_token);
   await AsyncStorage.setItem('refreshToken', response.refresh_token);
-  // await AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
 }
 
 async function setAuthUserAsyncStorage(response: any) {

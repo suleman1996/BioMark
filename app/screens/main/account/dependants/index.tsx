@@ -1,13 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import ButtonComponent from '../../../../components/base/button';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../utils/functions/responsive-dimensions';
-import DependantsList from '../../../../components/ui/dependants-list';
-import { navigate } from '../../../../services/nav-ref';
-import { Nav_Screens } from '../../../../navigation/constants/index';
+
+import ButtonComponent from 'components/base/button';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import DependantsList from 'components/ui/dependants-list';
+import { navigate } from 'services/nav-ref';
+import { Nav_Screens } from 'navigation/constants/index';
 
 const DependantsScreen = () => {
   return (

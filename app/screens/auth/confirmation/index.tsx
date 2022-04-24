@@ -1,20 +1,16 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React, { useState } from 'react';
-import styles from './styles';
-import Button from '../../../components/button/button';
-import StepIndicator from 'react-native-step-indicator';
-import SetToGo from '../../../assets/svgs/set-to-go';
+import { Text, View, ScrollView } from 'react-native';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import StepIndicator from 'react-native-step-indicator';
+
+import styles from './styles';
+import Button from 'components/button/button';
+import SetToGo from 'assets/svgs/set-to-go';
 
 export default function Confirmation() {
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
   const navigations = useNavigation();
+
   return (
     <>
       <View style={styles.signupNav}>

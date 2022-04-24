@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
-import TagsCloudInputComponent from '../../../../../../../components/higher-order/tags-cloud-input';
+
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import TagsCloudInputComponent from 'components/higher-order/tags-cloud-input';
 
 type Props = {
   isVisible: boolean;
@@ -28,5 +28,3 @@ const OthersModal = ({ isVisible, setIsVisible }: Props) => {
 };
 
 export default OthersModal;
-
-const styles = StyleSheet.create({});

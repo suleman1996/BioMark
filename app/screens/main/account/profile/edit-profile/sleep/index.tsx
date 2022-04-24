@@ -1,20 +1,19 @@
 import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
-import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
-import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import styles from './styles';
 import { Picker } from '@react-native-picker/picker';
-import { navigate } from '../../../../../../services/nav-ref';
-import { Nav_Screens } from '../../../../../../navigation/constants';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
-import colors from '../../../../../../assets/colors';
-import fonts from '../../../../../../assets/fonts';
+
+import TitleWithBackLayout from 'components/layouts/back-with-title';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import styles from './styles';
+import { navigate } from 'services/nav-ref';
+import { Nav_Screens } from 'navigation/constants';
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 type Props = {};
 
 const Sleep = (props: Props) => {
   const sleepOptions = [
-    // {title: null},
     { title: 'less than 4 hours' },
     { title: '4-7 hours' },
     { title: '7-10 hours' },
@@ -23,6 +22,7 @@ const Sleep = (props: Props) => {
   const [selectedSleep, setSelectedSleep] = React.useState(
     sleepOptions[0].title
   );
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TitleWithBackLayout title="Sleep">

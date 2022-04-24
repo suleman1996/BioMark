@@ -1,18 +1,16 @@
 import React from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Images from '../../../../assets/images';
-import TitleWithSearchBarLayout from '../../../../components/layouts/title-with-search-bar/index';
-import AccountMenu from '../../../../components/ui/account-menu';
-import { Nav_Screens } from '../../../../navigation/constants';
-import { navigate } from '../../../../services/nav-ref';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../../utils/theme/fonts';
-import { GlobalColors } from '../../../../utils/theme/global-colors';
+
+import Images from 'assets/images';
+import TitleWithSearchBarLayout from 'components/layouts/title-with-search-bar/index';
+import AccountMenu from 'components/ui/account-menu';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {};
 

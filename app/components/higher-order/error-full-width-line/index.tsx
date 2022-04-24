@@ -1,10 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../utils/theme/global-colors';
+
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {};
 

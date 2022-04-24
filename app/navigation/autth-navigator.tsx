@@ -56,14 +56,8 @@ const AuthNavigator = () => {
         name="AuthenticationStack"
         component={AuthenticationStack}
       />
-      {/* <Stack.Screen
-        name={Nav_Screens.Main_Navigator}
-        component={BottomTabNavigator}
-      /> */}
     </Stack.Navigator>
   );
 };
 
 export default AuthNavigator;
-
-const styles = StyleSheet.create({});

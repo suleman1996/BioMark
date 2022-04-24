@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
-import { goBack } from '../../../../../../../services/nav-ref';
+
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
 
 type Props = {
   isVisible: boolean;
@@ -37,5 +36,3 @@ const AsthmaModal = ({ isVisible, setIsVisible }: Props) => {
 };
 
 export default AsthmaModal;
-
-const styles = StyleSheet.create({});

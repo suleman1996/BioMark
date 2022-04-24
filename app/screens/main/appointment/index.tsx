@@ -1,4 +1,3 @@
-import {} from 'react-native';
 import React from 'react';
 import { Text, View } from 'native-base';
 import { styles } from './styles';

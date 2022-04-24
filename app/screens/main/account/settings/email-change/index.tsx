@@ -1,18 +1,19 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TitleWithBackWhiteBgLayout from '../../../../../components/layouts/back-with-title-white-bg';
-import { styles } from './styles';
-import InputWithLabel from '../../../../../components/base/input-with-label';
-import ButtonComponent from '../../../../../components/base/button';
-import { userService } from '../../../../../services/user-service/user-service';
-import { logNow } from '../../../../../utils/functions/log-binder';
-import { useDispatch, useSelector } from 'react-redux';
-import { addUserContactsDetails } from '../../../../../store/auth/auth-actions';
-import { IAppState } from '../../../../../store/IAppState';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import ErrorLineFullWidth from '../../../../../components/higher-order/error-full-width-line';
+
+import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
+import { styles } from './styles';
+import InputWithLabel from 'components/base/input-with-label';
+import ButtonComponent from 'components/base/button';
+import { userService } from 'services/user-service/user-service';
+import { logNow } from 'utils/functions/log-binder';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUserContactsDetails } from 'store/auth/auth-actions';
+import { IAppState } from 'store/IAppState';
+import ErrorLineFullWidth from 'components/higher-order/error-full-width-line';
 
 type Props = {};
 
@@ -25,7 +26,6 @@ const EmailChangeScreen = (props: Props) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState(userContacts.email_address);
-  const [confirmEmail, setConfirmEmail] = useState('');
 
   const dispatch = useDispatch();
 

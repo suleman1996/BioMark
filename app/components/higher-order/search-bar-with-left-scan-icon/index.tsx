@@ -9,34 +9,40 @@ import {
   Keyboard,
 } from 'react-native';
 import React, { useRef } from 'react';
-import SearchBarLeftIcon from '../../svg/search-bar-left-icon';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MyImage from '../../../assets/images';
-import colors from '../../../assets/colors';
-import fonts from '../../../assets/fonts';
-import Button from '../../button/button';
 import * as Yup from 'yup';
-import Text_Input from '../../input-field/text-input';
 import { Formik } from 'formik';
-import { inputBarcode } from '../../../services/auth-service';
-import ActivityIndicator from '../../loader/activity-indicator';
-import { showMessage, hideMessage } from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
+
+import SearchBarLeftIcon from 'components/svg/search-bar-left-icon';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import MyImage from 'assets/images';
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import Button from 'components/button/button';
+import Text_Input from 'components/input-field/text-input';
+import { inputBarcode } from 'services/auth-service';
+import ActivityIndicator from 'components/loader/activity-indicator';
+
+type Props = {
+  visible: Boolean;
+  children: any;
+  loading: Boolean;
+};
+
 //PopUp Modal
-const QrInputPopup = ({ visible, children, loading }) => {
+const QrInputPopup = ({ visible, children, loading }: Props) => {
   const [showModal, setShowModal] = React.useState(visible);
 
   React.useEffect(() => {
     togglePopUp();
   }, [visible]);
+
   const togglePopUp = () => {
     if (visible) {
       setShowModal(true);
@@ -44,6 +50,7 @@ const QrInputPopup = ({ visible, children, loading }) => {
       setShowModal(false);
     }
   };
+
   return (
     <Modal transparent visible={showModal}>
       <ActivityIndicator visible={loading} />
@@ -55,7 +62,7 @@ const QrInputPopup = ({ visible, children, loading }) => {
 };
 
 //PopUp Error Modal
-const QrInputErrPopup = ({ visible, children, loading }) => {
+const QrInputErrPopup = ({ visible, children, loading }: Props) => {
   const [showErrModal, setShowErrModal] = React.useState(visible);
 
   React.useEffect(() => {
@@ -95,7 +102,6 @@ const SearchBarWithLeftScanIcon = () => {
           code: qrInput,
         },
       });
-      console.log('bar code success API ', resut.data);
       Keyboard.dismiss();
       setVisible(false);
       setLoading(false);
@@ -103,7 +109,6 @@ const SearchBarWithLeftScanIcon = () => {
       setLoading(false);
       Keyboard.dismiss();
       setVisible(false);
-      console.log(error.errMsg);
       if (error.errMsg.status == '500') {
         showMessage({
           message: "User not exist's",
@@ -278,7 +283,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2,
   },
   leftIconView: {
@@ -359,7 +363,6 @@ const styles = StyleSheet.create({
   textInput: {
     borderRadius: 8,
     padding: 10,
-    // marginBottom: 40,
   },
   errorMessage: {
     marginHorizontal: 5,

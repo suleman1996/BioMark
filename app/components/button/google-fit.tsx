@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { Button } from 'react-native-paper';
-import colors from '../../assets/colors';
+
+import colors from 'assets/colors';
 
 type Props = {
   disabled?: boolean;
@@ -9,7 +10,7 @@ type Props = {
   title: string;
 };
 
-export default function button(props: Props) {
+export default function GoogleFitButton(props: Props) {
   return (
     <View style={styles.btnContainer}>
       <Button
@@ -30,10 +31,7 @@ export default function button(props: Props) {
 }
 
 const styles = StyleSheet.create({
-  btnContainer: {
-    // zIndex: 999,
-    // position: 'absolute',
-  },
+  btnContainer: {},
   btn: {
     borderRadius: 8,
   },

@@ -1,20 +1,12 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import ModalComponent from '../../base/modal';
-import ButtonWithShadowContainer from '../../base/button-with-shadow-container';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../utils/theme/fonts';
+
+import ModalComponent from 'components/base/modal';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
 
 type Props = {
   isVisible: boolean;

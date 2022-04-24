@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import DropdownMenuComponent from '../../../../../../../../components/base/dropdown-menu';
-import ModalWithBottomBtn from '../../../../../../../../components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from '../../../../../../../../components/higher-order/radio-question';
-import { heightToDp } from '../../../../../../../../utils/functions/responsive-dimensions';
-import { GlobalStyles } from '../../../../../../../../utils/theme/global-styles';
-import Textinput from '../../../../../../../../components/text-input-button';
+
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import TextInput from 'components/text-input-button';
 
 const options = [{ title: 'Blood' }, { title: 'Breast' }];
 
@@ -32,7 +29,7 @@ const OtherModal = ({ isVisible, setIsVisible }: Props) => {
       <RadioButtonQuestionComponent isTrue={ans1} setIsTrue={setAns1} />
       {ans1 ? (
         <>
-          <Textinput
+          <TextInput
             question="Please list these allergies"
             placeholder="Enter allergies"
           />
@@ -43,5 +40,3 @@ const OtherModal = ({ isVisible, setIsVisible }: Props) => {
 };
 
 export default OtherModal;
-
-const styles = StyleSheet.create({});

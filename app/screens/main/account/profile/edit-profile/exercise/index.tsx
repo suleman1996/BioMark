@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
-import { goBack } from '../../../../../../services/nav-ref';
-import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
-import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
+import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
+
+import { goBack } from 'services/nav-ref';
+import TitleWithBackLayout from 'components/layouts/back-with-title';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { GlobalColors } from 'utils/theme/global-colors';
 import { styles } from './styles';
 
 export default function ExerciseScreen() {
   const [value, setValue] = useState('first');
-  const [day, setDay] = useState('');
-  const [exerciseWeek, setexerciseWeek] = useState('');
-  const [exerciseSession, setexerciseSession] = useState('');
+  const [exerciseWeek, setExerciseWeek] = useState('');
+  const [exerciseSession, setExerciseSession] = useState('');
   const options = [
     { title: '' },
     { title: '1' },
@@ -95,7 +95,7 @@ export default function ExerciseScreen() {
                 <Picker
                   selectedValue={exerciseWeek}
                   onValueChange={(itemValue, itemIndex) =>
-                    setexerciseWeek(itemValue)
+                    setExerciseWeek(itemValue)
                   }
                 >
                   {options?.map((item, index) => {
@@ -117,7 +117,7 @@ export default function ExerciseScreen() {
                 <Picker
                   selectedValue={exerciseSession}
                   onValueChange={(itemValue, itemIndex) =>
-                    setexerciseSession(itemValue)
+                    setExerciseSession(itemValue)
                   }
                 >
                   {options2?.map((item, index) => {

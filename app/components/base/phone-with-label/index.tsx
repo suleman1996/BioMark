@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import InputField from '../../input-field/input-field';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import { heightToDp } from '../../../utils/functions/responsive-dimensions';
-import PhoneNumber from '../../phone-number';
+
+import PhoneNumber from 'components/phone-number';
+
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
   label?: string;
@@ -17,6 +18,7 @@ const PhoneNumberWithLabel = ({ label, placeholder, disabled }: Props) => {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
+
   return (
     <View style={styles.container}>
       {label ? <Text style={styles.label}>{label}</Text> : null}

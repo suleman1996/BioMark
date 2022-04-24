@@ -1,9 +1,6 @@
 import { StyleSheet } from 'react-native';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../../../utils/functions/responsive-dimensions';
-import { GlobalColors } from '../../../../../utils/theme/global-colors';
+
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 export const styles = StyleSheet.create({
   container: {

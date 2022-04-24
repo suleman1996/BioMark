@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
-import colors from '../../../assets/colors';
-import fonts from '../../../assets/fonts';
+import { StyleSheet } from 'react-native';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
   forgotPassword: {
     fontFamily: fonts.regular,
     color: colors.blue,
-    // alignSelf: 'center',
     fontSize: 14,
   },
   orTxt: {

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import React from 'react';
-import { logNow } from '../utils/functions/log-binder';
+
 import { getAuthAsyncStorage } from './async-storage/auth-async-storage';
 
 const request = axios.create({

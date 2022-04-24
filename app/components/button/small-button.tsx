@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Button } from 'react-native-paper';
-import colors from '../../assets/colors';
+
+import colors from 'assets/colors';
 
 type Props = {
   disabled?: boolean;
@@ -9,7 +10,7 @@ type Props = {
   title: string;
 };
 
-export default function button(props: Props) {
+export default function SmallButton(props: Props) {
   return (
     <View>
       <TouchableOpacity>

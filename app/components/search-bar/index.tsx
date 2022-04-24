@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Searchbar } from 'react-native-paper';
-import QrScanner from '../../assets/svgs/qr-scanner';
 import colors from '../../assets/colors';
 
-const MyComponent = () => {
+const SearchBar = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   const onChangeSearch = (query: string) => setSearchQuery(query);
@@ -28,4 +27,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default SearchBar;

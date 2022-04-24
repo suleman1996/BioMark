@@ -10,5 +10,3 @@ const DocumentTypeChooser = () => {
 };
 
 export default DocumentTypeChooser;
-
-const styles = StyleSheet.create({});

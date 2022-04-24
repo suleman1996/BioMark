@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
@@ -7,15 +6,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, { useState } from 'react';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
-import colors from '../../../../../../assets/colors';
-import fonts from '../../../../../../assets/fonts';
-import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
-import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
-import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
-import { GlobalColors } from '../../../../../../utils/theme/global-colors';
-import TextInput from '../../../../../../components/input-field/text-input';
+import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
+
+import TitleWithBackLayout from 'components/layouts/back-with-title';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { GlobalColors } from 'utils/theme/global-colors';
+import TextInput from 'components/input-field/text-input';
+
 import { options } from './year';
 import { styles } from './styles';
 
@@ -124,7 +122,7 @@ export default function SmokingScreen() {
                   value={day}
                   onChange={setDay}
                   margin={0}
-                  Keyboardtype="numeric"
+                  keyboardType="numeric"
                   svg={undefined}
                 />
               </View>

@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { RadioButton } from 'react-native-paper';
-import { GlobalColors } from '../../../utils/theme/global-colors';
-import {
-  heightToDp,
-  widthToDp,
-} from '../../../utils/functions/responsive-dimensions';
-import { responsiveFontSize } from '../../../utils/functions/responsive-text';
-import { GlobalFonts } from '../../../utils/theme/fonts';
+
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
 
 type Props = {
   question: string;

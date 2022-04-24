@@ -1,13 +1,8 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
-import colors from '../../assets/colors';
-import fonts from '../../assets/fonts';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 type Props = {
   margin?: any;
@@ -21,7 +16,7 @@ type Props = {
   eye?: any;
 };
 
-export default function inputField(props: Props) {
+export default function InputField(props: Props) {
   return (
     <View
       style={[styles.loginInputContainer, { marginHorizontal: props.margin }]}
@@ -34,7 +29,6 @@ export default function inputField(props: Props) {
           value={props.value}
           style={styles.textFieldStyle}
           secureTextEntry={props.secureTextEntry}
-          //   keyboardType={'email-address'}
           onChangeText={props.onChange}
           onBlur={props.onBlur}
         />
@@ -65,13 +59,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 20,
-    // height:hp(5)
   },
   textFieldStyle: {
     fontSize: 15,
     width: '100%',
     color: '#3D3D3D',
-    // marginHorizontal: 10,
     fontFamily: fonts.regular,
   },
 });

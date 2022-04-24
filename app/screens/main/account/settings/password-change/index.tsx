@@ -1,20 +1,21 @@
 import { View, Text, ScrollView } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TitleWithBackWhiteBgLayout from '../../../../../components/layouts/back-with-title-white-bg';
-import { settingsService } from '../../../../../services/account-service/settings-service';
-import { logNow } from '../../../../../utils/functions/log-binder';
-import { styles } from './styles';
-import PasswordInputWithLabel from '../../../../../components/base/password-input-with-label';
-import { heightToDp } from '../../../../../utils/functions/responsive-dimensions';
-import ButtonComponent from '../../../../../components/base/button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import ErrorText from '../../../../../components/base/error-text';
-import { ErrorResponse } from '../../../../../types/ErrorResponse';
+
+import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
+import { settingsService } from 'services/account-service/settings-service';
+import { logNow } from 'utils/functions/log-binder';
+import { styles } from './styles';
+import PasswordInputWithLabel from 'components/base/password-input-with-label';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import ButtonComponent from 'components/base/button';
+import ErrorText from 'components/base/error-text';
+import { ErrorResponse } from 'types/ErrorResponse';
 import { showMessage } from 'react-native-flash-message';
-import ActivityIndicator from '../../../../../components/loader/activity-indicator';
-import { goBack } from '../../../../../services/nav-ref';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { goBack } from 'services/nav-ref';
 
 type Props = {};
 
