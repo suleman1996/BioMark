@@ -34,7 +34,7 @@ const SettingsScreen = (props: Props) => {
           title={'Phone Number'}
         />
         <SingleMenuItemWithArrow
-          onPress={undefined}
+          onPress={() => navigate(Nav_Screens.MarketingConsentScreen)}
           title={'Marketing Consent'}
         />
         <SingleMenuItemWithArrow

@@ -19,6 +19,7 @@ import DrinkingScreen from '../screens/main/account/profile/edit-profile/drinkin
 import PasswordChangeScreen from '../screens/main/account/settings/password-change';
 import EmailChangeScreen from '../screens/main/account/settings/email-change';
 import PhoneChangeScreen from '../screens/main/account/settings/phone-change';
+import MarketingConsentScreen from '../screens/main/account/settings/marketing-consent';
 
 const Stack = createNativeStackNavigator();
 
@@ -84,6 +85,13 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.PhoneChangeScreen}
         component={PhoneChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.MarketingConsentScreen}
+        component={MarketingConsentScreen}
       />
     </Stack.Group>
     {/* Profile Stack */}
