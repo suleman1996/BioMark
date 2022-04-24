@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
+    color:'black'
   },
 });
 

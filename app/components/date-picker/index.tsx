@@ -43,8 +43,14 @@ const DatePicker = (props: Props) => {
           }}
         />
       )}
-      <Text style={{ marginLeft: 15, color: colors.placeHolder }}>
+      <Text
+        style={{
+          marginLeft: 15,
+          color: colors.placeHolder,
+        }}
+      >
         {moment(date).format('MM/DD/YYYY')}
+        {/* January             |  01                         |  1990 */}
       </Text>
     </TouchableOpacity>
   );

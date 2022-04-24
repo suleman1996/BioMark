@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     stepStrokeWidth: 0,
     stepIndicatorSize: 40,
     currentStepIndicatorSize: 40,
-    stepIndicatorLabelFontSize: 20,
-    currentStepIndicatorLabelFontSize: 20,
+    stepIndicatorLabelFontSize: 15,
+    currentStepIndicatorLabelFontSize: 15,
     stepStrokeCurrentColor: colors.blue,
     stepIndicatorCurrentColor: colors.blue,
     stepIndicatorLabelCurrentColor: '#FFFFFF',
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   inputLablel: {
     marginHorizontal: 20,
     marginTop: 20,
-    fontFamily: fonts.extraBold,
+    fontFamily: fonts.semiBold,
     color: colors.heading,
     fontSize: 15,
   },
@@ -108,12 +108,22 @@ const styles = StyleSheet.create({
   radioButton: {
     height: 40,
     width: 100,
-
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     marginRight: 10,
-    borderWidth: 0.5,
+    marginVertical:5,
+    // borderWidth: 0.5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 4,
+  
   },
   radioText: {
     fontFamily: fonts.regular,

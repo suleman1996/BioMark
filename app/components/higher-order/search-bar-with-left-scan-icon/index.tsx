@@ -163,7 +163,13 @@ const SearchBarWithLeftScanIcon = () => {
                   validationSchema={QRschemma}
                   onSubmit={handleCode}
                 >
-                  {({ handleChange, handleSubmit, values, errors }) => (
+                  {({
+                    handleChange,
+                    handleSubmit,
+                    values,
+                    errors,
+                    isValid,
+                  }) => (
                     <QrInputPopup loading={loading} visible={visible}>
                       <View style={{ alignItems: 'center', marginBottom: 20 }}>
                         <View style={styles.popUpHeader}>
@@ -206,10 +212,10 @@ const SearchBarWithLeftScanIcon = () => {
                         <View style={{ marginTop: 40 }}>
                           <TouchableOpacity>
                             <Button
-                              disabled={false}
                               title="Save Code"
                               marginHorizontal={0.1}
                               marginVertical={0.1}
+                              disabled={!isValid && errors}
                               onPress={() => handleSubmit()}
                             />
                           </TouchableOpacity>
@@ -310,13 +316,14 @@ const styles = StyleSheet.create({
   popupMenu: {
     borderRadius: 8,
     flex: 1,
-    width: widthToDp(43),
+    width: widthToDp(65),
+    // height:heightToDp(15),
     marginTop: 40,
     marginLeft: -7,
   },
   singleMenuItem: {
-    paddingHorizontal: widthToDp(2),
-    paddingVertical: widthToDp(1),
+    paddingHorizontal: widthToDp(4),
+    paddingVertical: widthToDp(2.5),
     borderBottomWidth: 0.5,
     borderBottomLeftRadius: 4,
     borderBottomRightRadius: 4,
@@ -325,10 +332,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   menuText: {
-    paddingLeft: widthToDp(2),
+    paddingLeft: widthToDp(3),
     fontFamily: GlobalFonts.regular,
     color: '#8493AE',
-    fontSize: 13,
+    fontSize: 15,
   },
   popUpBackground: {
     flex: 1,

@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: 16,
     marginVertical: 20,
+    color:colors.black,
     marginBottom: 10,
   },
   inputLablel: {
