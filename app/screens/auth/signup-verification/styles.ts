@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 20,
     marginHorizontal: 20,
-    color: 'black',
+    color: colors.black,
     // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
+    color:'black'
   },
 });
 

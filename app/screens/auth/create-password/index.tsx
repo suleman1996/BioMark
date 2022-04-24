@@ -85,7 +85,7 @@ export default function CreatePassword() {
                   <TextInput
                     placeholder="Enter your new password..."
                     secureTextEntry={hidePassword}
-                    eye={!hidePassword ? 'eye-off' : 'eye'}
+                    eye={!hidePassword ? 'eye' : 'eye-off'}
                     onEyePress={() => setHidePassword(!hidePassword)}
                     onChange={handleChange('password')}
                     margin={0}
@@ -98,7 +98,7 @@ export default function CreatePassword() {
                     <TextInput
                       placeholder="Retype your new password..."
                       secureTextEntry={hideConfirmPassword}
-                      eye={!hideConfirmPassword ? 'eye-off' : 'eye'}
+                      eye={!hideConfirmPassword ? 'eye' : 'eye-off'}
                       onEyePress={() =>
                         setConfirmHidePassword(!hideConfirmPassword)
                       }
@@ -112,7 +112,11 @@ export default function CreatePassword() {
                     )}
                   </View>
                   <View style={styles.floatingBtn}>
-                    <Button onPress={handleSubmit} title="Reset Password" />
+                    <Button
+                      onPress={handleSubmit}
+                      title="Reset Password"
+              
+                    />
                   </View>
                 </>
               )}

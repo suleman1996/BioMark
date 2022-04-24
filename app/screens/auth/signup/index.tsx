@@ -86,7 +86,7 @@ export default function Signup() {
   };
 
   const handleSignup = async ({ password }: { password: string }) => {
-    if (phoneNumber == '' || gender == '') {
+    if (phoneNumber == '' || gender == '' ) {
     } else if (checked == true) {
       signupApi(password);
     } else {
@@ -253,10 +253,10 @@ export default function Signup() {
                     onEyePress={() => setHidePassword(!hidePassword)}
                     onChange={handleChange('password')}
                     margin={20}
-                  />
-                  {errors.password && (
-                    <Text style={styles.errorMessage}>{errors.password}</Text>
-                  )}
+                    />
+                    {errors.password && (
+                      <Text style={styles.errorMessage}>{errors.password}</Text>
+                    )}
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
@@ -288,7 +288,11 @@ export default function Signup() {
                 <TouchableOpacity>
                   <Button
                     title="Continue"
-                    disabled={!isValid}
+                    disabled={
+                      !isValid || phoneNumber.length < 8
+                        ? true
+                        : false
+                    }
                     onPress={() => handleSubmit()}
                   />
                 </TouchableOpacity>

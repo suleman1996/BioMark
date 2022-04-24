@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import colors from 'assets/colors';
 import React from 'react';
 
 import ArrowBack from 'assets/svgs/arrow-back';
@@ -53,5 +54,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: { marginLeft: 5, fontFamily: fonts.regular, fontSize: 16 },
+  title: { marginLeft: 5, fontFamily: fonts.regular, fontSize: 16,color:colors.black },
 });

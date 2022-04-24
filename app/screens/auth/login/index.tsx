@@ -196,6 +196,7 @@ export default function Login() {
           onEyePress={() => {
             setHidePassword(!hidePassword);
           }}
+         
           onChange={setPassword}
           margin={20}
         />
@@ -234,7 +235,7 @@ export default function Login() {
             color: colors.black,
           }}
         >
-          Login With
+          Log In With
         </Text>
         <View style={styles.socialLogins}>
           {Platform.OS === 'ios' && (

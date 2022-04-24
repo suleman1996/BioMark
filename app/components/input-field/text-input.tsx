@@ -38,7 +38,8 @@ export default function (props: Props) {
             <TextInput.Icon
               name={props?.eye}
               onPress={props?.onEyePress}
-              style={{ zIndex: 10 }}
+              style={{ zIndex: 10}}
+              color={colors.heading}
             />
           )
         }
