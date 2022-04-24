@@ -10,6 +10,7 @@ import TitleWithBackLayout from 'components/layouts/back-with-title/index';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { goBack } from 'services/nav-ref';
+import Button from 'components/button/button';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
@@ -42,7 +43,7 @@ const BodyMeasurementScreen = () => {
           value={value2}
         />
       </ScrollView>
-      <ButtonWithShadowContainer
+      <Button
         onPress={() => {
           goBack();
         }}
