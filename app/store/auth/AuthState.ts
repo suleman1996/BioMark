@@ -14,6 +14,6 @@ export class AuthState {
     email_address: '',
   };
   marketing = {
-    enable: false
+    enable: false,
   };
 }
