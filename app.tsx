@@ -1,18 +1,18 @@
-import {NavigationContainer} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {Platform, StatusBar, useColorScheme} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { Platform, StatusBar, useColorScheme } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
-import {MenuProvider} from 'react-native-popup-menu';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Provider, useDispatch, useSelector} from 'react-redux';
+import { MenuProvider } from 'react-native-popup-menu';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import colors from './app/assets/colors';
 import AppNavigator from './app/navigation/app-navigator';
 import AuthNavigator from './app/navigation/autth-navigator';
-import {getAuthAsyncStorage} from './app/services/async-storage/auth-async-storage';
-import {navigationRef} from './app/services/nav-ref';
-import {loggedIn} from './app/store/auth/auth-actions';
-import {IAppState} from './app/store/IAppState';
-import {store} from './app/store/store';
+import { getAuthAsyncStorage } from './app/services/async-storage/auth-async-storage';
+import { navigationRef } from './app/services/nav-ref';
+import { loggedIn } from './app/store/auth/auth-actions';
+import { IAppState } from './app/store/IAppState';
+import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
 
 const NavigationCheckIfLoggedIn = () => {
@@ -46,7 +46,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <AuthContext.Provider value={{user, setUser}}>
+      <AuthContext.Provider value={{ user, setUser }}>
         <MenuProvider>
           <StatusBar
             backgroundColor={colors.blue}
@@ -57,7 +57,7 @@ const App = () => {
             }
           />
 
-          <SafeAreaView edges={['top']} style={{flex: 1}}>
+          <SafeAreaView edges={['top']} style={{ flex: 1 }}>
             <NavigationCheckIfLoggedIn />
           </SafeAreaView>
         </MenuProvider>

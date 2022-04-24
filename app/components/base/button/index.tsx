@@ -27,6 +27,7 @@ export default ButtonComponent;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: GlobalColors.primary,
     height: heightToDp(6),
     alignItems: 'center',
     justifyContent: 'center',
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
+    color: GlobalColors.white,
     fontFamily: GlobalFonts.medium,
     fontSize: responsiveFontSize(18),
   },
