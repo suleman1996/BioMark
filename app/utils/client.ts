@@ -9,12 +9,12 @@ const request = axios.create({
   },
 });
 
-const onSuccess = function (response) {
+const onSuccess = function (response: any) {
   // console.log(response);
   return response.data;
 };
 
-const onError = function (error) {
+const onError = function (error: any) {
   //   console.error('Request Failed:', error.config);
   if (error.response) {
     // Request was made but server responded with something
@@ -54,6 +54,6 @@ request.interceptors.request.use(
 );
 export default request;
 
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
