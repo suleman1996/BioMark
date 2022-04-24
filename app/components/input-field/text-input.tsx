@@ -13,9 +13,8 @@ type Props = {
   onBlur?: any;
   onEyePress?: any;
   eye?: any;
-  Keyboardtype?: string
+  Keyboardtype?: string;
 };
-
 
 export default function textInput(props: Props) {
   const [text, setText] = React.useState('');
