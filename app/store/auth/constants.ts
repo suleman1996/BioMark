@@ -5,4 +5,5 @@ export const AUTH_ERR_LOG_IN = '[AUTH] ERR_LOG_IN';
 export const AUTH_ERR_LOG_OUT = '[AUTH] AUTH_ERR_LOG_OUT';
 export const AUTH_LOGOUT = '[AUTH] LOGOUT';
 export const AUTH_USER = '[AUTH] USERDETAILS';
-export const USER_CONTACTS = '[Auth] UserContactsDetails'
+export const USER_CONTACTS = '[Auth] UserContactsDetails';
+export const MARKETING = '[User] UserMarketingDetails';

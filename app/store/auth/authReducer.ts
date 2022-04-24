@@ -8,6 +8,7 @@ import {
   AUTH_LOGOUT,
   AUTH_USER,
   USER_CONTACTS,
+  MARKETING,
 } from './constants';
   
   const INITIAL_STATE = new AuthState;
@@ -17,7 +18,7 @@ import {
       case AUTH_LOGOUT: {
         return new AuthState();
       }
-  
+
       case AUTH_LOGGING_IN: {
         return {
           ...state,
@@ -27,7 +28,6 @@ import {
         };
       }
 
-      
       case AUTH_LOGGING_OUT: {
         return {
           ...state,
@@ -35,7 +35,7 @@ import {
           loggingOut: action.payload,
         };
       }
-  
+
       case AUTH_LOGGED_IN: {
         let {userToken, refreshToken, isFirstLogin, hasProfile, expiresIin} =
           action.payload;
@@ -55,7 +55,15 @@ import {
         const response = action.payload;
         return {
           ...state,
-          userContacts: response
+          userContacts: response,
+        };
+      }
+
+      case MARKETING: {
+        const response = action.payload;
+        return {
+          ...state,
+          marketing: response,
         };
       }
 
@@ -66,7 +74,7 @@ import {
           user,
         };
       }
-  
+
       case AUTH_ERR_LOG_IN: {
         return {
           ...state,
@@ -74,8 +82,7 @@ import {
           errorMessageLogin: action.payload,
         };
       }
-      
-  
+
       case AUTH_ERR_LOG_OUT: {
         return {
           ...state,
@@ -83,7 +90,7 @@ import {
           errorMessageLogout: action.payload,
         };
       }
-  
+
       default:
         return state;
     }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Linking, Pressable, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TitleWithBackWhiteBgLayout from '../../../../components/layouts/back-with-title-white-bg';
 import Fontisto from 'react-native-vector-icons/Fontisto'
@@ -17,6 +17,7 @@ const SettingsScreen = (props: Props) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <AccountDeActivateModal
+        callMe={() => setDeActivateModal(false)}
         isVisible={isVisibleDeActivateModal}
         setIsVisible={setDeActivateModal}
       />
@@ -38,7 +39,7 @@ const SettingsScreen = (props: Props) => {
           title={'Marketing Consent'}
         />
         <SingleMenuItemWithArrow
-          onPress={undefined}
+          onPress={() => Linking.openURL('mailto:support@biomarking.com')}
           title={'Data privacy Query'}
         />
         <SingleMenuItemWithArrow

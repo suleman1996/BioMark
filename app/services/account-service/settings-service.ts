@@ -3,6 +3,7 @@ import { API_URLS } from "../url-constants";
 import client from '../client'
 import { ErrorResponse } from "../../types/ErrorResponse";
 import { ChangePasswordLoggedIn } from "../../types/auth/ChangePasswordLoggedIn";
+import { MarketingType } from "../../types/Marketing";
 
 function changePassword(current_password: string, new_password: string) {
   return new Promise<ChangePasswordLoggedIn>((resolve, reject) => {
@@ -29,7 +30,53 @@ function changePassword(current_password: string, new_password: string) {
   });
 }
 
+function getMarketing(){
+   return new Promise<MarketingType>((resolve, reject) => {
+     client
+       .get(API_URLS.MARKETING)
+       .then(async response => {
+         try {
+           logNow('Register user success response', response.data);
+           resolve(response.data);
+         } catch (e) {
+           logNow('Register user error block login1.', e);
+           reject(e);
+         }
+       })
+       .catch(async (err: ErrorResponse) => {
+         logNow('Register user error response 2.', err);
+         reject(err);
+       });
+   });
+}
+
+function saveMarketing(enable: boolean) {
+  return new Promise<MarketingType>((resolve, reject) => {
+    client
+      .post(API_URLS.MARKETING, {
+        marketing: {
+          enable,
+        },
+      })
+      .then(async response => {
+        try {
+          logNow('Register user success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('Register user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('Register user error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
 
 export const settingsService = {
   changePassword,
+  getMarketing,
+  saveMarketing,
 };

@@ -1,5 +1,6 @@
 import { userService } from '../../services/user-service/userService';
 import { LoginErrorResponse, LoginResponse } from '../../types/auth/LoginResponse';
+import { MarketingType } from '../../types/Marketing';
 import { UserContacts } from '../../types/UserContacts';
 import { logNow } from '../../utils/functions/logBinder';
 import {
@@ -11,6 +12,7 @@ import {
   AUTH_LOGOUT,
   AUTH_USER,
   USER_CONTACTS,
+  MARKETING,
 } from './constants';
 
 export const loggingIn = (loggingIn: boolean) => ({
@@ -36,6 +38,11 @@ export const errorLogIn = (errorMessage: string) => ({
 export const addUserContactsDetails = (data: UserContacts) => ({
   type: USER_CONTACTS,
   payload: data
+});
+
+export const setMarketing = (data: MarketingType) => ({
+  type: MARKETING,
+  payload: data,
 });
 
 export const reduxLogin =

@@ -9,12 +9,13 @@ import { GlobalFonts } from '../../../utils/theme/fonts'
 import ButtonComponent from '../../base/button'
 
 type Props = {
-          isVisible: boolean;
-          setIsVisible: any
-}
+  isVisible: boolean;
+  setIsVisible: any;
+  callMe: any
+};
 
 const MarketingConsentModal = (props: Props) => {
-          const { isVisible, setIsVisible } = props
+          const {isVisible, setIsVisible, callMe} = props;
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
@@ -29,7 +30,7 @@ const MarketingConsentModal = (props: Props) => {
           and services via email and SMS.
         </Text>
         <ButtonComponent
-          onPress={() => setIsVisible(false)}
+          onPress={() => callMe()}
           title={'Confirm'}
           disabled={false}
         />

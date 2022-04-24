@@ -9,12 +9,13 @@ import { GlobalFonts } from '../../../utils/theme/fonts'
 import ButtonComponent from '../../base/button'
 
 type Props = {
-          isVisible: boolean;
-          setIsVisible: any
-}
+  isVisible: boolean;
+  setIsVisible: any;
+  callMe: any
+};
 
 const AccountDeActivateModal = (props: Props) => {
-          const { isVisible, setIsVisible } = props
+          const { isVisible, setIsVisible, callMe } = props
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
@@ -28,14 +29,14 @@ const AccountDeActivateModal = (props: Props) => {
           Are you sure you would like to deactivate your BioMark account?
         </Text>
         <ButtonComponent
-          onPress={undefined}
+          onPress={callMe}
           title={'Confirm'}
           disabled={false}
         />
         <ButtonComponent
           bg={'transparent'}
           color={'gray'}
-          onPress={undefined}
+          onPress={setIsVisible}
           title={'Not Now'}
           disabled={false}
         />
