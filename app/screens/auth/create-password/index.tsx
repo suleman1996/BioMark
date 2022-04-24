@@ -23,7 +23,7 @@ export default function CreatePassword() {
     try {
       setLoading(true);
       Keyboard.dismiss();
-      const result = await changePassword({
+      await changePassword({
         password: {
           username: route.params.phone,
           password: password,
@@ -76,7 +76,7 @@ export default function CreatePassword() {
               onSubmit={ResetPassword}
               validationSchema={ResetPassSchema}
             >
-              {({ handleChange, handleSubmit, values, errors }) => (
+              {({ handleChange, handleSubmit, errors }) => (
                 <>
                   <Text style={styles.title}>
                     Please enter your new password.
@@ -112,11 +112,7 @@ export default function CreatePassword() {
                     )}
                   </View>
                   <View style={styles.floatingBtn}>
-                    <Button
-                      onPress={handleSubmit}
-                      title="Reset Password"
-              
-                    />
+                    <Button onPress={handleSubmit} title="Reset Password" />
                   </View>
                 </>
               )}

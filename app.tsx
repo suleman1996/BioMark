@@ -25,6 +25,7 @@ const NavigationCheckIfLoggedIn = () => {
 
   useEffect(() => {
     getAuthTokenIfInAsyncStorage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const auth = useSelector((state: IAppState) => state.auth);

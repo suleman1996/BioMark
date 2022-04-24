@@ -5,10 +5,9 @@ import RadioButtonQuestionComponent from 'components/higher-order/radio-question
 
 type Props = {
   isVisible: boolean;
-  setIsVisible: any;
 };
 
-const AsthmaModal = ({ isVisible, setIsVisible }: Props) => {
+const AsthmaModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with asthma?
   const [ans1, setAns1] = useState(false);
 

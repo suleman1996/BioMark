@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native';
+import { Text } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
 import React from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';

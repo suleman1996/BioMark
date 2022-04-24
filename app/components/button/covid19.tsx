@@ -5,12 +5,7 @@ import Covid19 from 'assets/svgs/covid-19';
 import fonts from 'assets/fonts';
 import colors from 'assets/colors';
 
-type Props = {
-  text: string;
-  onPress: any;
-};
-
-export default function Covid19Btn({ text, onPress }: Props) {
+export default function Covid19Btn() {
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity>

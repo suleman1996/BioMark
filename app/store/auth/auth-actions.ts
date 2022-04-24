@@ -20,9 +20,9 @@ import {
   MARKETING,
 } from './constants';
 
-export const loggingIn = (loggingIn: boolean) => ({
+export const loggingIn = (logging: boolean) => ({
   type: AUTH_LOGGING_IN,
-  payload: loggingIn,
+  payload: logging,
 });
 
 export const loggedIn = (data: any) => ({
@@ -132,10 +132,10 @@ export const logout =
     dispatch(loggingOut(true));
     await userService
       .logout()
-      .then((res) => {
+      .then(() => {
         dispatch(loggedOut());
       })
-      .catch((err) => {
+      .catch(() => {
         // After developer alow below function on line 66
         // dispatch(errorLogOut('Error logging out.'));
         dispatch(loggedOut());

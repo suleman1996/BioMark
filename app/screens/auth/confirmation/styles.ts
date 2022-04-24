@@ -36,8 +36,6 @@ const styles = StyleSheet.create({
     currentStepIndicatorSize: 40,
     stepIndicatorLabelFontSize: 20,
     currentStepIndicatorLabelFontSize: 20,
-    stepIndicatorLabelFontSize: 20,
-    currentStepIndicatorLabelFontSize: 20,
     stepStrokeCurrentColor: colors.blue,
     stepIndicatorCurrentColor: colors.blue,
     stepIndicatorLabelCurrentColor: '#FFFFFF',

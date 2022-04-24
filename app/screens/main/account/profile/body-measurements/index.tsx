@@ -5,7 +5,6 @@ import HeightChooserComponent from 'components/higher-order/height-chooser/index
 import WeightChooserComponent from 'components/higher-order/weight-chooser';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container/index';
 import TitleWithBackLayout from 'components/layouts/back-with-title/index';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
@@ -48,7 +47,6 @@ const BodyMeasurementScreen = () => {
           goBack();
         }}
         title={'Save & Continue'}
-        
       />
     </TitleWithBackLayout>
   );

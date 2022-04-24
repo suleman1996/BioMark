@@ -5,7 +5,7 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
 
 export default function SelectedButton({}) {
-  return <View style={styles.view}></View>;
+  return <View style={styles.view} />;
 }
 
 const styles = StyleSheet.create({

@@ -25,6 +25,7 @@ export default function ({
   React.useEffect(() => {
     setCode('');
     setClearOTP(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focused]);
 
   return (
@@ -35,15 +36,16 @@ export default function ({
         pinCount={6}
         code={code}
         clearInputs={clearOTP}
-        onCodeChanged={(code) => {
-          setCode(code), setClearOTP(false);
+        onCodeChanged={(c: string) => {
+          setCode(c);
+          setClearOTP(false);
         }}
         autoFocusOnLoad={false}
         codeInputFieldStyle={[styles.codeInputFieldStyle]}
         codeInputHighlightStyle={styles.underlineStyleHighLighted}
-        onCodeFilled={(code) => {
+        onCodeFilled={(c: string) => {
           setClearOTP(false);
-          setCode(code);
+          setCode(c);
         }}
       />
     </View>

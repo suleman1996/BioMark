@@ -18,9 +18,7 @@ import { addUserContactsDetails } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import ErrorLineFullWidth from 'components/higher-order/error-full-width-line';
 
-type Props = {};
-
-const EmailChangeScreen = (props: Props) => {
+const EmailChangeScreen = () => {
   const formikRef = useRef<any>();
 
   const userContacts = useSelector(
@@ -42,25 +40,26 @@ const EmailChangeScreen = (props: Props) => {
       .then((res) => {
         dispatch(addUserContactsDetails(res));
       })
-      .catch((err) => {})
+      .catch(() => {})
       .finally(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const submitForm = () => {
-    const { email, confirmEmail } = formikRef.current.values;
+    const { confirmEmail } = formikRef.current.values;
     logNow({ email, confirmEmail });
     setIsLoading(true);
     formikRef.current.submitForm();
     userService
       .saveUserContacts(confirmEmail)
-      .then((res) => {
+      .then(() => {
         showMessage({
           message: 'Email changed successfully',
           type: 'success',
         });
         goBack();
       })
-      .catch((err) => {})
+      .catch(() => {})
       .finally(() => {
         setIsLoading(false);
       });
@@ -103,6 +102,7 @@ const EmailChangeScreen = (props: Props) => {
                   label={'Confirm Email Address'}
                   placeholder={'Enter your email address'}
                   onChange={handleChange('confirmEmail')}
+                  value={''}
                 />
               </View>
             </TitleWithBackWhiteBgLayout>

@@ -10,9 +10,7 @@ import { Nav_Screens } from 'navigation/constants';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
-type Props = {};
-
-const Sleep = (props: Props) => {
+const Sleep = () => {
   const sleepOptions = [
     { title: 'less than 4 hours' },
     { title: '4-7 hours' },
@@ -39,9 +37,7 @@ const Sleep = (props: Props) => {
                   fontFamily: fonts.regular,
                 }}
                 itemStyle={{ color: 'red' }}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedSleep(itemValue)
-                }
+                onValueChange={(itemValue) => setSelectedSleep(itemValue)}
               >
                 {sleepOptions?.map((item, index) => {
                   return (

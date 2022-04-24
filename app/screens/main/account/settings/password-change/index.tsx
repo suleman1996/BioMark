@@ -17,9 +17,7 @@ import { showMessage } from 'react-native-flash-message';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { goBack } from 'services/nav-ref';
 
-type Props = {};
-
-const PasswordChangeScreen = (props: Props) => {
+const PasswordChangeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [eCurrent, setECurrent] = useState(false);
   const [ePass, setEPass] = useState(false);
@@ -88,7 +86,7 @@ const PasswordChangeScreen = (props: Props) => {
             onSubmit={resetPassword}
             validationSchema={ResetPassSchema}
           >
-            {({ handleChange, handleSubmit, values, errors }) => (
+            {({ handleChange, handleSubmit, errors }) => (
               <>
                 <ScrollView style={{ flex: 1 }}>
                   <PasswordInputWithLabel

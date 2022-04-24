@@ -5,10 +5,9 @@ import RadioButtonQuestionComponent from 'components/higher-order/radio-question
 
 type Props = {
   isVisible: boolean;
-  setIsVisible: any;
 };
 
-const GoutModal = ({ isVisible, setIsVisible }: Props) => {
+const GoutModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with Gout?
   const [ans1, setAns1] = useState(false);
 

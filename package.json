@@ -7,13 +7,14 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint --quiet . --ext  .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write app/\"**/*.+(js|jsx|json|css|md|tsx|ts)\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.ts": [
       "prettier --write",
+      "yarn run lint",
       "git add"
     ]
   },

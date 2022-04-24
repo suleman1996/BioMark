@@ -1,6 +1,5 @@
 import { ApiResponse } from './api-response';
 import { EntryUpdateType, RangeValue } from './progress';
-import { WeightUnit } from 'src/app/modules/progress/models/measurement-units';
 
 export interface WeightProgressEntryRequest {
   medical: {

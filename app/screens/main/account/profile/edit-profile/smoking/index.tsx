@@ -134,9 +134,7 @@ export default function SmokingScreen() {
                 <Picker
                   itemStyle={{ height: 500, fontFamily: 'Rubik-Regular' }}
                   selectedValue={startSmoke}
-                  onValueChange={(itemValue, itemIndex) =>
-                    setStartSmoke(itemValue)
-                  }
+                  onValueChange={(itemValue) => setStartSmoke(itemValue)}
                 >
                   {options?.map((item, index) => {
                     return (
@@ -158,9 +156,7 @@ export default function SmokingScreen() {
                   <View style={styles.container2}>
                     <Picker
                       selectedValue={stopSmoke}
-                      onValueChange={(itemValue, itemIndex) =>
-                        setStopSmoke(itemValue)
-                      }
+                      onValueChange={(itemValue) => setStopSmoke(itemValue)}
                     >
                       {options2?.map((item, index) => {
                         return (

@@ -7,7 +7,6 @@ import { GlobalStyles } from 'utils/theme/global-styles';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import InputWithLabel from 'components/base/input-with-label';
-import DocumentTypeChooser from 'components/ui/document-type-chooser/index';
 import PhoneNumberWithLabel from 'components/base/phone-with-label/index';
 import DatePicker from 'components/date-picker';
 import BoxSelector from 'components/higher-order/box-selector';

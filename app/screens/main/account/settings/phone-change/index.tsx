@@ -9,9 +9,7 @@ import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white
 import { styles } from './styles';
 import PhoneNumberWithLabel from 'components/base/phone-with-label';
 
-type Props = {};
-
-const PhoneChangeScreen = (props: Props) => {
+const PhoneChangeScreen = () => {
   const [countryCode, setCountryCode] = useState<any>();
   const [number, setNumber] = useState<any>();
 

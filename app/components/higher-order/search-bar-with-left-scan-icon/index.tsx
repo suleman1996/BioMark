@@ -41,6 +41,7 @@ const QrInputPopup = ({ visible, children, loading }: Props) => {
 
   React.useEffect(() => {
     togglePopUp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
   const togglePopUp = () => {
@@ -61,27 +62,6 @@ const QrInputPopup = ({ visible, children, loading }: Props) => {
   );
 };
 
-//PopUp Error Modal
-const QrInputErrPopup = ({ visible, children, loading }: Props) => {
-  const [showErrModal, setShowErrModal] = React.useState(visible);
-
-  React.useEffect(() => {
-    togglePopUp();
-  }, [visible]);
-  const togglePopUp = () => {
-    if (visible) {
-      setShowErrModal(true);
-    } else {
-      setShowErrModal(false);
-    }
-  };
-  return (
-    <Modal transparent visible={showModal}>
-      <ActivityIndicator visible={loading} />
-    </Modal>
-  );
-};
-
 const SearchBarWithLeftScanIcon = () => {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -97,7 +77,7 @@ const SearchBarWithLeftScanIcon = () => {
     Keyboard.dismiss();
     try {
       setLoading(true);
-      const resut = await inputBarcode({
+      await inputBarcode({
         scanner: {
           code: qrInput,
         },
@@ -163,13 +143,7 @@ const SearchBarWithLeftScanIcon = () => {
                   validationSchema={QRschemma}
                   onSubmit={handleCode}
                 >
-                  {({
-                    handleChange,
-                    handleSubmit,
-                    values,
-                    errors,
-                    isValid,
-                  }) => (
+                  {({ handleChange, handleSubmit, errors, isValid }) => (
                     <QrInputPopup loading={loading} visible={visible}>
                       <View style={{ alignItems: 'center', marginBottom: 20 }}>
                         <View style={styles.popUpHeader}>
@@ -302,7 +276,6 @@ const styles = StyleSheet.create({
   input: {
     width: widthToDp(70),
     fontSize: responsiveFontSize(22),
-    fontSize: 15,
     color: '#3D3D3D',
     marginHorizontal: 10,
     fontFamily: GlobalFonts.regular,

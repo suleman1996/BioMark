@@ -5,12 +5,7 @@ import fonts from 'assets/fonts';
 import colors from 'assets/colors';
 import YourHealth from 'assets/svgs/your-health';
 
-type Props = {
-  text: string;
-  onPress: any;
-};
-
-export default function YourHealthBtn({ text, onPress }: Props) {
+export default function YourHealthBtn() {
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity>

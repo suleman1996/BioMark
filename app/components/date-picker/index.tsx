@@ -36,10 +36,10 @@ const DatePicker = (props: Props) => {
           value={new Date(date)}
           minimumDate={new Date(1950, 0, 1)}
           maximumDate={new Date()}
-          onChange={(date) => {
+          onChange={(d) => {
             setIsPickerShow(false),
-              date.type == 'set' &&
-                setDate(moment(date.nativeEvent.timestamp).format('L'));
+              d.type == 'set' &&
+                setDate(moment(d.nativeEvent.timestamp).format('L'));
           }}
         />
       )}

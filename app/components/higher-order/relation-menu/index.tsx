@@ -14,11 +14,10 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
-  options?: any;
   label: string;
 };
 
-const RelationMenu = ({ options, label }: Props) => {
+const RelationMenu = ({ label }: Props) => {
   const menuRef = useRef<any>();
   const [selected, setSelected] = useState();
 

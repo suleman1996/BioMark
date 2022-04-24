@@ -17,16 +17,6 @@ import HighBloodPressureModal from './modals/high-blood-pressure';
 import HighCholesterolModal from './modals/high-cholesterol';
 import OthersModal from './modals/others';
 
-const options = [
-  { title: '----' },
-  { title: 'Caucasian' },
-  { title: 'Chinese' },
-  { title: 'Filipino' },
-  { title: 'Indian' },
-  { title: 'Malay' },
-  { title: 'Other / NA' },
-];
-
 const MedicalHistoryScreen = () => {
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
   const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);

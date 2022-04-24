@@ -56,7 +56,7 @@ export default function SignupVerification() {
     setMinutes(initialMinutes);
     try {
       setLoading(true);
-      const result = await resendAccountCode({
+      await resendAccountCode({
         confirmation: {
           username: route?.params?.username,
         },
@@ -87,7 +87,7 @@ export default function SignupVerification() {
   const handleSignUP = async () => {
     try {
       setLoading(true);
-      const result = await signupAccountConfirm({
+      await signupAccountConfirm({
         confirmation: {
           username: route?.params?.username,
           password: route?.params?.password,

@@ -51,7 +51,7 @@ request.interceptors.request.use(
     // config.headers['clientid'] = '1620112254693';
     config.headers['x-biomark-group'] = 'patient';
     config.headers['x-biomark-token'] = `${userToken}`;
-    config.headers['Authorization'] = 'user';
+    config.headers.Authorization = 'user';
 
     return config;
   },

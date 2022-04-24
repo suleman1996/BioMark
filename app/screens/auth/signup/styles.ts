@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginRight: 10,
-    marginVertical:5,
+    marginVertical: 5,
     // borderWidth: 0.5,
     shadowColor: '#000',
     shadowOffset: {
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 4,
-  
   },
   radioText: {
     fontFamily: fonts.regular,

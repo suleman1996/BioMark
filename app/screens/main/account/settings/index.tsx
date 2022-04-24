@@ -8,9 +8,7 @@ import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 import AccountDeActivateModal from 'components/ui/account-deactivate-modal';
 
-type Props = {};
-
-const SettingsScreen = (props: Props) => {
+const SettingsScreen = () => {
   const [isVisibleDeActivateModal, setDeActivateModal] = useState(false);
   return (
     <SafeAreaView style={{ flex: 1 }}>
