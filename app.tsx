@@ -16,7 +16,6 @@ import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
 
 const NavigationCheckIfLoggedIn = () => {
-  const a = 'hjwh';
   const dispatch = useDispatch();
 
   async function getAuthTokenIfInAsyncStorage() {
