@@ -1,27 +1,32 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
-import { Provider, Appbar, RadioButton } from 'react-native-paper';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useState} from 'react';
+import {Provider, Appbar, RadioButton} from 'react-native-paper';
 import colors from '../../../../../../assets/colors/colors';
 import fonts from '../../../../../../assets/fonts/fonts';
 import TitleWithBackLayout from '../../../../../../components/layouts/back-with-title';
 import ButtonWithShadowContainer from '../../../../../../components/base/button-with-shadow-container';
 import DropdownMenuComponent from '../../../../../../components/base/dropdown-menu';
-import { GlobalColors } from '../../../../../../utils/theme/globalColors';
+import {GlobalColors} from '../../../../../../utils/theme/globalColors';
 import TextInput from '../../../../../../components/input-field/text-input';
-import { Picker } from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
 import Textinput from '../../../../../../components/text-input-button';
-import { styles } from './styles';
+import {styles} from './styles';
 
 export default function VaccinationScreen() {
-
   const [value, setValue] = useState('first');
   const [textinput, setTextinput] = useState('');
-  const [users] = useState(['john', 'James', 'ALis'])
+  const [users] = useState(['john', 'James', 'ALis']);
 
-
-  const onChangeInput = (event:any) => {
-    setTextinput(event)
-  }
+  const onChangeInput = (event: any) => {
+    setTextinput(event);
+  };
 
   const addTags = () => {
     // setTextinput(prevState => {
@@ -30,36 +35,93 @@ export default function VaccinationScreen() {
     //     users: [...prevState.users, prevState.textinput]
     //   }
     // })
-  }
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <TitleWithBackLayout title="Vaccinations">
-        <ScrollView style={{ flex: 1, marginBottom: 100 }}>
-          <Text style={styles.label}>Have you been vaccinated as an adult?</Text>
+        <ScrollView style={{flex: 1, marginBottom: 100}}>
+          <Text style={styles.label}>
+            Have you been vaccinated as an adult?
+          </Text>
           <RadioButton.Group
             onValueChange={newValue => setValue(newValue)}
             value={value}>
-
-            <TouchableOpacity onPress={()=>setValue('first')} style={[styles.radioContainer, { backgroundColor: value == 'first' ? GlobalColors.navyblue  : null }]}>
-              <RadioButton color={value == 'first' ? GlobalColors.white : null} value="first" />
-              <Text style={[styles.radioText, { color: value == 'first' ? '#ffffff' : '#000000' }]}>No</Text>
+            <TouchableOpacity
+              onPress={() => setValue('first')}
+              style={[
+                styles.radioContainer,
+                {
+                  backgroundColor:
+                    value == 'first' ? GlobalColors.navyblue : null,
+                },
+              ]}>
+              <RadioButton
+                color={value == 'first' ? GlobalColors.white : null}
+                value="first"
+              />
+              <Text
+                style={[
+                  styles.radioText,
+                  {color: value == 'first' ? '#ffffff' : '#000000'},
+                ]}>
+                No
+              </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=>setValue('second')} style={[styles.radioContainer, { backgroundColor: value == 'second' ? GlobalColors.navyblue  : null }]}>
-              <RadioButton color={value == 'second' ? GlobalColors.white : null} value="second" />
-              <Text style={[styles.radioText, { color: value == 'second' ? '#ffffff' : '#000000' }]}>Yes</Text>
+            <TouchableOpacity
+              onPress={() => setValue('second')}
+              style={[
+                styles.radioContainer,
+                {
+                  backgroundColor:
+                    value == 'second' ? GlobalColors.navyblue : null,
+                },
+              ]}>
+              <RadioButton
+                color={value == 'second' ? GlobalColors.white : null}
+                value="second"
+              />
+              <Text
+                style={[
+                  styles.radioText,
+                  {color: value == 'second' ? '#ffffff' : '#000000'},
+                ]}>
+                Yes
+              </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={()=>setValue('third')} style={[styles.radioContainer, { backgroundColor: value == 'third' ? GlobalColors.navyblue  : null }]}>
-              <RadioButton color={value == 'third' ? GlobalColors.white : null} value="third" />
-              <Text style={[styles.radioText, { color: value == 'third' ? '#ffffff' : '#000000' }]}>Yes, but I'm not sure which vaccines</Text>
+            <TouchableOpacity
+              onPress={() => setValue('third')}
+              style={[
+                styles.radioContainer,
+                {
+                  backgroundColor:
+                    value == 'third' ? GlobalColors.navyblue : null,
+                },
+              ]}>
+              <RadioButton
+                color={value == 'third' ? GlobalColors.white : null}
+                value="third"
+              />
+              <Text
+                style={[
+                  styles.radioText,
+                  {color: value == 'third' ? '#ffffff' : '#000000'},
+                ]}>
+                Yes, but I'm not sure which vaccines
+              </Text>
             </TouchableOpacity>
           </RadioButton.Group>
 
-          {value == 'second' ?
-            <Textinput onPress={addTags} value={textinput} onChangeText={onChangeInput} question='Please list the vaccines:' />
-            : null}
+          {value == 'second' ? (
+            <Textinput
+              onPress={addTags}
+              value={textinput}
+              onChangeText={onChangeInput}
+              question="Please list the vaccines:"
+            />
+          ) : null}
 
           {/* {
             users.map(item => {
@@ -68,11 +130,9 @@ export default function VaccinationScreen() {
               )
             })
           } */}
-
         </ScrollView>
-        <ButtonWithShadowContainer title='Save' />
+        <ButtonWithShadowContainer title="Save" />
       </TitleWithBackLayout>
     </SafeAreaView>
   );
 }
-
