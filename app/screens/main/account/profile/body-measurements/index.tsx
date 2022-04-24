@@ -48,6 +48,7 @@ const BodyMeasurementScreen = () => {
           goBack();
         }}
         title={'Save & Continue'}
+        
       />
     </TitleWithBackLayout>
   );
