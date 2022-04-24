@@ -13,6 +13,9 @@ import { IAppState } from '../../../../../store/IAppState'
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import ErrorLineFullWidth from '../../../../../components/higher-order/errorFullWidthLine'
+import ActivityIndicator from '../../../../../components/loader/activity-indicator'
+import { goBack } from '../../../../../services/navRef'
+import { showMessage } from 'react-native-flash-message'
 
 type Props = {}
 
@@ -29,6 +32,10 @@ const EmailChangeScreen = (props: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setEmail(userContacts.email_address);
+  }, [userContacts.email_address])
+
+  useEffect(() => {
     userService.getUserContacts().then(res => {
       dispatch(addUserContactsDetails(res));
     }).catch(err => {
@@ -43,6 +50,17 @@ const EmailChangeScreen = (props: Props) => {
     logNow({email, confirmEmail});
     setIsLoading(true);
     formikRef.current.submitForm();
+    userService.saveUserContacts(confirmEmail).then(res => {
+showMessage({
+  message: 'Email changed successfully',
+  type: 'success',
+});
+goBack();
+    }).catch(err => {
+
+    }).finally(() => {
+      setIsLoading(false);
+    })
   }
 
   const ResetPassSchema = Yup.object({
@@ -56,13 +74,14 @@ const EmailChangeScreen = (props: Props) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <ActivityIndicator visible={isLoading} />
       <Formik
         innerRef={formikRef}
         initialValues={{
           email,
           confirmEmail: '',
         }}
-        onSubmit={(values) => logNow(values)}
+        onSubmit={values => logNow(values)}
         validationSchema={ResetPassSchema}>
         {({handleChange, handleSubmit, values, errors}) => (
           <>
@@ -83,6 +102,7 @@ const EmailChangeScreen = (props: Props) => {
                 />
               </View>
             </TitleWithBackWhiteBgLayout>
+            <ErrorLineFullWidth error={errors.email || errors.confirmEmail} />
             <View style={styles.bottomBtnContainer}>
               <ButtonComponent
                 onPress={() => {
@@ -90,10 +110,15 @@ const EmailChangeScreen = (props: Props) => {
                   handleSubmit();
                 }}
                 title={'Save'}
-                disabled={Object.entries(errors).length === 0 ? values.confirmEmail ? false : true : true}
+                disabled={
+                  Object.entries(errors).length === 0
+                    ? values.confirmEmail
+                      ? false
+                      : true
+                    : true
+                }
               />
             </View>
-            <ErrorLineFullWidth />
           </>
         )}
       </Formik>

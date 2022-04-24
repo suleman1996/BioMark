@@ -5881,6 +5881,11 @@ libphonenumber-js@^0.2.24:
     minimist "^1.2.0"
     xml2js "^0.4.17"
 
+libphonenumber-js@^1.9.52:
+  version "1.9.52"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.52.tgz#662ea92dcb6761ceb2dc9a8cd036aadd355bc999"
+  integrity sha512-8k83chc+zMj+J/RkaBxi0PpSTAdzHmpqzCMqquSJVRfbZFr8DCp6vPC7ms2PIPGxeqajZLI6CBLW5nLCJCJrYg==
+
 lines-and-columns@^1.1.6:
   version "1.2.4"
   resolved "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
