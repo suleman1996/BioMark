@@ -8,6 +8,7 @@ import {
   AUTH_LOGOUT,
   AUTH_USER,
   USER_CONTACTS,
+  MARKETING,
 } from './constants';
 
 const INITIAL_STATE = new AuthState();
@@ -55,6 +56,14 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         userContacts: response,
+      };
+    }
+
+    case MARKETING: {
+      const response = action.payload;
+      return {
+        ...state,
+        marketing: response,
       };
     }
 

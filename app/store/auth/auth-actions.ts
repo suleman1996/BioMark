@@ -6,6 +6,7 @@ import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import { LoginErrorResponse, LoginResponse } from 'types/auth/LoginResponse';
 import { UserContacts } from 'types/UserContacts';
 import { logNow } from 'utils/functions/log-binder';
+import { MarketingType } from 'types/Marketing';
 import {
   AUTH_ERR_LOG_IN,
   AUTH_ERR_LOG_OUT,
@@ -16,6 +17,7 @@ import {
   AUTH_USER,
   DEVICE_REG,
   USER_CONTACTS,
+  MARKETING,
 } from './constants';
 
 export const loggingIn = (loggingIn: boolean) => ({
@@ -44,6 +46,11 @@ export const errorLogIn = (errorMessage: string) => ({
 
 export const addUserContactsDetails = (data: UserContacts) => ({
   type: USER_CONTACTS,
+  payload: data,
+});
+
+export const setMarketing = (data: MarketingType) => ({
+  type: MARKETING,
   payload: data,
 });
 

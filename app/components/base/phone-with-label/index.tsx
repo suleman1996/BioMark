@@ -12,11 +12,19 @@ type Props = {
   label?: string;
   placeholder: string;
   disabled: boolean;
+  number: any;
+  country: any;
 };
 
-const PhoneNumberWithLabel = ({ label, placeholder, disabled }: Props) => {
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
-  const [countryCode, setCountryCode] = useState('MY');
+const PhoneNumberWithLabel = ({
+  label,
+  placeholder,
+  disabled,
+  country,
+  number,
+}: Props) => {
+  const [selectCountryCode, setSelectCountryCode] = useState('PK');
+  const [countryCode, setCountryCode] = useState('PK');
   const [phoneNumber, setPhoneNumber] = useState('');
 
   return (
@@ -25,7 +33,7 @@ const PhoneNumberWithLabel = ({ label, placeholder, disabled }: Props) => {
       <View>
         {disabled ? <View style={styles.disableContainer} /> : null}
         <PhoneNumber
-          countryCode={countryCode}
+          countryCode={country}
           setCountryCode={setCountryCode}
           phoneNumber={phoneNumber}
           setPhoneNumber={setPhoneNumber}

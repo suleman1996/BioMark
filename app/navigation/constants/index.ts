@@ -20,7 +20,7 @@ export const Nav_Screens = {
   PasswordChangeScreen: 'PasswordChangeScreen',
   EmailChangeScreen: 'EmailChangeScreen',
   PhoneChangeScreen: 'PhoneChangeScreen',
-
+  MarketingConsentScreen: 'MarketingConsentScreen',
   // edit profile
   Edit_Profile: 'EditProfile',
   Smoking: 'Smoking',

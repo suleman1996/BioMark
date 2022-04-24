@@ -2,8 +2,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
 import { GlobalColors } from 'utils/theme/global-colors';
-
-import AccountScreen from 'screens/main/account/account-screen';
 import EditProfileScreen from 'screens/main/account/profile/edit-profile';
 import PersonalInformationScreen from 'screens/main/account/profile/personal-information';
 import BodyMeasurementScreen from 'screens/main/account/profile/body-measurements';
@@ -22,6 +20,7 @@ import DrinkingScreen from 'screens/main/account/profile/edit-profile/drinking';
 import PasswordChangeScreen from 'screens/main/account/settings/password-change';
 import EmailChangeScreen from 'screens/main/account/settings/email-change';
 import PhoneChangeScreen from 'screens/main/account/settings/phone-change';
+import MarketingConsentScreen from 'screens/main/account/settings/marketing-consent';
 
 import { Nav_Screens } from './constants';
 
@@ -90,6 +89,13 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.PhoneChangeScreen}
         component={PhoneChangeScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.MarketingConsentScreen}
+        component={MarketingConsentScreen}
       />
     </Stack.Group>
     {/* Profile Stack */}

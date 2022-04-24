@@ -140,6 +140,30 @@ function getUserContacts() {
   });
 }
 
+function saveUserContacts(email_address: string) {
+  return new Promise<UserContacts>((resolve, reject) => {
+    client
+      .post(API_URLS.GET_USER_CONTACTS, {
+        contact: {
+          email_address: email_address,
+        },
+      })
+      .then(async (response) => {
+        try {
+          logNow('Register user success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('Register user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get profile error', err);
+        reject(err);
+      });
+  });
+}
+
 async function logout() {
   await resetAuthAsyncStorage();
 
@@ -170,4 +194,5 @@ export const userService = {
   logout,
   forgotPassword,
   getUserContacts,
+  saveUserContacts,
 };

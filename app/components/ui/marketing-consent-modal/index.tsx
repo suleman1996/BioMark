@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 import ModalComponent from 'components/base/modal';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import ButtonComponent from 'components/base/button';
@@ -15,7 +15,7 @@ type Props = {
   callMe: any;
 };
 
-const AccountDeActivateModal = (props: Props) => {
+const MarketingConsentModal = (props: Props) => {
   const { isVisible, setIsVisible, callMe } = props;
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
@@ -27,13 +27,18 @@ const AccountDeActivateModal = (props: Props) => {
           </Pressable>
         </View>
         <Text style={styles.contentText}>
-          Are you sure you would like to deactivate your BioMark account?
+          By clicking 'Confirm' you will not receive any more offers, promotion
+          and services via email and SMS.
         </Text>
-        <ButtonComponent onPress={callMe} title={'Confirm'} disabled={false} />
+        <ButtonComponent
+          onPress={() => callMe()}
+          title={'Confirm'}
+          disabled={false}
+        />
         <ButtonComponent
           bg={'transparent'}
           color={'gray'}
-          onPress={setIsVisible}
+          onPress={() => setIsVisible(false)}
           title={'Not Now'}
           disabled={false}
         />
@@ -42,7 +47,7 @@ const AccountDeActivateModal = (props: Props) => {
   );
 };
 
-export default AccountDeActivateModal;
+export default MarketingConsentModal;
 
 const styles = StyleSheet.create({
   container: {

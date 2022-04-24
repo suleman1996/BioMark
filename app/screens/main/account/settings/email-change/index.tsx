@@ -3,7 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { showMessage } from 'react-native-flash-message';
 
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { goBack } from 'services/nav-ref';
 import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
 import { styles } from './styles';
 import InputWithLabel from 'components/base/input-with-label';
@@ -30,6 +33,10 @@ const EmailChangeScreen = (props: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setEmail(userContacts.email_address);
+  }, [userContacts.email_address]);
+
+  useEffect(() => {
     userService
       .getUserContacts()
       .then((res) => {
@@ -44,6 +51,19 @@ const EmailChangeScreen = (props: Props) => {
     logNow({ email, confirmEmail });
     setIsLoading(true);
     formikRef.current.submitForm();
+    userService
+      .saveUserContacts(confirmEmail)
+      .then((res) => {
+        showMessage({
+          message: 'Email changed successfully',
+          type: 'success',
+        });
+        goBack();
+      })
+      .catch((err) => {})
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const ResetPassSchema = Yup.object({
@@ -57,6 +77,7 @@ const EmailChangeScreen = (props: Props) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <ActivityIndicator visible={isLoading} />
       <Formik
         innerRef={formikRef}
         initialValues={{
@@ -85,6 +106,7 @@ const EmailChangeScreen = (props: Props) => {
                 />
               </View>
             </TitleWithBackWhiteBgLayout>
+            <ErrorLineFullWidth error={errors.email || errors.confirmEmail} />
             <View style={styles.bottomBtnContainer}>
               <ButtonComponent
                 onPress={() => {
@@ -101,7 +123,6 @@ const EmailChangeScreen = (props: Props) => {
                 }
               />
             </View>
-            <ErrorLineFullWidth />
           </>
         )}
       </Formik>

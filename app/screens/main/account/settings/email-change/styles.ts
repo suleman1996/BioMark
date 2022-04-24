@@ -10,6 +10,6 @@ export const styles = StyleSheet.create({
   bottomBtnContainer: {
     marginTop: heightToDp(4),
     paddingHorizontal: widthToDp(6),
-    paddingBottom: heightToDp(3),
+    paddingBottom: heightToDp(4),
   },
 });

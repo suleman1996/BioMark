@@ -13,4 +13,7 @@ export class AuthState {
     mobile: '',
     email_address: '',
   };
+  marketing = {
+    enable: false
+  };
 }

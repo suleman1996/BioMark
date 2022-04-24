@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { ScrollView } from 'native-base';
+import { ScrollView } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

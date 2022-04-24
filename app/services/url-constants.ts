@@ -10,6 +10,9 @@ const API_URLS = {
   GET_PROFILE: '/api/v1/patient/profiles',
   GET_USER_CONTACTS: '/api/v1/patient/contacts',
   LOG_OUT: '/api/v1/auth/sessions/logout',
+  SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
+  MARKETING: '/api/v1/patient/marketing',
+
   // Settings
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',
 };

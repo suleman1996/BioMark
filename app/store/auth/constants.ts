@@ -7,3 +7,4 @@ export const AUTH_LOGOUT = '[AUTH] LOGOUT';
 export const AUTH_USER = '[AUTH] USERDETAILS';
 export const DEVICE_REG = '[AUTH] DEVICE_REG';
 export const USER_CONTACTS = '[Auth] UserContactsDetails';
+export const MARKETING = '[User] UserMarketingDetails';
