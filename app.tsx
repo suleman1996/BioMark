@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import colors from './app/assets/colors';
 import AppNavigator from './app/navigation/app-navigator';
-import AuthNavigator from './app/navigation/autth-navigator';
+import AuthNavigator from './app/navigation/auth-navigator';
 import { getAuthAsyncStorage } from './app/services/async-storage/auth-async-storage';
 import { navigationRef } from './app/services/nav-ref';
 import { loggedIn } from './app/store/auth/auth-actions';
