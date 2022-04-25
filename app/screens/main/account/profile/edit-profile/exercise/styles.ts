@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
   container2: {
     marginHorizontal: heightToDp(2),
     marginVertical: heightToDp(3),
-    
+
     borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
     backgroundColor: GlobalColors.bg,
@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
   bottomView: {
     width: '100%',
     height: 50,
-    backgroundColor: '#EE5407',
+    backgroundColor: GlobalColors.gray,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute', //Here is the trick
