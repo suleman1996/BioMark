@@ -17,6 +17,7 @@ import AuthContext from './app/utils/auth-context';
 
 const NavigationCheckIfLoggedIn = () => {
   const dispatch = useDispatch();
+  const a = 'hafg';
 
   async function getAuthTokenIfInAsyncStorage() {
     const data = await getAuthAsyncStorage();
