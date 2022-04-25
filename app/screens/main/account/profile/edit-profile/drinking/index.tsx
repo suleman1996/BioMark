@@ -6,7 +6,6 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import TitleWithBackLayout from 'components/layouts/back-with-title';
-
 import styles from './styles';
 import { GlobalColors } from 'utils/theme/global-colors';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
@@ -16,15 +15,22 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 
-type Props = {};
+type RenderDrinkingProps = {
+  title: string;
+  quantity: number;
+  setter: (value: number) => void;
+  iconLeft: React.ReactNode;
+  Add: React.ReactNode;
+  Minus: React.ReactNode;
+};
 
-const Drinking = (props: Props) => {
+const Drinking = () => {
   const [value, setValue] = React.useState('');
   const [beer, setBeer] = React.useState(0);
   const [wine, setWine] = React.useState(0);
   const [spirits, setSpiritss] = React.useState(0);
 
-  const RenderDrinking = (props) => (
+  const RenderDrinking = (props: RenderDrinkingProps) => (
     <View
       style={{
         flexDirection: 'row',

@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
 import TagsCloudInputComponent from 'components/higher-order/tags-cloud-input';
 
 type Props = {
   isVisible: boolean;
-  setIsVisible: any;
 };
 
-const OthersModal = ({ isVisible, setIsVisible }: Props) => {
-  //    Have you been diagnosed with Gout?
-  const [ans1, setAns1] = useState(false);
-
-  // Are you taking any medications for this?
-  const [ans2, setAns2] = useState(false);
-
+const OthersModal = ({ isVisible }: Props) => {
   return (
     <ModalWithBottomBtn
       isVisible={isVisible}

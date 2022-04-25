@@ -12,4 +12,5 @@ export const GlobalColors = {
   blue: '#1B96D8',
   black: '#000',
   navyblue: '#04589E',
+  lightGrey: '#8493AE',
 };

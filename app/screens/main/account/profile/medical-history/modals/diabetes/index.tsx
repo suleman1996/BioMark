@@ -11,10 +11,9 @@ const options = [{ title: 'Type 1 only' }, { title: 'Type 2 only' }];
 
 type Props = {
   isVisible: boolean;
-  setIsVisible: any;
 };
 
-const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
+const DiabetesModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with diabetes?
   const [ans1, setAns1] = useState(false);
 
@@ -22,6 +21,7 @@ const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
   const [ans2, setAns2] = useState(false);
 
   // diagnoesed type 1 only
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [dDiagnosedWith, setDiagnosedWith] = useState('');
 
   return (

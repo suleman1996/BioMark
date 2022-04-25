@@ -41,6 +41,7 @@ export default function Signup() {
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState(''); //International Phone Picker
   const [selectCountryCode, setSelectCountryCode] = useState('60');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
     { id: 0, sex: 'Male' },
     { id: 1, sex: 'Female' },
@@ -54,11 +55,13 @@ export default function Signup() {
 
   //fuctions
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({ min: 8, max: 11 });
-    else if (selectCountryCode == '63')
+    if (selectCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectCountryCode == '63') {
       setNumberCondition({ min: 10, max: 10 });
-    else if (selectCountryCode == '65') setNumberCondition({ min: 8, max: 8 });
-    else {
+    } else if (selectCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
@@ -86,7 +89,7 @@ export default function Signup() {
   };
 
   const handleSignup = async ({ password }: { password: string }) => {
-    if (phoneNumber == '' || gender == '' ) {
+    if (phoneNumber == '' || gender == '') {
     } else if (checked == true) {
       signupApi(password);
     } else {
@@ -164,7 +167,7 @@ export default function Signup() {
           onSubmit={handleSignup}
           validationSchema={ResetPassSchema}
         >
-          {({ handleChange, handleSubmit, values, errors, isValid }) => (
+          {({ handleChange, handleSubmit, errors, isValid }) => (
             <>
               <View style={styles.biContainer}>
                 <Text style={styles.heading}>Basic Information</Text>
@@ -255,10 +258,10 @@ export default function Signup() {
                     onEyePress={() => setHidePassword(!hidePassword)}
                     onChange={handleChange('password')}
                     margin={20}
-                    />
-                    {errors.password && (
-                      <Text style={styles.errorMessage}>{errors.password}</Text>
-                    )}
+                  />
+                  {errors.password && (
+                    <Text style={styles.errorMessage}>{errors.password}</Text>
+                  )}
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
@@ -290,11 +293,7 @@ export default function Signup() {
                 <TouchableOpacity>
                   <Button
                     title="Continue"
-                    disabled={
-                      !isValid || phoneNumber.length < 8
-                        ? true
-                        : false
-                    }
+                    disabled={!isValid || phoneNumber.length < 8 ? true : false}
                     onPress={() => handleSubmit()}
                   />
                 </TouchableOpacity>

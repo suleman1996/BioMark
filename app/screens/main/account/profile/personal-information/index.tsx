@@ -54,7 +54,7 @@ const PersonalInformationScreen = () => {
           </View>
         </RadioButton.Group>
       </ScrollView>
-      <Button 
+      <Button
         disabled={
           firstName.length > 0 && lastName.length > 0 && value ? false : true
         }
@@ -62,7 +62,6 @@ const PersonalInformationScreen = () => {
         onPress={() => {
           goBack();
         }}
-        
       />
     </TitleWithBackLayout>
   );

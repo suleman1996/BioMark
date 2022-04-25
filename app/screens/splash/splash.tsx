@@ -12,7 +12,7 @@ export default function Splash() {
     setTimeout(() => {
       navigations.replace('Login');
     }, 2000);
-  }, []);
+  }, [navigations]);
 
   return (
     <View style={styles.container}>

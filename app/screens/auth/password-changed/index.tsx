@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
 
 import fonts from 'assets/fonts';
 import colors from 'assets/colors';

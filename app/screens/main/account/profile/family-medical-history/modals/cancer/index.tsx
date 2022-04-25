@@ -10,15 +10,11 @@ const options = [{ title: 'Blood' }, { title: 'Breast' }];
 
 type Props = {
   isVisible: boolean;
-  setIsVisible: any;
 };
 
-const CancerModal = ({ isVisible, setIsVisible }: Props) => {
+const CancerModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with Cancer?
   const [ans1, setAns1] = useState(false);
-
-  // Are you taking any medications for this?
-  const [ans2, setAns2] = useState(false);
 
   const [cancerType, setCancerType] = useState('');
 
@@ -39,7 +35,8 @@ const CancerModal = ({ isVisible, setIsVisible }: Props) => {
           <View style={{}}>
             <DropdownMenuComponent
               options={options}
-              setSelectedDropdown={setCancerType}
+              onValueChange={setCancerType}
+              selectedValue={cancerType}
             />
           </View>
         </>

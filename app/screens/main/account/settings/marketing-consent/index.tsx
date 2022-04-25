@@ -13,9 +13,7 @@ import { IAppState } from 'store/IAppState';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { goBack } from 'services/nav-ref';
 
-type Props = {};
-
-const MarketingConsentScreen = (props: Props) => {
+const MarketingConsentScreen = () => {
   const dispatch = useDispatch();
   const userMarketing = useSelector((state: IAppState) => state.auth.marketing);
 
@@ -30,11 +28,12 @@ const MarketingConsentScreen = (props: Props) => {
       .then((res) => {
         dispatch(setMarketing(res));
       })
-      .catch((err) => {});
+      .catch(() => {});
   };
 
   useEffect(() => {
     getUserMarketing();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -46,11 +45,11 @@ const MarketingConsentScreen = (props: Props) => {
     setIsLoading(true);
     settingsService
       .saveMarketing(isChecked)
-      .then((res) => {
+      .then(() => {
         getUserMarketing();
         goBack();
       })
-      .catch((err) => {})
+      .catch(() => {})
       .finally(() => {
         setIsLoading(false);
       });

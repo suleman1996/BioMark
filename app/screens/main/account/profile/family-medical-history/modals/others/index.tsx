@@ -5,10 +5,9 @@ import TagsCloudInputComponent from 'components/higher-order/tags-cloud-input';
 
 type Props = {
   isVisible: boolean;
-  setIsVisible: any;
 };
 
-const OthersModal = ({ isVisible, setIsVisible }: Props) => {
+const OthersModal = ({ isVisible }: Props) => {
   return (
     <ModalWithBottomBtn
       isVisible={isVisible}

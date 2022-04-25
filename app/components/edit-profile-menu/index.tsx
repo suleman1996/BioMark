@@ -20,7 +20,9 @@ export default function EditProfileModal({
   onPressGallery,
   iconPress,
 }: Props) {
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
     <View style={styles.overLay}>

@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
@@ -15,8 +14,6 @@ import { logNow } from 'utils/functions/log-binder';
 import styles from './styles';
 
 export default function ForgotPassword() {
-  const navigations = useNavigation();
-
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [selectCountryCode, setSelectCountryCode] = useState('60');
@@ -24,11 +21,13 @@ export default function ForgotPassword() {
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
 
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({ min: 8, max: 11 });
-    else if (selectCountryCode == '63')
+    if (selectCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectCountryCode == '63') {
       setNumberCondition({ min: 10, max: 10 });
-    else if (selectCountryCode == '65') setNumberCondition({ min: 8, max: 8 });
-    else {
+    } else if (selectCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
@@ -39,7 +38,7 @@ export default function ForgotPassword() {
     const username: string = `+${selectCountryCode}${phoneNumber}`;
     userService
       .forgotPassword(username)
-      .then((res) => {
+      .then(() => {
         navigate(Nav_Screens.PasswordOTPScreen, { phone: username });
       })
       .catch((err: ForgotPasswordErrorResponse) => {

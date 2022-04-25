@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 

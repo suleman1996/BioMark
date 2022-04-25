@@ -21,9 +21,10 @@ const PhoneNumberWithLabel = ({
   placeholder,
   disabled,
   country,
-  number,
 }: Props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectCountryCode, setSelectCountryCode] = useState('PK');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [countryCode, setCountryCode] = useState('PK');
   const [phoneNumber, setPhoneNumber] = useState('');
 

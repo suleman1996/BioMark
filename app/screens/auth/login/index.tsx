@@ -53,11 +53,13 @@ export default function Login() {
   });
 
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({ min: 8, max: 11 });
-    else if (selectCountryCode == '63')
+    if (selectCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectCountryCode == '63') {
       setNumberCondition({ min: 10, max: 10 });
-    else if (selectCountryCode == '65') setNumberCondition({ min: 8, max: 8 });
-    else {
+    } else if (selectCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
@@ -98,28 +100,6 @@ export default function Login() {
         console.log('Login fail with error: ' + error);
       }
     );
-  };
-
-  const initUser = (token: any) => {
-    // props.navigation.navigate(TOP_TAB_BAR);
-    fetch(
-      'https://graph.facebook.com/v2.5/me?fields=email,first_name,last_name,picture.type(large),friends&access_token=' +
-        token
-    )
-      .then((response) => {
-        response.json().then(
-          (json) => {
-            console.log('Json response', json);
-          },
-          (error) => {
-            alert(error.message);
-          }
-        );
-      })
-      .catch((error) => {
-        console.log('ERROR GETTING DATA FROM FACEBOOK');
-        // Toast.show(error.message, Toast.LONG);
-      });
   };
 
   // redux error check
@@ -196,7 +176,6 @@ export default function Login() {
           onEyePress={() => {
             setHidePassword(!hidePassword);
           }}
-         
           onChange={setPassword}
           margin={20}
         />

@@ -46,14 +46,10 @@ request.interceptors.request.use(
     // const user = await authStorage.getToken();
     // config.headers['clientid'] = '1620112254693';
     config.headers['x-biomark-group'] = 'patient';
-    config.headers['Authorization'] = 'user';
+    config.headers.Authorization = 'user';
 
     return config;
   },
   (error) => Promise.reject(error)
 );
 export default request;
-
-function capitalizeFirstLetter(string: string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}

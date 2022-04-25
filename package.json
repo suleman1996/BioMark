@@ -7,14 +7,15 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint --quiet . --ext  .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write app/\"**/*.+(js|jsx|json|css|md|tsx|ts)\"",
-    "precommit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*.ts": [
+    "**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "git add"
+      "yarn run lint"
     ]
   },
   "rnpm": {
@@ -96,7 +97,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "jest": "^26.6.3",
     "lint-staged": "^12.4.0",
     "metro-react-native-babel-preset": "^0.67.0",

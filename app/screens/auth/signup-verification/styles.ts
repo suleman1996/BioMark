@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import colors from '../../../assets/colors';
 import fonts from '../../../assets/fonts';
 
@@ -34,8 +34,6 @@ const styles = StyleSheet.create({
     stepStrokeWidth: 0,
     stepIndicatorSize: 40,
     currentStepIndicatorSize: 40,
-    stepIndicatorLabelFontSize: 20,
-    currentStepIndicatorLabelFontSize: 20,
     stepIndicatorLabelFontSize: 20,
     currentStepIndicatorLabelFontSize: 20,
     stepStrokeCurrentColor: colors.blue,
@@ -91,7 +89,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
-    color:'black'
+    color: 'black',
   },
 });
 

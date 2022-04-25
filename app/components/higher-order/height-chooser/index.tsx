@@ -26,6 +26,7 @@ const HeightChooserComponent = ({
   onChangeText,
 }: Props) => {
   const menuRef = useRef<any>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [value, setValue] = useState(0);
   const [selectedType, setSelectedType] = useState(2);
 
@@ -36,9 +37,7 @@ const HeightChooserComponent = ({
   if (textAlign) {
     otherStyle.push({ textAlign: textAlign });
   }
-  const convertedCentoFeet = (values = 30) => {
-    setValue(values);
-  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -139,7 +138,6 @@ const styles = StyleSheet.create({
   },
   singleMenuItem: {
     width: '100%',
-    width: widthToDp(25),
   },
   menuText: {
     fontSize: responsiveFontSize(20),

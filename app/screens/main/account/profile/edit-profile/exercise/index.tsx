@@ -94,9 +94,7 @@ export default function ExerciseScreen() {
               <View style={[styles.container2]}>
                 <Picker
                   selectedValue={exerciseWeek}
-                  onValueChange={(itemValue, itemIndex) =>
-                    setExerciseWeek(itemValue)
-                  }
+                  onValueChange={(itemValue) => setExerciseWeek(itemValue)}
                 >
                   {options?.map((item, index) => {
                     return (
@@ -115,9 +113,7 @@ export default function ExerciseScreen() {
               <View style={styles.container2}>
                 <Picker
                   selectedValue={exerciseSession}
-                  onValueChange={(itemValue, itemIndex) =>
-                    setExerciseSession(itemValue)
-                  }
+                  onValueChange={(itemValue) => setExerciseSession(itemValue)}
                 >
                   {options2?.map((item, index) => {
                     return (

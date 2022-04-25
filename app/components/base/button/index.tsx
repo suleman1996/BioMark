@@ -10,16 +10,27 @@ type Props = {
   onPress: any;
   title: string;
   disabled?: boolean;
+  bg?: string;
+  color?: string;
 };
 
-const ButtonComponent = ({ onPress, title, disabled }: Props) => {
+const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
+  const ifBg = bg ? { backgroundColor: bg } : {};
+  const ifColor = color ? { color: color } : {};
+  const ifDisabled = disabled
+    ? { backgroundColor: 'lightgray' }
+    : { backgroundColor: GlobalColors.primary };
+  const ifDisabledText = disabled
+    ? { color: 'gray' }
+    : { color: GlobalColors.white };
+
   return (
     <TouchableOpacity
-      onPress={onPress}
-      style={styles.container}
+      onPress={disabled ? undefined : onPress}
+      style={[styles.container, ifDisabled, ifBg]}
       disabled={disabled}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, ifDisabledText, ifColor]}>{title}</Text>
     </TouchableOpacity>
   );
 };

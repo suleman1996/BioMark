@@ -12,9 +12,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 
-type Props = {};
-
-const AccountScreen = (props: Props) => {
+const AccountScreen = () => {
   return (
     <>
       <TitleWithSearchBarLayout title={'Account'}>

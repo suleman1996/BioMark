@@ -23,7 +23,7 @@ export default function CreatePassword() {
     try {
       setLoading(true);
       Keyboard.dismiss();
-      const result = await changePassword({
+      await changePassword({
         password: {
           username: route.params.phone,
           password: password,

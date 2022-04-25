@@ -54,5 +54,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: { marginLeft: 5, fontFamily: fonts.regular, fontSize: 16,color:colors.black },
+  title: {
+    marginLeft: 5,
+    fontFamily: fonts.regular,
+    fontSize: 16,
+    color: colors.black,
+  },
 });
