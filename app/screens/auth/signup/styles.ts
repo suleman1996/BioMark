@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
   radioText: {
     fontFamily: fonts.regular,
     fontSize: 14,
-  
   },
 });
 

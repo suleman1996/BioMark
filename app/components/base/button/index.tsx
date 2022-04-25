@@ -40,7 +40,7 @@ export default ButtonComponent;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalColors.primary,
-    height: heightToDp(6),
+    height: heightToDp(7),
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: widthToDp(2.5),

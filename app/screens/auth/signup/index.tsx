@@ -106,7 +106,6 @@ export default function Signup() {
       style={[
         styles.radioButton,
         {
-          
           backgroundColor:
             item.id === selectedGender.id ? colors.heading : colors.whiteColor,
           borderColor:
@@ -119,7 +118,9 @@ export default function Signup() {
           (styles.radioText,
           {
             color:
-              item.id === selectedGender.id ? colors.whiteColor : colors.heading,
+              item.id === selectedGender.id
+                ? colors.whiteColor
+                : colors.heading,
           })
         }
       >
@@ -198,7 +199,6 @@ export default function Signup() {
                     renderItem={RenderRadio}
                     keyExtractor={(item) => item.id}
                     horizontal
-                   
                   />
                 </View>
                 {errors.password && selectedGender == '' && (
