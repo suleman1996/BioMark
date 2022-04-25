@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet,View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import HeightChooserComponent from 'components/higher-order/height-chooser/index';
 import WeightChooserComponent from 'components/higher-order/weight-chooser';
@@ -9,7 +9,7 @@ import TitleWithBackLayout from 'components/layouts/back-with-title/index';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { goBack } from 'services/nav-ref';
-import Button from 'components/button/button';
+import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
@@ -24,8 +24,7 @@ const BodyMeasurementScreen = () => {
 
   return (
     <TitleWithBackLayout title="Body Measurements">
-     
-      <ScrollView style={styles.container} >
+      <ScrollView style={styles.container}>
         <HeightChooserComponent
           height={15}
           label="Height"
@@ -42,17 +41,14 @@ const BodyMeasurementScreen = () => {
           onChangeText={onChangeText2}
           value={value2}
         />
-     
-    
-       </ScrollView>
-     
-       <ButtonWithShadowContainer
+      </ScrollView>
+
+      <ButtonWithShadowContainer
         onPress={() => {
           goBack();
         }}
         title={'Save & Continue'}
       />
-  
     </TitleWithBackLayout>
   );
 };

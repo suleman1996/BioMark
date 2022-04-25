@@ -24,21 +24,21 @@ const RadioButtonQuestionComponent = ({
       <View style={styles.radioContainer}>
         <View style={styles.singleRadioContainer}>
           <RadioButton
-            value="first"
-            status={isTrue ? 'checked' : 'unchecked'}
-            onPress={() => setIsTrue(true)}
-            color={GlobalColors.darkPrimary}
-          />
-          <Text style={styles.radioLabel}>Yes</Text>
-        </View>
-        <View style={styles.singleRadioContainer}>
-          <RadioButton
             value="second"
             status={!isTrue ? 'checked' : 'unchecked'}
             onPress={() => setIsTrue(false)}
             color={GlobalColors.darkPrimary}
           />
           <Text style={styles.radioLabel}>No</Text>
+        </View>
+        <View style={styles.singleRadioContainer}>
+          <RadioButton
+            value="first"
+            status={isTrue ? 'checked' : 'unchecked'}
+            onPress={() => setIsTrue(true)}
+            color={GlobalColors.darkPrimary}
+          />
+          <Text style={styles.radioLabel}>Yes</Text>
         </View>
       </View>
     </View>

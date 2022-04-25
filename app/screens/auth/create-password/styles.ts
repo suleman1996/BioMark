@@ -47,7 +47,6 @@ export const styles = StyleSheet.create({
     color: colors.danger,
     marginLeft: 20,
   },
-
 });
 
 export default styles;
