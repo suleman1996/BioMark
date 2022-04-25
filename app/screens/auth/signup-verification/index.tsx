@@ -99,6 +99,8 @@ export default function SignupVerification() {
       navigations.navigate('Confirmation');
       setLoading(false);
     } catch (error) {
+      console.log(error);
+
       setLoading(false);
       if (error.errMsg.status == '500') {
         showMessage({
