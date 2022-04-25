@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -23,7 +23,15 @@ const PasswordChangeScreen = () => {
   const [ePass, setEPass] = useState(false);
   const [eConfirm, setEConfirm] = useState(false);
   const formikRef = useRef<any>();
+  /*eslint-disable */
+  var isInitial = false;
 
+  useEffect(() => {
+    if (!isInitial) {
+      isInitial = true;
+    }
+  }, []);
+  /*eslint-enable */
   const resetPassword = async ({ password }: any) => {
     logNow('password', password);
   };
@@ -140,7 +148,11 @@ const PasswordChangeScreen = () => {
                     }}
                     title={'Save'}
                     disabled={
-                      Object.entries(errors).length === 0 ? false : true
+                      Object.entries(errors).length === 0
+                        ? !isInitial
+                          ? true
+                          : false
+                        : true
                     }
                   />
                 </View>
