@@ -94,7 +94,7 @@ const PasswordChangeScreen = () => {
             onSubmit={resetPassword}
             validationSchema={ResetPassSchema}
           >
-            {({ handleChange, handleSubmit, errors }) => (
+            {({ handleChange, handleSubmit, errors, values }) => (
               <>
                 <ScrollView style={{ flex: 1 }}>
                   <PasswordInputWithLabel
@@ -124,6 +124,30 @@ const PasswordChangeScreen = () => {
                     hidePassword={ePass}
                     onChange={handleChange('password')}
                   />
+                  <View style={styles.passValueContainer}>
+                    <Text style={styles.passValue}>
+                      {values.password.length < 15
+                        ? 'Low'
+                        : values.password.length < 50
+                        ? 'Medium'
+                        : 'High'}
+                    </Text>
+                    <View
+                      style={[
+                        styles.passValueProgress,
+                        {
+                          width:
+                            values.password.length < 15
+                              ? '0%'
+                              : values.password.length < 35
+                              ? '20%'
+                              : values.password.length < 50
+                              ? '35%'
+                              : '45%',
+                        },
+                      ]}
+                    />
+                  </View>
                   {errors.password && (
                     <ErrorText text={errors.currentPassword} />
                   )}

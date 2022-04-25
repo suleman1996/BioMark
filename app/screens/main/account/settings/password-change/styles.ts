@@ -24,4 +24,19 @@ export const styles = StyleSheet.create({
     marginTop: heightToDp(2),
     justifyContent: 'flex-end',
   },
+  passValue: {
+    color: GlobalColors.darkPrimary,
+    fontFamily: GlobalFonts.light,
+    marginRight: widthToDp(4),
+  },
+  passValueContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  passValueProgress: {
+    width: widthToDp(10),
+    height: heightToDp(0.5),
+    backgroundColor: GlobalColors.darkPrimary,
+    borderRadius: widthToDp(2),
+  },
 });
