@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 const request = axios.create({
-  // baseURL: 'https://bm-qa-api.biomarking.com',  prod
+  // baseURL: 'https://bm-qa-api.biomarking.com',
   baseURL: 'https://bm-dev-api.biomarking.com/',
+  // baseURL: 'https://bm-dev-api.biomarking.com/',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

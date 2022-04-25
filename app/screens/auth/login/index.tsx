@@ -214,7 +214,7 @@ export default function Login() {
             color: colors.black,
           }}
         >
-          Log In With
+          Log in With
         </Text>
         <View style={styles.socialLogins}>
           {Platform.OS === 'ios' && (

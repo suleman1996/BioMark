@@ -76,12 +76,13 @@ export default function CreatePassword() {
               onSubmit={ResetPassword}
               validationSchema={ResetPassSchema}
             >
-              {({ handleChange, handleSubmit, errors }) => (
+              {({ handleChange, handleSubmit, values, errors,isValid }) => (
                 <>
                   <Text style={styles.title}>
                     Please enter your new password.
                   </Text>
 
+                  <Text style={styles.inputLablel}>New Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."
                     secureTextEntry={hidePassword}
@@ -94,7 +95,8 @@ export default function CreatePassword() {
                     <Text style={styles.errorMessage}>{errors.password}</Text>
                   )}
 
-                  <View style={{ marginTop: 10 }}>
+<Text style={[styles.inputLablel,{marginTop: 30}]}>Confirm New Password</Text>
+                  <View >
                     <TextInput
                       placeholder="Retype your new password..."
                       secureTextEntry={hideConfirmPassword}
@@ -112,7 +114,12 @@ export default function CreatePassword() {
                     )}
                   </View>
                   <View style={styles.floatingBtn}>
-                    <Button onPress={handleSubmit} title="Reset Password" />
+                    <Button
+                      onPress={handleSubmit}
+                      title="Reset Password"
+                      disabled={!isValid||values.password==""?true:false}
+              
+                    />
                   </View>
                 </>
               )}

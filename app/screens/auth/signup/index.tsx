@@ -106,10 +106,11 @@ export default function Signup() {
       style={[
         styles.radioButton,
         {
+          
           backgroundColor:
-            item.id === selectedGender.id ? colors.blue : colors.whiteColor,
+            item.id === selectedGender.id ? colors.heading : colors.whiteColor,
           borderColor:
-            item.id === selectedGender.id ? colors.blue : colors.placeHolder,
+            item.id === selectedGender.id ? colors.heading : colors.placeHolder,
         },
       ]}
     >
@@ -118,7 +119,7 @@ export default function Signup() {
           (styles.radioText,
           {
             color:
-              item.id === selectedGender.id ? colors.whiteColor : colors.blue,
+              item.id === selectedGender.id ? colors.whiteColor : colors.heading,
           })
         }
       >
@@ -197,6 +198,7 @@ export default function Signup() {
                     renderItem={RenderRadio}
                     keyExtractor={(item) => item.id}
                     horizontal
+                   
                   />
                 </View>
                 {errors.password && selectedGender == '' && (

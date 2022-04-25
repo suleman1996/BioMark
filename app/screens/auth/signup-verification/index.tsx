@@ -15,6 +15,7 @@ import BackIcon from 'assets/svgs/back';
 import OtpInput from 'components/otp/otp-input';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
+import { reduxDeviceRegister } from 'store/auth/auth-actions';
 
 export default function SignupVerification() {
   const dispatch = useDispatch();
