@@ -14,7 +14,7 @@ export default function ExerciseScreen() {
   const [exerciseWeek, setExerciseWeek] = useState('');
   const [exerciseSession, setExerciseSession] = useState('');
   const options = [
-    { title: '' },
+  
     { title: '1' },
     { title: '2' },
     { title: '3' },
@@ -27,7 +27,7 @@ export default function ExerciseScreen() {
     { title: 'more than 10' },
   ];
   const options2 = [
-    { title: '' },
+
     { title: 'less than 20 mins' },
     { title: '20-40 mins' },
     { title: '40-60 mins' },
@@ -109,7 +109,6 @@ export default function ExerciseScreen() {
                   })}
                 </Picker>
               </View>
-
               <Text style={styles.label}>
                 How long do you exercise per session?
               </Text>

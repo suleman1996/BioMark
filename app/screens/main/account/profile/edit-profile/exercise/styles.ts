@@ -44,10 +44,13 @@ export const styles = StyleSheet.create({
     borderColor: GlobalColors.darkPrimary,
   },
   container2: {
-    marginHorizontal: heightToDp(5),
+    marginHorizontal: heightToDp(2),
+    marginVertical: heightToDp(3),
+    
     borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
-    backgroundColor: '#EBEFF2',
+    backgroundColor: GlobalColors.bg,
+    borderRadius: 8,
     height: 50,
   },
   bottomView: {

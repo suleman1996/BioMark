@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet,View } from 'react-native';
 
 import HeightChooserComponent from 'components/higher-order/height-chooser/index';
 import WeightChooserComponent from 'components/higher-order/weight-chooser';
@@ -25,7 +25,8 @@ const BodyMeasurementScreen = () => {
 
   return (
     <TitleWithBackLayout title="Body Measurements">
-      <ScrollView style={styles.container}>
+     
+      <ScrollView style={styles.container} >
         <HeightChooserComponent
           height={15}
           label="Height"
@@ -42,14 +43,17 @@ const BodyMeasurementScreen = () => {
           onChangeText={onChangeText2}
           value={value2}
         />
-      </ScrollView>
-      <Button
+     
+    
+       </ScrollView>
+     
+       <ButtonWithShadowContainer
         onPress={() => {
           goBack();
         }}
         title={'Save & Continue'}
-        
       />
+  
     </TitleWithBackLayout>
   );
 };
@@ -58,7 +62,7 @@ export default BodyMeasurementScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalColors.white,
+    // backgroundColor: GlobalColors.,
     flex: 1,
     paddingHorizontal: widthToDp(4),
   },
