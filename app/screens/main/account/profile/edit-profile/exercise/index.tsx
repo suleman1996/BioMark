@@ -8,33 +8,32 @@ import TitleWithBackLayout from 'components/layouts/back-with-title';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { styles } from './styles';
+const Options = [
+  { title: '1' },
+  { title: '2' },
+  { title: '3' },
+  { title: '4' },
+  { title: '5' },
+  { title: '6' },
+  { title: '7' },
+  { title: '8' },
+  { title: '9' },
+  { title: 'more than 10' },
+];
+
+const Options2 = [
+  { title: 'less than 20 mins' },
+  { title: '20-40 mins' },
+  { title: '40-60 mins' },
+  { title: '1-2 hours' },
+  { title: '2-3 hours' },
+  { title: 'more than 3 hours' },
+];
 
 export default function ExerciseScreen() {
   const [value, setValue] = useState('first');
   const [exerciseWeek, setExerciseWeek] = useState('');
   const [exerciseSession, setExerciseSession] = useState('');
-  const options = [
-    { title: '' },
-    { title: '1' },
-    { title: '2' },
-    { title: '3' },
-    { title: '4' },
-    { title: '5' },
-    { title: '6' },
-    { title: '7' },
-    { title: '8' },
-    { title: '9' },
-    { title: 'more than 10' },
-  ];
-  const options2 = [
-    { title: '' },
-    { title: 'less than 20 mins' },
-    { title: '20-40 mins' },
-    { title: '40-60 mins' },
-    { title: '1-2 hours' },
-    { title: '2-3 hours' },
-    { title: 'more than 3 hours' },
-  ];
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -96,7 +95,7 @@ export default function ExerciseScreen() {
                   selectedValue={exerciseWeek}
                   onValueChange={(itemValue) => setExerciseWeek(itemValue)}
                 >
-                  {options?.map((item, index) => {
+                  {Options?.map((item, index) => {
                     return (
                       <Picker.Item
                         key={index}
@@ -107,7 +106,6 @@ export default function ExerciseScreen() {
                   })}
                 </Picker>
               </View>
-
               <Text style={styles.label}>
                 How long do you exercise per session?
               </Text>
@@ -116,7 +114,7 @@ export default function ExerciseScreen() {
                   selectedValue={exerciseSession}
                   onValueChange={(itemValue) => setExerciseSession(itemValue)}
                 >
-                  {options2?.map((item, index) => {
+                  {Options2?.map((item, index) => {
                     return (
                       <Picker.Item
                         key={index}
