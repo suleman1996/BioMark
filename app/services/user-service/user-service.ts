@@ -19,6 +19,7 @@ import {
 } from '../async-storage/auth-async-storage';
 import client from '../client';
 import { API_URLS } from '../url-constants';
+import { store } from 'store/store';
 
 function login(username: string, password: string) {
   return new Promise<LoginResponse>((resolve, reject) => {
@@ -178,6 +179,7 @@ async function logout() {
     .then(async (response) => {
       try {
         logNow('response', response.data);
+        store.dispatch(logout());
       } catch (e) {
         logNow('e', e);
       }
