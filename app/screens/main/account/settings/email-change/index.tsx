@@ -28,6 +28,16 @@ const EmailChangeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState(userContacts.email_address);
 
+  /*eslint-disable */
+  var isInitial = false;
+
+  useEffect(() => {
+    if (!isInitial) {
+      isInitial = true;
+    }
+  }, []);
+  /*eslint-enable */
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -102,7 +112,7 @@ const EmailChangeScreen = () => {
                   label={'Confirm Email Address'}
                   placeholder={'Enter your email address'}
                   onChange={handleChange('confirmEmail')}
-                  value={''}
+                  value={values.confirmEmail}
                 />
               </View>
             </TitleWithBackWhiteBgLayout>

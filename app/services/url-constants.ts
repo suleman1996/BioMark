@@ -12,6 +12,7 @@ const API_URLS = {
   LOG_OUT: '/api/v1/auth/sessions/logout',
   SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
   MARKETING: '/api/v1/patient/marketing',
+  DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
 
   // Settings
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',
