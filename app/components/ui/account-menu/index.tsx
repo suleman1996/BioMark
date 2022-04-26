@@ -1,23 +1,21 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { Nav_Screens } from 'navigation/constants';
 import React, { useState } from 'react';
-import { TouchableRipple } from 'react-native-paper';
+import { StyleSheet, Text, View } from 'react-native';
+import { Switch, TouchableRipple } from 'react-native-paper';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome2 from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5';
-import FontAwesome2 from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { Switch } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
-
-import { widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
-import { GlobalStyles } from 'utils/theme/global-styles';
 import { logout } from 'store/auth/auth-actions';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalStyles } from 'utils/theme/global-styles';
 
 const AccountMenu = ({}) => {
   const dispatch = useDispatch();
@@ -28,27 +26,29 @@ const AccountMenu = ({}) => {
   };
   return (
     <View style={styles.container}>
-      <Pressable style={styles.singleItem}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <MaterialCommunityIcons
-            name="credit-card-outline"
-            size={responsiveFontSize(18)}
-            color={GlobalColors.darkPrimary}
-          />
-          <Text style={styles.text}>Identify Verification </Text>
-        </View>
-        <View style={styles.iconWithSecondText}>
-          <Text style={styles.secondText}>Not Verified</Text>
-          <Fontisto
-            name="angle-right"
-            size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
-          />
-        </View>
-      </Pressable>
+      <TouchableRipple style={styles.singleItem}>
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <MaterialCommunityIcons
+              name="credit-card-outline"
+              size={responsiveFontSize(18)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>Identify Verification </Text>
+          </View>
+          <View style={styles.iconWithSecondText}>
+            <Text style={styles.secondText}>Not Verified</Text>
+            <Fontisto
+              name="angle-right"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+          </View>
+        </>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable
+      <TouchableRipple
         onPress={() =>
           navigate(Nav_Screens.NestedAccountNavigator, {
             screen: Nav_Screens.Dependants_Screen,
@@ -56,23 +56,25 @@ const AccountMenu = ({}) => {
         }
         style={styles.singleItem}
       >
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <FontAwesome
-            name="user-friends"
-            size={responsiveFontSize(18)}
-            color={GlobalColors.darkPrimary}
-          />
-          <Text style={styles.text}>Dependants</Text>
-        </View>
-        <View style={styles.iconWithSecondText}>
-          <Text style={styles.secondText}>7 Users</Text>
-          <Fontisto
-            name="angle-right"
-            size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
-          />
-        </View>
-      </Pressable>
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <FontAwesome
+              name="user-friends"
+              size={responsiveFontSize(18)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>Dependants</Text>
+          </View>
+          <View style={styles.iconWithSecondText}>
+            <Text style={styles.secondText}>7 Users</Text>
+            <Fontisto
+              name="angle-right"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+          </View>
+        </>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
       <TouchableRipple
@@ -101,75 +103,86 @@ const AccountMenu = ({}) => {
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable style={styles.singleItem}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <FontAwesome2
-            name="bell"
+      <TouchableRipple style={styles.singleItem}>
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <FontAwesome2
+              name="bell"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>Notifications</Text>
+          </View>
+          <Fontisto
+            name="angle-right"
             size={responsiveFontSize(22)}
             color={GlobalColors.darkPrimary}
           />
-          <Text style={styles.text}>Notifications</Text>
-        </View>
-        <Fontisto
-          name="angle-right"
-          size={responsiveFontSize(22)}
-          color={GlobalColors.darkPrimary}
-        />
-      </Pressable>
+        </>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable style={styles.singleItem}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <FontAwesome2
-            name="support"
+      <TouchableRipple style={styles.singleItem}>
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <FontAwesome2
+              name="support"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>Support</Text>
+          </View>
+          <Fontisto
+            name="angle-right"
             size={responsiveFontSize(22)}
             color={GlobalColors.darkPrimary}
           />
-          <Text style={styles.text}>Support</Text>
-        </View>
-        <Fontisto
-          name="angle-right"
-          size={responsiveFontSize(22)}
-          color={GlobalColors.darkPrimary}
-        />
-      </Pressable>
+        </>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable style={styles.singleItem}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <MaterialIcons
-            name="self-improvement"
+      <TouchableRipple style={styles.singleItem}>
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <MaterialIcons
+              name="self-improvement"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>About BioMark</Text>
+          </View>
+          <Fontisto
+            name="angle-right"
             size={responsiveFontSize(22)}
             color={GlobalColors.darkPrimary}
           />
-          <Text style={styles.text}>About BioMark</Text>
-        </View>
-        <Fontisto
-          name="angle-right"
-          size={responsiveFontSize(22)}
-          color={GlobalColors.darkPrimary}
-        />
-      </Pressable>
+        </>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable style={styles.singleItem}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <FontAwesome
-            name="book"
+      <TouchableRipple style={styles.singleItem}>
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <FontAwesome
+              name="book"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>Policies</Text>
+          </View>
+          <Fontisto
+            name="angle-right"
             size={responsiveFontSize(22)}
             color={GlobalColors.darkPrimary}
           />
-          <Text style={styles.text}>Policies</Text>
-        </View>
-        <Fontisto
-          name="angle-right"
-          size={responsiveFontSize(22)}
-          color={GlobalColors.darkPrimary}
-        />
-      </Pressable>
+        </>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable onPress={() => dispatch(logout())} style={styles.singleItem}>
+      <TouchableRipple
+        onPress={() => dispatch(logout())}
+        style={styles.singleItem}
+      >
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
             name="logout"
@@ -178,24 +191,27 @@ const AccountMenu = ({}) => {
           />
           <Text style={styles.text}>Logout</Text>
         </View>
-      </Pressable>
+      </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <Pressable style={styles.singleItem}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Entypo
-            name="back-in-time"
-            size={responsiveFontSize(22)}
+      <TouchableRipple style={styles.singleItem}>
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Entypo
+              name="back-in-time"
+              size={responsiveFontSize(22)}
+              color={GlobalColors.darkPrimary}
+            />
+            <Text style={styles.text}>Auto Logout</Text>
+          </View>
+          <Switch
             color={GlobalColors.darkPrimary}
+            value={isAutoLogout}
+            onValueChange={onToggleAutoLogout}
           />
-          <Text style={styles.text}>Auto Logout</Text>
-        </View>
-        <Switch
-          color={GlobalColors.darkPrimary}
-          value={isAutoLogout}
-          onValueChange={onToggleAutoLogout}
-        />
-      </Pressable>
+        </>
+      </TouchableRipple>
+      <View style={styles.divider} />
     </View>
   );
 };
@@ -206,7 +222,7 @@ const styles = StyleSheet.create({
   container: {
     width: widthToDp(92),
     borderRadius: widthToDp(3),
-    ...GlobalStyles.shadow,
+    ...GlobalStyles.shadow2,
   },
   singleItem: {
     width: widthToDp(92),

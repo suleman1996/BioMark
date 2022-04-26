@@ -17,7 +17,14 @@ const AccountScreen = () => {
     <>
       <TitleWithSearchBarLayout title={'Account'}>
         <View style={styles.content}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              width: widthToDp(100),
+              paddingHorizontal: widthToDp(6),
+            }}
+          >
             <Image source={Images.avatar} style={styles.image} />
             <View style={styles.profile}>
               <Text style={styles.name}>Gerold Mordeno</Text>
@@ -53,7 +60,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: heightToDp(5),
     justifyContent: 'center',
-    paddingBottom: heightToDp(20),
+    paddingBottom: heightToDp(10),
+    backgroundColor: GlobalColors.white,
   },
   image: {
     width: widthToDp(25),

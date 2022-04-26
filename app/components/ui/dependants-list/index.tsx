@@ -1,15 +1,14 @@
-import { StyleSheet, Text, View, Pressable, FlatList } from 'react-native';
+import DeleteModalComponent from 'components/higher-order/delete-modal';
+import BioBinIcon from 'components/svg/bio-bin-icon';
+import { Nav_Screens } from 'navigation/constants/index';
 import React, { useState } from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
-import { GlobalColors } from 'utils/theme/global-colors';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { navigate } from 'services/nav-ref';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
-import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants/index';
-import DeleteModalComponent from 'components/higher-order/delete-modal';
 
 const DependantsList = () => {
   const [isDelete, setIsDelete] = useState(false);
@@ -23,6 +22,7 @@ const DependantsList = () => {
         subHeading="Are you sure you want to delete profiles?"
       />
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={['1', '2', '3', '4', '5', '6', '7', '8']}
         renderItem={() => {
           return (
@@ -37,7 +37,7 @@ const DependantsList = () => {
                     <Text style={styles.editText}>Edit</Text>
                   </Pressable>
                   <Pressable onPress={() => setIsDelete(true)}>
-                    <AntDesign name="delete" size={responsiveFontSize(22)} />
+                    <BioBinIcon width={5} height={5} />
                   </Pressable>
                 </View>
               </View>
@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     padding: widthToDp(3),
     borderRadius: widthToDp(2),
     marginBottom: heightToDp(2),
-    ...GlobalStyles.shadow2,
+    backgroundColor: GlobalColors.white,
+    ...GlobalStyles.shadow,
   },
   header: {
     flexDirection: 'row',
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: responsiveFontSize(20),
-    fontFamily: GlobalFonts.medium,
+    fontFamily: GlobalFonts.bold,
     color: GlobalColors.darkPrimary,
   },
   editText: {
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
   },
   relationText: {
     fontSize: responsiveFontSize(20),
-    fontFamily: GlobalFonts.medium,
+    fontFamily: GlobalFonts.bold,
     color: GlobalColors.darkPrimary,
   },
   relationWithText: {
