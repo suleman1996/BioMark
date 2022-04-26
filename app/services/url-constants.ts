@@ -14,6 +14,9 @@ const API_URLS = {
   MARKETING: '/api/v1/patient/marketing',
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
 
+  // Dependent
+  DEPENDENTS: '/api/v1/patient/dependents',
+
   // Settings
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',
 };
