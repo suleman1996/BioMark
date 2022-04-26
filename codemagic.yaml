@@ -10,6 +10,18 @@ workflows:
       vars:
         FCI_KEYSTORE_PATH: /tmp/keystore.keystore
         FCI_OUTPUT_PATH: android/app/build/outputs/apk/release
+        GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: {
+          "type": "service_account",
+          "project_id": "pc-api-8356361201121168340-766",
+          "private_key_id": "1c56684658acf79b8ac618d55d54415d2b51d0c0",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/5D+wcHVjHlmI\n8/fJXmIJIJtt1DxLC7h27DCfj0cyPCaIsXU2kKJJAhYWa0k5KXcQFUmFEY1ghSje\ne4RganpU6cjM47O19ws67XmPblvnobQfHttKBz/GW9VCB3Ikh/ifH+M2AcjJwHHj\nwVH9P/jlON1W5Ji2atV7GMtYJrDuzJqnPRuNXfHgoWFJRGCkye5n+Fw1gn6Z/jpY\nteZUp8tcQxuwFKP1lMhci3fi/DR4Xd/jI1MHIcj9aKBA6nf8LHsLScxH7VhMfQ75\n1FlXQwe7c1TsLq4Or0T9FHW1ThXnt1+fswY5n+UTGzLawH0ivSfuRuB/kNVsBVVV\nJnYvBwz9AgMBAAECggEAD/ZBFACuyxFtujYtEOuQdRjoxPCIGWf+rqnD+6nT7spR\nHELCsMjELxWE19WR0DbyR/y1UmPc4kABX8xffROuXFzcDqsMOmEz5nF1kKhJ7dEm\nJgaPkC9dLzdZXHY5GO/Ujwv8fvQUCzA+aQceNlY5cnvR8ZXvXBEz89rio1EIm7x1\naLadieFVGrM4Rtm9nM2GXHVOjGh5vF83KGitgJmYCy+7kNkBMpoA8DNOkPM7nmtw\n+Uinl1ZXcwlTbz61UDKGG7GIRtnuqOZSn3JD50gfeYfUqCNq4Hz8ps1JT2W5/sKi\n8K2ibuyPAdj3VZlHQVN8PjHP+edX/Y4Zi8H5xBqJEQKBgQDi2apqc/bPLNxi8hIW\ni7kEhHIy2PKKxMXy3LNEx/wzC3vFLu5XZZzNDyZUjMR1+bt2HqWHIUMnojgukXHj\nfF5BvLKOE/4zx58V9urEtt4VPpAAQcKep8CRUCGEPc8VTfp+nzAVVshzVb0hKSoq\nydZrsfhZ6inheVaV8FgnSgCm+QKBgQDYjJpzpyIDBsddtk/sM0NXKhis0JMjkw5d\nzs7EtYtHskDziJDfJEHq52MtO7Ht/LHMIyHhB7UIvk7UCfSS9DnXPshFKIlhevug\naNfoSGQRARyc0g1vmmgP8AKZVqtuXn39m+ut0zpYJrLwoZGV6ssYqsDFMaskplh6\narjGr0oDJQKBgQCUOI6d0blw8qnpSKvC6XZxWizXxmLrgtin78Z+aYECxT0QwLJg\njncekQiFdBil0Q/IhQu4uGYNjnPREZ1tewSHRUkRhkSxBnyOuG/7KlT/YopqcI0+\nZvNuvwG3Sz90dyf19gNP3g1JNrtF4IS5wnmEkptn/JVyynplq82dlj/I2QKBgCzZ\nKd/L/IJN9BpXeMP9dfPmdwfLhr22ZiJNg4s/4iGuLD+DyCU+uBwzYdnrZBVa4WPa\n3thhJUAzUdYeXbXVuOj4SrfwBkvXEagOLrEf1QGkjk14P2oeu3CZj6A8T/LixQsy\nMKRme83n7eViQOmgoAFy08vDVqOXg/mOgsg7Y4O1AoGAQcCldaOB//mDbqqLyuSm\n9nf+0zRuAvdNQrqWztD5CNL6wbksm3TS2bDW+6TjMCfYbFV6ZgdbyKPEcZZCDXa/\nRv73kB6U0jFToWKd/rzkysmrltRv7IHzQuB0U6R/edsjZfoa3oxU/2oHe/J5y8lp\nSzOAZlbOE7+n//Wqhy3v7mc=\n-----END PRIVATE KEY-----\n",
+          "client_email": "codemagic@pc-api-8356361201121168340-766.iam.gserviceaccount.com",
+          "client_id": "117324703411538161661",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/codemagic%40pc-api-8356361201121168340-766.iam.gserviceaccount.com"
+        }
       java: 1.8
       node: 12.18.3
     triggering:
