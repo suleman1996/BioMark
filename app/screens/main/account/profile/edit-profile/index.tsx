@@ -24,6 +24,8 @@ import { GlobalColors } from 'utils/theme/global-colors';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import EditProfileModal from 'components/edit-profile-menu';
 import AuthContext from '../../../../../utils/auth-context';
+import { userService } from 'services/user-service/user-service';
+import ActivityIndicator from 'components/loader/activity-indicator';
 
 let cameraIs = false;
 
@@ -32,7 +34,42 @@ const EditProfileScreen = () => {
 
   const [edit, setEdit] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
-  const [profilePic, setProfilePic] = React.useState();
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [profileLoader, setProfileLoader] = React.useState(false);
+
+  const updateProfilePhoto = async (pic) => {
+    try {
+      setIsLoading(true);
+      const [profilePic] = await Promise.all([
+        userService.updateProfileAvatar(pic),
+      ]);
+      console.log('profile success ', profilePic.data);
+
+      const result = await userService.getUserProfile();
+      authContext.setUserData(result.data);
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
 
   const EditProfile = () => (
     <View style={styles.editView}>
@@ -53,6 +90,7 @@ const EditProfileScreen = () => {
       </TouchableOpacity>
     </View>
   );
+
   const ImagePickerFromGallery = () => {
     setShowModal(false);
     if (!cameraIs) {
@@ -60,6 +98,7 @@ const EditProfileScreen = () => {
       let options = {
         mediaType: 'photo',
         selectionLimit: 1,
+        includeBase64: true,
       };
       launchImageLibrary(options, (res) => {
         if (res.didCancel) {
@@ -69,8 +108,7 @@ const EditProfileScreen = () => {
           console.log('ImagePicker Error: ', res.errorMessage);
           cameraIs = false;
         } else {
-          console.log('here is the picture from gallery ', res);
-          setProfilePic(res.assets[0]);
+          updateProfilePhoto(res.assets[0].base64);
           setEdit(false);
           cameraIs = false;
         }
@@ -85,6 +123,7 @@ const EditProfileScreen = () => {
 
       let options = {
         mediaType: 'photo',
+        includeBase64: true,
       };
       launchCamera(options, (res) => {
         if (res.didCancel) {
@@ -94,7 +133,7 @@ const EditProfileScreen = () => {
           console.log('Camera error: ', res.errorMessage);
           cameraIs = false;
         } else {
-          setProfilePic(res.assets[0]);
+          updateProfilePhoto(res.assets[0].base64);
           setEdit(false);
           cameraIs = false;
         }
@@ -103,6 +142,7 @@ const EditProfileScreen = () => {
   };
   return (
     <TitleWithBackLayout title="Your Profile">
+      <ActivityIndicator visible={isLoading} />
       <EditProfileModal
         iconPress={() => setShowModal(false)}
         visible={showModal}
@@ -114,11 +154,21 @@ const EditProfileScreen = () => {
         <View style={styles.contentContainer}>
           <View style={styles.profileContainer}>
             {edit && <EditProfile />}
-            <TouchableOpacity onPress={() => setEdit(true)}>
+            <TouchableOpacity
+              style={[styles.image, { overflow: 'hidden' }]}
+              onPress={() => setEdit(true)}
+            >
               <Image
-                source={!profilePic ? Images.avatar : { uri: profilePic?.uri }}
+                onLoadStart={() => setProfileLoader(true)}
+                onLoadEnd={() => setProfileLoader(false)}
+                source={
+                  !authContext?.userData?.picture
+                    ? Images.avatar
+                    : { uri: authContext?.userData?.picture }
+                }
                 style={styles.image}
               />
+              <ActivityIndicator fontSize={20} visible={profileLoader} />
             </TouchableOpacity>
           </View>
           <Text style={styles.name}>{authContext?.userData?.patient_name}</Text>

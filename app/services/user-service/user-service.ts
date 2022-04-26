@@ -215,6 +215,16 @@ const drinking = (
   });
 };
 
+const updateProfileAvatar = (pic: String) => {
+  return client.post(API_URLS.Profile_Avatar, {
+    profile: {
+      base64: pic,
+      filename: 'filename',
+      filetype: 'jpg',
+    },
+  });
+};
+
 export const userService = {
   login,
   deviceRegisterAction,
@@ -226,4 +236,5 @@ export const userService = {
   getUserProfile,
   sleeping,
   drinking,
+  updateProfileAvatar,
 };

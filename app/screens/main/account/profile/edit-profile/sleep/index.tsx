@@ -34,6 +34,7 @@ const Sleep = () => {
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);
+      console.log('Api error ', error);
 
       if (error.errMsg.status == '500') {
         showMessage({

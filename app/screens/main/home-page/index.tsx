@@ -33,7 +33,8 @@ export default function Home() {
 
   useEffect(() => {
     userProfile();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <View style={{ alignSelf: 'center', backgroundColor: 'white' }}>

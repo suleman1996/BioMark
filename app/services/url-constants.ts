@@ -14,6 +14,7 @@ const API_URLS = {
   MARKETING: '/api/v1/patient/marketing',
   SLEEPING: '/api/v1/patient/lifestyle/sleeping',
   Drinking: '/api/v1/patient/lifestyle/drinking',
+  Profile_Avatar: '/api/v1/patient/profiles/avatar',
 
   // Settings
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',

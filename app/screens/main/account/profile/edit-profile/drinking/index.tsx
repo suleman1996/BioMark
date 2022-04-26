@@ -56,7 +56,7 @@ const Drinking = () => {
         setIsVisible(false);
       } catch (error) {
         setIsVisible(false);
-        console.log(error);
+
         if (error.errMsg.status == '500') {
           showMessage({
             message: 'Internal Server Error',
