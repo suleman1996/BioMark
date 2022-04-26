@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -11,8 +11,11 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
+import AuthContext from 'utils/auth-context';
 
 const AccountScreen = () => {
+  const authContext = useContext(AuthContext);
+
   return (
     <>
       <TitleWithSearchBarLayout title={'Account'}>
@@ -27,7 +30,9 @@ const AccountScreen = () => {
           >
             <Image source={Images.avatar} style={styles.image} />
             <View style={styles.profile}>
-              <Text style={styles.name}>Gerold Mordeno</Text>
+              <Text style={styles.name}>
+                {authContext?.userData?.patient_name}
+              </Text>
               <Pressable
                 onPress={() =>
                   navigate(Nav_Screens.NestedAccountNavigator, {

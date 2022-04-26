@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   ImageBackground,
   ScrollView,
@@ -14,9 +14,27 @@ import GoogleFit from 'components/button/google-fit';
 import SmallBtn from 'components/button/small-button';
 import YourHealthBtn from 'components/button/your-health-btn';
 import SearchBarWithLeftScanIcon from 'components/higher-order/search-bar-with-left-scan-icon/index';
+import AuthContext from 'utils/auth-context';
 import styles from './styles';
+import { userService } from 'services/user-service/user-service';
 
 export default function Home() {
+  const authContext = useContext(AuthContext);
+
+  const userProfile = async () => {
+    try {
+      const result = await userService.getUserProfile();
+      console.log('Here is the user profile ', result.data);
+      authContext.setUserData(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    userProfile();
+  });
+
   return (
     <View style={{ alignSelf: 'center', backgroundColor: 'white' }}>
       <View style={styles.navBar}>

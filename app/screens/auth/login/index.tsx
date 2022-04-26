@@ -108,6 +108,7 @@ export default function Login() {
       setLoginError(true);
     }
   }, [errorMessageLogin]);
+
   async function onAppleButtonPress() {
     // performs login request
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -127,11 +128,13 @@ export default function Login() {
       // user is authenticated
     }
   }
+
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
   };
+
   const handleFedrationLogin = async (accessToken: string) => {
     console.log('accessToken', accessToken);
   };

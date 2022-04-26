@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Image,
   Pressable,
@@ -23,10 +23,13 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import EditProfileModal from 'components/edit-profile-menu';
+import AuthContext from '../../../../../utils/auth-context';
 
 let cameraIs = false;
 
 const EditProfileScreen = () => {
+  const authContext = useContext(AuthContext);
+
   const [edit, setEdit] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [profilePic, setProfilePic] = React.useState();
@@ -118,7 +121,7 @@ const EditProfileScreen = () => {
               />
             </TouchableOpacity>
           </View>
-          <Text style={styles.name}>Gerold Mordena</Text>
+          <Text style={styles.name}>{authContext?.userData?.patient_name}</Text>
           <View style={styles.menuContainer}>
             <Text
               style={{

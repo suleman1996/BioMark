@@ -14,6 +14,9 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
+import { showMessage } from 'react-native-flash-message';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { userService } from 'services/user-service/user-service';
 
 type RenderDrinkingProps = {
   title: string;
@@ -29,6 +32,50 @@ const Drinking = () => {
   const [beer, setBeer] = React.useState(0);
   const [wine, setWine] = React.useState(0);
   const [spirits, setSpiritss] = React.useState(0);
+  const [isVisiable, setIsVisible] = React.useState(false);
+  const [isDrinking, setIsDrinking] = React.useState(false);
+
+  const handleDrinking = async () => {
+    if (value == '') {
+      showMessage({
+        message: 'Please select value',
+        type: 'danger',
+      });
+    } else {
+      try {
+        setIsVisible(true);
+        const result = await userService.drinking(
+          isDrinking,
+          beer,
+          wine,
+          spirits
+        );
+        console.log('Drinking success ', result.data);
+        navigate(Nav_Screens.Edit_Profile);
+
+        setIsVisible(false);
+      } catch (error) {
+        setIsVisible(false);
+        console.log(error);
+        if (error.errMsg.status == '500') {
+          showMessage({
+            message: 'Internal Server Error',
+            type: 'danger',
+          });
+        } else if (error.errMsg.status == false) {
+          showMessage({
+            message: error.errMsg.data.error,
+            type: 'danger',
+          });
+        } else {
+          showMessage({
+            message: error.errMsg,
+            type: 'danger',
+          });
+        }
+      }
+    }
+  };
 
   const RenderDrinking = (props: RenderDrinkingProps) => (
     <View
@@ -85,6 +132,7 @@ const Drinking = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <ActivityIndicator visible={isVisiable} />
       <TitleWithBackLayout title="Drinking">
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
           <ScrollView style={{ flex: 1, marginBottom: 100 }}>
@@ -92,11 +140,23 @@ const Drinking = () => {
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setValue(newValue);
+                newValue == 'first'
+                  ? (setBeer(0),
+                    setWine(0),
+                    setSpiritss(0),
+                    setIsDrinking(false))
+                  : setIsDrinking(true);
               }}
               value={value}
             >
               <TouchableOpacity
-                onPress={() => setValue('first')}
+                onPress={() => {
+                  setValue('first'),
+                    setBeer(0),
+                    setWine(0),
+                    setSpiritss(0),
+                    setIsDrinking(false);
+                }}
                 style={[
                   styles.radioContainer,
                   { backgroundColor: value === 'first' ? '#054E8B' : null },
@@ -117,7 +177,9 @@ const Drinking = () => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => setValue('second')}
+                onPress={() => {
+                  setValue('second'), setIsDrinking(true);
+                }}
                 style={[
                   styles.radioContainer,
                   { backgroundColor: value == 'second' ? '#054E8B' : null },
@@ -234,7 +296,7 @@ const Drinking = () => {
           </ScrollView>
         </View>
         <ButtonWithShadowContainer
-          onPress={() => navigate(Nav_Screens.Edit_Profile)}
+          onPress={() => handleDrinking()}
           title="Save"
         />
       </TitleWithBackLayout>
