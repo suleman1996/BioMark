@@ -6,6 +6,7 @@ workflows:
     environment:
       groups:
         - keystore_credentials
+        - google_play
       vars:
         FCI_KEYSTORE_PATH: /tmp/keystore.keystore
         FCI_OUTPUT_PATH: android/app/build/outputs/apk/release
