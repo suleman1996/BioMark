@@ -15,6 +15,7 @@ import ActivityIndicator from 'components/loader/activity-indicator';
 const SettingsScreen = () => {
   const [isVisibleDeActivateModal, setDeActivateModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const disableAccountCall = () => {
     setIsLoading(true);
     settingsService
@@ -37,6 +38,7 @@ const SettingsScreen = () => {
         setIsLoading(false);
       });
   };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <AccountDeActivateModal
