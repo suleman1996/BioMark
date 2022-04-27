@@ -65,15 +65,16 @@ const QrInputPopup = ({ visible, children, loading }: Props) => {
 const SearchBarWithLeftScanIcon = () => {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuRef = useRef();
+  const menuRef = useRef<any>();
 
   const QRschemma = Yup.object({
     qrInput: Yup.string()
       .required('Please type QR or Barcode.')
       .min(8, 'Invalid.'),
   });
-  const handleCode = async ({ qrInput }) => {
+  const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
     try {
       setLoading(true);
@@ -85,7 +86,7 @@ const SearchBarWithLeftScanIcon = () => {
       Keyboard.dismiss();
       setVisible(false);
       setLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false);
       Keyboard.dismiss();
       setVisible(false);
@@ -108,20 +109,30 @@ const SearchBarWithLeftScanIcon = () => {
     }
   };
 
+  const bgColor = isMenuOpen
+    ? { backgroundColor: GlobalColors.primary }
+    : { backgroundColor: GlobalColors.white };
+  const menuStyle = {
+    height: 30,
+    width: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
   return (
     <>
       <View style={styles.searchBar}>
-        <View style={styles.leftIconView}>
-          <Menu ref={menuRef}>
-            <MenuTrigger
-              style={{
-                height: 30,
-                width: 30,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <SearchBarLeftIcon width={5} height={5} />
+        <View style={[styles.leftIconView, bgColor]}>
+          <Menu
+            onOpen={() => setIsMenuOpen(true)}
+            onClose={() => setIsMenuOpen(false)}
+            ref={menuRef}
+          >
+            <MenuTrigger styles={menuStyle}>
+              <SearchBarLeftIcon
+                width={5}
+                height={5}
+                fill={isMenuOpen ? GlobalColors.white : GlobalColors.primary}
+              />
             </MenuTrigger>
             <MenuOptions optionsContainerStyle={styles.popupMenu}>
               <TouchableOpacity style={styles.singleMenuItem}>
@@ -292,7 +303,7 @@ const styles = StyleSheet.create({
     width: widthToDp(65),
     // height:heightToDp(15),
     marginTop: 40,
-    marginLeft: -7,
+    marginLeft: -15,
   },
   singleMenuItem: {
     paddingHorizontal: widthToDp(4),

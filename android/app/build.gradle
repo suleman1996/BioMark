@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
-
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -141,8 +141,9 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+        resValue "string", "build_config_package", "com.biomark"
         if (isNewArchitectureEnabled()) {
-            // We configure the NDK build only if you decide to opt-in for the New Architecture.
+            // We configure the NDK build only if you de cide to opt-in for the New Architecture.
             externalNativeBuild {
                 ndkBuild {
                     arguments "APP_PLATFORM=android-21",

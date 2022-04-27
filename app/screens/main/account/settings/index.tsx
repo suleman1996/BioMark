@@ -1,22 +1,72 @@
-import React, { useState } from 'react';
-import { Linking } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
 import SingleMenuItemWithArrow from 'components/higher-order/single-menu-item-with-right-arrow';
-import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
+import ActivityIndicator from 'components/loader/activity-indicator';
 import AccountDeActivateModal from 'components/ui/account-deactivate-modal';
+import { Nav_Screens } from 'navigation/constants';
+import React, { useEffect, useState } from 'react';
+import { Linking } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
+import { settingsService } from 'services/account-service/settings-service';
+import { navigate } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
+import { addUserContactsDetails, logout } from 'store/auth/auth-actions';
+import { ErrorResponse } from 'types/ErrorResponse';
+import { logNow } from 'utils/functions/log-binder';
 
 const SettingsScreen = () => {
+  const dispatch = useDispatch();
+
   const [isVisibleDeActivateModal, setDeActivateModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    userService
+      .getUserContacts()
+      .then((res) => {
+        dispatch(addUserContactsDetails(res));
+      })
+      .catch(() => {})
+      .finally(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const disableAccountCall = () => {
+    setIsLoading(true);
+    settingsService
+      .deactivateAccount()
+      .then((res) => {
+        showMessage({
+          message: res.data.message,
+          type: 'success',
+        });
+        userService.logout().then((res2) => {
+          logNow(res2);
+        });
+        dispatch(logout());
+        // goBack();
+      })
+      .catch((err: ErrorResponse) => {
+        showMessage({
+          message: err.errMsg.data.message,
+          type: 'danger',
+        });
+      })
+      .finally(() => {
+        setDeActivateModal(false);
+        setIsLoading(false);
+      });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <AccountDeActivateModal
-        callMe={() => setDeActivateModal(false)}
+        callMe={() => disableAccountCall()}
         isVisible={isVisibleDeActivateModal}
         setIsVisible={setDeActivateModal}
       />
+      <ActivityIndicator visible={isLoading} />
       <TitleWithBackWhiteBgLayout title="Settings">
         <SingleMenuItemWithArrow
           onPress={() => navigate(Nav_Screens.PasswordChangeScreen)}

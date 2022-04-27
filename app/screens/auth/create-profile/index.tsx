@@ -1,4 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import {
@@ -10,9 +12,10 @@ import {
   View,
 } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
-import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
-import moment from 'moment';
+import CountryPicker, {
+  DEFAULT_THEME,
+} from 'react-native-country-picker-modal';
 
 import colors from 'assets/colors';
 import BackIcon from 'assets/svgs/back';
@@ -21,26 +24,20 @@ import CheckBox from 'components/checkbox';
 import DatePicker from 'components/date-picker';
 import TextInput from 'components/input-field/text-input';
 import ActivityIndicator from 'components/loader/activity-indicator';
-import PhoneNumber from 'components/phone-number';
-import { Nav_Screens } from 'navigation/constants';
-import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
 
 import styles from './styles';
+import { resetAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
+import { useDispatch } from 'react-redux';
+import { loggedOut } from 'store/auth/auth-actions';
+import moment from 'moment';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Signup() {
-  //initial hooks define
-  const navigations = useNavigation();
-
-  //state
-  const [hidePassword, setHidePassword] = useState(true);
-
-  const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
+export default function index() {
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
-  const [phoneNumber, setPhoneNumber] = useState(''); //International Phone Picker
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
@@ -48,36 +45,31 @@ export default function Signup() {
     { id: 1, sex: 'Female' },
     { id: 2, sex: 'Others' },
   ]);
+  const [preferredCountries, setPreferredCountries] = useState([
+    'MY',
+    'PH',
+    'SG',
+    'ID',
+    'TH',
+    'VN',
+  ]);
+
   const [selectedGender, setSelectedGender] = useState('');
-  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
   const [checked, setChecked] = React.useState(false);
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
-
+  const dispatch = useDispatch();
   //fuctions
-  useEffect(() => {
-    if (selectCountryCode == '60') {
-      setNumberCondition({ min: 8, max: 11 });
-    } else if (selectCountryCode == '63') {
-      setNumberCondition({ min: 10, max: 10 });
-    } else if (selectCountryCode == '65') {
-      setNumberCondition({ min: 8, max: 8 });
-    } else {
-      setNumberCondition({ min: 4, max: 13 });
-    }
-  }, [selectCountryCode]);
 
   const signupApi = async (values: string) => {
     // setLoading(true);
     Keyboard.dismiss();
-    const username = `+${selectCountryCode}${phoneNumber}`;
     const newDate = moment(date).format('YYYY-MM-DD');
-    const password = values.password;
     userService
-      .registerUser(username, values, selectedGender.id, newDate)
-      .then((res) => {
+      .createProfile(values, selectedGender.id, newDate)
+      .then(async (res) => {
         logNow('signup res', res);
-        navigate(Nav_Screens.SignupVerificationScreen, { username, password });
+        await AsyncStorage.setItem('hasProfile', 'true');
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);
@@ -92,7 +84,7 @@ export default function Signup() {
   };
 
   const handleSignup = async (values) => {
-    if (phoneNumber == '' || gender == '') {
+    if (gender == '') {
     } else if (checked == true) {
       signupApi(values);
     } else {
@@ -139,25 +131,27 @@ export default function Signup() {
 
     IcPnum: Yup.string(),
     email: Yup.string(),
-
-    password: Yup.string().required('Please type your new password').min(8),
   });
+  const onSelect = (Country: any) => {
+    console.log(Country);
 
+    setCountryCode(Country.cca2);
+    setSelectCountryCode(Country.callingCode[0]);
+  };
+  const onBackPress = async () => {
+    await resetAuthAsyncStorage();
+    dispatch(loggedOut(true));
+  };
   return (
     <>
       <ActivityIndicator visible={loading} />
       <View style={styles.signupNav}>
         <View style={styles.csNav}>
           <TouchableOpacity>
-            <BackIcon onPress={() => navigations.goBack()} />
+            <BackIcon onPress={() => onBackPress()} />
           </TouchableOpacity>
-          <Text style={styles.signupText}>Signup</Text>
+          <Text style={styles.signupText}>Personal Details</Text>
         </View>
-        <StepIndicator
-          stepCount={3}
-          customStyles={styles.stepIndicator}
-          labels={labels}
-        />
       </View>
       <ScrollView keyboardShouldPersistTaps={'handled'}>
         <Formik
@@ -171,7 +165,7 @@ export default function Signup() {
           onSubmit={(values) => handleSignup(values)}
           validationSchema={ResetPassSchema}
         >
-          {({ handleChange, handleSubmit, errors, isValid }) => (
+          {({ handleChange, handleSubmit, errors }) => (
             <>
               <View style={styles.biContainer}>
                 <Text style={styles.heading}>Basic Information</Text>
@@ -192,9 +186,35 @@ export default function Signup() {
                   onChange={handleChange('lName')}
                   margin={20}
                 />
+                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
+                  Identity Card/Passport Number
+                </Text>
+                <TextInput
+                  placeholder="E.g.A1234567X"
+                  onChange={handleChange('IcPnum')}
+                  margin={20}
+                />
                 {errors.lName && (
                   <Text style={styles.errorMessage}>{errors.lName}</Text>
                 )}
+                <Text style={styles.inputLablel}>Country</Text>
+
+                <View style={styles.countryPickerView}>
+                  <CountryPicker
+                    countryCode={countryCode}
+                    withCountryNameButton={true}
+                    withFilter={true}
+                    preferredCountries={preferredCountries}
+                    theme={{
+                      ...DEFAULT_THEME,
+                      backgroundColor: colors.whiteColor,
+                      onBackgroundTextColor: colors.heading,
+                      fontSize: 14,
+                    }}
+                    containerButtonStyle={styles.pickerButtonStyle}
+                    onSelect={(Country) => onSelect(Country)}
+                  />
+                </View>
                 <Text style={styles.inputLablel}>Gender</Text>
                 <View style={styles.ChoiceBtnDOB}>
                   <FlatList
@@ -204,7 +224,7 @@ export default function Signup() {
                     horizontal
                   />
                 </View>
-                {errors.password && selectedGender == '' && (
+                {selectedGender == '' && (
                   <Text style={styles.errorMessage}>Please select gender</Text>
                 )}
                 <Text style={styles.inputLablel}>Date of Birth</Text>
@@ -215,36 +235,8 @@ export default function Signup() {
                   setDate={setDate}
                 />
 
-                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
-                  Identity Card/Passport Number
-                </Text>
-                <TextInput
-                  placeholder="E.g.A1234567X"
-                  onChange={handleChange('IcPnum')}
-                  margin={20}
-                />
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
-
-                  <Text style={styles.inputLablel}>Mobile Number</Text>
-                  {/* international phone Picker */}
-                  <PhoneNumber
-                    countryCode={countryCode}
-                    setCountryCode={setCountryCode}
-                    phoneNumber={phoneNumber}
-                    setPhoneNumber={setPhoneNumber}
-                    setSelectCountryCode={setSelectCountryCode}
-                    maxLength={numberCondition.max}
-                  />
-                  {(phoneNumber !== '' || errors.password) &&
-                    phoneNumber.length < numberCondition.min && (
-                      <Text style={styles.errorMessage}>
-                        Must have {numberCondition.min}
-                        {numberCondition.max !== numberCondition.min &&
-                          -numberCondition.max}{' '}
-                        characters
-                      </Text>
-                    )}
                   <Text style={styles.inputLablel}>Email</Text>
                   <TextInput
                     placeholder="E.g. Sample@email.com"
@@ -252,19 +244,6 @@ export default function Signup() {
                     margin={20}
                     keyboardType="email-address"
                   />
-
-                  <Text style={styles.inputLablel}>Password</Text>
-                  <TextInput
-                    placeholder="Enter your new password..."
-                    secureTextEntry={hidePassword}
-                    eye={!hidePassword ? 'eye' : 'eye-off'}
-                    onEyePress={() => setHidePassword(!hidePassword)}
-                    onChange={handleChange('password')}
-                    margin={20}
-                  />
-                  {errors.password && (
-                    <Text style={styles.errorMessage}>{errors.password}</Text>
-                  )}
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
@@ -296,7 +275,7 @@ export default function Signup() {
                 <TouchableOpacity>
                   <Button
                     title="Continue"
-                    disabled={!isValid || phoneNumber.length < 8 ? true : false}
+                    // disabled={!isValid || phoneNumber.length < 8 ? true : false}
                     onPress={() => handleSubmit()}
                   />
                 </TouchableOpacity>

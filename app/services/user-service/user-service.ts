@@ -21,6 +21,7 @@ import {
 } from '../async-storage/auth-async-storage';
 import client from '../client';
 import { API_URLS } from '../url-constants';
+import { store } from 'store/store';
 
 function login(username: string, password: string) {
   return new Promise<LoginResponse>((resolve, reject) => {
@@ -46,34 +47,30 @@ function login(username: string, password: string) {
       });
   });
 }
-
-// function Smoking(is_smoking: number, stick_per_day: number,smoking_stop_at:number,smoking_start_at:number) {
-//   return new Promise<LoginResponse>((resolve, reject) => {
-//     client
-//       .post(API_URLS.Smoking,{
-//         lifestyle: {
-//           is_smoking,
-//           stick_per_day,
-//           smoking_stop_at,
-//           smoking_start_at
-//         },
-//       })
-//       .then(async (response) => {
-//         try {
-//           await setAuthAsyncStorage(response.data);
-//           resolve(response.data);
-//         } catch (e) {
-//           logNow('User login service error block login1.', e);
-//           reject(e);
-//         }
-//       })
-//       .catch(async (err: LoginErrorResponse) => {
-//         logNow('User login service error block login.', err);
-//         reject(err);
-//       });
-//   });
-// }
-
+function federatedlogin(access_token: string, provider: string) {
+  return new Promise<LoginResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.FEDERATED_LOGIN, {
+        federated_identity: {
+          access_token,
+          provider,
+        },
+      })
+      .then(async (response) => {
+        try {
+          await setAuthAsyncStorage(response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('User login service error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: LoginErrorResponse) => {
+        logNow('User login service error block login.', err);
+        reject(err);
+      });
+  });
+}
 function deviceRegisterAction(device_token: string, device_type: string) {
   return new Promise<DeviceRegister>((resolve, reject) => {
     client
@@ -123,15 +120,21 @@ function forgotPassword(username: string) {
   });
 }
 
-function registerUser(username: string, password: string) {
+function registerUser(username: string, values, gender: any, date: string) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
     client
       .post(API_URLS.SIGN_UP, {
         registration: {
-          username,
-          password,
-          group: 'patient',
+          password: values.password,
           terms: true,
+          email_address: values.email,
+          first_name: values.fName,
+          last_name: values.lName,
+          gender_id: gender,
+          birth_date: date,
+          ic_number: values.IcPnum,
+          username: username,
+          group: 'patient',
         },
       })
       .then(async (response) => {
@@ -149,7 +152,38 @@ function registerUser(username: string, password: string) {
       });
   });
 }
-
+function createProfile(values, gender: any, date: string) {
+  console.log('values', values);
+  console.log('gender', gender);
+  console.log('date', date);
+  return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_PROFILE, {
+        profile: {
+          first_name: values.fName,
+          last_name: values.lName,
+          ic_number: values.IcPnum,
+          gender_id: gender,
+          birth_date: date,
+          email_address: values.email,
+          terms: true,
+        },
+      })
+      .then(async (response) => {
+        try {
+          logNow('create user success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('create user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: RegisterUserErrorResponse) => {
+        logNow('create user error response 2.', err);
+        reject(err);
+      });
+  });
+}
 function getUserContacts() {
   return new Promise<UserContacts>((resolve, reject) => {
     client
@@ -208,6 +242,7 @@ async function logout() {
     .then(async (response) => {
       try {
         logNow('response', response.data);
+        store.dispatch(logout());
       } catch (e) {
         logNow('e', e);
       }
@@ -217,16 +252,40 @@ async function logout() {
     });
 }
 
-// function Smoking(){
-//   return client.post(API_URLS.Smoking);
-// }
-
 const Smoking = (day: Number, stopSmoke: Number, startSmoke: Number) => {
   return client.post(API_URLS.Smoking, {
     lifestyle: {
       stick_per_day: day,
       smoking_stop_at: stopSmoke,
       smoking_start_at: startSmoke,
+    },
+  });
+};
+
+const getUserProfile = () => {
+  return client.get(API_URLS.GET_PROFILE);
+};
+
+const sleeping = (hours: String) => {
+  return client.post(API_URLS.SLEEPING, {
+    lifestyle: {
+      sleep_duration: hours,
+    },
+  });
+};
+
+const drinking = (
+  isDrinking: boolean,
+  beer: Number,
+  wine: Number,
+  spirits: Number
+) => {
+  return client.post(API_URLS.Drinking, {
+    lifestyle: {
+      is_drinking: isDrinking,
+      pints_of_beer: beer,
+      glasses_of_wine: wine,
+      shots_of_spirits: spirits,
     },
   });
 };
@@ -239,8 +298,39 @@ const Vaccination = (items: string | number) => {
     },
   });
 };
+const updateProfileAvatar = (pic: String) => {
+  return client.post(API_URLS.Profile_Avatar, {
+    profile: {
+      base64: pic,
+      filename: 'filename',
+      filetype: 'jpg',
+    },
+  });
+};
+
+const updateProfile = (
+  fName: String,
+  lName: String,
+  dob: String,
+  gender: Number,
+  ic_number: String,
+  email: String
+) => {
+  return client.put(API_URLS.Update_Profile, {
+    profile: {
+      first_name: fName,
+      last_name: lName,
+      birth_date: dob,
+      gender_id: gender,
+      ic_number: ic_number,
+      email: email,
+    },
+  });
+};
+
 export const userService = {
   login,
+  federatedlogin,
   deviceRegisterAction,
   registerUser,
   logout,
@@ -249,4 +339,10 @@ export const userService = {
   saveUserContacts,
   Smoking,
   Vaccination,
+  createProfile,
+  getUserProfile,
+  sleeping,
+  drinking,
+  updateProfileAvatar,
+  updateProfile,
 };
