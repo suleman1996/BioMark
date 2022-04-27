@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -23,7 +23,15 @@ const PasswordChangeScreen = () => {
   const [ePass, setEPass] = useState(false);
   const [eConfirm, setEConfirm] = useState(false);
   const formikRef = useRef<any>();
+  /*eslint-disable */
+  var isInitial = false;
 
+  useEffect(() => {
+    if (!isInitial) {
+      isInitial = true;
+    }
+  }, []);
+  /*eslint-enable */
   const resetPassword = async ({ password }: any) => {
     logNow('password', password);
   };
@@ -86,7 +94,7 @@ const PasswordChangeScreen = () => {
             onSubmit={resetPassword}
             validationSchema={ResetPassSchema}
           >
-            {({ handleChange, handleSubmit, errors }) => (
+            {({ handleChange, handleSubmit, errors, values }) => (
               <>
                 <ScrollView style={{ flex: 1 }}>
                   <PasswordInputWithLabel
@@ -116,6 +124,30 @@ const PasswordChangeScreen = () => {
                     hidePassword={ePass}
                     onChange={handleChange('password')}
                   />
+                  <View style={styles.passValueContainer}>
+                    <Text style={styles.passValue}>
+                      {values.password.length < 15
+                        ? 'Low'
+                        : values.password.length < 50
+                        ? 'Medium'
+                        : 'High'}
+                    </Text>
+                    <View
+                      style={[
+                        styles.passValueProgress,
+                        {
+                          width:
+                            values.password.length < 15
+                              ? '0%'
+                              : values.password.length < 35
+                              ? '20%'
+                              : values.password.length < 50
+                              ? '35%'
+                              : '45%',
+                        },
+                      ]}
+                    />
+                  </View>
                   {errors.password && (
                     <ErrorText text={errors.currentPassword} />
                   )}
@@ -140,7 +172,11 @@ const PasswordChangeScreen = () => {
                     }}
                     title={'Save'}
                     disabled={
-                      Object.entries(errors).length === 0 ? false : true
+                      Object.entries(errors).length === 0
+                        ? !isInitial
+                          ? true
+                          : false
+                        : true
                     }
                   />
                 </View>

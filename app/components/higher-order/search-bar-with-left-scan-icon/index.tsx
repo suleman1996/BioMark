@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
     width: widthToDp(65),
     // height:heightToDp(15),
     marginTop: 40,
-    marginLeft: -7,
+    marginLeft: -15,
   },
   singleMenuItem: {
     paddingHorizontal: widthToDp(4),
