@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import ModalButtonComponent from 'components/higher-order/modal-button';
@@ -11,8 +11,12 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import CancerModal from './modals/cancer';
 import OthersModal from './modals/others';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { useIsFocused } from '@react-navigation/native';
 
 const MedicalHistoryScreen = () => {
+  const focus = useIsFocused();
+
   const [heartDisease, setHeartDisease] = useState(false);
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
   const [isStroke, setIsStroke] = useState(false);
@@ -21,6 +25,7 @@ const MedicalHistoryScreen = () => {
   const [isCancerModal, setIsCancerModal] = useState(false);
   const [isOtherModal, setIsOtherModal] = useState(false);
   const [isNoneModal, setIsNoneModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onNonePress = () => {
     setIsCholesterolModal(false);
@@ -39,8 +44,22 @@ const MedicalHistoryScreen = () => {
     setIsCancerModal(true);
   };
 
+  const getFamilyMedicalHistory = async () => {
+    try {
+      setIsLoading(true);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getFamilyMedicalHistory();
+  }, [focus]);
+
   return (
     <TitleWithBackLayout title="Medical History">
+      <ActivityIndicator visible={isLoading} />
       <CancerModal isVisible={isCancerModal} setIsVisible={setIsCancerModal} />
       <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
       <ScrollView style={styles.container}>
@@ -133,5 +152,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: heightToDp(2),
     justifyContent: 'space-between',
+    paddingBottom: 5,
   },
 });
