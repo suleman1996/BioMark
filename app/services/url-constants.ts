@@ -15,6 +15,7 @@ const API_URLS = {
   SLEEPING: '/api/v1/patient/lifestyle/sleeping',
   Drinking: '/api/v1/patient/lifestyle/drinking',
   Profile_Avatar: '/api/v1/patient/profiles/avatar',
+  Update_Profile: '/api/v1/patient/profiles/update',
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
 
   // Dependent
