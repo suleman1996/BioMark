@@ -1,4 +1,10 @@
-import { Text, View, ScrollView, SafeAreaView } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 
@@ -60,7 +66,8 @@ export default function AllergiesScreen() {
             onValueChange={(newValue) => setValue(newValue)}
             value={value}
           >
-            <View
+            <TouchableOpacity
+              onPress={() => setValue('first')}
               style={[
                 styles.radioContainer,
                 {
@@ -81,9 +88,10 @@ export default function AllergiesScreen() {
               >
                 No
               </Text>
-            </View>
+            </TouchableOpacity>
 
-            <View
+            <TouchableOpacity
+              onPress={() => setValue('second')}
               style={[
                 styles.radioContainer,
                 {
@@ -104,9 +112,10 @@ export default function AllergiesScreen() {
               >
                 Yes
               </Text>
-            </View>
+            </TouchableOpacity>
 
-            <View
+            <TouchableOpacity
+              onPress={() => setValue('third')}
               style={[
                 styles.radioContainer,
                 {
@@ -127,7 +136,7 @@ export default function AllergiesScreen() {
               >
                 Not Sure
               </Text>
-            </View>
+            </TouchableOpacity>
           </RadioButton.Group>
 
           {value == 'second' ? (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Confirmation from 'screens/auth/confirmation';
 import CreatePassword from 'screens/auth/create-password';
+import Confirmation from 'screens/auth/confirmation';
 import ForgotPassword from 'screens/auth/forgot-password';
 import Login from 'screens/auth/login';
 import PasswordOTP from 'screens/auth/otp-verification-password';

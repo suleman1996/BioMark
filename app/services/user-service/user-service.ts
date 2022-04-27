@@ -248,6 +248,16 @@ async function logout() {
     });
 }
 
+const Smoking = (day: Number, stopSmoke: Number, startSmoke: Number) => {
+  return client.post(API_URLS.Smoking, {
+    lifestyle: {
+      stick_per_day: day,
+      smoking_stop_at: stopSmoke,
+      smoking_start_at: startSmoke,
+    },
+  });
+};
+
 const getUserProfile = () => {
   return client.get(API_URLS.GET_PROFILE);
 };
@@ -276,6 +286,14 @@ const drinking = (
   });
 };
 
+const Vaccination = (items: string | number) => {
+  return client.post(API_URLS.Vaccination, {
+    medical_history: {
+      has_condition: true,
+      vaccine_list: items,
+    },
+  });
+};
 const updateProfileAvatar = (pic: String) => {
   return client.post(API_URLS.Profile_Avatar, {
     profile: {
@@ -315,6 +333,8 @@ export const userService = {
   forgotPassword,
   getUserContacts,
   saveUserContacts,
+  Smoking,
+  Vaccination,
   createProfile,
   getUserProfile,
   sleeping,
