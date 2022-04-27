@@ -1,18 +1,17 @@
-import { View, Text } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { styles } from './styles';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import CheckBoxWithText from 'components/base/checkbox-with-text';
-import MarketingConsentModal from 'components/ui/marketing-consent-modal';
 import ButtonComponent from 'components/base/button';
+import CheckBoxWithText from 'components/base/checkbox-with-text';
+import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import MarketingConsentModal from 'components/ui/marketing-consent-modal';
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { settingsService } from 'services/account-service/settings-service';
+import { goBack } from 'services/nav-ref';
 import { setMarketing } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import { goBack } from 'services/nav-ref';
 import { GlobalStyles } from 'utils/theme/global-styles';
+import { styles } from './styles';
 
 const MarketingConsentScreen = () => {
   const dispatch = useDispatch();
@@ -22,6 +21,7 @@ const MarketingConsentScreen = () => {
 
   const [isChecked, setIsChecked] = useState(false);
   const [isMModal, setIsMModal] = useState(false);
+  const [isInitialDisable, setIsInitialDisable] = useState(true);
 
   const getUserMarketing = () => {
     settingsService
@@ -76,6 +76,7 @@ const MarketingConsentScreen = () => {
           rightText="I  would like to receive information on offers, promotions and services via email and SMS."
           isChecked={isChecked}
           setIsChecked={(value: any) => {
+            setIsInitialDisable(false);
             if (!value) {
               setIsMModal(true);
             } else {
@@ -89,7 +90,7 @@ const MarketingConsentScreen = () => {
           <ButtonComponent
             onPress={() => onChangeMarketing()}
             title={'Save'}
-            disabled={false}
+            disabled={isInitialDisable}
           />
         </View>
       </View>

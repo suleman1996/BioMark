@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     paddingTop: heightToDp(2.5),
     paddingBottom: heightToDp(2),
     ...GlobalStyles.shadow,
-    borderBottomWidth: 1,
+    borderBottomWidth: heightToDp(0.5),
     borderBottomColor: GlobalColors.gray,
   },
   titleContainer: {
