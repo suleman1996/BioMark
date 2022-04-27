@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
   textinputView: {
     marginHorizontal: heightToDp(5),
     marginTop: 10,
-    borderBottomWidth: 0,
+    // borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
   },
   container2: {
