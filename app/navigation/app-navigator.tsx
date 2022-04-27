@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AccountNavigator } from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { Nav_Screens } from './constants';
-import CreateProfile from 'screens/auth/create_profile';
+import CreateProfile from 'screens/auth/create-profile';
 
 const Stack = createNativeStackNavigator();
 

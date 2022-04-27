@@ -46,7 +46,7 @@ const DatePicker = (props: Props) => {
       <Text
         style={{
           marginLeft: 15,
-          color: colors.placeHolder,
+          color: colors.black,
         }}
       >
         {moment(date).format('MM/DD/YYYY')}

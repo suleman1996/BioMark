@@ -135,6 +135,7 @@ export default function Login() {
       setLoginError(true);
     }
   }, [errorMessageLogin]);
+
   async function onAppleButtonPress() {
     // performs login request
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -159,6 +160,7 @@ export default function Login() {
       );
     }
   }
+
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
