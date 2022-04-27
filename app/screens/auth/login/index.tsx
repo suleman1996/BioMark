@@ -152,6 +152,11 @@ export default function Login() {
     // use credentialState response to ensure the user is authenticated
     if (credentialState === appleAuth.State.AUTHORIZED) {
       // user is authenticated
+      const provider = 'apple';
+      Keyboard.dismiss();
+      dispatch(
+        reduxFederatedLogin(appleAuthRequestResponse?.identityToken, provider)
+      );
     }
   }
   const handleLogin = async () => {
