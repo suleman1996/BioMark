@@ -20,7 +20,7 @@ const SingleMenuItemWithArrow = (props: Props) => {
         <Text style={styles.menuItemText}>{title}</Text>
         <Fontisto
           name="angle-right"
-          size={responsiveFontSize(22)}
+          size={responsiveFontSize(20)}
           color={GlobalColors.darkPrimary}
         />
       </>

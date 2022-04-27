@@ -19,6 +19,7 @@ export const Nav_Screens = {
   Medical_History: 'MedicalHistoryScreen',
   Settings: 'SettingsScreen',
   PasswordChangeScreen: 'PasswordChangeScreen',
+  PasswordChangedInApp: 'PasswordChangedInApp',
   EmailChangeScreen: 'EmailChangeScreen',
   PhoneChangeScreen: 'PhoneChangeScreen',
   MarketingConsentScreen: 'MarketingConsentScreen',
