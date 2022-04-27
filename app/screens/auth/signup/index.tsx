@@ -12,6 +12,7 @@ import {
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
+import moment from 'moment';
 
 import colors from 'assets/colors';
 import BackIcon from 'assets/svgs/back';
@@ -66,12 +67,14 @@ export default function Signup() {
     }
   }, [selectCountryCode]);
 
-  const signupApi = async (password: string) => {
-    setLoading(true);
+  const signupApi = async (values: string) => {
+    // setLoading(true);
     Keyboard.dismiss();
     const username = `+${selectCountryCode}${phoneNumber}`;
+    const newDate = moment(date).format('YYYY-MM-DD');
+    const password = values.password;
     userService
-      .registerUser(username, password)
+      .registerUser(username, values, selectedGender.id, newDate)
       .then((res) => {
         logNow('signup res', res);
         navigate(Nav_Screens.SignupVerificationScreen, { username, password });
@@ -88,10 +91,10 @@ export default function Signup() {
       });
   };
 
-  const handleSignup = async ({ password }: { password: string }) => {
+  const handleSignup = async (values) => {
     if (phoneNumber == '' || gender == '') {
     } else if (checked == true) {
-      signupApi(password);
+      signupApi(values);
     } else {
       showMessage({
         message: 'Kindly accept terms and condition',
@@ -165,7 +168,7 @@ export default function Signup() {
             email: '',
             password: '',
           }}
-          onSubmit={handleSignup}
+          onSubmit={(values) => handleSignup(values)}
           validationSchema={ResetPassSchema}
         >
           {({ handleChange, handleSubmit, errors, isValid }) => (

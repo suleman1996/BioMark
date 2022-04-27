@@ -16,4 +16,8 @@ export class AuthState {
   marketing = {
     enable: false,
   };
+  facebookLoginData = {
+    fname: '',
+    lname: '',
+  };
 }

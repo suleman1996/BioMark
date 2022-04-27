@@ -45,6 +45,30 @@ function login(username: string, password: string) {
       });
   });
 }
+function federatedlogin(access_token: string, provider: string) {
+  return new Promise<LoginResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.FEDERATED_LOGIN, {
+        federated_identity: {
+          access_token,
+          provider,
+        },
+      })
+      .then(async (response) => {
+        try {
+          await setAuthAsyncStorage(response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('User login service error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: LoginErrorResponse) => {
+        logNow('User login service error block login.', err);
+        reject(err);
+      });
+  });
+}
 function deviceRegisterAction(device_token: string, device_type: string) {
   return new Promise<DeviceRegister>((resolve, reject) => {
     client
@@ -94,15 +118,21 @@ function forgotPassword(username: string) {
   });
 }
 
-function registerUser(username: string, password: string) {
+function registerUser(username: string, values, gender: any, date: string) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
     client
       .post(API_URLS.SIGN_UP, {
         registration: {
-          username,
-          password,
-          group: 'patient',
+          password: values.password,
           terms: true,
+          email_address: values.email,
+          first_name: values.fName,
+          last_name: values.lName,
+          gender_id: gender,
+          birth_date: date,
+          ic_number: values.IcPnum,
+          username: username,
+          group: 'patient',
         },
       })
       .then(async (response) => {
@@ -191,6 +221,7 @@ async function logout() {
 
 export const userService = {
   login,
+  federatedlogin,
   deviceRegisterAction,
   registerUser,
   logout,

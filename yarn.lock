@@ -6581,6 +6581,11 @@ react-native-colortool@^0.0.1:
   resolved "https://registry.yarnpkg.com/react-native-colortool/-/react-native-colortool-0.0.1.tgz#0ae21efe2e3df18a1c3d9b48c30acaaa647dfb66"
   integrity sha1-CuIe/i498YocPZtIwwrKqmR9+2Y=
 
+react-native-config@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.4.5.tgz#6fe5895410b75e44fe4f4bf00caaf894a0981f3a"
+  integrity sha512-5oiAsoW88SOYDg/0cleJ2vJDqv98FJUbFQYEnH4sdMtEn3AAT3lb7BkTGW8HO/t3Vk9VOruwxUUnO4tzuxzCsw==
+
 react-native-confirm@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/react-native-confirm/-/react-native-confirm-0.0.1.tgz#495ba41e10f67a8c1323a9450623a172c4743a29"

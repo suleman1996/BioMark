@@ -87,7 +87,39 @@ export const reduxLogin =
         dispatch(loggingIn(false));
       });
   };
-
+export const reduxFederatedLogin =
+  (access_token: string, provider: string) =>
+  (dispatch: (arg0: { type: string; payload: any }) => void) => {
+    dispatch(loggingIn(true));
+    userService
+      .federatedlogin(access_token, provider)
+      .then(async (res: LoginResponse) => {
+        logNow('auth reducer ==>', res);
+        const userToken = res?.access_token;
+        const refreshToken = res?.refresh_token;
+        const isFirstLogin = res?.first_login;
+        const hasProfile = res?.has_profile;
+        const expiresIin = res?.expires_in;
+        await dispatch(
+          loggedIn({
+            userToken,
+            refreshToken,
+            isFirstLogin,
+            hasProfile,
+            expiresIin,
+          })
+        );
+        let uniqueId = DeviceInfo.getUniqueId();
+        await dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
+      })
+      .catch((err: LoginErrorResponse) => {
+        logNow('User auth login redux action error block', err);
+        dispatch(errorLogIn(err.errMsg.data.error));
+      })
+      .finally(async () => {
+        dispatch(loggingIn(false));
+      });
+  };
 export const reduxDeviceRegister =
   (device_token: string, device_type: string) =>
   (dispatch: (arg0: { type: string; payload: any }) => void) => {

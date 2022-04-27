@@ -8,7 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
+import {
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager,
+  LoginManager,
+} from 'react-native-fbsdk-next';
 import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
@@ -26,10 +31,11 @@ import ActivityIndicator from 'components/loader/activity-indicator';
 import PhoneNumber from 'components/phone-number';
 import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
-import { reduxLogin } from 'store/auth/auth-actions';
+import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import styles from './styles';
-
+import Config from 'react-native-config';
+console.log('API_URL', Config.API_URL);
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -79,7 +85,25 @@ export default function Login() {
       console.log('re', re);
     });
   };
-
+  const getInfoFromToken = (token) => {
+    const PROFILE_REQUEST_PARAMS = {
+      fields: {
+        string: 'id,name,first_name,last_name',
+      },
+    };
+    const profileRequest = new GraphRequest(
+      '/me',
+      { token, parameters: PROFILE_REQUEST_PARAMS },
+      (error, user) => {
+        if (error) {
+          console.log('login info has error: ' + error);
+        } else {
+          console.log('result:', user);
+        }
+      }
+    );
+    new GraphRequestManager().addRequest(profileRequest).start();
+  };
   const onFacebookLogin = async () => {
     LoginManager.logOut();
     await LoginManager.logInWithPermissions().then(
@@ -92,8 +116,11 @@ export default function Login() {
               result.grantedPermissions.toString()
           );
           const data = await AccessToken.getCurrentAccessToken();
-          console.log('Facebook data', data?.accessToken);
-          handleFedrationLogin(data?.accessToken);
+          getInfoFromToken(data?.accessToken);
+          console.log('Facebook data', data);
+          const provider = 'facebook';
+          Keyboard.dismiss();
+          dispatch(reduxFederatedLogin(data?.accessToken, provider));
         }
       },
       function (error) {
@@ -131,9 +158,6 @@ export default function Login() {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
-  };
-  const handleFedrationLogin = async (accessToken: string) => {
-    console.log('accessToken', accessToken);
   };
 
   return (
