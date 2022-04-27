@@ -1,34 +1,34 @@
-import { View, Text, ScrollView } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import { settingsService } from 'services/account-service/settings-service';
-import { logNow } from 'utils/functions/log-binder';
-import { styles } from './styles';
-import PasswordInputWithLabel from 'components/base/password-input-with-label';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
 import ButtonComponent from 'components/base/button';
 import ErrorText from 'components/base/error-text';
-import { ErrorResponse } from 'types/ErrorResponse';
-import { showMessage } from 'react-native-flash-message';
+import PasswordInputWithLabel from 'components/base/password-input-with-label';
+import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
 import ActivityIndicator from 'components/loader/activity-indicator';
-import { goBack } from 'services/nav-ref';
+import { Formik } from 'formik';
+import { Nav_Screens } from 'navigation/constants';
+import React, { useEffect, useRef, useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { settingsService } from 'services/account-service/settings-service';
+import { goBack, navigate } from 'services/nav-ref';
+import { ErrorResponse } from 'types/ErrorResponse';
+import { logNow } from 'utils/functions/log-binder';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalStyles } from 'utils/theme/global-styles';
+import * as Yup from 'yup';
+import { styles } from './styles';
 
 const PasswordChangeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [eCurrent, setECurrent] = useState(false);
-  const [ePass, setEPass] = useState(false);
-  const [eConfirm, setEConfirm] = useState(false);
+  const [eCurrent, setECurrent] = useState(true);
+  const [ePass, setEPass] = useState(true);
+  const [eConfirm, setEConfirm] = useState(true);
   const formikRef = useRef<any>();
   /*eslint-disable */
-  var isInitial = false;
+  const [isInitial, setIsInitial] = useState(true);
 
   useEffect(() => {
-    if (!isInitial) {
-      isInitial = true;
+    if (isInitial) {
+      setIsInitial(false);
     }
   }, []);
   /*eslint-enable */
@@ -37,6 +37,8 @@ const PasswordChangeScreen = () => {
   };
 
   const submitForm = () => {
+    logNow('formik', formikRef.current);
+    // return;
     const { password, confirmPassword, currentPassword } =
       formikRef.current.values;
     setIsLoading(true);
@@ -47,18 +49,26 @@ const PasswordChangeScreen = () => {
       .changePassword(currentPassword, confirmPassword)
       .then((res) => {
         logNow('res', res);
-        showMessage({
-          message: 'Password changed successfully',
-          type: 'success',
+        navigate(Nav_Screens.NestedAccountNavigator, {
+          screen: Nav_Screens.PasswordChangedInApp,
+          params: { flag: 1 },
         });
+
+        // showMessage({
+        //   message: 'Password changed successfully',
+        //   type: 'success',
+        // });
         goBack();
       })
       .catch((err: ErrorResponse) => {
         logNow(err.errMsg.data.message);
-        showMessage({
-          message: err.errMsg.data.message,
-          type: 'danger',
+        formikRef.current.setErrors({
+          currentPassword: err.errMsg.data.message,
         });
+        // showMessage({
+        //   message: err.errMsg.data.message,
+        //   type: 'danger',
+        // });
       })
       .finally(() => {
         setIsLoading(false);
@@ -164,7 +174,7 @@ const PasswordChangeScreen = () => {
                     <ErrorText text={errors.confirmPassword} />
                   )}
                 </ScrollView>
-                <View style={styles.bottomBtnContainer}>
+                <View style={GlobalStyles.bottomBtnWithShadow}>
                   <ButtonComponent
                     onPress={() => {
                       submitForm();
@@ -173,9 +183,9 @@ const PasswordChangeScreen = () => {
                     title={'Save'}
                     disabled={
                       Object.entries(errors).length === 0
-                        ? !isInitial
-                          ? true
-                          : false
+                        ? values.currentPassword
+                          ? false
+                          : true
                         : true
                     }
                   />

@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: widthToDp(6),
-    paddingVertical: widthToDp(4),
+    paddingVertical: widthToDp(1),
+    backgroundColor: GlobalColors.white,
   },
   phoneText: {
     fontSize: responsiveFontSize(23),

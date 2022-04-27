@@ -25,7 +25,7 @@ const PhoneChangeScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <TitleWithBackWhiteBgLayout title="Phone">
+      <TitleWithBackWhiteBgLayout title="Phone Number">
         <View style={styles.container}>
           <Text style={styles.phoneText}>Mobile Number</Text>
           <PhoneNumberWithLabel

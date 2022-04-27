@@ -6,18 +6,22 @@ async function getAuthAsyncStorage() {
   const userToken = await AsyncStorage.getItem('userToken');
   const refreshToken = await AsyncStorage.getItem('refreshToken');
   const user: any = await AsyncStorage.getItem('userData');
+  const hasProfile: any = await AsyncStorage.getItem('hasProfile');
   return {
     userToken,
     refreshToken,
     user: JSON.parse(user),
+    hasProfile: JSON.parse(hasProfile),
   };
 }
 
 async function setAuthAsyncStorage(response: LoginResponse) {
-  let parseHasProfile = response?.has_profile ? 'true' : 'false';
   await AsyncStorage.setItem('userToken', response.access_token);
   await AsyncStorage.setItem('refreshToken', response.refresh_token);
-  await AsyncStorage.setItem('hasProfile', parseHasProfile);
+  await AsyncStorage.setItem(
+    'hasProfile',
+    JSON.stringify(response.has_profile)
+  );
 }
 
 async function setAuthUserAsyncStorage(response: any) {

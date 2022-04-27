@@ -1,13 +1,17 @@
+import BioAboutIcon from 'components/svg/bio-about-icon';
+import BioAutoLogout from 'components/svg/bio-auto-logout';
+import BioDependent from 'components/svg/bio-dependent';
+import BioIdentify from 'components/svg/bio-identify';
+import BioLogout from 'components/svg/bio-logout';
+import BioNotification from 'components/svg/bio-notification';
+import BioPolicies from 'components/svg/bio-policies';
+import BioSettings from 'components/svg/bio-settings';
+import BioSupport from 'components/svg/bio-support';
 import { Nav_Screens } from 'navigation/constants';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Switch, TouchableRipple } from 'react-native-paper';
-import Entypo from 'react-native-vector-icons/Entypo';
-import FontAwesome2 from 'react-native-vector-icons/FontAwesome';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useDispatch } from 'react-redux';
 import { navigate } from 'services/nav-ref';
 import { logout } from 'store/auth/auth-actions';
@@ -29,11 +33,7 @@ const AccountMenu = ({}) => {
       <TouchableRipple style={styles.singleItem}>
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <MaterialCommunityIcons
-              name="credit-card-outline"
-              size={responsiveFontSize(18)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioIdentify width={5} height={3} />
             <Text style={styles.text}>Identify Verification </Text>
           </View>
           <View style={styles.iconWithSecondText}>
@@ -58,11 +58,7 @@ const AccountMenu = ({}) => {
       >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <FontAwesome
-              name="user-friends"
-              size={responsiveFontSize(18)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioDependent width={5} height={5} />
             <Text style={styles.text}>Dependants</Text>
           </View>
           <View style={styles.iconWithSecondText}>
@@ -87,11 +83,7 @@ const AccountMenu = ({}) => {
       >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Fontisto
-              name="player-settings"
-              size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioSettings width={5} height={5} />
             <Text style={styles.text}>Settings</Text>
           </View>
           <Fontisto
@@ -106,11 +98,7 @@ const AccountMenu = ({}) => {
       <TouchableRipple style={styles.singleItem}>
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <FontAwesome2
-              name="bell"
-              size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioNotification width={5} height={5} />
             <Text style={styles.text}>Notifications</Text>
           </View>
           <Fontisto
@@ -125,11 +113,7 @@ const AccountMenu = ({}) => {
       <TouchableRipple style={styles.singleItem}>
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <FontAwesome2
-              name="support"
-              size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioSupport width={5} height={5} />
             <Text style={styles.text}>Support</Text>
           </View>
           <Fontisto
@@ -144,11 +128,7 @@ const AccountMenu = ({}) => {
       <TouchableRipple style={styles.singleItem}>
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <MaterialIcons
-              name="self-improvement"
-              size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioAboutIcon width={5} height={5} />
             <Text style={styles.text}>About BioMark</Text>
           </View>
           <Fontisto
@@ -163,11 +143,7 @@ const AccountMenu = ({}) => {
       <TouchableRipple style={styles.singleItem}>
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <FontAwesome
-              name="book"
-              size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioPolicies width={5} height={5} />
             <Text style={styles.text}>Policies</Text>
           </View>
           <Fontisto
@@ -184,11 +160,7 @@ const AccountMenu = ({}) => {
         style={styles.singleItem}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <MaterialCommunityIcons
-            name="logout"
-            size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
-          />
+          <BioLogout width={4} height={4} />
           <Text style={styles.text}>Logout</Text>
         </View>
       </TouchableRipple>
@@ -197,11 +169,7 @@ const AccountMenu = ({}) => {
       <TouchableRipple style={styles.singleItem}>
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Entypo
-              name="back-in-time"
-              size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
-            />
+            <BioAutoLogout width={4} height={4} />
             <Text style={styles.text}>Auto Logout</Text>
           </View>
           <Switch

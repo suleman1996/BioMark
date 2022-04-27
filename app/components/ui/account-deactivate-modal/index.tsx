@@ -1,13 +1,12 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
-
+import ButtonComponent from 'components/base/button';
 import ModalComponent from 'components/base/modal';
+import BioCloseGray from 'components/svg/bio-close-gray';
+import React from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import ButtonComponent from 'components/base/button';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   isVisible: boolean;
@@ -23,7 +22,7 @@ const AccountDeActivateModal = (props: Props) => {
         <View style={styles.header}>
           <Text style={styles.headerText}>Are You Sure?</Text>
           <Pressable onPress={() => setIsVisible(false)}>
-            <Entypo size={responsiveFontSize(32)} name="cross" />
+            <BioCloseGray width={4} height={4} />
           </Pressable>
         </View>
         <Text style={styles.contentText}>
@@ -33,7 +32,7 @@ const AccountDeActivateModal = (props: Props) => {
         <ButtonComponent
           bg={'transparent'}
           color={'gray'}
-          onPress={setIsVisible}
+          onPress={() => setIsVisible(false)}
           title={'Not Now'}
           disabled={false}
         />

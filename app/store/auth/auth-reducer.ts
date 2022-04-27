@@ -3,6 +3,7 @@ import {
   AUTH_ERR_LOG_IN,
   AUTH_ERR_LOG_OUT,
   AUTH_LOGGED_IN,
+  AUTH_LOGGED_IN_HAS_PROFILE,
   AUTH_LOGGING_IN,
   AUTH_LOGGING_OUT,
   AUTH_LOGOUT,
@@ -46,6 +47,16 @@ export default function (state = INITIAL_STATE, action: any) {
         isFirstLogin,
         hasProfile,
         expiresIin,
+        errorMessageLogin: null,
+        loggingIn: false,
+      };
+    }
+
+    case AUTH_LOGGED_IN_HAS_PROFILE: {
+      let { hasProfile } = action.payload;
+      return {
+        ...state,
+        hasProfile,
         errorMessageLogin: null,
         loggingIn: false,
       };
