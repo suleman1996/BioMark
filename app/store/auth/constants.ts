@@ -9,3 +9,4 @@ export const DEVICE_REG = '[AUTH] DEVICE_REG';
 export const USER_CONTACTS = '[Auth] UserContactsDetails';
 export const MARKETING = '[User] UserMarketingDetails';
 export const USER_DATA = '[User] UserData';
+export const AUTH_LOGGED_IN_HAS_PROFILE = '[AUTH] CheckIfUserHasProfile';
