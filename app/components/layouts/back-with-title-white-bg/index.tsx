@@ -40,6 +40,7 @@ export default TitleWithBackWhiteBgLayout;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: GlobalColors.white,
   },
   header: {
     width: widthToDp(100),
@@ -48,6 +49,8 @@ const styles = StyleSheet.create({
     paddingTop: heightToDp(2.5),
     paddingBottom: heightToDp(2),
     ...GlobalStyles.shadow,
+    borderBottomWidth: 1,
+    borderBottomColor: GlobalColors.gray,
   },
   titleContainer: {
     paddingVertical: heightToDp(1),

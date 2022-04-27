@@ -12,6 +12,7 @@ import { setMarketing } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { goBack } from 'services/nav-ref';
+import { GlobalStyles } from 'utils/theme/global-styles';
 
 const MarketingConsentScreen = () => {
   const dispatch = useDispatch();
@@ -82,7 +83,9 @@ const MarketingConsentScreen = () => {
             }
           }}
         />
-        <View style={styles.bottomBtnContainer}>
+        <View
+          style={[GlobalStyles.bottomBtnWithShadow, styles.bottomBtnContainer]}
+        >
           <ButtonComponent
             onPress={() => onChangeMarketing()}
             title={'Save'}

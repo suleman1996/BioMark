@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     borderTopWidth: 0.3,
   },
   menuItemText: {
-    fontFamily: GlobalFonts.bold,
+    fontFamily: GlobalFonts.semiBold,
     fontSize: responsiveFontSize(22),
     color: GlobalColors.darkPrimary,
   },

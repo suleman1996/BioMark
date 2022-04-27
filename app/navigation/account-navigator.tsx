@@ -23,6 +23,7 @@ import PhoneChangeScreen from 'screens/main/account/settings/phone-change';
 import MarketingConsentScreen from 'screens/main/account/settings/marketing-consent';
 
 import { Nav_Screens } from './constants';
+import PasswordChanged from 'screens/auth/password-changed';
 
 const Stack = createNativeStackNavigator();
 
@@ -75,6 +76,10 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.PasswordChangeScreen}
         component={PasswordChangeScreen}
+      />
+      <Stack.Screen
+        name={Nav_Screens.PasswordChangedInApp}
+        component={PasswordChanged}
       />
       <Stack.Screen
         options={{

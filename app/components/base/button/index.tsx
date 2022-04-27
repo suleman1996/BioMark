@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: widthToDp(2.5),
     width: '100%',
+    maxWidth: widthToDp(86),
   },
   text: {
     color: GlobalColors.white,

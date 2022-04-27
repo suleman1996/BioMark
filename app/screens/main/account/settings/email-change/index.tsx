@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUserContactsDetails } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import ErrorLineFullWidth from 'components/higher-order/error-full-width-line';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalStyles } from 'utils/theme/global-styles';
 
 const EmailChangeScreen = () => {
   const formikRef = useRef<any>();
@@ -85,7 +87,7 @@ const EmailChangeScreen = () => {
   });
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: GlobalColors.white }}>
       <ActivityIndicator visible={isLoading} />
       <Formik
         innerRef={formikRef}
@@ -105,10 +107,12 @@ const EmailChangeScreen = () => {
                   label={'Email Address'}
                   placeholder={'Enter your email address'}
                   value={values.email}
+                  onFocus={() => formikRef.current.submitForm()}
                   onChange={handleChange('email')}
                 />
                 <InputWithLabel
                   labelFontSize={25}
+                  onFocus={() => formikRef.current.submitForm()}
                   label={'Confirm Email Address'}
                   placeholder={'Enter your email address'}
                   onChange={handleChange('confirmEmail')}
@@ -117,7 +121,7 @@ const EmailChangeScreen = () => {
               </View>
             </TitleWithBackWhiteBgLayout>
             <ErrorLineFullWidth error={errors.email || errors.confirmEmail} />
-            <View style={styles.bottomBtnContainer}>
+            <View style={GlobalStyles.bottomBtnWithShadow}>
               <ButtonComponent
                 onPress={() => {
                   submitForm();
