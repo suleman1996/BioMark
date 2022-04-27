@@ -150,7 +150,38 @@ function registerUser(username: string, values, gender: any, date: string) {
       });
   });
 }
-
+function createProfile(values, gender: any, date: string) {
+  console.log('values', values);
+  console.log('gender', gender);
+  console.log('date', date);
+  return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_PROFILE, {
+        profile: {
+          first_name: values.fName,
+          last_name: values.lName,
+          ic_number: values.IcPnum,
+          gender_id: gender,
+          birth_date: date,
+          email_address: values.email,
+          terms: true,
+        },
+      })
+      .then(async (response) => {
+        try {
+          logNow('create user success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('create user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: RegisterUserErrorResponse) => {
+        logNow('create user error response 2.', err);
+        reject(err);
+      });
+  });
+}
 function getUserContacts() {
   return new Promise<UserContacts>((resolve, reject) => {
     client
@@ -228,4 +259,5 @@ export const userService = {
   forgotPassword,
   getUserContacts,
   saveUserContacts,
+  createProfile,
 };

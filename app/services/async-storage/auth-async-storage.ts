@@ -14,8 +14,10 @@ async function getAuthAsyncStorage() {
 }
 
 async function setAuthAsyncStorage(response: LoginResponse) {
+  let parseHasProfile = response?.has_profile ? 'true' : 'false';
   await AsyncStorage.setItem('userToken', response.access_token);
   await AsyncStorage.setItem('refreshToken', response.refresh_token);
+  await AsyncStorage.setItem('hasProfile', parseHasProfile);
 }
 
 async function setAuthUserAsyncStorage(response: any) {

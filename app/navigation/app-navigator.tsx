@@ -1,16 +1,34 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AccountNavigator } from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { Nav_Screens } from './constants';
 import CreateProfile from 'screens/auth/create_profile';
-import { useSelector } from 'react-redux';
-import { IAppState } from 'store/IAppState';
+
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
-  const auth = useSelector((state: IAppState) => state.auth);
+  var hasProfile = 'false';
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getData = async () => {
+    // get Data from Storage
+    try {
+      const data = await AsyncStorage.getItem('hasProfile');
+      if (data !== null) {
+        hasProfile = data;
+        return data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
   return (
     <Stack.Navigator
       initialRouteName="BottomTabNavigator"
@@ -18,7 +36,7 @@ const AppNavigator = () => {
         headerShown: false,
       }}
     >
-      {auth.hasProfile ? (
+      {hasProfile === 'true' ? (
         <>
           <Stack.Screen
             name="BottomTabNavigator"

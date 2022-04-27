@@ -9,6 +9,7 @@ const API_URLS = {
   CHANGE_PASSWORD: '/api/v1/auth/password/reset',
   RESEND_PASSWORD_OTP: '/api/v1/auth/confirmations/resend_code',
   GET_PROFILE: '/api/v1/patient/profiles',
+  CREATE_PROFILE: 'api/v2/patient/profiles',
   GET_USER_CONTACTS: '/api/v1/patient/contacts',
   LOG_OUT: '/api/v1/auth/sessions/logout',
   SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
