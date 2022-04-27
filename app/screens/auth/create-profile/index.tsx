@@ -31,7 +31,7 @@ import { logNow } from 'utils/functions/log-binder';
 import styles from './styles';
 import { resetAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 import { useDispatch } from 'react-redux';
-import { loggedOut } from 'store/auth/auth-actions';
+import { loggedInHasProfile, loggedOut } from 'store/auth/auth-actions';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -60,6 +60,7 @@ export default function index() {
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
   const dispatch = useDispatch();
+  const dispatch2 = useDispatch();
   const navigations = useNavigation();
   //fuctions
 
@@ -72,7 +73,7 @@ export default function index() {
       .then(async (res) => {
         logNow('signup res', res);
         await AsyncStorage.setItem('hasProfile', JSON.stringify(true));
-        navigations.push('CreateProfile');
+        await dispatch2(loggedInHasProfile(true));
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);
