@@ -4,14 +4,14 @@ import { BarIndicator } from 'react-native-indicators';
 
 import colors from 'assets/colors';
 
-export default function ActivityIndicator({ visible = false }) {
+export default function ActivityIndicator({ visible = false, fontSize }) {
   if (!visible) {
     return null;
   }
 
   return (
     <View style={styles.overLay}>
-      <BarIndicator color={colors.blue} size={40} />
+      <BarIndicator color={colors.blue} size={fontSize ? fontSize : 40} />
     </View>
   );
 }

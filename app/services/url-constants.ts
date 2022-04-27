@@ -12,6 +12,9 @@ const API_URLS = {
   LOG_OUT: '/api/v1/auth/sessions/logout',
   SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
   MARKETING: '/api/v1/patient/marketing',
+  SLEEPING: '/api/v1/patient/lifestyle/sleeping',
+  Drinking: '/api/v1/patient/lifestyle/drinking',
+  Profile_Avatar: '/api/v1/patient/profiles/avatar',
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
 
   // Dependent

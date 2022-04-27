@@ -189,6 +189,44 @@ async function logout() {
     });
 }
 
+const getUserProfile = () => {
+  return client.get(API_URLS.GET_PROFILE);
+};
+
+const sleeping = (hours: String) => {
+  return client.post(API_URLS.SLEEPING, {
+    lifestyle: {
+      sleep_duration: hours,
+    },
+  });
+};
+
+const drinking = (
+  isDrinking: boolean,
+  beer: Number,
+  wine: Number,
+  spirits: Number
+) => {
+  return client.post(API_URLS.Drinking, {
+    lifestyle: {
+      is_drinking: isDrinking,
+      pints_of_beer: beer,
+      glasses_of_wine: wine,
+      shots_of_spirits: spirits,
+    },
+  });
+};
+
+const updateProfileAvatar = (pic: String) => {
+  return client.post(API_URLS.Profile_Avatar, {
+    profile: {
+      base64: pic,
+      filename: 'filename',
+      filetype: 'jpg',
+    },
+  });
+};
+
 export const userService = {
   login,
   deviceRegisterAction,
@@ -197,4 +235,8 @@ export const userService = {
   forgotPassword,
   getUserContacts,
   saveUserContacts,
+  getUserProfile,
+  sleeping,
+  drinking,
+  updateProfileAvatar,
 };

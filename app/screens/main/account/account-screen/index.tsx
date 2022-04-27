@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -11,8 +11,14 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
+import AuthContext from 'utils/auth-context';
+import ActivityIndicator from 'components/loader/activity-indicator';
 
 const AccountScreen = () => {
+  const authContext = useContext(AuthContext);
+
+  const [profileLoader, setProfileLoader] = React.useState(false);
+
   return (
     <>
       <TitleWithSearchBarLayout title={'Account'}>
@@ -25,9 +31,23 @@ const AccountScreen = () => {
               paddingHorizontal: widthToDp(6),
             }}
           >
-            <Image source={Images.avatar} style={styles.image} />
+            <View style={[styles.image, { overflow: 'hidden' }]}>
+              <Image
+                onLoadStart={() => setProfileLoader(true)}
+                onLoadEnd={() => setProfileLoader(false)}
+                source={
+                  !authContext?.userData?.picture
+                    ? Images.avatar
+                    : { uri: authContext?.userData?.picture }
+                }
+                style={styles.image}
+              />
+              <ActivityIndicator fontSize={20} visible={profileLoader} />
+            </View>
             <View style={styles.profile}>
-              <Text style={styles.name}>Gerold Mordeno</Text>
+              <Text style={styles.name}>
+                {authContext?.userData?.patient_name}
+              </Text>
               <Pressable
                 onPress={() =>
                   navigate(Nav_Screens.NestedAccountNavigator, {
