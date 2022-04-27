@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import colors from 'assets/colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import fonts from 'assets/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 
@@ -59,5 +59,31 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute', //Here is the trick
     bottom: 0,
+  },
+  listview: {
+    backgroundColor: GlobalColors.white,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 10,
+    width: widthToDp(15),
+    height: heightToDp(4),
+    marginTop: 20,
+    borderRadius: 20,
+    borderColor: GlobalColors.navyblue,
+    borderWidth: 1,
+    flex: 9,
+  },
+  listTextColor: {
+    flex: 2,
+    color: GlobalColors.darkGray,
+    fontSize: responsiveFontSize(12),
+    marginHorizontal: 5,
+  },
+  flatlistView: {
+    marginHorizontal: 15,
+  },
+  crossIcon: {
+    // marginHorizontal: 2,
   },
 });

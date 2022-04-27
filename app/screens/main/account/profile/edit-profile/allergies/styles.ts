@@ -65,5 +65,6 @@ export const styles = StyleSheet.create({
     marginTop: heightToDp(2),
     justifyContent: 'space-between',
     marginHorizontal: heightToDp(2),
+    marginBottom: 5,
   },
 });

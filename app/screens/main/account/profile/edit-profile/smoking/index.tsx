@@ -13,16 +13,29 @@ import TitleWithBackLayout from 'components/layouts/back-with-title';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
 import { GlobalColors } from 'utils/theme/global-colors';
 import TextInput from 'components/input-field/text-input';
+import { userService } from 'services/user-service/user-service';
+import { navigate } from 'services/nav-ref';
+import { Nav_Screens } from 'navigation/constants';
 
 import { options } from './year';
 import { styles } from './styles';
 
 export default function SmokingScreen() {
-  const [value, setValue] = useState('first');
+  const [value, setValue] = useState('0');
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const options2 = [{ title: '2020' }, { title: '2021' }];
+  const options2 = [{ title: null }, { title: '2020' }, { title: '2021' }];
+
+  const onSubmit = async () => {
+    try {
+      const response = await userService.Smoking(day, stopSmoke, startSmoke);
+      console.log('smoking successful', response.data);
+      navigate(Nav_Screens.Edit_Profile);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -34,23 +47,22 @@ export default function SmokingScreen() {
             value={value}
           >
             <TouchableOpacity
-              onPress={() => setValue('first')}
+              onPress={() => setValue('0')}
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'first' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == '0' ? GlobalColors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'first' ? GlobalColors.white : null}
-                value="first"
+                color={value == '0' ? GlobalColors.white : null}
+                value="0"
               />
               <Text
                 style={[
                   styles.radioText,
-                  { color: value == 'first' ? '#ffffff' : '#000000' },
+                  { color: value == '0' ? '#ffffff' : '#000000' },
                 ]}
               >
                 No
@@ -58,23 +70,22 @@ export default function SmokingScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setValue('second')}
+              onPress={() => setValue('1')}
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'second' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == '1' ? GlobalColors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'second' ? GlobalColors.white : null}
-                value="second"
+                color={value == '1' ? GlobalColors.white : null}
+                value="1"
               />
               <Text
                 style={[
                   styles.radioText,
-                  { color: value == 'second' ? '#ffffff' : '#000000' },
+                  { color: value == '1' ? '#ffffff' : '#000000' },
                 ]}
               >
                 Yes
@@ -82,23 +93,22 @@ export default function SmokingScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setValue('third')}
+              onPress={() => setValue('2')}
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'third' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == '2' ? GlobalColors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'third' ? GlobalColors.white : null}
-                value="third"
+                color={value == '2' ? GlobalColors.white : null}
+                value="2"
               />
               <Text
                 style={[
                   styles.radioText,
-                  { color: value == 'third' ? '#ffffff' : '#000000' },
+                  { color: value == '2' ? '#ffffff' : '#000000' },
                 ]}
               >
                 I used to
@@ -106,7 +116,7 @@ export default function SmokingScreen() {
             </TouchableOpacity>
           </RadioButton.Group>
 
-          {value !== 'first' ? (
+          {value !== '0' ? (
             <View>
               <Text style={styles.label}>
                 How many cigarettes did you smoke per day?
@@ -118,7 +128,6 @@ export default function SmokingScreen() {
                 ]}
               >
                 <TextInput
-                  placeholder="eg : 1"
                   value={day}
                   onChange={setDay}
                   margin={0}
@@ -139,6 +148,7 @@ export default function SmokingScreen() {
                   {options?.map((item, index) => {
                     return (
                       <Picker.Item
+                        style={{ color: GlobalColors.darkGray }}
                         key={index}
                         label={item.title}
                         value={item.title}
@@ -148,13 +158,14 @@ export default function SmokingScreen() {
                 </Picker>
               </View>
 
-              {value == 'third' ? (
+              {value == '2' ? (
                 <View>
                   <Text style={styles.label}>
                     Which year did you stop smoking?
                   </Text>
                   <View style={styles.container2}>
                     <Picker
+                      style={{ color: GlobalColors.darkGray }}
                       selectedValue={stopSmoke}
                       onValueChange={(itemValue) => setStopSmoke(itemValue)}
                     >
@@ -174,7 +185,7 @@ export default function SmokingScreen() {
             </View>
           ) : null}
         </ScrollView>
-        <ButtonWithShadowContainer title="Save" onPress={undefined} />
+        <ButtonWithShadowContainer title="Save" onPress={onSubmit} />
       </TitleWithBackLayout>
     </SafeAreaView>
   );

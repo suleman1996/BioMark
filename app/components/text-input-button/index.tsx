@@ -37,9 +37,9 @@ const TextInputButton = ({
         />
         <Pressable style={styles.addBtn} onPress={onPress}>
           <Ionicons
-            color={GlobalColors.primaryGray}
+            color={GlobalColors.darkGray}
             name="add"
-            size={responsiveFontSize(35)}
+            size={responsiveFontSize(20)}
           />
         </Pressable>
       </View>

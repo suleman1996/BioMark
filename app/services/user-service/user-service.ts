@@ -2,10 +2,12 @@ import DeviceInfo from 'react-native-device-info';
 
 import { ErrorResponse } from 'types/ErrorResponse';
 import { UserContacts } from 'types/UserContacts';
+
 import {
   ForgotPasswordErrorResponse,
   ForgotPasswordSuccessResponse,
 } from 'types/auth/ForgotPassword';
+
 import { LoginResponse, LoginErrorResponse } from 'types/auth/LoginResponse';
 import {
   RegisterUserErrorResponse,
@@ -44,6 +46,34 @@ function login(username: string, password: string) {
       });
   });
 }
+
+// function Smoking(is_smoking: number, stick_per_day: number,smoking_stop_at:number,smoking_start_at:number) {
+//   return new Promise<LoginResponse>((resolve, reject) => {
+//     client
+//       .post(API_URLS.Smoking,{
+//         lifestyle: {
+//           is_smoking,
+//           stick_per_day,
+//           smoking_stop_at,
+//           smoking_start_at
+//         },
+//       })
+//       .then(async (response) => {
+//         try {
+//           await setAuthAsyncStorage(response.data);
+//           resolve(response.data);
+//         } catch (e) {
+//           logNow('User login service error block login1.', e);
+//           reject(e);
+//         }
+//       })
+//       .catch(async (err: LoginErrorResponse) => {
+//         logNow('User login service error block login.', err);
+//         reject(err);
+//       });
+//   });
+// }
+
 function deviceRegisterAction(device_token: string, device_type: string) {
   return new Promise<DeviceRegister>((resolve, reject) => {
     client
@@ -187,6 +217,28 @@ async function logout() {
     });
 }
 
+// function Smoking(){
+//   return client.post(API_URLS.Smoking);
+// }
+
+const Smoking = (day: Number, stopSmoke: Number, startSmoke: Number) => {
+  return client.post(API_URLS.Smoking, {
+    lifestyle: {
+      stick_per_day: day,
+      smoking_stop_at: stopSmoke,
+      smoking_start_at: startSmoke,
+    },
+  });
+};
+
+const Vaccination = (items: string | number) => {
+  return client.post(API_URLS.Vaccination, {
+    medical_history: {
+      has_condition: true,
+      vaccine_list: items,
+    },
+  });
+};
 export const userService = {
   login,
   deviceRegisterAction,
@@ -195,4 +247,6 @@ export const userService = {
   forgotPassword,
   getUserContacts,
   saveUserContacts,
+  Smoking,
+  Vaccination,
 };

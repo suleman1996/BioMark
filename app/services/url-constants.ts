@@ -15,6 +15,11 @@ const API_URLS = {
 
   // Settings
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',
+
+  // EditProfile
+  Smoking: '/api/v1/patient/lifestyle/smoking',
+  Vaccination: '/api/v1/patient/medical_histories/vaccine',
+  Allergies: '/api/v1/patient/medical_histories/allergy',
 };
 
 export { API_URLS };
