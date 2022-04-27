@@ -34,6 +34,7 @@ const AuthenticationStack = () => (
       component={CreatePassword}
     />
     <Stack.Screen name="PasswordChanged" component={PasswordChanged} />
+
     <Stack.Screen name="Signup" component={Signup} />
     <Stack.Screen
       name={Nav_Screens.SignupVerificationScreen}

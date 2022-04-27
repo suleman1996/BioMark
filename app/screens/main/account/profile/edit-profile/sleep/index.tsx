@@ -9,6 +9,9 @@ import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { userService } from 'services/user-service/user-service';
+import { showMessage } from 'react-native-flash-message';
 
 const Sleep = () => {
   const sleepOptions = [
@@ -20,9 +23,41 @@ const Sleep = () => {
   const [selectedSleep, setSelectedSleep] = React.useState(
     sleepOptions[0].title
   );
+  const [isVisiable, setIsVisible] = React.useState(false);
+
+  const handleSleep = async () => {
+    try {
+      setIsVisible(true);
+      const result = await userService.sleeping(selectedSleep);
+      console.log('Sleep success ', result.data);
+      navigate(Nav_Screens.Edit_Profile);
+      setIsVisible(false);
+    } catch (error) {
+      setIsVisible(false);
+      console.log('Api error ', error);
+
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <ActivityIndicator visible={isVisiable} />
       <TitleWithBackLayout title="Sleep">
         <View style={styles.container}>
           <Text style={styles.heading}>
@@ -53,10 +88,7 @@ const Sleep = () => {
             </View>
           </View>
         </View>
-        <ButtonWithShadowContainer
-          onPress={() => navigate(Nav_Screens.Edit_Profile)}
-          title="Save"
-        />
+        <ButtonWithShadowContainer onPress={() => handleSleep()} title="Save" />
       </TitleWithBackLayout>
     </SafeAreaView>
   );

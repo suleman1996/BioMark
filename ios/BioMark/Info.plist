@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb663925508194673</string>
+				<string>fb648501205748550</string>
 			</array>
 		</dict>
 		<dict>
@@ -42,7 +42,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>663925508194673</string>
+	<string>648501205748550</string>
 	<key>FacebookDisplayName</key>
 	<string>BioMark</string>
 	<key>LSApplicationQueriesSchemes</key>

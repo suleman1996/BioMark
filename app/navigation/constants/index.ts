@@ -6,6 +6,7 @@ export const Nav_Screens = {
   CreatePasswordScreen: 'CreatePassword',
   LoginScreen: 'Login',
   Sign_Up: 'Signup',
+  Create_Profile: 'CreateProfile',
 
   // NestedAccountNavigator
   NestedAccountNavigator: 'NestedAccountNavigator',

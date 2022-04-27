@@ -13,10 +13,13 @@ import { navigationRef } from './app/services/nav-ref';
 import { loggedIn } from './app/store/auth/auth-actions';
 import { IAppState } from './app/store/IAppState';
 import { store } from './app/store/store';
+
 import AuthContext from './app/utils/auth-context';
 
 const NavigationCheckIfLoggedIn = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state: IAppState) => state.auth);
+  const userToken = auth.userToken ? auth.userToken : null;
 
   async function getAuthTokenIfInAsyncStorage() {
     const data = await getAuthAsyncStorage();
@@ -25,11 +28,9 @@ const NavigationCheckIfLoggedIn = () => {
 
   useEffect(() => {
     getAuthTokenIfInAsyncStorage();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const auth = useSelector((state: IAppState) => state.auth);
-  const userToken = auth.userToken ? auth.userToken : null;
 
   return (
     <>
@@ -44,10 +45,11 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'light';
 
   const [user, setUser] = useState('');
+  const [userData, setUserData] = useState({});
 
   return (
     <Provider store={store}>
-      <AuthContext.Provider value={{ user, setUser }}>
+      <AuthContext.Provider value={{ user, setUser, userData, setUserData }}>
         <MenuProvider>
           <StatusBar
             backgroundColor={colors.blue}
