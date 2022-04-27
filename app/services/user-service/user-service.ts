@@ -227,6 +227,26 @@ const updateProfileAvatar = (pic: String) => {
   });
 };
 
+const updateProfile = (
+  fName: String,
+  lName: String,
+  dob: String,
+  gender: Number,
+  ic_number: String,
+  email: String
+) => {
+  return client.put(API_URLS.Update_Profile, {
+    profile: {
+      first_name: fName,
+      last_name: lName,
+      birth_date: dob,
+      gender_id: gender,
+      ic_number: ic_number,
+      email: email,
+    },
+  });
+};
+
 export const userService = {
   login,
   deviceRegisterAction,
@@ -239,4 +259,5 @@ export const userService = {
   sleeping,
   drinking,
   updateProfileAvatar,
+  updateProfile,
 };
