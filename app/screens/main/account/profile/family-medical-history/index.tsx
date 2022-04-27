@@ -13,9 +13,11 @@ import CancerModal from './modals/cancer';
 import OthersModal from './modals/others';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { useIsFocused } from '@react-navigation/native';
+import { userService } from 'services/user-service/user-service';
+import { showMessage } from 'react-native-flash-message';
 
 const MedicalHistoryScreen = () => {
-  const focus = useIsFocused();
+  const isFocus = useIsFocused();
 
   const [heartDisease, setHeartDisease] = useState(false);
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
@@ -26,6 +28,7 @@ const MedicalHistoryScreen = () => {
   const [isOtherModal, setIsOtherModal] = useState(false);
   const [isNoneModal, setIsNoneModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [history] = useState([]);
 
   const onNonePress = () => {
     setIsCholesterolModal(false);
@@ -47,15 +50,75 @@ const MedicalHistoryScreen = () => {
   const getFamilyMedicalHistory = async () => {
     try {
       setIsLoading(true);
+      const result = await userService.getFamilyMedicalHistory();
+      console.log('here are the medical history family ', result.data);
+      result?.data?.family.map(
+        (item) => (
+          item.condition_id == 9 && setHeartDisease(true),
+          item.condition_id == 10 && setIsStroke(true),
+          item.condition_id == 11 && setIsBloodPressureModal(true),
+          item.condition_id == 12 && setIsCholesterolModal(true),
+          item.condition_id == 13 && setIsDiabetesModal(true)
+        )
+      );
+
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+
+      console.log('Error ', error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
+
+  const createFamilyMedicalHistory = async () => {
+    try {
+      setIsLoading(true);
+      const result = await userService.createFamilyMedicalHistory(history);
+      console.log('here are the medical history family ', result.data);
+      goBack();
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+
+      console.log('Error ', error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
     }
   };
 
   useEffect(() => {
     getFamilyMedicalHistory();
-  }, [focus]);
+  }, [isFocus]);
 
   return (
     <TitleWithBackLayout title="Medical History">
@@ -73,12 +136,16 @@ const MedicalHistoryScreen = () => {
             isModal={heartDisease}
             setIsModal={setHeartDisease}
             drop={false}
+            history={history}
+            condition_id={9}
           />
           <ModalButtonComponent
             title="Stroke"
             isModal={isStroke}
             setIsModal={setIsStroke}
             drop={false}
+            history={history}
+            condition_id={10}
           />
         </View>
         <View style={styles.rowContainer}>
@@ -87,12 +154,16 @@ const MedicalHistoryScreen = () => {
             isModal={isBloodPressureModal}
             setIsModal={setIsBloodPressureModal}
             drop={false}
+            history={history}
+            condition_id={11}
           />
           <ModalButtonComponent
             title="High Cholesterol"
             isModal={isCholesterolModal}
             setIsModal={setIsCholesterolModal}
             drop={false}
+            history={history}
+            condition_id={12}
           />
         </View>
         <View style={styles.rowContainer}>
@@ -101,6 +172,8 @@ const MedicalHistoryScreen = () => {
             isModal={isDiabetesModal}
             setIsModal={setIsDiabetesModal}
             drop={false}
+            history={history}
+            condition_id={13}
           />
           <ModalButtonComponent
             title="Cancer"
@@ -126,7 +199,7 @@ const MedicalHistoryScreen = () => {
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={() => {
-          goBack();
+          createFamilyMedicalHistory();
         }}
       />
     </TitleWithBackLayout>

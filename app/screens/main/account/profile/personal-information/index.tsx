@@ -4,6 +4,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Keyboard,
 } from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
@@ -100,6 +101,7 @@ const PersonalInformationScreen = () => {
   };
 
   const handleUpdateProfile = async () => {
+    Keyboard.dismiss();
     setGenderWarn(false);
     const gender = value == 'first' ? 1 : 0;
     const ic_number = authContext?.userData?.ic_number;
