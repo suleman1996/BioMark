@@ -45,6 +45,30 @@ function login(username: string, password: string) {
       });
   });
 }
+function federatedlogin(access_token: string, provider: string) {
+  return new Promise<LoginResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.FEDERATED_LOGIN, {
+        federated_identity: {
+          access_token,
+          provider,
+        },
+      })
+      .then(async (response) => {
+        try {
+          await setAuthAsyncStorage(response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('User login service error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: LoginErrorResponse) => {
+        logNow('User login service error block login.', err);
+        reject(err);
+      });
+  });
+}
 function deviceRegisterAction(device_token: string, device_type: string) {
   return new Promise<DeviceRegister>((resolve, reject) => {
     client
@@ -94,15 +118,21 @@ function forgotPassword(username: string) {
   });
 }
 
-function registerUser(username: string, password: string) {
+function registerUser(username: string, values, gender: any, date: string) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
     client
       .post(API_URLS.SIGN_UP, {
         registration: {
-          username,
-          password,
-          group: 'patient',
+          password: values.password,
           terms: true,
+          email_address: values.email,
+          first_name: values.fName,
+          last_name: values.lName,
+          gender_id: gender,
+          birth_date: date,
+          ic_number: values.IcPnum,
+          username: username,
+          group: 'patient',
         },
       })
       .then(async (response) => {
@@ -120,7 +150,38 @@ function registerUser(username: string, password: string) {
       });
   });
 }
-
+function createProfile(values, gender: any, date: string) {
+  console.log('values', values);
+  console.log('gender', gender);
+  console.log('date', date);
+  return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_PROFILE, {
+        profile: {
+          first_name: values.fName,
+          last_name: values.lName,
+          ic_number: values.IcPnum,
+          gender_id: gender,
+          birth_date: date,
+          email_address: values.email,
+          terms: true,
+        },
+      })
+      .then(async (response) => {
+        try {
+          logNow('create user success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('create user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: RegisterUserErrorResponse) => {
+        logNow('create user error response 2.', err);
+        reject(err);
+      });
+  });
+}
 function getUserContacts() {
   return new Promise<UserContacts>((resolve, reject) => {
     client
@@ -249,12 +310,14 @@ const updateProfile = (
 
 export const userService = {
   login,
+  federatedlogin,
   deviceRegisterAction,
   registerUser,
   logout,
   forgotPassword,
   getUserContacts,
   saveUserContacts,
+  createProfile,
   getUserProfile,
   sleeping,
   drinking,
