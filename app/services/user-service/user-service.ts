@@ -227,8 +227,6 @@ function saveUserContacts(email_address: string) {
 }
 
 async function logout() {
-  await resetAuthAsyncStorage();
-
   let uniqueId = DeviceInfo.getUniqueId();
 
   client
@@ -240,7 +238,8 @@ async function logout() {
     .then(async (response) => {
       try {
         logNow('response', response.data);
-        store.dispatch(logout());
+        await resetAuthAsyncStorage();
+        await store.dispatch(logout());
       } catch (e) {
         logNow('e', e);
       }
