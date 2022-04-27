@@ -28,4 +28,14 @@ export const GlobalStyles = {
   paddingHorizontal: {
     paddingHorizontal: widthToDp(4),
   },
+  bottomBtnWithShadow: {
+    marginTop: heightToDp(4),
+    paddingHorizontal: widthToDp(6),
+    paddingBottom: heightToDp(2),
+    backgroundColor: GlobalColors.white,
+    borderTopWidth: heightToDp(0.5),
+    borderTopColor: GlobalColors.gray,
+    paddingTop: heightToDp(2.5),
+    alignItems: 'center',
+  },
 };

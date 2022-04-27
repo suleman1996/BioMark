@@ -11,6 +11,7 @@ import {
   AUTH_ERR_LOG_IN,
   AUTH_ERR_LOG_OUT,
   AUTH_LOGGED_IN,
+  AUTH_LOGGED_IN_HAS_PROFILE,
   AUTH_LOGGING_IN,
   AUTH_LOGGING_OUT,
   AUTH_LOGOUT,
@@ -29,6 +30,12 @@ export const loggedIn = (data: any) => ({
   type: AUTH_LOGGED_IN,
   payload: data,
 });
+
+export const loggedInHasProfile = (data: boolean) => ({
+  type: AUTH_LOGGED_IN_HAS_PROFILE,
+  payload: data,
+});
+
 export const deviceReg = (data: any) => ({
   type: DEVICE_REG,
   payload: data,

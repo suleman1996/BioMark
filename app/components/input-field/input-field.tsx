@@ -3,6 +3,7 @@ import React from 'react';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   margin?: any;
@@ -14,6 +15,7 @@ type Props = {
   onBlur?: any;
   onEyePress?: any;
   eye?: any;
+  onFocus?: any;
 };
 
 export default function InputField(props: Props) {
@@ -24,6 +26,7 @@ export default function InputField(props: Props) {
       <View style={styles.inputRow}>
         {props.svg}
         <TextInput
+          onFocus={props.onFocus}
           placeholder={props.placeholder}
           placeholderTextColor={colors.placeHolder}
           value={props.value}
@@ -58,10 +61,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: 10,
   },
   textFieldStyle: {
-    fontSize: 15,
+    fontSize: responsiveFontSize(17),
     width: '100%',
     color: '#3D3D3D',
     fontFamily: fonts.regular,

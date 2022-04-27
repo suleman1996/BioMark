@@ -1,17 +1,17 @@
 import DeviceInfo from 'react-native-device-info';
-
-import { ErrorResponse } from 'types/ErrorResponse';
-import { UserContacts } from 'types/UserContacts';
+import { store } from 'store/store';
+import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
   ForgotPasswordErrorResponse,
   ForgotPasswordSuccessResponse,
 } from 'types/auth/ForgotPassword';
-import { LoginResponse, LoginErrorResponse } from 'types/auth/LoginResponse';
+import { LoginErrorResponse, LoginResponse } from 'types/auth/LoginResponse';
 import {
   RegisterUserErrorResponse,
   RegisterUserSuccessResponse,
 } from 'types/auth/RegisterUser';
-import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
+import { ErrorResponse } from 'types/ErrorResponse';
+import { UserContacts } from 'types/UserContacts';
 import { logNow } from 'utils/functions/log-binder';
 import {
   resetAuthAsyncStorage,
@@ -19,7 +19,6 @@ import {
 } from '../async-storage/auth-async-storage';
 import client from '../client';
 import { API_URLS } from '../url-constants';
-import { store } from 'store/store';
 
 function login(username: string, password: string) {
   return new Promise<LoginResponse>((resolve, reject) => {

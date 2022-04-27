@@ -7,12 +7,27 @@ import Lock from 'assets/svgs/lock';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 
-export default function PasswordChanged() {
+type Props = {
+  route: any;
+};
+
+export default function PasswordChanged(props: Props) {
+  const { route } = props;
+  /*eslint-disable */
+  const flag = route?.params?.flag;
   useEffect(() => {
     setTimeout(() => {
-      navigate(Nav_Screens.LoginScreen);
+      if (flag == 1) {
+        navigate(Nav_Screens.NestedAccountNavigator, {
+          screen: Nav_Screens.Settings,
+        });
+        return;
+      } else {
+        navigate(Nav_Screens.LoginScreen);
+      }
     }, 2000);
   }, []);
+  /*eslint-enable */
 
   return (
     <View style={styles.container}>
