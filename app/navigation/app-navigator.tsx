@@ -32,7 +32,13 @@ const AppNavigator = () => {
           />
         </>
       ) : (
-        <Stack.Screen name="CreateProfile" component={CreateProfile} />
+        <>
+          <Stack.Screen name="CreateProfile" component={CreateProfile} />
+          <Stack.Screen
+            name="BottomTabNavigator"
+            component={BottomTabNavigator}
+          />
+        </>
       )}
     </Stack.Navigator>
   );

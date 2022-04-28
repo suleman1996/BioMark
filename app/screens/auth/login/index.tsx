@@ -79,6 +79,9 @@ export default function Login() {
     });
 
     const { idToken } = await GoogleSignin.signIn();
+    const provider = 'google';
+    dispatch(reduxFederatedLogin(idToken, provider));
+
     const googleCrenditial = auth.GoogleAuthProvider.credential(idToken);
     const user_sign_in = auth().signInWithCredential(googleCrenditial);
     user_sign_in.then((re) => {
