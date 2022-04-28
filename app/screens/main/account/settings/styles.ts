@@ -6,6 +6,9 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 
 export const styles = StyleSheet.create({
+  container: {
+    paddingTop: heightToDp(1),
+  },
   menuItem: {
     flexDirection: 'row',
     width: '100%',

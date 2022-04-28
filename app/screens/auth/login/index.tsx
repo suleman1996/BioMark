@@ -111,11 +111,7 @@ export default function Login() {
         if (result.isCancelled) {
           console.log('Login cancelled');
         } else {
-          console.log(
-            'Login success with permissions: ' +
-              result.grantedPermissions.toString()
-          );
-          const data = await AccessToken.getCurrentAccessToken();
+          const data: any = await AccessToken.getCurrentAccessToken();
           getInfoFromToken(data?.accessToken);
           console.log('Facebook data', data);
           const provider = 'facebook';
