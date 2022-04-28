@@ -38,6 +38,10 @@ const AppNavigator = () => {
             name="BottomTabNavigator"
             component={BottomTabNavigator}
           />
+          <Stack.Screen
+            name={Nav_Screens.NestedAccountNavigator}
+            component={AccountNavigator}
+          />
         </>
       )}
     </Stack.Navigator>
