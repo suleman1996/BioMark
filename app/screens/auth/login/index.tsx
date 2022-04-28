@@ -50,12 +50,6 @@ export default function Login() {
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
 
-  GoogleSignin.configure({
-    webClientId:
-      '871137629206-muidhs147vquoqovf71scmu89ibsaq7s.apps.googleusercontent.com',
-    offlineAccess: false,
-  });
-
   useEffect(() => {
     if (selectCountryCode == '60') {
       setNumberCondition({ min: 8, max: 11 });
