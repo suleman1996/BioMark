@@ -20,6 +20,7 @@ import {
   USER_CONTACTS,
   MARKETING,
 } from './constants';
+import { resetAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 
 export const loggingIn = (logging: boolean) => ({
   type: AUTH_LOGGING_IN,
@@ -169,6 +170,7 @@ export const errorLogOut = (errorMessage: any) => ({
 export const logout =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     dispatch(loggingOut(true));
+    await resetAuthAsyncStorage();
     await userService
       .logout()
       .then(() => {
