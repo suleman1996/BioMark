@@ -1,3 +1,5 @@
+import { Linking } from 'react-native';
+
 import BioAboutIcon from 'components/svg/bio-about-icon';
 import BioAutoLogout from 'components/svg/bio-auto-logout';
 import BioDependent from 'components/svg/bio-dependent';
@@ -20,6 +22,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
+import Config from 'react-native-config';
 
 const AccountMenu = ({}) => {
   const dispatch = useDispatch();
@@ -27,6 +30,9 @@ const AccountMenu = ({}) => {
   const [isAutoLogout, setIsAutoLogout] = useState(false);
   const onToggleAutoLogout = () => {
     setIsAutoLogout(!isAutoLogout);
+  };
+  const OpenMessenger = () => {
+    Linking.openURL(Config.MESSENGER_URL);
   };
   return (
     <View style={styles.container}>
@@ -110,7 +116,10 @@ const AccountMenu = ({}) => {
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => OpenMessenger()}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioSupport width={5} height={5} />
