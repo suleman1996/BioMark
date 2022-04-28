@@ -34,6 +34,7 @@ import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import styles from './styles';
+import Config from 'react-native-config';
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -65,8 +66,7 @@ export default function Login() {
   const onGoogleLogin = async () => {
     GoogleSignin.signOut();
     GoogleSignin.configure({
-      webClientId:
-        '1078990823809-1s2m5rup1t61rmmiic4ma5ag847d17u1.apps.googleusercontent.com',
+      webClientId: Config.WEB_CLIENT_ID,
       offlineAccess: true,
     });
 
