@@ -34,8 +34,6 @@ import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import styles from './styles';
-import Config from 'react-native-config';
-console.log('API_URL', Config.API_URL);
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -79,6 +77,9 @@ export default function Login() {
     });
 
     const { idToken } = await GoogleSignin.signIn();
+    const provider = 'google';
+    dispatch(reduxFederatedLogin(idToken, provider));
+
     const googleCrenditial = auth.GoogleAuthProvider.credential(idToken);
     const user_sign_in = auth().signInWithCredential(googleCrenditial);
     user_sign_in.then((re) => {
