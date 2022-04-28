@@ -298,6 +298,13 @@ const Vaccination = (items: string | number) => {
     },
   });
 };
+
+// const Allergies = ()=>{
+//  return client.post(API_URLS.Allergies,{
+
+//  })
+// }
+
 const updateProfileAvatar = (pic: String) => {
   return client.post(API_URLS.Profile_Avatar, {
     profile: {
