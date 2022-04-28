@@ -10,7 +10,7 @@ import BioPolicies from 'components/svg/bio-policies';
 import BioSettings from 'components/svg/bio-settings';
 import BioSupport from 'components/svg/bio-support';
 import { Nav_Screens } from 'navigation/constants';
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Switch, TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -24,13 +24,8 @@ import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
 import Config from 'react-native-config';
 
-const AccountMenu = ({}) => {
+const AccountMenu = (props) => {
   const dispatch = useDispatch();
-
-  const [isAutoLogout, setIsAutoLogout] = useState(false);
-  const onToggleAutoLogout = () => {
-    setIsAutoLogout(!isAutoLogout);
-  };
   const OpenMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);
   };
@@ -175,7 +170,10 @@ const AccountMenu = ({}) => {
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => props.onToggleAutoLogout()}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioAutoLogout width={4} height={4} />
@@ -183,8 +181,8 @@ const AccountMenu = ({}) => {
           </View>
           <Switch
             color={GlobalColors.darkPrimary}
-            value={isAutoLogout}
-            onValueChange={onToggleAutoLogout}
+            value={props.logOutCheck}
+            //    onValueChange={()=>props.onToggleAutoLogout()}
           />
         </>
       </TouchableRipple>

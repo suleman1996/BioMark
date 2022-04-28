@@ -1,4 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
+import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
   ForgotPasswordErrorResponse,
@@ -220,7 +221,25 @@ function saveUserContacts(email_address: string) {
       });
   });
 }
-
+function autoLogout() {
+  return new Promise<AutoLogoutRes>((resolve, reject) => {
+    client
+      .get(API_URLS.AUTO_LOG_OUT)
+      .then(async (response) => {
+        try {
+          logNow('tes', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('e', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('err', err);
+        reject(err);
+      });
+  });
+}
 async function logout() {
   let uniqueId = DeviceInfo.getUniqueId();
 
@@ -325,6 +344,7 @@ export const userService = {
   federatedlogin,
   deviceRegisterAction,
   registerUser,
+  autoLogout,
   logout,
   forgotPassword,
   getUserContacts,
