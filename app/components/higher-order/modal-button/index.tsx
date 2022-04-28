@@ -33,11 +33,18 @@ const ModalButtonComponent = ({
     <Pressable
       onPress={() => {
         setIsModal(!isModal);
-        history.push({
-          condition_id: condition_id,
-          medical_type: 'family',
-          has_condition: true,
-        });
+        if (!isModal) {
+          history.push({
+            condition_id: condition_id,
+            medical_type: 'family',
+            has_condition: true,
+          });
+        } else {
+          history.splice(
+            history.map((object) => object.condition_id).indexOf(condition_id),
+            1
+          );
+        }
       }}
       style={[styles.container, bgColor]}
     >

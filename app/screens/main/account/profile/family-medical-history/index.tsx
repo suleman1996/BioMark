@@ -61,6 +61,40 @@ const MedicalHistoryScreen = () => {
           item.condition_id == 13 && setIsDiabetesModal(true)
         )
       );
+      heartDisease &&
+        history.push({
+          condition_id: 9,
+          medical_type: 'family',
+          has_condition: true,
+        });
+
+      isStroke &&
+        history.push({
+          condition_id: 10,
+          medical_type: 'family',
+          has_condition: true,
+        });
+
+      isBloodPressureModal &&
+        history.push({
+          condition_id: 11,
+          medical_type: 'family',
+          has_condition: true,
+        });
+
+      isCholesterolModal &&
+        history.push({
+          condition_id: 12,
+          medical_type: 'family',
+          has_condition: true,
+        });
+
+      isDiabetesModal &&
+        history.push({
+          condition_id: 13,
+          medical_type: 'family',
+          has_condition: true,
+        });
 
       setIsLoading(false);
     } catch (error) {
@@ -118,6 +152,8 @@ const MedicalHistoryScreen = () => {
 
   useEffect(() => {
     getFamilyMedicalHistory();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocus]);
 
   return (
