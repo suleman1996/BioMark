@@ -1,5 +1,4 @@
 import DeviceInfo from 'react-native-device-info';
-import { store } from 'store/store';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
   ForgotPasswordErrorResponse,
@@ -13,10 +12,7 @@ import {
 import { ErrorResponse } from 'types/ErrorResponse';
 import { UserContacts } from 'types/UserContacts';
 import { logNow } from 'utils/functions/log-binder';
-import {
-  resetAuthAsyncStorage,
-  setAuthAsyncStorage,
-} from '../async-storage/auth-async-storage';
+import { setAuthAsyncStorage } from '../async-storage/auth-async-storage';
 import client from '../client';
 import { API_URLS } from '../url-constants';
 
@@ -237,8 +233,8 @@ async function logout() {
     .then(async (response) => {
       try {
         logNow('response', response.data);
-        await resetAuthAsyncStorage();
-        await store.dispatch(logout());
+        // await resetAuthAsyncStorage();
+        // await store.dispatch(logout());
       } catch (e) {
         logNow('e', e);
       }
