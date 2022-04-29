@@ -1,43 +1,74 @@
-import { StyleSheet, Text, View, Pressable, FlatList } from 'react-native';
-import React, { useState } from 'react';
-
-import { GlobalStyles } from 'utils/theme/global-styles';
+import React from 'react';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalStyles } from 'utils/theme/global-styles';
 
 type Props = {
   options: any;
   label: string;
+  value: number;
+  onChange: any;
+  isTitleSelect?: boolean;
 };
 
-const BoxSelector = ({ options, label }: Props) => {
-  const [selected, setSelected] = useState('');
+const BoxSelector = ({
+  options,
+  label,
+  value,
+  onChange,
+  isTitleSelect,
+}: Props) => {
   const selectedStyles = { backgroundColor: GlobalColors.primary };
   const selectedTextStyle = { color: GlobalColors.white };
 
-  return (
-    <View style={styles.main}>
-      {label ? <Text style={styles.label}>{label}</Text> : null}
-      <FlatList
-        style={styles.container}
-        horizontal
-        data={options}
-        renderItem={({ item, index }) => (
-          <Pressable
-            onPress={() => setSelected(item)}
-            key={index}
-            style={[styles.button, selected == item ? selectedStyles : {}]}
-          >
-            <Text style={[selected == item ? selectedTextStyle : {}]}>
-              {item}
-            </Text>
-          </Pressable>
-        )}
-      />
-    </View>
-  );
+  if (isTitleSelect) {
+    return (
+      <View style={styles.main}>
+        {label ? <Text style={styles.label}>{label}</Text> : null}
+        <FlatList
+          style={styles.container}
+          horizontal
+          data={options}
+          renderItem={({ item, index }) => (
+            <Pressable
+              onPress={() => onChange(item.title)}
+              key={index}
+              style={[styles.button, value == item.title ? selectedStyles : {}]}
+            >
+              <Text style={[value == item.title ? selectedTextStyle : {}]}>
+                {item.title}
+              </Text>
+            </Pressable>
+          )}
+        />
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.main}>
+        {label ? <Text style={styles.label}>{label}</Text> : null}
+        <FlatList
+          style={styles.container}
+          horizontal
+          data={options}
+          renderItem={({ item, index }) => (
+            <Pressable
+              onPress={() => onChange(item.id)}
+              key={index}
+              style={[styles.button, value == item.id ? selectedStyles : {}]}
+            >
+              <Text style={[value == item.id ? selectedTextStyle : {}]}>
+                {item.title}
+              </Text>
+            </Pressable>
+          )}
+        />
+      </View>
+    );
+  }
 };
 
 export default BoxSelector;

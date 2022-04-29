@@ -2,9 +2,10 @@ import { API_URLS } from 'services/url-constants';
 import { ErrorResponse } from 'types/ErrorResponse';
 import client from '../client';
 import { logNow } from 'utils/functions/log-binder';
+import { DependentData } from 'types/api/dependent';
 
 function getAllDependents() {
-  return new Promise<any>((resolve, reject) => {
+  return new Promise<Array<DependentData>>((resolve, reject) => {
     client
       .get(API_URLS.DEPENDENTS)
       .then(async (response) => {

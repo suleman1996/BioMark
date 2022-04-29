@@ -5,7 +5,8 @@ import InputField from 'components/input-field/input-field';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import BioDangerWhite from 'components/svg/bio-danger-white';
 
 type Props = {
   label: string;
@@ -14,6 +15,7 @@ type Props = {
   onChange: any;
   value: string;
   onFocus?: any;
+  error?: any;
 };
 
 const InputWithLabel = ({
@@ -23,6 +25,7 @@ const InputWithLabel = ({
   labelFontSize,
   value,
   onFocus,
+  error,
 }: Props) => {
   const ifLabelSize = labelFontSize
     ? { fontSize: responsiveFontSize(labelFontSize) }
@@ -37,6 +40,12 @@ const InputWithLabel = ({
         svg={undefined}
         value={value}
       />
+      {error ? (
+        <View style={styles.errorContainer}>
+          <BioDangerWhite width={3.5} height={3.5} />
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -51,5 +60,21 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(22),
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
+  },
+  errorContainer: {
+    width: '100%',
+    paddingVertical: heightToDp(0.3),
+    paddingHorizontal: widthToDp(4),
+    backgroundColor: GlobalColors.red,
+    borderBottomLeftRadius: widthToDp(2),
+    borderBottomRightRadius: widthToDp(2),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  errorText: {
+    color: GlobalColors.white,
+    fontFamily: GlobalFonts.light,
+    fontSize: responsiveFontSize(14),
+    paddingLeft: widthToDp(3),
   },
 });

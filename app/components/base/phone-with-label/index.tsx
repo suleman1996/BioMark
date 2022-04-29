@@ -14,6 +14,7 @@ type Props = {
   disabled: boolean;
   number: any;
   country: any;
+  setPhoneNumber: any;
 };
 
 const PhoneNumberWithLabel = ({
@@ -21,12 +22,14 @@ const PhoneNumberWithLabel = ({
   placeholder,
   disabled,
   country,
+  setPhoneNumber,
+  number,
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectCountryCode, setSelectCountryCode] = useState('PK');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [countryCode, setCountryCode] = useState('PK');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  // const [phoneNumber, setPhoneNumber] = useState('');
 
   return (
     <View style={styles.container}>
@@ -36,7 +39,7 @@ const PhoneNumberWithLabel = ({
         <PhoneNumber
           countryCode={country}
           setCountryCode={setCountryCode}
-          phoneNumber={phoneNumber}
+          phoneNumber={number}
           setPhoneNumber={setPhoneNumber}
           setSelectCountryCode={setSelectCountryCode}
           width={'100%'}

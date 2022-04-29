@@ -15,34 +15,35 @@ import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   label: string;
+  options: any;
+  onChange: any;
 };
 
-const RelationMenu = ({ label }: Props) => {
+const RelationMenu = ({ label, options, onChange }: Props) => {
   const menuRef = useRef<any>();
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState(0);
 
   return (
     <View style={styles.main}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
-      <Menu ref={menuRef} onSelect={(value) => setSelected(value)}>
+      <Menu
+        ref={menuRef}
+        onSelect={(value) => {
+          setSelected(value);
+          onChange(value);
+        }}
+      >
         <MenuTrigger
           style={styles.input}
-          text={selected ? selected : 'Select'}
+          text={options[selected - 1]?.name}
           placeholder="Select"
         >
           <Text>{selected}</Text>
         </MenuTrigger>
         <MenuOptions optionsContainerStyle={styles.popupMenu}>
-          <MenuOption value="Spouse" text="Spouse" />
-          <MenuOption value="Child" text="Child" />
-          <MenuOption value="Sibiling" text="Sibiling" />
-          <MenuOption
-            value="Parents / Parent's-in-law"
-            text="Parents / Parent's-in-law"
-          />
-          <MenuOption value="Grandparents" text="Grandparents" />
-          <MenuOption value="Guardian" text="Guardian" />
-          <MenuOption value="Others" text="Others" />
+          {options?.map((item: any, index: number) => (
+            <MenuOption key={index} value={item.id} text={item?.name} />
+          ))}
         </MenuOptions>
       </Menu>
     </View>
