@@ -586,17 +586,18 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 60.10.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.biomark;
+				PRODUCT_BUNDLE_IDENTIFIER = com.biomark.patientios;
 				PRODUCT_NAME = BioMark;
 				SWIFT_OBJC_BRIDGING_HEADER = "BioMark-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -615,16 +616,17 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 60.10.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.biomark;
+				PRODUCT_BUNDLE_IDENTIFIER = com.biomark.patientios;
 				PRODUCT_NAME = BioMark;
 				SWIFT_OBJC_BRIDGING_HEADER = "BioMark-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
