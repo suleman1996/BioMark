@@ -1,41 +1,92 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Images from '../../../../assets/images/images';
-import TitleWithSearchBarLayout from '../../../../components/layouts/titleWithSearchBar';
-import AccountMenu from '../../../../components/ui/accountMenu';
-import { Nav_Screens } from '../../../../navigation/constants';
-import { navigate } from '../../../../services/navRef';
-import {
-  heightToDp,
-  widthToDp
-} from '../../../../utils/functions/responsiveDimentions';
-import { responsiveFontSize } from '../../../../utils/functions/responsiveText';
-import { GlobalFonts } from '../../../../utils/theme/fonts';
-import { GlobalColors } from '../../../../utils/theme/globalColors';
 
+import Images from 'assets/images';
+import TitleWithSearchBarLayout from 'components/layouts/title-with-search-bar/index';
+import AccountMenu from 'components/ui/account-menu';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import AuthContext from 'utils/auth-context';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { userService } from 'services/user-service/user-service';
+import { logNow } from 'utils/functions/log-binder';
 
-type Props = {
+const AccountScreen = () => {
+  const authContext = useContext(AuthContext);
 
-}
+  const [profileLoader, setProfileLoader] = React.useState(false);
+  const [autoLogoutCheck, setAutoLogoutCheck] = React.useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let logoutCheck = await AsyncStorage.getItem('autoLogoutCheck');
+      setAutoLogoutCheck(logoutCheck);
+    };
+    fetchData().catch(console.error);
+  }, []);
 
-const AccountScreen = (props: Props) => {
+  const onToggleAutoLogout = async () => {
+    await autoLogout();
+  };
+  const autoLogout = async () => {
+    userService
+      .autoLogout()
+      .then(async (res) => {
+        logNow('signup res', res);
+        setAutoLogoutCheck(res?.auto_logout);
+        await AsyncStorage.setItem(
+          'autoLogoutCheck',
+          JSON.stringify(res?.auto_logout)
+        );
+      })
+      .catch((e) => {
+        logNow('erro', e);
+      })
+      .finally(() => {});
+  };
   return (
     <>
       <TitleWithSearchBarLayout title={'Account'}>
         <View style={styles.content}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Image source={Images.avatar} style={styles.image} />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              width: widthToDp(100),
+              paddingHorizontal: widthToDp(6),
+            }}
+          >
+            <View style={[styles.image, { overflow: 'hidden' }]}>
+              <Image
+                onLoadStart={() => setProfileLoader(true)}
+                onLoadEnd={() => setProfileLoader(false)}
+                source={
+                  !authContext?.userData?.picture
+                    ? Images.avatar
+                    : { uri: authContext?.userData?.picture }
+                }
+                style={styles.image}
+              />
+              <ActivityIndicator fontSize={20} visible={profileLoader} />
+            </View>
             <View style={styles.profile}>
-              <Text style={styles.name}>Gerold Mordeno</Text>
+              <Text style={styles.name}>
+                {authContext?.userData?.patient_name}
+              </Text>
               <Pressable
                 onPress={() =>
                   navigate(Nav_Screens.NestedAccountNavigator, {
                     screen: Nav_Screens.Edit_Profile,
                   })
                 }
-                style={{flexDirection: 'row', alignItems: 'center'}}>
+                style={{ flexDirection: 'row', alignItems: 'center' }}
+              >
                 <MaterialCommunityIcons
                   name="pencil"
                   size={responsiveFontSize(25)}
@@ -46,7 +97,10 @@ const AccountScreen = (props: Props) => {
             </View>
           </View>
           <View style={styles.menuList}>
-            <AccountMenu />
+            <AccountMenu
+              logOutCheck={autoLogoutCheck}
+              onToggleAutoLogout={onToggleAutoLogout}
+            />
           </View>
         </View>
       </TitleWithSearchBarLayout>
@@ -60,7 +114,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: heightToDp(5),
     justifyContent: 'center',
-    paddingBottom: heightToDp(20)
+    paddingBottom: heightToDp(10),
+    backgroundColor: GlobalColors.white,
   },
   image: {
     width: widthToDp(25),
@@ -83,7 +138,7 @@ const styles = StyleSheet.create({
   },
   menuList: {
     paddingTop: widthToDp(7),
-    marginBottom: heightToDp(7)
+    marginBottom: heightToDp(7),
   },
 });
 

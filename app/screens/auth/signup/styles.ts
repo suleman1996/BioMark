@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 const styles = StyleSheet.create({
   signupNav: {
@@ -34,8 +35,8 @@ const styles = StyleSheet.create({
     stepStrokeWidth: 0,
     stepIndicatorSize: 40,
     currentStepIndicatorSize: 40,
-    stepIndicatorLabelFontSize: 20,
-    currentStepIndicatorLabelFontSize: 20,
+    stepIndicatorLabelFontSize: 15,
+    currentStepIndicatorLabelFontSize: 15,
     stepStrokeCurrentColor: colors.blue,
     stepIndicatorCurrentColor: colors.blue,
     stepIndicatorLabelCurrentColor: '#FFFFFF',
@@ -66,28 +67,21 @@ const styles = StyleSheet.create({
   inputLablel: {
     marginHorizontal: 20,
     marginTop: 20,
-    fontFamily: fonts.extraBold,
+    fontFamily: fonts.semiBold,
     color: colors.heading,
     fontSize: 15,
   },
   ChoiceBtnDOB: {
-    // flexDirection: 'row',
-    // height: 50,
     width: '100%',
-    // backgroundColor: 'yellow',
     alignItems: 'center',
     paddingVertical: 10,
   },
   aiContainer: {
-    // flex: 1,
-    // width: '100%',
     borderRadius: 8,
     backgroundColor: colors.whiteColor,
     marginHorizontal: 5,
-    // borderWidth: 1,
     borderColor: 'grey',
     paddingBottom: 15,
-    // elevation: 6,
     marginTop: 20,
   },
   checkbox: {
@@ -95,17 +89,16 @@ const styles = StyleSheet.create({
   },
   tcText: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: 30,
   },
   tcTextStyle: {
-    fontSize: 18,
+    fontSize: 17,
     marginTop: 20,
-    // marginHorizontal: 10,
-    // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
+    color: colors.black,
   },
   errorMessage: {
     fontFamily: fonts.regular,
@@ -116,12 +109,22 @@ const styles = StyleSheet.create({
   radioButton: {
     height: 40,
     width: 100,
-
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     marginRight: 10,
-    borderWidth: 0.5,
+    marginLeft: 5,
+    marginVertical: 5,
+    // borderWidth: 0.5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 4,
   },
   radioText: {
     fontFamily: fonts.regular,

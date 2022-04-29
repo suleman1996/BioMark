@@ -1,13 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   margin?: any;
@@ -18,22 +14,24 @@ type Props = {
   onChange: any;
   onBlur?: any;
   onEyePress?: any;
-  eye?: any
+  eye?: any;
+  onFocus?: any;
 };
 
-export default function inputField(props: Props) {
+export default function InputField(props: Props) {
   return (
     <View
-      style={[styles.loginInputContainer, {marginHorizontal: props.margin}]}>
+      style={[styles.loginInputContainer, { marginHorizontal: props.margin }]}
+    >
       <View style={styles.inputRow}>
         {props.svg}
         <TextInput
+          onFocus={props.onFocus}
           placeholder={props.placeholder}
           placeholderTextColor={colors.placeHolder}
           value={props.value}
           style={styles.textFieldStyle}
           secureTextEntry={props.secureTextEntry}
-          //   keyboardType={'email-address'}
           onChangeText={props.onChange}
           onBlur={props.onBlur}
         />
@@ -63,14 +61,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 20,
-    // height:hp(5)
+    marginHorizontal: 10,
   },
   textFieldStyle: {
-    fontSize: 15,
+    fontSize: responsiveFontSize(17),
     width: '100%',
     color: '#3D3D3D',
-    // marginHorizontal: 10,
     fontFamily: fonts.regular,
   },
 });

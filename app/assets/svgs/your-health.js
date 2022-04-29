@@ -1,11 +1,11 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
 function SvgComponent(props) {
   return (
     <Svg
-      width={35}
-      height={35}
+      width={30}
+      height={30}
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ function SvgComponent(props) {
         fill="#1B96D8"
       />
     </Svg>
-  )
+  );
 }
 
-export default SvgComponent
+export default SvgComponent;

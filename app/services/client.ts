@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React from 'react';
+import Config from 'react-native-config';
+
+import { getAuthAsyncStorage } from './async-storage/auth-async-storage';
 
 const request = axios.create({
   // baseURL: 'https://bm-qa-api.biomarking.com',  prod
-  baseURL: 'https://bm-dev-api.biomarking.com/',
+  baseURL: Config.BASE_URL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -43,14 +45,17 @@ const onError = function (error: any) {
 request.interceptors.response.use(onSuccess, onError);
 
 request.interceptors.request.use(
-  async config => {
+  async (config) => {
     // const user = await authStorage.getToken();
+    const { userToken } = await getAuthAsyncStorage();
+    // logNow('its userToken', userToken);
     // config.headers['clientid'] = '1620112254693';
     config.headers['x-biomark-group'] = 'patient';
-    config.headers['Authorization'] = 'user';
+    config.headers['x-biomark-token'] = `${userToken}`;
+    config.headers.Authorization = 'user';
 
     return config;
   },
-  error => Promise.reject(error),
+  (error) => Promise.reject(error)
 );
 export default request;

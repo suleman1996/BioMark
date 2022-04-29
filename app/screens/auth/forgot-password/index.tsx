@@ -1,36 +1,34 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import {
-  Keyboard, Text, TouchableWithoutFeedback, View
-} from 'react-native';
+import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
-import Button from '../../../components/button/button';
-import Header from '../../../components/header/header';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { forgotPassword } from '../../../services/auth-service';
-import { navigate } from '../../../services/navRef';
-import { userService } from '../../../services/user-service/userService';
-import { ForgotPasswordErrorResponse } from '../../../types/auth/ForgotPassword';
-import { logNow } from '../../../utils/functions/logBinder';
+
+import Button from 'components/button/button';
+import Header from 'components/header';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import PhoneNumber from 'components/phone-number';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
+import { ForgotPasswordErrorResponse } from 'types/auth/ForgotPassword';
+import { logNow } from 'utils/functions/log-binder';
 import styles from './styles';
 
 export default function ForgotPassword() {
-  const navigations = useNavigation();
-
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [loading, setLoading] = useState(false);
-  const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
 
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
-    else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
-    else if (selectCountryCode == '65') setNumberCondition({min: 8, max: 8});
-    else {
-      setNumberCondition({min: 4, max: 13});
+    if (selectCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectCountryCode == '63') {
+      setNumberCondition({ min: 10, max: 10 });
+    } else if (selectCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
+      setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
 
@@ -38,55 +36,28 @@ export default function ForgotPassword() {
     setLoading(true);
     Keyboard.dismiss();
     const username: string = `+${selectCountryCode}${phoneNumber}`;
-    userService.forgotPassword(username).then(res => {
-      navigate(Nav_Screens.PasswordOTPScreen, {phone: username});
-    }).catch((err: ForgotPasswordErrorResponse) => {
-      logNow(err)
-      if(err.errMsg.status == 500){
-        showMessage({
-          message: 'Please try again later',
-          type: 'danger',
-        });
-      }else{
-        showMessage({
-          message: err.errMsg.data.message,
-          type: 'danger',
-        });
-      }
-    }).finally(() => {
-      setLoading(false);
-    })
-    // try {
-    //   setLoading(true);
-    //   Keyboard.dismiss();
-    //   const result = await forgotPassword({
-    //     password: {username: `+${selectCountryCode}${phoneNumber}`},
-    //   });
-    //   console.log('Forgot Password Success API ', result.data);
-    //   navigations.navigate('PasswordOTP', {
-    //     phone: `+${selectCountryCode}${phoneNumber}`,
-    //   });
-    //   setLoading(false);
-    // } catch (error) {
-    //   setLoading(false);
-    //   console.log(error.errMsg);
-    //   if (error.errMsg.status == '500') {
-    //     showMessage({
-    //       message: 'Account not found',
-    //       type: 'danger',
-    //     });
-    //   } else if (error.errMsg.status == false) {
-    //     showMessage({
-    //       message: error.errMsg.data.message,
-    //       type: 'danger',
-    //     });
-    //   } else {
-    //     showMessage({
-    //       message: error.errMsg,
-    //       type: 'danger',
-    //     });
-    //   }
-    // }
+    userService
+      .forgotPassword(username)
+      .then(() => {
+        navigate(Nav_Screens.PasswordOTPScreen, { phone: username });
+      })
+      .catch((err: ForgotPasswordErrorResponse) => {
+        logNow(err);
+        if (err.errMsg.status == 500) {
+          showMessage({
+            message: 'User not found',
+            type: 'danger',
+          });
+        } else {
+          showMessage({
+            message: err.errMsg.data.message,
+            type: 'danger',
+          });
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (

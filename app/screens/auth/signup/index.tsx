@@ -2,25 +2,31 @@ import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import {
-  FlatList, Keyboard, ScrollView, Text, TouchableOpacity, View
+  FlatList,
+  Keyboard,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
-import colors from '../../../assets/colors/colors';
-import BackIcon from '../../../assets/svgs/back';
-import Button from '../../../components/button/button';
-import CheckBox from '../../../components/check-box/check-box';
-import DatePicker from '../../../components/date-picker/date-picker';
-import TextInput from '../../../components/input-field/text-input';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { signup } from '../../../services/auth-service';
-import { navigate } from '../../../services/navRef';
-import {userService} from '../../../services/user-service/userService';
-import { RegisterUserErrorResponse } from '../../../types/auth/RegisterUser';
-import { logNow } from '../../../utils/functions/logBinder';
+import moment from 'moment';
+
+import colors from 'assets/colors';
+import BackIcon from 'assets/svgs/back';
+import Button from 'components/button/button';
+import CheckBox from 'components/checkbox';
+import DatePicker from 'components/date-picker';
+import TextInput from 'components/input-field/text-input';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import PhoneNumber from 'components/phone-number';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
+import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
+import { logNow } from 'utils/functions/log-binder';
 
 import styles from './styles';
 
@@ -36,51 +42,59 @@ export default function Signup() {
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState(''); //International Phone Picker
   const [selectCountryCode, setSelectCountryCode] = useState('60');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
-    {id: 0, sex: 'Male'},
-    {id: 1, sex: 'Female'},
-    {id: 2, sex: 'Others'},
+    { id: 0, sex: 'Male' },
+    { id: 1, sex: 'Female' },
+    { id: 2, sex: 'Others' },
   ]);
   const [selectedGender, setSelectedGender] = useState('');
-  const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
   const [checked, setChecked] = React.useState(false);
+  const [date, setDate] = useState(new Date());
+  const [isPickerShow, setIsPickerShow] = useState(false);
 
   //fuctions
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
-    else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
-    else if (selectCountryCode == '65') setNumberCondition({min: 8, max: 8});
-    else {
-      setNumberCondition({min: 4, max: 13});
+    if (selectCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectCountryCode == '63') {
+      setNumberCondition({ min: 10, max: 10 });
+    } else if (selectCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
+      setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
 
-  const signupApi = async (password: string) => {
-     setLoading(true);
-     Keyboard.dismiss();
-     const username = `+${selectCountryCode}${phoneNumber}`;
-     userService
-       .registerUser(username, password)
-       .then(res => {
-         logNow('signup res', res);
-         navigate(Nav_Screens.SignupVerificationScreen, {username, password});
-       })
-       .catch((err: RegisterUserErrorResponse) => {
-         logNow('error signup', err.errMsg.data.message);
-          showMessage({
+  const signupApi = async (values: string) => {
+    // setLoading(true);
+    Keyboard.dismiss();
+    const username = `+${selectCountryCode}${phoneNumber}`;
+    const newDate = moment(date).format('YYYY-MM-DD');
+    const password = values.password;
+    userService
+      .registerUser(username, values, selectedGender.id, newDate)
+      .then((res) => {
+        logNow('signup res', res);
+        navigate(Nav_Screens.SignupVerificationScreen, { username, password });
+      })
+      .catch((err: RegisterUserErrorResponse) => {
+        logNow('error signup', err.errMsg.data.message);
+        showMessage({
           message: err?.errMsg.data.message || 'Please try again later',
           type: 'danger',
         });
-       })
-       .finally(() => {
-         setLoading(false);
-       });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
-  const handleSignup = async ({password}: {password: string}) => {
+
+  const handleSignup = async (values) => {
     if (phoneNumber == '' || gender == '') {
     } else if (checked == true) {
-      console.log('trye');
-      signupApi(password);
+      signupApi(values);
     } else {
       showMessage({
         message: 'Kindly accept terms and condition',
@@ -89,26 +103,30 @@ export default function Signup() {
     }
   };
 
-  const RenderRadio = ({item}) => (
+  const RenderRadio = ({ item }) => (
     <TouchableOpacity
       onPress={() => setSelectedGender(item)}
       style={[
         styles.radioButton,
         {
           backgroundColor:
-            item.id === selectedGender.id ? colors.blue : colors.whiteColor,
+            item.id === selectedGender.id ? colors.heading : colors.whiteColor,
           borderColor:
-            item.id === selectedGender.id ? colors.blue : colors.placeHolder,
+            item.id === selectedGender.id ? colors.heading : colors.placeHolder,
         },
-      ]}>
+      ]}
+    >
       <Text
         style={
           (styles.radioText,
           {
             color:
-              item.id === selectedGender.id ? colors.whiteColor : colors.blue,
+              item.id === selectedGender.id
+                ? colors.whiteColor
+                : colors.heading,
           })
-        }>
+        }
+      >
         {item.sex}
       </Text>
     </TouchableOpacity>
@@ -119,13 +137,8 @@ export default function Signup() {
 
     lName: Yup.string().required('Please provide your last name'),
 
-    IcPnum: Yup.string()
-      .required('Please type your IC Number')
-      .min(9, 'Invalid.'),
-
-    email: Yup.string()
-      .email('invalid Email.')
-      .required('Please type your e-mail'),
+    IcPnum: Yup.string(),
+    email: Yup.string(),
 
     password: Yup.string().required('Please type your new password').min(8),
   });
@@ -155,9 +168,10 @@ export default function Signup() {
             email: '',
             password: '',
           }}
-          onSubmit={handleSignup}
-          validationSchema={ResetPassSchema}>
-          {({handleChange, handleSubmit, values, errors}) => (
+          onSubmit={(values) => handleSignup(values)}
+          validationSchema={ResetPassSchema}
+        >
+          {({ handleChange, handleSubmit, errors, isValid }) => (
             <>
               <View style={styles.biContainer}>
                 <Text style={styles.heading}>Basic Information</Text>
@@ -170,7 +184,7 @@ export default function Signup() {
                 {errors.fName && (
                   <Text style={styles.errorMessage}>{errors.fName}</Text>
                 )}
-                <Text style={[styles.inputLablel, {marginTop: 20}]}>
+                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
                   Last Name
                 </Text>
                 <TextInput
@@ -186,7 +200,7 @@ export default function Signup() {
                   <FlatList
                     data={gender}
                     renderItem={RenderRadio}
-                    keyExtractor={item => item.id}
+                    keyExtractor={(item) => item.id}
                     horizontal
                   />
                 </View>
@@ -194,9 +208,14 @@ export default function Signup() {
                   <Text style={styles.errorMessage}>Please select gender</Text>
                 )}
                 <Text style={styles.inputLablel}>Date of Birth</Text>
-                <DatePicker />
+                <DatePicker
+                  isPickerShow={isPickerShow}
+                  setIsPickerShow={setIsPickerShow}
+                  date={date}
+                  setDate={setDate}
+                />
 
-                <Text style={[styles.inputLablel, {marginTop: 20}]}>
+                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
                   Identity Card/Passport Number
                 </Text>
                 <TextInput
@@ -204,9 +223,6 @@ export default function Signup() {
                   onChange={handleChange('IcPnum')}
                   margin={20}
                 />
-                {errors.IcPnum && (
-                  <Text style={styles.errorMessage}>{errors.IcPnum}</Text>
-                )}
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
 
@@ -234,17 +250,14 @@ export default function Signup() {
                     placeholder="E.g. Sample@email.com"
                     onChange={handleChange('email')}
                     margin={20}
-                    Keyboardtype="email-address"
+                    keyboardType="email-address"
                   />
-                  {errors.email && (
-                    <Text style={styles.errorMessage}>{errors.email}</Text>
-                  )}
 
                   <Text style={styles.inputLablel}>Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."
                     secureTextEntry={hidePassword}
-                    eye={!hidePassword ? 'eye-off' : 'eye'}
+                    eye={!hidePassword ? 'eye' : 'eye-off'}
                     onEyePress={() => setHidePassword(!hidePassword)}
                     onChange={handleChange('password')}
                     margin={20}
@@ -255,33 +268,35 @@ export default function Signup() {
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
-                  <TouchableOpacity>
-                    <Text style={styles.tcTextStyle}>
-                      <Text>I accept the </Text>
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}>
-                        terms and condition
-                      </Text>
-                      <Text> and the </Text>
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}>
-                        privacy policy.
-                      </Text>
+                  {/* <TouchableOpacity> */}
+                  <Text style={styles.tcTextStyle}>
+                    <Text>I accept the </Text>
+                    <Text
+                      style={{
+                        color: colors.blue,
+                        fontSize: 17,
+                        textDecorationLine: 'underline',
+                      }}
+                    >
+                      terms and condition
                     </Text>
-                  </TouchableOpacity>
+                    <Text> and the </Text>
+                    <Text
+                      style={{
+                        color: colors.blue,
+                        fontSize: 17,
+                        textDecorationLine: 'underline',
+                      }}
+                    >
+                      privacy policy.
+                    </Text>
+                  </Text>
+                  {/* </TouchableOpacity> */}
                 </View>
                 <TouchableOpacity>
                   <Button
-                    disabled={false}
                     title="Continue"
+                    disabled={!isValid || phoneNumber.length < 8 ? true : false}
                     onPress={() => handleSubmit()}
                   />
                 </TouchableOpacity>

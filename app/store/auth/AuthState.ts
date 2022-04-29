@@ -9,4 +9,15 @@ export class AuthState {
   hasProfile = false;
   expiresIin = 300000;
   message = null;
+  userContacts = {
+    mobile: '',
+    email_address: '',
+  };
+  marketing = {
+    enable: false,
+  };
+  facebookLoginData = {
+    fname: '',
+    lname: '',
+  };
 }

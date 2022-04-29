@@ -1,27 +1,24 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import styles from './styles';
-import Button from '../../../components/button/button';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
-import BackIcon from '../../../assets/svgs/back';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Platform } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
+import { useDispatch } from 'react-redux';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useState, useEffect, useRef } from 'react';
+import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
-import OtpInput from '../../../components/otp/otpInput';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import {
-  resendAccountCode,
-  signupAccountConfirm,
-} from '../../../services/auth-service';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+
+import styles from './styles';
+import Button from 'components/button/button';
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import BackIcon from 'assets/svgs/back';
+import OtpInput from 'components/otp/otp-input';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
+import { reduxDeviceRegister } from 'store/auth/auth-actions';
 
 export default function SignupVerification() {
+  const dispatch = useDispatch();
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
 
   let initialMinutes = 1;
@@ -60,12 +57,11 @@ export default function SignupVerification() {
     setMinutes(initialMinutes);
     try {
       setLoading(true);
-      const result = await resendAccountCode({
+      await resendAccountCode({
         confirmation: {
-          username: route?.params?.useName,
+          username: route?.params?.username,
         },
       });
-      console.log('success resend account code ', result.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -92,19 +88,19 @@ export default function SignupVerification() {
   const handleSignUP = async () => {
     try {
       setLoading(true);
-      const result = await signupAccountConfirm({
+      await signupAccountConfirm({
         confirmation: {
-          username: route?.params?.useName,
+          username: route?.params?.username,
           password: route?.params?.password,
           code: code,
         },
       });
-      console.log('Signup confirmaton ', result.data);
+      let uniqueId = DeviceInfo.getUniqueId();
+      dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
       navigations.navigate('Confirmation');
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error.errMsg);
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Invalid Code',
@@ -112,7 +108,7 @@ export default function SignupVerification() {
         });
       } else if (error.errMsg.status == false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: error.errMsg.data.message,
           type: 'danger',
         });
       } else {
@@ -127,7 +123,7 @@ export default function SignupVerification() {
   return (
     <>
       <ActivityIndicator visible={loading} />
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <View style={styles.signupNav}>
           <View style={styles.csNav}>
             <BackIcon onPress={() => navigations.goBack()} />
@@ -142,14 +138,14 @@ export default function SignupVerification() {
         </View>
 
         <View style={styles.OTPContainer}>
-          <ScrollView style={{marginBottom: 40}}>
+          <ScrollView style={{ marginBottom: 40 }}>
             <View>
               <Text style={styles.heading}>Enter your OTP Code</Text>
               <Text style={styles.upperText}>
                 You will receive a verification code with the mobile number you
                 have provided. Check your phone and enter the OTP code below.
               </Text>
-              <View style={{marginTop: 30, height: 50}}>
+              <View style={{ marginTop: 30, height: 50 }}>
                 <OtpInput
                   code={code}
                   setCode={setCode}
@@ -164,7 +160,8 @@ export default function SignupVerification() {
                 onPress={() => {
                   resendOTP();
                 }}
-                style={{marginTop: 30}}>
+                style={{ marginTop: 30 }}
+              >
                 <Text
                   style={{
                     textAlign: 'center',
@@ -172,9 +169,10 @@ export default function SignupVerification() {
                     fontSize: 15,
                     // marginBottom: 170,
                     fontFamily: fonts.regular,
-                  }}>
+                  }}
+                >
                   <Text>Not received? </Text>
-                  <Text style={{color: colors.blue}}>
+                  <Text style={{ color: colors.blue }}>
                     Resend OTP Code {minutes}:
                     {seconds < 10 ? `0${seconds}` : seconds}
                   </Text>
@@ -193,7 +191,8 @@ export default function SignupVerification() {
                       color: colors.blue,
                       fontSize: 15,
                       fontFamily: fonts.bold,
-                    }}>
+                    }}
+                  >
                     contact us
                   </Text>
                 </Text>

@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 const styles = StyleSheet.create({
   signupNav: {
@@ -14,7 +15,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   csNav: {
@@ -34,8 +34,6 @@ const styles = StyleSheet.create({
     stepStrokeWidth: 0,
     stepIndicatorSize: 40,
     currentStepIndicatorSize: 40,
-    stepIndicatorLabelFontSize: 20,
-    currentStepIndicatorLabelFontSize: 20,
     stepIndicatorLabelFontSize: 20,
     currentStepIndicatorLabelFontSize: 20,
     stepStrokeCurrentColor: colors.blue,
@@ -60,7 +58,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     elevation: 6,
     marginBottom: 10,
-    // borderWidth: 1,
   },
   womanIcon: {
     alignSelf: 'center',
@@ -80,7 +77,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     lineHeight: 20,
     color: 'black',
-    // borderWidth: 2,
     fontFamily: fonts.regular,
     textAlign: 'center',
     marginBottom: 190,

@@ -1,32 +1,34 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { TextInput } from 'react-native-paper';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useRef } from 'react';
-import { GlobalFonts } from '../../../utils/theme/fonts';
-import { GlobalColors } from '../../../utils/theme/globalColors';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { responsiveFontSize } from '../../../utils/functions/responsiveText';
-import InputField from '../../input-field/input-field'
-import colors from '../../../assets/colors/colors';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import colors from 'assets/colors';
 
 type Props = {
-  label: string,
-  placeholder: string,
-  height: number| string,
-  textAlign: string|number,
-}
+  label: string;
+  placeholder: string;
+  height: number | string;
+  textAlign: string | number;
+  onChangeText: (text: string) => void;
+};
 
 const HeightChooserComponent = ({
   label,
   placeholder,
   height,
   textAlign,
+  onChangeText,
 }: Props) => {
   const menuRef = useRef<any>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [value, setValue] = useState(0);
-  const [selectedType, setSelectedType] = useState(1);
+  const [selectedType, setSelectedType] = useState(2);
 
   var otherStyle = [];
   if (height) {
@@ -35,9 +37,7 @@ const HeightChooserComponent = ({
   if (textAlign) {
     otherStyle.push({ textAlign: textAlign });
   }
-  const convertedCentoFeet = (values = 30) => {
-    setValue(values);
-  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -46,10 +46,9 @@ const HeightChooserComponent = ({
           placeholder={placeholder}
           placeholderTextColor={colors.placeHolder}
           style={[styles.textFieldStyle, otherStyle]}
-          //   keyboardType={'email-address'}
           onChangeText={onChangeText}
           value={value}
-          autoFocus={true}
+          autoFocus={false}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           borderBottomWidth={0}
@@ -61,7 +60,8 @@ const HeightChooserComponent = ({
                 color: GlobalColors.primary,
                 fontFamily: GlobalFonts.regular,
                 fontSize: responsiveFontSize(20),
-              }}>
+              }}
+            >
               {selectedType == 1 ? 'ft/in' : 'cm'}
             </Text>
 
@@ -80,7 +80,8 @@ const HeightChooserComponent = ({
               style={[
                 styles.singleMenuItem,
                 selectedType == 1 ? { backgroundColor: GlobalColors.gray } : {},
-              ]}>
+              ]}
+            >
               <Text style={styles.menuText}>ft/in</Text>
             </Pressable>
             <Pressable
@@ -91,7 +92,8 @@ const HeightChooserComponent = ({
               style={[
                 styles.singleMenuItem,
                 selectedType == 2 ? { backgroundColor: GlobalColors.gray } : {},
-              ]}>
+              ]}
+            >
               <Text style={styles.menuText}>cm</Text>
             </Pressable>
           </MenuOptions>
@@ -116,7 +118,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(40),
     width: '80%',
     color: '#3D3D3D',
-    // marginHorizontal: 10,
     backgroundColor: GlobalColors.gray,
     fontFamily: GlobalFonts.bold,
     borderWidth: 0,
@@ -137,7 +138,6 @@ const styles = StyleSheet.create({
   },
   singleMenuItem: {
     width: '100%',
-    width: widthToDp(25),
   },
   menuText: {
     fontSize: responsiveFontSize(20),

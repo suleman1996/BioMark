@@ -1,19 +1,20 @@
-import {StyleSheet, Text, View, Pressable} from 'react-native';
-import React from 'react'
-import ModalComponent from '../../base/modal'
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions'
-import { responsiveFontSize } from '../../../utils/functions/responsiveText'
-import { GlobalFonts } from '../../../utils/theme/fonts'
-import { GlobalColors } from '../../../utils/theme/globalColors'
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import React from 'react';
+
+import ModalComponent from 'components/base/modal';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   heading: string;
   isVisible: boolean;
   setIsVisible: any;
-  subHeading: string
+  subHeading: string;
 };
 
-const DeleteModalComponent = ({isVisible, setIsVisible}: Props) => {
+const DeleteModalComponent = ({ isVisible, setIsVisible }: Props) => {
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
@@ -34,7 +35,7 @@ const DeleteModalComponent = ({isVisible, setIsVisible}: Props) => {
   );
 };
 
-export default DeleteModalComponent
+export default DeleteModalComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: responsiveFontSize(25),
     fontFamily: GlobalFonts.bold,
-    color: GlobalColors.red
+    color: GlobalColors.red,
   },
   subHeading: {
     fontSize: responsiveFontSize(17),
@@ -74,11 +75,11 @@ const styles = StyleSheet.create({
   yesBtnText: {
     fontSize: responsiveFontSize(18),
     fontFamily: GlobalFonts.regular,
-    color: GlobalColors.red
+    color: GlobalColors.red,
   },
   noBtnText: {
     fontSize: responsiveFontSize(18),
     fontFamily: GlobalFonts.regular,
-    color: GlobalColors.white
+    color: GlobalColors.white,
   },
 });

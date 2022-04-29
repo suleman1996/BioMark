@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
+
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
 
 type Props = {
-  isVisible: boolean,
-  setIsVisible: any,
+  isVisible: boolean;
 };
 
-const GoutModal = ({isVisible, setIsVisible}: Props) => {
+const GoutModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with Gout?
   const [ans1, setAns1] = useState(false);
 
@@ -19,7 +18,8 @@ const GoutModal = ({isVisible, setIsVisible}: Props) => {
     <ModalWithBottomBtn
       isVisible={isVisible}
       title="Gout"
-      onPress={() => console.log('clicked')}>
+      onPress={() => console.log('clicked')}
+    >
       <RadioButtonQuestionComponent
         isTrue={ans1}
         setIsTrue={setAns1}
@@ -35,5 +35,3 @@ const GoutModal = ({isVisible, setIsVisible}: Props) => {
 };
 
 export default GoutModal;
-
-const styles = StyleSheet.create({});

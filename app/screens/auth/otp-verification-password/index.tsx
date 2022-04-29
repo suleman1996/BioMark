@@ -1,31 +1,31 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View
+  Keyboard,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
-import colors from '../../../assets/colors/colors';
-import Button from '../../../components/button/button';
-import Header from '../../../components/header/header';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import OtpInput from '../../../components/otp/otpInput';
-import { Nav_Screens } from '../../../navigation/constants';
-import { forgotPassword } from '../../../services/auth-service';
-import { navigate } from '../../../services/navRef';
-import { userService } from '../../../services/user-service/userService';
-import { logNow } from '../../../utils/functions/logBinder';
+
+import colors from 'assets/colors';
+import Button from 'components/button/button';
+import Header from 'components/header';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import OtpInput from 'components/otp/otp-input';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
+import { logNow } from 'utils/functions/log-binder';
 import styles from './style';
 
 type Props = {
-  route: any
-}
+  route: any;
+};
 
 export default function OtpPassword(props: Props) {
-  
-  const {phone} = props.route.params;
+  const { phone } = props.route.params;
 
-  const navigations = useNavigation();
-  const route = useRoute();
   let initialMinutes = 1;
   let initialSeconds = 0;
 
@@ -72,27 +72,31 @@ export default function OtpPassword(props: Props) {
     setSeconds(initialSeconds);
     setMinutes(initialMinutes);
 
-     setLoading(true);
+    setLoading(true);
 
-     const username = phone;
+    const username = phone;
 
-    userService.forgotPassword(username).then(res => {
-      logNow('response for forgot password on otp verify', res);
-    }).catch(err => {
-      logNow('error on forgot password on otp verify', err);
-      if (err.errMsg.status == '500') {
+    userService
+      .forgotPassword(username)
+      .then((res) => {
+        logNow('response for forgot password on otp verify', res);
+      })
+      .catch((err) => {
+        logNow('error on forgot password on otp verify', err);
+        if (err.errMsg.status == '500') {
+          showMessage({
+            message: "User not exist's",
+            type: 'danger',
+          });
+        }
         showMessage({
-          message: "User not exist's",
-          type: 'danger',
-        });
-      }
-      showMessage({
           message: err.errMsg.data.message,
           type: 'danger',
         });
-    }).finally(() => {
-      setLoading(false);
-    })
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -106,7 +110,7 @@ export default function OtpPassword(props: Props) {
               You will receive a verification code on the mobile number you
               provided. Check your phone and enter the OTP code below.
             </Text>
-            <View style={{height: 60}}>
+            <View style={{ height: 60 }}>
               <OtpInput
                 code={code}
                 setCode={setCode}
@@ -120,19 +124,22 @@ export default function OtpPassword(props: Props) {
               onPress={() => {
                 resendOTP();
               }}
-              style={{marginTop: 30}}>
+              style={{ marginTop: 30 }}
+            >
               <Text style={styles.resendText}>
-                <Text style={{color: colors.heading}}>Not received? </Text>
-                <Text style={{color: colors.blue}}>
+                <Text style={{ color: colors.heading }}>Not received? </Text>
+                <Text style={{ color: colors.blue }}>
                   Resend OTP {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                 </Text>
               </Text>
             </TouchableOpacity>
             <View style={styles.floatingBtn}>
-              <TouchableOpacity style={{marginVertical: 10}}>
+              <TouchableOpacity style={{ marginVertical: 10 }}>
                 <Text style={styles.resendText}>
-                  <Text style={{color: colors.heading}}>Having trouble? </Text>
-                  <Text style={{color: colors.blue}}>contact us </Text>
+                  <Text style={{ color: colors.heading }}>
+                    Having trouble?{' '}
+                  </Text>
+                  <Text style={{ color: colors.blue }}>contact us </Text>
                 </Text>
               </TouchableOpacity>
               <Button

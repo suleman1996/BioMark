@@ -1,32 +1,48 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import InputField from '../../input-field/input-field';
-import {responsiveFontSize} from '../../../utils/functions/responsiveText';
-import {GlobalFonts} from '../../../utils/theme/fonts';
-import {GlobalColors} from '../../../utils/theme/globalColors';
-import {heightToDp} from '../../../utils/functions/responsiveDimentions';
-import PhoneNumber from '../../phone-number/phone-number'
+
+import PhoneNumber from 'components/phone-number';
+
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
-  label: string;
-  placeholder: string
+  label?: string;
+  placeholder: string;
+  disabled: boolean;
+  number: any;
+  country: any;
 };
 
-const PhoneNumberWithLabel = ({label, placeholder}: Props) => {
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
-  const [countryCode, setCountryCode] = useState('MY');
+const PhoneNumberWithLabel = ({
+  label,
+  placeholder,
+  disabled,
+  country,
+}: Props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectCountryCode, setSelectCountryCode] = useState('PK');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [countryCode, setCountryCode] = useState('PK');
   const [phoneNumber, setPhoneNumber] = useState('');
+
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <PhoneNumber
-        countryCode={countryCode}
-        setCountryCode={setCountryCode}
-        phoneNumber={phoneNumber}
-        setPhoneNumber={setPhoneNumber}
-        setSelectCountryCode={setSelectCountryCode}
-        width={'100%'}
-      />
+      {label ? <Text style={styles.label}>{label}</Text> : null}
+      <View>
+        {disabled ? <View style={styles.disableContainer} /> : null}
+        <PhoneNumber
+          countryCode={country}
+          setCountryCode={setCountryCode}
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
+          setSelectCountryCode={setSelectCountryCode}
+          width={'100%'}
+          placeholder={placeholder}
+        />
+      </View>
     </View>
   );
 };
@@ -41,5 +57,15 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(22),
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
+  },
+  disableContainer: {
+    position: 'absolute',
+    zIndex: 1000,
+    backgroundColor: 'transparent',
+    width: '100%',
+    height: '100%',
+  },
+  phoneContainer: {
+    zIndex: 999,
   },
 });

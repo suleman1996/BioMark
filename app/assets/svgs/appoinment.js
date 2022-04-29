@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Svg, {Path} from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 
 function SvgComponent(props) {
   return (
@@ -9,7 +9,8 @@ function SvgComponent(props) {
       viewBox="0 0 31 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}>
+      {...props}
+    >
       <Path
         d="M19.654 12.692a.692.692 0 01.692-.692h1.385a.692.692 0 01.692.692v1.385a.692.692 0 01-.692.692h-1.385a.693.693 0 01-.692-.692v-1.385zm-4.154 0a.692.692 0 01.692-.692h1.385a.692.692 0 01.692.692v1.385a.693.693 0 01-.692.692h-1.385a.692.692 0 01-.692-.692v-1.385zm-6.923 4.154a.692.692 0 01.692-.692h1.385a.692.692 0 01.692.692v1.385a.692.692 0 01-.692.692H9.27a.692.692 0 01-.692-.692v-1.385zm4.154 0a.692.692 0 01.692-.692h1.385a.693.693 0 01.692.692v1.385a.692.692 0 01-.692.692h-1.385a.692.692 0 01-.692-.692v-1.385z"
         fill={props.fill}

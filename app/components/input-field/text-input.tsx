@@ -1,11 +1,12 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import {TextInput} from 'react-native-paper';
-import colors from '../../assets/colors/colors';
+import { TextInput } from 'react-native-paper';
+
+import colors from 'assets/colors';
 
 type Props = {
   margin?: any;
-  svg: any;
+  svg?: any;
   placeholder: string;
   value: string;
   secureTextEntry?: boolean;
@@ -13,20 +14,16 @@ type Props = {
   onBlur?: any;
   onEyePress?: any;
   eye?: any;
-  Keyboardtype?: string
+  keyboardType?: string;
 };
 
-
-export default function textInput(props: Props) {
-  const [text, setText] = React.useState('');
+export default function (props: Props) {
   return (
-    <View style={[styles.container, {marginHorizontal: props.margin}]}>
+    <View style={[styles.container, { marginHorizontal: props.margin }]}>
       <TextInput
-        // mode="outlined"
-        // label={props.placeholder}
         placeholder={props?.placeholder}
         value={props?.value}
-        activeUnderlineColor={colors?.blue}
+        activeUnderlineColor={'transparent'}
         underlineColor={'FFFFFF'}
         placeholderTextColor={'#8493AE'}
         onChangeText={props?.onChange}
@@ -34,14 +31,15 @@ export default function textInput(props: Props) {
         style={styles.textInput}
         keyboardShouldPersistTaps={'handled'}
         autoCapitalize="none"
-        keyboardType={props?.Keyboardtype}
+        keyboardType={props?.keyboardType}
         autoCorrect={false}
         right={
           props?.eye && (
             <TextInput.Icon
               name={props?.eye}
               onPress={props?.onEyePress}
-              style={{zIndex: 10}}
+              style={{ zIndex: 10 }}
+              color={colors.heading}
             />
           )
         }
@@ -52,7 +50,6 @@ export default function textInput(props: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    // borderRadius: 10,
     overflow: 'hidden',
   },
   textInput: {

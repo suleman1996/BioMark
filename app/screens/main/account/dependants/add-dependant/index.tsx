@@ -1,28 +1,27 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import React from 'react'
-import DependantsList from '../../../../../components/ui/dependantsList';
-import { heightToDp, widthToDp } from '../../../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from '../../../../../utils/theme/globalColors';
-import { GlobalStyles } from '../../../../../utils/theme/globalStyles';
-import { GlobalFonts } from '../../../../../utils/theme/fonts';
-import { responsiveFontSize } from '../../../../../utils/functions/responsiveText';
-import InputWithLabel from '../../../../../components/base/inputWithLabel/index';
-import DocumentTypeChooser from '../../../../../components/ui/documentTypeChooser/index';
-import PhoneNumberWithLabel from '../../../../../components/base/phone-with-label/index';
-import DatePicker from '../../../../../components/date-picker/date-picker'
-import BoxSelector from '../../../../../components/higher-order/box-selector';
-import RelationMenu from '../../../../../components/higher-order/relation-menu';
-import ButtonComponent from '../../../../../components/base/button'
-import { goBack } from '../../../../../services/navRef';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React from 'react';
+
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalStyles } from 'utils/theme/global-styles';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import InputWithLabel from 'components/base/input-with-label';
+import PhoneNumberWithLabel from 'components/base/phone-with-label/index';
+import DatePicker from 'components/date-picker';
+import BoxSelector from 'components/higher-order/box-selector';
+import RelationMenu from 'components/higher-order/relation-menu';
+import ButtonComponent from 'components/base/button';
+import { goBack } from 'services/nav-ref';
 
 const AddDependantScreen = () => {
   return (
     <View style={styles.container}>
-    
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingBottom: heightToDp(20)}}>
+          contentContainerStyle={{ paddingBottom: heightToDp(20) }}
+        >
           <Text style={styles.headerText}>Enter your Dependant Details</Text>
           <InputWithLabel label="First Name" placeholder={''} />
           <InputWithLabel label="Last Name" placeholder={''} />
@@ -38,18 +37,15 @@ const AddDependantScreen = () => {
           <RelationMenu label={'Relation'} options={undefined} />
           <BoxSelector label={'Document Type'} options={['IC', 'Passport']} />
           <View style={styles.bottomBtnContainer}>
-            <ButtonComponent
-              onPress={() => goBack()}
-              title={'Confirm'}
-            />
+            <ButtonComponent onPress={() => goBack()} title={'Confirm'} />
           </View>
         </ScrollView>
       </View>
     </View>
   );
-}
+};
 
-export default AddDependantScreen
+export default AddDependantScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -77,6 +73,6 @@ const styles = StyleSheet.create({
     marginTop: heightToDp(2),
   },
   bottomBtnContainer: {
-    marginTop: heightToDp(4)
-  }
+    marginTop: heightToDp(4),
+  },
 });

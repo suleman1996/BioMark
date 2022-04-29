@@ -1,6 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
+import { StyleSheet } from 'react-native';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
   forgotPassword: {
     fontFamily: fonts.regular,
     color: colors.blue,
-    // alignSelf: 'center',
     fontSize: 14,
   },
   orTxt: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.black,
   },
-  dash: {height: 0.5, backgroundColor: colors.blue, width: '40%'},
+  dash: { height: 0.5, backgroundColor: colors.blue, width: '40%' },
   orView: {
     flexDirection: 'row',
     alignItems: 'center',

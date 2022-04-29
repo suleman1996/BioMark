@@ -1,5 +1,7 @@
-import { AuthState } from "./auth/AuthState";
+import { AccountState } from './account/AccountState';
+import { AuthState } from './auth/AuthState';
 
 export interface IAppState {
-  auth: AuthState,
+  auth: AuthState;
+  account: AccountState;
 }

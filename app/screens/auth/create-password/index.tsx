@@ -1,49 +1,39 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import styles from './styles';
-import Header from '../../../components/header/header';
-import Button from '../../../components/button/button';
-import InputField from '../../../components/input-field/input-field';
-import TextInput from '../../../components/input-field/text-input';
-import {Formik} from 'formik';
+import { Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState } from 'react';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {changePassword} from '../../../services/auth-service';
-import {showMessage, hideMessage} from 'react-native-flash-message';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { showMessage } from 'react-native-flash-message';
+
+import styles from './styles';
+import Header from 'components/header';
+import Button from 'components/button/button';
+import TextInput from 'components/input-field/text-input';
+import { changePassword } from 'services/auth-service';
+import ActivityIndicator from 'components/loader/activity-indicator';
 
 export default function CreatePassword() {
   const navigations = useNavigation();
   const route = useRoute();
-  const [password, setPassword] = React.useState('');
   const [hidePassword, setHidePassword] = useState(true);
-  const [confirmPassword, setCoonfirmPassword] = React.useState('');
   const [hideConfirmPassword, setConfirmHidePassword] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const ResetPassword = async ({password}) => {
+  const ResetPassword = async ({ password }) => {
     try {
       setLoading(true);
       Keyboard.dismiss();
-      const result = await changePassword({
+      await changePassword({
         password: {
           username: route.params.phone,
           password: password,
           code: route.params.otp,
         },
       });
-      console.log('Create password success message ', result.data);
       navigations.navigate('PasswordChanged');
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error.errMsg);
       if (error.errMsg.status == '500') {
         showMessage({
           message: "User not exist's",
@@ -84,20 +74,20 @@ export default function CreatePassword() {
                 confirmPassword: '',
               }}
               onSubmit={ResetPassword}
-              validationSchema={ResetPassSchema}>
-              {({handleChange, handleSubmit, values, errors}) => (
+              validationSchema={ResetPassSchema}
+            >
+              {({ handleChange, handleSubmit, values, errors, isValid }) => (
                 <>
                   <Text style={styles.title}>
                     Please enter your new password.
                   </Text>
 
+                  <Text style={styles.inputLablel}>New Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."
                     secureTextEntry={hidePassword}
-                    eye={!hidePassword ? 'eye-off' : 'eye'}
-                    // value={password}
+                    eye={!hidePassword ? 'eye' : 'eye-off'}
                     onEyePress={() => setHidePassword(!hidePassword)}
-                    // onChange={value => setPassword(value)}
                     onChange={handleChange('password')}
                     margin={0}
                   />
@@ -105,16 +95,17 @@ export default function CreatePassword() {
                     <Text style={styles.errorMessage}>{errors.password}</Text>
                   )}
 
-                  <View style={{marginTop: 10}}>
+                  <Text style={[styles.inputLablel, { marginTop: 30 }]}>
+                    Confirm New Password
+                  </Text>
+                  <View>
                     <TextInput
                       placeholder="Retype your new password..."
                       secureTextEntry={hideConfirmPassword}
-                      eye={!hideConfirmPassword ? 'eye-off' : 'eye'}
-                      // value={confirmPassword}
+                      eye={!hideConfirmPassword ? 'eye' : 'eye-off'}
                       onEyePress={() =>
                         setConfirmHidePassword(!hideConfirmPassword)
                       }
-                      // onChange={value => setCoonfirmPassword(value)}
                       onChange={handleChange('confirmPassword')}
                       margin={0}
                     />
@@ -126,12 +117,11 @@ export default function CreatePassword() {
                   </View>
                   <View style={styles.floatingBtn}>
                     <Button
-                      // onPress={() => navigations.navigate('PasswordChanged')}
                       onPress={handleSubmit}
                       title="Reset Password"
-                      // disabled={
-                      //   password === '' || confirmPassword === '' ? true : false
-                      // }
+                      disabled={
+                        !isValid || values.password == '' ? true : false
+                      }
                     />
                   </View>
                 </>

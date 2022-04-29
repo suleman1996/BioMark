@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { Button } from 'react-native-paper';
-import colors from '../../assets/colors/colors';
+import { Button as PaperButton } from 'react-native-paper';
+
+import colors from 'assets/colors';
 
 type Props = {
   marginHorizontal?: number;
@@ -11,27 +12,32 @@ type Props = {
   title?: string;
 };
 
-export default function button(props: Props) {
+export default function Button(props: Props) {
   const horizontal = props.marginHorizontal ? props.marginHorizontal : 20;
   const vertical = props.marginVertical ? props.marginVertical : 20;
   return (
     <View
       style={[
         styles.btnContainer,
-        {marginHorizontal: horizontal, marginVertical: vertical},
-      ]}>
-      <Button
-        mode="contained"
-        uppercase={false}
-        disabled={props.disabled}
-        contentStyle={{ height: 50 }}
-        style={[
-          styles.btn,
-          { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
-        ]}
-        onPress={props.onPress}>
-        {props.title}
-      </Button>
+        { marginHorizontal: horizontal, marginVertical: vertical },
+      ]}
+    >
+      <TouchableOpacity>
+        <PaperButton
+          mode="contained"
+          uppercase={false}
+          disabled={props.disabled}
+          contentStyle={{ height: 50 }}
+          style={[
+            styles.btn,
+            { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
+          ]}
+          labelStyle={{ color: colors.whiteColor }}
+          onPress={props.onPress}
+        >
+          {props.title}
+        </PaperButton>
+      </TouchableOpacity>
     </View>
   );
 }

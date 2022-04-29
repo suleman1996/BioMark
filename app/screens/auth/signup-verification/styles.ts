@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
+import { StyleSheet } from 'react-native';
+import colors from '../../../assets/colors';
+import fonts from '../../../assets/fonts';
 
 const styles = StyleSheet.create({
   signupNav: {
@@ -34,8 +34,6 @@ const styles = StyleSheet.create({
     stepStrokeWidth: 0,
     stepIndicatorSize: 40,
     currentStepIndicatorSize: 40,
-    stepIndicatorLabelFontSize: 20,
-    currentStepIndicatorLabelFontSize: 20,
     stepIndicatorLabelFontSize: 20,
     currentStepIndicatorLabelFontSize: 20,
     stepStrokeCurrentColor: colors.blue,
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 20,
     marginHorizontal: 20,
-    color: 'black',
+    color: colors.black,
     // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
@@ -91,6 +89,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
+    color: 'black',
   },
 });
 

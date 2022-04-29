@@ -1,7 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import colors from '../../assets/colors/colors';
-import fonts from '../../assets/fonts/fonts';
+import { StyleSheet } from 'react-native';
+import colors from '../../assets/colors';
+import fonts from '../../assets/fonts';
 
 const styles = StyleSheet.create({
   countryPickerView: {
@@ -22,7 +21,6 @@ const styles = StyleSheet.create({
   textInputStyle: {
     paddingLeft: 10,
     color: colors.black,
-    // fontSize: RFValue(14),
     fontSize: 14,
     width: '60%',
     fontFamily: fonts.regular,

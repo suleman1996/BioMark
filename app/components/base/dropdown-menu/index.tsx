@@ -1,23 +1,29 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import {Picker} from '@react-native-picker/picker';
-import { heightToDp, widthToDp } from '../../../utils/functions/responsiveDimentions';
-import { GlobalColors } from '../../../utils/theme/globalColors';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
+import { Picker } from '@react-native-picker/picker';
+
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   options: any;
-  setSelectedDropdown: any
+  selectedValue: string;
+  onValueChange?: (text: string) => void;
 };
 
-const DropdownMenuComponent = ({options, setSelectedDropdown}: Props) => {
+const DropdownMenuComponent = ({
+  options,
+  selectedValue,
+  onValueChange,
+}: Props) => {
   return (
     <View style={styles.container}>
       <Picker
         mode="dropdown"
-        selectedValue={setSelectedDropdown}
-        onValueChange={(itemValue: string, itemIndex: number) =>
-          setSelectedDropdown(itemValue)
-        }>
+        selectedValue={selectedValue}
+        onValueChange={onValueChange}
+      >
         {options?.map((item: any, index: number) => {
           return (
             <Picker.Item key={index} label={item.title} value={item.title} />
@@ -28,7 +34,7 @@ const DropdownMenuComponent = ({options, setSelectedDropdown}: Props) => {
   );
 };
 
-export default DropdownMenuComponent
+export default DropdownMenuComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -37,6 +43,6 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalColors.gray,
     flex: 1,
     borderRadius: widthToDp(2),
-    maxHeight: heightToDp(6.5)
+    maxHeight: heightToDp(6.5),
   },
 });

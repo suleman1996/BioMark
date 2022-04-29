@@ -1,17 +1,15 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
+import { StyleSheet } from 'react-native';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.whiteColor,
-    // paddingHorizontal: 15,
   },
   body: {
     flex: 1,
-    // backgroundColor: 'red',
     margin: 10,
     borderRadius: 10,
     backgroundColor: colors.whiteColor,
@@ -29,6 +27,8 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: 16,
     marginVertical: 20,
+    color: colors.black,
+    marginBottom: 10,
   },
   inputLablel: {
     fontFamily: fonts.bold,

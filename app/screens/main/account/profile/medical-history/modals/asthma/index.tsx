@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
+
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
 
 type Props = {
-  isVisible: boolean,
-  setIsVisible: any,
+  isVisible: boolean;
 };
 
-const AsthmaModal = ({isVisible, setIsVisible}: Props) => {
+const AsthmaModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with asthma?
   const [ans1, setAns1] = useState(false);
 
@@ -19,7 +18,8 @@ const AsthmaModal = ({isVisible, setIsVisible}: Props) => {
     <ModalWithBottomBtn
       isVisible={isVisible}
       title="Asthma"
-      onPress={() => console.log('clicked')}>
+      onPress={() => console.log('clicked')}
+    >
       <RadioButtonQuestionComponent
         isTrue={ans1}
         setIsTrue={setAns1}
@@ -35,5 +35,3 @@ const AsthmaModal = ({isVisible, setIsVisible}: Props) => {
 };
 
 export default AsthmaModal;
-
-const styles = StyleSheet.create({});

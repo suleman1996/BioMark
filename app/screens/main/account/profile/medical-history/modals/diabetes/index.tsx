@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import DropdownMenuComponent from '../../../../../../../components/base/dropdown-menu';
-import ModalWithBottomBtn from '../../../../../../../components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from '../../../../../../../components/higher-order/radio-question';
-import TagsCloudInputComponent from '../../../../../../../components/higher-order/tags-cloud-input';
-import { heightToDp } from '../../../../../../../utils/functions/responsiveDimentions';
-import { GlobalStyles } from '../../../../../../../utils/theme/globalStyles';
+import { Text, View } from 'react-native';
 
-const options = [{title: 'Type 1 only'}, {title: 'Type 2 only'}];
+import DropdownMenuComponent from 'components/base/dropdown-menu';
+import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
+import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalStyles } from 'utils/theme/global-styles';
+
+const options = [{ title: 'Type 1 only' }, { title: 'Type 2 only' }];
 
 type Props = {
   isVisible: boolean;
-  setIsVisible: any;
 };
 
-const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
+const DiabetesModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with diabetes?
   const [ans1, setAns1] = useState(false);
 
@@ -22,13 +21,15 @@ const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
   const [ans2, setAns2] = useState(false);
 
   // diagnoesed type 1 only
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [dDiagnosedWith, setDiagnosedWith] = useState('');
 
   return (
     <ModalWithBottomBtn
       isVisible={isVisible}
       title="Diabetes"
-      onPress={() => console.log('clicked')}>
+      onPress={() => console.log('clicked')}
+    >
       <RadioButtonQuestionComponent
         isTrue={ans1}
         setIsTrue={setAns1}
@@ -37,7 +38,9 @@ const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
       <Text style={GlobalStyles.qLabel}>
         What type of diabetes have you been diagnosed with?
       </Text>
-      <View style={{height: heightToDp(7), ...GlobalStyles.paddingHorizontal}}>
+      <View
+        style={{ height: heightToDp(7), ...GlobalStyles.paddingHorizontal }}
+      >
         <DropdownMenuComponent
           options={options}
           setSelectedDropdown={setDiagnosedWith}
@@ -48,11 +51,8 @@ const DiabetesModal = ({isVisible, setIsVisible}: Props) => {
         setIsTrue={setAns2}
         question="Did you take any medications for this?"
       />
-      <TagsCloudInputComponent question="Please list  medications?" />
     </ModalWithBottomBtn>
   );
 };
 
 export default DiabetesModal;
-
-const styles = StyleSheet.create({});

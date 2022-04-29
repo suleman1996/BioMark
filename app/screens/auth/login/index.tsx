@@ -1,157 +1,156 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Keyboard,
   Platform,
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
-import { showMessage } from 'react-native-flash-message';
+import {
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager,
+  LoginManager,
+} from 'react-native-fbsdk-next';
 import { useDispatch, useSelector } from 'react-redux';
-import colors from '../../../assets/colors/colors';
-import fonts from '../../../assets/fonts/fonts';
-import Apple from '../../../assets/svgs/apple';
-import Facebook from '../../../assets/svgs/facebook';
-import Google from '../../../assets/svgs/google';
-import Logo from '../../../assets/svgs/logo-name';
-import Button from '../../../components/button/button';
-import ErrorModal from '../../../components/error-modal/error-modal';
-import TextInput from '../../../components/input-field/text-input';
-import ActivityIndicator from '../../../components/loader/activity-indicator';
-import PhoneNumber from '../../../components/phone-number/phone-number';
-import { Nav_Screens } from '../../../navigation/constants';
-import { navigate } from '../../../services/navRef';
-import { reduxLogin } from '../../../store/auth/authActions';
-import { IAppState } from '../../../store/IAppState';
-// import InputField from '../../components/inputField/inputField';
-import AuthContext from '../../../utils/auth-context';
+import auth from '@react-native-firebase/auth';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import Apple from 'assets/svgs/apple';
+import Facebook from 'assets/svgs/facebook';
+import Google from 'assets/svgs/google';
+import Logo from 'assets/svgs/logo-name';
+import Button from 'components/button/button';
+import ErrorModal from 'components/error-modal';
+import TextInput from 'components/input-field/text-input';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import PhoneNumber from 'components/phone-number';
+import { Nav_Screens } from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
+import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
+import { IAppState } from 'store/IAppState';
 import styles from './styles';
-
+import Config from 'react-native-config';
 export default function Login() {
-
   // redux
   const dispatch = useDispatch();
-  const {loggingIn, errorMessageLogin} = useSelector(
-    (state: IAppState) => state.auth,
+
+  const { loggingIn, errorMessageLogin } = useSelector(
+    (state: IAppState) => state.auth
   );
-
-
-  const navigations = useNavigation();
-  const authcontext = useContext(AuthContext);
 
   const [hidePassword, setHidePassword] = useState(true);
   const [password, setPassword] = useState('');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [selectCountryCode, setSelectCountryCode] = useState('60');
-  const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
-  const [numberCondition, setNumberCondition] = useState({min: 8, max: 11});
-  const [userGoogleInfo, setUserGoogleInfo] = useState({});
-  const [loaded, setLoaded] = useState(false);
-
-  
-
-  GoogleSignin.configure({
-    webClientId:
-      '871137629206-muidhs147vquoqovf71scmu89ibsaq7s.apps.googleusercontent.com',
-    offlineAccess: false,
-  });
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
 
   useEffect(() => {
-    if (selectCountryCode == '60') setNumberCondition({min: 8, max: 11});
-    else if (selectCountryCode == '63') setNumberCondition({min: 10, max: 10});
-    else if (selectCountryCode == '65') setNumberCondition({min: 8, max: 8});
-    else {
-      setNumberCondition({min: 4, max: 13});
+    if (selectCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectCountryCode == '63') {
+      setNumberCondition({ min: 10, max: 10 });
+    } else if (selectCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
+      setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
 
-  const GoogleLogin = async () => {
+  const onGoogleLogin = async () => {
     GoogleSignin.signOut();
-    await GoogleSignin.hasPlayServices()
-      .then(response => {
-        console.log('Play Services Response', response);
-        GoogleSignin.signIn()
-          .then(data => {
-            console.log('Google Accounts Data ', Platform.OS, ' ', data.user);
-            GoogleSignin.getTokens().then({});
-            // props.navigation.navigate(TOP_TAB_BAR);
-            authcontext.setUser(data.user.email);
-          })
-          .catch(error => {
-            console.log('SignIn error --->', error);
-          });
-      })
-      .catch(error => {
-        console.log('Play services error --->', error);
-        // Toast.show(error, Toast.LONG);
-      });
-  };
+    GoogleSignin.configure({
+      webClientId: Config.WEB_CLIENT_ID,
+      offlineAccess: true,
+    });
 
-  const FacebookLogin = async () => {
+    const { idToken } = await GoogleSignin.signIn();
+    const provider = 'google';
+    dispatch(reduxFederatedLogin(idToken, provider));
+
+    const googleCrenditial = auth.GoogleAuthProvider.credential(idToken);
+    const user_sign_in = auth().signInWithCredential(googleCrenditial);
+    user_sign_in.then((re) => {
+      console.log('re', re);
+    });
+  };
+  const getInfoFromToken = (token) => {
+    const PROFILE_REQUEST_PARAMS = {
+      fields: {
+        string: 'id,name,first_name,last_name',
+      },
+    };
+    const profileRequest = new GraphRequest(
+      '/me',
+      { token, parameters: PROFILE_REQUEST_PARAMS },
+      (error, user) => {
+        if (error) {
+          console.log('login info has error: ' + error);
+        } else {
+          console.log('result:', user);
+        }
+      }
+    );
+    new GraphRequestManager().addRequest(profileRequest).start();
+  };
+  const onFacebookLogin = async () => {
     LoginManager.logOut();
     await LoginManager.logInWithPermissions().then(
       async function (result) {
         if (result.isCancelled) {
           console.log('Login cancelled');
         } else {
-          console.log(
-            'Login success with permissions: ' +
-              result.grantedPermissions.toString(),
-          );
-          const data = await AccessToken.getCurrentAccessToken();
-          initUser(data.accessToken);
-
-          console.log('Facebook data is ===>>', data);
+          const data: any = await AccessToken.getCurrentAccessToken();
+          getInfoFromToken(data?.accessToken);
+          console.log('Facebook data', data);
+          const provider = 'facebook';
+          Keyboard.dismiss();
+          dispatch(reduxFederatedLogin(data?.accessToken, provider));
         }
       },
       function (error) {
         console.log('Login fail with error: ' + error);
-      },
+      }
     );
-  };
-
-  const initUser = (token: any) => {
-    // props.navigation.navigate(TOP_TAB_BAR);
-    fetch(
-      'https://graph.facebook.com/v2.5/me?fields=email,first_name,last_name,picture.type(large),friends&access_token=' +
-        token,
-    )
-      .then(response => {
-        response.json().then(
-          json => {
-            console.log('Json response', json);
-            authcontext.setUser(json.first_name);
-            // const credential = auth.FacebookAuthProvider.credential(token);
-            // console.log('json id is', json.id);
-            let name = `${json.first_name} ${json.last_name}`;
-            // console.log('Credentials', credential);
-          },
-          error => {
-            alert(error.message);
-          },
-        );
-      })
-      .catch(error => {
-        console.log('ERROR GETTING DATA FROM FACEBOOK');
-        // Toast.show(error.message, Toast.LONG);
-      });
   };
 
   // redux error check
   useEffect(() => {
-    if(errorMessageLogin){
-      showMessage({
-        message: errorMessageLogin,
-        type: 'danger',
-      });
+    if (errorMessageLogin) {
+      setLoginError(true);
     }
-  }, [errorMessageLogin])
+  }, [errorMessageLogin]);
+
+  async function onAppleButtonPress() {
+    // performs login request
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+    console.log('appleAuthRequestResponse', appleAuthRequestResponse);
+
+    // get current authentication state for user
+    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    const credentialState = await appleAuth.getCredentialStateForUser(
+      appleAuthRequestResponse.user
+    );
+
+    // use credentialState response to ensure the user is authenticated
+    if (credentialState === appleAuth.State.AUTHORIZED) {
+      // user is authenticated
+      const provider = 'apple';
+      Keyboard.dismiss();
+      dispatch(
+        reduxFederatedLogin(appleAuthRequestResponse?.identityToken, provider)
+      );
+    }
+  }
 
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
@@ -189,12 +188,12 @@ export default function Login() {
           </Text>
         )}
 
-        <View style={{height: 20}} />
-        <Text style={[styles.inputLablel, {marginTop: 20}]}>Password</Text>
+        <View style={{ height: 20 }} />
+        <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
         <TextInput
           placeholder="Password"
           secureTextEntry={hidePassword}
-          eye={!hidePassword ? 'eye-off' : 'eye'}
+          eye={hidePassword ? 'eye-off' : 'eye'}
           value={password}
           onEyePress={() => {
             setHidePassword(!hidePassword);
@@ -207,14 +206,14 @@ export default function Login() {
             Password must have 8-11 characters long
           </Text>
         )}
-        <View style={{alignSelf: 'center'}}>
+        <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity
-            style={{marginVertical: 30}}
-            onPress={() => navigate(Nav_Screens.Forgot_Password)}>
-            <Text style={styles.forgotPassword}>Forgot Password?</Text>
+            style={{ marginVertical: 30 }}
+            onPress={() => navigate(Nav_Screens.Forgot_Password)}
+          >
+            <Text style={styles.forgotPassword}>Forgot password?</Text>
           </TouchableOpacity>
         </View>
-
         <Button
           onPress={() => handleLogin()}
           disabled={
@@ -235,28 +234,29 @@ export default function Login() {
             fontFamily: fonts.regular,
             fontSize: 16,
             color: colors.black,
-          }}>
-          Login With
+          }}
+        >
+          Log in With
         </Text>
         <View style={styles.socialLogins}>
           {Platform.OS === 'ios' && (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => onAppleButtonPress()}>
               <Apple height="24" width="24" />
             </TouchableOpacity>
           )}
-          <TouchableOpacity onPress={() => FacebookLogin()}>
+          <TouchableOpacity onPress={() => onFacebookLogin()}>
             <Facebook height="20" width="20" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => GoogleLogin()}>
+          <TouchableOpacity onPress={() => onGoogleLogin()}>
             <Google />
           </TouchableOpacity>
         </View>
 
-        <View style={{alignSelf: 'center'}}>
+        <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity onPress={() => navigate(Nav_Screens.Sign_Up)}>
             <Text style={styles.noAccountTxt}>
-              <Text style={{color: colors.black}}>Dont have an account?</Text>
-              <Text style={{color: colors.blue}}> SignUp</Text>
+              <Text style={{ color: colors.black }}>Dont have an account?</Text>
+              <Text style={{ color: colors.blue }}> Sign up</Text>
             </Text>
           </TouchableOpacity>
         </View>

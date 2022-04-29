@@ -8,7 +8,7 @@ export type ForgotPasswordSuccessResponse = {
 
 export type ForgotPasswordErrorResponse = {
   errMsg: {
-    status: number,
+    status: number;
     data: {
       message: string;
       type: string;

@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path, Defs, LinearGradient, Stop } from 'react-native-svg';
 
 function SvgComponent(props) {
   return (
@@ -26,7 +26,7 @@ function SvgComponent(props) {
         </LinearGradient>
       </Defs>
     </Svg>
-  )
+  );
 }
 
-export default SvgComponent
+export default SvgComponent;

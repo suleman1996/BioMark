@@ -23,16 +23,26 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb663925508194673</string>
+				<string>fb648501205748550</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1078990823809-8us2qk3drov66qh0p59b743v8nj5p77a</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>663925508194673</string>
+	<string>648501205748550</string>
 	<key>FacebookDisplayName</key>
 	<string>BioMark</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -59,6 +69,13 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access Warning</string>
+	<key>Privacy – Camera Usage Description	</key>
+	<string>App needs Camera Access Permission for testing</string>
+	<key>Privacy – Photo Library Additions Usage Description</key>
+	<string>App needs photo library Access
+</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -83,6 +100,7 @@
 		<string>Mukta-ExtraLight.ttf</string>
 		<string>Mukta-Medium.ttf</string>
 		<string>Mukta-SemiBold.ttf</string>
+		<string>Mukta-Light.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -90,8 +108,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIRequiresFullScreen</key>
-	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
