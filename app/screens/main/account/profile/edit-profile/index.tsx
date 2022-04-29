@@ -26,6 +26,7 @@ import EditProfileModal from 'components/edit-profile-menu';
 import AuthContext from '../../../../../utils/auth-context';
 import { userService } from 'services/user-service/user-service';
 import ActivityIndicator from 'components/loader/activity-indicator';
+import { showMessage } from 'react-native-flash-message';
 
 let cameraIs = false;
 

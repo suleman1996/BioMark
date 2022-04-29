@@ -319,6 +319,18 @@ const updateProfileAvatar = (pic: String) => {
   });
 };
 
+const getFamilyMedicalHistory = () => {
+  return client.get(API_URLS.GET_FAMILY_MEDICAL_HISTORY);
+};
+
+const createFamilyMedicalHistory = (history: Array<String>) => {
+  return client.post(API_URLS.CREATE_FAMILY_MEDICAL_HISTORY, {
+    medical_history: {
+      conditions: history,
+    },
+  });
+};
+
 const updateProfile = (
   fName: String,
   lName: String,
@@ -357,4 +369,6 @@ export const userService = {
   drinking,
   updateProfileAvatar,
   updateProfile,
+  getFamilyMedicalHistory,
+  createFamilyMedicalHistory,
 };
