@@ -68,7 +68,7 @@ workflows:
         - google_play
       vars:
         FCI_KEYSTORE_PATH: /tmp/keystore.keystore
-      java: 1.8
+      java: 11
       node: 12.18.3
     triggering:
       events:
