@@ -1,8 +1,7 @@
 import ButtonComponent from 'components/base/button';
-import ErrorText from 'components/base/error-text';
+import DateTimePickerModalComponent from 'components/base/dateTimePickerModal';
 import InputWithLabel from 'components/base/input-with-label';
 import PhoneNumberWithLabel from 'components/base/phone-with-label/index';
-import DatePicker from 'components/date-picker';
 import BoxSelector from 'components/higher-order/box-selector';
 import RelationMenu from 'components/higher-order/relation-menu';
 import { Regex } from 'constants/regex';
@@ -22,8 +21,7 @@ import { GenderEnum } from '../../../../../enum/GenderEnum';
 const AddDependantScreen = () => {
   const formikRef = useRef<any>();
 
-  const [countryCode] = useState('MY');
-  const [gender_id, setGenderId] = useState<any>();
+  const [countryCode, setCountryCode] = useState('MY');
 
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
@@ -110,36 +108,39 @@ const AddDependantScreen = () => {
                   disabled={false}
                   number={values.phone_number}
                   setPhoneNumber={handleChange('phone_number')}
-                  country={countryCode}
+                  countryCode={countryCode}
+                  error={errors.phone_number}
+                  setCountryCode={setCountryCode}
                 />
-                {errors.phone_number && (
-                  <ErrorText text={errors.phone_number} />
-                )}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
                   label="Email"
                   onChange={handleChange('email')}
                   value={values.email}
+                  error={errors.email}
                 />
-                {errors.email && <ErrorText text={errors.email} />}
                 <Text style={styles.label}>Date of Birth</Text>
-                <DatePicker
+                <DateTimePickerModalComponent
+                  date={values.birth_date}
+                  setDate={(e: any) => setFieldValue('birth_date', e)}
+                />
+                {/* <DatePicker
                   width={'100%'}
                   date={new Date('Jan-01-1990')}
-                  setDate={handleChange('birth_date')}
-                  isPickerShow={false}
-                  setIsPickerShow={undefined}
-                />
+                  setDate={(e: any) => setFieldValue('birth_date', e)}
+                  isPickerShow={isDatePicker}
+                  setIsPickerShow={setIsDatePicker}
+                /> */}
                 <InputWithLabel
                   label="NRIC /Passport Number"
                   placeholder={''}
                   onChange={handleChange('id_number')}
                   value={values.id_number}
+                  error={errors.id_number}
                 />
-                {errors.id_number && <ErrorText text={errors.id_number} />}
                 <BoxSelector
-                  onChange={setGenderId}
-                  value={gender_id}
+                  onChange={(e: any) => setFieldValue('birth_date', e)}
+                  value={values.gender_id}
                   label={'Gender'}
                   options={GenderEnum}
                 />

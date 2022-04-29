@@ -21,7 +21,7 @@ type Props = {
 
 const RelationMenu = ({ label, options, onChange }: Props) => {
   const menuRef = useRef<any>();
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(1);
 
   return (
     <View style={styles.main}>

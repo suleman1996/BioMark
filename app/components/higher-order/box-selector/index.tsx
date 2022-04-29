@@ -9,7 +9,7 @@ import { GlobalStyles } from 'utils/theme/global-styles';
 type Props = {
   options: any;
   label: string;
-  value: number;
+  value: number | string;
   onChange: any;
   isTitleSelect?: boolean;
 };
