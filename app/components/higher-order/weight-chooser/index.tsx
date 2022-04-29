@@ -57,9 +57,9 @@ const WeightChooserComponent = ({
           <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
-                color: GlobalColors.primary,
-                fontFamily: GlobalFonts.regular,
-                fontSize: responsiveFontSize(20),
+                color: GlobalColors.heading,
+                fontFamily: GlobalFonts.bold,
+                fontSize: responsiveFontSize(22),
               }}
             >
               {selectedType == 1 ? 'lbs' : 'kg'}

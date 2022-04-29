@@ -283,7 +283,7 @@ const EditProfileScreen = () => {
               >
                 <View style={styles.menuTitleAndIcon}>
                   <MaterialIcons
-                    name="family-restroom"
+                    name="groups"
                     size={responsiveFontSize(22)}
                     color={GlobalColors.darkPrimary}
                   />
