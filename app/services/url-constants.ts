@@ -33,6 +33,8 @@ const API_URLS = {
   Smoking: '/api/v1/patient/lifestyle/smoking',
   Vaccination: '/api/v1/patient/medical_histories/vaccine',
   Allergies: '/api/v1/patient/medical_histories/allergy',
+  Get_Stress: '/api/v1/patient/stress',
+  Create_Stress: '/api/v1/patient/lifestyle/stress',
 };
 
 export { API_URLS };
