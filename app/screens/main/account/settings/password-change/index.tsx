@@ -115,7 +115,7 @@ const PasswordChangeScreen = () => {
                     label={'Current Password'}
                     placeholder={'Enter your current password'}
                     isSecure={eCurrent}
-                    password={values.password}
+                    password={values.currentPassword}
                     setHidePassword={() => setECurrent(!eCurrent)}
                     hidePassword={eCurrent}
                     onChange={handleChange('currentPassword')}
@@ -140,7 +140,7 @@ const PasswordChangeScreen = () => {
                     label={'Enter new password'}
                     placeholder={'Enter your current password'}
                     isSecure={ePass}
-                    password={''}
+                    password={values.password}
                     setHidePassword={() => setEPass(!ePass)}
                     hidePassword={ePass}
                     onChange={handleChange('password')}
@@ -173,11 +173,11 @@ const PasswordChangeScreen = () => {
                     <ErrorText text={errors.currentPassword} />
                   )}
                   <PasswordInputWithLabel
-                    marginTop={-2}
+                    marginTop={-1}
                     label={'Confirm New Password'}
                     placeholder={'Enter your current password'}
                     isSecure={eConfirm}
-                    password={''}
+                    password={values.confirmPassword}
                     setHidePassword={() => setEConfirm(!eConfirm)}
                     hidePassword={eConfirm}
                     onChange={handleChange('confirmPassword')}
