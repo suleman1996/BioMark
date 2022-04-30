@@ -1,5 +1,5 @@
 import ButtonComponent from 'components/base/button';
-import DateTimePickerModalComponent from 'components/base/dateTimePickerModal';
+import DateTimePickerModalComponent from 'components/base/date-time-picker-modal';
 import InputWithLabel from 'components/base/input-with-label';
 import PhoneNumberWithLabel from 'components/base/phone-with-label/index';
 import BoxSelector from 'components/higher-order/box-selector';
