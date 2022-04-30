@@ -7,7 +7,7 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { logNow } from 'utils/functions/log-binder';
-import { getDay, getMonth, getYear } from 'utils/functions/dateFormat';
+import { getDay, getMonth, getYear } from 'utils/functions/date-format';
 type Props = {
   date: any;
   setDate: any;

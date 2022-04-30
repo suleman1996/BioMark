@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { dependentService } from 'services/account-service/dependent-service';
 import { goBack } from 'services/nav-ref';
 import { getAllDependents } from 'store/account/account-actions';
-import { dateFormat } from 'utils/functions/dateFormat';
+import { dateFormat } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
