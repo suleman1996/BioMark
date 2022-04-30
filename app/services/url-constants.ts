@@ -36,6 +36,7 @@ const API_URLS = {
   Get_Stress: '/api/v1/patient/stress',
   Create_Stress: '/api/v1/patient/lifestyle/stress',
   GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
+  bodyMeasurement: '/api/v1/patient/medical/bm',
 };
 
 export { API_URLS };

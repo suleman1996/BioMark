@@ -25,7 +25,7 @@ export default function SmokingScreen() {
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const options2 = [{ title: null }, { title: '2020' }, { title: '2021' }];
+  const options2 = [{ title: '' }, { title: '2020' }, { title: '2021' }];
 
   const onSubmit = async () => {
     try {
@@ -141,7 +141,7 @@ export default function SmokingScreen() {
               </Text>
               <View style={styles.container2}>
                 <Picker
-                  itemStyle={{ height: 500, fontFamily: 'Rubik-Regular' }}
+                  itemStyle={{ fontFamily: 'Rubik-Regular' }}
                   selectedValue={startSmoke}
                   onValueChange={(itemValue) => setStartSmoke(itemValue)}
                 >

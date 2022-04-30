@@ -35,7 +35,7 @@ export default function VaccinationScreen() {
       const response = await userService.Vaccination(items);
       console.log('Vaccination successful', response);
       setList([...list, { id: list?.length + 1, title: items }]);
-      // navigate(Nav_Screens.Edit_Profile);
+      setItems(!items);
     } catch (err) {
       console.log(err);
     }

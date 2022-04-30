@@ -1,4 +1,10 @@
-import { Text, View, ScrollView, SafeAreaView } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
@@ -8,6 +14,7 @@ import TitleWithBackLayout from 'components/layouts/back-with-title';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { styles } from './styles';
+import colors from 'assets/colors';
 const Options = [
   { title: '1' },
   { title: '2' },
@@ -44,10 +51,14 @@ export default function ExerciseScreen() {
             onValueChange={(newValue) => setValue(newValue)}
             value={value}
           >
-            <View
+            <TouchableOpacity
+              onPress={() => setValue('first')}
               style={[
                 styles.radioContainer,
-                { backgroundColor: value == 'first' ? '#054E8B' : null },
+                {
+                  backgroundColor:
+                    value == 'first' ? GlobalColors.navyblue : null,
+                },
               ]}
             >
               <RadioButton
@@ -62,12 +73,16 @@ export default function ExerciseScreen() {
               >
                 No
               </Text>
-            </View>
+            </TouchableOpacity>
 
-            <View
+            <TouchableOpacity
+              onPress={() => setValue('second')}
               style={[
                 styles.radioContainer,
-                { backgroundColor: value == 'second' ? '#054E8B' : null },
+                {
+                  backgroundColor:
+                    value == 'second' ? GlobalColors.navyblue : null,
+                },
               ]}
             >
               <RadioButton
@@ -82,7 +97,7 @@ export default function ExerciseScreen() {
               >
                 Yes
               </Text>
-            </View>
+            </TouchableOpacity>
           </RadioButton.Group>
 
           {value !== 'first' ? (
@@ -101,6 +116,7 @@ export default function ExerciseScreen() {
                         key={index}
                         label={item.title}
                         value={item.title}
+                        color={colors.placeHolder}
                       />
                     );
                   })}
@@ -120,6 +136,7 @@ export default function ExerciseScreen() {
                         key={index}
                         label={item.title}
                         value={item.title}
+                        color={colors.placeHolder}
                       />
                     );
                   })}

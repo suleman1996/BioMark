@@ -38,13 +38,12 @@ export const styles = StyleSheet.create({
     fontFamily: GlobalFonts.light,
   },
   textinputView: {
-    marginHorizontal: heightToDp(5),
+    marginHorizontal: heightToDp(2),
     marginTop: 10,
-    // borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
   },
   container2: {
-    marginHorizontal: heightToDp(5),
+    marginHorizontal: heightToDp(2),
     borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
     backgroundColor: '#EBEFF2',

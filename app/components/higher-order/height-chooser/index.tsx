@@ -57,9 +57,9 @@ const HeightChooserComponent = ({
           <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
-                color: GlobalColors.primary,
-                fontFamily: GlobalFonts.regular,
-                fontSize: responsiveFontSize(20),
+                color: GlobalColors.heading,
+                fontFamily: GlobalFonts.bold,
+                fontSize: responsiveFontSize(22),
               }}
             >
               {selectedType == 1 ? 'ft/in' : 'cm'}
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   textFieldStyle: {
     fontSize: responsiveFontSize(40),
     width: '80%',
-    color: '#3D3D3D',
+    color: colors.blue,
     backgroundColor: GlobalColors.gray,
     fontFamily: GlobalFonts.bold,
     borderWidth: 0,
@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
   },
   singleMenuItem: {
     width: '100%',
+    // borderWidth: 1,
   },
   menuText: {
     fontSize: responsiveFontSize(20),
