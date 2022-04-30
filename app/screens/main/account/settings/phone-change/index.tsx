@@ -8,6 +8,7 @@ import { IAppState } from 'store/IAppState';
 import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
 import { styles } from './styles';
 import PhoneNumberWithLabel from 'components/base/phone-with-label';
+import { logNow } from 'utils/functions/log-binder';
 
 const PhoneChangeScreen = () => {
   const [countryCode, setCountryCode] = useState<any>();
@@ -19,6 +20,7 @@ const PhoneChangeScreen = () => {
 
   useEffect(() => {
     const phoneNumber = parsePhoneNumber(userContacts.mobile);
+    logNow('parsed phone', phoneNumber?.countryCallingCode);
     setCountryCode(phoneNumber?.country);
     setNumber(phoneNumber?.nationalNumber);
   }, [userContacts]);
@@ -29,7 +31,7 @@ const PhoneChangeScreen = () => {
         <View style={styles.container}>
           <Text style={styles.phoneText}>Mobile Number</Text>
           <PhoneNumberWithLabel
-            country={countryCode}
+            countryCode={countryCode}
             number={number}
             disabled={true}
             placeholder={number}

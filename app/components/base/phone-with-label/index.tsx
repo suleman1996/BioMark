@@ -35,28 +35,30 @@ const PhoneNumberWithLabel = ({
   // const [phoneNumber, setPhoneNumber] = useState('');
 
   return (
-    <View style={styles.container}>
-      {label ? <Text style={styles.label}>{label}</Text> : null}
-      <View>
+    <>
+      <View style={styles.container}>
         {disabled ? <View style={styles.disableContainer} /> : null}
-        <PhoneNumber
-          countryCode={countryCode}
-          setCountryCode={setCountryCode}
-          phoneNumber={number}
-          setPhoneNumber={setPhoneNumber}
-          setSelectCountryCode={setSelectCountryCode}
-          width={'100%'}
-          placeholder={placeholder}
-          maxLength={undefined}
-        />
-      </View>
-      {error ? (
-        <View style={styles.errorContainer}>
-          <BioDangerWhite width={3.5} height={3.5} />
-          <Text style={styles.errorText}>{error}</Text>
+        {label ? <Text style={styles.label}>{label}</Text> : null}
+        <View>
+          <PhoneNumber
+            countryCode={countryCode}
+            setCountryCode={setCountryCode}
+            phoneNumber={number}
+            setPhoneNumber={setPhoneNumber}
+            setSelectCountryCode={setSelectCountryCode}
+            width={'100%'}
+            placeholder={placeholder}
+            maxLength={undefined}
+          />
         </View>
-      ) : null}
-    </View>
+        {error ? (
+          <View style={styles.errorContainer}>
+            <BioDangerWhite width={3.5} height={3.5} />
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+        ) : null}
+      </View>
+    </>
   );
 };
 
@@ -77,6 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     width: '100%',
     height: '100%',
+    flex: 1,
   },
   phoneContainer: {
     zIndex: 999,
