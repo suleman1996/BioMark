@@ -44,9 +44,9 @@ export default function Signup() {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
-    { id: 0, sex: 'Male' },
-    { id: 1, sex: 'Female' },
-    { id: 2, sex: 'Others' },
+    { id: 1, sex: 'Male' },
+    { id: 2, sex: 'Female' },
+    { id: 3, sex: 'Others' },
   ]);
   const [selectedGender, setSelectedGender] = useState('');
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
