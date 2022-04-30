@@ -120,7 +120,10 @@ const EmailChangeScreen = () => {
                 />
               </View>
             </TitleWithBackWhiteBgLayout>
-            <ErrorLineFullWidth error={errors.email || errors.confirmEmail} />
+            <ErrorLineFullWidth error={values.email ? errors.email : ''} />
+            <ErrorLineFullWidth
+              error={values.confirmEmail ? errors.confirmEmail : ''}
+            />
             <View style={GlobalStyles.bottomBtnWithShadow}>
               <ButtonComponent
                 onPress={() => {

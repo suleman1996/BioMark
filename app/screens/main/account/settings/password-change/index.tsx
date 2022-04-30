@@ -13,9 +13,12 @@ import { goBack, navigate } from 'services/nav-ref';
 import { ErrorResponse } from 'types/ErrorResponse';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalStyles } from 'utils/theme/global-styles';
 import * as Yup from 'yup';
 import { styles } from './styles';
+
+const passText = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
 const PasswordChangeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -108,10 +111,11 @@ const PasswordChangeScreen = () => {
               <>
                 <ScrollView style={{ flex: 1 }}>
                   <PasswordInputWithLabel
+                    marginTop={1}
                     label={'Current Password'}
                     placeholder={'Enter your current password'}
                     isSecure={eCurrent}
-                    password={''}
+                    password={values.password}
                     setHidePassword={() => setECurrent(!eCurrent)}
                     hidePassword={eCurrent}
                     onChange={handleChange('currentPassword')}
@@ -120,12 +124,19 @@ const PasswordChangeScreen = () => {
                     <ErrorText text={errors.currentPassword} />
                   )}
                   <Text
-                    style={[styles.textHeader, { marginTop: heightToDp(4) }]}
+                    style={[
+                      styles.textHeader,
+                      {
+                        marginTop: heightToDp(4),
+                        letterSpacing: -0.5,
+                        lineHeight: responsiveFontSize(25),
+                      },
+                    ]}
                   >
-                    Your new password must be at least 8 characters, include a
-                    symbol, a capital letter and a number.
+                    {passText}
                   </Text>
                   <PasswordInputWithLabel
+                    marginTop={0.3}
                     label={'Enter new password'}
                     placeholder={'Enter your current password'}
                     isSecure={ePass}
@@ -162,6 +173,7 @@ const PasswordChangeScreen = () => {
                     <ErrorText text={errors.currentPassword} />
                   )}
                   <PasswordInputWithLabel
+                    marginTop={-2}
                     label={'Confirm New Password'}
                     placeholder={'Enter your current password'}
                     isSecure={eConfirm}

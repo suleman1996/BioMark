@@ -15,6 +15,7 @@ type Props = {
   setHidePassword: any;
   hidePassword: boolean;
   onChange: any;
+  marginTop?: number;
 };
 
 const PasswordInputWithLabel = ({
@@ -25,14 +26,19 @@ const PasswordInputWithLabel = ({
   setHidePassword,
   hidePassword,
   onChange,
+  marginTop,
 }: Props) => {
+  let otherStyles = [];
+  if (marginTop) {
+    otherStyles.push({ marginTop: heightToDp(marginTop) });
+  }
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, otherStyles]}>
       <Text style={[styles.inputLabel]}>{label}</Text>
       <TextInput
         placeholder={placeholder}
         secureTextEntry={isSecure}
-        eye={!isSecure ? 'eye-off' : 'eye'}
+        eye={isSecure ? 'eye-off' : 'eye'}
         value={password}
         onEyePress={() => {
           setHidePassword(!hidePassword);

@@ -26,6 +26,7 @@ const SettingsScreen = () => {
     userService
       .getUserContacts()
       .then((res) => {
+        logNow(res);
         dispatch(addUserContactsDetails(res));
       })
       .catch(() => {})
