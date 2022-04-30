@@ -1,13 +1,12 @@
 import ButtonComponent from 'components/base/button';
 import DependantsList from 'components/ui/dependants-list';
 import { Nav_Screens } from 'navigation/constants/index';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { dependentService } from 'services/account-service/dependent-service';
+import { useDispatch, useSelector } from 'react-redux';
 import { navigate } from 'services/nav-ref';
-import { DependentData } from 'types/api/dependent';
-import { ErrorResponse } from 'types/ErrorResponse';
-import { logNow } from 'utils/functions/log-binder';
+import { getAllDependents } from 'store/account/account-actions';
+import { IAppState } from 'store/IAppState';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
@@ -16,24 +15,17 @@ type Props = {
 
 const DependantsScreen = (props: Props) => {
   const {} = props;
-  const [data, setData] = useState<Array<DependentData>>([]);
+  // const [data, setData] = useState<Array<DependentData>>([]);
 
-  const getAllDependents = () => {
-    dependentService
-      .getAllDependents()
-      .then((res) => {
-        logNow(res);
-        setData(res);
-      })
-      .catch((err: ErrorResponse) => {
-        logNow(err);
-      });
-  };
+  const data = useSelector((state: IAppState) => state.account.allDependents);
+
+  const dispatch = useDispatch();
+  /*eslint-disable*/
 
   useEffect(() => {
-    getAllDependents();
+    dispatch(getAllDependents());
   }, []);
-
+  /*eslint-enable*/
   return (
     <View style={styles.container}>
       <DependantsList data={data} />

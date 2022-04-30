@@ -19,7 +19,7 @@ const BoxSelector = ({
   label,
   value,
   onChange,
-  isTitleSelect,
+  isTitleSelect = false,
 }: Props) => {
   const selectedStyles = { backgroundColor: GlobalColors.primary };
   const selectedTextStyle = { color: GlobalColors.white };

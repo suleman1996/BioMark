@@ -37,7 +37,9 @@ const DependantsList = (props: Props) => {
           <Text style={styles.headerTitle}>{name}</Text>
           <View style={styles.headerEnd}>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Edit_Dependants)}
+              onPress={() =>
+                navigate(Nav_Screens.Edit_Dependants, { id: item?.id })
+              }
               style={styles.editBtn}
             >
               <Text style={styles.editText}>Edit</Text>

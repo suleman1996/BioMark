@@ -9,8 +9,10 @@ import { Regex } from 'constants/regex';
 import { Formik } from 'formik';
 import React, { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { dependentService } from 'services/account-service/dependent-service';
 import { goBack } from 'services/nav-ref';
+import { getAllDependents } from 'store/account/account-actions';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -23,6 +25,7 @@ import { GenderEnum } from '../../../../../enum/GenderEnum';
 
 const AddDependantScreen = () => {
   const formikRef = useRef<any>();
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,20 +65,20 @@ const AddDependantScreen = () => {
       phone_number,
       gender_id, // 1 = Male, 2 = Female, 3 = Others
     } = formikRef.current.values;
-    // logNow({
-    //   first_name,
-    //   last_name,
-    //   document_type, //Either 'id_card' or 'passport'
-    //   dependent_type_id, //From get dependent types
-    //   id_number,
-    //   birth_date,
-    //   email,
-    //   phone_number: `${selectedCountryCode}${phone_number}`,
-    //   gender_id, // 1 = Male, 2 = Female, 3 = Others
-    //   country_code: countryCode,
-    //   country_phone_code: `${selectedCountryCode}`,
-    // });
-    const pN = `+${selectedCountryCode}${phone_number}`;
+    logNow({
+      first_name,
+      last_name,
+      document_type, //Either 'id_card' or 'passport'
+      dependent_type_id, //From get dependent types
+      id_number,
+      birth_date,
+      email,
+      phone_number: `${selectedCountryCode}${phone_number}`,
+      gender_id, // 1 = Male, 2 = Female, 3 = Others
+      country_code: countryCode,
+      country_phone_code: `${selectedCountryCode}`,
+    });
+    const pN = `${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
     setIsLoading(true);
     dependentService
@@ -98,8 +101,9 @@ const AddDependantScreen = () => {
       .catch((err) => {
         logNow(err);
       })
-      .finally(() => {
+      .finally(async () => {
         setIsLoading(false);
+        await dispatch(getAllDependents());
         goBack();
       });
     formikRef.current.submitForm();
@@ -107,10 +111,11 @@ const AddDependantScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ActivityIndicator visible={isLoading} />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: heightToDp(20) }}
+          contentContainerStyle={{ paddingBottom: heightToDp(10) }}
         >
           <Text style={styles.headerText}>Enter your Dependant Details</Text>
           <Formik
@@ -143,7 +148,6 @@ const AddDependantScreen = () => {
               // touched,
             }) => (
               <>
-                <ActivityIndicator visible={isLoading} />
                 <InputWithLabel
                   label="First Name"
                   placeholder={''}
@@ -198,7 +202,7 @@ const AddDependantScreen = () => {
                   error={errors.id_number}
                 />
                 <BoxSelector
-                  onChange={(e: any) => setFieldValue('birth_date', e)}
+                  onChange={(e: any) => setFieldValue('gender_id', e)}
                   value={values.gender_id}
                   label={'Gender'}
                   options={GenderEnum}

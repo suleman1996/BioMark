@@ -7,10 +7,14 @@ import RelationMenu from 'components/higher-order/relation-menu';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { Regex } from 'constants/regex';
 import { Formik } from 'formik';
-import React, { useRef, useState } from 'react';
+import { parsePhoneNumber } from 'libphonenumber-js';
+import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { dependentService } from 'services/account-service/dependent-service';
 import { goBack } from 'services/nav-ref';
+import { getAllDependents } from 'store/account/account-actions';
+import { DependentSingleGetResponse } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -21,13 +25,49 @@ import * as Yup from 'yup';
 import { DependentTypeEnum } from '../../../../../enum/DependentTypeEnum';
 import { GenderEnum } from '../../../../../enum/GenderEnum';
 
-const EditDependantScreen = () => {
+type Props = {
+  route?: any;
+};
+
+const EditDependantScreen = (props: Props) => {
+  const dispatch = useDispatch();
+  const [nationalNumber, setNationalNumber] = useState<any>();
+
+  const id = props.route?.params?.id;
+
   const formikRef = useRef<any>();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [countryCode, setCountryCode] = useState('MY');
   const [selectedCountryCode, setSelectedCountryCode] = useState('+60');
+
+  const [dependentData, setDependentData] =
+    useState<DependentSingleGetResponse>();
+  /*eslint-disable */
+  const getDependentData = async () => {
+    setIsLoading(true);
+    dependentService
+      .getSingleDependentData(id)
+      .then((res: any) => {
+        logNow('single dependent response', res);
+        setDependentData(res);
+        const phoneNumber: any = parsePhoneNumber(res.dependent_mobile_number);
+        setCountryCode(phoneNumber?.country);
+        setNationalNumber(phoneNumber?.nationalNumber);
+      })
+      .catch((err) => {
+        goBack();
+        logNow('get single dependent error', err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getDependentData();
+  }, [id]);
 
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
@@ -75,11 +115,12 @@ const EditDependantScreen = () => {
       country_code: countryCode,
       country_phone_code: `${selectedCountryCode}`,
     });
-    const pN = `+${selectedCountryCode}${phone_number}`;
+    const pN = `${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
     setIsLoading(true);
     dependentService
-      .createDependent(
+      .editDependent(
+        id,
         first_name,
         last_name,
         document_type,
@@ -98,8 +139,9 @@ const EditDependantScreen = () => {
       .catch((err) => {
         logNow(err);
       })
-      .finally(() => {
+      .finally(async () => {
         setIsLoading(false);
+        await dispatch(getAllDependents());
         goBack();
       });
     formikRef.current.submitForm();
@@ -107,6 +149,7 @@ const EditDependantScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ActivityIndicator visible={isLoading} />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -115,16 +158,17 @@ const EditDependantScreen = () => {
           <Text style={styles.headerText}>Enter your Dependant Details</Text>
           <Formik
             innerRef={formikRef}
+            enableReinitialize
             initialValues={{
-              first_name: '',
-              last_name: '',
-              document_type: '',
-              dependent_type_id: '',
-              id_number: '',
-              birth_date: '01-01-1990',
-              email: '',
-              phone_number: '',
-              gender_id: 1,
+              first_name: dependentData?.first_name,
+              last_name: dependentData?.last_name,
+              document_type: dependentData?.document_type,
+              dependent_type_id: dependentData?.dependent_type_id,
+              id_number: dependentData?.id_number,
+              birth_date: dependentData?.dependent_dob,
+              email: dependentData?.dependent_email,
+              phone_number: nationalNumber,
+              gender_id: dependentData?.dependent_gender,
             }}
             onSubmit={() => {
               onSubmit;
@@ -143,7 +187,6 @@ const EditDependantScreen = () => {
               // touched,
             }) => (
               <>
-                <ActivityIndicator visible={isLoading} />
                 <InputWithLabel
                   label="First Name"
                   placeholder={''}
@@ -198,7 +241,7 @@ const EditDependantScreen = () => {
                   error={errors.id_number}
                 />
                 <BoxSelector
-                  onChange={(e: any) => setFieldValue('birth_date', e)}
+                  onChange={(e: any) => setFieldValue('gender_id', e)}
                   value={values.gender_id}
                   label={'Gender'}
                   options={GenderEnum}
@@ -206,6 +249,7 @@ const EditDependantScreen = () => {
                 <RelationMenu
                   onChange={(e: any) => setFieldValue('dependent_type_id', e)}
                   label={'Relation'}
+                  optionValue={values.dependent_type_id}
                   options={DependentTypeEnum}
                 />
                 <BoxSelector

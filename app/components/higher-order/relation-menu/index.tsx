@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {
   Menu,
@@ -17,11 +17,16 @@ type Props = {
   label: string;
   options: any;
   onChange: any;
+  optionValue: any;
 };
 
-const RelationMenu = ({ label, options, onChange }: Props) => {
+const RelationMenu = ({ label, options, onChange, optionValue }: Props) => {
   const menuRef = useRef<any>();
   const [selected, setSelected] = useState();
+
+  useEffect(() => {
+    setSelected(optionValue);
+  }, [optionValue]);
 
   return (
     <View style={styles.main}>
