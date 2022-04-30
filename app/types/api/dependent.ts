@@ -8,6 +8,10 @@ export interface DependentRequest {
   };
 }
 
+export interface DependentSaveResponse {
+  message: string;
+}
+
 export interface DependentData {
   id: number;
   first_name: string;

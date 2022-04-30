@@ -1,13 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
-
 import PhoneNumber from 'components/phone-number';
-
+import BioDangerWhite from 'components/svg/bio-danger-white';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import BioDangerWhite from 'components/svg/bio-danger-white';
 
 type Props = {
   label?: string;
@@ -18,6 +16,7 @@ type Props = {
   setPhoneNumber: any;
   error?: string;
   setCountryCode: any;
+  setSelectCountryCode: any;
 };
 
 const PhoneNumberWithLabel = ({
@@ -29,9 +28,9 @@ const PhoneNumberWithLabel = ({
   number,
   error,
   setCountryCode,
+  setSelectCountryCode,
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectCountryCode, setSelectCountryCode] = useState('PK');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // const [phoneNumber, setPhoneNumber] = useState('');
 

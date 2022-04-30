@@ -4,7 +4,15 @@ import { BarIndicator } from 'react-native-indicators';
 
 import colors from 'assets/colors';
 
-export default function ActivityIndicator({ visible = false, fontSize }) {
+type Props = {
+  visible: boolean;
+  fontSize?: any;
+};
+
+export default function ActivityIndicator({
+  visible = false,
+  fontSize,
+}: Props) {
   if (!visible) {
     return null;
   }

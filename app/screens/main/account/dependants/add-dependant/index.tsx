@@ -4,10 +4,13 @@ import InputWithLabel from 'components/base/input-with-label';
 import PhoneNumberWithLabel from 'components/base/phone-with-label/index';
 import BoxSelector from 'components/higher-order/box-selector';
 import RelationMenu from 'components/higher-order/relation-menu';
+import ActivityIndicator from 'components/loader/activity-indicator';
 import { Regex } from 'constants/regex';
 import { Formik } from 'formik';
 import React, { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { dependentService } from 'services/account-service/dependent-service';
+import { goBack } from 'services/nav-ref';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -21,7 +24,10 @@ import { GenderEnum } from '../../../../../enum/GenderEnum';
 const AddDependantScreen = () => {
   const formikRef = useRef<any>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [countryCode, setCountryCode] = useState('MY');
+  const [selectedCountryCode, setSelectedCountryCode] = useState('+60');
 
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
@@ -33,7 +39,7 @@ const AddDependantScreen = () => {
     document_type: Yup.string().required(''),
     dependent_type_id: Yup.string().required(''),
     id_number: Yup.string()
-      .matches(Regex.numberReg, 'Enter valid NRIC / Passport')
+      .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
       .required('NRIC / Passport is required'),
     // birth_date: Yup.string().required(''),
     email: Yup.string()
@@ -45,8 +51,57 @@ const AddDependantScreen = () => {
   });
 
   const onSubmit = () => {
-    const values = formikRef.current.values;
-    logNow(values);
+    const {
+      first_name,
+      last_name,
+      document_type, //Either 'id_card' or 'passport'
+      dependent_type_id, //From get dependent types
+      id_number,
+      birth_date,
+      email,
+      phone_number,
+      gender_id, // 1 = Male, 2 = Female, 3 = Others
+    } = formikRef.current.values;
+    // logNow({
+    //   first_name,
+    //   last_name,
+    //   document_type, //Either 'id_card' or 'passport'
+    //   dependent_type_id, //From get dependent types
+    //   id_number,
+    //   birth_date,
+    //   email,
+    //   phone_number: `${selectedCountryCode}${phone_number}`,
+    //   gender_id, // 1 = Male, 2 = Female, 3 = Others
+    //   country_code: countryCode,
+    //   country_phone_code: `${selectedCountryCode}`,
+    // });
+    const pN = `+${selectedCountryCode}${phone_number}`;
+    const cPC = `+${selectedCountryCode}`;
+    setIsLoading(true);
+    dependentService
+      .createDependent(
+        first_name,
+        last_name,
+        document_type,
+        dependent_type_id,
+        id_number,
+        birth_date,
+        email,
+        pN,
+        gender_id,
+        countryCode,
+        cPC
+      )
+      .then((res) => {
+        logNow(res);
+      })
+      .catch((err) => {
+        logNow(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        goBack();
+      });
     formikRef.current.submitForm();
   };
 
@@ -72,7 +127,7 @@ const AddDependantScreen = () => {
               gender_id: 1,
             }}
             onSubmit={() => {
-              onSubmit;
+              logNow('Hello');
             }}
             validationSchema={AddDependentSchema}
           >
@@ -88,6 +143,7 @@ const AddDependantScreen = () => {
               // touched,
             }) => (
               <>
+                <ActivityIndicator visible={isLoading} />
                 <InputWithLabel
                   label="First Name"
                   placeholder={''}
@@ -107,10 +163,13 @@ const AddDependantScreen = () => {
                   placeholder={''}
                   disabled={false}
                   number={values.phone_number}
-                  setPhoneNumber={handleChange('phone_number')}
+                  setPhoneNumber={(e: any) => {
+                    setFieldValue('phone_number', e);
+                  }}
                   countryCode={countryCode}
                   error={errors.phone_number}
                   setCountryCode={setCountryCode}
+                  setSelectCountryCode={setSelectedCountryCode}
                 />
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
@@ -153,10 +212,9 @@ const AddDependantScreen = () => {
                   onChange={(e: any) => setFieldValue('document_type', e)}
                   value={values.document_type}
                   label={'Document Type'}
-                  isTitleSelect
                   options={[
-                    { id: 1, title: 'IC' },
-                    { id: 2, title: 'Passport' },
+                    { id: 'id_card', title: 'IC' },
+                    { id: 'passport', title: 'Passport' },
                   ]}
                 />
                 <View style={styles.bottomBtnContainer}>

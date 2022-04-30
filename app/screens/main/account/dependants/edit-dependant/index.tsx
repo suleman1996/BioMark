@@ -1,19 +1,110 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import React from 'react';
-
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalStyles } from 'utils/theme/global-styles';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
+import ButtonComponent from 'components/base/button';
+import DateTimePickerModalComponent from 'components/base/dateTimePickerModal';
 import InputWithLabel from 'components/base/input-with-label';
 import PhoneNumberWithLabel from 'components/base/phone-with-label/index';
-import DatePicker from 'components/date-picker';
 import BoxSelector from 'components/higher-order/box-selector';
 import RelationMenu from 'components/higher-order/relation-menu';
-import ButtonComponent from 'components/base/button';
+import ActivityIndicator from 'components/loader/activity-indicator';
+import { Regex } from 'constants/regex';
+import { Formik } from 'formik';
+import React, { useRef, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { dependentService } from 'services/account-service/dependent-service';
+import { goBack } from 'services/nav-ref';
+import { logNow } from 'utils/functions/log-binder';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
+import { GlobalStyles } from 'utils/theme/global-styles';
+import * as Yup from 'yup';
+import { DependentTypeEnum } from '../../../../../enum/DependentTypeEnum';
+import { GenderEnum } from '../../../../../enum/GenderEnum';
 
 const EditDependantScreen = () => {
+  const formikRef = useRef<any>();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [countryCode, setCountryCode] = useState('MY');
+  const [selectedCountryCode, setSelectedCountryCode] = useState('+60');
+
+  const AddDependentSchema = Yup.object({
+    first_name: Yup.string()
+      .matches(/^[A-Za-z ]*$/, 'Please enter valid first name')
+      .required('Firstname is required'),
+    last_name: Yup.string()
+      .matches(/^[A-Za-z ]*$/, 'Please enter valid last name')
+      .required('Firstname is required'),
+    document_type: Yup.string().required(''),
+    dependent_type_id: Yup.string().required(''),
+    id_number: Yup.string()
+      .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
+      .required('NRIC / Passport is required'),
+    // birth_date: Yup.string().required(''),
+    email: Yup.string()
+      .email('Enter valid email address')
+      .required('Email is required'),
+    phone_number: Yup.string()
+      .matches(Regex.numberReg, 'Enter valid phone number')
+      .required('Please provide your phone number'),
+  });
+
+  const onSubmit = () => {
+    const {
+      first_name,
+      last_name,
+      document_type, //Either 'id_card' or 'passport'
+      dependent_type_id, //From get dependent types
+      id_number,
+      birth_date,
+      email,
+      phone_number,
+      gender_id, // 1 = Male, 2 = Female, 3 = Others
+    } = formikRef.current.values;
+    logNow({
+      first_name,
+      last_name,
+      document_type, //Either 'id_card' or 'passport'
+      dependent_type_id, //From get dependent types
+      id_number,
+      birth_date,
+      email,
+      phone_number: `${selectedCountryCode}${phone_number}`,
+      gender_id, // 1 = Male, 2 = Female, 3 = Others
+      country_code: countryCode,
+      country_phone_code: `${selectedCountryCode}`,
+    });
+    const pN = `+${selectedCountryCode}${phone_number}`;
+    const cPC = `+${selectedCountryCode}`;
+    setIsLoading(true);
+    dependentService
+      .createDependent(
+        first_name,
+        last_name,
+        document_type,
+        dependent_type_id,
+        id_number,
+        birth_date,
+        email,
+        pN,
+        gender_id,
+        countryCode,
+        cPC
+      )
+      .then((res) => {
+        logNow(res);
+      })
+      .catch((err) => {
+        logNow(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        goBack();
+      });
+    formikRef.current.submitForm();
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
@@ -22,22 +113,120 @@ const EditDependantScreen = () => {
           contentContainerStyle={{ paddingBottom: heightToDp(20) }}
         >
           <Text style={styles.headerText}>Enter your Dependant Details</Text>
-          <InputWithLabel label="First Name" placeholder={''} />
-          <InputWithLabel label="Last Name" placeholder={''} />
-          <PhoneNumberWithLabel label="Mobile Number" placeholder={''} />
-          <InputWithLabel placeholder="E.g. Sample@email.com" label="Email" />
-          <Text style={styles.label}>Date of Birth</Text>
-          <DatePicker width={'100%'} />
-          <InputWithLabel label="NRIC /Passport Number" placeholder={''} />
-          <BoxSelector
-            label={'Gender'}
-            options={['Male', 'Female', 'Others']}
-          />
-          <RelationMenu label={'Relation'} options={undefined} />
-          <BoxSelector label={'Document Type'} options={['IC', 'Passport']} />
-          <View style={styles.bottomBtnContainer}>
-            <ButtonComponent onPress={undefined} title={'Add New Dependant'} />
-          </View>
+          <Formik
+            innerRef={formikRef}
+            initialValues={{
+              first_name: '',
+              last_name: '',
+              document_type: '',
+              dependent_type_id: '',
+              id_number: '',
+              birth_date: '01-01-1990',
+              email: '',
+              phone_number: '',
+              gender_id: 1,
+            }}
+            onSubmit={() => {
+              onSubmit;
+            }}
+            validationSchema={AddDependentSchema}
+          >
+            {({
+              handleChange,
+              // handleSubmit,
+              // setFieldTouched,
+              errors,
+              values,
+              // isSubmitting,
+              isValid,
+              setFieldValue,
+              // touched,
+            }) => (
+              <>
+                <ActivityIndicator visible={isLoading} />
+                <InputWithLabel
+                  label="First Name"
+                  placeholder={''}
+                  onChange={handleChange('first_name')}
+                  value={values.first_name}
+                  error={errors.first_name}
+                />
+                <InputWithLabel
+                  label="Last Name"
+                  placeholder={''}
+                  onChange={handleChange('last_name')}
+                  value={values.last_name}
+                  error={errors.last_name}
+                />
+                <PhoneNumberWithLabel
+                  label="Mobile Number"
+                  placeholder={''}
+                  disabled={false}
+                  number={values.phone_number}
+                  setPhoneNumber={(e: any) => {
+                    setFieldValue('phone_number', e);
+                  }}
+                  countryCode={countryCode}
+                  error={errors.phone_number}
+                  setCountryCode={setCountryCode}
+                  setSelectCountryCode={setSelectedCountryCode}
+                />
+                <InputWithLabel
+                  placeholder="E.g. Sample@email.com"
+                  label="Email"
+                  onChange={handleChange('email')}
+                  value={values.email}
+                  error={errors.email}
+                />
+                <Text style={styles.label}>Date of Birth</Text>
+                <DateTimePickerModalComponent
+                  date={values.birth_date}
+                  setDate={(e: any) => setFieldValue('birth_date', e)}
+                />
+                {/* <DatePicker
+                  width={'100%'}
+                  date={new Date('Jan-01-1990')}
+                  setDate={(e: any) => setFieldValue('birth_date', e)}
+                  isPickerShow={isDatePicker}
+                  setIsPickerShow={setIsDatePicker}
+                /> */}
+                <InputWithLabel
+                  label="NRIC /Passport Number"
+                  placeholder={''}
+                  onChange={handleChange('id_number')}
+                  value={values.id_number}
+                  error={errors.id_number}
+                />
+                <BoxSelector
+                  onChange={(e: any) => setFieldValue('birth_date', e)}
+                  value={values.gender_id}
+                  label={'Gender'}
+                  options={GenderEnum}
+                />
+                <RelationMenu
+                  onChange={(e: any) => setFieldValue('dependent_type_id', e)}
+                  label={'Relation'}
+                  options={DependentTypeEnum}
+                />
+                <BoxSelector
+                  onChange={(e: any) => setFieldValue('document_type', e)}
+                  value={values.document_type}
+                  label={'Document Type'}
+                  options={[
+                    { id: 'id_card', title: 'IC' },
+                    { id: 'passport', title: 'Passport' },
+                  ]}
+                />
+                <View style={styles.bottomBtnContainer}>
+                  <ButtonComponent
+                    disabled={!isValid || !values.first_name}
+                    onPress={() => onSubmit()}
+                    title={'Confirm'}
+                  />
+                </View>
+              </>
+            )}
+          </Formik>
         </ScrollView>
       </View>
     </View>

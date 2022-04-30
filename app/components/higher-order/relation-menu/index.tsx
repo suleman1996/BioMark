@@ -21,7 +21,7 @@ type Props = {
 
 const RelationMenu = ({ label, options, onChange }: Props) => {
   const menuRef = useRef<any>();
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState();
 
   return (
     <View style={styles.main}>
@@ -38,7 +38,9 @@ const RelationMenu = ({ label, options, onChange }: Props) => {
           text={options[selected - 1]?.name}
           placeholder="Select"
         >
-          <Text>{selected}</Text>
+          <Text>
+            {options[selected - 1]?.name ? options[selected - 1]?.name : label}
+          </Text>
         </MenuTrigger>
         <MenuOptions optionsContainerStyle={styles.popupMenu}>
           {options?.map((item: any, index: number) => (

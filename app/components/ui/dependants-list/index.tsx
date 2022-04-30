@@ -4,14 +4,56 @@ import { Nav_Screens } from 'navigation/constants/index';
 import React, { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { navigate } from 'services/nav-ref';
+import { DependentData } from 'types/api/dependent';
+import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
-const DependantsList = () => {
+type Props = {
+  data: DependentData[];
+};
+
+const DependantsList = (props: Props) => {
+  const { data } = props;
   const [isDelete, setIsDelete] = useState(false);
+
+  const singleItem = ({ item }: { item: DependentData }) => {
+    const {
+      name = '',
+      relation = '',
+      id = '',
+    } = {
+      name: item?.name,
+      relation: item?.type,
+      id: item?.id,
+    };
+    logNow(id);
+    return (
+      <View style={styles.cardItem}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>{name}</Text>
+          <View style={styles.headerEnd}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Edit_Dependants)}
+              style={styles.editBtn}
+            >
+              <Text style={styles.editText}>Edit</Text>
+            </Pressable>
+            <Pressable onPress={() => setIsDelete(true)}>
+              <BioBinIcon width={5} height={5} />
+            </Pressable>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={styles.relationText}>Relation: </Text>
+          <Text style={styles.relationWithText}>{relation}</Text>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -23,33 +65,8 @@ const DependantsList = () => {
       />
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={['1', '2', '3', '4', '5', '6', '7', '8']}
-        renderItem={() => {
-          return (
-            <View style={styles.cardItem}>
-              <View style={styles.header}>
-                <Text style={styles.headerTitle}>Deku Midoriya</Text>
-                <View style={styles.headerEnd}>
-                  <Pressable
-                    onPress={() => navigate(Nav_Screens.Edit_Dependants)}
-                    style={styles.editBtn}
-                  >
-                    <Text style={styles.editText}>Edit</Text>
-                  </Pressable>
-                  <Pressable onPress={() => setIsDelete(true)}>
-                    <BioBinIcon width={5} height={5} />
-                  </Pressable>
-                </View>
-              </View>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={styles.relationText}>Relation: </Text>
-                <Text style={styles.relationWithText}>
-                  Parents / Parent's in law
-                </Text>
-              </View>
-            </View>
-          );
-        }}
+        data={data}
+        renderItem={singleItem}
       />
     </View>
   );
