@@ -129,7 +129,10 @@ const AccountMenu = (props) => {
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => Linking.openURL(Config.ABOUT_US)}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioAboutIcon width={5} height={5} />
