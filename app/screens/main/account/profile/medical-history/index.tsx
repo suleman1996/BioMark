@@ -16,8 +16,22 @@ import GoutModal from './modals/gout';
 import HighBloodPressureModal from './modals/high-blood-pressure';
 import HighCholesterolModal from './modals/high-cholesterol';
 import OthersModal from './modals/others';
+import DropdownMenuComponent from 'components/base/dropdown-menu';
+
+const options = [
+  { id: 1, title: '---' },
+  { id: 1, title: 'Caucasian' },
+  { id: 1, title: 'Chinese' },
+  { id: 1, title: 'Filpino' },
+  { id: 1, title: 'Indian' },
+  { id: 1, title: 'Malay' },
+  { id: 1, title: 'Other / NA' },
+];
 
 const MedicalHistoryScreen = () => {
+  const [dropdownValue, setDropdown] = useState();
+  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
+
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
   const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);
   const [isDiabetesModal, setIsDiabetesModal] = useState(false);
@@ -57,8 +71,24 @@ const MedicalHistoryScreen = () => {
       <GoutModal isVisible={isGoutModal} setIsVisible={setIsGoutModal} />
       <CancerModal isVisible={isCancerModal} setIsVisible={setIsCancerModal} />
       <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
+
       {/* modals */}
       <ScrollView style={styles.container}>
+        <DropdownMenuComponent
+          options={options}
+          selectedValue={dropdownValue}
+          onValueChange={(value: any) => {
+            setDropdown(value);
+            setIsDropDownChanged(true);
+          }}
+          error={
+            isDropdownChanged
+              ? dropdownValue === '---'
+                ? 'Please select your ethnicity'
+                : ''
+              : ''
+          }
+        />
         <Text style={styles.label}>
           Have you ever been diagnosed with any of the following conditions?
         </Text>
@@ -125,7 +155,7 @@ export default MedicalHistoryScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: GlobalColors.gray,
+    backgroundColor: GlobalColors.white,
     flex: 1,
     paddingHorizontal: widthToDp(7),
     paddingTop: heightToDp(3),
@@ -134,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(22),
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
+    marginTop: heightToDp(3),
   },
   rowContainer: {
     flexDirection: 'row',
