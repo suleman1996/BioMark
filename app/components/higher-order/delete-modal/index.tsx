@@ -12,9 +12,10 @@ type Props = {
   isVisible: boolean;
   setIsVisible: any;
   subHeading: string;
+  callMe: any;
 };
 
-const DeleteModalComponent = ({ isVisible, setIsVisible }: Props) => {
+const DeleteModalComponent = ({ isVisible, setIsVisible, callMe }: Props) => {
   return (
     <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
@@ -23,7 +24,13 @@ const DeleteModalComponent = ({ isVisible, setIsVisible }: Props) => {
           Are you sure you want to delete profiles
         </Text>
         <View style={styles.buttonsContainer}>
-          <Pressable onPress={() => setIsVisible(false)} style={styles.yesBtn}>
+          <Pressable
+            onPress={() => {
+              setIsVisible(false);
+              callMe();
+            }}
+            style={styles.yesBtn}
+          >
             <Text style={styles.yesBtnText}>Yes</Text>
           </Pressable>
           <Pressable onPress={() => setIsVisible(false)} style={styles.noBtn}>

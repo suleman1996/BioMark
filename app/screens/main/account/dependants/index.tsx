@@ -1,16 +1,34 @@
-import { StyleSheet, View } from 'react-native';
-import React from 'react';
-
 import ButtonComponent from 'components/base/button';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import DependantsList from 'components/ui/dependants-list';
-import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants/index';
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { navigate } from 'services/nav-ref';
+import { getAllDependents } from 'store/account/account-actions';
+import { IAppState } from 'store/IAppState';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
-const DependantsScreen = () => {
+type Props = {
+  navigation: any;
+};
+
+const DependantsScreen = (props: Props) => {
+  const {} = props;
+  // const [data, setData] = useState<Array<DependentData>>([]);
+
+  const data = useSelector((state: IAppState) => state.account.allDependents);
+
+  const dispatch = useDispatch();
+  /*eslint-disable*/
+
+  useEffect(() => {
+    dispatch(getAllDependents());
+  }, []);
+  /*eslint-enable*/
   return (
     <View style={styles.container}>
-      <DependantsList />
+      <DependantsList data={data} />
       <View style={styles.bottomBtnContainer}>
         <ButtonComponent
           onPress={() => navigate(Nav_Screens.Add_Dependants)}
