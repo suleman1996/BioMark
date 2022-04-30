@@ -8,14 +8,16 @@ import { GlobalColors } from 'utils/theme/global-colors';
 type Props = {
   isVisible: boolean;
   children: any;
+  setIsVisible: any;
 };
 
-const ModalComponent = ({ isVisible, children }: Props) => {
+const ModalComponent = ({ isVisible, children, setIsVisible }: Props) => {
   return (
     <View>
       <Modal
         deviceWidth={widthToDp(100)}
         deviceHeight={heightToDp(100)}
+        onBackdropPress={() => setIsVisible(false)}
         backdropColor={GlobalColors.transparentBlack}
         isVisible={isVisible}
       >

@@ -11,9 +11,10 @@ const options = [{ title: 'Type 1 only' }, { title: 'Type 2 only' }];
 
 type Props = {
   isVisible: boolean;
+  setIsVisible: any;
 };
 
-const DiabetesModal = ({ isVisible }: Props) => {
+const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
   //    Have you been diagnosed with diabetes?
   const [ans1, setAns1] = useState(false);
 
@@ -26,6 +27,7 @@ const DiabetesModal = ({ isVisible }: Props) => {
 
   return (
     <ModalWithBottomBtn
+      setIsVisible={setIsVisible}
       isVisible={isVisible}
       title="Diabetes"
       onPress={() => console.log('clicked')}

@@ -5,11 +5,13 @@ import TagsCloudInputComponent from 'components/higher-order/tags-cloud-input';
 
 type Props = {
   isVisible: boolean;
+  setIsVisible: any;
 };
 
-const OthersModal = ({ isVisible }: Props) => {
+const OthersModal = ({ isVisible, setIsVisible }: Props) => {
   return (
     <ModalWithBottomBtn
+      setIsVisible={setIsVisible}
       isVisible={isVisible}
       title="Other"
       onPress={() => console.log('clicked')}

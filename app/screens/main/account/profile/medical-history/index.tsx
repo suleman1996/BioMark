@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalColors.gray,
     flex: 1,
-    paddingHorizontal: widthToDp(4),
+    paddingHorizontal: widthToDp(7),
     paddingTop: heightToDp(3),
   },
   label: {
@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: heightToDp(2),
     justifyContent: 'space-between',
-    paddingHorizontal: widthToDp(4),
     marginBottom: heightToDp(0.5),
   },
 });

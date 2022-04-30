@@ -191,14 +191,14 @@ const EditDependantScreen = (props: Props) => {
                   placeholder={''}
                   onChange={handleChange('first_name')}
                   value={values.first_name}
-                  error={errors.first_name}
+                  error={values.first_name ? errors.first_name : ''}
                 />
                 <InputWithLabel
                   label="Last Name"
                   placeholder={''}
                   onChange={handleChange('last_name')}
                   value={values.last_name}
-                  error={errors.last_name}
+                  error={values.last_name ? errors.last_name : ''}
                 />
                 <PhoneNumberWithLabel
                   label="Mobile Number"
@@ -209,7 +209,7 @@ const EditDependantScreen = (props: Props) => {
                     setFieldValue('phone_number', e);
                   }}
                   countryCode={countryCode}
-                  error={errors.phone_number}
+                  error={values.phone_number ? errors.phone_number : ''}
                   setCountryCode={setCountryCode}
                   setSelectCountryCode={setSelectedCountryCode}
                 />
@@ -218,7 +218,7 @@ const EditDependantScreen = (props: Props) => {
                   label="Email"
                   onChange={handleChange('email')}
                   value={values.email}
-                  error={errors.email}
+                  error={values.email ? errors.email : ''}
                 />
                 <Text style={styles.label}>Date of Birth</Text>
                 <DateTimePickerModalComponent
@@ -237,7 +237,7 @@ const EditDependantScreen = (props: Props) => {
                   placeholder={''}
                   onChange={handleChange('id_number')}
                   value={values.id_number}
-                  error={errors.id_number}
+                  error={values.id_number ? errors.id_number : ''}
                 />
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('gender_id', e)}

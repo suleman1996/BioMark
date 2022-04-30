@@ -5,9 +5,10 @@ import RadioButtonQuestionComponent from 'components/higher-order/radio-question
 
 type Props = {
   isVisible: boolean;
+  setIsVisible: any;
 };
 
-const HighCholesterolModal = ({ isVisible }: Props) => {
+const HighCholesterolModal = ({ isVisible, setIsVisible }: Props) => {
   //    Have you been diagnosed with high cholesterol?
   const [ans1, setAns1] = useState(false);
 
@@ -17,6 +18,7 @@ const HighCholesterolModal = ({ isVisible }: Props) => {
   return (
     <ModalWithBottomBtn
       isVisible={isVisible}
+      setIsVisible={setIsVisible}
       title={'High Cholesterol'}
       onPress={() => console.log('clicked')}
     >
