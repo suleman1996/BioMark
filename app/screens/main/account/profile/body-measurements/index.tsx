@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 import HeightChooserComponent from 'components/higher-order/height-chooser/index';
 import WeightChooserComponent from 'components/higher-order/weight-chooser';
@@ -8,8 +8,11 @@ import { GlobalColors } from 'utils/theme/global-colors';
 import TitleWithBackLayout from 'components/layouts/back-with-title/index';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { goBack } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { navigate } from 'services/nav-ref';
+import { Nav_Screens } from 'navigation/constants';
+import colors from 'assets/colors';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
@@ -22,33 +25,58 @@ const BodyMeasurementScreen = () => {
     setValue2(values);
   };
 
+  const onSubmit = async () => {
+    try {
+      const response = await userService.bodyMeasurement({
+        medical: {
+          height: value,
+          weight: value2,
+          is_metric: true,
+        },
+      });
+      console.log('measurement successful', response.data);
+      navigate(Nav_Screens.Edit_Profile);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <TitleWithBackLayout title="Body Measurements">
       <ScrollView style={styles.container}>
-        <HeightChooserComponent
-          height={15}
-          label="Height"
-          textAlign="right"
-          placeholder={''}
-          onChangeText={onChangeText}
-          value={value}
-        />
-        <WeightChooserComponent
-          height={15}
-          label="Weight"
-          textAlign="right"
-          placeholder={undefined}
-          onChangeText={onChangeText2}
-          value={value2}
+        <View
+          style={{
+            paddingHorizontal: widthToDp(4),
+            // borderWidth: 5,
+            marginBottom: heightToDp(37),
+          }}
+        >
+          <HeightChooserComponent
+            height={15}
+            label="Height"
+            textAlign="right"
+            placeholder={'0'}
+            onChangeText={onChangeText}
+            value={value}
+          />
+          <WeightChooserComponent
+            height={15}
+            label="Weight"
+            textAlign="right"
+            placeholder={'0.0'}
+            onChangeText={onChangeText2}
+            value={value2}
+          />
+        </View>
+        <ButtonWithShadowContainer
+          onPress={() => {
+            goBack();
+          }}
+          title={'Save & Continue'}
         />
       </ScrollView>
 
-      <ButtonWithShadowContainer
-        onPress={() => {
-          goBack();
-        }}
-        title={'Save & Continue'}
-      />
+      <ButtonWithShadowContainer onPress={onSubmit} title={'Save & Continue'} />
     </TitleWithBackLayout>
   );
 };
@@ -57,9 +85,10 @@ export default BodyMeasurementScreen;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: GlobalColors.,
     flex: 1,
-    paddingHorizontal: widthToDp(4),
+    borderColor: 'red',
+    flexDirection: 'column',
+    color: colors.blue,
   },
   label: {
     fontSize: responsiveFontSize(22),

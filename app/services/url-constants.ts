@@ -20,6 +20,8 @@ const API_URLS = {
   Profile_Avatar: '/api/v1/patient/profiles/avatar',
   Update_Profile: '/api/v1/patient/profiles/update',
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
+  GET_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
+  CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
 
   // Dependent
   DEPENDENTS: '/api/v1/patient/dependents',
@@ -31,6 +33,10 @@ const API_URLS = {
   Smoking: '/api/v1/patient/lifestyle/smoking',
   Vaccination: '/api/v1/patient/medical_histories/vaccine',
   Allergies: '/api/v1/patient/medical_histories/allergy',
+  Get_Stress: '/api/v1/patient/stress',
+  Create_Stress: '/api/v1/patient/lifestyle/stress',
+  GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
+  bodyMeasurement: '/api/v1/patient/medical/bm',
 };
 
 export { API_URLS };

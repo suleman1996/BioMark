@@ -309,12 +309,69 @@ const Vaccination = (items: string | number) => {
     },
   });
 };
+type Props = {
+  conditions: any;
+  medical: any;
+};
+const Allergies = ({ conditions }: Props) => {
+  return client.post(API_URLS.Allergies, {
+    medical_history: {
+      has_allergy: true,
+      conditions,
+      // conditions: [
+      //   {
+      //     has_condition: true,
+      //     allergy_to: isMedicationModal,
+      //     allergy_type: 'item1,item2,item3,item4',
+      //   },
+      // ],
+    },
+  });
+};
+
+const bodyMeasurement = ({ medical }: Props) => {
+  return client.post(API_URLS.bodyMeasurement, {
+    medical,
+  });
+};
+
 const updateProfileAvatar = (pic: String) => {
   return client.post(API_URLS.Profile_Avatar, {
     profile: {
       base64: pic,
       filename: 'filename',
       filetype: 'jpg',
+    },
+  });
+};
+
+const getFamilyMedicalHistory = () => {
+  return client.get(API_URLS.GET_FAMILY_MEDICAL_HISTORY);
+};
+
+const createFamilyMedicalHistory = (history: Array<String>) => {
+  return client.post(API_URLS.CREATE_FAMILY_MEDICAL_HISTORY, {
+    medical_history: {
+      conditions: history,
+    },
+  });
+};
+
+const getStress = () => {
+  return client.get(API_URLS.Get_Stress);
+};
+
+const getLifeStyle = () => {
+  return client.get(API_URLS.GET_LIFE_STYLE);
+};
+
+const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
+  return client.post(API_URLS.Create_Stress, {
+    stress: {
+      question1: q1,
+      question2: q2,
+      question3: q3,
+      question4: q4,
     },
   });
 };
@@ -351,10 +408,17 @@ export const userService = {
   saveUserContacts,
   Smoking,
   Vaccination,
+  Allergies,
+  bodyMeasurement,
   createProfile,
   getUserProfile,
   sleeping,
   drinking,
   updateProfileAvatar,
   updateProfile,
+  getFamilyMedicalHistory,
+  createFamilyMedicalHistory,
+  getStress,
+  createStress,
+  getLifeStyle,
 };

@@ -14,7 +14,14 @@ type Props = {
   drop: boolean;
 };
 
-const ModalButtonComponent = ({ title, setIsModal, isModal, drop }: Props) => {
+const ModalButtonComponent = ({
+  title,
+  setIsModal,
+  isModal,
+  drop,
+  history,
+  condition_id,
+}: Props) => {
   const textColor = isModal
     ? { color: GlobalColors.white }
     : { color: GlobalColors.lightGrey };
@@ -26,6 +33,18 @@ const ModalButtonComponent = ({ title, setIsModal, isModal, drop }: Props) => {
     <Pressable
       onPress={() => {
         setIsModal(!isModal);
+        if (!isModal) {
+          history.push({
+            condition_id: condition_id,
+            medical_type: 'family',
+            has_condition: true,
+          });
+        } else {
+          history.splice(
+            history.map((object) => object.condition_id).indexOf(condition_id),
+            1
+          );
+        }
       }}
       style={[styles.container, bgColor]}
     >

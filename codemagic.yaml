@@ -6,10 +6,12 @@ workflows:
     environment:
       groups:
         - keystore_credentials
+        - google_play
       vars:
         FCI_KEYSTORE_PATH: /tmp/keystore.keystore
         FCI_OUTPUT_PATH: android/app/build/outputs/apk/release
-      java: 1.8
+        PACKAGE_NAME: com.biomarking.app.biomark
+      java: 11
       node: 12.18.3
     triggering:
       events:
@@ -41,7 +43,8 @@ workflows:
           # Note that tracks can be specified when retrieving latest build number from Google Play, for example:
           # export NEW_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=alpha) + 1))
           export NEW_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME") + 1))
-          cd android && ./gradlew assembleRelease
+          cd android 
+          chmod +x gradlew && ./gradlew assembleRelease
     artifacts:
       - android/app/build/outputs/**/*.apk
     publishing:

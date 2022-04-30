@@ -26,6 +26,7 @@ import EditProfileModal from 'components/edit-profile-menu';
 import AuthContext from '../../../../../utils/auth-context';
 import { userService } from 'services/user-service/user-service';
 import ActivityIndicator from 'components/loader/activity-indicator';
+import { showMessage } from 'react-native-flash-message';
 
 let cameraIs = false;
 
@@ -282,7 +283,7 @@ const EditProfileScreen = () => {
               >
                 <View style={styles.menuTitleAndIcon}>
                   <MaterialIcons
-                    name="family-restroom"
+                    name="groups"
                     size={responsiveFontSize(22)}
                     color={GlobalColors.darkPrimary}
                   />
@@ -372,7 +373,10 @@ const EditProfileScreen = () => {
                 color={GlobalColors.darkPrimary}
               />
             </Pressable>
-            <View style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Stress)}
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="lightning-bolt"
@@ -386,7 +390,7 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
           </View>
         </View>
         <Text
