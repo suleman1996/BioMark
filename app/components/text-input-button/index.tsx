@@ -33,6 +33,7 @@ const TextInputButton = ({
           style={styles.input}
           activeUnderlineColor="transparent"
           underlineColor="transparent"
+          clearButtonMode="always"
           onChangeText={onChangeText}
         />
         <Pressable style={styles.addBtn} onPress={onPress}>
