@@ -137,9 +137,30 @@ function editDependent(
   });
 }
 
+function deleteSingleDependentData(id: number) {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.DEPENDENTS}/${id}`)
+      .then(async (response) => {
+        try {
+          logNow('get single dependent success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('get single dependent error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get dependent catch error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
 export const dependentService = {
   getAllDependents,
   createDependent,
   getSingleDependentData,
   editDependent,
+  deleteSingleDependentData,
 };

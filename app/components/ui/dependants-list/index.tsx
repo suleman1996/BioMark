@@ -3,7 +3,10 @@ import BioBinIcon from 'components/svg/bio-bin-icon';
 import { Nav_Screens } from 'navigation/constants/index';
 import React, { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { dependentService } from 'services/account-service/dependent-service';
 import { navigate } from 'services/nav-ref';
+import { getAllDependents } from 'store/account/account-actions';
 import { DependentData } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -17,8 +20,20 @@ type Props = {
 };
 
 const DependantsList = (props: Props) => {
+  const dispatch = useDispatch();
   const { data } = props;
   const [isDelete, setIsDelete] = useState(false);
+  const [deleteId, setDeleteId] = useState<any>();
+
+  const deleteSingleDependent = () => {
+    dependentService
+      .deleteSingleDependentData(deleteId)
+      .then(async () => {
+        await dispatch(getAllDependents());
+      })
+      .catch(() => {})
+      .finally(() => {});
+  };
 
   const singleItem = ({ item }: { item: DependentData }) => {
     const {
@@ -44,7 +59,12 @@ const DependantsList = (props: Props) => {
             >
               <Text style={styles.editText}>Edit</Text>
             </Pressable>
-            <Pressable onPress={() => setIsDelete(true)}>
+            <Pressable
+              onPress={() => {
+                setIsDelete(true);
+                setDeleteId(item?.id);
+              }}
+            >
               <BioBinIcon width={5} height={5} />
             </Pressable>
           </View>
@@ -62,6 +82,7 @@ const DependantsList = (props: Props) => {
       <DeleteModalComponent
         isVisible={isDelete}
         setIsVisible={setIsDelete}
+        callMe={deleteSingleDependent}
         heading="Delete Dependants?"
         subHeading="Are you sure you want to delete profiles?"
       />
