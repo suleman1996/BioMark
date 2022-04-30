@@ -1,32 +1,38 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
-
 import PhoneNumber from 'components/phone-number';
-
+import BioDangerWhite from 'components/svg/bio-danger-white';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
   label?: string;
   placeholder: string;
   disabled: boolean;
   number: any;
-  country: any;
+  countryCode: any;
+  setPhoneNumber: any;
+  error?: string;
+  setCountryCode: any;
+  setSelectCountryCode: any;
 };
 
 const PhoneNumberWithLabel = ({
   label,
   placeholder,
   disabled,
-  country,
+  countryCode,
+  setPhoneNumber,
+  number,
+  error,
+  setCountryCode,
+  setSelectCountryCode,
 }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectCountryCode, setSelectCountryCode] = useState('PK');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [countryCode, setCountryCode] = useState('PK');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  // const [phoneNumber, setPhoneNumber] = useState('');
 
   return (
     <View style={styles.container}>
@@ -34,15 +40,22 @@ const PhoneNumberWithLabel = ({
       <View>
         {disabled ? <View style={styles.disableContainer} /> : null}
         <PhoneNumber
-          countryCode={country}
+          countryCode={countryCode}
           setCountryCode={setCountryCode}
-          phoneNumber={phoneNumber}
+          phoneNumber={number}
           setPhoneNumber={setPhoneNumber}
           setSelectCountryCode={setSelectCountryCode}
           width={'100%'}
           placeholder={placeholder}
+          maxLength={undefined}
         />
       </View>
+      {error ? (
+        <View style={styles.errorContainer}>
+          <BioDangerWhite width={3.5} height={3.5} />
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -67,5 +80,21 @@ const styles = StyleSheet.create({
   },
   phoneContainer: {
     zIndex: 999,
+  },
+  errorContainer: {
+    width: '100%',
+    paddingVertical: heightToDp(0.3),
+    paddingHorizontal: widthToDp(4),
+    backgroundColor: GlobalColors.red,
+    borderBottomLeftRadius: widthToDp(2),
+    borderBottomRightRadius: widthToDp(2),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  errorText: {
+    color: GlobalColors.white,
+    fontFamily: GlobalFonts.light,
+    fontSize: responsiveFontSize(14),
+    paddingLeft: widthToDp(3),
   },
 });
