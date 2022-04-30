@@ -7,6 +7,7 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { logNow } from 'utils/functions/log-binder';
+import { dateFormat } from 'utils/functions/dateFormat';
 type Props = {
   date: any;
   setDate: any;
@@ -37,18 +38,19 @@ const DateTimePickerModalComponent = (props: Props) => {
         onPress={() => setDatePickerVisibility(true)}
         style={styles.textContainer}
       >
-        <Text style={styles.dateText}>January</Text>
+        <Text style={styles.dateText}>{dateFormat(date)}</Text>
+        {/* <Text style={styles.dateText}>January</Text>
         <View style={[styles.verticalLine, { flex: 1 }]}>
           <Text style={[styles.dateText]}>01</Text>
         </View>
         <View style={[styles.verticalLine, { flex: 1 }]}>
           <Text style={styles.dateText}>1990</Text>
-        </View>
+        </View> */}
       </Pressable>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
-        onConfirm={handleConfirm}
+        onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}
       />
     </View>

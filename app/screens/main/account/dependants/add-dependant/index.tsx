@@ -6,6 +6,7 @@ import BoxSelector from 'components/higher-order/box-selector';
 import RelationMenu from 'components/higher-order/relation-menu';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { Regex } from 'constants/regex';
+import { format } from 'date-fns';
 import { Formik } from 'formik';
 import React, { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -13,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { dependentService } from 'services/account-service/dependent-service';
 import { goBack } from 'services/nav-ref';
 import { getAllDependents } from 'store/account/account-actions';
+import { dateFormat } from 'utils/functions/dateFormat';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -71,15 +73,16 @@ const AddDependantScreen = () => {
       document_type, //Either 'id_card' or 'passport'
       dependent_type_id, //From get dependent types
       id_number,
-      birth_date,
+      birth_date: dateFormat(birth_date),
       email,
-      phone_number: `${selectedCountryCode}${phone_number}`,
+      phone_number: `+${selectedCountryCode}${phone_number}`,
       gender_id, // 1 = Male, 2 = Female, 3 = Others
       country_code: countryCode,
-      country_phone_code: `${selectedCountryCode}`,
+      country_phone_code: `+${selectedCountryCode}`,
     });
     const pN = `${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
+    const dob = dateFormat(birth_date);
     setIsLoading(true);
     dependentService
       .createDependent(
@@ -88,7 +91,7 @@ const AddDependantScreen = () => {
         document_type,
         dependent_type_id,
         id_number,
-        birth_date,
+        dob,
         email,
         pN,
         gender_id,
@@ -126,7 +129,7 @@ const AddDependantScreen = () => {
               document_type: '',
               dependent_type_id: '',
               id_number: '',
-              birth_date: '01-01-1990',
+              birth_date: format(new Date(1990, 1, 1), 'MM/dd/yyyy'),
               email: '',
               phone_number: '',
               gender_id: 1,
