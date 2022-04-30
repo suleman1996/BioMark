@@ -17,6 +17,7 @@ import { Nav_Screens } from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { userService } from 'services/user-service/user-service';
+import { useIsFocused } from '@react-navigation/native';
 
 type RenderDrinkingProps = {
   title: string;
@@ -28,6 +29,8 @@ type RenderDrinkingProps = {
 };
 
 const Drinking = () => {
+  const isFocus = useIsFocused();
+
   const [value, setValue] = React.useState('');
   const [beer, setBeer] = React.useState(0);
   const [wine, setWine] = React.useState(0);
@@ -73,6 +76,37 @@ const Drinking = () => {
             type: 'danger',
           });
         }
+      }
+    }
+  };
+
+  const handleLifeStyle = async () => {
+    try {
+      setIsVisible(true);
+      const result = await userService.getLifeStyle();
+      setValue(result?.data?.drinking?.is_drinking ? 'second' : 'first');
+      setBeer(result?.data?.drinking?.pints_of_beer);
+      setWine(result?.data?.drinking?.glasses_of_wine);
+      setSpiritss(result?.data?.drinking?.shots_of_spirits);
+      setIsVisible(false);
+    } catch (error) {
+      setIsVisible(false);
+
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
       }
     }
   };
@@ -129,6 +163,10 @@ const Drinking = () => {
       </View>
     </View>
   );
+
+  React.useEffect(() => {
+    handleLifeStyle();
+  }, [isFocus]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -205,7 +243,7 @@ const Drinking = () => {
                   Do you drink alcoholic beverages.?
                 </Text>
                 <RenderDrinking
-                  title="Points of Beer"
+                  title="Pints of Beer"
                   quantity={beer}
                   setter={setBeer}
                   iconLeft={

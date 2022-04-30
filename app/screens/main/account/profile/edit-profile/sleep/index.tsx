@@ -12,8 +12,10 @@ import fonts from 'assets/fonts';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import { userService } from 'services/user-service/user-service';
 import { showMessage } from 'react-native-flash-message';
+import { useIsFocused } from '@react-navigation/native';
 
 const Sleep = () => {
+  const isFocus = useIsFocused();
   const sleepOptions = [
     { title: 'less than 4 hours' },
     { title: '4-7 hours' },
@@ -54,6 +56,47 @@ const Sleep = () => {
       }
     }
   };
+
+  const handleLifeStyle = async () => {
+    try {
+      setIsVisible(true);
+      const result = await userService.getLifeStyle();
+      console.log('lifeStyle success ', result.data);
+      result.data?.sleep?.sleep_duration == 'less than 4 hours' &&
+        setSelectedSleep(sleepOptions[0].title);
+      result.data?.sleep?.sleep_duration == '4-7 hours' &&
+        setSelectedSleep(sleepOptions[1].title);
+      result.data?.sleep?.sleep_duration == '7-10 hours' &&
+        setSelectedSleep(sleepOptions[2].title);
+      result.data?.sleep?.sleep_duration == 'more than 10 hours' &&
+        setSelectedSleep(sleepOptions[3].title);
+      setIsVisible(false);
+    } catch (error) {
+      setIsVisible(false);
+
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    handleLifeStyle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocus]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

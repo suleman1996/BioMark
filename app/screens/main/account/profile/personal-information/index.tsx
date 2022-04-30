@@ -184,7 +184,13 @@ const PersonalInformationScreen = () => {
       </ScrollView>
       <Button
         disabled={
-          firstName?.length > 0 && lastName?.length > 0 && value ? false : true
+          firstName?.length > 0 &&
+          lastName?.length > 0 &&
+          (firstName.length > authContext?.userData?.first_name.length ||
+            lastName.length > authContext?.userData?.last_name.length) &&
+          value
+            ? false
+            : true
         }
         title="Save & Continue"
         onPress={() => {

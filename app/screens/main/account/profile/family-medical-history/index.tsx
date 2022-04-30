@@ -215,6 +215,7 @@ const MedicalHistoryScreen = () => {
             title="Cancer"
             isModal={isCancerModal}
             setIsModal={onPressCancer}
+            history={history}
             drop={true}
           />
         </View>
@@ -223,12 +224,14 @@ const MedicalHistoryScreen = () => {
             title="Others"
             isModal={isOtherModal}
             setIsModal={onPressOthers}
+            history={history}
             drop={true}
           />
           <ModalButtonComponent
             title="None"
             isModal={isNoneModal}
             setIsModal={onNonePress}
+            history={history}
             drop={false}
           />
         </View>
