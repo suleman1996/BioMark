@@ -7,7 +7,7 @@ export const Nav_Screens = {
   LoginScreen: 'Login',
   Sign_Up: 'Signup',
   Create_Profile: 'CreateProfile',
-
+  TermsAndPrivacy: 'TermsAndPrivacy',
   // NestedAccountNavigator
   NestedAccountNavigator: 'NestedAccountNavigator',
   Account_Screen: 'Account_Screen',
