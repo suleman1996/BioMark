@@ -1,5 +1,3 @@
-import { Linking } from 'react-native';
-
 import BioAboutIcon from 'components/svg/bio-about-icon';
 import BioAutoLogout from 'components/svg/bio-auto-logout';
 import BioDependent from 'components/svg/bio-dependent';
@@ -11,7 +9,8 @@ import BioSettings from 'components/svg/bio-settings';
 import BioSupport from 'components/svg/bio-support';
 import { Nav_Screens } from 'navigation/constants';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Linking, StyleSheet, Text, View } from 'react-native';
+import Config from 'react-native-config';
 import { Switch, TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { useDispatch } from 'react-redux';
@@ -21,8 +20,6 @@ import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalStyles } from 'utils/theme/global-styles';
-import Config from 'react-native-config';
 
 const AccountMenu = (props) => {
   const dispatch = useDispatch();
@@ -63,7 +60,7 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Dependants</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            <Text style={styles.secondText}>7 Users</Text>
+            {/* <Text style={styles.secondText}>7 Users</Text> */}
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
@@ -207,7 +204,8 @@ const styles = StyleSheet.create({
   container: {
     width: widthToDp(92),
     borderRadius: widthToDp(3),
-    ...GlobalStyles.shadow2,
+    borderWidth: 0.5,
+    borderColor: GlobalColors.lightGrey,
   },
   singleItem: {
     width: widthToDp(92),
