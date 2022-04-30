@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     position: 'absolute',
+    // borderWidth: 2,
     backgroundColor: GlobalColors.white,
     bottom: 0,
     paddingHorizontal: widthToDp(6),

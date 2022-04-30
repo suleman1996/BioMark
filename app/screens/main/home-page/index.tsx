@@ -39,7 +39,9 @@ export default function Home() {
   return (
     <View style={{ alignSelf: 'center', backgroundColor: 'white' }}>
       <View style={styles.navBar}>
-        <Text style={styles.navHeading}>Hello Calvin!</Text>
+        <Text style={styles.navHeading}>
+          Hello {authContext?.userData?.first_name}!
+        </Text>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />
         </View>
