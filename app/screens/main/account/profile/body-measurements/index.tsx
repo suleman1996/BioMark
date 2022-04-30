@@ -68,15 +68,17 @@ const BodyMeasurementScreen = () => {
             value={value2}
           />
         </View>
+        {/* <ButtonWithShadowContainer
+          // onPress={() => {
+          //   goBack();
+          // }}
+          title={'Save & Continue'}
+        /> */}
         <ButtonWithShadowContainer
-          onPress={() => {
-            goBack();
-          }}
+          onPress={onSubmit}
           title={'Save & Continue'}
         />
       </ScrollView>
-
-      <ButtonWithShadowContainer onPress={onSubmit} title={'Save & Continue'} />
     </TitleWithBackLayout>
   );
 };

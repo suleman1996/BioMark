@@ -8,6 +8,7 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import colors from 'assets/colors';
 
 type Props = {
@@ -44,8 +45,9 @@ const HeightChooserComponent = ({
       <View style={styles.rowContainer}>
         <TextInput
           placeholder={placeholder}
-          placeholderTextColor={colors.placeHolder}
+          placeholderTextColor={colors.smoke}
           style={[styles.textFieldStyle, otherStyle]}
+          theme={{ colors: { text: colors.smoke } }}
           onChangeText={onChangeText}
           value={value}
           autoFocus={false}

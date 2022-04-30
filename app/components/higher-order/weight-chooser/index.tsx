@@ -44,7 +44,8 @@ const WeightChooserComponent = ({
       <View style={styles.rowContainer}>
         <TextInput
           placeholder={placeholder}
-          placeholderTextColor={colors.placeHolder}
+          placeholderTextColor={colors.smoke}
+          theme={{ colors: { text: colors.smoke } }}
           style={[styles.textFieldStyle, otherStyle]}
           onChangeText={onChangeText}
           value={value}

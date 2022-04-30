@@ -182,12 +182,6 @@ const SearchBarWithLeftScanIcon = () => {
                       </Text>
                       <Text style={styles.popUpSubHeading}>QR or Barcode</Text>
                       <View style={{ width: '100%' }}>
-                        {/* <Text_Input
-                          backgroundColor={colors.inputBg}
-                          style={styles.textInput}
-                          marginTop={10}
-                          onChange={handleChange('qrInput')}
-                        /> */}
                         <TextInput
                           backgroundColor={colors.inputBg}
                           style={styles.textInput}
@@ -207,8 +201,8 @@ const SearchBarWithLeftScanIcon = () => {
                               marginHorizontal={0.1}
                               marginVertical={0.1}
                               onChange={handleChange('qrInput')}
-                              // disabled={!isValid && errors}
-                              disabled={!isValid && errors ? true : false}
+                              disabled={!isValid && errors}
+                              // disabled={!isValid && errors ? true : false}
                             />
                           </TouchableOpacity>
                         </View>
