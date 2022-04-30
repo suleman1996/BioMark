@@ -22,6 +22,7 @@ import PasswordChangeScreen from 'screens/main/account/settings/password-change'
 import EmailChangeScreen from 'screens/main/account/settings/email-change';
 import PhoneChangeScreen from 'screens/main/account/settings/phone-change';
 import MarketingConsentScreen from 'screens/main/account/settings/marketing-consent';
+import TermsAndPrivacy from 'screens/auth/terms-and-privacy';
 
 import { Nav_Screens } from './constants';
 import PasswordChanged from 'screens/auth/password-changed';
@@ -102,6 +103,10 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.MarketingConsentScreen}
         component={MarketingConsentScreen}
+      />
+      <Stack.Screen
+        name={Nav_Screens.TermsAndPrivacy}
+        component={TermsAndPrivacy}
       />
     </Stack.Group>
     {/* Profile Stack */}

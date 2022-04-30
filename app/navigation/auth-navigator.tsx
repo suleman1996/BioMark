@@ -10,7 +10,7 @@ import PasswordChanged from 'screens/auth/password-changed';
 import Signup from 'screens/auth/signup';
 import SignupVerification from 'screens/auth/signup-verification';
 import Splash from 'screens/splash/splash';
-
+import TermsAndPrivacy from 'screens/auth/terms-and-privacy';
 import { Nav_Screens } from './constants';
 
 const Stack = createNativeStackNavigator();
@@ -34,13 +34,13 @@ const AuthenticationStack = () => (
       component={CreatePassword}
     />
     <Stack.Screen name="PasswordChanged" component={PasswordChanged} />
-
     <Stack.Screen name="Signup" component={Signup} />
     <Stack.Screen
       name={Nav_Screens.SignupVerificationScreen}
       component={SignupVerification}
     />
     <Stack.Screen name="Confirmation" component={Confirmation} />
+    <Stack.Screen name="TermsAndPrivacy" component={TermsAndPrivacy} />
   </Stack.Navigator>
 );
 
