@@ -88,6 +88,7 @@ const Drinking = () => {
       setBeer(result?.data?.drinking?.pints_of_beer);
       setWine(result?.data?.drinking?.glasses_of_wine);
       setSpiritss(result?.data?.drinking?.shots_of_spirits);
+      setIsDrinking(result?.data?.drinking?.is_drinking ? true : false);
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);
