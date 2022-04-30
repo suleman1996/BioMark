@@ -35,7 +35,6 @@ import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import styles from './styles';
 import Config from 'react-native-config';
-console.log('API_URL', Config.API_URL);
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -52,12 +51,6 @@ export default function Login() {
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
 
-  GoogleSignin.configure({
-    webClientId:
-      '871137629206-muidhs147vquoqovf71scmu89ibsaq7s.apps.googleusercontent.com',
-    offlineAccess: false,
-  });
-
   useEffect(() => {
     if (selectCountryCode == '60') {
       setNumberCondition({ min: 8, max: 11 });
@@ -73,12 +66,14 @@ export default function Login() {
   const onGoogleLogin = async () => {
     GoogleSignin.signOut();
     GoogleSignin.configure({
-      webClientId:
-        '1078990823809-1s2m5rup1t61rmmiic4ma5ag847d17u1.apps.googleusercontent.com',
+      webClientId: Config.WEB_CLIENT_ID,
       offlineAccess: true,
     });
 
     const { idToken } = await GoogleSignin.signIn();
+    const provider = 'google';
+    dispatch(reduxFederatedLogin(idToken, provider));
+
     const googleCrenditial = auth.GoogleAuthProvider.credential(idToken);
     const user_sign_in = auth().signInWithCredential(googleCrenditial);
     user_sign_in.then((re) => {

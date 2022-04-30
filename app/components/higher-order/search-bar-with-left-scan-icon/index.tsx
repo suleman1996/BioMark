@@ -25,7 +25,6 @@ import MyImage from 'assets/images';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 import Button from 'components/button/button';
-import Text_Input from 'components/input-field/text-input';
 import { inputBarcode } from 'services/auth-service';
 import ActivityIndicator from 'components/loader/activity-indicator';
 
@@ -183,7 +182,13 @@ const SearchBarWithLeftScanIcon = () => {
                       </Text>
                       <Text style={styles.popUpSubHeading}>QR or Barcode</Text>
                       <View style={{ width: '100%' }}>
-                        <Text_Input
+                        {/* <Text_Input
+                          backgroundColor={colors.inputBg}
+                          style={styles.textInput}
+                          marginTop={10}
+                          onChange={handleChange('qrInput')}
+                        /> */}
+                        <TextInput
                           backgroundColor={colors.inputBg}
                           style={styles.textInput}
                           marginTop={10}
@@ -197,11 +202,13 @@ const SearchBarWithLeftScanIcon = () => {
                         <View style={{ marginTop: 40 }}>
                           <TouchableOpacity>
                             <Button
+                              onPress={() => handleSubmit()}
                               title="Save Code"
                               marginHorizontal={0.1}
                               marginVertical={0.1}
-                              disabled={!isValid && errors}
-                              onPress={() => handleSubmit()}
+                              onChange={handleChange('qrInput')}
+                              // disabled={!isValid && errors}
+                              disabled={!isValid && errors ? true : false}
                             />
                           </TouchableOpacity>
                         </View>

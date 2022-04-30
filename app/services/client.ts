@@ -1,10 +1,11 @@
 import axios from 'axios';
+import Config from 'react-native-config';
 
 import { getAuthAsyncStorage } from './async-storage/auth-async-storage';
 
 const request = axios.create({
   // baseURL: 'https://bm-qa-api.biomarking.com',  prod
-  baseURL: 'https://bm-dev-api.biomarking.com/',
+  baseURL: Config.BASE_URL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

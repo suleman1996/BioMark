@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 import HeightChooserComponent from 'components/higher-order/height-chooser/index';
 import WeightChooserComponent from 'components/higher-order/weight-chooser';
@@ -43,21 +43,35 @@ const BodyMeasurementScreen = () => {
   return (
     <TitleWithBackLayout title="Body Measurements">
       <ScrollView style={styles.container}>
-        <HeightChooserComponent
-          height={15}
-          label="Height"
-          textAlign="right"
-          placeholder={''}
-          onChangeText={onChangeText}
-          value={value}
-        />
-        <WeightChooserComponent
-          height={15}
-          label="Weight"
-          textAlign="right"
-          placeholder={undefined}
-          onChangeText={onChangeText2}
-          value={value2}
+        <View
+          style={{
+            paddingHorizontal: widthToDp(4),
+            // borderWidth: 5,
+            marginBottom: heightToDp(37),
+          }}
+        >
+          <HeightChooserComponent
+            height={15}
+            label="Height"
+            textAlign="right"
+            placeholder={'0'}
+            onChangeText={onChangeText}
+            value={value}
+          />
+          <WeightChooserComponent
+            height={15}
+            label="Weight"
+            textAlign="right"
+            placeholder={'0.0'}
+            onChangeText={onChangeText2}
+            value={value2}
+          />
+        </View>
+        <ButtonWithShadowContainer
+          onPress={() => {
+            goBack();
+          }}
+          title={'Save & Continue'}
         />
       </ScrollView>
 
@@ -70,9 +84,10 @@ export default BodyMeasurementScreen;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: GlobalColors.,
     flex: 1,
-    paddingHorizontal: widthToDp(4),
+    borderColor: 'red',
+    flexDirection: 'column',
+    color: colors.blue,
   },
   label: {
     fontSize: responsiveFontSize(22),

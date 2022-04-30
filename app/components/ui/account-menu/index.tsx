@@ -1,3 +1,5 @@
+import { Linking } from 'react-native';
+
 import BioAboutIcon from 'components/svg/bio-about-icon';
 import BioAutoLogout from 'components/svg/bio-auto-logout';
 import BioDependent from 'components/svg/bio-dependent';
@@ -8,7 +10,7 @@ import BioPolicies from 'components/svg/bio-policies';
 import BioSettings from 'components/svg/bio-settings';
 import BioSupport from 'components/svg/bio-support';
 import { Nav_Screens } from 'navigation/constants';
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Switch, TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -20,13 +22,12 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
+import Config from 'react-native-config';
 
-const AccountMenu = ({}) => {
+const AccountMenu = (props) => {
   const dispatch = useDispatch();
-
-  const [isAutoLogout, setIsAutoLogout] = useState(false);
-  const onToggleAutoLogout = () => {
-    setIsAutoLogout(!isAutoLogout);
+  const OpenMessenger = () => {
+    Linking.openURL(Config.MESSENGER_URL);
   };
   return (
     <View style={styles.container}>
@@ -110,7 +111,10 @@ const AccountMenu = ({}) => {
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => OpenMessenger()}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioSupport width={5} height={5} />
@@ -166,7 +170,10 @@ const AccountMenu = ({}) => {
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => props.onToggleAutoLogout()}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioAutoLogout width={4} height={4} />
@@ -174,8 +181,8 @@ const AccountMenu = ({}) => {
           </View>
           <Switch
             color={GlobalColors.darkPrimary}
-            value={isAutoLogout}
-            onValueChange={onToggleAutoLogout}
+            value={props.logOutCheck}
+            //    onValueChange={()=>props.onToggleAutoLogout()}
           />
         </>
       </TouchableRipple>

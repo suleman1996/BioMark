@@ -12,6 +12,7 @@ const API_URLS = {
   CREATE_PROFILE: 'api/v2/patient/profiles',
   GET_USER_CONTACTS: '/api/v1/patient/contacts',
   LOG_OUT: '/api/v1/auth/sessions/logout',
+  AUTO_LOG_OUT: '/api/v1/patient/settings',
   SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
   MARKETING: '/api/v1/patient/marketing',
   SLEEPING: '/api/v1/patient/lifestyle/sleeping',
@@ -19,6 +20,8 @@ const API_URLS = {
   Profile_Avatar: '/api/v1/patient/profiles/avatar',
   Update_Profile: '/api/v1/patient/profiles/update',
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
+  GET_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
+  CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
 
   // Dependent
   DEPENDENTS: '/api/v1/patient/dependents',

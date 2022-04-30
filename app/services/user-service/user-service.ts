@@ -1,5 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
-import { store } from 'store/store';
+import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
   ForgotPasswordErrorResponse,
@@ -13,10 +13,7 @@ import {
 import { ErrorResponse } from 'types/ErrorResponse';
 import { UserContacts } from 'types/UserContacts';
 import { logNow } from 'utils/functions/log-binder';
-import {
-  resetAuthAsyncStorage,
-  setAuthAsyncStorage,
-} from '../async-storage/auth-async-storage';
+import { setAuthAsyncStorage } from '../async-storage/auth-async-storage';
 import client from '../client';
 import { API_URLS } from '../url-constants';
 
@@ -224,7 +221,25 @@ function saveUserContacts(email_address: string) {
       });
   });
 }
-
+function autoLogout() {
+  return new Promise<AutoLogoutRes>((resolve, reject) => {
+    client
+      .get(API_URLS.AUTO_LOG_OUT)
+      .then(async (response) => {
+        try {
+          logNow('tes', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('e', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('err', err);
+        reject(err);
+      });
+  });
+}
 async function logout() {
   let uniqueId = DeviceInfo.getUniqueId();
 
@@ -237,8 +252,8 @@ async function logout() {
     .then(async (response) => {
       try {
         logNow('response', response.data);
-        await resetAuthAsyncStorage();
-        await store.dispatch(logout());
+        // await resetAuthAsyncStorage();
+        // await store.dispatch(logout());
       } catch (e) {
         logNow('e', e);
       }
@@ -330,6 +345,18 @@ const updateProfileAvatar = (pic: String) => {
   });
 };
 
+const getFamilyMedicalHistory = () => {
+  return client.get(API_URLS.GET_FAMILY_MEDICAL_HISTORY);
+};
+
+const createFamilyMedicalHistory = (history: Array<String>) => {
+  return client.post(API_URLS.CREATE_FAMILY_MEDICAL_HISTORY, {
+    medical_history: {
+      conditions: history,
+    },
+  });
+};
+
 const updateProfile = (
   fName: String,
   lName: String,
@@ -355,6 +382,7 @@ export const userService = {
   federatedlogin,
   deviceRegisterAction,
   registerUser,
+  autoLogout,
   logout,
   forgotPassword,
   getUserContacts,
@@ -369,4 +397,6 @@ export const userService = {
   drinking,
   updateProfileAvatar,
   updateProfile,
+  getFamilyMedicalHistory,
+  createFamilyMedicalHistory,
 };

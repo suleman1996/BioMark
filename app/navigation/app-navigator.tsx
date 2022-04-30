@@ -11,7 +11,6 @@ const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
-  console.log('auuth', auth);
 
   return (
     <Stack.Navigator
@@ -32,7 +31,17 @@ const AppNavigator = () => {
           />
         </>
       ) : (
-        <Stack.Screen name="CreateProfile" component={CreateProfile} />
+        <>
+          <Stack.Screen name="CreateProfile" component={CreateProfile} />
+          <Stack.Screen
+            name="BottomTabNavigator"
+            component={BottomTabNavigator}
+          />
+          <Stack.Screen
+            name={Nav_Screens.NestedAccountNavigator}
+            component={AccountNavigator}
+          />
+        </>
       )}
     </Stack.Navigator>
   );

@@ -42,9 +42,9 @@ export default function index() {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
-    { id: 0, sex: 'Male' },
-    { id: 1, sex: 'Female' },
-    { id: 2, sex: 'Others' },
+    { id: 1, sex: 'Male' },
+    { id: 2, sex: 'Female' },
+    { id: 3, sex: 'Others' },
   ]);
   const [preferredCountries, setPreferredCountries] = useState([
     'MY',
@@ -73,7 +73,8 @@ export default function index() {
       .then(async (res) => {
         logNow('signup res', res);
         await AsyncStorage.setItem('hasProfile', JSON.stringify(true));
-        await dispatch2(loggedInHasProfile(true));
+        // await dispatch2(loggedInHasProfile(true));
+        navigations.navigate('BottomTabNavigator');
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);
