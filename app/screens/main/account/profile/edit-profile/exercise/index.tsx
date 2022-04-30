@@ -16,6 +16,7 @@ import { GlobalColors } from 'utils/theme/global-colors';
 import { styles } from './styles';
 import colors from 'assets/colors';
 const Options = [
+  { title: '' },
   { title: '1' },
   { title: '2' },
   { title: '3' },
@@ -29,6 +30,7 @@ const Options = [
 ];
 
 const Options2 = [
+  { title: '' },
   { title: 'less than 20 mins' },
   { title: '20-40 mins' },
   { title: '40-60 mins' },

@@ -44,8 +44,9 @@ const HeightChooserComponent = ({
       <View style={styles.rowContainer}>
         <TextInput
           placeholder={placeholder}
-          placeholderTextColor={colors.placeHolder}
+          placeholderTextColor={colors.smoke}
           style={[styles.textFieldStyle, otherStyle]}
+          theme={{ colors: { text: colors.smoke } }}
           onChangeText={onChangeText}
           value={value}
           autoFocus={false}
