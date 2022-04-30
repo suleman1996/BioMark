@@ -7,5 +7,6 @@ const colors = {
   placeHolder: '#8493AE',
   danger: '#FF0000',
   inactive: '#8493AE',
+  smoke: '#808080',
 };
 export default colors;

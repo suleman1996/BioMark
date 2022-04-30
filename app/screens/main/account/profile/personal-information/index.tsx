@@ -37,6 +37,7 @@ const PersonalInformationScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [genderWar, setGenderWarn] = useState(false);
   const [genderCheck, setGenderCheck] = useState(false);
+  const [genderDisable, setGenderDisable] = useState(false);
 
   React.useEffect(() => {
     setGenderCheck(true);
@@ -169,7 +170,9 @@ const PersonalInformationScreen = () => {
         />
         <Text style={styles.label}>Gender</Text>
         <RadioButton.Group
-          onValueChange={(newValue) => setValue(newValue)}
+          onValueChange={(newValue) => {
+            setValue(newValue), setGenderDisable(true);
+          }}
           value={value}
         >
           <View style={styles.radioContainer}>
@@ -184,11 +187,12 @@ const PersonalInformationScreen = () => {
       </ScrollView>
       <Button
         disabled={
-          firstName?.length > 0 &&
-          lastName?.length > 0 &&
-          (firstName.length > authContext?.userData?.first_name.length ||
-            lastName.length > authContext?.userData?.last_name.length) &&
-          value
+          // firstName?.length > 0 &&
+          // lastName?.length > 0 &&
+          firstName.length > authContext?.userData?.first_name.length ||
+          lastName.length > authContext?.userData?.last_name.length ||
+          date != authContext?.userData?.birth_date ||
+          genderDisable == true
             ? false
             : true
         }

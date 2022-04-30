@@ -13,16 +13,23 @@ type Props = {
   children: any;
   onPress: any;
   title: string;
+  setIsVisible: any;
 };
 
-const ModalWithBottomBtn = ({ isVisible, children, onPress, title }: Props) => {
+const ModalWithBottomBtn = ({
+  isVisible,
+  children,
+  onPress,
+  title,
+  setIsVisible,
+}: Props) => {
   const [isModal, setIsModal] = useState(isVisible);
 
   useEffect(() => {
     setIsModal(isVisible);
   }, [isVisible]);
   return (
-    <ModalComponent isVisible={isModal}>
+    <ModalComponent setIsVisible={setIsVisible} isVisible={isModal}>
       <View style={styles.card}>
         <ScrollView contentContainerStyle={{ flex: 1 }}>
           <Text style={styles.title}>{title}</Text>
