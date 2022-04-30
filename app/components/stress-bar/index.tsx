@@ -6,135 +6,48 @@ import { GlobalColors } from 'utils/theme/global-colors';
 type Props = { titleText: String; question: Number; setQuestion: Any };
 
 const Index = (props: Props) => {
-  const [never, setNever] = React.useState(false);
-  const [almostNever, setAlmostNever] = React.useState(false);
-  const [someTimes, setSometimes] = React.useState(false);
-  const [fairlyOften, setFairlyOftern] = React.useState(false);
-  const [veryOftern, setVeryOftern] = React.useState(false);
+  const [stressValue, setStressValue] = React.useState(0);
 
   React.useEffect(() => {
-    props.question == 0 &&
-      (setNever(true),
-      setAlmostNever(false),
-      setSometimes(false),
-      setFairlyOftern(false),
-      setVeryOftern(false));
-    props.question == 1 &&
-      (setNever(false),
-      setAlmostNever(true),
-      setSometimes(false),
-      setFairlyOftern(false),
-      setVeryOftern(false));
-    props.question == 2 &&
-      (setNever(false),
-      setAlmostNever(false),
-      setSometimes(true),
-      setFairlyOftern(false),
-      setVeryOftern(false));
-    props.question == 3 &&
-      (setNever(false),
-      setAlmostNever(false),
-      setSometimes(false),
-      setFairlyOftern(true),
-      setVeryOftern(false));
-    props.question == 4 &&
-      (setNever(false),
-      setAlmostNever(false),
-      setSometimes(false),
-      setFairlyOftern(false),
-      setVeryOftern(true));
+    setStressValue(props?.question);
   }, [props.question]);
+
+  const RenderStressTitle = ({ title, width }) => (
+    <View style={[styles.selectView]}>
+      <Text style={[styles.headingText, { width: width }]}>{title}</Text>
+    </View>
+  );
+
+  const RenderDot = ({ index }) => (
+    <TouchableOpacity
+      onPress={() => {
+        setStressValue(index);
+        props.setQuestion(index);
+      }}
+      style={styles.selectView}
+    >
+      <View style={stressValue == index ? styles.bigDot : styles.smallDot} />
+    </TouchableOpacity>
+  );
 
   return (
     <View>
       <Text style={styles.title}>{props.titleText}</Text>
 
       <View style={styles.bar}>
-        <TouchableOpacity
-          onPress={() => {
-            setNever(true),
-              setAlmostNever(false),
-              setSometimes(false),
-              setFairlyOftern(false),
-              setVeryOftern(false);
-            props.setQuestion(0);
-          }}
-          style={styles.selectView}
-        >
-          <View style={never ? styles.bigDot : styles.smallDot} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setNever(false),
-              setAlmostNever(true),
-              setSometimes(false),
-              setFairlyOftern(false),
-              setVeryOftern(false);
-            props.setQuestion(1);
-          }}
-          style={styles.selectView}
-        >
-          <View style={almostNever ? styles.bigDot : styles.smallDot} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setNever(false),
-              setAlmostNever(false),
-              setSometimes(true),
-              setFairlyOftern(false),
-              setVeryOftern(false);
-            props.setQuestion(2);
-          }}
-          style={styles.selectView}
-        >
-          <View style={someTimes ? styles.bigDot : styles.smallDot} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setNever(false),
-              setAlmostNever(false),
-              setSometimes(false),
-              setFairlyOftern(true),
-              setVeryOftern(false);
-            props.setQuestion(3);
-          }}
-          style={styles.selectView}
-        >
-          <View style={fairlyOften ? styles.bigDot : styles.smallDot} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setNever(false),
-              setAlmostNever(false),
-              setSometimes(false),
-              setFairlyOftern(false),
-              setVeryOftern(true);
-            props.setQuestion(4);
-          }}
-          style={styles.selectView}
-        >
-          <View style={veryOftern ? styles.bigDot : styles.smallDot} />
-        </TouchableOpacity>
+        <RenderDot index={0} />
+        <RenderDot index={1} />
+        <RenderDot index={2} />
+        <RenderDot index={3} />
+        <RenderDot index={4} />
       </View>
 
       <View style={styles.headingView}>
-        <View style={styles.selectView}>
-          <Text style={styles.headingText}>Never</Text>
-        </View>
-        <View style={styles.selectView}>
-          <Text style={styles.headingText}>Almost Never</Text>
-        </View>
-        <View style={styles.selectView}>
-          <Text style={styles.headingText}>Sometimes</Text>
-        </View>
-        <View style={styles.selectView}>
-          <Text style={[styles.headingText, { width: '50%' }]}>
-            Fairly Often
-          </Text>
-        </View>
-        <View style={styles.selectView}>
-          <Text style={styles.headingText}>Very Often</Text>
-        </View>
+        <RenderStressTitle title="Never" />
+        <RenderStressTitle title="Almost Never" />
+        <RenderStressTitle title="Sometimes" />
+        <RenderStressTitle width="50%" title="Fairly Often" />
+        <RenderStressTitle title="Very Often" />
       </View>
     </View>
   );
