@@ -142,6 +142,7 @@ android {
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         resValue "string", "build_config_package", "com.biomark"
+        multiDexEnabled true
         if (isNewArchitectureEnabled()) {
             // We configure the NDK build only if you de cide to opt-in for the New Architecture.
             externalNativeBuild {
@@ -271,6 +272,14 @@ android {
 
         }
     }
+       packagingOptions {
+       pickFirst 'lib/x86/libc++_shared.so'
+       pickFirst 'lib/x86_64/libjsc.so'
+       pickFirst 'lib/arm64-v8a/libjsc.so'
+       pickFirst 'lib/arm64-v8a/libc++_shared.so'
+       pickFirst 'lib/x86_64/libc++_shared.so'
+       pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+     }
 }
 
 dependencies {

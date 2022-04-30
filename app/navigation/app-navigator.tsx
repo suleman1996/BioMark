@@ -15,7 +15,7 @@ const AppNavigator = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="BottomTabNavigator"
+      // initialRouteName="BottomTabNavigator"
       screenOptions={{
         headerShown: false,
       }}
@@ -32,17 +32,7 @@ const AppNavigator = () => {
           />
         </>
       ) : (
-        <>
-          <Stack.Screen name="CreateProfile" component={CreateProfile} />
-          <Stack.Screen
-            name="BottomTabNavigator"
-            component={BottomTabNavigator}
-          />
-          <Stack.Screen
-            name={Nav_Screens.NestedAccountNavigator}
-            component={AccountNavigator}
-          />
-        </>
+        <Stack.Screen name="CreateProfile" component={CreateProfile} />
       )}
     </Stack.Navigator>
   );
