@@ -51,7 +51,7 @@ export default function (props: Props) {
         theme={{
           ...DEFAULT_THEME,
           backgroundColor: colors.whiteColor,
-          onBackgroundTextColor: colors.heading,
+          onBackgroundTextColor: colors.black,
           fontSize: 14,
         }}
         containerButtonStyle={styles.pickerButtonStyle}

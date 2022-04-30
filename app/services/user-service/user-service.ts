@@ -335,6 +335,10 @@ const getStress = () => {
   return client.get(API_URLS.Get_Stress);
 };
 
+const getLifeStyle = () => {
+  return client.get(API_URLS.GET_LIFE_STYLE);
+};
+
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
   return client.post(API_URLS.Create_Stress, {
     stress: {
@@ -388,4 +392,5 @@ export const userService = {
   createFamilyMedicalHistory,
   getStress,
   createStress,
+  getLifeStyle,
 };
