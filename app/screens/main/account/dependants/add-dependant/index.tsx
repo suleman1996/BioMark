@@ -190,13 +190,7 @@ const AddDependantScreen = () => {
                   date={values.birth_date}
                   setDate={(e: any) => setFieldValue('birth_date', e)}
                 />
-                {/* <DatePicker
-                  width={'100%'}
-                  date={new Date('Jan-01-1990')}
-                  setDate={(e: any) => setFieldValue('birth_date', e)}
-                  isPickerShow={isDatePicker}
-                  setIsPickerShow={setIsDatePicker}
-                /> */}
+
                 <InputWithLabel
                   label="NRIC /Passport Number"
                   placeholder={''}
