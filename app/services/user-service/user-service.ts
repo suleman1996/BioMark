@@ -294,12 +294,31 @@ const Vaccination = (items: string | number) => {
     },
   });
 };
+type Props = {
+  conditions: any;
+  medical: any;
+};
+const Allergies = ({ conditions }: Props) => {
+  return client.post(API_URLS.Allergies, {
+    medical_history: {
+      has_allergy: true,
+      conditions,
+      // conditions: [
+      //   {
+      //     has_condition: true,
+      //     allergy_to: isMedicationModal,
+      //     allergy_type: 'item1,item2,item3,item4',
+      //   },
+      // ],
+    },
+  });
+};
 
-// const Allergies = ()=>{
-//  return client.post(API_URLS.Allergies,{
-
-//  })
-// }
+const bodyMeasurement = ({ medical }: Props) => {
+  return client.post(API_URLS.bodyMeasurement, {
+    medical,
+  });
+};
 
 const updateProfileAvatar = (pic: String) => {
   return client.post(API_URLS.Profile_Avatar, {
@@ -342,6 +361,8 @@ export const userService = {
   saveUserContacts,
   Smoking,
   Vaccination,
+  Allergies,
+  bodyMeasurement,
   createProfile,
   getUserProfile,
   sleeping,

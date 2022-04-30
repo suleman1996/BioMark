@@ -30,6 +30,7 @@ const API_URLS = {
   Smoking: '/api/v1/patient/lifestyle/smoking',
   Vaccination: '/api/v1/patient/medical_histories/vaccine',
   Allergies: '/api/v1/patient/medical_histories/allergy',
+  bodyMeasurement: '/api/v1/patient/medical/bm',
 };
 
 export { API_URLS };

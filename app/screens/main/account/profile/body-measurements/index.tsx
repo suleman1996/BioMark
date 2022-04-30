@@ -8,8 +8,10 @@ import { GlobalColors } from 'utils/theme/global-colors';
 import TitleWithBackLayout from 'components/layouts/back-with-title/index';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { goBack } from 'services/nav-ref';
+import { userService } from 'services/user-service/user-service';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { navigate } from 'services/nav-ref';
+import { Nav_Screens } from 'navigation/constants';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
@@ -20,6 +22,22 @@ const BodyMeasurementScreen = () => {
   };
   const onChangeText2 = (values = 30) => {
     setValue2(values);
+  };
+
+  const onSubmit = async () => {
+    try {
+      const response = await userService.bodyMeasurement({
+        medical: {
+          height: value,
+          weight: value2,
+          is_metric: true,
+        },
+      });
+      console.log('measurement successful', response.data);
+      navigate(Nav_Screens.Edit_Profile);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -43,12 +61,7 @@ const BodyMeasurementScreen = () => {
         />
       </ScrollView>
 
-      <ButtonWithShadowContainer
-        onPress={() => {
-          goBack();
-        }}
-        title={'Save & Continue'}
-      />
+      <ButtonWithShadowContainer onPress={onSubmit} title={'Save & Continue'} />
     </TitleWithBackLayout>
   );
 };
