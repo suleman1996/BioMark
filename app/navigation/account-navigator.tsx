@@ -13,6 +13,7 @@ import FamilyMedicalHistory from 'screens/main/account/profile/family-medical-hi
 import SmokingScreen from 'screens/main/account/profile/edit-profile/smoking';
 import SettingsScreen from 'screens/main/account/settings';
 import ExerciseScreen from 'screens/main/account/profile/edit-profile/exercise';
+import Stress from 'screens/main/account/profile/edit-profile/stress/index';
 import SleepScreen from 'screens/main/account/profile/edit-profile/sleep';
 import VaccinationScreen from 'screens/main/account/profile/edit-profile/vaccination';
 import AllergiesScreen from 'screens/main/account/profile/edit-profile/allergies';
@@ -182,6 +183,13 @@ export const AccountNavigator = () => (
         }}
         name={Nav_Screens.Exercise}
         component={ExerciseScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={Nav_Screens.Stress}
+        component={Stress}
       />
     </Stack.Group>
   </Stack.Navigator>

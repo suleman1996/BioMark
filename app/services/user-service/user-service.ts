@@ -357,6 +357,25 @@ const createFamilyMedicalHistory = (history: Array<String>) => {
   });
 };
 
+const getStress = () => {
+  return client.get(API_URLS.Get_Stress);
+};
+
+const getLifeStyle = () => {
+  return client.get(API_URLS.GET_LIFE_STYLE);
+};
+
+const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
+  return client.post(API_URLS.Create_Stress, {
+    stress: {
+      question1: q1,
+      question2: q2,
+      question3: q3,
+      question4: q4,
+    },
+  });
+};
+
 const updateProfile = (
   fName: String,
   lName: String,
@@ -399,4 +418,7 @@ export const userService = {
   updateProfile,
   getFamilyMedicalHistory,
   createFamilyMedicalHistory,
+  getStress,
+  createStress,
+  getLifeStyle,
 };

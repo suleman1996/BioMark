@@ -373,7 +373,10 @@ const EditProfileScreen = () => {
                 color={GlobalColors.darkPrimary}
               />
             </Pressable>
-            <View style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(Nav_Screens.Stress)}
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="lightning-bolt"
@@ -387,7 +390,7 @@ const EditProfileScreen = () => {
                 size={responsiveFontSize(18)}
                 color={GlobalColors.darkPrimary}
               />
-            </View>
+            </Pressable>
           </View>
         </View>
         <Text
