@@ -12,6 +12,7 @@ import { userService } from 'services/user-service/user-service';
 import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
+import colors from 'assets/colors';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
