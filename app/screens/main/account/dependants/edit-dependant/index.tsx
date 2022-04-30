@@ -57,7 +57,6 @@ const EditDependantScreen = (props: Props) => {
         setNationalNumber(phoneNumber?.nationalNumber);
       })
       .catch((err) => {
-        goBack();
         logNow('get single dependent error', err);
       })
       .finally(() => {
