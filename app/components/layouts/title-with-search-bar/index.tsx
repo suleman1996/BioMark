@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     alignItems: 'center',
+    backgroundColor: GlobalColors.white,
+    paddingBottom: heightToDp(0.5),
   },
   halfPrimary: {
     height: heightToDp(3),
