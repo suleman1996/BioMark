@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-
+import { StyleSheet, Text, View } from 'react-native';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   error: string | undefined | null;
@@ -30,6 +29,8 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalColors.red,
     padding: widthToDp(1.5),
     justifyContent: 'center',
+    position: 'absolute',
+    bottom: 100,
   },
   text: {
     fontSize: responsiveFontSize(18),

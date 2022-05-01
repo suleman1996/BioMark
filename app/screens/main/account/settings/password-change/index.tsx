@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { settingsService } from 'services/account-service/settings-service';
-import { goBack, navigate } from 'services/nav-ref';
+import { navigate } from 'services/nav-ref';
 import { ErrorResponse } from 'types/ErrorResponse';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
@@ -39,6 +39,13 @@ const PasswordChangeScreen = () => {
     logNow('password', password);
   };
 
+  const goToPassChangedScreen = () => {
+    navigate(Nav_Screens.NestedAccountNavigator, {
+      screen: Nav_Screens.PasswordChangedInApp,
+      params: { flag: 1 },
+    });
+  };
+
   const submitForm = () => {
     logNow('formik', formikRef.current);
     // return;
@@ -52,16 +59,12 @@ const PasswordChangeScreen = () => {
       .changePassword(currentPassword, confirmPassword)
       .then((res) => {
         logNow('res', res);
-        navigate(Nav_Screens.NestedAccountNavigator, {
-          screen: Nav_Screens.PasswordChangedInApp,
-          params: { flag: 1 },
-        });
+        goToPassChangedScreen();
 
         // showMessage({
         //   message: 'Password changed successfully',
         //   type: 'success',
         // });
-        goBack();
       })
       .catch((err: ErrorResponse) => {
         logNow(err.errMsg.data.message);
@@ -74,7 +77,7 @@ const PasswordChangeScreen = () => {
         // });
       })
       .finally(() => {
-        setIsLoading(false);
+        // setIsLoading(false);
       });
   };
 
