@@ -100,8 +100,12 @@ export default function Login() {
     new GraphRequestManager().addRequest(profileRequest).start();
   };
   const onFacebookLogin = async () => {
-    LoginManager.logOut();
-    await LoginManager.logInWithPermissions().then(
+    // LoginManager.logOut();
+    if (Platform.OS === 'android') {
+      LoginManager.setLoginBehavior('web_only');
+    }
+
+    await LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       async function (result) {
         if (result.isCancelled) {
           console.log('Login cancelled');
