@@ -9,7 +9,7 @@ import BackIcon from 'assets/svgs/back';
 import ActivityIndicator from 'components/loader/activity-indicator';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
-export default function index() {
+export default function TermsAndPrivacy() {
   const [loading, setLoading] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
 

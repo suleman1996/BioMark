@@ -29,14 +29,22 @@ import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
 
 import styles from './styles';
-import { resetAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
-import { useDispatch } from 'react-redux';
-import { loggedInHasProfile, loggedOut } from 'store/auth/auth-actions';
+import {
+  getAuthAsyncStorage,
+  resetAuthAsyncStorage,
+} from 'services/async-storage/auth-async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  loggedIn,
+  loggedInHasProfile,
+  loggedOut,
+} from 'store/auth/auth-actions';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { IAppState } from 'store/IAppState';
 
-export default function index() {
+export default function CreateProfile() {
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
   const [selectCountryCode, setSelectCountryCode] = useState('60');
@@ -61,7 +69,16 @@ export default function index() {
   const [isPickerShow, setIsPickerShow] = useState(false);
   const dispatch = useDispatch();
   const dispatch2 = useDispatch();
+  const dispatch3 = useDispatch();
   const navigations = useNavigation();
+  const auth = useSelector((state: IAppState) => state.auth);
+
+  async function getHasprofileAsyncStorage() {
+    const data = await getAuthAsyncStorage();
+    dispatch3(loggedIn(data));
+    console.log('data', data);
+  }
+
   //fuctions
 
   const signupApi = async (values: string) => {
@@ -73,8 +90,8 @@ export default function index() {
       .then(async (res) => {
         logNow('signup res', res);
         await AsyncStorage.setItem('hasProfile', JSON.stringify(true));
-        // await dispatch2(loggedInHasProfile(true));
-        navigations.navigate('BottomTabNavigator');
+        getHasprofileAsyncStorage();
+        //navigations.navigate('BottomTabNavigator');
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);

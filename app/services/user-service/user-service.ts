@@ -52,6 +52,7 @@ function federatedlogin(access_token: string, provider: string) {
       })
       .then(async (response) => {
         try {
+          // await resetAuthAsyncStorage();
           await setAuthAsyncStorage(response.data);
           resolve(response.data);
         } catch (e) {

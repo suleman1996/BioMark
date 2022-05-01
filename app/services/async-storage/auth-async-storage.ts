@@ -32,6 +32,7 @@ async function resetAuthAsyncStorage() {
   await AsyncStorage.removeItem('userData');
   await AsyncStorage.removeItem('userToken');
   await AsyncStorage.removeItem('refreshToken');
+  await AsyncStorage.removeItem('hasProfile');
 }
 
 async function Get_Token() {
