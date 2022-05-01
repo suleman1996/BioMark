@@ -310,7 +310,7 @@ const EditProfileScreen = () => {
                   color={GlobalColors.darkPrimary}
                 />
 
-                <Text style={styles.menuTitleText}>Smooking</Text>
+                <Text style={styles.menuTitleText}>Smoking</Text>
               </View>
               <Fontisto
                 name="angle-right"

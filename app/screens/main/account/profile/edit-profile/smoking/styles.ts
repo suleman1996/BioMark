@@ -44,7 +44,9 @@ export const styles = StyleSheet.create({
   },
   container2: {
     marginHorizontal: heightToDp(2),
+    marginTop: heightToDp(2),
     borderBottomWidth: 0,
+    borderRadius: 8,
     borderColor: GlobalColors.darkPrimary,
     backgroundColor: '#EBEFF2',
     height: 50,

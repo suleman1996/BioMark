@@ -124,7 +124,7 @@ export default function SmokingScreen() {
               <View
                 style={[
                   styles.textinputView,
-                  { borderWidth: day ? 1 : null, borderRadius: day ? 5 : null },
+                  { borderWidth: day ? 1 : null, borderRadius: day ? 8 : null },
                 ]}
               >
                 <TextInput

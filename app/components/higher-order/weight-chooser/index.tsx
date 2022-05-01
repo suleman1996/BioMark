@@ -53,6 +53,7 @@ const WeightChooserComponent = ({
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           borderBottomWidth={0}
+          keyboardType="numeric"
         />
         <Menu ref={menuRef}>
           <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
