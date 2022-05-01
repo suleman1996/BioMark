@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: heightToDp(2),
     justifyContent: 'space-between',
-    marginHorizontal: heightToDp(2),
+    marginHorizontal: heightToDp(4),
     marginBottom: 5,
   },
   listview: {

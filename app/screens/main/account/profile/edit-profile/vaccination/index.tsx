@@ -25,6 +25,7 @@ export default function VaccinationScreen() {
   const [items, setItems] = useState('');
   const [list, setList] = useState([]);
   const [refresh, setRefreh] = useState(false);
+  const numColumns = 3;
 
   const onChangeInput = (text: any) => {
     setItems(text);
@@ -138,8 +139,9 @@ export default function VaccinationScreen() {
           {value == 'second' ? (
             <View style={styles.flatlistView}>
               <FlatList
-                horizontal
+                // horizontal
                 data={list}
+                numColumns={numColumns}
                 extraData={refresh}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => (
@@ -164,11 +166,11 @@ export default function VaccinationScreen() {
             </View>
           ) : null}
         </ScrollView>
-        <ButtonWithShadowContainer
-          title="Save"
-          onPress={() => navigate(Nav_Screens.Edit_Profile)}
-        />
       </TitleWithBackLayout>
+      <ButtonWithShadowContainer
+        title="Save"
+        onPress={() => navigate(Nav_Screens.Edit_Profile)}
+      />
     </SafeAreaView>
   );
 }

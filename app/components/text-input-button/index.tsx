@@ -40,7 +40,7 @@ const TextInputButton = ({
           <Ionicons
             color={GlobalColors.darkGray}
             name="add"
-            size={responsiveFontSize(20)}
+            size={responsiveFontSize(22)}
           />
         </Pressable>
       </View>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '85%',
-    height: heightToDp(6),
+    height: heightToDp(5),
     borderRadius: widthToDp(2),
     marginTop: heightToDp(2),
     marginRight: widthToDp(2),
@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
   },
   addBtn: {
     width: widthToDp(20),
-    height: heightToDp(6),
+    height: heightToDp(5),
     borderRadius: widthToDp(5),
     backgroundColor: GlobalColors.primary,
     position: 'absolute',
-    right: widthToDp(4),
+    right: widthToDp(6),
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center',
