@@ -126,7 +126,7 @@ workflows:
         XCODE_SCHEME: "BioMark"
         BUNDLE_ID: "com.biomark.patientios"
       node: 12.18.3
-      xcode: 12.4
+      xcode: 13
       cocoapods: default
     triggering:
       events:
