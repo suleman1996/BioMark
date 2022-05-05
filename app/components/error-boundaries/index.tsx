@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { Text } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 
 class ErrorBoundary extends Component {
   constructor(props: any) {
@@ -20,7 +20,11 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return <Text>Something went wrong.</Text>;
+      return (
+        <View>
+          <Text>Something went wrong.</Text>
+        </View>
+      );
     }
 
     return this.props.children;

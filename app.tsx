@@ -1,11 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
-import ErrorBoundary from 'components/error-boundaries';
 import React, { useEffect, useState } from 'react';
 import { Platform, StatusBar, useColorScheme } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider, useDispatch, useSelector } from 'react-redux';
+
 import colors from './app/assets/colors';
 import AppNavigator from './app/navigation/app-navigator';
 import AuthNavigator from './app/navigation/auth-navigator';
@@ -14,8 +14,8 @@ import { navigationRef } from './app/services/nav-ref';
 import { loggedIn } from './app/store/auth/auth-actions';
 import { IAppState } from './app/store/IAppState';
 import { store } from './app/store/store';
-
 import AuthContext from './app/utils/auth-context';
+import ErrorBoundary from 'components/error-boundaries';
 
 const NavigationCheckIfLoggedIn = () => {
   const dispatch = useDispatch();
