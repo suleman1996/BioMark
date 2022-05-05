@@ -5,6 +5,7 @@ import FlashMessage from 'react-native-flash-message';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider, useDispatch, useSelector } from 'react-redux';
+
 import colors from './app/assets/colors';
 import AppNavigator from './app/navigation/app-navigator';
 import AuthNavigator from './app/navigation/auth-navigator';
@@ -13,8 +14,8 @@ import { navigationRef } from './app/services/nav-ref';
 import { loggedIn } from './app/store/auth/auth-actions';
 import { IAppState } from './app/store/IAppState';
 import { store } from './app/store/store';
-
 import AuthContext from './app/utils/auth-context';
+import ErrorBoundary from 'components/error-boundaries';
 
 const NavigationCheckIfLoggedIn = () => {
   const dispatch = useDispatch();
@@ -48,25 +49,27 @@ const App = () => {
   const [userData, setUserData] = useState({});
 
   return (
-    <Provider store={store}>
-      <AuthContext.Provider value={{ user, setUser, userData, setUserData }}>
-        <MenuProvider>
-          <StatusBar
-            backgroundColor={colors.blue}
-            barStyle={
-              Platform.OS === 'android' && isDarkMode
-                ? 'light-content'
-                : 'dark-content'
-            }
-          />
+    <ErrorBoundary>
+      <Provider store={store}>
+        <AuthContext.Provider value={{ user, setUser, userData, setUserData }}>
+          <MenuProvider>
+            <StatusBar
+              backgroundColor={colors.blue}
+              barStyle={
+                Platform.OS === 'android' && isDarkMode
+                  ? 'light-content'
+                  : 'dark-content'
+              }
+            />
 
-          <SafeAreaView edges={['top']} style={{ flex: 1 }}>
-            <NavigationCheckIfLoggedIn />
-          </SafeAreaView>
-        </MenuProvider>
-      </AuthContext.Provider>
-      <FlashMessage floating position="top" />
-    </Provider>
+            <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+              <NavigationCheckIfLoggedIn />
+            </SafeAreaView>
+          </MenuProvider>
+        </AuthContext.Provider>
+        <FlashMessage floating position="top" />
+      </Provider>
+    </ErrorBoundary>
   );
 };
 
