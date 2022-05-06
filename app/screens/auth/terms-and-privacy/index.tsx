@@ -5,7 +5,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import Pdf from 'react-native-pdf';
 
 import colors from 'assets/colors';
-import BackIcon from 'assets/svgs/back';
+import { BackIcon } from 'assets/svgs/index';
 import { ActivityIndicator } from 'components';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';

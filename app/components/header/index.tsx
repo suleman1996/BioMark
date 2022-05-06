@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import colors from 'assets/colors';
 import React from 'react';
 
-import ArrowBack from 'assets/svgs/arrow-back';
+import { ArrowBack } from 'assets/svgs/index';
 import fonts from 'assets/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 
