@@ -23,15 +23,16 @@ import fonts from 'assets/fonts';
 import Apple from 'assets/svgs/apple';
 import Facebook from 'assets/svgs/facebook';
 import Google from 'assets/svgs/google';
-import Logo from 'assets/svgs/logo-name';
-import { Button } from 'components/button';
+//import Logo from 'assets/svgs/logo-name';
+import { Logo } from 'assets/svgs/index';
+//import { Button } from 'components/button';
 import {
   ErrorModal,
   TextInput,
   ActivityIndicator,
   PhoneNumber,
-} from 'components';
-
+  Button,
+} from 'components/index';
 import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
