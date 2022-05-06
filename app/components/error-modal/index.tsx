@@ -3,7 +3,7 @@ import React from 'react';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import Button from 'components/button/button';
+import { Button } from 'components/button';
 
 type Props = {
   onPress: any;

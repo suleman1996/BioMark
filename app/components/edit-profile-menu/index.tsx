@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import Button from 'components/button/button';
+import { Button } from 'components/button';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {

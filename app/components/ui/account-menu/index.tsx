@@ -1,12 +1,14 @@
-import BioAboutIcon from 'components/svg/bio-about-icon';
-import BioAutoLogout from 'components/svg/bio-auto-logout';
-import BioDependent from 'components/svg/bio-dependent';
-import BioIdentify from 'components/svg/bio-identify';
-import BioLogout from 'components/svg/bio-logout';
-import BioNotification from 'components/svg/bio-notification';
-import BioPolicies from 'components/svg/bio-policies';
-import BioSettings from 'components/svg/bio-settings';
-import BioSupport from 'components/svg/bio-support';
+import {
+  BioAboutIcon,
+  BioAutoLogout,
+  BioDependent,
+  BioIdentify,
+  BioLogout,
+  BioNotification,
+  BioPolicies,
+  BioSupport,
+  BioSettings,
+} from 'components/svg';
 import { Nav_Screens } from 'navigation/constants';
 import React from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';

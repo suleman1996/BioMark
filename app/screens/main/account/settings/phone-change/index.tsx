@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import parsePhoneNumber from 'libphonenumber-js';
 
 import { IAppState } from 'store/IAppState';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { styles } from './styles';
-import PhoneNumberWithLabel from 'components/base/phone-with-label';
+import { PhoneNumberWithLabel } from 'components/base';
 import { logNow } from 'utils/functions/log-binder';
 
 const PhoneChangeScreen = () => {

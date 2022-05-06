@@ -42,6 +42,7 @@
     "paths": {
       "screens/*": ["./app/screens/*"],
       "components/*": ["./app/components/*"],
+      "components": ["./app/components"],
       "assets/*": ["./app/assets/*"],
       "constants/*": ["./app/constants/*"],
       "navigation/*": ["./app/navigation/*"],

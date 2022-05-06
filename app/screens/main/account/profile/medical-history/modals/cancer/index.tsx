@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 
-import DropdownMenuComponent from 'components/base/dropdown-menu';
-import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import { DropdownMenu } from 'components/base';
+import {
+  ModalWithBottomBtn,
+  RadioButtonQuestion,
+} from 'components/higher-order';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
@@ -30,7 +32,7 @@ const CancerModal = ({ isVisible, setIsVisible }: Props) => {
       title="Cancer"
       onPress={() => console.log('clicked')}
     >
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans1}
         setIsTrue={setAns1}
         question="Have you been diagnosed with Cancer?"
@@ -39,13 +41,13 @@ const CancerModal = ({ isVisible, setIsVisible }: Props) => {
       <View
         style={{ height: heightToDp(7), ...GlobalStyles.paddingHorizontal }}
       >
-        <DropdownMenuComponent
+        <DropdownMenu
           options={options}
           selectedValue={cancerType}
           onValueChange={setCancerType}
         />
       </View>
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans2}
         setIsTrue={setAns2}
         question="Are you still under treatment for this?"

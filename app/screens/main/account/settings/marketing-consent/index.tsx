@@ -1,8 +1,7 @@
-import ButtonComponent from 'components/base/button';
-import CheckBoxWithText from 'components/base/checkbox-with-text';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import MarketingConsentModal from 'components/ui/marketing-consent-modal';
+import { Button, CheckBoxWithText } from 'components/base';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
+import { MarketingConsentModal } from 'components/ui';
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -87,7 +86,7 @@ const MarketingConsentScreen = () => {
         <View
           style={[GlobalStyles.bottomBtnWithShadow, styles.bottomBtnContainer]}
         >
-          <ButtonComponent
+          <Button
             onPress={() => onChangeMarketing()}
             title={'Save'}
             disabled={isInitialDisable}

@@ -9,10 +9,10 @@ import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 
-import TitleWithBackLayout from 'components/layouts/back-with-title';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
 import { GlobalColors } from 'utils/theme/global-colors';
-import TextInput from 'components/input-field/text-input';
+import { TextInput } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';

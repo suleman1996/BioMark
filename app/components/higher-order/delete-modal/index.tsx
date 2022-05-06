@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import React from 'react';
 
-import ModalComponent from 'components/base/modal';
+import { Modal } from 'components/base';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
@@ -17,7 +17,7 @@ type Props = {
 
 const DeleteModalComponent = ({ isVisible, setIsVisible, callMe }: Props) => {
   return (
-    <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
+    <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
         <Text style={styles.heading}>Delete Dependant?</Text>
         <Text style={styles.subHeading}>
@@ -38,7 +38,7 @@ const DeleteModalComponent = ({ isVisible, setIsVisible, callMe }: Props) => {
           </Pressable>
         </View>
       </View>
-    </ModalComponent>
+    </Modal>
   );
 };
 

@@ -14,7 +14,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import Images from 'assets/images';
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import { TitleWithBackLayout } from 'components/layouts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { Nav_Screens } from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
@@ -22,10 +22,9 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import EditProfileModal from 'components/edit-profile-menu';
+import { EditProfileModal, ActivityIndicator } from 'components';
 import AuthContext from '../../../../../utils/auth-context';
 import { userService } from 'services/user-service/user-service';
-import ActivityIndicator from 'components/loader/activity-indicator';
 import { showMessage } from 'react-native-flash-message';
 
 let cameraIs = false;

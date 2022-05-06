@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
-import SearchBarWithLeftScanIcon from 'components/higher-order/search-bar-with-left-scan-icon/index';
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';

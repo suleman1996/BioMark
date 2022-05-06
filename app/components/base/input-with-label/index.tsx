@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-import InputField from 'components/input-field/input-field';
+import { InputField } from 'components';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import BioDangerWhite from 'components/svg/bio-danger-white';
+import { BioDangerWhite } from 'components/svg';
 
 type Props = {
   label: string;

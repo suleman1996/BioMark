@@ -16,12 +16,14 @@ import moment from 'moment';
 
 import colors from 'assets/colors';
 import BackIcon from 'assets/svgs/back';
-import Button from 'components/button/button';
-import CheckBox from 'components/checkbox';
-import DatePicker from 'components/date-picker';
-import TextInput from 'components/input-field/text-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import PhoneNumber from 'components/phone-number';
+import { Button } from 'components/button';
+import {
+  CheckBox,
+  DatePicker,
+  ActivityIndicator,
+  TextInput,
+  PhoneNumber,
+} from 'components';
 import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';

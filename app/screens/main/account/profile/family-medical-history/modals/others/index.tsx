@@ -1,7 +1,6 @@
 import React from 'react';
 
-import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
-import TagsCloudInputComponent from 'components/higher-order/tags-cloud-input';
+import { ModalWithBottomBtn, TagsCloudInput } from 'components/higher-order';
 
 type Props = {
   isVisible: boolean;
@@ -14,7 +13,7 @@ const OthersModal = ({ isVisible }: Props) => {
       title="Other"
       onPress={() => console.log('clicked')}
     >
-      <TagsCloudInputComponent question="Which other medical conditions do you have or have had?" />
+      <TagsCloudInput question="Which other medical conditions do you have or have had?" />
     </ModalWithBottomBtn>
   );
 };

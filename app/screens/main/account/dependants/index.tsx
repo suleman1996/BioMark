@@ -1,5 +1,5 @@
-import ButtonComponent from 'components/base/button';
-import DependantsList from 'components/ui/dependants-list';
+import { Button } from 'components/base';
+import { DependantsList } from 'components/ui';
 import { Nav_Screens } from 'navigation/constants/index';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -30,7 +30,7 @@ const DependantsScreen = (props: Props) => {
     <View style={styles.container}>
       <DependantsList data={data} />
       <View style={styles.bottomBtnContainer}>
-        <ButtonComponent
+        <Button
           onPress={() => navigate(Nav_Screens.AddDependants)}
           title={'Add New Dependant'}
         />

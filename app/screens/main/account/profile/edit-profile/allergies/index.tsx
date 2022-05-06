@@ -8,15 +8,15 @@ import {
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 
-import TitleWithBackLayout from 'components/layouts/back-with-title';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { styles } from './styles';
 import MedicationModal from './modals/medication';
 import FoodModal from './modals/food';
 import AnimalModal from './modals/animal';
 import EnvironmentModal from './modals/environment';
-import ModalButtonComponent from 'components/higher-order/modal-button';
+import { ModalButton } from 'components/higher-order';
 import { userService } from 'services/user-service/user-service';
 import OtherModal from './modals/other';
 import { navigate } from 'services/nav-ref';
@@ -289,13 +289,13 @@ export default function AllergiesScreen() {
                 setIsVisible={setIsFoodModal}
               />
               <View style={styles.rowContainer}>
-                <ModalButtonComponent
+                <ModalButton
                   title="Medication"
                   isModal={isMedicationModal}
                   setIsModal={() => onPressMedication()}
                   drop={true}
                 />
-                <ModalButtonComponent
+                <ModalButton
                   title="Food"
                   isModal={isFoodModal}
                   setIsModal={() => onPressFood()}
@@ -329,13 +329,13 @@ export default function AllergiesScreen() {
                 setIsVisible={setIsEnvironmentModal}
               />
               <View style={styles.rowContainer}>
-                <ModalButtonComponent
+                <ModalButton
                   title="Animal"
                   isModal={isAnimalModal}
                   setIsModal={() => onPressAnimal()}
                   drop={true}
                 />
-                <ModalButtonComponent
+                <ModalButton
                   title="Environment"
                   isModal={isEnvironmentModal}
                   setIsModal={() => onPressEnvironment()}
@@ -356,13 +356,13 @@ export default function AllergiesScreen() {
                 setIsVisible={setIsOtherModal}
               />
               <View style={styles.rowContainer}>
-                <ModalButtonComponent
+                <ModalButton
                   title="Other"
                   isModal={isOtherModal}
                   setIsModal={() => onPressOther()}
                   drop={true}
                 />
-                <ModalButtonComponent
+                <ModalButton
                   title="Not Sure"
                   isModal={isNotSureModal}
                   setIsModal={() => onPressNotSure()}

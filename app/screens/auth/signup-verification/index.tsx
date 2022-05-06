@@ -8,12 +8,11 @@ import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 
 import styles from './styles';
-import Button from 'components/button/button';
+import { Button } from 'components/button';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 import BackIcon from 'assets/svgs/back';
-import OtpInput from 'components/otp/otp-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { OtpInput, ActivityIndicator } from 'components';
 import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
 import { reduxDeviceRegister } from 'store/auth/auth-actions';
 

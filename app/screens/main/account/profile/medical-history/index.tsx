@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import ModalButtonComponent from 'components/higher-order/modal-button';
+import { ModalButton } from 'components/higher-order';
 import { goBack } from 'services/nav-ref';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container/index';
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import { TitleWithBackLayout } from 'components/layouts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import AsthmaModal from './modals/asthma';
@@ -16,7 +15,7 @@ import GoutModal from './modals/gout';
 import HighBloodPressureModal from './modals/high-blood-pressure';
 import HighCholesterolModal from './modals/high-cholesterol';
 import OthersModal from './modals/others';
-import DropdownMenuComponent from 'components/base/dropdown-menu';
+import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
 
 const options = [
   { id: 1, title: '---' },
@@ -74,7 +73,7 @@ const MedicalHistoryScreen = () => {
 
       {/* modals */}
       <ScrollView style={styles.container}>
-        <DropdownMenuComponent
+        <DropdownMenu
           options={options}
           selectedValue={dropdownValue}
           onValueChange={(value: any) => {
@@ -93,48 +92,48 @@ const MedicalHistoryScreen = () => {
           Have you ever been diagnosed with any of the following conditions?
         </Text>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="High Cholesterol"
             isModal={isCholesterolModal}
             setIsModal={setIsCholesterolModal}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="High Blood Pressure"
             isModal={isBloodPressureModal}
             setIsModal={setIsBloodPressureModal}
           />
         </View>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="Diabetes"
             isModal={isDiabetesModal}
             setIsModal={setIsDiabetesModal}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="Asthma"
             isModal={isAsthmaModal}
             setIsModal={setIsAsthmaModal}
           />
         </View>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="Gout"
             isModal={isGoutModal}
             setIsModal={setIsGoutModal}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="Cancer"
             isModal={isCancerModal}
             setIsModal={setIsCancerModal}
           />
         </View>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="Others"
             isModal={isOtherModal}
             setIsModal={setIsOtherModal}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="None"
             isModal={isNoneModal}
             setIsModal={onNonePress}

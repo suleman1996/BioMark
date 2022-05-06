@@ -5,7 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
-import BioDangerWhite from 'components/svg/bio-danger-white';
+import { BioDangerWhite } from 'components/svg';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 

@@ -10,8 +10,8 @@ import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 
 import { goBack } from 'services/nav-ref';
-import TitleWithBackLayout from 'components/layouts/back-with-title';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { styles } from './styles';
 import colors from 'assets/colors';

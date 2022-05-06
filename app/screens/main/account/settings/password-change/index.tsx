@@ -1,8 +1,6 @@
-import ButtonComponent from 'components/base/button';
-import ErrorText from 'components/base/error-text';
-import PasswordInputWithLabel from 'components/base/password-input-with-label';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { Button, ErrorText, PasswordInputWithLabel } from 'components/base';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
 import { Formik } from 'formik';
 import { Nav_Screens } from 'navigation/constants';
 import React, { useEffect, useRef, useState } from 'react';
@@ -190,7 +188,7 @@ const PasswordChangeScreen = () => {
                   )}
                 </ScrollView>
                 <View style={GlobalStyles.bottomBtnWithShadow}>
-                  <ButtonComponent
+                  <Button
                     onPress={() => {
                       submitForm();
                       handleSubmit();

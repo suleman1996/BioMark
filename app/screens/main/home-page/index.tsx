@@ -9,11 +9,13 @@ import {
 
 import fonts from 'assets/fonts';
 import MyImage from 'assets/images';
-import Covid19Btn from 'components/button/covid19';
-import GoogleFit from 'components/button/google-fit';
-import SmallBtn from 'components/button/small-button';
-import YourHealthBtn from 'components/button/your-health-btn';
-import SearchBarWithLeftScanIcon from 'components/higher-order/search-bar-with-left-scan-icon/index';
+import {
+  Covid19Btn,
+  GoogleFitButton,
+  SmallButton,
+  YourHealthBtn,
+} from 'components/button';
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import AuthContext from 'utils/auth-context';
 import styles from './styles';
 import { userService } from 'services/user-service/user-service';
@@ -72,7 +74,7 @@ export default function Home() {
                   </Text>
                 </View>
                 <View style={{ width: '35%' }}>
-                  <SmallBtn title="Book Now" />
+                  <SmallButton title="Book Now" />
                 </View>
               </View>
             </ImageBackground>
@@ -94,7 +96,7 @@ export default function Home() {
               }}
             >
               <TouchableOpacity>
-                <GoogleFit
+                <GoogleFitButton
                   disabled={false}
                   title="Connect with Google Fit"
                   onPress={() => console.log('pressed')}

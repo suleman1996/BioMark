@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 
-import Button from 'components/button/button';
-import Header from 'components/header';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import PhoneNumber from 'components/phone-number';
+import { Button } from 'components/button';
+import { Header, ActivityIndicator, PhoneNumber } from 'components';
 import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';

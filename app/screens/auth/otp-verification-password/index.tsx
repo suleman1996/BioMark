@@ -9,10 +9,8 @@ import {
 import { showMessage } from 'react-native-flash-message';
 
 import colors from 'assets/colors';
-import Button from 'components/button/button';
-import Header from 'components/header';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import OtpInput from 'components/otp/otp-input';
+import { Button } from 'components/button';
+import { Header, ActivityIndicator, OtpInput } from 'components';
 import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';

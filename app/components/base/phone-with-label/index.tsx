@@ -1,5 +1,5 @@
-import PhoneNumber from 'components/phone-number';
-import BioDangerWhite from 'components/svg/bio-danger-white';
+import { PhoneNumber } from 'components';
+import { BioDangerWhite } from 'components/svg';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';

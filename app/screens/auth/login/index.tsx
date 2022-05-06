@@ -24,11 +24,14 @@ import Apple from 'assets/svgs/apple';
 import Facebook from 'assets/svgs/facebook';
 import Google from 'assets/svgs/google';
 import Logo from 'assets/svgs/logo-name';
-import Button from 'components/button/button';
-import ErrorModal from 'components/error-modal';
-import TextInput from 'components/input-field/text-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import PhoneNumber from 'components/phone-number';
+import { Button } from 'components/button';
+import {
+  ErrorModal,
+  TextInput,
+  ActivityIndicator,
+  PhoneNumber,
+} from 'components';
+
 import { Nav_Screens } from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';

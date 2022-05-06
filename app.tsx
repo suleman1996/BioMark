@@ -15,7 +15,7 @@ import { loggedIn } from './app/store/auth/auth-actions';
 import { IAppState } from './app/store/IAppState';
 import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
-import ErrorBoundary from 'components/error-boundaries';
+import { ErrorBoundary } from 'components';
 
 const NavigationCheckIfLoggedIn = () => {
   const dispatch = useDispatch();

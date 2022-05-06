@@ -5,7 +5,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
-import TextInput from 'components/input-field/text-input';
+import { TextInput } from 'components';
 
 type Props = {
   label: string;

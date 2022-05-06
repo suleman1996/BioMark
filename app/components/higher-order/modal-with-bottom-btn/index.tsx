@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
-import ModalComponent from 'components/base/modal';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { Modal, ButtonWithShadowContainer } from 'components/base';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -29,7 +28,7 @@ const ModalWithBottomBtn = ({
     setIsModal(isVisible);
   }, [isVisible]);
   return (
-    <ModalComponent setIsVisible={setIsVisible} isVisible={isModal}>
+    <Modal setIsVisible={setIsVisible} isVisible={isModal}>
       <View style={styles.card}>
         <ScrollView contentContainerStyle={{ flex: 1 }}>
           <Text style={styles.title}>{title}</Text>
@@ -43,7 +42,7 @@ const ModalWithBottomBtn = ({
           }}
         />
       </View>
-    </ModalComponent>
+    </Modal>
   );
 };
 

@@ -16,7 +16,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 
-import SearchBarLeftIcon from 'components/svg/search-bar-left-icon';
+import { SearchBarLeftIcon } from 'components/svg';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
@@ -24,9 +24,9 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import MyImage from 'assets/images';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import Button from 'components/button/button';
+import { Button } from 'components/button';
 import { inputBarcode } from 'services/auth-service';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { ActivityIndicator } from 'components';
 
 type Props = {
   visible: Boolean;

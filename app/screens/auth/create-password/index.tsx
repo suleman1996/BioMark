@@ -6,11 +6,9 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 
 import styles from './styles';
-import Header from 'components/header';
-import Button from 'components/button/button';
-import TextInput from 'components/input-field/text-input';
+import { Header, TextInput, ActivityIndicator } from 'components';
+import { Button } from 'components/button';
 import { changePassword } from 'services/auth-service';
-import ActivityIndicator from 'components/loader/activity-indicator';
 
 export default function CreatePassword() {
   const navigations = useNavigation();

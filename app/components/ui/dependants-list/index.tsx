@@ -1,5 +1,5 @@
-import DeleteModalComponent from 'components/higher-order/delete-modal';
-import BioBinIcon from 'components/svg/bio-bin-icon';
+import { DeleteModal } from 'components/higher-order';
+import { BioBinIcon } from 'components/svg';
 import { Nav_Screens } from 'navigation/constants/index';
 import React, { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -79,7 +79,7 @@ const DependantsList = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <DeleteModalComponent
+      <DeleteModal
         isVisible={isDelete}
         setIsVisible={setIsDelete}
         callMe={deleteSingleDependent}

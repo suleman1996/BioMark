@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import HeightChooserComponent from 'components/higher-order/height-chooser/index';
-import WeightChooserComponent from 'components/higher-order/weight-chooser';
+import { HeightChooser, WeightChooser } from 'components/higher-order';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import { TitleWithBackLayout } from 'components/layouts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { userService } from 'services/user-service/user-service';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { ButtonWithShadowContainer } from 'components/base';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 import colors from 'assets/colors';
@@ -51,7 +50,7 @@ const BodyMeasurementScreen = () => {
             marginBottom: heightToDp(37),
           }}
         >
-          <HeightChooserComponent
+          <HeightChooser
             height={15}
             label="Height"
             textAlign="right"
@@ -59,7 +58,7 @@ const BodyMeasurementScreen = () => {
             onChangeText={onChangeText}
             value={value}
           />
-          <WeightChooserComponent
+          <WeightChooser
             height={15}
             label="Weight"
             textAlign="right"

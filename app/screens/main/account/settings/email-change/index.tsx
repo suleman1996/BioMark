@@ -1,7 +1,7 @@
-import ButtonComponent from 'components/base/button';
-import InputWithLabel from 'components/base/input-with-label';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { Button } from 'components/base';
+import { InputWithLabel } from 'components/base';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
 import { Formik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
@@ -128,7 +128,7 @@ const EmailChangeScreen = () => {
                   error={values.confirmEmail ? errors.confirmEmail : ''}
                 /> */}
                 <View style={GlobalStyles.bottomBtnWithShadow}>
-                  <ButtonComponent
+                  <Button
                     onPress={() => {
                       submitForm();
                       handleSubmit();

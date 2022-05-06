@@ -9,20 +9,19 @@ import {
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
-import Button from 'components/button/button';
-import InputWithLabel from 'components/base/input-with-label';
+import { TitleWithBackLayout } from 'components/layouts';
+import { Button } from 'components/button';
+import { InputWithLabel } from 'components/base';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import DatePicker from 'components/date-picker';
+import { DatePicker, ActivityIndicator } from 'components';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import AuthContext from 'utils/auth-context';
-import ActivityIndicator from 'components/loader/activity-indicator';
 import { showMessage } from 'react-native-flash-message';
 import { userService } from 'services/user-service/user-service';
 import fonts from 'assets/fonts';
-import ButtonComponent from 'components/base/button';
+import { Button as ButtonComponent } from 'components/base';
 
 const PersonalInformationScreen = () => {
   const authContext = React.useContext(AuthContext);

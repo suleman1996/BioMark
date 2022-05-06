@@ -1,10 +1,7 @@
-import ButtonComponent from 'components/base/button';
-import DateTimePickerModalComponent from 'components/base/date-time-picker-modal';
-import InputWithLabel from 'components/base/input-with-label';
-import PhoneNumberWithLabel from 'components/base/phone-with-label/index';
-import BoxSelector from 'components/higher-order/box-selector';
-import RelationMenu from 'components/higher-order/relation-menu';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { Button, PhoneNumberWithLabel } from 'components/base';
+import { DateTimePickerModal, InputWithLabel } from 'components/base';
+import { BoxSelector, RelationMenu } from 'components/higher-order';
+import { ActivityIndicator } from 'components';
 import { Regex } from 'constants/regex';
 import { format } from 'date-fns';
 import { Formik } from 'formik';
@@ -186,7 +183,7 @@ const AddDependantScreen = () => {
                   error={values.email ? errors.email : ''}
                 />
                 <Text style={styles.label}>Date of Birth</Text>
-                <DateTimePickerModalComponent
+                <DateTimePickerModal
                   date={values.birth_date}
                   setDate={(e: any) => setFieldValue('birth_date', e)}
                 />
@@ -219,7 +216,7 @@ const AddDependantScreen = () => {
                   ]}
                 />
                 <View style={styles.bottomBtnContainer}>
-                  <ButtonComponent
+                  <Button
                     disabled={!isValid || !values.first_name}
                     onPress={() => onSubmit()}
                     title={'Confirm'}

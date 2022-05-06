@@ -2,14 +2,14 @@ import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 
-import TitleWithBackLayout from 'components/layouts/back-with-title';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
 import styles from './styles';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { ActivityIndicator } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { showMessage } from 'react-native-flash-message';
 import { useIsFocused } from '@react-navigation/native';

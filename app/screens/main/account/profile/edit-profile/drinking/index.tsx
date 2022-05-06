@@ -5,17 +5,17 @@ import { RadioButton } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import TitleWithBackLayout from 'components/layouts/back-with-title';
+import { TitleWithBackLayout } from 'components/layouts';
 import styles from './styles';
 import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { ButtonWithShadowContainer } from 'components/base';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { ActivityIndicator } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { useIsFocused } from '@react-navigation/native';
 

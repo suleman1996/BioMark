@@ -1,6 +1,5 @@
-import ButtonComponent from 'components/base/button';
-import ModalComponent from 'components/base/modal';
-import BioCloseGray from 'components/svg/bio-close-gray';
+import { Button, Modal } from 'components/base';
+import { BioCloseGray } from 'components/svg';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -17,7 +16,7 @@ type Props = {
 const MarketingConsentModal = (props: Props) => {
   const { isVisible, setIsVisible, callMe } = props;
   return (
-    <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
+    <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Are You Sure?</Text>
@@ -29,12 +28,8 @@ const MarketingConsentModal = (props: Props) => {
           By clicking 'Confirm' you will not receive any more offers, promotion
           and services via email and SMS.
         </Text>
-        <ButtonComponent
-          onPress={() => callMe()}
-          title={'Confirm'}
-          disabled={false}
-        />
-        <ButtonComponent
+        <Button onPress={() => callMe()} title={'Confirm'} disabled={false} />
+        <Button
           bg={'transparent'}
           color={'gray'}
           onPress={() => setIsVisible(false)}
@@ -42,7 +37,7 @@ const MarketingConsentModal = (props: Props) => {
           disabled={false}
         />
       </View>
-    </ModalComponent>
+    </Modal>
   );
 };
 

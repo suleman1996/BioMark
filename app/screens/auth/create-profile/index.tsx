@@ -19,11 +19,9 @@ import CountryPicker, {
 
 import colors from 'assets/colors';
 import BackIcon from 'assets/svgs/back';
-import Button from 'components/button/button';
-import CheckBox from 'components/checkbox';
-import DatePicker from 'components/date-picker';
-import TextInput from 'components/input-field/text-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { Button } from 'components/button';
+import { CheckBox } from 'components';
+import { DatePicker, TextInput, ActivityIndicator } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';

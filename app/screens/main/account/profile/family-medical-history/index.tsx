@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import ModalButtonComponent from 'components/higher-order/modal-button';
+import { ModalButton } from 'components/higher-order';
 import { goBack } from 'services/nav-ref';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container/index';
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
+import { ButtonWithShadowContainer } from 'components/base';
+import { TitleWithBackLayout } from 'components/layouts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import CancerModal from './modals/cancer';
 import OthersModal from './modals/others';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { ActivityIndicator } from 'components';
 import { useIsFocused } from '@react-navigation/native';
 import { userService } from 'services/user-service/user-service';
 import { showMessage } from 'react-native-flash-message';
@@ -167,7 +167,7 @@ const MedicalHistoryScreen = () => {
           conditions?
         </Text>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="Heart Disease"
             isModal={heartDisease}
             setIsModal={setHeartDisease}
@@ -175,7 +175,7 @@ const MedicalHistoryScreen = () => {
             history={history}
             condition_id={9}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="Stroke"
             isModal={isStroke}
             setIsModal={setIsStroke}
@@ -185,7 +185,7 @@ const MedicalHistoryScreen = () => {
           />
         </View>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="High Blood Pressure"
             isModal={isBloodPressureModal}
             setIsModal={setIsBloodPressureModal}
@@ -193,7 +193,7 @@ const MedicalHistoryScreen = () => {
             history={history}
             condition_id={11}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="High Cholesterol"
             isModal={isCholesterolModal}
             setIsModal={setIsCholesterolModal}
@@ -203,7 +203,7 @@ const MedicalHistoryScreen = () => {
           />
         </View>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="Diabetes"
             isModal={isDiabetesModal}
             setIsModal={setIsDiabetesModal}
@@ -211,7 +211,7 @@ const MedicalHistoryScreen = () => {
             history={history}
             condition_id={13}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="Cancer"
             isModal={isCancerModal}
             setIsModal={onPressCancer}
@@ -220,14 +220,14 @@ const MedicalHistoryScreen = () => {
           />
         </View>
         <View style={styles.rowContainer}>
-          <ModalButtonComponent
+          <ModalButton
             title="Others"
             isModal={isOtherModal}
             setIsModal={onPressOthers}
             history={history}
             drop={true}
           />
-          <ModalButtonComponent
+          <ModalButton
             title="None"
             isModal={isNoneModal}
             setIsModal={onNonePress}

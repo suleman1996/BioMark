@@ -10,10 +10,10 @@ import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-import TitleWithBackLayout from 'components/layouts/back-with-title';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
 import { GlobalColors } from 'utils/theme/global-colors';
-import TextInput from 'components/text-input-button';
+import { TextInputButton } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
@@ -127,7 +127,7 @@ export default function VaccinationScreen() {
           </RadioButton.Group>
 
           {value == 'second' ? (
-            <TextInput
+            <TextInputButton
               placeholder={undefined}
               onPress={addTags}
               value={items}

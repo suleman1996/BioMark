@@ -1,12 +1,11 @@
 import { View, ScrollView } from 'react-native';
 import React, { useEffect } from 'react';
-import TitleWithBackLayout from 'components/layouts/back-with-title';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
 import styles from './styles';
-import StressBar from '../../../../../../components/stress-bar/index';
+import { StressBar, ActivityIndicator } from 'components';
 import { useIsFocused } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
-import ActivityIndicator from 'components/loader/activity-indicator';
 import { userService } from 'services/user-service/user-service';
 import { goBack } from 'services/nav-ref';
 

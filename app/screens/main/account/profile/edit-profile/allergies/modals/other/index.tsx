@@ -3,9 +3,11 @@ import { View, TouchableOpacity, Text, FlatList } from 'react-native';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import Entypo from 'react-native-vector-icons/Entypo';
-import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
-import TextInput from 'components/text-input-button';
+import {
+  ModalWithBottomBtn,
+  RadioButtonQuestion,
+} from 'components/higher-order';
+import { TextInputButton } from 'components';
 import { styles } from '../../styles';
 
 type Props = {
@@ -37,10 +39,10 @@ const OtherModal = ({
       title="Medication Allergies"
       onPress={onDone}
     >
-      <RadioButtonQuestionComponent isTrue={ans1} setIsTrue={setAns1} />
+      <RadioButtonQuestion isTrue={ans1} setIsTrue={setAns1} />
       {ans1 ? (
         <>
-          <TextInput
+          <TextInputButton
             question="Please list these medications"
             placeholder="Enter medications"
             onChangeText={setvalueOther}

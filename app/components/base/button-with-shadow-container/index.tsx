@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonComponent from 'components/base/button/index';
+import { Button } from 'components/base';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
@@ -15,7 +15,7 @@ type Props = {
 const ButtonWithShadowContainer = ({ title, onPress, disabled }: Props) => {
   return (
     <View style={styles.container}>
-      <ButtonComponent
+      <Button
         onPress={onPress}
         title={title ? title : 'Save'}
         disabled={disabled}

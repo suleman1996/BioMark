@@ -1,7 +1,7 @@
-import SingleMenuItemWithArrow from 'components/higher-order/single-menu-item-with-right-arrow';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import AccountDeActivateModal from 'components/ui/account-deactivate-modal';
+import { SingleMenuItemWithArrow } from 'components/higher-order';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
+import { AccountDeActivateModal } from 'components/ui';
 import { Nav_Screens } from 'navigation/constants';
 import React, { useEffect, useState } from 'react';
 import { Linking, View } from 'react-native';
