@@ -43,7 +43,7 @@ export const AccountNavigator = () => (
           headerTintColor: GlobalColors.darkPrimary,
           title: 'Dependants',
         }}
-        name={Nav_Screens.Dependants_Screen}
+        name={Nav_Screens.DependantsScreen}
         component={DependantsScreen}
       />
       <Stack.Screen
@@ -52,7 +52,7 @@ export const AccountNavigator = () => (
           headerTintColor: GlobalColors.darkPrimary,
           title: 'Dependants',
         }}
-        name={Nav_Screens.Add_Dependants}
+        name={Nav_Screens.AddDependants}
         component={AddDependantScreen}
       />
       <Stack.Screen
@@ -61,7 +61,7 @@ export const AccountNavigator = () => (
           headerTintColor: GlobalColors.darkPrimary,
           title: 'Dependants',
         }}
-        name={Nav_Screens.Edit_Dependants}
+        name={Nav_Screens.EditDependants}
         component={EditDependantScreen}
       />
       {/* Settings */}
@@ -115,28 +115,28 @@ export const AccountNavigator = () => (
         options={{
           headerShown: false,
         }}
-        name={Nav_Screens.Edit_Profile}
+        name={Nav_Screens.EditProfile}
         component={EditProfileScreen}
       />
       <Stack.Screen
         options={{
           headerShown: false,
         }}
-        name={Nav_Screens.Personal_Information}
+        name={Nav_Screens.PersonalInformation}
         component={PersonalInformationScreen}
       />
       <Stack.Screen
         options={{
           headerShown: false,
         }}
-        name={Nav_Screens.Body_Measurement}
+        name={Nav_Screens.BodyMeasurement}
         component={BodyMeasurementScreen}
       />
       <Stack.Screen
         options={{
           headerShown: false,
         }}
-        name={Nav_Screens.Medical_History}
+        name={Nav_Screens.MedicalHistory}
         component={MedicalHistoryScreen}
       />
       <Stack.Screen

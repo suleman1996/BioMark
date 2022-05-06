@@ -6,6 +6,7 @@ import React from 'react';
 
 import ArrowBack from 'assets/svgs/arrow-back';
 import fonts from 'assets/fonts';
+import { GlobalColors } from 'utils/theme/global-colors';
 
 type Props = {
   title: string;
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     paddingHorizontal: 10,
-    backgroundColor: '#fff',
+    backgroundColor: GlobalColors.white,
     shadowColor: '#000',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,

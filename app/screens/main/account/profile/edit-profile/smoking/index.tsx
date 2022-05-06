@@ -31,7 +31,7 @@ export default function SmokingScreen() {
     try {
       const response = await userService.Smoking(day, stopSmoke, startSmoke);
       console.log('smoking successful', response.data);
-      navigate(Nav_Screens.Edit_Profile);
+      navigate(Nav_Screens.EditProfile);
     } catch (err) {
       console.log(err);
     }

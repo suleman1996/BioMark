@@ -21,7 +21,7 @@ export default function SmallButton(props: Props) {
           contentStyle={{ height: 35 }}
           style={[
             styles.btn,
-            { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
+            { backgroundColor: props?.disabled ? colors.disable : colors.blue },
           ]}
           onPress={props.onPress}
         >

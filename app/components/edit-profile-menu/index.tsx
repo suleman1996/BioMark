@@ -55,7 +55,7 @@ export default function EditProfileModal({
 const styles = StyleSheet.create({
   overLay: {
     position: 'absolute',
-    backgroundColor: '#3D3D3D90',
+    backgroundColor: colors.bg,
     top: 0,
     left: 0,
     right: 0,

@@ -82,7 +82,7 @@ const AccountScreen = () => {
               <Pressable
                 onPress={() =>
                   navigate(Nav_Screens.NestedAccountNavigator, {
-                    screen: Nav_Screens.Edit_Profile,
+                    screen: Nav_Screens.EditProfile,
                   })
                 }
                 style={{ flexDirection: 'row', alignItems: 'center' }}

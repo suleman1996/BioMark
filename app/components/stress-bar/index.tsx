@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   bar: {
-    backgroundColor: '#3D3D3D30',
+    backgroundColor: GlobalColors.fieldGrey,
     width: '100%',
     height: 10,
     borderRadius: 10,

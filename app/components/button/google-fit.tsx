@@ -20,7 +20,7 @@ export default function GoogleFitButton(props: Props) {
         contentStyle={{ height: 45, width: '100%' }}
         style={[
           styles.btn,
-          { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
+          { backgroundColor: props?.disabled ? colors.disable : colors.blue },
         ]}
         onPress={props.onPress}
       >

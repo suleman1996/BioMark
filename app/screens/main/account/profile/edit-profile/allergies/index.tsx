@@ -135,7 +135,7 @@ export default function AllergiesScreen() {
           conditions: conditions,
         });
         console.log('Allergies successful', response.data);
-        navigate(Nav_Screens.Edit_Profile);
+        navigate(Nav_Screens.EditProfile);
       }
     } catch (err) {
       console.log(err);
