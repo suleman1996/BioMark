@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontFamily: fonts.regular,
     fontSize: 16,
+    flexDirection: 'row',
   },
   errorMessage: {
     fontFamily: fonts.regular,

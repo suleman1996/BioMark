@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
-    backgroundColor: '#EBEFF2',
+    backgroundColor: GlobalColors.gray,
     height: 50,
   },
 });

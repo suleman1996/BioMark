@@ -53,7 +53,7 @@ const DependantsList = (props: Props) => {
           <View style={styles.headerEnd}>
             <Pressable
               onPress={() =>
-                navigate(Nav_Screens.Edit_Dependants, { id: item?.id })
+                navigate(Nav_Screens.EditDependants, { id: item?.id })
               }
               style={styles.editBtn}
             >

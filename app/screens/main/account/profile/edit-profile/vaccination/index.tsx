@@ -169,7 +169,7 @@ export default function VaccinationScreen() {
       </TitleWithBackLayout>
       <ButtonWithShadowContainer
         title="Save"
-        onPress={() => navigate(Nav_Screens.Edit_Profile)}
+        onPress={() => navigate(Nav_Screens.EditProfile)}
       />
     </SafeAreaView>
   );

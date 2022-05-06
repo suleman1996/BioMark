@@ -31,7 +31,7 @@ const DependantsScreen = (props: Props) => {
       <DependantsList data={data} />
       <View style={styles.bottomBtnContainer}>
         <ButtonComponent
-          onPress={() => navigate(Nav_Screens.Add_Dependants)}
+          onPress={() => navigate(Nav_Screens.AddDependants)}
           title={'Add New Dependant'}
         />
       </View>

@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     // marginTop:10,
     borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
-    backgroundColor: '#EBEFF2',
+    backgroundColor: colors.inputBg,
     height: 50,
   },
   bottomView: {

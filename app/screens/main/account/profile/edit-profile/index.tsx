@@ -184,7 +184,7 @@ const EditProfileScreen = () => {
               ABOUT ME
             </Text>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Personal_Information)}
+              onPress={() => navigate(Nav_Screens.PersonalInformation)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -202,7 +202,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Body_Measurement)}
+              onPress={() => navigate(Nav_Screens.BodyMeasurement)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -220,7 +220,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Medical_History)}
+              onPress={() => navigate(Nav_Screens.MedicalHistory)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>

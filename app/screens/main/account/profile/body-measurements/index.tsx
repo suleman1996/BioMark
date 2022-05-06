@@ -35,7 +35,7 @@ const BodyMeasurementScreen = () => {
         },
       });
       console.log('measurement successful', response.data);
-      navigate(Nav_Screens.Edit_Profile);
+      navigate(Nav_Screens.EditProfile);
     } catch (err) {
       console.log(err);
     }

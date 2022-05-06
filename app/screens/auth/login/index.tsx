@@ -213,7 +213,7 @@ export default function Login() {
         <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity
             style={{ marginVertical: 30 }}
-            onPress={() => navigate(Nav_Screens.Forgot_Password)}
+            onPress={() => navigate(Nav_Screens.ForgotPassword)}
           >
             <Text style={styles.forgotPassword}>Forgot password?</Text>
           </TouchableOpacity>
@@ -257,12 +257,12 @@ export default function Login() {
         </View>
 
         <View style={{ alignSelf: 'center' }}>
-          <TouchableOpacity onPress={() => navigate(Nav_Screens.Sign_Up)}>
-            <Text style={styles.noAccountTxt}>
-              <Text style={{ color: colors.black }}>Dont have an account?</Text>
+          <View style={styles.noAccountTxt}>
+            <Text style={{ color: colors.black }}>Dont have an account?</Text>
+            <TouchableOpacity onPress={() => navigate(Nav_Screens.SignUp)}>
               <Text style={{ color: colors.blue }}> Sign up</Text>
-            </Text>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </View>

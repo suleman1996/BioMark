@@ -32,7 +32,7 @@ const Sleep = () => {
       setIsVisible(true);
       const result = await userService.sleeping(selectedSleep);
       console.log('Sleep success ', result.data);
-      navigate(Nav_Screens.Edit_Profile);
+      navigate(Nav_Screens.EditProfile);
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);
@@ -114,7 +114,7 @@ const Sleep = () => {
                   color: colors.placeHolder,
                   fontFamily: fonts.regular,
                 }}
-                itemStyle={{ color: 'red' }}
+                itemStyle={{ color: colors.danger }}
                 onValueChange={(itemValue) => setSelectedSleep(itemValue)}
               >
                 {sleepOptions?.map((item, index) => {

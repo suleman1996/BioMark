@@ -30,7 +30,7 @@ export default function Button(props: Props) {
           contentStyle={{ height: 50 }}
           style={[
             styles.btn,
-            { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
+            { backgroundColor: props?.disabled ? colors.disable : colors.blue },
           ]}
           labelStyle={{ color: colors.whiteColor }}
           onPress={props.onPress}

@@ -1,22 +1,22 @@
 export const Nav_Screens = {
   // Auth
-  Forgot_Password: 'ForgotPassword',
+  ForgotPassword: 'ForgotPassword',
   PasswordOTPScreen: 'PasswordOTP',
   SignupVerificationScreen: 'SignupVerification',
   CreatePasswordScreen: 'CreatePassword',
   LoginScreen: 'Login',
-  Sign_Up: 'Signup',
-  Create_Profile: 'CreateProfile',
+  SignUp: 'Signup',
+  CreateProfile: 'CreateProfile',
   TermsAndPrivacy: 'TermsAndPrivacy',
   // NestedAccountNavigator
   NestedAccountNavigator: 'NestedAccountNavigator',
-  Account_Screen: 'Account_Screen',
-  Dependants_Screen: 'DependantsScreen',
-  Add_Dependants: 'AddDependantScreen',
-  Edit_Dependants: 'EditDependantScreen',
-  Personal_Information: 'PersonalInformationScreen',
-  Body_Measurement: 'BodyMeasurementScreen',
-  Medical_History: 'MedicalHistoryScreen',
+  AccountScreen: 'Account_Screen',
+  DependantsScreen: 'DependantsScreen',
+  AddDependants: 'AddDependantScreen',
+  EditDependants: 'EditDependantScreen',
+  PersonalInformation: 'PersonalInformationScreen',
+  BodyMeasurement: 'BodyMeasurementScreen',
+  MedicalHistory: 'MedicalHistoryScreen',
   Settings: 'SettingsScreen',
   PasswordChangeScreen: 'PasswordChangeScreen',
   PasswordChangedInApp: 'PasswordChangedInApp',
@@ -24,7 +24,7 @@ export const Nav_Screens = {
   PhoneChangeScreen: 'PhoneChangeScreen',
   MarketingConsentScreen: 'MarketingConsentScreen',
   // edit profile
-  Edit_Profile: 'EditProfile',
+  EditProfile: 'EditProfile',
   Smoking: 'Smoking',
   Vaccination: 'Vaccination',
   Sleep: 'Sleep',
@@ -34,6 +34,6 @@ export const Nav_Screens = {
   Stress: 'Stress',
 
   // Bottom Nav_Screens
-  Main_Navigator: 'MainBottomTabsNavigator',
+  MainNavigator: 'MainBottomTabsNavigator',
   FamilyMedicalHistory: 'FamilyMedicalHistory',
 };

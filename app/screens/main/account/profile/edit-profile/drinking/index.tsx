@@ -54,7 +54,7 @@ const Drinking = () => {
           spirits
         );
         console.log('Drinking success ', result.data);
-        navigate(Nav_Screens.Edit_Profile);
+        navigate(Nav_Screens.EditProfile);
 
         setIsVisible(false);
       } catch (error) {

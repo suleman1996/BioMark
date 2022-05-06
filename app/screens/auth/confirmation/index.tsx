@@ -6,6 +6,7 @@ import StepIndicator from 'react-native-step-indicator';
 import styles from './styles';
 import Button from 'components/button/button';
 import SetToGo from 'assets/svgs/set-to-go';
+import { Nav_Screens } from 'navigation/constants';
 
 export default function Confirmation() {
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
@@ -33,7 +34,7 @@ export default function Confirmation() {
           <Button
             disabled={false}
             title="Continue to Homepage"
-            onPress={() => navigations.navigate('Login')}
+            onPress={() => navigations.navigate(Nav_Screens.LoginScreen)}
           />
         </ScrollView>
       </View>
