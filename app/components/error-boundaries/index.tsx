@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
-import Logo from 'assets/svgs/logo-name';
+import { Logo } from 'assets/svgs/index';
 
 class ErrorBoundary extends Component {
   constructor(props: any) {

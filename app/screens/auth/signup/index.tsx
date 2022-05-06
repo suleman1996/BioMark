@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 import moment from 'moment';
 
 import colors from 'assets/colors';
-import BackIcon from 'assets/svgs/back';
+import { BackIcon } from 'assets/svgs/index';
 import { Button } from 'components/button';
 import {
   CheckBox,

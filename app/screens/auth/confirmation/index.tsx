@@ -5,7 +5,7 @@ import StepIndicator from 'react-native-step-indicator';
 
 import styles from './styles';
 import { Button } from 'components/button';
-import SetToGo from 'assets/svgs/set-to-go';
+import { SetToGo } from 'assets/svgs/index';
 import { Nav_Screens } from 'navigation/constants';
 
 export default function Confirmation() {

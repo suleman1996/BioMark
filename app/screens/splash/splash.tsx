@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
-import AppLogo from 'assets/svgs/logo-name';
+import { Logo } from 'assets/svgs/index';
 
 export default function Splash() {
   const navigations = useNavigation();
@@ -16,7 +16,7 @@ export default function Splash() {
 
   return (
     <View style={styles.container}>
-      <AppLogo />
+      <Logo />
     </View>
   );
 }

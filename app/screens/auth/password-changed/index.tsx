@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import fonts from 'assets/fonts';
 import colors from 'assets/colors';
-import Lock from 'assets/svgs/lock';
+import { Lock } from 'assets/svgs/index';
 import { navigate } from 'services/nav-ref';
 import { Nav_Screens } from 'navigation/constants';
 

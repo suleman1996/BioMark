@@ -4,10 +4,12 @@ import * as React from 'react';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import AccountIcon from 'assets/svgs/account';
-import AppointmentIcon from 'assets/svgs/appoinment';
-import HomeIcon from 'assets/svgs/home';
-import InboxIcon from 'assets/svgs/inbox';
+import {
+  AccountIcon,
+  AppointmentIcon,
+  HomeIcon,
+  InboxIcon,
+} from 'assets/svgs/index';
 import Inbox from 'screens/main/Inbox/index';
 import Home from 'screens/main/home-page';
 import AppointmentScreen from 'screens/main/appointment';

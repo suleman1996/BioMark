@@ -3,7 +3,8 @@ import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 
 import fonts from 'assets/fonts';
 import colors from 'assets/colors';
-import YourHealth from 'assets/svgs/your-health';
+
+import { YourHealth } from 'assets/svgs/index';
 
 export default function YourHealthBtn() {
   return (

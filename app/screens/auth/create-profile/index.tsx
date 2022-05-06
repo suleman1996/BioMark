@@ -18,7 +18,7 @@ import CountryPicker, {
 } from 'react-native-country-picker-modal';
 
 import colors from 'assets/colors';
-import BackIcon from 'assets/svgs/back';
+import { BackIcon } from 'assets/svgs/index';
 import { Button } from 'components/button';
 import { CheckBox } from 'components';
 import { DatePicker, TextInput, ActivityIndicator } from 'components';

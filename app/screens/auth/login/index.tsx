@@ -20,11 +20,7 @@ import { appleAuth } from '@invertase/react-native-apple-authentication';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import Apple from 'assets/svgs/apple';
-import Facebook from 'assets/svgs/facebook';
-import Google from 'assets/svgs/google';
-//import Logo from 'assets/svgs/logo-name';
-import { Logo } from 'assets/svgs/index';
+import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 //import { Button } from 'components/button';
 import {
   ErrorModal,
