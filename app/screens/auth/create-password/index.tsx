@@ -5,12 +5,13 @@ import * as Yup from 'yup';
 import { useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 
-import styles from './styles';
 import { navigate } from 'services/nav-ref';
 import { Header, TextInput, ActivityIndicator } from 'components';
 import { Button } from 'components/button';
 import { changePassword } from 'services/auth-service';
 import SCREENS from 'navigation/constants';
+
+import styles from './styles';
 
 export default function CreatePassword() {
   const route = useRoute();

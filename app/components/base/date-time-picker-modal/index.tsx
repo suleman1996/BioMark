@@ -1,8 +1,11 @@
 import { Pressable, Text, View } from 'react-native';
 import React, { useState } from 'react';
+
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
 import { logNow } from 'utils/functions/log-binder';
 import { getDay, getMonth, getYear } from 'utils/functions/date-format';
+
 import { styles } from './styles';
 type Props = {
   date: any;

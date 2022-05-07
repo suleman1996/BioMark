@@ -1,9 +1,12 @@
+import React from 'react';
+import { View } from 'react-native';
+
 import { useIsFocused } from '@react-navigation/native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
 
 import colors from 'assets/colors';
+
+import { styles } from './styles';
 
 type Props = {
   code: string;
@@ -51,28 +54,3 @@ export default function ({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  borderStyleBase: {
-    width: 30,
-    height: 45,
-  },
-  borderStyleHighLighted: {
-    borderColor: '#03DAC6',
-  },
-  underlineStyleBase: {
-    width: 30,
-    height: 45,
-    borderWidth: 0,
-    borderBottomWidth: 1,
-  },
-  underlineStyleHighLighted: {
-    borderColor: '#03DAC6',
-  },
-  codeInputFieldStyle: {
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.heading,
-    color: colors.black,
-  },
-});

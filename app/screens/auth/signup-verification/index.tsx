@@ -7,7 +7,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 
-import styles from './styles';
 import { Button } from 'components/button';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
@@ -17,6 +16,8 @@ import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
 import { reduxDeviceRegister } from 'store/auth/auth-actions';
 import { navigate, goBack } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+
+import styles from './styles';
 
 export default function SignupVerification() {
   const dispatch = useDispatch();

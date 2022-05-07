@@ -1,13 +1,16 @@
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { navigate } from 'services/nav-ref';
+
+import { getAllDependents } from 'store/account/account-actions';
+import { IAppState } from 'store/IAppState';
 import { Button } from 'components/base';
 import { DependantsList } from 'components/ui';
 import SCREENS from 'navigation/constants';
-import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { navigate } from 'services/nav-ref';
-import { getAllDependents } from 'store/account/account-actions';
-import { IAppState } from 'store/IAppState';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+
+import { styles } from './styles';
 
 type Props = {
   navigation: any;
@@ -40,18 +43,3 @@ const DependantsScreen = (props: Props) => {
 };
 
 export default DependantsScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  bottomBtnContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    bottom: 0,
-    paddingBottom: heightToDp(3),
-    width: widthToDp(100),
-    paddingHorizontal: widthToDp(6),
-  },
-});

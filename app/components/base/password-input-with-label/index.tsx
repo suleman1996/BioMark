@@ -1,8 +1,10 @@
-import { Text, View } from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+
+import { TextInput } from 'components';
 
 import { heightToDp } from 'utils/functions/responsive-dimensions';
-import { TextInput } from 'components';
+
 import { styles } from './styles';
 
 type Props = {

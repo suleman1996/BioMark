@@ -26,7 +26,6 @@ import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
 
-import styles from './styles';
 import {
   getAuthAsyncStorage,
   resetAuthAsyncStorage,
@@ -37,6 +36,8 @@ import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { IAppState } from 'store/IAppState';
+
+import styles from './styles';
 
 export default function CreateProfile() {
   const [loading, setLoading] = useState(false);

@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 
 import { Covid19 } from 'assets/svgs/index';
-
 import fonts from 'assets/fonts';
 import colors from 'assets/colors';
 

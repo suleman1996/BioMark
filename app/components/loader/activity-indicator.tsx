@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+
 import { BarIndicator } from 'react-native-indicators';
 
 import colors from 'assets/colors';
+
+import { styles } from './styles';
 
 type Props = {
   visible: boolean;
@@ -23,15 +26,3 @@ export default function ActivityIndicator({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  overLay: {
-    position: 'absolute',
-    backgroundColor: '#ffffff90',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 100,
-  },
-});

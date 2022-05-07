@@ -9,6 +9,7 @@ import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { ForgotPasswordErrorResponse } from 'types/auth/ForgotPassword';
 import { logNow } from 'utils/functions/log-binder';
+
 import styles from './styles';
 
 export default function ForgotPassword() {

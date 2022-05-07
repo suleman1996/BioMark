@@ -1,9 +1,11 @@
-import { Text, View } from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import { styles } from './styles';
 
 type Props = {

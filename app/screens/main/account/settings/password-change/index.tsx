@@ -1,19 +1,25 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Button, ErrorText, PasswordInputWithLabel } from 'components/base';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
-import { Formik } from 'formik';
+
 import SCREENS from 'navigation/constants';
-import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { settingsService } from 'services/account-service/settings-service';
-import { navigate } from 'services/nav-ref';
-import { ErrorResponse } from 'types/ErrorResponse';
+
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalStyles } from 'utils/theme/global-styles';
-import * as Yup from 'yup';
+
+import { settingsService } from 'services/account-service/settings-service';
+import { navigate } from 'services/nav-ref';
+import { ErrorResponse } from 'types/ErrorResponse';
+
 import { styles } from './styles';
 
 const passText = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;

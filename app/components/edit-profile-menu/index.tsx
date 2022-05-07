@@ -1,9 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { Button } from 'components/button';
+
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import { styles } from './styles';
 
 type Props = {

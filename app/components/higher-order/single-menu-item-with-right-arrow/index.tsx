@@ -1,11 +1,13 @@
-import { Text } from 'react-native';
-import { TouchableRipple } from 'react-native-paper';
 import React from 'react';
+import { Text } from 'react-native';
+
+import { TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-import { styles } from './styles';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalColors } from 'utils/theme/global-colors';
+
+import { styles } from './styles';
 
 type Props = {
   onPress: any;

@@ -6,7 +6,9 @@ import {
   Keyboard,
 } from 'react-native';
 import React, { useState } from 'react';
+
 import { RadioButton } from 'react-native-paper';
+import { showMessage } from 'react-native-flash-message';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { Button } from 'components/button';
@@ -14,10 +16,10 @@ import { InputWithLabel } from 'components/base';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { DatePicker, ActivityIndicator } from 'components';
 import AuthContext from 'utils/auth-context';
-import { showMessage } from 'react-native-flash-message';
 import { userService } from 'services/user-service/user-service';
 import fonts from 'assets/fonts';
 import { Button as ButtonComponent } from 'components/base';
+
 import { styles } from './styles';
 
 const PersonalInformationScreen = () => {

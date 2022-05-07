@@ -1,9 +1,10 @@
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   margin?: any;

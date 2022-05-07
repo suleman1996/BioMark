@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+
 import { GlobalColors } from 'utils/theme/global-colors';
+
 import { styles } from './styles';
 type Props = {
   onPress: any;

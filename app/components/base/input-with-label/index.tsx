@@ -2,8 +2,10 @@ import { Text, View } from 'react-native';
 import React from 'react';
 
 import { InputField } from 'components';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { BioDangerWhite } from 'components/svg';
+
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import { styles } from './styles';
 
 type Props = {

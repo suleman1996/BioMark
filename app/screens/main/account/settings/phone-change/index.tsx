@@ -1,14 +1,17 @@
 import { View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import parsePhoneNumber from 'libphonenumber-js';
 
-import { IAppState } from 'store/IAppState';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
-import { styles } from './styles';
 import { PhoneNumberWithLabel } from 'components/base';
+
+import { IAppState } from 'store/IAppState';
 import { logNow } from 'utils/functions/log-binder';
+
+import { styles } from './styles';
 
 const PhoneChangeScreen = () => {
   const [countryCode, setCountryCode] = useState<any>();

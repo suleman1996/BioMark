@@ -1,11 +1,13 @@
-import { Text, View, Pressable } from 'react-native';
 import React, { useState } from 'react';
+import { Text, View, Pressable } from 'react-native';
+
 import { TextInput } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalColors } from 'utils/theme/global-colors';
+
 import { styles } from './styles';
 
 type Props = {

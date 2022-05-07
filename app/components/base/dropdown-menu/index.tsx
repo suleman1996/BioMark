@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
+
 import { BioDangerWhite } from 'components/svg';
+
 import { styles } from './styles';
 
 type Props = {

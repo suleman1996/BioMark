@@ -2,6 +2,7 @@ import { Text, View } from 'react-native';
 import React from 'react';
 
 import { Button } from 'components/button';
+
 import { styles } from './styles';
 
 type Props = {

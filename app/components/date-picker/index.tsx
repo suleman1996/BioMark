@@ -1,9 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Text, Platform } from 'react-native';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
 import colors from 'assets/colors';
+
 import { styles } from './styles';
 
 type Props = {

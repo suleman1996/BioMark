@@ -1,8 +1,10 @@
-import { Text, View } from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+
 import { RadioButton } from 'react-native-paper';
 
 import { GlobalColors } from 'utils/theme/global-colors';
+
 import { styles } from './styles';
 
 type Props = {

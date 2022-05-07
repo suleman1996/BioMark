@@ -2,6 +2,7 @@ import { Text, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { Modal, ButtonWithShadowContainer } from 'components/base';
+
 import { styles } from './styles';
 
 type Props = {

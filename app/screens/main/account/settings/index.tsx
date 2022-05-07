@@ -1,19 +1,25 @@
+import React, { useEffect, useState } from 'react';
+import { Linking, View } from 'react-native';
+
+import { showMessage } from 'react-native-flash-message';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
+
+import SCREENS from 'navigation/constants';
+
 import { SingleMenuItemWithArrow } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 import { AccountDeActivateModal } from 'components/ui';
-import SCREENS from 'navigation/constants';
-import React, { useEffect, useState } from 'react';
-import { Linking, View } from 'react-native';
-import { showMessage } from 'react-native-flash-message';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
+
+import { logNow } from 'utils/functions/log-binder';
+
 import { settingsService } from 'services/account-service/settings-service';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { addUserContactsDetails, logout } from 'store/auth/auth-actions';
 import { ErrorResponse } from 'types/ErrorResponse';
-import { logNow } from 'utils/functions/log-binder';
+
 import { styles } from './styles';
 
 const SettingsScreen = () => {

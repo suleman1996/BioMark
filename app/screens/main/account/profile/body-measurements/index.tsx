@@ -8,6 +8,7 @@ import { userService } from 'services/user-service/user-service';
 import { ButtonWithShadowContainer } from 'components/base';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+
 import { styles } from './styles';
 
 const BodyMeasurementScreen = () => {

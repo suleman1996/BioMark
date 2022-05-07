@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
 import { Logo } from 'assets/svgs/index';
+
 import { styles } from './styles';
 class ErrorBoundary extends Component {
   constructor(props: any) {

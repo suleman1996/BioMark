@@ -1,21 +1,24 @@
-import { Button, PhoneNumberWithLabel } from 'components/base';
-import { DateTimePickerModal, InputWithLabel } from 'components/base';
-import { BoxSelector, RelationMenu } from 'components/higher-order';
+import React, { useRef, useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+
 import { ActivityIndicator } from 'components';
 import { Regex } from 'constants/regex';
 import { format } from 'date-fns';
 import { Formik } from 'formik';
-import React, { useRef, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { dependentService } from 'services/account-service/dependent-service';
+import * as Yup from 'yup';
 import { goBack } from 'services/nav-ref';
+
+import { Button, PhoneNumberWithLabel } from 'components/base';
+import { DateTimePickerModal, InputWithLabel } from 'components/base';
+import { BoxSelector, RelationMenu } from 'components/higher-order';
+import { dependentService } from 'services/account-service/dependent-service';
+
 import { getAllDependents } from 'store/account/account-actions';
 import { dateFormat } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 
-import * as Yup from 'yup';
 import { DependentTypeEnum } from '../../../../../enum/dependent-type-enum';
 import { GenderEnum } from '../../../../../enum/gender-enum';
 

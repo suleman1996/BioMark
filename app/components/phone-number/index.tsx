@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { TextInput, View } from 'react-native';
+
 import CountryPicker, {
   DEFAULT_THEME,
 } from 'react-native-country-picker-modal';
 
 import colors from 'assets/colors';
+
 import styles from './styles';
 
 type Props = {

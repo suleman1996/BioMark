@@ -1,11 +1,13 @@
 import { View } from 'react-native';
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
-import styles from './styles';
-import { Logo } from 'assets/svgs/index';
 import SCREENS from 'navigation/constants';
 
+import { Logo } from 'assets/svgs/index';
+
+import styles from './styles';
 export default function Splash() {
   const navigations = useNavigation();
 

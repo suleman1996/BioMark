@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { styles } from './styles';
 
 import { Button } from 'components/base';
 
+import { styles } from './styles';
 type Props = {
   onPress: any;
   disabled: boolean;

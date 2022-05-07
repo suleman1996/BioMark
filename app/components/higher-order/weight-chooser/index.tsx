@@ -1,5 +1,6 @@
-import { Text, View, Pressable } from 'react-native';
 import React, { useState, useRef } from 'react';
+import { Text, View, Pressable } from 'react-native';
+
 import { TextInput } from 'react-native-paper';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,7 +9,9 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import colors from 'assets/colors';
+
 import { styles } from './styles';
 
 type Props = {

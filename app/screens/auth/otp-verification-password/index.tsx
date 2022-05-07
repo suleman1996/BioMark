@@ -15,6 +15,7 @@ import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
+
 import styles from './style';
 
 type Props = {

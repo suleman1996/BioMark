@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Images from 'assets/images';
 import { TitleWithSearchBarLayout } from 'components/layouts';
@@ -12,7 +13,6 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
 import { ActivityIndicator } from 'components';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
 

@@ -1,9 +1,11 @@
-import { Text, Pressable } from 'react-native';
 import React from 'react';
+import { Text, Pressable } from 'react-native';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import { styles } from './styles';
 
 type Props = {

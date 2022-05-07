@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { Searchbar } from 'react-native-paper';
+
 import colors from '../../assets/colors';
 
 const SearchBar = () => {

@@ -17,6 +17,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
+import Config from 'react-native-config';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
@@ -33,9 +34,8 @@ import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
-import styles from './styles';
-import Config from 'react-native-config';
 
+import styles from './styles';
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -64,6 +64,13 @@ export default function Login() {
     }
   }, [selectCountryCode]);
 
+  // redux error check
+  useEffect(() => {
+    if (errorMessageLogin) {
+      setLoginError(true);
+    }
+  }, [errorMessageLogin]);
+
   const onGoogleLogin = async () => {
     GoogleSignin.signOut();
     GoogleSignin.configure({
@@ -81,6 +88,7 @@ export default function Login() {
       console.log('re', re);
     });
   };
+
   const getInfoFromToken = (token) => {
     const PROFILE_REQUEST_PARAMS = {
       fields: {
@@ -100,6 +108,7 @@ export default function Login() {
     );
     new GraphRequestManager().addRequest(profileRequest).start();
   };
+
   const onFacebookLogin = async () => {
     // LoginManager.logOut();
     if (Platform.OS === 'android') {
@@ -124,13 +133,6 @@ export default function Login() {
       }
     );
   };
-
-  // redux error check
-  useEffect(() => {
-    if (errorMessageLogin) {
-      setLoginError(true);
-    }
-  }, [errorMessageLogin]);
 
   async function onAppleButtonPress() {
     // performs login request
@@ -157,7 +159,7 @@ export default function Login() {
     }
   }
 
-  const handleLogin = async () => {
+  const HandleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
@@ -220,7 +222,7 @@ export default function Login() {
           </TouchableOpacity>
         </View>
         <Button
-          onPress={() => handleLogin()}
+          onPress={() => HandleLogin()}
           disabled={
             phoneNumber.length < numberCondition.min || password.length < 8
               ? true

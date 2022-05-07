@@ -1,9 +1,11 @@
+import React from 'react';
 import { Text, View } from 'react-native';
+
 import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
 
 import { ArrowBack } from 'assets/svgs/index';
+
 import { styles } from './styles';
 
 type Props = {

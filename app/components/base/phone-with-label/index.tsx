@@ -1,7 +1,9 @@
-import { PhoneNumber } from 'components';
-import { BioDangerWhite } from 'components/svg';
 import React from 'react';
 import { Text, View } from 'react-native';
+
+import { PhoneNumber } from 'components';
+import { BioDangerWhite } from 'components/svg';
+
 import { styles } from './styles';
 
 type Props = {

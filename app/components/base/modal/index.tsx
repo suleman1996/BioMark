@@ -1,9 +1,11 @@
-import { View } from 'react-native';
 import React from 'react';
+import { View } from 'react-native';
+
 import Modal from 'react-native-modal';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
+
 import { styles } from './styles';
 
 type Props = {

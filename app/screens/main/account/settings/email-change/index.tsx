@@ -1,21 +1,27 @@
-import { Button } from 'components/base';
-import { InputWithLabel } from 'components/base';
-import { TitleWithBackWhiteBgLayout } from 'components/layouts';
-import { ActivityIndicator } from 'components';
-import { Formik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
+
+import { ActivityIndicator } from 'components';
+import { Formik } from 'formik';
+
 import { showMessage } from 'react-native-flash-message';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
+
+import { Button } from 'components/base';
+import { InputWithLabel } from 'components/base';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { goBack } from 'services/nav-ref';
-import { userService } from 'services/user-service/user-service';
-import { addUserContactsDetails } from 'store/auth/auth-actions';
-import { IAppState } from 'store/IAppState';
+
 import { logNow } from 'utils/functions/log-binder';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
-import * as Yup from 'yup';
+
+import { userService } from 'services/user-service/user-service';
+import { addUserContactsDetails } from 'store/auth/auth-actions';
+import { IAppState } from 'store/IAppState';
+
 import { styles } from './styles';
 
 const EmailChangeScreen = () => {

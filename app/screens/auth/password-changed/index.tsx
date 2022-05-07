@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native';
 import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
 
 import { Lock } from 'assets/svgs/index';
 import { navigate } from 'services/nav-ref';

@@ -7,8 +7,6 @@ import {
   View,
 } from 'react-native';
 
-import fonts from 'assets/fonts';
-import MyImage from 'assets/images';
 import {
   Covid19Btn,
   GoogleFitButton,
@@ -16,9 +14,15 @@ import {
   YourHealthBtn,
 } from 'components/button';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
+
 import AuthContext from 'utils/auth-context';
-import styles from './styles';
+
 import { userService } from 'services/user-service/user-service';
+
+import fonts from 'assets/fonts';
+import MyImage from 'assets/images';
+
+import styles from './styles';
 
 export default function Home() {
   const authContext = useContext(AuthContext);

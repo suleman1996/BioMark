@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import {
   Text,
   View,
@@ -7,7 +8,7 @@ import {
   Modal,
   Keyboard,
 } from 'react-native';
-import React, { useRef } from 'react';
+
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,14 +17,17 @@ import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 
 import { SearchBarLeftIcon } from 'components/svg';
+import { ActivityIndicator } from 'components';
+import { Button } from 'components/button';
+
 import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { inputBarcode } from 'services/auth-service';
+
 import MyImage from 'assets/images';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import { Button } from 'components/button';
-import { inputBarcode } from 'services/auth-service';
-import { ActivityIndicator } from 'components';
+
 import { styles } from './styles';
 
 type Props = {
