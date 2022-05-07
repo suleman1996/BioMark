@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     backgroundColor: colors.whiteColor,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 1,

@@ -8,7 +8,7 @@ import colors from 'assets/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderColor: 'red',
+    borderColor: colors.danger,
     flexDirection: 'column',
     color: colors.blue,
   },

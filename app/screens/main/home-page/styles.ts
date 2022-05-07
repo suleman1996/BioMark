@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
 
   googleFitC: {
-    backgroundColor: 'white',
+    backgroundColor: colors.whiteColor,
     width: '100%',
     flex: 1,
     borderRadius: 8,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 5,
     paddingHorizontal: 10,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 1,

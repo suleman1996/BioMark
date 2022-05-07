@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
   bottomView: {
     width: '100%',
     height: 50,
-    backgroundColor: '#EE5407',
+    backgroundColor: colors.redish,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute', //Here is the trick

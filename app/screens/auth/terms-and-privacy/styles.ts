@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     width: '100%',
     backgroundColor: colors.whiteColor,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 8,
     backgroundColor: colors.whiteColor,
-    borderColor: 'grey',
+    borderColor: colors.inactive,
     marginHorizontal: 15,
     marginBottom: 10,
     elevation: 6,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginVertical: 5,
     // borderWidth: 0.5,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 1,

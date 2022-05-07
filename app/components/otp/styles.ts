@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     height: 45,
   },
   borderStyleHighLighted: {
-    borderColor: '#03DAC6',
+    borderColor: colors.greenish,
   },
   underlineStyleBase: {
     width: 30,
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   underlineStyleHighLighted: {
-    borderColor: '#03DAC6',
+    borderColor: colors.greenish,
   },
   codeInputFieldStyle: {
     borderWidth: 0,

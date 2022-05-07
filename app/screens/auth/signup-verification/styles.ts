@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     width: '100%',
     backgroundColor: colors.whiteColor,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     // borderWidth: 1,
     backgroundColor: colors.whiteColor,
-    borderColor: 'grey',
+    borderColor: colors.inactive,
     marginHorizontal: 15,
     // paddingBottom: 5,
     // elevation: 6,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     flexDirection: 'row',
     fontFamily: fonts.regular,
-    color: 'black',
+    color: colors.black,
   },
 });
 

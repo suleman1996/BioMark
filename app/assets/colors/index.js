@@ -12,5 +12,7 @@ const colors = {
   darBlue: '#273859',
   disable: '#8493AE60',
   bg: '#3D3D3D90',
+  redish: '#EE5407',
+  greenish: '#03DAC6',
 };
 export default colors;

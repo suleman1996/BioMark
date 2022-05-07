@@ -48,13 +48,13 @@ export const styles = StyleSheet.create({
     // marginTop:10,
     borderBottomWidth: 0,
     borderColor: GlobalColors.darkPrimary,
-    backgroundColor: '#EBEFF2',
+    backgroundColor: colors.whiteColor,
     height: 50,
   },
   bottomView: {
     width: '100%',
     height: 50,
-    backgroundColor: '#EE5407',
+    backgroundColor: colors.redish,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute', //Here is the trick
