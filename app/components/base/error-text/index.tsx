@@ -1,11 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 
-import { GlobalFonts } from 'utils/theme/fonts';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
-
-import colors from 'assets/colors';
+import { styles } from './styles';
 
 type Props = {
   text: string | undefined;
@@ -21,15 +17,3 @@ const ErrorText = (props: Props) => {
 };
 
 export default ErrorText;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    marginTop: heightToDp(1),
-  },
-  errorMessage: {
-    fontFamily: GlobalFonts.regular,
-    fontSize: responsiveFontSize(15),
-    color: colors.danger,
-  },
-});

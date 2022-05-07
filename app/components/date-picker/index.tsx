@@ -1,9 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text, Platform } from 'react-native';
+import { TouchableOpacity, Text, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
 import colors from 'assets/colors';
+import { styles } from './styles';
 
 type Props = {
   width: any;
@@ -57,18 +58,3 @@ const DatePicker = (props: Props) => {
 };
 
 export default DatePicker;
-
-const styles = StyleSheet.create({
-  container: {
-    borderBottomColor: colors.inputBg,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    borderRadius: 8,
-    height: 44,
-    backgroundColor: colors.inputBg,
-  },
-  datePickerStyle: {
-    alignSelf: 'center',
-    width: '100%',
-  },
-});

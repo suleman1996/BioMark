@@ -1,11 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-
-import { GlobalFonts } from 'utils/theme/fonts';
+import { Text, TouchableOpacity } from 'react-native';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-
+import { styles } from './styles';
 type Props = {
   onPress: any;
   title: string;
@@ -36,20 +32,3 @@ const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
 };
 
 export default ButtonComponent;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: GlobalColors.primary,
-    height: heightToDp(6),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: widthToDp(2.5),
-    width: '100%',
-    maxWidth: widthToDp(86),
-  },
-  text: {
-    color: GlobalColors.white,
-    fontFamily: GlobalFonts.medium,
-    fontSize: responsiveFontSize(18),
-  },
-});

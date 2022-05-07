@@ -1,11 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import CheckBox from 'react-native-check-box';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 
+import { GlobalColors } from 'utils/theme/global-colors';
+import { styles } from './styles';
 type Props = {
   isChecked: boolean;
   setIsChecked: any;
@@ -31,19 +29,3 @@ const CheckBoxWithText = (props: Props) => {
 };
 
 export default CheckBoxWithText;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flexDirection: 'row',
-  },
-  rightText: {
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(20),
-    marginLeft: widthToDp(4),
-    lineHeight: responsiveFontSize(30),
-  },
-  checkbox: {
-    padding: 1,
-  },
-});

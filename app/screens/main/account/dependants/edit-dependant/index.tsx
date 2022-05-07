@@ -20,8 +20,8 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
 import * as Yup from 'yup';
-import { DependentTypeEnum } from '../../../../../enum/DependentTypeEnum';
-import { GenderEnum } from '../../../../../enum/GenderEnum';
+import { DependentTypeEnum } from '../../../../../enum/dependent-type-enum';
+import { GenderEnum } from '../../../../../enum/gender-enum';
 
 type Props = {
   route?: any;
