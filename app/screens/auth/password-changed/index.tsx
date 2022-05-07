@@ -1,12 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 
-import fonts from 'assets/fonts';
-import colors from 'assets/colors';
 import { Lock } from 'assets/svgs/index';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
+import { styles } from './styles';
 type Props = {
   route: any;
 };
@@ -38,16 +37,3 @@ export default function PasswordChanged(props: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontFamily: fonts.bold,
-    color: colors.blue,
-    fontSize: 18,
-  },
-});

@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
 import { ModalButton } from 'components/higher-order';
 import { goBack } from 'services/nav-ref';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { TitleWithBackLayout } from 'components/layouts';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
 import AsthmaModal from './modals/asthma';
 import CancerModal from './modals/cancer';
 import DiabetesModal from './modals/diabetes';
@@ -16,6 +12,7 @@ import HighBloodPressureModal from './modals/high-blood-pressure';
 import HighCholesterolModal from './modals/high-cholesterol';
 import OthersModal from './modals/others';
 import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
+import { styles } from './styles';
 
 const options = [
   { id: 1, title: '---' },
@@ -151,24 +148,3 @@ const MedicalHistoryScreen = () => {
 };
 
 export default MedicalHistoryScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: GlobalColors.white,
-    flex: 1,
-    paddingHorizontal: widthToDp(7),
-    paddingTop: heightToDp(3),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(3),
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    marginTop: heightToDp(2),
-    justifyContent: 'space-between',
-    marginBottom: heightToDp(0.5),
-  },
-});

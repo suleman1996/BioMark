@@ -6,21 +6,20 @@ import { Regex } from 'constants/regex';
 import { format } from 'date-fns';
 import { Formik } from 'formik';
 import React, { useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { dependentService } from 'services/account-service/dependent-service';
 import { goBack } from 'services/nav-ref';
 import { getAllDependents } from 'store/account/account-actions';
 import { dateFormat } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalStyles } from 'utils/theme/global-styles';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+
 import * as Yup from 'yup';
 import { DependentTypeEnum } from '../../../../../enum/dependent-type-enum';
 import { GenderEnum } from '../../../../../enum/gender-enum';
+
+import { styles } from './styles';
 
 const AddDependantScreen = () => {
   const formikRef = useRef<any>();
@@ -232,33 +231,3 @@ const AddDependantScreen = () => {
 };
 
 export default AddDependantScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  cardContainer: {
-    marginHorizontal: widthToDp(4),
-    marginVertical: widthToDp(3),
-    flex: 1,
-    backgroundColor: GlobalColors.white,
-    borderRadius: widthToDp(3),
-    ...GlobalStyles.shadow,
-    paddingHorizontal: widthToDp(3),
-    paddingVertical: widthToDp(2),
-  },
-  headerText: {
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    fontSize: responsiveFontSize(21),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  bottomBtnContainer: {
-    marginTop: heightToDp(4),
-  },
-});

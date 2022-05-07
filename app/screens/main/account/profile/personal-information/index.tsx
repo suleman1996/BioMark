@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
@@ -13,15 +12,13 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { Button } from 'components/button';
 import { InputWithLabel } from 'components/base';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { DatePicker, ActivityIndicator } from 'components';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
 import AuthContext from 'utils/auth-context';
 import { showMessage } from 'react-native-flash-message';
 import { userService } from 'services/user-service/user-service';
 import fonts from 'assets/fonts';
 import { Button as ButtonComponent } from 'components/base';
+import { styles } from './styles';
 
 const PersonalInformationScreen = () => {
   const authContext = React.useContext(AuthContext);
@@ -205,34 +202,3 @@ const PersonalInformationScreen = () => {
 };
 
 export default PersonalInformationScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: GlobalColors.white,
-    flex: 1,
-    paddingHorizontal: widthToDp(4),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  radioContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  radioText: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.light,
-  },
-  overLay: {
-    position: 'absolute',
-    backgroundColor: '#3D3D3D90',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 100,
-  },
-});

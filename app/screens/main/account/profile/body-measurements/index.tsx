@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { HeightChooser, WeightChooser } from 'components/higher-order';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { TitleWithBackLayout } from 'components/layouts';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
 import { userService } from 'services/user-service/user-service';
 import { ButtonWithShadowContainer } from 'components/base';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
-import colors from 'assets/colors';
+import { styles } from './styles';
 
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
@@ -83,26 +80,3 @@ const BodyMeasurementScreen = () => {
 };
 
 export default BodyMeasurementScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    borderColor: 'red',
-    flexDirection: 'column',
-    color: colors.blue,
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  radioContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  radioText: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.light,
-  },
-});
