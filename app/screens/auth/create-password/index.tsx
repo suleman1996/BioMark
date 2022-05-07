@@ -2,22 +2,23 @@ import { Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 
 import styles from './styles';
+import { navigate } from 'services/nav-ref';
 import { Header, TextInput, ActivityIndicator } from 'components';
 import { Button } from 'components/button';
 import { changePassword } from 'services/auth-service';
+import SCREENS from 'navigation/constants';
 
 export default function CreatePassword() {
-  const navigations = useNavigation();
   const route = useRoute();
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setConfirmHidePassword] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const ResetPassword = async ({ password }) => {
+  const resetPassword = async ({ password }) => {
     try {
       setLoading(true);
       Keyboard.dismiss();
@@ -28,7 +29,7 @@ export default function CreatePassword() {
           code: route.params.otp,
         },
       });
-      navigations.navigate('PasswordChanged');
+      navigate(SCREENS.PASSWORD_CHANGED);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -51,14 +52,6 @@ export default function CreatePassword() {
     }
   };
 
-  const ResetPassSchema = Yup.object({
-    password: Yup.string().required('Password is required').min(7, 'Too short'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required')
-      .min(7, 'Too short'),
-  });
-
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -71,7 +64,7 @@ export default function CreatePassword() {
                 password: '',
                 confirmPassword: '',
               }}
-              onSubmit={ResetPassword}
+              onSubmit={resetPassword}
               validationSchema={ResetPassSchema}
             >
               {({ handleChange, handleSubmit, values, errors, isValid }) => (
@@ -131,3 +124,11 @@ export default function CreatePassword() {
     </>
   );
 }
+
+const ResetPassSchema = Yup.object({
+  password: Yup.string().required('Password is required').min(7, 'Too short'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required')
+    .min(7, 'Too short'),
+});

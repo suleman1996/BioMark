@@ -6,7 +6,7 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import styles from './styles';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 import { ActivityIndicator } from 'components';
@@ -32,7 +32,7 @@ const Sleep = () => {
       setIsVisible(true);
       const result = await userService.sleeping(selectedSleep);
       console.log('Sleep success ', result.data);
-      navigate(Nav_Screens.EditProfile);
+      navigate(SCREENS.EDIT_PROFILE);
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);

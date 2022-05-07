@@ -20,7 +20,7 @@ import { ModalButton } from 'components/higher-order';
 import { userService } from 'services/user-service/user-service';
 import OtherModal from './modals/other';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 
 export default function AllergiesScreen() {
   const [value, setValue] = useState('');
@@ -135,7 +135,7 @@ export default function AllergiesScreen() {
           conditions: conditions,
         });
         console.log('Allergies successful', response.data);
-        navigate(Nav_Screens.EditProfile);
+        navigate(SCREENS.EDIT_PROFILE);
       }
     } catch (err) {
       console.log(err);

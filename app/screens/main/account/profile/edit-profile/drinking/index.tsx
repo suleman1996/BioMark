@@ -13,7 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
 import { ActivityIndicator } from 'components';
 import { userService } from 'services/user-service/user-service';
@@ -54,7 +54,7 @@ const Drinking = () => {
           spirits
         );
         console.log('Drinking success ', result.data);
-        navigate(Nav_Screens.EditProfile);
+        navigate(SCREENS.EDIT_PROFILE);
 
         setIsVisible(false);
       } catch (error) {

@@ -16,7 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Images from 'assets/images';
 import { TitleWithBackLayout } from 'components/layouts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { Nav_Screens } from 'navigation/constants/index';
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
@@ -140,6 +140,9 @@ const EditProfileScreen = () => {
       });
     }
   };
+
+  console.log(SCREENS.PERSONAL_INFORMATION);
+
   return (
     <TitleWithBackLayout title="Your Profile">
       <ActivityIndicator visible={isLoading} />
@@ -183,7 +186,7 @@ const EditProfileScreen = () => {
               ABOUT ME
             </Text>
             <Pressable
-              onPress={() => navigate(Nav_Screens.PersonalInformation)}
+              onPress={() => navigate(SCREENS.PERSONAL_INFORMATION)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -201,7 +204,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.BodyMeasurement)}
+              onPress={() => navigate(SCREENS.BODY_MEASUREMENT)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -219,7 +222,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.MedicalHistory)}
+              onPress={() => navigate(SCREENS.MEDICAL_HISTORY)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -238,7 +241,7 @@ const EditProfileScreen = () => {
             </Pressable>
 
             <Pressable
-              onPress={() => navigate(Nav_Screens.Vaccination)}
+              onPress={() => navigate(SCREENS.VACCINATION)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -258,7 +261,7 @@ const EditProfileScreen = () => {
 
             <Pressable
               style={styles.menuOption}
-              onPress={() => navigate(Nav_Screens.Allergies)}
+              onPress={() => navigate(SCREENS.ALLERGIES)}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
@@ -277,7 +280,7 @@ const EditProfileScreen = () => {
 
             <View style={styles.menuOption}>
               <Pressable
-                onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)}
+                onPress={() => navigate(SCREENS.FAMILY_MEDICAL_HISTORY)}
                 style={styles.menuOption}
               >
                 <View style={styles.menuTitleAndIcon}>
@@ -299,7 +302,7 @@ const EditProfileScreen = () => {
             </View>
 
             <Pressable
-              onPress={() => navigate(Nav_Screens.Smoking)}
+              onPress={() => navigate(SCREENS.SMOKING)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -319,7 +322,7 @@ const EditProfileScreen = () => {
             </Pressable>
 
             <Pressable
-              onPress={() => navigate(Nav_Screens.Drinking)}
+              onPress={() => navigate(SCREENS.DRINKING)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -337,7 +340,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Exercise)}
+              onPress={() => navigate(SCREENS.EXERCISE)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -355,7 +358,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Sleep)}
+              onPress={() => navigate(SCREENS.SLEEP)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
@@ -373,7 +376,7 @@ const EditProfileScreen = () => {
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Stress)}
+              onPress={() => navigate(SCREENS.STRESS)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>

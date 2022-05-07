@@ -1,6 +1,6 @@
 import { Button } from 'components/base';
 import { DependantsList } from 'components/ui';
-import { Nav_Screens } from 'navigation/constants/index';
+import SCREENS from 'navigation/constants';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,7 +31,7 @@ const DependantsScreen = (props: Props) => {
       <DependantsList data={data} />
       <View style={styles.bottomBtnContainer}>
         <Button
-          onPress={() => navigate(Nav_Screens.AddDependants)}
+          onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
           title={'Add New Dependant'}
         />
       </View>

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   Keyboard,
@@ -32,11 +32,7 @@ import {
   resetAuthAsyncStorage,
 } from 'services/async-storage/auth-async-storage';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  loggedIn,
-  loggedInHasProfile,
-  loggedOut,
-} from 'store/auth/auth-actions';
+import { loggedIn, loggedOut } from 'store/auth/auth-actions';
 import moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -89,7 +85,6 @@ export default function CreateProfile() {
         logNow('signup res', res);
         await AsyncStorage.setItem('hasProfile', JSON.stringify(true));
         getHasprofileAsyncStorage();
-        //navigations.navigate('BottomTabNavigator');
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);

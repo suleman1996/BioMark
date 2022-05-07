@@ -17,7 +17,7 @@ import { TextInputButton } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import { styles } from './styles';
 
 export default function VaccinationScreen() {
@@ -169,7 +169,7 @@ export default function VaccinationScreen() {
       </TitleWithBackLayout>
       <ButtonWithShadowContainer
         title="Save"
-        onPress={() => navigate(Nav_Screens.EditProfile)}
+        onPress={() => navigate(SCREENS.EDIT_PROFILE)}
       />
     </SafeAreaView>
   );

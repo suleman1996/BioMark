@@ -15,7 +15,7 @@ import { GlobalColors } from 'utils/theme/global-colors';
 import { TextInput } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 
 import { options } from './year';
 import { styles } from './styles';
@@ -31,7 +31,7 @@ export default function SmokingScreen() {
     try {
       const response = await userService.Smoking(day, stopSmoke, startSmoke);
       console.log('smoking successful', response.data);
-      navigate(Nav_Screens.EditProfile);
+      navigate(SCREENS.EDIT_PROFILE);
     } catch (err) {
       console.log(err);
     }

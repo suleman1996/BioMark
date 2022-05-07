@@ -11,7 +11,7 @@ import { showMessage } from 'react-native-flash-message';
 import colors from 'assets/colors';
 import { Button } from 'components/button';
 import { Header, ActivityIndicator, OtpInput } from 'components';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
@@ -56,7 +56,7 @@ export default function OtpPassword(props: Props) {
   const handleOTP = async () => {
     try {
       setLoading(true);
-      navigate(Nav_Screens.CreatePasswordScreen, {
+      navigate(SCREENS.CREATE_PASSWORD, {
         phone,
         otp: code,
       });

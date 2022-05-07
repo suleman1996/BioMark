@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
 import colors from 'assets/colors';
@@ -14,42 +13,9 @@ import Inbox from 'screens/main/Inbox/index';
 import Home from 'screens/main/home-page';
 import AppointmentScreen from 'screens/main/appointment';
 import AccountScreen from 'screens/main/account/account-screen';
+import SCREENS from './constants';
 
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const HomeStack = () => (
-  <Stack.Navigator
-    initialRouteName="HomeScreen"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="HomeScreen" component={Home} />
-  </Stack.Navigator>
-);
-
-const InboxStack = () => (
-  <Stack.Navigator
-    initialRouteName="HomeScreen"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="HomeScreen" component={Inbox} />
-  </Stack.Navigator>
-);
-
-const AppointmentStack = () => (
-  <Stack.Navigator
-    initialRouteName="HomeScreen"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="HomeScreen" component={AppointmentScreen} />
-  </Stack.Navigator>
-);
 
 const BottomTabNavigator = () => {
   return (
@@ -67,28 +33,28 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={HomeStack}
+        name={SCREENS.HOME}
+        component={Home}
         options={{
           tabBarIcon: ({ color }) => <HomeIcon fill={color} />,
         }}
       />
       <Tab.Screen
-        name="Inbox"
-        component={InboxStack}
+        name={SCREENS.INBOX}
+        component={Inbox}
         options={{
           tabBarIcon: ({ color }) => <InboxIcon fill={color} />,
         }}
       />
       <Tab.Screen
-        name="Appointment"
-        component={AppointmentStack}
+        name={SCREENS.APPOINTMENT}
+        component={AppointmentScreen}
         options={{
           tabBarIcon: ({ color }) => <AppointmentIcon fill={color} />,
         }}
       />
       <Tab.Screen
-        name="Account"
+        name={SCREENS.ACCOUNT}
         component={AccountScreen}
         options={{
           tabBarIcon: ({ color }) => <AccountIcon fill={color} />,

@@ -1,6 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import SCREENS from './constants';
+
 import CreatePassword from 'screens/auth/create-password';
 import Confirmation from 'screens/auth/confirmation';
 import ForgotPassword from 'screens/auth/forgot-password';
@@ -11,50 +13,36 @@ import Signup from 'screens/auth/signup';
 import SignupVerification from 'screens/auth/signup-verification';
 import Splash from 'screens/splash/splash';
 import TermsAndPrivacy from 'screens/auth/terms-and-privacy';
-import { Nav_Screens } from './constants';
 
 const Stack = createNativeStackNavigator();
-
-const AuthenticationStack = () => (
-  <Stack.Navigator
-    initialRouteName="Splash"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="Splash" component={Splash} />
-    <Stack.Screen name="Login" component={Login} />
-    <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-    <Stack.Screen
-      name={Nav_Screens.PasswordOTPScreen}
-      component={PasswordOTP}
-    />
-    <Stack.Screen
-      name={Nav_Screens.CreatePasswordScreen}
-      component={CreatePassword}
-    />
-    <Stack.Screen name="PasswordChanged" component={PasswordChanged} />
-    <Stack.Screen name="Signup" component={Signup} />
-    <Stack.Screen
-      name={Nav_Screens.SignupVerificationScreen}
-      component={SignupVerification}
-    />
-    <Stack.Screen name="Confirmation" component={Confirmation} />
-    <Stack.Screen name="TermsAndPrivacy" component={TermsAndPrivacy} />
-  </Stack.Navigator>
-);
 
 const AuthNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="authenticationStack"
+      initialRouteName={SCREENS.SPLASH}
       screenOptions={{
         headerShown: false,
       }}
     >
+      <Stack.Screen name={SCREENS.LOGIN} component={Login} />
+      <Stack.Screen name={SCREENS.SPLASH} component={Splash} />
+
+      <Stack.Screen name={SCREENS.FORGOT_PASSWORD} component={ForgotPassword} />
+      <Stack.Screen name={SCREENS.PASSWORD_OTP} component={PasswordOTP} />
+      <Stack.Screen name={SCREENS.CREATE_PASSWORD} component={CreatePassword} />
       <Stack.Screen
-        name="AuthenticationStack"
-        component={AuthenticationStack}
+        name={SCREENS.PASSWORD_CHANGED}
+        component={PasswordChanged}
+      />
+      <Stack.Screen name={SCREENS.SIGNUP} component={Signup} />
+      <Stack.Screen
+        name={SCREENS.SIGNUP_VERIFICATION}
+        component={SignupVerification}
+      />
+      <Stack.Screen name={SCREENS.CONFIRMATION} component={Confirmation} />
+      <Stack.Screen
+        name={SCREENS.TERMS_AND_PRIVACY}
+        component={TermsAndPrivacy}
       />
     </Stack.Navigator>
   );

@@ -1,16 +1,15 @@
 import { Text, View, ScrollView } from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import StepIndicator from 'react-native-step-indicator';
 
 import styles from './styles';
+import { navigate } from 'services/nav-ref';
 import { Button } from 'components/button';
 import { SetToGo } from 'assets/svgs/index';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 
 export default function Confirmation() {
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
-  const navigations = useNavigation();
 
   return (
     <>
@@ -34,7 +33,7 @@ export default function Confirmation() {
           <Button
             disabled={false}
             title="Continue to Homepage"
-            onPress={() => navigations.navigate(Nav_Screens.LoginScreen)}
+            onPress={() => navigate(SCREENS.LOGIN)}
           />
         </ScrollView>
       </View>

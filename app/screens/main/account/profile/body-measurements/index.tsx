@@ -10,7 +10,7 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { userService } from 'services/user-service/user-service';
 import { ButtonWithShadowContainer } from 'components/base';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import colors from 'assets/colors';
 
 const BodyMeasurementScreen = () => {
@@ -34,7 +34,7 @@ const BodyMeasurementScreen = () => {
         },
       });
       console.log('measurement successful', response.data);
-      navigate(Nav_Screens.EditProfile);
+      navigate(SCREENS.EDIT_PROFILE);
     } catch (err) {
       console.log(err);
     }

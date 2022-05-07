@@ -2,7 +2,7 @@ import { SingleMenuItemWithArrow } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 import { AccountDeActivateModal } from 'components/ui';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import React, { useEffect, useState } from 'react';
 import { Linking, View } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
@@ -72,19 +72,19 @@ const SettingsScreen = () => {
       <TitleWithBackWhiteBgLayout title="Settings">
         <View style={styles.container}>
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.PasswordChangeScreen)}
+            onPress={() => navigate(SCREENS.PASSWORD_CHANGED)}
             title={'Password'}
           />
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.EmailChangeScreen)}
+            onPress={() => navigate(SCREENS.EMAIL_CHANGE)}
             title={'Email'}
           />
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.PhoneChangeScreen)}
+            onPress={() => navigate(SCREENS.PHONE_NUMBER_CHANGE)}
             title={'Phone Number'}
           />
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.MarketingConsentScreen)}
+            onPress={() => navigate(SCREENS.MARKETING_CONSENT)}
             title={'Marketing Consent'}
           />
           <SingleMenuItemWithArrow

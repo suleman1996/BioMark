@@ -1,6 +1,6 @@
 import { DeleteModal } from 'components/higher-order';
 import { BioBinIcon } from 'components/svg';
-import { Nav_Screens } from 'navigation/constants/index';
+import SCREENS from 'navigation/constants';
 import React, { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -53,7 +53,7 @@ const DependantsList = (props: Props) => {
           <View style={styles.headerEnd}>
             <Pressable
               onPress={() =>
-                navigate(Nav_Screens.EditDependants, { id: item?.id })
+                navigate(SCREENS.EDIT_DEPENDANTS, { id: item?.id })
               }
               style={styles.editBtn}
             >

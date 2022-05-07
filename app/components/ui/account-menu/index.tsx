@@ -9,7 +9,7 @@ import {
   BioSupport,
   BioSettings,
 } from 'components/svg';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import React from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import Config from 'react-native-config';
@@ -50,8 +50,8 @@ const AccountMenu = (props) => {
       <View style={styles.divider} />
       <TouchableRipple
         onPress={() =>
-          navigate(Nav_Screens.NestedAccountNavigator, {
-            screen: Nav_Screens.Dependants_Screen,
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.DEPENDANTS,
           })
         }
         style={styles.singleItem}
@@ -75,8 +75,8 @@ const AccountMenu = (props) => {
       <View style={styles.divider} />
       <TouchableRipple
         onPress={() =>
-          navigate(Nav_Screens.NestedAccountNavigator, {
-            screen: Nav_Screens.Settings,
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.SETTINGS,
           })
         }
         style={styles.singleItem}
@@ -149,8 +149,8 @@ const AccountMenu = (props) => {
       <TouchableRipple
         style={styles.singleItem}
         onPress={() =>
-          navigate(Nav_Screens.NestedAccountNavigator, {
-            screen: Nav_Screens.TermsAndPrivacy,
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.TERMS_AND_PRIVACY,
           })
         }
       >

@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Images from 'assets/images';
 import { TitleWithSearchBarLayout } from 'components/layouts';
 import { AccountMenu } from 'components/ui';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -81,8 +81,8 @@ const AccountScreen = () => {
               </Text>
               <Pressable
                 onPress={() =>
-                  navigate(Nav_Screens.NestedAccountNavigator, {
-                    screen: Nav_Screens.EditProfile,
+                  navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+                    screen: SCREENS.EDIT_PROFILE,
                   })
                 }
                 style={{ flexDirection: 'row', alignItems: 'center' }}

@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import {
@@ -24,8 +23,8 @@ import {
   TextInput,
   PhoneNumber,
 } from 'components';
-import { Nav_Screens } from 'navigation/constants';
-import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
+import { navigate, goBack } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
@@ -34,7 +33,6 @@ import styles from './styles';
 
 export default function Signup() {
   //initial hooks define
-  const navigations = useNavigation();
 
   //state
   const [hidePassword, setHidePassword] = useState(true);
@@ -79,7 +77,7 @@ export default function Signup() {
       .registerUser(username, values, selectedGender.id, newDate)
       .then((res) => {
         logNow('signup res', res);
-        navigate(Nav_Screens.SignupVerificationScreen, { username, password });
+        navigate(SCREENS.SIGNUP_VERIFICATION, { username, password });
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);
@@ -134,24 +132,13 @@ export default function Signup() {
     </TouchableOpacity>
   );
 
-  const ResetPassSchema = Yup.object({
-    fName: Yup.string().required('Please provide your first name'),
-
-    lName: Yup.string().required('Please provide your last name'),
-
-    IcPnum: Yup.string(),
-    email: Yup.string(),
-
-    password: Yup.string().required('Please type your new password').min(8),
-  });
-
   return (
     <>
       <ActivityIndicator visible={loading} />
       <View style={styles.signupNav}>
         <View style={styles.csNav}>
           <TouchableOpacity>
-            <BackIcon onPress={() => navigations.goBack()} />
+            <BackIcon onPress={() => goBack()} />
           </TouchableOpacity>
           <Text style={styles.signupText}>Signup</Text>
         </View>
@@ -274,9 +261,7 @@ export default function Signup() {
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
                     <TouchableOpacity
-                      onPress={() =>
-                        navigations.navigate(Nav_Screens.TermsAndPrivacy)
-                      }
+                      onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
                     >
                       <Text
                         style={{
@@ -291,9 +276,7 @@ export default function Signup() {
                     </TouchableOpacity>
                     <Text> and the </Text>
                     <TouchableOpacity
-                      onPress={() =>
-                        navigations.navigate(Nav_Screens.TermsAndPrivacy)
-                      }
+                      onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
                     >
                       <Text
                         style={{
@@ -322,3 +305,11 @@ export default function Signup() {
     </>
   );
 }
+
+const ResetPassSchema = Yup.object({
+  fName: Yup.string().required('Please provide your first name'),
+  lName: Yup.string().required('Please provide your last name'),
+  IcPnum: Yup.string(),
+  email: Yup.string(),
+  password: Yup.string().required('Please type your new password').min(8),
+});

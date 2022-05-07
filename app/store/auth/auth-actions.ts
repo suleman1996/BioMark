@@ -141,7 +141,6 @@ export const reduxDeviceRegister =
             message,
           })
         );
-        // await navigate('DashboardScreen');
       })
       .catch((err: LoginErrorResponse) => {
         logNow('err', err);

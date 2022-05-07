@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { useDispatch } from 'react-redux';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import React, { useState, useEffect, useRef } from 'react';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
@@ -15,6 +15,8 @@ import BackIcon from 'assets/svgs/back';
 import { OtpInput, ActivityIndicator } from 'components';
 import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
 import { reduxDeviceRegister } from 'store/auth/auth-actions';
+import { navigate, goBack } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
 
 export default function SignupVerification() {
   const dispatch = useDispatch();
@@ -30,7 +32,6 @@ export default function SignupVerification() {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [loading, setLoading] = useState(false);
 
-  const navigations = useNavigation();
   const route = useRoute();
   useEffect(() => {
     let myInterval = setInterval(() => {
@@ -96,7 +97,7 @@ export default function SignupVerification() {
       });
       let uniqueId = DeviceInfo.getUniqueId();
       dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
-      navigations.navigate('Confirmation');
+      navigate(SCREENS.CONFIRMATION);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -125,7 +126,7 @@ export default function SignupVerification() {
       <View style={{ flex: 1 }}>
         <View style={styles.signupNav}>
           <View style={styles.csNav}>
-            <BackIcon onPress={() => navigations.goBack()} />
+            <BackIcon onPress={() => goBack()} />
             <Text style={styles.signupText}>Back</Text>
           </View>
           <StepIndicator

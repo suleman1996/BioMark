@@ -2,7 +2,7 @@ import { Button, ErrorText, PasswordInputWithLabel } from 'components/base';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 import { Formik } from 'formik';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -38,8 +38,8 @@ const PasswordChangeScreen = () => {
   };
 
   const goToPassChangedScreen = () => {
-    navigate(Nav_Screens.NestedAccountNavigator, {
-      screen: Nav_Screens.PasswordChangedInApp,
+    navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+      screen: SCREENS.PASSWORD_CHANGED_IN_APP,
       params: { flag: 1 },
     });
   };

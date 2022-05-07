@@ -4,7 +4,7 @@ import { showMessage } from 'react-native-flash-message';
 
 import { Button } from 'components/button';
 import { Header, ActivityIndicator, PhoneNumber } from 'components';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { ForgotPasswordErrorResponse } from 'types/auth/ForgotPassword';
@@ -37,7 +37,7 @@ export default function ForgotPassword() {
     userService
       .forgotPassword(username)
       .then(() => {
-        navigate(Nav_Screens.PasswordOTPScreen, { phone: username });
+        navigate(SCREENS.PASSWORD_OTP, { phone: username });
       })
       .catch((err: ForgotPasswordErrorResponse) => {
         logNow(err);

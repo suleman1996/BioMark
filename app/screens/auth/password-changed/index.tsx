@@ -5,7 +5,7 @@ import fonts from 'assets/fonts';
 import colors from 'assets/colors';
 import { Lock } from 'assets/svgs/index';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 
 type Props = {
   route: any;
@@ -18,12 +18,12 @@ export default function PasswordChanged(props: Props) {
   useEffect(() => {
     setTimeout(() => {
       if (flag == 1) {
-        navigate(Nav_Screens.NestedAccountNavigator, {
-          screen: Nav_Screens.Settings,
+        navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+          screen: SCREENS.SETTINGS,
         });
         return;
       } else {
-        navigate(Nav_Screens.LoginScreen);
+        navigate(SCREENS.LOGIN);
       }
     }, 2000);
   }, []);

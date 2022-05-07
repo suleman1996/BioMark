@@ -29,12 +29,13 @@ import {
   PhoneNumber,
   Button,
 } from 'components/index';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import styles from './styles';
 import Config from 'react-native-config';
+
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -213,7 +214,7 @@ export default function Login() {
         <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity
             style={{ marginVertical: 30 }}
-            onPress={() => navigate(Nav_Screens.ForgotPassword)}
+            onPress={() => navigate(SCREENS.FORGOT_PASSWORD)}
           >
             <Text style={styles.forgotPassword}>Forgot password?</Text>
           </TouchableOpacity>
@@ -259,7 +260,7 @@ export default function Login() {
         <View style={{ alignSelf: 'center' }}>
           <View style={styles.noAccountTxt}>
             <Text style={{ color: colors.black }}>Dont have an account?</Text>
-            <TouchableOpacity onPress={() => navigate(Nav_Screens.SignUp)}>
+            <TouchableOpacity onPress={() => navigate(SCREENS.SIGNUP)}>
               <Text style={{ color: colors.blue }}> Sign up</Text>
             </TouchableOpacity>
           </View>
