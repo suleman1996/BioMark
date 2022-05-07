@@ -1,11 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 import { RadioButton } from 'react-native-paper';
 
 import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
+import { styles } from './styles';
 
 type Props = {
   question: string;
@@ -46,27 +44,3 @@ const RadioButtonQuestionComponent = ({
 };
 
 export default RadioButtonQuestionComponent;
-
-const styles = StyleSheet.create({
-  radioContainer: {
-    flexDirection: 'row',
-  },
-  container: {
-    paddingHorizontal: widthToDp(4),
-  },
-  qText: {
-    fontSize: responsiveFontSize(20),
-    fontFamily: GlobalFonts.extraBold,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  singleRadioContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: widthToDp(3),
-  },
-  radioLabel: {
-    fontSize: responsiveFontSize(20),
-    fontFamily: GlobalFonts.regular,
-  },
-});

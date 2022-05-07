@@ -1,13 +1,9 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import React, { useState } from 'react';
-import colors from 'assets/colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { logNow } from 'utils/functions/log-binder';
 import { getDay, getMonth, getYear } from 'utils/functions/date-format';
+import { styles } from './styles';
 type Props = {
   date: any;
   setDate: any;
@@ -57,34 +53,3 @@ const DateTimePickerModalComponent = (props: Props) => {
 };
 
 export default DateTimePickerModalComponent;
-
-const styles = StyleSheet.create({
-  container: {
-    borderBottomColor: colors.inputBg,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    borderRadius: widthToDp(3),
-    height: heightToDp(6),
-    backgroundColor: colors.inputBg,
-    width: '100%',
-  },
-  textContainer: {
-    width: '100%',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    paddingHorizontal: widthToDp(3),
-  },
-  dateText: {
-    fontFamily: GlobalFonts.light,
-    color: GlobalColors.black,
-    fontSize: responsiveFontSize(18),
-    flex: 1,
-    textAlign: 'center',
-  },
-  verticalLine: {
-    height: heightToDp(4),
-    borderLeftWidth: 1,
-    borderLeftColor: GlobalColors.darkGray,
-    width: widthToDp(1),
-  },
-});

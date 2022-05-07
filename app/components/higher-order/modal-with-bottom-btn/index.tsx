@@ -1,11 +1,8 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 import { Modal, ButtonWithShadowContainer } from 'components/base';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
+import { styles } from './styles';
 
 type Props = {
   isVisible: boolean;
@@ -47,20 +44,3 @@ const ModalWithBottomBtn = ({
 };
 
 export default ModalWithBottomBtn;
-
-const styles = StyleSheet.create({
-  card: {
-    width: widthToDp(90),
-    height: heightToDp(85),
-    backgroundColor: GlobalColors.white,
-    borderRadius: widthToDp(3),
-  },
-  title: {
-    fontSize: responsiveFontSize(25),
-    color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.bold,
-    paddingHorizontal: widthToDp(4),
-    paddingTop: heightToDp(2),
-    marginBottom: heightToDp(3),
-  },
-});

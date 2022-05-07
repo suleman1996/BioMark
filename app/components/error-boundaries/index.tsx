@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import colors from 'assets/colors';
-import fonts from 'assets/fonts';
+import { Text, View } from 'react-native';
 
 import { Logo } from 'assets/svgs/index';
-
+import { styles } from './styles';
 class ErrorBoundary extends Component {
   constructor(props: any) {
     super(props);
@@ -44,32 +41,5 @@ class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.whiteColor,
-    height: '100%',
-    alignItems: 'center',
-    paddingVertical: '20%',
-  },
-
-  icon: {
-    alignSelf: 'center',
-    marginBottom: 60,
-  },
-  heading: {
-    fontFamily: fonts.bold,
-    fontSize: 25,
-    alignSelf: 'center',
-    color: colors.blue,
-    marginTop: 20,
-    marginBottom: 25,
-  },
-  subHeading: {
-    fontFamily: fonts.medium,
-    fontSize: 16,
-    lineHeight: 20,
-  },
-});
 
 export default ErrorBoundary;

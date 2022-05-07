@@ -1,11 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { TextInput } from 'components';
+import { styles } from './styles';
 
 type Props = {
   label: string;
@@ -50,19 +48,3 @@ const PasswordInputWithLabel = ({
 };
 
 export default PasswordInputWithLabel;
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: heightToDp(2),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-  inputLabel: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-});
