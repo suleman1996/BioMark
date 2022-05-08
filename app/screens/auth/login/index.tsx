@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import Config from 'react-native-config';
+import { useTheme } from 'react-native-paper';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
@@ -39,6 +40,7 @@ import styles from './styles';
 export default function Login() {
   // redux
   const dispatch = useDispatch();
+  const { globalColors } = useTheme();
 
   const { loggingIn, errorMessageLogin } = useSelector(
     (state: IAppState) => state.auth
@@ -166,7 +168,9 @@ export default function Login() {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: globalColors.background }]}
+    >
       <ActivityIndicator visible={loggingIn} />
       <ErrorModal
         onPress={() => setLoginError(!loginError)}
