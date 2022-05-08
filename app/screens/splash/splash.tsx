@@ -8,6 +8,7 @@ import SCREENS from 'navigation/constants';
 import { Logo } from 'assets/svgs/index';
 
 import styles from './styles';
+
 export default function Splash() {
   const navigations = useNavigation();
 

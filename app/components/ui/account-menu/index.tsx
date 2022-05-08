@@ -1,3 +1,11 @@
+import React from 'react';
+import { Linking, Text, View } from 'react-native';
+
+import Config from 'react-native-config';
+import { Switch, TouchableRipple } from 'react-native-paper';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import { useDispatch } from 'react-redux';
+
 import {
   BioAboutIcon,
   BioAutoLogout,
@@ -9,25 +17,22 @@ import {
   BioSupport,
   BioSettings,
 } from 'components/svg';
+
 import SCREENS from 'navigation/constants';
-import React from 'react';
-import { Linking, StyleSheet, Text, View } from 'react-native';
-import Config from 'react-native-config';
-import { Switch, TouchableRipple } from 'react-native-paper';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import { useDispatch } from 'react-redux';
 import { navigate } from 'services/nav-ref';
 import { logout } from 'store/auth/auth-actions';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
+
+import styles from './styles';
 
 const AccountMenu = (props) => {
   const dispatch = useDispatch();
+
   const OpenMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);
   };
+
   return (
     <View style={styles.container}>
       <TouchableRipple style={styles.singleItem}>
@@ -201,40 +206,3 @@ const AccountMenu = (props) => {
 };
 
 export default AccountMenu;
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthToDp(92),
-    borderRadius: widthToDp(3),
-    borderWidth: 0.5,
-    borderColor: GlobalColors.lightGrey,
-  },
-  singleItem: {
-    width: widthToDp(92),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: widthToDp(3),
-    paddingVertical: widthToDp(3),
-    paddingLeft: widthToDp(4),
-    alignItems: 'center',
-  },
-  text: {
-    color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(20),
-    paddingLeft: widthToDp(3),
-  },
-  divider: {
-    borderBottomWidth: 2,
-    borderColor: GlobalColors.primary,
-    opacity: 0.3,
-  },
-  secondText: {
-    color: GlobalColors.primary,
-    fontFamily: GlobalFonts.light,
-    paddingRight: widthToDp(2),
-  },
-  iconWithSecondText: {
-    flexDirection: 'row',
-  },
-});

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { showMessage } from 'react-native-flash-message';
 
 import { ModalButton } from 'components/higher-order';
+import { ButtonWithShadowContainer } from 'components/base';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
+import CancerModal from './modals/cancer';
+import OthersModal from './modals/others';
+
 import { goBack } from 'services/nav-ref';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { ButtonWithShadowContainer } from 'components/base';
-import { TitleWithBackLayout } from 'components/layouts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import CancerModal from './modals/cancer';
-import OthersModal from './modals/others';
-import { ActivityIndicator } from 'components';
-import { useIsFocused } from '@react-navigation/native';
 import { userService } from 'services/user-service/user-service';
-import { showMessage } from 'react-native-flash-message';
 
 const MedicalHistoryScreen = () => {
   const isFocus = useIsFocused();
@@ -30,6 +31,12 @@ const MedicalHistoryScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [history] = useState([]);
 
+  useEffect(() => {
+    getFamilyMedicalHistory();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocus]);
+
   const onNonePress = () => {
     setIsCholesterolModal(false);
     setIsBloodPressureModal(false);
@@ -40,9 +47,11 @@ const MedicalHistoryScreen = () => {
     setIsOtherModal(false);
     setIsNoneModal(true);
   };
+
   const onPressOthers = () => {
     setIsOtherModal(true);
   };
+
   const onPressCancer = () => {
     setIsCancerModal(true);
   };
@@ -149,12 +158,6 @@ const MedicalHistoryScreen = () => {
       }
     }
   };
-
-  useEffect(() => {
-    getFamilyMedicalHistory();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocus]);
 
   return (
     <TitleWithBackLayout title="Medical History">

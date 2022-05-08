@@ -30,6 +30,7 @@ const InputWithLabel = ({
   const ifLabelSize = labelFontSize
     ? { fontSize: responsiveFontSize(labelFontSize) }
     : {};
+
   return (
     <View style={styles.container}>
       <Text style={[styles.label, ifLabelSize]}>{label}</Text>

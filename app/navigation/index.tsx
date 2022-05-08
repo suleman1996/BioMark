@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { NavigationContainer } from '@react-navigation/native';
 
 import AppNavigator from './app-navigator';
 import AuthNavigator from './auth-navigator';
+
 import { getAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 import { navigationRef } from 'services/nav-ref';
 import { loggedIn } from 'store/auth/auth-actions';

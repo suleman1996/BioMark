@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -5,14 +6,15 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
+
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { TextInput } from 'components';
+
+import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';

@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -5,16 +6,20 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
+
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 
-import { goBack } from 'services/nav-ref';
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
+
+import { goBack } from 'services/nav-ref';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { styles } from './styles';
+
 import colors from 'assets/colors';
+
+import { styles } from './styles';
+
 const Options = [
   { title: '' },
   { title: '1' },

@@ -6,15 +6,18 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+
 import { showMessage } from 'react-native-flash-message';
 
-import colors from 'assets/colors';
 import { Button } from 'components/button';
 import { Header, ActivityIndicator, OtpInput } from 'components';
+
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
+
+import colors from 'assets/colors';
 
 import styles from './style';
 

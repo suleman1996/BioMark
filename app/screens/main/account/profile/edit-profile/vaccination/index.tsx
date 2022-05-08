@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Text,
   ScrollView,
@@ -6,18 +7,20 @@ import {
   View,
   FlatList,
 } from 'react-native';
-import React, { useState } from 'react';
+
 import { RadioButton } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { TextInputButton } from 'components';
+
+import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+
 import { styles } from './styles';
 
 export default function VaccinationScreen() {

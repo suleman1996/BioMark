@@ -1,20 +1,22 @@
 import React, { useContext, useEffect } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Images from 'assets/images';
 import { TitleWithSearchBarLayout } from 'components/layouts';
 import { AccountMenu } from 'components/ui';
+import { ActivityIndicator } from 'components';
+
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
-import { ActivityIndicator } from 'components';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
+
+import Images from 'assets/images';
 
 import { styles } from './styles';
 
@@ -35,6 +37,7 @@ const AccountScreen = () => {
   const onToggleAutoLogout = async () => {
     await autoLogout();
   };
+
   const autoLogout = async () => {
     userService
       .autoLogout()
@@ -51,18 +54,12 @@ const AccountScreen = () => {
       })
       .finally(() => {});
   };
+
   return (
     <>
       <TitleWithSearchBarLayout title={'Account'}>
         <View style={styles.content}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: widthToDp(100),
-              paddingHorizontal: widthToDp(6),
-            }}
-          >
+          <View style={styles.accountScreenView}>
             <View style={[styles.image, { overflow: 'hidden' }]}>
               <Image
                 onLoadStart={() => setProfileLoader(true)}

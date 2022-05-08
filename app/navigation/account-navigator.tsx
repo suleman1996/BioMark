@@ -1,7 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import DependantsScreen from 'screens/main/account/dependants';
 import AddDependantScreen from 'screens/main/account/dependants/add-dependant';
 import EditDependantScreen from 'screens/main/account/dependants/edit-dependant';
@@ -25,6 +24,7 @@ import VaccinationScreen from 'screens/main/account/profile/edit-profile/vaccina
 import AllergiesScreen from 'screens/main/account/profile/edit-profile/allergies';
 import DrinkingScreen from 'screens/main/account/profile/edit-profile/drinking';
 
+import { GlobalColors } from 'utils/theme/global-colors';
 import SCREENS from './constants';
 
 const Stack = createNativeStackNavigator();

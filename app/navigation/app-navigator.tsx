@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import CreateProfile from 'screens/auth/create-profile';
+import AccountNavigator from './account-navigator';
+import BottomTabNavigator from './bottom-tab-navigator';
+
 import { getAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import SCREENS from './constants';
-import AccountNavigator from './account-navigator';
-import BottomTabNavigator from './bottom-tab-navigator';
 
 const Stack = createNativeStackNavigator();
 const { NESTED_ACCOUNT_NAVIGATOR, CREATE_PROFILE } = SCREENS;

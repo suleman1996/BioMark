@@ -1,24 +1,30 @@
-import ButtonComponent from 'components/base/button';
-import { DateTimePickerModal } from 'components/base';
-import { PhoneNumberWithLabel, InputWithLabel } from 'components/base';
-import { BoxSelector, RelationMenu } from 'components/higher-order';
-import { ActivityIndicator } from 'components';
-import { Regex } from 'constants/regex';
-import { Formik } from 'formik';
-import { parsePhoneNumber } from 'libphonenumber-js';
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { parsePhoneNumber } from 'libphonenumber-js';
 import { useDispatch } from 'react-redux';
+
+import {
+  PhoneNumberWithLabel,
+  InputWithLabel,
+  DateTimePickerModal,
+  Button,
+} from 'components/base';
+import { BoxSelector, RelationMenu } from 'components/higher-order';
+import { ActivityIndicator } from 'components';
+
+import { Regex } from 'constants/regex';
 import { dependentService } from 'services/account-service/dependent-service';
 import { goBack } from 'services/nav-ref';
 import { getAllDependents } from 'store/account/account-actions';
 import { DependentSingleGetResponse } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { DependentTypeEnum } from 'enum/dependent-type-enum';
+import { GenderEnum } from 'enum/gender-enum';
 
-import * as Yup from 'yup';
-import { DependentTypeEnum } from '../../../../../enum/dependent-type-enum';
-import { GenderEnum } from '../../../../../enum/gender-enum';
 import { styles } from './styles';
 
 type Props = {
@@ -63,27 +69,6 @@ const EditDependantScreen = (props: Props) => {
   useEffect(() => {
     getDependentData();
   }, [id]);
-
-  const AddDependentSchema = Yup.object({
-    first_name: Yup.string()
-      .matches(/^[A-Za-z ]*$/, 'Please enter valid first name')
-      .required('Firstname is required'),
-    last_name: Yup.string()
-      .matches(/^[A-Za-z ]*$/, 'Please enter valid last name')
-      .required('Firstname is required'),
-    document_type: Yup.string().required(''),
-    dependent_type_id: Yup.string().required(''),
-    id_number: Yup.string()
-      .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
-      .required('NRIC / Passport is required'),
-    // birth_date: Yup.string().required(''),
-    email: Yup.string()
-      .email('Enter valid email address')
-      .required('Email is required'),
-    phone_number: Yup.string()
-      .matches(Regex.numberReg, 'Enter valid phone number')
-      .required('Please provide your phone number'),
-  });
 
   const onSubmit = () => {
     const {
@@ -257,7 +242,7 @@ const EditDependantScreen = (props: Props) => {
                   ]}
                 />
                 <View style={styles.bottomBtnContainer}>
-                  <ButtonComponent
+                  <Button
                     disabled={!isValid || !values.first_name}
                     onPress={() => onSubmit()}
                     title={'Confirm'}
@@ -273,3 +258,24 @@ const EditDependantScreen = (props: Props) => {
 };
 
 export default EditDependantScreen;
+
+const AddDependentSchema = Yup.object({
+  first_name: Yup.string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid first name')
+    .required('Firstname is required'),
+  last_name: Yup.string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid last name')
+    .required('Firstname is required'),
+  document_type: Yup.string().required(''),
+  dependent_type_id: Yup.string().required(''),
+  id_number: Yup.string()
+    .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
+    .required('NRIC / Passport is required'),
+  // birth_date: Yup.string().required(''),
+  email: Yup.string()
+    .email('Enter valid email address')
+    .required('Email is required'),
+  phone_number: Yup.string()
+    .matches(Regex.numberReg, 'Enter valid phone number')
+    .required('Please provide your phone number'),
+});

@@ -1,18 +1,22 @@
-import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
+import { View, Text, SafeAreaView } from 'react-native';
+
 import { Picker } from '@react-native-picker/picker';
+import { showMessage } from 'react-native-flash-message';
+import { useIsFocused } from '@react-navigation/native';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
-import styles from './styles';
+import { ActivityIndicator } from 'components';
+
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+import { userService } from 'services/user-service/user-service';
+
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import { ActivityIndicator } from 'components';
-import { userService } from 'services/user-service/user-service';
-import { showMessage } from 'react-native-flash-message';
-import { useIsFocused } from '@react-navigation/native';
+
+import styles from './styles';
 
 const Sleep = () => {
   const isFocus = useIsFocused();
@@ -26,6 +30,11 @@ const Sleep = () => {
     sleepOptions[0].title
   );
   const [isVisiable, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    handleLifeStyle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocus]);
 
   const handleSleep = async () => {
     try {
@@ -92,11 +101,6 @@ const Sleep = () => {
       }
     }
   };
-
-  React.useEffect(() => {
-    handleLifeStyle();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocus]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

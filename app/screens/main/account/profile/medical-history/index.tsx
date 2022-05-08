@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import { ModalButton } from 'components/higher-order';
-import { goBack } from 'services/nav-ref';
+import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
 import { TitleWithBackLayout } from 'components/layouts';
+
 import AsthmaModal from './modals/asthma';
 import CancerModal from './modals/cancer';
 import DiabetesModal from './modals/diabetes';
@@ -11,7 +12,9 @@ import GoutModal from './modals/gout';
 import HighBloodPressureModal from './modals/high-blood-pressure';
 import HighCholesterolModal from './modals/high-cholesterol';
 import OthersModal from './modals/others';
-import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
+
+import { goBack } from 'services/nav-ref';
+
 import { styles } from './styles';
 
 const options = [
@@ -27,7 +30,6 @@ const options = [
 const MedicalHistoryScreen = () => {
   const [dropdownValue, setDropdown] = useState();
   const [isDropdownChanged, setIsDropDownChanged] = useState(false);
-
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
   const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);
   const [isDiabetesModal, setIsDiabetesModal] = useState(false);

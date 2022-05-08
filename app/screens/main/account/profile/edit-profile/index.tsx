@@ -3,29 +3,33 @@ import {
   Image,
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
 } from 'react-native';
+
+import { showMessage } from 'react-native-flash-message';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import Images from 'assets/images';
 import { TitleWithBackLayout } from 'components/layouts';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { EditProfileModal, ActivityIndicator } from 'components';
+
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { EditProfileModal, ActivityIndicator } from 'components';
-import AuthContext from '../../../../../utils/auth-context';
+
+import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
-import { showMessage } from 'react-native-flash-message';
+
+import Images from 'assets/images';
+
+import styles from './styles';
 
 let cameraIs = false;
 
@@ -91,7 +95,7 @@ const EditProfileScreen = () => {
     </View>
   );
 
-  const ImagePickerFromGallery = () => {
+  const imagePickerFromGallery = () => {
     setShowModal(false);
     if (!cameraIs) {
       cameraIs = true;
@@ -116,7 +120,7 @@ const EditProfileScreen = () => {
     }
   };
 
-  const ImagePickerFromCamera = () => {
+  const imagePickerFromCamera = () => {
     setShowModal(false);
     if (!cameraIs) {
       cameraIs = true;
@@ -141,16 +145,14 @@ const EditProfileScreen = () => {
     }
   };
 
-  console.log(SCREENS.PERSONAL_INFORMATION);
-
   return (
     <TitleWithBackLayout title="Your Profile">
       <ActivityIndicator visible={isLoading} />
       <EditProfileModal
         iconPress={() => setShowModal(false)}
         visible={showModal}
-        onPressGallery={() => ImagePickerFromGallery()}
-        onPressPhoto={() => ImagePickerFromCamera()}
+        onPressGallery={() => imagePickerFromGallery()}
+        onPressPhoto={() => imagePickerFromCamera()}
       />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topBg} />
@@ -410,78 +412,3 @@ const EditProfileScreen = () => {
 };
 
 export default EditProfileScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    paddingBottom: 5,
-  },
-  topBg: {
-    width: widthToDp(100),
-    height: heightToDp(7),
-    position: 'absolute',
-    top: 0,
-    backgroundColor: GlobalColors.primary,
-  },
-  image: {
-    width: widthToDp(25),
-    height: widthToDp(25),
-    borderRadius: widthToDp(12.5),
-  },
-  contentContainer: {
-    width: widthToDp(92),
-    backgroundColor: GlobalColors.white,
-    flex: 1,
-    marginTop: heightToDp(4),
-    borderRadius: widthToDp(3),
-    alignItems: 'center',
-  },
-  profileContainer: {
-    width: widthToDp(25),
-    height: widthToDp(25),
-    borderRadius: widthToDp(12.5),
-    position: 'absolute',
-    top: -heightToDp(3),
-    backgroundColor: GlobalColors.white,
-  },
-  name: {
-    marginTop: heightToDp(12),
-    fontSize: responsiveFontSize(25),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-  menuContainer: {
-    flex: 1,
-    width: '100%',
-    paddingHorizontal: widthToDp(3),
-    marginTop: heightToDp(2),
-    marginBottom: heightToDp(3),
-  },
-  menuOption: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: heightToDp(1),
-  },
-  menuTitleAndIcon: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  menuTitleText: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.light,
-    marginLeft: widthToDp(4),
-  },
-  editView: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: '#3D3D3D90',
-    borderRadius: widthToDp(12.5),
-    zIndex: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

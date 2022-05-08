@@ -9,7 +9,6 @@ import { ActivityIndicator } from 'components';
 import { MarketingConsentModal } from 'components/ui';
 
 import { GlobalStyles } from 'utils/theme/global-styles';
-
 import { settingsService } from 'services/account-service/settings-service';
 import { goBack } from 'services/nav-ref';
 import { setMarketing } from 'store/auth/auth-actions';
@@ -22,19 +21,9 @@ const MarketingConsentScreen = () => {
   const userMarketing = useSelector((state: IAppState) => state.auth.marketing);
 
   const [isLoading, setIsLoading] = useState(false);
-
   const [isChecked, setIsChecked] = useState(false);
   const [isMModal, setIsMModal] = useState(false);
   const [isInitialDisable, setIsInitialDisable] = useState(true);
-
-  const getUserMarketing = () => {
-    settingsService
-      .getMarketing()
-      .then((res) => {
-        dispatch(setMarketing(res));
-      })
-      .catch(() => {});
-  };
 
   useEffect(() => {
     getUserMarketing();
@@ -44,6 +33,15 @@ const MarketingConsentScreen = () => {
   useEffect(() => {
     setIsChecked(userMarketing.enable);
   }, [userMarketing]);
+
+  const getUserMarketing = () => {
+    settingsService
+      .getMarketing()
+      .then((res) => {
+        dispatch(setMarketing(res));
+      })
+      .catch(() => {});
+  };
 
   const onChangeMarketing = () => {
     setIsMModal(false);

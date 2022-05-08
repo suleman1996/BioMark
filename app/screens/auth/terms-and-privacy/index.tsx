@@ -2,9 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+
 import Pdf from 'react-native-pdf';
-import { ActivityIndicator } from 'components';
 import { useNavigation } from '@react-navigation/native';
+
+import { ActivityIndicator } from 'components';
 
 import colors from 'assets/colors';
 import { BackIcon } from 'assets/svgs/index';

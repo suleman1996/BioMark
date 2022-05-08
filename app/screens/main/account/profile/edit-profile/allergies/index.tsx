@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -5,22 +6,24 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
+
 import { RadioButton } from 'react-native-paper';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { styles } from './styles';
+import { ModalButton } from 'components/higher-order';
 import MedicationModal from './modals/medication';
 import FoodModal from './modals/food';
 import AnimalModal from './modals/animal';
 import EnvironmentModal from './modals/environment';
-import { ModalButton } from 'components/higher-order';
-import { userService } from 'services/user-service/user-service';
 import OtherModal from './modals/other';
+
+import { GlobalColors } from 'utils/theme/global-colors';
+import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+
+import { styles } from './styles';
 
 export default function AllergiesScreen() {
   const [value, setValue] = useState('');
@@ -86,6 +89,7 @@ export default function AllergiesScreen() {
     setIsOtherModal(false);
     setConditions([]);
   };
+
   const onDoneMedical = ({ allergyTo }) => {
     let body = {
       has_condition: true,
@@ -94,6 +98,7 @@ export default function AllergiesScreen() {
     };
     conditions.push(body);
   };
+
   const onDoneFood = ({ allergyTo }) => {
     let body = {
       has_condition: true,
@@ -102,6 +107,7 @@ export default function AllergiesScreen() {
     };
     conditions.push(body);
   };
+
   const onDoneAnimal = ({ allergyTo }) => {
     let body = {
       has_condition: true,
@@ -110,6 +116,7 @@ export default function AllergiesScreen() {
     };
     conditions.push(body);
   };
+
   const onDoneEnvironment = ({ allergyTo }) => {
     let body = {
       has_condition: true,
@@ -118,6 +125,7 @@ export default function AllergiesScreen() {
     };
     conditions.push(body);
   };
+
   const onDoneOther = ({ allergyTo }) => {
     let body = {
       has_condition: true,
@@ -125,21 +133,6 @@ export default function AllergiesScreen() {
       allergy_type: listOthers.toString(),
     };
     conditions.push(body);
-  };
-
-  const onSubmit = async () => {
-    console.log(conditions);
-    try {
-      if (conditions.length > 0) {
-        const response = await userService.Allergies({
-          conditions: conditions,
-        });
-        console.log('Allergies successful', response.data);
-        navigate(SCREENS.EDIT_PROFILE);
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const addMedicalFunction = () => {
@@ -175,6 +168,21 @@ export default function AllergiesScreen() {
       listOthers.push(valueOther);
       setRefreshOther(!refreshOther);
       setValueOther(!valueOther);
+    }
+  };
+
+  const onSubmit = async () => {
+    console.log(conditions);
+    try {
+      if (conditions.length > 0) {
+        const response = await userService.Allergies({
+          conditions: conditions,
+        });
+        console.log('Allergies successful', response.data);
+        navigate(SCREENS.EDIT_PROFILE);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 

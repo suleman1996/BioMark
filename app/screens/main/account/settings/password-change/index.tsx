@@ -10,7 +10,6 @@ import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 
 import SCREENS from 'navigation/constants';
-
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -22,7 +21,7 @@ import { ErrorResponse } from 'types/ErrorResponse';
 
 import { styles } from './styles';
 
-const passText = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
+const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
 const PasswordChangeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -140,7 +139,7 @@ const PasswordChangeScreen = () => {
                       },
                     ]}
                   >
-                    {passText}
+                    {PASS_TEXT}
                   </Text>
                   <PasswordInputWithLabel
                     marginTop={0.3}

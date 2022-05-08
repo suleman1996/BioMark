@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Button } from 'components/base';
 
 import { styles } from './styles';
+
 type Props = {
   onPress: any;
   disabled: boolean;

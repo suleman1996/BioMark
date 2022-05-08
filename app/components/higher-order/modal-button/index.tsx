@@ -26,6 +26,7 @@ const ModalButtonComponent = ({
   const textColor = isModal
     ? { color: GlobalColors.white }
     : { color: GlobalColors.lightGrey };
+
   const bgColor = isModal
     ? { backgroundColor: GlobalColors.darkPrimary }
     : { backgroundColor: GlobalColors.white };

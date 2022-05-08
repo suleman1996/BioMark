@@ -29,9 +29,11 @@ const PasswordInputWithLabel = ({
   marginTop,
 }: Props) => {
   let otherStyles = [];
+
   if (marginTop) {
     otherStyles.push({ marginTop: heightToDp(marginTop) });
   }
+
   return (
     <View style={[styles.container, otherStyles]}>
       <Text style={[styles.inputLabel]}>{label}</Text>

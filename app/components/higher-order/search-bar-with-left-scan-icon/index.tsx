@@ -30,39 +30,6 @@ import fonts from 'assets/fonts';
 
 import { styles } from './styles';
 
-type Props = {
-  visible: Boolean;
-  children: any;
-  loading: Boolean;
-};
-
-//PopUp Modal
-const QrInputPopup = ({ visible, children, loading }: Props) => {
-  const [showModal, setShowModal] = React.useState(visible);
-
-  React.useEffect(() => {
-    togglePopUp();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible]);
-
-  const togglePopUp = () => {
-    if (visible) {
-      setShowModal(true);
-    } else {
-      setShowModal(false);
-    }
-  };
-
-  return (
-    <Modal transparent visible={showModal}>
-      <ActivityIndicator visible={loading} />
-      <View style={styles.popUpBackground}>
-        <View style={styles.popUpContainer}>{children}</View>
-      </View>
-    </Modal>
-  );
-};
-
 const SearchBarWithLeftScanIcon = () => {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -70,11 +37,6 @@ const SearchBarWithLeftScanIcon = () => {
 
   const menuRef = useRef<any>();
 
-  const QRschemma = Yup.object({
-    qrInput: Yup.string()
-      .required('Please type QR or Barcode.')
-      .min(8, 'Invalid.'),
-  });
   const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
     try {
@@ -113,12 +75,14 @@ const SearchBarWithLeftScanIcon = () => {
   const bgColor = isMenuOpen
     ? { backgroundColor: GlobalColors.primary }
     : { backgroundColor: GlobalColors.white };
+
   const menuStyle = {
     height: 30,
     width: 30,
     justifyContent: 'center',
     alignItems: 'center',
   };
+
   return (
     <>
       <View style={styles.searchBar}>
@@ -261,3 +225,42 @@ const SearchBarWithLeftScanIcon = () => {
 };
 
 export default SearchBarWithLeftScanIcon;
+
+const QRschemma = Yup.object({
+  qrInput: Yup.string()
+    .required('Please type QR or Barcode.')
+    .min(8, 'Invalid.'),
+});
+
+type Props = {
+  visible: Boolean;
+  children: any;
+  loading: Boolean;
+};
+
+//PopUp Modal
+const QrInputPopup = ({ visible, children, loading }: Props) => {
+  const [showModal, setShowModal] = React.useState(visible);
+
+  React.useEffect(() => {
+    togglePopUp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
+
+  const togglePopUp = () => {
+    if (visible) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  };
+
+  return (
+    <Modal transparent visible={showModal}>
+      <ActivityIndicator visible={loading} />
+      <View style={styles.popUpBackground}>
+        <View style={styles.popUpContainer}>{children}</View>
+      </View>
+    </Modal>
+  );
+};

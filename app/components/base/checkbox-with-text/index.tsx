@@ -6,6 +6,7 @@ import CheckBox from 'react-native-check-box';
 import { GlobalColors } from 'utils/theme/global-colors';
 
 import { styles } from './styles';
+
 type Props = {
   isChecked: boolean;
   setIsChecked: any;

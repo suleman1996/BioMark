@@ -35,9 +35,11 @@ const HeightChooserComponent = ({
   const [selectedType, setSelectedType] = useState(2);
 
   var otherStyle = [];
+
   if (height) {
     otherStyle.push({ height: heightToDp(height) });
   }
+
   if (textAlign) {
     otherStyle.push({ textAlign: textAlign });
   }

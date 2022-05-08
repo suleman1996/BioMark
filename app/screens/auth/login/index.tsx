@@ -1,4 +1,3 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useEffect, useState } from 'react';
 import {
   Keyboard,
@@ -8,6 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import {
   AccessToken,
   GraphRequest,
@@ -19,23 +20,25 @@ import auth from '@react-native-firebase/auth';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import Config from 'react-native-config';
 
-import colors from 'assets/colors';
-import fonts from 'assets/fonts';
-import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
-//import { Button } from 'components/button';
 import {
   ErrorModal,
   TextInput,
   ActivityIndicator,
   PhoneNumber,
   Button,
-} from 'components/index';
+} from 'components';
+
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
+
 import styles from './styles';
+
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -159,7 +162,7 @@ export default function Login() {
     }
   }
 
-  const HandleLogin = async () => {
+  const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
@@ -222,7 +225,7 @@ export default function Login() {
           </TouchableOpacity>
         </View>
         <Button
-          onPress={() => HandleLogin()}
+          onPress={() => handleLogin()}
           disabled={
             phoneNumber.length < numberCondition.min || password.length < 8
               ? true

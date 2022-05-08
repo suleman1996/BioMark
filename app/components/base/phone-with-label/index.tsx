@@ -29,10 +29,6 @@ const PhoneNumberWithLabel = ({
   setCountryCode,
   setSelectCountryCode,
 }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [phoneNumber, setPhoneNumber] = useState('');
-
   return (
     <>
       <View style={styles.container}>

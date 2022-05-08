@@ -1,13 +1,15 @@
 import { Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, { useState } from 'react';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 
-import { navigate } from 'services/nav-ref';
 import { Header, TextInput, ActivityIndicator } from 'components';
 import { Button } from 'components/button';
+
+import { navigate } from 'services/nav-ref';
 import { changePassword } from 'services/auth-service';
 import SCREENS from 'navigation/constants';
 

@@ -1,13 +1,17 @@
-import { View, ScrollView } from 'react-native';
 import React, { useEffect } from 'react';
-import { TitleWithBackLayout } from 'components/layouts';
-import { ButtonWithShadowContainer } from 'components/base';
-import styles from './styles';
-import { StressBar, ActivityIndicator } from 'components';
+import { View, ScrollView } from 'react-native';
+
 import { useIsFocused } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
+
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
+import { StressBar, ActivityIndicator } from 'components';
+
 import { userService } from 'services/user-service/user-service';
 import { goBack } from 'services/nav-ref';
+
+import styles from './styles';
 
 const Index = () => {
   const isFocus = useIsFocused();
@@ -16,6 +20,10 @@ const Index = () => {
   const [question3, setQuestion3] = React.useState(0);
   const [question4, setQuestion4] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  useEffect(() => {
+    getStress();
+  }, [isFocus]);
 
   const getStress = async () => {
     try {
@@ -90,10 +98,6 @@ const Index = () => {
       }
     }
   };
-
-  useEffect(() => {
-    getStress();
-  }, [isFocus]);
 
   return (
     <View style={styles.container}>

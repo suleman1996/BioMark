@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { HeightChooser, WeightChooser } from 'components/higher-order';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { TitleWithBackLayout } from 'components/layouts';
-import { userService } from 'services/user-service/user-service';
 import { ButtonWithShadowContainer } from 'components/base';
+
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 

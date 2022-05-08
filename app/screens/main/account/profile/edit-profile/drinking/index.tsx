@@ -1,23 +1,31 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
+
 import { RadioButton } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { showMessage } from 'react-native-flash-message';
+import { useIsFocused } from '@react-navigation/native';
 
 import { TitleWithBackLayout } from 'components/layouts';
-import styles from './styles';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { ActivityIndicator } from 'components';
 import { ButtonWithShadowContainer } from 'components/base';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
-import { showMessage } from 'react-native-flash-message';
-import { ActivityIndicator } from 'components';
 import { userService } from 'services/user-service/user-service';
-import { useIsFocused } from '@react-navigation/native';
+
+import styles from './styles';
 
 type RenderDrinkingProps = {
   title: string;
@@ -37,6 +45,10 @@ const Drinking = () => {
   const [spirits, setSpiritss] = React.useState(0);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [isDrinking, setIsDrinking] = React.useState(false);
+
+  React.useEffect(() => {
+    handleLifeStyle();
+  }, [isFocus]);
 
   const handleDrinking = async () => {
     if (value == '') {
@@ -164,10 +176,6 @@ const Drinking = () => {
       </View>
     </View>
   );
-
-  React.useEffect(() => {
-    handleLifeStyle();
-  }, [isFocus]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

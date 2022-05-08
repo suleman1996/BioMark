@@ -15,4 +15,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
   },
+  dateText: {
+    marginLeft: 15,
+    color: colors.black,
+  },
 });

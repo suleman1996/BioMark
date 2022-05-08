@@ -5,15 +5,13 @@ import { showMessage } from 'react-native-flash-message';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
-import SCREENS from 'navigation/constants';
-
 import { SingleMenuItemWithArrow } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 import { AccountDeActivateModal } from 'components/ui';
 
 import { logNow } from 'utils/functions/log-binder';
-
+import SCREENS from 'navigation/constants';
 import { settingsService } from 'services/account-service/settings-service';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';

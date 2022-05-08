@@ -265,7 +265,7 @@ async function logout() {
 }
 
 const Smoking = (day: Number, stopSmoke: Number, startSmoke: Number) => {
-  return client.post(API_URLS.Smoking, {
+  return client.post(API_URLS.SMOKING, {
     lifestyle: {
       stick_per_day: day,
       smoking_stop_at: stopSmoke,
@@ -292,7 +292,7 @@ const drinking = (
   wine: Number,
   spirits: Number
 ) => {
-  return client.post(API_URLS.Drinking, {
+  return client.post(API_URLS.DRINKING, {
     lifestyle: {
       is_drinking: isDrinking,
       pints_of_beer: beer,
@@ -303,7 +303,7 @@ const drinking = (
 };
 
 const Vaccination = (items: string | number) => {
-  return client.post(API_URLS.Vaccination, {
+  return client.post(API_URLS.VACCINATION, {
     medical_history: {
       has_condition: true,
       vaccine_list: items,
@@ -315,7 +315,7 @@ type Props = {
   medical: any;
 };
 const Allergies = ({ conditions }: Props) => {
-  return client.post(API_URLS.Allergies, {
+  return client.post(API_URLS.ALLERGIES, {
     medical_history: {
       has_allergy: true,
       conditions,
@@ -331,13 +331,13 @@ const Allergies = ({ conditions }: Props) => {
 };
 
 const bodyMeasurement = ({ medical }: Props) => {
-  return client.post(API_URLS.bodyMeasurement, {
+  return client.post(API_URLS.BODY_MEASUREMENT, {
     medical,
   });
 };
 
 const updateProfileAvatar = (pic: String) => {
-  return client.post(API_URLS.Profile_Avatar, {
+  return client.post(API_URLS.PROFILE_AVATAR, {
     profile: {
       base64: pic,
       filename: 'filename',
@@ -359,7 +359,7 @@ const createFamilyMedicalHistory = (history: Array<String>) => {
 };
 
 const getStress = () => {
-  return client.get(API_URLS.Get_Stress);
+  return client.get(API_URLS.GET_STRESS);
 };
 
 const getLifeStyle = () => {
@@ -367,7 +367,7 @@ const getLifeStyle = () => {
 };
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
-  return client.post(API_URLS.Create_Stress, {
+  return client.post(API_URLS.CREATE_STRESS, {
     stress: {
       question1: q1,
       question2: q2,
@@ -385,7 +385,7 @@ const updateProfile = (
   ic_number: String,
   email: String
 ) => {
-  return client.put(API_URLS.Update_Profile, {
+  return client.put(API_URLS.UPDATE_PROFILE, {
     profile: {
       first_name: fName,
       last_name: lName,

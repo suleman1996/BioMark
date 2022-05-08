@@ -1,5 +1,13 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import Inbox from 'screens/main/Inbox/index';
+import Home from 'screens/main/home-page';
+import AppointmentScreen from 'screens/main/appointment';
+import AccountScreen from 'screens/main/account/account-screen';
+
+import SCREENS from './constants';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
@@ -9,11 +17,6 @@ import {
   HomeIcon,
   InboxIcon,
 } from 'assets/svgs/index';
-import Inbox from 'screens/main/Inbox/index';
-import Home from 'screens/main/home-page';
-import AppointmentScreen from 'screens/main/appointment';
-import AccountScreen from 'screens/main/account/account-screen';
-import SCREENS from './constants';
 
 const Tab = createBottomTabNavigator();
 

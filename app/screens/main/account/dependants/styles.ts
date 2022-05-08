@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -15,3 +15,5 @@ export const styles = StyleSheet.create({
     paddingHorizontal: widthToDp(6),
   },
 });
+
+export default styles;

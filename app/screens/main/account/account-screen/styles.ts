@@ -36,4 +36,10 @@ export const styles = StyleSheet.create({
     paddingTop: widthToDp(7),
     marginBottom: heightToDp(7),
   },
+  accountScreenView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: widthToDp(100),
+    paddingHorizontal: widthToDp(6),
+  },
 });
