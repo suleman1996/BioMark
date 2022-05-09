@@ -50,7 +50,7 @@ const AccountNavigator = () => (
         options={{
           headerShown: true,
           headerTintColor: GlobalColors.darkPrimary,
-          title: 'Dependants',
+          title: 'Add Dependants',
         }}
         name={SCREENS.ADD_DEPENDANTS}
         component={AddDependantScreen}
@@ -59,7 +59,7 @@ const AccountNavigator = () => (
         options={{
           headerShown: true,
           headerTintColor: GlobalColors.darkPrimary,
-          title: 'Dependants',
+          title: 'Edit Dependants',
         }}
         name={SCREENS.EDIT_DEPENDANTS}
         component={EditDependantScreen}

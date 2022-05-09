@@ -270,17 +270,9 @@ export default function Signup() {
                         })
                       }
                     >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                          bottom: 2,
-                        }}
-                      >
-                        terms and condition
-                      </Text>
-                    </TouchableOpacity>
+                      terms and condition
+                    </Text>
+
                     <Text> and the </Text>
                     <TouchableOpacity
                       onPress={() =>
@@ -289,16 +281,8 @@ export default function Signup() {
                         })
                       }
                     >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}
-                      >
-                        privacy policy.
-                      </Text>
-                    </TouchableOpacity>
+                      privacy policy.
+                    </Text>
                   </Text>
                 </View>
                 <TouchableOpacity>

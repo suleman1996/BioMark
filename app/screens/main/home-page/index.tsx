@@ -39,6 +39,7 @@ export default function Home() {
 
   useEffect(() => {
     userProfile();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,6 +60,7 @@ export default function Home() {
               source={MyImage.rectangle}
               style={{
                 width: '100%',
+                height: 140,
               }}
             >
               <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
