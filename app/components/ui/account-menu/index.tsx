@@ -156,6 +156,10 @@ const AccountMenu = (props) => {
         onPress={() =>
           navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
             screen: SCREENS.TERMS_AND_PRIVACY,
+            params: {
+              privacyPolicy: false,
+              headerHome: true,
+            },
           })
         }
       >
