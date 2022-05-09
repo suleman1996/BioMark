@@ -14,11 +14,11 @@ export const styles = StyleSheet.create({
     backgroundColor: GlobalColors.white,
   },
   headerText: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.light,
+    fontSize: responsiveFontSize(23),
+    fontFamily: GlobalFonts.extraLight,
     color: GlobalColors.darkPrimary,
-    letterSpacing: -0.3,
-    lineHeight: heightToDp(3),
+    letterSpacing: -0.1,
+    lineHeight: heightToDp(3.5),
   },
   checkbox: {
     transform: [{ scaleX: 1.8 }, { scaleY: 1.8 }],
