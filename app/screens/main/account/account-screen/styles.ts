@@ -19,12 +19,13 @@ export const styles = StyleSheet.create({
     borderRadius: widthToDp(12.5),
   },
   profile: {
-    paddingLeft: widthToDp(4),
+    paddingHorizontal: widthToDp(4),
   },
   name: {
     fontFamily: GlobalFonts.medium,
     fontSize: responsiveFontSize(22),
     color: GlobalColors.darkPrimary,
+    paddingRight: widthToDp(20),
   },
   editProfile: {
     fontFamily: GlobalFonts.light,
