@@ -91,10 +91,14 @@ export default function ForgotPassword() {
             )}
             <View style={styles.floatingBtn}>
               <Button
-                onPress={() => handleForgotPassword()}
+                onPress={() =>
+                  phoneNumber.length >= numberCondition.min &&
+                  handleForgotPassword()
+                }
                 title="Continue"
                 disabled={
-                  phoneNumber.length < numberCondition.min ? true : false
+                  // phoneNumber.length < numberCondition.min ? true : false
+                  phoneNumber.length < 1 ? true : false
                 }
               />
             </View>

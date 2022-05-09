@@ -397,6 +397,10 @@ const updateProfile = (
   });
 };
 
+const getBootStrapper = () => {
+  return client.get(API_URLS.GET_BOOTSTRAPPER);
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -422,4 +426,5 @@ export const userService = {
   getStress,
   createStress,
   getLifeStyle,
+  getBootStrapper,
 };

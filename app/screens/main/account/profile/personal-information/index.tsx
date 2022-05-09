@@ -185,10 +185,10 @@ const PersonalInformationScreen = () => {
       </ScrollView>
       <Button
         disabled={
-          // firstName?.length > 0 &&
-          // lastName?.length > 0 &&
           firstName.length > authContext?.userData?.first_name.length ||
+          firstName.length < authContext?.userData?.first_name.length ||
           lastName.length > authContext?.userData?.last_name.length ||
+          lastName.length < authContext?.userData?.last_name.length ||
           date != authContext?.userData?.birth_date ||
           genderDisable == true
             ? false
