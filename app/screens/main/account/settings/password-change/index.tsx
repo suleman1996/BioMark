@@ -127,7 +127,11 @@ const PasswordChangeScreen = () => {
                     onChange={handleChange('currentPassword')}
                   />
                   {errors.currentPassword && (
-                    <ErrorText text={errors.currentPassword} />
+                    <ErrorText
+                      text={
+                        values.currentPassword ? errors.currentPassword : ''
+                      }
+                    />
                   )}
                   <Text
                     style={[
@@ -176,7 +180,11 @@ const PasswordChangeScreen = () => {
                     />
                   </View>
                   {errors.password && (
-                    <ErrorText text={errors.currentPassword} />
+                    <View style={{ paddingBottom: heightToDp(3) }}>
+                      <ErrorText
+                        text={values.password ? errors.password : ''}
+                      />
+                    </View>
                   )}
                   <PasswordInputWithLabel
                     marginTop={-1}
@@ -189,7 +197,11 @@ const PasswordChangeScreen = () => {
                     onChange={handleChange('confirmPassword')}
                   />
                   {errors.confirmPassword && (
-                    <ErrorText text={errors.confirmPassword} />
+                    <ErrorText
+                      text={
+                        values.confirmPassword ? errors.confirmPassword : ''
+                      }
+                    />
                   )}
                 </ScrollView>
                 <View style={GlobalStyles.bottomBtnWithShadow}>
