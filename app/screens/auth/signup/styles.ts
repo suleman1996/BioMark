@@ -94,12 +94,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   tcTextStyle: {
-    fontSize: 17,
     marginTop: 20,
-    flexDirection: 'row',
+    fontSize: 17,
     fontFamily: fonts.regular,
     color: colors.black,
   },
+
   errorMessage: {
     fontFamily: fonts.regular,
     fontSize: 12,

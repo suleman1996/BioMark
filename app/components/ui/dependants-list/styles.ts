@@ -4,7 +4,7 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalStyles } from 'utils/theme/global-styles';
+// import { GlobalStyles } from 'utils/theme/global-styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +19,16 @@ const styles = StyleSheet.create({
     borderRadius: widthToDp(2),
     marginBottom: heightToDp(2),
     backgroundColor: GlobalColors.white,
-    ...GlobalStyles.shadow,
+    // ...GlobalStyles.shadow,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
   header: {
     flexDirection: 'row',

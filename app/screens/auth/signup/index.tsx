@@ -263,34 +263,30 @@ export default function Signup() {
 
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
-                    <TouchableOpacity
+
+                    <Text
                       onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
+                      style={{
+                        color: colors.blue,
+                        fontSize: 17,
+                        textDecorationLine: 'underline',
+                      }}
                     >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                          bottom: 2,
-                        }}
-                      >
-                        terms and condition
-                      </Text>
-                    </TouchableOpacity>
+                      terms and condition
+                    </Text>
+
                     <Text> and the </Text>
-                    <TouchableOpacity
+
+                    <Text
                       onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
+                      style={{
+                        color: colors.blue,
+                        fontSize: 17,
+                        textDecorationLine: 'underline',
+                      }}
                     >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}
-                      >
-                        privacy policy.
-                      </Text>
-                    </TouchableOpacity>
+                      privacy policy.
+                    </Text>
                   </Text>
                 </View>
                 <TouchableOpacity>

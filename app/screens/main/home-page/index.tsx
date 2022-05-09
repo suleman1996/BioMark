@@ -59,6 +59,7 @@ export default function Home() {
               source={MyImage.rectangle}
               style={{
                 width: '100%',
+                height: 140,
               }}
             >
               <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
