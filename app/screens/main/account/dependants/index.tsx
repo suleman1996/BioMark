@@ -33,12 +33,11 @@ const DependantsScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <DependantsList data={data} />
-      <View style={styles.bottomBtnContainer}>
-        <Button
-          onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
-          title={'Add New Dependant'}
-        />
-      </View>
+      <Button
+        onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
+        title={'Add New Dependant'}
+      />
+      {/* <View style={styles.bottomBtnContainer}></View> */}
     </View>
   );
 };

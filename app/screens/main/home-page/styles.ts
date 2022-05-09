@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.bold,
     fontSize: 20,
     color: colors.whiteColor,
-    marginTop: 10,
+    paddingTop: 10,
     paddingHorizontal: 10,
   },
 
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 13,
     alignContent: 'center',
-    borderRadius: 10,
   },
 
   bnInner: {
