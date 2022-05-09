@@ -23,7 +23,6 @@ const API_URLS = {
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
   GET_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
-  GET_BOOTSTRAPPER: '/api/v1/patient/bootstrapper',
 
   // Dependent
   DEPENDENTS: '/api/v1/patient/dependents',

@@ -37,18 +37,9 @@ export default function Home() {
     }
   };
 
-  const bootStrapper = async () => {
-    try {
-      const result = await userService.getBootStrapper();
-      console.log('get bootstraper ', result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     userProfile();
-    bootStrapper();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

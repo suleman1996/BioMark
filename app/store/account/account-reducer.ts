@@ -1,5 +1,5 @@
 import { AccountState } from './AccountState';
-import { DEPENDENTS, BOOTSTRAPPER } from './constants';
+import { DEPENDENTS } from './constants';
 
 const INITIAL_STATE = new AccountState();
 
@@ -9,12 +9,6 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         allDependents: action.payload,
-      };
-    }
-    case BOOTSTRAPPER: {
-      return {
-        ...state,
-        allBootStrapper: action.payload,
       };
     }
 
