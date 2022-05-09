@@ -37,7 +37,7 @@ const API_URLS = {
   VACCINATION: '/api/v1/patient/medical_histories/vaccine',
   ALLERGIES: '/api/v1/patient/medical_histories/allergy',
   GET_STRESS: '/api/v1/patient/stress',
-  CREATE_STRESS: '/api/v1/patient/lifestyle/stress',
+  CREATE_STRESS: '/api/v1/patient/stress',
   GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
 };

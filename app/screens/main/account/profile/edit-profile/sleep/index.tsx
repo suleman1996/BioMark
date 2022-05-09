@@ -21,15 +21,16 @@ import styles from './styles';
 const Sleep = () => {
   const isFocus = useIsFocused();
   const sleepOptions = [
-    { title: 'less than 4 hours' },
-    { title: '4-7 hours' },
-    { title: '7-10 hours' },
-    { title: 'more than 10 hours' },
+    { id: 0, title: 'less than 4 hours' },
+    { id: 1, title: '4-7 hours' },
+    { id: 2, title: '7-10 hours' },
+    { id: 3, title: 'more than 10 hours' },
   ];
   const [selectedSleep, setSelectedSleep] = React.useState(
     sleepOptions[0].title
   );
   const [isVisiable, setIsVisible] = React.useState(false);
+  const [indexNumber, setIndex] = React.useState(0);
 
   React.useEffect(() => {
     handleLifeStyle();
@@ -39,7 +40,7 @@ const Sleep = () => {
   const handleSleep = async () => {
     try {
       setIsVisible(true);
-      const result = await userService.sleeping(selectedSleep);
+      const result = await userService.sleeping(indexNumber);
       console.log('Sleep success ', result.data);
       navigate(SCREENS.EDIT_PROFILE);
       setIsVisible(false);
@@ -77,7 +78,7 @@ const Sleep = () => {
         setSelectedSleep(sleepOptions[1].title);
       result.data?.sleep?.sleep_duration == '7-10 hours' &&
         setSelectedSleep(sleepOptions[2].title);
-      result.data?.sleep?.sleep_duration == 'more than 10 hours' &&
+      result.data?.sleep?.sleep_duration == 'more than 10 hours ' &&
         setSelectedSleep(sleepOptions[3].title);
       setIsVisible(false);
     } catch (error) {
@@ -119,7 +120,9 @@ const Sleep = () => {
                   fontFamily: fonts.regular,
                 }}
                 itemStyle={{ color: colors.danger }}
-                onValueChange={(itemValue) => setSelectedSleep(itemValue)}
+                onValueChange={(itemValue, index) => {
+                  setSelectedSleep(itemValue), setIndex(index);
+                }}
               >
                 {sleepOptions?.map((item, index) => {
                   return (
