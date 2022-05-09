@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import { ModalButton } from 'components/higher-order';
@@ -16,6 +16,8 @@ import OthersModal from './modals/others';
 import { goBack } from 'services/nav-ref';
 
 import { styles } from './styles';
+import { IAppState } from 'store/IAppState';
+import { useSelector } from 'react-redux';
 
 const options = [
   { id: 1, title: '---' },
@@ -38,6 +40,12 @@ const MedicalHistoryScreen = () => {
   const [isCancerModal, setIsCancerModal] = useState(false);
   const [isOtherModal, setIsOtherModal] = useState(false);
   const [isNoneModal, setIsNoneModal] = useState(false);
+
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
+  useEffect(() => {
+    console.log('Bootstrap =======>', bootstrap);
+  }, [bootstrap]);
 
   const onNonePress = () => {
     setIsCholesterolModal(false);

@@ -10,6 +10,7 @@ const API_URLS = {
   RESEND_PASSWORD_OTP: '/api/v1/auth/confirmations/resend_code',
   INPUT_BARCODE: '/api/v1/patient/scanners/midas',
   MOBILE_REGISTER: '/api/v1/patient/devices',
+  BOOTSTRAP: '/api/v1/patient/bootstrapper',
 
   GET_PROFILE: '/api/v1/patient/profiles',
   CREATE_PROFILE: 'api/v2/patient/profiles',

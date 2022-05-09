@@ -1,3 +1,12 @@
+import fonts from 'assets/fonts';
+import MyImage from 'assets/images';
+import {
+  Covid19Btn,
+  GoogleFitButton,
+  SmallButton,
+  YourHealthBtn,
+} from 'components/button';
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import React, { useContext, useEffect } from 'react';
 import {
   ImageBackground,
@@ -6,26 +15,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-import {
-  Covid19Btn,
-  GoogleFitButton,
-  SmallButton,
-  YourHealthBtn,
-} from 'components/button';
-import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-
-import AuthContext from 'utils/auth-context';
-
+import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
-
-import fonts from 'assets/fonts';
-import MyImage from 'assets/images';
-
+import { getReduxBootstrap } from 'store/account/account-actions';
+import AuthContext from 'utils/auth-context';
 import styles from './styles';
 
 export default function Home() {
   const authContext = useContext(AuthContext);
+
+  // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+  const dispatch = useDispatch();
+
+  /*eslint-disable*/
+  const getReduxBoot = async () => {
+    await dispatch(getReduxBootstrap());
+  };
+
+  useEffect(() => {
+    getReduxBoot();
+  }, []);
+  /*eslint-enable*/
 
   const userProfile = async () => {
     try {
