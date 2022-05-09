@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import colors from 'assets/colors';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   margin?: any;
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     backgroundColor: colors.inputBg,
-    fontSize: 14,
+    fontSize: responsiveFontSize(18),
     height: 45,
     borderRadius: 8,
   },

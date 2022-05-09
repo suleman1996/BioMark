@@ -133,8 +133,8 @@ const PasswordChangeScreen = () => {
                     style={[
                       styles.textHeader,
                       {
-                        marginTop: heightToDp(4),
-                        letterSpacing: -0.5,
+                        marginTop: heightToDp(5),
+                        letterSpacing: -0.1,
                         lineHeight: responsiveFontSize(25),
                       },
                     ]}
@@ -144,7 +144,7 @@ const PasswordChangeScreen = () => {
                   <PasswordInputWithLabel
                     marginTop={0.3}
                     label={'Enter new password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password...'}
                     isSecure={ePass}
                     password={values.password}
                     setHidePassword={() => setEPass(!ePass)}
@@ -181,7 +181,7 @@ const PasswordChangeScreen = () => {
                   <PasswordInputWithLabel
                     marginTop={-1}
                     label={'Confirm New Password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password again'}
                     isSecure={eConfirm}
                     password={values.confirmPassword}
                     setHidePassword={() => setEConfirm(!eConfirm)}

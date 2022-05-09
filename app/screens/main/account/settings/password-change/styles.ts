@@ -15,9 +15,9 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
   },
   textHeader: {
-    fontFamily: GlobalFonts.extraLight,
+    fontFamily: GlobalFonts.light,
     color: GlobalColors.darkPrimary,
-    fontSize: responsiveFontSize(21),
+    fontSize: responsiveFontSize(22),
   },
   bottomBtnContainer: {
     marginBottom: heightToDp(4),
