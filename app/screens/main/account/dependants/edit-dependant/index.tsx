@@ -23,7 +23,7 @@ import { DependentSingleGetResponse } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { DependentTypeEnum } from 'enum/dependent-type-enum';
-import { GenderEnum } from 'enum/gender-enum';
+import GenderEnum from 'enum/gender-enum';
 
 import { styles } from './styles';
 
