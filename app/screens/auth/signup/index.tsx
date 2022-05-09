@@ -264,7 +264,11 @@ export default function Signup() {
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
                     <TouchableOpacity
-                      onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
+                      onPress={() =>
+                        navigate(SCREENS.TERMS_AND_PRIVACY, {
+                          privacyPolicy: false,
+                        })
+                      }
                     >
                       <Text
                         style={{
@@ -279,7 +283,11 @@ export default function Signup() {
                     </TouchableOpacity>
                     <Text> and the </Text>
                     <TouchableOpacity
-                      onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
+                      onPress={() =>
+                        navigate(SCREENS.TERMS_AND_PRIVACY, {
+                          privacyPolicy: true,
+                        })
+                      }
                     >
                       <Text
                         style={{

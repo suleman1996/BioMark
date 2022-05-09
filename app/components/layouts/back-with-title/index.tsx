@@ -14,11 +14,12 @@ import { styles } from './styles';
 type Props = {
   children: any;
   title: string;
+  style: any;
 };
 
-const TitleWithBackLayout = ({ children, title }: Props) => {
+const TitleWithBackLayout = ({ children, title, style }: Props) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.header}>
         <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
           <MaterialIcons
