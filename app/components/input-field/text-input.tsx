@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   textInput: {
-    backgroundColor: colors.inputBg,
+    backgroundColor: colors.lightGray,
     fontSize: responsiveFontSize(18),
     height: 45,
     borderRadius: 8,
