@@ -127,14 +127,18 @@ const PasswordChangeScreen = () => {
                     onChange={handleChange('currentPassword')}
                   />
                   {errors.currentPassword && (
-                    <ErrorText text={errors.currentPassword} />
+                    <ErrorText
+                      text={
+                        values.currentPassword ? errors.currentPassword : ''
+                      }
+                    />
                   )}
                   <Text
                     style={[
                       styles.textHeader,
                       {
-                        marginTop: heightToDp(4),
-                        letterSpacing: -0.5,
+                        marginTop: heightToDp(5),
+                        letterSpacing: -0.1,
                         lineHeight: responsiveFontSize(25),
                       },
                     ]}
@@ -144,7 +148,7 @@ const PasswordChangeScreen = () => {
                   <PasswordInputWithLabel
                     marginTop={0.3}
                     label={'Enter new password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password...'}
                     isSecure={ePass}
                     password={values.password}
                     setHidePassword={() => setEPass(!ePass)}
@@ -176,12 +180,16 @@ const PasswordChangeScreen = () => {
                     />
                   </View>
                   {errors.password && (
-                    <ErrorText text={errors.currentPassword} />
+                    <View style={{ paddingBottom: heightToDp(3) }}>
+                      <ErrorText
+                        text={values.password ? errors.password : ''}
+                      />
+                    </View>
                   )}
                   <PasswordInputWithLabel
                     marginTop={-1}
                     label={'Confirm New Password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password again'}
                     isSecure={eConfirm}
                     password={values.confirmPassword}
                     setHidePassword={() => setEConfirm(!eConfirm)}
@@ -189,7 +197,11 @@ const PasswordChangeScreen = () => {
                     onChange={handleChange('confirmPassword')}
                   />
                   {errors.confirmPassword && (
-                    <ErrorText text={errors.confirmPassword} />
+                    <ErrorText
+                      text={
+                        values.confirmPassword ? errors.confirmPassword : ''
+                      }
+                    />
                   )}
                 </ScrollView>
                 <View style={GlobalStyles.bottomBtnWithShadow}>

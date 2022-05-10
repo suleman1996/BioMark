@@ -1,3 +1,4 @@
+import colors from 'assets/colors';
 import { StyleSheet } from 'react-native';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -12,9 +13,10 @@ export const styles = StyleSheet.create({
     maxWidth: widthToDp(100),
     justifyContent: 'space-between',
     paddingHorizontal: widthToDp(4),
-    paddingVertical: heightToDp(2),
+    paddingVertical: heightToDp(1.5),
     alignItems: 'center',
-    borderTopWidth: 0.3,
+    borderTopWidth: 0.25,
+    borderColor: colors.disable,
   },
   menuItemText: {
     fontFamily: GlobalFonts.semiBold,

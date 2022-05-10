@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     marginTop: heightToDp(2),
   },
   label: {
-    fontSize: responsiveFontSize(22),
+    fontSize: responsiveFontSize(25),
     fontFamily: GlobalFonts.medium,
     color: GlobalColors.darkPrimary,
   },

@@ -65,6 +65,14 @@ const EmailChangeScreen = () => {
     userService
       .saveUserContacts(confirmEmail)
       .then(() => {
+        userService
+          .getUserContacts()
+          .then((res) => {
+            logNow(res);
+            dispatch(addUserContactsDetails(res));
+          })
+          .catch(() => {})
+          .finally(() => {});
         showMessage({
           message: 'Email changed successfully',
           type: 'success',
@@ -148,10 +156,14 @@ const EmailChangeScreen = () => {
 export default EmailChangeScreen;
 
 const ResetPassSchema = Yup.object({
-  email: Yup.string().email('Invalid email format').required('Required'),
+  email: Yup.string()
+    .email('Invalid email format')
+    .required('Required')
+    .lowercase(),
   confirmEmail: Yup.string()
     .email('Invalid email format')
     .required('Required')
     .oneOf([Yup.ref('email'), null], 'Email does not match')
-    .required('Confirm email is required'),
+    .required('Confirm email is required')
+    .lowercase(),
 });
