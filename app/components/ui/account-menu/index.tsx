@@ -100,7 +100,12 @@ const AccountMenu = (props) => {
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => {
+          navigate(SCREENS.INBOX);
+        }}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioNotification width={5} height={5} />
