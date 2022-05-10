@@ -13,6 +13,8 @@ type Props = {
   setIsModal: any;
   isModal: boolean;
   drop: boolean;
+  history: any;
+  condition_id: any;
 };
 
 const ModalButtonComponent = ({

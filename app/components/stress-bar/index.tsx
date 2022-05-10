@@ -3,7 +3,12 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 
-type Props = { titleText: String; question: Number; setQuestion: Any };
+type Props = {
+  titleText: String;
+  question: Number;
+  setQuestion: any;
+  options: any;
+};
 
 const Index = (props: Props) => {
   const [stressValue, setStressValue] = React.useState(0);
@@ -32,7 +37,7 @@ const Index = (props: Props) => {
 
   return (
     <View>
-      <Text style={styles.title}>{props.titleText}</Text>
+      <Text style={styles.title}> {props.titleText}</Text>
 
       <View style={styles.bar}>
         <RenderDot index={0} />
@@ -43,11 +48,11 @@ const Index = (props: Props) => {
       </View>
 
       <View style={styles.headingView}>
-        <RenderStressTitle title="Never" />
-        <RenderStressTitle title="Almost Never" />
-        <RenderStressTitle title="Sometimes" />
-        <RenderStressTitle width="50%" title="Fairly Often" />
-        <RenderStressTitle title="Very Often" />
+        <RenderStressTitle title={props?.options[0]} />
+        <RenderStressTitle title={props?.options[1]} />
+        <RenderStressTitle title={props?.options[2]} />
+        <RenderStressTitle width="50%" title={props?.options[3]} />
+        <RenderStressTitle title={props?.options[4]} />
       </View>
     </View>
   );

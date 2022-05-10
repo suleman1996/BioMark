@@ -16,4 +16,5 @@ export const GlobalColors = {
   lightGrey: '#8493AE',
   darkGray: '#A9A9A9',
   fieldGrey: '#DCDCDC',
+  gainsboro: '#DCDCDC',
 };
