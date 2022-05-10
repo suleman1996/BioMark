@@ -10,20 +10,24 @@ import { StressBar, ActivityIndicator } from 'components';
 
 import { userService } from 'services/user-service/user-service';
 import { goBack } from 'services/nav-ref';
+import { useSelector } from 'react-redux';
 
 import styles from './styles';
 
 const Index = () => {
   const isFocus = useIsFocused();
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
   const [question1, setQuestion1] = React.useState(0);
   const [question2, setQuestion2] = React.useState(0);
   const [question3, setQuestion3] = React.useState(0);
   const [question4, setQuestion4] = React.useState(0);
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   useEffect(() => {
     getStress();
-  }, [isFocus]);
+  }, [isFocus, bootstrap]);
 
   const getStress = async () => {
     try {
@@ -108,22 +112,50 @@ const Index = () => {
             <StressBar
               question={question1}
               setQuestion={setQuestion1}
-              titleText=" In the last month, how often have you felt that you were unable to controll yhe important things in your life?"
+              titleText={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[0]?.question
+              }
+              options={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[0]?.options
+              }
             />
             <StressBar
               question={question2}
               setQuestion={setQuestion2}
-              titleText=" In the last month, how often have you felt confident about your ability to handle your personal problems?"
+              titleText={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[1]?.question
+              }
+              options={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[1]?.options
+              }
             />
             <StressBar
               question={question3}
               setQuestion={setQuestion3}
-              titleText=" In the last month, how often have you felt that hings were going your way?"
+              titleText={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[2]?.question
+              }
+              options={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[2]?.options
+              }
             />
             <StressBar
               question={question4}
               setQuestion={setQuestion4}
-              titleText=" In the last month, how often have you felt difficulties were piling up so high that you could not overcome them?"
+              titleText={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[3]?.question
+              }
+              options={
+                bootstrap?.attributes?.medical_template?.stress[0]?.content
+                  ?.fields[3]?.options
+              }
             />
             <View style={{ height: 130 }} />
           </ScrollView>
