@@ -40,7 +40,7 @@ export default function InboxScreen() {
     return (
       <View style={styles.previousNotificationContainer}>
         <FlatList
-          style={{ flexGrow: 1 }}
+          style={{ flexGrow: 1, marginTop: heightToDp(2) }}
           nestedScrollEnabled
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
