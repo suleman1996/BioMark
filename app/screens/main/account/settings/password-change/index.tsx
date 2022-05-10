@@ -115,7 +115,7 @@ const PasswordChangeScreen = () => {
           >
             {({ handleChange, handleSubmit, errors, values }) => (
               <>
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps>
                   <PasswordInputWithLabel
                     marginTop={1}
                     label={'Current Password'}
