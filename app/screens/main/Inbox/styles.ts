@@ -21,11 +21,13 @@ export const styles = StyleSheet.create({
   },
   pagerView: {
     width: widthToDp(92),
-    height: heightToDp(100),
+    height: '100%',
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: heightToDp(1.5),
     marginBottom: heightToDp(10),
+    // flex: 1
   },
   tabNameContainer: {
     width: widthToDp(92),
@@ -45,7 +47,14 @@ export const styles = StyleSheet.create({
   },
   previousNotificationContainer: {
     width: widthToDp(92),
-    height: heightToDp(100),
+    borderWidth: 1.2,
+    borderColor: GlobalColors.gray,
+    borderRadius: widthToDp(4),
+    flex: 1,
+    alignItems: 'center',
+  },
+  othersNotificationContainer: {
+    width: widthToDp(92),
     borderWidth: 1.2,
     borderColor: GlobalColors.gray,
     borderRadius: widthToDp(4),
