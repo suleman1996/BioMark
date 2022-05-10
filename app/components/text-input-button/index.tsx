@@ -15,6 +15,7 @@ type Props = {
   onChangeText: any;
   value: any;
   placeholder: any;
+  disabled: any;
 };
 
 const TextInputButton = ({
@@ -23,6 +24,7 @@ const TextInputButton = ({
   onChangeText,
   value,
   placeholder,
+  disabled,
 }: Props) => {
   return (
     <View style={styles.container}>
@@ -37,7 +39,7 @@ const TextInputButton = ({
           clearButtonMode="always"
           onChangeText={onChangeText}
         />
-        <Pressable style={styles.addBtn} onPress={onPress}>
+        <Pressable style={styles.addBtn} onPress={onPress} disabled={disabled}>
           <Ionicons
             color={GlobalColors.darkGray}
             name="add"
