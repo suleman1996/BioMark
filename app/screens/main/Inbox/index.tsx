@@ -1,13 +1,92 @@
+import { useIsFocused } from '@react-navigation/native';
 import { TitleWithSearchBarLayout } from 'components/layouts';
 import OtherNotificationItem from 'components/ui/other-notification-item';
 import PreviousNotificationItem from 'components/ui/previous-notification-item';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
+import { useDispatch, useSelector } from 'react-redux';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { styles } from './styles';
-
+import {
+  addAllInboxNotifications,
+  getAllInboxNotificationsR,
+  getAllOtherNotificationsR,
+  addAllOtherNotifications,
+  getAllOtherUnreadNotificationsR,
+} from 'store/notifications/notification-actions';
+import { IAppState } from 'store/IAppState';
+import { logNow } from 'utils/functions/log-binder';
+import { notificationsService } from 'services/notification-service';
 export default function InboxScreen() {
+  // redux state all inbox
+  const allInboxNotificationsData = useSelector(
+    (state: IAppState) => state.notifications.allInboxNotifications
+  );
+  // redux state all others
+  const allOthersNotificationsData = useSelector(
+    (state: IAppState) => state.notifications.allOthersNotifications
+  );
+
+  // redux state all others unread
+  const allOthersUnreadNotificationsData = useSelector(
+    (state: IAppState) => state.notifications.allOthersUnreadNotifications
+  );
+
+  const [isReadMoreInboxNoti, setIsReadMoreInboxNoti] = useState(true);
+  const [currentPageInboxNoti, setCurrentPageInboxNoti] = useState(1);
+
+  const [isReadMoreOtherNoti, setIsReadMoreOtherNoti] = useState(true);
+  const [currentPageOtherNoti, setCurrentPageOtherNoti] = useState(1);
+
+  const dispatch = useDispatch();
+  const focused = useIsFocused();
+
+  /*eslint-disable */
+  const _getAllInboxData = async () => {
+    await dispatch(getAllInboxNotificationsR(1));
+    await dispatch(getAllOtherNotificationsR(1));
+    await dispatch(getAllOtherUnreadNotificationsR());
+  };
+  useEffect(() => {
+    _getAllInboxData();
+    setIsReadMoreInboxNoti(true);
+    setCurrentPageInboxNoti(1);
+    setIsReadMoreOtherNoti(true);
+    setCurrentPageOtherNoti(1);
+  }, [focused]);
+
+  // on page number change update all inbox unread
+  useEffect(() => {
+    notificationsService
+      .getAllinboxNotifications(currentPageInboxNoti)
+      .then(async (res) => {
+        if (res.length > 0) {
+          await dispatch(
+            addAllInboxNotifications([...allInboxNotificationsData, ...res])
+          );
+        } else {
+          setIsReadMoreInboxNoti(false);
+        }
+      });
+  }, [currentPageInboxNoti]);
+
+  // on page change all other unread
+  useEffect(() => {
+    notificationsService
+      .getAlliOthersNotifications(currentPageOtherNoti)
+      .then(async (res) => {
+        if (res.length > 0) {
+          await dispatch(
+            addAllOtherNotifications([...allOthersNotificationsData, ...res])
+          );
+        } else {
+          setIsReadMoreOtherNoti(false);
+        }
+      });
+  }, [currentPageOtherNoti]);
+  /*eslint-enable */
+
   const pagerRef = useRef<any>();
   const [currentPage, setCurrentPage] = useState(0);
   const onPageScroll = (event: any) => {
@@ -29,14 +108,31 @@ export default function InboxScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
-          data={[1, 2, 3, 4, 5, 6, 7, 8]}
+          data={allInboxNotificationsData}
           renderItem={PreviousNotificationItem}
+          ListFooterComponent={() => {
+            return (
+              <>
+                {isReadMoreInboxNoti && allInboxNotificationsData.length > 0 ? (
+                  <Pressable
+                    onPress={() => {
+                      setCurrentPageInboxNoti(currentPageInboxNoti + 1);
+                    }}
+                    style={styles.readMoreContainer}
+                  >
+                    <Text style={styles.readMoreText}>Read More</Text>
+                  </Pressable>
+                ) : null}
+              </>
+            );
+          }}
         />
       </View>
     );
   };
 
   const OtherNotification = () => {
+    logNow('others');
     return (
       <View style={styles.previousNotificationContainer}>
         <FlatList
@@ -45,8 +141,25 @@ export default function InboxScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
-          data={[1, 2, 3, 4, 5, 6, 7, 8]}
+          data={allOthersNotificationsData}
           renderItem={OtherNotificationItem}
+          ListFooterComponent={() => {
+            return (
+              <>
+                {isReadMoreOtherNoti &&
+                allOthersNotificationsData.length > 0 ? (
+                  <Pressable
+                    onPress={() => {
+                      setCurrentPageOtherNoti(currentPageOtherNoti + 1);
+                    }}
+                    style={styles.readMoreContainer}
+                  >
+                    <Text style={styles.readMoreText}>Read More</Text>
+                  </Pressable>
+                ) : null}
+              </>
+            );
+          }}
         />
         <View style={styles.blackLine} />
         <View style={styles.headerContainer}>
@@ -57,7 +170,7 @@ export default function InboxScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
-          data={[1, 2, 3, 4, 5, 6, 7, 8]}
+          data={allOthersUnreadNotificationsData}
           renderItem={PreviousNotificationItem}
         />
       </View>
@@ -79,7 +192,9 @@ export default function InboxScreen() {
                   currentPage == 0 ? { borderBottomWidth: 3 } : {},
                 ]}
               >
-                <Text style={styles.tabText}>Inbox (10)</Text>
+                <Text style={styles.tabText}>
+                  Inbox ({allInboxNotificationsData.length})
+                </Text>
               </Pressable>
               <Pressable
                 onPress={() => pagerRef.current.setPage(1)}
@@ -88,7 +203,9 @@ export default function InboxScreen() {
                   currentPage == 1 ? { borderBottomWidth: 3 } : {},
                 ]}
               >
-                <Text style={styles.tabText}>Other (10)</Text>
+                <Text style={styles.tabText}>
+                  Other ({allOthersNotificationsData.length})
+                </Text>
               </Pressable>
             </View>
             <PagerView
