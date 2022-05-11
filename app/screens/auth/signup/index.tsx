@@ -323,5 +323,11 @@ const ResetPassSchema = Yup.object({
   lName: Yup.string().required('Please provide your last name'),
   IcPnum: Yup.string(),
   email: Yup.string(),
-  password: Yup.string().required('Please type your new password').min(8),
+  password: Yup.string()
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*\d)(?=.*[@#$%^&+=]).+$/,
+      'Atleast have one digit and one special character.'
+    ),
 });
