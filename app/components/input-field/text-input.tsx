@@ -26,7 +26,9 @@ export default function (props: Props) {
         placeholder={props?.placeholder}
         value={props?.value}
         activeUnderlineColor={'transparent'}
-        underlineColor={'FFFFFF'}
+        selectionColor={colors.heading}
+        caretHidden={false}
+        underlineColor={'#FFFFFF'}
         placeholderTextColor={'#8493AE'}
         onChangeText={props?.onChange}
         secureTextEntry={props?.secureTextEntry}
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   textInput: {
-    backgroundColor: colors.lightGray,
+    backgroundColor: colors.inputBg,
     fontSize: responsiveFontSize(18),
     height: 45,
     borderRadius: 8,
