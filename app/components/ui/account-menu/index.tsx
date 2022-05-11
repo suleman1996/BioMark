@@ -29,7 +29,7 @@ import styles from './styles';
 const AccountMenu = (props) => {
   const dispatch = useDispatch();
 
-  const OpenMessenger = () => {
+  const openMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);
   };
 
@@ -122,7 +122,7 @@ const AccountMenu = (props) => {
       <View style={styles.divider} />
       <TouchableRipple
         style={styles.singleItem}
-        onPress={() => OpenMessenger()}
+        onPress={() => openMessenger()}
       >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>

@@ -5,6 +5,7 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
@@ -263,7 +264,7 @@ export default function Signup() {
 
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
-                    <TouchableOpacity
+                    <TouchableWithoutFeedback
                       onPress={() =>
                         navigate(SCREENS.TERMS_AND_PRIVACY, {
                           privacyPolicy: false,
@@ -275,14 +276,14 @@ export default function Signup() {
                           color: colors.blue,
                           fontSize: 17,
                           textDecorationLine: 'underline',
-                          bottom: 2,
+                          // bottom: 2,
                         }}
                       >
                         terms and condition
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                     <Text> and the </Text>
-                    <TouchableOpacity
+                    <TouchableWithoutFeedback
                       onPress={() =>
                         navigate(SCREENS.TERMS_AND_PRIVACY, {
                           privacyPolicy: true,
@@ -298,7 +299,7 @@ export default function Signup() {
                       >
                         privacy policy.
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                   </Text>
                 </View>
                 <TouchableOpacity>
