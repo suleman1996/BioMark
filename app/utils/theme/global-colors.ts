@@ -1,5 +1,6 @@
 export const GlobalColors = {
   primary: '#1B96D8',
+  lightPrimary: '#cae1f3',
   darkPrimary: '#06599E',
   primaryGray: '#FAFAFA',
   white: '#FFFFFF',
