@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Keyboard,
+  Linking,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -56,6 +57,10 @@ export default function OtpPassword(props: Props) {
       clearInterval(myInterval);
     };
   });
+
+  const openMessenger = () => {
+    Linking.canOpenURL('mailto:support@biomarking.com');
+  };
 
   const handleOTP = async () => {
     try {
@@ -136,14 +141,13 @@ export default function OtpPassword(props: Props) {
               </Text>
             </TouchableOpacity>
             <View style={styles.floatingBtn}>
-              <TouchableOpacity style={{ marginVertical: 10 }}>
-                <Text style={styles.resendText}>
-                  <Text style={{ color: colors.heading }}>
-                    Having trouble?{' '}
-                  </Text>
+              <Text style={styles.resendText}>
+                <Text style={{ color: colors.heading }}>Having trouble? </Text>
+                <TouchableWithoutFeedback onPress={() => openMessenger()}>
                   <Text style={{ color: colors.blue }}>contact us </Text>
-                </Text>
-              </TouchableOpacity>
+                </TouchableWithoutFeedback>
+              </Text>
+
               <Button
                 onPress={() => handleOTP()}
                 title="Continue"

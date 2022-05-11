@@ -162,9 +162,7 @@ const styles = StyleSheet.create({
   },
   iconView: {
     backgroundColor: colors.blue,
-    position: 'absolute',
-    right: 20,
-    bottom: 40,
+
     padding: 12,
     borderRadius: 30,
   },

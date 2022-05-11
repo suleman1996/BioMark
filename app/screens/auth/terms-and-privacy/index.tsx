@@ -44,9 +44,11 @@ export default function TermsAndPrivacy({ route }) {
       useDownloadManager: true,
       notification: true,
       mediaScannable: true,
-      title: privacyPolicy ? 'Privacy_and_Policy.pdf' : 'Terms and Conditions',
+      title: privacyPolicy
+        ? 'Privacy_and_Policy.pdf'
+        : 'Terms_and_Conditions.pdf',
       path: `${dirToSave}/${
-        privacyPolicy ? 'Privacy_and_Policy.pdf' : 'Terms and Conditions'
+        privacyPolicy ? 'Privacy_and_Policy.pdf' : 'Terms_and_Conditions.pdf'
       }`,
     };
     const configOptions = Platform.select({
@@ -81,28 +83,78 @@ export default function TermsAndPrivacy({ route }) {
       });
   };
   const permissionFunc = async () => {
-    if (Platform.OS == 'ios') {
+    if (Platform.OS === 'ios') {
       actualDownload();
     } else {
-      if (downloaded) {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-          );
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            actualDownload();
-          } else {
-            Alert.alert(
-              'You need to give storage permission to download the file'
-            );
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          {
+            title: 'Storage Permission Required',
+            message:
+              'Application needs access to your storage to download File',
           }
-        } catch (err) {
-          console.warn(err);
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          // Start downloading
+          downloadFile();
+          console.log('Storage Permission Granted.');
+        } else {
+          // If permission denied then show alert
+          Alert.alert('Error', 'Storage Permission Not Granted');
         }
-      } else {
-        Alert.alert('File is already downloaded.');
+      } catch (err) {
+        // To handle permission related exception
+        console.log('++++' + err);
       }
     }
+  };
+  const fileUrl = privacyPolicy ? Config.PRIVACY_POLICY : Config.TNC;
+
+  const downloadFile = () => {
+    // Get today's date to add the time suffix in filename
+    let date = new Date();
+    // File URL which we want to download
+    let FILE_URL = fileUrl;
+    // Function to get extention of the file url
+    let file_ext = getFileExtention(FILE_URL);
+
+    file_ext = '.' + file_ext[0];
+
+    // config: To get response by passing the downloading related options
+    // fs: Root directory path to download
+    const { config, fs } = ReactNativeBlobUtil;
+    let RootDir =
+      Platform.OS === 'ios' ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
+    let options = {
+      //fileCache: true,
+      addAndroidDownloads: {
+        path:
+          RootDir +
+          '/file_' +
+          Math.floor(date.getTime() + date.getSeconds() / 2) +
+          file_ext,
+        description: 'downloading file...',
+        notification: true,
+        // useDownloadManager works with Android only
+        useDownloadManager: true,
+      },
+    };
+    config(options)
+      .fetch('GET', FILE_URL)
+      .then((res) => {
+        if (Platform.OS === 'ios') {
+          // ReactNativeBlobUtil.ios.openDocument(res.data);
+        }
+        // Alert after successful downloading
+        console.log('res -> ', JSON.stringify(res));
+        // alert('File Downloaded Successfully.');
+      });
+  };
+
+  const getFileExtention = () => {
+    // To get the file extension
+    return /[.]/.exec(fileUrl) ? /[^.]+$/.exec(fileUrl) : undefined;
   };
 
   return (
@@ -204,7 +256,15 @@ export default function TermsAndPrivacy({ route }) {
           style={styles.pdfView}
         />
       )}
-      <TouchableOpacity onPress={() => permissionFunc()}>
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          right: 20,
+          bottom: 40,
+          borderRadius: 30,
+        }}
+        onPress={() => permissionFunc()}
+      >
         <View style={styles.iconView}>
           <Icon name="cloud-download" size={30} color={colors.whiteColor} />
         </View>
