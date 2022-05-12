@@ -17,9 +17,16 @@ const Index = (props: Props) => {
     setStressValue(props?.question);
   }, [props.question]);
 
-  const RenderStressTitle = ({ title, width }) => (
+  const RenderStressTitle = ({ title, width, index }) => (
     <View style={[styles.selectView]}>
-      <Text style={[styles.headingText, { width: width }]}>{title}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setStressValue(index);
+          props.setQuestion(index);
+        }}
+      >
+        <Text style={[styles.headingText, { width: width }]}>{title}</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -29,7 +36,7 @@ const Index = (props: Props) => {
         setStressValue(index);
         props.setQuestion(index);
       }}
-      style={styles.selectView}
+      style={[styles.selectView]}
     >
       <View style={stressValue == index ? styles.bigDot : styles.smallDot} />
     </TouchableOpacity>
@@ -48,11 +55,11 @@ const Index = (props: Props) => {
       </View>
 
       <View style={styles.headingView}>
-        <RenderStressTitle title={props?.options[0]} />
-        <RenderStressTitle title={props?.options[1]} />
-        <RenderStressTitle title={props?.options[2]} />
-        <RenderStressTitle width="50%" title={props?.options[3]} />
-        <RenderStressTitle title={props?.options[4]} />
+        <RenderStressTitle index={0} title={props?.options[0]} />
+        <RenderStressTitle index={1} title={props?.options[1]} />
+        <RenderStressTitle index={2} title={props?.options[2]} />
+        <RenderStressTitle index={3} width="50%" title={props?.options[3]} />
+        <RenderStressTitle index={4} title={props?.options[4]} />
       </View>
     </View>
   );

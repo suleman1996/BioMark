@@ -108,7 +108,7 @@ const Index = () => {
       <ActivityIndicator visible={isLoading} />
       <TitleWithBackLayout title="Stress">
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <StressBar
               question={question1}
               setQuestion={setQuestion1}

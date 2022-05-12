@@ -16,6 +16,7 @@ import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { userService } from 'services/user-service/user-service';
+import { useSelector } from 'react-redux';
 
 const MedicalHistoryScreen = () => {
   const isFocus = useIsFocused();
@@ -31,11 +32,16 @@ const MedicalHistoryScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [history] = useState([]);
 
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
   useEffect(() => {
     getFamilyMedicalHistory();
-
+    console.log(
+      'Bootstrap =======>',
+      bootstrap?.attributes?.medical_template?.family
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocus]);
+  }, [isFocus, bootstrap]);
 
   const onNonePress = () => {
     setIsCholesterolModal(false);
@@ -60,7 +66,7 @@ const MedicalHistoryScreen = () => {
     try {
       setIsLoading(true);
       const result = await userService.getFamilyMedicalHistory();
-      console.log('here are the medical history family ', result.data);
+      // console.log('here are the medical history family ', result.data);
       result?.data?.family.map(
         (item) => (
           item.condition_id == 9 && setHeartDisease(true),
