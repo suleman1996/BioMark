@@ -345,7 +345,7 @@ const bodyMeasurement = ({ medical }: Props) => {
 };
 
 const exercise = ({ lifestyle }: Props) => {
-  return client.post(API_URLS.Exercise, {
+  return client.post(API_URLS.EXERCISE, {
     lifestyle,
   });
 };

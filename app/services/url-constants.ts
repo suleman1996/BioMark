@@ -44,7 +44,7 @@ const API_URLS = {
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
 
   LOCATION: '/api/v1/geolocation',
-  Exercise: '/api/v1/patient/lifestyle/exercise',
+  EXERCISE: '/api/v1/patient/lifestyle/exercise',
 };
 
 export { API_URLS };
