@@ -218,9 +218,7 @@ export default function Signup() {
                 />
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
-
-                  <Text style={styles.inputLablel}>Mobile Number</Text>
-                  {/* international phone Picker */}
+                  <Text style={styles.inputLablel}>Mobile Number</Text>0
                   <PhoneNumber
                     countryCode={countryCode}
                     setCountryCode={setCountryCode}
@@ -229,7 +227,9 @@ export default function Signup() {
                     setSelectCountryCode={setSelectCountryCode}
                     maxLength={numberCondition.max}
                   />
-                  {(phoneNumber !== '' || errors.password) &&
+                  {(phoneNumber !== '' ||
+                    errors.password ||
+                    phoneNumber.charAt(0) == 0) &&
                     phoneNumber.length < numberCondition.min && (
                       <Text style={styles.errorMessage}>
                         Must have {numberCondition.min}
@@ -245,7 +245,6 @@ export default function Signup() {
                     margin={20}
                     keyboardType="email-address"
                   />
-
                   <Text style={styles.inputLablel}>Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."

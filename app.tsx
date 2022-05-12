@@ -11,6 +11,9 @@ import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
 import colors from './app/assets/colors';
 
+//onboarding
+// import Onboarding from 'components/onboarding';
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
 
@@ -32,6 +35,7 @@ const App = () => {
             />
             <SafeAreaView edges={['top']} style={{ flex: 1 }}>
               <BiomarkNavigation />
+              {/* <Onboarding /> */}
             </SafeAreaView>
           </MenuProvider>
         </AuthContext.Provider>
