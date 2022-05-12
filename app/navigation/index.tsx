@@ -18,6 +18,7 @@ const BiomarkNavigation = () => {
 
   async function getAuthTokenIfInAsyncStorage() {
     const data = await getAuthAsyncStorage();
+
     dispatch(loggedIn(data));
   }
 
