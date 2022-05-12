@@ -17,6 +17,7 @@ type Props = {
   onEyePress?: any;
   eye?: any;
   keyboardType?: string;
+  defaultValue?: string;
 };
 
 export default function (props: Props) {
@@ -25,6 +26,7 @@ export default function (props: Props) {
       <TextInput
         placeholder={props?.placeholder}
         value={props?.value}
+        defaultValue={props?.defaultValue}
         activeUnderlineColor={'transparent'}
         underlineColor={'FFFFFF'}
         placeholderTextColor={'#8493AE'}
@@ -58,6 +60,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
     fontSize: responsiveFontSize(18),
     height: 45,
-    borderRadius: 8,
+    borderRadius: 5,
   },
 });

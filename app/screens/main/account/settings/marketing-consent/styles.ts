@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: widthToDp(7),
     paddingTop: heightToDp(2),
-    height: '100%',
     backgroundColor: GlobalColors.white,
   },
   headerText: {
