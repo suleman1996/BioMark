@@ -11,6 +11,7 @@ const API_URLS = {
   INPUT_BARCODE: '/api/v1/patient/scanners/midas',
   MOBILE_REGISTER: '/api/v1/patient/devices',
   BOOTSTRAP: '/api/v1/patient/bootstrapper',
+  NOTIFICATIONS: '/api/v1/patient/notifications',
 
   GET_PROFILE: '/api/v1/patient/profiles',
   CREATE_PROFILE: 'api/v2/patient/profiles',
