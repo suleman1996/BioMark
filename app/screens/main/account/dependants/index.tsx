@@ -32,12 +32,13 @@ const DependantsScreen = (props: Props) => {
   /*eslint-enable*/
   return (
     <View style={styles.container}>
-      <DependantsList data={data} />
-      <Button
-        onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
-        title={'Add New Dependant'}
-      />
-      {/* <View style={styles.bottomBtnContainer}></View> */}
+      <View style={styles.bottomBtnContainer}>
+        <DependantsList data={data} />
+        <Button
+          onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
+          title={'Add New Dependant'}
+        />
+      </View>
     </View>
   );
 };

@@ -12,7 +12,10 @@ import { Picker } from '@react-native-picker/picker';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
+import { ActivityIndicator } from 'components';
 import { TextInput } from 'components';
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
@@ -27,20 +30,25 @@ export default function SmokingScreen() {
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
-  const options2 = [{ title: '' }, { title: '2020' }, { title: '2021' }];
+  const [isVisiable, setIsVisible] = React.useState(false);
+  const options2 = [{ title: '2020' }, { title: '2021' }];
 
   const onSubmit = async () => {
     try {
+      setIsVisible(true);
       const response = await userService.Smoking(day, stopSmoke, startSmoke);
       console.log('smoking successful', response.data);
       navigate(SCREENS.EDIT_PROFILE);
+      setIsVisible(false);
     } catch (err) {
+      setIsVisible(false);
       console.log(err);
     }
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <ActivityIndicator visible={isVisiable} />
       <TitleWithBackLayout title="Smoking">
         <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>Do you smoke?</Text>
@@ -144,6 +152,10 @@ export default function SmokingScreen() {
               <View style={styles.container2}>
                 <Picker
                   itemStyle={{ fontFamily: 'Rubik-Regular' }}
+                  style={{
+                    color: colors.black,
+                    fontFamily: fonts.regular,
+                  }}
                   selectedValue={startSmoke}
                   onValueChange={(itemValue) => setStartSmoke(itemValue)}
                 >
@@ -167,13 +179,14 @@ export default function SmokingScreen() {
                   </Text>
                   <View style={styles.container2}>
                     <Picker
-                      style={{ color: GlobalColors.darkGray }}
+                      style={{ color: colors.black, fontFamily: fonts.regular }}
                       selectedValue={stopSmoke}
                       onValueChange={(itemValue) => setStopSmoke(itemValue)}
                     >
                       {options2?.map((item, index) => {
                         return (
                           <Picker.Item
+                            style={{ color: GlobalColors.darkGray }}
                             key={index}
                             label={item.title}
                             value={item.title}
