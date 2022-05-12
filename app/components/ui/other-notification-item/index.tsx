@@ -5,15 +5,11 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { NotificationMessage } from 'types/api';
-import { monthLLLDayDD } from 'utils/functions/date-format';
 
-type Props = {
-  item: NotificationMessage;
-};
+type Props = {};
 
 const OtherNotificationItem = (props: Props) => {
-  const { item } = props;
+  const {} = props;
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
@@ -24,10 +20,14 @@ const OtherNotificationItem = (props: Props) => {
         />
       </View>
       <View style={styles.contentContainer}>
-        <Text style={styles.contentHeaderText}>{item.notification_title}</Text>
-        <Text style={styles.contentext}>{item.notification_body}</Text>
+        <Text style={styles.contentHeaderText}>
+          Please Complete Your Health Declaration
+        </Text>
+        <Text style={styles.contentext}>
+          You will be undergoing a covid test in 24 hours.
+        </Text>
       </View>
-      <Text style={styles.dateText}>{monthLLLDayDD(item.created_at)}</Text>
+      <Text style={styles.dateText}>May 08</Text>
     </View>
   );
 };
