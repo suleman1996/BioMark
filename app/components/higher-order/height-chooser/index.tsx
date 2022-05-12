@@ -22,7 +22,8 @@ type Props = {
   onChangeText: (text: string) => void;
   setSelectedType: any;
   selectedType: any;
-  value: any;
+  value: string;
+  setValue: any;
 };
 
 const HeightChooserComponent = ({
@@ -34,6 +35,7 @@ const HeightChooserComponent = ({
   setSelectedType,
   selectedType,
   value,
+  setValue,
 }: Props) => {
   const menuRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -89,6 +91,8 @@ const HeightChooserComponent = ({
             <Pressable
               onPress={() => {
                 setSelectedType(1);
+                selectedType != 1 &&
+                  setValue((value / 2.54).toFixed(3).toString());
                 menuRef.current.close();
               }}
               style={[
@@ -101,6 +105,8 @@ const HeightChooserComponent = ({
             <Pressable
               onPress={() => {
                 setSelectedType(2);
+                selectedType != 2 &&
+                  setValue(parseInt(value * 2.54).toString());
                 menuRef.current.close();
               }}
               style={[

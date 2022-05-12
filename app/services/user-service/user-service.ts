@@ -1,5 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
-import { BootstrapData } from 'types/api';
+import { BootstrapData, GeoLocationData } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
@@ -265,9 +265,15 @@ async function logout() {
     });
 }
 
-const Smoking = (day: Number, stopSmoke: Number, startSmoke: Number) => {
+const Smoking = (
+  day: Number,
+  stopSmoke: Number,
+  startSmoke: Number,
+  isSmoking: string
+) => {
   return client.post(API_URLS.SMOKING, {
     lifestyle: {
+      is_smoking: isSmoking,
       stick_per_day: day,
       smoking_stop_at: stopSmoke,
       smoking_start_at: startSmoke,
@@ -303,10 +309,10 @@ const drinking = (
   });
 };
 
-const Vaccination = (items: string | number) => {
+const Vaccination = (items: string | number, condition: any) => {
   return client.post(API_URLS.VACCINATION, {
     medical_history: {
-      has_condition: true,
+      has_condition: condition,
       vaccine_list: items,
     },
   });
@@ -314,6 +320,7 @@ const Vaccination = (items: string | number) => {
 type Props = {
   conditions: any;
   medical: any;
+  lifestyle: any;
 };
 const Allergies = ({ conditions }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
@@ -334,6 +341,12 @@ const Allergies = ({ conditions }: Props) => {
 const bodyMeasurement = ({ medical }: Props) => {
   return client.post(API_URLS.BODY_MEASUREMENT, {
     medical,
+  });
+};
+
+const exercise = ({ lifestyle }: Props) => {
+  return client.post(API_URLS.EXERCISE, {
+    lifestyle,
   });
 };
 
@@ -365,6 +378,10 @@ const getStress = () => {
 
 const getLifeStyle = () => {
   return client.get(API_URLS.GET_LIFE_STYLE);
+};
+
+const getMedicalHistory = () => {
+  return client.get(API_URLS.GET_MEDICAL_HISTORY);
 };
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
@@ -416,7 +433,26 @@ function getBootstrap() {
       });
   });
 }
+function geoLocation() {
+  return new Promise<GeoLocationData>((resolve, reject) => {
+    client
+      .get(API_URLS.LOCATION)
+      .then(async (response) => {
+        try {
+          console.log('rees', response);
 
+          resolve(response.data);
+        } catch (e) {
+          logNow('Register user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get profile error', err);
+        reject(err);
+      });
+  });
+}
 export const userService = {
   login,
   federatedlogin,
@@ -442,5 +478,8 @@ export const userService = {
   getStress,
   createStress,
   getLifeStyle,
+  getMedicalHistory,
   getBootstrap,
+  geoLocation,
+  exercise,
 };
