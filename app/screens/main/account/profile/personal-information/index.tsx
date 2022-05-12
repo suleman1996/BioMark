@@ -18,6 +18,7 @@ import { DatePicker, ActivityIndicator } from 'components';
 import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
+import { goBack } from 'services/nav-ref';
 
 import fonts from 'assets/fonts';
 
@@ -60,7 +61,7 @@ const PersonalInformationScreen = () => {
       );
       console.log('success ', result.data);
       authContext?.setUserData(result.data);
-
+      goBack();
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
