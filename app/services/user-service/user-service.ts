@@ -265,9 +265,15 @@ async function logout() {
     });
 }
 
-const Smoking = (day: Number, stopSmoke: Number, startSmoke: Number) => {
+const Smoking = (
+  day: Number,
+  stopSmoke: Number,
+  startSmoke: Number,
+  isSmoking: string
+) => {
   return client.post(API_URLS.SMOKING, {
     lifestyle: {
+      is_smoking: isSmoking,
       stick_per_day: day,
       smoking_stop_at: stopSmoke,
       smoking_start_at: startSmoke,
