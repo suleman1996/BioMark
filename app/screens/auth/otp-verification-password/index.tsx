@@ -21,6 +21,7 @@ import { logNow } from 'utils/functions/log-binder';
 import colors from 'assets/colors';
 
 import styles from './style';
+import { changePassword } from 'services/auth-service';
 
 type Props = {
   route: any;
@@ -28,7 +29,7 @@ type Props = {
 
 export default function OtpPassword(props: Props) {
   const { phone } = props.route.params;
-
+  const { password } = props.route.params;
   let initialMinutes = 1;
   let initialSeconds = 0;
 
@@ -65,13 +66,34 @@ export default function OtpPassword(props: Props) {
   const handleOTP = async () => {
     try {
       setLoading(true);
-      navigate(SCREENS.CREATE_PASSWORD, {
-        phone,
-        otp: code,
+      Keyboard.dismiss();
+      await changePassword({
+        password: {
+          username: phone,
+          password: password,
+          code: code,
+        },
       });
+      navigate(SCREENS.PASSWORD_CHANGED);
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: "User not exist's",
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.message,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
     }
   };
 

@@ -41,6 +41,8 @@ const API_URLS = {
   CREATE_STRESS: '/api/v1/patient/stress',
   GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
+
+  LOCATION: '/api/v1/geolocation',
 };
 
 export { API_URLS };
