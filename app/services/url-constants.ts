@@ -40,9 +40,11 @@ const API_URLS = {
   GET_STRESS: '/api/v1/patient/stress',
   CREATE_STRESS: '/api/v1/patient/stress',
   GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
+  GET_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
 
   LOCATION: '/api/v1/geolocation',
+  Exercise: '/api/v1/patient/lifestyle/exercise',
 };
 
 export { API_URLS };

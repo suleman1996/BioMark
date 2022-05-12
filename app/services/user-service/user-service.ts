@@ -309,10 +309,10 @@ const drinking = (
   });
 };
 
-const Vaccination = (items: string | number) => {
+const Vaccination = (items: string | number, condition: any) => {
   return client.post(API_URLS.VACCINATION, {
     medical_history: {
-      has_condition: true,
+      has_condition: condition,
       vaccine_list: items,
     },
   });
@@ -320,6 +320,7 @@ const Vaccination = (items: string | number) => {
 type Props = {
   conditions: any;
   medical: any;
+  lifestyle: any;
 };
 const Allergies = ({ conditions }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
@@ -340,6 +341,12 @@ const Allergies = ({ conditions }: Props) => {
 const bodyMeasurement = ({ medical }: Props) => {
   return client.post(API_URLS.BODY_MEASUREMENT, {
     medical,
+  });
+};
+
+const exercise = ({ lifestyle }: Props) => {
+  return client.post(API_URLS.Exercise, {
+    lifestyle,
   });
 };
 
@@ -371,6 +378,10 @@ const getStress = () => {
 
 const getLifeStyle = () => {
   return client.get(API_URLS.GET_LIFE_STYLE);
+};
+
+const getMedicalHistory = () => {
+  return client.get(API_URLS.GET_MEDICAL_HISTORY);
 };
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
@@ -467,6 +478,8 @@ export const userService = {
   getStress,
   createStress,
   getLifeStyle,
+  getMedicalHistory,
   getBootstrap,
   geoLocation,
+  exercise,
 };
