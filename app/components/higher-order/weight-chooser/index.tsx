@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Text, View, Pressable } from 'react-native';
 
 import { TextInput } from 'react-native-paper';
@@ -20,6 +20,10 @@ type Props = {
   height: number;
   textAlign: string;
   onChangeText: () => void;
+  setSelectedType: any;
+  selectedType: any;
+  value: string;
+  setValue: any;
 };
 
 const WeightChooserComponent = ({
@@ -28,11 +32,15 @@ const WeightChooserComponent = ({
   height,
   textAlign,
   onChangeText,
+  setSelectedType,
+  selectedType,
+  value,
+  setValue,
 }: Props) => {
   const menuRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [value, setValue] = useState(0);
-  const [selectedType, setSelectedType] = useState(2);
+  // const [value, setValue] = useState(0);
+  // const [selectedType, setSelectedType] = useState(2);
 
   var otherStyle = [];
 
@@ -83,6 +91,8 @@ const WeightChooserComponent = ({
             <Pressable
               onPress={() => {
                 setSelectedType(1);
+                selectedType != 1 &&
+                  setValue((value * 2.2).toFixed(3).toString());
                 menuRef.current.close();
               }}
               style={[
@@ -95,6 +105,7 @@ const WeightChooserComponent = ({
             <Pressable
               onPress={() => {
                 setSelectedType(2);
+                selectedType != 2 && setValue(parseInt(value / 2.2).toString());
                 menuRef.current.close();
               }}
               style={[
