@@ -126,6 +126,17 @@ export default function VaccinationScreen() {
                 extraData={refresh}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => (
+                  // <>
+                  // {items ?
+                  //   <TouchableOpacity
+                  //   style={styles.listview}
+                  //   onPress={() => {
+                  //     list.splice(index, 1), setRefreh(!refresh);
+                  //   }}>
+                  // <Text style={{color:'red'}}>{item}</Text>
+                  // </TouchableOpacity>
+                  // :null}
+                  // </>
                   <TouchableOpacity
                     style={styles.listview}
                     onPress={() => {
