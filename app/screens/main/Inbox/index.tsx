@@ -1,10 +1,12 @@
+import React, { useRef, useState } from 'react';
+import { FlatList, Pressable, Text, View } from 'react-native';
+
 import { TitleWithSearchBarLayout } from 'components/layouts';
 import OtherNotificationItem from 'components/ui/other-notification-item';
 import PreviousNotificationItem from 'components/ui/previous-notification-item';
-import React, { useRef, useState } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
-import PagerView from 'react-native-pager-view';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+
+import PagerView from 'react-native-pager-view';
 import { styles } from './styles';
 
 export default function InboxScreen() {
