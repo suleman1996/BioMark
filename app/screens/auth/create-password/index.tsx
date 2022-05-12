@@ -129,9 +129,15 @@ export default function CreatePassword() {
 }
 
 const ResetPassSchema = Yup.object({
-  password: Yup.string().required('Password is required').min(7, 'Too short'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Must be 8 character long.')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have a Capital letter, a digit and a special character.'
+    ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Confirm Password is required')
-    .min(7, 'Too short'),
+    .min(8, 'Must be 8 character long.'),
 });
