@@ -45,7 +45,7 @@ const PersonalInformationScreen = () => {
   const handleUpdateProfile = async () => {
     Keyboard.dismiss();
     setGenderWarn(false);
-    const gender = value == 'first' ? 1 : 0;
+    const gender = value == 'first' ? 1 : 2;
     const ic_number = authContext?.userData?.ic_number;
     const email = authContext?.userData?.email;
     try {
