@@ -18,6 +18,7 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
 import { TextInputButton } from 'components';
+import { showMessage } from 'react-native-flash-message';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
@@ -28,7 +29,8 @@ import SCREENS from 'navigation/constants';
 import { styles } from './styles';
 
 export default function VaccinationScreen() {
-  const [value, setValue] = useState('first');
+  const [value, setValue] = useState('');
+  const [condition, setCondition] = useState('');
   const [items, setItems] = useState('');
   const [list, setList] = useState([]);
   const [isVisiable, setIsVisible] = React.useState(false);
@@ -43,12 +45,14 @@ export default function VaccinationScreen() {
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
   useEffect(() => {
     console.log('Bootstrap =======>', bootstrap?.attributes?.medical_template);
+    getMedicalHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bootstrap]);
 
   const addTags = async () => {
     try {
       setIsVisible(true);
-      const response = await userService.Vaccination(items);
+      const response = await userService.Vaccination(items, condition);
       console.log('Vaccination successful', response);
       setList([...list, { id: list?.length + 1, title: items }]);
       setItems(!items);
@@ -56,6 +60,48 @@ export default function VaccinationScreen() {
     } catch (err) {
       setIsVisible(false);
       console.log(err);
+    }
+  };
+
+  const getMedicalHistory = async () => {
+    try {
+      setIsVisible(true);
+      const result = await userService.getMedicalHistory();
+      console.log('resulttttt', result.data.vaccine);
+      setValue(
+        result?.data?.vaccine?.has_condition == '1'
+          ? '1'
+          : result?.data?.vaccine?.has_condition == '0'
+          ? '0'
+          : result?.data?.vaccine?.has_condition == '2'
+          ? '2'
+          : null
+      );
+      console.log('conditionlist', result?.data?.vaccine);
+      // setItems(result?.data?.vaccine?.vaccine_list);
+      setList([
+        ...list,
+        { id: list?.length + 1, title: result?.data?.vaccine?.vaccine_list },
+      ]);
+      setIsVisible(false);
+    } catch (error) {
+      setIsVisible(false);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
     }
   };
 
@@ -80,7 +126,16 @@ export default function VaccinationScreen() {
               >
                 <TouchableOpacity
                   onPress={() => {
-                    setValue(index);
+                    setValue(index),
+                      setCondition(
+                        index == '0'
+                          ? false
+                          : index == '1'
+                          ? true
+                          : index == '2'
+                          ? false
+                          : null
+                      );
                   }}
                   style={[
                     styles.radioContainer,
