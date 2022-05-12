@@ -1,5 +1,5 @@
 import { Text, View, Pressable } from 'react-native';
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { TextInput } from 'react-native-paper';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
@@ -20,6 +20,9 @@ type Props = {
   height: number | string;
   textAlign: string | number;
   onChangeText: (text: string) => void;
+  setSelectedType: any;
+  selectedType: any;
+  value: any;
 };
 
 const HeightChooserComponent = ({
@@ -28,11 +31,14 @@ const HeightChooserComponent = ({
   height,
   textAlign,
   onChangeText,
+  setSelectedType,
+  selectedType,
+  value,
 }: Props) => {
   const menuRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [value, setValue] = useState(0);
-  const [selectedType, setSelectedType] = useState(2);
+  // const [value, setValue] = useState(0);
+  // const [selectedType, setSelectedType] = useState(2);
 
   var otherStyle = [];
 

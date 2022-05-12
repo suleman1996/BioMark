@@ -15,6 +15,7 @@ import { styles } from './styles';
 const BodyMeasurementScreen = () => {
   const [value, setValue] = useState(0);
   const [value2, setValue2] = useState(0);
+  const [selectedType, setSelectedType] = useState(2);
 
   const onChangeText = (values = 30) => {
     setValue(values);
@@ -56,6 +57,8 @@ const BodyMeasurementScreen = () => {
             placeholder={'0'}
             onChangeText={onChangeText}
             value={value}
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
           />
           <WeightChooser
             height={15}
