@@ -60,7 +60,9 @@ export default function OtpPassword(props: Props) {
   });
 
   const openMessenger = () => {
-    Linking.canOpenURL('mailto:support@biomarking.com');
+    Linking.openURL(
+      'mailto:support@biomarking.com?subject=SendMail&body=Description'
+    );
   };
 
   const handleOTP = async () => {

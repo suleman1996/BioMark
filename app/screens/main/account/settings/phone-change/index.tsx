@@ -22,7 +22,7 @@ const PhoneChangeScreen = () => {
   );
 
   useEffect(() => {
-    const phoneNumber = parsePhoneNumber(userContacts.mobile);
+    const phoneNumber = parsePhoneNumber(userContacts.mobile + '');
     logNow('parsed phone', phoneNumber?.countryCallingCode);
     setCountryCode(phoneNumber?.country);
     setNumber(phoneNumber?.nationalNumber);

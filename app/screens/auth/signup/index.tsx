@@ -34,6 +34,8 @@ import colors from 'assets/colors';
 import { BackIcon } from 'assets/svgs/index';
 
 import styles from './styles';
+import { IAppState } from 'store/IAppState';
+import { useSelector } from 'react-redux';
 
 export default function Signup() {
   //initial hooks define
@@ -45,7 +47,7 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState(''); //International Phone Picker
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
+  const [selectCountryCode, setSelectCountryCode] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
     { id: 1, sex: 'Male' },
@@ -57,6 +59,9 @@ export default function Signup() {
   const [checked, setChecked] = React.useState(false);
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
 
   //fuctions
   useEffect(() => {
@@ -70,6 +75,15 @@ export default function Signup() {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
+
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectCountryCode(countryCodeParse);
+    }
+  }, [geoLocation]);
 
   const signupApi = async (values: string) => {
     // setLoading(true);
@@ -218,7 +232,7 @@ export default function Signup() {
                 />
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
-                  <Text style={styles.inputLablel}>Mobile Number</Text>0
+                  <Text style={styles.inputLablel}>Mobile Number</Text>
                   <PhoneNumber
                     countryCode={countryCode}
                     setCountryCode={setCountryCode}

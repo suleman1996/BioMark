@@ -2,7 +2,7 @@ const API_URLS = {
   //Auth constants
   LOGIN: '/api/v1/auth/sessions',
   FEDERATED_LOGIN: '/api/v1/auth/federated_identity',
-  SIGN_UP: '/api/v1/auth/registrations',
+  SIGN_UP: '/api/v2/auth/registrations',
   SIGN_UP_ACCOUNT_CONFIRM: '/api/v1/auth/confirmations',
   RESEND_ACCOUNT_OTP: '/api/v1/auth/confirmations/resend_code',
   FORGOT_PASSWORD: '/api/v1/auth/password/forgot',
@@ -18,6 +18,7 @@ const API_URLS = {
   GET_USER_CONTACTS: '/api/v1/patient/contacts',
   LOG_OUT: '/api/v1/auth/sessions/logout',
   AUTO_LOG_OUT: '/api/v1/patient/settings',
+  SAVE_AUTO_LOG_OUT: '/api/v1/patient/settings/update',
   SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
   MARKETING: '/api/v1/patient/marketing',
   PROFILE_AVATAR: '/api/v1/patient/profiles/avatar',
