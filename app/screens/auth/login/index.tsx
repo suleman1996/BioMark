@@ -241,7 +241,7 @@ export default function Login() {
         )}
         {!PASS_REGIX.test(password) && password.length > 7 ? (
           <Text style={styles.errorMessage}>
-            Atleast have one digit and one special character
+            At least have one digit and one special character.
           </Text>
         ) : null}
         <View style={{ alignSelf: 'center' }}>
