@@ -40,7 +40,8 @@ export default function ForgotPassword() {
     userService
       .forgotPassword(username)
       .then(() => {
-        navigate(SCREENS.PASSWORD_OTP, { phone: username });
+        // navigate(SCREENS.PASSWORD_OTP, { phone: username });
+        navigate(SCREENS.CREATE_PASSWORD, { phone: username });
       })
       .catch((err: ForgotPasswordErrorResponse) => {
         logNow(err);

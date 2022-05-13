@@ -1,5 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
-import { BootstrapData } from 'types/api';
+import { BootstrapData, GeoLocationData } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
@@ -345,7 +345,7 @@ const bodyMeasurement = ({ medical }: Props) => {
 };
 
 const exercise = ({ lifestyle }: Props) => {
-  return client.post(API_URLS.Exercise, {
+  return client.post(API_URLS.EXERCISE, {
     lifestyle,
   });
 };
@@ -433,7 +433,26 @@ function getBootstrap() {
       });
   });
 }
+function geoLocation() {
+  return new Promise<GeoLocationData>((resolve, reject) => {
+    client
+      .get(API_URLS.LOCATION)
+      .then(async (response) => {
+        try {
+          console.log('rees', response);
 
+          resolve(response.data);
+        } catch (e) {
+          logNow('Register user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get profile error', err);
+        reject(err);
+      });
+  });
+}
 export const userService = {
   login,
   federatedlogin,
@@ -461,5 +480,6 @@ export const userService = {
   getLifeStyle,
   getMedicalHistory,
   getBootstrap,
+  geoLocation,
   exercise,
 };

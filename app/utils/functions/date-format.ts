@@ -30,3 +30,11 @@ export const getYear = (date: string) => {
 
   return newDate || '';
 };
+
+export const monthLLLDayDD = (date: string) => {
+  if (date) {
+    var newDate: any = format(new Date(date), 'MMM dd');
+  }
+
+  return newDate || '';
+};

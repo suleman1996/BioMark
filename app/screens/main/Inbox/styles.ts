@@ -76,4 +76,14 @@ export const styles = StyleSheet.create({
   headerContainer: {
     width: widthToDp(86),
   },
+  readMoreContainer: {
+    width: widthToDp(86),
+    paddingHorizontal: widthToDp(6),
+    marginBottom: heightToDp(2),
+  },
+  readMoreText: {
+    color: GlobalColors.darkPrimary,
+    fontFamily: GlobalFonts.light,
+    fontSize: responsiveFontSize(23),
+  },
 });

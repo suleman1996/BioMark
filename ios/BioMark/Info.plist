@@ -47,6 +47,7 @@
 	<string>BioMark</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>mailto</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
@@ -116,5 +117,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	  <key>NSLocationWhenInUseUsageDescription</key>
+    <string></string>
 </dict>
 </plist>

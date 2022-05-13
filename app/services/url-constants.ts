@@ -11,6 +11,7 @@ const API_URLS = {
   INPUT_BARCODE: '/api/v1/patient/scanners/midas',
   MOBILE_REGISTER: '/api/v1/patient/devices',
   BOOTSTRAP: '/api/v1/patient/bootstrapper',
+  NOTIFICATIONS: '/api/v1/patient/notifications',
 
   GET_PROFILE: '/api/v1/patient/profiles',
   CREATE_PROFILE: 'api/v2/patient/profiles',
@@ -42,7 +43,9 @@ const API_URLS = {
   GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
   GET_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
-  Exercise: '/api/v1/patient/lifestyle/exercise',
+
+  LOCATION: '/api/v1/geolocation',
+  EXERCISE: '/api/v1/patient/lifestyle/exercise',
 };
 
 export { API_URLS };

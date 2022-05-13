@@ -39,6 +39,7 @@ import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 
 import styles from './styles';
 
+export const PASS_REGIX = /^(?=.*\d)(?=.*[@#$%^&+=]).+$/;
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -54,6 +55,10 @@ export default function Login() {
   const [selectCountryCode, setSelectCountryCode] = useState('60');
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
 
   useEffect(() => {
     if (selectCountryCode == '60') {
@@ -73,6 +78,13 @@ export default function Login() {
       setLoginError(true);
     }
   }, [errorMessageLogin]);
+
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+    }
+  }, [geoLocation]);
 
   const onGoogleLogin = async () => {
     GoogleSignin.signOut();
@@ -163,6 +175,8 @@ export default function Login() {
   }
 
   const handleLogin = async () => {
+    console.log('selectCountryCode', selectCountryCode);
+
     const username = `+${selectCountryCode}${phoneNumber}`;
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
@@ -201,7 +215,7 @@ export default function Login() {
         <View style={{ height: 20 }} />
         <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
         <TextInput
-          placeholder="Password"
+          // placeholder="Password"
           secureTextEntry={hidePassword}
           eye={hidePassword ? 'eye-off' : 'eye'}
           value={password}
@@ -213,9 +227,14 @@ export default function Login() {
         />
         {password !== '' && password.length < 8 && (
           <Text style={styles.errorMessage}>
-            Password must have 8-11 characters long
+            Password must be at least 8 characters long
           </Text>
         )}
+        {!PASS_REGIX.test(password) && password.length > 7 ? (
+          <Text style={styles.errorMessage}>
+            Atleast have one digit and one special character
+          </Text>
+        ) : null}
         <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity
             style={{ marginVertical: 30 }}
@@ -227,7 +246,9 @@ export default function Login() {
         <Button
           onPress={() => handleLogin()}
           disabled={
-            phoneNumber.length < numberCondition.min || password.length < 8
+            phoneNumber.length < numberCondition.min ||
+            password.length < 8 ||
+            !PASS_REGIX.test(password)
               ? true
               : false
           }
