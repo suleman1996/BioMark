@@ -218,7 +218,7 @@ export default function Signup() {
                 />
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
-                  <Text style={styles.inputLablel}>Mobile Number</Text>0
+                  <Text style={styles.inputLablel}>Mobile Number</Text>
                   <PhoneNumber
                     countryCode={countryCode}
                     setCountryCode={setCountryCode}
