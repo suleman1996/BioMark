@@ -6,4 +6,5 @@ export interface GeoLocationData {
   ip: string;
   location: string;
   code: string;
+  dial_code: string;
 }

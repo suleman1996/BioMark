@@ -28,7 +28,6 @@ import styles from './styles';
 
 const AccountMenu = (props) => {
   const dispatch = useDispatch();
-
   const openMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);
   };
@@ -67,7 +66,7 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Dependants</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            {/* <Text style={styles.secondText}>7 Users</Text> */}
+            <Text style={styles.secondText}>{props.dependentsCount} Users</Text>
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
@@ -205,7 +204,7 @@ const AccountMenu = (props) => {
           <Switch
             color={GlobalColors.darkPrimary}
             value={props.logOutCheck}
-            //    onValueChange={()=>props.onToggleAutoLogout()}
+            onValueChange={() => props.onToggleAutoLogout()}
           />
         </>
       </TouchableRipple>

@@ -13,13 +13,18 @@ import { ForgotPasswordErrorResponse } from 'types/auth/ForgotPassword';
 import { logNow } from 'utils/functions/log-binder';
 
 import styles from './styles';
+import { useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
 export default function ForgotPassword() {
-  const [countryCode, setCountryCode] = useState('MY');
+  const [countryCode, setCountryCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
+  const [selectCountryCode, setSelectCountryCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
 
   useEffect(() => {
     if (selectCountryCode == '60') {
@@ -32,6 +37,15 @@ export default function ForgotPassword() {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
+
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectCountryCode(countryCodeParse);
+    }
+  }, [geoLocation]);
 
   const handleForgotPassword = async () => {
     setLoading(true);
