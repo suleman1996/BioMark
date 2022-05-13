@@ -1,23 +1,14 @@
+import { ButtonWithShadowContainer, DropdownMenu } from 'components/base';
+import GeneralModalButton from 'components/higher-order/general-modal-button';
+import { TitleWithBackLayout } from 'components/layouts';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-
-import { ModalButton } from 'components/higher-order';
-import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
-import { TitleWithBackLayout } from 'components/layouts';
-
-import AsthmaModal from './modals/asthma';
-import CancerModal from './modals/cancer';
-import DiabetesModal from './modals/diabetes';
-import GoutModal from './modals/gout';
-import HighBloodPressureModal from './modals/high-blood-pressure';
-import HighCholesterolModal from './modals/high-cholesterol';
-import OthersModal from './modals/others';
-
-import { goBack } from 'services/nav-ref';
-
-import { styles } from './styles';
-import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
+import { goBack } from 'services/nav-ref';
+import { IAppState } from 'store/IAppState';
+import { MedicalTemplateAttribute } from 'types/api';
+import GeneralModalPage from './modals/general-modal';
+import { styles } from './styles';
 
 const options = [
   { id: 1, title: '---' },
@@ -32,51 +23,27 @@ const options = [
 const MedicalHistoryScreen = () => {
   const [dropdownValue, setDropdown] = useState();
   const [isDropdownChanged, setIsDropDownChanged] = useState(false);
-  const [isCholesterolModal, setIsCholesterolModal] = useState(false);
-  const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);
-  const [isDiabetesModal, setIsDiabetesModal] = useState(false);
-  const [isAsthmaModal, setIsAsthmaModal] = useState(false);
-  const [isGoutModal, setIsGoutModal] = useState(false);
-  const [isCancerModal, setIsCancerModal] = useState(false);
-  const [isOtherModal, setIsOtherModal] = useState(false);
-  const [isNoneModal, setIsNoneModal] = useState(false);
+
+  const [isGeneralModal, setIsGeneralModal] = useState(false);
+  const [generalModalData, setGeneralModalData] =
+    useState<MedicalTemplateAttribute>({});
 
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
-
+  const medicalHistory = useSelector(
+    (state: IAppState) => state.profile?.medicalHistoryUpdate
+  );
   useEffect(() => {
     console.log('Bootstrap =======>', bootstrap);
   }, [bootstrap]);
 
-  const onNonePress = () => {
-    setIsCholesterolModal(false);
-    setIsBloodPressureModal(false);
-    setIsDiabetesModal(false);
-    setIsAsthmaModal(false);
-    setIsGoutModal(false);
-    setIsCancerModal(false);
-    setIsOtherModal(false);
-    setIsNoneModal(true);
-  };
-
   return (
     <TitleWithBackLayout title="Medical History">
       {/* modals */}
-      <HighCholesterolModal
-        isVisible={isCholesterolModal}
-        setIsVisible={setIsCholesterolModal}
+      <GeneralModalPage
+        isVisible={isGeneralModal}
+        setIsVisible={setIsGeneralModal}
+        qData={generalModalData}
       />
-      <HighBloodPressureModal
-        isVisible={isBloodPressureModal}
-        setIsVisible={setIsBloodPressureModal}
-      />
-      <DiabetesModal
-        isVisible={isDiabetesModal}
-        setIsVisible={setIsDiabetesModal}
-      />
-      <AsthmaModal isVisible={isAsthmaModal} setIsVisible={setIsAsthmaModal} />
-      <GoutModal isVisible={isGoutModal} setIsVisible={setIsGoutModal} />
-      <CancerModal isVisible={isCancerModal} setIsVisible={setIsCancerModal} />
-      <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
 
       {/* modals */}
       <ScrollView style={styles.container}>
@@ -98,54 +65,28 @@ const MedicalHistoryScreen = () => {
         <Text style={styles.label}>
           Have you ever been diagnosed with any of the following conditions?
         </Text>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="High Cholesterol"
-            isModal={isCholesterolModal}
-            setIsModal={setIsCholesterolModal}
-          />
-          <ModalButton
-            title="High Blood Pressure"
-            isModal={isBloodPressureModal}
-            setIsModal={setIsBloodPressureModal}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="Diabetes"
-            isModal={isDiabetesModal}
-            setIsModal={setIsDiabetesModal}
-          />
-          <ModalButton
-            title="Asthma"
-            isModal={isAsthmaModal}
-            setIsModal={setIsAsthmaModal}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="Gout"
-            isModal={isGoutModal}
-            setIsModal={setIsGoutModal}
-          />
-          <ModalButton
-            title="Cancer"
-            isModal={isCancerModal}
-            setIsModal={setIsCancerModal}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="Others"
-            isModal={isOtherModal}
-            setIsModal={setIsOtherModal}
-          />
-          <ModalButton
-            title="None"
-            isModal={isNoneModal}
-            setIsModal={onNonePress}
-          />
-        </View>
+        <ScrollView>
+          <View style={styles.rowContainer}>
+            {bootstrap?.attributes?.medical_template?.personal?.map(
+              (item: MedicalTemplateAttribute, index: number) => (
+                <View key={index}>
+                  <GeneralModalButton
+                    isSelected={medicalHistory.some(
+                      (elem) =>
+                        elem.condition_id === item.id && elem.has_condition
+                    )}
+                    title={item.name}
+                    isModal={isGeneralModal}
+                    setIsModal={(value: any) => {
+                      setIsGeneralModal(value);
+                      setGeneralModalData(item);
+                    }}
+                  />
+                </View>
+              )
+            )}
+          </View>
+        </ScrollView>
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={() => {
