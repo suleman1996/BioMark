@@ -35,7 +35,14 @@ const AccountMenu = (props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        onPress={() =>
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.ID_VERIFICATION_START,
+          })
+        }
+        style={styles.singleItem}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioIdentify width={5} height={3} />
