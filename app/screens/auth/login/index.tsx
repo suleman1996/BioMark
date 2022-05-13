@@ -34,17 +34,18 @@ import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 
-import colors from 'assets/colors';
-import fonts from 'assets/fonts';
+// import fonts from 'assets/fonts';
 import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 export const PASS_REGIX = /^(?=.*\d)(?=.*[@#$%^&+=]).+$/;
 export default function Login() {
   // redux
   const dispatch = useDispatch();
-  const { globalColors } = useTheme();
+  const { colors, fonts } = useTheme();
+  const styles = makeStyles(colors);
+  console.log(fonts);
 
   const { loggingIn, errorMessageLogin } = useSelector(
     (state: IAppState) => state.auth
@@ -188,7 +189,11 @@ export default function Login() {
 
   return (
     <View
-      style={[styles.container, { backgroundColor: globalColors.background }]}
+      style={
+        // [
+        styles.container
+        // { backgroundColor: globalColors.background }]
+      }
     >
       <ActivityIndicator visible={loggingIn} />
       <ErrorModal

@@ -6,7 +6,7 @@ export const GlobalColors = {
   white: '#FFFFFF',
   opacityBlack: 'hsla(133, 50%, 7%, 0.18)',
   gray: '#EBEFF2',
-  bg: '#E5E5E5',
+  bgContainer: '#E5E5E5',
   red: 'red',
   transparentBlack: 'rgba(52, 52, 52, 0.8)',
   heading: '#06599E',

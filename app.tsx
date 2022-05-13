@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Platform, StatusBar, useColorScheme } from 'react-native';
+import {
+  Platform,
+  StatusBar,
+  useColorScheme,
+  SafeAreaView,
+} from 'react-native';
 
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 import FlashMessage from 'react-native-flash-message';
 import { MenuProvider } from 'react-native-popup-menu';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 
 import BiomarkNavigation from './app/navigation';
@@ -12,15 +16,7 @@ import { ErrorBoundary } from 'components';
 import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
 import colors from './app/assets/colors';
-
-const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  globalColors: {
-    ...DefaultTheme.colors,
-    background: '#FFFFFF',
-  },
-};
+import theme from 'utils/theme';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
