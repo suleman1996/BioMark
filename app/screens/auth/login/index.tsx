@@ -46,10 +46,6 @@ export default function Login() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const { loggingIn, errorMessageLogin } = useSelector(
-    (state: IAppState) => state.auth
-  );
-
   const [hidePassword, setHidePassword] = useState(true);
   const [password, setPassword] = useState('');
   const [countryCode, setCountryCode] = useState('MY');
@@ -57,6 +53,10 @@ export default function Login() {
   const [selectCountryCode, setSelectCountryCode] = useState('');
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+
+  const { loggingIn, errorMessageLogin } = useSelector(
+    (state: IAppState) => state.auth
+  );
 
   const geoLocation = useSelector(
     (state: IAppState) => state.account.geolocation
