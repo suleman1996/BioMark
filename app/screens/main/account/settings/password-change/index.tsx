@@ -84,16 +84,16 @@ const PasswordChangeScreen = () => {
       });
   };
 
-  const ResetPassSchema = Yup.object({
-    currentPassword: Yup.string()
-      .required('Password is required')
-      .min(7, 'Too short'),
-    password: Yup.string().required('Password is required').min(7, 'Too short'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required')
-      .min(7, 'Too short'),
-  });
+  // const ResetPassSchema = Yup.object({
+  //   currentPassword: Yup.string()
+  //     .required('Password is required')
+  //     .min(7, 'Too short'),
+  //   password: Yup.string().required('Password is required').min(7, 'Too short'),
+  //   confirmPassword: Yup.string()
+  //     .oneOf([Yup.ref('password'), null], 'Passwords must match')
+  //     .required('Confirm Password is required')
+  //     .min(7, 'Too short'),
+  // });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -111,7 +111,7 @@ const PasswordChangeScreen = () => {
               confirmPassword: '',
             }}
             onSubmit={resetPassword}
-            validationSchema={ResetPassSchema}
+            validationSchema={UpdatePassSchema}
           >
             {({ handleChange, handleSubmit, errors, values }) => (
               <>
@@ -157,9 +157,9 @@ const PasswordChangeScreen = () => {
                   />
                   <View style={styles.passValueContainer}>
                     <Text style={styles.passValue}>
-                      {values.password.length < 15
+                      {values.password.length < 8
                         ? 'Low'
-                        : values.password.length < 50
+                        : values.password.length < 10
                         ? 'Medium'
                         : 'High'}
                     </Text>
@@ -228,5 +228,28 @@ const PasswordChangeScreen = () => {
     </SafeAreaView>
   );
 };
-
+const UpdatePassSchema = Yup.object({
+  currentPassword: Yup.string()
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+  password: Yup.string()
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+});
 export default PasswordChangeScreen;

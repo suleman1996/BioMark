@@ -1,14 +1,19 @@
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+
+import { goBack } from 'services/nav-ref';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { ActivityIndicator } from 'components';
 import { CheckBoxWithText, Button } from 'components/base';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { MarketingConsentModal } from 'components/ui';
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { settingsService } from 'services/account-service/settings-service';
 import { setMarketing } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import { GlobalStyles } from 'utils/theme/global-styles';
+
 import { styles } from './styles';
 
 const MarketingConsentScreen = () => {

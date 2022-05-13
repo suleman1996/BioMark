@@ -39,7 +39,8 @@ import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 
 import makeStyles from './styles';
 
-export const PASS_REGIX = /^(?=.*\d)(?=.*[@#$%^&+=]).+$/;
+export const PASS_REGIX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 export default function Login() {
   // redux
   const dispatch = useDispatch();
@@ -241,7 +242,8 @@ export default function Login() {
         )}
         {!PASS_REGIX.test(password) && password.length > 7 ? (
           <Text style={styles.errorMessage}>
-            At least have one digit and one special character.
+            At least have one digit, one captial letter and one special
+            character.
           </Text>
         ) : null}
         <View style={{ alignSelf: 'center' }}>

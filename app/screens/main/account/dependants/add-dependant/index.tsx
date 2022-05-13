@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import { format } from 'date-fns';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import { ActivityIndicator } from 'components';
@@ -25,14 +25,15 @@ import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 
 import { styles } from './styles';
+import { IAppState } from 'store/IAppState';
 
 const AddDependantScreen = () => {
   const formikRef = useRef<any>();
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [countryCode, setCountryCode] = useState('MY');
-  const [selectedCountryCode, setSelectedCountryCode] = useState('+60');
+  const [countryCode, setCountryCode] = useState('');
+  const [selectedCountryCode, setSelectedCountryCode] = useState('');
   const [min, setMin] = useState(4);
   const [max, setMax] = useState(13);
   React.useEffect(() => {
@@ -40,6 +41,19 @@ const AddDependantScreen = () => {
     selectedCountryCode == '+63' && setMin(10), setMax(10);
     selectedCountryCode == '+65' && setMin(8), setMax(8);
   }, [selectedCountryCode]);
+
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
+
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectedCountryCode(countryCodeParse);
+    }
+  }, [geoLocation]);
 
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
@@ -89,7 +103,7 @@ const AddDependantScreen = () => {
       country_code: countryCode,
       country_phone_code: `+${selectedCountryCode}`,
     });
-    const pN = `${selectedCountryCode}${phone_number}`;
+    const pN = `+${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
     const dob = dateFormat(birth_date);
     setIsLoading(true);

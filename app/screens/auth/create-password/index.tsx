@@ -116,7 +116,7 @@ const ResetPassSchema = Yup.object({
     .required('Confirm Password is required')
     .min(7, 'Too short')
     .matches(
-      /^(?=.*\d)(?=.*[@#$%^&+=]).+$/,
-      'Atleast have one digit and one special character.'
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
     ),
 });

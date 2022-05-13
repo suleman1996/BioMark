@@ -356,7 +356,7 @@ const ResetPassSchema = Yup.object({
     .required('Please type your new password')
     .min(8)
     .matches(
-      /^(?=.*\d)(?=.*[@#$%^&+=]).+$/,
-      'Atleast have one digit and one special character.'
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
     ),
 });
