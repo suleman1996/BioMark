@@ -122,6 +122,7 @@ export default function ExerciseScreen() {
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
       <TitleWithBackLayout title="Exercise">
+        <Text style={{ color: 'red' }}>{isExercise}</Text>
         <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>
             {
