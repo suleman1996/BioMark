@@ -85,6 +85,5 @@ export const styles = StyleSheet.create({
     color: GlobalColors.darkPrimary,
     fontFamily: GlobalFonts.light,
     fontSize: responsiveFontSize(23),
-    textDecorationLine: 'underline',
   },
 });
