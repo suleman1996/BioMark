@@ -33,7 +33,7 @@ export const getYear = (date: string) => {
 
 export const monthLLLDayDD = (date: string) => {
   if (date) {
-    var newDate: any = format(new Date(date), 'LLLL dd');
+    var newDate: any = format(new Date(date), 'MMM dd');
   }
 
   return newDate || '';
