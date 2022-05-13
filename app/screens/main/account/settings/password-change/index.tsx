@@ -43,6 +43,7 @@ const PasswordChangeScreen = () => {
   };
 
   const goToPassChangedScreen = () => {
+    setIsLoading(false);
     navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
       screen: SCREENS.PASSWORD_CHANGED_IN_APP,
       params: { flag: 1 },
@@ -70,10 +71,18 @@ const PasswordChangeScreen = () => {
         // });
       })
       .catch((err: ErrorResponse) => {
+        setIsLoading(false);
         logNow(err.errMsg.data.message);
-        formikRef.current.setErrors({
-          currentPassword: err.errMsg.data.message,
-        });
+        if (err.errMsg.data.message === 'Invalid Access Token') {
+          formikRef.current.setErrors({
+            currentPassword: 'Invalid Password',
+          });
+        } else {
+          formikRef.current.setErrors({
+            currentPassword: err.errMsg.data.message,
+          });
+        }
+
         // showMessage({
         //   message: err.errMsg.data.message,
         //   type: 'danger',
