@@ -22,7 +22,7 @@ const ModalButtonComponent = ({
   setIsModal,
   isModal,
   drop,
-  history,
+  history = [],
   condition_id,
 }: Props) => {
   const textColor = isModal

@@ -321,11 +321,12 @@ type Props = {
   conditions: any;
   medical: any;
   lifestyle: any;
+  has_allergy: any;
 };
-const Allergies = ({ conditions }: Props) => {
+const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
     medical_history: {
-      has_allergy: true,
+      has_allergy,
       conditions,
       // conditions: [
       //   {
