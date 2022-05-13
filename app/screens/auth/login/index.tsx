@@ -215,7 +215,6 @@ export default function Login() {
         <View style={{ height: 20 }} />
         <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
         <TextInput
-          // placeholder="Password"
           secureTextEntry={hidePassword}
           eye={hidePassword ? 'eye-off' : 'eye'}
           value={password}
