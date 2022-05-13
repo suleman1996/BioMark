@@ -292,7 +292,6 @@ export default function Login() {
             <Google />
           </TouchableOpacity>
         </View>
-
         <View style={{ alignSelf: 'center' }}>
           <View style={styles.noAccountTxt}>
             <Text style={{ color: colors.black }}>Dont have an account?</Text>
