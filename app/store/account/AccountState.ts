@@ -14,5 +14,6 @@ export class AccountState {
     ip: '',
     location: '',
     code: '',
+    dial_code: '',
   };
 }

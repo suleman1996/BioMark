@@ -52,7 +52,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
+  const [selectCountryCode, setSelectCountryCode] = useState('');
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
 
@@ -83,6 +83,8 @@ export default function Login() {
     console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectCountryCode(countryCodeParse);
     }
   }, [geoLocation]);
 
@@ -175,9 +177,9 @@ export default function Login() {
   }
 
   const handleLogin = async () => {
-    console.log('selectCountryCode', selectCountryCode);
-
     const username = `+${selectCountryCode}${phoneNumber}`;
+    console.log('username', username);
+
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
   };
