@@ -241,17 +241,33 @@ export default function Signup() {
                     setSelectCountryCode={setSelectCountryCode}
                     maxLength={numberCondition.max}
                   />
-                  {(phoneNumber !== '' ||
-                    errors.password ||
-                    phoneNumber.charAt(0) == 0) &&
-                    phoneNumber.length < numberCondition.min && (
-                      <Text style={styles.errorMessage}>
-                        Must have {numberCondition.min}
-                        {numberCondition.max !== numberCondition.min &&
-                          -numberCondition.max}{' '}
-                        characters
-                      </Text>
-                    )}
+                  {(phoneNumber !== '' || errors.password) &&
+                    (selectCountryCode == 63 ? (
+                      phoneNumber.charAt(0) == 0 ? (
+                        <Text style={styles.errorMessage}>
+                          Phonenumber must not start with 0
+                        </Text>
+                      ) : (
+                        phoneNumber.length < numberCondition.min && (
+                          <Text style={styles.errorMessage}>
+                            Must have {numberCondition.min}
+                            {numberCondition.max !== numberCondition.min &&
+                              -numberCondition.max}{' '}
+                            characters
+                          </Text>
+                        )
+                      )
+                    ) : (
+                      phoneNumber.length < numberCondition.min && (
+                        <Text style={styles.errorMessage}>
+                          Must have {numberCondition.min}
+                          {numberCondition.max !== numberCondition.min &&
+                            -numberCondition.max}{' '}
+                          characters
+                        </Text>
+                      )
+                    ))}
+
                   <Text style={styles.inputLablel}>Email</Text>
                   <TextInput
                     placeholder="E.g. Sample@email.com"
