@@ -66,7 +66,7 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Dependants</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            {/* <Text style={styles.secondText}>7 Users</Text> */}
+            <Text style={styles.secondText}>{props.dependentsCount} Users</Text>
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
