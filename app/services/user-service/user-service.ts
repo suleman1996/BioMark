@@ -242,6 +242,31 @@ function autoLogout() {
       });
   });
 }
+function saveAutoLogout(auto_logout: boolean) {
+  return new Promise<AutoLogoutRes>((resolve, reject) => {
+    console.log('auto_logout', auto_logout);
+
+    client
+      .post(API_URLS.SAVE_AUTO_LOG_OUT, {
+        settings: {
+          auto_logout: auto_logout,
+        },
+      })
+      .then(async (response) => {
+        try {
+          logNow('tes', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('e', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('err', err);
+        reject(err);
+      });
+  });
+}
 async function logout() {
   let uniqueId = DeviceInfo.getUniqueId();
 
@@ -459,6 +484,7 @@ export const userService = {
   deviceRegisterAction,
   registerUser,
   autoLogout,
+  saveAutoLogout,
   logout,
   forgotPassword,
   getUserContacts,
