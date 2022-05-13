@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -26,7 +27,7 @@ import SCREENS from 'navigation/constants';
 import { userService } from 'services/user-service/user-service';
 import { useSelector } from 'react-redux';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 type RenderDrinkingProps = {
   title: string;
@@ -38,6 +39,9 @@ type RenderDrinkingProps = {
 };
 
 const Drinking = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const isFocus = useIsFocused();
 
   const [value, setValue] = React.useState('');

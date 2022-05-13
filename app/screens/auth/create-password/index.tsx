@@ -7,13 +7,16 @@ import { useRoute } from '@react-navigation/native';
 
 import { Header, TextInput, ActivityIndicator } from 'components';
 import { Button } from 'components/button';
+import { useTheme } from 'react-native-paper';
 
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 export default function CreatePassword() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const route = useRoute();
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setConfirmHidePassword] = useState(true);

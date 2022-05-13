@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
@@ -30,16 +31,16 @@ import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
 
-import colors from 'assets/colors';
 import { BackIcon } from 'assets/svgs/index';
 
-import styles from './styles';
+import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
 
 export default function Signup() {
   //initial hooks define
-
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   //state
   const [hidePassword, setHidePassword] = useState(true);
 

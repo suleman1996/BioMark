@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { format } from 'date-fns';
 import { Formik } from 'formik';
@@ -25,9 +26,12 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const AddDependantScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const formikRef = useRef<any>();
   const dispatch = useDispatch();
 

@@ -7,6 +7,7 @@ import {
   View,
   FlatList,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
@@ -26,9 +27,12 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 export default function VaccinationScreen() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [value, setValue] = useState('');
   const [condition, setCondition] = useState('');
   const [items, setItems] = useState('');

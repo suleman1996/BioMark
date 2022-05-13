@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, FlatList } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -9,10 +10,10 @@ import {
 } from 'components/higher-order';
 import { TextInput } from 'components';
 
-import { GlobalColors } from 'utils/theme/global-colors';
+// import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import { styles } from '../../styles';
+import makeStyles from '../../styles';
 
 type Props = {
   isVisible: boolean;
@@ -36,7 +37,8 @@ const EnvironmentModal = ({
   onDone,
 }: Props) => {
   const [ans1, setAns1] = useState(false);
-
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <ModalWithBottomBtn
       isVisible={isVisible}
@@ -72,7 +74,7 @@ const EnvironmentModal = ({
                   <Entypo
                     name={'cross'}
                     size={responsiveFontSize(15)}
-                    color={GlobalColors.darkGray}
+                    color={colors.darkGray}
                     style={styles.crossIcon}
                   />
                 </TouchableOpacity>

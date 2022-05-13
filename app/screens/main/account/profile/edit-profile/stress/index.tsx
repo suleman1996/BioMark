@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
@@ -12,11 +13,14 @@ import { userService } from 'services/user-service/user-service';
 import { goBack } from 'services/nav-ref';
 import { useSelector } from 'react-redux';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 const Index = () => {
   const isFocus = useIsFocused();
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [question1, setQuestion1] = React.useState(0);
   const [question2, setQuestion2] = React.useState(0);

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
@@ -22,10 +23,13 @@ import { goBack } from 'services/nav-ref';
 
 import fonts from 'assets/fonts';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const PersonalInformationScreen = () => {
   const authContext = React.useContext(AuthContext);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [value, setValue] = useState(
     authContext?.userData?.gender?.id == 1 ? 'first' : 'second'

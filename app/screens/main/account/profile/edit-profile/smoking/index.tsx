@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
@@ -15,7 +16,6 @@ import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
 import { useIsFocused } from '@react-navigation/native';
 import { TextInput } from 'components';
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
 import { GlobalColors } from 'utils/theme/global-colors';
@@ -26,9 +26,12 @@ import SCREENS from 'navigation/constants';
 import { useSelector } from 'react-redux';
 
 import { options } from './year';
-import { styles } from './styles';
+import makeStyles from './styles';
 
 export default function SmokingScreen() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [value, setValue] = useState('');
   const [isSmoking, setIsSmoking] = useState('');
   const [day, setDay] = useState('');

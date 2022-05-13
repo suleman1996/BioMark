@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, SafeAreaView } from 'react-native';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, ErrorText, PasswordInputWithLabel } from 'components/base';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';

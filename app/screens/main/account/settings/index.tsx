@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Linking, View } from 'react-native';
+import { Linking, View, SafeAreaView } from 'react-native';
 
 import { showMessage } from 'react-native-flash-message';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
 import { SingleMenuItemWithArrow } from 'components/higher-order';

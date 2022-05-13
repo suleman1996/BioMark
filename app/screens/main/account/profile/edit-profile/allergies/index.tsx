@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 
@@ -18,14 +19,16 @@ import AnimalModal from './modals/animal';
 import EnvironmentModal from './modals/environment';
 import OtherModal from './modals/other';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 export default function AllergiesScreen() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [value, setValue] = useState('');
   const [isMedicationModal, setIsMedicationModal] = useState(false);
   const [isFoodModal, setIsFoodModal] = useState(false);
@@ -200,13 +203,12 @@ export default function AllergiesScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'first' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 'first' ? colors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'first' ? GlobalColors.white : null}
+                color={value == 'first' ? colors.white : null}
                 value="first"
               />
               <Text
@@ -224,13 +226,12 @@ export default function AllergiesScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'second' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 'second' ? colors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'second' ? GlobalColors.white : null}
+                color={value == 'second' ? colors.white : null}
                 value="second"
               />
               <Text
@@ -248,13 +249,12 @@ export default function AllergiesScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'third' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 'third' ? colors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'third' ? GlobalColors.white : null}
+                color={value == 'third' ? colors.white : null}
                 value="third"
               />
               <Text

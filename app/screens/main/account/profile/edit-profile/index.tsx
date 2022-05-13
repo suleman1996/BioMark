@@ -7,6 +7,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { showMessage } from 'react-native-flash-message';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -21,7 +22,6 @@ import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 import AuthContext from 'utils/auth-context';
@@ -29,12 +29,15 @@ import { userService } from 'services/user-service/user-service';
 
 import Images from 'assets/images';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 let cameraIs = false;
 
 const EditProfileScreen = () => {
   const authContext = useContext(AuthContext);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [edit, setEdit] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
@@ -89,7 +92,7 @@ const EditProfileScreen = () => {
         <MaterialCommunityIcons
           name={'pencil-outline'}
           size={responsiveFontSize(22)}
-          color={GlobalColors.white}
+          color={colors.white}
         />
       </TouchableOpacity>
     </View>
@@ -181,7 +184,7 @@ const EditProfileScreen = () => {
             <Text
               style={{
                 fontSize: responsiveFontSize(20),
-                color: GlobalColors.darkPrimary,
+                color: colors.darkPrimary,
                 fontFamily: GlobalFonts.light,
               }}
             >
@@ -195,14 +198,14 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="human-male"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Personal Information</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
@@ -213,14 +216,14 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="human-male"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Body Measurement</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
@@ -231,14 +234,14 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="plus"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Medical History</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
@@ -250,14 +253,14 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="needle"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Vaccination</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
@@ -269,14 +272,14 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="allergy"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Allergies</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
@@ -289,7 +292,7 @@ const EditProfileScreen = () => {
                   <MaterialIcons
                     name="groups"
                     size={responsiveFontSize(22)}
-                    color={GlobalColors.darkPrimary}
+                    color={colors.darkPrimary}
                   />
                   <Text style={styles.menuTitleText}>
                     Family Medical History
@@ -299,7 +302,7 @@ const EditProfileScreen = () => {
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </View>
 
@@ -311,7 +314,7 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="smoking"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
 
                 <Text style={styles.menuTitleText}>Smoking</Text>
@@ -319,7 +322,7 @@ const EditProfileScreen = () => {
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
@@ -331,14 +334,14 @@ const EditProfileScreen = () => {
                 <MaterialIcons
                   name="local-drink"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Drinking</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
@@ -349,14 +352,14 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="dumbbell"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Excercise</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
@@ -367,14 +370,14 @@ const EditProfileScreen = () => {
                 <Ionicons
                   name="moon"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Sleep</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
@@ -385,14 +388,14 @@ const EditProfileScreen = () => {
                 <MaterialCommunityIcons
                   name="lightning-bolt"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Stress</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
           </View>
@@ -400,7 +403,7 @@ const EditProfileScreen = () => {
         <Text
           style={{
             marginTop: 15,
-            color: GlobalColors.darkPrimary,
+            color: colors.darkPrimary,
             fontFamily: GlobalFonts.light,
           }}
         >

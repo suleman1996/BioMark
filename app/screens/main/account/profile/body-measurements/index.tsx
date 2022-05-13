@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { HeightChooser, WeightChooser } from 'components/higher-order';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -11,10 +12,13 @@ import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 import { ActivityIndicator } from 'components/';
 
 const BodyMeasurementScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [value, setValue] = useState('');
   const [value2, setValue2] = useState('');
   const [selectedType, setSelectedType] = useState(2);

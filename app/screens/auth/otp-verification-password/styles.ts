@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import fonts from 'assets/fonts';
 
-export const makeStyles = (colors: any) =>
+const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       height: '100%',
@@ -29,11 +29,6 @@ export const makeStyles = (colors: any) =>
       marginVertical: 20,
       color: colors.heading,
     },
-    inputLablel: {
-      fontFamily: fonts.bold,
-      color: colors.heading,
-      fontSize: 15,
-    },
     floatingBtn: {
       position: 'absolute',
       bottom: 0,
@@ -41,11 +36,10 @@ export const makeStyles = (colors: any) =>
       right: 0,
       paddingVertical: 15,
     },
-    errorMessage: {
+    resendText: {
       fontFamily: fonts.regular,
-      fontSize: 12,
-      color: colors.danger,
-      marginLeft: 20,
+      fontSize: 16,
+      alignSelf: 'center',
     },
   });
 

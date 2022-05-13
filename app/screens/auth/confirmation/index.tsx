@@ -1,15 +1,18 @@
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
+import { useTheme } from 'react-native-paper';
 
 import { navigate } from 'services/nav-ref';
 import { Button } from 'components/button';
 import { SetToGo } from 'assets/svgs/index';
 import SCREENS from 'navigation/constants';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 export default function Confirmation() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
 
   return (

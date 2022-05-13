@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -17,10 +18,13 @@ import { logNow } from 'utils/functions/log-binder';
 
 import Images from 'assets/images';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const AccountScreen = () => {
   const authContext = useContext(AuthContext);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [profileLoader, setProfileLoader] = React.useState(false);
   const [autoLogoutCheck, setAutoLogoutCheck] = React.useState(false);

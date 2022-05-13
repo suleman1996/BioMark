@@ -1,7 +1,6 @@
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import parsePhoneNumber from 'libphonenumber-js';
 

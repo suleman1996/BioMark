@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
@@ -22,9 +23,7 @@ import fonts from 'assets/fonts';
 import { ActivityIndicator } from 'components';
 import { GlobalColors } from 'utils/theme/global-colors';
 
-import colors from 'assets/colors';
-
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const Options = [
   { title: '' },
@@ -51,6 +50,9 @@ const Options2 = [
 ];
 
 export default function ExerciseScreen() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [value, setValue] = useState('');
   const [isExercise, setIsExercise] = useState('');
   const [exerciseWeek, setExerciseWeek] = useState('');

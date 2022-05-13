@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Picker } from '@react-native-picker/picker';
 import { showMessage } from 'react-native-flash-message';
@@ -13,10 +14,9 @@ import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 import { userService } from 'services/user-service/user-service';
 
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 const Sleep = () => {
   const isFocus = useIsFocused();
@@ -29,6 +29,9 @@ const Sleep = () => {
   const [selectedSleep, setSelectedSleep] = React.useState(
     sleepOptions[0].title
   );
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [isVisiable, setIsVisible] = React.useState(false);
   const [indexNumber, setIndex] = React.useState(0);
 

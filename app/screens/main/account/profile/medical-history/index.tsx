@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { ModalButton } from 'components/higher-order';
 import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
@@ -15,7 +16,7 @@ import OthersModal from './modals/others';
 
 import { goBack } from 'services/nav-ref';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
 
@@ -30,6 +31,9 @@ const options = [
 ];
 
 const MedicalHistoryScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [dropdownValue, setDropdown] = useState();
   const [isDropdownChanged, setIsDropDownChanged] = useState(false);
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
