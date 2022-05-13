@@ -18,6 +18,7 @@ const API_URLS = {
   GET_USER_CONTACTS: '/api/v1/patient/contacts',
   LOG_OUT: '/api/v1/auth/sessions/logout',
   AUTO_LOG_OUT: '/api/v1/patient/settings',
+  SAVE_AUTO_LOG_OUT: '/api/v1/patient/settings/update',
   SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
   MARKETING: '/api/v1/patient/marketing',
   PROFILE_AVATAR: '/api/v1/patient/profiles/avatar',

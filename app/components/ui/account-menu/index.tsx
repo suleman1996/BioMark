@@ -28,7 +28,6 @@ import styles from './styles';
 
 const AccountMenu = (props) => {
   const dispatch = useDispatch();
-
   const openMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);
   };
@@ -205,7 +204,7 @@ const AccountMenu = (props) => {
           <Switch
             color={GlobalColors.darkPrimary}
             value={props.logOutCheck}
-            //    onValueChange={()=>props.onToggleAutoLogout()}
+            onValueChange={() => props.onToggleAutoLogout()}
           />
         </>
       </TouchableRipple>
