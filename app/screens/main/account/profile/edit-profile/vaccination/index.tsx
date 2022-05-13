@@ -68,15 +68,15 @@ export default function VaccinationScreen() {
       setIsVisible(true);
       const result = await userService.getMedicalHistory();
       console.log('resulttttt', result.data.vaccine);
-      setValue(
-        result?.data?.vaccine?.has_condition == '1'
-          ? '1'
-          : result?.data?.vaccine?.has_condition == '0'
-          ? '0'
-          : result?.data?.vaccine?.has_condition == '2'
-          ? '2'
-          : null
-      );
+      // setValue(
+      //   result?.data?.vaccine?.has_condition == '1'
+      //     ? 'true'
+      //     : result?.data?.vaccine?.has_condition == '0'
+      //     ? 'false'
+      //     : result?.data?.vaccine?.has_condition == '2'
+      //     ? 'false'
+      //     : null
+      // );
       console.log('conditionlist', result?.data?.vaccine);
       // setItems(result?.data?.vaccine?.vaccine_list);
       setList([
@@ -128,14 +128,16 @@ export default function VaccinationScreen() {
                   onPress={() => {
                     setValue(index),
                       setCondition(
-                        index == '0'
-                          ? false
-                          : index == '1'
-                          ? true
-                          : index == '2'
-                          ? false
-                          : null
+                        index == 0
+                          ? 'nooo'
+                          : // : index == 1
+                            // ? 'true'
+                            // : index == 2
+                            // ? 'false'
+                            null
                       );
+                    // console.log(index, 'items');
+                    console.log(condition, 'value------');
                   }}
                   style={[
                     styles.radioContainer,

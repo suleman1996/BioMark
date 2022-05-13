@@ -12,6 +12,7 @@ import { ActivityIndicator } from 'components';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 import { userService } from 'services/user-service/user-service';
+import { useSelector } from 'react-redux';
 
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
@@ -31,11 +32,13 @@ const Sleep = () => {
   );
   const [isVisiable, setIsVisible] = React.useState(false);
   const [indexNumber, setIndex] = React.useState(0);
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
 
   React.useEffect(() => {
     handleLifeStyle();
+    console.log(bootstrap, 'bootstrapppppp');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocus]);
+  }, [isFocus, bootstrap]);
 
   const handleSleep = async () => {
     try {
@@ -109,7 +112,10 @@ const Sleep = () => {
       <TitleWithBackLayout title="Sleep">
         <View style={styles.container}>
           <Text style={styles.heading}>
-            How many hours of sleep do you get per day?
+            {
+              bootstrap?.attributes?.medical_template?.sleeping[0]?.content
+                ?.fields[0]?.question
+            }
           </Text>
           <View>
             <View style={styles.container2}>
