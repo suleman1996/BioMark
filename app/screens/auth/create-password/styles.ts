@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: 12,
     color: colors.danger,
-    marginLeft: 20,
+    marginLeft: 2,
   },
 });
 

@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: 12,
     color: colors.danger,
-    marginLeft: 30,
+    marginLeft: 22,
   },
 });
 

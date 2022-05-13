@@ -15,7 +15,6 @@ import {
 } from 'components/base';
 import { BoxSelector, RelationMenu } from 'components/higher-order';
 
-import { Regex } from 'constants/regex';
 import { goBack } from 'services/nav-ref';
 import { dependentService } from 'services/account-service/dependent-service';
 import { getAllDependents } from 'store/account/account-actions';
@@ -218,21 +217,20 @@ export default AddDependantScreen;
 
 const AddDependentSchema = Yup.object({
   first_name: Yup.string()
-    .matches(Regex.alphabets, 'Please enter valid first name')
+    // .matches(Regex.alphabets, 'Please enter valid first name')
     .required('Firstname is required'),
   last_name: Yup.string()
-    .matches(Regex.alphabets, 'Please enter valid last name')
+    // .matches(Regex.alphabets, 'Please enter valid last name')
     .required('lastname is required'),
   phone_number: Yup.string()
-    .matches(Regex.minNum, 'Enter valid phone number')
+    // .matches(Regex.minNum, 'Enter valid phone number')
     .required('Please provide your phone number'),
   email: Yup.string()
     .email('Enter valid email address')
     .required('Email is required'),
   id_number: Yup.string()
-    .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
-    // .required('NRIC / Passport is required'),
-    .required('enterrr'),
+    // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
+    .required('Enter valid NRIC / Passport'),
   document_type: Yup.string().required(''),
   dependent_type_id: Yup.string().required(''),
   // birth_date: Yup.string().required(''),

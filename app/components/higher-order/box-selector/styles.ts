@@ -25,6 +25,16 @@ export const styles = StyleSheet.create({
     borderRadius: widthToDp(2),
     height: heightToDp(5.5),
     ...GlobalStyles.shadow,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    marginVertical: 10,
   },
   label: {
     fontSize: responsiveFontSize(22),
