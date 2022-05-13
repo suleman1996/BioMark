@@ -33,6 +33,36 @@ const AddDependantScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
   const [selectedCountryCode, setSelectedCountryCode] = useState('+60');
+  const [min, setMin] = useState(4);
+  const [max, setMax] = useState(13);
+  React.useEffect(() => {
+    selectedCountryCode == '+60' && setMin(8), setMax(11);
+    selectedCountryCode == '+63' && setMin(10), setMax(10);
+    selectedCountryCode == '+65' && setMin(8), setMax(8);
+  }, [selectedCountryCode]);
+
+  const AddDependentSchema = Yup.object({
+    first_name: Yup.string()
+      // .matches(Regex.alphabets, 'Please enter valid first name')
+      .required('Firstname is required'),
+    last_name: Yup.string()
+      // .matches(Regex.alphabets, 'Please enter valid last name')
+      .required('lastname is required'),
+    phone_number: Yup.string()
+      // .matches(Regex.minNum, 'Enter valid phone number')
+      .required('Please provide your phone number')
+      .min(min)
+      .max(max),
+    email: Yup.string()
+      .email('Enter valid email address')
+      .required('Email is required'),
+    id_number: Yup.string()
+      // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
+      .required('Enter valid NRIC / Passport'),
+    document_type: Yup.string().required(''),
+    dependent_type_id: Yup.string().required(''),
+    // birth_date: Yup.string().required(''),
+  });
 
   const onSubmit = () => {
     const {
@@ -214,24 +244,3 @@ const AddDependantScreen = () => {
 };
 
 export default AddDependantScreen;
-
-const AddDependentSchema = Yup.object({
-  first_name: Yup.string()
-    // .matches(Regex.alphabets, 'Please enter valid first name')
-    .required('Firstname is required'),
-  last_name: Yup.string()
-    // .matches(Regex.alphabets, 'Please enter valid last name')
-    .required('lastname is required'),
-  phone_number: Yup.string()
-    // .matches(Regex.minNum, 'Enter valid phone number')
-    .required('Please provide your phone number'),
-  email: Yup.string()
-    .email('Enter valid email address')
-    .required('Email is required'),
-  id_number: Yup.string()
-    // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
-    .required('Enter valid NRIC / Passport'),
-  document_type: Yup.string().required(''),
-  dependent_type_id: Yup.string().required(''),
-  // birth_date: Yup.string().required(''),
-});

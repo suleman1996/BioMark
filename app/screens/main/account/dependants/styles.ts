@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     // position: 'absolute',
   },
   bottomBtnContainer: {
-    alignItems: 'center',
+    // alignItems: 'center',
     bottom: 0,
     paddingBottom: heightToDp(3),
     width: widthToDp(100),
