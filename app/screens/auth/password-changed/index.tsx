@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
-import { Lock } from 'assets/svgs/index';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
+import { Lock } from 'assets/svgs/index';
+
 import { styles } from './styles';
+
 type Props = {
   route: any;
 };

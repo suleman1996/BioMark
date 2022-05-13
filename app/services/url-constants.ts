@@ -10,6 +10,8 @@ const API_URLS = {
   RESEND_PASSWORD_OTP: '/api/v1/auth/confirmations/resend_code',
   INPUT_BARCODE: '/api/v1/patient/scanners/midas',
   MOBILE_REGISTER: '/api/v1/patient/devices',
+  BOOTSTRAP: '/api/v1/patient/bootstrapper',
+  NOTIFICATIONS: '/api/v1/patient/notifications',
 
   GET_PROFILE: '/api/v1/patient/profiles',
   CREATE_PROFILE: 'api/v2/patient/profiles',
@@ -18,10 +20,8 @@ const API_URLS = {
   AUTO_LOG_OUT: '/api/v1/patient/settings',
   SAVE_USER_CONTACTS: '/api/v1/patient/contacts',
   MARKETING: '/api/v1/patient/marketing',
-  SLEEPING: '/api/v1/patient/lifestyle/sleeping',
-  Drinking: '/api/v1/patient/lifestyle/drinking',
-  Profile_Avatar: '/api/v1/patient/profiles/avatar',
-  Update_Profile: '/api/v1/patient/profiles/update',
+  PROFILE_AVATAR: '/api/v1/patient/profiles/avatar',
+  UPDATE_PROFILE: '/api/v1/patient/profiles/update',
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
   GET_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
@@ -33,13 +33,19 @@ const API_URLS = {
   CHANGE_PASSWORD_LOGGED_IN: '/api/v1/auth/password/reset_password',
 
   // EditProfile
-  Smoking: '/api/v1/patient/lifestyle/smoking',
-  Vaccination: '/api/v1/patient/medical_histories/vaccine',
-  Allergies: '/api/v1/patient/medical_histories/allergy',
-  Get_Stress: '/api/v1/patient/stress',
-  Create_Stress: '/api/v1/patient/lifestyle/stress',
+  SMOKING: '/api/v1/patient/lifestyle/smoking',
+  SLEEPING: '/api/v1/patient/lifestyle/sleeping',
+  DRINKING: '/api/v1/patient/lifestyle/drinking',
+  VACCINATION: '/api/v1/patient/medical_histories/vaccine',
+  ALLERGIES: '/api/v1/patient/medical_histories/allergy',
+  GET_STRESS: '/api/v1/patient/stress',
+  CREATE_STRESS: '/api/v1/patient/stress',
   GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
-  bodyMeasurement: '/api/v1/patient/medical/bm',
+  GET_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
+  BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
+
+  LOCATION: '/api/v1/geolocation',
+  EXERCISE: '/api/v1/patient/lifestyle/exercise',
 };
 
 export { API_URLS };

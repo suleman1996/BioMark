@@ -1,8 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import SCREENS from './constants';
-
 import CreatePassword from 'screens/auth/create-password';
 import Confirmation from 'screens/auth/confirmation';
 import ForgotPassword from 'screens/auth/forgot-password';
@@ -13,6 +11,8 @@ import Signup from 'screens/auth/signup';
 import SignupVerification from 'screens/auth/signup-verification';
 import Splash from 'screens/splash/splash';
 import TermsAndPrivacy from 'screens/auth/terms-and-privacy';
+
+import SCREENS from './constants';
 
 const Stack = createNativeStackNavigator();
 

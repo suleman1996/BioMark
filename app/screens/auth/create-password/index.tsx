@@ -1,14 +1,14 @@
 import { Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, { useState } from 'react';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useRoute } from '@react-navigation/native';
-import { showMessage } from 'react-native-flash-message';
 
-import { navigate } from 'services/nav-ref';
 import { Header, TextInput, ActivityIndicator } from 'components';
 import { Button } from 'components/button';
-import { changePassword } from 'services/auth-service';
+
+import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
 import styles from './styles';
@@ -20,37 +20,13 @@ export default function CreatePassword() {
   const [loading, setLoading] = useState(false);
 
   const resetPassword = async ({ password }) => {
-    try {
-      setLoading(true);
-      Keyboard.dismiss();
-      await changePassword({
-        password: {
-          username: route.params.phone,
-          password: password,
-          code: route.params.otp,
-        },
-      });
-      navigate(SCREENS.PASSWORD_CHANGED);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: "User not exist's",
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.message,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
+    setLoading(true);
+
+    navigate(SCREENS.PASSWORD_OTP, {
+      password: password,
+      phone: route?.params?.phone,
+    });
+    setLoading(false);
   };
 
   return (
@@ -127,9 +103,19 @@ export default function CreatePassword() {
 }
 
 const ResetPassSchema = Yup.object({
-  password: Yup.string().required('Password is required').min(7, 'Too short'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Must be 8 character long.')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have a Capital letter, a digit and a special character.'
+    ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Confirm Password is required')
-    .min(7, 'Too short'),
+    .min(7, 'Too short')
+    .matches(
+      /^(?=.*\d)(?=.*[@#$%^&+=]).+$/,
+      'Atleast have one digit and one special character.'
+    ),
 });

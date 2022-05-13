@@ -1,36 +1,46 @@
-import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
+import { View, Text, SafeAreaView } from 'react-native';
+
 import { Picker } from '@react-native-picker/picker';
+import { showMessage } from 'react-native-flash-message';
+import { useIsFocused } from '@react-navigation/native';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
-import styles from './styles';
+import { ActivityIndicator } from 'components';
+
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+import { userService } from 'services/user-service/user-service';
+
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
-import { ActivityIndicator } from 'components';
-import { userService } from 'services/user-service/user-service';
-import { showMessage } from 'react-native-flash-message';
-import { useIsFocused } from '@react-navigation/native';
+
+import styles from './styles';
 
 const Sleep = () => {
   const isFocus = useIsFocused();
   const sleepOptions = [
-    { title: 'less than 4 hours' },
-    { title: '4-7 hours' },
-    { title: '7-10 hours' },
-    { title: 'more than 10 hours' },
+    { id: 0, title: 'less than 4 hours' },
+    { id: 1, title: '4-7 hours' },
+    { id: 2, title: '7-10 hours' },
+    { id: 3, title: 'more than 10 hours' },
   ];
   const [selectedSleep, setSelectedSleep] = React.useState(
     sleepOptions[0].title
   );
   const [isVisiable, setIsVisible] = React.useState(false);
+  const [indexNumber, setIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    handleLifeStyle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocus]);
 
   const handleSleep = async () => {
     try {
       setIsVisible(true);
-      const result = await userService.sleeping(selectedSleep);
+      const result = await userService.sleeping(indexNumber);
       console.log('Sleep success ', result.data);
       navigate(SCREENS.EDIT_PROFILE);
       setIsVisible(false);
@@ -68,7 +78,7 @@ const Sleep = () => {
         setSelectedSleep(sleepOptions[1].title);
       result.data?.sleep?.sleep_duration == '7-10 hours' &&
         setSelectedSleep(sleepOptions[2].title);
-      result.data?.sleep?.sleep_duration == 'more than 10 hours' &&
+      result.data?.sleep?.sleep_duration == 'more than 10 hours ' &&
         setSelectedSleep(sleepOptions[3].title);
       setIsVisible(false);
     } catch (error) {
@@ -93,11 +103,6 @@ const Sleep = () => {
     }
   };
 
-  React.useEffect(() => {
-    handleLifeStyle();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocus]);
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
@@ -115,7 +120,9 @@ const Sleep = () => {
                   fontFamily: fonts.regular,
                 }}
                 itemStyle={{ color: colors.danger }}
-                onValueChange={(itemValue) => setSelectedSleep(itemValue)}
+                onValueChange={(itemValue, index) => {
+                  setSelectedSleep(itemValue), setIndex(index);
+                }}
               >
                 {sleepOptions?.map((item, index) => {
                   return (

@@ -7,7 +7,6 @@ export { default as Header } from './header';
 export { default as ActivityIndicator } from './loader/activity-indicator';
 export { default as OtpInput } from './otp/otp-input';
 export { default as PhoneNumber } from './phone-number';
-export { default as SearchBar } from './search-bar';
 export { default as SelectedButton } from './selected-button';
 export { default as StressBar } from './stress-bar';
 export { default as TextInputButton } from './text-input-button';

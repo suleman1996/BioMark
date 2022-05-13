@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -5,20 +6,21 @@ import {
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
-import React, { useState } from 'react';
 
 import { RadioButton } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { Button } from 'components/button';
-import { InputWithLabel } from 'components/base';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { InputWithLabel, Button as ButtonComponent } from 'components/base';
 import { DatePicker, ActivityIndicator } from 'components';
+
+import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
+import { goBack } from 'services/nav-ref';
+
 import fonts from 'assets/fonts';
-import { Button as ButtonComponent } from 'components/base';
 
 import { styles } from './styles';
 
@@ -40,6 +42,48 @@ const PersonalInformationScreen = () => {
   React.useEffect(() => {
     setGenderCheck(true);
   }, [value]);
+
+  const handleUpdateProfile = async () => {
+    Keyboard.dismiss();
+    setGenderWarn(false);
+    const gender = value == 'first' ? 1 : 2;
+    const ic_number = authContext?.userData?.ic_number;
+    const email = authContext?.userData?.email;
+    try {
+      setIsLoading(true);
+      const result = await userService.updateProfile(
+        firstName,
+        lastName,
+        date,
+        gender,
+        ic_number,
+        email
+      );
+      console.log('success ', result.data);
+      authContext?.setUserData(result.data);
+      goBack();
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log('Error ', error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
 
   const RenderConfirmation = ({ visible = false }) => {
     if (!visible) {
@@ -99,49 +143,6 @@ const PersonalInformationScreen = () => {
     );
   };
 
-  const handleUpdateProfile = async () => {
-    Keyboard.dismiss();
-    setGenderWarn(false);
-    const gender = value == 'first' ? 1 : 0;
-    const ic_number = authContext?.userData?.ic_number;
-    const email = authContext?.userData?.email;
-    try {
-      setIsLoading(true);
-      const result = await userService.updateProfile(
-        firstName,
-        lastName,
-        date,
-        gender,
-        ic_number,
-        email
-      );
-      console.log('success ', result.data);
-
-      authContext?.setUserData(result.data);
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log('Error ', error);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: 'Internal Server Error',
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
-  };
-
   return (
     <TitleWithBackLayout title="Personal Information">
       <ActivityIndicator visible={isLoading} />
@@ -185,10 +186,10 @@ const PersonalInformationScreen = () => {
       </ScrollView>
       <Button
         disabled={
-          // firstName?.length > 0 &&
-          // lastName?.length > 0 &&
           firstName.length > authContext?.userData?.first_name.length ||
+          firstName.length < authContext?.userData?.first_name.length ||
           lastName.length > authContext?.userData?.last_name.length ||
+          lastName.length < authContext?.userData?.last_name.length ||
           date != authContext?.userData?.birth_date ||
           genderDisable == true
             ? false

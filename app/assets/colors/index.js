@@ -14,5 +14,7 @@ const colors = {
   bg: '#3D3D3D90',
   redish: '#EE5407',
   greenish: '#03DAC6',
+  darkGray: '#A9A9A9',
+  lightGray: '#DCDCDC',
 };
 export default colors;

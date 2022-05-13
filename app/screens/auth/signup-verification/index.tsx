@@ -1,21 +1,28 @@
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { Platform } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
-import React, { useState, useEffect, useRef } from 'react';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 
 import { Button } from 'components/button';
-import colors from 'assets/colors';
-import fonts from 'assets/fonts';
-import BackIcon from 'assets/svgs/back';
 import { OtpInput, ActivityIndicator } from 'components';
+
 import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
 import { reduxDeviceRegister } from 'store/auth/auth-actions';
 import { navigate, goBack } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
+import BackIcon from 'assets/svgs/back';
 
 import styles from './styles';
 

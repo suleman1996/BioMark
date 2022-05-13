@@ -44,3 +44,4 @@ export * from './stripe-payment';
 export * from './covid-dependant';
 export * from './billplz-payment';
 export * from './health-snapshot';
+export * from './geolocation';

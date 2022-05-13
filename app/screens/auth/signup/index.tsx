@@ -1,4 +1,3 @@
-import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
@@ -6,15 +5,16 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
+
+import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
 import moment from 'moment';
 
-import colors from 'assets/colors';
-import { BackIcon } from 'assets/svgs/index';
 import { Button } from 'components/button';
 import {
   CheckBox,
@@ -23,11 +23,15 @@ import {
   TextInput,
   PhoneNumber,
 } from 'components';
+
 import SCREENS from 'navigation/constants';
 import { navigate, goBack } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
+
+import colors from 'assets/colors';
+import { BackIcon } from 'assets/svgs/index';
 
 import styles from './styles';
 
@@ -214,9 +218,7 @@ export default function Signup() {
                 />
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
-
-                  <Text style={styles.inputLablel}>Mobile Number</Text>
-                  {/* international phone Picker */}
+                  <Text style={styles.inputLablel}>Mobile Number</Text>0
                   <PhoneNumber
                     countryCode={countryCode}
                     setCountryCode={setCountryCode}
@@ -225,7 +227,9 @@ export default function Signup() {
                     setSelectCountryCode={setSelectCountryCode}
                     maxLength={numberCondition.max}
                   />
-                  {(phoneNumber !== '' || errors.password) &&
+                  {(phoneNumber !== '' ||
+                    errors.password ||
+                    phoneNumber.charAt(0) == 0) &&
                     phoneNumber.length < numberCondition.min && (
                       <Text style={styles.errorMessage}>
                         Must have {numberCondition.min}
@@ -241,7 +245,6 @@ export default function Signup() {
                     margin={20}
                     keyboardType="email-address"
                   />
-
                   <Text style={styles.inputLablel}>Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."
@@ -260,23 +263,31 @@ export default function Signup() {
 
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
-                    <TouchableOpacity
-                      onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
+                    <TouchableWithoutFeedback
+                      onPress={() =>
+                        navigate(SCREENS.TERMS_AND_PRIVACY, {
+                          privacyPolicy: false,
+                        })
+                      }
                     >
                       <Text
                         style={{
                           color: colors.blue,
                           fontSize: 17,
                           textDecorationLine: 'underline',
-                          bottom: 2,
+                          // bottom: 2,
                         }}
                       >
                         terms and condition
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                     <Text> and the </Text>
-                    <TouchableOpacity
-                      onPress={() => navigate(SCREENS.TERMS_AND_PRIVACY)}
+                    <TouchableWithoutFeedback
+                      onPress={() =>
+                        navigate(SCREENS.TERMS_AND_PRIVACY, {
+                          privacyPolicy: true,
+                        })
+                      }
                     >
                       <Text
                         style={{
@@ -287,7 +298,7 @@ export default function Signup() {
                       >
                         privacy policy.
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                   </Text>
                 </View>
                 <TouchableOpacity>
@@ -311,5 +322,11 @@ const ResetPassSchema = Yup.object({
   lName: Yup.string().required('Please provide your last name'),
   IcPnum: Yup.string(),
   email: Yup.string(),
-  password: Yup.string().required('Please type your new password').min(8),
+  password: Yup.string()
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*\d)(?=.*[@#$%^&+=]).+$/,
+      'Atleast have one digit and one special character.'
+    ),
 });

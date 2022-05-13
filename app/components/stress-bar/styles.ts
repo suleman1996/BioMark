@@ -42,7 +42,8 @@ export const styles = StyleSheet.create({
   },
   headingText: {
     fontFamily: GlobalFonts.regular,
-    fontSize: 12,
+    fontSize: 11,
     color: GlobalColors.heading,
+    fontWeight: 'bold',
   },
 });

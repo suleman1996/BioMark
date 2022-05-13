@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, FlatList } from 'react-native';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import Entypo from 'react-native-vector-icons/Entypo';
+
 import {
   ModalWithBottomBtn,
   RadioButtonQuestion,
 } from 'components/higher-order';
 import { TextInputButton } from 'components';
+
+import { GlobalColors } from 'utils/theme/global-colors';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+
 import { styles } from '../../styles';
 
 type Props = {

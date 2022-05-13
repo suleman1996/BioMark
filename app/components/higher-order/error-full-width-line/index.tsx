@@ -8,6 +8,7 @@ type Props = {
 };
 const ErrorLineFullWidth = (props: Props) => {
   const { error } = props;
+
   if (error) {
     return (
       <View style={styles.container}>

@@ -7,6 +7,7 @@ import { logNow } from 'utils/functions/log-binder';
 import { getDay, getMonth, getYear } from 'utils/functions/date-format';
 
 import { styles } from './styles';
+
 type Props = {
   date: any;
   setDate: any;
@@ -16,17 +17,12 @@ const DateTimePickerModalComponent = (props: Props) => {
   const { date, setDate } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  //   const showDatePicker = () => {
-  //     setDatePickerVisibility(true);
-  //   };
-
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
 
   const handleConfirm = (dated: any) => {
     logNow(date);
-    console.warn('A date has been picked: ', dated);
     setDate(dated);
     hideDatePicker();
   };

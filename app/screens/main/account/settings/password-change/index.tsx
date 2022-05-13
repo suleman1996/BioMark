@@ -10,7 +10,6 @@ import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 
 import SCREENS from 'navigation/constants';
-
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -22,7 +21,7 @@ import { ErrorResponse } from 'types/ErrorResponse';
 
 import { styles } from './styles';
 
-const passText = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
+const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
 const PasswordChangeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -116,7 +115,7 @@ const PasswordChangeScreen = () => {
           >
             {({ handleChange, handleSubmit, errors, values }) => (
               <>
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps>
                   <PasswordInputWithLabel
                     marginTop={1}
                     label={'Current Password'}
@@ -128,24 +127,28 @@ const PasswordChangeScreen = () => {
                     onChange={handleChange('currentPassword')}
                   />
                   {errors.currentPassword && (
-                    <ErrorText text={errors.currentPassword} />
+                    <ErrorText
+                      text={
+                        values.currentPassword ? errors.currentPassword : ''
+                      }
+                    />
                   )}
                   <Text
                     style={[
                       styles.textHeader,
                       {
-                        marginTop: heightToDp(4),
-                        letterSpacing: -0.5,
+                        marginTop: heightToDp(5),
+                        letterSpacing: -0.1,
                         lineHeight: responsiveFontSize(25),
                       },
                     ]}
                   >
-                    {passText}
+                    {PASS_TEXT}
                   </Text>
                   <PasswordInputWithLabel
                     marginTop={0.3}
                     label={'Enter new password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password...'}
                     isSecure={ePass}
                     password={values.password}
                     setHidePassword={() => setEPass(!ePass)}
@@ -177,12 +180,16 @@ const PasswordChangeScreen = () => {
                     />
                   </View>
                   {errors.password && (
-                    <ErrorText text={errors.currentPassword} />
+                    <View style={{ paddingBottom: heightToDp(3) }}>
+                      <ErrorText
+                        text={values.password ? errors.password : ''}
+                      />
+                    </View>
                   )}
                   <PasswordInputWithLabel
                     marginTop={-1}
                     label={'Confirm New Password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password again'}
                     isSecure={eConfirm}
                     password={values.confirmPassword}
                     setHidePassword={() => setEConfirm(!eConfirm)}
@@ -190,7 +197,11 @@ const PasswordChangeScreen = () => {
                     onChange={handleChange('confirmPassword')}
                   />
                   {errors.confirmPassword && (
-                    <ErrorText text={errors.confirmPassword} />
+                    <ErrorText
+                      text={
+                        values.confirmPassword ? errors.confirmPassword : ''
+                      }
+                    />
                   )}
                 </ScrollView>
                 <View style={GlobalStyles.bottomBtnWithShadow}>

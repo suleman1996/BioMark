@@ -25,6 +25,7 @@ const ModalWithBottomBtn = ({
   useEffect(() => {
     setIsModal(isVisible);
   }, [isVisible]);
+
   return (
     <Modal setIsVisible={setIsVisible} isVisible={isModal}>
       <View style={styles.card}>

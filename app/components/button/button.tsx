@@ -16,6 +16,7 @@ type Props = {
 export default function Button(props: Props) {
   const horizontal = props.marginHorizontal ? props.marginHorizontal : 20;
   const vertical = props.marginVertical ? props.marginVertical : 20;
+
   return (
     <View
       style={[

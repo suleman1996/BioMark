@@ -1,7 +1,6 @@
 /* eslint-disable eslint-comments/no-unused-disable */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Formik } from 'formik';
 import React, { useState } from 'react';
 import {
   FlatList,
@@ -11,35 +10,38 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 import * as Yup from 'yup';
 import CountryPicker, {
   DEFAULT_THEME,
 } from 'react-native-country-picker-modal';
+import moment from 'moment';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
 
-import colors from 'assets/colors';
-import { BackIcon } from 'assets/svgs/index';
 import { Button } from 'components/button';
-import { CheckBox } from 'components';
-import { DatePicker, TextInput, ActivityIndicator } from 'components';
+import { DatePicker, TextInput, ActivityIndicator, CheckBox } from 'components';
+
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
-
 import {
   getAuthAsyncStorage,
   resetAuthAsyncStorage,
 } from 'services/async-storage/auth-async-storage';
-import { useDispatch, useSelector } from 'react-redux';
 import { loggedIn, loggedOut } from 'store/auth/auth-actions';
-import moment from 'moment';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
-import { IAppState } from 'store/IAppState';
+
+import colors from 'assets/colors';
+import { BackIcon } from 'assets/svgs/index';
 
 import styles from './styles';
 
 export default function CreateProfile() {
+  const dispatch = useDispatch();
+  const dispatch3 = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
   const [selectCountryCode, setSelectCountryCode] = useState('60');
@@ -62,11 +64,6 @@ export default function CreateProfile() {
   const [checked, setChecked] = React.useState(false);
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
-  const dispatch = useDispatch();
-  const dispatch2 = useDispatch();
-  const dispatch3 = useDispatch();
-  const navigations = useNavigation();
-  const auth = useSelector((state: IAppState) => state.auth);
 
   async function getHasprofileAsyncStorage() {
     const data = await getAuthAsyncStorage();
@@ -74,8 +71,7 @@ export default function CreateProfile() {
     console.log('data', data);
   }
 
-  //fuctions
-
+  //functions
   const signupApi = async (values: string) => {
     // setLoading(true);
     Keyboard.dismiss();
@@ -111,6 +107,16 @@ export default function CreateProfile() {
     }
   };
 
+  const onSelect = (Country: any) => {
+    setCountryCode(Country.cca2);
+    setSelectCountryCode(Country.callingCode[0]);
+  };
+
+  const onBackPress = async () => {
+    await resetAuthAsyncStorage();
+    dispatch(loggedOut(true));
+  };
+
   const RenderRadio = ({ item }) => (
     <TouchableOpacity
       onPress={() => setSelectedGender(item)}
@@ -140,24 +146,6 @@ export default function CreateProfile() {
     </TouchableOpacity>
   );
 
-  const ResetPassSchema = Yup.object({
-    fName: Yup.string().required('Please provide your first name'),
-
-    lName: Yup.string().required('Please provide your last name'),
-
-    IcPnum: Yup.string(),
-    email: Yup.string(),
-  });
-  const onSelect = (Country: any) => {
-    console.log(Country);
-
-    setCountryCode(Country.cca2);
-    setSelectCountryCode(Country.callingCode[0]);
-  };
-  const onBackPress = async () => {
-    await resetAuthAsyncStorage();
-    dispatch(loggedOut(true));
-  };
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -303,3 +291,12 @@ export default function CreateProfile() {
     </>
   );
 }
+
+const ResetPassSchema = Yup.object({
+  fName: Yup.string().required('Please provide your first name'),
+
+  lName: Yup.string().required('Please provide your last name'),
+
+  IcPnum: Yup.string(),
+  email: Yup.string(),
+});

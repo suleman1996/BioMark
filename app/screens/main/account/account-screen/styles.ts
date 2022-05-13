@@ -19,12 +19,13 @@ export const styles = StyleSheet.create({
     borderRadius: widthToDp(12.5),
   },
   profile: {
-    paddingLeft: widthToDp(4),
+    paddingHorizontal: widthToDp(4),
   },
   name: {
     fontFamily: GlobalFonts.medium,
     fontSize: responsiveFontSize(22),
     color: GlobalColors.darkPrimary,
+    paddingRight: widthToDp(20),
   },
   editProfile: {
     fontFamily: GlobalFonts.light,
@@ -35,5 +36,11 @@ export const styles = StyleSheet.create({
   menuList: {
     paddingTop: widthToDp(7),
     marginBottom: heightToDp(7),
+  },
+  accountScreenView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: widthToDp(100),
+    paddingHorizontal: widthToDp(6),
   },
 });

@@ -14,15 +14,7 @@ export default function Covid19Btn() {
         </View>
       </TouchableOpacity>
       <View>
-        <Text
-          style={{
-            fontFamily: fonts.bold,
-            fontSize: 15,
-            color: colors.heading,
-          }}
-        >
-          COVID-19
-        </Text>
+        <Text style={styles.covidText}>COVID-19</Text>
       </View>
     </View>
   );
@@ -43,5 +35,10 @@ const styles = StyleSheet.create({
     shadowRadius: 16.0,
     elevation: 10,
     marginBottom: 5,
+  },
+  covidText: {
+    fontFamily: fonts.bold,
+    fontSize: 15,
+    color: colors.heading,
   },
 });

@@ -23,6 +23,16 @@ const styles = StyleSheet.create({
     marginTop: heightToDp(2),
     fontWeight: 'bold',
   },
+  drinkingView: {
+    flexDirection: 'row',
+    height: 50,
+    alignItems: 'center',
+    marginBottom: 20,
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#ffffff50',
+  },
 });
 
 export default styles;

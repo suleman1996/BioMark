@@ -15,15 +15,7 @@ export default function YourHealthBtn() {
         </View>
       </TouchableOpacity>
       <View>
-        <Text
-          style={{
-            fontFamily: fonts.bold,
-            fontSize: 15,
-            color: colors.heading,
-          }}
-        >
-          Your Health
-        </Text>
+        <Text style={styles.healthText}>Your Health</Text>
       </View>
     </View>
   );
@@ -44,5 +36,10 @@ const styles = StyleSheet.create({
     shadowRadius: 16.0,
     elevation: 10,
     marginBottom: 5,
+  },
+  healthText: {
+    fontFamily: fonts.bold,
+    fontSize: 15,
+    color: colors.heading,
   },
 });

@@ -1,3 +1,12 @@
+import fonts from 'assets/fonts';
+import MyImage from 'assets/images';
+import {
+  Covid19Btn,
+  GoogleFitButton,
+  SmallButton,
+  YourHealthBtn,
+} from 'components/button';
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import React, { useContext, useEffect } from 'react';
 import {
   ImageBackground,
@@ -6,26 +15,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-import {
-  Covid19Btn,
-  GoogleFitButton,
-  SmallButton,
-  YourHealthBtn,
-} from 'components/button';
-import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-
-import AuthContext from 'utils/auth-context';
-
+import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
-
-import fonts from 'assets/fonts';
-import MyImage from 'assets/images';
-
+import { getReduxBootstrap } from 'store/account/account-actions';
+import AuthContext from 'utils/auth-context';
 import styles from './styles';
 
 export default function Home() {
   const authContext = useContext(AuthContext);
+
+  // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+  const dispatch = useDispatch();
+
+  /*eslint-disable*/
+  const getReduxBoot = async () => {
+    await dispatch(getReduxBootstrap());
+  };
+
+  useEffect(() => {
+    getReduxBoot();
+  }, []);
+  /*eslint-enable*/
 
   const userProfile = async () => {
     try {
@@ -39,6 +49,7 @@ export default function Home() {
 
   useEffect(() => {
     userProfile();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,6 +70,7 @@ export default function Home() {
               source={MyImage.rectangle}
               style={{
                 width: '100%',
+                height: 140,
               }}
             >
               <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>

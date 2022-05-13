@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 0,
     borderRadius: 8,
     borderColor: GlobalColors.darkPrimary,
-    backgroundColor: colors.inputBg,
+    backgroundColor: colors.lightGray,
     height: 50,
   },
   bottomView: {

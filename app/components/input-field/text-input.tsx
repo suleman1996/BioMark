@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import colors from 'assets/colors';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   margin?: any;
@@ -16,6 +17,7 @@ type Props = {
   onEyePress?: any;
   eye?: any;
   keyboardType?: string;
+  defaultValue?: string;
 };
 
 export default function (props: Props) {
@@ -24,8 +26,11 @@ export default function (props: Props) {
       <TextInput
         placeholder={props?.placeholder}
         value={props?.value}
+        defaultValue={props?.defaultValue}
         activeUnderlineColor={'transparent'}
-        underlineColor={'FFFFFF'}
+        selectionColor={colors.heading}
+        caretHidden={false}
+        underlineColor={'#FFFFFF'}
         placeholderTextColor={'#8493AE'}
         onChangeText={props?.onChange}
         secureTextEntry={props?.secureTextEntry}
@@ -55,8 +60,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     backgroundColor: colors.inputBg,
-    fontSize: 14,
+    fontSize: responsiveFontSize(18),
     height: 45,
-    borderRadius: 8,
+    borderRadius: 5,
   },
 });

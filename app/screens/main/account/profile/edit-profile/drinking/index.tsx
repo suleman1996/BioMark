@@ -1,23 +1,32 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
+
 import { RadioButton } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { showMessage } from 'react-native-flash-message';
+import { useIsFocused } from '@react-navigation/native';
 
 import { TitleWithBackLayout } from 'components/layouts';
-import styles from './styles';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { ActivityIndicator } from 'components';
 import { ButtonWithShadowContainer } from 'components/base';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
-import { showMessage } from 'react-native-flash-message';
-import { ActivityIndicator } from 'components';
 import { userService } from 'services/user-service/user-service';
-import { useIsFocused } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+
+import styles from './styles';
 
 type RenderDrinkingProps = {
   title: string;
@@ -37,6 +46,13 @@ const Drinking = () => {
   const [spirits, setSpiritss] = React.useState(0);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [isDrinking, setIsDrinking] = React.useState(false);
+
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
+  React.useEffect(() => {
+    handleLifeStyle();
+    // console.log('Bootstrap =======>', bootstrap);
+  }, [isFocus, bootstrap]);
 
   const handleDrinking = async () => {
     if (value == '') {
@@ -113,18 +129,7 @@ const Drinking = () => {
   };
 
   const RenderDrinking = (props: RenderDrinkingProps) => (
-    <View
-      style={{
-        flexDirection: 'row',
-        height: 50,
-        alignItems: 'center',
-        marginBottom: 20,
-        paddingHorizontal: 20,
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: '#ffffff50',
-      }}
-    >
+    <View style={styles.drinkingView}>
       <View
         style={{ width: '50%', flexDirection: 'row', alignItems: 'center' }}
       >
@@ -165,17 +170,18 @@ const Drinking = () => {
     </View>
   );
 
-  React.useEffect(() => {
-    handleLifeStyle();
-  }, [isFocus]);
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
       <TitleWithBackLayout title="Drinking">
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
           <ScrollView style={{ flex: 1, marginBottom: 100 }}>
-            <Text style={styles.label}>Do you drink alcoholic beverages.?</Text>
+            <Text style={styles.label}>
+              {
+                bootstrap?.attributes?.medical_template?.drinking[0]?.content
+                  ?.fields[0]?.question
+              }
+            </Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setValue(newValue);
@@ -211,7 +217,10 @@ const Drinking = () => {
                     { color: value == 'first' ? '#ffffff' : '#000000' },
                   ]}
                 >
-                  No
+                  {
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[0]?.options[0]
+                  }
                 </Text>
               </TouchableOpacity>
 
@@ -234,17 +243,26 @@ const Drinking = () => {
                     { color: value == 'second' ? '#ffffff' : '#000000' },
                   ]}
                 >
-                  Yes
+                  {
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[0]?.options[1]
+                  }
                 </Text>
               </TouchableOpacity>
             </RadioButton.Group>
             {value == 'second' && (
               <>
                 <Text style={[styles.label, { marginBottom: 20 }]}>
-                  Do you drink alcoholic beverages.?
+                  {
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.question
+                  }
                 </Text>
                 <RenderDrinking
-                  title="Pints of Beer"
+                  title={
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.options[0]
+                  }
                   quantity={beer}
                   setter={setBeer}
                   iconLeft={
@@ -273,7 +291,10 @@ const Drinking = () => {
                   }
                 />
                 <RenderDrinking
-                  title="Glass of Wine"
+                  title={
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.options[1]
+                  }
                   quantity={wine}
                   setter={setWine}
                   iconLeft={
@@ -302,7 +323,10 @@ const Drinking = () => {
                   }
                 />
                 <RenderDrinking
-                  title="Shots of Spirits"
+                  title={
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.options[2]
+                  }
                   quantity={spirits}
                   setter={setSpiritss}
                   iconLeft={

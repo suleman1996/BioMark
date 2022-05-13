@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
+
 import { showMessage } from 'react-native-flash-message';
 
 import { Button } from 'components/button';
 import { Header, ActivityIndicator, PhoneNumber } from 'components';
+
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
@@ -38,7 +40,8 @@ export default function ForgotPassword() {
     userService
       .forgotPassword(username)
       .then(() => {
-        navigate(SCREENS.PASSWORD_OTP, { phone: username });
+        // navigate(SCREENS.PASSWORD_OTP, { phone: username });
+        navigate(SCREENS.CREATE_PASSWORD, { phone: username });
       })
       .catch((err: ForgotPasswordErrorResponse) => {
         logNow(err);
@@ -89,10 +92,14 @@ export default function ForgotPassword() {
             )}
             <View style={styles.floatingBtn}>
               <Button
-                onPress={() => handleForgotPassword()}
+                onPress={() =>
+                  phoneNumber.length >= numberCondition.min &&
+                  handleForgotPassword()
+                }
                 title="Continue"
                 disabled={
-                  phoneNumber.length < numberCondition.min ? true : false
+                  // phoneNumber.length < numberCondition.min ? true : false
+                  phoneNumber.length < 1 ? true : false
                 }
               />
             </View>

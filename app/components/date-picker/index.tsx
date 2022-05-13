@@ -4,8 +4,6 @@ import { TouchableOpacity, Text, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
-import colors from 'assets/colors';
-
 import { styles } from './styles';
 
 type Props = {
@@ -46,12 +44,7 @@ const DatePicker = (props: Props) => {
           }}
         />
       )}
-      <Text
-        style={{
-          marginLeft: 15,
-          color: colors.black,
-        }}
-      >
+      <Text style={styles.dateText}>
         {moment(date).format('MM/DD/YYYY')}
         {/* January             |  01                         |  1990 */}
       </Text>

@@ -3,7 +3,12 @@ import { Text, View, TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 
-type Props = { titleText: String; question: Number; setQuestion: Any };
+type Props = {
+  titleText: String;
+  question: Number;
+  setQuestion: any;
+  options: any;
+};
 
 const Index = (props: Props) => {
   const [stressValue, setStressValue] = React.useState(0);
@@ -12,9 +17,16 @@ const Index = (props: Props) => {
     setStressValue(props?.question);
   }, [props.question]);
 
-  const RenderStressTitle = ({ title, width }) => (
+  const RenderStressTitle = ({ title, width, index }) => (
     <View style={[styles.selectView]}>
-      <Text style={[styles.headingText, { width: width }]}>{title}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setStressValue(index);
+          props.setQuestion(index);
+        }}
+      >
+        <Text style={[styles.headingText, { width: width }]}>{title}</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -24,7 +36,7 @@ const Index = (props: Props) => {
         setStressValue(index);
         props.setQuestion(index);
       }}
-      style={styles.selectView}
+      style={[styles.selectView]}
     >
       <View style={stressValue == index ? styles.bigDot : styles.smallDot} />
     </TouchableOpacity>
@@ -32,7 +44,7 @@ const Index = (props: Props) => {
 
   return (
     <View>
-      <Text style={styles.title}>{props.titleText}</Text>
+      <Text style={styles.title}> {props.titleText}</Text>
 
       <View style={styles.bar}>
         <RenderDot index={0} />
@@ -43,11 +55,11 @@ const Index = (props: Props) => {
       </View>
 
       <View style={styles.headingView}>
-        <RenderStressTitle title="Never" />
-        <RenderStressTitle title="Almost Never" />
-        <RenderStressTitle title="Sometimes" />
-        <RenderStressTitle width="50%" title="Fairly Often" />
-        <RenderStressTitle title="Very Often" />
+        <RenderStressTitle index={0} title={props?.options[0]} />
+        <RenderStressTitle index={1} title={props?.options[1]} />
+        <RenderStressTitle index={2} title={props?.options[2]} />
+        <RenderStressTitle index={3} width="50%" title={props?.options[3]} />
+        <RenderStressTitle index={4} title={props?.options[4]} />
       </View>
     </View>
   );

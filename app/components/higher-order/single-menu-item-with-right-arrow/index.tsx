@@ -16,6 +16,7 @@ type Props = {
 
 const SingleMenuItemWithArrow = (props: Props) => {
   const { onPress, title } = props;
+
   return (
     <TouchableRipple onPress={onPress} style={styles.menuItem}>
       <>

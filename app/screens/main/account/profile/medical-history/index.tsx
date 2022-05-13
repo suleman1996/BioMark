@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import { ModalButton } from 'components/higher-order';
-import { goBack } from 'services/nav-ref';
+import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
 import { TitleWithBackLayout } from 'components/layouts';
+
 import AsthmaModal from './modals/asthma';
 import CancerModal from './modals/cancer';
 import DiabetesModal from './modals/diabetes';
@@ -11,8 +12,12 @@ import GoutModal from './modals/gout';
 import HighBloodPressureModal from './modals/high-blood-pressure';
 import HighCholesterolModal from './modals/high-cholesterol';
 import OthersModal from './modals/others';
-import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
+
+import { goBack } from 'services/nav-ref';
+
 import { styles } from './styles';
+import { IAppState } from 'store/IAppState';
+import { useSelector } from 'react-redux';
 
 const options = [
   { id: 1, title: '---' },
@@ -27,7 +32,6 @@ const options = [
 const MedicalHistoryScreen = () => {
   const [dropdownValue, setDropdown] = useState();
   const [isDropdownChanged, setIsDropDownChanged] = useState(false);
-
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
   const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);
   const [isDiabetesModal, setIsDiabetesModal] = useState(false);
@@ -36,6 +40,12 @@ const MedicalHistoryScreen = () => {
   const [isCancerModal, setIsCancerModal] = useState(false);
   const [isOtherModal, setIsOtherModal] = useState(false);
   const [isNoneModal, setIsNoneModal] = useState(false);
+
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
+  useEffect(() => {
+    console.log('Bootstrap =======>', bootstrap);
+  }, [bootstrap]);
 
   const onNonePress = () => {
     setIsCholesterolModal(false);

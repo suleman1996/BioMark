@@ -160,6 +160,12 @@ const styles = StyleSheet.create({
     height: 45,
     width: '90%',
   },
+  iconView: {
+    backgroundColor: colors.blue,
+
+    padding: 12,
+    borderRadius: 30,
+  },
 });
 
 export default styles;

@@ -1,19 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { ActivityIndicator } from 'components';
 import { Formik } from 'formik';
-
 import { showMessage } from 'react-native-flash-message';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-import { Button } from 'components/base';
-import { InputWithLabel } from 'components/base';
+import { ActivityIndicator } from 'components';
+import { InputWithLabel, Button } from 'components/base';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
-import { goBack } from 'services/nav-ref';
 
+import { goBack } from 'services/nav-ref';
 import { logNow } from 'utils/functions/log-binder';
 import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
@@ -25,12 +23,12 @@ import { IAppState } from 'store/IAppState';
 import { styles } from './styles';
 
 const EmailChangeScreen = () => {
-  const formikRef = useRef<any>();
-
+  const dispatch = useDispatch();
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
   );
 
+  const formikRef = useRef<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState(userContacts.email_address);
 
@@ -43,8 +41,6 @@ const EmailChangeScreen = () => {
     }
   }, []);
   /*eslint-enable */
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     setEmail(userContacts.email_address);
@@ -69,6 +65,14 @@ const EmailChangeScreen = () => {
     userService
       .saveUserContacts(confirmEmail)
       .then(() => {
+        userService
+          .getUserContacts()
+          .then((res) => {
+            logNow(res);
+            dispatch(addUserContactsDetails(res));
+          })
+          .catch(() => {})
+          .finally(() => {});
         showMessage({
           message: 'Email changed successfully',
           type: 'success',
@@ -80,15 +84,6 @@ const EmailChangeScreen = () => {
         setIsLoading(false);
       });
   };
-
-  const ResetPassSchema = Yup.object({
-    email: Yup.string().email('Invalid email format').required('Required'),
-    confirmEmail: Yup.string()
-      .email('Invalid email format')
-      .required('Required')
-      .oneOf([Yup.ref('email'), null], 'Email does not match')
-      .required('Confirm email is required'),
-  });
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: GlobalColors.white }}>
@@ -159,3 +154,16 @@ const EmailChangeScreen = () => {
 };
 
 export default EmailChangeScreen;
+
+const ResetPassSchema = Yup.object({
+  email: Yup.string()
+    .email('Invalid email format')
+    .required('Required')
+    .lowercase(),
+  confirmEmail: Yup.string()
+    .email('Invalid email format')
+    .required('Required')
+    .oneOf([Yup.ref('email'), null], 'Email does not match')
+    .required('Confirm email is required')
+    .lowercase(),
+});

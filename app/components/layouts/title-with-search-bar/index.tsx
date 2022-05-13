@@ -20,7 +20,9 @@ const TitleWithSearchBarLayout = ({ children, title }: Props) => {
         <View style={styles.halfPrimary} />
         <SearchBarWithLeftScanIcon />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
+      <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
+        {children}
+      </ScrollView>
     </View>
   );
 };
