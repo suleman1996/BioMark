@@ -94,10 +94,10 @@ export type MedicalHistoryResponse = ApiResponse<MedicalHistoryResponseData>;
 export type MedicalHistoryItemResponse = ApiResponse<MedicalHistoryItem>;
 
 export interface MedicalHistoryResponseData {
-  personal: MedicalHistoryItem[] | null;
-  family: MedicalHistoryItem[] | null;
-  vaccine: MedicalHistoryItem[] | null;
-  allergy: MedicalHistoryItem | null;
+  personal?: MedicalHistoryItem[] | null;
+  family?: MedicalHistoryItem[] | null;
+  vaccine?: MedicalHistoryItem[] | null;
+  allergy?: MedicalHistoryItem | null;
 }
 
 export interface MedicalHistoryWithLifestyle
