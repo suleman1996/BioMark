@@ -23,9 +23,18 @@ const DependantsScreen = (props: Props) => {
 
   const data = useSelector((state: IAppState) => state.account.allDependents);
 
+  const hasUnsavedChanges = Boolean(true);
   const dispatch = useDispatch();
   /*eslint-disable*/
+  React.useEffect(
+    () =>
+      props.navigation.addListener('beforeRemove', (e) => {
+        console.log('e', e);
 
+        // alert('hii');
+      }),
+    [props.navigation, hasUnsavedChanges]
+  );
   useEffect(() => {
     dispatch(getAllDependents());
   }, []);

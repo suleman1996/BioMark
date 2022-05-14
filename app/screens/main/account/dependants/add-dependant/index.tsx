@@ -34,12 +34,17 @@ const AddDependantScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('');
   const [selectedCountryCode, setSelectedCountryCode] = useState('');
-  const [min, setMin] = useState(4);
-  const [max, setMax] = useState(13);
-  React.useEffect(() => {
-    selectedCountryCode == '+60' && setMin(8), setMax(11);
-    selectedCountryCode == '+63' && setMin(10), setMax(10);
-    selectedCountryCode == '+65' && setMin(8), setMax(8);
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+  useEffect(() => {
+    if (selectedCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectedCountryCode == '63') {
+      setNumberCondition({ min: 10, max: 10 });
+    } else if (selectedCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
+      setNumberCondition({ min: 4, max: 13 });
+    }
   }, [selectedCountryCode]);
 
   const geoLocation = useSelector(
@@ -62,11 +67,11 @@ const AddDependantScreen = () => {
     last_name: Yup.string()
       // .matches(Regex.alphabets, 'Please enter valid last name')
       .required('lastname is required'),
-    phone_number: Yup.string()
-      // .matches(Regex.minNum, 'Enter valid phone number')
-      .required('Please provide your phone number')
-      .min(min)
-      .max(max),
+    // phone_number: Yup.string()
+    //   // .matches(Regex.minNum, 'Enter valid phone number')
+    //   .required('Please provide your phone number')
+    //   .min(min)
+    //   .max(max),
     email: Yup.string()
       .email('Enter valid email address')
       .required('Email is required'),
@@ -197,10 +202,20 @@ const AddDependantScreen = () => {
                     setFieldValue('phone_number', e);
                   }}
                   countryCode={countryCode}
-                  error={values.phone_number ? errors.phone_number : ''}
+                  // error={values.phone_number ? errors.phone_number : ''}
                   setCountryCode={setCountryCode}
-                  setSelectCountryCode={setSelectedCountryCode}
+                  setselectedCountryCode={setSelectedCountryCode}
+                  maxLength={numberCondition.max}
                 />
+                {values.phone_number !== '' &&
+                  values.phone_number.length < numberCondition.min && (
+                    <Text style={styles.errorMessage}>
+                      Must have {numberCondition.min}
+                      {numberCondition.max !== numberCondition.min &&
+                        -numberCondition.max}{' '}
+                      characters
+                    </Text>
+                  )}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
                   label="Email"
@@ -243,7 +258,13 @@ const AddDependantScreen = () => {
                 />
                 <View style={styles.bottomBtnContainer}>
                   <Button
-                    disabled={!isValid || !values.first_name}
+                    disabled={
+                      !isValid ||
+                      !values.first_name ||
+                      values.phone_number.length < numberCondition.min
+                        ? true
+                        : false
+                    }
                     onPress={() => onSubmit()}
                     title={'Confirm'}
                   />
