@@ -1,7 +1,6 @@
 import React from 'react';
 import { Checkbox } from 'react-native-paper';
-
-import colors from 'assets/colors';
+import { useTheme } from 'react-native-paper';
 
 type Props = {
   checked: boolean;
@@ -9,6 +8,8 @@ type Props = {
 };
 
 const CheckBox = (props: Props) => {
+  const { colors } = useTheme();
+
   return (
     <Checkbox
       status={props.checked ? 'checked' : 'unchecked'}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import CheckBox from 'react-native-check-box';
 
-import { GlobalColors } from 'utils/theme/global-colors';
-
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   isChecked: boolean;
@@ -14,11 +13,14 @@ type Props = {
 };
 
 const CheckBoxWithText = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { isChecked, setIsChecked, rightText } = props;
   return (
     <View style={styles.container}>
       <CheckBox
-        checkBoxColor={GlobalColors.primary}
+        checkBoxColor={colors.primary}
         style={styles.checkbox}
         leftTextStyle={styles.rightText}
         onClick={() => {

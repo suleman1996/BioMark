@@ -1,15 +1,16 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Button } from 'react-native-paper';
-
-import colors from 'assets/colors';
 
 type Props = {
   title: string;
 };
 
 export default function ChoiceBtn(props: Props) {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.btnContainer}>
       <Button

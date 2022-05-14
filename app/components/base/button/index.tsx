@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   onPress: any;
@@ -14,6 +15,9 @@ type Props = {
 };
 
 const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const ifBg = bg ? { backgroundColor: bg } : {};
   const ifColor = color ? { color: color } : {};
   const ifDisabled = disabled

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { PhoneNumber } from 'components';
 import { BioDangerWhite } from 'components/svg';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   label?: string;
@@ -29,6 +30,8 @@ const PhoneNumberWithLabel = ({
   setCountryCode,
   setSelectCountryCode,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <>
       <View style={styles.container}>
