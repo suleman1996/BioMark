@@ -66,14 +66,25 @@ export default function ExerciseScreen() {
   const onSave = async () => {
     try {
       setIsVisible(true);
-      const response = await userService.exercise({
-        lifestyle: {
-          is_exercise: isExercise,
-          exercise_per_week: exerciseWeek,
-          exercise_per_session: exerciseSession,
-        },
-      });
-      console.log(response.data);
+      if (isExercise === 'true') {
+        const response = await userService.exercise({
+          lifestyle: {
+            is_exercise: isExercise,
+            exercise_per_week: exerciseWeek,
+            exercise_per_session: exerciseSession,
+          },
+        });
+        console.log(response.data);
+      } else {
+        const response = await userService.exercise({
+          lifestyle: {
+            is_exercise: false,
+            exercise_per_week: null,
+            exercise_per_session: null,
+          },
+        });
+        console.log(response.data);
+      }
       navigate(SCREENS.EDIT_PROFILE);
       setIsVisible(false);
     } catch (err) {
