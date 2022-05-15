@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   title: {
-    fontFamily: fonts.regular,
+    fontFamily: fonts.mulishRegular,
     fontSize: 16,
     marginVertical: 20,
     color: colors.heading,

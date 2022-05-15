@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { widthToDp } from 'utils/functions/responsive-dimensions';
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   },
   secondText: {
     color: GlobalColors.primary,
-    fontFamily: GlobalFonts.light,
+    fontFamily: fonts.mulishRegular,
     paddingRight: widthToDp(2),
   },
   iconWithSecondText: {

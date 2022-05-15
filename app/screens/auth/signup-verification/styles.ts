@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     // borderWidth: 2,
     flexDirection: 'row',
-    fontFamily: fonts.regular,
+    fontFamily: fonts.mulishRegular,
   },
   callUsText: {
     // flexDirection: 'row',
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     // borderWidth: 2,
     flexDirection: 'row',
-    fontFamily: fonts.regular,
+    fontFamily: fonts.mulishRegular,
     color: colors.black,
   },
 });
