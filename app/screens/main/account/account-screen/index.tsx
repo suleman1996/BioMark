@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { TitleWithSearchBarLayout } from 'components/layouts';
 import { AccountMenu } from 'components/ui';
@@ -27,27 +26,29 @@ const AccountScreen = () => {
   const [autoLogoutCheck, setAutoLogoutCheck] = React.useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let logoutCheck = await AsyncStorage.getItem('autoLogoutCheck');
-      setAutoLogoutCheck(logoutCheck);
-    };
-    fetchData().catch(console.error);
+    getAutoLogout();
   }, []);
 
   const onToggleAutoLogout = async () => {
-    await autoLogout();
+    setAutoLogoutCheck(!autoLogoutCheck);
+    userService
+      .saveAutoLogout(!autoLogoutCheck)
+      .then(async (res) => {
+        console.log('resSave', res);
+        setAutoLogoutCheck(res?.auto_logout);
+      })
+      .catch((e) => {
+        logNow('erro', e);
+      })
+      .finally(() => {});
   };
 
-  const autoLogout = async () => {
+  const getAutoLogout = async () => {
     userService
       .autoLogout()
       .then(async (res) => {
-        logNow('signup res', res);
+        console.log('res', res);
         setAutoLogoutCheck(res?.auto_logout);
-        await AsyncStorage.setItem(
-          'autoLogoutCheck',
-          JSON.stringify(res?.auto_logout)
-        );
       })
       .catch((e) => {
         logNow('erro', e);
@@ -98,6 +99,7 @@ const AccountScreen = () => {
             <AccountMenu
               logOutCheck={autoLogoutCheck}
               onToggleAutoLogout={onToggleAutoLogout}
+              dependentsCount={authContext?.userData?.dependent_count || 0}
             />
           </View>
         </View>

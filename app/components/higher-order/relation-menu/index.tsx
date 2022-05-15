@@ -7,6 +7,7 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 
 import { styles } from './styles';
 
@@ -40,6 +41,9 @@ const RelationMenu = ({ label, options, onChange, optionValue }: Props) => {
           text={options[selected - 1]?.name}
           placeholder="Select"
         >
+          <View style={{ position: 'absolute', right: 20 }}>
+            <AntDesignIcon name="caretdown" />
+          </View>
           <Text>
             {options[selected - 1]?.name ? options[selected - 1]?.name : label}
           </Text>

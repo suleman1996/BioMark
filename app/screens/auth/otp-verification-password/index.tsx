@@ -3,9 +3,9 @@ import {
   Keyboard,
   Linking,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  TouchableOpacity,
 } from 'react-native';
 
 import { showMessage } from 'react-native-flash-message';
@@ -60,12 +60,15 @@ export default function OtpPassword(props: Props) {
   });
 
   const openMessenger = () => {
-    Linking.canOpenURL('mailto:support@biomarking.com');
+    Linking.openURL(
+      'mailto:support@biomarking.com?subject=SendMail&body=Description'
+    );
   };
 
   const handleOTP = async () => {
     try {
       setLoading(true);
+
       Keyboard.dismiss();
       await changePassword({
         password: {

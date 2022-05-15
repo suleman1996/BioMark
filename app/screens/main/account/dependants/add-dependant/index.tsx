@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import { format } from 'date-fns';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 import { ActivityIndicator } from 'components';
@@ -15,7 +15,6 @@ import {
 } from 'components/base';
 import { BoxSelector, RelationMenu } from 'components/higher-order';
 
-import { Regex } from 'constants/regex';
 import { goBack } from 'services/nav-ref';
 import { dependentService } from 'services/account-service/dependent-service';
 import { getAllDependents } from 'store/account/account-actions';
@@ -26,14 +25,63 @@ import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 
 import { styles } from './styles';
+import { IAppState } from 'store/IAppState';
 
 const AddDependantScreen = () => {
   const formikRef = useRef<any>();
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [countryCode, setCountryCode] = useState('MY');
-  const [selectedCountryCode, setSelectedCountryCode] = useState('+60');
+  const [countryCode, setCountryCode] = useState('');
+  const [selectedCountryCode, setSelectedCountryCode] = useState('');
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+  useEffect(() => {
+    if (selectedCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectedCountryCode == '63') {
+      setNumberCondition({ min: 10, max: 10 });
+    } else if (selectedCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
+      setNumberCondition({ min: 4, max: 13 });
+    }
+  }, [selectedCountryCode]);
+
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
+
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectedCountryCode(countryCodeParse);
+    }
+  }, [geoLocation]);
+
+  const AddDependentSchema = Yup.object({
+    first_name: Yup.string()
+      // .matches(Regex.alphabets, 'Please enter valid first name')
+      .required('Firstname is required'),
+    last_name: Yup.string()
+      // .matches(Regex.alphabets, 'Please enter valid last name')
+      .required('lastname is required'),
+    // phone_number: Yup.string()
+    //   // .matches(Regex.minNum, 'Enter valid phone number')
+    //   .required('Please provide your phone number')
+    //   .min(min)
+    //   .max(max),
+    email: Yup.string()
+      .email('Enter valid email address')
+      .required('Email is required'),
+    id_number: Yup.string()
+      // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
+      .required('Enter valid NRIC / Passport'),
+    document_type: Yup.string().required(''),
+    dependent_type_id: Yup.string().required(''),
+    // birth_date: Yup.string().required(''),
+  });
 
   const onSubmit = () => {
     const {
@@ -60,7 +108,7 @@ const AddDependantScreen = () => {
       country_code: countryCode,
       country_phone_code: `+${selectedCountryCode}`,
     });
-    const pN = `${selectedCountryCode}${phone_number}`;
+    const pN = `+${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
     const dob = dateFormat(birth_date);
     setIsLoading(true);
@@ -154,10 +202,20 @@ const AddDependantScreen = () => {
                     setFieldValue('phone_number', e);
                   }}
                   countryCode={countryCode}
-                  error={values.phone_number ? errors.phone_number : ''}
+                  // error={values.phone_number ? errors.phone_number : ''}
                   setCountryCode={setCountryCode}
-                  setSelectCountryCode={setSelectedCountryCode}
+                  setselectedCountryCode={setSelectedCountryCode}
+                  maxLength={numberCondition.max}
                 />
+                {values.phone_number !== '' &&
+                  values.phone_number.length < numberCondition.min && (
+                    <Text style={styles.errorMessage}>
+                      Must have {numberCondition.min}
+                      {numberCondition.max !== numberCondition.min &&
+                        -numberCondition.max}{' '}
+                      characters
+                    </Text>
+                  )}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
                   label="Email"
@@ -200,7 +258,13 @@ const AddDependantScreen = () => {
                 />
                 <View style={styles.bottomBtnContainer}>
                   <Button
-                    disabled={!isValid || !values.first_name}
+                    disabled={
+                      !isValid ||
+                      !values.first_name ||
+                      values.phone_number.length < numberCondition.min
+                        ? true
+                        : false
+                    }
                     onPress={() => onSubmit()}
                     title={'Confirm'}
                   />
@@ -215,25 +279,3 @@ const AddDependantScreen = () => {
 };
 
 export default AddDependantScreen;
-
-const AddDependentSchema = Yup.object({
-  first_name: Yup.string()
-    .matches(Regex.alphabets, 'Please enter valid first name')
-    .required('Firstname is required'),
-  last_name: Yup.string()
-    .matches(Regex.alphabets, 'Please enter valid last name')
-    .required('lastname is required'),
-  phone_number: Yup.string()
-    .matches(Regex.minNum, 'Enter valid phone number')
-    .required('Please provide your phone number'),
-  email: Yup.string()
-    .email('Enter valid email address')
-    .required('Email is required'),
-  id_number: Yup.string()
-    .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
-    // .required('NRIC / Passport is required'),
-    .required('enterrr'),
-  document_type: Yup.string().required(''),
-  dependent_type_id: Yup.string().required(''),
-  // birth_date: Yup.string().required(''),
-});

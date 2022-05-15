@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     fontSize: 16,
     alignSelf: 'center',
+    justifyContent: 'center',
   },
 });
 

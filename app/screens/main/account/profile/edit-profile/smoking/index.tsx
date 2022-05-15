@@ -75,11 +75,20 @@ export default function SmokingScreen() {
           ? '1'
           : result?.data?.smoking?.is_smoking == 'I used to'
           ? '2'
-          : null
+          : '0'
       );
       setDay(result?.data?.smoking?.stick_per_day);
       setStopSmoke(result?.data?.smoking?.smoking_stop_at);
       setStartSmoke(result?.data?.smoking?.smoking_start_at);
+      setIsSmoking(
+        result?.data?.smoking?.is_smoking == 'No'
+          ? '0'
+          : result?.data?.smoking?.is_smoking == 'Yes'
+          ? '1'
+          : result?.data?.smoking?.is_smoking == 'I used to'
+          ? '2'
+          : '0'
+      );
       console.log('smoking data', result.data.smoking);
       setIsVisible(false);
     } catch (error) {

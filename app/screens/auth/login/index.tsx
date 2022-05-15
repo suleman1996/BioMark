@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
 import Config from 'react-native-config';
+import { useTheme } from 'react-native-paper';
 
 import {
   ErrorModal,
@@ -33,28 +34,30 @@ import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 
-import styles from './styles';
+import makeStyles from './styles';
 
-export const PASS_REGIX = /^(?=.*\d)(?=.*[@#$%^&+=]).+$/;
+export const PASS_REGIX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 export default function Login() {
   // redux
   const dispatch = useDispatch();
-
-  const { loggingIn, errorMessageLogin } = useSelector(
-    (state: IAppState) => state.auth
-  );
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [hidePassword, setHidePassword] = useState(true);
   const [password, setPassword] = useState('');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
+  const [selectCountryCode, setSelectCountryCode] = useState('');
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+
+  const { loggingIn, errorMessageLogin } = useSelector(
+    (state: IAppState) => state.auth
+  );
 
   const geoLocation = useSelector(
     (state: IAppState) => state.account.geolocation
@@ -83,6 +86,8 @@ export default function Login() {
     console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectCountryCode(countryCodeParse);
     }
   }, [geoLocation]);
 
@@ -175,15 +180,21 @@ export default function Login() {
   }
 
   const handleLogin = async () => {
-    console.log('selectCountryCode', selectCountryCode);
-
     const username = `+${selectCountryCode}${phoneNumber}`;
+    console.log('username', username);
+
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        // [
+        styles.container
+        // { backgroundColor: globalColors.background }]
+      }
+    >
       <ActivityIndicator visible={loggingIn} />
       <ErrorModal
         onPress={() => setLoginError(!loginError)}
@@ -215,7 +226,6 @@ export default function Login() {
         <View style={{ height: 20 }} />
         <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
         <TextInput
-          // placeholder="Password"
           secureTextEntry={hidePassword}
           eye={hidePassword ? 'eye-off' : 'eye'}
           value={password}
@@ -232,7 +242,8 @@ export default function Login() {
         )}
         {!PASS_REGIX.test(password) && password.length > 7 ? (
           <Text style={styles.errorMessage}>
-            Atleast have one digit and one special character
+            At least have one digit, one captial letter and one special
+            character.
           </Text>
         ) : null}
         <View style={{ alignSelf: 'center' }}>
@@ -282,7 +293,6 @@ export default function Login() {
             <Google />
           </TouchableOpacity>
         </View>
-
         <View style={{ alignSelf: 'center' }}>
           <View style={styles.noAccountTxt}>
             <Text style={{ color: colors.black }}>Dont have an account?</Text>

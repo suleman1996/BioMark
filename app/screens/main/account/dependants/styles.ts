@@ -5,13 +5,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    position: 'absolute',
+    // position: 'absolute',
   },
   bottomBtnContainer: {
-    alignItems: 'center',
+    // alignItems: 'center',
     bottom: 0,
     paddingBottom: heightToDp(3),
     width: widthToDp(100),
+    flex: 1,
   },
 });
 
