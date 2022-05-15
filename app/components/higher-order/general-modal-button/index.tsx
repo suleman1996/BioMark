@@ -36,7 +36,7 @@ const GeneralModalButton = ({
   return (
     <Pressable
       onPress={() => {
-        setIsModal(!isModal);
+        setIsModal(true);
       }}
       style={[styles.container, bgColor]}
     >

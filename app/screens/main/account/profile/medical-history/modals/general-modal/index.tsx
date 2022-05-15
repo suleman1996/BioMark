@@ -43,6 +43,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
     selectedOption = '',
     otherOptions = '',
     treatmentType = '',
+    // treatmentTypeOther = '',
     treatment = '',
     other_condition = '',
   } = {
@@ -75,9 +76,12 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
     treatmentType:
       medicalHistory?.find((item: any) => item.condition_id == qData?.id)
         ?.medical_values?.treatmentType || '',
+    // treatmentTypeOther:
+    //   medicalHistory?.find((item: any) => item.condition_id == qData?.id)
+    //     ?.medical_values?.treatmentTypeOther || '',
     treatment:
       medicalHistory?.find((item: any) => item.condition_id == qData?.id)
-        ?.medical_values?.treatment || '',
+        ?.medical_values?.treatment || false,
     other_condition:
       medicalHistory?.find((item: any) => item.condition_id == qData?.id)
         ?.other_condition?.length > 1
@@ -124,7 +128,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
           question={item.question}
           selectedValue={selectedOption}
           onValueChange={async (value: any) => {
-            logNow('redux', medicalHistory);
+            // logNow('redux', medicalHistory);
             let updatedItems = [];
             if (medicalHistory.length > 0) {
               updatedItems = medicalHistory?.map((el) =>
@@ -133,10 +137,12 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
                   : el
               );
             } else {
-              updatedItems[0] = {
+              updatedItems.push({
                 condition_id: condition_id,
+                has_condition: true,
+                medical_type: 'personal',
                 medical_values: { options: value },
-              };
+              });
             }
             await dispatch(addMedicalHistoryUpdate(updatedItems));
             logNow('redux', updatedItems);
@@ -226,7 +232,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             <InputWithLabel
               labelFontSize={25}
               label={''}
-              defaultValue={otherOptions}
+              defaultValue={treatmentTypeOther}
               onChange={async (value: any) => {
                 logNow('redux', value);
                 let updatedItems = [];
@@ -441,7 +447,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
           <GeneralRadioQuestions
             question={item.question}
             options={item.options}
-            isTrue={taking_medication ? 'Yes' : 'No'}
+            isTrue={treatment ? 'Yes' : 'No'}
             setIsTrue={async (value: any) => {
               logNow('redux', medicalHistory);
               let updatedItems = [];
@@ -450,15 +456,18 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
                   el.condition_id === condition_id
                     ? {
                         ...el,
-                        taking_medication: value == 'Yes' ? true : false,
+                        medical_values: {
+                          ...el.medical_values,
+                          treatment: value == 'Yes' ? true : false,
+                        },
                       }
                     : el
                 );
               } else {
-                updatedItems[0] = {
+                updatedItems.push({
                   condition_id: condition_id,
-                  taking_medication: value,
-                };
+                  medical_values: { treatment: value == 'Yes' ? true : false },
+                });
               }
               await dispatch(addMedicalHistoryUpdate(updatedItems));
               logNow('redux', updatedItems);
@@ -530,13 +539,19 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
     } else if (
       item.type === 'dropdown' &&
       item.id === 'treatmentType' &&
-      has_condition
+      has_condition &&
+      treatment === true
     ) {
       allTsxFields.push(<TreatmentTypeDropDown item={item} />);
     } else if (item.type === 'multi_text' && item.id === 'conditions') {
       allTsxFields.push(<OtherConditionTagsComponent item={item} />);
     } else if (item.type === 'multi_text' && item.id === 'medications') {
       allTsxFields.push(<OtherMedicationsTagsComponent item={item} />);
+    } else if (
+      (item.type === 'radio' && has_condition) ||
+      item.id === 'statusTreatment'
+    ) {
+      allTsxFields.push(<RadioBtn item={item} />);
     }
   }
 
@@ -545,7 +560,10 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
       isVisible={isVisible}
       setIsVisible={setIsVisible}
       title={name}
-      onPress={() => console.log('clicked')}
+      onPress={() => {
+        console.log('clicked');
+        setIsVisible();
+      }}
     >
       {allTsxFields}
     </ModalWithBottomBtn>

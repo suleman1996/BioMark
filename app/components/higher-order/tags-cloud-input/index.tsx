@@ -71,7 +71,7 @@ const TagsCloudInputComponent = ({ question, setData, data }: Props) => {
       </View>
       <View style={styles.tagsWrapper}>
         {tags?.map((item, index) => (
-          <View style={styles.tag} key={index}>
+          <View key={index} style={styles.tag}>
             <Text style={styles.tagText}>{item}</Text>
             <Pressable onPress={() => onDelete(item, index)}>
               <Entypo

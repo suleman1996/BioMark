@@ -1,4 +1,6 @@
 import { useIsFocused } from '@react-navigation/native';
+import { default as useStateRef } from 'react-usestateref';
+
 import { ButtonWithShadowContainer, DropdownMenu } from 'components/base';
 import GeneralModalButton from 'components/higher-order/general-modal-button';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -44,7 +46,12 @@ const MedicalHistoryScreen = () => {
     setNoneId(id);
   }, []);
 
-  const [isGeneralModal, setIsGeneralModal] = useState(false);
+  const [isGeneralModal, setIsGeneralModal, isGenModalRef] = useStateRef(false);
+  useEffect(() => {
+    setIsGeneralModal(isGenModalRef.current);
+    logNow(isGenModalRef.current);
+  }, [isGenModalRef.current]);
+
   const [generalModalData, setGeneralModalData] =
     useState<MedicalTemplateAttribute>({});
 
@@ -98,12 +105,17 @@ const MedicalHistoryScreen = () => {
       });
   };
 
+  const onChangeModalState = () => {
+    setIsGeneralModal(!isGeneralModal);
+    setIsGeneralModal(isGenModalRef.current);
+  };
+
   return (
     <TitleWithBackLayout title="Medical History">
       {/* modals */}
       <GeneralModalPage
-        isVisible={isGeneralModal}
-        setIsVisible={setIsGeneralModal}
+        isVisible={isGenModalRef.current}
+        setIsVisible={onChangeModalState}
         qData={generalModalData}
       />
 
@@ -159,7 +171,7 @@ const MedicalHistoryScreen = () => {
                         await dispatch(addMedicalHistoryUpdate(updated));
                       }
                       logNow('filter Data', medicalHistory);
-                      setIsGeneralModal(value);
+                      onChangeModalState();
                       setGeneralModalData(item);
                     }}
                   />
