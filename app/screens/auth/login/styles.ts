@@ -28,13 +28,13 @@ const makeStyles = (colors: any) =>
       fontSize: 15,
     },
     forgotPassword: {
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       color: colors.blue,
       fontSize: 14,
     },
     orTxt: {
       marginHorizontal: 20,
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       fontSize: 14,
       color: colors.black,
     },

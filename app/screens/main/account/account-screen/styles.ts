@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -28,8 +29,8 @@ export const styles = StyleSheet.create({
     paddingRight: widthToDp(20),
   },
   editProfile: {
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(21),
+    fontFamily: fonts.mulishLight,
+    fontSize: responsiveFontSize(20),
     color: GlobalColors.primary,
     paddingLeft: widthToDp(2),
   },

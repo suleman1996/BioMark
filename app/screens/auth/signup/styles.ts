@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   inputLablel: {
     marginHorizontal: 20,
     marginTop: 20,
-    fontFamily: fonts.semiBold,
+    fontFamily: fonts.mulishBold,
     color: colors.heading,
     fontSize: 15,
   },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   tcTextStyle: {
     marginTop: 20,
     fontSize: 17,
-    fontFamily: fonts.regular,
+    fontFamily: fonts.mulishRegular,
     color: colors.black,
   },
 
