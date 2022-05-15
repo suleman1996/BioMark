@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   question: string;
@@ -18,6 +19,8 @@ const RadioButtonQuestionComponent = ({
   isTrue,
   setIsTrue,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
       <Text style={styles.qText}>{question}</Text>

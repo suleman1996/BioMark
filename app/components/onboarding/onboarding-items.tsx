@@ -1,9 +1,13 @@
 import React from 'react';
 import { View, Text, Image, useWindowDimensions } from 'react-native';
-import { styles } from './styles';
-import colors from 'assets/colors';
+import { useTheme } from 'react-native-paper';
+
+import makeStyles from './styles';
 
 const OnboardingItem = ({ item, index }) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { width } = useWindowDimensions();
   const RenderDots = ({ itemDot }) => (
     <View

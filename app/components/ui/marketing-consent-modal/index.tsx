@@ -1,10 +1,11 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Button, Modal } from 'components/base';
 import { BioCloseGray } from 'components/svg';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 type Props = {
   isVisible: boolean;
@@ -13,6 +14,9 @@ type Props = {
 };
 
 const MarketingConsentModal = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { isVisible, setIsVisible, callMe } = props;
 
   return (

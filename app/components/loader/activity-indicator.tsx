@@ -1,11 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { BarIndicator } from 'react-native-indicators';
 
-import colors from 'assets/colors';
-
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   visible: boolean;
@@ -16,6 +15,8 @@ export default function ActivityIndicator({
   visible = false,
   fontSize,
 }: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles();
   if (!visible) {
     return null;
   }

@@ -6,15 +6,18 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { useTheme } from 'react-native-paper';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   question: string;
 };
 
 const TagsCloudInputComponent = ({ question }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [tags, setTags] = useState([]);
 
   const onDelete = (item: any, index: number) => {
@@ -35,7 +38,7 @@ const TagsCloudInputComponent = ({ question }: Props) => {
         />
         <View style={styles.addBtn}>
           <Ionicons
-            color={GlobalColors.primaryGray}
+            color={colors.primaryGray}
             name="add"
             size={responsiveFontSize(35)}
           />

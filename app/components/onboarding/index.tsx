@@ -1,13 +1,18 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import ButtonComponent from 'components/base/button';
 
 import slides from './slides';
 import OnboardingItem from '../onboarding/onboarding-items';
-import colors from 'assets/colors';
-import { styles } from './styles';
+
+import makeStyles from './styles';
 
 const Onboarding = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={styles.OBcontainer}>
       <View style={styles.cardView}>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   titleText: String;
@@ -11,6 +12,9 @@ type Props = {
 };
 
 const Index = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [stressValue, setStressValue] = React.useState(0);
 
   React.useEffect(() => {

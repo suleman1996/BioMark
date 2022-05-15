@@ -1,10 +1,11 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Button, Modal } from 'components/base';
 import { BioCloseGray } from 'components/svg';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 type Props = {
   isVisible: boolean;
@@ -14,6 +15,9 @@ type Props = {
 
 const AccountDeActivateModal = (props: Props) => {
   const { isVisible, setIsVisible, callMe } = props;
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>

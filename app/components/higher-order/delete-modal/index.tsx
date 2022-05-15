@@ -1,9 +1,10 @@
 import { Text, View, Pressable } from 'react-native';
 import React from 'react';
+import { useTheme } from 'react-native-paper';
 
 import { Modal } from 'components/base';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   heading: string;
@@ -14,6 +15,8 @@ type Props = {
 };
 
 const DeleteModalComponent = ({ isVisible, setIsVisible, callMe }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>

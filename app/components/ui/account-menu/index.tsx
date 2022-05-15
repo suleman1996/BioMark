@@ -1,5 +1,6 @@
 import React from 'react';
 import { Linking, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import Config from 'react-native-config';
 import { Switch, TouchableRipple } from 'react-native-paper';
@@ -24,9 +25,12 @@ import { logout } from 'store/auth/auth-actions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalColors } from 'utils/theme/global-colors';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 const AccountMenu = (props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const openMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);

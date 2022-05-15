@@ -1,16 +1,16 @@
 import React from 'react';
 import { Text, View, Pressable } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 
 import { goBack } from 'services/nav-ref';
 
 import { hitSlop } from 'constants/hit-slop';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   children: any;
@@ -18,12 +18,15 @@ type Props = {
 };
 
 const TitleWithBackWhiteBgLayout = ({ children, title }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
           <MaterialIcons
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
             size={responsiveFontSize(35)}
             name="arrow-back-ios"
           />
