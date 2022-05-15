@@ -479,6 +479,32 @@ function geoLocation() {
       });
   });
 }
+
+function updateUserEthnic(ethnic: string) {
+  return new Promise((resolve, reject) => {
+    client
+      .put(API_URLS.UPDATE_PROFILE, {
+        profile: {
+          ethnic,
+        },
+      })
+      .then(async (response) => {
+        try {
+          console.log('updateUserEthnic response', response.data);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('updateUserEthnic user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('updateUserEthnic updateUserEthnic error', err);
+        reject(err);
+      });
+  });
+}
+
 export const userService = {
   login,
   federatedlogin,
@@ -509,4 +535,5 @@ export const userService = {
   getBootstrap,
   geoLocation,
   exercise,
+  updateUserEthnic,
 };

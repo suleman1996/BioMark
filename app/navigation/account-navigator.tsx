@@ -26,6 +26,7 @@ import DrinkingScreen from 'screens/main/account/profile/edit-profile/drinking';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 import SCREENS from './constants';
+import LetsStartIdVerfiication from 'screens/main/account/id-verification/lets-start';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,13 @@ const AccountNavigator = () => (
   >
     {/* Account Stack */}
     <Stack.Group>
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name={SCREENS.ID_VERIFICATION_START}
+        component={LetsStartIdVerfiication}
+      />
       <Stack.Screen
         options={{
           headerShown: true,
