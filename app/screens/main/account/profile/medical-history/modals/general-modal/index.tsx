@@ -46,6 +46,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
     // treatmentTypeOther = '',
     treatment = '',
     other_condition = '',
+    gender_id = 1,
   } = {
     // id: qData?.id,
     condition_id: qData?.id,
@@ -90,6 +91,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             ?.other_condition?.toString()
             ?.split(',')
         : '' || [],
+    gender_id: userProfileDataFromRedux?.gender_id,
   };
 
   const DropDown = ({ item }: { item: MedicalTemplateField }) => {
@@ -522,13 +524,19 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
       allTsxFields.push(<TagsComponent item={item} />);
     } else if (
       item.id === 'diabetesTypeFemale' &&
-      userProfileDataFromRedux.gender_id == 2 &&
+      gender_id == 2 &&
+      has_condition
+    ) {
+      allTsxFields.push(<DropDown item={item} />);
+    } else if (
+      item.id === 'diabetesTypeMale' &&
+      gender_id == 1 &&
       has_condition
     ) {
       allTsxFields.push(<DropDown item={item} />);
     } else if (
       item.id === 'takingMedication' &&
-      userProfileDataFromRedux.gender_id == 1 &&
+      gender_id == 1 &&
       has_condition
     ) {
       allTsxFields.push(<DropDown item={item} />);
