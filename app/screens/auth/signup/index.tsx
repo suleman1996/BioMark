@@ -241,17 +241,33 @@ export default function Signup() {
                     setSelectCountryCode={setSelectCountryCode}
                     maxLength={numberCondition.max}
                   />
-                  {(phoneNumber !== '' ||
-                    errors.password ||
-                    phoneNumber.charAt(0) == 0) &&
-                    phoneNumber.length < numberCondition.min && (
-                      <Text style={styles.errorMessage}>
-                        Must have {numberCondition.min}
-                        {numberCondition.max !== numberCondition.min &&
-                          -numberCondition.max}{' '}
-                        characters
-                      </Text>
-                    )}
+                  {(phoneNumber !== '' || errors.password) &&
+                    (selectCountryCode == 63 ? (
+                      phoneNumber.charAt(0) == 0 ? (
+                        <Text style={styles.errorMessage}>
+                          Phonenumber must not start with 0
+                        </Text>
+                      ) : (
+                        phoneNumber.length < numberCondition.min && (
+                          <Text style={styles.errorMessage}>
+                            Must have {numberCondition.min}
+                            {numberCondition.max !== numberCondition.min &&
+                              -numberCondition.max}{' '}
+                            characters
+                          </Text>
+                        )
+                      )
+                    ) : (
+                      phoneNumber.length < numberCondition.min && (
+                        <Text style={styles.errorMessage}>
+                          Must have {numberCondition.min}
+                          {numberCondition.max !== numberCondition.min &&
+                            -numberCondition.max}{' '}
+                          characters
+                        </Text>
+                      )
+                    ))}
+
                   <Text style={styles.inputLablel}>Email</Text>
                   <TextInput
                     placeholder="E.g. Sample@email.com"
@@ -340,7 +356,7 @@ const ResetPassSchema = Yup.object({
     .required('Please type your new password')
     .min(8)
     .matches(
-      /^(?=.*\d)(?=.*[@#$%^&+=]).+$/,
-      'Atleast have one digit and one special character.'
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
     ),
 });

@@ -4,6 +4,12 @@ import { GlobalFonts } from './fonts';
 import { GlobalColors } from './global-colors';
 
 export const GlobalStyles = {
+  question: {
+    fontSize: responsiveFontSize(20),
+    fontFamily: GlobalFonts.extraBold,
+    color: GlobalColors.darkPrimary,
+    marginTop: heightToDp(2),
+  },
   shadow: {
     shadowOffset: { width: 5 },
     shadowColor: 'lightgray',

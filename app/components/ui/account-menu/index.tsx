@@ -34,7 +34,14 @@ const AccountMenu = (props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        onPress={() =>
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.ID_VERIFICATION_START,
+          })
+        }
+        style={styles.singleItem}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioIdentify width={5} height={3} />
@@ -66,7 +73,7 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Dependants</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            {/* <Text style={styles.secondText}>7 Users</Text> */}
+            <Text style={styles.secondText}>{props.dependentsCount} Users</Text>
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}

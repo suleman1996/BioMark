@@ -1,3 +1,5 @@
+import colors from 'assets/colors';
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -32,5 +34,11 @@ export const styles = StyleSheet.create({
   },
   bottomBtnContainer: {
     marginTop: heightToDp(4),
+  },
+  errorMessage: {
+    fontFamily: fonts.regular,
+    fontSize: 12,
+    color: colors.danger,
+    marginLeft: 30,
   },
 });

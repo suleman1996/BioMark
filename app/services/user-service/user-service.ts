@@ -346,11 +346,12 @@ type Props = {
   conditions: any;
   medical: any;
   lifestyle: any;
+  has_allergy: any;
 };
-const Allergies = ({ conditions }: Props) => {
+const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
     medical_history: {
-      has_allergy: true,
+      has_allergy,
       conditions,
       // conditions: [
       //   {
@@ -478,6 +479,32 @@ function geoLocation() {
       });
   });
 }
+
+function updateUserEthnic(ethnic: string) {
+  return new Promise((resolve, reject) => {
+    client
+      .put(API_URLS.UPDATE_PROFILE, {
+        profile: {
+          ethnic,
+        },
+      })
+      .then(async (response) => {
+        try {
+          console.log('updateUserEthnic response', response.data);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('updateUserEthnic user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('updateUserEthnic updateUserEthnic error', err);
+        reject(err);
+      });
+  });
+}
+
 export const userService = {
   login,
   federatedlogin,
@@ -508,4 +535,5 @@ export const userService = {
   getBootstrap,
   geoLocation,
   exercise,
+  updateUserEthnic,
 };

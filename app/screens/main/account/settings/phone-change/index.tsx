@@ -17,6 +17,9 @@ const PhoneChangeScreen = () => {
   const [countryCode, setCountryCode] = useState<any>();
   const [number, setNumber] = useState<any>();
 
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
   );
@@ -24,9 +27,13 @@ const PhoneChangeScreen = () => {
   useEffect(() => {
     const phoneNumber = parsePhoneNumber(userContacts.mobile + '');
     logNow('parsed phone', phoneNumber?.countryCallingCode);
-    setCountryCode(phoneNumber?.country);
+    if (phoneNumber?.country) {
+      setCountryCode(phoneNumber?.country);
+    } else {
+      setCountryCode(geoLocation?.code);
+    }
     setNumber(phoneNumber?.nationalNumber);
-  }, [userContacts]);
+  }, [userContacts, geoLocation]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

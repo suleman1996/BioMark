@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { Formik } from 'formik';
-import { showMessage } from 'react-native-flash-message';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -73,10 +72,6 @@ const EmailChangeScreen = () => {
           })
           .catch(() => {})
           .finally(() => {});
-        showMessage({
-          message: 'Email changed successfully',
-          type: 'success',
-        });
         goBack();
       })
       .catch(() => {})

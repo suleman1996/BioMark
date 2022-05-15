@@ -3,9 +3,9 @@ import {
   Keyboard,
   Linking,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  TouchableOpacity,
 } from 'react-native';
 
 import { showMessage } from 'react-native-flash-message';
@@ -68,6 +68,7 @@ export default function OtpPassword(props: Props) {
   const handleOTP = async () => {
     try {
       setLoading(true);
+
       Keyboard.dismiss();
       await changePassword({
         password: {

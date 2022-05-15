@@ -34,22 +34,18 @@ import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 
-// import fonts from 'assets/fonts';
+import fonts from 'assets/fonts';
 import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 
 import makeStyles from './styles';
 
-export const PASS_REGIX = /^(?=.*\d)(?=.*[@#$%^&+=]).+$/;
+export const PASS_REGIX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 export default function Login() {
   // redux
   const dispatch = useDispatch();
-  const { colors, fonts } = useTheme();
+  const { colors } = useTheme();
   const styles = makeStyles(colors);
-  console.log(fonts);
-
-  const { loggingIn, errorMessageLogin } = useSelector(
-    (state: IAppState) => state.auth
-  );
 
   const [hidePassword, setHidePassword] = useState(true);
   const [password, setPassword] = useState('');
@@ -58,6 +54,10 @@ export default function Login() {
   const [selectCountryCode, setSelectCountryCode] = useState('');
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+
+  const { loggingIn, errorMessageLogin } = useSelector(
+    (state: IAppState) => state.auth
+  );
 
   const geoLocation = useSelector(
     (state: IAppState) => state.account.geolocation
@@ -242,7 +242,8 @@ export default function Login() {
         )}
         {!PASS_REGIX.test(password) && password.length > 7 ? (
           <Text style={styles.errorMessage}>
-            Atleast have one digit and one special character
+            At least have one digit, one captial letter and one special
+            character.
           </Text>
         ) : null}
         <View style={{ alignSelf: 'center' }}>
@@ -292,7 +293,6 @@ export default function Login() {
             <Google />
           </TouchableOpacity>
         </View>
-
         <View style={{ alignSelf: 'center' }}>
           <View style={styles.noAccountTxt}>
             <Text style={{ color: colors.black }}>Dont have an account?</Text>

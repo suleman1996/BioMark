@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   container: {
     width: widthToDp(40),
     height: heightToDp(7),
+    marginTop: heightToDp(1.5),
     backgroundColor: GlobalColors.white,
     borderRadius: widthToDp(2),
     alignItems: 'center',

@@ -1,4 +1,5 @@
 const fonts = {
+  //Mukta
   regular: 'Mukta',
   bold: 'Mukta-Bold',
   light: 'Mukta-Light',
@@ -6,6 +7,44 @@ const fonts = {
   semiBold: 'Mukta-SemiBold',
   extraBold: 'Mukta-ExtraBold',
   extraLight: 'Mukta-ExtraLight',
+  //Mulish
+  mulishBlack: 'Mulish-Black',
+  mulishBlackItalic: 'Mulish-BlackItalic',
+  mulishBold: 'Mulish-Bold',
+  mulishBoldItalic: 'Mulish-BoldItalic',
+  mulishExtraBold: 'Mulish-ExtraBold',
+  mulishExtraLight: 'Mulish-ExtraLight',
+  mulishExtraLightItalic: 'Mulish-ExtraLightItalic',
+  mulishItalic: 'Mulish-Italic',
+  mulishLight: 'Mulish-Light',
+  mulishLightItalic: 'Mulish-LightItalic',
+  mulishMediumItalic: 'Mulish-MediumItalic',
+  mulishRegular: 'Mulish-Regular',
+  mulishSemiBold: 'Mulish-SemiBold',
+  mulishSemiBoldItalic: 'Mulish-SemiBoldItalic',
+  //OpenSan
+  OpenSansBold: 'OpenSans-Bold',
+  OpenSansBoldItalic: 'OpenSans-BoldItalic',
+  OpenSansExtraBold: 'OpenSans-ExtraBold',
+  OpenSansExtraBoldItalic: 'OpenSans-ExtraBoldItalic',
+  OpenSansItalic: 'OpenSans-Italic',
+  OpenSansLightItalic: 'OpenSans-LightItalic',
+  OpenSansRegular: 'OpenSans-Regular',
+  OpenSansSemiBold: 'OpenSans-SemiBold',
+  OpenSansSemiBoldItalic: 'OpenSans-SemiBoldItalic',
+  //Roboto
+  RobotoBlack: 'Roboto-Black',
+  RobotoBlackItalic: 'Roboto-BlackItalic',
+  RobotoBold: 'Roboto-Bold',
+  RobotoBoldItalic: 'Roboto-BoldItalic',
+  RobotoItalic: 'Roboto-Italic',
+  RobotoLight: 'Roboto-Light',
+  RobotoLightItalic: 'Roboto-LightItalic',
+  RobotoMedium: 'Roboto-Medium',
+  RobotoMediumItalic: 'Roboto-MediumItalic',
+  RobotoRegular: 'Roboto-Regular',
+  RobotoThin: 'Roboto-Thin',
+  RobotoThinItalic: 'Roboto-ThinItalic',
 };
 
 export default fonts;
