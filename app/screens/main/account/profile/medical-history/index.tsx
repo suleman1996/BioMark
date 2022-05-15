@@ -149,6 +149,7 @@ const MedicalHistoryScreen = () => {
                       (elem) =>
                         elem.condition_id === item.id && elem.has_condition
                     )}
+                    drop={item.name !== 'None' ? true : false}
                     title={item.name}
                     isModal={isGeneralModal}
                     setIsModal={async (value: any) => {
