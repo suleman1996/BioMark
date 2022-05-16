@@ -313,9 +313,18 @@ export default function Login() {
         </View>
         <View style={{ alignSelf: 'center' }}>
           <View style={styles.noAccountTxt}>
-            <Text style={{ color: colors.black }}>Dont have an account?</Text>
+            <Text
+              style={{ color: colors.black, fontFamily: fonts.mulishRegular }}
+            >
+              Dont have an account?
+            </Text>
             <TouchableOpacity onPress={() => navigate(SCREENS.SIGNUP)}>
-              <Text style={{ color: colors.blue }}> Sign up</Text>
+              <Text
+                style={{ color: colors.blue, fontFamily: fonts.mulishRegular }}
+              >
+                {' '}
+                Sign up
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

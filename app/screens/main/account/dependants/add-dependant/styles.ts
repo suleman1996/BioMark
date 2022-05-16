@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
   bottomBtnContainer: {
     marginTop: heightToDp(4),
   },
+
   errorMessage: {
     fontFamily: fonts.regular,
     fontSize: 12,

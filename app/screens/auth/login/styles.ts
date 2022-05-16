@@ -23,7 +23,7 @@ const makeStyles = (colors: any) =>
     },
     inputLablel: {
       marginHorizontal: 20,
-      fontFamily: fonts.bold,
+      fontFamily: fonts.mulishBold,
       color: colors.heading,
       fontSize: 15,
     },
@@ -56,7 +56,7 @@ const makeStyles = (colors: any) =>
     },
     noAccountTxt: {
       marginTop: 10,
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       fontSize: 16,
       flexDirection: 'row',
     },

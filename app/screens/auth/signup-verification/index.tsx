@@ -176,7 +176,7 @@ export default function SignupVerification() {
                     color: colors.black,
                     fontSize: 15,
                     // marginBottom: 170,
-                    fontFamily: fonts.regular,
+                    fontFamily: fonts.mulishRegular,
                   }}
                 >
                   <Text>Not received? </Text>
