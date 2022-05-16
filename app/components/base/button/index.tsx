@@ -1,10 +1,9 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import { GlobalColors } from 'utils/theme/global-colors';
-
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   onPress: any;
@@ -25,14 +24,15 @@ const ButtonComponent = ({
   fontFamily,
   fontSize,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const ifBg = bg ? { backgroundColor: bg } : {};
   const ifColor = color ? { color: color } : {};
   const ifDisabled = disabled
     ? { backgroundColor: 'lightgray' }
-    : { backgroundColor: GlobalColors.primary };
-  const ifDisabledText = disabled
-    ? { color: 'gray' }
-    : { color: GlobalColors.white };
+    : { backgroundColor: colors.primary };
+  const ifDisabledText = disabled ? { color: 'gray' } : { color: colors.white };
   const ifFontFamily = fontFamily ? { fontFamily: fontFamily } : {};
   const ifFontSize = fontSize ? { fontSize: responsiveFontSize(fontSize) } : {};
 

@@ -8,6 +8,7 @@ import {
   Modal,
   Keyboard,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
@@ -20,17 +21,18 @@ import { SearchBarLeftIcon } from 'components/svg';
 import { ActivityIndicator } from 'components';
 import { Button } from 'components/button';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { inputBarcode } from 'services/auth-service';
 
 import MyImage from 'assets/images';
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const SearchBarWithLeftScanIcon = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -73,8 +75,8 @@ const SearchBarWithLeftScanIcon = () => {
   };
 
   const bgColor = isMenuOpen
-    ? { backgroundColor: GlobalColors.primary }
-    : { backgroundColor: GlobalColors.white };
+    ? { backgroundColor: colors.primary }
+    : { backgroundColor: colors.white };
 
   const menuStyle = {
     height: 30,
@@ -96,7 +98,7 @@ const SearchBarWithLeftScanIcon = () => {
               <SearchBarLeftIcon
                 width={5}
                 height={5}
-                fill={isMenuOpen ? GlobalColors.white : GlobalColors.primary}
+                fill={isMenuOpen ? colors.white : colors.primary}
               />
             </MenuTrigger>
             <MenuOptions optionsContainerStyle={styles.popupMenu}>
@@ -104,7 +106,7 @@ const SearchBarWithLeftScanIcon = () => {
                 <MaterialCommunityIcons
                   name="barcode-scan"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.primary}
+                  color={colors.primary}
                 />
                 <Text style={styles.menuText} fontSize={responsiveFontSize(15)}>
                   Scan QR/Barcode
@@ -180,7 +182,7 @@ const SearchBarWithLeftScanIcon = () => {
                 <MaterialCommunityIcons
                   name="barcode-scan"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.primary}
+                  color={colors.primary}
                 />
                 <Text
                   style={styles.menuText}
@@ -194,7 +196,7 @@ const SearchBarWithLeftScanIcon = () => {
                 <MaterialCommunityIcons
                   name="upload"
                   size={responsiveFontSize(25)}
-                  color={GlobalColors.primary}
+                  color={colors.primary}
                 />
                 <Text style={styles.menuText} fontSize={responsiveFontSize(15)}>
                   Upload Results
@@ -208,7 +210,7 @@ const SearchBarWithLeftScanIcon = () => {
           <Fontisto
             name="search"
             size={responsiveFontSize(22)}
-            color={GlobalColors.primary}
+            color={colors.primary}
           />
           <TextInput
             textAlignVertical="center"

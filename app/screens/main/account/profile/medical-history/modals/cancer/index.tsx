@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { DropdownMenu } from 'components/base';
 import {
@@ -23,6 +24,7 @@ const CancerModal = ({ isVisible, setIsVisible }: Props) => {
 
   // Are you taking any medications for this?
   const [ans2, setAns2] = useState(false);
+  const { colors } = useTheme();
 
   const [cancerType, setCancerType] = useState('');
 
@@ -38,9 +40,12 @@ const CancerModal = ({ isVisible, setIsVisible }: Props) => {
         setIsTrue={setAns1}
         question="Have you been diagnosed with Cancer?"
       />
-      <Text style={GlobalStyles.qLabel}>Which type of cancer?</Text>
+      <Text style={GlobalStyles(colors).qLabel}>Which type of cancer?</Text>
       <View
-        style={{ height: heightToDp(7), ...GlobalStyles.paddingHorizontal }}
+        style={{
+          height: heightToDp(7),
+          ...GlobalStyles(colors).paddingHorizontal,
+        }}
       >
         <DropdownMenu
           options={options}

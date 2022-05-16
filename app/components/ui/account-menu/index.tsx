@@ -1,5 +1,6 @@
 import React from 'react';
 import { Linking, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import Config from 'react-native-config';
 import { Switch, TouchableRipple } from 'react-native-paper';
@@ -22,11 +23,13 @@ import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { logout } from 'store/auth/auth-actions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 const AccountMenu = (props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const openMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);
@@ -52,7 +55,7 @@ const AccountMenu = (props) => {
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
+              color={colors.darkPrimary}
             />
           </View>
         </>
@@ -77,7 +80,7 @@ const AccountMenu = (props) => {
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
+              color={colors.darkPrimary}
             />
           </View>
         </>
@@ -100,7 +103,7 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
@@ -120,7 +123,7 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
@@ -138,7 +141,7 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
@@ -156,7 +159,7 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
@@ -182,7 +185,7 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
@@ -209,7 +212,7 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Auto Logout</Text>
           </View>
           <Switch
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
             value={props.logOutCheck}
             onValueChange={() => props.onToggleAutoLogout()}
           />

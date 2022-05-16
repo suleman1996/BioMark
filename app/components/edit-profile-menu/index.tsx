@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -7,7 +8,7 @@ import { Button } from 'components/button';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   onPressPhoto: any;
@@ -22,6 +23,9 @@ export default function EditProfileModal({
   onPressGallery,
   iconPress,
 }: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   if (!visible) {
     return null;
   }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -25,13 +26,16 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   route?: any;
 };
 
 const EditDependantScreen = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const [nationalNumber, setNationalNumber] = useState<any>();
 

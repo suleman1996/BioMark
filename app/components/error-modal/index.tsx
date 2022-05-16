@@ -1,9 +1,10 @@
 import { Text, View } from 'react-native';
 import React from 'react';
+import { useTheme } from 'react-native-paper';
 
 import { Button } from 'components/button';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   onPress: any;
@@ -11,6 +12,9 @@ type Props = {
 };
 
 export default function ErrorModal({ visible = false, onPress }: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   if (!visible) {
     return null;
   }

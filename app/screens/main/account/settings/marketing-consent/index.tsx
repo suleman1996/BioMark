@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { goBack } from 'services/nav-ref';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,8 @@ import { GlobalStyles } from 'utils/theme/global-styles';
 import { styles } from './styles';
 
 const MarketingConsentScreen = () => {
+  const { colors } = useTheme();
+
   const dispatch = useDispatch();
   const userMarketing = useSelector((state: IAppState) => state.auth.marketing);
   const [isChecked, setIsChecked] = useState(false);
@@ -84,7 +87,10 @@ const MarketingConsentScreen = () => {
           }}
         />
         <View
-          style={[GlobalStyles.bottomBtnWithShadow, styles.bottomBtnContainer]}
+          style={[
+            GlobalStyles(colors).bottomBtnWithShadow,
+            styles.bottomBtnContainer,
+          ]}
         >
           <Button onPress={() => onChangeMarketing()} title={'Save'} />
         </View>

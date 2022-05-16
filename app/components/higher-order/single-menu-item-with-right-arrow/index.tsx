@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   onPress: any;
@@ -15,6 +15,9 @@ type Props = {
 };
 
 const SingleMenuItemWithArrow = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { onPress, title } = props;
 
   return (
@@ -24,7 +27,7 @@ const SingleMenuItemWithArrow = (props: Props) => {
         <Fontisto
           name="angle-right"
           size={responsiveFontSize(20)}
-          color={GlobalColors.darkPrimary}
+          color={colors.darkPrimary}
         />
       </>
     </TouchableRipple>

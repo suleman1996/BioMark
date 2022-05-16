@@ -1,18 +1,22 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Images from 'assets/images';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 import ButtonComponent from 'components/base/button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack } from 'services/nav-ref';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 type Props = {};
 
 const LetsStartIdVerfiication = (props: Props) => {
+  const { colors } = useTheme();
+
   const {} = props;
   return (
     <SafeAreaView style={styles.container}>
@@ -20,7 +24,7 @@ const LetsStartIdVerfiication = (props: Props) => {
         <Ionicons
           size={responsiveFontSize(35)}
           name="chevron-back-sharp"
-          color={GlobalColors.darkPrimary}
+          color={colors.darkPrimary}
         />
         <Text style={styles.backText}>Back</Text>
       </Pressable>
@@ -34,7 +38,7 @@ const LetsStartIdVerfiication = (props: Props) => {
       <View style={{ marginTop: heightToDp(2) }} />
       <ButtonComponent
         bg="transparent"
-        color={GlobalColors.darkGray}
+        color={colors.darkGray}
         fontFamily={GlobalFonts.bold}
         fontSize={22}
         onPress={() => goBack()}
@@ -55,12 +59,12 @@ const styles = StyleSheet.create({
   text1: {
     fontFamily: GlobalFonts.extraBold,
     fontSize: responsiveFontSize(40),
-    color: GlobalColors.darkPrimary,
+    color: Colors.darkPrimary,
   },
   text2: {
     fontFamily: GlobalFonts.light,
     fontSize: responsiveFontSize(22),
-    color: GlobalColors.black,
+    color: Colors.black,
     paddingHorizontal: widthToDp(10),
     textAlign: 'center',
   },
@@ -77,6 +81,6 @@ const styles = StyleSheet.create({
   backText: {
     fontFamily: GlobalFonts.light,
     fontSize: responsiveFontSize(25),
-    color: GlobalColors.darkPrimary,
+    color: Colors.darkPrimary,
   },
 });

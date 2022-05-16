@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
 import { Lock } from 'assets/svgs/index';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   route: any;
 };
 
 export default function PasswordChanged(props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { route } = props;
   /*eslint-disable */
   const flag = route?.params?.flag;

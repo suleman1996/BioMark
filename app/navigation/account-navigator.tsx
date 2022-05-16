@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useTheme } from 'react-native-paper';
 
 import DependantsScreen from 'screens/main/account/dependants';
 import AddDependantScreen from 'screens/main/account/dependants/add-dependant';
@@ -24,187 +25,189 @@ import VaccinationScreen from 'screens/main/account/profile/edit-profile/vaccina
 import AllergiesScreen from 'screens/main/account/profile/edit-profile/allergies';
 import DrinkingScreen from 'screens/main/account/profile/edit-profile/drinking';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import SCREENS from './constants';
 import LetsStartIdVerfiication from 'screens/main/account/id-verification/lets-start';
 
 const Stack = createNativeStackNavigator();
 
-const AccountNavigator = () => (
-  <Stack.Navigator
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    {/* Account Stack */}
-    <Stack.Group>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.ID_VERIFICATION_START}
-        component={LetsStartIdVerfiication}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: true,
-          headerTintColor: GlobalColors.darkPrimary,
-          title: 'Dependants',
-        }}
-        name={SCREENS.DEPENDANTS}
-        component={DependantsScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: true,
-          headerTintColor: GlobalColors.darkPrimary,
-          title: 'Add Dependants',
-        }}
-        name={SCREENS.ADD_DEPENDANTS}
-        component={AddDependantScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: true,
-          headerTintColor: GlobalColors.darkPrimary,
-          title: 'Edit Dependants',
-        }}
-        name={SCREENS.EDIT_DEPENDANTS}
-        component={EditDependantScreen}
-      />
-      {/* Settings */}
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.SETTINGS}
-        component={SettingsScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.PASSWORD_CHANGED}
-        component={PasswordChangeScreen}
-      />
-      <Stack.Screen
-        name={SCREENS.PASSWORD_CHANGED_IN_APP}
-        component={PasswordChanged}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.EMAIL_CHANGE}
-        component={EmailChangeScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.PHONE_NUMBER_CHANGE}
-        component={PhoneChangeScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.MARKETING_CONSENT}
-        component={MarketingConsentScreen}
-      />
-      <Stack.Screen
-        name={SCREENS.TERMS_AND_PRIVACY}
-        component={TermsAndPrivacy}
-      />
-    </Stack.Group>
-    {/* Profile Stack */}
-    <Stack.Group>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.EDIT_PROFILE}
-        component={EditProfileScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.PERSONAL_INFORMATION}
-        component={PersonalInformationScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.BODY_MEASUREMENT}
-        component={BodyMeasurementScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.MEDICAL_HISTORY}
-        component={MedicalHistoryScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.FAMILY_MEDICAL_HISTORY}
-        component={FamilyMedicalHistory}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.SMOKING}
-        component={SmokingScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.VACCINATION}
-        component={VaccinationScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.SLEEP}
-        component={SleepScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.DRINKING}
-        component={DrinkingScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.ALLERGIES}
-        component={AllergiesScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.EXERCISE}
-        component={ExerciseScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name={SCREENS.STRESS}
-        component={Stress}
-      />
-    </Stack.Group>
-  </Stack.Navigator>
-);
+const AccountNavigator = () => {
+  const { colors } = useTheme();
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      {/* Account Stack */}
+      <Stack.Group>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.ID_VERIFICATION_START}
+          component={LetsStartIdVerfiication}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            headerTintColor: colors.darkPrimary,
+            title: 'Dependants',
+          }}
+          name={SCREENS.DEPENDANTS}
+          component={DependantsScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            headerTintColor: colors.darkPrimary,
+            title: 'Add Dependants',
+          }}
+          name={SCREENS.ADD_DEPENDANTS}
+          component={AddDependantScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            headerTintColor: colors.darkPrimary,
+            title: 'Edit Dependants',
+          }}
+          name={SCREENS.EDIT_DEPENDANTS}
+          component={EditDependantScreen}
+        />
+        {/* Settings */}
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.SETTINGS}
+          component={SettingsScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.PASSWORD_CHANGED}
+          component={PasswordChangeScreen}
+        />
+        <Stack.Screen
+          name={SCREENS.PASSWORD_CHANGED_IN_APP}
+          component={PasswordChanged}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.EMAIL_CHANGE}
+          component={EmailChangeScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.PHONE_NUMBER_CHANGE}
+          component={PhoneChangeScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.MARKETING_CONSENT}
+          component={MarketingConsentScreen}
+        />
+        <Stack.Screen
+          name={SCREENS.TERMS_AND_PRIVACY}
+          component={TermsAndPrivacy}
+        />
+      </Stack.Group>
+      {/* Profile Stack */}
+      <Stack.Group>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.EDIT_PROFILE}
+          component={EditProfileScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.PERSONAL_INFORMATION}
+          component={PersonalInformationScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.BODY_MEASUREMENT}
+          component={BodyMeasurementScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.MEDICAL_HISTORY}
+          component={MedicalHistoryScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.FAMILY_MEDICAL_HISTORY}
+          component={FamilyMedicalHistory}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.SMOKING}
+          component={SmokingScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.VACCINATION}
+          component={VaccinationScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.SLEEP}
+          component={SleepScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.DRINKING}
+          component={DrinkingScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.ALLERGIES}
+          component={AllergiesScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.EXERCISE}
+          component={ExerciseScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.STRESS}
+          component={Stress}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+};
 
 export default AccountNavigator;

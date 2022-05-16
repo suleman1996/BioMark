@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { TextInput } from 'components';
 
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   label: string;
@@ -33,6 +34,9 @@ const PasswordInputWithLabel = ({
   if (marginTop) {
     otherStyles.push({ marginTop: heightToDp(marginTop) });
   }
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   return (
     <View style={[styles.container, otherStyles]}>

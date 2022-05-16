@@ -1,18 +1,22 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import { ArrowBack } from 'assets/svgs/index';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   title: string;
 };
 
 export default function Header(props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const navigations = useNavigation();
 
   return (

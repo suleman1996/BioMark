@@ -1,17 +1,29 @@
 import { useIsFocused } from '@react-navigation/native';
 import { default as useStateRef } from 'react-usestateref';
 
-import { ButtonWithShadowContainer, DropdownMenu } from 'components/base';
 import GeneralModalButton from 'components/higher-order/general-modal-button';
-import { TitleWithBackLayout } from 'components/layouts';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+// import { ModalButton } from 'components/higher-order';
+import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
+import { TitleWithBackLayout } from 'components/layouts';
+
+// import AsthmaModal from './modals/asthma';
+// import CancerModal from './modals/cancer';
+// import DiabetesModal from './modals/diabetes';
+// import GoutModal from './modals/gout';
+// import HighBloodPressureModal from './modals/high-blood-pressure';
+// import HighCholesterolModal from './modals/high-cholesterol';
+// import OthersModal from './modals/others';
+
+import makeStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { goBack } from 'services/nav-ref';
 import { IAppState } from 'store/IAppState';
 import { MedicalTemplateAttribute } from 'types/api';
 import GeneralModalPage from './modals/general-modal';
-import { styles } from './styles';
 import {
   getAndAddMedicalHistoryDataR,
   getUserProfileData,
@@ -33,6 +45,9 @@ const options = [
 
 /* eslint-disable */
 const MedicalHistoryScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const focused = useIsFocused();
   const dispatch = useDispatch();
   const [dropdownValue, setDropdown] = useState<any>();

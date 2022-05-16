@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
+import { useTheme } from 'react-native-paper';
 
 import { ModalButton } from 'components/higher-order';
 import { ButtonWithShadowContainer } from 'components/base';
@@ -12,7 +13,6 @@ import OthersModal from './modals/others';
 
 import { goBack } from 'services/nav-ref';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { userService } from 'services/user-service/user-service';
@@ -20,7 +20,8 @@ import { useSelector } from 'react-redux';
 
 const MedicalHistoryScreen = () => {
   const isFocus = useIsFocused();
-
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const [heartDisease, setHeartDisease] = useState(false);
   const [isCholesterolModal, setIsCholesterolModal] = useState(false);
   const [isStroke, setIsStroke] = useState(false);
@@ -256,23 +257,24 @@ const MedicalHistoryScreen = () => {
 
 export default MedicalHistoryScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: GlobalColors.primaryGray,
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingTop: heightToDp(3),
-  },
-  label: {
-    fontSize: responsiveFontSize(16),
-    fontFamily: GlobalFonts.semiBold,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    marginTop: heightToDp(2),
-    justifyContent: 'space-between',
-    paddingBottom: 5,
-  },
-});
+const makeStyles = (colors: any) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: colors.primaryGray,
+      flex: 1,
+      paddingHorizontal: 15,
+      paddingTop: heightToDp(3),
+    },
+    label: {
+      fontSize: responsiveFontSize(16),
+      fontFamily: GlobalFonts.semiBold,
+      color: colors.darkPrimary,
+      marginTop: heightToDp(2),
+    },
+    rowContainer: {
+      flexDirection: 'row',
+      marginTop: heightToDp(2),
+      justifyContent: 'space-between',
+      paddingBottom: 5,
+    },
+  });

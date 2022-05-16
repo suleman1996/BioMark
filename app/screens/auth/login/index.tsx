@@ -192,7 +192,7 @@ export default function Login() {
       style={
         // [
         styles.container
-        // { backgroundColor: globalColors.background }]
+        // { backgroundColor: .background }]
       }
     >
       <ActivityIndicator visible={loggingIn} />

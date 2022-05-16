@@ -1,12 +1,16 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   error: string | undefined | null;
 };
 const ErrorLineFullWidth = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { error } = props;
 
   if (error) {

@@ -9,6 +9,7 @@ import {
   View,
   Platform,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import Pdf from 'react-native-pdf';
 import { useNavigation } from '@react-navigation/native';
@@ -17,14 +18,16 @@ import ReactNativeBlobUtil from 'react-native-blob-util';
 
 import { ActivityIndicator } from 'components';
 
-import colors from 'assets/colors';
 import { BackIcon } from 'assets/svgs/index';
 
-import styles from './styles';
+import makeStyles from './styles';
 import Config from 'react-native-config';
 import { TitleWithBackLayout } from 'components/layouts';
 
 export default function TermsAndPrivacy({ route }) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [loading, setLoading] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(
     route?.params?.privacyPolicy

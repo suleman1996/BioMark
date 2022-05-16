@@ -23,6 +23,7 @@ import { useDispatch } from 'react-redux';
 
 import { Button } from 'components/button';
 import { DatePicker, TextInput, ActivityIndicator, CheckBox } from 'components';
+import { useTheme } from 'react-native-paper';
 
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
@@ -33,12 +34,14 @@ import {
 } from 'services/async-storage/auth-async-storage';
 import { loggedIn, loggedOut } from 'store/auth/auth-actions';
 
-import colors from 'assets/colors';
 import { BackIcon } from 'assets/svgs/index';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 export default function CreateProfile() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const dispatch3 = useDispatch();
 

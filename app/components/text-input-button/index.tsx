@@ -3,11 +3,11 @@ import { Text, View, Pressable } from 'react-native';
 
 import { TextInput } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useTheme } from 'react-native-paper';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   question: string;
@@ -26,6 +26,9 @@ const TextInputButton = ({
   placeholder,
   disabled,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={styles.container}>
       <Text style={styles.question}>{question}</Text>
@@ -41,7 +44,7 @@ const TextInputButton = ({
         />
         <Pressable style={styles.addBtn} onPress={onPress} disabled={disabled}>
           <Ionicons
-            color={GlobalColors.darkGray}
+            color={colors.darkGray}
             name="add"
             size={responsiveFontSize(22)}
           />

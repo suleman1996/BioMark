@@ -2,43 +2,34 @@ import { StyleSheet } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
-export const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    marginTop: heightToDp(2),
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    width: '100%',
-  },
-  button: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    width: widthToDp(25),
-    marginRight: widthToDp(3),
-    borderRadius: widthToDp(2),
-    height: heightToDp(5.5),
-    ...GlobalStyles.shadow,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
+export const makeStyles = (colors: any) =>
+  StyleSheet.create({
+    main: {
+      flex: 1,
+      marginTop: heightToDp(2),
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-    marginVertical: 10,
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.medium,
-  },
-});
+    container: {
+      flex: 1,
+      flexDirection: 'row',
+      width: '100%',
+    },
+    button: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#fff',
+      width: widthToDp(25),
+      marginRight: widthToDp(3),
+      borderRadius: widthToDp(2),
+      height: heightToDp(5.5),
+      ...GlobalStyles(colors).shadow,
+    },
+    label: {
+      fontSize: responsiveFontSize(22),
+      color: colors.darkPrimary,
+      fontFamily: GlobalFonts.medium,
+    },
+  });
+export default makeStyles;

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 
-import { GlobalColors } from 'utils/theme/global-colors';
-
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   question: string;
@@ -18,6 +17,8 @@ const RadioButtonQuestionComponent = ({
   isTrue,
   setIsTrue,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
       <Text style={styles.qText}>{question}</Text>
@@ -27,7 +28,7 @@ const RadioButtonQuestionComponent = ({
             value="second"
             status={!isTrue ? 'checked' : 'unchecked'}
             onPress={() => setIsTrue(false)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
           <Text style={styles.radioLabel}>No</Text>
         </View>
@@ -36,7 +37,7 @@ const RadioButtonQuestionComponent = ({
             value="first"
             status={isTrue ? 'checked' : 'unchecked'}
             onPress={() => setIsTrue(true)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
           <Text style={styles.radioLabel}>Yes</Text>
         </View>

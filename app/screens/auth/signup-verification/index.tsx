@@ -6,6 +6,7 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import DeviceInfo from 'react-native-device-info';
 import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
@@ -20,13 +21,15 @@ import { reduxDeviceRegister } from 'store/auth/auth-actions';
 import { navigate, goBack } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 import BackIcon from 'assets/svgs/back';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 export default function SignupVerification() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
 

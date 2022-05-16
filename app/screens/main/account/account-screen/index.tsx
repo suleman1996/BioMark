@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -10,17 +11,19 @@ import { ActivityIndicator } from 'components';
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
 
 import Images from 'assets/images';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const AccountScreen = () => {
   const authContext = useContext(AuthContext);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [profileLoader, setProfileLoader] = React.useState(false);
   const [autoLogoutCheck, setAutoLogoutCheck] = React.useState(false);
@@ -89,7 +92,7 @@ const AccountScreen = () => {
                 <MaterialCommunityIcons
                   name="pencil"
                   size={responsiveFontSize(25)}
-                  color={GlobalColors.primary}
+                  color={colors.primary}
                 />
                 <Text style={styles.editProfile}>Edit Profile</Text>
               </Pressable>

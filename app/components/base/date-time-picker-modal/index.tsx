@@ -1,12 +1,13 @@
 import { Pressable, Text, View } from 'react-native';
 import React, { useState } from 'react';
+import { useTheme } from 'react-native-paper';
 
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import { logNow } from 'utils/functions/log-binder';
 import { getDay, getMonth, getYear } from 'utils/functions/date-format';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   date: any;
@@ -14,6 +15,9 @@ type Props = {
 };
 
 const DateTimePickerModalComponent = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { date, setDate } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 

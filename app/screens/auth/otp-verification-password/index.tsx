@@ -12,15 +12,16 @@ import { showMessage } from 'react-native-flash-message';
 
 import { Button } from 'components/button';
 import { Header, ActivityIndicator, OtpInput } from 'components';
+import { useTheme } from 'react-native-paper';
 
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
 
-import colors from 'assets/colors';
+// import colors from 'assets/colors';
 
-import styles from './style';
+import makeStyles from './styles';
 import { changePassword } from 'services/auth-service';
 
 type Props = {
@@ -33,6 +34,8 @@ export default function OtpPassword(props: Props) {
   let initialMinutes = 1;
   let initialSeconds = 0;
 
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const [code, setCode] = React.useState('');
   const [clearOTP, setClearOTP] = React.useState(false);
   const OTPRef = useRef(null);

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, SafeAreaView } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, ErrorText, PasswordInputWithLabel } from 'components/base';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
@@ -24,6 +24,8 @@ import { styles } from './styles';
 const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
 const PasswordChangeScreen = () => {
+  const { colors } = useTheme();
+
   const [isLoading, setIsLoading] = useState(false);
   const [eCurrent, setECurrent] = useState(true);
   const [ePass, setEPass] = useState(true);
@@ -213,7 +215,7 @@ const PasswordChangeScreen = () => {
                     />
                   )}
                 </ScrollView>
-                <View style={GlobalStyles.bottomBtnWithShadow}>
+                <View style={GlobalStyles(colors).bottomBtnWithShadow}>
                   <Button
                     onPress={() => {
                       submitForm();

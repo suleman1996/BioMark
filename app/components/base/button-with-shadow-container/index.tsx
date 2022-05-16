@@ -1,9 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Button } from 'components/base';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   onPress: any;
@@ -12,6 +13,8 @@ type Props = {
 };
 
 const ButtonWithShadowContainer = ({ title, onPress, disabled }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
       <Button

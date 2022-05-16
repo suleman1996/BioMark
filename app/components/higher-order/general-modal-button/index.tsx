@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, Pressable } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   isSelected: boolean;
@@ -25,13 +25,16 @@ const GeneralModalButton = ({
   isModal,
   drop,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const textColor = isSelected
-    ? { color: GlobalColors.white }
-    : { color: GlobalColors.lightGrey };
+    ? { color: colors.white }
+    : { color: colors.lightGrey };
 
   const bgColor = isSelected
-    ? { backgroundColor: GlobalColors.darkPrimary }
-    : { backgroundColor: GlobalColors.white };
+    ? { backgroundColor: colors.darkPrimary }
+    : { backgroundColor: colors.white };
 
   return (
     <Pressable
@@ -47,7 +50,7 @@ const GeneralModalButton = ({
         <MaterialCommunityIcons
           size={responsiveFontSize(20)}
           name="chevron-down"
-          color={isModal ? GlobalColors.white : 'black'}
+          color={isModal ? colors.white : 'black'}
         />
       ) : null}
     </Pressable>

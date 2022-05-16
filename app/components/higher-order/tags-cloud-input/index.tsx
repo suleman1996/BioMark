@@ -6,9 +6,9 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { useTheme } from 'react-native-paper';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   question: string;
@@ -17,6 +17,9 @@ type Props = {
 };
 
 const TagsCloudInputComponent = ({ question, setData, data }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [tags, setTags] = useState([]);
   const [singleTag, setSingleTag] = useState<string>('');
   const ref = useRef<any>();
@@ -67,7 +70,7 @@ const TagsCloudInputComponent = ({ question, setData, data }: Props) => {
           style={styles.addBtn}
         >
           <Ionicons
-            color={GlobalColors.primaryGray}
+            color={colors.primaryGray}
             name="add"
             size={responsiveFontSize(35)}
           />

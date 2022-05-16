@@ -1,10 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, Text, Platform } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   width: any;
@@ -15,6 +16,9 @@ type Props = {
 };
 
 const DatePicker = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { width, date, setDate, isPickerShow, setIsPickerShow } = props;
   let otherStyles = [];
 

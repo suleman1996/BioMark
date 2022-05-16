@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
+import { useTheme } from 'react-native-paper';
 
 import {
   Menu,
@@ -9,7 +10,7 @@ import {
 } from 'react-native-popup-menu';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   label: string;
@@ -19,6 +20,9 @@ type Props = {
 };
 
 const RelationMenu = ({ label, options, onChange, optionValue }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const menuRef = useRef<any>();
   const [selected, setSelected] = useState();
 

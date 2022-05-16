@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
@@ -15,10 +16,8 @@ import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
 import { useIsFocused } from '@react-navigation/native';
 import { TextInput } from 'components';
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
@@ -26,9 +25,14 @@ import SCREENS from 'navigation/constants';
 import { useSelector } from 'react-redux';
 
 import { options } from './year';
-import { styles } from './styles';
+import makeStyles from './styles';
 
 export default function SmokingScreen() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
+  // const [value, setValue] = useState('');
+  // const [isSmoking, setIsSmoking] = useState('');
   const [value, setValue] = useState(2);
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
@@ -155,14 +159,11 @@ export default function SmokingScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor: value == 2 ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 2 ? colors.navyblue : null,
                 },
               ]}
             >
-              <RadioButton
-                color={value == 2 ? GlobalColors.white : null}
-                value={2}
-              />
+              <RadioButton color={value == 2 ? colors.white : null} value={2} />
               <Text
                 style={[
                   styles.radioText,
@@ -183,14 +184,11 @@ export default function SmokingScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor: value == 0 ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 0 ? colors.navyblue : null,
                 },
               ]}
             >
-              <RadioButton
-                color={value == 0 ? GlobalColors.white : null}
-                value={0}
-              />
+              <RadioButton color={value == 0 ? colors.white : null} value={0} />
               <Text
                 style={[
                   styles.radioText,
@@ -211,14 +209,11 @@ export default function SmokingScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor: value == 1 ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 1 ? colors.navyblue : null,
                 },
               ]}
             >
-              <RadioButton
-                color={value == 1 ? GlobalColors.white : null}
-                value={1}
-              />
+              <RadioButton color={value == 1 ? colors.white : null} value={1} />
               <Text
                 style={[
                   styles.radioText,
@@ -276,7 +271,7 @@ export default function SmokingScreen() {
                   {options?.map((item, index) => {
                     return (
                       <Picker.Item
-                        style={{ color: GlobalColors.darkGray }}
+                        style={{ color: colors.darkGray }}
                         key={index}
                         label={item.title}
                         value={item.title}
@@ -303,7 +298,7 @@ export default function SmokingScreen() {
                       {options2?.map((item, index) => {
                         return (
                           <Picker.Item
-                            style={{ color: GlobalColors.darkGray }}
+                            style={{ color: colors.darkGray }}
                             key={index}
                             label={item.title}
                             value={item.title}

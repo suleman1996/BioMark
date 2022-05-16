@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
-
 import { showMessage } from 'react-native-flash-message';
+import { useTheme } from 'react-native-paper';
 
 import { Button } from 'components/button';
 import { Header, ActivityIndicator, PhoneNumber } from 'components';
@@ -12,11 +12,14 @@ import { userService } from 'services/user-service/user-service';
 import { ForgotPasswordErrorResponse } from 'types/auth/ForgotPassword';
 import { logNow } from 'utils/functions/log-binder';
 
-import styles from './styles';
+import makeStyles from './styles';
 import { useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 
 export default function ForgotPassword() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [countryCode, setCountryCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [selectCountryCode, setSelectCountryCode] = useState('');

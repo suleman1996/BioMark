@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Picker } from '@react-native-picker/picker';
 
 import { BioDangerWhite } from 'components/svg';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   options: any;
@@ -20,6 +21,9 @@ const DropdownMenuComponent = ({
   onValueChange,
   error,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={styles.container}>
       <Picker

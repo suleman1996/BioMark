@@ -1,12 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
-import colors from 'assets/colors';
-
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   code: string;
@@ -24,6 +23,9 @@ export default function ({
   OTPRef,
 }: Props) {
   const focused = useIsFocused();
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   React.useEffect(() => {
     setCode('');

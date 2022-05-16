@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { useDispatch } from 'react-redux';
 
@@ -13,13 +14,16 @@ import { getAllDependents } from 'store/account/account-actions';
 import { DependentData } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 type Props = {
   data: DependentData[];
 };
 
 const DependantsList = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const { data } = props;
   const [isDelete, setIsDelete] = useState(false);

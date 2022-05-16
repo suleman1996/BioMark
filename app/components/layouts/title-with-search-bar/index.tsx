@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   children: any;
@@ -11,6 +12,9 @@ type Props = {
 };
 
 const TitleWithSearchBarLayout = ({ children, title }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={styles.container}>
       <View style={styles.titleBar}>

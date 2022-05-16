@@ -1,12 +1,13 @@
 import { Text, View } from 'react-native';
 import React from 'react';
+import { useTheme } from 'react-native-paper';
 
 import { InputField } from 'components';
 import { BioDangerWhite } from 'components/svg';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 type Props = {
   label: string;
@@ -29,6 +30,9 @@ const InputWithLabel = ({
   error,
   defaultValue,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const ifLabelSize = labelFontSize
     ? { fontSize: responsiveFontSize(labelFontSize) }
     : {};
