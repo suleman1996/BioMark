@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import colors from 'assets/colors';
 import fonts from 'assets/fonts';
@@ -37,7 +36,7 @@ export const styles = StyleSheet.create({
     fontSize: responsiveFontSize(22),
     color: '#3D3D3D',
     marginHorizontal: 10,
-    fontFamily: GlobalFonts.regular,
+    fontFamily: fonts.mulishRegular,
   },
   inputContainer: {
     alignItems: 'center',
@@ -65,7 +64,7 @@ export const styles = StyleSheet.create({
   },
   menuText: {
     paddingLeft: widthToDp(3),
-    fontFamily: GlobalFonts.regular,
+    fontFamily: fonts.mulishRegular,
     color: '#8493AE',
     fontSize: 15,
   },
