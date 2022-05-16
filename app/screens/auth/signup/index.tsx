@@ -25,7 +25,7 @@ import {
 } from 'components';
 
 import SCREENS from 'navigation/constants';
-import { navigate, goBack } from 'services/nav-ref';
+import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
@@ -156,7 +156,8 @@ export default function Signup() {
       <View style={styles.signupNav}>
         <View style={styles.csNav}>
           <TouchableOpacity>
-            <BackIcon onPress={() => goBack()} />
+            {/* <BackIcon onPress={() => goBack()} /> */}
+            <BackIcon onPress={() => console.log('goback')} />
           </TouchableOpacity>
           <Text style={styles.signupText}>Signup</Text>
         </View>
@@ -290,7 +291,6 @@ export default function Signup() {
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
-
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
                     <TouchableWithoutFeedback
@@ -308,7 +308,7 @@ export default function Signup() {
                           // bottom: 2,
                         }}
                       >
-                        terms and condition
+                        terms and conditions
                       </Text>
                     </TouchableWithoutFeedback>
                     <Text> and the </Text>

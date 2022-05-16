@@ -90,11 +90,10 @@ const styles = StyleSheet.create({
   tcText: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     marginHorizontal: 30,
   },
   tcTextStyle: {
-    marginTop: 20,
     fontSize: 17,
     fontFamily: fonts.mulishRegular,
     color: colors.black,
