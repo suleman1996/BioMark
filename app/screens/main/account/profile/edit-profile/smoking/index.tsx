@@ -28,15 +28,13 @@ import { useSelector } from 'react-redux';
 import { options } from './year';
 import { styles } from './styles';
 
-const options2 = [{ title: '2020' }, { title: '2021' }];
-
 export default function SmokingScreen() {
   const [value, setValue] = useState(2);
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
   const [isVisiable, setIsVisible] = React.useState(false);
-
+  const options2 = [{ title: '2020' }, { title: '2021' }];
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
 
   const isFocus = useIsFocused();
@@ -99,7 +97,6 @@ export default function SmokingScreen() {
     };
     handleLifeStyle();
   }, []);
-
   const onSubmit = async () => {
     try {
       console.log('day', day);
@@ -301,9 +298,7 @@ export default function SmokingScreen() {
                     <Picker
                       style={{ color: colors.black, fontFamily: fonts.regular }}
                       selectedValue={stopSmoke + ''}
-                      onValueChange={(itemValue) => {
-                        alert(itemValue);
-                      }}
+                      onValueChange={(itemValue) => setStopSmoke(itemValue)}
                     >
                       {options2?.map((item, index) => {
                         return (
