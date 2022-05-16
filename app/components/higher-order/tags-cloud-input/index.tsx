@@ -45,20 +45,24 @@ const TagsCloudInputComponent = ({ question, setData, data }: Props) => {
           onChangeText={setSingleTag}
           value={singleTag}
           onSubmitEditing={({ nativeEvent: { text } }) => {
-            setTags((state) => {
-              setData([...state, text]);
-              return [...state, text];
-            });
-            setSingleTag('');
+            if (text.trim() !== '') {
+              setTags((state) => {
+                setData([...state, text]);
+                return [...state, text];
+              });
+              setSingleTag('');
+            }
           }}
         />
         <Pressable
           onPress={() => {
-            setTags((state: any) => {
-              setData([...state, singleTag]);
-              return [...state, singleTag];
-            });
-            setSingleTag('');
+            if (singleTag.trim() !== '') {
+              setTags((state: any) => {
+                setData([...state, singleTag]);
+                return [...state, singleTag];
+              });
+              setSingleTag('');
+            }
           }}
           style={styles.addBtn}
         >
