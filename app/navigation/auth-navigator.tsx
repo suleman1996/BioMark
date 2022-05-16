@@ -11,6 +11,7 @@ import Signup from 'screens/auth/signup';
 import SignupVerification from 'screens/auth/signup-verification';
 import Splash from 'screens/splash/splash';
 import TermsAndPrivacy from 'screens/auth/terms-and-privacy';
+import onboarding from '../components/onboarding/index';
 
 import SCREENS from './constants';
 
@@ -24,8 +25,9 @@ const AuthNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name={SCREENS.LOGIN} component={Login} />
       <Stack.Screen name={SCREENS.SPLASH} component={Splash} />
+      <Stack.Screen name={SCREENS.ONBOARDING} component={onboarding} />
+      <Stack.Screen name={SCREENS.LOGIN} component={Login} />
 
       <Stack.Screen name={SCREENS.FORGOT_PASSWORD} component={ForgotPassword} />
       <Stack.Screen name={SCREENS.PASSWORD_OTP} component={PasswordOTP} />
