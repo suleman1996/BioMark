@@ -103,6 +103,7 @@ const AccountScreen = () => {
             <AccountMenu
               logOutCheck={autoLogoutCheck}
               onToggleAutoLogout={onToggleAutoLogout}
+              dependentsCount={authContext?.userData?.dependent_count || 0}
             />
           </View>
         </View>

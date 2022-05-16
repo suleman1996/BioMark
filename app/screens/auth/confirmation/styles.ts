@@ -17,6 +17,7 @@ export const makeStyles = (colors: any) =>
       shadowRadius: 3.84,
       elevation: 5,
     },
+
     csNav: {
       alignItems: 'center',
       marginHorizontal: 15,
@@ -35,6 +36,7 @@ export const makeStyles = (colors: any) =>
       stepIndicatorSize: 40,
       currentStepIndicatorSize: 40,
       stepIndicatorLabelFontSize: 20,
+      labelFontFamily: fonts.mulishBold,
       currentStepIndicatorLabelFontSize: 20,
       stepStrokeCurrentColor: colors.blue,
       stepIndicatorCurrentColor: colors.blue,
@@ -77,7 +79,7 @@ export const makeStyles = (colors: any) =>
       marginHorizontal: 50,
       lineHeight: 20,
       color: colors.black,
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       textAlign: 'center',
       marginBottom: 190,
     },

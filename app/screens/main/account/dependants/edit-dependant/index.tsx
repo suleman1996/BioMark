@@ -265,15 +265,15 @@ export default EditDependantScreen;
 
 const AddDependentSchema = Yup.object({
   first_name: Yup.string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid first name')
+    // .matches(/^[A-Za-z ]*$/, 'Please enter valid first name')
     .required('Firstname is required'),
   last_name: Yup.string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid last name')
+    // .matches(/^[A-Za-z ]*$/, 'Please enter valid last name')
     .required('Firstname is required'),
   document_type: Yup.string().required(''),
   dependent_type_id: Yup.string().required(''),
   id_number: Yup.string()
-    .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
+    // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
     .required('NRIC / Passport is required'),
   // birth_date: Yup.string().required(''),
   email: Yup.string()

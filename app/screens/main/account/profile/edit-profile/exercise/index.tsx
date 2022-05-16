@@ -68,14 +68,25 @@ export default function ExerciseScreen() {
   const onSave = async () => {
     try {
       setIsVisible(true);
-      const response = await userService.exercise({
-        lifestyle: {
-          is_exercise: isExercise,
-          exercise_per_week: exerciseWeek,
-          exercise_per_session: exerciseSession,
-        },
-      });
-      console.log(response.data);
+      if (isExercise === 'true') {
+        const response = await userService.exercise({
+          lifestyle: {
+            is_exercise: isExercise,
+            exercise_per_week: exerciseWeek,
+            exercise_per_session: exerciseSession,
+          },
+        });
+        console.log(response.data);
+      } else {
+        const response = await userService.exercise({
+          lifestyle: {
+            is_exercise: false,
+            exercise_per_week: null,
+            exercise_per_session: null,
+          },
+        });
+        console.log(response.data);
+      }
       navigate(SCREENS.EDIT_PROFILE);
       setIsVisible(false);
     } catch (err) {
@@ -97,6 +108,7 @@ export default function ExerciseScreen() {
       );
       setExerciseWeek(result?.data?.exercise?.exercise_per_week);
       setExerciseSession(result?.data?.exercise?.exercise_per_session);
+      setIsExercise(result?.data?.exercise?.is_exercise ? 'second' : 'first');
       console.log('Exercise data', result?.data?.exercise?.is_exercise);
       setIsVisible(false);
     } catch (error) {
@@ -124,7 +136,6 @@ export default function ExerciseScreen() {
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
       <TitleWithBackLayout title="Exercise">
-        <Text style={{ color: 'red' }}>{isExercise}</Text>
         <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>
             {

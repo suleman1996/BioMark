@@ -17,6 +17,7 @@ type Props = {
   onEyePress?: any;
   eye?: any;
   onFocus?: any;
+  defaultValue?: any;
 };
 
 export default function InputField(props: Props) {
@@ -27,6 +28,7 @@ export default function InputField(props: Props) {
       <View style={styles.inputRow}>
         {props.svg}
         <TextInput
+          defaultValue={props.defaultValue}
           onFocus={props.onFocus}
           placeholder={props.placeholder}
           placeholderTextColor={colors.placeHolder}

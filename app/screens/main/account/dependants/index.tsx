@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,9 +23,18 @@ const DependantsScreen = (props: Props) => {
 
   const data = useSelector((state: IAppState) => state.account.allDependents);
 
+  const hasUnsavedChanges = Boolean(true);
   const dispatch = useDispatch();
   /*eslint-disable*/
+  React.useEffect(
+    () =>
+      props.navigation.addListener('beforeRemove', (e) => {
+        console.log('e', e);
 
+        // alert('hii');
+      }),
+    [props.navigation, hasUnsavedChanges]
+  );
   useEffect(() => {
     dispatch(getAllDependents());
   }, []);
@@ -33,11 +42,15 @@ const DependantsScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.bottomBtnContainer}>
-        <DependantsList data={data} />
-        <Button
-          onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
-          title={'Add New Dependant'}
-        />
+        <ScrollView style={{ flex: 1 }}>
+          <DependantsList data={data} />
+          <View style={{ alignItems: 'center' }}>
+            <Button
+              onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
+              title={'Add New Dependant'}
+            />
+          </View>
+        </ScrollView>
       </View>
     </View>
   );

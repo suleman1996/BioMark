@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -17,7 +17,9 @@ import MedicationModal from './modals/medication';
 import FoodModal from './modals/food';
 import AnimalModal from './modals/animal';
 import EnvironmentModal from './modals/environment';
+import { ActivityIndicator } from 'components';
 import OtherModal from './modals/other';
+import { showMessage } from 'react-native-flash-message';
 
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
@@ -29,6 +31,9 @@ export default function AllergiesScreen() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
+  useEffect(() => {
+    getMedicalHistory();
+  }, []);
   const [value, setValue] = useState('');
   const [isMedicationModal, setIsMedicationModal] = useState(false);
   const [isFoodModal, setIsFoodModal] = useState(false);
@@ -36,6 +41,8 @@ export default function AllergiesScreen() {
   const [isEnvironmentModal, setIsEnvironmentModal] = useState(false);
   const [isOtherModal, setIsOtherModal] = useState(false);
   const [isNotSureModal, setIsNotSureModal] = useState(false);
+  const [isVisiable, setIsVisible] = React.useState(false);
+  const [isAllergy, setIsAllergy] = useState('');
   const [conditions, setConditions] = useState([]);
   // medical states
   /*eslint-disable no-unused-vars*/
@@ -177,20 +184,70 @@ export default function AllergiesScreen() {
   const onSubmit = async () => {
     console.log(conditions);
     try {
-      if (conditions.length > 0) {
-        const response = await userService.Allergies({
-          conditions: conditions,
-        });
-        console.log('Allergies successful', response.data);
-        navigate(SCREENS.EDIT_PROFILE);
-      }
+      // if (conditions.length > 0) {
+      setIsVisible(true);
+      const response = await userService.Allergies({
+        has_allergy: isAllergy,
+        conditions: conditions,
+      });
+      console.log('Allergies successful', response.data);
+      navigate(SCREENS.EDIT_PROFILE);
+      setIsVisible(false);
+      // }
     } catch (err) {
+      setIsVisible(false);
       console.log(err);
+    }
+  };
+
+  const getMedicalHistory = async () => {
+    try {
+      setIsVisible(true);
+      const result = await userService.getMedicalHistory();
+      setValue(
+        result.data.allergy.has_allergy == '0'
+          ? 'first'
+          : result.data.allergy.has_allergy == '1'
+          ? 'second'
+          : result.data.allergy.has_allergy == '2'
+          ? 'third'
+          : null
+      );
+      setIsAllergy(
+        result.data.allergy.has_allergy == '0'
+          ? 'first'
+          : result.data.allergy.has_allergy == '1'
+          ? 'second'
+          : result.data.allergy.has_allergy == '2'
+          ? 'third'
+          : null
+      );
+      console.log('resulttttt', result.data.allergy.has_allergy);
+      setIsVisible(false);
+    } catch (error) {
+      setIsVisible(false);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
     }
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <ActivityIndicator visible={isVisiable} />
       <TitleWithBackLayout title="Allergies">
         <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>Do you have any allergies?</Text>
@@ -199,7 +256,9 @@ export default function AllergiesScreen() {
             value={value}
           >
             <TouchableOpacity
-              onPress={() => setValue('first')}
+              onPress={() => {
+                setValue('first'), setIsAllergy('0');
+              }}
               style={[
                 styles.radioContainer,
                 {
@@ -222,7 +281,9 @@ export default function AllergiesScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setValue('second')}
+              onPress={() => {
+                setValue('second'), setIsAllergy('1');
+              }}
               style={[
                 styles.radioContainer,
                 {
@@ -245,7 +306,9 @@ export default function AllergiesScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => setValue('third')}
+              onPress={() => {
+                setValue('third'), setIsAllergy('0');
+              }}
               style={[
                 styles.radioContainer,
                 {

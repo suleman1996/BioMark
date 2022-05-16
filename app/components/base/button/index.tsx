@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import { GlobalColors } from 'utils/theme/global-colors';
 
@@ -12,9 +13,19 @@ type Props = {
   disabled?: boolean;
   bg?: string;
   color?: string;
+  fontFamily?: string;
+  fontSize?: number;
 };
 
-const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
+const ButtonComponent = ({
+  onPress,
+  title,
+  disabled,
+  bg,
+  color,
+  fontFamily,
+  fontSize,
+}: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -26,6 +37,8 @@ const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
   const ifDisabledText = disabled
     ? { color: 'gray' }
     : { color: GlobalColors.white };
+  const ifFontFamily = fontFamily ? { fontFamily: fontFamily } : {};
+  const ifFontSize = fontSize ? { fontSize: responsiveFontSize(fontSize) } : {};
 
   return (
     <TouchableOpacity
@@ -33,7 +46,11 @@ const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
       style={[styles.container, ifDisabled, ifBg]}
       disabled={disabled}
     >
-      <Text style={[styles.text, ifDisabledText, ifColor]}>{title}</Text>
+      <Text
+        style={[styles.text, ifDisabledText, ifColor, ifFontFamily, ifFontSize]}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

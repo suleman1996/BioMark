@@ -3,6 +3,7 @@ import React from 'react';
 import { useTheme } from 'react-native-paper';
 
 import { useNavigation } from '@react-navigation/native';
+import { getOnboarding } from '../../services/async-storage/auth-async-storage';
 
 import SCREENS from 'navigation/constants';
 
@@ -15,10 +16,26 @@ export default function Splash() {
   const styles = makeStyles(colors);
   const navigations = useNavigation();
 
-  React.useEffect(() => {
+  const [onBoarding, setOnboarding] = React.useState('');
+
+  const getUser = async () => {
+    const onboardingg = await getOnboarding();
+    console.log('onboarding ', onboardingg);
+
+    setOnboarding(onboardingg);
+
     setTimeout(() => {
-      navigations.replace(SCREENS.LOGIN);
+      console.log('timeout ', onBoarding);
+
+      onBoarding == 'false'
+        ? navigations.replace(SCREENS.LOGIN)
+        : navigations.replace(SCREENS.ONBOARDING);
     }, 2000);
+  };
+
+  React.useEffect(() => {
+    getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigations]);
 
   return (

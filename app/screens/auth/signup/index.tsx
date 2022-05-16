@@ -26,7 +26,7 @@ import {
 } from 'components';
 
 import SCREENS from 'navigation/constants';
-import { navigate, goBack } from 'services/nav-ref';
+import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
@@ -157,7 +157,8 @@ export default function Signup() {
       <View style={styles.signupNav}>
         <View style={styles.csNav}>
           <TouchableOpacity>
-            <BackIcon onPress={() => goBack()} />
+            {/* <BackIcon onPress={() => goBack()} /> */}
+            <BackIcon onPress={() => console.log('goback')} />
           </TouchableOpacity>
           <Text style={styles.signupText}>Signup</Text>
         </View>
@@ -242,17 +243,33 @@ export default function Signup() {
                     setSelectCountryCode={setSelectCountryCode}
                     maxLength={numberCondition.max}
                   />
-                  {(phoneNumber !== '' ||
-                    errors.password ||
-                    phoneNumber.charAt(0) == 0) &&
-                    phoneNumber.length < numberCondition.min && (
-                      <Text style={styles.errorMessage}>
-                        Must have {numberCondition.min}
-                        {numberCondition.max !== numberCondition.min &&
-                          -numberCondition.max}{' '}
-                        characters
-                      </Text>
-                    )}
+                  {(phoneNumber !== '' || errors.password) &&
+                    (selectCountryCode == 63 ? (
+                      phoneNumber.charAt(0) == 0 ? (
+                        <Text style={styles.errorMessage}>
+                          Phonenumber must not start with 0
+                        </Text>
+                      ) : (
+                        phoneNumber.length < numberCondition.min && (
+                          <Text style={styles.errorMessage}>
+                            Must have {numberCondition.min}
+                            {numberCondition.max !== numberCondition.min &&
+                              -numberCondition.max}{' '}
+                            characters
+                          </Text>
+                        )
+                      )
+                    ) : (
+                      phoneNumber.length < numberCondition.min && (
+                        <Text style={styles.errorMessage}>
+                          Must have {numberCondition.min}
+                          {numberCondition.max !== numberCondition.min &&
+                            -numberCondition.max}{' '}
+                          characters
+                        </Text>
+                      )
+                    ))}
+
                   <Text style={styles.inputLablel}>Email</Text>
                   <TextInput
                     placeholder="E.g. Sample@email.com"
@@ -275,7 +292,6 @@ export default function Signup() {
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
-
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
                     <TouchableWithoutFeedback
@@ -293,7 +309,7 @@ export default function Signup() {
                           // bottom: 2,
                         }}
                       >
-                        terms and condition
+                        terms and conditions
                       </Text>
                     </TouchableWithoutFeedback>
                     <Text> and the </Text>
@@ -341,7 +357,7 @@ const ResetPassSchema = Yup.object({
     .required('Please type your new password')
     .min(8)
     .matches(
-      /^(?=.*\d)(?=.*[@#$%^&+=]).+$/,
-      'Atleast have one digit and one special character.'
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
     ),
 });

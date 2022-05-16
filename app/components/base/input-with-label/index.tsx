@@ -17,6 +17,7 @@ type Props = {
   value: string;
   onFocus?: any;
   error?: any;
+  defaultValue: any;
 };
 
 const InputWithLabel = ({
@@ -27,6 +28,7 @@ const InputWithLabel = ({
   value,
   onFocus,
   error,
+  defaultValue,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -44,6 +46,7 @@ const InputWithLabel = ({
         onChange={onChange}
         svg={undefined}
         value={value}
+        defaultValue={defaultValue}
       />
       {error ? (
         <View style={styles.errorContainer}>

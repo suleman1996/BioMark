@@ -24,6 +24,7 @@ const API_URLS = {
   PROFILE_AVATAR: '/api/v1/patient/profiles/avatar',
   UPDATE_PROFILE: '/api/v1/patient/profiles/update',
   DISABLE_ACCOUNT: '/api/v1/auth/accounts/disable',
+  MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   GET_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
 
@@ -44,6 +45,7 @@ const API_URLS = {
   GET_LIFE_STYLE: '/api/v1/patient/lifestyle',
   GET_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
+  GET_BODY_MEASUREMENT: '/api/v1/patient/medical',
 
   LOCATION: '/api/v1/geolocation',
   EXERCISE: '/api/v1/patient/lifestyle/exercise',

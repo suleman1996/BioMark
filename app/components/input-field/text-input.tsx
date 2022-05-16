@@ -5,6 +5,7 @@ import { TextInput } from 'react-native-paper';
 
 import colors from 'assets/colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import fonts from 'assets/fonts';
 
 type Props = {
   margin?: any;
@@ -63,5 +64,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(18),
     height: 45,
     borderRadius: 5,
+    fontFamily: fonts.mulishRegular,
   },
 });

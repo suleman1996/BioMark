@@ -39,6 +39,44 @@ const BodyMeasurementScreen = () => {
       : setValue2(values);
   };
 
+  React.useEffect(() => {
+    bodyMeasurements();
+  }, []);
+
+  const bodyMeasurements = async () => {
+    try {
+      setIsLoading(true);
+      const result = await userService.getBodyMeasurements();
+      console.log('body measurements ', result.data);
+      result?.data?.height_attr
+        ? setValue(result?.data?.height_attr)
+        : setValue(0);
+      result?.data?.weight_attr
+        ? setValue2(result?.data?.weight_attr)
+        : setValue2(0);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
+
   const onSubmit = async () => {
     try {
       setIsLoading(true);

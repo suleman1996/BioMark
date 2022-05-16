@@ -18,7 +18,6 @@ import { useIsFocused } from '@react-navigation/native';
 import { TextInput } from 'components';
 import fonts from 'assets/fonts';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
@@ -32,8 +31,9 @@ export default function SmokingScreen() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const [value, setValue] = useState('');
-  const [isSmoking, setIsSmoking] = useState('');
+  // const [value, setValue] = useState('');
+  // const [isSmoking, setIsSmoking] = useState('');
+  const [value, setValue] = useState(2);
   const [day, setDay] = useState('');
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
@@ -44,65 +44,96 @@ export default function SmokingScreen() {
   const isFocus = useIsFocused();
 
   useEffect(() => {
-    handleLifeStyle();
-    console.log(bootstrap, 'bootstrap');
+    //  handleLifeStyle();
+    console.log(
+      'bootSt',
+      bootstrap?.attributes?.medical_template.smoking[0].content.fields
+    );
   }, [isFocus, bootstrap]);
-
+  useEffect(() => {
+    const handleLifeStyle = async () => {
+      try {
+        setIsVisible(true);
+        const result = await userService.getLifeStyle();
+        console.log('hahah ', result);
+        setValue(
+          result?.data?.smoking?.is_smoking == 'No'
+            ? 2
+            : result?.data?.smoking?.is_smoking == 'Yes'
+            ? 0
+            : result?.data?.smoking?.is_smoking == 'I used to'
+            ? 1
+            : 0
+        );
+        setDay(result?.data?.smoking?.stick_per_day);
+        setStopSmoke(result?.data?.smoking?.smoking_stop_at);
+        setStartSmoke(result?.data?.smoking?.smoking_start_at);
+        // setIsSmoking(
+        //   result?.data?.smoking?.is_smoking == 'No'
+        //     ? 2
+        //     : result?.data?.smoking?.is_smoking == 'Yes'
+        //     ? 0
+        //     : result?.data?.smoking?.is_smoking == 'I used to'
+        //     ? 1
+        //     : 0
+        // );
+        console.log('smoking data', result.data.smoking);
+        setIsVisible(false);
+      } catch (error) {
+        setIsVisible(false);
+        if (error.errMsg.status == '500') {
+          showMessage({
+            message: 'Internal Server Error',
+            type: 'danger',
+          });
+        } else if (error.errMsg.status == false) {
+          showMessage({
+            message: error.errMsg.data.error,
+            type: 'danger',
+          });
+        } else {
+          showMessage({
+            message: error.errMsg,
+            type: 'danger',
+          });
+        }
+      }
+    };
+    handleLifeStyle();
+  }, []);
   const onSubmit = async () => {
     try {
-      setIsVisible(true);
-      const response = await userService.Smoking(
-        day,
-        stopSmoke,
-        startSmoke,
-        isSmoking
-      );
-      console.log('smoking successful', response.data);
-      navigate(SCREENS.EDIT_PROFILE);
-      setIsVisible(false);
+      console.log('day', day);
+      console.log('stopSmoke', stopSmoke);
+      console.log('startSmoke', startSmoke);
+      console.log('isSmoking yes no wala', value);
+      if (value === 1) {
+        setIsVisible(true);
+        const response = await userService.Smoking(day, 0, startSmoke, value);
+        console.log('smoking successful', response.data);
+        navigate(SCREENS.EDIT_PROFILE);
+        setIsVisible(false);
+      } else if (value === 0) {
+        setIsVisible(true);
+        const response = await userService.Smoking(
+          day,
+          stopSmoke,
+          startSmoke,
+          value
+        );
+        console.log('smoking successful', response.data);
+        navigate(SCREENS.EDIT_PROFILE);
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+        const response = await userService.Smoking(0, 0, 0, value);
+        console.log('smoking successful', response.data);
+        navigate(SCREENS.EDIT_PROFILE);
+        setIsVisible(false);
+      }
     } catch (err) {
       setIsVisible(false);
       console.log(err);
-    }
-  };
-
-  const handleLifeStyle = async () => {
-    try {
-      setIsVisible(true);
-      const result = await userService.getLifeStyle();
-      console.log('hahah ', result?.data?.smoking?.is_smoking);
-      setValue(
-        result?.data?.smoking?.is_smoking == 'No'
-          ? '0'
-          : result?.data?.smoking?.is_smoking == 'Yes'
-          ? '1'
-          : result?.data?.smoking?.is_smoking == 'I used to'
-          ? '2'
-          : null
-      );
-      setDay(result?.data?.smoking?.stick_per_day);
-      setStopSmoke(result?.data?.smoking?.smoking_stop_at);
-      setStartSmoke(result?.data?.smoking?.smoking_start_at);
-      console.log('smoking data', result.data.smoking);
-      setIsVisible(false);
-    } catch (error) {
-      setIsVisible(false);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: 'Internal Server Error',
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
     }
   };
 
@@ -123,23 +154,20 @@ export default function SmokingScreen() {
           >
             <TouchableOpacity
               onPress={() => {
-                setValue('0'), setIsSmoking('No');
+                setValue(2);
               }}
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor: value == '0' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 2 ? colors.navyblue : null,
                 },
               ]}
             >
-              <RadioButton
-                color={value == '0' ? GlobalColors.white : null}
-                value="0"
-              />
+              <RadioButton color={value == 2 ? colors.white : null} value={2} />
               <Text
                 style={[
                   styles.radioText,
-                  { color: value == '0' ? '#ffffff' : '#000000' },
+                  { color: value == 2 ? '#ffffff' : '#000000' },
                 ]}
               >
                 {
@@ -151,23 +179,20 @@ export default function SmokingScreen() {
 
             <TouchableOpacity
               onPress={() => {
-                setValue('1'), setIsSmoking('Yes');
+                setValue(0);
               }}
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor: value == '1' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 0 ? colors.navyblue : null,
                 },
               ]}
             >
-              <RadioButton
-                color={value == '1' ? GlobalColors.white : null}
-                value="1"
-              />
+              <RadioButton color={value == 0 ? colors.white : null} value={0} />
               <Text
                 style={[
                   styles.radioText,
-                  { color: value == '1' ? '#ffffff' : '#000000' },
+                  { color: value == 0 ? '#ffffff' : '#000000' },
                 ]}
               >
                 {
@@ -179,23 +204,20 @@ export default function SmokingScreen() {
 
             <TouchableOpacity
               onPress={() => {
-                setValue('2'), setIsSmoking('I used to');
+                setValue(1);
               }}
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor: value == '2' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 1 ? colors.navyblue : null,
                 },
               ]}
             >
-              <RadioButton
-                color={value == '2' ? GlobalColors.white : null}
-                value="2"
-              />
+              <RadioButton color={value == 1 ? colors.white : null} value={1} />
               <Text
                 style={[
                   styles.radioText,
-                  { color: value == '2' ? '#ffffff' : '#000000' },
+                  { color: value == 1 ? '#ffffff' : '#000000' },
                 ]}
               >
                 {
@@ -206,7 +228,7 @@ export default function SmokingScreen() {
             </TouchableOpacity>
           </RadioButton.Group>
 
-          {value !== '0' ? (
+          {value !== 2 ? (
             <View>
               <Text style={styles.label}>
                 {
@@ -249,7 +271,7 @@ export default function SmokingScreen() {
                   {options?.map((item, index) => {
                     return (
                       <Picker.Item
-                        style={{ color: GlobalColors.darkGray }}
+                        style={{ color: colors.darkGray }}
                         key={index}
                         label={item.title}
                         value={item.title}
@@ -259,13 +281,13 @@ export default function SmokingScreen() {
                 </Picker>
               </View>
 
-              {value == '2' ? (
+              {value == 1 ? (
                 <View>
                   <Text style={styles.label}>
                     {
                       bootstrap?.attributes?.medical_template?.smoking[0]
                         ?.content?.fields[3]?.question
-                    }{' '}
+                    }
                   </Text>
                   <View style={styles.container2}>
                     <Picker
@@ -276,7 +298,7 @@ export default function SmokingScreen() {
                       {options2?.map((item, index) => {
                         return (
                           <Picker.Item
-                            style={{ color: GlobalColors.darkGray }}
+                            style={{ color: colors.darkGray }}
                             key={index}
                             label={item.title}
                             value={item.title}

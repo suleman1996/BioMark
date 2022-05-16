@@ -33,7 +33,10 @@ const ModalWithBottomBtn = ({
   return (
     <Modal setIsVisible={setIsVisible} isVisible={isModal}>
       <View style={styles.card}>
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{ flex: 1 }}
+          keyboardShouldPersistTaps="always"
+        >
           <Text style={styles.title}>{title}</Text>
           {children}
         </ScrollView>

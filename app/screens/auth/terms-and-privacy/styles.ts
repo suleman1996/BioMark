@@ -11,16 +11,6 @@ export const makeStyles = (colors: any) =>
       flex: 1,
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
-    },
-    signupNav: {
-      paddingTop: 40,
-      width: '100%',
-      backgroundColor: colors.whiteColor,
-      shadowColor: colors.black,
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
 
@@ -44,6 +34,7 @@ export const makeStyles = (colors: any) =>
       stepIndicatorSize: 40,
       currentStepIndicatorSize: 40,
       stepIndicatorLabelFontSize: 15,
+      labelFontFamily: fonts.mulishBold,
       currentStepIndicatorLabelFontSize: 15,
       stepStrokeCurrentColor: colors.blue,
       stepIndicatorCurrentColor: colors.blue,
@@ -133,11 +124,8 @@ export const makeStyles = (colors: any) =>
         width: 0,
         height: 1,
       },
-      shadowOpacity: 0.2,
-      shadowRadius: 1.41,
-
-      elevation: 4,
     },
+
     radioText: {
       fontFamily: fonts.regular,
       fontSize: 14,

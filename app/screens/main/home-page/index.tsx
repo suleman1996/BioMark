@@ -78,7 +78,7 @@ export default function Home() {
                 <View style={{ width: '60%' }}>
                   <Text
                     style={{
-                      fontFamily: fonts.regular,
+                      fontFamily: fonts.mulishRegular,
                       fontSize: 13,
                       color: 'white',
                       lineHeight: 16.36,

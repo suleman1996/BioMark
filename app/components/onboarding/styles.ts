@@ -39,7 +39,7 @@ export const makeStyles = (colors: any) =>
       textAlign: 'center',
     },
     description: {
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       fontSize: 15,
       color: colors.black,
       textAlign: 'center',

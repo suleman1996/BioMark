@@ -23,18 +23,18 @@ const makeStyles = (colors: any) =>
     },
     inputLablel: {
       marginHorizontal: 20,
-      fontFamily: fonts.bold,
+      fontFamily: fonts.mulishBold,
       color: colors.heading,
       fontSize: 15,
     },
     forgotPassword: {
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       color: colors.blue,
       fontSize: 14,
     },
     orTxt: {
       marginHorizontal: 20,
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       fontSize: 14,
       color: colors.black,
     },
@@ -56,7 +56,7 @@ const makeStyles = (colors: any) =>
     },
     noAccountTxt: {
       marginTop: 10,
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       fontSize: 16,
       flexDirection: 'row',
     },

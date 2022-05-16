@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Image,
   Pressable,
@@ -30,10 +30,16 @@ import { userService } from 'services/user-service/user-service';
 import Images from 'assets/images';
 
 import makeStyles from './styles';
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+
+import { getUserProfileData } from 'store/profile/profile-actions';
 
 let cameraIs = false;
 
 const EditProfileScreen = () => {
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
 
   const { colors } = useTheme();
@@ -44,7 +50,16 @@ const EditProfileScreen = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [profileLoader, setProfileLoader] = React.useState(false);
 
-  const updateProfilePhoto = async (pic) => {
+  // get user profile
+  /* eslint-disable */
+  const getUserOnFocus = async () => {
+    await dispatch(getUserProfileData());
+  };
+  useEffect(() => {
+    getUserOnFocus();
+  }, [focused]);
+  /* eslint-enable */
+  const updateProfilePhoto = async (pic: any) => {
     try {
       setIsLoading(true);
       const [profilePic] = await Promise.all([
