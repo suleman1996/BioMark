@@ -106,6 +106,7 @@ export default function ExerciseScreen() {
       );
       setExerciseWeek(result?.data?.exercise?.exercise_per_week);
       setExerciseSession(result?.data?.exercise?.exercise_per_session);
+      setIsExercise(result?.data?.exercise?.is_exercise ? 'second' : 'first');
       console.log('Exercise data', result?.data?.exercise?.is_exercise);
       setIsVisible(false);
     } catch (error) {
