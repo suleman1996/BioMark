@@ -35,10 +35,6 @@ export const styles = StyleSheet.create({
   bottomBtnContainer: {
     marginTop: heightToDp(4),
   },
-  phText: {
-    fontSize: 15,
-    fontStyle: fonts.mulishRegular,
-  },
 
   errorMessage: {
     fontFamily: fonts.regular,

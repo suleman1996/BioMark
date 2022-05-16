@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     stepIndicatorSize: 40,
     currentStepIndicatorSize: 40,
     stepIndicatorLabelFontSize: 20,
+    labelFontFamily: fonts.mulishBold,
     currentStepIndicatorLabelFontSize: 20,
     stepStrokeCurrentColor: colors.blue,
     stepIndicatorCurrentColor: colors.blue,

@@ -218,7 +218,6 @@ const AddDependantScreen = () => {
                   )}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
-                  placeholderStyle={styles.phText}
                   label="Email"
                   onChange={handleChange('email')}
                   value={values.email}

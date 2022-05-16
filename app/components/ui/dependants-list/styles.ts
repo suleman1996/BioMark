@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   },
   editText: {
     fontSize: responsiveFontSize(15),
-    fontFamily: GlobalFonts.regular,
+    fontFamily: fonts.mulishRegular,
     color: GlobalColors.darkPrimary,
     textDecorationLine: 'underline',
     borderBottomColor: GlobalColors.darkPrimary,
