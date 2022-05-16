@@ -17,7 +17,7 @@ export const makeStyles = (colors: any) =>
       paddingHorizontal: widthToDp(4),
       paddingTop: heightToDp(2.5),
       paddingBottom: heightToDp(2),
-      ...GlobalStyles.shadow,
+      ...GlobalStyles(colors).shadow,
       borderBottomWidth: heightToDp(0.5),
       borderBottomColor: colors.gray,
     },

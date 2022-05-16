@@ -19,7 +19,6 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 import { ButtonWithShadowContainer } from 'components/base';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
@@ -143,7 +142,7 @@ const Drinking = () => {
 
         <Text
           style={{
-            color: GlobalColors.darkPrimary,
+            color: colors.darkPrimary,
             fontFamily: GlobalFonts.light,
           }}
         >
@@ -212,7 +211,7 @@ const Drinking = () => {
                 ]}
               >
                 <RadioButton
-                  color={value == 'first' ? GlobalColors.white : null}
+                  color={value == 'first' ? colors.white : null}
                   value="first"
                 />
                 <Text
@@ -238,7 +237,7 @@ const Drinking = () => {
                 ]}
               >
                 <RadioButton
-                  color={value == 'second' ? GlobalColors.white : null}
+                  color={value == 'second' ? colors.white : null}
                   value="second"
                 />
                 <Text
@@ -273,7 +272,7 @@ const Drinking = () => {
                     <FontAwesome
                       name={'beer'}
                       size={responsiveFontSize(24)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -281,7 +280,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'plus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -289,7 +288,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'minus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -305,7 +304,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'wine-glass-alt'}
                       size={responsiveFontSize(24)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -313,7 +312,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'plus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -321,7 +320,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'minus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -337,7 +336,7 @@ const Drinking = () => {
                     <MaterialCommunityIcons
                       name={'cup'}
                       size={responsiveFontSize(24)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -345,7 +344,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'plus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -353,7 +352,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'minus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }

@@ -4,8 +4,6 @@ import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
 
-import { GlobalColors } from 'utils/theme/global-colors';
-
 import makeStyles from './styles';
 
 type Props = {
@@ -30,7 +28,7 @@ const RadioButtonQuestionComponent = ({
             value="second"
             status={!isTrue ? 'checked' : 'unchecked'}
             onPress={() => setIsTrue(false)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
           <Text style={styles.radioLabel}>No</Text>
         </View>
@@ -39,7 +37,7 @@ const RadioButtonQuestionComponent = ({
             value="first"
             status={isTrue ? 'checked' : 'unchecked'}
             onPress={() => setIsTrue(true)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
           <Text style={styles.radioLabel}>Yes</Text>
         </View>

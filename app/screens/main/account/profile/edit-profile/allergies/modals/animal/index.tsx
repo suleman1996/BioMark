@@ -10,7 +10,7 @@ import {
 } from 'components/higher-order';
 import { TextInput } from 'components';
 
-// import { GlobalColors } from 'utils/theme/global-colors';
+// import {  } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 // import { styles } from '../../styles';

@@ -12,7 +12,7 @@ export const makeStyles = (colors: any) =>
       bottom: 0,
       paddingHorizontal: widthToDp(6),
       paddingVertical: heightToDp(3),
-      ...GlobalStyles.shadow,
+      ...GlobalStyles(colors).shadow,
     },
   });
 

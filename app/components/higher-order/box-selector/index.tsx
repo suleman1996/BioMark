@@ -2,8 +2,6 @@ import React from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { GlobalColors } from 'utils/theme/global-colors';
-
 import makeStyles from './styles';
 
 type Props = {
@@ -24,8 +22,8 @@ const BoxSelector = ({
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const selectedStyles = { backgroundColor: GlobalColors.primary };
-  const selectedTextStyle = { color: GlobalColors.white };
+  const selectedStyles = { backgroundColor: colors.primary };
+  const selectedTextStyle = { color: colors.white };
 
   if (isTitleSelect) {
     return (

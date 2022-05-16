@@ -21,7 +21,6 @@ import { ActivityIndicator } from 'components';
 import { TextInputButton } from 'components';
 import { showMessage } from 'react-native-flash-message';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import { userService } from 'services/user-service/user-service';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
@@ -146,13 +145,12 @@ export default function VaccinationScreen() {
                   style={[
                     styles.radioContainer,
                     {
-                      backgroundColor:
-                        index == value ? GlobalColors.navyblue : null,
+                      backgroundColor: index == value ? colors.navyblue : null,
                     },
                   ]}
                 >
                   <RadioButton
-                    color={index == value ? GlobalColors.white : null}
+                    color={index == value ? colors.white : null}
                     value={index}
                   />
                   <Text
@@ -210,7 +208,7 @@ export default function VaccinationScreen() {
                     <Entypo
                       name={'cross'}
                       size={responsiveFontSize(15)}
-                      color={GlobalColors.darkGray}
+                      color={colors.darkGray}
                       style={styles.crossIcon}
                     />
                   </TouchableOpacity>

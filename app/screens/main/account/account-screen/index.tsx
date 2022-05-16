@@ -11,7 +11,6 @@ import { ActivityIndicator } from 'components';
 import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
@@ -93,7 +92,7 @@ const AccountScreen = () => {
                 <MaterialCommunityIcons
                   name="pencil"
                   size={responsiveFontSize(25)}
-                  color={GlobalColors.primary}
+                  color={colors.primary}
                 />
                 <Text style={styles.editProfile}>Edit Profile</Text>
               </Pressable>

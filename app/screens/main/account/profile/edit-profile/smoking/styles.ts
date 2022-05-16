@@ -4,7 +4,6 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import fonts from 'assets/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -21,7 +20,7 @@ export const makeStyles = (colors: any) =>
     label: {
       fontSize: responsiveFontSize(19),
       fontFamily: GlobalFonts.medium,
-      color: GlobalColors.darkPrimary,
+      color: colors.darkPrimary,
       marginTop: heightToDp(2),
       marginHorizontal: 15,
       fontWeight: 'bold',
@@ -40,14 +39,14 @@ export const makeStyles = (colors: any) =>
     textinputView: {
       marginHorizontal: heightToDp(2),
       marginTop: 10,
-      borderColor: GlobalColors.darkPrimary,
+      borderColor: colors.darkPrimary,
     },
     container2: {
       marginHorizontal: heightToDp(2),
       marginTop: heightToDp(2),
       borderBottomWidth: 0,
       borderRadius: 8,
-      borderColor: GlobalColors.darkPrimary,
+      borderColor: colors.darkPrimary,
       backgroundColor: colors.lightGray,
       height: 50,
     },

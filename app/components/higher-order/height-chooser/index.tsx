@@ -7,7 +7,6 @@ import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
@@ -75,7 +74,7 @@ const HeightChooserComponent = ({
           <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
-                color: GlobalColors.heading,
+                color: colors.heading,
                 fontFamily: GlobalFonts.bold,
                 fontSize: responsiveFontSize(22),
               }}
@@ -86,7 +85,7 @@ const HeightChooserComponent = ({
             <MaterialCommunityIcons
               name="chevron-down"
               size={responsiveFontSize(28)}
-              color={GlobalColors.darkPrimary}
+              color={colors.darkPrimary}
             />
           </MenuTrigger>
           <MenuOptions optionsContainerStyle={styles.popupMenu}>
@@ -99,7 +98,7 @@ const HeightChooserComponent = ({
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 1 ? { backgroundColor: GlobalColors.gray } : {},
+                selectedType == 1 ? { backgroundColor: colors.gray } : {},
               ]}
             >
               <Text style={styles.menuText}>ft/in</Text>
@@ -113,7 +112,7 @@ const HeightChooserComponent = ({
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 2 ? { backgroundColor: GlobalColors.gray } : {},
+                selectedType == 2 ? { backgroundColor: colors.gray } : {},
               ]}
             >
               <Text style={styles.menuText}>cm</Text>

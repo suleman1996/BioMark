@@ -6,7 +6,6 @@ import { TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 
 import makeStyles from './styles';
 
@@ -28,7 +27,7 @@ const SingleMenuItemWithArrow = (props: Props) => {
         <Fontisto
           name="angle-right"
           size={responsiveFontSize(20)}
-          color={GlobalColors.darkPrimary}
+          color={colors.darkPrimary}
         />
       </>
     </TouchableRipple>

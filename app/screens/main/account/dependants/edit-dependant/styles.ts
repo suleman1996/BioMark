@@ -16,7 +16,7 @@ export const makeStyles = (colors: any) =>
       flex: 1,
       backgroundColor: colors.white,
       borderRadius: widthToDp(3),
-      ...GlobalStyles.shadow,
+      ...GlobalStyles(colors).shadow,
       paddingHorizontal: widthToDp(3),
       paddingVertical: widthToDp(2),
     },

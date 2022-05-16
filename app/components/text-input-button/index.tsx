@@ -6,7 +6,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useTheme } from 'react-native-paper';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalColors } from 'utils/theme/global-colors';
 
 import makeStyles from './styles';
 
@@ -45,7 +44,7 @@ const TextInputButton = ({
         />
         <Pressable style={styles.addBtn} onPress={onPress} disabled={disabled}>
           <Ionicons
-            color={GlobalColors.darkGray}
+            color={colors.darkGray}
             name="add"
             size={responsiveFontSize(22)}
           />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-
+import { useTheme } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 
 import { BioDangerWhite } from 'components/svg';
@@ -23,9 +23,10 @@ const DropdownMenuWithQuestion = ({
   error,
   question,
 }: Props) => {
+  const { colors } = useTheme();
   return (
     <View style={styles.parent}>
-      <Text style={GlobalStyles.question}>{question}</Text>
+      <Text style={GlobalStyles(colors).question}>{question}</Text>
       <View style={styles.container}>
         <Picker
           mode="dropdown"

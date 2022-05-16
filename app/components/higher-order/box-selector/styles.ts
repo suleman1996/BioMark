@@ -24,7 +24,7 @@ export const makeStyles = (colors: any) =>
       marginRight: widthToDp(3),
       borderRadius: widthToDp(2),
       height: heightToDp(5.5),
-      ...GlobalStyles.shadow,
+      ...GlobalStyles(colors).shadow,
     },
     label: {
       fontSize: responsiveFontSize(22),

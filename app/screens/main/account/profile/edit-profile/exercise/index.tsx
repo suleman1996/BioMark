@@ -21,7 +21,6 @@ import { showMessage } from 'react-native-flash-message';
 import fonts from 'assets/fonts';
 
 import { ActivityIndicator } from 'components';
-import { GlobalColors } from 'utils/theme/global-colors';
 
 import makeStyles from './styles';
 
@@ -154,13 +153,12 @@ export default function ExerciseScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'first' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 'first' ? colors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'first' ? GlobalColors.white : null}
+                color={value == 'first' ? colors.white : null}
                 value="first"
               />
               <Text
@@ -183,13 +181,12 @@ export default function ExerciseScreen() {
               style={[
                 styles.radioContainer,
                 {
-                  backgroundColor:
-                    value == 'second' ? GlobalColors.navyblue : null,
+                  backgroundColor: value == 'second' ? colors.navyblue : null,
                 },
               ]}
             >
               <RadioButton
-                color={value == 'second' ? GlobalColors.white : null}
+                color={value == 'second' ? colors.white : null}
                 value="second"
               />
               <Text

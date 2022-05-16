@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Formik } from 'formik';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,7 +13,6 @@ import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 
 import { goBack } from 'services/nav-ref';
 import { logNow } from 'utils/functions/log-binder';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
 import { userService } from 'services/user-service/user-service';
@@ -22,6 +22,8 @@ import { IAppState } from 'store/IAppState';
 import { styles } from './styles';
 
 const EmailChangeScreen = () => {
+  const { colors } = useTheme();
+
   const dispatch = useDispatch();
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
@@ -81,7 +83,7 @@ const EmailChangeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: GlobalColors.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
       <ActivityIndicator visible={isLoading} />
       <Formik
         innerRef={formikRef}
@@ -123,7 +125,7 @@ const EmailChangeScreen = () => {
                 <ErrorLineFullWidth
                   error={values.confirmEmail ? errors.confirmEmail : ''}
                 /> */}
-                <View style={GlobalStyles.bottomBtnWithShadow}>
+                <View style={GlobalStyles(colors).bottomBtnWithShadow}>
                   <Button
                     onPress={() => {
                       submitForm();

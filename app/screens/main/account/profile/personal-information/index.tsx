@@ -16,7 +16,6 @@ import { Button } from 'components/button';
 import { InputWithLabel, Button as ButtonComponent } from 'components/base';
 import { DatePicker, ActivityIndicator } from 'components';
 
-import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
 import { goBack } from 'services/nav-ref';
@@ -98,7 +97,7 @@ const PersonalInformationScreen = () => {
       <View style={styles.overLay}>
         <View
           style={{
-            backgroundColor: GlobalColors.white,
+            backgroundColor: colors.white,
             width: '90%',
             borderRadius: 5,
             padding: 20,
@@ -107,7 +106,7 @@ const PersonalInformationScreen = () => {
           <Text
             style={{
               fontFamily: fonts.bold,
-              color: GlobalColors.heading,
+              color: colors.heading,
               fontSize: 18,
               marginBottom: 30,
             }}
@@ -118,7 +117,7 @@ const PersonalInformationScreen = () => {
           <Text
             style={{
               fontFamily: fonts.regular,
-              color: GlobalColors.lightGrey,
+              color: colors.lightGrey,
               fontSize: 14,
               marginBottom: 40,
             }}
@@ -133,7 +132,7 @@ const PersonalInformationScreen = () => {
               style={{
                 marginTop: 15,
                 fontFamily: fonts.regular,
-                color: GlobalColors.lightGrey,
+                color: colors.lightGrey,
                 fontSize: 14,
                 marginBottom: 10,
                 alignSelf: 'center',
@@ -179,11 +178,11 @@ const PersonalInformationScreen = () => {
           value={value}
         >
           <View style={styles.radioContainer}>
-            <RadioButton color={GlobalColors.darkPrimary} value="first" />
+            <RadioButton color={colors.darkPrimary} value="first" />
             <Text style={styles.radioText}>Male</Text>
           </View>
           <View style={styles.radioContainer}>
-            <RadioButton color={GlobalColors.darkPrimary} value="second" />
+            <RadioButton color={colors.darkPrimary} value="second" />
             <Text style={styles.radioText}>Female</Text>
           </View>
         </RadioButton.Group>
