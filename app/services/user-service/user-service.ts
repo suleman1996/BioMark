@@ -410,6 +410,10 @@ const getMedicalHistory = () => {
   return client.get(API_URLS.GET_MEDICAL_HISTORY);
 };
 
+const getBodyMeasurements = () => {
+  return client.get(API_URLS.GET_BODY_MEASUREMENT);
+};
+
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
   return client.post(API_URLS.CREATE_STRESS, {
     stress: {
@@ -536,4 +540,5 @@ export const userService = {
   geoLocation,
   exercise,
   updateUserEthnic,
+  getBodyMeasurements,
 };
