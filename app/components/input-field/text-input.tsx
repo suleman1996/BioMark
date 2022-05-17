@@ -1,11 +1,10 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { TextInput } from 'react-native-paper';
 
-import colors from 'assets/colors';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import fonts from 'assets/fonts';
+import makeStyles from './styles';
 
 type Props = {
   margin?: any;
@@ -22,6 +21,9 @@ type Props = {
 };
 
 export default function (props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={[styles.container, { marginHorizontal: props.margin }]}>
       <TextInput
@@ -54,16 +56,3 @@ export default function (props: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-  },
-  textInput: {
-    backgroundColor: colors.inputBg,
-    fontSize: responsiveFontSize(18),
-    height: 45,
-    borderRadius: 5,
-    fontFamily: fonts.mulishRegular,
-  },
-});

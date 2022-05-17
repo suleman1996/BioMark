@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { TextInput, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import CountryPicker, {
   DEFAULT_THEME,
 } from 'react-native-country-picker-modal';
 
-import colors from 'assets/colors';
+// import colors from 'assets/colors';
 
-import styles from './styles';
+import makeStyles from './styles';
 
 type Props = {
   width: string | number;
@@ -21,6 +22,9 @@ type Props = {
 };
 
 export default function (props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { width, placeholder } = props;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [preferredCountries, setPreferredCountries] = useState([

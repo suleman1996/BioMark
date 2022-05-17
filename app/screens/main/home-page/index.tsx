@@ -15,13 +15,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
 import { getReduxBootstrap } from 'store/account/account-actions';
 import AuthContext from 'utils/auth-context';
-import styles from './styles';
+
+import makeStyles from './styles';
 
 export default function Home() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const authContext = useContext(AuthContext);
 
   // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);

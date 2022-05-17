@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useTheme } from 'react-native-paper';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -9,7 +10,6 @@ import AccountScreen from 'screens/main/account/account-screen';
 
 import SCREENS from './constants';
 
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 import {
   AccountIcon,
@@ -21,6 +21,8 @@ import {
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const { colors } = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={{

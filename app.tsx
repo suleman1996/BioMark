@@ -5,6 +5,7 @@ import {
   useColorScheme,
   SafeAreaView,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { Provider as PaperProvider } from 'react-native-paper';
 import FlashMessage from 'react-native-flash-message';
@@ -15,11 +16,12 @@ import BiomarkNavigation from './app/navigation';
 import { ErrorBoundary } from 'components';
 import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
-import colors from './app/assets/colors';
+// import colors from './app/assets/colors';
 import theme from 'utils/theme';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
+  const { colors } = useTheme();
 
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState({});
