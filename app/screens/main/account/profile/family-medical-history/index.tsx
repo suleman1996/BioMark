@@ -1,48 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import { showMessage } from 'react-native-flash-message';
-import { useTheme } from 'react-native-paper';
-
-import { ModalButton } from 'components/higher-order';
+// import { ModalButton } from 'components/higher-order';
 import { ButtonWithShadowContainer } from 'components/base';
+import GeneralModalButton from 'components/higher-order/general-modal-button';
 import { TitleWithBackLayout } from 'components/layouts';
-import { ActivityIndicator } from 'components';
-import CancerModal from './modals/cancer';
-import OthersModal from './modals/others';
-
-import { goBack } from 'services/nav-ref';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { userService } from 'services/user-service/user-service';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAndAddMedicalHistoryDataR } from 'store/profile/profile-actions';
+import { default as useStateRef } from 'react-usestateref';
+import { goBack } from 'services/nav-ref';
+import { profileServices } from 'services/profile-services';
+import { IAppState } from 'store/IAppState';
+import {
+  addFamilyMedicalHistoryUpdate,
+  getAndAddMedicalHistoryDataR,
+} from 'store/profile/profile-actions';
+import { MedicalTemplateAttribute } from 'types/api';
+import { logNow } from 'utils/functions/log-binder';
+import GeneralModalPage from './modals/general-modal';
+// import AsthmaModal from './modals/asthma';
+// import CancerModal from './modals/cancer';
+// import DiabetesModal from './modals/diabetes';
+// import GoutModal from './modals/gout';
+// import HighBloodPressureModal from './modals/high-blood-pressure';
+// import HighCholesterolModal from './modals/high-cholesterol';
+// import OthersModal from './modals/others';
+import makeStyles from './styles';
 
-/*eslint-disable */
+/* eslint-disable */
 const MedicalHistoryScreen = () => {
-  const isFocus = useIsFocused();
-  const dispatch = useDispatch();
-
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const [heartDisease, setHeartDisease] = useState(false);
-  const [isCholesterolModal, setIsCholesterolModal] = useState(false);
-  const [isStroke, setIsStroke] = useState(false);
-  const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);
-  const [isDiabetesModal, setIsDiabetesModal] = useState(false);
-  const [isCancerModal, setIsCancerModal] = useState(false);
-  const [isOtherModal, setIsOtherModal] = useState(false);
-  const [isNoneModal, setIsNoneModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [history] = useState([]);
+
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
+  const [dropdownValue, setDropdown] = useState<any>();
+  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
+
+  const [noneId, setNoneId] = useState();
+  useEffect(() => {
+    const id: any = bootstrap?.attributes?.medical_template?.family?.find(
+      (item) => item.name === 'None'
+    )?.id;
+    setNoneId(id);
+  }, []);
+
+  const [isGeneralModal, setIsGeneralModal, isGenModalRef] = useStateRef(false);
+  useEffect(() => {
+    setIsGeneralModal(isGenModalRef.current);
+    logNow(isGenModalRef.current);
+  }, [isGenModalRef.current]);
+
+  const [generalModalData, setGeneralModalData] =
+    useState<MedicalTemplateAttribute>({});
 
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
 
-  useEffect(() => {
-    getFamilyMedicalHistory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocus, bootstrap]);
+  // medical history data from redux
+  const familyMedicalHistory = useSelector(
+    (state: IAppState) => state.profile?.familyMedicalHistoryUpdate
+  );
 
   // getData when on focused
   const getOnFocued = async () => {
@@ -50,239 +67,156 @@ const MedicalHistoryScreen = () => {
   };
   useEffect(() => {
     getOnFocued();
-  }, [isFocus]);
+  }, [focused]);
 
-  const onNonePress = () => {
-    setIsCholesterolModal(false);
-    setIsBloodPressureModal(false);
-    setIsDiabetesModal(false);
-    setIsStroke(false);
-    setHeartDisease(false);
-    setIsCancerModal(false);
-    setIsOtherModal(false);
-    setIsNoneModal(true);
+  // save data on save button press
+  const saveDataonSavePress = () => {
+    profileServices
+      .saveAllFamilyMedicalHistoryPersonalData({
+        medical_history: {
+          conditions: familyMedicalHistory,
+        },
+      })
+      .then((res) => {
+        logNow('save medical personal ', res);
+      })
+      .catch((err) => {
+        logNow('save medical data error', err);
+      });
   };
 
-  const onPressOthers = () => {
-    setIsOtherModal(true);
-  };
-
-  const onPressCancer = () => {
-    setIsCancerModal(true);
-  };
-
-  const getFamilyMedicalHistory = async () => {
-    try {
-      setIsLoading(true);
-      const result = await userService.getFamilyMedicalHistory();
-      // console.log('here are the medical history family ', result.data);
-      result?.data?.family.map(
-        (item) => (
-          item.condition_id == 9 && setHeartDisease(true),
-          item.condition_id == 10 && setIsStroke(true),
-          item.condition_id == 11 && setIsBloodPressureModal(true),
-          item.condition_id == 12 && setIsCholesterolModal(true),
-          item.condition_id == 13 && setIsDiabetesModal(true)
-        )
-      );
-      heartDisease &&
-        history.push({
-          condition_id: 9,
-          medical_type: 'family',
-          has_condition: true,
-        });
-
-      isStroke &&
-        history.push({
-          condition_id: 10,
-          medical_type: 'family',
-          has_condition: true,
-        });
-
-      isBloodPressureModal &&
-        history.push({
-          condition_id: 11,
-          medical_type: 'family',
-          has_condition: true,
-        });
-
-      isCholesterolModal &&
-        history.push({
-          condition_id: 12,
-          medical_type: 'family',
-          has_condition: true,
-        });
-
-      isDiabetesModal &&
-        history.push({
-          condition_id: 13,
-          medical_type: 'family',
-          has_condition: true,
-        });
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-
-      console.log('Error ', error);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: 'Internal Server Error',
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
-  };
-
-  const createFamilyMedicalHistory = async () => {
-    try {
-      setIsLoading(true);
-      const result = await userService.createFamilyMedicalHistory(history);
-      console.log('here are the medical history family ', result.data);
-      goBack();
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-
-      console.log('Error ', error);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: 'Internal Server Error',
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
+  const onChangeModalState = () => {
+    setIsGeneralModal(!isGeneralModal);
+    setIsGeneralModal(isGenModalRef.current);
   };
 
   return (
-    <TitleWithBackLayout title="Medical History">
-      <ActivityIndicator visible={isLoading} />
-      <CancerModal isVisible={isCancerModal} setIsVisible={setIsCancerModal} />
-      <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
+    <TitleWithBackLayout title="Family Medical History">
+      {/* modals */}
+      <GeneralModalPage
+        isVisible={isGenModalRef.current}
+        setIsVisible={onChangeModalState}
+        qData={generalModalData}
+      />
+
+      {/* modals */}
       <ScrollView style={styles.container}>
         <Text style={styles.label}>
-          Have any of your family members been diagnosed with the following
+          Have you of your family members been diagnosed with the following
           conditions?
         </Text>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="Heart Disease"
-            isModal={heartDisease}
-            setIsModal={setHeartDisease}
-            drop={false}
-            history={history}
-            condition_id={9}
-          />
-          <ModalButton
-            title="Stroke"
-            isModal={isStroke}
-            setIsModal={setIsStroke}
-            drop={false}
-            history={history}
-            condition_id={10}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="High Blood Pressure"
-            isModal={isBloodPressureModal}
-            setIsModal={setIsBloodPressureModal}
-            drop={false}
-            history={history}
-            condition_id={11}
-          />
-          <ModalButton
-            title="High Cholesterol"
-            isModal={isCholesterolModal}
-            setIsModal={setIsCholesterolModal}
-            drop={false}
-            history={history}
-            condition_id={12}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="Diabetes"
-            isModal={isDiabetesModal}
-            setIsModal={setIsDiabetesModal}
-            drop={false}
-            history={history}
-            condition_id={13}
-          />
-          <ModalButton
-            title="Cancer"
-            isModal={isCancerModal}
-            setIsModal={onPressCancer}
-            history={history}
-            drop={true}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButton
-            title="Others"
-            isModal={isOtherModal}
-            setIsModal={onPressOthers}
-            history={history}
-            drop={true}
-          />
-          <ModalButton
-            title="None"
-            isModal={isNoneModal}
-            setIsModal={onNonePress}
-            history={history}
-            drop={false}
-          />
-        </View>
+        <ScrollView>
+          <View style={styles.rowContainer}>
+            {bootstrap?.attributes?.medical_template?.family?.map(
+              (item: MedicalTemplateAttribute, index: number) => (
+                <View key={index}>
+                  <GeneralModalButton
+                    isSelected={familyMedicalHistory.some(
+                      (elem) =>
+                        elem.condition_id === item.id && elem.has_condition
+                    )}
+                    drop={
+                      item.name !== 'None' && !item.content?.toggle
+                        ? true
+                        : false
+                    }
+                    title={item.name}
+                    isToggle={item.content?.toggle}
+                    isModal={isGeneralModal}
+                    setIsModal={async (value: any) => {
+                      if (item.name == 'None') {
+                        await dispatch(
+                          addFamilyMedicalHistoryUpdate([
+                            {
+                              condition_id: item.id,
+                              medical_type: 'family',
+                              has_condition: true,
+                              name: 'None',
+                            },
+                          ])
+                        );
+                        return;
+                      } else if (item.content.toggle) {
+                        let updatedItems = [];
+                        const d = familyMedicalHistory.find(
+                          (el) =>
+                            el.condition_id === item.id && el.has_condition
+                        );
+                        const d2 = familyMedicalHistory.find(
+                          (el) =>
+                            el.condition_id === item.id &&
+                            el.has_condition == false
+                        );
+                        if (d) {
+                          logNow('Already Item');
+                          updatedItems = familyMedicalHistory?.map((el) =>
+                            el.condition_id === item.id
+                              ? {
+                                  ...el,
+                                  condition_id: item.id,
+                                  medical_type: 'family',
+                                  has_condition: false,
+                                }
+                              : el
+                          );
+                          await dispatch(
+                            addFamilyMedicalHistoryUpdate(updatedItems)
+                          );
+                        } else if (d2) {
+                          logNow('Already Item2');
+                          updatedItems = familyMedicalHistory?.map((el) =>
+                            el.condition_id === item.id
+                              ? {
+                                  ...el,
+                                  condition_id: item.id,
+                                  medical_type: 'family',
+                                  has_condition: true,
+                                }
+                              : el
+                          );
+                          await dispatch(
+                            addFamilyMedicalHistoryUpdate(updatedItems)
+                          );
+                        } else {
+                          updatedItems.push({
+                            condition_id: item.id,
+                            medical_type: 'family',
+                            has_condition: true,
+                          });
+                          const dData = [
+                            ...familyMedicalHistory,
+                            ...updatedItems,
+                          ];
+                          logNow(dData);
+                          await dispatch(addFamilyMedicalHistoryUpdate(dData));
+                        }
+                        return;
+                      } else {
+                        const updated = familyMedicalHistory.filter(
+                          (item) => item.condition_id !== noneId
+                        );
+                        await dispatch(addFamilyMedicalHistoryUpdate(updated));
+                      }
+                      logNow('filter Data', familyMedicalHistory);
+                      onChangeModalState();
+                      setGeneralModalData(item);
+                    }}
+                  />
+                </View>
+              )
+            )}
+          </View>
+        </ScrollView>
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={() => {
-          createFamilyMedicalHistory();
+          saveDataonSavePress();
+          goBack();
         }}
+        title={'Save & Continue'}
       />
     </TitleWithBackLayout>
   );
 };
 
 export default MedicalHistoryScreen;
-
-const makeStyles = (colors: any) =>
-  StyleSheet.create({
-    container: {
-      backgroundColor: colors.primaryGray,
-      flex: 1,
-      paddingHorizontal: 15,
-      paddingTop: heightToDp(3),
-    },
-    label: {
-      fontSize: responsiveFontSize(16),
-      fontFamily: GlobalFonts.semiBold,
-      color: colors.darkPrimary,
-      marginTop: heightToDp(2),
-    },
-    rowContainer: {
-      flexDirection: 'row',
-      marginTop: heightToDp(2),
-      justifyContent: 'space-between',
-      paddingBottom: 5,
-    },
-  });
