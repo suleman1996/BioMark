@@ -15,10 +15,11 @@ import { setMarketing } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const MarketingConsentScreen = () => {
   const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const dispatch = useDispatch();
   const userMarketing = useSelector((state: IAppState) => state.auth.marketing);

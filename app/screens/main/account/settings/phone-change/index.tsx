@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { useTheme } from 'react-native-paper';
 
 import { useSelector } from 'react-redux';
 import parsePhoneNumber from 'libphonenumber-js';
@@ -10,9 +11,12 @@ import { PhoneNumberWithLabel } from 'components/base';
 import { IAppState } from 'store/IAppState';
 import { logNow } from 'utils/functions/log-binder';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const PhoneChangeScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [countryCode, setCountryCode] = useState<any>();
   const [number, setNumber] = useState<any>();
 
