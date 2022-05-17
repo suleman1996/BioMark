@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Linking, View, SafeAreaView } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { showMessage } from 'react-native-flash-message';
 import { useDispatch } from 'react-redux';
@@ -17,9 +18,12 @@ import { userService } from 'services/user-service/user-service';
 import { addUserContactsDetails, logout } from 'store/auth/auth-actions';
 import { ErrorResponse } from 'types/ErrorResponse';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const SettingsScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
 
   const [isVisibleDeActivateModal, setDeActivateModal] = useState(false);

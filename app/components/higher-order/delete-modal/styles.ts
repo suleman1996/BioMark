@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -26,7 +27,7 @@ export const makeStyles = (colors: any) =>
     },
     subHeading: {
       fontSize: responsiveFontSize(17),
-      fontFamily: GlobalFonts.regular,
+      fontFamily: fonts.mulishRegular,
     },
     yesBtn: {
       paddingHorizontal: widthToDp(8),

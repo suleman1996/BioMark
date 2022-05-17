@@ -16,7 +16,6 @@ import BiomarkNavigation from './app/navigation';
 import { ErrorBoundary } from 'components';
 import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
-// import colors from './app/assets/colors';
 import theme from 'utils/theme';
 
 const App = () => {

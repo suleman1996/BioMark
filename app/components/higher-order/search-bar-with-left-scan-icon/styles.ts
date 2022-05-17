@@ -35,7 +35,7 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(22),
       color: '#3D3D3D',
       marginHorizontal: 10,
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
     },
     inputContainer: {
       alignItems: 'center',
@@ -63,7 +63,7 @@ export const makeStyles = (colors: any) =>
     },
     menuText: {
       paddingLeft: widthToDp(3),
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       color: '#8493AE',
       fontSize: 15,
     },
