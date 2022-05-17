@@ -5,6 +5,7 @@ import {
   MEDICAL_HISTORY,
   MEDICAL_HISTORY_UPDATE,
   USER_PROFILE,
+  FAMILY_MEDICAL_HISTORY_UPDATE,
 } from './constants';
 
 export const addMedicalHistoryUpdate = (data: any) => ({
@@ -14,6 +15,11 @@ export const addMedicalHistoryUpdate = (data: any) => ({
 
 export const addMedicalHistoryData = (data: any) => ({
   type: MEDICAL_HISTORY,
+  payload: data,
+});
+
+export const addFamilyMedicalHistoryUpdate = (data: any) => ({
+  type: FAMILY_MEDICAL_HISTORY_UPDATE,
   payload: data,
 });
 
@@ -30,6 +36,7 @@ export const getAndAddMedicalHistoryDataR =
         logNow(' all medical history response for redux ============>', res);
         await dispatch(addMedicalHistoryData(res));
         await dispatch(addMedicalHistoryUpdate(res.personal));
+        await dispatch(addFamilyMedicalHistoryUpdate(res.family));
       })
       .catch((err) => {
         logNow(err);

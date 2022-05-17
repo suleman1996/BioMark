@@ -16,10 +16,14 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { userService } from 'services/user-service/user-service';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAndAddMedicalHistoryDataR } from 'store/profile/profile-actions';
 
+/*eslint-disable */
 const MedicalHistoryScreen = () => {
   const isFocus = useIsFocused();
+  const dispatch = useDispatch();
+
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const [heartDisease, setHeartDisease] = useState(false);
@@ -37,12 +41,16 @@ const MedicalHistoryScreen = () => {
 
   useEffect(() => {
     getFamilyMedicalHistory();
-    console.log(
-      'Bootstrap =======>',
-      bootstrap?.attributes?.medical_template?.family
-    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocus, bootstrap]);
+
+  // getData when on focused
+  const getOnFocued = async () => {
+    await dispatch(getAndAddMedicalHistoryDataR());
+  };
+  useEffect(() => {
+    getOnFocued();
+  }, [isFocus]);
 
   const onNonePress = () => {
     setIsCholesterolModal(false);
