@@ -9,6 +9,7 @@ import CountryPicker, {
 // import colors from 'assets/colors';
 
 import makeStyles from './styles';
+import fonts from 'assets/fonts';
 
 type Props = {
   width: string | number;
@@ -60,6 +61,7 @@ export default function (props: Props) {
           backgroundColor: colors.whiteColor,
           onBackgroundTextColor: colors.black,
           fontSize: 14,
+          fontFamily: fonts.mulishRegular,
         }}
         containerButtonStyle={styles.pickerButtonStyle}
         onSelect={(Country) => onSelect(Country)}
