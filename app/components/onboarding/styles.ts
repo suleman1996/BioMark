@@ -11,7 +11,7 @@ export const makeStyles = (colors: any) =>
       paddingTop: 30,
     },
     cards: {
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       // marginVertical: 50,
       height: '80%',
       width: '80%',

@@ -12,7 +12,7 @@ export const makeStyles = (colors: any) =>
     navHeading: {
       fontFamily: fonts.bold,
       fontSize: 25,
-      color: colors.whiteColor,
+      color: colors.white,
       paddingLeft: 21,
       paddingTop: 5,
       paddingBottom: 10,
@@ -39,7 +39,7 @@ export const makeStyles = (colors: any) =>
     bnHeading: {
       fontFamily: fonts.bold,
       fontSize: 20,
-      color: colors.whiteColor,
+      color: colors.white,
       paddingTop: 10,
       paddingHorizontal: 10,
     },
@@ -66,7 +66,7 @@ export const makeStyles = (colors: any) =>
     },
 
     googleFitC: {
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       width: '100%',
       flex: 1,
       borderRadius: 8,

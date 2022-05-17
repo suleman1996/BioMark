@@ -129,9 +129,9 @@ export default function Signup() {
         styles.radioButton,
         {
           backgroundColor:
-            item.id === selectedGender.id ? colors.heading : colors.whiteColor,
+            item.id === selectedGender.id ? colors.heading : colors.white,
           borderColor:
-            item.id === selectedGender.id ? colors.heading : colors.placeHolder,
+            item.id === selectedGender.id ? colors.heading : colors.lightGrey,
         },
       ]}
     >
@@ -140,9 +140,7 @@ export default function Signup() {
           (styles.radioText,
           {
             color:
-              item.id === selectedGender.id
-                ? colors.whiteColor
-                : colors.heading,
+              item.id === selectedGender.id ? colors.white : colors.heading,
           })
         }
       >

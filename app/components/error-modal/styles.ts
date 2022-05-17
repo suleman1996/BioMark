@@ -17,7 +17,7 @@ export const makeStyles = (colors: any) =>
     },
     view: {
       width: '90%',
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       borderRadius: 5,
       padding: 20,
       paddingBottom: 10,
@@ -26,7 +26,7 @@ export const makeStyles = (colors: any) =>
       fontFamily: fonts.regular,
       fontSize: 15,
       textAlign: 'center',
-      color: colors.placeHolder,
+      color: colors.lightGrey,
     },
     heading: {
       fontFamily: fonts.semiBold,

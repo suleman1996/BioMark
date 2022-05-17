@@ -6,7 +6,7 @@ export const makeStyles = (colors: any) =>
     signupNav: {
       paddingTop: 20,
       width: '100%',
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       shadowColor: colors.black,
       shadowOffset: {
         width: 0,
@@ -38,11 +38,11 @@ export const makeStyles = (colors: any) =>
       currentStepIndicatorLabelFontSize: 20,
       stepStrokeCurrentColor: colors.blue,
       stepIndicatorCurrentColor: colors.blue,
-      stepIndicatorLabelCurrentColor: colors.whiteColor,
-      stepIndicatorLabelFinishedColor: colors.whiteColor,
+      stepIndicatorLabelCurrentColor: colors.white,
+      stepIndicatorLabelFinishedColor: colors.white,
       stepIndicatorFinishedColor: colors.blue,
       stepIndicatorUnFinishedColor: colors.lightBlue,
-      labelColor: colors.placeHolder,
+      labelColor: colors.lightGrey,
       currentStepLabelColor: colors.darBlue,
       separatorFinishedColor: colors.blue,
       separatorUnFinishedColor: colors.lightBlue,
@@ -52,7 +52,7 @@ export const makeStyles = (colors: any) =>
 
       borderRadius: 8,
       // borderWidth: 1,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       borderColor: colors.inactive,
       marginHorizontal: 15,
       // paddingBottom: 5,
