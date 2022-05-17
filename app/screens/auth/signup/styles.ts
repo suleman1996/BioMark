@@ -7,7 +7,7 @@ export const makeStyles = (colors: any) =>
     signupNav: {
       paddingTop: 20,
       width: '100%',
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       shadowColor: colors.black,
       shadowOffset: {
         width: 0,
@@ -39,9 +39,9 @@ export const makeStyles = (colors: any) =>
       currentStepIndicatorLabelFontSize: 15,
       stepStrokeCurrentColor: colors.blue,
       stepIndicatorCurrentColor: colors.blue,
-      stepIndicatorLabelCurrentColor: colors.whiteColor,
+      stepIndicatorLabelCurrentColor: colors.white,
       stepIndicatorUnFinishedColor: colors.lightBlue,
-      labelColor: colors.placeHolder,
+      labelColor: colors.lightGrey,
       currentStepLabelColor: colors.darBlue,
       separatorFinishedColor: colors.blue,
       separatorUnFinishedColor: colors.lightBlue,
@@ -49,7 +49,7 @@ export const makeStyles = (colors: any) =>
     biContainer: {
       flex: 1,
       borderRadius: 8,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       borderColor: 'grey',
       marginHorizontal: 15,
       marginBottom: 10,
@@ -78,7 +78,7 @@ export const makeStyles = (colors: any) =>
     },
     aiContainer: {
       borderRadius: 8,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       marginHorizontal: 5,
       borderColor: 'grey',
       paddingBottom: 15,

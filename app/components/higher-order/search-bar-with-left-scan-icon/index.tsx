@@ -242,6 +242,8 @@ type Props = {
 
 //PopUp Modal
 const QrInputPopup = ({ visible, children, loading }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const [showModal, setShowModal] = React.useState(visible);
 
   React.useEffect(() => {

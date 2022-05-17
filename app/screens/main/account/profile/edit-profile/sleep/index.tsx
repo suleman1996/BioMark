@@ -125,7 +125,7 @@ const Sleep = () => {
               <Picker
                 selectedValue={selectedSleep}
                 style={{
-                  color: colors.placeHolder,
+                  color: colors.lightGrey,
                   fontFamily: fonts.regular,
                 }}
                 itemStyle={{ color: colors.danger }}

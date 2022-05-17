@@ -269,7 +269,7 @@ export default function TermsAndPrivacy({ route }) {
         onPress={() => permissionFunc()}
       >
         <View style={styles.iconView}>
-          <Icon name="cloud-download" size={30} color={colors.whiteColor} />
+          <Icon name="cloud-download" size={30} color={colors.white} />
         </View>
       </TouchableOpacity>
     </View>

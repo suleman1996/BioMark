@@ -223,7 +223,7 @@ export default function ExerciseScreen() {
                         key={index}
                         label={item.title}
                         value={item.title}
-                        color={colors.placeHolder}
+                        color={colors.lightGrey}
                       />
                     );
                   })}
@@ -247,7 +247,7 @@ export default function ExerciseScreen() {
                         key={index}
                         label={item.title}
                         value={item.title}
-                        color={colors.placeHolder}
+                        color={colors.lightGrey}
                       />
                     );
                   })}

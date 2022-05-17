@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
 import PagerView from 'react-native-pager-view';
@@ -21,9 +22,11 @@ import { IAppState } from 'store/IAppState';
 import { logNow } from 'utils/functions/log-binder';
 import { notificationsService } from 'services/notification-service';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 export default function InboxScreen() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   // redux state all inbox
   const allInboxNotificationsData = useSelector(
     (state: IAppState) => state.notifications.allInboxNotifications

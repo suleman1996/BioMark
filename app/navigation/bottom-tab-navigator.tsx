@@ -30,7 +30,7 @@ const BottomTabNavigator = () => {
         tabBarHideOnKeyboard: true,
         tabBarLabelStyle: { fontSize: 11, fontFamily: fonts.mulishRegular },
         tabBarStyle: {
-          backgroundColor: colors.whiteColor,
+          backgroundColor: colors.white,
           borderTopColor: 'rgba(0, 0, 0, 0)',
         },
         tabBarActiveTintColor: colors.blue,

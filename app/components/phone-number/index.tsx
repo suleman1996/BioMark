@@ -58,7 +58,7 @@ export default function (props: Props) {
         preferredCountries={preferredCountries}
         theme={{
           ...DEFAULT_THEME,
-          backgroundColor: colors.whiteColor,
+          backgroundColor: colors.white,
           onBackgroundTextColor: colors.black,
           fontSize: 14,
           fontFamily: fonts.mulishRegular,
@@ -68,7 +68,7 @@ export default function (props: Props) {
       />
       <TextInput
         placeholder={placeholder ? placeholder : 'Phone Number'}
-        placeholderTextColor={colors.placeHolder}
+        placeholderTextColor={colors.lightGrey}
         autoCapitalize={'none'}
         maxLength={props.maxLength}
         style={[
