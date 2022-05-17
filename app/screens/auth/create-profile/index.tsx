@@ -127,9 +127,9 @@ export default function CreateProfile() {
         styles.radioButton,
         {
           backgroundColor:
-            item.id === selectedGender.id ? colors.heading : colors.whiteColor,
+            item.id === selectedGender.id ? colors.heading : colors.white,
           borderColor:
-            item.id === selectedGender.id ? colors.heading : colors.placeHolder,
+            item.id === selectedGender.id ? colors.heading : colors.lightGrey,
         },
       ]}
     >
@@ -138,9 +138,7 @@ export default function CreateProfile() {
           (styles.radioText,
           {
             color:
-              item.id === selectedGender.id
-                ? colors.whiteColor
-                : colors.heading,
+              item.id === selectedGender.id ? colors.white : colors.heading,
           })
         }
       >
@@ -214,7 +212,7 @@ export default function CreateProfile() {
                     preferredCountries={preferredCountries}
                     theme={{
                       ...DEFAULT_THEME,
-                      backgroundColor: colors.whiteColor,
+                      backgroundColor: colors.white,
                       onBackgroundTextColor: colors.heading,
                       fontSize: 14,
                     }}

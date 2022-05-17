@@ -5,13 +5,13 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
     },
     body: {
       flex: 1,
       margin: 10,
       borderRadius: 10,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       shadowColor: colors.black,
       shadowOffset: {
         width: 0,

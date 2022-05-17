@@ -9,7 +9,7 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -47,7 +47,7 @@ export const makeStyles = (colors: any) =>
       // marginTop:10,
       borderBottomWidth: 0,
       borderColor: colors.darkPrimary,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       height: 50,
     },
     bottomView: {

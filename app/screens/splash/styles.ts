@@ -6,7 +6,7 @@ export const makeStyles = (colors: any) =>
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
     },
   });
 

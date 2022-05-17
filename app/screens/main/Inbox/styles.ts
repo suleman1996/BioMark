@@ -9,7 +9,7 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       // flex: 0,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       alignItems: 'center',
       justifyContent: 'center',
       marginBottom: heightToDp(10),

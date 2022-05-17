@@ -37,7 +37,7 @@ export default function Button(props: Props) {
             styles.btn,
             { backgroundColor: props?.disabled ? colors.disable : colors.blue },
           ]}
-          labelStyle={{ color: colors.whiteColor }}
+          labelStyle={{ color: colors.white }}
           onPress={props.onPress}
         >
           {props.title}

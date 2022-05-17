@@ -7,7 +7,7 @@ const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.whiteColor,
+      backgroundColor: colors.white,
       paddingHorizontal: 15,
     },
     icon: {

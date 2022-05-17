@@ -34,7 +34,7 @@ export default function InputField(props: Props) {
           defaultValue={props.defaultValue}
           onFocus={props.onFocus}
           placeholder={props.placeholder}
-          placeholderTextColor={colors.placeHolder}
+          placeholderTextColor={colors.lightGrey}
           value={props.value}
           style={styles.textFieldStyle}
           secureTextEntry={props.secureTextEntry}
