@@ -7,6 +7,7 @@ import Inbox from 'screens/main/Inbox/index';
 import Home from 'screens/main/home-page';
 import AppointmentScreen from 'screens/main/appointment';
 import AccountScreen from 'screens/main/account/account-screen';
+// import YourHealth from '../screens/main/home-page/your-health/index';
 
 import SCREENS from './constants';
 
@@ -44,6 +45,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color }) => <HomeIcon fill={color} />,
         }}
       />
+
       <Tab.Screen
         name={SCREENS.INBOX}
         component={Inbox}
