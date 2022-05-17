@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
 type Props = {
@@ -21,6 +21,9 @@ type Props = {
 };
 
 export default function InputField(props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View
       style={[styles.loginInputContainer, { marginHorizontal: props.margin }]}
@@ -46,30 +49,31 @@ export default function InputField(props: Props) {
   );
 }
 
-const styles = StyleSheet.create({
-  loginInputContainer: {
-    backgroundColor: colors.inputBg,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 45,
-  },
-  labelStyle: {
-    color: 'rgba(41, 56, 89, 0.48)',
-    marginHorizontal: 5,
-    marginVertical: 3,
-    fontSize: 15,
-  },
-  inputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 10,
-  },
-  textFieldStyle: {
-    fontSize: responsiveFontSize(17),
-    width: '100%',
-    color: '#3D3D3D',
-    fontFamily: fonts.regular,
-  },
-});
+const makeStyles = (colors: any) =>
+  StyleSheet.create({
+    loginInputContainer: {
+      backgroundColor: colors.inputBg,
+      borderRadius: 8,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 45,
+    },
+    labelStyle: {
+      color: 'rgba(41, 56, 89, 0.48)',
+      marginHorizontal: 5,
+      marginVertical: 3,
+      fontSize: 15,
+    },
+    inputRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginHorizontal: 10,
+    },
+    textFieldStyle: {
+      fontSize: responsiveFontSize(17),
+      width: '100%',
+      color: '#3D3D3D',
+      fontFamily: fonts.regular,
+    },
+  });

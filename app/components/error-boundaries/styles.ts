@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import colors from 'assets/colors';
+//import colors from 'assets/colors';
 import fonts from 'assets/fonts';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.whiteColor,
+    backgroundColor: '#fff',
     height: '100%',
     alignItems: 'center',
     paddingVertical: '20%',
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.bold,
     fontSize: 25,
     alignSelf: 'center',
-    color: colors.blue,
+    color: '#1B96D8',
     marginTop: 20,
     marginBottom: 25,
   },
