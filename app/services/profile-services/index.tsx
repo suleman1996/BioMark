@@ -68,8 +68,29 @@ function saveAllMedicalHistoryPersonalData(data: MedicalHistoryRequest) {
   });
 }
 
+function saveAllFamilyMedicalHistoryPersonalData(data: MedicalHistoryRequest) {
+  return new Promise<MedicalHistoryResponseData>((resolve, reject) => {
+    client
+      .post(`${API_URLS.MEDICAL_HISTORY}/family`, data)
+      .then(async (response) => {
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('all medical history error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('all medical history error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
 export const profileServices = {
   getUserProfile,
   getAllMedicalHistoryData,
   saveAllMedicalHistoryPersonalData,
+  saveAllFamilyMedicalHistoryPersonalData,
 };
