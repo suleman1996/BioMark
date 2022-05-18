@@ -11,6 +11,7 @@ const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   // const { HEALTH_SMOKING } = SCREENS;
+  // const { HEALTH_STRESS } = SCREENS;
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -27,6 +28,7 @@ const Index = () => {
           <SearchBarWithLeftScanIcon />
         </View>
       </View>
+      {/* <Text onPress={() => navigation.navigate(HEALTH_STRESS)}>stress</Text> */}
     </View>
   );
 };

@@ -11,6 +11,7 @@ import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import HealthSmoking from '../screens/main/home-page/your-health/health-smoking/index';
+import HealthStress from '../screens/main/home-page/your-health/health-stress/index';
 import SCREENS from './constants';
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ const {
   CREATE_PROFILE,
   YOUR_HEALTH,
   HEALTH_SMOKING,
+  HEALTH_STRESS,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -55,6 +57,7 @@ const AppNavigator = () => {
           />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HEALTH_SMOKING} component={HealthSmoking} />
+          <Stack.Screen name={HEALTH_STRESS} component={HealthStress} />
         </>
       ) : (
         <>

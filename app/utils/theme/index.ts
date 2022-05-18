@@ -38,6 +38,7 @@ const theme = {
     redish: '#EE5407',
     greenish: '#03DAC6',
     dullRed: '#EA4C59',
+    goodGreen: '#54CB83',
   },
 
   // fonts: configureFonts({
