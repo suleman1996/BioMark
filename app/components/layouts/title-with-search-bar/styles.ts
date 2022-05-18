@@ -9,10 +9,15 @@ export const makeStyles = (colors: any) =>
     container: {
       width: widthToDp(100),
     },
+    iconContainer: {
+      paddingRight: widthToDp(2),
+    },
     titleBar: {
       backgroundColor: colors.primary,
       paddingVertical: heightToDp(1.1),
       paddingHorizontal: widthToDp(4),
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     textStyle: {
       color: colors.white,

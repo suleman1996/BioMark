@@ -11,9 +11,15 @@ import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import SCREENS from './constants';
+import Covid19Navigator from './covid19-navigator';
 
 const Stack = createNativeStackNavigator();
-const { NESTED_ACCOUNT_NAVIGATOR, CREATE_PROFILE, YOUR_HEALTH } = SCREENS;
+const {
+  NESTED_ACCOUNT_NAVIGATOR,
+  CREATE_PROFILE,
+  YOUR_HEALTH,
+  NESTED_COVID19_NAVIGATOR,
+} = SCREENS;
 
 const AppNavigator = () => {
   const dispatch = useDispatch();
@@ -46,6 +52,10 @@ const AppNavigator = () => {
           <Stack.Screen
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}
+          />
+          <Stack.Screen
+            name={NESTED_COVID19_NAVIGATOR}
+            component={Covid19Navigator}
           />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
         </>
