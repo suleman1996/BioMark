@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import CreateProfile from 'screens/auth/create-profile';
-import Diabetes from 'screens/main/diabetes';
+import Diabetes from 'screens/main/home-page/diabetes';
 import AccountNavigator from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 
