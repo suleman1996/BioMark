@@ -19,12 +19,13 @@ import { settingsService } from 'services/account-service/settings-service';
 import { navigate } from 'services/nav-ref';
 import { ErrorResponse } from 'types/ErrorResponse';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
 const PasswordChangeScreen = () => {
   const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [isLoading, setIsLoading] = useState(false);
   const [eCurrent, setECurrent] = useState(true);

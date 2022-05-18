@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -26,9 +27,9 @@ export const makeStyles = (colors: any) =>
       color: colors.darkPrimary,
     },
     contentText: {
-      fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(20),
-      color: 'gray',
+      fontFamily: fonts.mulishLight,
+      fontSize: responsiveFontSize(18),
+      color: colors.darBlue,
       lineHeight: responsiveFontSize(30),
       marginTop: heightToDp(3),
       marginBottom: heightToDp(3),

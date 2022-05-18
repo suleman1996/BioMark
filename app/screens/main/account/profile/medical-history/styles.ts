@@ -19,10 +19,14 @@ export const makeStyles = (colors: any) =>
       marginTop: heightToDp(3),
     },
     rowContainer: {
-      flexDirection: 'row',
       marginTop: heightToDp(2),
-      justifyContent: 'space-between',
       marginBottom: heightToDp(0.5),
+      flex: 1,
+      flexWrap: 'wrap',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignContent: 'space-between',
+      paddingBottom: heightToDp(7),
     },
   });
 export default makeStyles;

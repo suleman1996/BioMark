@@ -23,7 +23,7 @@ const ModalComponent = ({ isVisible, children, setIsVisible }: Props) => {
         deviceWidth={widthToDp(100)}
         deviceHeight={heightToDp(100)}
         onBackdropPress={() => setIsVisible(false)}
-        backdropColor={colors.transparentBlack}
+        backdropColor={colors.opacityBlack}
         isVisible={isVisible}
       >
         <View style={styles.mainView}>{children}</View>
