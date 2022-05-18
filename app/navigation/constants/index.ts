@@ -43,6 +43,7 @@ export default {
   // Bottom Navigation
   MAIN_NAVIGATOR: 'MAIN_NAVIGATOR',
   HOME: 'HOME',
+  YOUR_HEALTH: 'YOUR_HEALTH',
   INBOX: 'INBOX',
   APPOINTMENT: 'APPOINTMENT',
 };

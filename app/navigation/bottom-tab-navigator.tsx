@@ -44,6 +44,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color }) => <HomeIcon fill={color} />,
         }}
       />
+
       <Tab.Screen
         name={SCREENS.INBOX}
         component={Inbox}

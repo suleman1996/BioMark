@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'react-native-paper';
+import SCREENS from '../../navigation/constants/index';
 
 import fonts from 'assets/fonts';
 //import colors from 'assets/colors';
@@ -11,10 +13,12 @@ import { YourHealth } from 'assets/svgs/index';
 export default function YourHealthBtn() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const { YOUR_HEALTH } = SCREENS;
+  const navigation = useNavigation();
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate(YOUR_HEALTH)}>
         <View style={styles.circleBtn}>
           <YourHealth />
         </View>
