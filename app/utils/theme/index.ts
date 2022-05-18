@@ -37,6 +37,7 @@ const theme = {
     bg: '#3D3D3D90',
     redish: '#EE5407',
     greenish: '#03DAC6',
+    dullRed: '#EA4C59',
   },
 
   // fonts: configureFonts({

@@ -5,10 +5,12 @@ import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
+// import SCREENS from '../../../../navigation/constants/index';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  // const { HEALTH_SMOKING } = SCREENS;
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
