@@ -16,7 +16,8 @@ import {
   View,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
-
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
 import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
 import { getReduxBootstrap } from 'store/account/account-actions';
@@ -103,7 +104,7 @@ export default function Home() {
           </View>
 
           <View style={styles.badgesContainer}>
-            <YourHealthBtn />
+            <YourHealthBtn onPress={() => navigate(SCREENS.DIABETES)} />
             <Covid19Btn />
           </View>
           <Text style={styles.gfHeading}>Your Health Snapshot</Text>

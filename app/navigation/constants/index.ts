@@ -42,6 +42,7 @@ export default {
 
   // Bottom Navigation
   MAIN_NAVIGATOR: 'MAIN_NAVIGATOR',
+  DIABETES: 'DIABETES',
   HOME: 'HOME',
   INBOX: 'INBOX',
   APPOINTMENT: 'APPOINTMENT',

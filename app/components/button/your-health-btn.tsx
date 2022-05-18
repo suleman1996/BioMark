@@ -8,13 +8,13 @@ import fonts from 'assets/fonts';
 
 import { YourHealth } from 'assets/svgs/index';
 
-export default function YourHealthBtn() {
+export default function YourHealthBtn({ onPress }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.circleBtn}>
           <YourHealth />
         </View>

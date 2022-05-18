@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import CreateProfile from 'screens/auth/create-profile';
+import Diabetes from 'screens/main/diabetes';
 import AccountNavigator from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 
@@ -12,7 +13,7 @@ import { IAppState } from 'store/IAppState';
 import SCREENS from './constants';
 
 const Stack = createNativeStackNavigator();
-const { NESTED_ACCOUNT_NAVIGATOR, CREATE_PROFILE } = SCREENS;
+const { NESTED_ACCOUNT_NAVIGATOR, CREATE_PROFILE, DIABETES } = SCREENS;
 
 const AppNavigator = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const AppNavigator = () => {
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}
           />
+          <Stack.Screen name={DIABETES} component={Diabetes} />
         </>
       ) : (
         <>
