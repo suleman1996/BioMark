@@ -19,10 +19,11 @@ import { userService } from 'services/user-service/user-service';
 import { addUserContactsDetails } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 
-import { styles } from './styles';
+import makeStyles from './styles';
 
 const EmailChangeScreen = () => {
   const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const dispatch = useDispatch();
   const userContacts = useSelector(
