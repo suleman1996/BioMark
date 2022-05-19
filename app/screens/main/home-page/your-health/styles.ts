@@ -56,6 +56,8 @@ const styles = (colors: any) =>
       borderRadius: 7.5,
       //   position: 'absolute',
       right: 13,
+      borderWidth: 1,
+      borderColor: colors.white,
     },
     healthTrackerHeading: {
       //   fontFamily: fonts.bold,
@@ -173,7 +175,7 @@ const styles = (colors: any) =>
     highlightsView: {
       height: 85,
       width: 187,
-      backgroundColor: 'red',
+
       borderRadius: 5,
       //   padding: 5,
       overflow: 'hidden',

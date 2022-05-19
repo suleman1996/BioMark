@@ -12,8 +12,10 @@ import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
+import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
 
 import Heart from '../../../../assets/svgs/heart';
 import Diabetes from '../../../../assets/svgs/diabtes';
@@ -82,6 +84,14 @@ const Index = () => {
       color: colors.blue,
     },
   ]);
+  const [currentPosition] = React.useState(2);
+  const [stepIndicatorIcons] = React.useState([
+    <Heart />,
+    <Diabetes />,
+    <BMI />,
+    <BP />,
+  ]);
+
   const RenderHealthRiskView = ({ svg, color }) => (
     <>
       <TouchableOpacity
@@ -94,7 +104,12 @@ const Index = () => {
   );
 
   const RenderRecordKeeping = ({ title, id, svg }) => (
-    <View style={styles.recordKeepingView}>
+    <LinearGradient
+      start={{ x: 0, y: 0.75 }}
+      end={{ x: 1, y: 0.25 }}
+      colors={['#2C6CFC', '#2CBDFC']}
+      style={styles.recordKeepingView}
+    >
       {svg}
       <Text style={[styles.recordKeepinText, { marginTop: 10 }]}>{title}</Text>
       <Text
@@ -105,7 +120,7 @@ const Index = () => {
       >
         Empower ID: {id}
       </Text>
-    </View>
+    </LinearGradient>
   );
 
   const RenderLastResult = ({ title, date, svg }) => (
@@ -132,7 +147,11 @@ const Index = () => {
 
   const RenderHighlights = ({ item }) => (
     <View style={styles.highlightsView}>
-      <ImageBackground style={{ flex: 1 }} source={{ uri: item.image }}>
+      <ImageBackground
+        style={{ flex: 1 }}
+        // resizeMode="stretch"
+        source={{ uri: item.image }}
+      >
         <BlurView title={item.title} />
       </ImageBackground>
     </View>
@@ -217,7 +236,12 @@ const Index = () => {
             <View style={{ alignItems: 'center' }}>
               <Text style={styles.resultStatus}>Your Lab Result Status</Text>
               <Text style={[styles.barcode]}>Barcode CVD-UBCDLM</Text>
-
+            </View>
+            <LabResultProgressBar
+              currentPosition={currentPosition}
+              icons={stepIndicatorIcons}
+            />
+            <View style={{ alignItems: 'center' }}>
               <Text style={styles.resultStatus}>Processing</Text>
               <Text style={[styles.barcode]}>
                 Your result is being processed by the lab. We'll let you know
@@ -228,7 +252,7 @@ const Index = () => {
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Article Highlights
           </Text>
-          {/* <RenderHighlights /> */}
+
           <FlatList
             keyExtractor={(item) => item.id}
             data={highlights}
@@ -237,6 +261,7 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
           />
+
           <View style={{ height: 50 }} />
         </ScrollView>
       </View>
