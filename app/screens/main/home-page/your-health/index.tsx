@@ -6,15 +6,17 @@ import {
   ImageBackground,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 import SCREENS from 'navigation/constants/index';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
+import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
 
 import Heart from '../../../../assets/svgs/heart';
 import Diabetes from '../../../../assets/svgs/diabtes';
@@ -27,6 +29,9 @@ import Sleep from '../../../../assets/svgs/sleep';
 import Health from '../../../../assets/svgs/Health';
 import Progress from '../../../../assets/svgs/Progress';
 import fonts from 'assets/fonts';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import { getReduxHealthTracker } from 'store/home/home-actions';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -34,7 +39,14 @@ const Index = () => {
   const { HYPERTENSION } = SCREENS;
   // const { HEALTH_STRESS } = SCREENS;
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
+  const hell = useSelector((state: IAppState) => state.home.healthTracker);
+  useEffect(() => {
+    dispatch(getReduxHealthTracker());
+    console.log('hell =======>', hell);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [highlights] = React.useState([
     {
       id: 0,
@@ -85,6 +97,14 @@ const Index = () => {
       color: colors.blue,
     },
   ]);
+  const [currentPosition] = React.useState(2);
+  const [stepIndicatorIcons] = React.useState([
+    <Heart />,
+    <Diabetes />,
+    <BMI />,
+    <BP />,
+  ]);
+
   const RenderHealthRiskView = ({ svg, color }) => (
     <>
       <TouchableOpacity
@@ -97,18 +117,27 @@ const Index = () => {
   );
 
   const RenderRecordKeeping = ({ title, id, svg, onPress }) => (
-    <TouchableOpacity onPress={onPress} style={styles.recordKeepingView}>
-      {svg}
-      <Text style={[styles.recordKeepinText, { marginTop: 10 }]}>{title}</Text>
-      <Text
-        style={[
-          styles.recordKeepinText,
-          { fontSize: 14, fontFamily: fonts.light, marginBottom: 10 },
-        ]}
-      >
-        Empower ID: {id}
-      </Text>
-    </TouchableOpacity>
+    <LinearGradient
+      start={{ x: 0, y: 0.75 }}
+      end={{ x: 1, y: 0.25 }}
+      colors={['#2C6CFC', '#2CBDFC']}
+      style={styles.recordKeepingView}
+    >
+      <TouchableOpacity onPress={onPress} style={{ alignItems: 'center' }}>
+        {svg}
+        <Text style={[styles.recordKeepinText, { marginTop: 10 }]}>
+          {title}
+        </Text>
+        <Text
+          style={[
+            styles.recordKeepinText,
+            { fontSize: 14, fontFamily: fonts.light, marginBottom: 10 },
+          ]}
+        >
+          Empower ID: {id}
+        </Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 
   const RenderLastResult = ({ title, date, svg, onPress }) => (
@@ -138,7 +167,11 @@ const Index = () => {
 
   const RenderHighlights = ({ item }) => (
     <View style={styles.highlightsView}>
-      <ImageBackground style={{ flex: 1 }} source={{ uri: item.image }}>
+      <ImageBackground
+        style={{ flex: 1 }}
+        // resizeMode="stretch"
+        source={{ uri: item.image }}
+      >
         <BlurView title={item.title} />
       </ImageBackground>
     </View>
@@ -227,7 +260,12 @@ const Index = () => {
             <View style={{ alignItems: 'center' }}>
               <Text style={styles.resultStatus}>Your Lab Result Status</Text>
               <Text style={[styles.barcode]}>Barcode CVD-UBCDLM</Text>
-
+            </View>
+            <LabResultProgressBar
+              currentPosition={currentPosition}
+              icons={stepIndicatorIcons}
+            />
+            <View style={{ alignItems: 'center' }}>
               <Text style={styles.resultStatus}>Processing</Text>
               <Text style={[styles.barcode]}>
                 Your result is being processed by the lab. We'll let you know
@@ -238,7 +276,7 @@ const Index = () => {
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Article Highlights
           </Text>
-          {/* <RenderHighlights /> */}
+
           <FlatList
             keyExtractor={(item) => item.id}
             data={highlights}
@@ -247,6 +285,7 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
           />
+
           <View style={{ height: 50 }} />
         </ScrollView>
       </View>

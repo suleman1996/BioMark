@@ -46,6 +46,7 @@ const API_URLS = {
   GET_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
   GET_BODY_MEASUREMENT: '/api/v1/patient/medical',
+  GET_HEALTH_TRACKER: '/api/v1/patient/health_trackers?page={0}',
 
   LOCATION: '/api/v1/geolocation',
   EXERCISE: '/api/v1/patient/lifestyle/exercise',
