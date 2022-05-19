@@ -1,7 +1,9 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 // import fonts from 'assets/fonts';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -15,7 +17,17 @@ export const makeStyles = (colors: any) =>
       flexDirection: 'row',
       justifyContent: 'space-evenly',
     },
-    horizontalListItem: {},
+    horizontalListItem: {
+      paddingHorizontal: widthToDp(6),
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: heightToDp(6),
+      borderBottomColor: colors.darkPrimary,
+    },
+    horizontalListItemText: {
+      fontFamily: fonts.regular,
+      fontSize: responsiveFontSize(20),
+    },
   });
 
 export default makeStyles;
