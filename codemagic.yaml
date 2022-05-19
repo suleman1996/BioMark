@@ -24,7 +24,7 @@ workflows:
     scripts:
       - name: Installing Dependencies
         script: |
-          npm ci --quiet --no-optional
+          yarn install --quiet --no-optional
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
@@ -122,9 +122,9 @@ workflows:
         - app_store_credentials
         - certificate_credentials
       vars:
-        XCODE_WORKSPACE: "./ios/BioMark.xcworkspace"
-        XCODE_SCHEME: "BioMark"
-        BUNDLE_ID: "com.biomark.patientios"
+        XCODE_WORKSPACE: './ios/BioMark.xcworkspace'
+        XCODE_SCHEME: 'BioMark'
+        BUNDLE_ID: 'com.biomark.patientios'
       node: 12.18.3
       xcode: 13
       cocoapods: default
@@ -152,10 +152,10 @@ workflows:
           keychain initialize
       - name: Fetch signing files
         script: |
-          app-store-connect fetch-signing-files $BUNDLE_ID --type IOS_APP_STORE --create          
+          app-store-connect fetch-signing-files $BUNDLE_ID --type IOS_APP_STORE --create
       - name: Add certificates to keychain
         script: |
-          keychain add-certificates      
+          keychain add-certificates
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles
@@ -169,9 +169,9 @@ workflows:
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
     publishing:
       app_store_connect:
-          api_key: $APP_STORE_CONNECT_PRIVATE_KEY
-          key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
-          issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
       email:
         recipients:
           - jem.zubiri@biomarking.com
