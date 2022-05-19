@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { Picker } from '@react-native-picker/picker';
+import DropDown from 'react-native-paper-dropdown';
 import { showMessage } from 'react-native-flash-message';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -15,9 +15,8 @@ import SCREENS from 'navigation/constants';
 import { userService } from 'services/user-service/user-service';
 import { useSelector } from 'react-redux';
 
-import fonts from 'assets/fonts';
-
 import makeStyles from './styles';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 const Sleep = () => {
   const isFocus = useIsFocused();
@@ -36,6 +35,7 @@ const Sleep = () => {
   const [isVisiable, setIsVisible] = React.useState(false);
   const [indexNumber, setIndex] = React.useState(0);
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+  const [showDropDown, setShowDropDown] = React.useState(false);
 
   React.useEffect(() => {
     handleLifeStyle();
@@ -122,7 +122,7 @@ const Sleep = () => {
           </Text>
           <View>
             <View style={styles.container2}>
-              <Picker
+              {/* <Picker
                 selectedValue={selectedSleep}
                 style={{
                   color: colors.lightGrey,
@@ -143,7 +143,28 @@ const Sleep = () => {
                     />
                   );
                 })}
-              </Picker>
+              </Picker> */}
+              <DropDown
+                mode={'flat'}
+                visible={showDropDown}
+                showDropDown={() => setShowDropDown(true)}
+                onDismiss={() => setShowDropDown(false)}
+                value={selectedSleep}
+                setValue={(itemValue) => {
+                  setSelectedSleep(itemValue), setIndex(index);
+                }}
+                list={sleepOptions}
+                inputProps={{
+                  style: {
+                    width: '100%',
+                    height: heightToDp(6),
+                    flex: 1,
+                    borderRadius: widthToDp(2),
+                    maxHeight: heightToDp(6.5),
+                  },
+                  underlineColor: '#fff',
+                }}
+              />
             </View>
           </View>
         </View>

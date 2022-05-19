@@ -9,14 +9,13 @@ import {
 import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
-import { Picker } from '@react-native-picker/picker';
+import DropDown from 'react-native-paper-dropdown';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
 import { useIsFocused } from '@react-navigation/native';
 import { TextInput } from 'components';
-import fonts from 'assets/fonts';
 
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
@@ -26,6 +25,7 @@ import { useSelector } from 'react-redux';
 
 import { options } from './year';
 import makeStyles from './styles';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 export default function SmokingScreen() {
   const { colors } = useTheme();
@@ -39,6 +39,8 @@ export default function SmokingScreen() {
   const [startSmoke, setStartSmoke] = useState('');
   const [isVisiable, setIsVisible] = React.useState(false);
   const options2 = [{ title: '2020' }, { title: '2021' }];
+  const [showDropDown, setShowDropDown] = React.useState(false);
+  const [showDropDown2, setShowDropDown2] = React.useState(false);
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
 
   const isFocus = useIsFocused();
@@ -259,7 +261,7 @@ export default function SmokingScreen() {
                 }
               </Text>
               <View style={styles.container2}>
-                <Picker
+                {/* <Picker
                   itemStyle={{ fontFamily: 'Rubik-Regular' }}
                   style={{
                     color: colors.black,
@@ -278,7 +280,26 @@ export default function SmokingScreen() {
                       />
                     );
                   })}
-                </Picker>
+                </Picker> */}
+                <DropDown
+                  mode={'flat'}
+                  visible={showDropDown}
+                  showDropDown={() => setShowDropDown(true)}
+                  onDismiss={() => setShowDropDown(false)}
+                  value={startSmoke + ''}
+                  setValue={(itemValue) => setStartSmoke(itemValue)}
+                  list={options}
+                  inputProps={{
+                    style: {
+                      width: '100%',
+                      height: heightToDp(6),
+                      flex: 1,
+                      borderRadius: widthToDp(2),
+                      maxHeight: heightToDp(6.5),
+                    },
+                    underlineColor: '#fff',
+                  }}
+                />
               </View>
 
               {value == 1 ? (
@@ -290,7 +311,7 @@ export default function SmokingScreen() {
                     }
                   </Text>
                   <View style={styles.container2}>
-                    <Picker
+                    {/* <Picker
                       style={{ color: colors.black, fontFamily: fonts.regular }}
                       selectedValue={stopSmoke + ''}
                       onValueChange={(itemValue) => setStopSmoke(itemValue)}
@@ -305,7 +326,26 @@ export default function SmokingScreen() {
                           />
                         );
                       })}
-                    </Picker>
+                    </Picker> */}
+                    <DropDown
+                      mode={'flat'}
+                      visible={showDropDown2}
+                      showDropDown={() => setShowDropDown2(true)}
+                      onDismiss={() => setShowDropDown2(false)}
+                      value={startSmoke + ''}
+                      setValue={(itemValue) => setStopSmoke(itemValue)}
+                      list={options2}
+                      inputProps={{
+                        style: {
+                          width: '100%',
+                          height: heightToDp(6),
+                          flex: 1,
+                          borderRadius: widthToDp(2),
+                          maxHeight: heightToDp(6.5),
+                        },
+                        underlineColor: '#fff',
+                      }}
+                    />
                   </View>
                 </View>
               ) : null}

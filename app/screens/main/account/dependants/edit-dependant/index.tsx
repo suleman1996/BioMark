@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import {
   PhoneNumberWithLabel,
   InputWithLabel,
-  DateTimePickerModal,
+  DatePickerModal,
   Button,
 } from 'components/base';
 import { BoxSelector, RelationMenu } from 'components/higher-order';
@@ -206,16 +206,16 @@ const EditDependantScreen = (props: Props) => {
                   error={values.email ? errors.email : ''}
                 />
                 <Text style={styles.label}>Date of Birth</Text>
-                <DateTimePickerModal
+                <DatePickerModal
                   date={values.birth_date}
                   setDate={(e: any) => setFieldValue('birth_date', e)}
                 />
-                {/* <DatePicker
+                {/* <DatePickerModal
                   width={'100%'}
                   date={new Date('Jan-01-1990')}
                   setDate={(e: any) => setFieldValue('birth_date', e)}
-                  isPickerShow={isDatePicker}
-                  setIsPickerShow={setIsDatePicker}
+                  isPickerShow={isDatePickerModal}
+                  setIsPickerShow={setIsDatePickerModal}
                 /> */}
                 <InputWithLabel
                   label="NRIC /Passport Number"

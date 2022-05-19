@@ -9,7 +9,7 @@ import {
 import { useTheme } from 'react-native-paper';
 
 import { RadioButton } from 'react-native-paper';
-import { Picker } from '@react-native-picker/picker';
+import DropDown from 'react-native-paper-dropdown';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
@@ -23,6 +23,7 @@ import fonts from 'assets/fonts';
 import { ActivityIndicator } from 'components';
 
 import makeStyles from './styles';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 const Options = [
   { title: '' },
@@ -58,7 +59,8 @@ export default function ExerciseScreen() {
   const [exerciseSession, setExerciseSession] = useState('');
   const [isVisiable, setIsVisible] = React.useState(false);
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
-
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [showDropDown2, setShowDropDown2] = useState(false);
   useEffect(() => {
     console.log(bootstrap, 'bootstrap');
     handleLifeStyle();
@@ -212,7 +214,28 @@ export default function ExerciseScreen() {
                 }
               </Text>
               <View style={[styles.container2]}>
-                <Picker
+                <DropDown
+                  mode={'flat'}
+                  visible={showDropDown}
+                  showDropDown={() => setShowDropDown(true)}
+                  onDismiss={() => setShowDropDown(false)}
+                  value={exerciseWeek}
+                  setValue={(text) => setExerciseWeek(text)}
+                  list={Options}
+                  inputProps={{
+                    style: {
+                      width: '100%',
+                      height: heightToDp(6),
+                      flex: 1,
+                      borderRadius: widthToDp(2),
+                      maxHeight: heightToDp(6.5),
+                      color: colors.black,
+                      fontFamily: fonts.regular,
+                    },
+                    underlineColor: '#fff',
+                  }}
+                />
+                {/* <Picker
                   style={{ color: colors.black, fontFamily: fonts.regular }}
                   selectedValue={exerciseWeek}
                   onValueChange={(itemValue) => setExerciseWeek(itemValue)}
@@ -227,7 +250,7 @@ export default function ExerciseScreen() {
                       />
                     );
                   })}
-                </Picker>
+                </Picker> */}
               </View>
               <Text style={styles.label}>
                 {
@@ -236,7 +259,7 @@ export default function ExerciseScreen() {
                 }
               </Text>
               <View style={styles.container2}>
-                <Picker
+                {/* <Picker
                   style={{ color: colors.black, fontFamily: fonts.regular }}
                   selectedValue={exerciseSession}
                   onValueChange={(itemValue) => setExerciseSession(itemValue)}
@@ -251,7 +274,28 @@ export default function ExerciseScreen() {
                       />
                     );
                   })}
-                </Picker>
+                </Picker> */}
+                <DropDown
+                  mode={'flat'}
+                  visible={showDropDown2}
+                  showDropDown={() => setShowDropDown2(true)}
+                  onDismiss={() => setShowDropDown2(false)}
+                  value={exerciseSession}
+                  setValue={(text) => setExerciseSession(text)}
+                  list={Options2}
+                  inputProps={{
+                    style: {
+                      width: '100%',
+                      height: heightToDp(6),
+                      flex: 1,
+                      borderRadius: widthToDp(2),
+                      maxHeight: heightToDp(6.5),
+                      color: colors.lightGrey,
+                      fontFamily: fonts.regular,
+                    },
+                    underlineColor: '#fff',
+                  }}
+                />
               </View>
             </View>
           ) : null}

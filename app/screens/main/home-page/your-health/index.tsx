@@ -5,7 +5,8 @@ import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
-
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
@@ -20,6 +21,9 @@ const Index = () => {
             <ArrowBack fill={colors.white} />
           </TouchableOpacity>
           <Text style={styles.navHeading}>Your Health</Text>
+          <TouchableOpacity onPress={() => navigate(SCREENS.BLOOD_SUGAR)}>
+            <Text style={styles.navHeading}>Blood sugar</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />
