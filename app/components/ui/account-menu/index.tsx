@@ -1,37 +1,50 @@
-import { Linking } from 'react-native';
-
-import BioAboutIcon from 'components/svg/bio-about-icon';
-import BioAutoLogout from 'components/svg/bio-auto-logout';
-import BioDependent from 'components/svg/bio-dependent';
-import BioIdentify from 'components/svg/bio-identify';
-import BioLogout from 'components/svg/bio-logout';
-import BioNotification from 'components/svg/bio-notification';
-import BioPolicies from 'components/svg/bio-policies';
-import BioSettings from 'components/svg/bio-settings';
-import BioSupport from 'components/svg/bio-support';
-import { Nav_Screens } from 'navigation/constants';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Linking, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+import Config from 'react-native-config';
 import { Switch, TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { useDispatch } from 'react-redux';
+
+import {
+  BioAboutIcon,
+  BioAutoLogout,
+  BioDependent,
+  BioIdentify,
+  BioLogout,
+  BioNotification,
+  BioPolicies,
+  BioSupport,
+  BioSettings,
+} from 'components/svg';
+
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { logout } from 'store/auth/auth-actions';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalStyles } from 'utils/theme/global-styles';
-import Config from 'react-native-config';
+
+import makeStyles from './styles';
 
 const AccountMenu = (props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
-  const OpenMessenger = () => {
+  const openMessenger = () => {
     Linking.openURL(Config.MESSENGER_URL);
   };
+
   return (
     <View style={styles.container}>
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        onPress={() =>
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.ID_VERIFICATION_START,
+          })
+        }
+        style={styles.singleItem}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioIdentify width={5} height={3} />
@@ -42,7 +55,7 @@ const AccountMenu = (props) => {
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
+              color={colors.darkPrimary}
             />
           </View>
         </>
@@ -51,8 +64,8 @@ const AccountMenu = (props) => {
       <View style={styles.divider} />
       <TouchableRipple
         onPress={() =>
-          navigate(Nav_Screens.NestedAccountNavigator, {
-            screen: Nav_Screens.Dependants_Screen,
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.DEPENDANTS,
           })
         }
         style={styles.singleItem}
@@ -63,11 +76,11 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Dependants</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            <Text style={styles.secondText}>7 Users</Text>
+            <Text style={styles.secondText}>{props.dependentsCount} Users</Text>
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
-              color={GlobalColors.darkPrimary}
+              color={colors.darkPrimary}
             />
           </View>
         </>
@@ -76,8 +89,8 @@ const AccountMenu = (props) => {
       <View style={styles.divider} />
       <TouchableRipple
         onPress={() =>
-          navigate(Nav_Screens.NestedAccountNavigator, {
-            screen: Nav_Screens.Settings,
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.SETTINGS,
           })
         }
         style={styles.singleItem}
@@ -90,13 +103,18 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => {
+          navigate(SCREENS.INBOX);
+        }}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioNotification width={5} height={5} />
@@ -105,7 +123,7 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
@@ -113,7 +131,7 @@ const AccountMenu = (props) => {
       <View style={styles.divider} />
       <TouchableRipple
         style={styles.singleItem}
-        onPress={() => OpenMessenger()}
+        onPress={() => openMessenger()}
       >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -123,13 +141,16 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() => Linking.openURL(Config.ABOUT_US)}
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioAboutIcon width={5} height={5} />
@@ -138,13 +159,24 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
       {/* divider */}
       <View style={styles.divider} />
-      <TouchableRipple style={styles.singleItem}>
+      <TouchableRipple
+        style={styles.singleItem}
+        onPress={() =>
+          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.TERMS_AND_PRIVACY,
+            params: {
+              privacyPolicy: false,
+              headerHome: true,
+            },
+          })
+        }
+      >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioPolicies width={5} height={5} />
@@ -153,7 +185,7 @@ const AccountMenu = (props) => {
           <Fontisto
             name="angle-right"
             size={responsiveFontSize(22)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
         </>
       </TouchableRipple>
@@ -180,9 +212,9 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Auto Logout</Text>
           </View>
           <Switch
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
             value={props.logOutCheck}
-            //    onValueChange={()=>props.onToggleAutoLogout()}
+            onValueChange={() => props.onToggleAutoLogout()}
           />
         </>
       </TouchableRipple>
@@ -192,39 +224,3 @@ const AccountMenu = (props) => {
 };
 
 export default AccountMenu;
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthToDp(92),
-    borderRadius: widthToDp(3),
-    ...GlobalStyles.shadow2,
-  },
-  singleItem: {
-    width: widthToDp(92),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: widthToDp(3),
-    paddingVertical: widthToDp(3),
-    paddingLeft: widthToDp(4),
-    alignItems: 'center',
-  },
-  text: {
-    color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(20),
-    paddingLeft: widthToDp(3),
-  },
-  divider: {
-    borderBottomWidth: 2,
-    borderColor: GlobalColors.primary,
-    opacity: 0.3,
-  },
-  secondText: {
-    color: GlobalColors.primary,
-    fontFamily: GlobalFonts.light,
-    paddingRight: widthToDp(2),
-  },
-  iconWithSecondText: {
-    flexDirection: 'row',
-  },
-});

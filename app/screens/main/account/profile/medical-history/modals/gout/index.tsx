@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
-import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import {
+  ModalWithBottomBtn,
+  RadioButtonQuestion,
+} from 'components/higher-order';
 
 type Props = {
   isVisible: boolean;
+  setIsVisible: any;
 };
 
-const GoutModal = ({ isVisible }: Props) => {
+const GoutModal = ({ isVisible, setIsVisible }: Props) => {
   //    Have you been diagnosed with Gout?
   const [ans1, setAns1] = useState(false);
 
@@ -16,16 +19,17 @@ const GoutModal = ({ isVisible }: Props) => {
 
   return (
     <ModalWithBottomBtn
+      setIsVisible={setIsVisible}
       isVisible={isVisible}
       title="Gout"
       onPress={() => console.log('clicked')}
     >
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans1}
         setIsTrue={setAns1}
         question="Have you been diagnosed with Gout?"
       />
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans2}
         setIsTrue={setAns2}
         question="Are you taking any medications for this?"

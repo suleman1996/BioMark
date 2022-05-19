@@ -1,23 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Keyboard,
+  Linking,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  TouchableOpacity,
 } from 'react-native';
+
 import { showMessage } from 'react-native-flash-message';
 
-import colors from 'assets/colors';
-import Button from 'components/button/button';
-import Header from 'components/header';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import OtpInput from 'components/otp/otp-input';
-import { Nav_Screens } from 'navigation/constants';
+import { Button } from 'components/button';
+import { Header, ActivityIndicator, OtpInput } from 'components';
+import { useTheme } from 'react-native-paper';
+
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
-import styles from './style';
+
+// import colors from 'assets/colors';
+
+import makeStyles from './styles';
+import { changePassword } from 'services/auth-service';
 
 type Props = {
   route: any;
@@ -25,10 +30,12 @@ type Props = {
 
 export default function OtpPassword(props: Props) {
   const { phone } = props.route.params;
-
+  const { password } = props.route.params;
   let initialMinutes = 1;
   let initialSeconds = 0;
 
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const [code, setCode] = React.useState('');
   const [clearOTP, setClearOTP] = React.useState(false);
   const OTPRef = useRef(null);
@@ -55,16 +62,44 @@ export default function OtpPassword(props: Props) {
     };
   });
 
+  const openMessenger = () => {
+    Linking.openURL(
+      'mailto:support@biomarking.com?subject=SendMail&body=Description'
+    );
+  };
+
   const handleOTP = async () => {
     try {
       setLoading(true);
-      navigate(Nav_Screens.CreatePasswordScreen, {
-        phone,
-        otp: code,
+
+      Keyboard.dismiss();
+      await changePassword({
+        password: {
+          username: phone,
+          password: password,
+          code: code,
+        },
       });
+      navigate(SCREENS.PASSWORD_CHANGED);
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: "User not exist's",
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.message,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
     }
   };
 
@@ -134,14 +169,13 @@ export default function OtpPassword(props: Props) {
               </Text>
             </TouchableOpacity>
             <View style={styles.floatingBtn}>
-              <TouchableOpacity style={{ marginVertical: 10 }}>
-                <Text style={styles.resendText}>
-                  <Text style={{ color: colors.heading }}>
-                    Having trouble?{' '}
-                  </Text>
+              <Text style={styles.resendText}>
+                <Text style={{ color: colors.heading }}>Having trouble? </Text>
+                <TouchableWithoutFeedback onPress={() => openMessenger()}>
                   <Text style={{ color: colors.blue }}>contact us </Text>
-                </Text>
-              </TouchableOpacity>
+                </TouchableWithoutFeedback>
+              </Text>
+
               <Button
                 onPress={() => handleOTP()}
                 title="Continue"

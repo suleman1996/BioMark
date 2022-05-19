@@ -1,48 +1,61 @@
-import React, { useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { useTheme } from 'react-native-paper';
+
 import {
   Menu,
   MenuOption,
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 
-import colors from 'assets/colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
+import makeStyles from './styles';
 
 type Props = {
   label: string;
+  options: any;
+  onChange: any;
+  optionValue: any;
 };
 
-const RelationMenu = ({ label }: Props) => {
+const RelationMenu = ({ label, options, onChange, optionValue }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const menuRef = useRef<any>();
   const [selected, setSelected] = useState();
+
+  useEffect(() => {
+    setSelected(optionValue);
+  }, [optionValue]);
 
   return (
     <View style={styles.main}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
-      <Menu ref={menuRef} onSelect={(value) => setSelected(value)}>
+      <Menu
+        ref={menuRef}
+        onSelect={(value) => {
+          setSelected(value);
+          onChange(value);
+        }}
+      >
         <MenuTrigger
           style={styles.input}
-          text={selected ? selected : 'Select'}
+          text={options[selected - 1]?.name}
           placeholder="Select"
         >
-          <Text>{selected}</Text>
+          <View style={{ position: 'absolute', right: 20 }}>
+            <AntDesignIcon name="caretdown" />
+          </View>
+          <Text>
+            {options[selected - 1]?.name ? options[selected - 1]?.name : label}
+          </Text>
         </MenuTrigger>
         <MenuOptions optionsContainerStyle={styles.popupMenu}>
-          <MenuOption value="Spouse" text="Spouse" />
-          <MenuOption value="Child" text="Child" />
-          <MenuOption value="Sibiling" text="Sibiling" />
-          <MenuOption
-            value="Parents / Parent's-in-law"
-            text="Parents / Parent's-in-law"
-          />
-          <MenuOption value="Grandparents" text="Grandparents" />
-          <MenuOption value="Guardian" text="Guardian" />
-          <MenuOption value="Others" text="Others" />
+          {options?.map((item: any, index: number) => (
+            <MenuOption key={index} value={item.id} text={item?.name} />
+          ))}
         </MenuOptions>
       </Menu>
     </View>
@@ -50,30 +63,3 @@ const RelationMenu = ({ label }: Props) => {
 };
 
 export default RelationMenu;
-
-const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    marginTop: heightToDp(2),
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    width: '100%',
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.medium,
-  },
-  input: {
-    backgroundColor: colors.inputBg,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 45,
-  },
-  popupMenu: {
-    width: widthToDp(70),
-  },
-});

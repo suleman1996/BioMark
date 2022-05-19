@@ -1,23 +1,32 @@
-import ButtonComponent from 'components/base/button';
-import ErrorText from 'components/base/error-text';
-import PasswordInputWithLabel from 'components/base/password-input-with-label';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import { Formik } from 'formik';
-import { Nav_Screens } from 'navigation/constants';
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { settingsService } from 'services/account-service/settings-service';
-import { goBack, navigate } from 'services/nav-ref';
-import { ErrorResponse } from 'types/ErrorResponse';
+import { ScrollView, Text, View, SafeAreaView } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+
+import { Button, ErrorText, PasswordInputWithLabel } from 'components/base';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
+
+import SCREENS from 'navigation/constants';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalStyles } from 'utils/theme/global-styles';
-import * as Yup from 'yup';
-import { styles } from './styles';
+
+import { settingsService } from 'services/account-service/settings-service';
+import { navigate } from 'services/nav-ref';
+import { ErrorResponse } from 'types/ErrorResponse';
+
+import makeStyles from './styles';
+
+const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
 const PasswordChangeScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [isLoading, setIsLoading] = useState(false);
   const [eCurrent, setECurrent] = useState(true);
   const [ePass, setEPass] = useState(true);
@@ -36,6 +45,14 @@ const PasswordChangeScreen = () => {
     logNow('password', password);
   };
 
+  const goToPassChangedScreen = () => {
+    setIsLoading(false);
+    navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+      screen: SCREENS.PASSWORD_CHANGED_IN_APP,
+      params: { flag: 1 },
+    });
+  };
+
   const submitForm = () => {
     logNow('formik', formikRef.current);
     // return;
@@ -49,42 +66,46 @@ const PasswordChangeScreen = () => {
       .changePassword(currentPassword, confirmPassword)
       .then((res) => {
         logNow('res', res);
-        navigate(Nav_Screens.NestedAccountNavigator, {
-          screen: Nav_Screens.PasswordChangedInApp,
-          params: { flag: 1 },
-        });
+        goToPassChangedScreen();
 
         // showMessage({
         //   message: 'Password changed successfully',
         //   type: 'success',
         // });
-        goBack();
       })
       .catch((err: ErrorResponse) => {
+        setIsLoading(false);
         logNow(err.errMsg.data.message);
-        formikRef.current.setErrors({
-          currentPassword: err.errMsg.data.message,
-        });
+        if (err.errMsg.data.message === 'Invalid Access Token') {
+          formikRef.current.setErrors({
+            currentPassword: 'Invalid Password',
+          });
+        } else {
+          formikRef.current.setErrors({
+            currentPassword: err.errMsg.data.message,
+          });
+        }
+
         // showMessage({
         //   message: err.errMsg.data.message,
         //   type: 'danger',
         // });
       })
       .finally(() => {
-        setIsLoading(false);
+        // setIsLoading(false);
       });
   };
 
-  const ResetPassSchema = Yup.object({
-    currentPassword: Yup.string()
-      .required('Password is required')
-      .min(7, 'Too short'),
-    password: Yup.string().required('Password is required').min(7, 'Too short'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required')
-      .min(7, 'Too short'),
-  });
+  // const ResetPassSchema = Yup.object({
+  //   currentPassword: Yup.string()
+  //     .required('Password is required')
+  //     .min(7, 'Too short'),
+  //   password: Yup.string().required('Password is required').min(7, 'Too short'),
+  //   confirmPassword: Yup.string()
+  //     .oneOf([Yup.ref('password'), null], 'Passwords must match')
+  //     .required('Confirm Password is required')
+  //     .min(7, 'Too short'),
+  // });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -102,43 +123,55 @@ const PasswordChangeScreen = () => {
               confirmPassword: '',
             }}
             onSubmit={resetPassword}
-            validationSchema={ResetPassSchema}
+            validationSchema={UpdatePassSchema}
           >
             {({ handleChange, handleSubmit, errors, values }) => (
               <>
-                <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps>
                   <PasswordInputWithLabel
+                    marginTop={1}
                     label={'Current Password'}
                     placeholder={'Enter your current password'}
                     isSecure={eCurrent}
-                    password={''}
+                    password={values.currentPassword}
                     setHidePassword={() => setECurrent(!eCurrent)}
                     hidePassword={eCurrent}
                     onChange={handleChange('currentPassword')}
                   />
                   {errors.currentPassword && (
-                    <ErrorText text={errors.currentPassword} />
+                    <ErrorText
+                      text={
+                        values.currentPassword ? errors.currentPassword : ''
+                      }
+                    />
                   )}
                   <Text
-                    style={[styles.textHeader, { marginTop: heightToDp(4) }]}
+                    style={[
+                      styles.textHeader,
+                      {
+                        marginTop: heightToDp(5),
+                        letterSpacing: -0.1,
+                        lineHeight: responsiveFontSize(25),
+                      },
+                    ]}
                   >
-                    Your new password must be at least 8 characters, include a
-                    symbol, a capital letter and a number.
+                    {PASS_TEXT}
                   </Text>
                   <PasswordInputWithLabel
+                    marginTop={0.3}
                     label={'Enter new password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password...'}
                     isSecure={ePass}
-                    password={''}
+                    password={values.password}
                     setHidePassword={() => setEPass(!ePass)}
                     hidePassword={ePass}
                     onChange={handleChange('password')}
                   />
                   <View style={styles.passValueContainer}>
                     <Text style={styles.passValue}>
-                      {values.password.length < 15
+                      {values.password.length < 8
                         ? 'Low'
-                        : values.password.length < 50
+                        : values.password.length < 10
                         ? 'Medium'
                         : 'High'}
                     </Text>
@@ -159,23 +192,32 @@ const PasswordChangeScreen = () => {
                     />
                   </View>
                   {errors.password && (
-                    <ErrorText text={errors.currentPassword} />
+                    <View style={{ paddingBottom: heightToDp(3) }}>
+                      <ErrorText
+                        text={values.password ? errors.password : ''}
+                      />
+                    </View>
                   )}
                   <PasswordInputWithLabel
+                    marginTop={-1}
                     label={'Confirm New Password'}
-                    placeholder={'Enter your current password'}
+                    placeholder={'Enter your new password again'}
                     isSecure={eConfirm}
-                    password={''}
+                    password={values.confirmPassword}
                     setHidePassword={() => setEConfirm(!eConfirm)}
                     hidePassword={eConfirm}
                     onChange={handleChange('confirmPassword')}
                   />
                   {errors.confirmPassword && (
-                    <ErrorText text={errors.confirmPassword} />
+                    <ErrorText
+                      text={
+                        values.confirmPassword ? errors.confirmPassword : ''
+                      }
+                    />
                   )}
                 </ScrollView>
-                <View style={GlobalStyles.bottomBtnWithShadow}>
-                  <ButtonComponent
+                <View style={GlobalStyles(colors).bottomBtnWithShadow}>
+                  <Button
                     onPress={() => {
                       submitForm();
                       handleSubmit();
@@ -198,5 +240,28 @@ const PasswordChangeScreen = () => {
     </SafeAreaView>
   );
 };
-
+const UpdatePassSchema = Yup.object({
+  currentPassword: Yup.string()
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+  password: Yup.string()
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+});
 export default PasswordChangeScreen;

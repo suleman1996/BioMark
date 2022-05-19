@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonComponent from 'components/base/button/index';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalStyles } from 'utils/theme/global-styles';
+import { Button } from 'components/base';
+
+import makeStyles from './styles';
 
 type Props = {
   onPress: any;
@@ -13,9 +13,11 @@ type Props = {
 };
 
 const ButtonWithShadowContainer = ({ title, onPress, disabled }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
-      <ButtonComponent
+      <Button
         onPress={onPress}
         title={title ? title : 'Save'}
         disabled={disabled}
@@ -25,15 +27,3 @@ const ButtonWithShadowContainer = ({ title, onPress, disabled }: Props) => {
 };
 
 export default ButtonWithShadowContainer;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    position: 'absolute',
-    backgroundColor: GlobalColors.white,
-    bottom: 0,
-    paddingHorizontal: widthToDp(6),
-    paddingVertical: heightToDp(3),
-    ...GlobalStyles.shadow,
-  },
-});

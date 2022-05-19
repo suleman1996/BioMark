@@ -1,5 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
-import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
@@ -7,33 +5,42 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 import * as Yup from 'yup';
 import moment from 'moment';
 
-import colors from 'assets/colors';
-import BackIcon from 'assets/svgs/back';
-import Button from 'components/button/button';
-import CheckBox from 'components/checkbox';
-import DatePicker from 'components/date-picker';
-import TextInput from 'components/input-field/text-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import PhoneNumber from 'components/phone-number';
-import { Nav_Screens } from 'navigation/constants';
+import { Button } from 'components/button';
+import {
+  CheckBox,
+  DatePicker,
+  ActivityIndicator,
+  TextInput,
+  PhoneNumber,
+} from 'components';
+
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
 
-import styles from './styles';
+import { BackIcon } from 'assets/svgs/index';
+
+import makeStyles from './styles';
+import { IAppState } from 'store/IAppState';
+import { useSelector } from 'react-redux';
 
 export default function Signup() {
   //initial hooks define
-  const navigations = useNavigation();
-
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   //state
   const [hidePassword, setHidePassword] = useState(true);
 
@@ -41,18 +48,21 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState(''); //International Phone Picker
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
+  const [selectCountryCode, setSelectCountryCode] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
-    { id: 0, sex: 'Male' },
-    { id: 1, sex: 'Female' },
-    { id: 2, sex: 'Others' },
+    { id: 1, sex: 'Male' },
+    { id: 2, sex: 'Female' },
+    { id: 3, sex: 'Others' },
   ]);
   const [selectedGender, setSelectedGender] = useState('');
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
   const [checked, setChecked] = React.useState(false);
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
 
   //fuctions
   useEffect(() => {
@@ -67,6 +77,15 @@ export default function Signup() {
     }
   }, [selectCountryCode]);
 
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectCountryCode(countryCodeParse);
+    }
+  }, [geoLocation]);
+
   const signupApi = async (values: string) => {
     // setLoading(true);
     Keyboard.dismiss();
@@ -77,7 +96,7 @@ export default function Signup() {
       .registerUser(username, values, selectedGender.id, newDate)
       .then((res) => {
         logNow('signup res', res);
-        navigate(Nav_Screens.SignupVerificationScreen, { username, password });
+        navigate(SCREENS.SIGNUP_VERIFICATION, { username, password });
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);
@@ -110,9 +129,9 @@ export default function Signup() {
         styles.radioButton,
         {
           backgroundColor:
-            item.id === selectedGender.id ? colors.heading : colors.whiteColor,
+            item.id === selectedGender.id ? colors.heading : colors.white,
           borderColor:
-            item.id === selectedGender.id ? colors.heading : colors.placeHolder,
+            item.id === selectedGender.id ? colors.heading : colors.lightGrey,
         },
       ]}
     >
@@ -121,9 +140,7 @@ export default function Signup() {
           (styles.radioText,
           {
             color:
-              item.id === selectedGender.id
-                ? colors.whiteColor
-                : colors.heading,
+              item.id === selectedGender.id ? colors.white : colors.heading,
           })
         }
       >
@@ -132,24 +149,14 @@ export default function Signup() {
     </TouchableOpacity>
   );
 
-  const ResetPassSchema = Yup.object({
-    fName: Yup.string().required('Please provide your first name'),
-
-    lName: Yup.string().required('Please provide your last name'),
-
-    IcPnum: Yup.string(),
-    email: Yup.string(),
-
-    password: Yup.string().required('Please type your new password').min(8),
-  });
-
   return (
     <>
       <ActivityIndicator visible={loading} />
       <View style={styles.signupNav}>
         <View style={styles.csNav}>
           <TouchableOpacity>
-            <BackIcon onPress={() => navigations.goBack()} />
+            {/* <BackIcon onPress={() => goBack()} /> */}
+            <BackIcon onPress={() => console.log('goback')} />
           </TouchableOpacity>
           <Text style={styles.signupText}>Signup</Text>
         </View>
@@ -225,9 +232,7 @@ export default function Signup() {
                 />
                 <View style={styles.aiContainer}>
                   <Text style={styles.heading}>Account Information</Text>
-
                   <Text style={styles.inputLablel}>Mobile Number</Text>
-                  {/* international phone Picker */}
                   <PhoneNumber
                     countryCode={countryCode}
                     setCountryCode={setCountryCode}
@@ -237,14 +242,32 @@ export default function Signup() {
                     maxLength={numberCondition.max}
                   />
                   {(phoneNumber !== '' || errors.password) &&
-                    phoneNumber.length < numberCondition.min && (
-                      <Text style={styles.errorMessage}>
-                        Must have {numberCondition.min}
-                        {numberCondition.max !== numberCondition.min &&
-                          -numberCondition.max}{' '}
-                        characters
-                      </Text>
-                    )}
+                    (selectCountryCode == 63 ? (
+                      phoneNumber.charAt(0) == 0 ? (
+                        <Text style={styles.errorMessage}>
+                          Phonenumber must not start with 0
+                        </Text>
+                      ) : (
+                        phoneNumber.length < numberCondition.min && (
+                          <Text style={styles.errorMessage}>
+                            Must have {numberCondition.min}
+                            {numberCondition.max !== numberCondition.min &&
+                              -numberCondition.max}{' '}
+                            characters
+                          </Text>
+                        )
+                      )
+                    ) : (
+                      phoneNumber.length < numberCondition.min && (
+                        <Text style={styles.errorMessage}>
+                          Must have {numberCondition.min}
+                          {numberCondition.max !== numberCondition.min &&
+                            -numberCondition.max}{' '}
+                          characters
+                        </Text>
+                      )
+                    ))}
+
                   <Text style={styles.inputLablel}>Email</Text>
                   <TextInput
                     placeholder="E.g. Sample@email.com"
@@ -252,7 +275,6 @@ export default function Signup() {
                     margin={20}
                     keyboardType="email-address"
                   />
-
                   <Text style={styles.inputLablel}>Password</Text>
                   <TextInput
                     placeholder="Enter your new password..."
@@ -268,30 +290,45 @@ export default function Signup() {
                 </View>
                 <View style={styles.tcText}>
                   <CheckBox checked={checked} setChecked={setChecked} />
-                  {/* <TouchableOpacity> */}
                   <Text style={styles.tcTextStyle}>
                     <Text>I accept the </Text>
-                    <Text
-                      style={{
-                        color: colors.blue,
-                        fontSize: 17,
-                        textDecorationLine: 'underline',
-                      }}
+                    <TouchableWithoutFeedback
+                      onPress={() =>
+                        navigate(SCREENS.TERMS_AND_PRIVACY, {
+                          privacyPolicy: false,
+                        })
+                      }
                     >
-                      terms and condition
-                    </Text>
+                      <Text
+                        style={{
+                          color: colors.blue,
+                          fontSize: 17,
+                          textDecorationLine: 'underline',
+                          // bottom: 2,
+                        }}
+                      >
+                        terms and conditions
+                      </Text>
+                    </TouchableWithoutFeedback>
                     <Text> and the </Text>
-                    <Text
-                      style={{
-                        color: colors.blue,
-                        fontSize: 17,
-                        textDecorationLine: 'underline',
-                      }}
+                    <TouchableWithoutFeedback
+                      onPress={() =>
+                        navigate(SCREENS.TERMS_AND_PRIVACY, {
+                          privacyPolicy: true,
+                        })
+                      }
                     >
-                      privacy policy.
-                    </Text>
+                      <Text
+                        style={{
+                          color: colors.blue,
+                          fontSize: 17,
+                          textDecorationLine: 'underline',
+                        }}
+                      >
+                        privacy policy.
+                      </Text>
+                    </TouchableWithoutFeedback>
                   </Text>
-                  {/* </TouchableOpacity> */}
                 </View>
                 <TouchableOpacity>
                   <Button
@@ -308,3 +345,17 @@ export default function Signup() {
     </>
   );
 }
+
+const ResetPassSchema = Yup.object({
+  fName: Yup.string().required('Please provide your first name'),
+  lName: Yup.string().required('Please provide your last name'),
+  IcPnum: Yup.string(),
+  email: Yup.string(),
+  password: Yup.string()
+    .required('Please type your new password')
+    .min(8)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+});

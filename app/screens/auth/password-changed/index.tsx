@@ -1,29 +1,34 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import fonts from 'assets/fonts';
-import colors from 'assets/colors';
-import Lock from 'assets/svgs/lock';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
+import SCREENS from 'navigation/constants';
+
+import { Lock } from 'assets/svgs/index';
+
+import makeStyles from './styles';
 
 type Props = {
   route: any;
 };
 
 export default function PasswordChanged(props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { route } = props;
   /*eslint-disable */
   const flag = route?.params?.flag;
   useEffect(() => {
     setTimeout(() => {
       if (flag == 1) {
-        navigate(Nav_Screens.NestedAccountNavigator, {
-          screen: Nav_Screens.Settings,
+        navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+          screen: SCREENS.SETTINGS,
         });
         return;
       } else {
-        navigate(Nav_Screens.LoginScreen);
+        navigate(SCREENS.LOGIN);
       }
     }, 2000);
   }, []);
@@ -38,16 +43,3 @@ export default function PasswordChanged(props: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontFamily: fonts.bold,
-    color: colors.blue,
-    fontSize: 18,
-  },
-});

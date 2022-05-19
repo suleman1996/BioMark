@@ -1,16 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import { widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
+import makeStyles from './styles';
 
 type Props = {
   error: string | undefined | null;
 };
 const ErrorLineFullWidth = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { error } = props;
+
   if (error) {
     return (
       <View style={styles.container}>
@@ -23,18 +25,3 @@ const ErrorLineFullWidth = (props: Props) => {
 };
 
 export default ErrorLineFullWidth;
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthToDp(100),
-    backgroundColor: GlobalColors.red,
-    padding: widthToDp(1.5),
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.white,
-    paddingLeft: widthToDp(4),
-  },
-});

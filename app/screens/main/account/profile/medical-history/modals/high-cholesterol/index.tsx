@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
-import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import {
+  ModalWithBottomBtn,
+  RadioButtonQuestion,
+} from 'components/higher-order';
 
 type Props = {
   isVisible: boolean;
+  setIsVisible: any;
 };
 
-const HighCholesterolModal = ({ isVisible }: Props) => {
+const HighCholesterolModal = ({ isVisible, setIsVisible }: Props) => {
   //    Have you been diagnosed with high cholesterol?
   const [ans1, setAns1] = useState(false);
 
@@ -17,15 +20,16 @@ const HighCholesterolModal = ({ isVisible }: Props) => {
   return (
     <ModalWithBottomBtn
       isVisible={isVisible}
+      setIsVisible={setIsVisible}
       title={'High Cholesterol'}
       onPress={() => console.log('clicked')}
     >
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans1}
         setIsTrue={setAns1}
         question="Have you been diagnosed with high cholesterol?"
       />
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans2}
         setIsTrue={setAns2}
         question="Are you taking any medications for this?"

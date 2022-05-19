@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import DropdownMenuComponent from 'components/base/dropdown-menu';
-import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import { DropdownMenu } from 'components/base';
+import {
+  ModalWithBottomBtn,
+  RadioButtonQuestion,
+} from 'components/higher-order';
+
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
@@ -11,9 +15,12 @@ const options = [{ title: 'Type 1 only' }, { title: 'Type 2 only' }];
 
 type Props = {
   isVisible: boolean;
+  setIsVisible: any;
 };
 
-const DiabetesModal = ({ isVisible }: Props) => {
+const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
+  const { colors } = useTheme();
+
   //    Have you been diagnosed with diabetes?
   const [ans1, setAns1] = useState(false);
 
@@ -26,27 +33,31 @@ const DiabetesModal = ({ isVisible }: Props) => {
 
   return (
     <ModalWithBottomBtn
+      setIsVisible={setIsVisible}
       isVisible={isVisible}
       title="Diabetes"
       onPress={() => console.log('clicked')}
     >
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans1}
         setIsTrue={setAns1}
         question="Have you been diagnosed with diabetes?"
       />
-      <Text style={GlobalStyles.qLabel}>
+      <Text style={GlobalStyles(colors).qLabel}>
         What type of diabetes have you been diagnosed with?
       </Text>
       <View
-        style={{ height: heightToDp(7), ...GlobalStyles.paddingHorizontal }}
+        style={{
+          height: heightToDp(7),
+          ...GlobalStyles(colors).paddingHorizontal,
+        }}
       >
-        <DropdownMenuComponent
+        <DropdownMenu
           options={options}
           setSelectedDropdown={setDiagnosedWith}
         />
       </View>
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans2}
         setIsTrue={setAns2}
         question="Did you take any medications for this?"

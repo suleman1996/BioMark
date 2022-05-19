@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { TextInput } from 'components';
+
 import { heightToDp } from 'utils/functions/responsive-dimensions';
-import TextInput from 'components/input-field/text-input';
+
+import makeStyles from './styles';
 
 type Props = {
   label: string;
@@ -15,6 +16,7 @@ type Props = {
   setHidePassword: any;
   hidePassword: boolean;
   onChange: any;
+  marginTop?: number;
 };
 
 const PasswordInputWithLabel = ({
@@ -25,14 +27,24 @@ const PasswordInputWithLabel = ({
   setHidePassword,
   hidePassword,
   onChange,
+  marginTop,
 }: Props) => {
+  let otherStyles = [];
+
+  if (marginTop) {
+    otherStyles.push({ marginTop: heightToDp(marginTop) });
+  }
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, otherStyles]}>
       <Text style={[styles.inputLabel]}>{label}</Text>
       <TextInput
         placeholder={placeholder}
         secureTextEntry={isSecure}
-        eye={!isSecure ? 'eye-off' : 'eye'}
+        eye={isSecure ? 'eye-off' : 'eye'}
         value={password}
         onEyePress={() => {
           setHidePassword(!hidePassword);
@@ -44,19 +56,3 @@ const PasswordInputWithLabel = ({
 };
 
 export default PasswordInputWithLabel;
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: heightToDp(2),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-  inputLabel: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-});

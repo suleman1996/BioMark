@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import CheckBox from 'react-native-check-box';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
+
+import makeStyles from './styles';
 
 type Props = {
   isChecked: boolean;
@@ -13,11 +13,14 @@ type Props = {
 };
 
 const CheckBoxWithText = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { isChecked, setIsChecked, rightText } = props;
   return (
     <View style={styles.container}>
       <CheckBox
-        checkBoxColor={GlobalColors.primary}
+        checkBoxColor={colors.primary}
         style={styles.checkbox}
         leftTextStyle={styles.rightText}
         onClick={() => {
@@ -31,19 +34,3 @@ const CheckBoxWithText = (props: Props) => {
 };
 
 export default CheckBoxWithText;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flexDirection: 'row',
-  },
-  rightText: {
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(20),
-    marginLeft: widthToDp(4),
-    lineHeight: responsiveFontSize(30),
-  },
-  checkbox: {
-    padding: 1,
-  },
-});

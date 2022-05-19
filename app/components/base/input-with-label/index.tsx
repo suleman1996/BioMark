@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
+import { useTheme } from 'react-native-paper';
 
-import InputField from 'components/input-field/input-field';
+import { InputField } from 'components';
+import { BioDangerWhite } from 'components/svg';
+
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+
+import makeStyles from './styles';
 
 type Props = {
   label: string;
@@ -14,6 +16,8 @@ type Props = {
   onChange: any;
   value: string;
   onFocus?: any;
+  error?: any;
+  defaultValue: any;
 };
 
 const InputWithLabel = ({
@@ -23,10 +27,16 @@ const InputWithLabel = ({
   labelFontSize,
   value,
   onFocus,
+  error,
+  defaultValue,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const ifLabelSize = labelFontSize
     ? { fontSize: responsiveFontSize(labelFontSize) }
     : {};
+
   return (
     <View style={styles.container}>
       <Text style={[styles.label, ifLabelSize]}>{label}</Text>
@@ -36,20 +46,16 @@ const InputWithLabel = ({
         onChange={onChange}
         svg={undefined}
         value={value}
+        defaultValue={defaultValue}
       />
+      {error ? (
+        <View style={styles.errorContainer}>
+          <BioDangerWhite width={3.5} height={3.5} />
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };
 
 export default InputWithLabel;
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: heightToDp(2),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-});

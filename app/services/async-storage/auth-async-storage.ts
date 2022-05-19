@@ -32,6 +32,7 @@ async function resetAuthAsyncStorage() {
   await AsyncStorage.removeItem('userData');
   await AsyncStorage.removeItem('userToken');
   await AsyncStorage.removeItem('refreshToken');
+  await AsyncStorage.removeItem('hasProfile');
 }
 
 async function Get_Token() {
@@ -44,6 +45,33 @@ async function Get_Refresh_Token() {
   return refreshToken;
 }
 
+const setIsOnboarding = async (value) => {
+  try {
+    const jsonObj = JSON.stringify(value);
+    await AsyncStorage.setItem('onBoarding', jsonObj);
+  } catch (e) {
+    console.log('Error storing the onboarding token', e);
+  }
+};
+
+const getOnboarding = async () => {
+  try {
+    const value = await AsyncStorage.getItem('onBoarding');
+    if (value !== null) {
+      const jsonVal = JSON.parse(value);
+      return jsonVal;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.log('Error getting the onboarding token', e);
+  }
+};
+
+async function removeOnboarding() {
+  await AsyncStorage.removeItem('onBoarding');
+}
+
 export {
   Get_Token,
   Get_Refresh_Token,
@@ -51,4 +79,7 @@ export {
   getAuthAsyncStorage,
   setAuthAsyncStorage,
   setAuthUserAsyncStorage,
+  setIsOnboarding,
+  getOnboarding,
+  removeOnboarding,
 };

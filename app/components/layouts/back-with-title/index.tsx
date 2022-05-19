@@ -1,26 +1,32 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
 import React from 'react';
+import { Text, View, Pressable } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalFonts } from 'utils/theme/fonts';
+
 import { hitSlop } from 'constants/hit-slop';
 import { goBack } from 'services/nav-ref';
+
+import makeStyles from './styles';
 
 type Props = {
   children: any;
   title: string;
+  style: any;
 };
 
-const TitleWithBackLayout = ({ children, title }: Props) => {
+const TitleWithBackLayout = ({ children, title, style }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.header}>
         <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
           <MaterialIcons
-            color={GlobalColors.white}
+            color={colors.white}
             size={responsiveFontSize(35)}
             name="arrow-back-ios"
           />
@@ -35,26 +41,3 @@ const TitleWithBackLayout = ({ children, title }: Props) => {
 };
 
 export default TitleWithBackLayout;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    width: widthToDp(100),
-    backgroundColor: GlobalColors.primary,
-    paddingHorizontal: widthToDp(4),
-    paddingTop: heightToDp(2.5),
-    paddingBottom: heightToDp(2),
-    borderBottomWidth: 0.3,
-  },
-  titleContainer: {
-    paddingVertical: heightToDp(1),
-  },
-  textStyle: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    marginTop: heightToDp(2),
-    color: GlobalColors.white,
-  },
-});

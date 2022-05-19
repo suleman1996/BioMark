@@ -1,17 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import { TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import colors from 'assets/colors';
-import React from 'react';
 
-import ArrowBack from 'assets/svgs/arrow-back';
-import fonts from 'assets/fonts';
+import { ArrowBack } from 'assets/svgs/index';
+
+import makeStyles from './styles';
 
 type Props = {
   title: string;
 };
 
 export default function Header(props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const navigations = useNavigation();
 
   return (
@@ -32,32 +37,3 @@ export default function Header(props: Props) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    height: 50,
-    width: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
-    elevation: 5,
-  },
-  ripple: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    marginLeft: 5,
-    fontFamily: fonts.regular,
-    fontSize: 16,
-    color: colors.black,
-  },
-});

@@ -1,67 +1,69 @@
 import React, { useContext, useEffect } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Images from 'assets/images';
-import TitleWithSearchBarLayout from 'components/layouts/title-with-search-bar/index';
-import AccountMenu from 'components/ui/account-menu';
-import { Nav_Screens } from 'navigation/constants';
+import { TitleWithSearchBarLayout } from 'components/layouts';
+import { AccountMenu } from 'components/ui';
+import { ActivityIndicator } from 'components';
+
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 import AuthContext from 'utils/auth-context';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
 
+import Images from 'assets/images';
+
+import makeStyles from './styles';
+
 const AccountScreen = () => {
   const authContext = useContext(AuthContext);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [profileLoader, setProfileLoader] = React.useState(false);
   const [autoLogoutCheck, setAutoLogoutCheck] = React.useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let logoutCheck = await AsyncStorage.getItem('autoLogoutCheck');
-      setAutoLogoutCheck(logoutCheck);
-    };
-    fetchData().catch(console.error);
+    getAutoLogout();
   }, []);
 
   const onToggleAutoLogout = async () => {
-    await autoLogout();
-  };
-  const autoLogout = async () => {
+    setAutoLogoutCheck(!autoLogoutCheck);
     userService
-      .autoLogout()
+      .saveAutoLogout(!autoLogoutCheck)
       .then(async (res) => {
-        logNow('signup res', res);
+        console.log('resSave', res);
         setAutoLogoutCheck(res?.auto_logout);
-        await AsyncStorage.setItem(
-          'autoLogoutCheck',
-          JSON.stringify(res?.auto_logout)
-        );
       })
       .catch((e) => {
         logNow('erro', e);
       })
       .finally(() => {});
   };
+
+  const getAutoLogout = async () => {
+    userService
+      .autoLogout()
+      .then(async (res) => {
+        console.log('res', res);
+        setAutoLogoutCheck(res?.auto_logout);
+      })
+      .catch((e) => {
+        logNow('erro', e);
+      })
+      .finally(() => {});
+  };
+
   return (
     <>
       <TitleWithSearchBarLayout title={'Account'}>
         <View style={styles.content}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: widthToDp(100),
-              paddingHorizontal: widthToDp(6),
-            }}
-          >
+          <View style={styles.accountScreenView}>
             <View style={[styles.image, { overflow: 'hidden' }]}>
               <Image
                 onLoadStart={() => setProfileLoader(true)}
@@ -81,8 +83,8 @@ const AccountScreen = () => {
               </Text>
               <Pressable
                 onPress={() =>
-                  navigate(Nav_Screens.NestedAccountNavigator, {
-                    screen: Nav_Screens.Edit_Profile,
+                  navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+                    screen: SCREENS.EDIT_PROFILE,
                   })
                 }
                 style={{ flexDirection: 'row', alignItems: 'center' }}
@@ -90,7 +92,7 @@ const AccountScreen = () => {
                 <MaterialCommunityIcons
                   name="pencil"
                   size={responsiveFontSize(25)}
-                  color={GlobalColors.primary}
+                  color={colors.primary}
                 />
                 <Text style={styles.editProfile}>Edit Profile</Text>
               </Pressable>
@@ -100,6 +102,7 @@ const AccountScreen = () => {
             <AccountMenu
               logOutCheck={autoLogoutCheck}
               onToggleAutoLogout={onToggleAutoLogout}
+              dependentsCount={authContext?.userData?.dependent_count || 0}
             />
           </View>
         </View>
@@ -107,39 +110,5 @@ const AccountScreen = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: heightToDp(5),
-    justifyContent: 'center',
-    paddingBottom: heightToDp(10),
-    backgroundColor: GlobalColors.white,
-  },
-  image: {
-    width: widthToDp(25),
-    height: widthToDp(25),
-    borderRadius: widthToDp(12.5),
-  },
-  profile: {
-    paddingLeft: widthToDp(4),
-  },
-  name: {
-    fontFamily: GlobalFonts.medium,
-    fontSize: responsiveFontSize(22),
-    color: GlobalColors.darkPrimary,
-  },
-  editProfile: {
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(21),
-    color: GlobalColors.primary,
-    paddingLeft: widthToDp(2),
-  },
-  menuList: {
-    paddingTop: widthToDp(7),
-    marginBottom: heightToDp(7),
-  },
-});
 
 export default AccountScreen;

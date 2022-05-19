@@ -1,22 +1,29 @@
-import SingleMenuItemWithArrow from 'components/higher-order/single-menu-item-with-right-arrow';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import AccountDeActivateModal from 'components/ui/account-deactivate-modal';
-import { Nav_Screens } from 'navigation/constants';
 import React, { useEffect, useState } from 'react';
-import { Linking, View } from 'react-native';
+import { Linking, View, SafeAreaView } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import { showMessage } from 'react-native-flash-message';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
+
+import { SingleMenuItemWithArrow } from 'components/higher-order';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
+import { AccountDeActivateModal } from 'components/ui';
+
+import { logNow } from 'utils/functions/log-binder';
+import SCREENS from 'navigation/constants';
 import { settingsService } from 'services/account-service/settings-service';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { addUserContactsDetails, logout } from 'store/auth/auth-actions';
 import { ErrorResponse } from 'types/ErrorResponse';
-import { logNow } from 'utils/functions/log-binder';
-import { styles } from './styles';
+
+import makeStyles from './styles';
 
 const SettingsScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
 
   const [isVisibleDeActivateModal, setDeActivateModal] = useState(false);
@@ -26,6 +33,7 @@ const SettingsScreen = () => {
     userService
       .getUserContacts()
       .then((res) => {
+        logNow(res);
         dispatch(addUserContactsDetails(res));
       })
       .catch(() => {})
@@ -71,19 +79,19 @@ const SettingsScreen = () => {
       <TitleWithBackWhiteBgLayout title="Settings">
         <View style={styles.container}>
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.PasswordChangeScreen)}
+            onPress={() => navigate(SCREENS.PASSWORD_CHANGED)}
             title={'Password'}
           />
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.EmailChangeScreen)}
+            onPress={() => navigate(SCREENS.EMAIL_CHANGE)}
             title={'Email'}
           />
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.PhoneChangeScreen)}
+            onPress={() => navigate(SCREENS.PHONE_NUMBER_CHANGE)}
             title={'Phone Number'}
           />
           <SingleMenuItemWithArrow
-            onPress={() => navigate(Nav_Screens.MarketingConsentScreen)}
+            onPress={() => navigate(SCREENS.MARKETING_CONSENT)}
             title={'Marketing Consent'}
           />
           <SingleMenuItemWithArrow

@@ -1,22 +1,32 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import { RadioButton } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-import TitleWithBackLayout from 'components/layouts/back-with-title';
-import styles from './styles';
-import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { showMessage } from 'react-native-flash-message';
+import { useIsFocused } from '@react-navigation/native';
+
+import { TitleWithBackLayout } from 'components/layouts';
+import { ActivityIndicator } from 'components';
+import { ButtonWithShadowContainer } from 'components/base';
+
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants';
-import { showMessage } from 'react-native-flash-message';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import SCREENS from 'navigation/constants';
 import { userService } from 'services/user-service/user-service';
+import { useSelector } from 'react-redux';
+
+import makeStyles from './styles';
 
 type RenderDrinkingProps = {
   title: string;
@@ -28,12 +38,24 @@ type RenderDrinkingProps = {
 };
 
 const Drinking = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
+  const isFocus = useIsFocused();
+
   const [value, setValue] = React.useState('');
   const [beer, setBeer] = React.useState(0);
   const [wine, setWine] = React.useState(0);
   const [spirits, setSpiritss] = React.useState(0);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [isDrinking, setIsDrinking] = React.useState(false);
+
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
+  React.useEffect(() => {
+    handleLifeStyle();
+    // console.log('Bootstrap =======>', bootstrap);
+  }, [isFocus, bootstrap]);
 
   const handleDrinking = async () => {
     if (value == '') {
@@ -51,7 +73,7 @@ const Drinking = () => {
           spirits
         );
         console.log('Drinking success ', result.data);
-        navigate(Nav_Screens.Edit_Profile);
+        navigate(SCREENS.EDIT_PROFILE);
 
         setIsVisible(false);
       } catch (error) {
@@ -77,19 +99,40 @@ const Drinking = () => {
     }
   };
 
+  const handleLifeStyle = async () => {
+    try {
+      setIsVisible(true);
+      const result = await userService.getLifeStyle();
+      setValue(result?.data?.drinking?.is_drinking ? 'second' : 'first');
+      setBeer(result?.data?.drinking?.pints_of_beer);
+      setWine(result?.data?.drinking?.glasses_of_wine);
+      setSpiritss(result?.data?.drinking?.shots_of_spirits);
+      setIsDrinking(result?.data?.drinking?.is_drinking ? true : false);
+      setIsVisible(false);
+    } catch (error) {
+      setIsVisible(false);
+
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
+
   const RenderDrinking = (props: RenderDrinkingProps) => (
-    <View
-      style={{
-        flexDirection: 'row',
-        height: 50,
-        alignItems: 'center',
-        marginBottom: 20,
-        paddingHorizontal: 20,
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: '#ffffff50',
-      }}
-    >
+    <View style={styles.drinkingView}>
       <View
         style={{ width: '50%', flexDirection: 'row', alignItems: 'center' }}
       >
@@ -99,7 +142,7 @@ const Drinking = () => {
 
         <Text
           style={{
-            color: GlobalColors.darkPrimary,
+            color: colors.darkPrimary,
             fontFamily: GlobalFonts.light,
           }}
         >
@@ -136,7 +179,12 @@ const Drinking = () => {
       <TitleWithBackLayout title="Drinking">
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
           <ScrollView style={{ flex: 1, marginBottom: 100 }}>
-            <Text style={styles.label}>Do you drink alcoholic beverages.?</Text>
+            <Text style={styles.label}>
+              {
+                bootstrap?.attributes?.medical_template?.drinking[0]?.content
+                  ?.fields[0]?.question
+              }
+            </Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setValue(newValue);
@@ -163,7 +211,7 @@ const Drinking = () => {
                 ]}
               >
                 <RadioButton
-                  color={value == 'first' ? GlobalColors.white : null}
+                  color={value == 'first' ? colors.white : null}
                   value="first"
                 />
                 <Text
@@ -172,7 +220,10 @@ const Drinking = () => {
                     { color: value == 'first' ? '#ffffff' : '#000000' },
                   ]}
                 >
-                  No
+                  {
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[0]?.options[0]
+                  }
                 </Text>
               </TouchableOpacity>
 
@@ -186,7 +237,7 @@ const Drinking = () => {
                 ]}
               >
                 <RadioButton
-                  color={value == 'second' ? GlobalColors.white : null}
+                  color={value == 'second' ? colors.white : null}
                   value="second"
                 />
                 <Text
@@ -195,24 +246,33 @@ const Drinking = () => {
                     { color: value == 'second' ? '#ffffff' : '#000000' },
                   ]}
                 >
-                  Yes
+                  {
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[0]?.options[1]
+                  }
                 </Text>
               </TouchableOpacity>
             </RadioButton.Group>
             {value == 'second' && (
               <>
                 <Text style={[styles.label, { marginBottom: 20 }]}>
-                  Do you drink alcoholic beverages.?
+                  {
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.question
+                  }
                 </Text>
                 <RenderDrinking
-                  title="Points of Beer"
+                  title={
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.options[0]
+                  }
                   quantity={beer}
                   setter={setBeer}
                   iconLeft={
                     <FontAwesome
                       name={'beer'}
                       size={responsiveFontSize(24)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -220,7 +280,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'plus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -228,20 +288,23 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'minus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
                 />
                 <RenderDrinking
-                  title="Glass of Wine"
+                  title={
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.options[1]
+                  }
                   quantity={wine}
                   setter={setWine}
                   iconLeft={
                     <FontAwesome5
                       name={'wine-glass-alt'}
                       size={responsiveFontSize(24)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -249,7 +312,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'plus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -257,20 +320,23 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'minus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
                 />
                 <RenderDrinking
-                  title="Shots of Spirits"
+                  title={
+                    bootstrap?.attributes?.medical_template?.drinking[0]
+                      ?.content?.fields[1]?.options[2]
+                  }
                   quantity={spirits}
                   setter={setSpiritss}
                   iconLeft={
                     <MaterialCommunityIcons
                       name={'cup'}
                       size={responsiveFontSize(24)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -278,7 +344,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'plus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }
@@ -286,7 +352,7 @@ const Drinking = () => {
                     <FontAwesome5
                       name={'minus'}
                       size={responsiveFontSize(22)}
-                      color={GlobalColors.blue}
+                      color={colors.blue}
                       style={{ marginRight: 10 }}
                     />
                   }

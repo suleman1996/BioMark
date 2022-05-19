@@ -1,8 +1,10 @@
-import { StyleSheet, View } from 'react-native';
 import React from 'react';
+import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import { TextInput } from 'react-native-paper';
 
-import colors from 'assets/colors';
+import makeStyles from './styles';
 
 type Props = {
   margin?: any;
@@ -15,16 +17,23 @@ type Props = {
   onEyePress?: any;
   eye?: any;
   keyboardType?: string;
+  defaultValue?: string;
 };
 
 export default function (props: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={[styles.container, { marginHorizontal: props.margin }]}>
       <TextInput
         placeholder={props?.placeholder}
         value={props?.value}
+        defaultValue={props?.defaultValue}
         activeUnderlineColor={'transparent'}
-        underlineColor={'FFFFFF'}
+        selectionColor={colors.heading}
+        caretHidden={false}
+        underlineColor={'#FFFFFF'}
         placeholderTextColor={'#8493AE'}
         onChangeText={props?.onChange}
         secureTextEntry={props?.secureTextEntry}
@@ -47,15 +56,3 @@ export default function (props: Props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-  },
-  textInput: {
-    backgroundColor: colors.inputBg,
-    fontSize: 14,
-    height: 45,
-    borderRadius: 8,
-  },
-});

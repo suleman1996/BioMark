@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
-import React, { useState, useRef } from 'react';
+import { Text, View, Pressable } from 'react-native';
+import React, { useRef } from 'react';
+import { useTheme } from 'react-native-paper';
+
 import { TextInput } from 'react-native-paper';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import colors from 'assets/colors';
+
+import makeStyles from './styles';
 
 type Props = {
   label: string;
@@ -16,6 +18,10 @@ type Props = {
   height: number | string;
   textAlign: string | number;
   onChangeText: (text: string) => void;
+  setSelectedType: any;
+  selectedType: any;
+  value: string;
+  setValue: any;
 };
 
 const HeightChooserComponent = ({
@@ -24,16 +30,25 @@ const HeightChooserComponent = ({
   height,
   textAlign,
   onChangeText,
+  setSelectedType,
+  selectedType,
+  value,
+  setValue,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const menuRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [value, setValue] = useState(0);
-  const [selectedType, setSelectedType] = useState(2);
+  // const [value, setValue] = useState(0);
+  // const [selectedType, setSelectedType] = useState(2);
 
   var otherStyle = [];
+
   if (height) {
     otherStyle.push({ height: heightToDp(height) });
   }
+
   if (textAlign) {
     otherStyle.push({ textAlign: textAlign });
   }
@@ -44,22 +59,24 @@ const HeightChooserComponent = ({
       <View style={styles.rowContainer}>
         <TextInput
           placeholder={placeholder}
-          placeholderTextColor={colors.placeHolder}
+          placeholderTextColor={colors.smoke}
           style={[styles.textFieldStyle, otherStyle]}
+          theme={{ colors: { text: colors.smoke } }}
           onChangeText={onChangeText}
           value={value}
           autoFocus={false}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           borderBottomWidth={0}
+          keyboardType="numeric"
         />
         <Menu ref={menuRef}>
           <MenuTrigger style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text
               style={{
-                color: GlobalColors.primary,
-                fontFamily: GlobalFonts.regular,
-                fontSize: responsiveFontSize(20),
+                color: colors.heading,
+                fontFamily: GlobalFonts.bold,
+                fontSize: responsiveFontSize(22),
               }}
             >
               {selectedType == 1 ? 'ft/in' : 'cm'}
@@ -68,18 +85,20 @@ const HeightChooserComponent = ({
             <MaterialCommunityIcons
               name="chevron-down"
               size={responsiveFontSize(28)}
-              color={GlobalColors.darkPrimary}
+              color={colors.darkPrimary}
             />
           </MenuTrigger>
           <MenuOptions optionsContainerStyle={styles.popupMenu}>
             <Pressable
               onPress={() => {
                 setSelectedType(1);
+                selectedType != 1 &&
+                  setValue((value / 2.54).toFixed(3).toString());
                 menuRef.current.close();
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 1 ? { backgroundColor: GlobalColors.gray } : {},
+                selectedType == 1 ? { backgroundColor: colors.gray } : {},
               ]}
             >
               <Text style={styles.menuText}>ft/in</Text>
@@ -87,11 +106,13 @@ const HeightChooserComponent = ({
             <Pressable
               onPress={() => {
                 setSelectedType(2);
+                selectedType != 2 &&
+                  setValue(parseInt(value * 2.54).toString());
                 menuRef.current.close();
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 2 ? { backgroundColor: GlobalColors.gray } : {},
+                selectedType == 2 ? { backgroundColor: colors.gray } : {},
               ]}
             >
               <Text style={styles.menuText}>cm</Text>
@@ -104,43 +125,3 @@ const HeightChooserComponent = ({
 };
 
 export default HeightChooserComponent;
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: heightToDp(2),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-  textFieldStyle: {
-    fontSize: responsiveFontSize(40),
-    width: '80%',
-    color: '#3D3D3D',
-    backgroundColor: GlobalColors.gray,
-    fontFamily: GlobalFonts.bold,
-    borderWidth: 0,
-    borderBottomWidth: 0,
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: GlobalColors.gray,
-    alignItems: 'center',
-    borderRadius: widthToDp(2),
-  },
-  popupMenu: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: widthToDp(25),
-  },
-  singleMenuItem: {
-    width: '100%',
-  },
-  menuText: {
-    fontSize: responsiveFontSize(20),
-    padding: widthToDp(2),
-  },
-});

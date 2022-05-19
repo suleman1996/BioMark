@@ -1,44 +1,65 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Image,
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
 } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+import { showMessage } from 'react-native-flash-message';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import Images from 'assets/images';
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { Nav_Screens } from 'navigation/constants/index';
+import { TitleWithBackLayout } from 'components/layouts';
+import { EditProfileModal, ActivityIndicator } from 'components';
+
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import EditProfileModal from 'components/edit-profile-menu';
-import AuthContext from '../../../../../utils/auth-context';
+
+import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import { showMessage } from 'react-native-flash-message';
+
+import Images from 'assets/images';
+
+import makeStyles from './styles';
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+
+import { getUserProfileData } from 'store/profile/profile-actions';
 
 let cameraIs = false;
 
 const EditProfileScreen = () => {
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [edit, setEdit] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [profileLoader, setProfileLoader] = React.useState(false);
 
-  const updateProfilePhoto = async (pic) => {
+  // get user profile
+  /* eslint-disable */
+  const getUserOnFocus = async () => {
+    await dispatch(getUserProfileData());
+  };
+  useEffect(() => {
+    getUserOnFocus();
+  }, [focused]);
+  /* eslint-enable */
+  const updateProfilePhoto = async (pic: any) => {
     try {
       setIsLoading(true);
       const [profilePic] = await Promise.all([
@@ -86,13 +107,13 @@ const EditProfileScreen = () => {
         <MaterialCommunityIcons
           name={'pencil-outline'}
           size={responsiveFontSize(22)}
-          color={GlobalColors.white}
+          color={colors.white}
         />
       </TouchableOpacity>
     </View>
   );
 
-  const ImagePickerFromGallery = () => {
+  const imagePickerFromGallery = () => {
     setShowModal(false);
     if (!cameraIs) {
       cameraIs = true;
@@ -117,7 +138,7 @@ const EditProfileScreen = () => {
     }
   };
 
-  const ImagePickerFromCamera = () => {
+  const imagePickerFromCamera = () => {
     setShowModal(false);
     if (!cameraIs) {
       cameraIs = true;
@@ -141,14 +162,15 @@ const EditProfileScreen = () => {
       });
     }
   };
+
   return (
     <TitleWithBackLayout title="Your Profile">
       <ActivityIndicator visible={isLoading} />
       <EditProfileModal
         iconPress={() => setShowModal(false)}
         visible={showModal}
-        onPressGallery={() => ImagePickerFromGallery()}
-        onPressPhoto={() => ImagePickerFromCamera()}
+        onPressGallery={() => imagePickerFromGallery()}
+        onPressPhoto={() => imagePickerFromCamera()}
       />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topBg} />
@@ -177,115 +199,115 @@ const EditProfileScreen = () => {
             <Text
               style={{
                 fontSize: responsiveFontSize(20),
-                color: GlobalColors.darkPrimary,
+                color: colors.darkPrimary,
                 fontFamily: GlobalFonts.light,
               }}
             >
               ABOUT ME
             </Text>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Personal_Information)}
+              onPress={() => navigate(SCREENS.PERSONAL_INFORMATION)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="human-male"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Personal Information</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Body_Measurement)}
+              onPress={() => navigate(SCREENS.BODY_MEASUREMENT)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="human-male"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Body Measurement</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Medical_History)}
+              onPress={() => navigate(SCREENS.MEDICAL_HISTORY)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="plus"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Medical History</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
             <Pressable
-              onPress={() => navigate(Nav_Screens.Vaccination)}
+              onPress={() => navigate(SCREENS.VACCINATION)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="needle"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Vaccination</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
             <Pressable
               style={styles.menuOption}
-              onPress={() => navigate(Nav_Screens.Allergies)}
+              onPress={() => navigate(SCREENS.ALLERGIES)}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="allergy"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Allergies</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
             <View style={styles.menuOption}>
               <Pressable
-                onPress={() => navigate(Nav_Screens.FamilyMedicalHistory)}
+                onPress={() => navigate(SCREENS.FAMILY_MEDICAL_HISTORY)}
                 style={styles.menuOption}
               >
                 <View style={styles.menuTitleAndIcon}>
                   <MaterialIcons
-                    name="family-restroom"
+                    name="groups"
                     size={responsiveFontSize(22)}
-                    color={GlobalColors.darkPrimary}
+                    color={colors.darkPrimary}
                   />
                   <Text style={styles.menuTitleText}>
                     Family Medical History
@@ -295,105 +317,108 @@ const EditProfileScreen = () => {
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </View>
 
             <Pressable
-              onPress={() => navigate(Nav_Screens.Smoking)}
+              onPress={() => navigate(SCREENS.SMOKING)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="smoking"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
 
-                <Text style={styles.menuTitleText}>Smooking</Text>
+                <Text style={styles.menuTitleText}>Smoking</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
 
             <Pressable
-              onPress={() => navigate(Nav_Screens.Drinking)}
+              onPress={() => navigate(SCREENS.DRINKING)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialIcons
                   name="local-drink"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Drinking</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Exercise)}
+              onPress={() => navigate(SCREENS.EXERCISE)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="dumbbell"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Excercise</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
             <Pressable
-              onPress={() => navigate(Nav_Screens.Sleep)}
+              onPress={() => navigate(SCREENS.SLEEP)}
               style={styles.menuOption}
             >
               <View style={styles.menuTitleAndIcon}>
                 <Ionicons
                   name="moon"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Sleep</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
             </Pressable>
-            <View style={styles.menuOption}>
+            <Pressable
+              onPress={() => navigate(SCREENS.STRESS)}
+              style={styles.menuOption}
+            >
               <View style={styles.menuTitleAndIcon}>
                 <MaterialCommunityIcons
                   name="lightning-bolt"
                   size={responsiveFontSize(22)}
-                  color={GlobalColors.darkPrimary}
+                  color={colors.darkPrimary}
                 />
                 <Text style={styles.menuTitleText}>Stress</Text>
               </View>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
-                color={GlobalColors.darkPrimary}
+                color={colors.darkPrimary}
               />
-            </View>
+            </Pressable>
           </View>
         </View>
         <Text
           style={{
             marginTop: 15,
-            color: GlobalColors.darkPrimary,
+            color: colors.darkPrimary,
             fontFamily: GlobalFonts.light,
           }}
         >
@@ -405,78 +430,3 @@ const EditProfileScreen = () => {
 };
 
 export default EditProfileScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    paddingBottom: 5,
-  },
-  topBg: {
-    width: widthToDp(100),
-    height: heightToDp(7),
-    position: 'absolute',
-    top: 0,
-    backgroundColor: GlobalColors.primary,
-  },
-  image: {
-    width: widthToDp(25),
-    height: widthToDp(25),
-    borderRadius: widthToDp(12.5),
-  },
-  contentContainer: {
-    width: widthToDp(92),
-    backgroundColor: GlobalColors.white,
-    flex: 1,
-    marginTop: heightToDp(4),
-    borderRadius: widthToDp(3),
-    alignItems: 'center',
-  },
-  profileContainer: {
-    width: widthToDp(25),
-    height: widthToDp(25),
-    borderRadius: widthToDp(12.5),
-    position: 'absolute',
-    top: -heightToDp(3),
-    backgroundColor: GlobalColors.white,
-  },
-  name: {
-    marginTop: heightToDp(12),
-    fontSize: responsiveFontSize(25),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-  },
-  menuContainer: {
-    flex: 1,
-    width: '100%',
-    paddingHorizontal: widthToDp(3),
-    marginTop: heightToDp(2),
-    marginBottom: heightToDp(3),
-  },
-  menuOption: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: heightToDp(1),
-  },
-  menuTitleAndIcon: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  menuTitleText: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.light,
-    marginLeft: widthToDp(4),
-  },
-  editView: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: '#3D3D3D90',
-    borderRadius: widthToDp(12.5),
-    zIndex: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

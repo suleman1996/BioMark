@@ -1,9 +1,14 @@
 import { heightToDp, widthToDp } from '../functions/responsive-dimensions';
 import { responsiveFontSize } from '../functions/responsive-text';
 import { GlobalFonts } from './fonts';
-import { GlobalColors } from './global-colors';
 
-export const GlobalStyles = {
+export const GlobalStyles = (colors: any) => ({
+  question: {
+    fontSize: responsiveFontSize(20),
+    fontFamily: GlobalFonts.extraBold,
+    color: colors.darkPrimary,
+    marginTop: heightToDp(2),
+  },
   shadow: {
     shadowOffset: { width: 5 },
     shadowColor: 'lightgray',
@@ -22,7 +27,7 @@ export const GlobalStyles = {
     paddingHorizontal: widthToDp(4),
     fontSize: responsiveFontSize(23),
     fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
+    color: colors.darkPrimary,
     marginTop: heightToDp(2),
   },
   paddingHorizontal: {
@@ -32,10 +37,10 @@ export const GlobalStyles = {
     marginTop: heightToDp(4),
     paddingHorizontal: widthToDp(6),
     paddingBottom: heightToDp(2),
-    backgroundColor: GlobalColors.white,
+    backgroundColor: colors.white,
     borderTopWidth: heightToDp(0.5),
-    borderTopColor: GlobalColors.gray,
+    borderTopColor: colors.gray,
     paddingTop: heightToDp(2.5),
     alignItems: 'center',
   },
-};
+});

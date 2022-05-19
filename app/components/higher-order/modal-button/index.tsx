@@ -1,17 +1,20 @@
-import { StyleSheet, Text, Pressable } from 'react-native';
 import React from 'react';
+import { Text, Pressable } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
+
+import makeStyles from './styles';
 
 type Props = {
   title: string;
   setIsModal: any;
   isModal: boolean;
   drop: boolean;
+  history: any;
+  condition_id: any;
 };
 
 const ModalButtonComponent = ({
@@ -19,15 +22,19 @@ const ModalButtonComponent = ({
   setIsModal,
   isModal,
   drop,
-  history,
+  history = [],
   condition_id,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const textColor = isModal
-    ? { color: GlobalColors.white }
-    : { color: GlobalColors.lightGrey };
+    ? { color: colors.white }
+    : { color: colors.lightGrey };
+
   const bgColor = isModal
-    ? { backgroundColor: GlobalColors.darkPrimary }
-    : { backgroundColor: GlobalColors.white };
+    ? { backgroundColor: colors.darkPrimary }
+    : { backgroundColor: colors.white };
 
   return (
     <Pressable
@@ -55,7 +62,7 @@ const ModalButtonComponent = ({
         <MaterialCommunityIcons
           size={responsiveFontSize(20)}
           name="chevron-down"
-          color={isModal ? GlobalColors.white : 'black'}
+          color={isModal ? colors.white : 'black'}
         />
       ) : null}
     </Pressable>
@@ -63,27 +70,3 @@ const ModalButtonComponent = ({
 };
 
 export default ModalButtonComponent;
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthToDp(40),
-    height: heightToDp(7),
-    backgroundColor: GlobalColors.white,
-    borderRadius: widthToDp(2),
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
-  },
-  label: {
-    fontSize: responsiveFontSize(17),
-    fontFamily: GlobalFonts.regular,
-    color: GlobalColors.gray,
-  },
-});

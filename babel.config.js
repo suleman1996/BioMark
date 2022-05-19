@@ -14,6 +14,7 @@ module.exports = {
           store: './app/store',
           types: './app/types',
           utils: './app/utils',
+          enum: './app/enum',
         },
       },
     ],

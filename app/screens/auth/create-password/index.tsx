@@ -1,65 +1,36 @@
 import { Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, { useState } from 'react';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { showMessage } from 'react-native-flash-message';
+import { useRoute } from '@react-navigation/native';
 
-import styles from './styles';
-import Header from 'components/header';
-import Button from 'components/button/button';
-import TextInput from 'components/input-field/text-input';
-import { changePassword } from 'services/auth-service';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { Header, TextInput, ActivityIndicator } from 'components';
+import { Button } from 'components/button';
+import { useTheme } from 'react-native-paper';
+
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
+
+import makeStyles from './styles';
 
 export default function CreatePassword() {
-  const navigations = useNavigation();
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const route = useRoute();
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setConfirmHidePassword] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const ResetPassword = async ({ password }) => {
-    try {
-      setLoading(true);
-      Keyboard.dismiss();
-      await changePassword({
-        password: {
-          username: route.params.phone,
-          password: password,
-          code: route.params.otp,
-        },
-      });
-      navigations.navigate('PasswordChanged');
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: "User not exist's",
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.message,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
-  };
+  const resetPassword = async ({ password }) => {
+    setLoading(true);
 
-  const ResetPassSchema = Yup.object({
-    password: Yup.string().required('Password is required').min(7, 'Too short'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required')
-      .min(7, 'Too short'),
-  });
+    navigate(SCREENS.PASSWORD_OTP, {
+      password: password,
+      phone: route?.params?.phone,
+    });
+    setLoading(false);
+  };
 
   return (
     <>
@@ -73,7 +44,7 @@ export default function CreatePassword() {
                 password: '',
                 confirmPassword: '',
               }}
-              onSubmit={ResetPassword}
+              onSubmit={resetPassword}
               validationSchema={ResetPassSchema}
             >
               {({ handleChange, handleSubmit, values, errors, isValid }) => (
@@ -133,3 +104,22 @@ export default function CreatePassword() {
     </>
   );
 }
+
+const ResetPassSchema = Yup.object({
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Must be 8 characters long.')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'At least have a Capital letter, a digit and a special character.'
+    ),
+
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required')
+    .min(7, 'Too short')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Atleast have one digit, one captial letter and one special character.'
+    ),
+});

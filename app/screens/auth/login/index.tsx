@@ -1,4 +1,3 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useEffect, useState } from 'react';
 import {
   Keyboard,
@@ -8,6 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import {
   AccessToken,
   GraphRequest,
@@ -17,39 +18,50 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import { appleAuth } from '@invertase/react-native-apple-authentication';
+import Config from 'react-native-config';
+import { useTheme } from 'react-native-paper';
 
-import colors from 'assets/colors';
-import fonts from 'assets/fonts';
-import Apple from 'assets/svgs/apple';
-import Facebook from 'assets/svgs/facebook';
-import Google from 'assets/svgs/google';
-import Logo from 'assets/svgs/logo-name';
-import Button from 'components/button/button';
-import ErrorModal from 'components/error-modal';
-import TextInput from 'components/input-field/text-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import PhoneNumber from 'components/phone-number';
-import { Nav_Screens } from 'navigation/constants';
+import {
+  ErrorModal,
+  TextInput,
+  ActivityIndicator,
+  PhoneNumber,
+  Button,
+} from 'components';
+
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
-import styles from './styles';
-import Config from 'react-native-config';
+
+import fonts from 'assets/fonts';
+import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
+
+import makeStyles from './styles';
+
+export const PASS_REGIX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 export default function Login() {
   // redux
   const dispatch = useDispatch();
-
-  const { loggingIn, errorMessageLogin } = useSelector(
-    (state: IAppState) => state.auth
-  );
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [hidePassword, setHidePassword] = useState(true);
   const [password, setPassword] = useState('');
   const [countryCode, setCountryCode] = useState('MY');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
+  const [selectCountryCode, setSelectCountryCode] = useState('');
   const [loginError, setLoginError] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+
+  const { loggingIn, errorMessageLogin } = useSelector(
+    (state: IAppState) => state.auth
+  );
+
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
 
   useEffect(() => {
     if (selectCountryCode == '60') {
@@ -62,6 +74,22 @@ export default function Login() {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectCountryCode]);
+
+  // redux error check
+  useEffect(() => {
+    if (errorMessageLogin) {
+      setLoginError(true);
+    }
+  }, [errorMessageLogin]);
+
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectCountryCode(countryCodeParse);
+    }
+  }, [geoLocation]);
 
   const onGoogleLogin = async () => {
     GoogleSignin.signOut();
@@ -80,6 +108,7 @@ export default function Login() {
       console.log('re', re);
     });
   };
+
   const getInfoFromToken = (token) => {
     const PROFILE_REQUEST_PARAMS = {
       fields: {
@@ -99,9 +128,14 @@ export default function Login() {
     );
     new GraphRequestManager().addRequest(profileRequest).start();
   };
+
   const onFacebookLogin = async () => {
-    LoginManager.logOut();
-    await LoginManager.logInWithPermissions().then(
+    // LoginManager.logOut();
+    if (Platform.OS === 'android') {
+      LoginManager.setLoginBehavior('web_only');
+    }
+
+    await LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       async function (result) {
         if (result.isCancelled) {
           console.log('Login cancelled');
@@ -119,13 +153,6 @@ export default function Login() {
       }
     );
   };
-
-  // redux error check
-  useEffect(() => {
-    if (errorMessageLogin) {
-      setLoginError(true);
-    }
-  }, [errorMessageLogin]);
 
   async function onAppleButtonPress() {
     // performs login request
@@ -154,12 +181,20 @@ export default function Login() {
 
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
+    console.log('username', username);
+
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        // [
+        styles.container
+        // { backgroundColor: .background }]
+      }
+    >
       <ActivityIndicator visible={loggingIn} />
       <ErrorModal
         onPress={() => setLoginError(!loginError)}
@@ -179,19 +214,36 @@ export default function Login() {
           setSelectCountryCode={setSelectCountryCode}
           maxLength={numberCondition.max}
         />
-        {phoneNumber !== '' && phoneNumber.length < numberCondition.min && (
-          <Text style={styles.errorMessage}>
-            Must have {numberCondition.min}
-            {numberCondition.max !== numberCondition.min &&
-              -numberCondition.max}{' '}
-            characters
-          </Text>
-        )}
+        {phoneNumber !== '' &&
+          (selectCountryCode == 63 ? (
+            phoneNumber.charAt(0) == 0 ? (
+              <Text style={styles.errorMessage}>
+                Phonenumber must not start with 0
+              </Text>
+            ) : (
+              phoneNumber.length < numberCondition.min && (
+                <Text style={styles.errorMessage}>
+                  Must have {numberCondition.min}
+                  {numberCondition.max !== numberCondition.min &&
+                    -numberCondition.max}{' '}
+                  characters
+                </Text>
+              )
+            )
+          ) : (
+            phoneNumber.length < numberCondition.min && (
+              <Text style={styles.errorMessage}>
+                Must have {numberCondition.min}
+                {numberCondition.max !== numberCondition.min &&
+                  -numberCondition.max}{' '}
+                characters
+              </Text>
+            )
+          ))}
 
         <View style={{ height: 20 }} />
         <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
         <TextInput
-          placeholder="Password"
           secureTextEntry={hidePassword}
           eye={hidePassword ? 'eye-off' : 'eye'}
           value={password}
@@ -203,13 +255,19 @@ export default function Login() {
         />
         {password !== '' && password.length < 8 && (
           <Text style={styles.errorMessage}>
-            Password must have 8-11 characters long
+            Password must be at least 8 characters long
           </Text>
         )}
+        {!PASS_REGIX.test(password) && password.length > 7 ? (
+          <Text style={styles.errorMessage}>
+            At least have one digit, one captial letter and one special
+            character.
+          </Text>
+        ) : null}
         <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity
             style={{ marginVertical: 30 }}
-            onPress={() => navigate(Nav_Screens.Forgot_Password)}
+            onPress={() => navigate(SCREENS.FORGOT_PASSWORD)}
           >
             <Text style={styles.forgotPassword}>Forgot password?</Text>
           </TouchableOpacity>
@@ -217,7 +275,9 @@ export default function Login() {
         <Button
           onPress={() => handleLogin()}
           disabled={
-            phoneNumber.length < numberCondition.min || password.length < 8
+            phoneNumber.length < numberCondition.min ||
+            password.length < 8 ||
+            !PASS_REGIX.test(password)
               ? true
               : false
           }
@@ -251,14 +311,22 @@ export default function Login() {
             <Google />
           </TouchableOpacity>
         </View>
-
         <View style={{ alignSelf: 'center' }}>
-          <TouchableOpacity onPress={() => navigate(Nav_Screens.Sign_Up)}>
-            <Text style={styles.noAccountTxt}>
-              <Text style={{ color: colors.black }}>Dont have an account?</Text>
-              <Text style={{ color: colors.blue }}> Sign up</Text>
+          <View style={styles.noAccountTxt}>
+            <Text
+              style={{ color: colors.black, fontFamily: fonts.mulishRegular }}
+            >
+              Dont have an account?
             </Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigate(SCREENS.SIGNUP)}>
+              <Text
+                style={{ color: colors.blue, fontFamily: fonts.mulishRegular }}
+              >
+                {' '}
+                Sign up
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </View>

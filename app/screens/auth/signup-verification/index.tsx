@@ -1,23 +1,35 @@
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { Platform } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+} from 'react-native';
+import { useTheme } from 'react-native-paper';
 import DeviceInfo from 'react-native-device-info';
 import { useDispatch } from 'react-redux';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import React, { useState, useEffect, useRef } from 'react';
+import { useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
 
-import styles from './styles';
-import Button from 'components/button/button';
-import colors from 'assets/colors';
-import fonts from 'assets/fonts';
-import BackIcon from 'assets/svgs/back';
-import OtpInput from 'components/otp/otp-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { Button } from 'components/button';
+import { OtpInput, ActivityIndicator } from 'components';
+
 import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
 import { reduxDeviceRegister } from 'store/auth/auth-actions';
+import { navigate, goBack } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
+
+import fonts from 'assets/fonts';
+import BackIcon from 'assets/svgs/back';
+
+import makeStyles from './styles';
 
 export default function SignupVerification() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
 
@@ -31,7 +43,6 @@ export default function SignupVerification() {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [loading, setLoading] = useState(false);
 
-  const navigations = useNavigation();
   const route = useRoute();
   useEffect(() => {
     let myInterval = setInterval(() => {
@@ -97,7 +108,7 @@ export default function SignupVerification() {
       });
       let uniqueId = DeviceInfo.getUniqueId();
       dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
-      navigations.navigate('Confirmation');
+      navigate(SCREENS.CONFIRMATION);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -126,7 +137,7 @@ export default function SignupVerification() {
       <View style={{ flex: 1 }}>
         <View style={styles.signupNav}>
           <View style={styles.csNav}>
-            <BackIcon onPress={() => navigations.goBack()} />
+            <BackIcon onPress={() => goBack()} />
             <Text style={styles.signupText}>Back</Text>
           </View>
           <StepIndicator
@@ -168,7 +179,7 @@ export default function SignupVerification() {
                     color: colors.black,
                     fontSize: 15,
                     // marginBottom: 170,
-                    fontFamily: fonts.regular,
+                    fontFamily: fonts.mulishRegular,
                   }}
                 >
                   <Text>Not received? </Text>

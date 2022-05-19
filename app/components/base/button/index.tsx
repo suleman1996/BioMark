@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { Text, TouchableOpacity } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
+import makeStyles from './styles';
 
 type Props = {
   onPress: any;
@@ -12,17 +11,30 @@ type Props = {
   disabled?: boolean;
   bg?: string;
   color?: string;
+  fontFamily?: string;
+  fontSize?: number;
 };
 
-const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
+const ButtonComponent = ({
+  onPress,
+  title,
+  disabled,
+  bg,
+  color,
+  fontFamily,
+  fontSize,
+}: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const ifBg = bg ? { backgroundColor: bg } : {};
   const ifColor = color ? { color: color } : {};
   const ifDisabled = disabled
     ? { backgroundColor: 'lightgray' }
-    : { backgroundColor: GlobalColors.primary };
-  const ifDisabledText = disabled
-    ? { color: 'gray' }
-    : { color: GlobalColors.white };
+    : { backgroundColor: colors.primary };
+  const ifDisabledText = disabled ? { color: 'gray' } : { color: colors.white };
+  const ifFontFamily = fontFamily ? { fontFamily: fontFamily } : {};
+  const ifFontSize = fontSize ? { fontSize: responsiveFontSize(fontSize) } : {};
 
   return (
     <TouchableOpacity
@@ -30,26 +42,13 @@ const ButtonComponent = ({ onPress, title, disabled, bg, color }: Props) => {
       style={[styles.container, ifDisabled, ifBg]}
       disabled={disabled}
     >
-      <Text style={[styles.text, ifDisabledText, ifColor]}>{title}</Text>
+      <Text
+        style={[styles.text, ifDisabledText, ifColor, ifFontFamily, ifFontSize]}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
 
 export default ButtonComponent;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: GlobalColors.primary,
-    height: heightToDp(6),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: widthToDp(2.5),
-    width: '100%',
-    maxWidth: widthToDp(86),
-  },
-  text: {
-    color: GlobalColors.white,
-    fontFamily: GlobalFonts.medium,
-    fontSize: responsiveFontSize(18),
-  },
-});

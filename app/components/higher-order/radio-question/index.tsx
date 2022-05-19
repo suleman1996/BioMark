@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import { RadioButton } from 'react-native-paper';
 
-import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
+import makeStyles from './styles';
 
 type Props = {
   question: string;
@@ -18,6 +17,8 @@ const RadioButtonQuestionComponent = ({
   isTrue,
   setIsTrue,
 }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
       <Text style={styles.qText}>{question}</Text>
@@ -27,7 +28,7 @@ const RadioButtonQuestionComponent = ({
             value="second"
             status={!isTrue ? 'checked' : 'unchecked'}
             onPress={() => setIsTrue(false)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
           <Text style={styles.radioLabel}>No</Text>
         </View>
@@ -36,7 +37,7 @@ const RadioButtonQuestionComponent = ({
             value="first"
             status={isTrue ? 'checked' : 'unchecked'}
             onPress={() => setIsTrue(true)}
-            color={GlobalColors.darkPrimary}
+            color={colors.darkPrimary}
           />
           <Text style={styles.radioLabel}>Yes</Text>
         </View>
@@ -46,27 +47,3 @@ const RadioButtonQuestionComponent = ({
 };
 
 export default RadioButtonQuestionComponent;
-
-const styles = StyleSheet.create({
-  radioContainer: {
-    flexDirection: 'row',
-  },
-  container: {
-    paddingHorizontal: widthToDp(4),
-  },
-  qText: {
-    fontSize: responsiveFontSize(20),
-    fontFamily: GlobalFonts.extraBold,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  singleRadioContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: widthToDp(3),
-  },
-  radioLabel: {
-    fontSize: responsiveFontSize(20),
-    fontFamily: GlobalFonts.regular,
-  },
-});
