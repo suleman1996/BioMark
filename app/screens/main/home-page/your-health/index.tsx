@@ -12,6 +12,7 @@ import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
+import SCREENS from 'navigation/constants/index';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 
@@ -30,6 +31,8 @@ import fonts from 'assets/fonts';
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const { HYPERTENSION } = SCREENS;
+  // const { HEALTH_STRESS } = SCREENS;
   const navigation = useNavigation();
 
   const [highlights] = React.useState([
@@ -93,8 +96,8 @@ const Index = () => {
     </>
   );
 
-  const RenderRecordKeeping = ({ title, id, svg }) => (
-    <View style={styles.recordKeepingView}>
+  const RenderRecordKeeping = ({ title, id, svg, onPress }) => (
+    <TouchableOpacity onPress={onPress} style={styles.recordKeepingView}>
       {svg}
       <Text style={[styles.recordKeepinText, { marginTop: 10 }]}>{title}</Text>
       <Text
@@ -105,11 +108,14 @@ const Index = () => {
       >
         Empower ID: {id}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 
-  const RenderLastResult = ({ title, date, svg }) => (
-    <View style={[styles.recordKeepingView, { backgroundColor: colors.white }]}>
+  const RenderLastResult = ({ title, date, svg, onPress }) => (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.recordKeepingView, { backgroundColor: colors.white }]}
+    >
       {svg}
       <Text
         style={[
@@ -120,7 +126,7 @@ const Index = () => {
         {title}
       </Text>
       <Text style={[styles.date]}>Receive on {date}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   const RenderCircle = ({ svg, title }) => (
@@ -198,17 +204,21 @@ const Index = () => {
             svg={<Diabetes />}
             title="Enter Diabetes Support Center"
             id="4y6yb5y5yb56b56y"
+            onPress={() => console.log('xxxxxx')}
           />
           <RenderRecordKeeping
             svg={<BP />}
-            title="Enter Diabetes Support Center"
+            title="Enter Hypertension Support Center"
             id="4y6yb5y5yb56b56y"
+            onPress={() => navigation.navigate(HYPERTENSION)}
           />
+
           <RenderLastResult
             title="Your Last Result"
             date={'Dec 12 2022'}
             svg={<BP fill={colors.blue} />}
           />
+
           <View style={styles.circleView}>
             <RenderCircle title="Health Records" svg={<Health />} />
             <RenderCircle title="Health Progress" svg={<Progress />} />
