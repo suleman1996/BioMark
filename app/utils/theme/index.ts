@@ -37,6 +37,10 @@ const theme = {
     bg: '#3D3D3D90',
     redish: '#EE5407',
     greenish: '#03DAC6',
+    lightGreen: '#54CB83',
+    lightYellow: '#FFD75E',
+    dangerRed: '#EA4C59',
+    lightDark: '#455066',
   },
 
   // fonts: configureFonts({

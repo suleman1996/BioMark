@@ -47,7 +47,7 @@ const DateTimePickerModalComponent = (props: Props) => {
       </Pressable>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode="datetime"
         onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}
       />

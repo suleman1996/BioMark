@@ -2,6 +2,7 @@ export { default as Button } from './button';
 export { default as ButtonWithShadowContainer } from './button-with-shadow-container';
 export { default as CheckBoxWithText } from './checkbox-with-text';
 export { default as DateTimePickerModal } from './date-time-picker-modal';
+export { default as DatePickerModal } from './date-picker-modal';
 export { default as DropdownMenu } from './dropdown-menu';
 export { default as ErrorText } from './error-text';
 export { default as InputWithLabel } from './input-with-label';

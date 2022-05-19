@@ -10,7 +10,7 @@ export const makeStyles = (colors: any) =>
     container: {
       flex: 1,
       backgroundColor: colors.white,
-      height: heightToDp(100),
+      height: heightToDp(150),
     },
     badgesContainer: {
       marginTop: 30,

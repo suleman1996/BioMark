@@ -9,6 +9,7 @@ import { TouchableRipple, useTheme } from 'react-native-paper';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import makeStyles from './styles';
+import QRCarousel from 'components/ui/qr-carousel';
 
 type Props = {};
 
@@ -61,12 +62,14 @@ const Covid19Home = (props: Props) => {
           </View>
           <View style={{ marginTop: heightToDp(2) }} />
           <FlatList
+            style={{ flexGrow: 0 }}
             horizontal
             ListHeaderComponent={<View style={{ width: widthToDp(10) }} />}
             ListFooterComponent={<View style={{ width: widthToDp(10) }} />}
             data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
             renderItem={horizontalListItem}
           />
+          <QRCarousel />
         </View>
       </TitleWithSearchBarLayout>
     </>
