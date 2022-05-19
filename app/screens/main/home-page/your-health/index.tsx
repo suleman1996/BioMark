@@ -6,7 +6,7 @@ import {
   ImageBackground,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
@@ -28,12 +28,22 @@ import Sleep from '../../../../assets/svgs/sleep';
 import Health from '../../../../assets/svgs/Health';
 import Progress from '../../../../assets/svgs/Progress';
 import fonts from 'assets/fonts';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import { getReduxHealthTracker } from 'store/home/home-actions';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
+  const hell = useSelector((state: IAppState) => state.home.healthTracker);
+  useEffect(() => {
+    dispatch(getReduxHealthTracker());
+    console.log('hell =======>', hell);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [highlights] = React.useState([
     {
       id: 0,
