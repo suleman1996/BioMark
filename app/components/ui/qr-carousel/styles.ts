@@ -23,7 +23,7 @@ export const makeStyles = (colors: any) =>
     },
     dotStyle: {
       backgroundColor: colors.white,
-      borderColor: colors.primary,
+      borderColor: colors.inactive,
       borderWidth: 1,
       width: widthToDp(3.5),
       height: widthToDp(3.5),
