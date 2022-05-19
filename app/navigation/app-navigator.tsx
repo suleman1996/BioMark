@@ -11,6 +11,7 @@ import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 // import HealthSmoking from '../screens/main/home-page/your-health/health-smoking/index';
+import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
 // import HealthStress from '../screens/main/home-page/your-health/health-stress/index';
 import SCREENS from './constants';
 // import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
@@ -20,6 +21,7 @@ const {
   NESTED_ACCOUNT_NAVIGATOR,
   CREATE_PROFILE,
   YOUR_HEALTH,
+  HYPERTENSION,
   // HEALTH_SMOKING,
   // HEALTH_STRESS,
   // BLOOD_SUGAR
@@ -58,6 +60,7 @@ const AppNavigator = () => {
             component={AccountNavigator}
           />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
+          <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           {/* <Stack.Screen name={HEALTH_SMOKING} component={HealthSmoking} />
           <Stack.Screen name={HEALTH_STRESS} component={HealthStress} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} /> */}
