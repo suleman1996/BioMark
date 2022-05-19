@@ -14,7 +14,7 @@ import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
 // import HealthStress from '../screens/main/home-page/your-health/health-stress/index';
 import SCREENS from './constants';
-// import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
+import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -24,7 +24,7 @@ const {
   HYPERTENSION,
   // HEALTH_SMOKING,
   // HEALTH_STRESS,
-  // BLOOD_SUGAR
+  BLOOD_SUGAR,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -62,8 +62,8 @@ const AppNavigator = () => {
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           {/* <Stack.Screen name={HEALTH_SMOKING} component={HealthSmoking} />
-          <Stack.Screen name={HEALTH_STRESS} component={HealthStress} />
-          <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} /> */}
+          <Stack.Screen name={HEALTH_STRESS} component={HealthStress} /> */}
+          <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
         </>
       ) : (
         <>
