@@ -11,3 +11,4 @@ export { default as SearchBarWithLeftScanIcon } from './search-bar-with-left-sca
 export { default as SingleMenuItemWithArrow } from './single-menu-item-with-right-arrow';
 export { default as TagsCloudInput } from './tags-cloud-input';
 export { default as WeightChooser } from './weight-chooser';
+export { default as BloodSugarChooser } from './blood-sugar-chooser';

@@ -10,10 +10,12 @@ import { getAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
+import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
 import SCREENS from './constants';
 
 const Stack = createNativeStackNavigator();
-const { NESTED_ACCOUNT_NAVIGATOR, CREATE_PROFILE, YOUR_HEALTH } = SCREENS;
+const { NESTED_ACCOUNT_NAVIGATOR, CREATE_PROFILE, YOUR_HEALTH, BLOOD_SUGAR } =
+  SCREENS;
 
 const AppNavigator = () => {
   const dispatch = useDispatch();
@@ -48,6 +50,7 @@ const AppNavigator = () => {
             component={AccountNavigator}
           />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
+          <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
         </>
       ) : (
         <>
