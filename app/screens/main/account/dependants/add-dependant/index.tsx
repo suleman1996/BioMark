@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 
 import { ActivityIndicator } from 'components';
 import {
-  DateTimePickerModal,
+  DatePickerModal,
   InputWithLabel,
   Button,
   PhoneNumberWithLabel,
@@ -228,7 +228,7 @@ const AddDependantScreen = () => {
                   error={values.email ? errors.email : ''}
                 />
                 <Text style={styles.label}>Date of Birth</Text>
-                <DateTimePickerModal
+                <DatePickerModal
                   date={values.birth_date}
                   setDate={(e: any) => setFieldValue('birth_date', e)}
                 />
