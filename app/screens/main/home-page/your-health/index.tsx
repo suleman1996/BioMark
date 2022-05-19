@@ -13,6 +13,7 @@ import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import SCREENS from 'navigation/constants/index';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
@@ -35,6 +36,8 @@ import { getReduxHealthTracker } from 'store/home/home-actions';
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const { HYPERTENSION } = SCREENS;
+  // const { HEALTH_STRESS } = SCREENS;
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -113,28 +116,35 @@ const Index = () => {
     </>
   );
 
-  const RenderRecordKeeping = ({ title, id, svg }) => (
+  const RenderRecordKeeping = ({ title, id, svg, onPress }) => (
     <LinearGradient
       start={{ x: 0, y: 0.75 }}
       end={{ x: 1, y: 0.25 }}
       colors={['#2C6CFC', '#2CBDFC']}
       style={styles.recordKeepingView}
     >
-      {svg}
-      <Text style={[styles.recordKeepinText, { marginTop: 10 }]}>{title}</Text>
-      <Text
-        style={[
-          styles.recordKeepinText,
-          { fontSize: 14, fontFamily: fonts.light, marginBottom: 10 },
-        ]}
-      >
-        Empower ID: {id}
-      </Text>
+      <TouchableOpacity onPress={onPress} style={{ alignItems: 'center' }}>
+        {svg}
+        <Text style={[styles.recordKeepinText, { marginTop: 10 }]}>
+          {title}
+        </Text>
+        <Text
+          style={[
+            styles.recordKeepinText,
+            { fontSize: 14, fontFamily: fonts.light, marginBottom: 10 },
+          ]}
+        >
+          Empower ID: {id}
+        </Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
 
-  const RenderLastResult = ({ title, date, svg }) => (
-    <View style={[styles.recordKeepingView, { backgroundColor: colors.white }]}>
+  const RenderLastResult = ({ title, date, svg, onPress }) => (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.recordKeepingView, { backgroundColor: colors.white }]}
+    >
       {svg}
       <Text
         style={[
@@ -145,7 +155,7 @@ const Index = () => {
         {title}
       </Text>
       <Text style={[styles.date]}>Receive on {date}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   const RenderCircle = ({ svg, title }) => (
@@ -227,17 +237,21 @@ const Index = () => {
             svg={<Diabetes />}
             title="Enter Diabetes Support Center"
             id="4y6yb5y5yb56b56y"
+            onPress={() => console.log('xxxxxx')}
           />
           <RenderRecordKeeping
             svg={<BP />}
-            title="Enter Diabetes Support Center"
+            title="Enter Hypertension Support Center"
             id="4y6yb5y5yb56b56y"
+            onPress={() => navigation.navigate(HYPERTENSION)}
           />
+
           <RenderLastResult
             title="Your Last Result"
             date={'Dec 12 2022'}
             svg={<BP fill={colors.blue} />}
           />
+
           <View style={styles.circleView}>
             <RenderCircle title="Health Records" svg={<Health />} />
             <RenderCircle title="Health Progress" svg={<Progress />} />

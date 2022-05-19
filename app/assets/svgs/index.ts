@@ -12,3 +12,4 @@ export { default as Lock } from './lock';
 export { default as Logo } from './logo-name';
 export { default as SetToGo } from './set-to-go';
 export { default as YourHealth } from './your-health';
+export { default as Back } from './back';
