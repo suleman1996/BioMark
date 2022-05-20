@@ -8,16 +8,18 @@ import SCREENS from '../../navigation/constants';
 import { navigate } from '../../services/nav-ref';
 //import colors from 'assets/colors';
 
-export default function Covid19Btn() {
+export default function Covid19Btn({ onPress }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity
         onPress={() =>
-          navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-            screen: SCREENS.COVID19HOME,
-          })
+          onPress
+            ? onPress()
+            : navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                screen: SCREENS.COVID19HOME,
+              })
         }
       >
         <View style={styles.circleBtn}>
