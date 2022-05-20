@@ -1,0 +1,1 @@
+export const HEALTH_TRACKER = '[HEALTH] HEALTH_TRACKER';

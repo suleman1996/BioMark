@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 
@@ -8,29 +8,32 @@ type Props = {
   text?: string;
   image?: any;
   data?: any;
+  renderItem?: any;
+  Refrences?: string;
+  RefText?: string;
+  FootNotes?: string;
+  NotesText?: string;
+  Calculation?: string;
+  CalcText?: string;
 };
 const HealthListCard = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const renderItem = ({ item }) => {
-    return (
-      <View style={styles.flatlistView}>
-        <View style={styles.flatlistView2}>
-          <Image source={item.image} style={styles.flatlistImage} />
-          <Text style={styles.flatlisttext}>{item.title}</Text>
-        </View>
-        <Text style={styles.flatlisttext2}>{item.text}</Text>
-      </View>
-    );
-  };
-
   return (
-    <FlatList
-      data={props.data}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id}
-    />
+    <>
+      <Text style={styles.text4}>{props?.Calculation}</Text>
+      <Text style={styles.text5}>{props?.CalcText}</Text>
+      <FlatList
+        data={props?.data}
+        renderItem={props?.renderItem}
+        keyExtractor={(item) => item.id}
+      />
+      <Text style={styles.text6}>{props?.Refrences}</Text>
+      <Text style={styles.text7}>{props?.RefText}</Text>
+      <Text style={styles.text6}>{props?.FootNotes}</Text>
+      <Text style={styles.text7}>{props?.NotesText}</Text>
+    </>
   );
 };
 export default HealthListCard;

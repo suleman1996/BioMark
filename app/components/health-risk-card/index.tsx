@@ -20,14 +20,14 @@ const HealthCard = (props: Props) => {
     <View style={styles.view}>
       <View style={styles.view3}>
         <View style={styles.view2}>
-          <Image source={props.image} style={styles.green} />
-          <Text style={styles.diabetes}>{props.H1Text}</Text>
+          <Image source={props?.image} style={styles.green} />
+          <Text style={styles.diabetes}>{props?.H1Text}</Text>
         </View>
-        <Text style={styles.text}>{props.H2Text}</Text>
+        <Text style={styles.text}>{props?.H2Text}</Text>
       </View>
 
-      <Text style={styles.text2}>{props.number}</Text>
-      <Text style={styles.text3}>{props.description}</Text>
+      <Text style={styles.text2}>{props?.number}</Text>
+      <Text style={styles.text3}>{props?.description}</Text>
     </View>
   );
 };

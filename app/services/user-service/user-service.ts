@@ -1,5 +1,9 @@
 import DeviceInfo from 'react-native-device-info';
-import { BootstrapData, GeoLocationData } from 'types/api';
+import {
+  BootstrapData,
+  GeoLocationData,
+  HealthTrackerPayload,
+} from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
@@ -509,6 +513,27 @@ function updateUserEthnic(ethnic: string) {
   });
 }
 
+function getHealthTracker() {
+  return new Promise<HealthTrackerPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_HEALTH_TRACKER)
+      .then(async (response) => {
+        try {
+          console.log('rrr', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get profile error', err);
+        reject(err);
+      });
+  });
+}
+
 export const userService = {
   login,
   federatedlogin,
@@ -541,4 +566,5 @@ export const userService = {
   exercise,
   updateUserEthnic,
   getBodyMeasurements,
+  getHealthTracker,
 };

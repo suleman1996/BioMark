@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Text, ScrollView } from 'react-native';
+import { SafeAreaView, Text, ScrollView, View, Image } from 'react-native';
 import { TitleWithBackLayout } from 'components/layouts';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
@@ -53,6 +53,18 @@ const Diabetes = () => {
     },
   ];
 
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.flatlistView}>
+        <View style={styles.flatlistView2}>
+          <Image source={item.image} style={styles.flatlistImage} />
+          <Text style={styles.flatlisttext}>{item.title}</Text>
+        </View>
+        <Text style={styles.flatlisttext2}>{item.text}</Text>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safeareaview}>
       <ScrollView style={{ flex: 1 }}>
@@ -66,24 +78,20 @@ const Diabetes = () => {
               ' A low score means you have a lower than average probability of developing prediabetes or type 2 diabetes. People with low score may still develop prediabetes or type 2 diabetes.If you develop symptoms of diabetes (frequent urination, thirst, unexplained weight loss, fatigue or blurred vision),please see your doctor.'
             }
           />
-          <Text style={styles.text4}>Calculation</Text>
-          <Text style={styles.text5}>
-            This diabetes risk score is based on the Type 2 Diabetes Risk Test
-            by the american Diabetes Association for people who have no prior
-            history of diabetes or prediabetes.It takes the following factors
-            into account.
-          </Text>
-
-          <HealthListCard data={Data} />
-
-          <Text style={styles.text6}>Refrences</Text>
-          <Text style={styles.text7}>American Diabetes Association</Text>
-          <Text style={styles.text6}>Footnotes</Text>
-          <Text style={styles.text7}>
-            Your diabetes risk scores is only an estimate.Additionally,your risk
-            changes over time.Only a blood test can determine a diagnoses.Please
-            discuss with your doctor for more information.
-          </Text>
+          <HealthListCard
+            data={Data}
+            renderItem={renderItem}
+            Refrences={'Refrences'}
+            RefText={'American Diabetes Association'}
+            FootNotes={'Footnotes'}
+            NotesText={
+              'Your diabetes risk scores is only an estimate.Additionally,your risk changes over time.Only a blood test can determine a diagnoses.Please discuss with your doctor for more information.'
+            }
+            Calculation={'Calculation'}
+            CalcText={
+              'This diabetes risk score is based on the Type 2 Diabetes Risk Test by the american Diabetes Association for people who have no prior history of diabetes or prediabetes.It takes the following factors into account.'
+            }
+          />
         </TitleWithBackLayout>
       </ScrollView>
     </SafeAreaView>
