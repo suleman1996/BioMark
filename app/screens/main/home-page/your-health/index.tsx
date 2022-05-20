@@ -37,7 +37,6 @@ const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const { HYPERTENSION } = SCREENS;
-  // const { HEALTH_STRESS } = SCREENS;
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
