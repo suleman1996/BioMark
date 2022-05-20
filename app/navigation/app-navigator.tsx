@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import CreateProfile from 'screens/auth/create-profile';
-import Diabetes from 'screens/main/home-page/diabetes';
+import HealthRisk from 'screens/main/home-page/health-risk';
 import AccountNavigator from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 
@@ -20,7 +20,7 @@ const {
   NESTED_ACCOUNT_NAVIGATOR,
   CREATE_PROFILE,
   YOUR_HEALTH,
-  DIABETES,
+  HEALTH_RISK,
   HYPERTENSION,
   BLOOD_SUGAR,
 } = SCREENS;
@@ -57,7 +57,7 @@ const AppNavigator = () => {
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}
           />
-          <Stack.Screen name={DIABETES} component={Diabetes} />
+          <Stack.Screen name={HEALTH_RISK} component={HealthRisk} />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
