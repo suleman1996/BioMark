@@ -4,6 +4,8 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  Linking,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React from 'react';
 
@@ -15,7 +17,13 @@ import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 // import { useNavigation } from '@react-navigation/native';
 import Pdf from 'assets/svgs/pdf';
+import Messenger from 'assets/svgs/messenger';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+const openMessenger = () => {
+  Linking.openURL(
+    'mailto:support@biomarking.com?subject=SendMail&body=Description'
+  );
+};
 
 const Index = () => {
   const { colors } = useTheme();
@@ -116,6 +124,11 @@ const Index = () => {
             </TouchableOpacity>
           </View>
         </ScrollView>
+        <TouchableWithoutFeedback onPress={() => openMessenger()}>
+          <View style={styles.messengerView}>
+            <Messenger />
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     </TitleWithBackLayout>
   );
