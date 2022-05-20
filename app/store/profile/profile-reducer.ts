@@ -2,6 +2,7 @@ import {
   MEDICAL_HISTORY,
   MEDICAL_HISTORY_UPDATE,
   USER_PROFILE,
+  FAMILY_MEDICAL_HISTORY_UPDATE,
 } from './constants';
 import { ProfileState } from './ProfileState';
 
@@ -13,6 +14,13 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         medicalHistoryUpdate: action.payload,
+      };
+    }
+
+    case FAMILY_MEDICAL_HISTORY_UPDATE: {
+      return {
+        ...state,
+        familyMedicalHistoryUpdate: action.payload,
       };
     }
 

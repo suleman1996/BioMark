@@ -14,7 +14,7 @@ type Props = {
   setDate: any;
 };
 
-const DateTimePickerModalComponent = (props: Props) => {
+const DatePickerModal = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -47,7 +47,7 @@ const DateTimePickerModalComponent = (props: Props) => {
       </Pressable>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="datetime"
+        mode="date"
         onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}
       />
@@ -55,4 +55,4 @@ const DateTimePickerModalComponent = (props: Props) => {
   );
 };
 
-export default DateTimePickerModalComponent;
+export default DatePickerModal;

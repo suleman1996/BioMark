@@ -18,13 +18,7 @@ type Props = {
   condition_id: any;
 };
 
-const GeneralModalButton = ({
-  isSelected,
-  title,
-  setIsModal,
-  isModal,
-  drop,
-}: Props) => {
+const GeneralModalButton = ({ isSelected, title, setIsModal, drop }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -50,7 +44,7 @@ const GeneralModalButton = ({
         <MaterialCommunityIcons
           size={responsiveFontSize(20)}
           name="chevron-down"
-          color={isModal ? colors.white : 'black'}
+          color={isSelected ? colors.white : 'black'}
         />
       ) : null}
     </Pressable>

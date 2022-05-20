@@ -6,14 +6,6 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
-    container: {
-      width: '100%',
-      height: heightToDp(6),
-      backgroundColor: colors.gray,
-      flex: 1,
-      borderRadius: widthToDp(2),
-      maxHeight: heightToDp(6.5),
-    },
     errorContainer: {
       width: '100%',
       paddingVertical: heightToDp(0.3),

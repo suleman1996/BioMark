@@ -1,56 +1,71 @@
 import React from 'react';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  ScrollView,
-  FlatList,
-  Image,
-} from 'react-native';
+import { SafeAreaView, Text, ScrollView } from 'react-native';
 import { TitleWithBackLayout } from 'components/layouts';
 import { useTheme } from 'react-native-paper';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { Data } from './list';
 import makeStyles from './styles';
+import HealthCard from 'components/health-risk-card';
+import HealthListCard from 'components/health-list-card';
 
 const Diabetes = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const renderItem = ({ item }) => {
-    return (
-      <View style={styles.flatlistView}>
-        <View style={styles.flatlistView2}>
-          <Image source={item.image} style={styles.flatlistImage} />
-          <Text style={styles.flatlisttext}>{item.title}</Text>
-        </View>
-        <Text style={styles.flatlisttext2}>{item.text}</Text>
-      </View>
-    );
-  };
+  const Data = [
+    {
+      image: require('../../../../assets/images/home/people.png'),
+      title: 'Age',
+      text: 'Your risk increases above the age of 40.',
+    },
+    {
+      image: require('../../../../assets/images/home/people.png'),
+      title: 'Gender',
+      text: 'Men are more likely to have type 2 diabetes compared to women.',
+    },
+    {
+      image: require('../../../../assets/images/home/GD.png'),
+      title: 'Gestational Diabetes',
+      text: 'Women who had gestational diabetes are at an increased risk.',
+    },
+    {
+      image: require('../../../../assets/images/home/Familyhod.png'),
+      title: 'Fmaily History of Diabetes',
+      text: 'A family history of diabetes may increases your risk.',
+    },
+    {
+      image: require('../../../../assets/images/home/HighBloodPressure.png'),
+      title: 'High Blood Pressure',
+      text: 'Having high blood pressure increases your risk.',
+    },
+    {
+      image: require('../../../../assets/images/home/Exercise.png'),
+      title: 'Exercise',
+      text: 'Being physically inactive increases your risk.',
+    },
+    {
+      image: require('../../../../assets/images/home/Height.png'),
+      title: 'Height',
+      text: 'Your height is used to calculate Body Mass Index (BMI).High BMIs increases your risk.',
+    },
+    {
+      image: require('../../../../assets/images/home/Weight.png'),
+      title: 'Weight',
+      text: 'Your weight is used to calculate Body Mass Index (BMI).High BMIs increases your risk.',
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.safeareaview}>
       <ScrollView style={{ flex: 1 }}>
         <TitleWithBackLayout>
-          <View style={styles.view}>
-            <View style={styles.view3}>
-              <View style={styles.view2}>
-                <Entypo name="drop" size={20} color="lightgreen" />
-                <Text style={styles.diabetes}>Diabetes</Text>
-              </View>
-              <Text style={styles.text}>Low Risk</Text>
-            </View>
-
-            <Text style={styles.text2}>3</Text>
-            <Text style={styles.text3}>
-              A low score means you have a lower than average probability of
-              developing prediabetes or type 2 diabetes. People with low score
-              may still develop prediabetes or type 2 diabetes.If you develop
-              symptoms of diabetes (frequent urination, thirst, unexplained
-              weight loss, fatigue or blurred vision),please see your doctor.
-            </Text>
-          </View>
+          <HealthCard
+            H1Text={'Diabetes'}
+            H2Text={'Low Risk'}
+            number={'3'}
+            image={require('../../../../assets/images/home/greenDrop.png')}
+            description={
+              ' A low score means you have a lower than average probability of developing prediabetes or type 2 diabetes. People with low score may still develop prediabetes or type 2 diabetes.If you develop symptoms of diabetes (frequent urination, thirst, unexplained weight loss, fatigue or blurred vision),please see your doctor.'
+            }
+          />
           <Text style={styles.text4}>Calculation</Text>
           <Text style={styles.text5}>
             This diabetes risk score is based on the Type 2 Diabetes Risk Test
@@ -59,15 +74,10 @@ const Diabetes = () => {
             into account.
           </Text>
 
-          <FlatList
-            data={Data}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
+          <HealthListCard data={Data} />
 
           <Text style={styles.text6}>Refrences</Text>
           <Text style={styles.text7}>American Diabetes Association</Text>
-
           <Text style={styles.text6}>Footnotes</Text>
           <Text style={styles.text7}>
             Your diabetes risk scores is only an estimate.Additionally,your risk
