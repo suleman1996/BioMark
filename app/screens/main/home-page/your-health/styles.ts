@@ -194,5 +194,30 @@ const styles = (colors: any) =>
       backgroundColor: '#3D3D3D90',
       paddingHorizontal: 10,
     },
+    healthRisk: {
+      // height: 100,
+      backgroundColor: colors.white,
+      padding: 10,
+      borderRadius: 5,
+      marginTop: 10,
+      paddingBottom: 10,
+    },
+    healthName: {
+      fontFamily: fonts.regular,
+      fontWeight: 'bold',
+      color: colors.black,
+      fontSize: 14,
+      marginLeft: 10,
+    },
+    healthCardStatusName: {
+      fontFamily: fonts.regular,
+      fontWeight: 'bold',
+      color: colors.lightGrey,
+      fontSize: 12,
+    },
+    descriptionHealthRisk: {
+      fontFamily: fonts.light,
+      marginTop: 10,
+    },
   });
 export default styles;

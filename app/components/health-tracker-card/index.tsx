@@ -12,19 +12,19 @@ const RenderHealthTrack = ({ item }) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(SCREENS.BLOOD_SUGAR)}
-      style={[styles.renderHealthView, { borderColor: item.item.color }]}
+      style={[styles.renderHealthView, { borderColor: item?.item?.color }]}
     >
-      <Text style={[styles.healthTrackerHeading]}>{item.item.title}</Text>
+      <Text style={[styles.healthTrackerHeading]}>{item?.item?.title}</Text>
       <Text
         style={[
           styles.healthTrackerHeading,
-          { marginVertical: 5, fontSize: 16, color: item.item.color },
+          { marginVertical: 5, fontSize: 16, color: item?.item?.color },
         ]}
       >
-        {item.item.value}
+        {item?.item?.value}
       </Text>
       <Text style={[styles.healthTrackerHeading, { color: colors.lightGrey }]}>
-        {item.item.subTitle}
+        {item?.item?.subTitle}
       </Text>
     </TouchableOpacity>
   );

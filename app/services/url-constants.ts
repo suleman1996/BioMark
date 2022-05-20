@@ -50,6 +50,8 @@ const API_URLS = {
 
   LOCATION: '/api/v1/geolocation',
   EXERCISE: '/api/v1/patient/lifestyle/exercise',
+
+  DASHBOARD: 'api/v1/patient/dashboard',
 };
 
 export { API_URLS };

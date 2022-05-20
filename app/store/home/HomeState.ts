@@ -1,4 +1,5 @@
-import { HealthTrackerPayload } from 'types/api/health-tracker';
+import { HealthTrackerPayload, DashboardResponseData } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
+  dashboard: DashboardResponseData[] = [];
 }
