@@ -6,12 +6,12 @@ import { Covid19 } from 'assets/svgs/index';
 import fonts from 'assets/fonts';
 //import colors from 'assets/colors';
 
-export default function Covid19Btn() {
+export default function Covid19Btn({ onPress }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.circleBtn}>
           <Covid19 />
         </View>
