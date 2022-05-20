@@ -70,7 +70,7 @@ const Index = () => {
     </TouchableOpacity>
   );
   return (
-    <TitleWithBackLayout title="Hypertension Support Center">
+    <TitleWithBackLayout isGradient={true} title="Hypertension Support Center">
       <View style={styles.containerBody}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={[styles.headingText, { marginVertical: 10 }]}>

@@ -59,5 +59,6 @@ const styles = (colors: any) =>
       marginRight: 20,
       marginBottom: 20,
     },
+    backgroundVideo: {},
   });
 export default styles;
