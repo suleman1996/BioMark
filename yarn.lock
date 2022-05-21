@@ -1226,6 +1226,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@pietile-native-kit/expandable-view@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@pietile-native-kit/expandable-view/-/expandable-view-1.1.1.tgz#dad95be1845d76fac5622a441a4f561c3302799f"
+  integrity sha512-7rSQgHwydol3o+wIj3Cer1o2fi5XdaYwvbIkDsKKclIsRodNaU7SuTUw4fc7kUeJTPgmn/YgIk2PRjam5qBp1w==
+  dependencies:
+    prop-types "~15.7.0"
+
 "@react-native-async-storage/async-storage@^1.17.3":
   version "1.17.3"
   resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.17.3.tgz"
@@ -6711,7 +6718,7 @@ prop-types@*, prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.0, prop-
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
-prop-types@15.7.2:
+prop-types@15.7.2, prop-types@~15.7.0:
   version "15.7.2"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==

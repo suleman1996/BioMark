@@ -1,20 +1,24 @@
-import { useNavigation } from '@react-navigation/native';
 import fonts from 'assets/fonts';
 import BioBookTest from 'components/svg/bio-book-test';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { navigate } from 'services/nav-ref';
 import SCREENS from '../../navigation/constants/index';
 
 export default function BookTestButton() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const { YOUR_HEALTH } = SCREENS;
-  const navigation = useNavigation();
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate(YOUR_HEALTH)}>
+      <TouchableOpacity
+        onPress={() =>
+          navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+            screen: SCREENS.BOOKCOVIDTEST,
+          })
+        }
+      >
         <View style={styles.circleBtn}>
           <BioBookTest width={7} height={7} />
         </View>
