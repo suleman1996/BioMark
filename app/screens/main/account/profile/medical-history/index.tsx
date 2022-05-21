@@ -34,13 +34,13 @@ import { addMedicalHistoryUpdate } from 'store/profile/profile-actions';
 import { userService } from 'services/user-service/user-service';
 
 const options = [
-  { value: '---', label: '---' },
-  { value: 'Caucasian', label: 'Caucasian' },
-  { value: 'Chinese', label: 'Chinese' },
-  { value: 'Filpino', label: 'Filpino' },
-  { value: 'Indian', label: 'Indian' },
-  { value: 'Malay', label: 'Malay' },
-  { value: 'Other / NA', label: 'Other / NA' },
+  { id: 1, title: '---' },
+  { id: 1, title: 'Caucasian' },
+  { id: 1, title: 'Chinese' },
+  { id: 1, title: 'Filpino' },
+  { id: 1, title: 'Indian' },
+  { id: 1, title: 'Malay' },
+  { id: 1, title: 'Other / NA' },
 ];
 
 /* eslint-disable */
@@ -136,9 +136,6 @@ const MedicalHistoryScreen = () => {
 
       {/* modals */}
       <ScrollView style={styles.container}>
-        <Text style={styles.label}>
-          Have you ever been diagnosed with any of the following conditions?
-        </Text>
         <DropdownMenu
           options={options}
           selectedValue={dropdownValue}
@@ -154,6 +151,9 @@ const MedicalHistoryScreen = () => {
               : ''
           }
         />
+        <Text style={styles.label}>
+          Have you ever been diagnosed with any of the following conditions?
+        </Text>
         <ScrollView>
           <View style={styles.rowContainer}>
             {bootstrap?.attributes?.medical_template?.personal?.map(

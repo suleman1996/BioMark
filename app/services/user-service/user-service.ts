@@ -3,6 +3,7 @@ import {
   BootstrapData,
   GeoLocationData,
   HealthTrackerPayload,
+  MedicationSetupPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -417,6 +418,11 @@ const getMedicalHistory = () => {
 const getBodyMeasurements = () => {
   return client.get(API_URLS.GET_BODY_MEASUREMENT);
 };
+const createBloodSugar = ({ blood_sugar }: Props) => {
+  return client.post(API_URLS.CREATE_BLOOD_SUGAR, {
+    blood_sugar,
+  });
+};
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
   return client.post(API_URLS.CREATE_STRESS, {
@@ -533,6 +539,26 @@ function getHealthTracker() {
       });
   });
 }
+function getMedicalDropDown() {
+  return new Promise<MedicationSetupPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_HEALTH_DROPDOWN)
+      .then(async (response) => {
+        try {
+          console.log('med', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+}
 
 export const userService = {
   login,
@@ -567,4 +593,6 @@ export const userService = {
   updateUserEthnic,
   getBodyMeasurements,
   getHealthTracker,
+  getMedicalDropDown,
+  createBloodSugar,
 };
