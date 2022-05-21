@@ -1,10 +1,11 @@
 import {
   View,
   Text,
-  TouchableOpacity,
   ScrollView,
   ImageBackground,
   FlatList,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React, { useEffect } from 'react';
 import Styles from './styles';
@@ -31,10 +32,14 @@ import Progress from '../../../../assets/svgs/Progress';
 import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
-import { getReduxHealthTracker } from 'store/home/home-actions';
+import {
+  getReduxHealthTracker,
+  getReduxDashboard,
+} from 'store/home/home-actions';
 
 const Index = () => {
   const { colors } = useTheme();
+
   const styles = Styles(colors);
   const { HYPERTENSION } = SCREENS;
   // const { HEALTH_STRESS } = SCREENS;
@@ -42,11 +47,37 @@ const Index = () => {
   const dispatch = useDispatch();
 
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
+  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
+
+  const handleHEalthTracker = () => {
+    healthTracker.length = 0;
+    let id = -1;
+    Object.entries(hell).map((item) => {
+      item[1]?.name &&
+        healthTracker.push({
+          id: id + 1,
+          title: item[1]?.name,
+          value: item[1]?.value,
+          subTitle: item[1]?.unit,
+          color:
+            item[1]?.card_status == 'none'
+              ? colors.blue
+              : item[1]?.card_status == 'high'
+              ? colors.dangerRed
+              : colors.lightYellow,
+        });
+    });
+  };
+
   useEffect(() => {
     dispatch(getReduxHealthTracker());
-    console.log('hell =======>', hell);
+    console.log('Health Trackeer api =======>', hell);
+    handleHEalthTracker();
+    dispatch(getReduxDashboard());
+    console.log('Dashboard api =======>', dashboard);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
+
   const [highlights] = React.useState([
     {
       id: 0,
@@ -67,36 +98,37 @@ const Index = () => {
     },
   ]);
 
-  const [healthTracker] = React.useState([
-    {
-      id: 0,
-      title: 'Blood Sugar',
-      value: 2.0,
-      subTitle: 'mg/dL',
-      color: colors.blue,
-    },
-    {
-      id: 1,
-      title: 'Medication',
-      value: '-',
-      subTitle: 'Add',
-      color: colors.blue,
-    },
-    {
-      id: 2,
-      title: 'Blood Pressure',
-      value: '75/30',
-      subTitle: 'mmHg',
-      color: colors.dangerRed,
-    },
-    {
-      id: 3,
-      title: 'Blood Sugar',
-      value: 2.0,
-      subTitle: 'mg/dL',
-      color: colors.blue,
-    },
-  ]);
+  //   const [healthTracker] = React.useState([
+  //     {
+  //       id: 0,
+  //       title: 'Blood Sugar',
+  //       value: 2.0,
+  //       subTitle: 'mg/dL',
+  //       color: colors.blue,
+  //     },
+  //     {
+  //       id: 1,
+  //       title: 'Medication',
+  //       value: '-',
+  //       subTitle: 'Add',
+  //       color: colors.blue,
+  //     },
+  //     {
+  //       id: 2,
+  //       title: 'Blood Pressure',
+  //       value: '75/30',
+  //       subTitle: 'mmHg',
+  //       color: colors.dangerRed,
+  //     },
+  //     {
+  //       id: 3,
+  //       title: 'Blood Sugar',
+  //       value: 2.0,
+  //       subTitle: 'mg/dL',
+  //       color: colors.blue,
+  //     },
+  //   ]);
+  const [healthTracker] = React.useState([]);
   const [currentPosition] = React.useState(2);
   const [stepIndicatorIcons] = React.useState([
     <Heart />,
@@ -104,6 +136,17 @@ const Index = () => {
     <BMI />,
     <BP />,
   ]);
+  //   const [healthRisk, setHealthRisk] = React.useState({
+  //     heartDisease: false,
+  //     diabetes: false,
+  //     bloodPreasure: false,
+  //     bmi: false,
+  //     smooking: false,
+  //     drinking: false,
+  //     stress: false,
+  //     sleeping: false,
+  //   });
+  //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
 
   const RenderHealthRiskView = ({ svg, color }) => (
     <>
@@ -183,6 +226,27 @@ const Index = () => {
     </View>
   );
 
+  const RenderHealthRisk = ({ description, name, card_status }) => (
+    <View style={styles.healthRisk}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Heart fill={colors.lightGrey} />
+          <Text style={styles.healthName}>{name}</Text>
+        </View>
+        <Text style={styles.healthCardStatusName}>{card_status}</Text>
+      </View>
+      <Text style={styles.descriptionHealthRisk}>
+        <Text>{description} </Text>
+        <TouchableWithoutFeedback>
+          <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
+            Tap here{' '}
+          </Text>
+        </TouchableWithoutFeedback>
+        <Text>to complete your information</Text>
+      </Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
@@ -217,6 +281,11 @@ const Index = () => {
             <RenderHealthRiskView color={colors.lightGreen} svg={<Stress />} />
             <RenderHealthRiskView color={colors.dangerRed} svg={<Sleep />} />
           </View>
+          <RenderHealthRisk
+            name="Heart Disease"
+            description="This calculae the % risk of developing heart disease over the next year."
+            card_status="Need More Information"
+          />
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Health Trackers
           </Text>

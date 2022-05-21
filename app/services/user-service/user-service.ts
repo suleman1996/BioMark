@@ -3,6 +3,7 @@ import {
   BootstrapData,
   GeoLocationData,
   HealthTrackerPayload,
+  DashboardResponseData,
   MedicationSetupPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
@@ -534,7 +535,28 @@ function getHealthTracker() {
         }
       })
       .catch(async (err: ErrorResponse) => {
-        logNow('get profile error', err);
+        logNow('get HEALTH TRACKER error', err);
+        reject(err);
+      });
+  });
+}
+
+function getDashboard() {
+  return new Promise<DashboardResponseData>((resolve, reject) => {
+    client
+      .get(API_URLS.DASHBOARD)
+      .then(async (response) => {
+        try {
+          console.log('rrr', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get DASHBOARD error', err);
         reject(err);
       });
   });
@@ -593,6 +615,7 @@ export const userService = {
   updateUserEthnic,
   getBodyMeasurements,
   getHealthTracker,
+  getDashboard,
   getMedicalDropDown,
   createBloodSugar,
 };
