@@ -1,5 +1,5 @@
 import { HomeState } from './HomeState';
-import { HEALTH_TRACKER, GET_DASHBOARD } from './constants';
+import { HEALTH_TRACKER, GET_DASHBOARD, MEDICAL_DROPDOWN } from './constants';
 
 const INITIAL_STATE = new HomeState();
 
@@ -15,6 +15,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         dashboard: action.payload,
+      };
+    }
+    case MEDICAL_DROPDOWN: {
+      return {
+        ...state,
+        medicalDropDown: action.payload,
       };
     }
 

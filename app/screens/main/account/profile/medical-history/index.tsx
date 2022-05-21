@@ -136,9 +136,6 @@ const MedicalHistoryScreen = () => {
 
       {/* modals */}
       <ScrollView style={styles.container}>
-        <Text style={styles.label}>
-          Have you ever been diagnosed with any of the following conditions?
-        </Text>
         <DropdownMenu
           options={options}
           selectedValue={dropdownValue}
@@ -154,6 +151,9 @@ const MedicalHistoryScreen = () => {
               : ''
           }
         />
+        <Text style={styles.label}>
+          Have you ever been diagnosed with any of the following conditions?
+        </Text>
         <ScrollView>
           <View style={styles.rowContainer}>
             {bootstrap?.attributes?.medical_template?.personal?.map(

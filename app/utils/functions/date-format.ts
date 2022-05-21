@@ -7,6 +7,13 @@ export const dateFormat = (date: string) => {
   return newDate || '';
 };
 
+export const getTime = (date: string) => {
+  if (date) {
+    var newDate: any = format(new Date(date), 'hh:mm a');
+  }
+
+  return newDate || '';
+};
 export const getMonth = (date: string) => {
   if (date) {
     var newDate: any = format(new Date(date), 'LLLL');
