@@ -109,14 +109,14 @@ const BloodSugarChooser = ({
             </Pressable>
             <Pressable
               onPress={() => {
-                setSelectedType(2);
-                selectedType != 2 &&
+                setSelectedType(21);
+                selectedType != 21 &&
                   setValue((value / 18).toFixed(1).toString());
                 menuRef.current.close();
               }}
               style={[
                 styles.singleMenuItem,
-                selectedType == 2 ? { backgroundColor: colors.gray } : {},
+                selectedType == 21 ? { backgroundColor: colors.gray } : {},
               ]}
             >
               <Text style={styles.menuText}>mmol/L</Text>

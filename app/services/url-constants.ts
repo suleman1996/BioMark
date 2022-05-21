@@ -50,6 +50,10 @@ const API_URLS = {
 
   LOCATION: '/api/v1/geolocation',
   EXERCISE: '/api/v1/patient/lifestyle/exercise',
+
+  // BloodSugar
+  GET_HEALTH_DROPDOWN: '/api/v1/patient/psp/trackers/blood_sugar/new',
+  CREATE_BLOOD_SUGAR: '/api/v1/patient/psp/trackers/blood_sugar',
 };
 
 export { API_URLS };

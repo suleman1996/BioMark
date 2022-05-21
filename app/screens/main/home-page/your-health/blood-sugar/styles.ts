@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -33,6 +34,11 @@ export const makeStyles = (colors: any) =>
       fontFamily: GlobalFonts.medium,
       marginTop: heightToDp(2),
       color: colors.darkPrimary,
+    },
+    errorMessage: {
+      fontFamily: fonts.regular,
+      fontSize: 12,
+      color: colors.danger,
     },
   });
 export default makeStyles;
