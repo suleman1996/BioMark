@@ -13,6 +13,8 @@ import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
 import SCREENS from './constants';
+import Covid19Navigator from './covid19-navigator';
+// import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
 import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +22,7 @@ const {
   NESTED_ACCOUNT_NAVIGATOR,
   CREATE_PROFILE,
   YOUR_HEALTH,
+  NESTED_COVID19_NAVIGATOR,
   HEALTH_RISK,
   HYPERTENSION,
   BLOOD_SUGAR,
@@ -56,6 +59,10 @@ const AppNavigator = () => {
           <Stack.Screen
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}
+          />
+          <Stack.Screen
+            name={NESTED_COVID19_NAVIGATOR}
+            component={Covid19Navigator}
           />
           <Stack.Screen name={HEALTH_RISK} component={HealthRisk} />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
