@@ -3,9 +3,15 @@ import React, { useState } from 'react';
 import { useTheme } from 'react-native-paper';
 
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { logNow } from 'utils/functions/log-binder';
-import { getDay, getMonth, getYear } from 'utils/functions/date-format';
+import {
+  getDay,
+  getMonth,
+  getYear,
+  getTime,
+} from 'utils/functions/date-format';
 
 import makeStyles from './styles';
 
@@ -37,16 +43,18 @@ const DateTimePickerModalComponent = (props: Props) => {
         onPress={() => setDatePickerVisibility(true)}
         style={styles.textContainer}
       >
-        <Text style={styles.dateText}>{getMonth(date)}</Text>
-        <View style={[styles.verticalLine, { flex: 1 }]}>
-          <Text style={[styles.dateText]}>{getDay(date)}</Text>
-        </View>
-        <View style={[styles.verticalLine, { flex: 1 }]}>
-          <Text style={styles.dateText}>{getYear(date)}</Text>
-        </View>
+        <Text style={[styles.dateText]}>
+          {getMonth(date)} {getDay(date)}, {getYear(date)} - {getTime(date)}
+        </Text>
+        <Icon
+          name="calendar-month-outline"
+          size={30}
+          color={colors.placeholder}
+        />
       </Pressable>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
+        display="inline"
         mode="datetime"
         onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}

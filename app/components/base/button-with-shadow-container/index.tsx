@@ -10,13 +10,19 @@ type Props = {
   onPress: any;
   disabled: boolean;
   title?: string;
+  style: any;
 };
 
-const ButtonWithShadowContainer = ({ title, onPress, disabled }: Props) => {
+const ButtonWithShadowContainer = ({
+  title,
+  onPress,
+  disabled,
+  style,
+}: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Button
         onPress={onPress}
         title={title ? title : 'Save'}

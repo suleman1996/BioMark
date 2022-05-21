@@ -26,11 +26,9 @@ export const makeStyles = (colors: any) =>
       color: colors.black,
       fontSize: responsiveFontSize(18),
       flex: 1,
-      textAlign: 'center',
     },
     verticalLine: {
       height: heightToDp(4),
-      borderLeftWidth: 1,
       borderLeftColor: colors.darkGray,
       width: widthToDp(1),
     },
