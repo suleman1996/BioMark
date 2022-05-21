@@ -24,7 +24,6 @@ import SleepScreen from 'screens/main/account/profile/edit-profile/sleep';
 import VaccinationScreen from 'screens/main/account/profile/edit-profile/vaccination';
 import AllergiesScreen from 'screens/main/account/profile/edit-profile/allergies';
 import DrinkingScreen from 'screens/main/account/profile/edit-profile/drinking';
-
 import SCREENS from './constants';
 import LetsStartIdVerfiication from 'screens/main/account/id-verification/lets-start';
 

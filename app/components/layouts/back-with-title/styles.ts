@@ -11,7 +11,7 @@ export const makeStyles = (colors: any) =>
     },
     header: {
       width: widthToDp(100),
-      backgroundColor: colors.primary,
+      // backgroundColor: colors.primary,
       paddingHorizontal: widthToDp(4),
       paddingTop: heightToDp(2.5),
       paddingBottom: heightToDp(2),

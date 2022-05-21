@@ -52,5 +52,13 @@ const styles = (colors: any) =>
       fontFamily: fonts.mulishRegular,
       fontSize: 17,
     },
+    messengerView: {
+      position: 'absolute',
+      right: 0,
+      bottom: 0,
+      marginRight: 20,
+      marginBottom: 20,
+    },
+    backgroundVideo: {},
   });
 export default styles;
