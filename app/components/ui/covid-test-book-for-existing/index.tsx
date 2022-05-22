@@ -7,7 +7,9 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import CircleBtn from '../../button/circleBtn';
 import { responsiveFontSize } from './../../../utils/functions/responsive-text';
+import CalenderStrip from './../../higher-order/calender-strip/index';
 import { makeStyles } from './styles';
+
 type Props = {};
 
 const options = [
@@ -30,6 +32,7 @@ const ExisitingBookingForDependent = (props: Props) => {
   const [countryDropdownValue, setCountryDropDown] = useState<any>();
   const [cityDropdownValue, setCityDropDown] = useState<any>();
   const [covidTestCenterValue, setCovidTestCenter] = useState<any>();
+  const [testCenterValue, setTestCenter] = useState<any>();
 
   function onPress() {
     setShow(!show);
@@ -156,7 +159,23 @@ const ExisitingBookingForDependent = (props: Props) => {
                   />
                 </>
               ) : null}
+              <View style={{ marginTop: heightToDp(1) }} />
+              {covidTestCenterValue ? (
+                <>
+                  <Text style={styles.innerTitle}>Select a covid Test</Text>
+                  <DropdownMenu
+                    options={options}
+                    selectedValue={testCenterValue}
+                    onValueChange={(value: any) => {
+                      setTestCenter(value);
+                    }}
+                  />
+                </>
+              ) : null}
             </View>
+
+            <Text style={styles.innerTitle}>Choose a test date</Text>
+            <CalenderStrip />
             <View style={styles.bottomBtnContainer}>
               <View
                 style={[styles.bottomBtn, { backgroundColor: colors.white }]}
