@@ -4,7 +4,7 @@ import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 import StepIndicator from 'react-native-step-indicator';
 import ButtonComponent from 'components/base/button';
-import ExisitingBookingForDependent from './../../../components/ui/covid-test-book-for-existing/index';
+import ExisitingBookingForDependent from 'components/ui/covid-test-book-for-existing/index';
 
 type Props = {};
 
@@ -14,7 +14,7 @@ const BookCovidTest = (props: Props) => {
   const {} = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const [isExistingBtn, setIsExisting] = useState(false);
+  const [isExistingBtn, setIsExisting] = useState(true);
 
   return (
     <>
