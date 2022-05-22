@@ -27,7 +27,11 @@ const BookCovidTest = (props: Props) => {
             labels={labels}
           />
         </View>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="always"
+          contentContainerStyle={styles.scrollView}
+        >
           {isExistingBtn ? (
             <View>
               <ExisitingBookingForDependent />

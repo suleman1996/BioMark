@@ -3,7 +3,7 @@ import React from 'react';
 import { useTheme } from 'react-native-paper';
 // import { useTheme } from 'react-native-paper';
 import Covid19Home from 'screens/covid19';
-import BookCovidTest from 'screens/covid19/book-test';
+import BookCovidTest from 'screens/covid19/steps/book-test';
 import Covid19Bookings from 'screens/covid19/bookings';
 import { GlobalFonts } from 'utils/theme/fonts';
 import SCREENS from './constants';

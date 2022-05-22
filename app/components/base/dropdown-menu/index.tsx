@@ -13,6 +13,7 @@ type Props = {
   selectedValue: string;
   onValueChange: (text: string) => void;
   error?: string;
+  marginTop?: number;
 };
 
 const DropdownMenuComponent = ({
@@ -20,13 +21,16 @@ const DropdownMenuComponent = ({
   selectedValue,
   onValueChange,
   error,
+  marginTop,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
+  const ifMT = marginTop ? { height: heightToDp(marginTop) } : {};
+
   const [showDropDown, setShowDropDown] = useState(false);
   return (
-    <View>
+    <View style={[ifMT]}>
       <DropDown
         mode={'flat'}
         visible={showDropDown}

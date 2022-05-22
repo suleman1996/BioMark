@@ -86,6 +86,23 @@ export const makeStyles = (colors: any) =>
       fontFamily: GlobalFonts.light,
       color: colors.inactive,
     },
+    bottomBtnContainer: {
+      flexDirection: 'row',
+      width: widthToDp(86),
+      justifyContent: 'space-between',
+      marginTop: heightToDp(2),
+    },
+    bottomBtn: {
+      backgroundColor: colors.fieldGrey,
+      paddingHorizontal: widthToDp(8),
+      paddingVertical: widthToDp(2),
+      borderRadius: widthToDp(2),
+    },
+    bottomBtnText: {
+      fontSize: responsiveFontSize(18),
+      fontFamily: GlobalFonts.regular,
+      color: colors.inactive,
+    },
   });
 
 export default makeStyles;
