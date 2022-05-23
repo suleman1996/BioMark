@@ -32,7 +32,7 @@ export const makeStyles = (colors: any) =>
     },
     input: {
       width: widthToDp(70),
-      fontSize: responsiveFontSize(22),
+      fontSize: responsiveFontSize(20),
       color: '#3D3D3D',
       marginHorizontal: 10,
       fontFamily: fonts.mulishRegular,

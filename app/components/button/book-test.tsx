@@ -1,33 +1,30 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
-
-import { Covid19 } from 'assets/svgs/index';
 import fonts from 'assets/fonts';
-import SCREENS from '../../navigation/constants';
-import { navigate } from '../../services/nav-ref';
-//import colors from 'assets/colors';
+import BioBookTest from 'components/svg/bio-book-test';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { navigate } from 'services/nav-ref';
+import SCREENS from '../../navigation/constants/index';
 
-export default function Covid19Btn({ onPress }) {
+export default function BookTestButton() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity
         onPress={() =>
-          onPress
-            ? onPress()
-            : navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                screen: SCREENS.COVID19HOME,
-              })
+          navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+            screen: SCREENS.BOOKCOVIDTEST,
+          })
         }
       >
         <View style={styles.circleBtn}>
-          <Covid19 />
+          <BioBookTest width={7} height={7} />
         </View>
       </TouchableOpacity>
       <View>
-        <Text style={styles.covidText}>COVID-19</Text>
+        <Text style={styles.healthText}>Book Tests</Text>
       </View>
     </View>
   );
@@ -50,7 +47,7 @@ const makeStyles = (colors: any) =>
       elevation: 10,
       marginBottom: 5,
     },
-    covidText: {
+    healthText: {
       fontFamily: fonts.bold,
       fontSize: 15,
       color: colors.heading,
