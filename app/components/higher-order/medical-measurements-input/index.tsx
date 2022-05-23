@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import React from 'react';
-import { useTheme } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
 
 import { TextInput } from 'react-native-paper';
 
@@ -58,6 +58,7 @@ const MedicalInput = ({
         keyboardType="numeric"
         maxLength={maxLength}
       />
+      <Text style={styles.label}>%</Text>
     </View>
   );
 };

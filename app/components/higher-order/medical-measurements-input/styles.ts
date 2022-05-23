@@ -24,5 +24,10 @@ export const makeStyles = (colors: any) =>
       borderRadius: widthToDp(2),
       marginTop: 3,
     },
+    label: {
+      fontSize: responsiveFontSize(22),
+      fontFamily: GlobalFonts.medium,
+      color: colors.darkPrimary,
+    },
   });
 export default makeStyles;

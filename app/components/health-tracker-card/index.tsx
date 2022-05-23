@@ -18,6 +18,12 @@ const RenderHealthTrack = ({ item }) => {
           navigation.navigate(SCREENS.BLOOD_SUGAR);
         } else if (item?.item?.title === 'Blood Pressure') {
           navigation.navigate(SCREENS.BLOOD_PRESSURE);
+        } else if (item?.item?.title === 'Weight') {
+          navigation.navigate(SCREENS.WEIGHT);
+        } else if (item?.item?.title === 'HbA1c') {
+          navigation.navigate(SCREENS.HBA1C);
+        } else if (item?.item?.title === 'Medication') {
+          navigation.navigate(SCREENS.MEDICATION);
         } else {
           alert('Under Development');
         }

@@ -46,16 +46,18 @@ const API_URLS = {
   GET_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   BODY_MEASUREMENT: '/api/v1/patient/medical/bm',
   GET_BODY_MEASUREMENT: '/api/v1/patient/medical',
-  GET_HEALTH_TRACKER: '/api/v1/patient/health_trackers?page={0}',
+  GET_HEALTH_TRACKER: '/api/v1/patient/health_trackers',
 
   LOCATION: '/api/v1/geolocation',
   EXERCISE: '/api/v1/patient/lifestyle/exercise',
 
   DASHBOARD: 'api/v1/patient/dashboard',
-  // BloodSugar
+  // Health Traqcker
   GET_HEALTH_DROPDOWN: '/api/v1/patient/psp/trackers/blood_sugar/new',
   CREATE_BLOOD_SUGAR: '/api/v1/patient/psp/trackers/blood_sugar',
   CREATE_BLOOD_PRESSURE: '/api/v1/patient/bp_trackers',
+  CREATE_WEIGHT: '/api/v1/patient/weight_trackers',
+  CREATE_HBA1C: '/api/v1/patient/psp/trackers/hba1c',
 };
 
 export { API_URLS };

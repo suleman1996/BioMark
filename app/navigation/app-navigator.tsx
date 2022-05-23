@@ -15,6 +15,9 @@ import Hypertension from '../screens/main/home-page/your-health/hypertension-dia
 import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
+import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
+import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
+import Medication from 'screens/main/home-page/your-health/health-trackers/Medication/index';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -25,6 +28,9 @@ const {
   HYPERTENSION,
   BLOOD_SUGAR,
   BLOOD_PRESSURE,
+  WEIGHT,
+  HBA1C,
+  MEDICATION,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -64,6 +70,9 @@ const AppNavigator = () => {
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
           <Stack.Screen name={BLOOD_PRESSURE} component={BloodPressure} />
+          <Stack.Screen name={WEIGHT} component={Weight} />
+          <Stack.Screen name={HBA1C} component={HbA1c} />
+          <Stack.Screen name={MEDICATION} component={Medication} />
         </>
       ) : (
         <>

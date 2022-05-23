@@ -429,6 +429,16 @@ const createBloodPressure = ({ medical }: Props) => {
     medical,
   });
 };
+const createWeight = ({ medical }: Props) => {
+  return client.post(API_URLS.CREATE_WEIGHT, {
+    medical,
+  });
+};
+const createHba1c = ({ hba1c }: Props) => {
+  return client.post(API_URLS.CREATE_HBA1C, {
+    hba1c,
+  });
+};
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
   return client.post(API_URLS.CREATE_STRESS, {
@@ -624,4 +634,6 @@ export const userService = {
   getMedicalDropDown,
   createBloodSugar,
   createBloodPressure,
+  createWeight,
+  createHba1c,
 };
