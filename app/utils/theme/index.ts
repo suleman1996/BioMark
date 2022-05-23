@@ -42,6 +42,8 @@ const theme = {
     lightYellow: '#FFD75E',
     dangerRed: '#EA4C59',
     lightDark: '#455066',
+
+    //gradient
   },
 
   // fonts: configureFonts({

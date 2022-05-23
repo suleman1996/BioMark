@@ -41,7 +41,7 @@ const Index = () => {
   const { colors } = useTheme();
 
   const styles = Styles(colors);
-  const { HYPERTENSION } = SCREENS;
+  const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
   // const { HEALTH_STRESS } = SCREENS;
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -201,9 +201,11 @@ const Index = () => {
     </TouchableOpacity>
   );
 
-  const RenderCircle = ({ svg, title }) => (
+  const RenderCircle = ({ svg, title, onPress }) => (
     <View style={{ alignItems: 'center' }}>
-      <TouchableOpacity style={styles.circle}>{svg}</TouchableOpacity>
+      <TouchableOpacity style={styles.circle} onPress={onPress}>
+        {svg}
+      </TouchableOpacity>
       <Text style={styles.circleText}>{title}</Text>
     </View>
   );
@@ -323,7 +325,11 @@ const Index = () => {
 
           <View style={styles.circleView}>
             <RenderCircle title="Health Records" svg={<Health />} />
-            <RenderCircle title="Health Progress" svg={<Progress />} />
+            <RenderCircle
+              title="Health Progress"
+              svg={<Progress />}
+              onPress={() => navigation.navigate(HEALTH_PROGRESS)}
+            />
           </View>
           <View style={styles.resultStatusView}>
             <View style={{ alignItems: 'center' }}>
