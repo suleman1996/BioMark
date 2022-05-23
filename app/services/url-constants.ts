@@ -55,6 +55,7 @@ const API_URLS = {
   // BloodSugar
   GET_HEALTH_DROPDOWN: '/api/v1/patient/psp/trackers/blood_sugar/new',
   CREATE_BLOOD_SUGAR: '/api/v1/patient/psp/trackers/blood_sugar',
+  GET_HEALTH_RISKS: '/api/v1/patient/risks',
 };
 
 export { API_URLS };
