@@ -1,29 +1,37 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import React from 'react';
+import { useTheme } from 'react-native-paper';
 
-import ModalComponent from 'components/base/modal';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { Modal } from 'components/base';
+
+import makeStyles from './styles';
 
 type Props = {
   heading: string;
   isVisible: boolean;
   setIsVisible: any;
   subHeading: string;
+  callMe: any;
 };
 
-const DeleteModalComponent = ({ isVisible, setIsVisible }: Props) => {
+const DeleteModalComponent = ({ isVisible, setIsVisible, callMe }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
-    <ModalComponent isVisible={isVisible} setIsVisible={setIsVisible}>
+    <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
         <Text style={styles.heading}>Delete Dependant?</Text>
         <Text style={styles.subHeading}>
           Are you sure you want to delete profiles
         </Text>
         <View style={styles.buttonsContainer}>
-          <Pressable onPress={() => setIsVisible(false)} style={styles.yesBtn}>
+          <Pressable
+            onPress={() => {
+              setIsVisible(false);
+              callMe();
+            }}
+            style={styles.yesBtn}
+          >
             <Text style={styles.yesBtnText}>Yes</Text>
           </Pressable>
           <Pressable onPress={() => setIsVisible(false)} style={styles.noBtn}>
@@ -31,55 +39,8 @@ const DeleteModalComponent = ({ isVisible, setIsVisible }: Props) => {
           </Pressable>
         </View>
       </View>
-    </ModalComponent>
+    </Modal>
   );
 };
 
 export default DeleteModalComponent;
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthToDp(85),
-    padding: widthToDp(4),
-    borderRadius: widthToDp(3),
-    backgroundColor: GlobalColors.white,
-    alignItems: 'center',
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: heightToDp(2),
-  },
-  heading: {
-    fontSize: responsiveFontSize(25),
-    fontFamily: GlobalFonts.bold,
-    color: GlobalColors.red,
-  },
-  subHeading: {
-    fontSize: responsiveFontSize(17),
-    fontFamily: GlobalFonts.regular,
-  },
-  yesBtn: {
-    paddingHorizontal: widthToDp(8),
-    paddingVertical: widthToDp(2),
-    borderWidth: 0.5,
-    borderRadius: widthToDp(3),
-  },
-  noBtn: {
-    paddingHorizontal: widthToDp(8),
-    paddingVertical: widthToDp(2),
-    backgroundColor: GlobalColors.primary,
-    borderRadius: widthToDp(3),
-  },
-  yesBtnText: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.regular,
-    color: GlobalColors.red,
-  },
-  noBtnText: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.regular,
-    color: GlobalColors.white,
-  },
-});

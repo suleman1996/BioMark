@@ -1,27 +1,42 @@
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme } from 'react-native-paper';
+
 import { useSelector } from 'react-redux';
 import parsePhoneNumber from 'libphonenumber-js';
 
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { PhoneNumberWithLabel } from 'components/base';
+
 import { IAppState } from 'store/IAppState';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import { styles } from './styles';
-import PhoneNumberWithLabel from 'components/base/phone-with-label';
+import { logNow } from 'utils/functions/log-binder';
+
+import makeStyles from './styles';
 
 const PhoneChangeScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [countryCode, setCountryCode] = useState<any>();
   const [number, setNumber] = useState<any>();
 
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
   );
 
   useEffect(() => {
-    const phoneNumber = parsePhoneNumber(userContacts.mobile);
-    setCountryCode(phoneNumber?.country);
+    const phoneNumber = parsePhoneNumber(userContacts.mobile + '');
+    logNow('parsed phone', phoneNumber?.countryCallingCode);
+    if (phoneNumber?.country) {
+      setCountryCode(phoneNumber?.country);
+    } else {
+      setCountryCode(geoLocation?.code);
+    }
     setNumber(phoneNumber?.nationalNumber);
-  }, [userContacts]);
+  }, [userContacts, geoLocation]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -29,7 +44,7 @@ const PhoneChangeScreen = () => {
         <View style={styles.container}>
           <Text style={styles.phoneText}>Mobile Number</Text>
           <PhoneNumberWithLabel
-            country={countryCode}
+            countryCode={countryCode}
             number={number}
             disabled={true}
             placeholder={number}

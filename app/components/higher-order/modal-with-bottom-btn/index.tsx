@@ -1,30 +1,42 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { useTheme } from 'react-native-paper';
 
-import ModalComponent from 'components/base/modal';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
+import { Modal, ButtonWithShadowContainer } from 'components/base';
+
+import makeStyles from './styles';
 
 type Props = {
   isVisible: boolean;
   children: any;
   onPress: any;
   title: string;
+  setIsVisible: any;
 };
 
-const ModalWithBottomBtn = ({ isVisible, children, onPress, title }: Props) => {
+const ModalWithBottomBtn = ({
+  isVisible,
+  children,
+  onPress,
+  title,
+  setIsVisible,
+}: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const [isModal, setIsModal] = useState(isVisible);
 
   useEffect(() => {
     setIsModal(isVisible);
   }, [isVisible]);
+
   return (
-    <ModalComponent isVisible={isModal}>
+    <Modal setIsVisible={setIsVisible} isVisible={isModal}>
       <View style={styles.card}>
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{ flex: 1 }}
+          keyboardShouldPersistTaps="always"
+        >
           <Text style={styles.title}>{title}</Text>
           {children}
         </ScrollView>
@@ -36,25 +48,8 @@ const ModalWithBottomBtn = ({ isVisible, children, onPress, title }: Props) => {
           }}
         />
       </View>
-    </ModalComponent>
+    </Modal>
   );
 };
 
 export default ModalWithBottomBtn;
-
-const styles = StyleSheet.create({
-  card: {
-    width: widthToDp(90),
-    height: heightToDp(85),
-    backgroundColor: GlobalColors.white,
-    borderRadius: widthToDp(3),
-  },
-  title: {
-    fontSize: responsiveFontSize(25),
-    color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.bold,
-    paddingHorizontal: widthToDp(4),
-    paddingTop: heightToDp(2),
-    marginBottom: heightToDp(3),
-  },
-});

@@ -1,15 +1,19 @@
-import { Text, View, ScrollView } from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { Text, View, ScrollView } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
+import { useTheme } from 'react-native-paper';
 
-import styles from './styles';
-import Button from 'components/button/button';
-import SetToGo from 'assets/svgs/set-to-go';
+import { navigate } from 'services/nav-ref';
+import { Button } from 'components/button';
+import { SetToGo } from 'assets/svgs/index';
+import SCREENS from 'navigation/constants';
+
+import makeStyles from './styles';
 
 export default function Confirmation() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
-  const navigations = useNavigation();
 
   return (
     <>
@@ -33,7 +37,7 @@ export default function Confirmation() {
           <Button
             disabled={false}
             title="Continue to Homepage"
-            onPress={() => navigations.navigate('Login')}
+            onPress={() => navigate(SCREENS.LOGIN)}
           />
         </ScrollView>
       </View>

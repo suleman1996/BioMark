@@ -1,78 +1,160 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import HeightChooserComponent from 'components/higher-order/height-chooser/index';
-import WeightChooserComponent from 'components/higher-order/weight-chooser';
+import { HeightChooser, WeightChooser } from 'components/higher-order';
+import { TitleWithBackLayout } from 'components/layouts';
+import { ButtonWithShadowContainer } from 'components/base';
+
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { goBack } from 'services/nav-ref';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container';
+import { userService } from 'services/user-service/user-service';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
+import { showMessage } from 'react-native-flash-message';
+
+import makeStyles from './styles';
+import { ActivityIndicator } from 'components/';
 
 const BodyMeasurementScreen = () => {
-  const [value, setValue] = useState(0);
-  const [value2, setValue2] = useState(0);
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
-  const onChangeText = (values = 30) => {
-    setValue(values);
+  const [value, setValue] = useState('');
+  const [value2, setValue2] = useState('');
+  const [selectedType, setSelectedType] = useState(2);
+  const [selectedTypeWeight, setSelectedTypeWeight] = useState(2);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onChangeText = (values) => {
+    selectedType == '1'
+      ? setValue((values / 2.54).toFixed(4).toString())
+      : setValue(values);
+    // setValue(value);
   };
-  const onChangeText2 = (values = 30) => {
-    setValue2(values);
+  const onChangeText2 = (values) => {
+    // setValue2(values);
+
+    selectedTypeWeight == '1'
+      ? setValue2((values * 2.2).toFixed(4).toString())
+      : setValue2(values);
+  };
+
+  React.useEffect(() => {
+    bodyMeasurements();
+  }, []);
+
+  const bodyMeasurements = async () => {
+    try {
+      setIsLoading(true);
+      const result = await userService.getBodyMeasurements();
+      console.log('body measurements ', result.data);
+      result?.data?.height_attr
+        ? setValue(result?.data?.height_attr)
+        : setValue(0);
+      result?.data?.weight_attr
+        ? setValue2(result?.data?.weight_attr)
+        : setValue2(0);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
+
+  const onSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const response = await userService.bodyMeasurement({
+        medical: {
+          height: value,
+          weight: value2,
+          is_metric: true,
+        },
+      });
+      console.log('measurement successful', response.data);
+      navigate(SCREENS.EDIT_PROFILE);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
   };
 
   return (
     <TitleWithBackLayout title="Body Measurements">
+      <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
-        <HeightChooserComponent
-          height={15}
-          label="Height"
-          textAlign="right"
-          placeholder={''}
-          onChangeText={onChangeText}
-          value={value}
-        />
-        <WeightChooserComponent
-          height={15}
-          label="Weight"
-          textAlign="right"
-          placeholder={undefined}
-          onChangeText={onChangeText2}
-          value={value2}
+        <View
+          style={{
+            paddingHorizontal: widthToDp(4),
+            // borderWidth: 5,
+            marginBottom: heightToDp(37),
+          }}
+        >
+          <HeightChooser
+            height={15}
+            label="Height"
+            textAlign="right"
+            placeholder={'0'}
+            onChangeText={onChangeText}
+            value={value}
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
+            setValue={setValue}
+          />
+          <WeightChooser
+            height={15}
+            label="Weight"
+            textAlign="right"
+            placeholder={'0.0'}
+            onChangeText={onChangeText2}
+            value={value2}
+            selectedType={selectedTypeWeight}
+            setSelectedType={setSelectedTypeWeight}
+            setValue={setValue2}
+          />
+        </View>
+
+        <ButtonWithShadowContainer
+          onPress={onSubmit}
+          title={'Save & Continue'}
+          disabled={value == '' || value2 == '' ? true : false}
         />
       </ScrollView>
-
-      <ButtonWithShadowContainer
-        onPress={() => {
-          goBack();
-        }}
-        title={'Save & Continue'}
-      />
     </TitleWithBackLayout>
   );
 };
 
 export default BodyMeasurementScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    // backgroundColor: GlobalColors.,
-    flex: 1,
-    paddingHorizontal: widthToDp(4),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  radioContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  radioText: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.light,
-  },
-});

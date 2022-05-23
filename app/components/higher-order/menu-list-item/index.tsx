@@ -1,17 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-import { widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
+import makeStyles from './styles';
 
 type Props = {
   Icon?: any;
 };
 
 const MenuListItem = ({ Icon }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -21,28 +24,10 @@ const MenuListItem = ({ Icon }: Props) => {
       <Fontisto
         name="angle-right"
         size={responsiveFontSize(22)}
-        color={GlobalColors.darkPrimary}
+        color={colors.darkPrimary}
       />
     </View>
   );
 };
 
 export default MenuListItem;
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthToDp(92),
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: widthToDp(2),
-    borderWidth: 1,
-    paddingLeft: widthToDp(4),
-    justifyContent: 'space-between',
-  },
-  text: {
-    color: GlobalColors.darkPrimary,
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(20),
-    paddingLeft: widthToDp(3),
-  },
-});

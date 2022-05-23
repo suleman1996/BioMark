@@ -1,56 +1,48 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Pressable } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import SearchBarWithLeftScanIcon from 'components/higher-order/search-bar-with-left-scan-icon/index';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import makeStyles from './styles';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalColors } from 'utils/theme/global-colors';
+import { goBack } from 'services/nav-ref';
 
 type Props = {
   children: any;
   title: string;
+  isBack?: boolean;
 };
 
-const TitleWithSearchBarLayout = ({ children, title }: Props) => {
+const TitleWithSearchBarLayout = ({ children, title, isBack }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={styles.container}>
       <View style={styles.titleBar}>
+        {/* arrow-back-sharp */}
+        {isBack ? (
+          <Pressable onPress={() => goBack()} style={styles.iconContainer}>
+            <Ionicons
+              color={colors.white}
+              name="arrow-back-sharp"
+              size={responsiveFontSize(25)}
+            />
+          </Pressable>
+        ) : null}
         <Text style={styles.textStyle}>{title}</Text>
       </View>
       <View style={styles.searchBarContainer}>
         <View style={styles.halfPrimary} />
         <SearchBarWithLeftScanIcon />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
+      <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
+        {children}
+      </ScrollView>
     </View>
   );
 };
 
 export default TitleWithSearchBarLayout;
-
-const styles = StyleSheet.create({
-  container: {
-    width: widthToDp(100),
-  },
-  titleBar: {
-    backgroundColor: GlobalColors.primary,
-    paddingVertical: heightToDp(1.1),
-    paddingHorizontal: widthToDp(4),
-  },
-  textStyle: {
-    color: GlobalColors.white,
-    fontSize: responsiveFontSize(30),
-    fontFamily: GlobalFonts.bold,
-  },
-  searchBarContainer: {
-    alignItems: 'center',
-  },
-  halfPrimary: {
-    height: heightToDp(3),
-    width: '100%',
-    backgroundColor: GlobalColors.primary,
-    position: 'absolute',
-    top: 0,
-  },
-});

@@ -9,7 +9,6 @@ export interface BootstrapData {
     medical_template: MedicalTemplates;
   };
 }
-
 export interface MedicalTemplates {
   personal: MedicalTemplateAttribute[];
   family: MedicalTemplateAttribute[];

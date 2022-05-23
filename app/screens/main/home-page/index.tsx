@@ -1,3 +1,12 @@
+import fonts from 'assets/fonts';
+import MyImage from 'assets/images';
+import {
+  Covid19Btn,
+  GoogleFitButton,
+  SmallButton,
+  YourHealthBtn,
+} from 'components/button';
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import React, { useContext, useEffect } from 'react';
 import {
   ImageBackground,
@@ -6,25 +15,39 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-import fonts from 'assets/fonts';
-import MyImage from 'assets/images';
-import Covid19Btn from 'components/button/covid19';
-import GoogleFit from 'components/button/google-fit';
-import SmallBtn from 'components/button/small-button';
-import YourHealthBtn from 'components/button/your-health-btn';
-import SearchBarWithLeftScanIcon from 'components/higher-order/search-bar-with-left-scan-icon/index';
-import AuthContext from 'utils/auth-context';
-import styles from './styles';
+import { useTheme } from 'react-native-paper';
+// import { navigate } from 'services/nav-ref';
+// import SCREENS from 'navigation/constants';
+import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
+import { getReduxBootstrap } from 'store/account/account-actions';
+import AuthContext from 'utils/auth-context';
+
+import makeStyles from './styles';
 
 export default function Home() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const authContext = useContext(AuthContext);
+
+  // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+  const dispatch = useDispatch();
+
+  /*eslint-disable*/
+  const getReduxBoot = async () => {
+    await dispatch(getReduxBootstrap());
+  };
+
+  useEffect(() => {
+    getReduxBoot();
+  }, []);
+  /*eslint-enable*/
 
   const userProfile = async () => {
     try {
       const result = await userService.getUserProfile();
-      console.log('Here is the user profile ', result.data);
+      console.log('user profile ', result.data);
       authContext.setUserData(result.data);
     } catch (error) {
       console.log(error);
@@ -33,6 +56,7 @@ export default function Home() {
 
   useEffect(() => {
     userProfile();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -53,6 +77,7 @@ export default function Home() {
               source={MyImage.rectangle}
               style={{
                 width: '100%',
+                height: 140,
               }}
             >
               <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
@@ -60,7 +85,7 @@ export default function Home() {
                 <View style={{ width: '60%' }}>
                   <Text
                     style={{
-                      fontFamily: fonts.regular,
+                      fontFamily: fonts.mulishRegular,
                       fontSize: 13,
                       color: 'white',
                       lineHeight: 16.36,
@@ -72,7 +97,7 @@ export default function Home() {
                   </Text>
                 </View>
                 <View style={{ width: '35%' }}>
-                  <SmallBtn title="Book Now" />
+                  <SmallButton title="Book Now" />
                 </View>
               </View>
             </ImageBackground>
@@ -94,7 +119,7 @@ export default function Home() {
               }}
             >
               <TouchableOpacity>
-                <GoogleFit
+                <GoogleFitButton
                   disabled={false}
                   title="Connect with Google Fit"
                   onPress={() => console.log('pressed')}

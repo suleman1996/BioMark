@@ -1,5 +1,5 @@
 import client from 'utils/client';
-import URL from 'utils/url-path';
+import { API_URLS as URL } from './url-constants';
 import {
   LoginRequest,
   RegisterRequest,

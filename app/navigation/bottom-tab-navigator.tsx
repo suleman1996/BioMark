@@ -1,63 +1,36 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import { useTheme } from 'react-native-paper';
 
-import colors from 'assets/colors';
-import fonts from 'assets/fonts';
-import AccountIcon from 'assets/svgs/account';
-import AppointmentIcon from 'assets/svgs/appoinment';
-import HomeIcon from 'assets/svgs/home';
-import InboxIcon from 'assets/svgs/inbox';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import Inbox from 'screens/main/Inbox/index';
 import Home from 'screens/main/home-page';
 import AppointmentScreen from 'screens/main/appointment';
 import AccountScreen from 'screens/main/account/account-screen';
 
-const Stack = createStackNavigator();
+import SCREENS from './constants';
+
+import fonts from 'assets/fonts';
+import {
+  AccountIcon,
+  AppointmentIcon,
+  HomeIcon,
+  InboxIcon,
+} from 'assets/svgs/index';
+
 const Tab = createBottomTabNavigator();
 
-const HomeStack = () => (
-  <Stack.Navigator
-    initialRouteName="HomeScreen"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="HomeScreen" component={Home} />
-  </Stack.Navigator>
-);
-
-const InboxStack = () => (
-  <Stack.Navigator
-    initialRouteName="HomeScreen"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="HomeScreen" component={Inbox} />
-  </Stack.Navigator>
-);
-
-const AppointmentStack = () => (
-  <Stack.Navigator
-    initialRouteName="HomeScreen"
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen name="HomeScreen" component={AppointmentScreen} />
-  </Stack.Navigator>
-);
-
 const BottomTabNavigator = () => {
+  const { colors } = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
-        tabBarLabelStyle: { fontSize: 11, fontFamily: fonts.regular },
+        tabBarLabelStyle: { fontSize: 11, fontFamily: fonts.mulishRegular },
         tabBarStyle: {
-          backgroundColor: colors.whiteColor,
+          backgroundColor: colors.white,
           borderTopColor: 'rgba(0, 0, 0, 0)',
         },
         tabBarActiveTintColor: colors.blue,
@@ -65,28 +38,29 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={HomeStack}
+        name={SCREENS.HOME}
+        component={Home}
         options={{
           tabBarIcon: ({ color }) => <HomeIcon fill={color} />,
         }}
       />
+
       <Tab.Screen
-        name="Inbox"
-        component={InboxStack}
+        name={SCREENS.INBOX}
+        component={Inbox}
         options={{
           tabBarIcon: ({ color }) => <InboxIcon fill={color} />,
         }}
       />
       <Tab.Screen
-        name="Appointment"
-        component={AppointmentStack}
+        name={SCREENS.APPOINTMENT}
+        component={AppointmentScreen}
         options={{
           tabBarIcon: ({ color }) => <AppointmentIcon fill={color} />,
         }}
       />
       <Tab.Screen
-        name="Account"
+        name={SCREENS.ACCOUNT}
         component={AccountScreen}
         options={{
           tabBarIcon: ({ color }) => <AccountIcon fill={color} />,

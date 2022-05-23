@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import { Button } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
-import colors from 'assets/colors';
+import { Button } from 'react-native-paper';
 
 type Props = {
   disabled?: boolean;
@@ -11,6 +11,8 @@ type Props = {
 };
 
 export default function GoogleFitButton(props: Props) {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.btnContainer}>
       <Button
@@ -20,7 +22,7 @@ export default function GoogleFitButton(props: Props) {
         contentStyle={{ height: 45, width: '100%' }}
         style={[
           styles.btn,
-          { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
+          { backgroundColor: props?.disabled ? colors.disable : colors.blue },
         ]}
         onPress={props.onPress}
       >

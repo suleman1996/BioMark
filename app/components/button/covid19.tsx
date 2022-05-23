@@ -1,47 +1,58 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import Covid19 from 'assets/svgs/covid-19';
+import { Covid19 } from 'assets/svgs/index';
 import fonts from 'assets/fonts';
-import colors from 'assets/colors';
+import SCREENS from '../../navigation/constants';
+import { navigate } from '../../services/nav-ref';
+//import colors from 'assets/colors';
 
-export default function Covid19Btn() {
+export default function Covid19Btn({ onPress }) {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          onPress
+            ? onPress()
+            : navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                screen: SCREENS.COVID19HOME,
+              })
+        }
+      >
         <View style={styles.circleBtn}>
           <Covid19 />
         </View>
       </TouchableOpacity>
       <View>
-        <Text
-          style={{
-            fontFamily: fonts.bold,
-            fontSize: 15,
-            color: colors.heading,
-          }}
-        >
-          COVID-19
-        </Text>
+        <Text style={styles.covidText}>COVID-19</Text>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  circleBtn: {
-    backgroundColor: 'white',
-    borderRadius: 300,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
+const makeStyles = (colors: any) =>
+  StyleSheet.create({
+    circleBtn: {
+      backgroundColor: 'white',
+      borderRadius: 300,
+      paddingHorizontal: 15,
+      paddingVertical: 15,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 12,
+      },
+      shadowOpacity: 0.58,
+      shadowRadius: 16.0,
+      elevation: 10,
+      marginBottom: 5,
     },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 10,
-    marginBottom: 5,
-  },
-});
+    covidText: {
+      fontFamily: fonts.bold,
+      fontSize: 15,
+      color: colors.heading,
+    },
+  });

@@ -1,118 +1,205 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { default as useStateRef } from 'react-usestateref';
 
-import ModalButtonComponent from 'components/higher-order/modal-button';
+import GeneralModalButton from 'components/higher-order/general-modal-button';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+// import { ModalButton } from 'components/higher-order';
+import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
+import { TitleWithBackLayout } from 'components/layouts';
+
+// import AsthmaModal from './modals/asthma';
+// import CancerModal from './modals/cancer';
+// import DiabetesModal from './modals/diabetes';
+// import GoutModal from './modals/gout';
+// import HighBloodPressureModal from './modals/high-blood-pressure';
+// import HighCholesterolModal from './modals/high-cholesterol';
+// import OthersModal from './modals/others';
+
+import makeStyles from './styles';
+import { useDispatch, useSelector } from 'react-redux';
 import { goBack } from 'services/nav-ref';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalColors } from 'utils/theme/global-colors';
-import ButtonWithShadowContainer from 'components/base/button-with-shadow-container/index';
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import AsthmaModal from './modals/asthma';
-import CancerModal from './modals/cancer';
-import DiabetesModal from './modals/diabetes';
-import GoutModal from './modals/gout';
-import HighBloodPressureModal from './modals/high-blood-pressure';
-import HighCholesterolModal from './modals/high-cholesterol';
-import OthersModal from './modals/others';
+import { IAppState } from 'store/IAppState';
+import { MedicalTemplateAttribute } from 'types/api';
+import GeneralModalPage from './modals/general-modal';
+import {
+  getAndAddMedicalHistoryDataR,
+  getUserProfileData,
+} from 'store/profile/profile-actions';
+import { profileServices } from 'services/profile-services';
+import { logNow } from 'utils/functions/log-binder';
+import { addMedicalHistoryUpdate } from 'store/profile/profile-actions';
+import { userService } from 'services/user-service/user-service';
 
+const options = [
+  { value: '---', label: '---' },
+  { value: 'Caucasian', label: 'Caucasian' },
+  { value: 'Chinese', label: 'Chinese' },
+  { value: 'Filpino', label: 'Filpino' },
+  { value: 'Indian', label: 'Indian' },
+  { value: 'Malay', label: 'Malay' },
+  { value: 'Other / NA', label: 'Other / NA' },
+];
+
+/* eslint-disable */
 const MedicalHistoryScreen = () => {
-  const [isCholesterolModal, setIsCholesterolModal] = useState(false);
-  const [isBloodPressureModal, setIsBloodPressureModal] = useState(false);
-  const [isDiabetesModal, setIsDiabetesModal] = useState(false);
-  const [isAsthmaModal, setIsAsthmaModal] = useState(false);
-  const [isGoutModal, setIsGoutModal] = useState(false);
-  const [isCancerModal, setIsCancerModal] = useState(false);
-  const [isOtherModal, setIsOtherModal] = useState(false);
-  const [isNoneModal, setIsNoneModal] = useState(false);
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
-  const onNonePress = () => {
-    setIsCholesterolModal(false);
-    setIsBloodPressureModal(false);
-    setIsDiabetesModal(false);
-    setIsAsthmaModal(false);
-    setIsGoutModal(false);
-    setIsCancerModal(false);
-    setIsOtherModal(false);
-    setIsNoneModal(true);
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
+  const [dropdownValue, setDropdown] = useState<any>();
+  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
+
+  const [noneId, setNoneId] = useState();
+  useEffect(() => {
+    const id: any = bootstrap?.attributes?.medical_template?.personal?.find(
+      (item) => item.name === 'None'
+    )?.id;
+    setNoneId(id);
+  }, []);
+
+  const [isGeneralModal, setIsGeneralModal, isGenModalRef] = useStateRef(false);
+  useEffect(() => {
+    setIsGeneralModal(isGenModalRef.current);
+    logNow(isGenModalRef.current);
+  }, [isGenModalRef.current]);
+
+  const [generalModalData, setGeneralModalData] =
+    useState<MedicalTemplateAttribute>({});
+
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
+  // medical history data from redux
+  const medicalHistory = useSelector(
+    (state: IAppState) => state.profile?.medicalHistoryUpdate
+  );
+
+  // medical history data from redux
+  const userDetails = useSelector(
+    (state: IAppState) => state.profile?.userProfile
+  );
+  useEffect(() => {
+    setDropdown(userDetails?.ethnic);
+    logNow(userDetails?.ethnic);
+  }, [userDetails]);
+
+  // getData when on focused
+  const getOnFocued = async () => {
+    await dispatch(getAndAddMedicalHistoryDataR());
+  };
+  useEffect(() => {
+    getOnFocued();
+  }, [focused]);
+
+  // save data on save button press
+  const saveDataonSavePress = () => {
+    profileServices
+      .saveAllMedicalHistoryPersonalData({
+        medical_history: {
+          ethnic: dropdownValue,
+          conditions: medicalHistory,
+        },
+      })
+      .then((res) => {
+        logNow('save medical personal ', res);
+      })
+      .catch((err) => {
+        logNow('save medical data error', err);
+      });
+    logNow(dropdownValue);
+    userService
+      .updateUserEthnic(dropdownValue)
+      .then(async (res) => {
+        await dispatch(getUserProfileData());
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+  const onChangeModalState = () => {
+    setIsGeneralModal(!isGeneralModal);
+    setIsGeneralModal(isGenModalRef.current);
   };
 
   return (
     <TitleWithBackLayout title="Medical History">
       {/* modals */}
-      <HighCholesterolModal
-        isVisible={isCholesterolModal}
-        setIsVisible={setIsCholesterolModal}
+      <GeneralModalPage
+        isVisible={isGenModalRef.current}
+        setIsVisible={onChangeModalState}
+        qData={generalModalData}
       />
-      <HighBloodPressureModal
-        isVisible={isBloodPressureModal}
-        setIsVisible={setIsBloodPressureModal}
-      />
-      <DiabetesModal
-        isVisible={isDiabetesModal}
-        setIsVisible={setIsDiabetesModal}
-      />
-      <AsthmaModal isVisible={isAsthmaModal} setIsVisible={setIsAsthmaModal} />
-      <GoutModal isVisible={isGoutModal} setIsVisible={setIsGoutModal} />
-      <CancerModal isVisible={isCancerModal} setIsVisible={setIsCancerModal} />
-      <OthersModal isVisible={isOtherModal} setIsVisible={setIsOtherModal} />
+
       {/* modals */}
       <ScrollView style={styles.container}>
+        <DropdownMenu
+          options={options}
+          selectedValue={dropdownValue}
+          onValueChange={(value: any) => {
+            setDropdown(value);
+            setIsDropDownChanged(true);
+          }}
+          error={
+            isDropdownChanged
+              ? dropdownValue === '---'
+                ? 'Please select your ethnicity'
+                : ''
+              : ''
+          }
+        />
         <Text style={styles.label}>
           Have you ever been diagnosed with any of the following conditions?
         </Text>
-        <View style={styles.rowContainer}>
-          <ModalButtonComponent
-            title="High Cholesterol"
-            isModal={isCholesterolModal}
-            setIsModal={setIsCholesterolModal}
-          />
-          <ModalButtonComponent
-            title="High Blood Pressure"
-            isModal={isBloodPressureModal}
-            setIsModal={setIsBloodPressureModal}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButtonComponent
-            title="Diabetes"
-            isModal={isDiabetesModal}
-            setIsModal={setIsDiabetesModal}
-          />
-          <ModalButtonComponent
-            title="Asthma"
-            isModal={isAsthmaModal}
-            setIsModal={setIsAsthmaModal}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButtonComponent
-            title="Gout"
-            isModal={isGoutModal}
-            setIsModal={setIsGoutModal}
-          />
-          <ModalButtonComponent
-            title="Cancer"
-            isModal={isCancerModal}
-            setIsModal={setIsCancerModal}
-          />
-        </View>
-        <View style={styles.rowContainer}>
-          <ModalButtonComponent
-            title="Others"
-            isModal={isOtherModal}
-            setIsModal={setIsOtherModal}
-          />
-          <ModalButtonComponent
-            title="None"
-            isModal={isNoneModal}
-            setIsModal={onNonePress}
-          />
-        </View>
+        <ScrollView>
+          <View style={styles.rowContainer}>
+            {bootstrap?.attributes?.medical_template?.personal?.map(
+              (item: MedicalTemplateAttribute, index: number) => (
+                <View key={index}>
+                  <GeneralModalButton
+                    isSelected={medicalHistory.some(
+                      (elem) =>
+                        elem.condition_id === item.id && elem.has_condition
+                    )}
+                    drop={item.name !== 'None' ? true : false}
+                    title={item.name}
+                    isModal={isGeneralModal}
+                    setIsModal={async (value: any) => {
+                      if (item.name == 'None') {
+                        await dispatch(
+                          addMedicalHistoryUpdate([
+                            {
+                              condition_id: item.id,
+                              medical_type: 'personal',
+                              has_condition: true,
+                              name: 'None',
+                            },
+                          ])
+                        );
+                        return;
+                      } else {
+                        const updated = medicalHistory.filter(
+                          (item) => item.condition_id !== noneId
+                        );
+                        await dispatch(addMedicalHistoryUpdate(updated));
+                      }
+                      logNow('filter Data', medicalHistory);
+                      onChangeModalState();
+                      setGeneralModalData(item);
+                    }}
+                  />
+                </View>
+              )
+            )}
+          </View>
+        </ScrollView>
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={() => {
+          saveDataonSavePress();
           goBack();
         }}
         title={'Save & Continue'}
@@ -122,25 +209,3 @@ const MedicalHistoryScreen = () => {
 };
 
 export default MedicalHistoryScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: GlobalColors.gray,
-    flex: 1,
-    paddingHorizontal: widthToDp(4),
-    paddingTop: heightToDp(3),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    marginTop: heightToDp(2),
-    justifyContent: 'space-between',
-    paddingHorizontal: widthToDp(4),
-    marginBottom: heightToDp(0.5),
-  },
-});

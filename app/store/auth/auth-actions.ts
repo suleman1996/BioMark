@@ -98,7 +98,6 @@ export const reduxLogin =
 export const reduxFederatedLogin =
   (access_token: string, provider: string) =>
   (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    dispatch(loggingIn(true));
     userService
       .federatedlogin(access_token, provider)
       .then(async (res: LoginResponse) => {
@@ -142,7 +141,6 @@ export const reduxDeviceRegister =
             message,
           })
         );
-        // await navigate('DashboardScreen');
       })
       .catch((err: LoginErrorResponse) => {
         logNow('err', err);

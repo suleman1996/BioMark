@@ -1,8 +1,10 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { useTheme } from 'react-native-paper';
+
 import { Button as PaperButton } from 'react-native-paper';
 
-import colors from 'assets/colors';
+// import colors from 'assets/colors';
 
 type Props = {
   marginHorizontal?: number;
@@ -13,8 +15,11 @@ type Props = {
 };
 
 export default function Button(props: Props) {
+  const { colors } = useTheme();
+
   const horizontal = props.marginHorizontal ? props.marginHorizontal : 20;
   const vertical = props.marginVertical ? props.marginVertical : 20;
+
   return (
     <View
       style={[
@@ -30,9 +35,9 @@ export default function Button(props: Props) {
           contentStyle={{ height: 50 }}
           style={[
             styles.btn,
-            { backgroundColor: props?.disabled ? '#8493AE60' : colors.blue },
+            { backgroundColor: props?.disabled ? colors.disable : colors.blue },
           ]}
-          labelStyle={{ color: colors.whiteColor }}
+          labelStyle={{ color: colors.white }}
           onPress={props.onPress}
         >
           {props.title}

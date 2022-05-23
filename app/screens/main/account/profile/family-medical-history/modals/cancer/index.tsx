@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import DropdownMenuComponent from 'components/base/dropdown-menu';
-import ModalWithBottomBtn from 'components/higher-order/modal-with-bottom-btn';
-import RadioButtonQuestionComponent from 'components/higher-order/radio-question';
+import { DropdownMenu } from 'components/base';
+import {
+  RadioButtonQuestion,
+  ModalWithBottomBtn,
+} from 'components/higher-order';
+
 import { GlobalStyles } from 'utils/theme/global-styles';
 
 const options = [{ title: 'Blood' }, { title: 'Breast' }];
@@ -15,8 +19,8 @@ type Props = {
 const CancerModal = ({ isVisible }: Props) => {
   //    Have you been diagnosed with Cancer?
   const [ans1, setAns1] = useState(false);
-
   const [cancerType, setCancerType] = useState('');
+  const { colors } = useTheme();
 
   return (
     <ModalWithBottomBtn
@@ -24,16 +28,16 @@ const CancerModal = ({ isVisible }: Props) => {
       title="Cancer"
       onPress={() => console.log('clicked')}
     >
-      <RadioButtonQuestionComponent
+      <RadioButtonQuestion
         isTrue={ans1}
         setIsTrue={setAns1}
         question="Do any of your family members have or have had cancer?"
       />
       {ans1 ? (
         <>
-          <Text style={GlobalStyles.qLabel}>Which type of cancer?</Text>
+          <Text style={GlobalStyles(colors).qLabel}>Which type of cancer?</Text>
           <View style={{}}>
-            <DropdownMenuComponent
+            <DropdownMenu
               options={options}
               onValueChange={setCancerType}
               selectedValue={cancerType}

@@ -1,8 +1,7 @@
 /* eslint-disable eslint-comments/no-unused-disable */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   Keyboard,
@@ -11,32 +10,41 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 import * as Yup from 'yup';
 import CountryPicker, {
   DEFAULT_THEME,
 } from 'react-native-country-picker-modal';
+import moment from 'moment';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
 
-import colors from 'assets/colors';
-import BackIcon from 'assets/svgs/back';
-import Button from 'components/button/button';
-import CheckBox from 'components/checkbox';
-import DatePicker from 'components/date-picker';
-import TextInput from 'components/input-field/text-input';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { Button } from 'components/button';
+import { DatePicker, TextInput, ActivityIndicator, CheckBox } from 'components';
+import { useTheme } from 'react-native-paper';
+
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
+import {
+  getAuthAsyncStorage,
+  resetAuthAsyncStorage,
+} from 'services/async-storage/auth-async-storage';
+import { loggedIn, loggedOut } from 'store/auth/auth-actions';
 
-import styles from './styles';
-import { resetAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
-import { useDispatch } from 'react-redux';
-import { loggedInHasProfile, loggedOut } from 'store/auth/auth-actions';
-import moment from 'moment';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { BackIcon } from 'assets/svgs/index';
 
-export default function index() {
+import makeStyles from './styles';
+
+export default function CreateProfile() {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
+  const dispatch = useDispatch();
+  const dispatch3 = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
   const [selectCountryCode, setSelectCountryCode] = useState('60');
@@ -59,11 +67,14 @@ export default function index() {
   const [checked, setChecked] = React.useState(false);
   const [date, setDate] = useState(new Date());
   const [isPickerShow, setIsPickerShow] = useState(false);
-  const dispatch = useDispatch();
-  const dispatch2 = useDispatch();
-  const navigations = useNavigation();
-  //fuctions
 
+  async function getHasprofileAsyncStorage() {
+    const data = await getAuthAsyncStorage();
+    dispatch3(loggedIn(data));
+    console.log('data', data);
+  }
+
+  //functions
   const signupApi = async (values: string) => {
     // setLoading(true);
     Keyboard.dismiss();
@@ -73,8 +84,7 @@ export default function index() {
       .then(async (res) => {
         logNow('signup res', res);
         await AsyncStorage.setItem('hasProfile', JSON.stringify(true));
-        // await dispatch2(loggedInHasProfile(true));
-        navigations.navigate('BottomTabNavigator');
+        getHasprofileAsyncStorage();
       })
       .catch((err: RegisterUserErrorResponse) => {
         logNow('error signup', err.errMsg.data.message);
@@ -100,6 +110,16 @@ export default function index() {
     }
   };
 
+  const onSelect = (Country: any) => {
+    setCountryCode(Country.cca2);
+    setSelectCountryCode(Country.callingCode[0]);
+  };
+
+  const onBackPress = async () => {
+    await resetAuthAsyncStorage();
+    dispatch(loggedOut(true));
+  };
+
   const RenderRadio = ({ item }) => (
     <TouchableOpacity
       onPress={() => setSelectedGender(item)}
@@ -107,9 +127,9 @@ export default function index() {
         styles.radioButton,
         {
           backgroundColor:
-            item.id === selectedGender.id ? colors.heading : colors.whiteColor,
+            item.id === selectedGender.id ? colors.heading : colors.white,
           borderColor:
-            item.id === selectedGender.id ? colors.heading : colors.placeHolder,
+            item.id === selectedGender.id ? colors.heading : colors.lightGrey,
         },
       ]}
     >
@@ -118,9 +138,7 @@ export default function index() {
           (styles.radioText,
           {
             color:
-              item.id === selectedGender.id
-                ? colors.whiteColor
-                : colors.heading,
+              item.id === selectedGender.id ? colors.white : colors.heading,
           })
         }
       >
@@ -129,24 +147,6 @@ export default function index() {
     </TouchableOpacity>
   );
 
-  const ResetPassSchema = Yup.object({
-    fName: Yup.string().required('Please provide your first name'),
-
-    lName: Yup.string().required('Please provide your last name'),
-
-    IcPnum: Yup.string(),
-    email: Yup.string(),
-  });
-  const onSelect = (Country: any) => {
-    console.log(Country);
-
-    setCountryCode(Country.cca2);
-    setSelectCountryCode(Country.callingCode[0]);
-  };
-  const onBackPress = async () => {
-    await resetAuthAsyncStorage();
-    dispatch(loggedOut(true));
-  };
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -212,7 +212,7 @@ export default function index() {
                     preferredCountries={preferredCountries}
                     theme={{
                       ...DEFAULT_THEME,
-                      backgroundColor: colors.whiteColor,
+                      backgroundColor: colors.white,
                       onBackgroundTextColor: colors.heading,
                       fontSize: 14,
                     }}
@@ -292,3 +292,12 @@ export default function index() {
     </>
   );
 }
+
+const ResetPassSchema = Yup.object({
+  fName: Yup.string().required('Please provide your first name'),
+
+  lName: Yup.string().required('Please provide your last name'),
+
+  IcPnum: Yup.string(),
+  email: Yup.string(),
+});

@@ -1,9 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text, Platform } from 'react-native';
+import { TouchableOpacity, Text, Platform } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
-import colors from 'assets/colors';
+import makeStyles from './styles';
 
 type Props = {
   width: any;
@@ -14,6 +16,9 @@ type Props = {
 };
 
 const DatePicker = (props: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const { width, date, setDate, isPickerShow, setIsPickerShow } = props;
   let otherStyles = [];
 
@@ -43,12 +48,7 @@ const DatePicker = (props: Props) => {
           }}
         />
       )}
-      <Text
-        style={{
-          marginLeft: 15,
-          color: colors.black,
-        }}
-      >
+      <Text style={styles.dateText}>
         {moment(date).format('MM/DD/YYYY')}
         {/* January             |  01                         |  1990 */}
       </Text>
@@ -57,18 +57,3 @@ const DatePicker = (props: Props) => {
 };
 
 export default DatePicker;
-
-const styles = StyleSheet.create({
-  container: {
-    borderBottomColor: colors.inputBg,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    borderRadius: 8,
-    height: 44,
-    backgroundColor: colors.inputBg,
-  },
-  datePickerStyle: {
-    alignSelf: 'center',
-    width: '100%',
-  },
-});

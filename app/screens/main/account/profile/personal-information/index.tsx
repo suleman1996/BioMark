@@ -1,31 +1,34 @@
+import React, { useState } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
-import React, { useState } from 'react';
-import { RadioButton } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
-import TitleWithBackLayout from 'components/layouts/back-with-title/index';
-import Button from 'components/button/button';
-import InputWithLabel from 'components/base/input-with-label';
-import { GlobalColors } from 'utils/theme/global-colors';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import DatePicker from 'components/date-picker';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import AuthContext from 'utils/auth-context';
-import ActivityIndicator from 'components/loader/activity-indicator';
+import { RadioButton } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
+
+import { TitleWithBackLayout } from 'components/layouts';
+import { Button } from 'components/button';
+import { InputWithLabel, Button as ButtonComponent } from 'components/base';
+import { DatePicker, ActivityIndicator } from 'components';
+
+import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
+import { goBack } from 'services/nav-ref';
+
 import fonts from 'assets/fonts';
-import ButtonComponent from 'components/base/button';
+
+import makeStyles from './styles';
 
 const PersonalInformationScreen = () => {
   const authContext = React.useContext(AuthContext);
+
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const [value, setValue] = useState(
     authContext?.userData?.gender?.id == 1 ? 'first' : 'second'
@@ -37,73 +40,16 @@ const PersonalInformationScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [genderWar, setGenderWarn] = useState(false);
   const [genderCheck, setGenderCheck] = useState(false);
+  const [genderDisable, setGenderDisable] = useState(false);
 
   React.useEffect(() => {
     setGenderCheck(true);
   }, [value]);
 
-  const RenderConfirmation = ({ visible = false }) => {
-    if (!visible) {
-      return null;
-    }
-
-    return (
-      <View style={styles.overLay}>
-        <View
-          style={{
-            backgroundColor: GlobalColors.white,
-            width: '90%',
-            borderRadius: 5,
-            padding: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: fonts.bold,
-              color: GlobalColors.heading,
-              fontSize: 18,
-              marginBottom: 30,
-            }}
-          >
-            Are you sure?
-          </Text>
-
-          <Text
-            style={{
-              fontFamily: fonts.regular,
-              color: GlobalColors.lightGrey,
-              fontSize: 14,
-              marginBottom: 40,
-            }}
-          >
-            Are you sure you want to change your gender? Your diabetes medical
-            history will be updated to Unsure. You will need to update your
-            personal medical history again.
-          </Text>
-          <ButtonComponent onPress={() => handleUpdateProfile()} title="yes" />
-          <TouchableOpacity onPress={() => setGenderWarn(false)}>
-            <Text
-              style={{
-                marginTop: 15,
-                fontFamily: fonts.regular,
-                color: GlobalColors.lightGrey,
-                fontSize: 14,
-                marginBottom: 10,
-                alignSelf: 'center',
-              }}
-            >
-              Exit
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
-
   const handleUpdateProfile = async () => {
     Keyboard.dismiss();
     setGenderWarn(false);
-    const gender = value == 'first' ? 1 : 0;
+    const gender = value == 'first' ? 1 : 2;
     const ic_number = authContext?.userData?.ic_number;
     const email = authContext?.userData?.email;
     try {
@@ -117,9 +63,8 @@ const PersonalInformationScreen = () => {
         email
       );
       console.log('success ', result.data);
-
       authContext?.setUserData(result.data);
-
+      goBack();
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -141,6 +86,64 @@ const PersonalInformationScreen = () => {
         });
       }
     }
+  };
+
+  const RenderConfirmation = ({ visible = false }) => {
+    if (!visible) {
+      return null;
+    }
+
+    return (
+      <View style={styles.overLay}>
+        <View
+          style={{
+            backgroundColor: colors.white,
+            width: '90%',
+            borderRadius: 5,
+            padding: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: fonts.bold,
+              color: colors.heading,
+              fontSize: 18,
+              marginBottom: 30,
+            }}
+          >
+            Are you sure?
+          </Text>
+
+          <Text
+            style={{
+              fontFamily: fonts.regular,
+              color: colors.lightGrey,
+              fontSize: 14,
+              marginBottom: 40,
+            }}
+          >
+            Are you sure you want to change your gender? Your diabetes medical
+            history will be updated to Unsure. You will need to update your
+            personal medical history again.
+          </Text>
+          <ButtonComponent onPress={() => handleUpdateProfile()} title="yes" />
+          <TouchableOpacity onPress={() => setGenderWarn(false)}>
+            <Text
+              style={{
+                marginTop: 15,
+                fontFamily: fonts.regular,
+                color: colors.lightGrey,
+                fontSize: 14,
+                marginBottom: 10,
+                alignSelf: 'center',
+              }}
+            >
+              Exit
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   };
 
   return (
@@ -169,22 +172,31 @@ const PersonalInformationScreen = () => {
         />
         <Text style={styles.label}>Gender</Text>
         <RadioButton.Group
-          onValueChange={(newValue) => setValue(newValue)}
+          onValueChange={(newValue) => {
+            setValue(newValue), setGenderDisable(true);
+          }}
           value={value}
         >
           <View style={styles.radioContainer}>
-            <RadioButton color={GlobalColors.darkPrimary} value="first" />
+            <RadioButton color={colors.darkPrimary} value="first" />
             <Text style={styles.radioText}>Male</Text>
           </View>
           <View style={styles.radioContainer}>
-            <RadioButton color={GlobalColors.darkPrimary} value="second" />
+            <RadioButton color={colors.darkPrimary} value="second" />
             <Text style={styles.radioText}>Female</Text>
           </View>
         </RadioButton.Group>
       </ScrollView>
       <Button
         disabled={
-          firstName?.length > 0 && lastName?.length > 0 && value ? false : true
+          firstName.length > authContext?.userData?.first_name.length ||
+          firstName.length < authContext?.userData?.first_name.length ||
+          lastName.length > authContext?.userData?.last_name.length ||
+          lastName.length < authContext?.userData?.last_name.length ||
+          date != authContext?.userData?.birth_date ||
+          genderDisable == true
+            ? false
+            : true
         }
         title="Save & Continue"
         onPress={() => {
@@ -196,34 +208,3 @@ const PersonalInformationScreen = () => {
 };
 
 export default PersonalInformationScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: GlobalColors.white,
-    flex: 1,
-    paddingHorizontal: widthToDp(4),
-  },
-  label: {
-    fontSize: responsiveFontSize(22),
-    fontFamily: GlobalFonts.medium,
-    color: GlobalColors.darkPrimary,
-    marginTop: heightToDp(2),
-  },
-  radioContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  radioText: {
-    fontSize: responsiveFontSize(18),
-    fontFamily: GlobalFonts.light,
-  },
-  overLay: {
-    position: 'absolute',
-    backgroundColor: '#3D3D3D90',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 100,
-  },
-});

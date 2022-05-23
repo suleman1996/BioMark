@@ -1,39 +1,59 @@
-import { StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ScrollView, View } from 'react-native';
 
-import ButtonComponent from 'components/base/button';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import DependantsList from 'components/ui/dependants-list';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { Button } from 'components/base';
+import { DependantsList } from 'components/ui';
+
 import { navigate } from 'services/nav-ref';
-import { Nav_Screens } from 'navigation/constants/index';
+import { getAllDependents } from 'store/account/account-actions';
+import { IAppState } from 'store/IAppState';
+import SCREENS from 'navigation/constants';
 
-const DependantsScreen = () => {
+import styles from './styles';
+
+type Props = {
+  navigation: any;
+};
+
+const DependantsScreen = (props: Props) => {
+  const {} = props;
+  // const [data, setData] = useState<Array<DependentData>>([]);
+
+  const data = useSelector((state: IAppState) => state.account.allDependents);
+
+  const hasUnsavedChanges = Boolean(true);
+  const dispatch = useDispatch();
+  /*eslint-disable*/
+  React.useEffect(
+    () =>
+      props.navigation.addListener('beforeRemove', (e) => {
+        console.log('e', e);
+
+        // alert('hii');
+      }),
+    [props.navigation, hasUnsavedChanges]
+  );
+  useEffect(() => {
+    dispatch(getAllDependents());
+  }, []);
+  /*eslint-enable*/
   return (
     <View style={styles.container}>
-      <DependantsList />
       <View style={styles.bottomBtnContainer}>
-        <ButtonComponent
-          onPress={() => navigate(Nav_Screens.Add_Dependants)}
-          title={'Add New Dependant'}
-        />
+        <ScrollView style={{ flex: 1 }}>
+          <DependantsList data={data} />
+          <View style={{ alignItems: 'center' }}>
+            <Button
+              onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
+              title={'Add New Dependant'}
+            />
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
 };
 
 export default DependantsScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  bottomBtnContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    bottom: 0,
-    paddingBottom: heightToDp(3),
-    width: widthToDp(100),
-    paddingHorizontal: widthToDp(6),
-  },
-});

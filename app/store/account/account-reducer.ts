@@ -1,5 +1,5 @@
 import { AccountState } from './AccountState';
-import { DEPENDENTS } from './constants';
+import { DEPENDENTS, BOOTSTRAP, LOCATION } from './constants';
 
 const INITIAL_STATE = new AccountState();
 
@@ -9,6 +9,20 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         allDependents: action.payload,
+      };
+    }
+
+    case BOOTSTRAP: {
+      return {
+        ...state,
+        bootstrap: action.payload,
+      };
+    }
+
+    case LOCATION: {
+      return {
+        ...state,
+        geolocation: action.payload,
       };
     }
 

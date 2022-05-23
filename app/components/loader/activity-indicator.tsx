@@ -1,10 +1,22 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
 import { BarIndicator } from 'react-native-indicators';
 
-import colors from 'assets/colors';
+import makeStyles from './styles';
 
-export default function ActivityIndicator({ visible = false, fontSize }) {
+type Props = {
+  visible: boolean;
+  fontSize?: any;
+};
+
+export default function ActivityIndicator({
+  visible = false,
+  fontSize,
+}: Props) {
+  const { colors } = useTheme();
+  const styles = makeStyles();
   if (!visible) {
     return null;
   }
@@ -15,15 +27,3 @@ export default function ActivityIndicator({ visible = false, fontSize }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  overLay: {
-    position: 'absolute',
-    backgroundColor: '#ffffff90',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 100,
-  },
-});

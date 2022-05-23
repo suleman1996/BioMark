@@ -1,32 +1,36 @@
-import { View } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import { showMessage } from 'react-native-flash-message';
+import { ScrollView, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-import ActivityIndicator from 'components/loader/activity-indicator';
-import { goBack } from 'services/nav-ref';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import { styles } from './styles';
-import InputWithLabel from 'components/base/input-with-label';
-import ButtonComponent from 'components/base/button';
-import { userService } from 'services/user-service/user-service';
-import { logNow } from 'utils/functions/log-binder';
+import { Formik } from 'formik';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserContactsDetails } from 'store/auth/auth-actions';
-import { IAppState } from 'store/IAppState';
-import ErrorLineFullWidth from 'components/higher-order/error-full-width-line';
-import { GlobalColors } from 'utils/theme/global-colors';
+import * as Yup from 'yup';
+
+import { ActivityIndicator } from 'components';
+import { InputWithLabel, Button } from 'components/base';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+
+import { goBack } from 'services/nav-ref';
+import { logNow } from 'utils/functions/log-binder';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
-const EmailChangeScreen = () => {
-  const formikRef = useRef<any>();
+import { userService } from 'services/user-service/user-service';
+import { addUserContactsDetails } from 'store/auth/auth-actions';
+import { IAppState } from 'store/IAppState';
 
+import makeStyles from './styles';
+
+const EmailChangeScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
+  const dispatch = useDispatch();
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
   );
 
+  const formikRef = useRef<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState(userContacts.email_address);
 
@@ -39,8 +43,6 @@ const EmailChangeScreen = () => {
     }
   }, []);
   /*eslint-enable */
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     setEmail(userContacts.email_address);
@@ -65,10 +67,14 @@ const EmailChangeScreen = () => {
     userService
       .saveUserContacts(confirmEmail)
       .then(() => {
-        showMessage({
-          message: 'Email changed successfully',
-          type: 'success',
-        });
+        userService
+          .getUserContacts()
+          .then((res) => {
+            logNow(res);
+            dispatch(addUserContactsDetails(res));
+          })
+          .catch(() => {})
+          .finally(() => {});
         goBack();
       })
       .catch(() => {})
@@ -77,17 +83,8 @@ const EmailChangeScreen = () => {
       });
   };
 
-  const ResetPassSchema = Yup.object({
-    email: Yup.string().email('Invalid email format').required('Required'),
-    confirmEmail: Yup.string()
-      .email('Invalid email format')
-      .required('Required')
-      .oneOf([Yup.ref('email'), null], 'Email does not match')
-      .required('Confirm email is required'),
-  });
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: GlobalColors.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
       <ActivityIndicator visible={isLoading} />
       <Formik
         innerRef={formikRef}
@@ -101,42 +98,52 @@ const EmailChangeScreen = () => {
         {({ handleChange, handleSubmit, values, errors }) => (
           <>
             <TitleWithBackWhiteBgLayout title="Email">
-              <View style={styles.container}>
-                <InputWithLabel
-                  labelFontSize={25}
-                  label={'Email Address'}
-                  placeholder={'Enter your email address'}
-                  value={values.email}
-                  onFocus={() => formikRef.current.submitForm()}
-                  onChange={handleChange('email')}
-                />
-                <InputWithLabel
-                  labelFontSize={25}
-                  onFocus={() => formikRef.current.submitForm()}
-                  label={'Confirm Email Address'}
-                  placeholder={'Enter your email address'}
-                  onChange={handleChange('confirmEmail')}
-                  value={values.confirmEmail}
-                />
-              </View>
+              <ScrollView
+                contentContainerStyle={{ flex: 1 }}
+                showsVerticalScrollIndicator={false}
+              >
+                <View style={styles.container}>
+                  <InputWithLabel
+                    labelFontSize={25}
+                    label={'Email Address'}
+                    placeholder={'Enter your email address'}
+                    value={values.email}
+                    onFocus={() => formikRef.current.submitForm()}
+                    onChange={handleChange('email')}
+                    error={values.email ? errors.email : ''}
+                  />
+                  <InputWithLabel
+                    labelFontSize={25}
+                    onFocus={() => formikRef.current.submitForm()}
+                    label={'Confirm Email Address'}
+                    placeholder={'Enter your email address'}
+                    onChange={handleChange('confirmEmail')}
+                    value={values.confirmEmail}
+                    error={values.confirmEmail ? errors.confirmEmail : ''}
+                  />
+                </View>
+                {/* <ErrorLineFullWidth error={values.email ? errors.email : ''} />
+                <ErrorLineFullWidth
+                  error={values.confirmEmail ? errors.confirmEmail : ''}
+                /> */}
+                <View style={GlobalStyles(colors).bottomBtnWithShadow}>
+                  <Button
+                    onPress={() => {
+                      submitForm();
+                      handleSubmit();
+                    }}
+                    title={'Save'}
+                    disabled={
+                      Object.entries(errors).length === 0
+                        ? values.confirmEmail
+                          ? false
+                          : true
+                        : true
+                    }
+                  />
+                </View>
+              </ScrollView>
             </TitleWithBackWhiteBgLayout>
-            <ErrorLineFullWidth error={errors.email || errors.confirmEmail} />
-            <View style={GlobalStyles.bottomBtnWithShadow}>
-              <ButtonComponent
-                onPress={() => {
-                  submitForm();
-                  handleSubmit();
-                }}
-                title={'Save'}
-                disabled={
-                  Object.entries(errors).length === 0
-                    ? values.confirmEmail
-                      ? false
-                      : true
-                    : true
-                }
-              />
-            </View>
           </>
         )}
       </Formik>
@@ -145,3 +152,16 @@ const EmailChangeScreen = () => {
 };
 
 export default EmailChangeScreen;
+
+const ResetPassSchema = Yup.object({
+  email: Yup.string()
+    .email('Invalid email format')
+    .required('Required')
+    .lowercase(),
+  confirmEmail: Yup.string()
+    .email('Invalid email format')
+    .required('Required')
+    .oneOf([Yup.ref('email'), null], 'Email does not match')
+    .required('Confirm email is required')
+    .lowercase(),
+});

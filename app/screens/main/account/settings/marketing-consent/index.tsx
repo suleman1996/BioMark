@@ -1,36 +1,31 @@
-import ButtonComponent from 'components/base/button';
-import CheckBoxWithText from 'components/base/checkbox-with-text';
-import TitleWithBackWhiteBgLayout from 'components/layouts/back-with-title-white-bg';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import MarketingConsentModal from 'components/ui/marketing-consent-modal';
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { settingsService } from 'services/account-service/settings-service';
+import { useTheme } from 'react-native-paper';
+
 import { goBack } from 'services/nav-ref';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { ActivityIndicator } from 'components';
+import { CheckBoxWithText, Button } from 'components/base';
+import { TitleWithBackWhiteBgLayout } from 'components/layouts';
+import { MarketingConsentModal } from 'components/ui';
+
+import { settingsService } from 'services/account-service/settings-service';
 import { setMarketing } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import { GlobalStyles } from 'utils/theme/global-styles';
-import { styles } from './styles';
+
+import makeStyles from './styles';
 
 const MarketingConsentScreen = () => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
   const dispatch = useDispatch();
   const userMarketing = useSelector((state: IAppState) => state.auth.marketing);
-
-  const [isLoading, setIsLoading] = useState(false);
-
   const [isChecked, setIsChecked] = useState(false);
   const [isMModal, setIsMModal] = useState(false);
-  const [isInitialDisable, setIsInitialDisable] = useState(true);
-
-  const getUserMarketing = () => {
-    settingsService
-      .getMarketing()
-      .then((res) => {
-        dispatch(setMarketing(res));
-      })
-      .catch(() => {});
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getUserMarketing();
@@ -40,6 +35,15 @@ const MarketingConsentScreen = () => {
   useEffect(() => {
     setIsChecked(userMarketing.enable);
   }, [userMarketing]);
+
+  const getUserMarketing = () => {
+    settingsService
+      .getMarketing()
+      .then((res) => {
+        dispatch(setMarketing(res));
+      })
+      .catch(() => {});
+  };
 
   const onChangeMarketing = () => {
     setIsMModal(false);
@@ -76,7 +80,6 @@ const MarketingConsentScreen = () => {
           rightText="I  would like to receive information on offers, promotions and services via email and SMS."
           isChecked={isChecked}
           setIsChecked={(value: any) => {
-            setIsInitialDisable(false);
             if (!value) {
               setIsMModal(true);
             } else {
@@ -85,13 +88,12 @@ const MarketingConsentScreen = () => {
           }}
         />
         <View
-          style={[GlobalStyles.bottomBtnWithShadow, styles.bottomBtnContainer]}
+          style={[
+            GlobalStyles(colors).bottomBtnWithShadow,
+            styles.bottomBtnContainer,
+          ]}
         >
-          <ButtonComponent
-            onPress={() => onChangeMarketing()}
-            title={'Save'}
-            disabled={isInitialDisable}
-          />
+          <Button onPress={() => onChangeMarketing()} title={'Save'} />
         </View>
       </View>
     </TitleWithBackWhiteBgLayout>

@@ -1,0 +1,15 @@
+export { default as Apple } from './apple';
+export { default as AccountIcon } from './account-icon';
+export { default as ArrowBack } from './arrow-back';
+export { default as AppointmentIcon } from './appointmen-icon';
+export { default as BackIcon } from './back';
+export { default as Covid19 } from './covid-19';
+export { default as Facebook } from './facebook';
+export { default as Google } from './google';
+export { default as HomeIcon } from './home-icon';
+export { default as InboxIcon } from './inbox-icon';
+export { default as Lock } from './lock';
+export { default as Logo } from './logo-name';
+export { default as SetToGo } from './set-to-go';
+export { default as YourHealth } from './your-health';
+export { default as Back } from './back';

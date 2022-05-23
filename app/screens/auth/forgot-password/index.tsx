@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
+import { useTheme } from 'react-native-paper';
 
-import Button from 'components/button/button';
-import Header from 'components/header';
-import ActivityIndicator from 'components/loader/activity-indicator';
-import PhoneNumber from 'components/phone-number';
-import { Nav_Screens } from 'navigation/constants';
+import { Button } from 'components/button';
+import { Header, ActivityIndicator, PhoneNumber } from 'components';
+
+import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { ForgotPasswordErrorResponse } from 'types/auth/ForgotPassword';
 import { logNow } from 'utils/functions/log-binder';
-import styles from './styles';
+
+import makeStyles from './styles';
+import { useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
 export default function ForgotPassword() {
-  const [countryCode, setCountryCode] = useState('MY');
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+
+  const [countryCode, setCountryCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [selectCountryCode, setSelectCountryCode] = useState('60');
+  const [selectCountryCode, setSelectCountryCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+  const geoLocation = useSelector(
+    (state: IAppState) => state.account.geolocation
+  );
 
   useEffect(() => {
     if (selectCountryCode == '60') {
@@ -32,6 +41,15 @@ export default function ForgotPassword() {
     }
   }, [selectCountryCode]);
 
+  useEffect(() => {
+    console.log('locc =======>', geoLocation);
+    if (geoLocation.code) {
+      setCountryCode(geoLocation.code);
+      let countryCodeParse = geoLocation.dial_code.replace('+', '');
+      setSelectCountryCode(countryCodeParse);
+    }
+  }, [geoLocation]);
+
   const handleForgotPassword = async () => {
     setLoading(true);
     Keyboard.dismiss();
@@ -39,7 +57,8 @@ export default function ForgotPassword() {
     userService
       .forgotPassword(username)
       .then(() => {
-        navigate(Nav_Screens.PasswordOTPScreen, { phone: username });
+        // navigate(SCREENS.PASSWORD_OTP, { phone: username });
+        navigate(SCREENS.CREATE_PASSWORD, { phone: username });
       })
       .catch((err: ForgotPasswordErrorResponse) => {
         logNow(err);
@@ -80,20 +99,42 @@ export default function ForgotPassword() {
               width="100%"
               maxLength={numberCondition.max}
             />
-            {phoneNumber !== '' && phoneNumber.length < numberCondition.min && (
-              <Text style={styles.errorMessage}>
-                Must have {numberCondition.min}
-                {numberCondition.max !== numberCondition.min &&
-                  -numberCondition.max}{' '}
-                characters
-              </Text>
-            )}
+            {phoneNumber !== '' &&
+              (selectCountryCode == 63 ? (
+                phoneNumber.charAt(0) == 0 ? (
+                  <Text style={styles.errorMessage}>
+                    Phonenumber must not start with 0
+                  </Text>
+                ) : (
+                  phoneNumber.length < numberCondition.min && (
+                    <Text style={styles.errorMessage}>
+                      Must have {numberCondition.min}
+                      {numberCondition.max !== numberCondition.min &&
+                        -numberCondition.max}{' '}
+                      characters
+                    </Text>
+                  )
+                )
+              ) : (
+                phoneNumber.length < numberCondition.min && (
+                  <Text style={styles.errorMessage}>
+                    Must have {numberCondition.min}
+                    {numberCondition.max !== numberCondition.min &&
+                      -numberCondition.max}{' '}
+                    characters
+                  </Text>
+                )
+              ))}
             <View style={styles.floatingBtn}>
               <Button
-                onPress={() => handleForgotPassword()}
+                onPress={() =>
+                  phoneNumber.length >= numberCondition.min &&
+                  handleForgotPassword()
+                }
                 title="Continue"
                 disabled={
-                  phoneNumber.length < numberCondition.min ? true : false
+                  // phoneNumber.length < numberCondition.min ? true : false
+                  phoneNumber.length < 1 ? true : false
                 }
               />
             </View>
