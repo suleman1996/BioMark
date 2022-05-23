@@ -4,12 +4,14 @@ import React, { useState } from 'react';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import CircleBtn from '../../button/circleBtn';
 import { responsiveFontSize } from './../../../utils/functions/responsive-text';
 import CalenderStrip from './../../higher-order/calender-strip/index';
 import { makeStyles } from './styles';
-
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { GlobalFonts } from 'utils/theme/fonts';
+import TimeSlots from './../time-slots/index';
 type Props = {};
 
 const options = [
@@ -173,9 +175,56 @@ const ExisitingBookingForDependent = (props: Props) => {
                 </>
               ) : null}
             </View>
-
+            {true ? (
+              <>
+                <Text style={styles.innerTitle}>City Test Centers</Text>
+                <MapView
+                  style={{ width: widthToDp(88), height: heightToDp(20) }}
+                  provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                  region={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.015,
+                    longitudeDelta: 0.0121,
+                  }}
+                >
+                  <Marker
+                    key={0}
+                    coordinate={{
+                      latitude: 37.78825,
+                      longitude: -122.4324,
+                    }}
+                    title={'My ttile'}
+                  >
+                    <View
+                      style={{
+                        width: widthToDp(15),
+                        height: heightToDp(3),
+                        backgroundColor: 'white',
+                        borderWidth: 0.2,
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontFamily: GlobalFonts.medium,
+                          color: colors.primary,
+                        }}
+                      >
+                        RM 143
+                      </Text>
+                    </View>
+                  </Marker>
+                </MapView>
+              </>
+            ) : null}
             <Text style={styles.innerTitle}>Choose a test date</Text>
             <CalenderStrip />
+            <View style={{ marginTop: heightToDp(1) }} />
+
+            {/* shift chooser */}
+            <Text style={styles.innerTitle}>Morning timeslots</Text>
+            <TimeSlots />
             <View style={styles.bottomBtnContainer}>
               <View
                 style={[styles.bottomBtn, { backgroundColor: colors.white }]}

@@ -5,6 +5,7 @@ import makeStyles from './styles';
 import StepIndicator from 'react-native-step-indicator';
 import ButtonComponent from 'components/base/button';
 import ExisitingBookingForDependent from 'components/ui/covid-test-book-for-existing/index';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {};
 
@@ -53,11 +54,12 @@ const BookCovidTest = (props: Props) => {
             marginTop={1}
             title={'Add Self'}
           />
+          <View style={{ marginTop: heightToDp(12) }} />
           <View style={styles.bottom2Btns}>
             <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
-            <Pressable style={styles.btn}>
+            <Pressable style={styles.btnEnable}>
               <Text style={[styles.btnText2]}>Next</Text>
             </Pressable>
           </View>
