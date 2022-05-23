@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { BloodSugarChooser } from 'components/higher-order';
+import { WeightChooser } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
   ButtonWithShadowContainer,
   DateTimePickerModal,
-  DropdownMenu,
 } from 'components/base';
-import { IAppState } from 'store/IAppState';
-import { getReduxMedicalDropDown } from 'store/home/home-actions';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
@@ -20,7 +17,6 @@ import { showMessage } from 'react-native-flash-message';
 
 import makeStyles from './styles';
 import { ActivityIndicator } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   getDay,
   getMonth,
@@ -28,36 +24,21 @@ import {
   getYear,
 } from 'utils/functions/date-format';
 
-const BloodSugar = () => {
+const Weight = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
   const [value, setValue] = useState('');
-  const [selectedType, setSelectedType] = useState(1);
 
   const [isLoading, setIsLoading] = useState(false);
-
-  const [dropdownValue, setDropdown] = useState<any>();
-  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
   const [dateAndtime, setDateAndTime] = useState<any>();
   const [validation, setValidation] = useState<any>(false);
   const [validation2, setValidation2] = useState<any>(false);
-  const [options, setOptions] = useState<any>([]);
-  const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
-  const dispatch = useDispatch();
+  const [selectedTypeWeight, setSelectedTypeWeight] = useState(1);
 
   useEffect(() => {
-    dispatch(getReduxMedicalDropDown());
-    let arr = [];
-    drop?.meal_type?.map((ele) => {
-      console.log('ele', ele);
-      arr.push({ label: ele.name, value: ele.id });
-    });
-    setOptions(arr);
-
     let today = new Date();
-    let dateTime = '';
-    dateTime =
+    let dateTime =
       getMonth(today) +
       ' ' +
       getDay(today) +
@@ -66,30 +47,27 @@ const BloodSugar = () => {
       ' ' +
       getTime(today);
     setDateAndTime(dateTime);
-    console.log('dt', dateTime);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, []);
 
-  const onChangeText = (values) => {
-    console.log('value', value);
+  const onChangeText = (val) => {
+    console.log(selectedTypeWeight, 'selectedTypeWeight');
 
-    if ((values < 1 || values > 600) && selectedType === 1) {
-      setValidation2(false);
+    setValue(val);
+    if ((val < 0 || val > 200) && selectedTypeWeight === 2) {
       setValidation(true);
-    } else if ((values < 0.06 || values > 50) && selectedType === 21) {
+      setValidation2(false);
+    } else if ((val < 0 || val > 400) && selectedTypeWeight === 1) {
       setValidation(false);
       setValidation2(true);
     } else {
       setValidation(false);
       setValidation2(false);
-      console.log('emmty');
     }
-    setValue(values);
-    // setValue(value);
   };
 
   const onSubmit = async () => {
     let dateTime = '';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dateTime =
       getMonth(dateAndtime) +
       ' ' +
@@ -98,32 +76,31 @@ const BloodSugar = () => {
       getYear(dateAndtime) +
       ' ' +
       getTime(dateAndtime);
-    console.log('data_value', value);
-    console.log('unit_list_id', selectedType);
-    console.log('record_date', dateTime);
-    console.log('meal_type_id', dropdownValue);
+
+    console.log('weight', value);
+    // console.log('bp_diastolic', lowValue);
+    console.log('date_entry', dateAndtime);
     try {
       setIsLoading(true);
-      const response = await userService.createBloodSugar({
-        blood_sugar: {
-          data_value: value,
-          unit_list_id: selectedType,
-          record_date: dateTime,
-          meal_type_id: dropdownValue,
+      const response = await userService.createWeight({
+        medical: {
+          weight: value,
+          is_metric: 'true',
+          date_entry: dateAndtime,
         },
       });
-      console.log('blood sugar successful', response.data);
-      alert('blood sugar successful');
+      console.log('weight submitted ', response.data);
+      alert('weight submitted ');
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
-      if (error.errMsg.status == '500') {
+      if (error.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
+      } else if (error.errMsg.status === false) {
         showMessage({
           message: error.errMsg.data.error,
           type: 'danger',
@@ -138,7 +115,7 @@ const BloodSugar = () => {
   };
 
   return (
-    <TitleWithBackWhiteBgLayout title="Blood Sugar">
+    <TitleWithBackWhiteBgLayout title="Weight">
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -148,51 +125,31 @@ const BloodSugar = () => {
             marginBottom: heightToDp(25),
           }}
         >
-          <BloodSugarChooser
-            width={'70%'}
+          <WeightChooser
             height={15}
             label="Your Reading"
             textAlign="right"
-            placeholder={'0'}
+            placeholder={'0.0'}
             onChangeText={onChangeText}
             value={value}
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
+            selectedType={selectedTypeWeight}
+            setSelectedType={setSelectedTypeWeight}
             setValue={setValue}
           />
           {validation ? (
             <Text style={styles.errorMessage}>
-              Please input a valid measurement from 1-600 mg/dL
+              Please enter a valid weight between 0 - 200 kg
             </Text>
           ) : null}
           {validation2 ? (
             <Text style={styles.errorMessage}>
-              Please input a valid measurement from 0.06-50 mmol/L
+              Please enter a valid weight between 0 - 400 lbs
             </Text>
           ) : null}
 
-          {value && !validation && !validation2 ? (
+          {!validation && !validation2 && value ? (
             <>
-              <View style={styles.dropDown}>
-                <Text style={styles.textStyle}>Meal</Text>
-                <DropdownMenu
-                  options={options}
-                  selectedValue={dropdownValue}
-                  onValueChange={(text: any) => {
-                    dispatch(getReduxMedicalDropDown());
-                    setDropdown(text);
-                    setIsDropDownChanged(true);
-                  }}
-                  error={
-                    isDropdownChanged
-                      ? dropdownValue === '---'
-                        ? 'Please select your ethnicity'
-                        : ''
-                      : ''
-                  }
-                />
-              </View>
-              <Text style={styles.label}>Date of Birth</Text>
+              <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
                 date={dateAndtime}
                 setDate={(e: any) => setDateAndTime(e)}
@@ -204,15 +161,11 @@ const BloodSugar = () => {
         <ButtonWithShadowContainer
           onPress={onSubmit}
           title={'Add'}
-          disabled={
-            value === '' || !isDropdownChanged || validation || validation2
-              ? true
-              : false
-          }
+          disabled={validation || validation2 || !value ? true : false}
         />
       </ScrollView>
     </TitleWithBackWhiteBgLayout>
   );
 };
 
-export default BloodSugar;
+export default Weight;

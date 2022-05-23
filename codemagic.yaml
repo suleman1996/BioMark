@@ -24,7 +24,7 @@ workflows:
     scripts:
       - name: Installing Dependencies
         script: |
-          yarn install --quiet --no-optional
+          npm ci --quiet --no-optional
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
