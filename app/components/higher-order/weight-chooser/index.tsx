@@ -92,8 +92,7 @@ const WeightChooserComponent = ({
             <Pressable
               onPress={() => {
                 setSelectedType(1);
-                selectedType != 1 &&
-                  setValue((value * 2.2).toFixed(3).toString());
+                selectedType != 1 && setValue((value * 2.2).toString());
                 menuRef.current.close();
               }}
               style={[
