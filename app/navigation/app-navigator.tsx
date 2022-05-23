@@ -14,6 +14,8 @@ import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
 import HealthProgress from '../screens/main/home-page/your-health/health-progress/index';
 import Targets from '../screens/main/home-page/your-health/health-progress/targets/index';
+import AddBloodSugar from '../screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
+import AddHba1c from '../screens/main/home-page/your-health/health-progress/targets/add-hba1c/index';
 import SCREENS from './constants';
 import Covid19Navigator from './covid19-navigator';
 // import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
@@ -30,6 +32,8 @@ const {
   BLOOD_SUGAR,
   HEALTH_PROGRESS,
   TARGETS,
+  ADD_BLOOD_SUGAR,
+  ADD_HBA1C,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -74,6 +78,8 @@ const AppNavigator = () => {
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
           <Stack.Screen name={HEALTH_PROGRESS} component={HealthProgress} />
           <Stack.Screen name={TARGETS} component={Targets} />
+          <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />
+          <Stack.Screen name={ADD_HBA1C} component={AddHba1c} />
         </>
       ) : (
         <>

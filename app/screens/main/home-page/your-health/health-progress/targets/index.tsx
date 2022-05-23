@@ -18,12 +18,13 @@ import makeStyles from './styles';
 import { ArrowBack } from 'assets/svgs';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import AddGradient from 'assets/svgs/add-gradient';
-// import navigation from 'navigation/';
+import SCREENS from 'navigation/constants/index';
 
 export default function InboxScreen() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const navigation = useNavigation();
+  const { ADD_HBA1C, ADD_BLOOD_SUGAR } = SCREENS;
 
   const pagerRef = useRef<any>();
   const [currentPage, setCurrentPage] = useState(0);
@@ -144,7 +145,15 @@ export default function InboxScreen() {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          if (currentPage === 0) {
+            navigation.navigate(ADD_BLOOD_SUGAR);
+          } else {
+            navigation.navigate(ADD_HBA1C);
+          }
+        }}
+      >
         <View style={styles.fixedIconView}>
           <AddGradient />
         </View>
