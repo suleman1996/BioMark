@@ -12,6 +12,8 @@ import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
+import HealthProgress from '../screens/main/home-page/your-health/health-progress/index';
+import Targets from '../screens/main/home-page/your-health/health-progress/targets/index';
 import SCREENS from './constants';
 import Covid19Navigator from './covid19-navigator';
 // import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
@@ -26,6 +28,8 @@ const {
   HEALTH_RISK,
   HYPERTENSION,
   BLOOD_SUGAR,
+  HEALTH_PROGRESS,
+  TARGETS,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -68,6 +72,8 @@ const AppNavigator = () => {
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
+          <Stack.Screen name={HEALTH_PROGRESS} component={HealthProgress} />
+          <Stack.Screen name={TARGETS} component={Targets} />
         </>
       ) : (
         <>

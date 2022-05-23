@@ -60,7 +60,7 @@ export default function (props: Props) {
           ...DEFAULT_THEME,
           backgroundColor: colors.white,
           onBackgroundTextColor: colors.black,
-          fontSize: 14,
+          fontSize: 15,
           fontFamily: fonts.mulishRegular,
         }}
         containerButtonStyle={styles.pickerButtonStyle}
