@@ -23,7 +23,7 @@ export const makeStyles = (colors: any) =>
       color: colors.black,
       fontSize: 14,
       width: '60%',
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishRegular,
       paddingRight: 10,
     },
   });

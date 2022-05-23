@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import CreateProfile from 'screens/auth/create-profile';
-import Diabetes from 'screens/main/home-page/diabetes';
+import HealthRisk from 'screens/main/home-page/health-risk';
 import AccountNavigator from './account-navigator';
 import BottomTabNavigator from './bottom-tab-navigator';
 
@@ -13,18 +13,27 @@ import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
 import SCREENS from './constants';
+import Covid19Navigator from './covid19-navigator';
+// import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
 import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
 import SupportCenter from 'screens/main/home-page/support-center';
+import EmpowerProgram from 'screens/main/home-page/empower-program';
+import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
+import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
 
 const Stack = createNativeStackNavigator();
 const {
   NESTED_ACCOUNT_NAVIGATOR,
   CREATE_PROFILE,
   YOUR_HEALTH,
-  DIABETES,
+  NESTED_COVID19_NAVIGATOR,
+  HEALTH_RISK,
   HYPERTENSION,
   BLOOD_SUGAR,
   SUPPORT_SYSTEM,
+  EMPOWER_PROGRAM,
+  DIABETES_SUPPORT_CENTER,
+  DIABETES_CENTER,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -59,11 +68,21 @@ const AppNavigator = () => {
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}
           />
-          <Stack.Screen name={DIABETES} component={Diabetes} />
+          <Stack.Screen
+            name={NESTED_COVID19_NAVIGATOR}
+            component={Covid19Navigator}
+          />
+          <Stack.Screen name={HEALTH_RISK} component={HealthRisk} />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
           <Stack.Screen name={SUPPORT_SYSTEM} component={SupportCenter} />
+          <Stack.Screen name={EMPOWER_PROGRAM} component={EmpowerProgram} />
+          <Stack.Screen name={DIABETES_CENTER} component={DiabetesCenter} />
+          <Stack.Screen
+            name={DIABETES_SUPPORT_CENTER}
+            component={DiabetesSupportCenter}
+          />
         </>
       ) : (
         <>

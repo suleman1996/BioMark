@@ -1,9 +1,14 @@
-import React from 'react';
-import { Text, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Text, ScrollView, View } from 'react-native';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import Icon from '../../../../assets/svgs/empower';
+import WaveIcon from '../../../../assets/svgs/wave';
 import SupportSystemForm from 'components/support-system-form';
 import SupportSystemForm2 from 'components/support-system-form2';
+import CheckBox from 'components/checkbox';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
+import GradientButton from 'components/linear-gradient-button';
 
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
@@ -11,6 +16,7 @@ import makeStyles from './styles';
 const SupportCenter = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const [checked, setChecked] = useState(false);
 
   return (
     <TitleWithBackWhiteBgLayout title={undefined}>
@@ -69,6 +75,29 @@ const SupportCenter = () => {
             'You acknowledge that you are aware that this Program may be discontinued at any given time and that you will be notified thirty (30) days prior the discontinuation date.'
           }
         />
+        <View style={styles.checkboxView}>
+          <CheckBox checked={checked} setChecked={setChecked} />
+          <Text style={styles.checkboXText}>
+            I hereby confirm my understanding of the above policy and my consent
+            to the collection, use and disclosure of my information in
+            accordance to the terms of the policy.
+          </Text>
+        </View>
+        {checked ? (
+          <GradientButton
+            text="Accept & Continue"
+            color={['#2C6CFC', '#2CBDFC']}
+            disabled={!checked ? true : false}
+            onPress={() => navigate(SCREENS.EMPOWER_PROGRAM)}
+          />
+        ) : (
+          <GradientButton
+            text="Accept & Continue"
+            color={['#cccccc', '#cccccc']}
+            disabled={!checked ? true : false}
+          />
+        )}
+        <WaveIcon style={{ height: 100, width: '100%' }} />
       </ScrollView>
     </TitleWithBackWhiteBgLayout>
   );

@@ -6,7 +6,7 @@ import makeStyles from './styles';
 import HealthCard from 'components/health-risk-card';
 import HealthListCard from 'components/health-list-card';
 
-const Diabetes = () => {
+const HealthRisk = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -97,4 +97,4 @@ const Diabetes = () => {
     </SafeAreaView>
   );
 };
-export default Diabetes;
+export default HealthRisk;

@@ -34,5 +34,16 @@ export const makeStyles = (colors: any) =>
       marginHorizontal: widthToDp(15),
       marginTop: heightToDp(2),
     },
+    checkboxView: {
+      flexDirection: 'row',
+      marginTop: heightToDp(4),
+      marginHorizontal: widthToDp(5),
+      marginBottom: 10,
+    },
+    checkboXText: {
+      color: colors.heading,
+      marginHorizontal: widthToDp(5),
+      fontFamily: fonts.OpenSansRegular,
+    },
   });
 export default makeStyles;

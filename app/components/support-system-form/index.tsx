@@ -14,6 +14,7 @@ type Props = {
   text8?: string;
   text9?: string;
   text10?: string;
+  text11?: string;
 };
 const SupportSystemForm = (props: Props) => {
   const { colors } = useTheme();
@@ -88,6 +89,12 @@ const SupportSystemForm = (props: Props) => {
         <View style={styles.flatlistView}>
           <View style={styles.bullets}></View>
           <Text style={styles.flatlistText}>{props.text10}</Text>
+        </View>
+      )}
+
+      {props.text11 && (
+        <View style={styles.flatlistView}>
+          <Text style={styles.flatlistText}>{props.text11}</Text>
         </View>
       )}
     </>
