@@ -21,7 +21,7 @@ export const makeStyles = (colors: any) =>
     textInputStyle: {
       paddingLeft: 10,
       color: colors.black,
-      fontSize: 14,
+      fontSize: 15,
       width: '60%',
       fontFamily: fonts.mulishRegular,
       paddingRight: 10,
