@@ -293,7 +293,7 @@ const Index = () => {
           <FlatList
             data={healthTracker}
             renderItem={(item) => <RenderHealthTrack item={item} />}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.index}
             horizontal
             showsHorizontalScrollIndicator={false}
           />

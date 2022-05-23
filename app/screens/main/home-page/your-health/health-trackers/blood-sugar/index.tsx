@@ -10,7 +10,6 @@ import {
   DropdownMenu,
 } from 'components/base';
 import { IAppState } from 'store/IAppState';
-import { getReduxMedicalDropDown } from 'store/home/home-actions';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
@@ -47,7 +46,6 @@ const BloodSugar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getReduxMedicalDropDown());
     let arr = [];
     drop?.meal_type?.map((ele) => {
       console.log('ele', ele);
@@ -179,7 +177,6 @@ const BloodSugar = () => {
                   options={options}
                   selectedValue={dropdownValue}
                   onValueChange={(text: any) => {
-                    dispatch(getReduxMedicalDropDown());
                     setDropdown(text);
                     setIsDropDownChanged(true);
                   }}

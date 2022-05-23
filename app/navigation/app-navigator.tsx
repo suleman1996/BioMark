@@ -13,7 +13,8 @@ import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
 import SCREENS from './constants';
-import BloodSugar from 'screens/main/home-page/your-health/blood-sugar/index';
+import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
+import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -23,6 +24,7 @@ const {
   HEALTH_RISK,
   HYPERTENSION,
   BLOOD_SUGAR,
+  BLOOD_PRESSURE,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -61,6 +63,7 @@ const AppNavigator = () => {
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
+          <Stack.Screen name={BLOOD_PRESSURE} component={BloodPressure} />
         </>
       ) : (
         <>

@@ -9,9 +9,19 @@ const RenderHealthTrack = ({ item }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const navigation = useNavigation();
+  console.log('item', item.item.title);
+
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(SCREENS.BLOOD_SUGAR)}
+      onPress={() => {
+        if (item?.item?.title === 'Blood Sugar') {
+          navigation.navigate(SCREENS.BLOOD_SUGAR);
+        } else if (item?.item?.title === 'Blood Pressure') {
+          navigation.navigate(SCREENS.BLOOD_PRESSURE);
+        } else {
+          alert('Under Development');
+        }
+      }}
       style={[styles.renderHealthView, { borderColor: item?.item?.color }]}
     >
       <Text style={[styles.healthTrackerHeading]}>{item?.item?.title}</Text>
