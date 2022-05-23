@@ -6,6 +6,8 @@ import StepIndicator from 'react-native-step-indicator';
 import ButtonComponent from 'components/base/button';
 import ExisitingBookingForDependent from 'components/ui/covid-test-book-for-existing/index';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 
 type Props = {};
 
@@ -59,7 +61,14 @@ const BookCovidTest = (props: Props) => {
             <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
-            <Pressable style={styles.btnEnable}>
+            <Pressable
+              onPress={() =>
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_STEP,
+                })
+              }
+              style={styles.btnEnable}
+            >
               <Text style={[styles.btnText2]}>Next</Text>
             </Pressable>
           </View>

@@ -58,6 +58,7 @@ export default {
   COVID19HOME: 'Covid19Home',
   COVID19BOOKINGS: 'Covid19Bookings',
   BOOKCOVIDTEST: 'BookCovidTest',
+  PAYMENT_STEP: 'PaymentStep',
 
   BLOOD_SUGAR: 'BLOOD_SUGAR',
 };

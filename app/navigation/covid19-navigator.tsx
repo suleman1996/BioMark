@@ -7,6 +7,7 @@ import BookCovidTest from 'screens/covid19/steps/book-test';
 import Covid19Bookings from 'screens/covid19/bookings';
 import { GlobalFonts } from 'utils/theme/fonts';
 import SCREENS from './constants';
+import PaymentStep from 'screens/covid19/steps/payments';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,17 @@ const Covid19Navigator = () => {
         }}
         name={SCREENS.BOOKCOVIDTEST}
         component={BookCovidTest}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          headerTintColor: colors.black,
+          headerTitleStyle: { fontFamily: GlobalFonts.light },
+          title: 'Back',
+          headerShadowVisible: false,
+        }}
+        name={SCREENS.PAYMENT_STEP}
+        component={PaymentStep}
       />
     </Stack.Navigator>
   );
