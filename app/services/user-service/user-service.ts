@@ -5,6 +5,7 @@ import {
   HealthTrackerPayload,
   DashboardResponseData,
   MedicationSetupPayload,
+  RiskData,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -597,6 +598,27 @@ function getMedicalDropDown() {
   });
 }
 
+function getHealthRisks() {
+  return new Promise<RiskData>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_HEALTH_RISKS)
+      .then(async (response) => {
+        try {
+          console.log('med', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+}
+
 export const userService = {
   login,
   federatedlogin,
@@ -636,4 +658,5 @@ export const userService = {
   createBloodPressure,
   createWeight,
   createHba1c,
+  getHealthRisks,
 };

@@ -6,8 +6,10 @@ import {
   FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Animated,
+  PanResponder,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
@@ -35,19 +37,21 @@ import { IAppState } from 'store/IAppState';
 import {
   getReduxHealthTracker,
   getReduxDashboard,
+  getHealthTrackerRisks,
 } from 'store/home/home-actions';
 
 const Index = () => {
   const { colors } = useTheme();
 
   const styles = Styles(colors);
-  const { HYPERTENSION } = SCREENS;
+  const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
   // const { HEALTH_STRESS } = SCREENS;
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
+  const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
 
   const handleHEalthTracker = () => {
     healthTracker.length = 0;
@@ -72,9 +76,13 @@ const Index = () => {
   useEffect(() => {
     dispatch(getReduxHealthTracker());
     console.log('Health Trackeer api =======>', hell);
-    handleHEalthTracker();
     dispatch(getReduxDashboard());
     console.log('Dashboard api =======>', dashboard);
+    dispatch(getHealthTrackerRisks());
+    console.log('healthRisk api =======>', healthRisk);
+    setHealthRisksData(healthRisk);
+    handleHEalthTracker();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -98,36 +106,6 @@ const Index = () => {
     },
   ]);
 
-  //   const [healthTracker] = React.useState([
-  //     {
-  //       id: 0,
-  //       title: 'Blood Sugar',
-  //       value: 2.0,
-  //       subTitle: 'mg/dL',
-  //       color: colors.blue,
-  //     },
-  //     {
-  //       id: 1,
-  //       title: 'Medication',
-  //       value: '-',
-  //       subTitle: 'Add',
-  //       color: colors.blue,
-  //     },
-  //     {
-  //       id: 2,
-  //       title: 'Blood Pressure',
-  //       value: '75/30',
-  //       subTitle: 'mmHg',
-  //       color: colors.dangerRed,
-  //     },
-  //     {
-  //       id: 3,
-  //       title: 'Blood Sugar',
-  //       value: 2.0,
-  //       subTitle: 'mg/dL',
-  //       color: colors.blue,
-  //     },
-  //   ]);
   const [healthTracker] = React.useState([]);
   const [currentPosition] = React.useState(2);
   const [stepIndicatorIcons] = React.useState([
@@ -136,22 +114,24 @@ const Index = () => {
     <BMI />,
     <BP />,
   ]);
-  //   const [healthRisk, setHealthRisk] = React.useState({
-  //     heartDisease: false,
-  //     diabetes: false,
-  //     bloodPreasure: false,
-  //     bmi: false,
-  //     smooking: false,
-  //     drinking: false,
-  //     stress: false,
-  //     sleeping: false,
-  //   });
+  const [healthRisksData, setHealthRisksData] = React.useState([]);
+
+  const [selectedHealthRisk, setSelectedHealthRisk] = React.useState();
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
 
-  const RenderHealthRiskView = ({ svg, color }) => (
+  const RenderHealthRiskView = ({ svg, color, healthRisks }) => (
     <>
       <TouchableOpacity
-        style={[styles.renderHealthRisk, { backgroundColor: color }]}
+        onPress={() => setSelectedHealthRisk(healthRisks)}
+        style={[
+          styles.renderHealthRisk,
+          {
+            backgroundColor:
+              healthRisks?.name == selectedHealthRisk?.name
+                ? colors.lightGrey
+                : color,
+          },
+        ]}
       >
         {svg}
       </TouchableOpacity>
@@ -201,9 +181,11 @@ const Index = () => {
     </TouchableOpacity>
   );
 
-  const RenderCircle = ({ svg, title }) => (
+  const RenderCircle = ({ svg, title, onPress }) => (
     <View style={{ alignItems: 'center' }}>
-      <TouchableOpacity style={styles.circle}>{svg}</TouchableOpacity>
+      <TouchableOpacity style={styles.circle} onPress={onPress}>
+        {svg}
+      </TouchableOpacity>
       <Text style={styles.circleText}>{title}</Text>
     </View>
   );
@@ -226,8 +208,11 @@ const Index = () => {
     </View>
   );
 
-  const RenderHealthRisk = ({ description, name, card_status }) => (
-    <View style={styles.healthRisk}>
+  const RenderHealthRisk = ({ description, name, card_status, onPress }) => (
+    <Animated.View
+      {...panResponder.panHandlers}
+      style={[pan.getLayout(), styles.healthRisk]}
+    >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Heart fill={colors.lightGrey} />
@@ -237,15 +222,34 @@ const Index = () => {
       </View>
       <Text style={styles.descriptionHealthRisk}>
         <Text>{description} </Text>
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={onPress}>
           <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
             Tap here{' '}
           </Text>
         </TouchableWithoutFeedback>
         <Text>to complete your information</Text>
       </Text>
-    </View>
+    </Animated.View>
   );
+
+  const pan = useRef(new Animated.ValueXY()).current;
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderMove: Animated.event([
+      null,
+      {
+        dx: pan.x, // x,y are Animated.Value
+        // dy: pan.y,
+      },
+    ]),
+    onPanResponderRelease: () => {
+      Animated.spring(
+        pan, // Auto-multiplexed
+        { toValue: { x: 0, y: 0 } } // Back to zero
+      ).start();
+    },
+  });
 
   return (
     <View style={styles.container}>
@@ -266,26 +270,55 @@ const Index = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.headingText}>Your Health Risks</Text>
           <View style={styles.healthRiskView}>
-            <RenderHealthRiskView color={colors.lightGreen} svg={<Heart />} />
+            <RenderHealthRiskView
+              healthRisks={healthRisksData?.heart}
+              color={colors.lightGreen}
+              svg={<Heart />}
+            />
             <RenderHealthRiskView
               color={colors.lightGreen}
+              healthRisks={healthRisksData?.diabetes}
               svg={<Diabetes />}
             />
-            <RenderHealthRiskView color={colors.lightGreen} svg={<BP />} />
-            <RenderHealthRiskView color={colors.lightYellow} svg={<BMI />} />
-            <RenderHealthRiskView color={colors.lightGreen} svg={<Smoking />} />
+            <RenderHealthRiskView
+              color={colors.lightGreen}
+              healthRisks={healthRisksData?.bp}
+              svg={<BP />}
+            />
             <RenderHealthRiskView
               color={colors.lightYellow}
+              healthRisks={healthRisksData?.bmi}
+              svg={<BMI />}
+            />
+            <RenderHealthRiskView
+              color={colors.lightGreen}
+              healthRisks={healthRisksData?.smoking}
+              svg={<Smoking />}
+            />
+            <RenderHealthRiskView
+              color={colors.lightYellow}
+              healthRisks={healthRisksData?.drinking}
               svg={<Drinking />}
             />
-            <RenderHealthRiskView color={colors.lightGreen} svg={<Stress />} />
-            <RenderHealthRiskView color={colors.dangerRed} svg={<Sleep />} />
+            <RenderHealthRiskView
+              color={colors.lightGreen}
+              healthRisks={healthRisksData?.stress}
+              svg={<Stress />}
+            />
+            <RenderHealthRiskView
+              color={colors.dangerRed}
+              healthRisks={healthRisksData?.sleeping}
+              svg={<Sleep />}
+            />
           </View>
-          <RenderHealthRisk
-            name="Heart Disease"
-            description="This calculae the % risk of developing heart disease over the next year."
-            card_status="Need More Information"
-          />
+          {selectedHealthRisk && (
+            <RenderHealthRisk
+              onPress={() => console.log('xxx ', selectedHealthRisk)}
+              name={selectedHealthRisk?.name}
+              description={selectedHealthRisk?.description}
+              card_status={selectedHealthRisk?.card_status}
+            />
+          )}
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Health Trackers
           </Text>
@@ -323,7 +356,11 @@ const Index = () => {
 
           <View style={styles.circleView}>
             <RenderCircle title="Health Records" svg={<Health />} />
-            <RenderCircle title="Health Progress" svg={<Progress />} />
+            <RenderCircle
+              title="Health Progress"
+              svg={<Progress />}
+              onPress={() => navigation.navigate(HEALTH_PROGRESS)}
+            />
           </View>
           <View style={styles.resultStatusView}>
             <View style={{ alignItems: 'center' }}>

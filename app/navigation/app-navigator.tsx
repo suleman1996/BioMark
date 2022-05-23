@@ -12,18 +12,22 @@ import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
+import HealthProgress from '../screens/main/home-page/your-health/health-progress/index';
+import Targets from '../screens/main/home-page/your-health/health-progress/targets/index';
 import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
 import Medication from 'screens/main/home-page/your-health/health-trackers/Medication/index';
+import Covid19Navigator from './covid19-navigator';
 
 const Stack = createNativeStackNavigator();
 const {
   NESTED_ACCOUNT_NAVIGATOR,
   CREATE_PROFILE,
   YOUR_HEALTH,
+  NESTED_COVID19_NAVIGATOR,
   HEALTH_RISK,
   HYPERTENSION,
   BLOOD_SUGAR,
@@ -31,6 +35,8 @@ const {
   WEIGHT,
   HBA1C,
   MEDICATION,
+  HEALTH_PROGRESS,
+  TARGETS,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -65,6 +71,10 @@ const AppNavigator = () => {
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}
           />
+          <Stack.Screen
+            name={NESTED_COVID19_NAVIGATOR}
+            component={Covid19Navigator}
+          />
           <Stack.Screen name={HEALTH_RISK} component={HealthRisk} />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
@@ -73,6 +83,8 @@ const AppNavigator = () => {
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
           <Stack.Screen name={MEDICATION} component={Medication} />
+          <Stack.Screen name={HEALTH_PROGRESS} component={HealthProgress} />
+          <Stack.Screen name={TARGETS} component={Targets} />
         </>
       ) : (
         <>
