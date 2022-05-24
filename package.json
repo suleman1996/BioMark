@@ -95,6 +95,7 @@
     "react-native-tags-input": "^1.0.10",
     "react-native-ui-xg": "^0.0.6",
     "react-native-vector-icons": "^9.1.0",
+    "react-native-video": "^5.2.0",
     "react-native-viewpager-carousel": "^0.3.2",
     "react-native-webview": "^11.18.2",
     "react-qr-code": "^2.0.7",

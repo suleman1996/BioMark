@@ -23,6 +23,10 @@ import Weight from 'screens/main/home-page/your-health/health-trackers/weight/in
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
 import Medication from 'screens/main/home-page/your-health/health-trackers/Medication/index';
 import Covid19Navigator from './covid19-navigator';
+import SupportCenter from 'screens/main/home-page/support-center';
+import EmpowerProgram from 'screens/main/home-page/empower-program';
+import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
+import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -33,6 +37,10 @@ const {
   HEALTH_RISK,
   HYPERTENSION,
   BLOOD_SUGAR,
+  SUPPORT_SYSTEM,
+  EMPOWER_PROGRAM,
+  DIABETES_SUPPORT_CENTER,
+  DIABETES_CENTER,
   BLOOD_PRESSURE,
   WEIGHT,
   HBA1C,
@@ -83,6 +91,13 @@ const AppNavigator = () => {
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
+          <Stack.Screen name={SUPPORT_SYSTEM} component={SupportCenter} />
+          <Stack.Screen name={EMPOWER_PROGRAM} component={EmpowerProgram} />
+          <Stack.Screen name={DIABETES_CENTER} component={DiabetesCenter} />
+          <Stack.Screen
+            name={DIABETES_SUPPORT_CENTER}
+            component={DiabetesSupportCenter}
+          />
           <Stack.Screen name={BLOOD_PRESSURE} component={BloodPressure} />
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
