@@ -20,6 +20,11 @@ const styles = (colors: any) =>
       fontSize: 20,
       fontFamily: fonts.mulishRegular,
       color: colors.heading,
+      marginBottom: 20,
+    },
+    buttonContainer: {
+      width: '100%',
+      marginTop: 30,
     },
   });
 export default styles;

@@ -8,17 +8,17 @@ import fonts from 'assets/fonts';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      marginTop: heightToDp(2),
+      marginBottom: heightToDp(3),
     },
     label: {
-      fontSize: responsiveFontSize(22),
-      fontFamily: fonts.mulishExtraBold,
+      fontSize: responsiveFontSize(21),
+      fontFamily: fonts.mulishBold,
       color: colors.shineBlue,
       marginBottom: 10,
     },
     textFieldStyle: {
       fontSize: responsiveFontSize(25),
-      width: '80%',
+      width: '70%',
       color: colors.blue,
       backgroundColor: colors.fieldGrey,
       fontFamily: GlobalFonts.bold,
@@ -37,15 +37,17 @@ export const makeStyles = (colors: any) =>
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      width: widthToDp(25),
+      width: '25%',
+      backgroundColor: colors.gray,
     },
     singleMenuItem: {
       width: '100%',
       // borderWidth: 1,
     },
     menuText: {
-      fontSize: responsiveFontSize(25),
-      //   padding: widthToDp(2),
+      fontSize: responsiveFontSize(22),
+      color: colors.shineBlue,
+      padding: widthToDp(1.5),
     },
   });
 export default makeStyles;

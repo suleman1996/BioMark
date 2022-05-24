@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import InputWithUnits from 'components/higher-order/input-with-units';
+import GradientButton from 'components/linear-gradient-button';
 
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
@@ -13,7 +14,7 @@ const Index = () => {
   const styles = Styles(colors);
   //   const navigation = useNavigation();
   const [value, setValue] = useState('');
-  const [selectedType, setSelectedType] = useState(2);
+  const [selectedType, setSelectedType] = useState(1);
 
   const onChangeText = (values) => {
     selectedType == '1' ? setValue(values.toString()) : setValue(values);
@@ -38,6 +39,13 @@ const Index = () => {
           selectedType={selectedType}
           setSelectedType={setSelectedType}
           setValue={setValue}
+          isFirst={true}
+          op1="%"
+        />
+        <GradientButton
+          text="Save"
+          color={['#2C6CFC', '#2CBDFC']}
+          style={styles.buttonContainer}
         />
       </View>
     </TitleWithBackWhiteBgLayout>

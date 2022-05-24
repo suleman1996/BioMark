@@ -32,9 +32,8 @@ const TitleWithBackWhiteBgLayout = ({ children, title, style }: Props) => {
             name="arrow-back-ios"
           />
         </Pressable>
-        <View>
-          <Text style={styles.textStyle}>{title ? title : ''}</Text>
-        </View>
+
+        {title && <Text style={styles.textStyle}>{title}</Text>}
       </View>
       {children}
     </View>

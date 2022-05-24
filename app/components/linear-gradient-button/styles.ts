@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -7,9 +8,10 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     text: {
-      fontWeight: 'bold',
+      // fontWeight: 'bold',
+      fontFamily: fonts.mulishRegular,
       color: colors.white,
-      fontSize: responsiveFontSize(15),
+      fontSize: responsiveFontSize(20),
     },
   });
 export default makeStyles;
