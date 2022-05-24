@@ -16,7 +16,7 @@ type Props = {};
 
 const labels = ['Booking', 'Payment', 'Confirmation'];
 
-const PaymentStep = (props: Props) => {
+const PaymentSuccess = (props: Props) => {
   const {} = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -38,7 +38,7 @@ const PaymentStep = (props: Props) => {
               );
             }}
             stepCount={3}
-            currentPosition={1}
+            currentPosition={2}
             customStyles={styles.stepIndicator}
             labels={labels}
           />
@@ -205,7 +205,7 @@ const PaymentStep = (props: Props) => {
             <Pressable
               onPress={() =>
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                  screen: SCREENS.PAYMENT_SUCCESS,
+                  screen: SCREENS.PAYMENT_STEP,
                 })
               }
               style={styles.btnEnable}
@@ -219,4 +219,4 @@ const PaymentStep = (props: Props) => {
   );
 };
 
-export default PaymentStep;
+export default PaymentSuccess;
