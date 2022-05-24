@@ -12,3 +12,4 @@ export { default as SingleMenuItemWithArrow } from './single-menu-item-with-righ
 export { default as TagsCloudInput } from './tags-cloud-input';
 export { default as WeightChooser } from './weight-chooser';
 export { default as BloodSugarChooser } from './blood-sugar-chooser';
+export { default as MedicalInput } from './medical-measurements-input';

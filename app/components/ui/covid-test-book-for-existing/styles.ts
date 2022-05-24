@@ -52,7 +52,7 @@ export const makeStyles = (colors: any) =>
       borderColor: colors.inputBg,
       borderWidth: 2,
       borderRadius: widthToDp(3),
-      marginBottom: heightToDp(1.5),
+      marginBottom: heightToDp(0.5),
       paddingHorizontal: widthToDp(3),
       paddingVertical: heightToDp(1),
       marginTop: heightToDp(1),
@@ -66,6 +66,42 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(20),
       fontFamily: GlobalFonts.regular,
       color: colors.darkPrimary,
+    },
+    innerTitle: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.medium,
+      color: colors.darkPrimary,
+    },
+    getTestedContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: widthToDp(86),
+      paddingHorizontal: widthToDp(10),
+    },
+    btnContainer: {
+      alignItems: 'center',
+    },
+    innerSmallTxt: {
+      fontSize: responsiveFontSize(13),
+      fontFamily: GlobalFonts.light,
+      color: colors.inactive,
+    },
+    bottomBtnContainer: {
+      flexDirection: 'row',
+      width: widthToDp(86),
+      justifyContent: 'space-between',
+      marginTop: heightToDp(2),
+    },
+    bottomBtn: {
+      backgroundColor: colors.fieldGrey,
+      paddingHorizontal: widthToDp(8),
+      paddingVertical: widthToDp(2),
+      borderRadius: widthToDp(2),
+    },
+    bottomBtnText: {
+      fontSize: responsiveFontSize(18),
+      fontFamily: GlobalFonts.regular,
+      color: colors.inactive,
     },
   });
 

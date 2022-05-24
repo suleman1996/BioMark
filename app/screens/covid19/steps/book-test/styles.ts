@@ -53,6 +53,13 @@ export const makeStyles = (colors: any) =>
       borderRadius: widthToDp(3),
       backgroundColor: colors.bgContainer,
     },
+    btnEnable: {
+      width: widthToDp(40),
+      paddingVertical: widthToDp(2),
+      alignItems: 'center',
+      borderRadius: widthToDp(3),
+      backgroundColor: colors.primary,
+    },
     btnText: {
       fontFamily: GlobalFonts.medium,
       fontSize: responsiveFontSize(19),
