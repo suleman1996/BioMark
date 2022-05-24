@@ -11,57 +11,14 @@ const HealthRisk = ({ route }) => {
   const styles = makeStyles(colors);
 
   const listItems = route.params.item;
-  const db = route.params.diabetes;
-  const hd = route.params.heartDisease;
+  const listData = route.params.cardData;
+  const refData = route.params.refData;
+  const footNote = route.params.footNotesData;
+  const calculations = route.params.calc;
 
   useEffect(() => {
-    console.log(JSON.stringify(listItems));
-    console.log(db, 'diabetes');
-    console.log(hd, 'heartdiseas');
+    console.log(calculations, 'callllllllll');
   });
-
-  // const Data = [
-  //   {
-  //     image: require('../../../../assets/images/home/people.png'),
-  //     title: 'Age',
-  //     text: 'Your risk increases above the age of 40.',
-  //   },
-  //   {
-  //     image: require('../../../../assets/images/home/people.png'),
-  //     title: 'Gender',
-  //     text: 'Men are more likely to have type 2 diabetes compared to women.',
-  //   },
-  //   {
-  //     image: require('../../../../assets/images/home/GD.png'),
-  //     title: 'Gestational Diabetes',
-  //     text: 'Women who had gestational diabetes are at an increased risk.',
-  //   },
-  //   {
-  //     image: require('../../../../assets/images/home/Familyhod.png'),
-  //     title: 'Fmaily History of Diabetes',
-  //     text: 'A family history of diabetes may increases your risk.',
-  //   },
-  //   {
-  //     image: require('../../../../assets/images/home/HighBloodPressure.png'),
-  //     title: 'High Blood Pressure',
-  //     text: 'Having high blood pressure increases your risk.',
-  //   },
-  //   {
-  //     image: require('../../../../assets/images/home/Exercise.png'),
-  //     title: 'Exercise',
-  //     text: 'Being physically inactive increases your risk.',
-  //   },
-  //   {
-  //     image: require('../../../../assets/images/home/Height.png'),
-  //     title: 'Height',
-  //     text: 'Your height is used to calculate Body Mass Index (BMI).High BMIs increases your risk.',
-  //   },
-  //   {
-  //     image: require('../../../../assets/images/home/Weight.png'),
-  //     title: 'Weight',
-  //     text: 'Your weight is used to calculate Body Mass Index (BMI).High BMIs increases your risk.',
-  //   },
-  // ];
 
   const renderItem = ({ item }) => {
     return (
@@ -89,18 +46,14 @@ const HealthRisk = ({ route }) => {
             description={listItems.summary}
           />
           <HealthListCard
-            data={hd}
+            data={listData}
             renderItem={renderItem}
-            Refrences={'Refrences'}
-            RefText={'American Diabetes Association'}
-            FootNotes={'Footnotes'}
-            NotesText={
-              'Your diabetes risk scores is only an estimate.Additionally,your risk changes over time.Only a blood test can determine a diagnoses.Please discuss with your doctor for more information.'
-            }
-            Calculation={'Calculation'}
-            CalcText={
-              'This diabetes risk score is based on the Type 2 Diabetes Risk Test by the american Diabetes Association for people who have no prior history of diabetes or prediabetes.It takes the following factors into account.'
-            }
+            Refrences={refData && 'Refrences'}
+            RefText={refData ? refData.text : undefined}
+            FootNotes={footNote && 'Footnotes'}
+            NotesText={footNote ? footNote.text : undefined}
+            Calculation={calculations ? 'Calculation' : undefined}
+            CalcText={calculations ? calculations.text : undefined}
           />
         </TitleWithBackLayout>
       </ScrollView>
