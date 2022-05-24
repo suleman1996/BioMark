@@ -6,8 +6,10 @@ import {
   FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Animated,
+  PanResponder,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
@@ -15,10 +17,36 @@ import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import SCREENS from 'navigation/constants/index';
+import { navigate } from 'services/nav-ref';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
 
+import {
+  Diabetess,
+  Heart_Disease,
+  Blood_Presure,
+  BMII,
+  Drinkings,
+  Heart_Disease_ref,
+  Heart_Disease_footnotes,
+  Diabetes_ref,
+  Diabetes_footnotes,
+  Blood_Pressure_ref,
+  BMI_ref,
+  Smoking_ref,
+  Drinking_ref,
+  Stress_ref,
+  Sleeping_ref,
+  heart_Diease_Calc,
+  diabetes_Calc,
+  Blood_Pressure_Calc,
+  BMI_Calc,
+  Smoking_Calc,
+  Drinking_Calc,
+  Stress_Calc,
+  Sleeping_Calc,
+} from '../health-risk/list-data';
 import Heart from '../../../../assets/svgs/heart';
 import Diabetes from '../../../../assets/svgs/diabtes';
 import BP from '../../../../assets/svgs/bP';
@@ -35,6 +63,7 @@ import { IAppState } from 'store/IAppState';
 import {
   getReduxHealthTracker,
   getReduxDashboard,
+  getHealthTrackerRisks,
 } from 'store/home/home-actions';
 
 const Index = () => {
@@ -48,6 +77,7 @@ const Index = () => {
 
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
+  const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
 
   const handleHEalthTracker = () => {
     healthTracker.length = 0;
@@ -72,9 +102,13 @@ const Index = () => {
   useEffect(() => {
     dispatch(getReduxHealthTracker());
     console.log('Health Trackeer api =======>', hell);
-    handleHEalthTracker();
     dispatch(getReduxDashboard());
     console.log('Dashboard api =======>', dashboard);
+    dispatch(getHealthTrackerRisks());
+    console.log('healthRisk api =======>', healthRisk);
+    setHealthRisksData(healthRisk);
+    handleHEalthTracker();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -98,36 +132,6 @@ const Index = () => {
     },
   ]);
 
-  //   const [healthTracker] = React.useState([
-  //     {
-  //       id: 0,
-  //       title: 'Blood Sugar',
-  //       value: 2.0,
-  //       subTitle: 'mg/dL',
-  //       color: colors.blue,
-  //     },
-  //     {
-  //       id: 1,
-  //       title: 'Medication',
-  //       value: '-',
-  //       subTitle: 'Add',
-  //       color: colors.blue,
-  //     },
-  //     {
-  //       id: 2,
-  //       title: 'Blood Pressure',
-  //       value: '75/30',
-  //       subTitle: 'mmHg',
-  //       color: colors.dangerRed,
-  //     },
-  //     {
-  //       id: 3,
-  //       title: 'Blood Sugar',
-  //       value: 2.0,
-  //       subTitle: 'mg/dL',
-  //       color: colors.blue,
-  //     },
-  //   ]);
   const [healthTracker] = React.useState([]);
   const [currentPosition] = React.useState(2);
   const [stepIndicatorIcons] = React.useState([
@@ -136,22 +140,43 @@ const Index = () => {
     <BMI />,
     <BP />,
   ]);
-  //   const [healthRisk, setHealthRisk] = React.useState({
-  //     heartDisease: false,
-  //     diabetes: false,
-  //     bloodPreasure: false,
-  //     bmi: false,
-  //     smooking: false,
-  //     drinking: false,
-  //     stress: false,
-  //     sleeping: false,
-  //   });
+  const [healthRisksData, setHealthRisksData] = React.useState([]);
+
+  const [selectedHealthRisk, setSelectedHealthRisk] = React.useState();
+  const [selectedHardCode, setSelectedHardCode] = React.useState();
+  const [selectedRef, setSelectedRef] = React.useState();
+  const [selectedFootNotes, setSelectedFootNotes] = React.useState();
+  const [selectedCalculations, setselectedCalculations] = React.useState();
+
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
 
-  const RenderHealthRiskView = ({ svg, color }) => (
+  const RenderHealthRiskView = ({
+    svg,
+    color,
+    healthRisks,
+    hardCode,
+    References,
+    FootNotes,
+    Calculations,
+  }) => (
     <>
       <TouchableOpacity
-        style={[styles.renderHealthRisk, { backgroundColor: color }]}
+        onPress={() => {
+          setSelectedHealthRisk(healthRisks),
+            setSelectedHardCode(hardCode),
+            setSelectedRef(References);
+          setSelectedFootNotes(FootNotes);
+          setselectedCalculations(Calculations);
+        }}
+        style={[
+          styles.renderHealthRisk,
+          {
+            backgroundColor:
+              healthRisks?.name == selectedHealthRisk?.name
+                ? colors.lightGrey
+                : color,
+          },
+        ]}
       >
         {svg}
       </TouchableOpacity>
@@ -228,8 +253,11 @@ const Index = () => {
     </View>
   );
 
-  const RenderHealthRisk = ({ description, name, card_status }) => (
-    <View style={styles.healthRisk}>
+  const RenderHealthRisk = ({ description, name, card_status, onPress }) => (
+    <Animated.View
+      {...panResponder.panHandlers}
+      style={[pan.getLayout(), styles.healthRisk]}
+    >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Heart fill={colors.lightGrey} />
@@ -239,15 +267,34 @@ const Index = () => {
       </View>
       <Text style={styles.descriptionHealthRisk}>
         <Text>{description} </Text>
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={onPress}>
           <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
             Tap here{' '}
           </Text>
         </TouchableWithoutFeedback>
         <Text>to complete your information</Text>
       </Text>
-    </View>
+    </Animated.View>
   );
+
+  const pan = useRef(new Animated.ValueXY()).current;
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderMove: Animated.event([
+      null,
+      {
+        dx: pan.x, // x,y are Animated.Value
+        // dy: pan.y,
+      },
+    ]),
+    onPanResponderRelease: () => {
+      Animated.spring(
+        pan, // Auto-multiplexed
+        { toValue: { x: 0, y: 0 } } // Back to zero
+      ).start();
+    },
+  });
 
   return (
     <View style={styles.container}>
@@ -268,26 +315,86 @@ const Index = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.headingText}>Your Health Risks</Text>
           <View style={styles.healthRiskView}>
-            <RenderHealthRiskView color={colors.lightGreen} svg={<Heart />} />
+            <RenderHealthRiskView
+              healthRisks={healthRisksData?.heart}
+              color={colors.lightGreen}
+              svg={<Heart />}
+              hardCode={Heart_Disease}
+              References={Heart_Disease_ref}
+              FootNotes={Heart_Disease_footnotes}
+              Calculations={heart_Diease_Calc}
+            />
             <RenderHealthRiskView
               color={colors.lightGreen}
+              healthRisks={healthRisksData?.diabetes}
               svg={<Diabetes />}
+              hardCode={Diabetess}
+              References={Diabetes_ref}
+              FootNotes={Diabetes_footnotes}
+              Calculations={diabetes_Calc}
             />
-            <RenderHealthRiskView color={colors.lightGreen} svg={<BP />} />
-            <RenderHealthRiskView color={colors.lightYellow} svg={<BMI />} />
-            <RenderHealthRiskView color={colors.lightGreen} svg={<Smoking />} />
+            <RenderHealthRiskView
+              color={colors.lightGreen}
+              healthRisks={healthRisksData?.bp}
+              svg={<BP />}
+              hardCode={Blood_Presure}
+              References={Blood_Pressure_ref}
+              Calculations={Blood_Pressure_Calc}
+            />
             <RenderHealthRiskView
               color={colors.lightYellow}
-              svg={<Drinking />}
+              healthRisks={healthRisksData?.bmi}
+              svg={<BMI />}
+              hardCode={BMII}
+              References={BMI_ref}
+              Calculations={BMI_Calc}
             />
-            <RenderHealthRiskView color={colors.lightGreen} svg={<Stress />} />
-            <RenderHealthRiskView color={colors.dangerRed} svg={<Sleep />} />
+            <RenderHealthRiskView
+              color={colors.lightGreen}
+              healthRisks={healthRisksData?.smoking}
+              svg={<Smoking />}
+              References={Smoking_ref}
+              Calculations={Smoking_Calc}
+            />
+            <RenderHealthRiskView
+              color={colors.lightYellow}
+              healthRisks={healthRisksData?.drinking}
+              svg={<Drinking />}
+              hardCode={Drinkings}
+              References={Drinking_ref}
+              Calculations={Drinking_Calc}
+            />
+            <RenderHealthRiskView
+              color={colors.lightGreen}
+              healthRisks={healthRisksData?.stress}
+              svg={<Stress />}
+              References={Stress_ref}
+              Calculations={Stress_Calc}
+            />
+            <RenderHealthRiskView
+              color={colors.dangerRed}
+              healthRisks={healthRisksData?.sleeping}
+              svg={<Sleep />}
+              References={Sleeping_ref}
+              Calculations={Sleeping_Calc}
+            />
           </View>
-          <RenderHealthRisk
-            name="Heart Disease"
-            description="This calculae the % risk of developing heart disease over the next year."
-            card_status="Need More Information"
-          />
+          {selectedHealthRisk && (
+            <RenderHealthRisk
+              onPress={() =>
+                navigate(SCREENS.HEALTH_RISK, {
+                  item: selectedHealthRisk,
+                  cardData: selectedHardCode,
+                  refData: selectedRef,
+                  footNotesData: selectedFootNotes,
+                  calc: selectedCalculations,
+                })
+              }
+              name={selectedHealthRisk?.name}
+              description={selectedHealthRisk?.description}
+              card_status={selectedHealthRisk?.card_status}
+            />
+          )}
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Health Trackers
           </Text>
@@ -295,7 +402,7 @@ const Index = () => {
           <FlatList
             data={healthTracker}
             renderItem={(item) => <RenderHealthTrack item={item} />}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.index}
             horizontal
             showsHorizontalScrollIndicator={false}
           />

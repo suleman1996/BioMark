@@ -21,6 +21,8 @@ import { useTheme } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
 import { getReduxBootstrap } from 'store/account/account-actions';
+import { getReduxMedicalDropDown } from 'store/home/home-actions';
+
 import AuthContext from 'utils/auth-context';
 
 import makeStyles from './styles';
@@ -33,14 +35,19 @@ export default function Home() {
 
   // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
   const dispatch = useDispatch();
+  const dispatchMedDropDown = useDispatch();
 
   /*eslint-disable*/
   const getReduxBoot = async () => {
     await dispatch(getReduxBootstrap());
   };
+  const getMedicalDropDown = async () => {
+    await dispatchMedDropDown(getReduxMedicalDropDown());
+  };
 
   useEffect(() => {
     getReduxBoot();
+    getMedicalDropDown();
   }, []);
   /*eslint-enable*/
 
@@ -56,7 +63,6 @@ export default function Home() {
 
   useEffect(() => {
     userProfile();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

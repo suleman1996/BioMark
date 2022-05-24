@@ -26,6 +26,7 @@ const theme = {
     darkGray: '#A9A9A9',
     fieldGrey: '#DCDCDC',
     green: 'lightgreen',
+    shineBlue: '#2C6CFC',
 
     // Colors
     inputBg: '#EBEFF2',

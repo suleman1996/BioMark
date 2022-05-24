@@ -15,14 +15,15 @@ import makeStyles from './styles';
 type Props = {
   children: any;
   title: string;
+  style: any;
 };
 
-const TitleWithBackWhiteBgLayout = ({ children, title }: Props) => {
+const TitleWithBackWhiteBgLayout = ({ children, title, style }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
   return (
-    <View style={styles.container}>
+    <View style={(styles.container, style)}>
       <View style={styles.header}>
         <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
           <MaterialIcons
@@ -31,9 +32,8 @@ const TitleWithBackWhiteBgLayout = ({ children, title }: Props) => {
             name="arrow-back-ios"
           />
         </Pressable>
-        <View>
-          <Text style={styles.textStyle}>{title ? title : ''}</Text>
-        </View>
+
+        {title && <Text style={styles.textStyle}>{title}</Text>}
       </View>
       {children}
     </View>
