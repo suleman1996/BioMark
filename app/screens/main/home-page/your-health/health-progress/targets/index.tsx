@@ -69,7 +69,7 @@ export default function InboxScreen() {
           </View>
         </View>
 
-        <View
+        {/* <View
           style={[styles.outerTarget, { backgroundColor: colors.opacityBlack }]}
         >
           <View style={styles.targetsContainer}>
@@ -78,7 +78,7 @@ export default function InboxScreen() {
           <View style={styles.targetsContainer}>
             <Text style={styles.targetText}>Goal Percentage 6.0%</Text>
           </View>
-        </View>
+        </View> */}
       </View>
     );
   };
