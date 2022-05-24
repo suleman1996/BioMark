@@ -17,10 +17,12 @@ import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import SCREENS from 'navigation/constants/index';
+import { navigate } from 'services/nav-ref';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
 
+import { Diabetess, Heart_Disease } from '../health-risk/list-data';
 import Heart from '../../../../assets/svgs/heart';
 import Diabetes from '../../../../assets/svgs/diabtes';
 import BP from '../../../../assets/svgs/bP';
@@ -117,12 +119,18 @@ const Index = () => {
   const [healthRisksData, setHealthRisksData] = React.useState([]);
 
   const [selectedHealthRisk, setSelectedHealthRisk] = React.useState();
+  const [selectedHardCode, setSelectedHardCode] = React.useState();
+  const [selectedHeartDisease, setSelectedHeartDisease] = React.useState();
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
 
-  const RenderHealthRiskView = ({ svg, color, healthRisks }) => (
+  const RenderHealthRiskView = ({ svg, color, healthRisks, hardCode }) => (
     <>
       <TouchableOpacity
-        onPress={() => setSelectedHealthRisk(healthRisks)}
+        onPress={() => {
+          setSelectedHealthRisk(healthRisks),
+            setSelectedHardCode(hardCode),
+            setSelectedHeartDisease(hardCode);
+        }}
         style={[
           styles.renderHealthRisk,
           {
@@ -274,11 +282,13 @@ const Index = () => {
               healthRisks={healthRisksData?.heart}
               color={colors.lightGreen}
               svg={<Heart />}
+              hardCode={Heart_Disease}
             />
             <RenderHealthRiskView
               color={colors.lightGreen}
               healthRisks={healthRisksData?.diabetes}
               svg={<Diabetes />}
+              hardCode={Diabetess}
             />
             <RenderHealthRiskView
               color={colors.lightGreen}
@@ -313,7 +323,13 @@ const Index = () => {
           </View>
           {selectedHealthRisk && (
             <RenderHealthRisk
-              onPress={() => console.log('xxx ', selectedHealthRisk)}
+              onPress={() =>
+                navigate(SCREENS.HEALTH_RISK, {
+                  item: selectedHealthRisk,
+                  diabetes: selectedHardCode,
+                  heartDisease: selectedHeartDisease,
+                })
+              }
               name={selectedHealthRisk?.name}
               description={selectedHealthRisk?.description}
               card_status={selectedHealthRisk?.card_status}
