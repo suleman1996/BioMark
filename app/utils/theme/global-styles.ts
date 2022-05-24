@@ -2,7 +2,7 @@ import { heightToDp, widthToDp } from '../functions/responsive-dimensions';
 import { responsiveFontSize } from '../functions/responsive-text';
 import { GlobalFonts } from './fonts';
 
-export const GlobalStyles = (colors: any) => ({
+export const GlobalStyles: any = (colors: any) => ({
   question: {
     fontSize: responsiveFontSize(20),
     fontFamily: GlobalFonts.extraBold,
@@ -42,5 +42,10 @@ export const GlobalStyles = (colors: any) => ({
     borderTopColor: colors.gray,
     paddingTop: heightToDp(2.5),
     alignItems: 'center',
+  },
+  text1: {
+    fontSize: responsiveFontSize(20),
+    fontFamily: GlobalFonts.medium,
+    color: colors.darkPrimary,
   },
 });
