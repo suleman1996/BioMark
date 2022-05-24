@@ -9,6 +9,7 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
 import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
+import CovidTestBookForPersonal from './../../../../components/ui/covid-test-book-for-personal/index';
 
 type Props = {};
 
@@ -20,6 +21,7 @@ const BookCovidTest = (props: Props) => {
   const styles = makeStyles(colors);
   const [isExistingBtn, setIsExisting] = useState(false);
   const [isDependantAdd, setIsDependantAdd] = useState(false);
+  const [isPersonal, setIsPersonal] = useState(false);
 
   return (
     <>
@@ -40,6 +42,12 @@ const BookCovidTest = (props: Props) => {
           {isExistingBtn && !isDependantAdd ? (
             <View>
               <ExisitingBookingForDependent />
+            </View>
+          ) : null}
+
+          {isPersonal && !isDependantAdd && !isExistingBtn ? (
+            <View>
+              <CovidTestBookForPersonal />
             </View>
           ) : null}
 
@@ -67,7 +75,9 @@ const BookCovidTest = (props: Props) => {
             />
           ) : null}
           <ButtonComponent
-            onPress={undefined}
+            onPress={() => {
+              setIsPersonal(true);
+            }}
             marginTop={1}
             title={'Add Self'}
           />
