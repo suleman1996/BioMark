@@ -6,7 +6,6 @@ import {
   View,
   NativeModules,
   NativeEventEmitter,
-  TouchableOpacity,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -52,7 +51,7 @@ const LetsStartIdVerfiication = (props: Props) => {
   const emitterJumio = new NativeEventEmitter(JumioMobileSDK);
   emitterJumio.addListener('EventResult', (EventResult) => {
     console.log('EventResult: ' + JSON.stringify(EventResult));
-    alert('finsihed');
+    navigation.navigate(ID_VERIFICATION_COMPLETE);
   });
   emitterJumio.addListener('EventError', (EventError) => {
     console.log('EventError: ' + JSON.stringify(EventError));
@@ -85,11 +84,6 @@ const LetsStartIdVerfiication = (props: Props) => {
         onPress={() => goBack()}
         title={'Skip for now'}
       />
-      <TouchableOpacity
-        onPress={() => navigation.navigate(ID_VERIFICATION_COMPLETE)}
-      >
-        <Text>Complete</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
