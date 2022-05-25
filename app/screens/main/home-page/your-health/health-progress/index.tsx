@@ -11,11 +11,13 @@ import BloodSugar from './blood-sugar/index';
 import Medication from './medication/index';
 import HbA1c from './hba1c/index';
 import BloodPressue from './blood-pressure/index';
+import SCREENS from 'navigation/constants/index';
 
 const Index = () => {
   const { colors } = useTheme();
-
   const styles = Styles(colors);
+
+  const { TARGETS } = SCREENS;
 
   const navigation = useNavigation();
   const [healthProgress] = useState([
@@ -70,9 +72,9 @@ const Index = () => {
         </View>
       </View>
       <View style={styles.containerBody}>
-        {/* <TouchableOpacity onPress={() => navigation.navigate(TARGETS)}>
+        <TouchableOpacity onPress={() => navigation.navigate(TARGETS)}>
           <Text>Targets</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         <FlatList
           data={healthProgress}
           keyExtractor={(item) => item.id}

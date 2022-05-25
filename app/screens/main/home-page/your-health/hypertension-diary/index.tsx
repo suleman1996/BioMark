@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import React from 'react';
+import Video from 'react-native-video';
 
 import { TitleWithBackLayout } from 'components/layouts';
 
@@ -87,8 +88,21 @@ const Index = () => {
           <Text style={[styles.headingText, { marginVertical: 10 }]}>
             HYPERTENSION EDUCATION
           </Text>
-          <View>
-            <Text>Vedio player</Text>
+          <View style={styles.videoView}>
+            <Video
+              source={{
+                uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
+              }} // the video file
+              controls={true}
+              paused={true} // make it start
+              style={styles.backgroundVideo} // any style you want
+              repeat={true} // make it a loop
+              resizeMode="cover"
+              posterResizeMode={'cover'}
+              fullScreen={true}
+              poster="https://play-lh.googleusercontent.com/uf1TVrS58KmBNiWYR3LocIJMDXTmmfkYY79lDlG2eA4brjyw3q1BN4DDIriw7B9MfQ=w600-h300-pc0xffffff-pd"
+              // style={{ width: '100%', margin: 'auto' }}
+            />
           </View>
           <PdfLink
             title="What Do I Need To Know About Hypertension"
