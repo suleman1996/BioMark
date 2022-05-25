@@ -7024,10 +7024,17 @@ react-native-event-listeners@1.0.3:
   dependencies:
     type-detect "4.0.3"
 
+<<<<<<< Updated upstream
 react-native-fbsdk-next@^7.3.3:
   version "7.3.3"
   resolved "https://registry.npmjs.org/react-native-fbsdk-next/-/react-native-fbsdk-next-7.3.3.tgz"
   integrity sha512-8DRzfqPIUZ3OmzaVmn3zNDSg6eieDFDGhkoLbJvs2juXyz+RdqxM5DbMTTw0VFKiNrvdtfFFbL8Sslg8/ecStQ==
+=======
+react-native-fbsdk-next@^8.0.5:
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-fbsdk-next/-/react-native-fbsdk-next-8.0.5.tgz#d69c51cdb2afd357e0a2400951155d64b935d348"
+  integrity sha512-gxIP+QfgHKtzVVcjQxflTbXuPOZQ1PlT9dJKlrCWDX2wIOblRIs8eTN6TS5dbw7OPgibwpHVMehIxLAM+z/G/w==
+>>>>>>> Stashed changes
   dependencies:
     "@expo/config-plugins" "^4.0.4"
     xml2js "^0.4.23"
@@ -7084,6 +7091,10 @@ react-native-iphone-x-helper@^1.3.1:
   version "1.3.1"
   resolved "https://registry.npmjs.org/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
+
+"react-native-jumio-mobilesdk@https://github.com/Jumio/mobile-react.git#v4.1.0":
+  version "4.1.0"
+  resolved "https://github.com/Jumio/mobile-react.git#3658e6605221775ee094ec909746dbec3c043ad2"
 
 react-native-keyboard-aware-scrollview@^2.1.0:
   version "2.1.0"

@@ -1,7 +1,14 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  NativeModules,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Images from 'assets/images';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -11,15 +18,32 @@ import ButtonComponent from 'components/base/button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack } from 'services/nav-ref';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { userService } from 'services/user-service/user-service';
+import { ActivityIndicator } from 'components/';
 
 type Props = {};
-
+const { JumioMobileSDK } = NativeModules;
+const DATACENTER = 'SG';
 const LetsStartIdVerfiication = (props: Props) => {
-  const { colors } = useTheme();
-
   const {} = props;
+  const { colors } = useTheme();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const GetJumioData = async () => {
+    setIsLoading(true);
+    const result = await userService.getJumioData();
+    console.log('result', result?.data?.sdk?.token);
+    startJumio(result?.data?.sdk?.token);
+    setIsLoading(false);
+  };
+
+  const startJumio = (authorizationToken) => {
+    JumioMobileSDK.initialize(authorizationToken, DATACENTER);
+    JumioMobileSDK.start();
+  };
   return (
     <SafeAreaView style={styles.container}>
+      <ActivityIndicator visible={isLoading} />
       <Pressable onPress={() => goBack()} style={styles.backBtnContainer}>
         <Ionicons
           size={responsiveFontSize(35)}
@@ -34,7 +58,7 @@ const LetsStartIdVerfiication = (props: Props) => {
       </Text>
       <Image source={Images.bioverificationstart} style={styles.image} />
       <View style={{ marginTop: heightToDp(6) }} />
-      <ButtonComponent onPress={undefined} title={'Continue'} />
+      <ButtonComponent onPress={() => GetJumioData()} title={'Continue'} />
       <View style={{ marginTop: heightToDp(2) }} />
       <ButtonComponent
         bg="transparent"
