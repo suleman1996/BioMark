@@ -17,6 +17,15 @@ const styles = (colors: any) =>
       fontSize: 18,
       color: colors.heading,
     },
+    videoView: {
+      marginBottom: 20,
+      borderWidth: 1,
+      borderRadius: 5,
+    },
+    backgroundVideo: {
+      height: 200,
+      borderRadius: 5,
+    },
     recordKeepingView: {
       marginHorizontal: 5,
       flexDirection: 'row',

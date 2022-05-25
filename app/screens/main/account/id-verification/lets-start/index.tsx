@@ -1,4 +1,11 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import React from 'react';
@@ -11,11 +18,15 @@ import ButtonComponent from 'components/base/button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack } from 'services/nav-ref';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import SCREENS from 'navigation/constants';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = {};
 
 const LetsStartIdVerfiication = (props: Props) => {
   const { colors } = useTheme();
+  const { ID_VERIFICATION_COMPLETE } = SCREENS;
+  const navigation = useNavigation();
 
   const {} = props;
   return (
@@ -44,6 +55,11 @@ const LetsStartIdVerfiication = (props: Props) => {
         onPress={() => goBack()}
         title={'Skip for now'}
       />
+      <TouchableOpacity
+        onPress={() => navigation.navigate(ID_VERIFICATION_COMPLETE)}
+      >
+        <Text>Complete</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

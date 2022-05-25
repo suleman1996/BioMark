@@ -64,5 +64,9 @@ const styles = (colors: any) =>
       fontFamily: fonts.regular,
       fontSize: responsiveFontSize(17),
     },
+    Floatingcontainer: {
+      // flex: 1,
+      // position: 'absolute',
+    },
   });
 export default styles;
