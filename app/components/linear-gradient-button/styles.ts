@@ -11,7 +11,7 @@ export const makeStyles = (colors: any) =>
       // fontWeight: 'bold',
       fontFamily: fonts.mulishRegular,
       color: colors.white,
-      fontSize: responsiveFontSize(20),
+      fontSize: responsiveFontSize(18),
     },
   });
 export default makeStyles;

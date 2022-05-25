@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import React, { useState } from 'react';
+
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme, TouchableRipple } from 'react-native-paper';
