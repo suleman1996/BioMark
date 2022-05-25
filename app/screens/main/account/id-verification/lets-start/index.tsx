@@ -55,7 +55,6 @@ const LetsStartIdVerfiication = (props: Props) => {
   });
   emitterJumio.addListener('EventError', (EventError) => {
     console.log('EventError: ' + JSON.stringify(EventError));
-    alert('canceled');
   });
   return (
     <SafeAreaView style={styles.container}>
