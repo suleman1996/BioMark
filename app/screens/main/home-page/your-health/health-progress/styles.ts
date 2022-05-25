@@ -66,6 +66,7 @@ const styles = (colors: any) =>
     },
     Floatingcontainer: {
       // flex: 1,
+      // position: 'absolute',
     },
   });
 export default styles;
