@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import React from 'react';
+
 import Arrow from 'react-native-vector-icons/AntDesign';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';

@@ -1,5 +1,6 @@
 import { TouchableOpacity, View } from 'react-native';
 import React from 'react';
+
 import Styles from './styles';
 import { Text, useTheme } from 'react-native-paper';
 
