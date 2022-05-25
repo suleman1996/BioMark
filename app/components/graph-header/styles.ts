@@ -8,7 +8,7 @@ const styles = (colors: any) =>
       width: '100%',
       flexDirection: 'row',
       alignItems: 'center',
-      borderRadius: 3,
+      borderRadius: 2,
       paddingHorizontal: 3,
       justifyContent: 'space-around',
     },
