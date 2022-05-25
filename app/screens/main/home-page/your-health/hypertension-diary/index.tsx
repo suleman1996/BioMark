@@ -10,15 +10,16 @@ import {
 import React from 'react';
 import Video from 'react-native-video';
 
+import SCREENS from 'navigation/constants/index';
 import { TitleWithBackLayout } from 'components/layouts';
 
 import RenderHealthTrack from 'components/health-tracker-card/index';
 
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
-// import { useNavigation } from '@react-navigation/native';
-import Pdf from 'assets/svgs/pdf';
+import PdfSvg from 'assets/svgs/pdf';
 import Messenger from 'assets/svgs/messenger';
+import { useNavigation } from '@react-navigation/native';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
   Linking.openURL(
@@ -29,7 +30,9 @@ const openMessenger = () => {
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  //   const navigation = useNavigation();
+
+  const { PDF_HYPERTENSION } = SCREENS;
+  const navigation = useNavigation();
 
   const [healthTracker] = React.useState([
     {
@@ -107,20 +110,28 @@ const Index = () => {
           <PdfLink
             title="What Do I Need To Know About Hypertension"
             // svg={<BP fill={colors.primary} />}
-            svg={<Pdf />}
+            svg={<PdfSvg />}
+            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
           />
-          <PdfLink title="What Do I Check My Blood Pressure" svg={<Pdf />} />
+          <PdfLink
+            title="What Do I Check My Blood Pressure"
+            svg={<PdfSvg />}
+            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
+          />
           <PdfLink
             title="Shaking The Salt To Manage My Blood Pressure"
-            svg={<Pdf />}
+            svg={<PdfSvg />}
+            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
           />
           <PdfLink
             title="Modify My Lifestyle Can Help Control My Blood Presure"
-            svg={<Pdf />}
+            svg={<PdfSvg />}
+            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
           />
           <PdfLink
             title="Tips on Accurately Measuring Your Blood Pressure At Home"
-            svg={<Pdf />}
+            svg={<PdfSvg />}
+            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
           />
           <View style={styles.bottomTextView}>
             <Text style={[styles.bottomText, { color: colors.heading }]}>

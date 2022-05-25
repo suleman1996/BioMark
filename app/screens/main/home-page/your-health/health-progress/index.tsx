@@ -5,6 +5,7 @@ import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme, TouchableRipple } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
+import { FloatingAction } from 'react-native-floating-action';
 
 import Weight from './weight/index';
 import BloodSugar from './blood-sugar/index';
@@ -28,6 +29,33 @@ const Index = () => {
     { id: 4, title: 'Blood Pressure' },
   ]);
   const [selectedHorizontal, setSelectedHorizontal] = useState(0);
+
+  const actions = [
+    {
+      text: 'Accessibility',
+      // icon: require('./images/ic_accessibility_white.png'),
+      name: 'bt_accessibility',
+      position: 2,
+    },
+    {
+      text: 'Language',
+      // icon: require('./images/ic_language_white.png'),
+      name: 'bt_language',
+      position: 1,
+    },
+    {
+      text: 'Location',
+      // icon: require('./images/ic_room_white.png'),
+      name: 'bt_room',
+      position: 3,
+    },
+    {
+      text: 'Video',
+      // icon: require('./images/ic_videocam_white.png'),
+      name: 'bt_videocam',
+      position: 4,
+    },
+  ];
 
   const horizontalListItem = ({
     item,
@@ -91,6 +119,17 @@ const Index = () => {
           {selectedHorizontal == 4 && <BloodPressue />}
         </View>
       </View>
+      {selectedHorizontal == 2 && (
+        <View style={styles.Floatingcontainer}>
+          {/* <Text style={styles.example}>Floating Action example</Text> */}
+          <FloatingAction
+            actions={actions}
+            onPressItem={(name) => {
+              console.log(`selected button: ${name}`);
+            }}
+          />
+        </View>
+      )}
     </View>
   );
 };
