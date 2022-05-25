@@ -11,13 +11,15 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import ButtonComponent from 'components/base/button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack } from 'services/nav-ref';
-
+import SCREENS from 'navigation/constants';
+import { useNavigation } from '@react-navigation/native';
 type Props = {};
 
 const IdVerfiicationComplete = (props: Props) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const {} = props;
+  const navigation = useNavigation();
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -37,7 +39,12 @@ const IdVerfiicationComplete = (props: Props) => {
         <View style={{ marginTop: heightToDp(6) }} />
       </SafeAreaView>
       <View style={{ alignItems: 'center', marginBottom: 20 }}>
-        <ButtonComponent onPress={undefined} title={'Continue'} />
+        <ButtonComponent
+          onPress={() => {
+            navigation.navigate(SCREENS.ACCOUNT);
+          }}
+          title={'Continue'}
+        />
       </View>
     </>
   );
