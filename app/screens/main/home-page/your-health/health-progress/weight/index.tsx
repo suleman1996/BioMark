@@ -12,7 +12,7 @@ const Index = () => {
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
     { id: 1, title: '7D', complete: '7 Days' },
-    { id: 2, title: '1M', complete: '1 Month' },
+    { id: 2, title: '1M', complete: 'Last Month' },
     { id: 3, title: '3M', complete: '3 Months' },
     { id: 4, title: '1Y', complete: '1 Year' },
     { id: 5, title: 'All', complete: 'All' },
