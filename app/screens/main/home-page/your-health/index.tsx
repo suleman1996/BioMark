@@ -10,6 +10,7 @@ import {
   PanResponder,
 } from 'react-native';
 import React, { useEffect, useRef } from 'react';
+
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';

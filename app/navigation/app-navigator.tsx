@@ -12,6 +12,7 @@ import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 import YourHealth from '../screens/main/home-page/your-health/index';
 import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
+import PdfHypertension from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
 import HealthProgress from '../screens/main/home-page/your-health/health-progress/index';
 import Targets from '../screens/main/home-page/your-health/health-progress/targets/index';
 import AddBloodSugar from '../screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
@@ -36,6 +37,7 @@ const {
   NESTED_COVID19_NAVIGATOR,
   HEALTH_RISK,
   HYPERTENSION,
+  PDF_HYPERTENSION,
   BLOOD_SUGAR,
   SUPPORT_SYSTEM,
   EMPOWER_PROGRAM,
@@ -90,6 +92,7 @@ const AppNavigator = () => {
           <Stack.Screen name={HEALTH_RISK} component={HealthRisk} />
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
+          <Stack.Screen name={PDF_HYPERTENSION} component={PdfHypertension} />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
           <Stack.Screen name={SUPPORT_SYSTEM} component={SupportCenter} />
           <Stack.Screen name={EMPOWER_PROGRAM} component={EmpowerProgram} />

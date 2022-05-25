@@ -26,7 +26,7 @@ const GradientButton = (props: Props) => {
         <LinearGradient
           start={{ x: 0, y: 0.75 }}
           end={{ x: 1, y: 0.25 }}
-          colors={props.color}
+          colors={props?.color}
           style={{
             height: 50,
             // marginHorizontal: 30,
