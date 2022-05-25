@@ -6,6 +6,10 @@ import StepIndicator from 'react-native-step-indicator';
 import ButtonComponent from 'components/base/button';
 import ExisitingBookingForDependent from 'components/ui/covid-test-book-for-existing/index';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
+import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
+import CovidTestBookForPersonal from './../../../../components/ui/covid-test-book-for-personal/index';
 
 type Props = {};
 
@@ -15,7 +19,9 @@ const BookCovidTest = (props: Props) => {
   const {} = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const [isExistingBtn, setIsExisting] = useState(true);
+  const [isExistingBtn, setIsExisting] = useState(false);
+  const [isDependantAdd, setIsDependantAdd] = useState(false);
+  const [isPersonal, setIsPersonal] = useState(false);
 
   return (
     <>
@@ -33,24 +39,45 @@ const BookCovidTest = (props: Props) => {
           keyboardShouldPersistTaps="always"
           contentContainerStyle={styles.scrollView}
         >
-          {isExistingBtn ? (
+          {isExistingBtn && !isDependantAdd ? (
             <View>
               <ExisitingBookingForDependent />
             </View>
           ) : null}
+
+          {isPersonal && !isDependantAdd && !isExistingBtn ? (
+            <View>
+              <CovidTestBookForPersonal />
+            </View>
+          ) : null}
+
           <ButtonComponent
             onPress={() => {
               setIsExisting(true);
             }}
             title={'Add Existing Dependent'}
           />
+
           <ButtonComponent
-            onPress={undefined}
+            onPress={() => {
+              setIsDependantAdd(true);
+            }}
             marginTop={1}
+            disabled={isDependantAdd}
             title={'Add New Dependent'}
           />
+          {/* Add Dependant Form */}
+          {isDependantAdd ? (
+            <AddDependantForm
+              callMe={() => {
+                setIsDependantAdd(false);
+              }}
+            />
+          ) : null}
           <ButtonComponent
-            onPress={undefined}
+            onPress={() => {
+              setIsPersonal(true);
+            }}
             marginTop={1}
             title={'Add Self'}
           />
@@ -59,7 +86,14 @@ const BookCovidTest = (props: Props) => {
             <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
-            <Pressable style={styles.btnEnable}>
+            <Pressable
+              onPress={() =>
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_STEP,
+                })
+              }
+              style={styles.btnEnable}
+            >
               <Text style={[styles.btnText2]}>Next</Text>
             </Pressable>
           </View>

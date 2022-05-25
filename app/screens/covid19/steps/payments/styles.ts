@@ -16,6 +16,32 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
       paddingTop: heightToDp(2),
     },
+    parent: {
+      borderColor: colors.inputBg,
+      borderWidth: 2,
+      borderRadius: widthToDp(3),
+      marginBottom: heightToDp(1.5),
+      width: widthToDp(88),
+      padding: widthToDp(3),
+    },
+    innerView: {
+      borderColor: colors.inputBg,
+      borderWidth: 2,
+      borderRadius: widthToDp(3),
+      marginBottom: heightToDp(1.5),
+      width: '100%',
+      padding: widthToDp(3),
+    },
+    headerLine: {
+      width: '100%',
+      borderWidth: 1,
+      borderColor: colors.lightPrimary,
+    },
+    innerTitle: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.medium,
+      color: colors.darkPrimary,
+    },
     stepContainer: {
       borderBottomWidth: 2,
       borderColor: colors.inputBg,
@@ -32,6 +58,7 @@ export const makeStyles = (colors: any) =>
       stepIndicatorCurrentColor: colors.blue,
       stepIndicatorLabelCurrentColor: colors.white,
       stepIndicatorUnFinishedColor: colors.lightBlue,
+      stepIndicatorFinishedColor: colors.blue,
       labelColor: colors.lightGrey,
       currentStepLabelColor: colors.darBlue,
       separatorFinishedColor: colors.blue,
@@ -45,7 +72,6 @@ export const makeStyles = (colors: any) =>
       width: widthToDp(88),
       paddingBottom: heightToDp(2),
       backgroundColor: colors.white,
-      paddingTop: heightToDp(2),
     },
     btn: {
       width: widthToDp(40),
