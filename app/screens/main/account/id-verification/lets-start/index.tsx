@@ -5,6 +5,7 @@ import {
   Text,
   View,
   NativeModules,
+  NativeEventEmitter,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -41,6 +42,16 @@ const LetsStartIdVerfiication = (props: Props) => {
     JumioMobileSDK.initialize(authorizationToken, DATACENTER);
     JumioMobileSDK.start();
   };
+  // Callbacks - (Data is displayed as a warning for demo purposes)
+  const emitterJumio = new NativeEventEmitter(JumioMobileSDK);
+  emitterJumio.addListener('EventResult', (EventResult) => {
+    console.log('EventResult: ' + JSON.stringify(EventResult));
+    alert('finsihed');
+  });
+  emitterJumio.addListener('EventError', (EventError) => {
+    console.log('EventError: ' + JSON.stringify(EventError));
+    alert('canceled');
+  });
   return (
     <SafeAreaView style={styles.container}>
       <ActivityIndicator visible={isLoading} />

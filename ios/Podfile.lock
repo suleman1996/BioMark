@@ -730,12 +730,8 @@ SPEC CHECKSUMS:
   react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
   react-native-fbsdk-next: 79815a5b8f66ab0990fbb370b4a4b5bdf0a15e6c
   react-native-geolocation: 69f4fd37650b8e7fee91816d395e62dd16f5ab8d
-<<<<<<< Updated upstream
   react-native-image-picker: 4e6008ad8c2321622affa2c85432a5ebd02d480c
-=======
-  react-native-image-picker: e95b4785b685cfc06609bc50ed6fb55b59990c99
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
->>>>>>> Stashed changes
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
   react-native-pager-view: b1914469643f40042e65d78cbf3d3dfebd6fb0d9
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b

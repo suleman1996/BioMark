@@ -7024,17 +7024,10 @@ react-native-event-listeners@1.0.3:
   dependencies:
     type-detect "4.0.3"
 
-<<<<<<< Updated upstream
-react-native-fbsdk-next@^7.3.3:
-  version "7.3.3"
-  resolved "https://registry.npmjs.org/react-native-fbsdk-next/-/react-native-fbsdk-next-7.3.3.tgz"
-  integrity sha512-8DRzfqPIUZ3OmzaVmn3zNDSg6eieDFDGhkoLbJvs2juXyz+RdqxM5DbMTTw0VFKiNrvdtfFFbL8Sslg8/ecStQ==
-=======
 react-native-fbsdk-next@^8.0.5:
   version "8.0.5"
   resolved "https://registry.yarnpkg.com/react-native-fbsdk-next/-/react-native-fbsdk-next-8.0.5.tgz#d69c51cdb2afd357e0a2400951155d64b935d348"
   integrity sha512-gxIP+QfgHKtzVVcjQxflTbXuPOZQ1PlT9dJKlrCWDX2wIOblRIs8eTN6TS5dbw7OPgibwpHVMehIxLAM+z/G/w==
->>>>>>> Stashed changes
   dependencies:
     "@expo/config-plugins" "^4.0.4"
     xml2js "^0.4.23"
