@@ -26,6 +26,7 @@ import AllergiesScreen from 'screens/main/account/profile/edit-profile/allergies
 import DrinkingScreen from 'screens/main/account/profile/edit-profile/drinking';
 import SCREENS from './constants';
 import LetsStartIdVerfiication from 'screens/main/account/id-verification/lets-start';
+import IdVerfiicationComplete from 'screens/main/account/id-verification/lets-start/id-verification-complete/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,13 @@ const AccountNavigator = () => {
           }}
           name={SCREENS.ID_VERIFICATION_START}
           component={LetsStartIdVerfiication}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name={SCREENS.ID_VERIFICATION_COMPLETE}
+          component={IdVerfiicationComplete}
         />
         <Stack.Screen
           options={{
