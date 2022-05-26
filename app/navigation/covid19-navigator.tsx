@@ -9,11 +9,12 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import SCREENS from './constants';
 import PaymentStep from 'screens/covid19/steps/payments';
 import PaymentSuccess from 'screens/covid19/steps/payment-success';
+import ViewCovidResults from 'screens/covid19/view-results';
 
 const Stack = createNativeStackNavigator();
 
 const Covid19Navigator = () => {
-  const { colors } = useTheme();
+  const { colors }: any = useTheme();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -68,6 +69,20 @@ const Covid19Navigator = () => {
         }}
         name={SCREENS.PAYMENT_SUCCESS}
         component={PaymentSuccess}
+      />
+
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          headerTintColor: colors.darkPrimary,
+          headerTitleStyle: {
+            fontFamily: GlobalFonts.light,
+            color: colors.darkPrimary,
+          },
+          title: 'Back',
+        }}
+        name={SCREENS.VIEWCOVIDRESULTS}
+        component={ViewCovidResults}
       />
     </Stack.Navigator>
   );

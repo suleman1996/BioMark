@@ -9,9 +9,9 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
 import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
-import CovidTestBookForPersonal from './../../../../components/ui/covid-test-book-for-personal/index';
-import TopBarWithBackText from './../../../../components/higher-order/topBarWithBackText/index';
-import CancelBookingTestModal from './../../../../components/ui/cancelBookingTestModal/index';
+import CovidTestBookForPersonal from 'components/ui/covid-test-book-for-personal/index';
+import TopBarWithBackText from 'components/higher-order/topBarWithBackText/index';
+import CancelBookingTestModal from 'components/ui/cancelBookingTestModal/index';
 
 type Props = {};
 

@@ -10,7 +10,7 @@ import { navigate } from 'services/nav-ref';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import makeStyles from './styles';
+import { makeStyles } from './styles';
 
 type Props = {};
 
