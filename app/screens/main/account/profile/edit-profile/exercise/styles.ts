@@ -45,11 +45,6 @@ export const makeStyles = (colors: any) =>
     container2: {
       marginHorizontal: heightToDp(2),
       marginVertical: heightToDp(3),
-      borderBottomWidth: 0,
-      borderColor: colors.darkPrimary,
-      backgroundColor: colors.bgContainer,
-      borderRadius: 8,
-      height: 50,
     },
     bottomView: {
       width: '100%',
