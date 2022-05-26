@@ -4,12 +4,16 @@ import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import SCREENS from 'navigation/constants';
+import { useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
 const RenderHealthTrack = ({ item }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const navigation = useNavigation();
-  console.log('item', item.item.title);
+  const medicationList = useSelector(
+    (state: IAppState) => state.home.medicationList
+  );
 
   return (
     <TouchableOpacity
@@ -23,7 +27,11 @@ const RenderHealthTrack = ({ item }) => {
         } else if (item?.item?.title === 'HbA1c') {
           navigation.navigate(SCREENS.HBA1C);
         } else if (item?.item?.title === 'Medication') {
-          navigation.navigate(SCREENS.MEDICATION);
+          if (medicationList) {
+            navigation.navigate(SCREENS.MEDICATION);
+          } else {
+            alert('add medication');
+          }
         } else {
           alert('Under Development');
         }

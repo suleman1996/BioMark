@@ -5,6 +5,7 @@ import {
   DashboardResponseData,
   MedicationSetupPayload,
   RiskData,
+  MedicationListEntry,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -12,6 +13,7 @@ import {
   GET_DASHBOARD,
   MEDICAL_DROPDOWN,
   GET_HEALTH_RISK,
+  MEDICATION_LIST,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -20,6 +22,10 @@ export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
 });
 export const addMedicalDropDown = (data: MedicationSetupPayload) => ({
   type: MEDICAL_DROPDOWN,
+  payload: data,
+});
+export const addMedicalList = (data: MedicationListEntry) => ({
+  type: MEDICATION_LIST,
   payload: data,
 });
 
@@ -73,7 +79,19 @@ export const getReduxMedicalDropDown =
         logNow(err);
       });
   };
+export const getReduxMedicationList =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getMedicationList()
+      .then(async (res) => {
+        console.log('MEDICATION LIST', res);
 
+        await dispatch(addMedicalList(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
 export const getHealthTrackerRisks =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
