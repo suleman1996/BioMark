@@ -28,6 +28,8 @@ import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
 import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
 import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
+import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
+import HealthRecord from 'screens/main/home-page/your-health/health-records';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -51,6 +53,8 @@ const {
   TARGETS,
   ADD_BLOOD_SUGAR,
   ADD_HBA1C,
+  PDF_DIABETES_SUPPORT,
+  HEALTH_RECORD,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -93,6 +97,11 @@ const AppNavigator = () => {
           <Stack.Screen name={YOUR_HEALTH} component={YourHealth} />
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={PDF_HYPERTENSION} component={PdfHypertension} />
+          <Stack.Screen name={HEALTH_RECORD} component={HealthRecord} />
+          <Stack.Screen
+            name={PDF_DIABETES_SUPPORT}
+            component={PdfDiabetesSupportCenter}
+          />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
           <Stack.Screen name={SUPPORT_SYSTEM} component={SupportCenter} />
           <Stack.Screen name={EMPOWER_PROGRAM} component={EmpowerProgram} />
