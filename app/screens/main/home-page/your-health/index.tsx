@@ -10,6 +10,7 @@ import {
   PanResponder,
 } from 'react-native';
 import React, { useEffect, useRef } from 'react';
+
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme } from 'react-native-paper';
@@ -17,10 +18,36 @@ import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import SCREENS from 'navigation/constants/index';
+import { navigate } from 'services/nav-ref';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
 
+import {
+  Diabetess,
+  Heart_Disease,
+  Blood_Presure,
+  BMII,
+  Drinkings,
+  Heart_Disease_ref,
+  Heart_Disease_footnotes,
+  Diabetes_ref,
+  Diabetes_footnotes,
+  Blood_Pressure_ref,
+  BMI_ref,
+  Smoking_ref,
+  Drinking_ref,
+  Stress_ref,
+  Sleeping_ref,
+  heart_Diease_Calc,
+  diabetes_Calc,
+  Blood_Pressure_Calc,
+  BMI_Calc,
+  Smoking_Calc,
+  Drinking_Calc,
+  Stress_Calc,
+  Sleeping_Calc,
+} from '../health-risk/list-data';
 import Heart from '../../../../assets/svgs/heart';
 import Diabetes from '../../../../assets/svgs/diabtes';
 import BP from '../../../../assets/svgs/bP';
@@ -117,12 +144,31 @@ const Index = () => {
   const [healthRisksData, setHealthRisksData] = React.useState([]);
 
   const [selectedHealthRisk, setSelectedHealthRisk] = React.useState();
+  const [selectedHardCode, setSelectedHardCode] = React.useState();
+  const [selectedRef, setSelectedRef] = React.useState();
+  const [selectedFootNotes, setSelectedFootNotes] = React.useState();
+  const [selectedCalculations, setselectedCalculations] = React.useState();
+
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
 
-  const RenderHealthRiskView = ({ svg, color, healthRisks }) => (
+  const RenderHealthRiskView = ({
+    svg,
+    color,
+    healthRisks,
+    hardCode,
+    References,
+    FootNotes,
+    Calculations,
+  }) => (
     <>
       <TouchableOpacity
-        onPress={() => setSelectedHealthRisk(healthRisks)}
+        onPress={() => {
+          setSelectedHealthRisk(healthRisks),
+            setSelectedHardCode(hardCode),
+            setSelectedRef(References);
+          setSelectedFootNotes(FootNotes);
+          setselectedCalculations(Calculations);
+        }}
         style={[
           styles.renderHealthRisk,
           {
@@ -274,46 +320,77 @@ const Index = () => {
               healthRisks={healthRisksData?.heart}
               color={colors.lightGreen}
               svg={<Heart />}
+              hardCode={Heart_Disease}
+              References={Heart_Disease_ref}
+              FootNotes={Heart_Disease_footnotes}
+              Calculations={heart_Diease_Calc}
             />
             <RenderHealthRiskView
               color={colors.lightGreen}
               healthRisks={healthRisksData?.diabetes}
               svg={<Diabetes />}
+              hardCode={Diabetess}
+              References={Diabetes_ref}
+              FootNotes={Diabetes_footnotes}
+              Calculations={diabetes_Calc}
             />
             <RenderHealthRiskView
               color={colors.lightGreen}
               healthRisks={healthRisksData?.bp}
               svg={<BP />}
+              hardCode={Blood_Presure}
+              References={Blood_Pressure_ref}
+              Calculations={Blood_Pressure_Calc}
             />
             <RenderHealthRiskView
               color={colors.lightYellow}
               healthRisks={healthRisksData?.bmi}
               svg={<BMI />}
+              hardCode={BMII}
+              References={BMI_ref}
+              Calculations={BMI_Calc}
             />
             <RenderHealthRiskView
               color={colors.lightGreen}
               healthRisks={healthRisksData?.smoking}
               svg={<Smoking />}
+              References={Smoking_ref}
+              Calculations={Smoking_Calc}
             />
             <RenderHealthRiskView
               color={colors.lightYellow}
               healthRisks={healthRisksData?.drinking}
               svg={<Drinking />}
+              hardCode={Drinkings}
+              References={Drinking_ref}
+              Calculations={Drinking_Calc}
             />
             <RenderHealthRiskView
               color={colors.lightGreen}
               healthRisks={healthRisksData?.stress}
               svg={<Stress />}
+              References={Stress_ref}
+              Calculations={Stress_Calc}
             />
             <RenderHealthRiskView
               color={colors.dangerRed}
               healthRisks={healthRisksData?.sleeping}
               svg={<Sleep />}
+              References={Sleeping_ref}
+              Calculations={Sleeping_Calc}
             />
           </View>
           {selectedHealthRisk && (
             <RenderHealthRisk
-              onPress={() => console.log('xxx ', selectedHealthRisk)}
+              onPress={() =>
+                navigate(SCREENS.HEALTH_RISK, {
+                  item: selectedHealthRisk,
+                  cardData: selectedHardCode,
+                  refData: selectedRef,
+                  footNotesData: selectedFootNotes,
+                  calc: selectedCalculations,
+                })
+              }
               name={selectedHealthRisk?.name}
               description={selectedHealthRisk?.description}
               card_status={selectedHealthRisk?.card_status}
@@ -339,7 +416,7 @@ const Index = () => {
             svg={<Diabetes />}
             title="Enter Diabetes Support Center"
             id="4y6yb5y5yb56b56y"
-            onPress={() => console.log('xxxxxx')}
+            onPress={() => navigate(SCREENS.DIABETES_CENTER)}
           />
           <RenderRecordKeeping
             svg={<BP />}
@@ -355,7 +432,11 @@ const Index = () => {
           />
 
           <View style={styles.circleView}>
-            <RenderCircle title="Health Records" svg={<Health />} />
+            <RenderCircle
+              title="Health Records"
+              svg={<Health />}
+              onPress={() => navigate(SCREENS.HEALTH_RECORD)}
+            />
             <RenderCircle
               title="Health Progress"
               svg={<Progress />}

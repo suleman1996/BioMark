@@ -52,6 +52,8 @@ const API_URLS = {
   EXERCISE: '/api/v1/patient/lifestyle/exercise',
 
   DASHBOARD: 'api/v1/patient/dashboard',
+  GET_JUMIO_DATA: '/integration/v1/id_verifications/get_authtoken',
+
   // Health Traqcker
   GET_HEALTH_DROPDOWN: '/api/v1/patient/psp/trackers/blood_sugar/new',
   CREATE_BLOOD_SUGAR: '/api/v1/patient/psp/trackers/blood_sugar',
@@ -59,6 +61,7 @@ const API_URLS = {
   CREATE_WEIGHT: '/api/v1/patient/weight_trackers',
   CREATE_HBA1C: '/api/v1/patient/psp/trackers/hba1c',
   GET_HEALTH_RISKS: '/api/v1/patient/risks',
+  GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
 };
 
 export { API_URLS };

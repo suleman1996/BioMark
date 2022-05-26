@@ -22,6 +22,7 @@ import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
 import { getReduxBootstrap } from 'store/account/account-actions';
 import { getReduxMedicalDropDown } from 'store/home/home-actions';
+import { getReduxMedicationList } from 'store/home/home-actions';
 
 import AuthContext from 'utils/auth-context';
 
@@ -36,6 +37,7 @@ export default function Home() {
   // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
   const dispatch = useDispatch();
   const dispatchMedDropDown = useDispatch();
+  const dispatchMedicationList = useDispatch();
 
   /*eslint-disable*/
   const getReduxBoot = async () => {
@@ -44,10 +46,14 @@ export default function Home() {
   const getMedicalDropDown = async () => {
     await dispatchMedDropDown(getReduxMedicalDropDown());
   };
+  const getMedicationList = async () => {
+    await dispatchMedicationList(getReduxMedicationList());
+  };
 
   useEffect(() => {
     getReduxBoot();
     getMedicalDropDown();
+    getMedicationList();
   }, []);
   /*eslint-enable*/
 

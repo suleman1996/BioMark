@@ -21,10 +21,10 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const Sleep = () => {
   const isFocus = useIsFocused();
   const sleepOptions = [
-    { id: 0, title: 'less than 4 hours' },
-    { id: 1, title: '4-7 hours' },
-    { id: 2, title: '7-10 hours' },
-    { id: 3, title: 'more than 10 hours' },
+    { value: 0, label: 'less than 4 hours' },
+    { value: 1, label: '4-7 hours' },
+    { value: 2, label: '7-10 hours' },
+    { value: 3, label: 'more than 10 hours' },
   ];
   const [selectedSleep, setSelectedSleep] = React.useState(
     sleepOptions[0].title
@@ -120,9 +120,9 @@ const Sleep = () => {
                 ?.fields[0]?.question
             }
           </Text>
-          <View>
-            <View style={styles.container2}>
-              {/* <Picker
+
+          <View style={styles.container2}>
+            {/* <Picker
                 selectedValue={selectedSleep}
                 style={{
                   color: colors.lightGrey,
@@ -144,28 +144,27 @@ const Sleep = () => {
                   );
                 })}
               </Picker> */}
-              <DropDown
-                mode={'flat'}
-                visible={showDropDown}
-                showDropDown={() => setShowDropDown(true)}
-                onDismiss={() => setShowDropDown(false)}
-                value={selectedSleep}
-                setValue={(itemValue) => {
-                  setSelectedSleep(itemValue), setIndex(index);
-                }}
-                list={sleepOptions}
-                inputProps={{
-                  style: {
-                    width: '100%',
-                    height: heightToDp(6),
-                    flex: 1,
-                    borderRadius: widthToDp(2),
-                    maxHeight: heightToDp(6.5),
-                  },
-                  underlineColor: '#fff',
-                }}
-              />
-            </View>
+            <DropDown
+              mode={'flat'}
+              visible={showDropDown}
+              showDropDown={() => setShowDropDown(true)}
+              onDismiss={() => setShowDropDown(false)}
+              value={selectedSleep}
+              setValue={(itemValue) => {
+                setSelectedSleep(itemValue), setIndex(itemValue);
+              }}
+              list={sleepOptions}
+              inputProps={{
+                style: {
+                  width: '100%',
+                  height: heightToDp(6),
+                  // flex: 1,
+                  borderRadius: widthToDp(2),
+                  maxHeight: heightToDp(6.5),
+                },
+                underlineColor: '#fff',
+              }}
+            />
           </View>
         </View>
         <ButtonWithShadowContainer onPress={() => handleSleep()} title="Save" />

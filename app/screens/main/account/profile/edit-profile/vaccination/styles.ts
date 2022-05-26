@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import fonts from 'assets/fonts';
 
 export const makeStyles = (colors: any) =>
@@ -61,32 +61,42 @@ export const makeStyles = (colors: any) =>
       // borderWidth: 4,
     },
     listview: {
-      backgroundColor: colors.white,
-      justifyContent: 'space-around',
       flexDirection: 'row',
       alignItems: 'center',
-      marginHorizontal: 5,
-      paddingHorizontal: 5,
-      maxWidth: '33%',
-      height: heightToDp(4),
-      marginTop: 10,
+      backgroundColor: colors.white,
+      justifyContent: 'space-evenly',
+      marginHorizontal: widthToDp(2),
+      paddingHorizontal: widthToDp(2),
+      height: heightToDp(5),
       borderRadius: 20,
       borderColor: colors.navyblue,
       borderWidth: 1,
-      flex: 9,
     },
     listTextColor: {
-      flex: 2,
+      // flex: 1,
+      flexDirection: 'row',
       color: colors.darkGray,
-      fontSize: responsiveFontSize(12),
-      marginHorizontal: 5,
+      // fontSize: responsiveFontSize(12),
+      // marginHorizontal: 5,
     },
     flatlistView: {
       marginHorizontal: 25,
-      marginTop: 25,
+      // marginTop: 10,
+      // width: '50%',
     },
     crossIcon: {
-      // marginHorizontal: 2,
+      // flex: 1,
+    },
+    addBtn: {
+      width: widthToDp(20),
+      height: heightToDp(5),
+      borderRadius: widthToDp(5),
+      backgroundColor: colors.primary,
+      position: 'absolute',
+      right: widthToDp(6),
+      bottom: 0,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   });
 export default makeStyles;

@@ -1,7 +1,15 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  NativeModules,
+  NativeEventEmitter,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Images from 'assets/images';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -11,15 +19,46 @@ import ButtonComponent from 'components/base/button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack } from 'services/nav-ref';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { userService } from 'services/user-service/user-service';
+import { ActivityIndicator } from 'components/';
+import SCREENS from 'navigation/constants';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = {};
-
+const { JumioMobileSDK } = NativeModules;
+const DATACENTER = 'SG';
 const LetsStartIdVerfiication = (props: Props) => {
   const { colors } = useTheme();
+  const { ID_VERIFICATION_COMPLETE } = SCREENS;
+  const navigation = useNavigation();
 
   const {} = props;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const GetJumioData = async () => {
+    setIsLoading(true);
+    const result = await userService.getJumioData();
+    console.log('result', result?.data?.sdk?.token);
+    startJumio(result?.data?.sdk?.token);
+    setIsLoading(false);
+  };
+
+  const startJumio = (authorizationToken) => {
+    JumioMobileSDK.initialize(authorizationToken, DATACENTER);
+    JumioMobileSDK.start();
+  };
+  // Callbacks - (Data is displayed as a warning for demo purposes)
+  const emitterJumio = new NativeEventEmitter(JumioMobileSDK);
+  emitterJumio.addListener('EventResult', (EventResult) => {
+    console.log('EventResult: ' + JSON.stringify(EventResult));
+    navigation.navigate(ID_VERIFICATION_COMPLETE);
+  });
+  emitterJumio.addListener('EventError', (EventError) => {
+    console.log('EventError: ' + JSON.stringify(EventError));
+  });
   return (
     <SafeAreaView style={styles.container}>
+      <ActivityIndicator visible={isLoading} />
       <Pressable onPress={() => goBack()} style={styles.backBtnContainer}>
         <Ionicons
           size={responsiveFontSize(35)}
@@ -34,7 +73,7 @@ const LetsStartIdVerfiication = (props: Props) => {
       </Text>
       <Image source={Images.bioverificationstart} style={styles.image} />
       <View style={{ marginTop: heightToDp(6) }} />
-      <ButtonComponent onPress={undefined} title={'Continue'} />
+      <ButtonComponent onPress={() => GetJumioData()} title={'Continue'} />
       <View style={{ marginTop: heightToDp(2) }} />
       <ButtonComponent
         bg="transparent"

@@ -26,27 +26,27 @@ import makeStyles from './styles';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 const Options = [
-  { title: '' },
-  { title: '1' },
-  { title: '2' },
-  { title: '3' },
-  { title: '4' },
-  { title: '5' },
-  { title: '6' },
-  { title: '7' },
-  { title: '8' },
-  { title: '9' },
-  { title: 'more than 10' },
+  { label: '', value: '' },
+  { label: '1', value: '1' },
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '4', value: '4' },
+  { label: '5', value: '5' },
+  { label: '6', value: '6' },
+  { label: '7', value: '7' },
+  { label: '8', value: '8' },
+  { label: '9', value: '9' },
+  { label: 'more than 10', value: 'more than 10' },
 ];
 
 const Options2 = [
-  { title: '' },
-  { title: 'less than 20 mins' },
-  { title: '20-40 mins' },
-  { title: '40-60 mins' },
-  { title: '1-2 hours' },
-  { title: '2-3 hours' },
-  { title: 'more than 3 hours' },
+  { label: '', value: '' },
+  { label: 'less than 20 mins', value: 'less than 20 mins' },
+  { label: '20-40 mins', value: '20-40 mins' },
+  { label: '40-60 mins', value: '40-60 mins' },
+  { label: '1-2 hours', value: '1-2 hours' },
+  { label: '2-3 hours', value: '2-3 hours' },
+  { label: 'more than 3 hours', value: 'more than 3 hours' },
 ];
 
 export default function ExerciseScreen() {

@@ -26,6 +26,7 @@ const theme = {
     darkGray: '#A9A9A9',
     fieldGrey: '#DCDCDC',
     green: 'lightgreen',
+    shineBlue: '#2C6CFC',
 
     // Colors
     inputBg: '#EBEFF2',
@@ -42,6 +43,7 @@ const theme = {
     lightYellow: '#FFD75E',
     dangerRed: '#EA4C59',
     lightDark: '#455066',
+    container: '#FAFAFA',
 
     //gradient
   },

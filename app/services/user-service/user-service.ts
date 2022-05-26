@@ -6,6 +6,7 @@ import {
   DashboardResponseData,
   MedicationSetupPayload,
   RiskData,
+  MedicationListEntry,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -341,18 +342,20 @@ const drinking = (
   });
 };
 
-const Vaccination = (items: string | number, condition: any) => {
+const Vaccination = ({ medical_history }: Props) => {
   return client.post(API_URLS.VACCINATION, {
-    medical_history: {
-      has_condition: condition,
-      vaccine_list: items,
-    },
+    medical_history,
+    // medical_history: {
+    //   has_condition: condition,
+    //   vaccine_list: items,
+    // },
   });
 };
 type Props = {
   conditions: any;
   medical: any;
   lifestyle: any;
+  medical_history: any;
   has_allergy: any;
 };
 const Allergies = ({ conditions, has_allergy }: Props) => {
@@ -597,6 +600,26 @@ function getMedicalDropDown() {
       });
   });
 }
+function getMedicationList() {
+  return new Promise<MedicationListEntry>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_MEDICATION_DROPDWON)
+      .then(async (response) => {
+        try {
+          console.log('memm', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+}
 
 function getHealthRisks() {
   return new Promise<RiskData>((resolve, reject) => {
@@ -618,6 +641,9 @@ function getHealthRisks() {
       });
   });
 }
+const getJumioData = () => {
+  return client.get(API_URLS.GET_JUMIO_DATA);
+};
 
 export const userService = {
   login,
@@ -659,4 +685,6 @@ export const userService = {
   createWeight,
   createHba1c,
   getHealthRisks,
+  getJumioData,
+  getMedicationList,
 };
