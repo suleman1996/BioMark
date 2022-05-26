@@ -3,6 +3,7 @@ import React from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
+import fonts from 'assets/fonts';
 
 type Props = { data: array; setSelectedValue: any; selectedValue: any };
 
@@ -29,10 +30,12 @@ const Index = (props: Props) => {
       >
         <Text
           style={{
+            fontFamily: fonts.regular,
+            fontSize: 14,
             color:
               props.selectedValue?.title == title?.title
                 ? colors.white
-                : colors.blue,
+                : colors.heading,
           }}
         >
           {props.selectedValue?.title == title?.title

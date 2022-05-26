@@ -620,6 +620,9 @@ function getHealthRisks() {
       });
   });
 }
+const getJumioData = () => {
+  return client.get(API_URLS.GET_JUMIO_DATA);
+};
 
 export const userService = {
   login,
@@ -661,4 +664,5 @@ export const userService = {
   createWeight,
   createHba1c,
   getHealthRisks,
+  getJumioData,
 };

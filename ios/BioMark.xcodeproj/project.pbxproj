@@ -18,9 +18,10 @@
 		168DA3465B5D48E980A15EA0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32924B4B48C24EF793BF29A8 /* Roboto-Thin.ttf */; };
 		22AD677E30C64100864C7A56 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C569830E5AD94F0099CE0403 /* Roboto-Light.ttf */; };
 		2DC0B133C59940C293202BE3 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6EA44A09D874E1A9CE294A6 /* OpenSans-SemiBoldItalic.ttf */; };
-		2E6A100189AAD44EAEBF1269 /* libPods-BioMark-BioMarkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 266E47A755F2454FA7A5C69B /* libPods-BioMark-BioMarkTests.a */; };
 		35BDADFBA10A4E6EB9571ACE /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32CB9FF14C0748EF979DE2CC /* Roboto-BoldItalic.ttf */; };
 		464B837B92B0443E91E6D1F8 /* Mulish-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F9C7D460D9641B2B056F168 /* Mulish-ExtraLight.ttf */; };
+		4728718A283E4F12002C4296 /* Localizable-Jumio.strings in Resources */ = {isa = PBXBuildFile; fileRef = 47287188283E4F12002C4296 /* Localizable-Jumio.strings */; };
+		4728718E283E4F71002C4296 /* Localizable-Jumio.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4728718C283E4F71002C4296 /* Localizable-Jumio.strings */; };
 		477FB7FA281158D40055B6D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 477FB7F9281158D40055B6D4 /* GoogleService-Info.plist */; };
 		479D527828149A1D000A09CA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		479F8B2E28105BB3007C1715 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479F8B2D28105BB3007C1715 /* File.swift */; };
@@ -69,7 +70,6 @@
 		494993478E864783AE552250 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EC73F782AF24DB9900C5D25 /* Roboto-Italic.ttf */; };
 		4AD5B397272E46719A9C5FCA /* Mulish-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EB6C0C08C5C4AC0BAC4FDA7 /* Mulish-Regular.ttf */; };
 		4C66858084244CB7B669D610 /* Mulish-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4833A2EF9F77437E90205A81 /* Mulish-LightItalic.ttf */; };
-		4F7FB6FF8E8E0217D5B54FB6 /* libPods-BioMark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB127DB232EB439763DD9C4 /* libPods-BioMark.a */; };
 		565049E4CFB4456BA07A92DC /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA11B00BF32D4F94A945E0AC /* OpenSans-ExtraBold.ttf */; };
 		655B42E5C30F48BFA7D4E8DB /* Mulish-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0247CF92BDD451AABCD3F0D /* Mulish-ExtraLightItalic.ttf */; };
 		6C49308EB1564847B789906A /* Mulish-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8BF6A0B35554AA1BD019BEB /* Mulish-SemiBold.ttf */; };
@@ -82,6 +82,7 @@
 		9E0FF39012E44142B4C4E2FA /* Mulish-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCAF356D4C64A738BAB22F0 /* Mulish-BoldItalic.ttf */; };
 		A91143E026054EFAB9816B41 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3C6D0502E4F4B44918665CB /* OpenSans-Bold.ttf */; };
 		AA85E5D5C81B4C01B7396EB5 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD9C3AD9B531453996B8F719 /* Roboto-Bold.ttf */; };
+		AC51EEF001C71EA4253D4143 /* Pods_BioMark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F3D979555F3DAB826528BF /* Pods_BioMark.framework */; };
 		B2DA348C42C9444DA37F0BB3 /* Mulish-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC3918213CBD438A90EAC813 /* Mulish-Italic.ttf */; };
 		B659CD46C8434677A7AD7A7C /* Mulish-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1926B977319C4E6787E12777 /* Mulish-Light.ttf */; };
 		C8BB4B2DED5B49339787071F /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E51800B3C1FC433CB0C4B3D3 /* Roboto-Black.ttf */; };
@@ -120,7 +121,6 @@
 		1C5A07F5C82343098587DC3A /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		1C65DB3E514648B8A9125CF6 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../app/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		1D0D4E89A9EB4E9B855A1BC1 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		266E47A755F2454FA7A5C69B /* libPods-BioMark-BioMarkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BioMark-BioMarkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A5AD0AAA14343EEA8574881 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		2BBAA36902594F1F822E56FB /* Mulish-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mulish-SemiBoldItalic.ttf"; path = "../app/assets/fonts/Mulish-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		2D2AD4587A9548CDA24F67DD /* Mulish-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mulish-Black.ttf"; path = "../app/assets/fonts/Mulish-Black.ttf"; sourceTree = "<group>"; };
@@ -132,6 +132,8 @@
 		3F064E5C253D427FBE75B54A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		40888F356415442197843708 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../app/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		4662F157B07442C5A2C93974 /* Mulish-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mulish-ExtraBold.ttf"; path = "../app/assets/fonts/Mulish-ExtraBold.ttf"; sourceTree = "<group>"; };
+		47287189283E4F12002C4296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Localizable-Jumio.strings"; sourceTree = "<group>"; };
+		4728718D283E4F71002C4296 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "Localizable-Jumio.strings"; sourceTree = "<group>"; };
 		477FB7F9281158D40055B6D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4797136E2812BA350011E444 /* BioMark.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BioMark.entitlements; path = BioMark/BioMark.entitlements; sourceTree = "<group>"; };
 		479F8B2C28105BB2007C1715 /* BioMark-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioMark-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -191,12 +193,12 @@
 		7B5CFC71F89B4B5F92C25483 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		7DDE1C64A95845BF8D3EEBE7 /* Mulish-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mulish-MediumItalic.ttf"; path = "../app/assets/fonts/Mulish-MediumItalic.ttf"; sourceTree = "<group>"; };
 		7FCAF356D4C64A738BAB22F0 /* Mulish-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mulish-BoldItalic.ttf"; path = "../app/assets/fonts/Mulish-BoldItalic.ttf"; sourceTree = "<group>"; };
+		80F3D979555F3DAB826528BF /* Pods_BioMark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BioMark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BioMark/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81B9EB0ACA04448C99B9EC70 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../app/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		8D14D4A1104A47458208C4BF /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		91A4D8B83D9D46D592A5ABE6 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../app/assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		94C257A4688747CC8422164E /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../app/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
-		9EB127DB232EB439763DD9C4 /* libPods-BioMark.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BioMark.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC73F782AF24DB9900C5D25 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../app/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		A0247CF92BDD451AABCD3F0D /* Mulish-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Mulish-ExtraLightItalic.ttf"; path = "../app/assets/fonts/Mulish-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		A6D649AD85B94AD0AF909816 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../app/assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -211,13 +213,11 @@
 		D3C6D0502E4F4B44918665CB /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../app/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		D4CBAF2F806B451C9D64D12B /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../app/assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		E165F1B640F546FFAAAFD680 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		E50A894C00E70A20A1ABAF6C /* Pods-BioMark-BioMarkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BioMark-BioMarkTests.release.xcconfig"; path = "Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests.release.xcconfig"; sourceTree = "<group>"; };
 		E51800B3C1FC433CB0C4B3D3 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../app/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		E6EA44A09D874E1A9CE294A6 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../app/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		EA11B00BF32D4F94A945E0AC /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../app/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F2EC935732B80A5DC807F037 /* Pods-BioMark.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BioMark.release.xcconfig"; path = "Target Support Files/Pods-BioMark/Pods-BioMark.release.xcconfig"; sourceTree = "<group>"; };
-		FBAB513FFC3C2134A2685639 /* Pods-BioMark-BioMarkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BioMark-BioMarkTests.debug.xcconfig"; path = "Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FEFDAFF9BD7549958449DC23 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../app/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,7 +226,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E6A100189AAD44EAEBF1269 /* libPods-BioMark-BioMarkTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F7FB6FF8E8E0217D5B54FB6 /* libPods-BioMark.a in Frameworks */,
+				AC51EEF001C71EA4253D4143 /* Pods_BioMark.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +260,8 @@
 		13B07FAE1A68108700A75B9A /* BioMark */ = {
 			isa = PBXGroup;
 			children = (
+				4728718B283E4F71002C4296 /* de.lproj */,
+				47287187283E4F12002C4296 /* en.lproj */,
 				4797136E2812BA350011E444 /* BioMark.entitlements */,
 				477FB7F9281158D40055B6D4 /* GoogleService-Info.plist */,
 				47EBC11628102635000492F8 /* Mukta-Bold.ttf */,
@@ -321,8 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				9EB127DB232EB439763DD9C4 /* libPods-BioMark.a */,
-				266E47A755F2454FA7A5C69B /* libPods-BioMark-BioMarkTests.a */,
+				80F3D979555F3DAB826528BF /* Pods_BioMark.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -385,6 +385,24 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		47287187283E4F12002C4296 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				47287188283E4F12002C4296 /* Localizable-Jumio.strings */,
+			);
+			name = en.lproj;
+			path = Pods/Jumio/Localization/en.lproj;
+			sourceTree = "<group>";
+		};
+		4728718B283E4F71002C4296 /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				4728718C283E4F71002C4296 /* Localizable-Jumio.strings */,
+			);
+			name = de.lproj;
+			path = Pods/Jumio/Localization/de.lproj;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,8 +440,6 @@
 			children = (
 				D2AF8C9F94C8B434E766CDCF /* Pods-BioMark.debug.xcconfig */,
 				F2EC935732B80A5DC807F037 /* Pods-BioMark.release.xcconfig */,
-				FBAB513FFC3C2134A2685639 /* Pods-BioMark-BioMarkTests.debug.xcconfig */,
-				E50A894C00E70A20A1ABAF6C /* Pods-BioMark-BioMarkTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -435,12 +451,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "BioMarkTests" */;
 			buildPhases = (
-				4377CA9ABDAE922D41EB1498 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				E8CDD49A1741BD33FB6CD06D /* [CP] Embed Pods Frameworks */,
-				991A52552BF1BA76EF5D76A9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -499,6 +512,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -529,6 +543,7 @@
 				47CDEB7E282E8060004D771F /* OpenSans-BoldItalic.ttf in Resources */,
 				47CDEB5F282E8060004D771F /* Mulish-BoldItalic.ttf in Resources */,
 				47CDEB66282E8060004D771F /* Mulish-MediumItalic.ttf in Resources */,
+				4728718E283E4F71002C4296 /* Localizable-Jumio.strings in Resources */,
 				47CDEB7D282E8060004D771F /* Mulish-SemiBold.ttf in Resources */,
 				47EBC11E28102636000492F8 /* Mukta-SemiBold.ttf in Resources */,
 				477FB7FA281158D40055B6D4 /* GoogleService-Info.plist in Resources */,
@@ -575,6 +590,7 @@
 				47CDEB79282E8060004D771F /* Mulish-BlackItalic.ttf in Resources */,
 				0E07F42A94EC4598BF22D918 /* OpenSans-Regular.ttf in Resources */,
 				47CDEB77282E8060004D771F /* OpenSans-LightItalic.ttf in Resources */,
+				4728718A283E4F12002C4296 /* Localizable-Jumio.strings in Resources */,
 				47CDEB72282E8060004D771F /* Roboto-BoldItalic.ttf in Resources */,
 				DF222DAC0F0F4BFFBCC86E4E /* OpenSans-SemiBold.ttf in Resources */,
 				47CDEB6F282E8060004D771F /* Roboto-Medium.ttf in Resources */,
@@ -622,28 +638,6 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		4377CA9ABDAE922D41EB1498 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BioMark-BioMarkTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7FF1B443EE7FCAB2259F9F19 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -659,23 +653,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BioMark/Pods-BioMark-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		991A52552BF1BA76EF5D76A9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9DBFA3F496EF1FFDC1D4911F /* [CP] Check Pods Manifest.lock */ = {
@@ -715,23 +692,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BioMark/Pods-BioMark-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E8CDD49A1741BD33FB6CD06D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BioMark-BioMarkTests/Pods-BioMark-BioMarkTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EDCF4CF244433FBE93553106 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -797,10 +757,28 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		47287188283E4F12002C4296 /* Localizable-Jumio.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				47287189283E4F12002C4296 /* en */,
+			);
+			name = "Localizable-Jumio.strings";
+			sourceTree = "<group>";
+		};
+		4728718C283E4F71002C4296 /* Localizable-Jumio.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4728718D283E4F71002C4296 /* de */,
+			);
+			name = "Localizable-Jumio.strings";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBAB513FFC3C2134A2685639 /* Pods-BioMark-BioMarkTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -828,7 +806,6 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E50A894C00E70A20A1ABAF6C /* Pods-BioMark-BioMarkTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

@@ -45,6 +45,7 @@ export const makeStyles = (colors: any) =>
       width: widthToDp(88),
       paddingBottom: heightToDp(2),
       backgroundColor: colors.white,
+      paddingTop: heightToDp(2),
     },
     btn: {
       width: widthToDp(40),
