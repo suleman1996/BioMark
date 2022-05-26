@@ -20,7 +20,7 @@ const Index = () => {
     ],
   });
   return (
-    <View style={{ height: '45%', marginTop: 10 }}>
+    <View style={{ height: 280, marginTop: 10 }}>
       <ECharts option={option} backgroundColor={'#3D3D3D10'} />
     </View>
   );
