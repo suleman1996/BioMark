@@ -65,6 +65,7 @@ import {
   getReduxHealthTracker,
   getReduxDashboard,
   getHealthTrackerRisks,
+  getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
 
 const Index = () => {
@@ -79,7 +80,9 @@ const Index = () => {
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
-
+  const getMedNewTracker = useSelector(
+    (state: IAppState) => state.home.getNewMedicationTracker
+  );
   const handleHEalthTracker = () => {
     healthTracker.length = 0;
     let id = -1;
@@ -101,6 +104,9 @@ const Index = () => {
   };
 
   useEffect(() => {
+    dispatch(getReduxNewMedicationTracker());
+    console.log('getMedNewTracker', getMedNewTracker);
+
     dispatch(getReduxHealthTracker());
     console.log('Health Trackeer api =======>', hell);
     dispatch(getReduxDashboard());

@@ -117,38 +117,39 @@ const Medication = () => {
     //   ' ' +
     //   getTime(dateAndtime);
     // console.log('bp_systolic', hbvalue);
-    // try {
-    //   setIsLoading(true);
-    //   const response = await userService.createHba1c({
-    //     hba1c: {
-    //       data_value: hbvalue,
-    //       unit_list_id: 3,
-    //       record_date: dateAndtime,
-    //     },
-    //   });
-    //   console.log('HbA1c successful', response.data);
-    //   alert('HbA1c successful');
-    //   setIsLoading(false);
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.log(error);
-    //   if (error.errMsg.status === '500') {
-    //     showMessage({
-    //       message: 'Internal Server Error',
-    //       type: 'danger',
-    //     });
-    //   } else if (error.errMsg.status === false) {
-    //     showMessage({
-    //       message: error.errMsg.data.error,
-    //       type: 'danger',
-    //     });
-    //   } else {
-    //     showMessage({
-    //       message: error.errMsg,
-    //       type: 'danger',
-    //     });
-    //   }
-    // }
+    try {
+      setIsLoading(true);
+      const response = await userService.createMedication({
+        medication: {
+          dosage: '10',
+          record_date: 'Feb 13, 2020 4:00 PM',
+          meal_type: 8,
+          medication_log_id: 48951,
+        },
+      });
+      console.log('Take Medication successful', response.data);
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error.errMsg.status === '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status === false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
   };
   const RenderDosage = (props: RenderDosageProps) => (
     <View style={styles.rowContainer}>
@@ -210,6 +211,8 @@ const Medication = () => {
               options={options}
               selectedValue={dropdownValue}
               onValueChange={(text: any) => {
+                console.log('text', text);
+
                 setDropdown(text);
                 setIsDropDownChanged(true);
               }}
@@ -274,7 +277,7 @@ const Medication = () => {
         <ButtonWithShadowContainer
           onPress={onSubmit}
           title={'Take'}
-          disabled={!hbvalue || validation ? true : false}
+          // disabled={!hbvalue || validation ? true : false}
         />
       </ScrollView>
     </TitleWithBackWhiteBgLayout>
