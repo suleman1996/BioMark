@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BioMark</string>
     <string name="facebook_app_id">648501205748550</string>
+    <string name="facebook_client_token">f8d15076c15bbab6177b413fe4e2c625</string>
 </resources>
