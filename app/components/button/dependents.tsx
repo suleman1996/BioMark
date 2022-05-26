@@ -9,12 +9,18 @@ import SCREENS from '../../navigation/constants/index';
 export default function DependentButton() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const { YOUR_HEALTH } = SCREENS;
+  const { NESTED_ACCOUNT_NAVIGATOR } = SCREENS;
   const navigation = useNavigation();
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate(YOUR_HEALTH)}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate(NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.DEPENDANTS,
+          })
+        }
+      >
         <View style={styles.circleBtn}>
           <BioDependants width={7} height={7} />
         </View>
