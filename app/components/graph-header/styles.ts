@@ -11,6 +11,7 @@ const styles = (colors: any) =>
       borderRadius: 2,
       paddingHorizontal: 3,
       justifyContent: 'space-around',
+      marginTop: 5,
     },
     selected: {
       //   backgroundColor: 'yellow',

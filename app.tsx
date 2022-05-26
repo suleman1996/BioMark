@@ -5,7 +5,6 @@ import {
   useColorScheme,
   SafeAreaView,
 } from 'react-native';
-import { useTheme } from 'react-native-paper';
 
 import { Provider as PaperProvider } from 'react-native-paper';
 import FlashMessage from 'react-native-flash-message';
@@ -20,7 +19,6 @@ import theme from 'utils/theme';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
-  const { colors } = useTheme();
 
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState({});
@@ -34,7 +32,7 @@ const App = () => {
           >
             <MenuProvider>
               <StatusBar
-                backgroundColor={colors.blue}
+                backgroundColor={'#1B96D8'}
                 barStyle={
                   Platform.OS === 'android' && isDarkMode
                     ? 'light-content'

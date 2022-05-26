@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, ScrollView } from 'react-native';
 import React from 'react';
 
 import Styles from './styles';
@@ -9,6 +9,7 @@ import LineGraph from '../../../../../../components/line-graph/index';
 import Filter from '../../..//../../../assets/svgs/filter';
 import HealthProgressFilter from '../../../../../../components/health-progress-filter/index';
 import Logs from '../../../../../../components/health-progress-logs/index';
+
 import FloatingButton from '../../../../../../components/floating-button/index';
 import Person from '../../../../../../assets/svgs/Bmi';
 
@@ -86,20 +87,22 @@ const Index = () => {
       />
 
       <View style={styles.container}>
-        <GraphHeader
-          selectedValue={selectedValue}
-          setSelectedValue={setSelectedValue}
-          data={headerValue}
-        />
-        <View style={styles.headingView}>
-          <Text style={styles.heading}>Weight (kg)</Text>
-          <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-            <Filter fill={colors.heading} />
-          </TouchableOpacity>
-        </View>
-        <LineGraph />
-        <Logs logData={logData} />
-        <FloatingButton svg={<Person />} />
+        <ScrollView>
+          <GraphHeader
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
+            data={headerValue}
+          />
+          <View style={styles.headingView}>
+            <Text style={styles.heading}>Weight (kg)</Text>
+            <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+              <Filter fill={colors.heading} />
+            </TouchableOpacity>
+          </View>
+          <LineGraph />
+          <Logs logData={logData} />
+        </ScrollView>
+        <FloatingButton svg={<Person height={28} width={28} />} />
       </View>
     </>
   );
