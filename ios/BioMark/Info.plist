@@ -44,7 +44,7 @@
 	<key>FacebookAppID</key>
 	<string>648501205748550</string>
 	<key>FacebookClientToken</key>
-    <string>f8d15076c15bbab6177b413fe4e2c625</string> 
+	<string>f8d15076c15bbab6177b413fe4e2c625</string>
 	<key>FacebookDisplayName</key>
 	<string>BioMark</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -70,6 +70,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This will allow to take photos of your credentials.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -78,8 +80,6 @@
 	<string>BioMark needs Camera Access Permission</string>
 	<key>Privacy – Photo Library Additions Usage Description</key>
 	<string>App needs photo library Access</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This will allow to take photos of your credentials.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
