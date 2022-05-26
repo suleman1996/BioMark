@@ -7,16 +7,19 @@ import {
   Linking,
   TouchableWithoutFeedback,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import RenderHealthTrack from 'components/health-tracker-card/index';
+import PdfList from 'components/pdf-list';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
+import WithdrawProgram from 'components/widthdraw-from-program';
 import Video from 'react-native-video';
-// import { useNavigation } from '@react-navigation/native';
+import SCREENS from 'navigation/constants'; // import { useNavigation } from '@react-navigation/native';
 // import Pdf from 'assets/svgs/pdf';
 import Messenger from 'assets/svgs/messenger';
+import { navigate } from 'services/nav-ref';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
   Linking.openURL(
@@ -25,6 +28,8 @@ const openMessenger = () => {
 };
 
 const DiabetesCenter = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const { colors } = useTheme();
   const styles = Styles(colors);
   //   const navigation = useNavigation();
@@ -60,21 +65,24 @@ const DiabetesCenter = () => {
     },
   ]);
 
-  // const PdfLink = ({ title, svg, onPress }) => (
-  //   <TouchableOpacity
-  //     onPress={onPress}
-  //     style={[
-  //       styles.recordKeepingView,
-  //       { backgroundColor: colors.white, paddingHorizontal: 10 },
-  //     ]}
-  //   >
-  //     <View style={{ width: '80%' }}>
-  //       <Text style={styles.recordKeepinText}>{title}</Text>
-  //     </View>
-
-  //     <View style={{ width: '20%', alignItems: 'center' }}>{svg}</View>
-  //   </TouchableOpacity>
-  // );
+  const [Pdflist] = React.useState([
+    {
+      id: 1,
+      title: 'Diabetes Patient Manual',
+    },
+    {
+      id: 2,
+      title: 'Diabetes Myths and Facts',
+    },
+    {
+      id: 3,
+      title: 'Diabetes Patient Manual',
+    },
+    {
+      id: 4,
+      title: 'Diabetes Patient Manual',
+    },
+  ]);
 
   return (
     <TitleWithBackLayout isGradient={true} title="Diabetes Support Center">
@@ -98,42 +106,43 @@ const DiabetesCenter = () => {
           <Video
             source={{
               uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-            }} // the video file
+            }}
             controls={true}
-            paused={true} // make it start
-            style={styles.backgroundVideo} // any style you want
-            repeat={true} // make it a loop
-            resizeMode="cover"
+            paused={true}
+            style={styles.backgroundVideo}
+            repeat={true}
+            resizeMode="stretch"
+            fullscreen={true}
             posterResizeMode={'cover'}
-            poster="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
+            poster="https://play-lh.googleusercontent.com/uf1TVrS58KmBNiWYR3LocIJMDXTmmfkYY79lDlG2eA4brjyw3q1BN4DDIriw7B9MfQ=w600-h300-pc0xffffff-pd"
             //   style={{ flex: 1, width: '100%', margin: 'auto' }}
           />
-          {/* <View>
-            <Text>Vedio player</Text>
-          </View>
-          <PdfLink
-            title="What Do I Need To Know About Hypertension"
-            // svg={<BP fill={colors.primary} />}
-            svg={<Pdf />}
+
+          <FlatList
+            data={Pdflist}
+            renderItem={(item) => (
+              <PdfList
+                item={item}
+                onPress={() => navigate(SCREENS.PDF_DIABETES_SUPPORT)}
+              />
+            )}
+            keyExtractor={(item) => item.id}
+            showsHorizontalScrollIndicator={false}
           />
-          <PdfLink title="What Do I Check My Blood Pressure" svg={<Pdf />} />
-          <PdfLink
-            title="Shaking The Salt To Manage My Blood Pressure"
-            svg={<Pdf />}
+          <WithdrawProgram
+            visible={modalVisible}
+            title="Are You Sure?"
+            text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
+            cancel="Cancel"
+            cancelModal={() => setModalVisible(!modalVisible)}
+            closeModal={() => setModalVisible(!modalVisible)}
           />
-          <PdfLink
-            title="Modify My Lifestyle Can Help Control My Blood Presure"
-            svg={<Pdf />}
-          />
-          <PdfLink
-            title="Tips on Accurately Measuring Your Blood Pressure At Home"
-            svg={<Pdf />}
-          /> */}
+
           <View style={styles.bottomTextView}>
             <Text style={[styles.bottomText, { color: colors.heading }]}>
               Tap to{' '}
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Text
                 style={[
                   styles.bottomText,

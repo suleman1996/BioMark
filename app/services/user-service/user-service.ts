@@ -342,18 +342,20 @@ const drinking = (
   });
 };
 
-const Vaccination = (items: string | number, condition: any) => {
+const Vaccination = ({ medical_history }: Props) => {
   return client.post(API_URLS.VACCINATION, {
-    medical_history: {
-      has_condition: condition,
-      vaccine_list: items,
-    },
+    medical_history,
+    // medical_history: {
+    //   has_condition: condition,
+    //   vaccine_list: items,
+    // },
   });
 };
 type Props = {
   conditions: any;
   medical: any;
   lifestyle: any;
+  medical_history: any;
   has_allergy: any;
 };
 const Allergies = ({ conditions, has_allergy }: Props) => {
