@@ -10,6 +10,8 @@ import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
 import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
 import CovidTestBookForPersonal from './../../../../components/ui/covid-test-book-for-personal/index';
+import TopBarWithBackText from './../../../../components/higher-order/topBarWithBackText/index';
+import CancelBookingTestModal from './../../../../components/ui/cancelBookingTestModal/index';
 
 type Props = {};
 
@@ -23,10 +25,21 @@ const BookCovidTest = (props: Props) => {
   const [isDependantAdd, setIsDependantAdd] = useState(false);
   const [isPersonal, setIsPersonal] = useState(false);
 
+  const [isCancelModal, setIsCancelModal] = useState(false);
+
   return (
     <>
       <View style={styles.container}>
+        <CancelBookingTestModal
+          setIsVisible={setIsCancelModal}
+          isVisible={isCancelModal}
+        />
         <View style={styles.stepContainer}>
+          <TopBarWithBackText
+            onBackPress={() => {
+              setIsCancelModal(true);
+            }}
+          />
           <StepIndicator
             stepCount={3}
             currentPosition={0}

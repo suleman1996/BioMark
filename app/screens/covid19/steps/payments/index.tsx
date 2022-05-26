@@ -1,16 +1,16 @@
-import React from 'react';
-import { ScrollView, View, Text, Pressable } from 'react-native';
-import { useTheme } from 'react-native-paper';
-import StepIndicator from 'react-native-step-indicator';
-import makeStyles from './styles';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { InputWithLabel } from 'components/base';
 import ButtonComponent from 'components/base/button';
-import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+import React from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import StepIndicator from 'react-native-step-indicator';
 import Feather from 'react-native-vector-icons/Feather';
+import { navigate } from 'services/nav-ref';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import makeStyles from './styles';
 
 type Props = {};
 

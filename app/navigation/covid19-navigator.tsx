@@ -38,7 +38,7 @@ const Covid19Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerShown: true,
+          headerShown: false,
           headerTintColor: colors.black,
           headerTitleStyle: { fontFamily: GlobalFonts.light },
           title: 'Back',
