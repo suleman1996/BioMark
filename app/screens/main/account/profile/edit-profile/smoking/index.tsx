@@ -38,7 +38,10 @@ export default function SmokingScreen() {
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
   const [isVisiable, setIsVisible] = React.useState(false);
-  const options2 = [{ title: '2020' }, { title: '2021' }];
+  const options2 = [
+    { label: '2020', value: '2020' },
+    { label: '2021', value: '2021' },
+  ];
   const [showDropDown, setShowDropDown] = React.useState(false);
   const [showDropDown2, setShowDropDown2] = React.useState(false);
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
@@ -332,7 +335,7 @@ export default function SmokingScreen() {
                       visible={showDropDown2}
                       showDropDown={() => setShowDropDown2(true)}
                       onDismiss={() => setShowDropDown2(false)}
-                      value={startSmoke + ''}
+                      value={stopSmoke}
                       setValue={(itemValue) => setStopSmoke(itemValue)}
                       list={options2}
                       inputProps={{

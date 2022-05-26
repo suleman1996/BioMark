@@ -60,6 +60,7 @@ const EditDependantScreen = (props: Props) => {
         setDependentData(res);
         const phoneNumber: any = parsePhoneNumber(res.dependent_mobile_number);
         setCountryCode(phoneNumber?.country);
+        setSelectedCountryCode(phoneNumber?.country_phone_code);
         setNationalNumber(phoneNumber?.nationalNumber);
       })
       .catch((err) => {
@@ -101,6 +102,7 @@ const EditDependantScreen = (props: Props) => {
     });
     const pN = `${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
+
     setIsLoading(true);
     dependentService
       .editDependent(

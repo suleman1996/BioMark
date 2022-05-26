@@ -5,6 +5,7 @@ const styles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: colors.container,
     },
     navBar: {
       backgroundColor: colors.blue,

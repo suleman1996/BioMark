@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import React, { useState } from 'react';
 
-import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme, TouchableRipple } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
@@ -20,11 +19,11 @@ import PillMedicationIcon from 'assets/svgs/pill-mediction';
 import EditMedicationIcon from 'assets/svgs/edit-medication-icon';
 import TickMedicationIcon from 'assets/svgs/tick-medication-icon';
 
+import Styles from './styles';
+
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-
-  const { TARGETS } = SCREENS;
 
   const navigation = useNavigation();
   const [healthProgress] = useState([
@@ -138,9 +137,6 @@ const Index = () => {
         </View>
       </View>
       <View style={styles.containerBody}>
-        <TouchableOpacity onPress={() => navigation.navigate(TARGETS)}>
-          <Text>Targets</Text>
-        </TouchableOpacity>
         <FlatList
           data={healthProgress}
           keyExtractor={(item) => item.id}

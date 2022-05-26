@@ -24,6 +24,7 @@ import Weight from 'screens/main/home-page/your-health/health-trackers/weight/in
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
 import Medication from 'screens/main/home-page/your-health/health-trackers/Medication/index';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
+// import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 import Covid19Navigator from './covid19-navigator';
 import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';

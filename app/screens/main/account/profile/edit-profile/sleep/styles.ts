@@ -28,7 +28,8 @@ export const makeStyles = (colors: any) =>
       borderBottomWidth: 0,
       borderColor: colors.darkPrimary,
       backgroundColor: colors.gray,
-      height: 50,
+
+      // height: 50,
     },
   });
 
