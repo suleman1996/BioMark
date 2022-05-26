@@ -16,23 +16,39 @@ type Props = {
   children: any;
   title: string;
   style: any;
+  binIcon: boolean;
 };
 
-const TitleWithBackWhiteBgLayout = ({ children, title, style }: Props) => {
+const TitleWithBackWhiteBgLayout = ({
+  children,
+  title,
+  style,
+  binIcon,
+}: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
   return (
     <View style={(styles.container, style)}>
       <View style={styles.header}>
-        <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
-          <MaterialIcons
-            color={colors.darkPrimary}
-            size={responsiveFontSize(35)}
-            name="arrow-back-ios"
-          />
-        </Pressable>
-
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
+            <MaterialIcons
+              color={colors.darkPrimary}
+              size={responsiveFontSize(35)}
+              name="arrow-back-ios"
+            />
+          </Pressable>
+          {binIcon ? (
+            <Pressable hitSlop={hitSlop.one} onPress={() => alert('Remove')}>
+              <MaterialIcons
+                color={colors.darkPrimary}
+                size={responsiveFontSize(35)}
+                name="delete"
+              />
+            </Pressable>
+          ) : null}
+        </View>
         {title && <Text style={styles.textStyle}>{title}</Text>}
       </View>
       {children}

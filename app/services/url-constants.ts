@@ -61,6 +61,7 @@ const API_URLS = {
   CREATE_WEIGHT: '/api/v1/patient/weight_trackers',
   CREATE_HBA1C: '/api/v1/patient/psp/trackers/hba1c',
   GET_HEALTH_RISKS: '/api/v1/patient/risks',
+  GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
 };
 
 export { API_URLS };
