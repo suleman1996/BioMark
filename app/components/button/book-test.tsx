@@ -1,10 +1,13 @@
-import fonts from 'assets/fonts';
-import BioBookTest from 'components/svg/bio-book-test';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { useTheme } from 'react-native-paper';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import BioBookTest from 'components/svg/bio-book-test';
+
 import { navigate } from 'services/nav-ref';
 import SCREENS from '../../navigation/constants/index';
+import fonts from 'assets/fonts';
 
 export default function BookTestButton() {
   const { colors } = useTheme();

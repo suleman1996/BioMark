@@ -1,11 +1,15 @@
-import { InputWithLabel } from 'components/base';
-import ButtonComponent from 'components/base/button';
-import SCREENS from 'navigation/constants';
 import React from 'react';
+
 import { Pressable, ScrollView, Text, View } from 'react-native';
+import SCREENS from 'navigation/constants';
 import { useTheme } from 'react-native-paper';
+
+import ButtonComponent from 'components/base/button';
+import { InputWithLabel } from 'components/base';
+
 import StepIndicator from 'react-native-step-indicator';
 import Feather from 'react-native-vector-icons/Feather';
+
 import { navigate } from 'services/nav-ref';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';

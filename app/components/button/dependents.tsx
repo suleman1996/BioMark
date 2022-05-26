@@ -1,10 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
-import fonts from 'assets/fonts';
-import BioDependants from 'components/svg/bio-dependants';
 import React from 'react';
+
+import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+
+import BioDependants from 'components/svg/bio-dependants';
 import SCREENS from '../../navigation/constants/index';
+import fonts from 'assets/fonts';
 
 export default function DependentButton() {
   const { colors } = useTheme();

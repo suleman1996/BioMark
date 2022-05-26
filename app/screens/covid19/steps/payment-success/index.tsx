@@ -1,10 +1,11 @@
 import React from 'react';
 
-import ButtonComponent from 'components/base/button';
 import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import StepIndicator from 'react-native-step-indicator';
 import Feather from 'react-native-vector-icons/Feather';
+import StepIndicator from 'react-native-step-indicator';
+
+import ButtonComponent from 'components/base/button';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import makeStyles from './styles';
 

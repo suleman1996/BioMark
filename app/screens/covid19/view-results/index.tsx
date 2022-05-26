@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { FlatList, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+
 import makeStyles from './styles';
 
 type Props = {};
