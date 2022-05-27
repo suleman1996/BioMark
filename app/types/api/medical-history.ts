@@ -66,6 +66,11 @@ export interface MedicalHistoryCondition {
   stress?: MedicalHistoryStressValue;
 }
 
+export interface AlergiesRequestBody {
+  has_allergy: boolean | number;
+  conditions: MedicalHistoryItem[];
+}
+
 export interface MedicalHistoryLifestyleValue {
   sleep_duration?: string;
   is_exercise?: boolean;

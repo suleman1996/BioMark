@@ -36,6 +36,7 @@ export interface GenderAttribute {
 }
 
 export interface MedicalTemplateAttribute {
+  type: string;
   id: number;
   name: string;
   medical_type: MedicalTemplateType;
