@@ -32,7 +32,7 @@ export default function VaccinationScreen() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(0);
   // const [condition, setCondition] = useState('');
   const [showSuggestion, setShowSuggestion] = useState(false);
   const [vaccineList, setVaccineList] = useState([]);
@@ -72,6 +72,10 @@ export default function VaccinationScreen() {
       console.log('response---------data', response.data);
       if (value === 1) {
         navigate(SCREENS.EDIT_PROFILE);
+      } else if (value == 0) {
+        navigate(SCREENS.EDIT_PROFILE);
+      } else if (value == 2) {
+        navigate(SCREENS.EDIT_PROFILE);
       } else {
         console.log('false');
       }
@@ -93,6 +97,20 @@ export default function VaccinationScreen() {
       setIsVisible(true);
       const result = await userService.getMedicalHistory();
       console.log('resulttttt---------', result.data.vaccine);
+      setValue(
+        result?.data?.vaccine?.has_condition == '1'
+          ? 1
+          : result?.data?.vaccine?.has_condition == '0'
+          ? 0
+          : result?.data?.vaccine?.has_condition == '2'
+          ? 2
+          : null
+      );
+      setList([
+        result?.data?.vaccine?.vaccine_list
+          ? result?.data?.vaccine?.vaccine_list
+          : undefined,
+      ]);
       // setValue(
       //   result?.data?.vaccine?.has_condition == '1'
       //     ? 'true'
@@ -102,7 +120,7 @@ export default function VaccinationScreen() {
       //     ? 'false'
       //     : null
       // );
-      // console.log('conditionlist', result?.data?.vaccine);
+      // console.log('conditionlist', result?.data?.vaccine_list);
       // setItems(result?.data?.vaccine?.vaccine_list);
 
       // setList([
