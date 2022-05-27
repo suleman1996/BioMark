@@ -1,43 +1,72 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Pressable, Text, View } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'react-native-paper';
 
 import makeStyles from './styles';
+import { getAllCovidResultsR } from 'store/covid/covid-actions';
+import { CovidResultListResponse } from 'types/api';
+import { IAppState } from './../../../store/IAppState';
+import { dateFormat1 } from 'utils/functions/date-format';
 
 type Props = {};
 
 const ViewCovidResults = (props: Props) => {
   const {} = props;
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
   const { colors }: any = useTheme();
   const styles = makeStyles(colors);
 
-  const singleFlatListItem = () => {
+  const data = useSelector((state: IAppState) => state.covid.allCovidResults);
+
+  /*eslint-disable */
+  const getAllCovidResults = async () => {
+    await dispatch(getAllCovidResultsR());
+  };
+
+  useEffect(() => {
+    getAllCovidResults();
+  }, [focused]);
+  /*eslint-enable */
+
+  const singleFlatListItem = ({ item }: { item: CovidResultListResponse }) => {
+    const changeBtnBg =
+      item.test_result == 'NEGATIVE'
+        ? { backgroundColor: colors.lightGreen }
+        : { backgroundColor: colors.red };
     return (
-      <View style={styles.parent}>
+      <Pressable style={styles.parent}>
         <View style={styles.header}>
-          <Text style={styles.whoText}>You</Text>
+          <Text style={styles.whoText}>{item.name}</Text>
           <Text style={styles.header2}>
-            Booking ID - <Text style={styles.testCodeText}>CVD-HSVGRP</Text>
+            Booking ID -{' '}
+            <Text style={styles.testCodeText}>{item.order_id}</Text>
           </Text>
         </View>
         <View style={styles.contentContainer}>
           <Text style={styles.testType} numberOfLines={3}>
-            COVID-19 RT-PCR (Urgent)
+            {item.test_type}
           </Text>
-          <View style={styles.testResult}>
-            <Text style={styles.testResultText}>DETECTED</Text>
+          <View style={[styles.testResult, changeBtnBg]}>
+            <Text style={styles.testResultText}>{item.test_result}</Text>
           </View>
         </View>
-        <Text style={styles.dateText}>06/02/2022</Text>
-      </View>
+        <Text style={styles.dateText}>{dateFormat1(item.date_of_test)}</Text>
+      </Pressable>
     );
   };
 
   return (
     <>
       <View style={styles.container}>
-        <FlatList data={[1, 2, 3, 4, 5]} renderItem={singleFlatListItem} />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={data}
+          renderItem={singleFlatListItem}
+        />
       </View>
     </>
   );

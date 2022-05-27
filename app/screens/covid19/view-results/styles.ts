@@ -53,7 +53,7 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(22),
       fontFamily: GlobalFonts.regular,
       color: colors.black,
-      width: '70%',
+      width: '60%',
     },
     testResult: {
       backgroundColor: colors.red,
