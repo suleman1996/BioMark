@@ -7,9 +7,11 @@ import { GlobalFonts } from 'utils/theme/fonts';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
+      flex: 1,
       borderColor: colors.danger,
       flexDirection: 'column',
       color: colors.blue,
+      backgroundColor: colors.white,
     },
     label: {
       fontSize: responsiveFontSize(22),

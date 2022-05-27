@@ -7,6 +7,7 @@ import {
   MedicationSetupPayload,
   RiskData,
   MedicationListEntry,
+  MedicationTrackerSetup,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -443,6 +444,11 @@ const createHba1c = ({ hba1c }: Props) => {
     hba1c,
   });
 };
+const createMedication = ({ medication }: Props) => {
+  return client.post(API_URLS.CREATE_MEDICATION, {
+    medication,
+  });
+};
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
   return client.post(API_URLS.CREATE_STRESS, {
@@ -641,6 +647,26 @@ function getHealthRisks() {
       });
   });
 }
+function getNewMedicationTracker() {
+  return new Promise<MedicationTrackerSetup>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_NEW_MEDICATION_TRACKER)
+      .then(async (response) => {
+        try {
+          console.log('new med tracker', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+}
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
@@ -687,4 +713,6 @@ export const userService = {
   getHealthRisks,
   getJumioData,
   getMedicationList,
+  createMedication,
+  getNewMedicationTracker,
 };
