@@ -48,4 +48,9 @@ export const GlobalStyles: any = (colors: any) => ({
     fontFamily: GlobalFonts.medium,
     color: colors.darkPrimary,
   },
+  headerLine: {
+    width: widthToDp(86),
+    borderWidth: 1,
+    borderColor: colors.lightPrimary,
+  },
 });

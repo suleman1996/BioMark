@@ -10,6 +10,8 @@ import { getAllCovidResultsR } from 'store/covid/covid-actions';
 import { CovidResultListResponse } from 'types/api';
 import { IAppState } from './../../../store/IAppState';
 import { dateFormat1 } from 'utils/functions/date-format';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
 
 type Props = {};
 
@@ -38,7 +40,15 @@ const ViewCovidResults = (props: Props) => {
         ? { backgroundColor: colors.lightGreen }
         : { backgroundColor: colors.red };
     return (
-      <Pressable style={styles.parent}>
+      <Pressable
+        onPress={() =>
+          navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+            screen: SCREENS.SINGLECOVIDRESULT,
+            id: 'idof',
+          })
+        }
+        style={styles.parent}
+      >
         <View style={styles.header}>
           <Text style={styles.whoText}>{item.name}</Text>
           <Text style={styles.header2}>
