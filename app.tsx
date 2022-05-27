@@ -39,7 +39,10 @@ const App = () => {
                     : 'dark-content'
                 }
               />
-              <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+              <SafeAreaView
+                edges={['top']}
+                style={{ flex: 1, backgroundColor: '#fff' }}
+              >
                 <BiomarkNavigation />
               </SafeAreaView>
             </MenuProvider>

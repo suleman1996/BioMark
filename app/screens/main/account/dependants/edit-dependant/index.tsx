@@ -15,6 +15,7 @@ import {
 } from 'components/base';
 import { BoxSelector, RelationMenu } from 'components/higher-order';
 import { ActivityIndicator } from 'components';
+import { Header } from 'components';
 
 import { Regex } from 'constants/regex';
 import { dependentService } from 'services/account-service/dependent-service';
@@ -136,6 +137,7 @@ const EditDependantScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
+      <Header isBold={true} isColor={true} title="Edit Dependent" />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}

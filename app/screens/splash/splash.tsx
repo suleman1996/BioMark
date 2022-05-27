@@ -25,8 +25,6 @@ export default function Splash() {
     setOnboarding(onboardingg);
 
     setTimeout(() => {
-      console.log('timeout ', onBoarding);
-
       onBoarding == 'false'
         ? navigations.replace(SCREENS.LOGIN)
         : navigations.replace(SCREENS.ONBOARDING);

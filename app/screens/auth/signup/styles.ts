@@ -108,7 +108,7 @@ export const makeStyles = (colors: any) =>
     },
     radioButton: {
       height: 40,
-      width: 100,
+      width: 90,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 10,
@@ -129,6 +129,13 @@ export const makeStyles = (colors: any) =>
     radioText: {
       fontFamily: fonts.regular,
       fontSize: 14,
+    },
+    ripple: {
+      height: 40,
+      width: 40,
+      borderRadius: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
 
