@@ -17,14 +17,13 @@ import HealthProgress from 'screens/main/home-page/your-health/health-progress/i
 import Targets from 'screens/main/home-page/your-health/health-progress/targets/index';
 import AddBloodSugar from 'screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
 import AddHba1c from 'screens/main/home-page/your-health/health-progress/targets/add-hba1c/index';
-import SCREENS from 'constants';
+import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
 import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
-// import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 import Covid19Navigator from './covid19-navigator';
 import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';

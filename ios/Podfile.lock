@@ -428,10 +428,10 @@ PODS:
     - React-Core
   - RNDeviceInfo (8.7.1):
     - React-Core
-  - RNFBApp (14.10.0):
+  - RNFBApp (14.10.1):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBAuth (14.10.0):
+  - RNFBAuth (14.10.1):
     - Firebase/Auth (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -766,8 +766,8 @@ SPEC CHECKSUMS:
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNDateTimePicker: 04b805a3cb4d386e5e6aff54b47ace7bad706fda
   RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
-  RNFBApp: ca5f49bbe21f663142320337eb39956b04de4d12
-  RNFBAuth: 44c1776c86b3026322d95908741a5ce0d2d4e39e
+  RNFBApp: ce36cbcce243d63f2b84d7bad48d82fe118602d0
+  RNFBAuth: 2456be668b18455edeb5394817c32047f20770b0
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
