@@ -29,7 +29,7 @@ const TitleWithBackWhiteBgLayout = ({
   const styles = makeStyles(colors);
 
   return (
-    <View style={(styles.container, style)}>
+    <View style={[styles.container, style]}>
       <View style={styles.header}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
