@@ -410,7 +410,7 @@ const Index = () => {
             svg={<Diabetes />}
             title="Enter Diabetes Support Center"
             id="4y6yb5y5yb56b56y"
-            onPress={() => console.log('xxxxxx')}
+            onPress={() => navigate(SCREENS.DIABETES_CENTER)}
           />
           <RenderRecordKeeping
             svg={<BP />}
@@ -426,7 +426,11 @@ const Index = () => {
           />
 
           <View style={styles.circleView}>
-            <RenderCircle title="Health Records" svg={<Health />} />
+            <RenderCircle
+              title="Health Records"
+              svg={<Health />}
+              onPress={() => navigate(SCREENS.HEALTH_RECORD)}
+            />
             <RenderCircle
               title="Health Progress"
               svg={<Progress />}
