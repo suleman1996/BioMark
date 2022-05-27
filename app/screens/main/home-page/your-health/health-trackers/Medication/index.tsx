@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
@@ -5,7 +6,6 @@ import { useTheme } from 'react-native-paper';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
   ButtonWithShadowContainer,
@@ -28,12 +28,9 @@ import {
   getYear,
 } from 'utils/functions/date-format';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
+import { useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
-const options = [
-  { label: 'abc', value: 'Type 1 only' },
-  { label: 'abc', value: 'Type 2 only' },
-];
 type RenderDosageProps = {
   title: string;
   quantity: number;
@@ -52,12 +49,35 @@ const Medication = () => {
   const [dateAndtime, setDateAndTime] = useState<any>();
   const [validation, setValidation] = useState<any>(false);
   const [validation2, setValidation2] = useState<any>(false);
+  const [options, setOptions] = useState<any>([]);
+  const [options2, setOptions2] = useState<any>([]);
   const [wine, setWine] = React.useState(0);
 
   const [dropdownValue, setDropdown] = useState<any>();
   const [isDropdownChanged, setIsDropDownChanged] = useState(false);
 
+  const [dropdownValue2, setDropdown2] = useState<any>();
+  const [isDropdownChanged2, setIsDropDownChanged2] = useState(false);
+
+  const medicationList = useSelector(
+    (state: IAppState) => state.home.medicationList
+  );
+  const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+
   useEffect(() => {
+    console.log('medication', medicationList);
+    let arr = [];
+    medicationList.map((ele) => {
+      arr.push({ label: ele.name, value: ele.medication_record_id });
+    });
+    setOptions(arr);
+
+    let arr2 = [];
+    drop?.meal_type?.map((ele) => {
+      arr2.push({ label: ele.name, value: ele.id });
+    });
+    setOptions2(arr2);
+
     let today = new Date();
     let dateTime =
       getMonth(today) +
@@ -86,51 +106,49 @@ const Medication = () => {
   };
 
   const onSubmit = async () => {
-    let dateTime = '';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateTime =
-      getMonth(dateAndtime) +
-      ' ' +
-      getDay(dateAndtime) +
-      ', ' +
-      getYear(dateAndtime) +
-      ' ' +
-      getTime(dateAndtime);
-
-    console.log('bp_systolic', hbvalue);
-
-    try {
-      setIsLoading(true);
-      const response = await userService.createHba1c({
-        hba1c: {
-          data_value: hbvalue,
-          unit_list_id: 3,
-          record_date: dateAndtime,
-        },
-      });
-      console.log('HbA1c successful', response.data);
-      alert('HbA1c successful');
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      if (error.errMsg.status === '500') {
-        showMessage({
-          message: 'Internal Server Error',
-          type: 'danger',
-        });
-      } else if (error.errMsg.status === false) {
-        showMessage({
-          message: error.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
+    // let dateTime = '';
+    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // dateTime =
+    //   getMonth(dateAndtime) +
+    //   ' ' +
+    //   getDay(dateAndtime) +
+    //   ', ' +
+    //   getYear(dateAndtime) +
+    //   ' ' +
+    //   getTime(dateAndtime);
+    // console.log('bp_systolic', hbvalue);
+    // try {
+    //   setIsLoading(true);
+    //   const response = await userService.createHba1c({
+    //     hba1c: {
+    //       data_value: hbvalue,
+    //       unit_list_id: 3,
+    //       record_date: dateAndtime,
+    //     },
+    //   });
+    //   console.log('HbA1c successful', response.data);
+    //   alert('HbA1c successful');
+    //   setIsLoading(false);
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   console.log(error);
+    //   if (error.errMsg.status === '500') {
+    //     showMessage({
+    //       message: 'Internal Server Error',
+    //       type: 'danger',
+    //     });
+    //   } else if (error.errMsg.status === false) {
+    //     showMessage({
+    //       message: error.errMsg.data.error,
+    //       type: 'danger',
+    //     });
+    //   } else {
+    //     showMessage({
+    //       message: error.errMsg,
+    //       type: 'danger',
+    //     });
+    //   }
+    // }
   };
   const RenderDosage = (props: RenderDosageProps) => (
     <View style={styles.rowContainer}>
@@ -176,14 +194,14 @@ const Medication = () => {
   );
 
   return (
-    <TitleWithBackWhiteBgLayout title="Take Medication">
+    <TitleWithBackWhiteBgLayout title="Take Medication" binIcon={true}>
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
           style={{
             paddingHorizontal: widthToDp(4),
             // borderWidth: 5,
-            marginBottom: heightToDp(25),
+            marginBottom: heightToDp(19),
           }}
         >
           <View style={styles.dropDown}>
@@ -229,15 +247,15 @@ const Medication = () => {
               />
               <Text style={styles.textStyle}>Meal</Text>
               <DropdownMenu
-                options={options}
-                selectedValue={dropdownValue}
+                options={options2}
+                selectedValue={dropdownValue2}
                 onValueChange={(text: any) => {
-                  setDropdown(text);
-                  setIsDropDownChanged(true);
+                  setDropdown2(text);
+                  setIsDropDownChanged2(true);
                 }}
                 error={
-                  isDropdownChanged
-                    ? dropdownValue === '---'
+                  isDropdownChanged2
+                    ? dropdownValue2 === '---'
                       ? 'Please select your ethnicity'
                       : ''
                     : ''

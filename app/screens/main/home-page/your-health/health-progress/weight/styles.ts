@@ -14,7 +14,7 @@ const styles = (colors: any) =>
       marginHorizontal: 10,
     },
     heading: {
-      fontFamily: fonts.regular,
+      fontFamily: fonts.bold,
       fontSize: 16,
       color: colors.heading,
     },

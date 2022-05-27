@@ -64,6 +64,7 @@ const API_URLS = {
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
+  GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
 };
 
 export { API_URLS };
