@@ -28,6 +28,12 @@ import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
 import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
 import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
+import {
+  getHealthTrackerRisks,
+  getReduxDashboard,
+  getReduxHealthTracker,
+  getReduxNewMedicationTracker,
+} from 'store/home/home-actions';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -60,6 +66,10 @@ const AppNavigator = () => {
 
   useEffect(() => {
     getHasProfileAsyncStorage();
+    dispatch(getReduxNewMedicationTracker());
+    dispatch(getReduxHealthTracker());
+    dispatch(getReduxDashboard());
+    dispatch(getHealthTrackerRisks());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
