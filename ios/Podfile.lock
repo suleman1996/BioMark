@@ -330,7 +330,7 @@ PODS:
     - React-Core
   - react-native-maps (0.31.1):
     - React-Core
-  - react-native-pager-view (5.4.22):
+  - react-native-pager-view (5.4.23):
     - React-Core
   - react-native-pdf (6.5.0):
     - React-Core
@@ -428,10 +428,10 @@ PODS:
     - React-Core
   - RNDeviceInfo (8.7.1):
     - React-Core
-  - RNFBApp (14.9.4):
+  - RNFBApp (14.10.0):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBAuth (14.9.4):
+  - RNFBAuth (14.10.0):
     - Firebase/Auth (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -741,7 +741,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: e95b4785b685cfc06609bc50ed6fb55b59990c99
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
-  react-native-pager-view: c0ff94cb1e670bcba387bdf575515c58dfa85f04
+  react-native-pager-view: f7c878676230561d3ab6408d7fecaa410dd58264
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b
   react-native-progress-bar-android: be43138ab7da30d51fc038bafa98e9ed594d0c40
   react-native-progress-view: 9e6b6a5305a9115c2157ae3b8852081aba0aab7c
@@ -766,8 +766,8 @@ SPEC CHECKSUMS:
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNDateTimePicker: 04b805a3cb4d386e5e6aff54b47ace7bad706fda
   RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
-  RNFBApp: bef4ec5a6d31a3da9bf285379d0c4857c6b7313e
-  RNFBAuth: 8694f1f043c75424455726b9b246a9ce12fb5518
+  RNFBApp: ca5f49bbe21f663142320337eb39956b04de4d12
+  RNFBAuth: 44c1776c86b3026322d95908741a5ce0d2d4e39e
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393

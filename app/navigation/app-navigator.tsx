@@ -22,7 +22,9 @@ import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/Medication/index';
+import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
+import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
+// import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 import Covid19Navigator from './covid19-navigator';
 import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
@@ -49,6 +51,7 @@ const {
   WEIGHT,
   HBA1C,
   MEDICATION,
+  ADD_NEW_MEDICATION,
   HEALTH_PROGRESS,
   TARGETS,
   ADD_BLOOD_SUGAR,
@@ -114,6 +117,10 @@ const AppNavigator = () => {
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
           <Stack.Screen name={MEDICATION} component={Medication} />
+          <Stack.Screen
+            name={ADD_NEW_MEDICATION}
+            component={AddNewMedication}
+          />
           <Stack.Screen name={HEALTH_PROGRESS} component={HealthProgress} />
           <Stack.Screen name={TARGETS} component={Targets} />
           <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />

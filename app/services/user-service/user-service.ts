@@ -6,6 +6,7 @@ import {
   DashboardResponseData,
   MedicationSetupPayload,
   RiskData,
+  MedicationListEntry,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -599,6 +600,26 @@ function getMedicalDropDown() {
       });
   });
 }
+function getMedicationList() {
+  return new Promise<MedicationListEntry>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_MEDICATION_DROPDWON)
+      .then(async (response) => {
+        try {
+          console.log('memm', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+}
 
 function getHealthRisks() {
   return new Promise<RiskData>((resolve, reject) => {
@@ -665,4 +686,5 @@ export const userService = {
   createHba1c,
   getHealthRisks,
   getJumioData,
+  getMedicationList,
 };

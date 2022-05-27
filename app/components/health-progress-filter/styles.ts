@@ -13,6 +13,7 @@ const styles = (colors: any) =>
       right: 0,
       top: 0,
       bottom: 0,
+      borderRadius: 10,
     },
     filterView: {
       //   height: 400,
@@ -28,14 +29,14 @@ const styles = (colors: any) =>
       alignItems: 'center',
     },
     headingText: {
-      fontFamily: fonts.regular,
+      fontFamily: fonts.bold,
       fontSize: 18,
       color: colors.heading,
     },
     subHeading: {
-      fontFamily: fonts.regular,
+      fontFamily: fonts.bold,
       fontSize: 14,
-      color: colors.blue,
+      color: colors.heading,
     },
     radio: {
       height: 15,

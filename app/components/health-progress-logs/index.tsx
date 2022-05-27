@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 import Arrow from 'react-native-vector-icons/AntDesign';
@@ -16,7 +16,12 @@ const Index = (props: Props) => {
   const RenderLog = ({ item }) => (
     <View style={styles.renderLog}>
       <View style={{ width: '40%' }}>
-        <Text style={{ color: colors.heading, fontFamily: fonts.bold }}>
+        <Text
+          style={{
+            color: item?.color ? item?.color : colors.heading,
+            fontFamily: fonts.bold,
+          }}
+        >
           {item.value}
         </Text>
       </View>
@@ -32,11 +37,8 @@ const Index = (props: Props) => {
         <Text style={{ color: colors.heading }}>Logs</Text>
         <Arrow color={colors.heading} name={log ? 'up' : 'down'} />
       </TouchableOpacity>
-      <View style={{ height: 200 }}>
-        <ScrollView>
-          {log && props.logData.map((item) => <RenderLog item={item} />)}
-        </ScrollView>
-      </View>
+
+      {log && props.logData.map((item) => <RenderLog item={item} />)}
     </View>
   );
 };
