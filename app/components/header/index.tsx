@@ -8,9 +8,12 @@ import { useNavigation } from '@react-navigation/native';
 import { ArrowBack } from 'assets/svgs/index';
 
 import makeStyles from './styles';
+import fonts from 'assets/fonts';
 
 type Props = {
   title: string;
+  isColor: boolean;
+  isBold: boolean;
 };
 
 export default function Header(props: Props) {
@@ -29,9 +32,19 @@ export default function Header(props: Props) {
             onPress={() => navigations.goBack()}
             rippleColor={'#8493AE20'}
           >
-            <ArrowBack />
+            <ArrowBack fill={props.isColor ? colors.heading : colors.black} />
           </TouchableRipple>
-          <Text style={styles.title}>{props.title}</Text>
+          <Text
+            style={[
+              styles.title,
+              {
+                color: props.isColor ? colors.heading : colors.black,
+                fontFamily: props.isBold ? fonts.bold : fonts.regular,
+              },
+            ]}
+          >
+            {props.title}
+          </Text>
         </View>
       </View>
     </>

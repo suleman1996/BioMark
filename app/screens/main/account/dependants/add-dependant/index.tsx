@@ -17,6 +17,7 @@ import {
 import { BoxSelector, RelationMenu } from 'components/higher-order';
 
 import { goBack } from 'services/nav-ref';
+import { Header } from 'components';
 import { dependentService } from 'services/account-service/dependent-service';
 import { getAllDependents } from 'store/account/account-actions';
 import { dateFormat } from 'utils/functions/date-format';
@@ -147,6 +148,7 @@ const AddDependantScreen = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
+      <Header isBold={true} isColor={true} title="Add Dependents" />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -208,7 +210,7 @@ const AddDependantScreen = () => {
                   countryCode={countryCode}
                   // error={values.phone_number ? errors.phone_number : ''}
                   setCountryCode={setCountryCode}
-                  setselectedCountryCode={setSelectedCountryCode}
+                  setSelectCountryCode={setSelectedCountryCode}
                   maxLength={numberCondition.max}
                 />
                 {values.phone_number !== '' &&

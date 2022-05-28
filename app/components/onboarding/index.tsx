@@ -36,7 +36,7 @@ const Onboarding = () => {
           <ButtonComponent
             title="Sign up"
             onPress={() => {
-              navigations.replace(SCREENS.SIGNUP), setIsOnboarding(false);
+              navigations.navigate(SCREENS.SIGNUP), setIsOnboarding(false);
             }}
           />
         </View>
