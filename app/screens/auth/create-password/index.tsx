@@ -50,7 +50,7 @@ export default function CreatePassword() {
               {({ handleChange, handleSubmit, values, errors, isValid }) => (
                 <>
                   <Text style={styles.title}>
-                    Please enter your new password.234
+                    Please enter your new password.
                   </Text>
 
                   <Text style={styles.inputLablel}>New Password</Text>
