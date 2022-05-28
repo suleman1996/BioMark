@@ -5,6 +5,7 @@ import {
   MEDICAL_DROPDOWN,
   GET_HEALTH_RISK,
   MEDICATION_LIST,
+  GET_NEW_MEDICATION_TRACKER,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -39,6 +40,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         medicationList: action.payload,
+      };
+    }
+    case GET_NEW_MEDICATION_TRACKER: {
+      return {
+        ...state,
+        getNewMedicationTracker: action.payload,
       };
     }
 

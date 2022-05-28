@@ -28,8 +28,9 @@ import {
   getYear,
 } from 'utils/functions/date-format';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
+import { getReduxNewMedicationTracker } from 'store/home/home-actions';
 
 type RenderDosageProps = {
   title: string;
@@ -42,38 +43,44 @@ type RenderDosageProps = {
 const Medication = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-
-  const [hbvalue, setHbvalue] = useState('');
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [dateAndtime, setDateAndTime] = useState<any>();
-  const [validation, setValidation] = useState<any>(false);
-  const [validation2, setValidation2] = useState<any>(false);
+  const [validation, setValidation] = useState<any>(true);
   const [options, setOptions] = useState<any>([]);
   const [options2, setOptions2] = useState<any>([]);
-  const [wine, setWine] = React.useState(0);
+  const [dosage, setDosage] = React.useState(1);
 
-  const [dropdownValue, setDropdown] = useState<any>();
+  const [medicatioDropdownValue, setMedicatioDropdown] = useState<any>();
   const [isDropdownChanged, setIsDropDownChanged] = useState(false);
 
-  const [dropdownValue2, setDropdown2] = useState<any>();
+  const [mealDropDown, setMealDropDown] = useState<any>();
   const [isDropdownChanged2, setIsDropDownChanged2] = useState(false);
 
-  const medicationList = useSelector(
-    (state: IAppState) => state.home.medicationList
-  );
-  const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+  const [minRange, setMinRange] = useState<any>(0);
+  const [maxRange, setMaxRange] = useState(0);
 
+  // const medicationList = useSelector(
+  //   (state: IAppState) => state.home.medicationList
+  // );
+  // const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+  const getMedNewTracker = useSelector(
+    (state: IAppState) => state.home.getNewMedicationTracker
+  );
   useEffect(() => {
-    console.log('medication', medicationList);
+    console.log('getMedNewTracker', getMedNewTracker);
+
     let arr = [];
-    medicationList.map((ele) => {
-      arr.push({ label: ele.name, value: ele.medication_record_id });
+    getMedNewTracker?.medication?.map((ele) => {
+      console.log('ele', ele);
+
+      arr.push({ label: ele.name, value: ele.medication_log_id });
     });
     setOptions(arr);
 
     let arr2 = [];
-    drop?.meal_type?.map((ele) => {
+    getMedNewTracker?.meal_type?.map((ele) => {
       arr2.push({ label: ele.name, value: ele.id });
     });
     setOptions2(arr2);
@@ -90,65 +97,66 @@ const Medication = () => {
     setDateAndTime(dateTime);
   }, []);
 
-  const onChangeText = (values) => {
-    console.log('value', values);
-
-    if (values < 5 || values > 15) {
-      setValidation2(false);
-      setValidation(true);
-    } else {
-      setValidation(false);
-      setValidation2(false);
-      console.log('emmty');
-    }
-    setHbvalue(values);
-    // setValue(value);
-  };
-
   const onSubmit = async () => {
-    // let dateTime = '';
-    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // dateTime =
-    //   getMonth(dateAndtime) +
-    //   ' ' +
-    //   getDay(dateAndtime) +
-    //   ', ' +
-    //   getYear(dateAndtime) +
-    //   ' ' +
-    //   getTime(dateAndtime);
-    // console.log('bp_systolic', hbvalue);
-    // try {
-    //   setIsLoading(true);
-    //   const response = await userService.createHba1c({
-    //     hba1c: {
-    //       data_value: hbvalue,
-    //       unit_list_id: 3,
-    //       record_date: dateAndtime,
-    //     },
-    //   });
-    //   console.log('HbA1c successful', response.data);
-    //   alert('HbA1c successful');
-    //   setIsLoading(false);
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.log(error);
-    //   if (error.errMsg.status === '500') {
-    //     showMessage({
-    //       message: 'Internal Server Error',
-    //       type: 'danger',
-    //     });
-    //   } else if (error.errMsg.status === false) {
-    //     showMessage({
-    //       message: error.errMsg.data.error,
-    //       type: 'danger',
-    //     });
-    //   } else {
-    //     showMessage({
-    //       message: error.errMsg,
-    //       type: 'danger',
-    //     });
-    //   }
-    // }
+    let dateTime = '';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    dateTime =
+      getMonth(dateAndtime) +
+      ' ' +
+      getDay(dateAndtime) +
+      ', ' +
+      getYear(dateAndtime) +
+      ' ' +
+      getTime(dateAndtime);
+
+    console.log('dosage', dosage);
+    console.log('record_date', dateTime);
+    console.log('medication_log_id', medicatioDropdownValue);
+    console.log('meal_type', mealDropDown);
+
+    try {
+      setIsLoading(true);
+      const response = await userService.createMedication({
+        medication: {
+          dosage: dosage,
+          record_date: dateTime,
+          medication_log_id: medicatioDropdownValue,
+          meal_type: mealDropDown,
+        },
+      });
+      dispatch(getReduxNewMedicationTracker());
+      console.log('Take Medication successful', response.data);
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error.errMsg.status === '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status === false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
+  const setDosageFromDropDown = (text) => {
+    getMedNewTracker?.medication?.map((ele) => {
+      if (ele.medication_log_id === text) {
+        setDosage(parseInt(ele?.dosage));
+        setMinRange(ele?.min_range);
+        setMaxRange(ele?.max_range);
+      }
+    });
   };
   const RenderDosage = (props: RenderDosageProps) => (
     <View style={styles.rowContainer}>
@@ -163,7 +171,9 @@ const Medication = () => {
         }}
       >
         <TouchableOpacity
-          onPress={() => props.quantity > 0 && props.setter(props.quantity - 1)}
+          onPress={() =>
+            props.quantity > minRange && props.setter(props.quantity - 1)
+          }
           style={{ marginRight: 10 }}
         >
           {props.Minus}
@@ -183,7 +193,9 @@ const Medication = () => {
           </Text>
           <Text style={[styles.label, { marginTop: 0 }]}>unit(s)</Text>
           <TouchableOpacity
-            onPress={() => props.setter(props.quantity + 1)}
+            onPress={() =>
+              props.quantity < maxRange && props.setter(props.quantity + 1)
+            }
             style={{ marginLeft: 10 }}
           >
             {props.Add}
@@ -202,32 +214,37 @@ const Medication = () => {
             paddingHorizontal: widthToDp(4),
             // borderWidth: 5,
             marginBottom: heightToDp(19),
+            backgroundColor: colors.white,
           }}
         >
-          <View style={styles.dropDown}>
-            <Text style={styles.textStyle}>Medication</Text>
-            <DropdownMenu
-              options={options}
-              selectedValue={dropdownValue}
-              onValueChange={(text: any) => {
-                setDropdown(text);
-                setIsDropDownChanged(true);
-              }}
-              error={
-                isDropdownChanged
-                  ? dropdownValue === '---'
-                    ? 'Please select your ethnicity'
+          {getMedNewTracker?.medication_dropdown ? (
+            <View style={styles.dropDown}>
+              <Text style={styles.textStyle}>Medication</Text>
+              <DropdownMenu
+                options={options}
+                selectedValue={medicatioDropdownValue}
+                onValueChange={(text: any) => {
+                  setMedicatioDropdown(text);
+                  setIsDropDownChanged(true);
+                  setDosageFromDropDown(text);
+                }}
+                error={
+                  isDropdownChanged
+                    ? medicatioDropdownValue === '---'
+                      ? 'Please select your ethnicity'
+                      : ''
                     : ''
-                  : ''
-              }
-            />
-          </View>
-          {dropdownValue ? (
+                }
+              />
+            </View>
+          ) : null}
+
+          {medicatioDropdownValue ? (
             <>
               <Text style={styles.textStyle}>Dosage</Text>
               <RenderDosage
-                quantity={wine}
-                setter={setWine}
+                quantity={dosage}
+                setter={setDosage}
                 Add={
                   <FontAwesome5
                     name={'plus'}
@@ -248,14 +265,15 @@ const Medication = () => {
               <Text style={styles.textStyle}>Meal</Text>
               <DropdownMenu
                 options={options2}
-                selectedValue={dropdownValue2}
+                selectedValue={mealDropDown}
                 onValueChange={(text: any) => {
-                  setDropdown2(text);
+                  setMealDropDown(text);
                   setIsDropDownChanged2(true);
+                  setValidation(false);
                 }}
                 error={
                   isDropdownChanged2
-                    ? dropdownValue2 === '---'
+                    ? mealDropDown === '---'
                       ? 'Please select your ethnicity'
                       : ''
                     : ''
@@ -274,7 +292,7 @@ const Medication = () => {
         <ButtonWithShadowContainer
           onPress={onSubmit}
           title={'Take'}
-          disabled={!hbvalue || validation ? true : false}
+          disabled={validation ? true : false}
         />
       </ScrollView>
     </TitleWithBackWhiteBgLayout>
