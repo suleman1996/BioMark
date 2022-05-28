@@ -69,7 +69,7 @@ workflows:
       vars:
         FCI_KEYSTORE_PATH: /tmp/keystore.keystore
       java: 11
-      node: 12.18.3
+      node: 16.14.2
     triggering:
       events:
         - push
@@ -125,7 +125,7 @@ workflows:
         XCODE_WORKSPACE: './ios/BioMark.xcworkspace'
         XCODE_SCHEME: 'BioMark'
         BUNDLE_ID: 'com.biomark.patientios'
-      node: 12.18.3
+      node: 16.14.2
       xcode: 13
       cocoapods: default
     triggering:
