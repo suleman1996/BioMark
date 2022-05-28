@@ -95,16 +95,18 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             if (
               allergiesMedicalHistory.some((item) => item.allergy_to == qData)
             ) {
-              updatedItems = allergiesMedicalHistory?.map((el) =>
-                el.allergy_to === qData
-                  ? {
-                      ...el,
-                      has_condition: value == 'Yes' ? true : false,
-                      allergy_to: qData,
-                      allergy_type: '',
-                    }
-                  : el
-              );
+              updatedItems = allergiesMedicalHistory
+                ?.map((el) =>
+                  el.allergy_to === qData
+                    ? {
+                        ...el,
+                        has_condition: value == 'Yes' ? true : false,
+                        allergy_to: qData,
+                        allergy_type: '',
+                      }
+                    : el
+                )
+                .filter((item) => item.allergy_to !== 'Not Sure');
             } else {
               updatedItems.push({
                 has_condition: value == 'Yes' ? true : false,
