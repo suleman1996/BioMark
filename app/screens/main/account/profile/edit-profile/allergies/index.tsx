@@ -167,7 +167,7 @@ const AllergiesScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Medical History">
+    <TitleWithBackLayout title="Allergies">
       {/* modals */}
       <GeneralModalPage
         isVisible={isGenModalRef.current}
