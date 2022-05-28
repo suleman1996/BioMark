@@ -24,8 +24,7 @@ workflows:
     scripts:
       - name: Installing Dependencies
         script: |
-          # npm ci --quiet --no-optional
-          yarn install --frozen-lockfile
+          npm ci --quiet --no-optional
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
@@ -82,8 +81,7 @@ workflows:
     scripts:
       - name: Installing Dependencies
         script: |
-          #npm ci --quiet --no-optional
-          yarn install --frozen-lockfile
+          npm ci --quiet --no-optional
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
@@ -142,8 +140,7 @@ workflows:
     scripts:
       - name: Installing Dependencies
         script: |
-          # npm ci --quiet --no-optional
-          yarn install --frozen-lockfile
+          npm ci --quiet --no-optional
       - name: Install CocoaPods dependencies
         script: |
           cd ios && pod install
@@ -176,7 +173,7 @@ workflows:
         key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
         issuer_id: $APP_STORE_CONNECT_ISSUER_ID
       email:
-        recipients:f
+        recipients:
           - jem.zubiri@biomarking.com
         notify:
           success: true
