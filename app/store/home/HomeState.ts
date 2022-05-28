@@ -4,6 +4,7 @@ import {
   MedicationSetupPayload,
   RiskData,
   MedicationListEntry,
+  MedicationTrackerSetup,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -11,4 +12,5 @@ export class HomeState {
   dashboard: DashboardResponseData[] = [];
   healthRisks: RiskData[] = [];
   medicationList: MedicationListEntry[] = [];
+  getNewMedicationTracker: MedicationTrackerSetup[] = [];
 }

@@ -65,6 +65,8 @@ const API_URLS = {
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
+  CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
+  GET_NEW_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/new',
 };
 
 export { API_URLS };

@@ -61,11 +61,6 @@ import Progress from '../../../../assets/svgs/Progress';
 import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
-import {
-  getReduxHealthTracker,
-  getReduxDashboard,
-  getHealthTrackerRisks,
-} from 'store/home/home-actions';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -79,7 +74,9 @@ const Index = () => {
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
-
+  const getMedNewTracker = useSelector(
+    (state: IAppState) => state.home.getNewMedicationTracker
+  );
   const handleHEalthTracker = () => {
     healthTracker.length = 0;
     let id = -1;
@@ -101,15 +98,12 @@ const Index = () => {
   };
 
   useEffect(() => {
-    dispatch(getReduxHealthTracker());
-    console.log('Health Trackeer api =======>', hell);
-    dispatch(getReduxDashboard());
-    console.log('Dashboard api =======>', dashboard);
-    dispatch(getHealthTrackerRisks());
-    console.log('healthRisk api =======>', healthRisk);
     setHealthRisksData(healthRisk);
     handleHEalthTracker();
-
+    console.log('getMedNewTracker', getMedNewTracker);
+    console.log('Health Trackeer api =======>', hell);
+    console.log('Dashboard api =======>', dashboard);
+    console.log('healthRisk api =======>', healthRisk);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
