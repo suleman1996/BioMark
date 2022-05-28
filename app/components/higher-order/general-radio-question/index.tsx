@@ -26,7 +26,7 @@ const GeneralRadioQuestions = ({
       <Text style={styles.qText}>{question}</Text>
       <View style={styles.radioContainer}>
         {options?.map((item: any, index: number) => (
-          <View key={index} style={styles.singleRadioContainer}>
+          <View key={index + item} style={styles.singleRadioContainer}>
             <RadioButton
               value="second"
               status={isTrue == item ? 'checked' : 'unchecked'}
