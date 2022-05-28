@@ -12,7 +12,7 @@ workflows:
         FCI_OUTPUT_PATH: android/app/build/outputs/apk/release
         PACKAGE_NAME: com.biomarking.app.biomark
       java: 11
-      node: 12.18.3
+      node: 16.14.2
     triggering:
       events:
         - push
