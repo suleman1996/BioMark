@@ -13,7 +13,7 @@ export const getAllCovidResultsR =
     await covidService
       .getCovidResults()
       .then(async (res: any) => {
-        logNow('response for redux ============>', res);
+        // logNow('response for redux ============>', res);
         await dispatch(addAllCovidResultsData(res));
       })
       .catch((err) => {

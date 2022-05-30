@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useIsFocused } from '@react-navigation/native';
-import { Pressable, View, Text, ScrollView } from 'react-native';
-import { useTheme } from 'react-native-paper';
-import Entypo from 'react-native-vector-icons/Entypo';
-
-import makeStyles from './styles';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import QRCode from 'react-qr-code';
 import ButtonComponent from 'components/base/button';
+import { Image, Pressable, ScrollView, Text, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import RNQRGenerator from 'rn-qr-generator';
+
+import { dateFormat1 } from 'utils/functions/date-format';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { covidService } from './../../../../services/covid-service/index';
+import { CovidResponseData } from './../../../../types/api/covid';
+import makeStyles from './styles';
 
 type Props = {
   route?: any;
@@ -19,26 +21,82 @@ const SingleCovidResult = (props: Props) => {
   const { route } = props;
   const id = route?.params?.id;
   console.log(id);
-  const focused = useIsFocused();
   const { colors }: any = useTheme();
   const styles = makeStyles(colors);
 
+  const [data, setData] = useState<CovidResponseData>();
+  const [qrImg, setQrImg] = useState('');
+
+  const getData = async () => {
+    covidService.getCovidSingleResults(id).then((res) => {
+      setData(res);
+      console.log(res);
+    });
+  };
+
   /*eslint-disable */
 
-  useEffect(() => {}, [focused]);
+  useEffect(() => {
+    getData();
+  }, []);
   /*eslint-enable */
 
+  const {
+    testingCenter = '',
+    testDate = '',
+    testingType = '',
+    reportDate = '',
+    testQr = '',
+    testResult = '',
+  } = {
+    testingCenter: data?.test_center,
+    testDate: data?.test_date,
+    testingType: data?.test_type,
+    reportDate: data?.test_report_date,
+    testQr: data?.test_qr,
+    testResult: data?.test_result,
+  };
+
+  useEffect(() => {
+    RNQRGenerator.generate({
+      value: testQr,
+      height: 400,
+      width: 400,
+    })
+      .then((response) => {
+        const { uri } = response;
+        setQrImg(uri);
+      })
+      .catch((error) => console.log('Cannot create QR code', error));
+  }, [testQr]);
+
   const SingleResult = () => {
+    const isPositiveColor =
+      testResult == 'POSITIVE' || testResult == 'DETECTED'
+        ? colors.red
+        : colors.green;
+    const isPositiveIcon =
+      testResult == 'POSITIVE' || testResult == 'DETECTED'
+        ? 'pluscircle'
+        : 'minuscircle';
+    const isPositiveText =
+      testResult == 'POSITIVE' || testResult == 'DETECTED'
+        ? 'Please isolate and quarantine yourself.'
+        : 'Continue to practice safe distancing.';
+
     return (
       <Pressable style={styles.parent}>
-        <Entypo
-          name="circle-with-minus"
+        <AntDesign
+          name={isPositiveIcon}
           size={responsiveFontSize(100)}
-          color={colors.lightGreen}
+          color={isPositiveColor}
         />
         <Text style={styles.text1}>
-          Your Test result is <Text style={styles.text2}>POSITIVE</Text> for
-          COVID-19
+          Your Test result is{' '}
+          <Text style={[styles.text2, { color: isPositiveColor }]}>
+            {testResult}
+          </Text>{' '}
+          for COVID-19
         </Text>
         <View style={{ marginTop: heightToDp(1) }} />
         <View style={styles.headerLine} />
@@ -46,7 +104,7 @@ const SingleCovidResult = (props: Props) => {
         <View style={styles.row}>
           <View style={{ flex: 1, alignItems: 'flex-start' }}>
             <Text style={styles.title}>Testing Center</Text>
-            <Text style={styles.content}>Queen's avenue clinic</Text>
+            <Text style={styles.content}>{testingCenter}</Text>
           </View>
           <View
             style={{
@@ -55,18 +113,18 @@ const SingleCovidResult = (props: Props) => {
               paddingLeft: widthToDp(4),
             }}
           >
-            <Text style={styles.title}>Test Center</Text>
-            <Text style={styles.content}>03/03/2022</Text>
+            <Text style={styles.title}>Test Date</Text>
+            <Text style={styles.content}>{dateFormat1(testDate)}</Text>
           </View>
         </View>
         <View style={styles.row}>
           <View style={styles.itemContainer}>
             <Text style={styles.title}>Testing Type</Text>
-            <Text style={styles.content}>COVID-19 RT-PCR (Urgent)</Text>
+            <Text style={styles.content}>{testingType}</Text>
           </View>
           <View style={[styles.itemContainer, { paddingLeft: widthToDp(4) }]}>
             <Text style={styles.title}>Report Date</Text>
-            <Text style={styles.content}>03/03/2022</Text>
+            <Text style={styles.content}>{dateFormat1(reportDate)}</Text>
           </View>
         </View>
         <View style={{ marginTop: heightToDp(1) }} />
@@ -74,12 +132,17 @@ const SingleCovidResult = (props: Props) => {
         <View style={{ marginTop: heightToDp(1) }} />
         <Text style={styles.text1}>Share to share Covid-19 Test Result</Text>
         <View style={{ marginTop: heightToDp(2) }} />
-        <QRCode value="heysdfsdfsdfsfsdfsdfsdfsdfsfsdf" />
+        {/* <QRCode value={testQr} /> */}
+        <Image
+          resizeMode="cover"
+          source={{ uri: qrImg }}
+          style={{ width: 300, height: 300 }}
+        />
         <View style={{ marginTop: heightToDp(1) }} />
-        <Text style={styles.text3}>COVID-19 POSITIVE (03/03/2022)</Text>
-        <Text style={styles.text4}>
-          Please isolate and quarantine yourself.
-        </Text>
+        <Text style={styles.text3}>{`COVID-19 ${testResult} (${dateFormat1(
+          reportDate
+        )})`}</Text>
+        <Text style={styles.text4}>{isPositiveText}</Text>
         <View style={{ marginTop: heightToDp(2) }} />
         <ButtonComponent onPress={undefined} title={'Share Test Result'} />
       </Pressable>

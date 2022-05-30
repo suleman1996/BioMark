@@ -36,7 +36,7 @@ const ViewCovidResults = (props: Props) => {
 
   const singleFlatListItem = ({ item }: { item: CovidResultListResponse }) => {
     const changeBtnBg =
-      item.test_result == 'NEGATIVE'
+      item.test_result == 'NEGATIVE' || item.test_result == 'NOT DETECTED'
         ? { backgroundColor: colors.lightGreen }
         : { backgroundColor: colors.red };
     return (
@@ -44,7 +44,7 @@ const ViewCovidResults = (props: Props) => {
         onPress={() =>
           navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
             screen: SCREENS.SINGLECOVIDRESULT,
-            id: 'idof',
+            params: { id: item.id },
           })
         }
         style={styles.parent}
