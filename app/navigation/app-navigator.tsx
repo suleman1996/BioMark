@@ -23,6 +23,7 @@ import BloodPressure from 'screens/main/home-page/your-health/health-trackers/bl
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
 import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
+// import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication/index';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
 // import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 import Covid19Navigator from './covid19-navigator';
@@ -58,6 +59,7 @@ const {
   ADD_HBA1C,
   PDF_DIABETES_SUPPORT,
   HEALTH_RECORD,
+  // SHOW_MEDICATION,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -117,6 +119,8 @@ const AppNavigator = () => {
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
           <Stack.Screen name={MEDICATION} component={Medication} />
+          {/* <Stack.Screen name={SHOW_MEDICATION} component={ShowMedication} /> */}
+
           <Stack.Screen
             name={ADD_NEW_MEDICATION}
             component={AddNewMedication}
