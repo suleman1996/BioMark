@@ -80,7 +80,7 @@ const Covid19Navigator = () => {
             fontFamily: GlobalFonts.light,
             color: colors.darkPrimary,
           },
-          title: 'Back',
+          title: 'COVID-19 Results',
         }}
         name={SCREENS.VIEWCOVIDRESULTS}
         component={ViewCovidResults}

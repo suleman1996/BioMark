@@ -12,6 +12,7 @@ import { IAppState } from './../../../store/IAppState';
 import { dateFormat1 } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+import BioEmptyTestResult from 'components/svg/bio-empty-test-result';
 
 type Props = {};
 
@@ -23,6 +24,7 @@ const ViewCovidResults = (props: Props) => {
   const styles = makeStyles(colors);
 
   const data = useSelector((state: IAppState) => state.covid.allCovidResults);
+  // const data = [];
 
   /*eslint-disable */
   const getAllCovidResults = async () => {
@@ -76,6 +78,17 @@ const ViewCovidResults = (props: Props) => {
           showsVerticalScrollIndicator={false}
           data={data}
           renderItem={singleFlatListItem}
+          ListEmptyComponent={() => {
+            return (
+              <View style={styles.emptyResult}>
+                <BioEmptyTestResult width={22} height={22} />
+                <Text style={styles.emptyTxt1}>No Test Results</Text>
+                <Text style={styles.emptyTxt2}>
+                  You have no Test results recorded.
+                </Text>
+              </View>
+            );
+          }}
         />
       </View>
     </>
