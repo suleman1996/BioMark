@@ -1,20 +1,28 @@
-import { useNavigation } from '@react-navigation/native';
-import fonts from 'assets/fonts';
-import BioDependants from 'components/svg/bio-dependants';
 import React from 'react';
+
+import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+
+import BioDependants from 'components/svg/bio-dependants';
 import SCREENS from '../../navigation/constants/index';
+import fonts from 'assets/fonts';
 
 export default function DependentButton() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const { YOUR_HEALTH } = SCREENS;
+  const { NESTED_ACCOUNT_NAVIGATOR } = SCREENS;
   const navigation = useNavigation();
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate(YOUR_HEALTH)}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate(NESTED_ACCOUNT_NAVIGATOR, {
+            screen: SCREENS.DEPENDANTS,
+          })
+        }
+      >
         <View style={styles.circleBtn}>
           <BioDependants width={7} height={7} />
         </View>

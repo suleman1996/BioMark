@@ -61,7 +61,12 @@ const API_URLS = {
   CREATE_WEIGHT: '/api/v1/patient/weight_trackers',
   CREATE_HBA1C: '/api/v1/patient/psp/trackers/hba1c',
   GET_HEALTH_RISKS: '/api/v1/patient/risks',
+
+  // Covid
+  COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
+  CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
+  GET_NEW_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/new',
 };
 
 export { API_URLS };

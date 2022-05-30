@@ -72,6 +72,8 @@ export default {
   BOOKCOVIDTEST: 'BookCovidTest',
   PAYMENT_STEP: 'PaymentStep',
   PAYMENT_SUCCESS: 'PaymentSuccess',
+  VIEWCOVIDRESULTS: 'ViewCovidResults',
+  SINGLECOVIDRESULT: 'SingleCovidResult',
 
   BLOOD_SUGAR: 'BLOOD_SUGAR',
   BLOOD_PRESSURE: 'BLOOD_PRESSURE',

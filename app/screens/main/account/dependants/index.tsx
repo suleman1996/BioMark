@@ -3,6 +3,7 @@ import { ScrollView, View } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Header } from 'components';
 import { Button } from 'components/base';
 import { DependantsList } from 'components/ui';
 
@@ -19,12 +20,12 @@ type Props = {
 
 const DependantsScreen = (props: Props) => {
   const {} = props;
-  // const [data, setData] = useState<Array<DependentData>>([]);
 
   const data = useSelector((state: IAppState) => state.account.allDependents);
 
   const hasUnsavedChanges = Boolean(true);
   const dispatch = useDispatch();
+
   /*eslint-disable*/
   React.useEffect(
     () =>
@@ -35,12 +36,15 @@ const DependantsScreen = (props: Props) => {
       }),
     [props.navigation, hasUnsavedChanges]
   );
+
   useEffect(() => {
     dispatch(getAllDependents());
   }, []);
   /*eslint-enable*/
+
   return (
     <View style={styles.container}>
+      <Header isBold={true} isColor={true} title="Dependent" />
       <View style={styles.bottomBtnContainer}>
         <ScrollView style={{ flex: 1 }}>
           <DependantsList data={data} />

@@ -56,7 +56,7 @@ const AccountNavigator = () => {
         />
         <Stack.Screen
           options={{
-            headerShown: true,
+            headerShown: false,
             headerTintColor: colors.darkPrimary,
             title: 'Dependants',
           }}
@@ -65,7 +65,7 @@ const AccountNavigator = () => {
         />
         <Stack.Screen
           options={{
-            headerShown: true,
+            headerShown: false,
             headerTintColor: colors.darkPrimary,
             title: 'Add Dependants',
           }}
@@ -74,7 +74,7 @@ const AccountNavigator = () => {
         />
         <Stack.Screen
           options={{
-            headerShown: true,
+            headerShown: false,
             headerTintColor: colors.darkPrimary,
             title: 'Edit Dependants',
           }}

@@ -1,449 +1,260 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
-import { useTheme } from 'react-native-paper';
-
-import { RadioButton } from 'react-native-paper';
-
-import { TitleWithBackLayout } from 'components/layouts';
+import { useIsFocused } from '@react-navigation/native';
+// import { ModalButton } from 'components/higher-order';
 import { ButtonWithShadowContainer } from 'components/base';
-import { ModalButton } from 'components/higher-order';
-import MedicationModal from './modals/medication';
-import FoodModal from './modals/food';
-import AnimalModal from './modals/animal';
-import EnvironmentModal from './modals/environment';
-import { ActivityIndicator } from 'components';
-import OtherModal from './modals/other';
-import { showMessage } from 'react-native-flash-message';
-
-import { userService } from 'services/user-service/user-service';
-import { navigate } from 'services/nav-ref';
-import SCREENS from 'navigation/constants';
-
+import GeneralModalButton from 'components/higher-order/general-modal-button';
+import { TitleWithBackLayout } from 'components/layouts';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { RadioButton, useTheme } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { default as useStateRef } from 'react-usestateref';
+import { goBack } from 'services/nav-ref';
+import { profileServices } from 'services/profile-services';
+import { IAppState } from 'store/IAppState';
+import {
+  addAllergiesConditionsUpdate,
+  addAllergiesMedicalHistoryUpdate,
+  getAndAddMedicalHistoryDataR,
+} from 'store/profile/profile-actions';
+import { AlergiesRequestBody, MedicalTemplateAttribute } from 'types/api';
+import { logNow } from 'utils/functions/log-binder';
+import GeneralModalPage from './modals/general-modal';
+// import AsthmaModal from './modals/asthma';
+// import CancerModal from './modals/cancer';
+// import DiabetesModal from './modals/diabetes';
+// import GoutModal from './modals/gout';
+// import HighBloodPressureModal from './modals/high-blood-pressure';
+// import HighCholesterolModal from './modals/high-cholesterol';
+// import OthersModal from './modals/others';
 import makeStyles from './styles';
 
-export default function AllergiesScreen() {
-  const { colors } = useTheme();
+/* eslint-disable */
+const AllergiesScreen = () => {
+  const { colors }: any = useTheme();
   const styles = makeStyles(colors);
 
-  useEffect(() => {
-    getMedicalHistory();
-  }, []);
-  const [value, setValue] = useState('');
-  const [isMedicationModal, setIsMedicationModal] = useState(false);
-  const [isFoodModal, setIsFoodModal] = useState(false);
-  const [isAnimalModal, setIsAnimalModal] = useState(false);
-  const [isEnvironmentModal, setIsEnvironmentModal] = useState(false);
-  const [isOtherModal, setIsOtherModal] = useState(false);
-  const [isNotSureModal, setIsNotSureModal] = useState(false);
-  const [isVisiable, setIsVisible] = React.useState(false);
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
+  const [dropdownValue, setDropdown] = useState<any>();
+  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
+  const [value, setValue] = useState<any>(1);
   const [isAllergy, setIsAllergy] = useState('');
-  const [conditions, setConditions] = useState([]);
-  // medical states
-  /*eslint-disable no-unused-vars*/
-  const [listMedical] = useState([]);
-  const [refreshMedical, setRefreshMedical] = useState(false);
-  const [valueMedical, setValueMedical] = useState('');
-  //food states
-  /* eslint-disable no-unused-vars*/
-  const [listFoods] = useState([]);
-  const [refreshFoods, setRefreshFoods] = useState(false);
-  const [valueFoods, setValueFoods] = useState('');
-  //animals state
-  /* eslint-disable no-unused-vars*/
-  const [listAnimals] = useState([]);
-  const [refreshAnimals, setRefreshAnimals] = useState(false);
-  const [valueAnimals, setValueAnimals] = useState('');
-  // Environment states
-  /* eslint-disable no-unused-vars*/
-  const [listEnviroment] = useState([]);
-  const [refreshEnviroment, setRefreshEnviroment] = useState(false);
-  const [valueEnviroment, setValueEnviroment] = useState('');
-  // others states
-  /* eslint-disable no-unused-vars*/
-  const [listOthers] = useState([]);
-  const [refreshOther, setRefreshOther] = useState(false);
-  const [valueOther, setValueOther] = useState('');
 
-  const onPressMedication = () => {
-    setIsMedicationModal(true);
+  const [noneId, setNoneId] = useState();
+  useEffect(() => {
+    const id: any = bootstrap?.attributes?.medical_template?.personal?.find(
+      (item) => item.name === 'None'
+    )?.id;
+    setNoneId(id);
+  }, []);
+
+  const [isGeneralModal, setIsGeneralModal, isGenModalRef] = useStateRef(false);
+  useEffect(() => {
+    setIsGeneralModal(isGenModalRef.current);
+    logNow(isGenModalRef.current);
+  }, [isGenModalRef.current]);
+
+  const [generalModalData, setGeneralModalData] = useState<string>('');
+
+  const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
+
+  // medical history data from redux
+
+  const allergiesMedicalHistory = useSelector(
+    (state: IAppState) => state.profile?.allergiesMedicalHistoryUpdate
+  );
+
+  useEffect(() => {
+    console.log('===>allergies in redux', allergiesMedicalHistory);
+    const hasAller = allergiesMedicalHistory.has_allergy;
+    setValue(
+      hasAller == 0
+        ? 'No'
+        : hasAller == 1
+        ? 'Yes'
+        : hasAller == 2
+        ? 'Not Sure'
+        : 'No'
+    );
+  }, [allergiesMedicalHistory]);
+
+  // medical history data from redux
+  const userDetails = useSelector(
+    (state: IAppState) => state.profile?.userProfile
+  );
+  useEffect(() => {
+    setDropdown(userDetails?.ethnic);
+    logNow(userDetails?.ethnic);
+  }, [userDetails]);
+
+  // getData when on focused
+  const getOnFocued = async () => {
+    await dispatch(getAndAddMedicalHistoryDataR());
   };
+  useEffect(() => {
+    getOnFocued();
+  }, [focused]);
 
-  const onPressFood = () => {
-    setIsFoodModal(true);
-  };
-
-  const onPressAnimal = () => {
-    setIsAnimalModal(true);
-  };
-
-  const onPressEnvironment = () => {
-    setIsEnvironmentModal(true);
-  };
-
-  const onPressOther = () => {
-    setIsOtherModal(true);
-  };
-
-  const onPressNotSure = () => {
-    setIsNotSureModal(true);
-    setIsMedicationModal(false);
-    setIsFoodModal(false);
-    setIsAnimalModal(false);
-    setIsEnvironmentModal(false);
-    setIsOtherModal(false);
-    setConditions([]);
-  };
-
-  const onDoneMedical = ({ allergyTo }) => {
-    let body = {
-      has_condition: true,
-      allergy_to: allergyTo,
-      allergy_type: listMedical.toString(),
-    };
-    conditions.push(body);
+  const changeAllergiesStatus = async (val: string) => {
+    let copyObj: AlergiesRequestBody = allergiesMedicalHistory;
+    copyObj.has_allergy = val == 'Yes' ? true : val == 'Not Sure' ? 2 : 0;
+    await dispatch(addAllergiesMedicalHistoryUpdate(copyObj));
   };
 
-  const onDoneFood = ({ allergyTo }) => {
-    let body = {
-      has_condition: true,
-      allergy_to: allergyTo,
-      allergy_type: listFoods.toString(),
-    };
-    conditions.push(body);
-  };
+  useEffect(() => {}, [value]);
 
-  const onDoneAnimal = ({ allergyTo }) => {
-    let body = {
-      has_condition: true,
-      allergy_to: allergyTo,
-      allergy_type: listAnimals.toString(),
-    };
-    conditions.push(body);
-  };
-
-  const onDoneEnvironment = ({ allergyTo }) => {
-    let body = {
-      has_condition: true,
-      allergy_to: allergyTo,
-      allergy_type: listEnviroment.toString(),
-    };
-    conditions.push(body);
-  };
-
-  const onDoneOther = ({ allergyTo }) => {
-    let body = {
-      has_condition: true,
-      allergy_to: allergyTo,
-      allergy_type: listOthers.toString(),
-    };
-    conditions.push(body);
-  };
-
-  const addMedicalFunction = () => {
-    if (valueMedical !== '') {
-      listMedical.push(valueMedical);
-      setRefreshMedical(!refreshMedical);
-      setValueMedical(!valueMedical);
-    }
-  };
-  const addFoodsFunction = () => {
-    if (valueFoods !== '') {
-      listFoods.push(valueFoods);
-      setRefreshFoods(!refreshFoods);
-      setValueFoods(!valueFoods);
-    }
-  };
-  const addAnimalsFunction = () => {
-    if (valueAnimals !== '') {
-      listAnimals.push(valueAnimals);
-      setRefreshAnimals(!refreshAnimals);
-      setValueAnimals(!valueAnimals);
-    }
-  };
-  const addEnvironmentFunction = () => {
-    if (valueEnviroment !== '') {
-      listEnviroment.push(valueEnviroment);
-      setRefreshEnviroment(!refreshEnviroment);
-      setValueEnviroment(!valueEnviroment);
-    }
-  };
-  const addOtherFunction = () => {
-    if (valueOther !== '') {
-      listOthers.push(valueOther);
-      setRefreshOther(!refreshOther);
-      setValueOther(!valueOther);
-    }
-  };
-
-  const onSubmit = async () => {
-    console.log(conditions);
-    try {
-      // if (conditions.length > 0) {
-      setIsVisible(true);
-      const response = await userService.Allergies({
-        has_allergy: isAllergy,
-        conditions: conditions,
+  // save data on save button press
+  const saveDataonSavePress = () => {
+    profileServices
+      .saveAllFamilyMedicalHistoryPersonalData({
+        medical_history: allergiesMedicalHistory,
+      })
+      .then((res) => {
+        logNow('save alergies data ', res);
+      })
+      .catch((err) => {
+        logNow('save allergies data error', err);
       });
-      console.log('Allergies successful', response.data);
-      navigate(SCREENS.EDIT_PROFILE);
-      setIsVisible(false);
-      // }
-    } catch (err) {
-      setIsVisible(false);
-      console.log(err);
-    }
   };
 
-  const getMedicalHistory = async () => {
-    try {
-      setIsVisible(true);
-      const result = await userService.getMedicalHistory();
-      setValue(
-        result.data.allergy.has_allergy == '0'
-          ? 'first'
-          : result.data.allergy.has_allergy == '1'
-          ? 'second'
-          : result.data.allergy.has_allergy == '2'
-          ? 'third'
-          : null
-      );
-      setIsAllergy(
-        result.data.allergy.has_allergy == '0'
-          ? 'first'
-          : result.data.allergy.has_allergy == '1'
-          ? 'second'
-          : result.data.allergy.has_allergy == '2'
-          ? 'third'
-          : null
-      );
-      console.log('resulttttt', result.data.allergy.has_allergy);
-      setIsVisible(false);
-    } catch (error) {
-      setIsVisible(false);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: 'Internal Server Error',
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
+  const onChangeModalState = () => {
+    setIsGeneralModal(!isGeneralModal);
+    setIsGeneralModal(isGenModalRef.current);
+  };
+
+  const RadioGroupComponent = ({ item }: any) => {
+    return (
+      <>
+        <Text style={styles.label}>{item.question}</Text>
+        <RadioButton.Group
+          onValueChange={async (val) => {
+            setValue(val), setIsAllergy('0');
+            changeAllergiesStatus(val);
+          }}
+          value={value}
+        >
+          {item.options.map((item2: any, index2: number) => (
+            <TouchableOpacity
+              key={index2}
+              onPress={async () => {
+                setValue(item2), setIsAllergy('0');
+                changeAllergiesStatus(item2);
+              }}
+              style={[
+                styles.radioContainer,
+                {
+                  backgroundColor: value == item2 ? colors.navyblue : null,
+                },
+              ]}
+            >
+              <RadioButton
+                color={value == item2 ? colors.white : colors.darkPrimary}
+                value={item2}
+              />
+              <Text
+                style={[
+                  styles.radioText,
+                  { color: value == item2 ? '#ffffff' : '#000000' },
+                ]}
+              >
+                {item2}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </RadioButton.Group>
+      </>
+    );
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ActivityIndicator visible={isVisiable} />
-      <TitleWithBackLayout title="Allergies">
-        <ScrollView style={{ flex: 1, marginBottom: 100 }}>
-          <Text style={styles.label}>Do you have any allergies?</Text>
-          <RadioButton.Group
-            onValueChange={(newValue) => setValue(newValue)}
-            value={value}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                setValue('first'), setIsAllergy('0');
-              }}
-              style={[
-                styles.radioContainer,
-                {
-                  backgroundColor: value == 'first' ? colors.navyblue : null,
-                },
-              ]}
-            >
-              <RadioButton
-                color={value == 'first' ? colors.white : null}
-                value="first"
-              />
-              <Text
-                style={[
-                  styles.radioText,
-                  { color: value == 'first' ? '#ffffff' : '#000000' },
-                ]}
-              >
-                No
-              </Text>
-            </TouchableOpacity>
+    <TitleWithBackLayout title="Allergies">
+      {/* modals */}
+      <GeneralModalPage
+        isVisible={isGenModalRef.current}
+        setIsVisible={onChangeModalState}
+        qData={generalModalData}
+      />
 
-            <TouchableOpacity
-              onPress={() => {
-                setValue('second'), setIsAllergy('1');
-              }}
-              style={[
-                styles.radioContainer,
-                {
-                  backgroundColor: value == 'second' ? colors.navyblue : null,
-                },
-              ]}
-            >
-              <RadioButton
-                color={value == 'second' ? colors.white : null}
-                value="second"
-              />
-              <Text
-                style={[
-                  styles.radioText,
-                  { color: value == 'second' ? '#ffffff' : '#000000' },
-                ]}
-              >
-                Yes
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => {
-                setValue('third'), setIsAllergy('0');
-              }}
-              style={[
-                styles.radioContainer,
-                {
-                  backgroundColor: value == 'third' ? colors.navyblue : null,
-                },
-              ]}
-            >
-              <RadioButton
-                color={value == 'third' ? colors.white : null}
-                value="third"
-              />
-              <Text
-                style={[
-                  styles.radioText,
-                  { color: value == 'third' ? '#ffffff' : '#000000' },
-                ]}
-              >
-                Not Sure
-              </Text>
-            </TouchableOpacity>
-          </RadioButton.Group>
-
-          {value == 'second' ? (
-            <>
-              <Text style={styles.label}>What are you allergic to?</Text>
-              <MedicationModal
-                listMedical={listMedical}
-                onDone={() => onDoneMedical({ allergyTo: 'Medication' })}
-                isVisible={isMedicationModal}
-                setValueMedical={setValueMedical}
-                valueMedical={valueMedical}
-                addMedical={addMedicalFunction}
-                deleteMedical={(index) => {
-                  listMedical.splice(index, 1),
-                    setRefreshMedical(!refreshMedical);
-                }}
-                setIsVisible={setIsMedicationModal}
-              />
-              <FoodModal
-                listFood={listFoods}
-                setvalueFood={setValueFoods}
-                onDone={() => onDoneFood({ allergyTo: 'Food' })}
-                valueFood={valueFoods}
-                addFood={addFoodsFunction}
-                deleteFood={(index) => {
-                  listFoods.splice(index, 1), setRefreshFoods(!refreshFoods);
-                }}
-                isVisible={isFoodModal}
-                setIsVisible={setIsFoodModal}
-              />
-              <View style={styles.rowContainer}>
-                <ModalButton
-                  title="Medication"
-                  isModal={isMedicationModal}
-                  setIsModal={() => onPressMedication()}
-                  drop={true}
-                />
-                <ModalButton
-                  title="Food"
-                  isModal={isFoodModal}
-                  setIsModal={() => onPressFood()}
-                  drop={true}
-                />
-              </View>
-              <AnimalModal
-                listAnimal={listAnimals}
-                setvalueAnimal={setValueAnimals}
-                onDone={() => onDoneAnimal({ allergyTo: 'Animal' })}
-                valueAnimal={valueAnimals}
-                addAnimal={addAnimalsFunction}
-                deleteAnimal={(index) => {
-                  listAnimals.splice(index, 1),
-                    setRefreshAnimals(!refreshAnimals);
-                }}
-                isVisible={isAnimalModal}
-                setIsVisible={setIsAnimalModal}
-              />
-              <EnvironmentModal
-                listEnvironment={listEnviroment}
-                setvalueEnvironment={setValueEnviroment}
-                onDone={() => onDoneEnvironment({ allergyTo: 'Environment' })}
-                valueEnvironment={valueEnviroment}
-                addEnvironment={addEnvironmentFunction}
-                deleteEnvironment={(index) => {
-                  listEnviroment.splice(index, 1),
-                    setRefreshEnviroment(!refreshEnviroment);
-                }}
-                isVisible={isEnvironmentModal}
-                setIsVisible={setIsEnvironmentModal}
-              />
-              <View style={styles.rowContainer}>
-                <ModalButton
-                  title="Animal"
-                  isModal={isAnimalModal}
-                  setIsModal={() => onPressAnimal()}
-                  drop={true}
-                />
-                <ModalButton
-                  title="Environment"
-                  isModal={isEnvironmentModal}
-                  setIsModal={() => onPressEnvironment()}
-                  drop={true}
-                />
-              </View>
-
-              <OtherModal
-                listOther={listOthers}
-                setvalueOther={setValueOther}
-                onDone={() => onDoneOther({ allergyTo: 'Other' })}
-                valueOther={valueOther}
-                addOther={addOtherFunction}
-                deleteOther={(index) => {
-                  listOthers.splice(index, 1), setRefreshOther(!refreshOther);
-                }}
-                isVisible={isOtherModal}
-                setIsVisible={setIsOtherModal}
-              />
-              <View style={styles.rowContainer}>
-                <ModalButton
-                  title="Other"
-                  isModal={isOtherModal}
-                  setIsModal={() => onPressOther()}
-                  drop={true}
-                />
-                <ModalButton
-                  title="Not Sure"
-                  isModal={isNotSureModal}
-                  setIsModal={() => onPressNotSure()}
-                />
-              </View>
-            </>
-          ) : null}
+      {/* modals */}
+      <ScrollView style={styles.container}>
+        {bootstrap?.attributes?.medical_template?.allergy?.map(
+          (item: MedicalTemplateAttribute, index: number) =>
+            item?.content?.fields.map((item2: any, index2: number) =>
+              item2.type == 'radio' ? (
+                <View key={item2}>
+                  <RadioGroupComponent item={item2} />
+                </View>
+              ) : null
+            )
+        )}
+        {allergiesMedicalHistory.has_allergy == 1 ? (
+          <Text style={styles.label}>
+            Have you ever been diagnosed with any of the following conditions?
+          </Text>
+        ) : null}
+        <ScrollView>
+          <View style={styles.rowContainer}>
+            {allergiesMedicalHistory.has_allergy == 1 &&
+              bootstrap?.attributes?.medical_template?.allergy?.map(
+                (item: MedicalTemplateAttribute, index: number) =>
+                  item?.content?.fields.map((item2: any, index2: number) =>
+                    item2.type == 'multi_select'
+                      ? item2.options.map((item3: any, index3: number) => (
+                          <View key={index2}>
+                            {item3 == 'Not Sure' ? (
+                              <GeneralModalButton
+                                isSelected={
+                                  allergiesMedicalHistory?.conditions?.find(
+                                    (item: any) => item.allergy_to == item3
+                                  )?.has_condition || false
+                                }
+                                setIsModal={async () => {
+                                  await dispatch(
+                                    addAllergiesConditionsUpdate([
+                                      {
+                                        has_condition: true,
+                                        allergy_to: 'Not Sure',
+                                        allergy_type: '',
+                                      },
+                                    ])
+                                  );
+                                }}
+                                title={item3}
+                                isModal={isGeneralModal}
+                              />
+                            ) : (
+                              <GeneralModalButton
+                                isSelected={
+                                  allergiesMedicalHistory?.conditions?.find(
+                                    (item: any) => item.allergy_to == item3
+                                  )?.has_condition || false
+                                }
+                                title={item3}
+                                drop={true}
+                                setIsModal={() => {
+                                  setGeneralModalData(item3);
+                                  onChangeModalState();
+                                }}
+                                isModal={isGeneralModal}
+                              />
+                            )}
+                          </View>
+                        ))
+                      : null
+                  )
+              )}
+          </View>
         </ScrollView>
-        <ButtonWithShadowContainer title="Save" onPress={onSubmit} />
-      </TitleWithBackLayout>
-    </SafeAreaView>
+      </ScrollView>
+      <ButtonWithShadowContainer
+        onPress={() => {
+          saveDataonSavePress();
+          goBack();
+        }}
+        title={'Save & Continue'}
+      />
+    </TitleWithBackLayout>
   );
-}
+};
+
+export default AllergiesScreen;

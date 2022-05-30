@@ -10,13 +10,13 @@ import BottomTabNavigator from './bottom-tab-navigator';
 import { getAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 import { loggedIn } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
-import YourHealth from '../screens/main/home-page/your-health/index';
-import Hypertension from '../screens/main/home-page/your-health/hypertension-diary/index';
+import YourHealth from 'screens/main/home-page/your-health/index';
+import Hypertension from 'screens/main/home-page/your-health/hypertension-diary/index';
 import PdfHypertension from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
-import HealthProgress from '../screens/main/home-page/your-health/health-progress/index';
-import Targets from '../screens/main/home-page/your-health/health-progress/targets/index';
-import AddBloodSugar from '../screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
-import AddHba1c from '../screens/main/home-page/your-health/health-progress/targets/add-hba1c/index';
+import HealthProgress from 'screens/main/home-page/your-health/health-progress/index';
+import Targets from 'screens/main/home-page/your-health/health-progress/targets/index';
+import AddBloodSugar from 'screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
+import AddHba1c from 'screens/main/home-page/your-health/health-progress/targets/add-hba1c/index';
 import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
@@ -25,12 +25,17 @@ import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/inde
 import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 // import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication/index';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
-// import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 import Covid19Navigator from './covid19-navigator';
 import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
 import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
 import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
+import {
+  getHealthTrackerRisks,
+  getReduxDashboard,
+  getReduxHealthTracker,
+  getReduxNewMedicationTracker,
+} from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
 
@@ -69,6 +74,10 @@ const AppNavigator = () => {
 
   useEffect(() => {
     getHasProfileAsyncStorage();
+    dispatch(getReduxNewMedicationTracker());
+    dispatch(getReduxHealthTracker());
+    dispatch(getReduxDashboard());
+    dispatch(getHealthTrackerRisks());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
