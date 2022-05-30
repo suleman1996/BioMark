@@ -6,6 +6,8 @@ import {
   GET_HEALTH_RISK,
   MEDICATION_LIST,
   GET_NEW_MEDICATION_TRACKER,
+  PSP_MODULE,
+  PSP_PDF_LINK,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -48,7 +50,18 @@ export default function (state = INITIAL_STATE, action: any) {
         getNewMedicationTracker: action.payload,
       };
     }
-
+    case PSP_MODULE: {
+      return {
+        ...state,
+        pspModuleData: action.payload,
+      };
+    }
+    case PSP_PDF_LINK: {
+      return {
+        ...state,
+        PspDataContents: action.payload,
+      };
+    }
     default:
       return state;
   }

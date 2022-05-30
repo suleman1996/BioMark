@@ -63,7 +63,6 @@ export default function TermsAndPrivacy({ route }) {
       },
       android: configfb,
     });
-
     console.log('The file saved to 23233', configfb, dirs);
 
     ReactNativeBlobUtil.config(configOptions)

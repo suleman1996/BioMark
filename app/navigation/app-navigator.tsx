@@ -30,6 +30,7 @@ import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
 import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
 import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
+import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-list';
 import {
   getHealthTrackerRisks,
   getReduxDashboard,
@@ -112,6 +113,13 @@ const AppNavigator = () => {
           <Stack.Screen name={HYPERTENSION} component={Hypertension} />
           <Stack.Screen name={PDF_HYPERTENSION} component={PdfHypertension} />
           <Stack.Screen name={HEALTH_RECORD} component={HealthRecord} />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name={SCREENS.VIDEO_LIST}
+            component={VideoList}
+          />
           <Stack.Screen
             name={PDF_DIABETES_SUPPORT}
             component={PdfDiabetesSupportCenter}

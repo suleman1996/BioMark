@@ -18,6 +18,7 @@ const styles = (colors: any) =>
       marginBottom: heightToDp(1),
     },
     listTitle: {
+      flex: 1,
       fontSize: responsiveFontSize(20),
       color: colors.primary,
       fontFamily: fonts.mulishExtraBold,

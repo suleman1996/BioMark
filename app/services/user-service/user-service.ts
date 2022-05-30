@@ -8,6 +8,8 @@ import {
   RiskData,
   MedicationListEntry,
   MedicationTrackerSetup,
+  PspModule,
+  PspModuleDataContents,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -667,6 +669,48 @@ function getNewMedicationTracker() {
       });
   });
 }
+function getPspModules() {
+  return new Promise<PspModule>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_MODULES)
+      .then(async (response) => {
+        try {
+          console.log('PSP Modules', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('psp error', err);
+        reject(err);
+      });
+  });
+}
+
+function getPspPdfLink(link) {
+  console.log(link, 'linkkkkkkkkkkkkkkkkkkkkk');
+  return new Promise<PspModuleDataContents>((resolve, reject) => {
+    client
+      .get(API_URLS.PDF_GET_LINK + link)
+      .then(async (response) => {
+        try {
+          console.log('PSP PDF LINK', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('pdf error', err);
+        reject(err);
+      });
+  });
+}
+
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
@@ -715,4 +759,6 @@ export const userService = {
   getMedicationList,
   createMedication,
   getNewMedicationTracker,
+  getPspModules,
+  getPspPdfLink,
 };

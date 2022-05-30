@@ -6,8 +6,10 @@ import {
   ScrollView,
   Linking,
   TouchableWithoutFeedback,
+  ImageBackground,
+  Image,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import RenderHealthTrack from 'components/health-tracker-card/index';
@@ -15,11 +17,15 @@ import PdfList from 'components/pdf-list';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import WithdrawProgram from 'components/widthdraw-from-program';
-import Video from 'react-native-video';
-import SCREENS from 'navigation/constants'; // import { useNavigation } from '@react-navigation/native';
+import SCREENS from 'navigation/constants';
+// import { useNavigation } from '@react-navigation/native';
 // import Pdf from 'assets/svgs/pdf';
 import Messenger from 'assets/svgs/messenger';
 import { navigate } from 'services/nav-ref';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import { getReduxPspModules } from 'store/home/home-actions';
+// import { Image } from 'react-native-svg';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
   Linking.openURL(
@@ -29,10 +35,34 @@ const openMessenger = () => {
 
 const DiabetesCenter = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [pdfData, setPdfData] = useState([]);
+  const [video, setVideo] = useState([]);
+  const dispatch = useDispatch();
 
   const { colors } = useTheme();
   const styles = Styles(colors);
-  //   const navigation = useNavigation();
+
+  const pspModuleData = useSelector(
+    (state: IAppState) => state.home.pspModuleData
+  );
+  //pdf & video data
+  // const pspPdfLinks = useSelector(
+  //   (state: IAppState) => state.home.PspDataContents
+  // );
+  useEffect(() => {
+    PspModuleData();
+  });
+
+  const PspModuleData = () => {
+    try {
+      dispatch(getReduxPspModules());
+      setPdfData(pspModuleData.pdf);
+      // console.log('ps--------------------p', pspModuleData);
+      setVideo(pspModuleData.video);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const [healthTracker] = React.useState([
     {
@@ -65,24 +95,32 @@ const DiabetesCenter = () => {
     },
   ]);
 
-  const [Pdflist] = React.useState([
-    {
-      id: 1,
-      title: 'Diabetes Patient Manual',
-    },
-    {
-      id: 2,
-      title: 'Diabetes Myths and Facts',
-    },
-    {
-      id: 3,
-      title: 'Diabetes Patient Manual',
-    },
-    {
-      id: 4,
-      title: 'Diabetes Patient Manual',
-    },
-  ]);
+  const renderItem = ({ item }) => (
+    <>
+      {console.log(item, '---------------item-------------------')}
+      <ImageBackground
+        resizeMode="stretch"
+        source={{ uri: item.thumbnail }}
+        style={styles.backgroundVideo}
+      >
+        <TouchableOpacity
+          onPress={() => navigate(SCREENS.VIDEO_LIST, { code: item })}
+        >
+          <Image
+            source={require('../../../../../assets/images/home/GD.png')}
+            style={{
+              height: 30,
+              width: 30,
+              // justifyContent: 'center',
+              // alignItems: 'center',
+              alignSelf: 'center',
+              backgroundColor: 'red',
+            }}
+          />
+        </TouchableOpacity>
+      </ImageBackground>
+    </>
+  );
 
   return (
     <TitleWithBackLayout isGradient={true} title="Diabetes Support Center">
@@ -103,32 +141,26 @@ const DiabetesCenter = () => {
             DIABETES EDUCATION
           </Text>
 
-          <Video
-            source={{
-              uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-            }}
-            controls={true}
-            paused={true}
-            style={styles.backgroundVideo}
-            repeat={true}
-            resizeMode="stretch"
-            fullscreen={true}
-            posterResizeMode={'cover'}
-            poster="https://play-lh.googleusercontent.com/uf1TVrS58KmBNiWYR3LocIJMDXTmmfkYY79lDlG2eA4brjyw3q1BN4DDIriw7B9MfQ=w600-h300-pc0xffffff-pd"
-            //   style={{ flex: 1, width: '100%', margin: 'auto' }}
+          <FlatList
+            data={video}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
           />
 
           <FlatList
-            data={Pdflist}
+            data={pdfData}
             renderItem={(item) => (
               <PdfList
                 item={item}
-                onPress={() => navigate(SCREENS.PDF_DIABETES_SUPPORT)}
+                onPress={() =>
+                  navigate(SCREENS.PDF_DIABETES_SUPPORT, { code: item })
+                }
               />
             )}
             keyExtractor={(item) => item.id}
             showsHorizontalScrollIndicator={false}
           />
+
           <WithdrawProgram
             visible={modalVisible}
             title="Are You Sure?"

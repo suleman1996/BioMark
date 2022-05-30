@@ -5,6 +5,8 @@ import {
   RiskData,
   MedicationListEntry,
   MedicationTrackerSetup,
+  PspModule,
+  PspModuleDataContents,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -13,4 +15,6 @@ export class HomeState {
   healthRisks: RiskData[] = [];
   medicationList: MedicationListEntry[] = [];
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
+  pspModuleData: PspModule[] = [];
+  PspDataContents: PspModuleDataContents[] = [];
 }
