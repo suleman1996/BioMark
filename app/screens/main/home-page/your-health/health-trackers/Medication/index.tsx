@@ -61,17 +61,15 @@ const Medication = () => {
   const [minRange, setMinRange] = useState<any>(0);
   const [maxRange, setMaxRange] = useState(0);
 
-  const medicationList = useSelector(
-    (state: IAppState) => state.home.medicationList
-  );
-  // const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+  // const medicationList = useSelector(
+  //   (state: IAppState) => state.home.medicationList
+  // );
+  const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
   useEffect(() => {
     console.log('getMedNewTracker', getMedNewTracker);
-    console.log('medicationList', medicationList);
-
     let arr = [];
     getMedNewTracker?.medication?.map((ele) => {
       console.log('ele', ele);
