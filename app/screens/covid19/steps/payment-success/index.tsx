@@ -7,7 +7,7 @@ import StepIndicator from 'react-native-step-indicator';
 
 import ButtonComponent from 'components/base/button';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import makeStyles from './styles';
+import { makeStyles } from './styles';
 
 type Props = {};
 

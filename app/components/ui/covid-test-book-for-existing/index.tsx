@@ -12,6 +12,7 @@ import { makeStyles } from './styles';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { GlobalFonts } from 'utils/theme/fonts';
 import TimeSlots from './../time-slots/index';
+
 type Props = {};
 
 const options = [

@@ -70,6 +70,8 @@ export default function SmokingScreen() {
             ? 1
             : 0
         );
+        console.log('stop', result?.data?.smoking?.smoking_stop_at);
+
         setDay(result?.data?.smoking?.stick_per_day);
         setStopSmoke(result?.data?.smoking?.smoking_stop_at);
         setStartSmoke(result?.data?.smoking?.smoking_start_at);
@@ -112,13 +114,13 @@ export default function SmokingScreen() {
       console.log('stopSmoke', stopSmoke);
       console.log('startSmoke', startSmoke);
       console.log('isSmoking yes no wala', value);
-      if (value === 1) {
+      if (value === 0) {
         setIsVisible(true);
         const response = await userService.Smoking(day, 0, startSmoke, value);
         console.log('smoking successful', response.data);
         navigate(SCREENS.EDIT_PROFILE);
         setIsVisible(false);
-      } else if (value === 0) {
+      } else if (value === 1) {
         setIsVisible(true);
         const response = await userService.Smoking(
           day,
@@ -335,7 +337,7 @@ export default function SmokingScreen() {
                       visible={showDropDown2}
                       showDropDown={() => setShowDropDown2(true)}
                       onDismiss={() => setShowDropDown2(false)}
-                      value={stopSmoke}
+                      value={stopSmoke + ''}
                       setValue={(itemValue) => setStopSmoke(itemValue)}
                       list={options2}
                       inputProps={{

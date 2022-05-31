@@ -7342,6 +7342,11 @@ react-native-tags-input@^1.0.10:
   dependencies:
     prop-types "^15.7.2"
 
+react-native-tip@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/react-native-tip/-/react-native-tip-0.0.18.tgz#267f697a3ece9227d7c4f54ca59bb09490b09e55"
+  integrity sha512-RZdUwbTlFebsoBLiChXFoDsQuehlbkBka7hcuQt4gkLotghvtmCg3wsFpgYZmdvtUkUSwNAoRp3WnXpxml/ESw==
+
 react-native-ui-xg@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-ui-xg/-/react-native-ui-xg-0.0.6.tgz#abbe72cb56a555e4a443c19a58e89d18bf8b3a2e"

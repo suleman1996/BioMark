@@ -10,6 +10,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import FlashMessage from 'react-native-flash-message';
 import { MenuProvider } from 'react-native-popup-menu';
 import { Provider } from 'react-redux';
+import TipProvider from 'react-native-tip';
 
 import BiomarkNavigation from './app/navigation';
 import { ErrorBoundary } from 'components';
@@ -43,6 +44,7 @@ const App = () => {
                 edges={['top']}
                 style={{ flex: 1, backgroundColor: '#fff' }}
               >
+                <TipProvider />
                 <BiomarkNavigation />
               </SafeAreaView>
             </MenuProvider>
