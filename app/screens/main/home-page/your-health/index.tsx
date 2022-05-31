@@ -74,6 +74,7 @@ const Index = () => {
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );

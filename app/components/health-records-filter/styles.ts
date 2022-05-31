@@ -71,5 +71,30 @@ const styles = (colors: any) =>
       fontFamily: fonts.mulishRegular,
       fontSize: responsiveFontSize(17),
     },
+    datepicker: {
+      backgroundColor: colors.inputBg,
+      width: '100%',
+      height: 40,
+      marginTop: 10,
+      borderRadius: 8,
+      justifyContent: 'space-between',
+      // alignContent: 'flex-end',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    datePickerText: {
+      flex: 1,
+      paddingHorizontal: widthToDp(5),
+    },
+    clear: {
+      marginHorizontal: widthToDp(25),
+    },
+    clearText: {
+      textAlign: 'center',
+      marginTop: heightToDp(2),
+      fontSize: responsiveFontSize(16),
+      color: colors.heading,
+      fontFamily: fonts.mulishBold,
+    },
   });
 export default styles;

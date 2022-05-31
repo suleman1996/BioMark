@@ -40,7 +40,7 @@ export default function VaccinationScreen() {
   const [list, setList] = useState([]);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [refresh, setRefreh] = useState(false);
-  const numColumns = 3;
+  // const numColumns = 3;
 
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
   useEffect(() => {
@@ -166,6 +166,7 @@ export default function VaccinationScreen() {
                     //       // null
                     // );
                     // console.log(index, 'items');
+                    // index == 0 ? alert('dkjkdj') : null;
                     console.log(index, 'value------');
                   }}
                   style={[
@@ -247,7 +248,7 @@ export default function VaccinationScreen() {
             <View style={{ marginHorizontal: 30, marginTop: 20 }}>
               <FlatList
                 data={list}
-                numColumns={numColumns}
+                numColumns={3}
                 extraData={refresh}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => {

@@ -65,6 +65,7 @@ const styles = (colors: any) =>
       height: 200,
       borderRadius: 5,
       margin: 5,
+      justifyContent: 'center',
     },
 
     // modal

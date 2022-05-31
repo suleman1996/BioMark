@@ -49,8 +49,12 @@ const VideoList = ({ route }) => {
         paused={true}
         style={styles.backgroundVideo}
         repeat={true}
+        playWhenInactive={true}
         resizeMode="contain"
         fullscreen={true}
+        onLoadStart={() => {
+          console.log('start auto');
+        }}
         // posterResizeMode={'stretch'}
         // poster={item.thumbnail}
       />
