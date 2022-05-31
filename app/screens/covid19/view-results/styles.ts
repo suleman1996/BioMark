@@ -72,6 +72,23 @@ export const makeStyles = (colors: any) =>
       color: colors.darkPrimary,
       width: '100%',
     },
+    emptyResult: {
+      flex: 1,
+      width: widthToDp(88),
+      height: heightToDp(85),
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    emptyTxt1: {
+      fontSize: responsiveFontSize(25),
+      fontFamily: GlobalFonts.extraBold,
+      color: colors.darkPrimary,
+    },
+    emptyTxt2: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.extraLight,
+      color: colors.black,
+    },
   });
 
 export default makeStyles;
