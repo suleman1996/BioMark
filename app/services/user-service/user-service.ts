@@ -8,6 +8,7 @@ import {
   RiskData,
   MedicationListEntry,
   MedicationTrackerSetup,
+  LabStatusPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -667,6 +668,26 @@ function getNewMedicationTracker() {
       });
   });
 }
+function getLabResultStatus() {
+  return new Promise<LabStatusPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_LAB_STATUS)
+      .then(async (response) => {
+        try {
+          console.log('lab staus', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('lab status error', err);
+        reject(err);
+      });
+  });
+}
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
@@ -715,4 +736,5 @@ export const userService = {
   getMedicationList,
   createMedication,
   getNewMedicationTracker,
+  getLabResultStatus,
 };

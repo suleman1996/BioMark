@@ -7,6 +7,7 @@ import {
   RiskData,
   MedicationListEntry,
   MedicationTrackerSetup,
+  LabStatusPayload,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -16,6 +17,7 @@ import {
   GET_HEALTH_RISK,
   MEDICATION_LIST,
   GET_NEW_MEDICATION_TRACKER,
+  GET_LAB_STATUS,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -42,6 +44,10 @@ export const addHealthRisks = (data: RiskData) => ({
 });
 export const addNewMedicationTracker = (data: MedicationTrackerSetup) => ({
   type: GET_NEW_MEDICATION_TRACKER,
+  payload: data,
+});
+export const addLabResultStatus = (data: LabStatusPayload) => ({
+  type: GET_LAB_STATUS,
   payload: data,
 });
 
@@ -119,6 +125,19 @@ export const getReduxNewMedicationTracker =
         console.log('new med tracker', res);
 
         await dispatch(addNewMedicationTracker(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+export const getReduxLabResultStatus =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getLabResultStatus()
+      .then(async (res) => {
+        console.log('lab status', res);
+
+        await dispatch(addLabResultStatus(res));
       })
       .catch((err) => {
         logNow(err);

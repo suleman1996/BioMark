@@ -8,6 +8,7 @@ type Props = {
   disabled?: boolean;
   onPress: any;
   title: string;
+  style: number;
 };
 
 export default function SmallButton(props: Props) {
@@ -20,7 +21,7 @@ export default function SmallButton(props: Props) {
           mode="contained"
           uppercase={false}
           disabled={props.disabled}
-          contentStyle={{ height: 35 }}
+          contentStyle={[{ height: 35 }, props.style]}
           style={[
             styles.btn,
             { backgroundColor: props?.disabled ? colors.disable : colors.blue },
