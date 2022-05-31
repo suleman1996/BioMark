@@ -68,6 +68,8 @@ const API_URLS = {
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
   GET_NEW_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/new',
   GET_LAB_STATUS: '/api/v1/patient/results/lab_status',
+
+  LAB_STATUS_VERYFY: '/api/v1/patient/results/verify',
 };
 
 export { API_URLS };

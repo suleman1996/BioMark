@@ -450,6 +450,11 @@ const createMedication = ({ medication }: Props) => {
     medication,
   });
 };
+const labStatusVerify = ({ result }: Props) => {
+  return client.post(API_URLS.LAB_STATUS_VERYFY, {
+    result,
+  });
+};
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
   return client.post(API_URLS.CREATE_STRESS, {
@@ -737,4 +742,5 @@ export const userService = {
   createMedication,
   getNewMedicationTracker,
   getLabResultStatus,
+  labStatusVerify,
 };

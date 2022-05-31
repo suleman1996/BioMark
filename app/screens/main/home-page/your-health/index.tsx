@@ -12,7 +12,7 @@ import {
   Image,
   Keyboard,
 } from 'react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import * as Yup from 'yup';
 import Styles from './styles';
@@ -70,45 +70,12 @@ import { SmallButton } from 'components/button';
 import MyImage from 'assets/images';
 import { Formik } from 'formik';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { TextInput } from 'components';
+import { userService } from 'services/user-service/user-service';
+import AuthContext from 'utils/auth-context';
+import { showMessage } from 'react-native-flash-message';
+import { InputWithLabel } from 'components/base';
+import { getReduxLabResultStatus } from 'store/home/home-actions';
 
-const tempDate = [
-  {
-    id: 153,
-    lab_ref_id: 'QDC-123-00003',
-    result_status: 'verified',
-    status_order: 1,
-    status_message:
-      'To access your results, we need to verify your IC or passport number first.',
-    status_name: 'Verify',
-  },
-  {
-    id: 152,
-    lab_ref_id: 'QDC-123-00002',
-    result_status: 'reviewing',
-    status_order: 2,
-    status_message:
-      "Your results are being reviewed by your doctor. We recommend following-up with your doctor if they haven't released your results in a few days.",
-    status_name: 'Reviewing',
-  },
-  {
-    id: 170,
-    lab_ref_id: 'QDT-BM-00112',
-    result_status: 'processing',
-    status_order: 3,
-    status_message:
-      "Your result is being processed by the lab. We'll let you know once it's done. ",
-    status_name: 'Processing',
-  },
-  {
-    id: 9,
-    lab_ref_id: 'GBC-0PW7-2845',
-    result_status: 'success_scan',
-    status_order: 4,
-    status_message: 'Your barcode has been successfully scanned. ',
-    status_name: 'Successful Scan',
-  },
-];
 const QrInputPopup = ({ visible, children, loading }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -137,13 +104,14 @@ const QrInputPopup = ({ visible, children, loading }: Props) => {
   );
 };
 const Index = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const authContext = useContext(AuthContext);
   const { colors } = useTheme();
 
   const styles = Styles(colors);
   const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
   // const { HEALTH_STRESS } = SCREENS;
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
@@ -222,44 +190,53 @@ const Index = () => {
   const [selectedCalculations, setselectedCalculations] = React.useState();
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [showApiError, setShowApiError] = React.useState('');
 
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
   const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
     console.log('qrInput', qrInput);
-    alert(qrInput);
-    setLoading(true);
-    // try {
-    //   setLoading(true);
-    //   await inputBarcode({
-    //     scanner: {
-    //       code: qrInput,
-    //     },
-    //   });
-    //   Keyboard.dismiss();
-    //   setVisible(false);
-    //   setLoading(false);
-    // } catch (error: any) {
-    //   setLoading(false);
-    //   Keyboard.dismiss();
-    //   setVisible(false);
-    //   if (error.errMsg.status == '500') {
-    //     showMessage({
-    //       message: "User not exist's",
-    //       type: 'danger',
-    //     });
-    //   } else if (error.errMsg.status == false) {
-    //     showMessage({
-    //       message: error.errMsg.data.message,
-    //       type: 'danger',
-    //     });
-    //   } else {
-    //     showMessage({
-    //       message: error.errMsg,
-    //       type: 'danger',
-    //     });
-    //   }
-    // }
+    console.log('identification_id', authContext?.userData?.ic_number);
+
+    try {
+      setLoading(true);
+      const response = await userService.labStatusVerify({
+        result: {
+          barcode: qrInput,
+          identification_id: authContext?.userData?.ic_number,
+        },
+      });
+      console.log('res', response);
+      dispatch(getReduxLabResultStatus());
+      if (response?.data?.message === 'Invalid request') {
+        setShowApiError(
+          'IC or passport number validation is unsucessful. Please check and try again'
+        );
+      } else {
+        setVisible(false);
+        setLoading(false);
+        console.log('status updated', response.data.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
   };
   const RenderHealthRiskView = ({
     svg,
@@ -408,8 +385,6 @@ const Index = () => {
   });
 
   const RendreLabResult = ({ item }) => {
-    console.log('item xxxx ', item);
-
     return (
       <>
         <View style={styles.resultStatusView}>
@@ -591,7 +566,7 @@ const Index = () => {
             />
           </View>
           <FlatList
-            data={tempDate}
+            data={getLabStatusData}
             renderItem={(item) => (
               <RendreLabResult item={item.item} setVisible={setVisible} />
             )}
@@ -647,20 +622,30 @@ const Index = () => {
                     Please enter your IC or passport number to verify your
                     identity
                   </Text>
-                  <Text style={styles.popUpSubHeading}>
-                    IC or Passport Number
-                  </Text>
+
                   <View style={{ width: '100%' }}>
-                    <TextInput
+                    {/* <TextInput
                       backgroundColor={colors.inputBg}
                       style={styles.textInput}
                       marginTop={10}
                       onChange={handleChange('qrInput')}
                       placeholder={'Enter your IC / Passport number'}
+                    /> */}
+                    <InputWithLabel
+                      label="IC or Passport Number"
+                      placeholder={'Enter your IC / Passport number'}
+                      onChange={() => {
+                        handleChange('qrInput');
+                        setShowApiError('');
+                      }}
+                      error={
+                        errors.qrInput
+                          ? errors.qrInput
+                          : showApiError
+                          ? showApiError
+                          : ''
+                      }
                     />
-                    {errors.qrInput && (
-                      <Text style={styles.errorMessage}>{errors.qrInput}</Text>
-                    )}
                     <View style={{ marginTop: 40 }}>
                       <TouchableOpacity>
                         <Button
@@ -668,7 +653,6 @@ const Index = () => {
                           title="Verify"
                           marginHorizontal={0.1}
                           marginVertical={0.1}
-                          onChange={handleChange('qrInput')}
                           //   disabled={!isValid && errors}
                           disabled={!isValid && errors ? true : false}
                         />
