@@ -74,6 +74,7 @@ import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
 import { showMessage } from 'react-native-flash-message';
 import { InputWithLabel } from 'components/base';
+import { getReduxLabResultStatus } from 'store/home/home-actions';
 
 const QrInputPopup = ({ visible, children, loading }: Props) => {
   const { colors } = useTheme();
@@ -103,14 +104,14 @@ const QrInputPopup = ({ visible, children, loading }: Props) => {
   );
 };
 const Index = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
   const { colors } = useTheme();
 
   const styles = Styles(colors);
   const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
   // const { HEALTH_STRESS } = SCREENS;
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
@@ -206,7 +207,7 @@ const Index = () => {
         },
       });
       console.log('res', response);
-
+      dispatch(getReduxLabResultStatus());
       if (response?.data?.message === 'Invalid request') {
         setShowApiError(
           'IC or passport number validation is unsucessful. Please check and try again'
