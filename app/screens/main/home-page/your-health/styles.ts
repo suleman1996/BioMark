@@ -245,7 +245,6 @@ const styles = (colors: any) =>
     singleMenuItem: {
       paddingHorizontal: widthToDp(4),
       paddingVertical: widthToDp(2.5),
-      borderBottomWidth: 0.5,
       borderBottomLeftRadius: 4,
       borderBottomRightRadius: 4,
       borderBottomColor: colors.primary,
