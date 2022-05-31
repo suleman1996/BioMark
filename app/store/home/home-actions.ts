@@ -7,6 +7,8 @@ import {
   RiskData,
   MedicationListEntry,
   MedicationTrackerSetup,
+  PspModule,
+  PspModuleDataContents,
   LabStatusPayload,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
@@ -17,6 +19,8 @@ import {
   GET_HEALTH_RISK,
   MEDICATION_LIST,
   GET_NEW_MEDICATION_TRACKER,
+  PSP_MODULE,
+  PSP_PDF_LINK,
   GET_LAB_STATUS,
 } from './constants';
 
@@ -44,6 +48,15 @@ export const addHealthRisks = (data: RiskData) => ({
 });
 export const addNewMedicationTracker = (data: MedicationTrackerSetup) => ({
   type: GET_NEW_MEDICATION_TRACKER,
+  payload: data,
+});
+export const addPspModule = (data: PspModule) => ({
+  type: PSP_MODULE,
+  payload: data,
+});
+
+export const addPspPdfLink = (data: PspModuleDataContents) => ({
+  type: PSP_PDF_LINK,
   payload: data,
 });
 export const addLabResultStatus = (data: LabStatusPayload) => ({
@@ -125,6 +138,32 @@ export const getReduxNewMedicationTracker =
         console.log('new med tracker', res);
 
         await dispatch(addNewMedicationTracker(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+export const getReduxPspModules =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getPspModules()
+      .then(async (res) => {
+        console.log('psp redux', res);
+        await dispatch(addPspModule(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxPspPdfLink =
+  (link: string) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getPspPdfLink(link)
+      .then(async (res) => {
+        console.log('psp redux', res);
+        await dispatch(addPspPdfLink(res));
       })
       .catch((err) => {
         logNow(err);
