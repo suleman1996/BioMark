@@ -21,8 +21,6 @@ import makeStyles from './styles';
 
 const AccountScreen = () => {
   const authContext = useContext(AuthContext);
-  console.log('authContext', authContext);
-
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
