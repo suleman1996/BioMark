@@ -5,7 +5,8 @@ import GeneralModalButton from 'components/higher-order/general-modal-button';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-
+import Icon from 'react-native-vector-icons/Ionicons';
+import { Tip } from 'react-native-tip';
 // import { ModalButton } from 'components/higher-order';
 import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -32,6 +33,8 @@ import { profileServices } from 'services/profile-services';
 import { logNow } from 'utils/functions/log-binder';
 import { addMedicalHistoryUpdate } from 'store/profile/profile-actions';
 import { userService } from 'services/user-service/user-service';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 const options = [
   { value: '---', label: '---' },
@@ -136,7 +139,24 @@ const MedicalHistoryScreen = () => {
 
       {/* modals */}
       <ScrollView style={styles.container}>
-        <Text style={styles.label}>What's your ethnicity?</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.label}>What's your ethnicity?</Text>
+          <View style={{ marginTop: heightToDp(3.8) }}>
+            <Tip
+              //title=""
+              body="Your ethnicity will impact the assessment of your BMI health indicator."
+              bodyStyle={{ color: '#fff' }}
+              tipContainerStyle={{ backgroundColor: '#2f6b64', width: '60%' }}
+              overlayOpacity={0.001}
+            >
+              <Icon
+                name="ios-information-circle-outline"
+                size={responsiveFontSize(22)}
+                color={colors.darkPrimary}
+              />
+            </Tip>
+          </View>
+        </View>
         <DropdownMenu
           options={options}
           selectedValue={dropdownValue}
