@@ -49,7 +49,8 @@ const DiabetesCenter = () => {
     PspModuleData();
     handleHEalthTracker();
     console.log('Health diabetes api =======>', hell);
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const PspModuleData = () => {
     try {

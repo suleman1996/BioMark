@@ -22,7 +22,8 @@ const VideoList = ({ route }) => {
 
   useEffect(() => {
     videoData();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const videoData = () => {
     try {
