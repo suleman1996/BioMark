@@ -15,6 +15,7 @@ import FloatingButton from '../../../../../../components/floating-button/index';
 import Target from 'react-native-vector-icons/MaterialCommunityIcons';
 import Info from 'react-native-vector-icons/AntDesign';
 import BloodSugar from '../../../../../../assets/svgs/diabtes';
+import LineGraph from '../../../../../../components/line-graph/index';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -126,6 +127,7 @@ const Index = () => {
               </TouchableOpacity>
             </View>
           </View>
+          <LineGraph />
           <Text
             style={[styles.heading, { alignSelf: 'center', marginTop: 10 }]}
           >

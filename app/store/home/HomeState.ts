@@ -7,6 +7,7 @@ import {
   MedicationTrackerSetup,
   PspModule,
   PspModuleDataContents,
+  LabStatusPayload,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -17,4 +18,5 @@ export class HomeState {
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
   pspModuleData: PspModule[] = [];
   PspDataContents: PspModuleDataContents[] = [];
+  getLabStatusData: LabStatusPayload[] = [];
 }

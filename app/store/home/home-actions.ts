@@ -9,6 +9,7 @@ import {
   MedicationTrackerSetup,
   PspModule,
   PspModuleDataContents,
+  LabStatusPayload,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -20,6 +21,7 @@ import {
   GET_NEW_MEDICATION_TRACKER,
   PSP_MODULE,
   PSP_PDF_LINK,
+  GET_LAB_STATUS,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -55,6 +57,10 @@ export const addPspModule = (data: PspModule) => ({
 
 export const addPspPdfLink = (data: PspModuleDataContents) => ({
   type: PSP_PDF_LINK,
+  payload: data,
+});
+export const addLabResultStatus = (data: LabStatusPayload) => ({
+  type: GET_LAB_STATUS,
   payload: data,
 });
 
@@ -158,6 +164,19 @@ export const getReduxPspPdfLink =
       .then(async (res) => {
         console.log('psp redux', res);
         await dispatch(addPspPdfLink(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+export const getReduxLabResultStatus =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getLabResultStatus()
+      .then(async (res) => {
+        console.log('lab status', res);
+
+        await dispatch(addLabResultStatus(res));
       })
       .catch((err) => {
         logNow(err);

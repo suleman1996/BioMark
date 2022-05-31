@@ -8,6 +8,7 @@ import {
   GET_NEW_MEDICATION_TRACKER,
   PSP_MODULE,
   PSP_PDF_LINK,
+  GET_LAB_STATUS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -62,6 +63,13 @@ export default function (state = INITIAL_STATE, action: any) {
         PspDataContents: action.payload,
       };
     }
+    case GET_LAB_STATUS: {
+      return {
+        ...state,
+        getLabStatusData: action.payload,
+      };
+    }
+
     default:
       return state;
   }

@@ -10,6 +10,7 @@ import {
   MedicationTrackerSetup,
   PspModule,
   PspModuleDataContents,
+  LabStatusPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -451,6 +452,11 @@ const createMedication = ({ medication }: Props) => {
     medication,
   });
 };
+const labStatusVerify = ({ result }: Props) => {
+  return client.post(API_URLS.LAB_STATUS_VERYFY, {
+    result,
+  });
+};
 
 const createStress = (q1: Number, q2: Number, q3: Number, q4: Number) => {
   return client.post(API_URLS.CREATE_STRESS, {
@@ -697,6 +703,7 @@ function getPspPdfLink(link) {
       .then(async (response) => {
         try {
           console.log('PSP PDF LINK', response);
+          console.log('lab staus', response);
 
           resolve(response.data);
         } catch (e) {
@@ -706,6 +713,28 @@ function getPspPdfLink(link) {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('pdf error', err);
+        logNow('lab status error', err);
+        reject(err);
+      });
+  });
+}
+function getLabResultStatus() {
+  return new Promise<LabStatusPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_LAB_STATUS)
+      .then(async (response) => {
+        try {
+          console.log('lab staus', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('pdf error', err);
+        logNow('lab status error', err);
         reject(err);
       });
   });
@@ -761,4 +790,6 @@ export const userService = {
   getNewMedicationTracker,
   getPspModules,
   getPspPdfLink,
+  getLabResultStatus,
+  labStatusVerify,
 };

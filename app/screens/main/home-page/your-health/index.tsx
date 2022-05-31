@@ -8,21 +8,25 @@ import {
   TouchableWithoutFeedback,
   Animated,
   PanResponder,
+  Modal,
+  Image,
+  Keyboard,
 } from 'react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
+import * as Yup from 'yup';
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-import { useTheme } from 'react-native-paper';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
+import { Button } from 'components/button';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
-
+import makeStyles from './styles';
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
-
 import {
   Diabetess,
   Heart_Disease,
@@ -61,15 +65,51 @@ import Progress from '../../../../assets/svgs/Progress';
 import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
+import { SmallButton } from 'components/button';
+import MyImage from 'assets/images';
+import { Formik } from 'formik';
+import { userService } from 'services/user-service/user-service';
+import AuthContext from 'utils/auth-context';
+import { showMessage } from 'react-native-flash-message';
+import { InputWithLabel } from 'components/base';
+import { getReduxLabResultStatus } from 'store/home/home-actions';
 
+const QrInputPopup = ({ visible, children, loading }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+  const [showModal, setShowModal] = React.useState(visible);
+
+  React.useEffect(() => {
+    togglePopUp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
+
+  const togglePopUp = () => {
+    if (visible) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  };
+
+  return (
+    <Modal transparent visible={showModal}>
+      <ActivityIndicator visible={loading} />
+      <View style={styles.popUpBackground}>
+        <View style={styles.popUpContainer}>{children}</View>
+      </View>
+    </Modal>
+  );
+};
 const Index = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const authContext = useContext(AuthContext);
   const { colors } = useTheme();
 
   const styles = Styles(colors);
   const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
   // const { HEALTH_STRESS } = SCREENS;
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
@@ -77,6 +117,9 @@ const Index = () => {
 
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
+  );
+  const getLabStatusData = useSelector(
+    (state: IAppState) => state.home.getLabStatusData
   );
   const handleHEalthTracker = () => {
     healthTracker.length = 0;
@@ -101,6 +144,8 @@ const Index = () => {
   useEffect(() => {
     setHealthRisksData(healthRisk);
     handleHEalthTracker();
+    console.log('getLabStatusData', getLabStatusData);
+
     console.log('getMedNewTracker', getMedNewTracker);
     console.log('Health Trackeer api =======>', hell);
     console.log('Dashboard api =======>', dashboard);
@@ -129,7 +174,6 @@ const Index = () => {
   ]);
 
   const [healthTracker] = React.useState([]);
-  const [currentPosition] = React.useState(2);
   const [stepIndicatorIcons] = React.useState([
     <Heart />,
     <Diabetes />,
@@ -143,9 +187,56 @@ const Index = () => {
   const [selectedRef, setSelectedRef] = React.useState();
   const [selectedFootNotes, setSelectedFootNotes] = React.useState();
   const [selectedCalculations, setselectedCalculations] = React.useState();
+  const [visible, setVisible] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [showApiError, setShowApiError] = React.useState('');
 
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
+  const handleCode = async ({ qrInput }: any) => {
+    Keyboard.dismiss();
+    console.log('qrInput', qrInput);
+    console.log('identification_id', authContext?.userData?.ic_number);
 
+    try {
+      setLoading(true);
+      const response = await userService.labStatusVerify({
+        result: {
+          barcode: qrInput,
+          identification_id: authContext?.userData?.ic_number,
+        },
+      });
+      console.log('res', response);
+      dispatch(getReduxLabResultStatus());
+      if (response?.data?.message === 'Invalid request') {
+        setShowApiError(
+          'IC or passport number validation is unsucessful. Please check and try again'
+        );
+      } else {
+        setVisible(false);
+        setLoading(false);
+        console.log('status updated', response.data.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
   const RenderHealthRiskView = ({
     svg,
     color,
@@ -292,6 +383,41 @@ const Index = () => {
     },
   });
 
+  const RendreLabResult = ({ item }) => {
+    return (
+      <>
+        <View style={styles.resultStatusView}>
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.resultStatus}>Your Lab Result Status</Text>
+            <Text style={[styles.barcode]}>Barcode {item?.lab_ref_id}</Text>
+          </View>
+          <LabResultProgressBar
+            currentPosition={4 - item?.status_order}
+            icons={stepIndicatorIcons}
+          />
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.resultStatus}>{item?.status_name}</Text>
+            <Text style={[styles.barcode]}>{item?.status_message}</Text>
+          </View>
+          {item?.result_status === 'verified' ? (
+            <View
+              style={{
+                width: '40%',
+                alignSelf: 'center',
+                paddingVertical: 10,
+              }}
+            >
+              <SmallButton
+                title="See Results"
+                style={{ height: 45 }}
+                onPress={() => setVisible(true)}
+              />
+            </View>
+          ) : null}
+        </View>
+      </>
+    );
+  };
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
@@ -438,23 +564,16 @@ const Index = () => {
               onPress={() => navigation.navigate(HEALTH_PROGRESS)}
             />
           </View>
-          <View style={styles.resultStatusView}>
-            <View style={{ alignItems: 'center' }}>
-              <Text style={styles.resultStatus}>Your Lab Result Status</Text>
-              <Text style={[styles.barcode]}>Barcode CVD-UBCDLM</Text>
-            </View>
-            <LabResultProgressBar
-              currentPosition={currentPosition}
-              icons={stepIndicatorIcons}
-            />
-            <View style={{ alignItems: 'center' }}>
-              <Text style={styles.resultStatus}>Processing</Text>
-              <Text style={[styles.barcode]}>
-                Your result is being processed by the lab. We'll let you know
-                once it's done.
-              </Text>
-            </View>
-          </View>
+          <FlatList
+            data={getLabStatusData}
+            renderItem={(item) => (
+              <RendreLabResult item={item.item} setVisible={setVisible} />
+            )}
+            keyExtractor={(item) => item.id}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 10 }}
+          />
+
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Article Highlights
           </Text>
@@ -467,12 +586,88 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
           />
+          <TouchableOpacity style={styles.singleMenuItem}>
+            {/* popup Modal */}
+            <Formik
+              initialValues={{
+                qrInput: '',
+              }}
+              onSubmit={(values) => handleCode(values)}
+              validationSchema={QRschemma}
+            >
+              {({ handleChange, handleSubmit, errors, isValid }) => (
+                <QrInputPopup loading={loading} visible={visible}>
+                  <View style={{ alignItems: 'center', marginBottom: 20 }}>
+                    <View style={styles.popUpHeader}>
+                      <Text style={styles.popUpHeading}>Results Available</Text>
+                      <TouchableOpacity onPress={() => setVisible(false)}>
+                        <Image
+                          source={MyImage.closeIcon}
+                          style={{
+                            height: 15,
+                            width: 15,
+                          }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <Text
+                    style={{
+                      fontFamily: fonts.regular,
+                      fontSize: 17,
+                      color: '#8493AE',
+                    }}
+                  >
+                    Please enter your IC or passport number to verify your
+                    identity
+                  </Text>
 
-          <View style={{ height: 50 }} />
+                  <View style={{ width: '100%' }}>
+                    {/* <TextInput
+                      backgroundColor={colors.inputBg}
+                      style={styles.textInput}
+                      marginTop={10}
+                      onChange={handleChange('qrInput')}
+                      placeholder={'Enter your IC / Passport number'}
+                    /> */}
+                    <InputWithLabel
+                      label="IC or Passport Number"
+                      placeholder={'Enter your IC / Passport number'}
+                      onChange={() => {
+                        handleChange('qrInput');
+                        setShowApiError('');
+                      }}
+                      error={
+                        errors.qrInput
+                          ? errors.qrInput
+                          : showApiError
+                          ? showApiError
+                          : ''
+                      }
+                    />
+                    <View style={{ marginTop: 40 }}>
+                      <TouchableOpacity>
+                        <Button
+                          onPress={() => handleSubmit()}
+                          title="Verify"
+                          marginHorizontal={0.1}
+                          marginVertical={0.1}
+                          //   disabled={!isValid && errors}
+                          disabled={!isValid && errors ? true : false}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </QrInputPopup>
+              )}
+            </Formik>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     </View>
   );
 };
-
 export default Index;
+const QRschemma = Yup.object({
+  qrInput: Yup.string().required('IC or Passport are required'),
+});
