@@ -33,6 +33,7 @@ import {
   getHealthTrackerRisks,
   getReduxDashboard,
   getReduxHealthTracker,
+  getReduxLabResultStatus,
   getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
@@ -76,6 +77,7 @@ const AppNavigator = () => {
     dispatch(getReduxHealthTracker());
     dispatch(getReduxDashboard());
     dispatch(getHealthTrackerRisks());
+    dispatch(getReduxLabResultStatus());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

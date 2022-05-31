@@ -6,6 +6,7 @@ import {
   GET_HEALTH_RISK,
   MEDICATION_LIST,
   GET_NEW_MEDICATION_TRACKER,
+  GET_LAB_STATUS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -46,6 +47,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getNewMedicationTracker: action.payload,
+      };
+    }
+    case GET_LAB_STATUS: {
+      return {
+        ...state,
+        getLabStatusData: action.payload,
       };
     }
 

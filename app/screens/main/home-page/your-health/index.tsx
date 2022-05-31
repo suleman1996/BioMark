@@ -8,21 +8,26 @@ import {
   TouchableWithoutFeedback,
   Animated,
   PanResponder,
+  Modal,
+  Image,
+  Keyboard,
 } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 
+import * as Yup from 'yup';
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-import { useTheme } from 'react-native-paper';
+import { ActivityIndicator, useTheme } from 'react-native-paper';
+import { Button } from 'components/button';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
-
+import makeStyles from './styles';
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   Diabetess,
   Heart_Disease,
@@ -61,7 +66,76 @@ import Progress from '../../../../assets/svgs/Progress';
 import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
+import { SmallButton } from 'components/button';
+import MyImage from 'assets/images';
+import { Formik } from 'formik';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { TextInput } from 'components';
 
+const tempDate = [
+  {
+    id: 153,
+    lab_ref_id: 'QDC-123-00003',
+    result_status: 'verified',
+    status_order: 1,
+    status_message:
+      'To access your results, we need to verify your IC or passport number first.',
+    status_name: 'Verify',
+  },
+  {
+    id: 152,
+    lab_ref_id: 'QDC-123-00002',
+    result_status: 'reviewing',
+    status_order: 2,
+    status_message:
+      "Your results are being reviewed by your doctor. We recommend following-up with your doctor if they haven't released your results in a few days.",
+    status_name: 'Reviewing',
+  },
+  {
+    id: 170,
+    lab_ref_id: 'QDT-BM-00112',
+    result_status: 'processing',
+    status_order: 3,
+    status_message:
+      "Your result is being processed by the lab. We'll let you know once it's done. ",
+    status_name: 'Processing',
+  },
+  {
+    id: 9,
+    lab_ref_id: 'GBC-0PW7-2845',
+    result_status: 'success_scan',
+    status_order: 4,
+    status_message: 'Your barcode has been successfully scanned. ',
+    status_name: 'Successful Scan',
+  },
+];
+const QrInputPopup = ({ visible, children, loading }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+  const [showModal, setShowModal] = React.useState(visible);
+
+  React.useEffect(() => {
+    togglePopUp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
+
+  const togglePopUp = () => {
+    if (visible) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  };
+
+  return (
+    <Modal transparent visible={showModal}>
+      <ActivityIndicator visible={loading} />
+      <View style={styles.popUpBackground}>
+        <View style={styles.popUpContainer}>{children}</View>
+      </View>
+    </Modal>
+  );
+};
 const Index = () => {
   const { colors } = useTheme();
 
@@ -76,6 +150,9 @@ const Index = () => {
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
+  );
+  const getLabStatusData = useSelector(
+    (state: IAppState) => state.home.getLabStatusData
   );
   const handleHEalthTracker = () => {
     healthTracker.length = 0;
@@ -100,6 +177,8 @@ const Index = () => {
   useEffect(() => {
     setHealthRisksData(healthRisk);
     handleHEalthTracker();
+    console.log('getLabStatusData', getLabStatusData);
+
     console.log('getMedNewTracker', getMedNewTracker);
     console.log('Health Trackeer api =======>', hell);
     console.log('Dashboard api =======>', dashboard);
@@ -128,7 +207,6 @@ const Index = () => {
   ]);
 
   const [healthTracker] = React.useState([]);
-  const [currentPosition] = React.useState(2);
   const [stepIndicatorIcons] = React.useState([
     <Heart />,
     <Diabetes />,
@@ -142,9 +220,47 @@ const Index = () => {
   const [selectedRef, setSelectedRef] = React.useState();
   const [selectedFootNotes, setSelectedFootNotes] = React.useState();
   const [selectedCalculations, setselectedCalculations] = React.useState();
+  const [visible, setVisible] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
-
+  const handleCode = async ({ qrInput }: any) => {
+    Keyboard.dismiss();
+    console.log('qrInput', qrInput);
+    alert(qrInput);
+    setLoading(true);
+    // try {
+    //   setLoading(true);
+    //   await inputBarcode({
+    //     scanner: {
+    //       code: qrInput,
+    //     },
+    //   });
+    //   Keyboard.dismiss();
+    //   setVisible(false);
+    //   setLoading(false);
+    // } catch (error: any) {
+    //   setLoading(false);
+    //   Keyboard.dismiss();
+    //   setVisible(false);
+    //   if (error.errMsg.status == '500') {
+    //     showMessage({
+    //       message: "User not exist's",
+    //       type: 'danger',
+    //     });
+    //   } else if (error.errMsg.status == false) {
+    //     showMessage({
+    //       message: error.errMsg.data.message,
+    //       type: 'danger',
+    //     });
+    //   } else {
+    //     showMessage({
+    //       message: error.errMsg,
+    //       type: 'danger',
+    //     });
+    //   }
+    // }
+  };
   const RenderHealthRiskView = ({
     svg,
     color,
@@ -291,6 +407,43 @@ const Index = () => {
     },
   });
 
+  const RendreLabResult = ({ item }) => {
+    console.log('item xxxx ', item);
+
+    return (
+      <>
+        <View style={styles.resultStatusView}>
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.resultStatus}>Your Lab Result Status</Text>
+            <Text style={[styles.barcode]}>Barcode {item?.lab_ref_id}</Text>
+          </View>
+          <LabResultProgressBar
+            currentPosition={4 - item?.status_order}
+            icons={stepIndicatorIcons}
+          />
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.resultStatus}>{item?.status_name}</Text>
+            <Text style={[styles.barcode]}>{item?.status_message}</Text>
+          </View>
+          {item?.result_status === 'verified' ? (
+            <View
+              style={{
+                width: '40%',
+                alignSelf: 'center',
+                paddingVertical: 10,
+              }}
+            >
+              <SmallButton
+                title="See Results"
+                style={{ height: 45 }}
+                onPress={() => setVisible(true)}
+              />
+            </View>
+          ) : null}
+        </View>
+      </>
+    );
+  };
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
@@ -437,23 +590,16 @@ const Index = () => {
               onPress={() => navigation.navigate(HEALTH_PROGRESS)}
             />
           </View>
-          <View style={styles.resultStatusView}>
-            <View style={{ alignItems: 'center' }}>
-              <Text style={styles.resultStatus}>Your Lab Result Status</Text>
-              <Text style={[styles.barcode]}>Barcode CVD-UBCDLM</Text>
-            </View>
-            <LabResultProgressBar
-              currentPosition={currentPosition}
-              icons={stepIndicatorIcons}
-            />
-            <View style={{ alignItems: 'center' }}>
-              <Text style={styles.resultStatus}>Processing</Text>
-              <Text style={[styles.barcode]}>
-                Your result is being processed by the lab. We'll let you know
-                once it's done.
-              </Text>
-            </View>
-          </View>
+          <FlatList
+            data={tempDate}
+            renderItem={(item) => (
+              <RendreLabResult item={item.item} setVisible={setVisible} />
+            )}
+            keyExtractor={(item) => item.id}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 10 }}
+          />
+
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Article Highlights
           </Text>
@@ -466,12 +612,93 @@ const Index = () => {
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
           />
+          <TouchableOpacity style={styles.singleMenuItem}>
+            {/* popup Modal */}
+            <Formik
+              initialValues={{
+                qrInput: '',
+              }}
+              onSubmit={(values) => handleCode(values)}
+              validationSchema={QRschemma}
+            >
+              {({ handleChange, handleSubmit, errors, isValid }) => (
+                <QrInputPopup loading={loading} visible={visible}>
+                  <View style={{ alignItems: 'center', marginBottom: 20 }}>
+                    <View style={styles.popUpHeader}>
+                      <Text style={styles.popUpHeading}>Results Available</Text>
+                      <TouchableOpacity onPress={() => setVisible(false)}>
+                        <Image
+                          source={MyImage.closeIcon}
+                          style={{
+                            height: 15,
+                            width: 15,
+                          }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <Text
+                    style={{
+                      fontFamily: fonts.regular,
+                      fontSize: 17,
+                      color: '#8493AE',
+                    }}
+                  >
+                    Please enter your IC or passport number to verify your
+                    identity
+                  </Text>
+                  <Text style={styles.popUpSubHeading}>
+                    IC or Passport Number
+                  </Text>
+                  <View style={{ width: '100%' }}>
+                    <TextInput
+                      backgroundColor={colors.inputBg}
+                      style={styles.textInput}
+                      marginTop={10}
+                      onChange={handleChange('qrInput')}
+                      placeholder={'Enter your IC / Passport number'}
+                    />
+                    {errors.qrInput && (
+                      <Text style={styles.errorMessage}>{errors.qrInput}</Text>
+                    )}
+                    <View style={{ marginTop: 40 }}>
+                      <TouchableOpacity>
+                        <Button
+                          onPress={() => handleSubmit()}
+                          title="Verify"
+                          marginHorizontal={0.1}
+                          marginVertical={0.1}
+                          onChange={handleChange('qrInput')}
+                          //   disabled={!isValid && errors}
+                          disabled={!isValid && errors ? true : false}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </QrInputPopup>
+              )}
+            </Formik>
 
+            <MaterialCommunityIcons
+              name="barcode-scan"
+              size={responsiveFontSize(22)}
+              color={colors.primary}
+            />
+            <Text
+              style={styles.menuText}
+              fontSize={responsiveFontSize(15)}
+              onPress={() => setVisible(true)}
+            >
+              Input Barcode
+            </Text>
+          </TouchableOpacity>
           <View style={{ height: 50 }} />
         </ScrollView>
       </View>
     </View>
   );
 };
-
 export default Index;
+const QRschemma = Yup.object({
+  qrInput: Yup.string().required('IC or Passport are required'),
+});
