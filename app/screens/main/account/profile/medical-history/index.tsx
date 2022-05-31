@@ -136,6 +136,7 @@ const MedicalHistoryScreen = () => {
 
       {/* modals */}
       <ScrollView style={styles.container}>
+        <Text style={styles.label}>What's your ethnicity?</Text>
         <DropdownMenu
           options={options}
           selectedValue={dropdownValue}
