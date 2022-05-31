@@ -67,6 +67,7 @@ const API_URLS = {
   GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
   GET_NEW_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/new',
+  GET_LAB_STATUS: '/api/v1/patient/results/lab_status',
 };
 
 export { API_URLS };

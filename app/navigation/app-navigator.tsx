@@ -33,10 +33,12 @@ import {
   getHealthTrackerRisks,
   getReduxDashboard,
   getReduxHealthTracker,
+  getReduxLabResultStatus,
   getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
+import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -63,6 +65,7 @@ const {
   ADD_HBA1C,
   PDF_DIABETES_SUPPORT,
   HEALTH_RECORD,
+  RESULT_OVERVIEW,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -76,6 +79,7 @@ const AppNavigator = () => {
     dispatch(getReduxHealthTracker());
     dispatch(getReduxDashboard());
     dispatch(getHealthTrackerRisks());
+    dispatch(getReduxLabResultStatus());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -134,6 +138,7 @@ const AppNavigator = () => {
           <Stack.Screen name={TARGETS} component={Targets} />
           <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />
           <Stack.Screen name={ADD_HBA1C} component={AddHba1c} />
+          <Stack.Screen name={RESULT_OVERVIEW} component={ResultOverView} />
         </>
       ) : (
         <>

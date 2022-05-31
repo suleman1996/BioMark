@@ -15,7 +15,17 @@ export const makeStyles = (colors: any) =>
       paddingHorizontal: widthToDp(4),
       paddingTop: heightToDp(2.5),
       paddingBottom: heightToDp(2),
-      borderBottomWidth: 0.3,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+      backgroundColor: colors.blue,
+      marginBottom: 10,
     },
     titleContainer: {
       paddingVertical: heightToDp(1),
@@ -25,6 +35,13 @@ export const makeStyles = (colors: any) =>
       fontFamily: GlobalFonts.medium,
       marginTop: heightToDp(2),
       color: colors.white,
+    },
+    optionsView: {
+      flexDirection: 'row',
+      position: 'absolute',
+      right: 0,
+      alignItems: 'center',
+      height: '100%',
     },
   });
 export default makeStyles;
