@@ -26,7 +26,7 @@ export const makeStyles = (colors: any) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignContent: 'space-between',
-      paddingBottom: heightToDp(7),
+      paddingBottom: heightToDp(17),
     },
   });
 export default makeStyles;

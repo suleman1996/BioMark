@@ -176,7 +176,7 @@ const AllergiesScreen = () => {
       />
 
       {/* modals */}
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         {bootstrap?.attributes?.medical_template?.allergy?.map(
           (item: MedicalTemplateAttribute, index: number) =>
             item?.content?.fields.map((item2: any, index2: number) =>

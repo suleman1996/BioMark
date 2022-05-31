@@ -105,7 +105,7 @@ const MedicalHistoryScreen = () => {
           Have you of your family members been diagnosed with the following
           conditions?
         </Text>
-        <ScrollView>
+        <ScrollView style={{ flex: 1 }}>
           <View style={styles.rowContainer}>
             {bootstrap?.attributes?.medical_template?.family?.map(
               (item: MedicalTemplateAttribute, index: number) => (
