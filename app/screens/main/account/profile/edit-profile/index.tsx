@@ -297,29 +297,25 @@ const EditProfileScreen = () => {
                 color={colors.darkPrimary}
               />
             </Pressable>
+            <Pressable
+              onPress={() => navigate(SCREENS.FAMILY_MEDICAL_HISTORY)}
+              style={styles.menuOption}
+            >
+              <View style={styles.menuTitleAndIcon}>
+                <MaterialIcons
+                  name="groups"
+                  size={responsiveFontSize(22)}
+                  color={colors.darkPrimary}
+                />
+                <Text style={styles.menuTitleText}>Family Medical History</Text>
+              </View>
 
-            <View style={styles.menuOption}>
-              <Pressable
-                onPress={() => navigate(SCREENS.FAMILY_MEDICAL_HISTORY)}
-                style={styles.menuOption}
-              >
-                <View style={styles.menuTitleAndIcon}>
-                  <MaterialIcons
-                    name="groups"
-                    size={responsiveFontSize(22)}
-                    color={colors.darkPrimary}
-                  />
-                  <Text style={styles.menuTitleText}>
-                    Family Medical History
-                  </Text>
-                </View>
-              </Pressable>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
                 color={colors.darkPrimary}
               />
-            </View>
+            </Pressable>
 
             <Pressable
               onPress={() => navigate(SCREENS.SMOKING)}

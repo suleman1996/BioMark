@@ -10,6 +10,7 @@ import { getReduxNewMedicationTracker } from 'store/home/home-actions';
 
 const RenderHealthTrack = ({ item }) => {
   const { colors } = useTheme();
+  const dispatch = useDispatch();
   const styles = Styles(colors);
   const navigation = useNavigation();
   const getMedNewTracker = useSelector(
@@ -32,7 +33,8 @@ const RenderHealthTrack = ({ item }) => {
         } else if (item?.item?.title === 'HbA1c') {
           navigation.navigate(SCREENS.HBA1C);
         } else if (item?.item?.title === 'Medication') {
-          if (getMedNewTracker?.medication?.length) {
+          dispatch(getReduxNewMedicationTracker());
+          if (getMedNewTracker?.medication) {
             navigation.navigate(SCREENS.MEDICATION);
           } else {
             alert('add medication');

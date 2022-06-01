@@ -32,7 +32,7 @@ export default function VaccinationScreen() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<any>(0);
   // const [condition, setCondition] = useState('');
   const [showSuggestion, setShowSuggestion] = useState(false);
   const [vaccineList, setVaccineList] = useState([]);
@@ -40,7 +40,7 @@ export default function VaccinationScreen() {
   const [list, setList] = useState([]);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [refresh, setRefreh] = useState(false);
-  const numColumns = 3;
+  // const numColumns = 3;
 
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function VaccinationScreen() {
     list.push(search.toString());
     setList([...list]);
     setSearch('');
-    console.log(list);
+    console.log('addList', list);
   };
 
   const onSubmit = async () => {
@@ -71,6 +71,10 @@ export default function VaccinationScreen() {
       });
       console.log('response---------data', response.data);
       if (value === 1) {
+        navigate(SCREENS.EDIT_PROFILE);
+      } else if (value == 0) {
+        navigate(SCREENS.EDIT_PROFILE);
+      } else if (value == 2) {
         navigate(SCREENS.EDIT_PROFILE);
       } else {
         console.log('false');
@@ -93,22 +97,22 @@ export default function VaccinationScreen() {
       setIsVisible(true);
       const result = await userService.getMedicalHistory();
       console.log('resulttttt---------', result.data.vaccine);
-      // setValue(
-      //   result?.data?.vaccine?.has_condition == '1'
-      //     ? 'true'
-      //     : result?.data?.vaccine?.has_condition == '0'
-      //     ? 'false'
-      //     : result?.data?.vaccine?.has_condition == '2'
-      //     ? 'false'
-      //     : null
-      // );
-      // console.log('conditionlist', result?.data?.vaccine);
-      // setItems(result?.data?.vaccine?.vaccine_list);
+      const array = (result?.data?.vaccine?.vaccine_list).split(',');
+      setValue(
+        result?.data?.vaccine?.has_condition == '1'
+          ? 1
+          : result?.data?.vaccine?.has_condition == '0'
+          ? 0
+          : result?.data?.vaccine?.has_condition == '2'
+          ? 2
+          : null
+      );
+      const filterEmptyValues = array.filter((element: any) => {
+        return element !== '';
+      });
+      setList(filterEmptyValues);
+      console.log('get_List', filterEmptyValues);
 
-      // setList([
-      //   ...list,
-      //   { id: list?.length + 1, title: result?.data?.vaccine?.vaccine_list },
-      // ]);
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);
@@ -130,7 +134,6 @@ export default function VaccinationScreen() {
       }
     }
   };
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
@@ -143,7 +146,7 @@ export default function VaccinationScreen() {
             }
           </Text>
           {bootstrap?.attributes?.medical_template?.vaccine[0]?.content?.fields[0]?.options.map(
-            (item, index) => (
+            (item, index: number) => (
               <RadioButton.Group
                 onValueChange={(newValue) => {
                   setValue(newValue);
@@ -163,6 +166,7 @@ export default function VaccinationScreen() {
                     //       // null
                     // );
                     // console.log(index, 'items');
+                    // index == 0 ? alert('dkjkdj') : null;
                     console.log(index, 'value------');
                   }}
                   style={[
@@ -194,7 +198,7 @@ export default function VaccinationScreen() {
               onPress={addTags}
               value={search}
               disabled={!search ? true : false}
-              onChangeText={(text) => {
+              onChangeText={(text: any) => {
                 setSearch(text);
                 setShowSuggestion(true);
               }}
@@ -244,25 +248,27 @@ export default function VaccinationScreen() {
             <View style={{ marginHorizontal: 30, marginTop: 20 }}>
               <FlatList
                 data={list}
-                numColumns={numColumns}
+                numColumns={3}
                 extraData={refresh}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    style={styles.listview}
-                    onPress={() => {
-                      list.splice(index, 1), setRefreh(!refresh);
-                    }}
-                  >
-                    <Text style={styles.listTextColor}>{item}</Text>
-                    <Entypo
-                      name={'cross'}
-                      size={responsiveFontSize(15)}
-                      color={colors.darkGray}
-                      style={styles.crossIcon}
-                    />
-                  </TouchableOpacity>
-                )}
+                renderItem={({ item, index }) => {
+                  return (
+                    <TouchableOpacity
+                      style={styles.listview}
+                      onPress={() => {
+                        list.splice(index, 1), setRefreh(!refresh);
+                      }}
+                    >
+                      <Text style={styles.listTextColor}>{item}</Text>
+                      <Entypo
+                        name={'cross'}
+                        size={responsiveFontSize(15)}
+                        color={colors.darkGray}
+                        style={styles.crossIcon}
+                      />
+                    </TouchableOpacity>
+                  );
+                }}
               />
             </View>
           ) : null}

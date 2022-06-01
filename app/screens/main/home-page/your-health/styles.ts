@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -219,6 +220,54 @@ const styles = (colors: any) =>
     descriptionHealthRisk: {
       fontFamily: fonts.light,
       marginTop: 10,
+    },
+    textInput: {
+      borderRadius: 8,
+      padding: 10,
+    },
+    popUpHeader: {
+      width: '100%',
+      height: 40,
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    popUpHeading: {
+      fontFamily: fonts.bold,
+      fontSize: 21,
+      color: colors.heading,
+    },
+    popUpSubHeading: {
+      fontFamily: fonts.extraBold,
+      fontSize: 15,
+      color: colors.heading,
+    },
+    singleMenuItem: {
+      paddingHorizontal: widthToDp(4),
+      paddingVertical: widthToDp(2.5),
+      borderBottomLeftRadius: 4,
+      borderBottomRightRadius: 4,
+      borderBottomColor: colors.primary,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    popUpBackground: {
+      flex: 1,
+      backgroundColor: 'rgba(0,0,0,0.4)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    popUpContainer: {
+      width: '80%',
+      backgroundColor: 'white',
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      borderRadius: 9,
+    },
+    errorMessage: {
+      marginHorizontal: 5,
+      fontSize: 12,
+      color: colors.danger,
     },
   });
 export default styles;

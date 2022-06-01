@@ -23,16 +23,19 @@ import BloodPressure from 'screens/main/home-page/your-health/health-trackers/bl
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
 import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
+// import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication/index';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
 import Covid19Navigator from './covid19-navigator';
 import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
 import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
 import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
+import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-list';
 import {
   getHealthTrackerRisks,
   getReduxDashboard,
   getReduxHealthTracker,
+  getReduxLabResultStatus,
   getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
@@ -63,6 +66,7 @@ const {
   ADD_HBA1C,
   PDF_DIABETES_SUPPORT,
   HEALTH_RECORD,
+  // SHOW_MEDICATION,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -76,6 +80,7 @@ const AppNavigator = () => {
     dispatch(getReduxHealthTracker());
     dispatch(getReduxDashboard());
     dispatch(getHealthTrackerRisks());
+    dispatch(getReduxLabResultStatus());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -111,6 +116,13 @@ const AppNavigator = () => {
           <Stack.Screen name={PDF_HYPERTENSION} component={PdfHypertension} />
           <Stack.Screen name={HEALTH_RECORD} component={HealthRecord} />
           <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name={SCREENS.VIDEO_LIST}
+            component={VideoList}
+          />
+          <Stack.Screen
             name={PDF_DIABETES_SUPPORT}
             component={PdfDiabetesSupportCenter}
           />
@@ -126,6 +138,8 @@ const AppNavigator = () => {
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
           <Stack.Screen name={MEDICATION} component={Medication} />
+          {/* <Stack.Screen name={SHOW_MEDICATION} component={ShowMedication} /> */}
+
           <Stack.Screen
             name={ADD_NEW_MEDICATION}
             component={AddNewMedication}

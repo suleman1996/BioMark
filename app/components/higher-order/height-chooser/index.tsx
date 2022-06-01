@@ -7,7 +7,7 @@ import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { GlobalFonts } from 'utils/theme/fonts';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import makeStyles from './styles';
@@ -88,7 +88,14 @@ const HeightChooserComponent = ({
               color={colors.darkPrimary}
             />
           </MenuTrigger>
-          <MenuOptions optionsContainerStyle={styles.popupMenu}>
+          <MenuOptions
+            optionsContainerStyle={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: widthToDp(25),
+            }}
+          >
             <Pressable
               onPress={() => {
                 setSelectedType(1);

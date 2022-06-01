@@ -7,7 +7,7 @@ import { GlobalFonts } from 'utils/theme/fonts';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.innerBackground,
       flex: 1,
       paddingHorizontal: widthToDp(7),
       paddingTop: heightToDp(3),
@@ -16,8 +16,6 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(20),
       fontFamily: GlobalFonts.medium,
       color: colors.darkPrimary,
-      marginTop: heightToDp(2),
-      marginHorizontal: 15,
       fontWeight: 'bold',
     },
 
@@ -29,12 +27,11 @@ export const makeStyles = (colors: any) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignContent: 'space-between',
-      paddingBottom: heightToDp(7),
+      paddingBottom: heightToDp(14),
     },
     radioContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginHorizontal: 15,
       marginVertical: 8,
       borderRadius: 3,
     },

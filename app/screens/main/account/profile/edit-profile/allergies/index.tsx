@@ -26,7 +26,7 @@ import GeneralModalPage from './modals/general-modal';
 // import HighBloodPressureModal from './modals/high-blood-pressure';
 // import HighCholesterolModal from './modals/high-cholesterol';
 // import OthersModal from './modals/others';
-import makeStyles from './styles';
+import { makeStyles } from './styles';
 
 /* eslint-disable */
 const AllergiesScreen = () => {
@@ -106,7 +106,7 @@ const AllergiesScreen = () => {
   // save data on save button press
   const saveDataonSavePress = () => {
     profileServices
-      .saveAllFamilyMedicalHistoryPersonalData({
+      .saveAllergiesMedicalHistoryData({
         medical_history: allergiesMedicalHistory,
       })
       .then((res) => {
@@ -118,8 +118,8 @@ const AllergiesScreen = () => {
   };
 
   const onChangeModalState = () => {
-    setIsGeneralModal(!isGeneralModal);
-    setIsGeneralModal(isGenModalRef.current);
+    // setIsGeneralModal(!isGeneralModal);
+    setIsGeneralModal(!isGenModalRef.current);
   };
 
   const RadioGroupComponent = ({ item }: any) => {
@@ -176,7 +176,7 @@ const AllergiesScreen = () => {
       />
 
       {/* modals */}
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         {bootstrap?.attributes?.medical_template?.allergy?.map(
           (item: MedicalTemplateAttribute, index: number) =>
             item?.content?.fields.map((item2: any, index2: number) =>
@@ -188,11 +188,9 @@ const AllergiesScreen = () => {
             )
         )}
         {allergiesMedicalHistory.has_allergy == 1 ? (
-          <Text style={styles.label}>
-            Have you ever been diagnosed with any of the following conditions?
-          </Text>
+          <Text style={styles.label}>What are you allergic to?</Text>
         ) : null}
-        <ScrollView>
+        <ScrollView style={{ flex: 1 }}>
           <View style={styles.rowContainer}>
             {allergiesMedicalHistory.has_allergy == 1 &&
               bootstrap?.attributes?.medical_template?.allergy?.map(
@@ -251,7 +249,7 @@ const AllergiesScreen = () => {
           saveDataonSavePress();
           goBack();
         }}
-        title={'Save & Continue'}
+        title={'Save'}
       />
     </TitleWithBackLayout>
   );

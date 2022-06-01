@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import DropDown from 'react-native-paper-dropdown';
 
 import { BioDangerWhite } from 'components/svg';
 
-import { styles } from './styles';
+import { makeStyles } from './styles';
 import { GlobalStyles } from 'utils/theme/global-styles';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
@@ -25,6 +25,7 @@ const DropdownMenuWithQuestion = ({
   question,
 }: Props) => {
   const { colors } = useTheme();
+  const styles = makeStyles(colors);
   const [showDropDown, setShowDropDown] = useState(false);
   return (
     <View style={styles.parent}>

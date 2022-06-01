@@ -10,7 +10,7 @@ export const makeStyles = (colors: any) =>
     },
     textInput: {
       backgroundColor: colors.inputBg,
-      fontSize: responsiveFontSize(18),
+      fontSize: responsiveFontSize(15),
       height: 45,
       borderRadius: 5,
       fontFamily: fonts.mulishRegular,
