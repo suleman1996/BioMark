@@ -35,6 +35,8 @@ import {
   getHealthTrackerRisks,
   getReduxDashboard,
   getReduxHealthTracker,
+  getReduxPspModules,
+  getReduxPspPdfLink,
   getReduxLabResultStatus,
   getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
@@ -76,13 +78,15 @@ const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
   const hasProfile = auth.hasProfile ? true : false;
 
-  useEffect(() => {
+  useEffect((link: string) => {
     getHasProfileAsyncStorage();
     dispatch(getReduxNewMedicationTracker());
     dispatch(getReduxHealthTracker());
     dispatch(getReduxDashboard());
     dispatch(getHealthTrackerRisks());
     dispatch(getReduxLabResultStatus());
+    dispatch(getReduxPspModules());
+    dispatch(getReduxPspPdfLink(link));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
