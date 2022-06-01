@@ -743,6 +743,10 @@ function getLabResultStatus() {
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
+const deleteMedicationTracker = (id: number) => {
+  console.log('iid', id);
+  return client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
+};
 
 export const userService = {
   login,
@@ -792,4 +796,5 @@ export const userService = {
   getPspPdfLink,
   getLabResultStatus,
   labStatusVerify,
+  deleteMedicationTracker,
 };

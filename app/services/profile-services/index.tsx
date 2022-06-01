@@ -68,10 +68,10 @@ function saveAllMedicalHistoryPersonalData(data: MedicalHistoryRequest) {
   });
 }
 
-function saveAllergiesMedicalHistoryData(data: MedicalHistoryRequest) {
+function saveAllergiesMedicalHistoryData(data: any) {
   return new Promise<MedicalHistoryResponseData>((resolve, reject) => {
     client
-      .post(`${API_URLS.MEDICAL_HISTORY}/personal`, data)
+      .post(`${API_URLS.MEDICAL_HISTORY}/allergy`, data)
       .then(async (response) => {
         try {
           //logNow('all notification inbox success response', response.data);
@@ -91,7 +91,7 @@ function saveAllergiesMedicalHistoryData(data: MedicalHistoryRequest) {
 function saveAllFamilyMedicalHistoryPersonalData(data: any) {
   return new Promise<MedicalHistoryResponseData>((resolve, reject) => {
     client
-      .post(`${API_URLS.MEDICAL_HISTORY}/allergy`, data)
+      .post(`${API_URLS.MEDICAL_HISTORY}/family`, data)
       .then(async (response) => {
         try {
           //logNow('all notification inbox success response', response.data);

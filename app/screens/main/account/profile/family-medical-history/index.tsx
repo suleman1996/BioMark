@@ -86,8 +86,8 @@ const MedicalHistoryScreen = () => {
   };
 
   const onChangeModalState = () => {
-    setIsGeneralModal(!isGeneralModal);
-    setIsGeneralModal(isGenModalRef.current);
+    // setIsGeneralModal(!isGeneralModal);
+    setIsGeneralModal(!isGenModalRef.current);
   };
 
   return (
@@ -149,31 +149,35 @@ const MedicalHistoryScreen = () => {
                         );
                         if (d) {
                           logNow('Already Item');
-                          updatedItems = familyMedicalHistory?.map((el) =>
-                            el.condition_id === item.id
-                              ? {
-                                  ...el,
-                                  condition_id: item.id,
-                                  medical_type: 'family',
-                                  has_condition: false,
-                                }
-                              : el
-                          );
+                          updatedItems = familyMedicalHistory
+                            ?.map((el) =>
+                              el.condition_id === item.id
+                                ? {
+                                    ...el,
+                                    condition_id: item.id,
+                                    medical_type: 'family',
+                                    has_condition: false,
+                                  }
+                                : el
+                            )
+                            .filter((item) => item.condition_id !== noneId);
                           await dispatch(
                             addFamilyMedicalHistoryUpdate(updatedItems)
                           );
                         } else if (d2) {
                           logNow('Already Item2');
-                          updatedItems = familyMedicalHistory?.map((el) =>
-                            el.condition_id === item.id
-                              ? {
-                                  ...el,
-                                  condition_id: item.id,
-                                  medical_type: 'family',
-                                  has_condition: true,
-                                }
-                              : el
-                          );
+                          updatedItems = familyMedicalHistory
+                            ?.map((el) =>
+                              el.condition_id === item.id
+                                ? {
+                                    ...el,
+                                    condition_id: item.id,
+                                    medical_type: 'family',
+                                    has_condition: true,
+                                  }
+                                : el
+                            )
+                            .filter((item) => item.condition_id !== noneId);
                           await dispatch(
                             addFamilyMedicalHistoryUpdate(updatedItems)
                           );
@@ -186,7 +190,7 @@ const MedicalHistoryScreen = () => {
                           const dData = [
                             ...familyMedicalHistory,
                             ...updatedItems,
-                          ];
+                          ].filter((item) => item.condition_id !== noneId);
                           logNow(dData);
                           await dispatch(addFamilyMedicalHistoryUpdate(dData));
                         }
