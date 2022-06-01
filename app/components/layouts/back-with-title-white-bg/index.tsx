@@ -17,6 +17,7 @@ type Props = {
   title: string;
   style: any;
   binIcon: boolean;
+  onPressIcon: any;
 };
 
 const TitleWithBackWhiteBgLayout = ({
@@ -24,6 +25,7 @@ const TitleWithBackWhiteBgLayout = ({
   title,
   style,
   binIcon,
+  onPressIcon,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -40,7 +42,7 @@ const TitleWithBackWhiteBgLayout = ({
             />
           </Pressable>
           {binIcon ? (
-            <Pressable hitSlop={hitSlop.one} onPress={() => alert('Remove')}>
+            <Pressable hitSlop={hitSlop.one} onPress={() => onPressIcon()}>
               <MaterialIcons
                 color={colors.darkPrimary}
                 size={responsiveFontSize(35)}
