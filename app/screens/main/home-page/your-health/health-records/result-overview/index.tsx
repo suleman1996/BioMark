@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import React from 'react';
 
 import { useTheme } from 'react-native-paper';
@@ -7,6 +13,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
 import SearchMeuBar from 'components/search-menu-bar/index';
+import { Button } from 'components/button';
+import Pdf from 'assets/svgs/pdf';
+import RenderResults from './result-card';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -14,13 +23,38 @@ const Index = () => {
   const styles = Styles(colors);
 
   const [showSummaryummary, setSummary] = React.useState(false);
+  const [lapid, setLapid] = React.useState(false);
+  const [lipidData] = React.useState([
+    {
+      id: 0,
+      title: 'Total Cholestrol',
+      subTitle: '4 mmol/L',
+      summary:
+        'Unlike the calculated LDL, this Direct LDL actually meassures the level of your LDL or bad cholestrol. This test is used to access your risk of cardiovascular disease and monitor your LDL level.',
+    },
+    {
+      id: 1,
+      title: 'Total Cholestrol',
+      subTitle: '4 mmol/L',
+      summary:
+        'Unlike the calculated LDL, this Direct LDL actually meassures the level of your LDL or bad cholestrol. This test is used to access your risk of cardiovascular disease and monitor your LDL level.',
+      status: 'danger',
+    },
+    {
+      id: 3,
+      title: 'Total Cholestrol',
+      subTitle: '4 mmol/L',
+      summary:
+        'Unlike the calculated LDL, this Direct LDL actually meassures the level of your LDL or bad cholestrol. This test is used to access your risk of cardiovascular disease and monitor your LDL level.',
+    },
+  ]);
 
-  const RenderTitle = ({ state, setState }) => (
+  const RenderTitle = ({ state, setState, title }) => (
     <TouchableOpacity
       onPress={() => setState(!state)}
       style={styles.titleContainer}
     >
-      <Text style={styles.renderTitle}>Summary</Text>
+      <Text style={styles.renderTitle}>{title}</Text>
       <AntDesign color={colors.blue} size={15} name={state ? 'up' : 'down'} />
     </TouchableOpacity>
   );
@@ -28,7 +62,11 @@ const Index = () => {
   const RenderSummary = () => (
     <View style={styles.summaryContainer}>
       <View style={{ marginHorizontal: 5 }}>
-        <RenderTitle state={showSummaryummary} setState={setSummary} />
+        <RenderTitle
+          title="Summary"
+          state={showSummaryummary}
+          setState={setSummary}
+        />
       </View>
       {showSummaryummary && (
         <View style={styles.infoView}>
@@ -58,7 +96,24 @@ const Index = () => {
           <View style={{ marginTop: -18 }}>
             <SearchMeuBar placeHolder="Search Biomark..." />
           </View>
-          <RenderSummary />
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <RenderSummary />
+            <Button svg={<Pdf fill={colors.white} />} title="See Report" />
+            <RenderTitle
+              title="LIPID STUDIES"
+              state={lapid}
+              setState={setLapid}
+            />
+            {lapid && (
+              <>
+                <FlatList
+                  data={lipidData}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => <RenderResults item={item} />}
+                />
+              </>
+            )}
+          </ScrollView>
         </View>
       </TitleWithBackLayout>
     </View>
