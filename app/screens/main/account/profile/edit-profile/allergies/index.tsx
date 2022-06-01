@@ -190,7 +190,7 @@ const AllergiesScreen = () => {
         {allergiesMedicalHistory.has_allergy == 1 ? (
           <Text style={styles.label}>What are you allergic to?</Text>
         ) : null}
-        <ScrollView>
+        <ScrollView style={{ flex: 1 }}>
           <View style={styles.rowContainer}>
             {allergiesMedicalHistory.has_allergy == 1 &&
               bootstrap?.attributes?.medical_template?.allergy?.map(

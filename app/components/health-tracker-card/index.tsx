@@ -4,15 +4,17 @@ import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import SCREENS from 'navigation/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
+import { getReduxNewMedicationTracker } from 'store/home/home-actions';
 
 const RenderHealthTrack = ({ item }) => {
   const { colors } = useTheme();
+  const dispatch = useDispatch();
   const styles = Styles(colors);
   const navigation = useNavigation();
-  const medicationList = useSelector(
-    (state: IAppState) => state.home.medicationList
+  const getMedNewTracker = useSelector(
+    (state: IAppState) => state.home.getNewMedicationTracker
   );
 
   return (
@@ -27,7 +29,8 @@ const RenderHealthTrack = ({ item }) => {
         } else if (item?.item?.title === 'HbA1c') {
           navigation.navigate(SCREENS.HBA1C);
         } else if (item?.item?.title === 'Medication') {
-          if (medicationList) {
+          dispatch(getReduxNewMedicationTracker());
+          if (getMedNewTracker?.medication) {
             navigation.navigate(SCREENS.MEDICATION);
           } else {
             alert('add medication');

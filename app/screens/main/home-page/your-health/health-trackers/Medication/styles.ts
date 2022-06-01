@@ -48,5 +48,11 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
       borderRadius: widthToDp(2),
     },
+    grayText: {
+      fontSize: responsiveFontSize(18),
+      fontFamily: GlobalFonts.medium,
+      marginTop: heightToDp(2),
+      color: colors.lightDark,
+    },
   });
 export default makeStyles;

@@ -45,6 +45,8 @@ const theme = {
     lightDark: '#455066',
     container: '#FAFAFA',
     innerBackground: '#F0F0EF',
+    pureRed: '#EB3342',
+    dangerBg: '#EA4C5920',
 
     //gradient
   },

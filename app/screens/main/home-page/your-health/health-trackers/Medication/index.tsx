@@ -18,6 +18,7 @@ import { userService } from 'services/user-service/user-service';
 // import { navigate } from 'services/nav-ref';
 // import SCREENS from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
+import { goBack } from 'services/nav-ref';
 
 import makeStyles from './styles';
 import { ActivityIndicator } from 'components';
@@ -48,6 +49,7 @@ const Medication = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [dateAndtime, setDateAndTime] = useState<any>();
   const [validation, setValidation] = useState<any>(true);
+  const [showDeleteIcon, setShowDeleteIcon] = useState<any>(false);
   const [options, setOptions] = useState<any>([]);
   const [options2, setOptions2] = useState<any>([]);
   const [dosage, setDosage] = React.useState(1);
@@ -60,6 +62,7 @@ const Medication = () => {
 
   const [minRange, setMinRange] = useState<any>(0);
   const [maxRange, setMaxRange] = useState(0);
+  const [medicationListId, setMedicationListId] = useState(0);
 
   // const medicationList = useSelector(
   //   (state: IAppState) => state.home.medicationList
@@ -116,16 +119,64 @@ const Medication = () => {
 
     try {
       setIsLoading(true);
-      const response = await userService.createMedication({
-        medication: {
-          dosage: dosage,
-          record_date: dateTime,
-          medication_log_id: medicatioDropdownValue,
-          meal_type: mealDropDown,
-        },
-      });
+      if (
+        medicationListId == 4 ||
+        medicationListId == 5 ||
+        medicationListId == 6
+      ) {
+        const response = await userService.createMedication({
+          medication: {
+            dosage: dosage,
+            record_date: dateTime,
+            medication_log_id: medicatioDropdownValue,
+          },
+        });
+        console.log('Take Medication successful', response.data);
+      } else {
+        const response = await userService.createMedication({
+          medication: {
+            dosage: dosage,
+            record_date: dateTime,
+            medication_log_id: medicatioDropdownValue,
+            meal_type: mealDropDown,
+          },
+        });
+        console.log('Take Medication successful', response.data);
+      }
+
       dispatch(getReduxNewMedicationTracker());
-      console.log('Take Medication successful', response.data);
+      goBack();
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      if (error.errMsg.status === '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status === false) {
+        showMessage({
+          message: error.errMsg.data.error,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+  };
+  const deleteMedication = async () => {
+    try {
+      setIsLoading(true);
+      const response = await userService.deleteMedicationTracker(
+        medicatioDropdownValue
+      );
+      dispatch(getReduxNewMedicationTracker());
+      console.log('deleted', response?.data);
 
       setIsLoading(false);
     } catch (error) {
@@ -150,13 +201,21 @@ const Medication = () => {
     }
   };
   const setDosageFromDropDown = (text) => {
+    let medId = 0;
     getMedNewTracker?.medication?.map((ele) => {
       if (ele.medication_log_id === text) {
         setDosage(parseInt(ele?.dosage));
         setMinRange(ele?.min_range);
         setMaxRange(ele?.max_range);
+        setMedicationListId(ele?.medication_list_id);
+        medId = ele?.medication_list_id;
       }
     });
+    if (medId == 4 || medId == 5 || medId == 6) {
+      setValidation(false);
+    } else {
+      setValidation(true);
+    }
   };
   const RenderDosage = (props: RenderDosageProps) => (
     <View style={styles.rowContainer}>
@@ -206,7 +265,11 @@ const Medication = () => {
   );
 
   return (
-    <TitleWithBackWhiteBgLayout title="Take Medication" binIcon={true}>
+    <TitleWithBackWhiteBgLayout
+      title="Take Medication"
+      binIcon={showDeleteIcon}
+      onPressIcon={() => deleteMedication()}
+    >
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -227,6 +290,7 @@ const Medication = () => {
                   setMedicatioDropdown(text);
                   setIsDropDownChanged(true);
                   setDosageFromDropDown(text);
+                  setShowDeleteIcon(true);
                 }}
                 error={
                   isDropdownChanged
@@ -242,44 +306,51 @@ const Medication = () => {
           {medicatioDropdownValue ? (
             <>
               <Text style={styles.textStyle}>Dosage</Text>
-              <RenderDosage
-                quantity={dosage}
-                setter={setDosage}
-                Add={
-                  <FontAwesome5
-                    name={'plus'}
-                    size={responsiveFontSize(22)}
-                    color={colors.darkPrimary}
-                    style={{ marginRight: 10 }}
+              {medicationListId == 4 ||
+              medicationListId == 5 ||
+              medicationListId == 6 ? (
+                <Text style={styles.grayText}>{dosage} pill(s)</Text>
+              ) : (
+                <>
+                  <RenderDosage
+                    quantity={dosage}
+                    setter={setDosage}
+                    Add={
+                      <FontAwesome5
+                        name={'plus'}
+                        size={responsiveFontSize(22)}
+                        color={colors.darkPrimary}
+                        style={{ marginRight: 10 }}
+                      />
+                    }
+                    Minus={
+                      <FontAwesome5
+                        name={'minus'}
+                        size={responsiveFontSize(22)}
+                        color={colors.darkPrimary}
+                        style={{ marginRight: 10 }}
+                      />
+                    }
                   />
-                }
-                Minus={
-                  <FontAwesome5
-                    name={'minus'}
-                    size={responsiveFontSize(22)}
-                    color={colors.darkPrimary}
-                    style={{ marginRight: 10 }}
+                  <Text style={styles.textStyle}>Meal</Text>
+                  <DropdownMenu
+                    options={options2}
+                    selectedValue={mealDropDown}
+                    onValueChange={(text: any) => {
+                      setMealDropDown(text);
+                      setIsDropDownChanged2(true);
+                      setValidation(false);
+                    }}
+                    error={
+                      isDropdownChanged2
+                        ? mealDropDown === '---'
+                          ? 'Please select your ethnicity'
+                          : ''
+                        : ''
+                    }
                   />
-                }
-              />
-              <Text style={styles.textStyle}>Meal</Text>
-              <DropdownMenu
-                options={options2}
-                selectedValue={mealDropDown}
-                onValueChange={(text: any) => {
-                  setMealDropDown(text);
-                  setIsDropDownChanged2(true);
-                  setValidation(false);
-                }}
-                error={
-                  isDropdownChanged2
-                    ? mealDropDown === '---'
-                      ? 'Please select your ethnicity'
-                      : ''
-                    : ''
-                }
-              />
-
+                </>
+              )}
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
                 date={dateAndtime}
