@@ -162,9 +162,9 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
               label={''}
               defaultValue={otherOptions}
               onChange={async (value: any) => {
-                logNow('redux', value);
-                let updatedItems = [];
+                let updatedItems = familyMedicalHistory;
                 if (familyMedicalHistory.length > 0) {
+                  logNow('redux');
                   updatedItems = familyMedicalHistory?.map((el) =>
                     el.condition_id === condition_id
                       ? {
@@ -177,6 +177,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
                       : el
                   );
                 } else {
+                  logNow('Zero Index');
                   updatedItems[0] = {
                     condition_id: condition_id,
                     medical_values: { otherOptions: value },
@@ -272,22 +273,24 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
         question={item.question}
         data={medication_list}
         setData={async (value: any) => {
-          logNow('redux', familyMedicalHistory);
+          logNow('redux1', familyMedicalHistory);
           let updatedItems = [];
           if (familyMedicalHistory.length > 0) {
+            logNow('index');
             updatedItems = familyMedicalHistory?.map((el) =>
               el.condition_id === condition_id
                 ? { ...el, medication_list: value ? value.toString() : [] }
                 : el
             );
           } else {
+            logNow('index Zero');
             updatedItems[0] = {
               condition_id: condition_id,
               medication_list: value ? value.toString() : [],
             };
           }
           await dispatch(addFamilyMedicalHistoryUpdate(updatedItems));
-          logNow('redux', updatedItems);
+          logNow('redux2', updatedItems);
         }}
       />
     );
@@ -303,7 +306,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
         question={item.question}
         data={other_condition}
         setData={async (value: any) => {
-          let updatedItems = [];
+          let updatedItems = familyMedicalHistory;
           const d = familyMedicalHistory.find(
             (el) => el.condition_id === condition_id
           );
