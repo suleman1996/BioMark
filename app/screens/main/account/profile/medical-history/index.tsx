@@ -175,7 +175,7 @@ const MedicalHistoryScreen = () => {
         <Text style={styles.label}>
           Have you ever been diagnosed with any of the following conditions?
         </Text>
-        <ScrollView>
+        <ScrollView style={{ flex: 1 }}>
           <View style={styles.rowContainer}>
             {bootstrap?.attributes?.medical_template?.personal?.map(
               (item: MedicalTemplateAttribute, index: number) => (

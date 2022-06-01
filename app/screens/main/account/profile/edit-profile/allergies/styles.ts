@@ -16,7 +16,6 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(20),
       fontFamily: GlobalFonts.medium,
       color: colors.darkPrimary,
-      marginHorizontal: 15,
       fontWeight: 'bold',
     },
 
@@ -33,7 +32,6 @@ export const makeStyles = (colors: any) =>
     radioContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginHorizontal: 15,
       marginVertical: 8,
       borderRadius: 3,
     },
