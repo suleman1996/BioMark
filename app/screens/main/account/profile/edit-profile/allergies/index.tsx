@@ -106,7 +106,7 @@ const AllergiesScreen = () => {
   // save data on save button press
   const saveDataonSavePress = () => {
     profileServices
-      .saveAllFamilyMedicalHistoryPersonalData({
+      .saveAllergiesMedicalHistoryData({
         medical_history: allergiesMedicalHistory,
       })
       .then((res) => {
@@ -118,8 +118,8 @@ const AllergiesScreen = () => {
   };
 
   const onChangeModalState = () => {
-    setIsGeneralModal(!isGeneralModal);
-    setIsGeneralModal(isGenModalRef.current);
+    // setIsGeneralModal(!isGeneralModal);
+    setIsGeneralModal(!isGenModalRef.current);
   };
 
   const RadioGroupComponent = ({ item }: any) => {
