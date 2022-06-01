@@ -14,7 +14,7 @@ import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleFitButton } from 'components/button';
-import Filter from '../../../../../assets/svgs/filter';
+
 import HealthRecordFilter from 'components/health-records-filter';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +24,9 @@ import {
   getReduxDashboard,
   getHealthTrackerRisks,
 } from 'store/home/home-actions';
+
+import Filter from '../../../../../assets/svgs/filter';
+import SCREENS from 'navigation/constants/index';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -195,7 +198,7 @@ const HealthRecord = () => {
             <GoogleFitButton
               disabled={false}
               title="Upload Results"
-              onPress={() => console.log('pressed')}
+              onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
             />
           </TouchableOpacity>
 
