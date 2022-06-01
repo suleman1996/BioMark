@@ -40,6 +40,7 @@ import {
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
+import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -66,6 +67,7 @@ const {
   ADD_HBA1C,
   PDF_DIABETES_SUPPORT,
   HEALTH_RECORD,
+  RESULT_OVERVIEW,
   // SHOW_MEDICATION,
 } = SCREENS;
 
@@ -148,6 +150,7 @@ const AppNavigator = () => {
           <Stack.Screen name={TARGETS} component={Targets} />
           <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />
           <Stack.Screen name={ADD_HBA1C} component={AddHba1c} />
+          <Stack.Screen name={RESULT_OVERVIEW} component={ResultOverView} />
         </>
       ) : (
         <>

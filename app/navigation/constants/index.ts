@@ -64,6 +64,7 @@ export default {
 
   //Health Record
   HEALTH_RECORD: 'HEALTH_RECORD',
+  RESULT_OVERVIEW: 'RESULT_OVERVIEW',
   VIDEO_LIST: 'VIDEO_LIST',
 
   // Covid19
