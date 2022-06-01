@@ -20,7 +20,6 @@ export const makeStyles = (colors: any) =>
       flexDirection: 'row-reverse',
       width: '70%',
       backgroundColor: 'transparent',
-      // marginHorizontal: widthToDp(10),
       fontSize: responsiveFontSize(30),
     },
     menuTrigger: {

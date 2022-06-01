@@ -46,6 +46,7 @@ const InputWithUnits = ({
           borderBottomWidth={0}
           keyboardType="numeric"
           style={styles.textInput}
+          selectionColor="darkblue"
         />
         <Menu ref={menuRef}>
           <MenuTrigger style={styles.menuTrigger}>

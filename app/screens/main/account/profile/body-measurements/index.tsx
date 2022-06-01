@@ -9,6 +9,7 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
 import InputWithUnits from 'components/input-with-units';
+import { cmToFeet, feetToCm, kgToLbs } from 'utils/functions/measurments';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
@@ -37,13 +38,13 @@ const BodyMeasurementScreen = () => {
       setBodyMeasurment((prev) => ({
         ...prev,
         weight: Number((prev.weight * 2.205).toFixed(1)),
-        height: toFeet(prev.height),
+        height: cmToFeet(prev.height),
       }));
     } else {
       setBodyMeasurment((prev) => ({
         ...prev,
         weight: Number((prev.weight * (1 / 2.205)).toFixed(1)),
-        height: testConversion(bodyMeasurment.height),
+        height: feetToCm(bodyMeasurment.height),
       }));
     }
   }, [bodyMeasurment.is_metric]);
@@ -86,12 +87,13 @@ const BodyMeasurementScreen = () => {
   const onSubmit = async () => {
     try {
       setIsLoading(true);
-      await userService.bodyMeasurement({
+      const response = await userService.bodyMeasurement({
         medical: {
           ...bodyMeasurment,
         },
       });
       navigate(SCREENS.EDIT_PROFILE);
+      console.log('response measureeeeeement', response);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -122,25 +124,6 @@ const BodyMeasurementScreen = () => {
 
   const handleChange = (value: number, key: string) => {
     setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
-  };
-
-  function toFeet(n) {
-    var realFeet = (n * 0.3937) / 12;
-    var feet = Math.floor(realFeet);
-    var inches = (realFeet - feet) * 12;
-    return feet + "'" + inches.toFixed(1);
-  }
-
-  const testConversion = (feets: string) => {
-    const [feet, inches] = feets.toString().split("'");
-    let cmTotal = 0;
-    if (feet) {
-      cmTotal += feet * 30.48;
-    }
-    if (inches) {
-      cmTotal += inches * 2.54;
-    }
-    return cmTotal.toFixed(1).toString();
   };
 
   return (
