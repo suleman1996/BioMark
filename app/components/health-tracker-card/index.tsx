@@ -16,7 +16,6 @@ const RenderHealthTrack = ({ item }) => {
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getReduxNewMedicationTracker());
   }, [dispatch]);
