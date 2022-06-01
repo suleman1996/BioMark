@@ -22,7 +22,7 @@ import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/Medication/index';
+import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 // import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication/index';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
 import Covid19Navigator from './covid19-navigator';
@@ -35,6 +35,8 @@ import {
   getHealthTrackerRisks,
   getReduxDashboard,
   getReduxHealthTracker,
+  getReduxPspModules,
+  getReduxPspPdfLink,
   getReduxLabResultStatus,
   getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
@@ -74,13 +76,15 @@ const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
   const hasProfile = auth.hasProfile ? true : false;
 
-  useEffect(() => {
+  useEffect((link: string) => {
     getHasProfileAsyncStorage();
     dispatch(getReduxNewMedicationTracker());
     dispatch(getReduxHealthTracker());
     dispatch(getReduxDashboard());
     dispatch(getHealthTrackerRisks());
     dispatch(getReduxLabResultStatus());
+    dispatch(getReduxPspModules());
+    dispatch(getReduxPspPdfLink(link));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

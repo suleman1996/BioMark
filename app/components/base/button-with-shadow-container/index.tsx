@@ -10,7 +10,7 @@ type Props = {
   onPress: any;
   disabled: boolean;
   title?: string;
-  style: any;
+  style?: any;
 };
 
 const ButtonWithShadowContainer = ({

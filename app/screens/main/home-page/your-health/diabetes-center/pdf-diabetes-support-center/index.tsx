@@ -16,6 +16,8 @@ import { TitleWithBackLayout } from 'components/layouts';
 export default function PdfDiabetesSupportCenter({ route }) {
   const { colors } = useTheme();
   const [pdf, setPdf] = useState('');
+  const [isVisiable, setIsVisible] = React.useState(false);
+
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
   const pspPdfLinks = useSelector(
@@ -29,13 +31,16 @@ export default function PdfDiabetesSupportCenter({ route }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const PdfData = () => {
+  const PdfData = async () => {
     try {
-      dispatch(getReduxPspPdfLink(item.item.code));
+      setIsVisible(true);
+      await dispatch(getReduxPspPdfLink(item.item.code));
       console.log('---------item-------------', item);
       console.log('------link-----', pspPdfLinks);
       setPdf(pspPdfLinks.link);
+      setIsVisible(false);
     } catch (err) {
+      setIsVisible(false);
       console.log(err);
     }
   };
@@ -44,7 +49,8 @@ export default function PdfDiabetesSupportCenter({ route }) {
   return (
     <TitleWithBackLayout isGradient={false} title={item.item.name}>
       <View style={{ height: '100%' }}>
-        <ActivityIndicator visible={loading} />
+        <ActivityIndicator visible={isVisiable} />
+        {/* <ActivityIndicator visible={loading} /> */}
         <Pdf
           source={{
             uri: pdf,

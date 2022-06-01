@@ -13,10 +13,10 @@ import { goBack } from 'services/nav-ref';
 import makeStyles from './styles';
 
 type Props = {
-  children: any;
-  title: string;
-  style: any;
-  isGradient: boolean;
+  children?: any;
+  title?: string;
+  style?: any;
+  isGradient?: boolean;
 };
 
 const TitleWithBackLayout = ({ children, title, style, isGradient }: Props) => {

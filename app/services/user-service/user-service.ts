@@ -11,6 +11,7 @@ import {
   PspModule,
   PspModuleDataContents,
   LabStatusPayload,
+  MedicalResponseData,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -425,7 +426,22 @@ const getMedicalHistory = () => {
 };
 
 const getBodyMeasurements = () => {
-  return client.get(API_URLS.GET_BODY_MEASUREMENT);
+  return new Promise<MedicalResponseData>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BODY_MEASUREMENT)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('Register user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get profile error', err);
+        reject(err);
+      });
+  });
 };
 const createBloodSugar = ({ blood_sugar }: Props) => {
   return client.post(API_URLS.CREATE_BLOOD_SUGAR, {
