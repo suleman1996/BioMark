@@ -45,7 +45,12 @@ const Index = () => {
 
   return (
     <View style={styles.container}>
-      <TitleWithBackLayout title="Result Overview" isShare={true} isInfo={true}>
+      <TitleWithBackLayout
+        shadow={colors.blue}
+        title="Result Overview"
+        isShare={true}
+        isInfo={true}
+      >
         <View style={styles.miniHeader}>
           <Text style={styles.miniHeaderText}>Received on March 23, 2022</Text>
         </View>

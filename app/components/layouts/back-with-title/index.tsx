@@ -20,6 +20,7 @@ type Props = {
   isGradient: boolean;
   isInfo: boolean;
   isShare: boolean;
+  shadow: string;
 };
 
 const TitleWithBackLayout = ({
@@ -29,6 +30,7 @@ const TitleWithBackLayout = ({
   isGradient,
   isInfo,
   isShare,
+  shadow,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -44,7 +46,7 @@ const TitleWithBackLayout = ({
         ]}
         style={{ borderRadius: 0 }}
       >
-        <View style={styles.header}>
+        <View style={[styles.header, { backgroundColor: shadow }]}>
           <View style={{ flexDirection: 'row' }}>
             <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
               <MaterialIcons

@@ -42,6 +42,7 @@ const styles = (colors: any) =>
       backgroundColor: '#C9E1F2',
       borderRadius: 8,
       paddingTop: 10,
+      // marginTop: heightToDp(2),
     },
     text: {
       textAlign: 'center',

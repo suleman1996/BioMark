@@ -164,7 +164,7 @@ const EditProfileScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Your Profile">
+    <TitleWithBackLayout shadow={colors.blue} title="Your Profile">
       <ActivityIndicator visible={isLoading} />
       <EditProfileModal
         iconPress={() => setShowModal(false)}

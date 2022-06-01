@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
@@ -14,6 +14,8 @@ import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleFitButton } from 'components/button';
+
+import HealthRecordFilter from 'components/health-records-filter';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
@@ -27,6 +29,8 @@ import Filter from '../../../../../assets/svgs/filter';
 import SCREENS from 'navigation/constants/index';
 
 const HealthRecord = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const { colors } = useTheme();
 
   const styles = Styles(colors);
@@ -47,25 +51,6 @@ const HealthRecord = () => {
     // handleHEalthTracker();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
-
-  //   const pan = useRef(new Animated.ValueXY()).current;
-
-  //   const panResponder = PanResponder.create({
-  //     onStartShouldSetPanResponder: () => true,
-  //     onPanResponderMove: Animated.event([
-  //       null,
-  //       {
-  //         dx: pan.x, // x,y are Animated.Value
-  //         // dy: pan.y,
-  //       },
-  //     ]),
-  //     onPanResponderRelease: () => {
-  //       Animated.spring(
-  //         pan, // Auto-multiplexed
-  //         { toValue: { x: 0, y: 0 } } // Back to zero
-  //       ).start();
-  //     },
-  //   });
 
   const latestResult = [
     {
@@ -219,14 +204,25 @@ const HealthRecord = () => {
 
           <View style={styles.filterView}>
             <Text style={styles.text5}>Past Results</Text>
-            <Filter fill={colors.heading} />
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <Filter fill={colors.heading} />
+            </TouchableOpacity>
           </View>
+
+          <HealthRecordFilter
+            visible={modalVisible}
+            title="Filter Results"
+            title2="Document Upload Type"
+            cancelModal={() => setModalVisible(!modalVisible)}
+            closeModal={() => setModalVisible(!modalVisible)}
+          />
 
           <FlatList
             data={pastResult}
             renderItem={renderItem2}
             keyExtractor={(item) => item.id}
           />
+
           <TouchableOpacity style={styles.uploadResult}>
             <GoogleFitButton
               disabled={false}

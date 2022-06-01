@@ -27,7 +27,6 @@ import { navigate } from 'services/nav-ref';
 import makeStyles from './styles';
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   Diabetess,
   Heart_Disease,
@@ -69,7 +68,6 @@ import { IAppState } from 'store/IAppState';
 import { SmallButton } from 'components/button';
 import MyImage from 'assets/images';
 import { Formik } from 'formik';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
 import { showMessage } from 'react-native-flash-message';
@@ -116,6 +114,7 @@ const Index = () => {
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
@@ -662,21 +661,7 @@ const Index = () => {
                 </QrInputPopup>
               )}
             </Formik>
-
-            <MaterialCommunityIcons
-              name="barcode-scan"
-              size={responsiveFontSize(22)}
-              color={colors.primary}
-            />
-            <Text
-              style={styles.menuText}
-              fontSize={responsiveFontSize(15)}
-              onPress={() => setVisible(true)}
-            >
-              Input Barcode
-            </Text>
           </TouchableOpacity>
-          <View style={{ height: 50 }} />
         </ScrollView>
       </View>
     </View>

@@ -6,6 +6,8 @@ import {
   GET_HEALTH_RISK,
   MEDICATION_LIST,
   GET_NEW_MEDICATION_TRACKER,
+  PSP_MODULE,
+  PSP_PDF_LINK,
   GET_LAB_STATUS,
 } from './constants';
 
@@ -47,6 +49,18 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getNewMedicationTracker: action.payload,
+      };
+    }
+    case PSP_MODULE: {
+      return {
+        ...state,
+        pspModuleData: action.payload,
+      };
+    }
+    case PSP_PDF_LINK: {
+      return {
+        ...state,
+        PspDataContents: action.payload,
       };
     }
     case GET_LAB_STATUS: {
