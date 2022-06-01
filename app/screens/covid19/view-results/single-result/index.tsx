@@ -12,6 +12,9 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { covidService } from './../../../../services/covid-service/index';
 import { CovidResponseData } from './../../../../types/api/covid';
 import makeStyles from './styles';
+import { API_URLS } from 'services/url-constants';
+import { logNow } from 'utils/functions/log-binder';
+import { sharePdfFile } from 'utils/functions/share-online';
 
 type Props = {
   route?: any;
@@ -144,7 +147,19 @@ const SingleCovidResult = (props: Props) => {
         )})`}</Text>
         <Text style={styles.text4}>{isPositiveText}</Text>
         <View style={{ marginTop: heightToDp(2) }} />
-        <ButtonComponent onPress={undefined} title={'Share Test Result'} />
+        <ButtonComponent
+          onPress={() => {
+            covidService.getCovidResultDownload(id).then((res) => {
+              console.log(res);
+              sharePdfFile(res);
+            });
+            logNow(`${API_URLS.COVID_GET_RESUTLS_DOWNLOAD_V1}/${id}/download`);
+            // checkPermissionAndDownload(
+            //   `https://bm-dev-api.biomarking.com/${API_URLS.COVID_GET_RESUTLS}/${id}/download`
+            // );
+          }}
+          title={'Share Test Result'}
+        />
       </Pressable>
     );
   };
