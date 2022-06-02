@@ -17,15 +17,6 @@ const styles = (colors: any) =>
       fontSize: 18,
       color: colors.heading,
     },
-    videoView: {
-      marginBottom: 20,
-      borderWidth: 1,
-      borderRadius: 5,
-    },
-    backgroundVideo: {
-      height: 200,
-      borderRadius: 5,
-    },
     recordKeepingView: {
       marginHorizontal: 5,
       flexDirection: 'row',
@@ -49,7 +40,7 @@ const styles = (colors: any) =>
       fontSize: 20,
       //   borderWidth: 2,
       paddingLeft: 10,
-      color: colors.primary,
+      color: colors.lightBlueish,
       fontFamily: fonts.mulishExtraBold,
     },
     bottomTextView: {
@@ -59,7 +50,7 @@ const styles = (colors: any) =>
     },
     bottomText: {
       fontFamily: fonts.mulishRegular,
-      fontSize: 17,
+      fontSize: 15,
     },
     messengerView: {
       position: 'absolute',

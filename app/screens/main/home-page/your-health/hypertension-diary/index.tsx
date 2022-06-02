@@ -108,13 +108,13 @@ const Index = () => {
             />
           </View>
           <PdfLink
-            title="What Do I Need To Know About Hypertension"
+            title="What Do I Need To Know About Hypertension?"
             // svg={<BP fill={colors.primary} />}
             svg={<PdfSvg />}
             onPress={() => navigation.navigate(PDF_HYPERTENSION)}
           />
           <PdfLink
-            title="What Do I Check My Blood Pressure"
+            title="What Do I Check My Blood Pressure?"
             svg={<PdfSvg />}
             onPress={() => navigation.navigate(PDF_HYPERTENSION)}
           />
