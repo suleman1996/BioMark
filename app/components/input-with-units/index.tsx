@@ -16,6 +16,8 @@ type Props = {
   units: string[];
   title: string;
   placeholder: string;
+  onBlur: any;
+  error: string;
 };
 
 const InputWithUnits = ({
@@ -25,7 +27,9 @@ const InputWithUnits = ({
   onUnitChange,
   units,
   title,
+  onBlur,
   placeholder,
+  error,
 }: Props) => {
   const menuRef = useRef<any>();
   const { colors } = useTheme();
@@ -47,6 +51,8 @@ const InputWithUnits = ({
           keyboardType="numeric"
           style={styles.textInput}
           selectionColor="darkblue"
+          onBlur={onBlur}
+          error={Boolean(error)}
         />
         <Menu ref={menuRef}>
           <MenuTrigger style={styles.menuTrigger}>

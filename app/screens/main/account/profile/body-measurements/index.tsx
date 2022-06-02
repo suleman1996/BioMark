@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -9,7 +8,7 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
 import InputWithUnits from 'components/input-with-units';
-import { cmToFeet, feetToCm, kgToLbs } from 'utils/functions/measurments';
+import { cmToFeet, feetToCm } from 'utils/functions/measurments';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
@@ -27,6 +26,10 @@ const BodyMeasurementScreen = () => {
     height: '0',
     weight: 0,
     is_metric: true,
+  });
+  const [error, setError] = useState({
+    heightError: '',
+    weightError: '',
   });
 
   React.useEffect(() => {
@@ -63,21 +66,21 @@ const BodyMeasurementScreen = () => {
         });
       }
       setIsLoading(false);
-    } catch (error) {
+    } catch (err) {
       setIsLoading(false);
-      if (error.errMsg.status == '500') {
+      if (err.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
+      } else if (err.errMsg.status == false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: err.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: err.errMsg,
           type: 'danger',
         });
       }
@@ -95,21 +98,21 @@ const BodyMeasurementScreen = () => {
       navigate(SCREENS.EDIT_PROFILE);
       console.log('response measureeeeeement', response);
       setIsLoading(false);
-    } catch (error) {
+    } catch (err) {
       setIsLoading(false);
-      if (error.errMsg.status == '500') {
+      if (err.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
+      } else if (err.errMsg.status == false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: err.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: err.errMsg,
           type: 'danger',
         });
       }
@@ -124,6 +127,52 @@ const BodyMeasurementScreen = () => {
 
   const handleChange = (value: number, key: string) => {
     setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
+  };
+
+  const measurmentValidator = (is_metric, measurment, value) => {
+    let errorr = '';
+    const WEIGHT_RANGE = {
+      kg: {
+        min: 0,
+        max: 200,
+        errorr: 'Should be between 0-200kg',
+      },
+      lbs: {
+        min: 0,
+        max: 440,
+        errorr: 'Should be between 0-440kg',
+      },
+    };
+
+    console.log(is_metric);
+
+    if (is_metric) {
+      // KG
+      console.log('sfdhsfhd', measurment);
+      if (measurment === 'weight') {
+        errorr =
+          WEIGHT_RANGE.kg.min < value && value <= WEIGHT_RANGE.kg.max
+            ? ''
+            : WEIGHT_RANGE.kg.errorr;
+        console.log('sfdhsfhd', WEIGHT_RANGE.kg.min < value);
+        console.log('sfdhsfhd', value <= WEIGHT_RANGE.kg.max);
+      }
+    } else {
+      // LBS
+      if (measurment === 'weight') {
+        errorr =
+          WEIGHT_RANGE.lbs.min < value <= WEIGHT_RANGE.lbs.max
+            ? ''
+            : WEIGHT_RANGE.lbs.errorr;
+      }
+    }
+    console.log('->>>>>', errorr);
+    console.log('sbjdjcjdbbv');
+
+    setError((err) => ({
+      ...err,
+      weightError: errorr,
+    }));
   };
 
   return (
@@ -144,6 +193,8 @@ const BodyMeasurementScreen = () => {
             value={bodyMeasurment.height}
             onChangeText={(val: any) => handleChange(val, 'height')}
             onUnitChange={handleUnitChange}
+            error={error.heightError}
+            onBlur={() => console.log(bodyMeasurment.height)}
           />
           <InputWithUnits
             title="Weight"
@@ -153,6 +204,15 @@ const BodyMeasurementScreen = () => {
             value={bodyMeasurment.weight.toString()}
             onChangeText={(val: any) => handleChange(val, 'weight')}
             onUnitChange={handleUnitChange}
+            error={error.weightError}
+            onBlur={() => {
+              console.log('WHyyy?');
+              measurmentValidator(
+                bodyMeasurment.is_metric,
+                'weight',
+                bodyMeasurment.weight
+              );
+            }}
           />
         </View>
 
@@ -169,5 +229,4 @@ const BodyMeasurementScreen = () => {
     </TitleWithBackLayout>
   );
 };
-
 export default BodyMeasurementScreen;
