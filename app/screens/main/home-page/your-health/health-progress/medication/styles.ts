@@ -18,14 +18,28 @@ const styles = (colors: any) =>
     },
     medicationBox: {
       alignItems: 'center',
-      borderWidth: 0.2,
-      borderRadius: 5,
+      borderWidth: 0.1,
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+      marginTop: 18,
+    },
+    medicationBoxSuccess: {
+      alignItems: 'center',
+      borderWidth: 0.1,
+      borderTopLeftRadius: 2,
+      borderTopRightRadius: 2,
+      backgroundColor: colors.greenOpacity,
       marginTop: 18,
     },
     timeText: {
-      fontFamily: fonts.mulishBold,
-      fontSize: 22,
+      fontFamily: fonts.bold,
+      fontSize: 25,
       color: colors.shineBlue,
+    },
+    timeTextSuccess: {
+      fontFamily: fonts.bold,
+      fontSize: 25,
+      color: colors.greenDark,
     },
     timeView: {
       borderBottomWidth: 0.2,
@@ -40,12 +54,18 @@ const styles = (colors: any) =>
       fontSize: 17,
       marginLeft: 10,
     },
+    medicineTextSuccess: {
+      fontFamily: fonts.mulishRegular,
+      color: colors.greenDark,
+      fontSize: 17,
+      marginLeft: 10,
+    },
     checkboxView: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '100%',
-      padding: 5,
+      padding: 10,
     },
     errorContainer: {
       width: '100%',
@@ -62,10 +82,10 @@ const styles = (colors: any) =>
     errorText: {
       color: colors.white,
       fontFamily: fonts.mulishLight,
-      fontSize: 13,
+      fontSize: 12,
       paddingLeft: widthToDp(3),
     },
-    greenContainer: {
+    successContainer: {
       width: '100%',
       height: 30,
       paddingVertical: heightToDp(0.3),

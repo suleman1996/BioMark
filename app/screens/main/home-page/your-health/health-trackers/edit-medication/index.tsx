@@ -42,7 +42,7 @@ const EditMedication = () => {
       binIcon={false}
     >
       <View style={styles.container}>
-        <View style={{ marginBottom: 10 }}>
+        <View style={{ height: '100%' }}>
           <RadioButton.Group
             value={selectedMedication}
             onValueChange={(newValue) => setSelectedMedication(newValue)}
@@ -51,7 +51,8 @@ const EditMedication = () => {
               <TouchableOpacity
                 onPress={() => setSelectedMedication(medication_record_id)}
                 style={{
-                  borderRadius: 8,
+                  marginBottom: 10,
+                  borderRadius: 5,
                   backgroundColor:
                     selectedMedication == medication_record_id
                       ? colors.shineBlue
@@ -70,7 +71,7 @@ const EditMedication = () => {
                         color:
                           selectedMedication == medication_record_id
                             ? colors.white
-                            : colors.darkGray,
+                            : colors.smoke,
                       },
                     ]}
                   >
