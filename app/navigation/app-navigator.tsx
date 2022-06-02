@@ -22,9 +22,10 @@ import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
-// import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication/index';
-import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
+import Medication from 'screens/main/home-page/your-health/health-trackers/medication';
+import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication';
+import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/medication-form';
+import EditMedication from 'screens/main/home-page/your-health/health-trackers/edit-medication';
 import Covid19Navigator from './covid19-navigator';
 import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
@@ -35,6 +36,8 @@ import {
   getHealthTrackerRisks,
   getReduxDashboard,
   getReduxHealthTracker,
+  getReduxPspModules,
+  getReduxPspPdfLink,
   getReduxLabResultStatus,
   getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
@@ -60,6 +63,7 @@ const {
   WEIGHT,
   HBA1C,
   MEDICATION,
+  SHOW_MEDICATION,
   ADD_NEW_MEDICATION,
   HEALTH_PROGRESS,
   TARGETS,
@@ -68,7 +72,7 @@ const {
   PDF_DIABETES_SUPPORT,
   HEALTH_RECORD,
   RESULT_OVERVIEW,
-  // SHOW_MEDICATION,
+  EDIT_MEDICATION,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -76,13 +80,15 @@ const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
   const hasProfile = auth.hasProfile ? true : false;
 
-  useEffect(() => {
+  useEffect((link: string) => {
     getHasProfileAsyncStorage();
     dispatch(getReduxNewMedicationTracker());
     dispatch(getReduxHealthTracker());
     dispatch(getReduxDashboard());
     dispatch(getHealthTrackerRisks());
     dispatch(getReduxLabResultStatus());
+    dispatch(getReduxPspModules());
+    dispatch(getReduxPspPdfLink(link));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -140,8 +146,8 @@ const AppNavigator = () => {
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
           <Stack.Screen name={MEDICATION} component={Medication} />
-          {/* <Stack.Screen name={SHOW_MEDICATION} component={ShowMedication} /> */}
-
+          <Stack.Screen name={SHOW_MEDICATION} component={ShowMedication} />
+          <Stack.Screen name={EDIT_MEDICATION} component={EditMedication} />
           <Stack.Screen
             name={ADD_NEW_MEDICATION}
             component={AddNewMedication}

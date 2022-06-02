@@ -13,11 +13,11 @@ import { hitSlop } from 'constants/hit-slop';
 import makeStyles from './styles';
 
 type Props = {
-  children: any;
+  children?: any;
   title: string;
-  style: any;
+  style?: any;
   binIcon: boolean;
-  onPressIcon: any;
+  onPressIcon?: any;
 };
 
 const TitleWithBackWhiteBgLayout = ({

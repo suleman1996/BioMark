@@ -71,6 +71,10 @@ const SettingsScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <AccountDeActivateModal
+        headerText="Are You Sure?"
+        subHeading="Are you sure you would like to deactivate your BioMark account?"
+        buttonUpperText="Confirm"
+        buttonLowerText="Not Now"
         callMe={() => disableAccountCall()}
         isVisible={isVisibleDeActivateModal}
         setIsVisible={setDeActivateModal}

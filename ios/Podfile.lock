@@ -330,7 +330,7 @@ PODS:
     - React-Core
   - react-native-maps (0.31.1):
     - React-Core
-  - react-native-pager-view (5.4.23):
+  - react-native-pager-view (5.4.24):
     - React-Core
   - react-native-pdf (6.5.0):
     - React-Core
@@ -349,7 +349,7 @@ PODS:
     - react-native-video/Video (= 5.2.0)
   - react-native-video/Video (5.2.0):
     - React-Core
-  - react-native-webview (11.18.2):
+  - react-native-webview (11.21.1):
     - React-Core
   - React-perflogger (0.68.1)
   - React-RCTActionSheet (0.68.1):
@@ -428,10 +428,10 @@ PODS:
     - React-Core
   - RNDeviceInfo (8.7.1):
     - React-Core
-  - RNFBApp (14.10.1):
+  - RNFBApp (14.11.0):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBAuth (14.10.1):
+  - RNFBAuth (14.11.0):
     - Firebase/Auth (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -751,13 +751,13 @@ SPEC CHECKSUMS:
   react-native-image-picker: e95b4785b685cfc06609bc50ed6fb55b59990c99
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
-  react-native-pager-view: f7c878676230561d3ab6408d7fecaa410dd58264
+  react-native-pager-view: 95d0418c3c74279840abec6926653d32447bafb6
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b
   react-native-progress-bar-android: be43138ab7da30d51fc038bafa98e9ed594d0c40
   react-native-progress-view: 9e6b6a5305a9115c2157ae3b8852081aba0aab7c
   react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
   react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28
-  react-native-webview: 8ec7ddf9eb4ddcd92b32cee7907efec19a9ec7cb
+  react-native-webview: e6125da6d1cb245ff0692f545b0e5eb3572e12ab
   React-perflogger: 30ab8d6db10e175626069e742eead3ebe8f24fd5
   React-RCTActionSheet: 4b45da334a175b24dabe75f856b98fed3dfd6201
   React-RCTAnimation: d6237386cb04500889877845b3e9e9291146bc2e
@@ -776,8 +776,8 @@ SPEC CHECKSUMS:
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNDateTimePicker: 04b805a3cb4d386e5e6aff54b47ace7bad706fda
   RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
-  RNFBApp: ce36cbcce243d63f2b84d7bad48d82fe118602d0
-  RNFBAuth: 2456be668b18455edeb5394817c32047f20770b0
+  RNFBApp: b1b5a80a676a07dea17e778bda7c1e8b69b2f5ec
+  RNFBAuth: e28fb7cd1b956086e68233b9ea19fb97c428f86b
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
   RNQrGenerator: 34beaf1996de4a2f2122c7019dccd1717b22d8d7
