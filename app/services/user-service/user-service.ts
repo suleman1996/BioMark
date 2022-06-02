@@ -1,4 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
+import moment from 'moment';
 import {
   BootstrapData,
   GeoLocationData,
@@ -12,6 +13,10 @@ import {
   PspModuleDataContents,
   LabStatusPayload,
   MedicalResponseData,
+  ShowMedication,
+  MedicationEditRequest,
+  MedicationUpdateResponse,
+  MedicationTracker,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -764,6 +769,161 @@ const deleteMedicationTracker = (id: number) => {
   return client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
 };
 
+const getNewMedicationFormData = () => {
+  return new Promise<MedicationSetupPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_NEW_MEDICATION_DATA)
+      .then(async ({ data }) => {
+        try {
+          const medication_list: any = data.medication_list.map((item) => ({
+            ...item,
+            value: item.id,
+            label: item.name,
+            disease_list: item.disease_list.map((d) => ({
+              ...d,
+              value: d.id,
+              label: d.name,
+            })),
+          }));
+
+          const frequency_list: any = data.frequency_list.map((item) => ({
+            ...item,
+            value: item.id,
+            label: item.name,
+          }));
+          resolve({
+            medication_list,
+            frequency_list,
+            unit_list: data.unit_list,
+          });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const getSelectedMedicationData = (id: number) => {
+  return new Promise<ShowMedication>((resolve, reject) => {
+    client
+      .get(`${API_URLS.SHOW_MEDICATION}/${id}`)
+      .then(async ({ data }) => {
+        try {
+          resolve({
+            name: data.name,
+            disease_type: data.disease_type_id,
+            medication_list_id: data.medication_list_id,
+            unit_list_id: data.unit_list_id,
+            dosage: data.dosage,
+            frequency: data.frequency_id,
+            frequency_time: [...data.frequency_time],
+            start_date: new Date(data.start_date),
+            end_date: new Date(data.end_date),
+          });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const saveMedication = (medication: MedicationEditRequest) => {
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.SAVE_MEDICATION, {
+        ...medication,
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateMedication = (medication: MedicationEditRequest, medication_id) => {
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .put(`${API_URLS.SAVE_MEDICATION}/${medication_id}`, {
+        ...medication,
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteMedication = (medication_id) => {
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.DELETE_MEDICATION}/${medication_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const getMedicationTrackers = (date: string) => {
+  return new Promise<MedicationTracker>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_MEDICATION_TRACKER)
+      .then(async ({ data }) => {
+        try {
+          let response;
+          data.map((item) => {
+            if (moment(item.date).format('MMM D, YYYY') === date) {
+              response = { ...item };
+            }
+          });
+          resolve({ ...response });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -813,4 +973,10 @@ export const userService = {
   getLabResultStatus,
   labStatusVerify,
   deleteMedicationTracker,
+  getNewMedicationFormData,
+  getSelectedMedicationData,
+  saveMedication,
+  updateMedication,
+  deleteMedication,
+  getMedicationTrackers,
 };
