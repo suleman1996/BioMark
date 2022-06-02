@@ -11,10 +11,22 @@ type Props = {
   isVisible: boolean;
   setIsVisible: any;
   callMe: any;
+  headerText: string;
+  subHeading: string;
+  buttonUpperText: string;
+  buttonLowerText: string;
 };
 
 const AccountDeActivateModal = (props: Props) => {
-  const { isVisible, setIsVisible, callMe } = props;
+  const {
+    isVisible,
+    setIsVisible,
+    callMe,
+    subHeading,
+    headerText,
+    buttonUpperText,
+    buttonLowerText,
+  } = props;
 
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -22,20 +34,18 @@ const AccountDeActivateModal = (props: Props) => {
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.headerText}>Are You Sure?</Text>
+          <Text style={styles.headerText}>{headerText}</Text>
           <Pressable onPress={() => setIsVisible(false)}>
             <BioCloseGray width={4} height={4} />
           </Pressable>
         </View>
-        <Text style={styles.contentText}>
-          Are you sure you would like to deactivate your BioMark account?
-        </Text>
-        <Button onPress={callMe} title={'Confirm'} disabled={false} />
+        <Text style={styles.contentText}>{subHeading}</Text>
+        <Button onPress={callMe} title={buttonUpperText} disabled={false} />
         <Button
           bg={'transparent'}
           color={'gray'}
           onPress={() => setIsVisible(false)}
-          title={'Not Now'}
+          title={buttonLowerText}
           disabled={false}
         />
       </View>

@@ -74,6 +74,14 @@ const API_URLS = {
   GET_LAB_STATUS: '/api/v1/patient/results/lab_status',
 
   LAB_STATUS_VERYFY: '/api/v1/patient/results/verify',
+
+  // Medication
+  GET_NEW_MEDICATION_DATA: '/api/v1/patient/psp/medications/new',
+  GET_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication',
+  SHOW_MEDICATION: '/api/v1/patient/psp/medications',
+  SAVE_MEDICATION: '/api/v1/patient/psp/medications',
+  UPDATE_MEDICATION: '/api/v1/patient/psp/medications',
+  DELETE_MEDICATION: '/api/v1/patient/psp/medications',
 };
 
 export { API_URLS };
