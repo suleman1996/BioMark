@@ -41,6 +41,8 @@ const theme = {
     redish: '#EE5407',
     greenish: '#03DAC6',
     lightGreen: '#54CB83',
+    greenOpacity: '#03DAC610',
+    greenDark: '#007C4D',
     lightYellow: '#FFD75E',
     dangerRed: '#EA4C59',
     lightDark: '#455066',

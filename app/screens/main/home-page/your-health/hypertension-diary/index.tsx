@@ -14,6 +14,7 @@ import SCREENS from 'navigation/constants/index';
 import { TitleWithBackLayout } from 'components/layouts';
 
 import RenderHealthTrack from 'components/health-tracker-card/index';
+import Config from 'react-native-config';
 
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
@@ -22,9 +23,7 @@ import Messenger from 'assets/svgs/messenger';
 import { useNavigation } from '@react-navigation/native';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
-  Linking.openURL(
-    'mailto:support@biomarking.com?subject=SendMail&body=Description'
-  );
+  Linking.openURL(Config.MESSENGER_URL);
 };
 
 const Index = () => {

@@ -15,8 +15,7 @@ import {
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
-// import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
+
 import { showMessage } from 'react-native-flash-message';
 import { goBack } from 'services/nav-ref';
 
@@ -67,13 +66,12 @@ const Medication = () => {
   // const medicationList = useSelector(
   //   (state: IAppState) => state.home.medicationList
   // );
-  // const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+  const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
   useEffect(() => {
     console.log('getMedNewTracker', getMedNewTracker);
-
     let arr = [];
     getMedNewTracker?.medication?.map((ele) => {
       console.log('ele', ele);
