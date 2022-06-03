@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { WeightChooser } from 'components/higher-order';
+import InputWithUnits from 'components/input-with-units';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
   ButtonWithShadowContainer,
@@ -35,7 +37,13 @@ const Weight = () => {
   const [validation, setValidation] = useState<any>(false);
   const [validation2, setValidation2] = useState<any>(false);
   const [selectedTypeWeight, setSelectedTypeWeight] = useState(1);
-
+  const [bodyMeasurment, setBodyMeasurment] = useState({
+    weight: 0,
+    is_metric: true,
+  });
+  const [error, setError] = useState({
+    weightError: '',
+  });
   useEffect(() => {
     let today = new Date();
     let dateTime =
@@ -49,20 +57,63 @@ const Weight = () => {
     setDateAndTime(dateTime);
   }, []);
 
-  const onChangeText = (val) => {
-    console.log(selectedTypeWeight, 'selectedTypeWeight');
+  const handleUnitChange = (selectedUnit: string) => {
+    console.log('selectedUnit', selectedUnit);
 
-    setValue(val);
-    if ((val < 0 || val > 200) && selectedTypeWeight === 2) {
-      setValidation(true);
-      setValidation2(false);
-    } else if ((val < 0 || val > 400) && selectedTypeWeight === 1) {
-      setValidation(false);
-      setValidation2(true);
+    setBodyMeasurment((prev: any) => ({
+      ...prev,
+      is_metric: selectedUnit === 'kg' ? true : false,
+    }));
+    console.log('bodyMeasurment', bodyMeasurment);
+  };
+  const handleChange = (value: number, key: string) => {
+    setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
+  };
+
+  const measurmentValidator = (is_metric, measurment, value) => {
+    let errorr = '';
+    const WEIGHT_RANGE = {
+      kg: {
+        min: 0,
+        max: 200,
+        errorr: 'Should be between 0-200kg',
+      },
+      lbs: {
+        min: 0,
+        max: 440,
+        errorr: 'Should be between 0-440kg',
+      },
+    };
+
+    console.log(is_metric);
+
+    if (is_metric) {
+      // KG
+      console.log('sfdhsfhd', measurment);
+      if (measurment === 'weight') {
+        errorr =
+          WEIGHT_RANGE.kg.min < value && value <= WEIGHT_RANGE.kg.max
+            ? ''
+            : WEIGHT_RANGE.kg.errorr;
+        console.log('sfdhsfhd', WEIGHT_RANGE.kg.min < value);
+        console.log('sfdhsfhd', value <= WEIGHT_RANGE.kg.max);
+      }
     } else {
-      setValidation(false);
-      setValidation2(false);
+      // LBS
+      if (measurment === 'weight') {
+        errorr =
+          WEIGHT_RANGE.lbs.min < value <= WEIGHT_RANGE.lbs.max
+            ? ''
+            : WEIGHT_RANGE.lbs.errorr;
+      }
     }
+    console.log('->>>>>', errorr);
+    console.log('sbjdjcjdbbv');
+
+    setError((err) => ({
+      ...err,
+      weightError: errorr,
+    }));
   };
 
   const onSubmit = async () => {
@@ -125,7 +176,7 @@ const Weight = () => {
             marginBottom: heightToDp(25),
           }}
         >
-          <WeightChooser
+          {/* <WeightChooser
             height={15}
             label="Your Reading"
             textAlign="right"
@@ -135,6 +186,24 @@ const Weight = () => {
             selectedType={selectedTypeWeight}
             setSelectedType={setSelectedTypeWeight}
             setValue={setValue}
+          /> */}
+          <InputWithUnits
+            title="Weight"
+            placeholder="0.0"
+            units={['kg', 'lbs']}
+            unit={bodyMeasurment.is_metric ? 'kg' : 'lbs'}
+            value={bodyMeasurment.weight.toString()}
+            onChangeText={(val: any) => handleChange(val, 'weight')}
+            onUnitChange={handleUnitChange}
+            error={error.weightError}
+            onBlur={() => {
+              console.log('WHyyy?');
+              measurmentValidator(
+                bodyMeasurment.is_metric,
+                'weight',
+                bodyMeasurment.weight
+              );
+            }}
           />
           {validation ? (
             <Text style={styles.errorMessage}>
