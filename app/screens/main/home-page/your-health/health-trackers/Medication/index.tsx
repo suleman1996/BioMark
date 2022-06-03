@@ -30,8 +30,8 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { getReduxNewMedicationTracker } from 'store/home/home-actions';
-import { makeStyles } from './styles';
-
+import makeStyles from './styles';
+// import { makeStyles } from './styles';
 type RenderDosageProps = {
   title: string;
   quantity: number;
