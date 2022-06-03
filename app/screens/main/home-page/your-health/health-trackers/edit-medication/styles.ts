@@ -16,7 +16,7 @@ export const makeStyles = (colors: any) =>
     },
     textStyle: {
       fontFamily: fonts.mulishRegular,
-      fontSize: 18,
+      fontSize: 17,
     },
     gradientButton: {
       borderTopColor: colors.darkGray,

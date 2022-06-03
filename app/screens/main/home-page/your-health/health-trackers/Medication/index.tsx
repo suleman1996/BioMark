@@ -15,12 +15,11 @@ import {
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
-// import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
+
 import { showMessage } from 'react-native-flash-message';
 import { goBack } from 'services/nav-ref';
 
-import makeStyles from './styles';
+// import makeStyles from './styles';
 import { ActivityIndicator } from 'components';
 import {
   getDay,
@@ -32,6 +31,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { getReduxNewMedicationTracker } from 'store/home/home-actions';
+import makeStyles from './styles';
 
 type RenderDosageProps = {
   title: string;
@@ -67,13 +67,12 @@ const Medication = () => {
   // const medicationList = useSelector(
   //   (state: IAppState) => state.home.medicationList
   // );
-  // const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+  const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
   useEffect(() => {
     console.log('getMedNewTracker', getMedNewTracker);
-
     let arr = [];
     getMedNewTracker?.medication?.map((ele) => {
       console.log('ele', ele);

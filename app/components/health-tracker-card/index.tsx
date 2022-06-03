@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -16,6 +16,9 @@ const RenderHealthTrack = ({ item }) => {
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
+  useEffect(() => {
+    dispatch(getReduxNewMedicationTracker());
+  }, [dispatch]);
 
   return (
     <TouchableOpacity
