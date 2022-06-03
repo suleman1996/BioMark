@@ -5,17 +5,21 @@ const styles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      // backgroundColor: colors.black,
+      // zIndex: 99,
     },
     containerBody: {
       flex: 1,
       paddingHorizontal: 15,
       paddingTop: 20,
+      // zIndex: 2,
     },
     headingText: {
       fontFamily: fonts.bold,
       fontSize: 18,
       color: colors.heading,
     },
+
     recordKeepingView: {
       marginHorizontal: 5,
       flexDirection: 'row',

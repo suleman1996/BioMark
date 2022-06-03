@@ -4,19 +4,13 @@ import { View, Text, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
-import { FloatingAction } from 'react-native-floating-action';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 
-import SCREENS from 'navigation/constants/index';
 import { userService } from 'services/user-service/user-service';
-import fonts from 'assets/fonts';
 
 import GraphHeader from 'components/graph-header/index';
-import PlusMedicationIcon from 'assets/svgs/plus-medication';
-import PillMedicationIcon from 'assets/svgs/pill-mediction';
-import EditMedicationIcon from 'assets/svgs/edit-medication-icon';
-import TickMedicationIcon from 'assets/svgs/tick-medication-icon';
+
 import MedicationLogsCard from './medication-logs-card';
 
 const Index = () => {
@@ -105,65 +99,6 @@ const Index = () => {
   const getFormattedDays = (date: any, days: number) =>
     moment(date).add(days, 'days').format('DD');
 
-  const ACTION_BUTTONS = [
-    {
-      text: 'Take Medication',
-      icon: <TickMedicationIcon />,
-      name: 'bt_TakeMedication',
-      position: 1,
-      color: colors.white,
-      buttonSize: 55,
-      textBackground: '#0000',
-      textElevation: 0,
-      margin: 0,
-      textStyle: [
-        {
-          fontSize: 17,
-          fontFamily: fonts.mulishRegular,
-          color: colors.white,
-        },
-      ],
-    },
-    {
-      text: 'Add New Medication',
-      icon: <PlusMedicationIcon />,
-      iconColor: colors.shineBlue,
-      name: 'bt_AddMedication',
-      margin: 0,
-      textBackground: '#0000',
-      textElevation: 0,
-      position: 2,
-      color: colors.white,
-      buttonSize: 55,
-      textStyle: [
-        {
-          fontSize: 17,
-          fontFamily: fonts.mulishRegular,
-          color: colors.white,
-        },
-      ],
-    },
-    {
-      text: 'Edit Medication',
-      icon: <EditMedicationIcon />,
-      iconColor: colors.shineBlue,
-      name: 'bt_EditMedication',
-      position: 3,
-      textBackground: '#0000',
-      margin: 0,
-      textElevation: 0,
-      color: colors.white,
-      buttonSize: 55,
-      textStyle: [
-        {
-          fontSize: 17,
-          fontFamily: fonts.mulishRegular,
-          color: colors.white,
-        },
-      ],
-    },
-  ];
-
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -181,23 +116,6 @@ const Index = () => {
           ))}
         </View>
       </ScrollView>
-      <FloatingAction
-        actions={ACTION_BUTTONS}
-        onPressItem={(item) => {
-          if (item === 'bt_TakeMedication') {
-            navigation.navigate(SCREENS.MEDICATION);
-          } else if (item === 'bt_AddMedication') {
-            navigation.navigate(SCREENS.ADD_NEW_MEDICATION);
-          } else if (item === 'bt_EditMedication') {
-            navigation.navigate(SCREENS.EDIT_MEDICATION);
-          }
-        }}
-        color={colors.shineBlue}
-        buttonSize={55}
-        distanceToEdge={15}
-        actionsPaddingTopBottom={5}
-        floatingIcon={<PillMedicationIcon />}
-      />
     </View>
   );
 };

@@ -33,6 +33,8 @@ const Index = () => {
   const { PDF_HYPERTENSION } = SCREENS;
   const navigation = useNavigation();
 
+  // const [showDemo, setShowDemo] = React.useState();
+
   const [healthTracker] = React.useState([
     {
       id: 0,
@@ -74,85 +76,87 @@ const Index = () => {
   );
   return (
     <TitleWithBackLayout isGradient={true} title="Hypertension Support Center">
-      <View style={styles.containerBody}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={[styles.headingText, { marginVertical: 10 }]}>
-            YOUR HYPERTENSION DAIRY
-          </Text>
-          <FlatList
-            style={{ alignSelf: 'center' }}
-            data={healthTracker}
-            renderItem={(item) => <RenderHealthTrack item={item} />}
-            keyExtractor={(item) => item.id}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-          <Text style={[styles.headingText, { marginVertical: 10 }]}>
-            HYPERTENSION EDUCATION
-          </Text>
-          <View style={styles.videoView}>
-            <Video
-              source={{
-                uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-              }} // the video file
-              controls={true}
-              paused={true} // make it start
-              style={styles.backgroundVideo} // any style you want
-              repeat={true} // make it a loop
-              resizeMode="cover"
-              posterResizeMode={'cover'}
-              fullScreen={true}
-              poster="https://play-lh.googleusercontent.com/uf1TVrS58KmBNiWYR3LocIJMDXTmmfkYY79lDlG2eA4brjyw3q1BN4DDIriw7B9MfQ=w600-h300-pc0xffffff-pd"
-              // style={{ width: '100%', margin: 'auto' }}
-            />
-          </View>
-          <PdfLink
-            title="What Do I Need To Know About Hypertension?"
-            // svg={<BP fill={colors.primary} />}
-            svg={<PdfSvg />}
-            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-          />
-          <PdfLink
-            title="What Do I Check My Blood Pressure?"
-            svg={<PdfSvg />}
-            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-          />
-          <PdfLink
-            title="Shaking The Salt To Manage My Blood Pressure"
-            svg={<PdfSvg />}
-            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-          />
-          <PdfLink
-            title="Modify My Lifestyle Can Help Control My Blood Presure"
-            svg={<PdfSvg />}
-            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-          />
-          <PdfLink
-            title="Tips on Accurately Measuring Your Blood Pressure At Home"
-            svg={<PdfSvg />}
-            onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-          />
-          <View style={styles.bottomTextView}>
-            <Text style={[styles.bottomText, { color: colors.heading }]}>
-              Tap to{' '}
+      <View style={styles.container}>
+        <View style={styles.containerBody}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Text style={[styles.headingText, { marginVertical: 10 }]}>
+              YOUR HYPERTENSION DAIRY
             </Text>
-            <TouchableOpacity>
-              <Text
-                style={[
-                  styles.bottomText,
-                  { color: colors.blue, textDecorationLine: 'underline' },
-                ]}
-              >
-                Withdraw from Program
+            <FlatList
+              style={{ alignSelf: 'center' }}
+              data={healthTracker}
+              renderItem={(item) => <RenderHealthTrack item={item} />}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+            <Text style={[styles.headingText, { marginVertical: 10 }]}>
+              HYPERTENSION EDUCATION
+            </Text>
+            <View style={styles.videoView}>
+              <Video
+                source={{
+                  uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
+                }} // the video file
+                controls={true}
+                paused={true} // make it start
+                style={styles.backgroundVideo} // any style you want
+                repeat={true} // make it a loop
+                resizeMode="cover"
+                posterResizeMode={'cover'}
+                fullScreen={true}
+                poster="https://play-lh.googleusercontent.com/uf1TVrS58KmBNiWYR3LocIJMDXTmmfkYY79lDlG2eA4brjyw3q1BN4DDIriw7B9MfQ=w600-h300-pc0xffffff-pd"
+                // style={{ width: '100%', margin: 'auto' }}
+              />
+            </View>
+            <PdfLink
+              title="What Do I Need To Know About Hypertension?"
+              // svg={<BP fill={colors.primary} />}
+              svg={<PdfSvg />}
+              onPress={() => navigation.navigate(PDF_HYPERTENSION)}
+            />
+            <PdfLink
+              title="What Do I Check My Blood Pressure?"
+              svg={<PdfSvg />}
+              onPress={() => navigation.navigate(PDF_HYPERTENSION)}
+            />
+            <PdfLink
+              title="Shaking The Salt To Manage My Blood Pressure"
+              svg={<PdfSvg />}
+              onPress={() => navigation.navigate(PDF_HYPERTENSION)}
+            />
+            <PdfLink
+              title="Modify My Lifestyle Can Help Control My Blood Presure"
+              svg={<PdfSvg />}
+              onPress={() => navigation.navigate(PDF_HYPERTENSION)}
+            />
+            <PdfLink
+              title="Tips on Accurately Measuring Your Blood Pressure At Home"
+              svg={<PdfSvg />}
+              onPress={() => navigation.navigate(PDF_HYPERTENSION)}
+            />
+            <View style={styles.bottomTextView}>
+              <Text style={[styles.bottomText, { color: colors.heading }]}>
+                Tap to{' '}
               </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-        <TouchableWithoutFeedback onPress={() => openMessenger()}>
-          <View style={styles.messengerView}>
-            <Messenger />
-          </View>
-        </TouchableWithoutFeedback>
+              <TouchableOpacity>
+                <Text
+                  style={[
+                    styles.bottomText,
+                    { color: colors.blue, textDecorationLine: 'underline' },
+                  ]}
+                >
+                  Withdraw from Program
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+          <TouchableWithoutFeedback onPress={() => openMessenger()}>
+            <View style={styles.messengerView}>
+              <Messenger />
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
     </TitleWithBackLayout>
   );
