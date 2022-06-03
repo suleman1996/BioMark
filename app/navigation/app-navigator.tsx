@@ -21,7 +21,7 @@ import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
-import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
+import HbA1c from 'screens/main/home-page/your-health/health-trackers/hbA1c/index';
 import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
 import Covid19Navigator from './covid19-navigator';
