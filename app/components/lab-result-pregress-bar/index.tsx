@@ -10,7 +10,7 @@ const Index = (props: Props) => {
   const { colors } = useTheme();
 
   const customStyles = {
-    stepIndicatorSize: 25,
+    stepIndicatorSize: 30,
     currentStepIndicatorSize: 30,
     separatorStrokeWidth: 2,
     currentStepStrokeWidth: 3,
