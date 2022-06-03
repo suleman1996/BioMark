@@ -13,3 +13,4 @@ export { default as TextInputButton } from './text-input-button';
 export { default as InputField } from './input-field/input-field';
 export { default as TextInput } from './input-field/text-input';
 export { default as Button } from './button/button';
+export { default as InputWithUnits } from './input-with-units';

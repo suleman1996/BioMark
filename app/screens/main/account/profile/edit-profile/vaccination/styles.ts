@@ -71,6 +71,7 @@ export const makeStyles = (colors: any) =>
       borderColor: colors.navyblue,
       borderWidth: 1,
       marginTop: 20,
+      padding: widthToDp(2),
       // flex: 1 / 4,
     },
     listTextColor: {

@@ -444,7 +444,7 @@ const Index = () => {
             <RenderHealthRiskView
               healthRisks={healthRisksData?.heart}
               color={colors.lightGreen}
-              svg={<Heart />}
+              svg={<Heart fill={colors.danger} />}
               hardCode={Heart_Disease}
               References={Heart_Disease_ref}
               FootNotes={Heart_Disease_footnotes}

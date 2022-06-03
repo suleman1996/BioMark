@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, ScrollView, View } from 'react-native';
+import { SafeAreaView, Text, ScrollView, View, Image } from 'react-native';
 import { TitleWithBackLayout } from 'components/layouts';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
@@ -29,7 +29,7 @@ const HealthRisk = ({ route }) => {
       <>
         <View style={styles.flatlistView}>
           <View style={styles.flatlistView2}>
-            {/* <Image source={item.image} style={styles.flatlistImage} /> */}
+            <Image source={item.image} style={styles.flatlistImage} />
             <Text style={styles.flatlisttext}>{item.title}</Text>
           </View>
           <Text style={styles.flatlisttext2}>{item.text}</Text>
@@ -53,7 +53,7 @@ const HealthRisk = ({ route }) => {
               fontFamily: fonts.OpenSansBold,
               color: color,
             }}
-            image={svgIcon}
+            svg={svgIcon}
             description={listItems.summary}
           />
           <HealthListCard

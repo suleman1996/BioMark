@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 
@@ -12,6 +12,7 @@ type Props = {
   image?: any;
   H2TextStyle?: any;
   numberStyle?: any;
+  svg?: any;
 };
 
 const HealthCard = (props: Props) => {
@@ -22,7 +23,8 @@ const HealthCard = (props: Props) => {
     <View style={styles.view}>
       <View style={styles.view3}>
         <View style={styles.view2}>
-          <Image source={props?.image} style={styles.green} />
+          {/* <Image source={props?.image} style={styles.green} /> */}
+          {props?.svg}
           <Text style={styles.diabetes}>{props?.H1Text}</Text>
         </View>
         <Text style={props?.H2TextStyle}>{props?.H2Text}</Text>
