@@ -21,6 +21,7 @@ type Props = {
   isInfo: boolean;
   isShare: boolean;
   shadow: string;
+  onPressInfo: any;
 };
 
 const TitleWithBackLayout = ({
@@ -31,6 +32,7 @@ const TitleWithBackLayout = ({
   isInfo,
   isShare,
   shadow,
+  onPressInfo,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -68,7 +70,7 @@ const TitleWithBackLayout = ({
                 </TouchableOpacity>
               )}
               {isInfo && (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => onPressInfo(true)}>
                   <AntDesignIcons
                     color={colors.white}
                     size={responsiveFontSize(22)}
