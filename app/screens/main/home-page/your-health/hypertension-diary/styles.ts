@@ -10,7 +10,6 @@ const styles = (colors: any) =>
       flex: 1,
       paddingHorizontal: 15,
       paddingTop: 20,
-      //   alignItems: 'center',
     },
     headingText: {
       fontFamily: fonts.bold,
@@ -21,11 +20,9 @@ const styles = (colors: any) =>
       marginHorizontal: 5,
       flexDirection: 'row',
       alignItems: 'center',
-      //   justifyContent: 'space-between',
       padding: 25,
       borderRadius: 8,
       marginBottom: 15,
-      //   paddingHorizontal: 18,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -38,7 +35,6 @@ const styles = (colors: any) =>
     },
     recordKeepinText: {
       fontSize: 20,
-      //   borderWidth: 2,
       paddingLeft: 10,
       color: colors.lightBlueish,
       fontFamily: fonts.mulishExtraBold,
