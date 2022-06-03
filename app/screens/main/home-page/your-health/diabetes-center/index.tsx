@@ -178,9 +178,9 @@ const DiabetesCenter = () => {
             renderItem={(item) => (
               <PdfList
                 item={item}
-                onPress={() =>
-                  navigate(SCREENS.PDF_DIABETES_SUPPORT, { code: item })
-                }
+                onPress={() => {
+                  navigate(SCREENS.PDF_DIABETES_SUPPORT, { code: item });
+                }}
               />
             )}
             keyExtractor={(item) => item.id}

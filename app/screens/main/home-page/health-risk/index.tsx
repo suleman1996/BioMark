@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, ScrollView, View, Image } from 'react-native';
+import { SafeAreaView, Text, ScrollView, View } from 'react-native';
 import { TitleWithBackLayout } from 'components/layouts';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 import HealthCard from 'components/health-risk-card';
 import HealthListCard from 'components/health-list-card';
+import fonts from 'assets/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 const HealthRisk = ({ route }) => {
   const { colors } = useTheme();
@@ -15,9 +17,11 @@ const HealthRisk = ({ route }) => {
   const refData = route.params.refData;
   const footNote = route.params.footNotesData;
   const calculations = route.params.calc;
+  const color = route.params.clr;
+  const svgIcon = route.params.icon;
 
   useEffect(() => {
-    console.log(calculations, 'callllllllll');
+    console.log('icon a jaaaaaaaaaaaaaaaaaaaa', svgIcon);
   });
 
   const renderItem = ({ item }) => {
@@ -25,7 +29,7 @@ const HealthRisk = ({ route }) => {
       <>
         <View style={styles.flatlistView}>
           <View style={styles.flatlistView2}>
-            <Image source={item.image} style={styles.flatlistImage} />
+            {/* <Image source={item.image} style={styles.flatlistImage} /> */}
             <Text style={styles.flatlisttext}>{item.title}</Text>
           </View>
           <Text style={styles.flatlisttext2}>{item.text}</Text>
@@ -41,8 +45,15 @@ const HealthRisk = ({ route }) => {
           <HealthCard
             H1Text={listItems.name}
             H2Text={listItems.card_status}
+            H2TextStyle={{ color: color, fontFamily: fonts.extraBold }}
             number={listItems.value}
-            image={require('../../../../assets/images/home/greenDrop.png')}
+            numberStyle={{
+              textAlign: 'center',
+              fontSize: responsiveFontSize('50'),
+              fontFamily: fonts.OpenSansBold,
+              color: color,
+            }}
+            image={svgIcon}
             description={listItems.summary}
           />
           <HealthListCard

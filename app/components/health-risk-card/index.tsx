@@ -10,6 +10,8 @@ type Props = {
   description?: string;
   icon?: string;
   image?: any;
+  H2TextStyle?: any;
+  numberStyle?: any;
 };
 
 const HealthCard = (props: Props) => {
@@ -23,10 +25,10 @@ const HealthCard = (props: Props) => {
           <Image source={props?.image} style={styles.green} />
           <Text style={styles.diabetes}>{props?.H1Text}</Text>
         </View>
-        <Text style={styles.text}>{props?.H2Text}</Text>
+        <Text style={props?.H2TextStyle}>{props?.H2Text}</Text>
       </View>
 
-      <Text style={styles.text2}>{props?.number}</Text>
+      <Text style={props?.numberStyle}>{props?.number}</Text>
       <Text style={styles.text3}>{props?.description}</Text>
     </View>
   );

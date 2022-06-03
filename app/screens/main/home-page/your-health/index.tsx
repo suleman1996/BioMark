@@ -12,7 +12,7 @@ import {
   Image,
   Keyboard,
 } from 'react-native';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import * as Yup from 'yup';
 import Styles from './styles';
@@ -187,6 +187,8 @@ const Index = () => {
   const [selectedRef, setSelectedRef] = React.useState();
   const [selectedFootNotes, setSelectedFootNotes] = React.useState();
   const [selectedCalculations, setselectedCalculations] = React.useState();
+  const [colorr, setColorr] = useState('');
+  const [svgImage, setSvgImage] = useState('');
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState('');
@@ -254,6 +256,8 @@ const Index = () => {
             setSelectedRef(References);
           setSelectedFootNotes(FootNotes);
           setselectedCalculations(Calculations);
+          setColorr(color);
+          setSvgImage(svg);
         }}
         style={[
           styles.renderHealthRisk,
@@ -510,6 +514,8 @@ const Index = () => {
                   refData: selectedRef,
                   footNotesData: selectedFootNotes,
                   calc: selectedCalculations,
+                  clr: colorr,
+                  icon: svgImage,
                 })
               }
               name={selectedHealthRisk?.name}
