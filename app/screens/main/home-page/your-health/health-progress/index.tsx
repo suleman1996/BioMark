@@ -166,7 +166,7 @@ const Index = () => {
               navigation.navigate(SCREENS.EDIT_MEDICATION);
             }
           }}
-          // overlayColor={col}
+          overlayColor={colors.opacityBlackDark}
           color={colors.shineBlue}
           buttonSize={53}
           distanceToEdge={35}

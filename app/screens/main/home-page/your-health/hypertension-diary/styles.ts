@@ -3,16 +3,47 @@ import fonts from 'assets/fonts';
 
 const styles = (colors: any) =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      // backgroundColor: colors.black,
-      // zIndex: 99,
+    demoContainer: {
+      // flex: 1,
+      backgroundColor: colors.opacityBlackDark,
+      position: 'absolute',
+      bottom: 0,
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 30,
     },
     containerBody: {
       flex: 1,
+      position: 'relative',
       paddingHorizontal: 15,
       paddingTop: 20,
-      // zIndex: 2,
+      zIndex: 30,
+    },
+    demobottomView: {
+      position: 'absolute',
+      width: '100%',
+      height: '23%',
+      justifyContent: 'space-between',
+      bottom: 0,
+      marginBottom: 20,
+    },
+    demoTextView: {
+      width: '100%',
+      height: '50%',
+      backgroundColor: colors.white,
+      justifyContent: 'center',
+      alignItems: 'center',
+      // marginBottom: 20,
+    },
+    demoText: {
+      fontFamily: fonts.extraBold,
+      color: colors.heading,
+      fontSize: 22,
+    },
+    demoButtonView: {
+      width: '100%',
+      paddingHorizontal: 15,
     },
     headingText: {
       fontFamily: fonts.bold,
@@ -36,6 +67,7 @@ const styles = (colors: any) =>
       shadowRadius: 3.84,
 
       elevation: 5,
+      // zIndex: 100,
     },
     recordKeepinText: {
       fontSize: 20,
