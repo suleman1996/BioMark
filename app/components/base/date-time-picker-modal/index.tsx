@@ -52,13 +52,15 @@ const DateTimePickerModalComponent = (props: Props) => {
           color={colors.placeholder}
         />
       </Pressable>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        display="inline"
-        mode="datetime"
-        onConfirm={(value) => handleConfirm(value.toISOString())}
-        onCancel={hideDatePicker}
-      />
+      {isDatePickerVisible && (
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          display="inline"
+          mode="datetime"
+          onConfirm={(value) => handleConfirm(value.toISOString())}
+          onCancel={hideDatePicker}
+        />
+      )}
     </View>
   );
 };

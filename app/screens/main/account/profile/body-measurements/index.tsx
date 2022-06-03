@@ -6,9 +6,12 @@ import { showMessage } from 'react-native-flash-message';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
-import { ActivityIndicator } from 'components';
-import InputWithUnits from 'components/input-with-units';
-import { cmToFeet, feetToCm } from 'utils/functions/measurments';
+import { ActivityIndicator, InputWithUnits } from 'components';
+import {
+  cmToFeet,
+  feetToCm,
+  measurmentValidator,
+} from 'utils/functions/measurments';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
@@ -28,8 +31,8 @@ const BodyMeasurementScreen = () => {
     is_metric: true,
   });
   const [error, setError] = useState({
-    heightError: '',
-    weightError: '',
+    height: '',
+    weight: '',
   });
 
   React.useEffect(() => {
@@ -90,13 +93,12 @@ const BodyMeasurementScreen = () => {
   const onSubmit = async () => {
     try {
       setIsLoading(true);
-      const response = await userService.bodyMeasurement({
+      await userService.bodyMeasurement({
         medical: {
           ...bodyMeasurment,
         },
       });
       navigate(SCREENS.EDIT_PROFILE);
-      console.log('response measureeeeeement', response);
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -127,51 +129,9 @@ const BodyMeasurementScreen = () => {
 
   const handleChange = (value: number, key: string) => {
     setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
-  };
-
-  const measurmentValidator = (is_metric, measurment, value) => {
-    let errorr = '';
-    const WEIGHT_RANGE = {
-      kg: {
-        min: 0,
-        max: 200,
-        errorr: 'Should be between 0-200kg',
-      },
-      lbs: {
-        min: 0,
-        max: 440,
-        errorr: 'Should be between 0-440kg',
-      },
-    };
-
-    console.log(is_metric);
-
-    if (is_metric) {
-      // KG
-      console.log('sfdhsfhd', measurment);
-      if (measurment === 'weight') {
-        errorr =
-          WEIGHT_RANGE.kg.min < value && value <= WEIGHT_RANGE.kg.max
-            ? ''
-            : WEIGHT_RANGE.kg.errorr;
-        console.log('sfdhsfhd', WEIGHT_RANGE.kg.min < value);
-        console.log('sfdhsfhd', value <= WEIGHT_RANGE.kg.max);
-      }
-    } else {
-      // LBS
-      if (measurment === 'weight') {
-        errorr =
-          WEIGHT_RANGE.lbs.min < value <= WEIGHT_RANGE.lbs.max
-            ? ''
-            : WEIGHT_RANGE.lbs.errorr;
-      }
-    }
-    console.log('->>>>>', errorr);
-    console.log('sbjdjcjdbbv');
-
     setError((err) => ({
       ...err,
-      weightError: errorr,
+      [key]: measurmentValidator(bodyMeasurment.is_metric, key, value),
     }));
   };
 
@@ -193,9 +153,19 @@ const BodyMeasurementScreen = () => {
             value={bodyMeasurment.height}
             onChangeText={(val: any) => handleChange(val, 'height')}
             onUnitChange={handleUnitChange}
-            error={error.heightError}
-            onBlur={() => console.log(bodyMeasurment.height)}
+            error={error.height}
+            onBlur={() => {
+              setError({
+                ...error,
+                height: measurmentValidator(
+                  bodyMeasurment.is_metric,
+                  'height',
+                  bodyMeasurment.height
+                ),
+              });
+            }}
           />
+
           <InputWithUnits
             title="Weight"
             placeholder="0.0"
@@ -204,14 +174,16 @@ const BodyMeasurementScreen = () => {
             value={bodyMeasurment.weight.toString()}
             onChangeText={(val: any) => handleChange(val, 'weight')}
             onUnitChange={handleUnitChange}
-            error={error.weightError}
+            error={error.weight}
             onBlur={() => {
-              console.log('WHyyy?');
-              measurmentValidator(
-                bodyMeasurment.is_metric,
-                'weight',
-                bodyMeasurment.weight
-              );
+              setError({
+                ...error,
+                weight: measurmentValidator(
+                  bodyMeasurment.is_metric,
+                  'weight',
+                  bodyMeasurment.weight
+                ),
+              });
             }}
           />
         </View>

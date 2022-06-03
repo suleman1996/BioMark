@@ -17,14 +17,16 @@ const HealthRecordFilter = ({
   cancelModal,
   closeModal,
   title2,
+  firstValue,
+  secondValue,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  const [checked, setChecked] = React.useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
   const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState();
   const [endDate, setEndDate] = useState('');
+  const [checked, setChecked] = React.useState('');
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -66,10 +68,13 @@ const HealthRecordFilter = ({
 
           <TouchableOpacity
             style={styles.radioview}
+            // onPress={touchableRadio1}
             onPress={() => setChecked('first')}
           >
             <RadioButton
-              value="first"
+              value={firstValue}
+              // status={status}
+              // onPress={onPressRadio1}
               status={checked === 'first' ? 'checked' : 'unchecked'}
               onPress={() => setChecked('first')}
               color={colors.heading}
@@ -82,7 +87,7 @@ const HealthRecordFilter = ({
             onPress={() => setChecked('second')}
           >
             <RadioButton
-              value="second"
+              value={secondValue}
               status={checked === 'second' ? 'checked' : 'unchecked'}
               onPress={() => setChecked('second')}
               color={colors.heading}
@@ -131,17 +136,13 @@ const HealthRecordFilter = ({
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.clear}
-            // onPress={() => alert('dkjfkjk')}
+            onPress={() => {
+              setChecked(''), setSelectedDate(''), setEndDate('');
+            }}
           >
             <Text style={styles.clearText}>Clear Filters</Text>
           </TouchableOpacity>
 
-          {/* <GradientButton
-            text="Yes"
-            color={['#2C6CFC', '#2CBDFC']}
-            style={styles.gradientButton}
-            onPress={onPress}
-          /> */}
           <TouchableOpacity style={styles.cancel} onPress={cancelModal}>
             <Text style={styles.cancelText}>{cancel}</Text>
           </TouchableOpacity>
