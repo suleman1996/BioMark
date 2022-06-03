@@ -24,6 +24,7 @@ const Index = () => {
 
   const [showSummaryummary, setSummary] = React.useState(false);
   const [lapid, setLapid] = React.useState(false);
+  const [isInfo, setIsInfo] = React.useState(false);
   const [lipidData] = React.useState([
     {
       id: 0,
@@ -81,13 +82,55 @@ const Index = () => {
     </View>
   );
 
+  const RenderHeading = ({ title }) => (
+    <Text style={styles.overLayHeading}>{title}</Text>
+  );
+
+  const RenderSubheading = ({ subTitle }) => (
+    <Text style={styles.overLaySubHeading}>{subTitle}</Text>
+  );
+
+  const ResultsDetails = ({ visible = false }) => {
+    if (!visible) {
+      return null;
+    }
+    return (
+      <View style={styles.overLay}>
+        <View style={styles.overLayContainer}>
+          <RenderHeading title="Results Details" />
+          <RenderHeading title="Source" />
+          <RenderSubheading subTitle="Gribbles Pathoogy" />
+          <RenderHeading title="Referring Doctor or Clinic" />
+          <RenderSubheading subTitle="Clinic Queen's Avenue Cilnic" />
+          <RenderHeading title="Lab Reference Number" />
+          <RenderSubheading subTitle="CVD-HSVOBP" />
+          <RenderHeading title="Report Received" />
+          <RenderSubheading subTitle="Mar 04,2022" />
+          <RenderHeading title="Report Printed" />
+          <RenderSubheading subTitle="Mar 04,2022" />
+
+          <View style={{ marginTop: 20 }}>
+            <Button
+              onPress={() => setIsInfo(false)}
+              marginVertical={1}
+              marginHorizontal={1}
+              title="Close"
+            />
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
+      <ResultsDetails visible={isInfo} />
       <TitleWithBackLayout
         shadow={colors.blue}
         title="Result Overview"
         isShare={true}
         isInfo={true}
+        onPressInfo={setIsInfo}
       >
         <View style={styles.miniHeader}>
           <Text style={styles.miniHeaderText}>Received on March 23, 2022</Text>

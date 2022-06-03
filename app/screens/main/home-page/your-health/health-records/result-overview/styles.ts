@@ -129,5 +129,34 @@ const styles = (colors: any) =>
       marginLeft: 10,
       fontSize: 16,
     },
+    overLay: {
+      position: 'absolute',
+      backgroundColor: '#3D3D3D90',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 100,
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+    },
+    overLayContainer: {
+      padding: 20,
+      backgroundColor: colors.white,
+      width: '90%',
+      borderRadius: 10,
+    },
+    overLayHeading: {
+      fontFamily: fonts.bold,
+      color: colors.heading,
+      fontSize: 20,
+      marginVertical: 10,
+    },
+    overLaySubHeading: {
+      fontFamily: fonts.regular,
+      fontSize: 18,
+      marginLeft: 20,
+      color: colors.lightGrey,
+    },
   });
 export default styles;
