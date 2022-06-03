@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -27,14 +29,13 @@ const Weight = () => {
   const styles = makeStyles(colors);
 
   const [weightTracker, setWeightTracker] = useState({
-    weight: '',
+    weight: '12',
     is_metric: true,
     date_entry: '',
   });
-  const [error, setError] = useState<string>('erro');
+  const [error, setError] = useState<string>('');
 
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     let today = new Date();
     let dateTime =
@@ -148,7 +149,7 @@ const Weight = () => {
             }}
           />
 
-          {error.length === 0 && weightTracker.weight && (
+          {error?.length === 0 && weightTracker.weight && (
             <>
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal

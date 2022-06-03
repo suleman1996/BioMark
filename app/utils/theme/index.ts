@@ -20,6 +20,7 @@ const theme = {
     transparentBlack: { background: '#343434', opacity: 0.8 },
     heading: '#06599E',
     blue: '#1B96D8',
+    lightBlueish: '#2CBDFC',
     black: '#000',
     navyblue: '#04589E',
     lightGrey: '#8493AE',

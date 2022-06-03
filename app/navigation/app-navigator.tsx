@@ -112,6 +112,7 @@ const AppNavigator = () => {
             name={SCREENS.MAIN_NAVIGATOR}
             component={BottomTabNavigator}
           />
+
           <Stack.Screen
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}

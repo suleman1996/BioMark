@@ -5,36 +5,28 @@ const styles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      // backgroundColor: colors.black,
+      // zIndex: 99,
     },
     containerBody: {
       flex: 1,
       paddingHorizontal: 15,
       paddingTop: 20,
-      //   alignItems: 'center',
+      // zIndex: 2,
     },
     headingText: {
       fontFamily: fonts.bold,
       fontSize: 18,
       color: colors.heading,
     },
-    videoView: {
-      marginBottom: 20,
-      borderWidth: 1,
-      borderRadius: 5,
-    },
-    backgroundVideo: {
-      height: 200,
-      borderRadius: 5,
-    },
+
     recordKeepingView: {
       marginHorizontal: 5,
       flexDirection: 'row',
       alignItems: 'center',
-      //   justifyContent: 'space-between',
       padding: 25,
       borderRadius: 8,
       marginBottom: 15,
-      //   paddingHorizontal: 18,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -47,9 +39,8 @@ const styles = (colors: any) =>
     },
     recordKeepinText: {
       fontSize: 20,
-      //   borderWidth: 2,
       paddingLeft: 10,
-      color: colors.primary,
+      color: colors.lightBlueish,
       fontFamily: fonts.mulishExtraBold,
     },
     bottomTextView: {
@@ -59,7 +50,7 @@ const styles = (colors: any) =>
     },
     bottomText: {
       fontFamily: fonts.mulishRegular,
-      fontSize: 17,
+      fontSize: 15,
     },
     messengerView: {
       position: 'absolute',

@@ -37,6 +37,7 @@ const InputWithUnits = ({
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
+  console.log(typeof error, 'here', error, error.length > 0);
   return (
     <>
       <Text style={styles.title}>{title}</Text>
