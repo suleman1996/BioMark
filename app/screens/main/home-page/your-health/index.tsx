@@ -53,6 +53,8 @@ import {
   Sleeping_Calc,
 } from '../health-risk/list-data';
 import Heart from '../../../../assets/svgs/heart';
+import Camera from '../../../../assets/svgs/report-scan';
+import ReportVerify from '../../../../assets/svgs/report-verify';
 import Diabetes from '../../../../assets/svgs/diabtes';
 import BP from '../../../../assets/svgs/bP';
 import BMI from '../../../../assets/svgs/Bmi';
@@ -62,6 +64,8 @@ import Stress from '../../../../assets/svgs/stress';
 import Sleep from '../../../../assets/svgs/sleep';
 import Health from '../../../../assets/svgs/Health';
 import Progress from '../../../../assets/svgs/Progress';
+import Processing from '../../../../assets/svgs/report-processing';
+import ReportView from '../../../../assets/svgs/report-viewing';
 import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
@@ -175,10 +179,10 @@ const Index = () => {
 
   const [healthTracker] = React.useState([]);
   const [stepIndicatorIcons] = React.useState([
-    <Heart />,
-    <Diabetes />,
-    <BMI />,
-    <BP />,
+    <Camera />,
+    <Processing />,
+    <ReportView />,
+    <ReportVerify />,
   ]);
   const [healthRisksData, setHealthRisksData] = React.useState([]);
 
