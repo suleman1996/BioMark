@@ -149,11 +149,11 @@ const Weight = () => {
             }}
           />
 
-          {error?.length === 0 && weightTracker.weight && (
+          {error?.length === 0 && weightTracker?.weight && (
             <>
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
-                date={weightTracker.date_entry}
+                date={weightTracker?.date_entry}
                 setDate={(e: any) =>
                   setWeightTracker((tracker) => ({ ...tracker, date_entry: e }))
                 }
