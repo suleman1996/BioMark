@@ -21,8 +21,9 @@ import {
   getYear,
 } from 'utils/functions/date-format';
 import { measurmentValidator } from 'utils/functions/measurments';
-
+import SCREENS from 'navigation/constants/index';
 import makeStyles from './styles';
+import { navigate } from 'services/nav-ref';
 
 const Weight = () => {
   const { colors } = useTheme();
@@ -83,8 +84,7 @@ const Weight = () => {
           ...weightTracker,
         },
       });
-
-      alert('weight submitted ');
+      navigate(SCREENS.HEALTH_PROGRESS, 0);
       setIsLoading(false);
     } catch (errorr) {
       setIsLoading(false);
