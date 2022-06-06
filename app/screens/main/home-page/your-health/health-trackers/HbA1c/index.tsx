@@ -12,7 +12,7 @@ import {
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
 // import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
+import SCREENS from 'navigation/constants/index';
 import { showMessage } from 'react-native-flash-message';
 
 import makeStyles from './styles';
@@ -23,6 +23,7 @@ import {
   getTime,
   getYear,
 } from 'utils/functions/date-format';
+import { navigate } from 'services/nav-ref';
 
 const HbA1c = () => {
   const { colors } = useTheme();
@@ -84,7 +85,7 @@ const HbA1c = () => {
         },
       });
       console.log('HbA1c successful', response.data);
-      alert('HbA1c successful');
+      navigate(SCREENS.HEALTH_PROGRESS, 3);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
