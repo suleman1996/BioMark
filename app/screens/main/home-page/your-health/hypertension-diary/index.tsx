@@ -7,13 +7,14 @@ import {
   Linking,
   TouchableWithoutFeedback,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 // import Video from 'react-native-video';
 
 import SCREENS from 'navigation/constants/index';
 import { TitleWithBackLayout } from 'components/layouts';
 
 import RenderHealthTrack from 'components/health-tracker-card/index';
+import RenderHealthTrackDemo from 'components/health-tracker-card-demo/index';
 import Config from 'react-native-config';
 
 import Styles from './styles';
@@ -21,20 +22,24 @@ import { useTheme } from 'react-native-paper';
 import PdfSvg from 'assets/svgs/pdf';
 import Messenger from 'assets/svgs/messenger';
 import { useNavigation } from '@react-navigation/native';
-// import GradientButton from 'components/linear-gradient-button';
+import GradientButton from 'components/linear-gradient-button';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
   Linking.openURL(Config.MESSENGER_URL);
 };
 
-const Index = () => {
+const HypertensionDiary = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
 
   const { PDF_HYPERTENSION } = SCREENS;
   const navigation = useNavigation();
 
-  // const [showDemo, setShowDemo] = React.useState();
+  const [showDemo, setShowDemo] = React.useState(false);
+
+  useEffect(() => {
+    setShowDemo(0);
+  }, []);
 
   const [healthTracker] = React.useState([
     {
@@ -81,30 +86,18 @@ const Index = () => {
         isGradient={true}
         title="Hypertension Support Center"
       >
-        {/* uncomment this and comment scrollview and container body /////////////////////////////*/}
-
-        {/* <View style={styles.demoContainer}>
-          <View style={styles.demobottomView}>
-            <View style={styles.demoTextView}>
-              <Text style={styles.demoText}>Demo Text</Text>
-            </View>
-            <View style={styles.demoButtonView}>
-              <GradientButton
-                text="Continue"
-                color={['#2C6CFC', '#2CBDFC']}
-                style={styles.gradientButton2}
-                // onPress={() => navigate(SCREENS.DIABETES_CENTER)}
-              />
-            </View>
-          </View>
-        </View> */}
-        <View style={styles.containerBody}>
+        <View style={{ flex: 1 }}>
           <ScrollView showsVerticalScrollIndicator={false}>
+            {showDemo !== 5 && <View style={styles.demoContainer}></View>}
             <View>
               <Text style={[styles.headingText, { marginVertical: 10 }]}>
                 YOUR HYPERTENSION DAIRY
               </Text>
-              <View style={{ position: 'relative', zIndex: 33 }}>
+              <View
+                style={{
+                  position: 'relative',
+                }}
+              >
                 <FlatList
                   style={{ alignSelf: 'center' }}
                   data={healthTracker}
@@ -113,6 +106,32 @@ const Index = () => {
                   horizontal
                   showsHorizontalScrollIndicator={false}
                 />
+              </View>
+              <View
+                style={{
+                  position: 'absolute',
+                  zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
+                  flexDirection: 'row',
+                  top: 50,
+                  left: 30,
+                }}
+              >
+                {showDemo === 0 && (
+                  <RenderHealthTrackDemo item={healthTracker[0]} />
+                )}
+                {showDemo === 1 && (
+                  <>
+                    <View style={{ height: 120, width: 110, marginLeft: 10 }} />
+                    <RenderHealthTrackDemo item={healthTracker[1]} />
+                  </>
+                )}
+                {showDemo === 2 && (
+                  <>
+                    <View style={{ height: 120, width: 110, marginLeft: 15 }} />
+                    <View style={{ height: 120, width: 110 }} />
+                    <RenderHealthTrackDemo item={healthTracker[2]} />
+                  </>
+                )}
               </View>
               <Text style={[styles.headingText, { marginVertical: 10 }]}>
                 HYPERTENSION EDUCATION
@@ -134,7 +153,12 @@ const Index = () => {
       /> */}
               </View>
               {/* view to show pdf on top */}
-              <View style={{ position: 'relative', zIndex: 33 }}>
+              <View
+                style={{
+                  position: 'relative',
+                  zIndex: showDemo === 4 ? 33 : 29,
+                }}
+              >
                 <PdfLink
                   title="What Do I Need To Know About Hypertension?"
                   svg={<PdfSvg />}
@@ -172,21 +196,65 @@ const Index = () => {
                       { color: colors.blue, textDecorationLine: 'underline' },
                     ]}
                   >
+                    {' '}
                     Withdraw from Program
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
           </ScrollView>
+          {showDemo !== 5 && (
+            <View style={styles.demobottomView}>
+              <View style={styles.demoTextView}>
+                {showDemo === 0 && (
+                  <Text style={styles.demoText}>
+                    Log your blood pressure here.
+                  </Text>
+                )}
+                {showDemo === 1 && (
+                  <Text style={styles.demoText}>Log your medication here.</Text>
+                )}
+                {showDemo === 2 && (
+                  <Text style={styles.demoText}>Log your weight here.</Text>
+                )}
+                {showDemo === 3 && (
+                  <Text style={styles.demoText}>
+                    View helpful video tutorials here.
+                  </Text>
+                )}
+                {showDemo === 4 && (
+                  <Text style={styles.demoText}>
+                    Learn more about hypertension here.
+                  </Text>
+                )}
+              </View>
+              <View style={styles.demoButtonView}>
+                <GradientButton
+                  text={showDemo === 4 ? 'Finish' : 'Next'}
+                  color={['#2C6CFC', '#2CBDFC']}
+                  style={styles.gradientButton2}
+                  onPress={() => setShowDemo((demo) => demo + 1)}
+                />
+              </View>
+            </View>
+          )}
+        </View>
+        <View
+          style={{
+            zIndex: 29,
+            position: showDemo != 5 ? 'absolute' : 'relative',
+          }}
+        >
           <TouchableWithoutFeedback onPress={() => openMessenger()}>
             <View style={styles.messengerView}>
               <Messenger />
             </View>
           </TouchableWithoutFeedback>
         </View>
+        {/* </View> */}
       </TitleWithBackLayout>
     </>
   );
 };
 
-export default Index;
+export default HypertensionDiary;

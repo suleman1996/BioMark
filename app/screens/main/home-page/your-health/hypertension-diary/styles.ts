@@ -39,7 +39,7 @@ const styles = (colors: any) =>
     demoText: {
       fontFamily: fonts.extraBold,
       color: colors.heading,
-      fontSize: 22,
+      fontSize: 17,
     },
     demoButtonView: {
       width: '100%',
@@ -49,10 +49,12 @@ const styles = (colors: any) =>
       fontFamily: fonts.bold,
       fontSize: 18,
       color: colors.heading,
+      paddingHorizontal: 20,
     },
 
     recordKeepingView: {
-      marginHorizontal: 5,
+      // marginHorizontal: 5,
+      marginHorizontal: 20,
       flexDirection: 'row',
       alignItems: 'center',
       padding: 25,
@@ -88,6 +90,7 @@ const styles = (colors: any) =>
       position: 'absolute',
       right: 0,
       bottom: 0,
+      zIndex: 20,
       marginRight: 20,
       marginBottom: 20,
     },
