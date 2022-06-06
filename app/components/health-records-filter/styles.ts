@@ -22,7 +22,6 @@ const styles = (colors: any) =>
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
-      height: 500,
       width: '90%',
     },
     modalText2: {
@@ -42,7 +41,7 @@ const styles = (colors: any) =>
     cancel: {
       textAlign: 'center',
       marginTop: heightToDp(3),
-      marginBottom: heightToDp(4),
+      // marginBottom: heightToDp(4),
     },
     cancelText: {
       textAlign: 'center',

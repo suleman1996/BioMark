@@ -9,18 +9,20 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     mainView: {
       height: heightToDp(18),
-      backgroundColor: colors.gray,
+      backgroundColor: colors.fieldGrey,
       marginTop: heightToDp(2),
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      borderRadius: 10,
+      borderRadius: 5,
     },
     textInput: {
       flexDirection: 'row-reverse',
-      width: '70%',
+      // width: '70%',
       backgroundColor: 'transparent',
-      fontSize: responsiveFontSize(30),
+      fontSize: responsiveFontSize(50),
+      fontFamily: fonts.OpenSansBold,
+      color: '#808080',
     },
     menuTrigger: {
       flexDirection: 'row',
