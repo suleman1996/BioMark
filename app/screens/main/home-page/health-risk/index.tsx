@@ -5,6 +5,8 @@ import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 import HealthCard from 'components/health-risk-card';
 import HealthListCard from 'components/health-list-card';
+import fonts from 'assets/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 const HealthRisk = ({ route }) => {
   const { colors } = useTheme();
@@ -15,9 +17,11 @@ const HealthRisk = ({ route }) => {
   const refData = route.params.refData;
   const footNote = route.params.footNotesData;
   const calculations = route.params.calc;
+  const color = route.params.clr;
+  const svgIcon = route.params.icon;
 
   useEffect(() => {
-    console.log(calculations, 'callllllllll');
+    console.log('icon a jaaaaaaaaaaaaaaaaaaaa', svgIcon);
   });
 
   const renderItem = ({ item }) => {
@@ -41,8 +45,15 @@ const HealthRisk = ({ route }) => {
           <HealthCard
             H1Text={listItems.name}
             H2Text={listItems.card_status}
+            H2TextStyle={{ color: color, fontFamily: fonts.extraBold }}
             number={listItems.value}
-            image={require('../../../../assets/images/home/greenDrop.png')}
+            numberStyle={{
+              textAlign: 'center',
+              fontSize: responsiveFontSize('50'),
+              fontFamily: fonts.OpenSansBold,
+              color: color,
+            }}
+            svg={svgIcon}
             description={listItems.summary}
           />
           <HealthListCard

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -28,6 +28,8 @@ import { GenderEnum } from 'enum/gender-enum';
 
 import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
+import { userService } from 'services/user-service/user-service';
+import AuthContext from 'utils/auth-context';
 
 const AddDependantScreen = () => {
   const { colors } = useTheme();
@@ -36,6 +38,7 @@ const AddDependantScreen = () => {
   const formikRef = useRef<any>();
   const dispatch = useDispatch();
 
+  const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('');
   const [selectedCountryCode, setSelectedCountryCode] = useState('');
@@ -64,6 +67,16 @@ const AddDependantScreen = () => {
       setSelectedCountryCode(countryCodeParse);
     }
   }, [geoLocation]);
+
+  const userProfile = async () => {
+    try {
+      const result = await userService.getUserProfile();
+      console.log('Here is the user profile ', result.data);
+      authContext.setUserData(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
@@ -140,6 +153,7 @@ const AddDependantScreen = () => {
       .finally(async () => {
         setIsLoading(false);
         await dispatch(getAllDependents());
+        userProfile();
         goBack();
       });
     formikRef.current.submitForm();

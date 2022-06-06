@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { showMessage } from 'react-native-flash-message';
 
-import InputWithUnits from 'components/input-with-units';
+import { InputWithUnits, ActivityIndicator } from 'components';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
   ButtonWithShadowContainer,
@@ -13,37 +14,28 @@ import {
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
-// import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
-import { showMessage } from 'react-native-flash-message';
-
-import makeStyles from './styles';
-import { ActivityIndicator } from 'components';
 import {
   getDay,
   getMonth,
   getTime,
   getYear,
 } from 'utils/functions/date-format';
+import { measurmentValidator } from 'utils/functions/measurments';
+
+import makeStyles from './styles';
 
 const Weight = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const [value, setValue] = useState('');
+  const [weightTracker, setWeightTracker] = useState({
+    weight: '12',
+    is_metric: true,
+    date_entry: '',
+  });
+  const [error, setError] = useState<string>('');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [dateAndtime, setDateAndTime] = useState<any>();
-  const [validation, setValidation] = useState<any>(false);
-  const [validation2, setValidation2] = useState<any>(false);
-  const [selectedTypeWeight, setSelectedTypeWeight] = useState(1);
-  const [bodyMeasurment, setBodyMeasurment] = useState({
-    weight: 0,
-    is_metric: true,
-  });
-  const [error, setError] = useState({
-    weightError: '',
-  });
   useEffect(() => {
     let today = new Date();
     let dateTime =
@@ -54,115 +46,77 @@ const Weight = () => {
       getYear(today) +
       ' ' +
       getTime(today);
-    setDateAndTime(dateTime);
+
+    setWeightTracker((tracker) => ({ ...tracker, date_entry: dateTime }));
   }, []);
 
-  const handleUnitChange = (selectedUnit: string) => {
-    console.log('selectedUnit', selectedUnit);
-
-    setBodyMeasurment((prev: any) => ({
-      ...prev,
-      is_metric: selectedUnit === 'kg' ? true : false,
-    }));
-    console.log('bodyMeasurment', bodyMeasurment);
-  };
-  const handleChange = (value: number, key: string) => {
-    setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
-  };
-
-  const measurmentValidator = (is_metric, measurment, value) => {
-    let errorr = '';
-    const WEIGHT_RANGE = {
-      kg: {
-        min: 0,
-        max: 200,
-        errorr: 'Should be between 0-200kg',
-      },
-      lbs: {
-        min: 0,
-        max: 440,
-        errorr: 'Should be between 0-440kg',
-      },
-    };
-
-    console.log(is_metric);
-
-    if (is_metric) {
-      // KG
-      console.log('sfdhsfhd', measurment);
-      if (measurment === 'weight') {
-        errorr =
-          WEIGHT_RANGE.kg.min < value && value <= WEIGHT_RANGE.kg.max
-            ? ''
-            : WEIGHT_RANGE.kg.errorr;
-        console.log('sfdhsfhd', WEIGHT_RANGE.kg.min < value);
-        console.log('sfdhsfhd', value <= WEIGHT_RANGE.kg.max);
-      }
+  useEffect(() => {
+    if (!weightTracker.is_metric) {
+      setWeightTracker((prev) => ({
+        ...prev,
+        weight: Number((prev.weight * 2.205).toFixed(1)),
+      }));
     } else {
-      // LBS
-      if (measurment === 'weight') {
-        errorr =
-          WEIGHT_RANGE.lbs.min < value <= WEIGHT_RANGE.lbs.max
-            ? ''
-            : WEIGHT_RANGE.lbs.errorr;
-      }
+      setWeightTracker((prev) => ({
+        ...prev,
+        weight: Number((prev.weight * (1 / 2.205)).toFixed(1)),
+      }));
     }
-    console.log('->>>>>', errorr);
-    console.log('sbjdjcjdbbv');
-
-    setError((err) => ({
-      ...err,
-      weightError: errorr,
-    }));
-  };
+  }, [weightTracker.is_metric]);
 
   const onSubmit = async () => {
     let dateTime = '';
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dateTime =
-      getMonth(dateAndtime) +
+      getMonth(weightTracker.date_entry) +
       ' ' +
-      getDay(dateAndtime) +
+      getDay(weightTracker.date_entry) +
       ', ' +
-      getYear(dateAndtime) +
+      getYear(weightTracker.date_entry) +
       ' ' +
-      getTime(dateAndtime);
+      getTime(weightTracker.date_entry);
 
-    console.log('weight', value);
-    // console.log('bp_diastolic', lowValue);
-    console.log('date_entry', dateAndtime);
     try {
       setIsLoading(true);
-      const response = await userService.createWeight({
+      await userService.createWeight({
         medical: {
-          weight: value,
-          is_metric: 'true',
-          date_entry: dateAndtime,
+          ...weightTracker,
         },
       });
-      console.log('weight submitted ', response.data);
+
       alert('weight submitted ');
       setIsLoading(false);
-    } catch (error) {
+    } catch (errorr) {
       setIsLoading(false);
-      console.log(error);
-      if (error.errMsg.status === '500') {
+      if (errorr.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status === false) {
+      } else if (errorr.errMsg.status === false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: errorr.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: errorr.errMsg,
           type: 'danger',
         });
       }
     }
+  };
+
+  const handleUnitChange = (selectedUnit: string) => {
+    setWeightTracker((prev: any) => ({
+      ...prev,
+      is_metric: selectedUnit === 'kg' ? true : false,
+    }));
+  };
+
+  const handleChange = (value: number, key: string) => {
+    setWeightTracker((prev: any) => ({ ...prev, [key]: value }));
+    setError(measurmentValidator(weightTracker.is_metric, key, value) || '');
   };
 
   return (
@@ -172,65 +126,46 @@ const Weight = () => {
         <View
           style={{
             paddingHorizontal: widthToDp(4),
-            // borderWidth: 5,
             marginBottom: heightToDp(25),
           }}
         >
-          {/* <WeightChooser
-            height={15}
-            label="Your Reading"
-            textAlign="right"
-            placeholder={'0.0'}
-            onChangeText={onChangeText}
-            value={value}
-            selectedType={selectedTypeWeight}
-            setSelectedType={setSelectedTypeWeight}
-            setValue={setValue}
-          /> */}
           <InputWithUnits
-            title="Weight"
+            title="Your Reading"
             placeholder="0.0"
             units={['kg', 'lbs']}
-            unit={bodyMeasurment.is_metric ? 'kg' : 'lbs'}
-            value={bodyMeasurment.weight.toString()}
+            unit={weightTracker.is_metric ? 'kg' : 'lbs'}
+            value={weightTracker.weight.toString()}
             onChangeText={(val: any) => handleChange(val, 'weight')}
             onUnitChange={handleUnitChange}
-            error={error.weightError}
+            error={error || ''}
             onBlur={() => {
-              console.log('WHyyy?');
-              measurmentValidator(
-                bodyMeasurment.is_metric,
-                'weight',
-                bodyMeasurment.weight
+              setError(
+                measurmentValidator(
+                  weightTracker.is_metric,
+                  'weight',
+                  weightTracker.weight
+                ) || ''
               );
             }}
           />
-          {validation ? (
-            <Text style={styles.errorMessage}>
-              Please enter a valid weight between 0 - 200 kg
-            </Text>
-          ) : null}
-          {validation2 ? (
-            <Text style={styles.errorMessage}>
-              Please enter a valid weight between 0 - 400 lbs
-            </Text>
-          ) : null}
 
-          {!validation && !validation2 && value ? (
+          {error?.length === 0 && weightTracker?.weight && (
             <>
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
-                date={dateAndtime}
-                setDate={(e: any) => setDateAndTime(e)}
+                date={weightTracker?.date_entry}
+                setDate={(e: any) =>
+                  setWeightTracker((tracker) => ({ ...tracker, date_entry: e }))
+                }
               />
             </>
-          ) : null}
+          )}
         </View>
 
         <ButtonWithShadowContainer
           onPress={onSubmit}
           title={'Add'}
-          disabled={validation || validation2 || !value ? true : false}
+          disabled={!weightTracker ? true : false}
         />
       </ScrollView>
     </TitleWithBackWhiteBgLayout>

@@ -4,6 +4,8 @@ import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme, TextInput } from 'react-native-paper';
 
+import { ErrorMessage } from 'components/base';
+
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import makeStyles from './styles';
@@ -35,6 +37,7 @@ const InputWithUnits = ({
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
+  console.log(typeof error, 'here', error, error.length > 0);
   return (
     <>
       <Text style={styles.title}>{title}</Text>
@@ -47,12 +50,10 @@ const InputWithUnits = ({
           autoFocus={false}
           underlineColor="transparent"
           activeUnderlineColor="transparent"
-          borderBottomWidth={0}
           keyboardType="numeric"
           style={styles.textInput}
           selectionColor="darkblue"
           onBlur={onBlur}
-          error={Boolean(error)}
         />
         <Menu ref={menuRef}>
           <MenuTrigger style={styles.menuTrigger}>
@@ -67,6 +68,7 @@ const InputWithUnits = ({
           <MenuOptions optionsContainerStyle={styles.optionContainer}>
             {units.map((unitValue) => (
               <Pressable
+                key={unitValue}
                 onPress={() => {
                   onUnitChange(unitValue);
                   menuRef.current.close();
@@ -78,6 +80,7 @@ const InputWithUnits = ({
           </MenuOptions>
         </Menu>
       </View>
+      {error?.length > 0 && <ErrorMessage errorMessage={error} />}
     </>
   );
 };

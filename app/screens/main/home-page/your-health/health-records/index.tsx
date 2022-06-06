@@ -30,6 +30,7 @@ import SCREENS from 'navigation/constants/index';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  // const [checked, setChecked] = React.useState('');
 
   const { colors } = useTheme();
 
@@ -122,7 +123,8 @@ const HealthRecord = () => {
   );
 
   const renderItem2 = ({ item }) => (
-    <View
+    <TouchableOpacity
+      onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
       style={{
         backgroundColor: 'white',
         paddingTop: 10,
@@ -159,7 +161,7 @@ const HealthRecord = () => {
       </View>
 
       <View style={styles.bottomView}></View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -194,12 +196,11 @@ const HealthRecord = () => {
             keyExtractor={(item) => item.id}
           />
 
-          <TouchableOpacity style={styles.uploadResult}>
-            <GoogleFitButton
-              disabled={false}
-              title="Upload Results"
-              onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
-            />
+          <TouchableOpacity
+            style={styles.uploadResult}
+            onPress={() => navigation.navigate(SCREENS.RESULT_UPLOAD)}
+          >
+            <GoogleFitButton disabled={false} title="Upload Results" />
           </TouchableOpacity>
 
           <View style={styles.filterView}>
@@ -215,6 +216,12 @@ const HealthRecord = () => {
             title2="Document Upload Type"
             cancelModal={() => setModalVisible(!modalVisible)}
             closeModal={() => setModalVisible(!modalVisible)}
+            firstValue={'first'}
+            secondValue={'second'}
+            // clearFilter={()=>set}
+            // status={checked === 'first' ? 'checked' : 'unchecked'}
+            // onPressRadio1={() => setChecked('first')}
+            // touchableRadio1={() => setChecked('first')}
           />
 
           <FlatList

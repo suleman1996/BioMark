@@ -23,11 +23,10 @@ import { navigate } from 'services/nav-ref';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { getReduxPspModules } from 'store/home/home-actions';
+import Config from 'react-native-config';
 
 const openMessenger = () => {
-  Linking.openURL(
-    'mailto:support@biomarking.com?subject=SendMail&body=Description'
-  );
+  Linking.openURL(Config.MESSENGER_URL);
 };
 
 const DiabetesCenter = () => {
@@ -178,9 +177,9 @@ const DiabetesCenter = () => {
             renderItem={(item) => (
               <PdfList
                 item={item}
-                onPress={() =>
-                  navigate(SCREENS.PDF_DIABETES_SUPPORT, { code: item })
-                }
+                onPress={() => {
+                  navigate(SCREENS.PDF_DIABETES_SUPPORT, { code: item });
+                }}
               />
             )}
             keyExtractor={(item) => item.id}

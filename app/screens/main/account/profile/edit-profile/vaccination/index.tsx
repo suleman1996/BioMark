@@ -166,7 +166,7 @@ export default function VaccinationScreen() {
                     //       // null
                     // );
                     // console.log(index, 'items');
-                    // index == 0 ? alert('dkjkdj') : null;
+                    index == 0 ? setList('') : index == 2 ? setList('') : null;
                     console.log(index, 'value------');
                   }}
                   style={[
@@ -245,28 +245,38 @@ export default function VaccinationScreen() {
           ) : null}
 
           {value == 1 ? (
-            <View style={{ marginHorizontal: 30, marginTop: 20 }}>
+            <View
+              style={{
+                marginHorizontal: 30,
+                marginTop: 20,
+              }}
+            >
               <FlatList
                 data={list}
+                showsVerticalScrollIndicator={false}
                 numColumns={3}
+                // key={list.length}
                 extraData={refresh}
+                columnWrapperStyle={{ flexWrap: 'wrap', flex: 1 }}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => {
                   return (
-                    <TouchableOpacity
-                      style={styles.listview}
-                      onPress={() => {
-                        list.splice(index, 1), setRefreh(!refresh);
-                      }}
-                    >
-                      <Text style={styles.listTextColor}>{item}</Text>
-                      <Entypo
-                        name={'cross'}
-                        size={responsiveFontSize(15)}
-                        color={colors.darkGray}
-                        style={styles.crossIcon}
-                      />
-                    </TouchableOpacity>
+                    <>
+                      <TouchableOpacity
+                        style={styles.listview}
+                        onPress={() => {
+                          list.splice(index, 1), setRefreh(!refresh);
+                        }}
+                      >
+                        <Text style={styles.listTextColor}>{item}</Text>
+                        <Entypo
+                          name={'cross'}
+                          size={responsiveFontSize(15)}
+                          color={colors.darkGray}
+                          style={styles.crossIcon}
+                        />
+                      </TouchableOpacity>
+                    </>
                   );
                 }}
               />

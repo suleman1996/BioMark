@@ -16,7 +16,7 @@ export const makeStyles = (colors: any) =>
       backgroundColor: colors.gray,
       flex: 0,
       borderRadius: widthToDp(2),
-      maxHeight: heightToDp(6.5),
+      minHeight: heightToDp(6.5),
     },
     errorContainer: {
       width: '100%',

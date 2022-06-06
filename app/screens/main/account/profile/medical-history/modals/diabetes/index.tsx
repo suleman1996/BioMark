@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { DropdownMenu } from 'components/base';
@@ -8,10 +8,12 @@ import {
   RadioButtonQuestion,
 } from 'components/higher-order';
 
-import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
-const options = [{ title: 'Type 1 only' }, { title: 'Type 2 only' }];
+const options = [
+  { label: 'Type 1 only', value: 'Type 1 only' },
+  { label: 'Type 2 only', value: 'Type 2 only' },
+];
 
 type Props = {
   isVisible: boolean;
@@ -29,7 +31,9 @@ const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
 
   // diagnoesed type 1 only
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [dDiagnosedWith, setDiagnosedWith] = useState('');
+
+  const [dDiagnosedWith, setDiagnosedWith] = useState<any>();
+  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
 
   return (
     <ModalWithBottomBtn
@@ -46,17 +50,27 @@ const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
       <Text style={GlobalStyles(colors).qLabel}>
         What type of diabetes have you been diagnosed with?
       </Text>
-      <View
-        style={{
-          height: heightToDp(7),
-          ...GlobalStyles(colors).paddingHorizontal,
-        }}
-      >
-        <DropdownMenu
+
+      {/* <DropdownMenu
           options={options}
-          setSelectedDropdown={setDiagnosedWith}
-        />
-      </View>
+          setSelectedDropdown={setDiagnosedWith} 
+        /> */}
+      <DropdownMenu
+        options={options}
+        selectedValue={dDiagnosedWith}
+        onValueChange={(value: any) => {
+          setDiagnosedWith(value);
+          setIsDropDownChanged(true);
+        }}
+        error={
+          isDropdownChanged
+            ? dDiagnosedWith === '---'
+              ? 'Please select your ethnicity'
+              : ''
+            : ''
+        }
+      />
+
       <RadioButtonQuestion
         isTrue={ans2}
         setIsTrue={setAns2}

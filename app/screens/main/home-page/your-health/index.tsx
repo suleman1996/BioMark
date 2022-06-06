@@ -12,7 +12,7 @@ import {
   Image,
   Keyboard,
 } from 'react-native';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import * as Yup from 'yup';
 import Styles from './styles';
@@ -53,6 +53,8 @@ import {
   Sleeping_Calc,
 } from '../health-risk/list-data';
 import Heart from '../../../../assets/svgs/heart';
+import Camera from '../../../../assets/svgs/report-scan';
+import ReportVerify from '../../../../assets/svgs/report-verify';
 import Diabetes from '../../../../assets/svgs/diabtes';
 import BP from '../../../../assets/svgs/bP';
 import BMI from '../../../../assets/svgs/Bmi';
@@ -62,6 +64,8 @@ import Stress from '../../../../assets/svgs/stress';
 import Sleep from '../../../../assets/svgs/sleep';
 import Health from '../../../../assets/svgs/Health';
 import Progress from '../../../../assets/svgs/Progress';
+import Processing from '../../../../assets/svgs/report-processing';
+import ReportView from '../../../../assets/svgs/report-viewing';
 import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
@@ -175,10 +179,10 @@ const Index = () => {
 
   const [healthTracker] = React.useState([]);
   const [stepIndicatorIcons] = React.useState([
-    <Heart />,
-    <Diabetes />,
-    <BMI />,
-    <BP />,
+    <Camera />,
+    <Processing />,
+    <ReportView />,
+    <ReportVerify />,
   ]);
   const [healthRisksData, setHealthRisksData] = React.useState([]);
 
@@ -187,6 +191,8 @@ const Index = () => {
   const [selectedRef, setSelectedRef] = React.useState();
   const [selectedFootNotes, setSelectedFootNotes] = React.useState();
   const [selectedCalculations, setselectedCalculations] = React.useState();
+  const [colorr, setColorr] = useState('');
+  const [svgImage, setSvgImage] = useState('');
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState('');
@@ -254,6 +260,8 @@ const Index = () => {
             setSelectedRef(References);
           setSelectedFootNotes(FootNotes);
           setselectedCalculations(Calculations);
+          setColorr(color);
+          setSvgImage(svg);
         }}
         style={[
           styles.renderHealthRisk,
@@ -440,7 +448,7 @@ const Index = () => {
             <RenderHealthRiskView
               healthRisks={healthRisksData?.heart}
               color={colors.lightGreen}
-              svg={<Heart />}
+              svg={<Heart fill={colors.danger} />}
               hardCode={Heart_Disease}
               References={Heart_Disease_ref}
               FootNotes={Heart_Disease_footnotes}
@@ -510,6 +518,8 @@ const Index = () => {
                   refData: selectedRef,
                   footNotesData: selectedFootNotes,
                   calc: selectedCalculations,
+                  clr: colorr,
+                  icon: svgImage,
                 })
               }
               name={selectedHealthRisk?.name}
