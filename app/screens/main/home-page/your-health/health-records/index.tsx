@@ -20,16 +20,18 @@ import HealthRecordFilter from 'components/health-records-filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import {
-  getReduxHealthTracker,
-  getReduxDashboard,
-  getHealthTrackerRisks,
+  getReduxLatestResult,
+  getReduxPastResult,
 } from 'store/home/home-actions';
 
 import Filter from '../../../../../assets/svgs/filter';
 import SCREENS from 'navigation/constants/index';
+import LatestResultCard from 'components/latest-result-card';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [latestResult, setLatestResult] = useState('');
+  const [pastResults, setPastResults] = useState([]);
   // const [checked, setChecked] = React.useState('');
 
   const { colors } = useTheme();
@@ -38,118 +40,45 @@ const HealthRecord = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const hell = useSelector((state: IAppState) => state.home.healthTracker);
-  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
-  const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+  const newResult = useSelector(
+    (state: IAppState) => state.home.getLatestResultData
+  );
+  const pastResult = useSelector(
+    (state: IAppState) => state.home.getPastResultData
+  );
 
   useEffect(() => {
-    dispatch(getReduxHealthTracker());
-    console.log('Health Trackeer api =======>', hell);
-    dispatch(getReduxDashboard());
-    console.log('Dashboard api =======>', dashboard);
-    dispatch(getHealthTrackerRisks());
-    console.log('healthRisk api =======>', healthRisk);
-    // handleHEalthTracker();
+    dispatch(getReduxLatestResult());
+    dispatch(getReduxPastResult());
+    console.log('past results ', pastResult);
+    setPastResults(pastResult);
+    console.log('latest results =======>', newResult);
+    // alert(JSON.stringify(newResult.result.summary));
+    setLatestResult(newResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-
-  const latestResult = [
-    {
-      title: 'Test',
-      text: 'March 22, 2022 09:00pm',
-      Ref: 'REF:555444333',
-      text2: 'Converted',
-    },
-  ];
-
-  const pastResult = [
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-  ];
-
-  const renderItem = ({ item }) => (
-    <View
-      style={{
-        backgroundColor: 'white',
-        paddingTop: 10,
-        marginTop: 20,
-        borderRadius: 10,
-        elevation: 7,
-        marginBottom: 10,
-      }}
-    >
-      <View style={styles.view}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={{ height: 30, width: 30 }}
-        />
-        <Text style={styles.title}>{item.title}</Text>
-      </View>
-      <Text style={styles.text3}>{item.text}</Text>
-      <Text style={styles.text3}>{item.Ref}</Text>
-
-      <View style={styles.roundView}>
-        <View style={styles.round}></View>
-        <Text style={styles.text4}>{item.text2}</Text>
-      </View>
-      <View style={styles.bottomView}></View>
-    </View>
-  );
+  }, []);
 
   const renderItem2 = ({ item }) => (
     <TouchableOpacity
       onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
-      style={{
-        backgroundColor: 'white',
-        paddingTop: 10,
-        marginTop: 20,
-        borderRadius: 10,
-        elevation: 10,
-        marginBottom: 0,
-      }}
+      style={styles.pastResultMainView}
     >
       <View style={styles.view}>
         <Image
           source={require('../../../../../assets/images/home/GD.png')}
           style={{ height: 30, width: 30 }}
         />
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.name}</Text>
       </View>
-      <Text style={styles.text3}>{item.text}</Text>
-      <Text style={styles.text3}>{item.Ref}</Text>
+      <Text style={styles.text3}>{item.received}</Text>
+      <Text style={styles.text3}>REF: {item.ref_no}</Text>
 
       <View style={styles.pastResultView}>
         <Image
           source={require('../../../../../assets/images/home/GD.png')}
           style={styles.prImage}
         />
-        <Text style={styles.text6}>{item.text2}</Text>
+        <Text style={styles.text6}>{item.result.summary}</Text>
       </View>
 
       <View style={styles.pastResultView2}>
@@ -157,7 +86,7 @@ const HealthRecord = () => {
           source={require('../../../../../assets/images/home/GD.png')}
           style={styles.prImage}
         />
-        <Text style={styles.text7}>{item.text3}</Text>
+        <Text style={styles.text7}>{item.result.doctor}</Text>
       </View>
 
       <View style={styles.bottomView}></View>
@@ -189,13 +118,19 @@ const HealthRecord = () => {
             </Text>
           </View>
 
-          <Text style={styles.latestResult}>Your Latest Results</Text>
-          <FlatList
+          <LatestResultCard
+            title="Your Latest Results"
+            name={latestResult.name}
+            received={latestResult.received}
+            ref_no={latestResult.ref_no}
+            summary={latestResult.result.summary}
+            doctor={latestResult.result.doctor}
+          />
+          {/* <FlatList
             data={latestResult}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
-          />
-
+          /> */}
           <TouchableOpacity
             style={styles.uploadResult}
             onPress={() => navigation.navigate(SCREENS.RESULT_UPLOAD)}
@@ -225,7 +160,7 @@ const HealthRecord = () => {
           />
 
           <FlatList
-            data={pastResult}
+            data={pastResults}
             renderItem={renderItem2}
             keyExtractor={(item) => item.id}
           />
@@ -242,5 +177,4 @@ const HealthRecord = () => {
     </View>
   );
 };
-
 export default HealthRecord;
