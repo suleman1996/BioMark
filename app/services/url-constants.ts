@@ -62,6 +62,10 @@ const API_URLS = {
   CREATE_HBA1C: '/api/v1/patient/psp/trackers/hba1c',
   GET_HEALTH_RISKS: '/api/v1/patient/risks',
 
+  // Health Record
+
+  GET_RESULT_OVERVIEW: '/api/v1/patient/results/',
+
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   COVID_GET_RESUTLS_DOWNLOAD_V1: '/api/v1/patient/results/',

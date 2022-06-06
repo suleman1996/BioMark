@@ -1,15 +1,18 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from 'react-native-paper';
 
 import Styles from './styles';
 import Filter from 'assets/svgs/filter';
+import SCREENS from 'navigation/constants/index';
 
 type Props = {};
 
 const Card = ({ item }: Props) => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
   const styles = Styles(colors);
 
@@ -30,6 +33,7 @@ const Card = ({ item }: Props) => {
 
   const RenderMoreInfo = () => (
     <TouchableOpacity
+      onPress={() => navigation.navigate(SCREENS.MORE_INFO)}
       style={[
         styles.moreView,
         {

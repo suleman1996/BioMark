@@ -10,6 +10,7 @@ import {
   PspModule,
   PspModuleDataContents,
   LabStatusPayload,
+  ResultResponse,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -22,6 +23,7 @@ import {
   PSP_MODULE,
   PSP_PDF_LINK,
   GET_LAB_STATUS,
+  GET_RESULT_OVERVIEW,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -61,6 +63,11 @@ export const addPspPdfLink = (data: PspModuleDataContents) => ({
 });
 export const addLabResultStatus = (data: LabStatusPayload) => ({
   type: GET_LAB_STATUS,
+  payload: data,
+});
+
+export const getResultOverView = (data: ResultResponse) => ({
+  type: GET_RESULT_OVERVIEW,
   payload: data,
 });
 
@@ -177,6 +184,20 @@ export const getReduxLabResultStatus =
         console.log('lab status', res);
 
         await dispatch(addLabResultStatus(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxResultOverview =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getResultOverView(140)
+      .then(async (res) => {
+        // console.log('Result Overview', res);
+
+        await dispatch(getResultOverView(res));
       })
       .catch((err) => {
         logNow(err);

@@ -9,6 +9,7 @@ import {
   PSP_MODULE,
   PSP_PDF_LINK,
   GET_LAB_STATUS,
+  GET_RESULT_OVERVIEW,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -67,6 +68,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getLabStatusData: action.payload,
+      };
+    }
+    case GET_RESULT_OVERVIEW: {
+      return {
+        ...state,
+        getResultOverViewData: action.payload,
       };
     }
 

@@ -45,6 +45,7 @@ import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabete
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
 import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
 import ResultUpload from 'screens/main/home-page/your-health/health-records/upload-results';
+import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -75,6 +76,7 @@ const {
   RESULT_OVERVIEW,
   EDIT_MEDICATION,
   RESULT_UPLOAD,
+  MORE_INFO,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -160,6 +162,7 @@ const AppNavigator = () => {
           <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />
           <Stack.Screen name={ADD_HBA1C} component={AddHba1c} />
           <Stack.Screen name={RESULT_OVERVIEW} component={ResultOverView} />
+          <Stack.Screen name={MORE_INFO} component={MoreInfo} />
           <Stack.Screen name={RESULT_UPLOAD} component={ResultUpload} />
         </>
       ) : (

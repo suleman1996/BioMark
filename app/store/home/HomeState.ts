@@ -8,6 +8,7 @@ import {
   PspModule,
   PspModuleDataContents,
   LabStatusPayload,
+  ResultResponse,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -19,4 +20,5 @@ export class HomeState {
   pspModuleData: PspModule[] = [];
   PspDataContents: PspModuleDataContents[] = [];
   getLabStatusData: LabStatusPayload[] = [];
+  getResultOverViewData: ResultResponse[] = [];
 }
