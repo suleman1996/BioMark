@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { addAllergiesConditionsUpdate } from 'store/profile/profile-actions';
 import { logNow } from 'utils/functions/log-binder';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 
@@ -81,7 +81,8 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             fontSize: responsiveFontSize(25),
             fontFamily: GlobalFonts.medium,
             color: colors.darkPrimary,
-            paddingLeft: widthToDp(6),
+            paddingLeft: widthToDp(4),
+            paddingTop: heightToDp(1),
           }}
         >
           {qData + ' Allergies'}

@@ -36,7 +36,7 @@ const RenderHealthTrack = ({ item }) => {
           if (getMedNewTracker?.medication) {
             navigation.navigate(SCREENS.MEDICATION);
           } else {
-            alert('add medication');
+            navigation.navigate(SCREENS.ADD_NEW_MEDICATION);
           }
         } else {
           alert('Under Development');

@@ -11,8 +11,6 @@ import {
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
-// import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
 
 import makeStyles from './styles';
@@ -23,6 +21,8 @@ import {
   getTime,
   getYear,
 } from 'utils/functions/date-format';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 
 const BloodPressure = () => {
   const { colors } = useTheme();
@@ -102,7 +102,7 @@ const BloodPressure = () => {
         },
       });
       console.log('blood pressure successful', response.data);
-      alert('blood pressure successful');
+      navigate(SCREENS.HEALTH_PROGRESS, 4);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
