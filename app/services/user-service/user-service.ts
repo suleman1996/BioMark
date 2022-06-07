@@ -21,6 +21,10 @@ import {
   EncodedResultOverviewPayload,
   LabStatusResponse,
   HealthTrackerPayloadData,
+  WeightProgressLogsPayload,
+  BloodSugarProgressLogsPayload,
+  Hba1CProgressLogsPayload,
+  BloodPressureProgressLogsPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -1053,6 +1057,90 @@ const getResultOverView = (id) => {
   });
 };
 
+const getWeightLogs = () => {
+  return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_WEIGHT_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getBloodSugarLogs = () => {
+  return new Promise<BloodSugarProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BLOOD_SUGAR_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getHba1cLogs = () => {
+  return new Promise<Hba1CProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_HBA1C_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getBloodPressureLogs = () => {
+  return new Promise<BloodPressureProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BLOOD_PRESSURE_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -1114,4 +1202,8 @@ export const userService = {
   getHypertensionHealthTracker,
   getPspHyperModules,
   getPspHyperPdfLink,
+  getWeightLogs,
+  getBloodSugarLogs,
+  getHba1cLogs,
+  getBloodPressureLogs,
 };

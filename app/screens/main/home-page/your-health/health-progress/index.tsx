@@ -38,7 +38,6 @@ const Index = () => {
   const [selectedHorizontal, setSelectedHorizontal] = useState(
     route?.params ? route?.params : 0
   );
-  console.log('nav', route.params);
 
   const horizontalListItem = ({
     item,

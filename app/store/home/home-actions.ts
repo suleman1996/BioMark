@@ -14,6 +14,10 @@ import {
   EncodedResultOverviewPayload,
   LabStatusResponse,
   HealthTrackerPayloadData,
+  WeightProgressLogsPayload,
+  BloodSugarProgressLogsPayload,
+  Hba1CProgressLogsPayload,
+  BloodPressureProgressLogsPayload,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -32,6 +36,10 @@ import {
   GET_PSP_HYPERTENSION_HEALTH_TRACKER,
   PSP_HYPER_MODULE,
   PSP_PDF_HYPER_LINK,
+  GET_RESULT_LOGS,
+  GET_BLOOD_SUGAR_LOGS,
+  GET_HBA1C_LOGS,
+  GET_BP_LOGS,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -100,6 +108,24 @@ export const addLabResultStatus = (data: LabStatusPayload) => ({
 
 export const getResultOverView = (data: ResultResponse) => ({
   type: GET_RESULT_OVERVIEW,
+  payload: data,
+});
+
+export const getWeightLogs = (data: WeightProgressLogsPayload) => ({
+  type: GET_RESULT_LOGS,
+  payload: data,
+});
+
+export const getBloodSuarLogs = (data: BloodSugarProgressLogsPayload) => ({
+  type: GET_BLOOD_SUGAR_LOGS,
+  payload: data,
+});
+export const getHba1cLogs = (data: Hba1CProgressLogsPayload) => ({
+  type: GET_HBA1C_LOGS,
+  payload: data,
+});
+export const getBPLogs = (data: BloodPressureProgressLogsPayload) => ({
+  type: GET_BP_LOGS,
   payload: data,
 });
 
@@ -295,6 +321,62 @@ export const getReduxResultOverview =
         // console.log('Result Overview', res);
 
         await dispatch(getResultOverView(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxWeightLogs =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getWeightLogs()
+      .then(async (res) => {
+        // console.log('Result Overview', res);
+
+        await dispatch(getWeightLogs(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxBloodSugarLogs =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getBloodSugarLogs()
+      .then(async (res) => {
+        // console.log('Result Overview', res);
+
+        await dispatch(getBloodSuarLogs(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxHba1cLogs =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getHba1cLogs()
+      .then(async (res) => {
+        // console.log('Result Overview', res);
+
+        await dispatch(getHba1cLogs(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxBloodPressureLogs =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getBloodPressureLogs()
+      .then(async (res) => {
+        // console.log('Result Overview', res);
+
+        await dispatch(getBPLogs(res));
       })
       .catch((err) => {
         logNow(err);
