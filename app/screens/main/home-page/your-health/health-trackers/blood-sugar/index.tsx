@@ -26,6 +26,8 @@ import {
   getTime,
   getYear,
 } from 'utils/functions/date-format';
+import SCREENS from 'navigation/constants/index';
+import { navigate } from 'services/nav-ref';
 
 const BloodSugar = () => {
   const { colors } = useTheme();
@@ -111,7 +113,7 @@ const BloodSugar = () => {
         },
       });
       console.log('blood sugar successful', response.data);
-      alert('blood sugar successful');
+      navigate(SCREENS.HEALTH_PROGRESS, 1);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

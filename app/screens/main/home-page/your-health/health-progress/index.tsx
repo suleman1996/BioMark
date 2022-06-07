@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { useTheme, TouchableRipple } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { FloatingAction } from 'react-native-floating-action';
 
 import Weight from './weight/index';
@@ -27,6 +27,7 @@ const Index = () => {
   const styles = Styles(colors);
 
   const navigation = useNavigation();
+  const route = useRoute();
   const [healthProgress] = useState([
     { id: 0, title: 'Weight' },
     { id: 1, title: 'Blood Sugar' },
@@ -34,7 +35,10 @@ const Index = () => {
     { id: 3, title: 'HbA1c' },
     { id: 4, title: 'Blood Pressure' },
   ]);
-  const [selectedHorizontal, setSelectedHorizontal] = useState(0);
+  const [selectedHorizontal, setSelectedHorizontal] = useState(
+    route?.params ? route?.params : 0
+  );
+  console.log('nav', route.params);
 
   const horizontalListItem = ({
     item,

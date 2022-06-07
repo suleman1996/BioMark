@@ -7,7 +7,7 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     card: {
       width: widthToDp(90),
-      height: heightToDp(90),
+      height: heightToDp(85),
       backgroundColor: colors.white,
       borderRadius: widthToDp(3),
     },

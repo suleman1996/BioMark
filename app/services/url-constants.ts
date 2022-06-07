@@ -76,6 +76,10 @@ const API_URLS = {
 
   LAB_STATUS_VERYFY: '/api/v1/patient/results/verify',
 
+  // Health Records
+  HEALTH_LATEST_RESULTS: '/api/v1/patient/results/latest',
+  HEALTH_PAST_RESULTS: '/api/v1/patient/results/past',
+
   // Medication
   GET_NEW_MEDICATION_DATA: '/api/v1/patient/psp/medications/new',
   GET_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication',

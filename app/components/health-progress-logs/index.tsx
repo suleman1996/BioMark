@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 
+import { TouchableRipple } from 'react-native-paper';
 import Arrow from 'react-native-vector-icons/AntDesign';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
@@ -14,21 +15,26 @@ const Index = (props: Props) => {
   const [log, setLog] = React.useState(false);
 
   const RenderLog = ({ item }) => (
-    <View style={styles.renderLog}>
-      <View style={{ width: '40%' }}>
-        <Text
-          style={{
-            color: item?.color ? item?.color : colors.heading,
-            fontFamily: fonts.bold,
-          }}
-        >
-          {item.value}
-        </Text>
-      </View>
-      <View style={{ width: '60%', alignItems: 'flex-end' }}>
-        <Text style={{ color: colors.blue, fontSize: 12 }}>{item.date}</Text>
-      </View>
-    </View>
+    <TouchableRipple
+      onPress={() => console.log('log item', item)}
+      style={styles.renderLog}
+    >
+      <>
+        <View style={{ width: '40%' }}>
+          <Text
+            style={{
+              color: item?.color ? item?.color : colors.heading,
+              fontFamily: fonts.bold,
+            }}
+          >
+            {item.value}
+          </Text>
+        </View>
+        <View style={{ width: '60%', alignItems: 'flex-end' }}>
+          <Text style={{ color: colors.blue, fontSize: 12 }}>{item.date}</Text>
+        </View>
+      </>
+    </TouchableRipple>
   );
 
   return (

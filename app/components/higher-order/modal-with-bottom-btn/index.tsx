@@ -38,7 +38,7 @@ const ModalWithBottomBtn = ({
           contentContainerStyle={{ flex: 1 }}
           keyboardShouldPersistTaps="always"
         >
-          <Text style={styles.title}>{title}</Text>
+          {title ? <Text style={styles.title}>{title}</Text> : null}
           {children}
         </ScrollView>
         <ButtonWithShadowContainer

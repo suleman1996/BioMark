@@ -4,7 +4,7 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 
-const makeStyles = (colors: any) =>
+export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -55,4 +55,4 @@ const makeStyles = (colors: any) =>
       color: colors.lightDark,
     },
   });
-export default makeStyles;
+// export default makeStyles;

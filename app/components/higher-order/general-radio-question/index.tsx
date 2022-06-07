@@ -23,7 +23,7 @@ const GeneralRadioQuestions = ({
   const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
-      <Text style={styles.qText}>{question}</Text>
+      {question ? <Text style={styles.qText}>{question}</Text> : null}
       <View style={styles.radioContainer}>
         {options?.map((item: any, index: number) => (
           <View key={index + item} style={styles.singleRadioContainer}>

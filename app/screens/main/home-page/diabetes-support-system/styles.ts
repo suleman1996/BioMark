@@ -28,5 +28,8 @@ export const makeStyles = (colors: any) =>
       marginTop: heightToDp(23),
       marginBottom: 10,
     },
+    gradientButtonView: {
+      marginHorizontal: widthToDp(8),
+    },
   });
 export default makeStyles;
