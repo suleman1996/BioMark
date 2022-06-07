@@ -2,7 +2,10 @@ import { TouchableOpacity, View, ScrollView } from 'react-native';
 import React from 'react';
 
 import Styles from './styles';
+import SCREENS from 'navigation/constants/index';
 import { Text, useTheme } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReduxWeightLogs } from 'store/home/home-actions';
 
 import GraphHeader from '../../../../../../components/graph-header/index';
 import LineGraph from '../../../../../../components/line-graph/index';
@@ -16,6 +19,11 @@ import Person from '../../../../../../assets/svgs/Bmi';
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+
+  const dispatch = useDispatch();
+  const weightLogs = useSelector(
+    (state: IAppState) => state.home.weightLogsData
+  );
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -48,28 +56,14 @@ const Index = () => {
     id: 0,
     title: 'kg',
   });
-  const [logData] = React.useState([
-    {
-      id: 0,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 1,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 2,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 3,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-  ]);
+  const [logData] = React.useState(weightLogs?.log);
+
+  React.useEffect(() => {
+    dispatch(getReduxWeightLogs());
+    // console.log('Result weight logs ', weightLogs);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -87,7 +81,7 @@ const Index = () => {
       />
 
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <GraphHeader
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
@@ -100,7 +94,8 @@ const Index = () => {
             </TouchableOpacity>
           </View>
           <LineGraph />
-          <Logs logData={logData} />
+          <Logs navigate={SCREENS.WEIGHT} logData={logData} />
+          <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton svg={<Person height={28} width={28} />} />
       </View>

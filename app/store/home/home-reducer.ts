@@ -12,6 +12,10 @@ import {
   GET_RESULT_OVERVIEW,
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
+  GET_RESULT_LOGS,
+  GET_BLOOD_SUGAR_LOGS,
+  GET_HBA1C_LOGS,
+  GET_BP_LOGS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -88,6 +92,30 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getPastResultData: action.payload,
+      };
+    }
+    case GET_RESULT_LOGS: {
+      return {
+        ...state,
+        weightLogsData: action.payload,
+      };
+    }
+    case GET_BLOOD_SUGAR_LOGS: {
+      return {
+        ...state,
+        bloodSugarLogsData: action.payload,
+      };
+    }
+    case GET_HBA1C_LOGS: {
+      return {
+        ...state,
+        hba1cLogsData: action.payload,
+      };
+    }
+    case GET_BP_LOGS: {
+      return {
+        ...state,
+        bPLogsData: action.payload,
       };
     }
 
