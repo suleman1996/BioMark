@@ -25,6 +25,10 @@ import {
   BloodSugarProgressEntryPayload,
   Hba1CProgressEntryPayload,
   MedicationTrackerPayload,
+  WeightProgressLogsPayload,
+  BloodSugarProgressLogsPayload,
+  Hba1CProgressLogsPayload,
+  BloodPressureProgressLogsPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -1019,7 +1023,6 @@ const getBloodPressureProgress = (id) => {
       .then(async (response) => {
         try {
           console.log('BPProgress', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1028,6 +1031,27 @@ const getBloodPressureProgress = (id) => {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('BPProgress error', err);
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+const getWeightLogs = () => {
+  return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_WEIGHT_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
         reject(err);
       });
   });
@@ -1039,7 +1063,6 @@ const getBloodSugarProgress = (id) => {
       .then(async (response) => {
         try {
           console.log('BSProgress', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1048,6 +1071,27 @@ const getBloodSugarProgress = (id) => {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('BSProgress error', err);
+
+        reject(err);
+      });
+  });
+};
+const getBloodSugarLogs = () => {
+  return new Promise<BloodSugarProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BLOOD_SUGAR_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs log error', err);
         reject(err);
       });
   });
@@ -1072,6 +1116,27 @@ const getHba1cProgress = (id) => {
       });
   });
 };
+
+const getHba1cLogs = () => {
+  return new Promise<Hba1CProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_HBA1C_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get hb1c log error', err);
+        reject(err);
+      });
+  });
+};
 const getMedicationProgress = (id) => {
   return new Promise<MedicationTrackerPayload>((resolve, reject) => {
     client
@@ -1092,6 +1157,28 @@ const getMedicationProgress = (id) => {
       });
   });
 };
+
+const getBloodPressureLogs = () => {
+  return new Promise<BloodPressureProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BLOOD_PRESSURE_LOGS)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -1155,4 +1242,8 @@ export const userService = {
   getBloodSugarProgress,
   getHba1cProgress,
   getMedicationProgress,
+  getWeightLogs,
+  getBloodSugarLogs,
+  getHba1cLogs,
+  getBloodPressureLogs,
 };

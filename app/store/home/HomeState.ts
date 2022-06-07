@@ -16,6 +16,10 @@ import {
   BloodSugarProgressEntryPayload,
   Hba1CProgressEntryPayload,
   MedicationTrackerPayload,
+  WeightProgressLogsPayload,
+  BloodSugarProgressLogsPayload,
+  Hba1CProgressLogsPayload,
+  BloodPressureProgressLogsPayload,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -35,4 +39,8 @@ export class HomeState {
   getBsProgressData: BloodSugarProgressEntryPayload[] = [];
   getHba1cProgressData: Hba1CProgressEntryPayload[] = [];
   getMedicationProgressData: MedicationTrackerPayload[] = [];
+  weightLogsData: WeightProgressLogsPayload[] = [];
+  bloodSugarLogsData: BloodSugarProgressLogsPayload[] = [];
+  hba1cLogsData: Hba1CProgressLogsPayload[] = [];
+  bPLogsData: BloodPressureProgressLogsPayload[] = [];
 }

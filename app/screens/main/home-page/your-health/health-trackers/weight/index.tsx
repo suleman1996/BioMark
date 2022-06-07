@@ -28,7 +28,7 @@ import { navigate } from 'services/nav-ref';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 
-const Weight = () => {
+const Weight = ({ route }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
@@ -76,18 +76,22 @@ const Weight = () => {
   }, [weightTracker.is_metric]);
 
   useEffect(() => {
-    dispatch(getReduxWeightProgress(4739));
-    console.log('weightProg', weightProgress);
-    const is_metric = weightProgress?.is_metric;
-    if (weightProgress?.is_metric) {
-      setWeightTracker({
-        date_entry: weightProgress.date_entry,
-        weight: weightProgress.weight,
-        is_metric,
-      });
+    console.log('logId', route?.params?.logId);
+
+    if (route?.params?.logId) {
+      dispatch(getReduxWeightProgress(route?.params?.logId));
+      console.log('weightProg', weightProgress);
+      const is_metric = weightProgress?.is_metric;
+      if (weightProgress?.is_metric) {
+        setWeightTracker({
+          date_entry: weightProgress.date_entry,
+          weight: weightProgress.weight,
+          is_metric,
+        });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch, weightProgress]);
 
   const onSubmit = async () => {
     let dateTime = '';
@@ -193,7 +197,7 @@ const Weight = () => {
 
         <ButtonWithShadowContainer
           onPress={onSubmit}
-          title={'Add'}
+          title={route?.params?.logId ? 'Save Edit' : 'Add'}
           disabled={!weightTracker ? true : false}
         />
       </ScrollView>

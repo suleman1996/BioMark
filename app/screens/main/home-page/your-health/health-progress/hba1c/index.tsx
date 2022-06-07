@@ -2,6 +2,8 @@ import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReduxHba1cLogs } from 'store/home/home-actions';
 
 import Styles from './styles';
 import SCREENS from 'navigation/constants/index';
@@ -19,6 +21,10 @@ const Index = () => {
   const styles = Styles(colors);
   const navigation = useNavigation();
   const { TARGETS } = SCREENS;
+  const dispatch = useDispatch();
+  const hba1cLogsData = useSelector(
+    (state: IAppState) => state.home.hba1cLogsData
+  );
 
   const [headerValue] = React.useState([
     { id: 0, title: '1M', complete: '1 Month' },
@@ -31,28 +37,22 @@ const Index = () => {
     title: '1M',
     complete: '1 Month',
   });
-  const [logData] = React.useState([
-    {
-      id: 0,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 1,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 2,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 3,
-      value: '30.00kg',
-      date: '09:14 pm May 12, 2022',
-    },
-  ]);
+  const [logData] = React.useState([]);
+
+  React.useEffect(() => {
+    dispatch(getReduxHba1cLogs());
+    // console.log('Hba1c Logs ', hba1cLogsData);
+    hba1cLogsData?.log?.map((item) =>
+      logData.push({
+        id: item?.id,
+        weight: item?.data_value,
+        unit: item?.unit_name,
+        date_entry: item?.record_date,
+        color: item?.record_status == 'high' ? colors.dangerRed : colors.green,
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -80,7 +80,7 @@ const Index = () => {
             </TouchableOpacity>
           </View>
 
-          <Logs logData={logData} />
+          <Logs navigate={SCREENS.HBA1C} logData={logData} />
         </ScrollView>
         <FloatingButton svg={<Hba1 height={28} width={28} />} />
       </View>

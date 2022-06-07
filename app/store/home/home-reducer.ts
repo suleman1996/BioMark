@@ -17,6 +17,10 @@ import {
   GET_BS_PROGRESS,
   GET_HBA1C_PROGRESS,
   GET_MEDICATION_PROGRESS,
+  GET_RESULT_LOGS,
+  GET_BLOOD_SUGAR_LOGS,
+  GET_HBA1C_LOGS,
+  GET_BP_LOGS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -125,6 +129,31 @@ export default function (state = INITIAL_STATE, action: any) {
         getMedicationProgressData: action.payload,
       };
     }
+    case GET_RESULT_LOGS: {
+      return {
+        ...state,
+        weightLogsData: action.payload,
+      };
+    }
+    case GET_BLOOD_SUGAR_LOGS: {
+      return {
+        ...state,
+        bloodSugarLogsData: action.payload,
+      };
+    }
+    case GET_HBA1C_LOGS: {
+      return {
+        ...state,
+        hba1cLogsData: action.payload,
+      };
+    }
+    case GET_BP_LOGS: {
+      return {
+        ...state,
+        bPLogsData: action.payload,
+      };
+    }
+
     default:
       return state;
   }
