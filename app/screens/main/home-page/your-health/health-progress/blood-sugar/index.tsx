@@ -2,6 +2,8 @@ import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReduxBloodSugarLogs } from 'store/home/home-actions';
 
 import Styles from './styles';
 import SCREENS from 'navigation/constants/index';
@@ -22,6 +24,10 @@ const Index = () => {
   const styles = Styles(colors);
   const navigation = useNavigation();
   const { TARGETS } = SCREENS;
+  const dispatch = useDispatch();
+  const bloodSugarLogs = useSelector(
+    (state: IAppState) => state.home.bloodSugarLogsData
+  );
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -56,32 +62,23 @@ const Index = () => {
     id: 0,
     title: 'mg/dL',
   });
-  const [logData] = React.useState([
-    {
-      id: 0,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-      color: colors.danger,
-    },
-    {
-      id: 1,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-      color: colors.blue,
-    },
-    {
-      id: 2,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-      color: colors.danger,
-    },
-    {
-      id: 3,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-      color: colors.heading,
-    },
-  ]);
+  const [logData] = React.useState([]);
+
+  React.useEffect(() => {
+    dispatch(getReduxBloodSugarLogs());
+    // console.log('Blood Sugar Logs ', bloodSugarLogs);
+
+    bloodSugarLogs?.log?.map((item) =>
+      logData.push({
+        id: item?.id,
+        weight: item?.data_value,
+        unit: item?.unit_name,
+        date_entry: item?.record_date,
+      })
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -98,7 +95,7 @@ const Index = () => {
         setSelectedfilterOption2={setSelectedfilterOption2}
       />
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <GraphHeader
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
@@ -133,7 +130,8 @@ const Index = () => {
           >
             Displaying Entries: All
           </Text>
-          <Logs logData={logData} />
+          <Logs navigate={SCREENS.BLOOD_SUGAR} logData={logData} />
+          <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton svg={<BloodSugar height={28} width={28} />} />
       </View>

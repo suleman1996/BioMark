@@ -1,6 +1,8 @@
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReduxBloodPressureLogs } from 'store/home/home-actions';
 
 import GraphHeader from '../../../../../../components/graph-header/index';
 import Filter from '../../..//../../../assets/svgs/filter';
@@ -8,6 +10,7 @@ import HealthProgressFilter from '../../../../../../components/health-progress-f
 import Logs from '../../../../../../components/health-progress-logs/index';
 import FloatingButton from '../../../../../../components/floating-button/index';
 import LineGraph from '../../../../../../components/line-graph/index';
+import SCREENS from 'navigation/constants/index';
 
 import Info from 'react-native-vector-icons/AntDesign';
 import BloodPressure from '../../../../../../assets/svgs/bP';
@@ -17,6 +20,9 @@ import Styles from './styles';
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const dispatch = useDispatch();
+
+  const bPLogsData = useSelector((state: IAppState) => state.home.bPLogsData);
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -44,28 +50,21 @@ const Index = () => {
     title: 'All',
   });
 
-  const [logData] = React.useState([
-    {
-      id: 0,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 1,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 2,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-    },
-    {
-      id: 3,
-      value: '66.0 mg/dL',
-      date: '09:14 pm May 12, 2022',
-    },
-  ]);
+  const [logData] = React.useState([]);
+
+  React.useEffect(() => {
+    dispatch(getReduxBloodPressureLogs());
+    // console.log('Blood Pressure Logs ', bPLogsData);
+    bPLogsData?.log?.map((item) =>
+      logData.push({
+        id: item?.id,
+        weight: item?.bp_diastolic + '/' + item?.bp_systolic,
+        unit: 'mmHg',
+        date_entry: item?.date_entry,
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -115,7 +114,8 @@ const Index = () => {
             </View>
           </View>
           <LineGraph />
-          <Logs logData={logData} />
+          <Logs navigate={SCREENS.BLOOD_PRESSURE} logData={logData} />
+          <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton svg={<BloodPressure height={28} width={28} />} />
       </View>

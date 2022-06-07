@@ -1,22 +1,27 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 
+import moment from 'moment';
 import { TouchableRipple } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+
 import Arrow from 'react-native-vector-icons/AntDesign';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
 
-type Props = { logData: array };
+type Props = { logData: array; navigate: any };
 
 const Index = (props: Props) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const navigations = useNavigation();
+
   const [log, setLog] = React.useState(false);
 
   const RenderLog = ({ item }) => (
     <TouchableRipple
-      onPress={() => console.log('log item', item)}
+      onPress={() => navigations.navigate(props.navigate, { params: item?.id })}
       style={styles.renderLog}
     >
       <>
@@ -27,11 +32,13 @@ const Index = (props: Props) => {
               fontFamily: fonts.bold,
             }}
           >
-            {item.value}
+            {item?.weight} {item?.unit}
           </Text>
         </View>
         <View style={{ width: '60%', alignItems: 'flex-end' }}>
-          <Text style={{ color: colors.blue, fontSize: 12 }}>{item.date}</Text>
+          <Text style={{ color: colors.blue, fontSize: 12 }}>
+            {moment(item?.date_entry).format('hh:mm a MMMM Do, YYYY')}
+          </Text>
         </View>
       </>
     </TouchableRipple>
@@ -44,7 +51,7 @@ const Index = (props: Props) => {
         <Arrow color={colors.heading} name={log ? 'up' : 'down'} />
       </TouchableOpacity>
 
-      {log && props.logData.map((item) => <RenderLog item={item} />)}
+      {log && props?.logData?.map((item) => <RenderLog item={item} />)}
     </View>
   );
 };
