@@ -91,6 +91,12 @@ const API_URLS = {
   SAVE_MEDICATION: '/api/v1/patient/psp/medications',
   UPDATE_MEDICATION: '/api/v1/patient/psp/medications',
   DELETE_MEDICATION: '/api/v1/patient/psp/medications',
+
+  //Progress Entry for tracker
+  GET_WEIGTH_TRACKER: '/api/v1/patient/weight_trackers/',
+  GET_BP_TRACKER: '/api/v1/patient/bp_trackers/',
+  GET_BS_TRACKER: '/api/v1/patient/psp/trackers/blood_sugar/',
+  GET_HBA1C_TRACKER: '/api/v1/patient/psp/trackers/hba1c/',
 };
 
 export { API_URLS };

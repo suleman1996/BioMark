@@ -20,23 +20,32 @@ import {
   getTime,
   getYear,
 } from 'utils/functions/date-format';
+import { getReduxWeightProgress } from 'store/home/home-actions';
 import { measurmentValidator } from 'utils/functions/measurments';
 import SCREENS from 'navigation/constants/index';
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
 const Weight = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const dispatch = useDispatch();
+
+  const weightProgress = useSelector(
+    (state: IAppState) => state.home.getWeightProgressData
+  );
 
   const [weightTracker, setWeightTracker] = useState({
-    weight: '12',
+    weight: '0.0',
     is_metric: true,
     date_entry: '',
   });
   const [error, setError] = useState<string>('');
 
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     let today = new Date();
     let dateTime =
@@ -53,17 +62,32 @@ const Weight = () => {
 
   useEffect(() => {
     if (!weightTracker.is_metric) {
-      setWeightTracker((prev) => ({
-        ...prev,
-        weight: Number((prev.weight * 2.205).toFixed(1)),
-      }));
+      setWeightTracker({
+        ...weightTracker,
+        weight: Number((weightTracker.weight * 2.205).toFixed(1)),
+      });
     } else {
-      setWeightTracker((prev) => ({
-        ...prev,
-        weight: Number((prev.weight * (1 / 2.205)).toFixed(1)),
-      }));
+      setWeightTracker({
+        ...weightTracker,
+        weight: Number((weightTracker.weight * (1 / 2.205)).toFixed(1)),
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [weightTracker.is_metric]);
+
+  useEffect(() => {
+    dispatch(getReduxWeightProgress(4739));
+    console.log('weightProg', weightProgress);
+    const is_metric = weightProgress?.is_metric;
+    if (weightProgress?.is_metric) {
+      setWeightTracker({
+        date_entry: weightProgress.date_entry,
+        weight: weightProgress.weight,
+        is_metric,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   const onSubmit = async () => {
     let dateTime = '';
@@ -108,16 +132,21 @@ const Weight = () => {
   };
 
   const handleUnitChange = (selectedUnit: string) => {
+    const metric = selectedUnit == 'kg' ? true : false;
     setWeightTracker((prev: any) => ({
       ...prev,
-      is_metric: selectedUnit === 'kg' ? true : false,
+      is_metric: metric,
     }));
+    setError(measurmentValidator(metric, 'weight', weightTracker.weight) || '');
   };
 
   const handleChange = (value: number, key: string) => {
+    console.log(weightTracker.is_metric, key, value);
     setWeightTracker((prev: any) => ({ ...prev, [key]: value }));
     setError(measurmentValidator(weightTracker.is_metric, key, value) || '');
   };
+
+  console.log(weightTracker);
 
   return (
     <TitleWithBackWhiteBgLayout title="Weight">
@@ -149,7 +178,7 @@ const Weight = () => {
             }}
           />
 
-          {error?.length === 0 && weightTracker?.weight && (
+          {error?.length === 0 && weightTracker?.weight ? (
             <>
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
@@ -159,7 +188,7 @@ const Weight = () => {
                 }
               />
             </>
-          )}
+          ) : null}
         </View>
 
         <ButtonWithShadowContainer

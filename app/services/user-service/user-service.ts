@@ -20,6 +20,10 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  WeightProgressEntryPayload,
+  BloodPressureProgressEntryPayload,
+  BloodSugarProgressEntryPayload,
+  Hba1CProgressEntryPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -987,7 +991,86 @@ const getResultOverView = (id) => {
       });
   });
 };
+const getWeightProgress = (id) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_WEIGTH_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('getWeightProgress', response);
 
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('getWeightProgress error', err);
+        reject(err);
+      });
+  });
+};
+const getBloodPressureProgress = (id) => {
+  return new Promise<BloodPressureProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_BP_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('BPProgress', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BPProgress error', err);
+        reject(err);
+      });
+  });
+};
+const getBloodSugarProgress = (id) => {
+  return new Promise<BloodSugarProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_BS_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('BSProgress', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BSProgress error', err);
+        reject(err);
+      });
+  });
+};
+const getHba1cProgress = (id) => {
+  return new Promise<Hba1CProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_HBA1C_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('hba1c', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('hba1c error', err);
+        reject(err);
+      });
+  });
+};
 export const userService = {
   login,
   federatedlogin,
@@ -1046,4 +1129,8 @@ export const userService = {
   getResultOverView,
   getLatestResult,
   getPastResult,
+  getWeightProgress,
+  getBloodPressureProgress,
+  getBloodSugarProgress,
+  getHba1cProgress,
 };
