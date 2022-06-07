@@ -9,6 +9,8 @@ import React from 'react';
 
 import { useTheme } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReduxResultOverview } from 'store/home/home-actions';
 
 import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -19,11 +21,14 @@ import RenderResults from './result-card';
 
 const Index = () => {
   const { colors } = useTheme();
-
   const styles = Styles(colors);
+  const dispatch = useDispatch();
+  const resultOverView = useSelector(
+    (state: IAppState) => state.home.getResultOverViewData
+  );
 
-  const [showSummaryummary, setSummary] = React.useState(false);
-  const [lapid, setLapid] = React.useState(false);
+  const [showSummaryummary, setSummary] = React.useState(true);
+  const [lapid, setLapid] = React.useState(true);
   const [isInfo, setIsInfo] = React.useState(false);
   const [lipidData] = React.useState([
     {
@@ -50,6 +55,13 @@ const Index = () => {
     },
   ]);
 
+  React.useEffect(() => {
+    dispatch(getReduxResultOverview());
+    console.log('Result OverView Redux ', resultOverView);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const RenderTitle = ({ state, setState, title }) => (
     <TouchableOpacity
       onPress={() => setState(!state)}
@@ -73,9 +85,10 @@ const Index = () => {
         <View style={styles.infoView}>
           <AntDesign color={colors.blue} name="infocirlceo" />
           <Text style={styles.infoText}>
-            <Text>You have</Text>
+            {/* <Text>You have</Text>
             <Text style={{ color: colors.heading }}> 1 out of 3 </Text>
-            <Text>That need attention</Text>
+            <Text>That need attention</Text> */}
+            {resultOverView?.result?.summary}
           </Text>
         </View>
       )}

@@ -8,6 +8,7 @@ import {
   PspModule,
   PspModuleDataContents,
   LabStatusPayload,
+  ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
 } from 'types/api';
@@ -21,6 +22,7 @@ export class HomeState {
   pspModuleData: PspModule[] = [];
   PspDataContents: PspModuleDataContents[] = [];
   getLabStatusData: LabStatusPayload[] = [];
+  getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
   getPastResultData: LabStatusResponse[] = [];
 }
