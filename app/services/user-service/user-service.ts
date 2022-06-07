@@ -17,6 +17,7 @@ import {
   MedicationEditRequest,
   MedicationUpdateResponse,
   MedicationTracker,
+  ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
 } from 'types/api';
@@ -966,6 +967,27 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
+const getResultOverView = (id) => {
+  return new Promise<ResultResponse>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter=abnormal'}`)
+      .then(async (response) => {
+        try {
+          // console.log('RESULT api overview', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get result overview error', err);
+        reject(err);
+      });
+  });
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -1021,6 +1043,7 @@ export const userService = {
   updateMedication,
   deleteMedication,
   getMedicationTrackers,
+  getResultOverView,
   getLatestResult,
   getPastResult,
 };
