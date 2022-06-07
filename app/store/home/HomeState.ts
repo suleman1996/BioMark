@@ -11,6 +11,11 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  WeightProgressEntryPayload,
+  BloodPressureProgressEntryPayload,
+  BloodSugarProgressEntryPayload,
+  Hba1CProgressEntryPayload,
+  MedicationTrackerPayload,
   WeightProgressLogsPayload,
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
@@ -29,6 +34,11 @@ export class HomeState {
   getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
   getPastResultData: LabStatusResponse[] = [];
+  getWeightProgressData: WeightProgressEntryPayload[] = [];
+  getBpProgressData: BloodPressureProgressEntryPayload[] = [];
+  getBsProgressData: BloodSugarProgressEntryPayload[] = [];
+  getHba1cProgressData: Hba1CProgressEntryPayload[] = [];
+  getMedicationProgressData: MedicationTrackerPayload[] = [];
   weightLogsData: WeightProgressLogsPayload[] = [];
   bloodSugarLogsData: BloodSugarProgressLogsPayload[] = [];
   hba1cLogsData: Hba1CProgressLogsPayload[] = [];

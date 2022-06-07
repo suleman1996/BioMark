@@ -21,7 +21,7 @@ const Index = (props: Props) => {
 
   const RenderLog = ({ item }) => (
     <TouchableRipple
-      onPress={() => navigations.navigate(props.navigate, { params: item?.id })}
+      onPress={() => navigations.navigate(props.navigate, { logId: item?.id })}
       style={styles.renderLog}
     >
       <>
