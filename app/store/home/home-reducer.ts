@@ -9,6 +9,7 @@ import {
   PSP_MODULE,
   PSP_PDF_LINK,
   GET_LAB_STATUS,
+  GET_RESULT_OVERVIEW,
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
 } from './constants';
@@ -69,6 +70,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getLabStatusData: action.payload,
+      };
+    }
+    case GET_RESULT_OVERVIEW: {
+      return {
+        ...state,
+        getResultOverViewData: action.payload,
       };
     }
     case GET_LATEST_RESULT: {
