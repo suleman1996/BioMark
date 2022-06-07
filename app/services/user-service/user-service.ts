@@ -18,6 +18,8 @@ import {
   MedicationUpdateResponse,
   MedicationTracker,
   ResultResponse,
+  EncodedResultOverviewPayload,
+  LabStatusResponse,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -697,6 +699,7 @@ function getNewMedicationTracker() {
       });
   });
 }
+
 function getPspModules() {
   return new Promise<PspModule>((resolve, reject) => {
     client
@@ -717,6 +720,45 @@ function getPspModules() {
   });
 }
 
+function getLatestResult() {
+  return new Promise<EncodedResultOverviewPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.HEALTH_LATEST_RESULTS)
+      .then(async (response) => {
+        try {
+          console.log('LATEST RESULTS', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('latest result error', err);
+        reject(err);
+      });
+  });
+}
+
+function getPastResult() {
+  return new Promise<LabStatusResponse>((resolve, reject) => {
+    client
+      .get(API_URLS.HEALTH_PAST_RESULTS)
+      .then(async (response) => {
+        try {
+          console.log('PAST RESULTS', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('past result error', err);
+        reject(err);
+      });
+  });
+}
 function getPspPdfLink(link) {
   console.log(link, 'linkkkkkkkkkkkkkkkkkkkkk');
   return new Promise<PspModuleDataContents>((resolve, reject) => {
@@ -1002,4 +1044,6 @@ export const userService = {
   deleteMedication,
   getMedicationTrackers,
   getResultOverView,
+  getLatestResult,
+  getPastResult,
 };

@@ -45,5 +45,8 @@ export const makeStyles = (colors: any) =>
       marginHorizontal: widthToDp(5),
       fontFamily: fonts.OpenSansRegular,
     },
+    gradientButtonView: {
+      marginHorizontal: 20,
+    },
   });
 export default makeStyles;

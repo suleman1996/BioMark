@@ -10,6 +10,8 @@ import {
   PSP_PDF_LINK,
   GET_LAB_STATUS,
   GET_RESULT_OVERVIEW,
+  GET_LATEST_RESULT,
+  GET_PAST_RESULT,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -74,6 +76,18 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getResultOverViewData: action.payload,
+      };
+    }
+    case GET_LATEST_RESULT: {
+      return {
+        ...state,
+        getLatestResultData: action.payload,
+      };
+    }
+    case GET_PAST_RESULT: {
+      return {
+        ...state,
+        getPastResultData: action.payload,
       };
     }
 

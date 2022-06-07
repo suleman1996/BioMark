@@ -11,6 +11,8 @@ import {
   PspModuleDataContents,
   LabStatusPayload,
   ResultResponse,
+  EncodedResultOverviewPayload,
+  LabStatusResponse,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -24,6 +26,8 @@ import {
   PSP_PDF_LINK,
   GET_LAB_STATUS,
   GET_RESULT_OVERVIEW,
+  GET_LATEST_RESULT,
+  GET_PAST_RESULT,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -59,6 +63,14 @@ export const addPspModule = (data: PspModule) => ({
 
 export const addPspPdfLink = (data: PspModuleDataContents) => ({
   type: PSP_PDF_LINK,
+  payload: data,
+});
+export const showLatestResult = (data: EncodedResultOverviewPayload) => ({
+  type: GET_LATEST_RESULT,
+  payload: data,
+});
+export const showPastResult = (data: LabStatusResponse) => ({
+  type: GET_PAST_RESULT,
   payload: data,
 });
 export const addLabResultStatus = (data: LabStatusPayload) => ({
@@ -157,6 +169,32 @@ export const getReduxPspModules =
       .then(async (res) => {
         console.log('psp redux', res);
         await dispatch(addPspModule(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxLatestResult =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getLatestResult()
+      .then(async (res) => {
+        console.log('latest show result', res);
+        await dispatch(showLatestResult(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxPastResult =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getPastResult()
+      .then(async (res) => {
+        console.log('past show result', res);
+        await dispatch(showPastResult(res));
       })
       .catch((err) => {
         logNow(err);

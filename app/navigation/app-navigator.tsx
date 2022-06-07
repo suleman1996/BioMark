@@ -40,6 +40,8 @@ import {
   getReduxPspPdfLink,
   getReduxLabResultStatus,
   getReduxNewMedicationTracker,
+  getReduxLatestResult,
+  getReduxPastResult,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
@@ -93,7 +95,8 @@ const AppNavigator = () => {
     dispatch(getReduxLabResultStatus());
     dispatch(getReduxPspModules());
     dispatch(getReduxPspPdfLink(link));
-
+    dispatch(getReduxLatestResult());
+    dispatch(getReduxPastResult());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

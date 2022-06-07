@@ -17,7 +17,7 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
 
 import { showMessage } from 'react-native-flash-message';
-import { goBack } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 
 import { ActivityIndicator } from 'components';
 import {
@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { getReduxNewMedicationTracker } from 'store/home/home-actions';
 import { makeStyles } from './styles';
+import { navigate } from 'services/nav-ref';
 
 type RenderDosageProps = {
   title: string;
@@ -140,10 +141,10 @@ const Medication = () => {
           },
         });
         console.log('Take Medication successful', response.data);
+        navigate(SCREENS.HEALTH_PROGRESS, 2);
       }
 
       dispatch(getReduxNewMedicationTracker());
-      goBack();
 
       setIsLoading(false);
     } catch (error) {
@@ -179,7 +180,7 @@ const Medication = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+      console.log('eeeee', error?.errMsg);
       if (error.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',

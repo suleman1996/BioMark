@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, TextInput } from 'react-native';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useTheme, TextInput } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 import { ErrorMessage } from 'components/base';
 
