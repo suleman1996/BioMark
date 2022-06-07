@@ -24,6 +24,7 @@ import {
   BloodPressureProgressEntryPayload,
   BloodSugarProgressEntryPayload,
   Hba1CProgressEntryPayload,
+  MedicationTrackerPayload,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -1071,6 +1072,26 @@ const getHba1cProgress = (id) => {
       });
   });
 };
+const getMedicationProgress = (id) => {
+  return new Promise<MedicationTrackerPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_MEDICATION_TRACKER_BY_ID}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('MED', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('MED error', err);
+        reject(err);
+      });
+  });
+};
 export const userService = {
   login,
   federatedlogin,
@@ -1133,4 +1154,5 @@ export const userService = {
   getBloodPressureProgress,
   getBloodSugarProgress,
   getHba1cProgress,
+  getMedicationProgress,
 };

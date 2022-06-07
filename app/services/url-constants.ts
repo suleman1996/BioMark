@@ -97,6 +97,7 @@ const API_URLS = {
   GET_BP_TRACKER: '/api/v1/patient/bp_trackers/',
   GET_BS_TRACKER: '/api/v1/patient/psp/trackers/blood_sugar/',
   GET_HBA1C_TRACKER: '/api/v1/patient/psp/trackers/hba1c/',
+  GET_MEDICATION_TRACKER_BY_ID: '/api/v1/patient/psp/trackers/medication/',
 };
 
 export { API_URLS };

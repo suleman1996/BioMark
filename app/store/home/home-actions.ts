@@ -36,6 +36,7 @@ import {
   GET_BP_PROGRESS,
   GET_BS_PROGRESS,
   GET_HBA1C_PROGRESS,
+  GET_MEDICATION_PROGRESS,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -108,6 +109,10 @@ export const getBloodSugarProgress = (
 });
 export const getHba1cProgress = (data: Hba1CProgressEntryPayload) => ({
   type: GET_HBA1C_PROGRESS,
+  payload: data,
+});
+export const getMedicationProgress = (data: Hba1CProgressEntryPayload) => ({
+  type: GET_MEDICATION_PROGRESS,
   payload: data,
 });
 
@@ -316,6 +321,19 @@ export const getReduxHba1cProgress =
         console.log('HB progress', res);
 
         await dispatch(getHba1cProgress(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+export const getReduxMedicationProgress =
+  (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getMedicationProgress(id)
+      .then(async (res) => {
+        console.log('MED progress', res);
+
+        await dispatch(getMedicationProgress(res));
       })
       .catch((err) => {
         logNow(err);

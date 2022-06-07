@@ -16,6 +16,7 @@ import {
   GET_BP_PROGRESS,
   GET_BS_PROGRESS,
   GET_HBA1C_PROGRESS,
+  GET_MEDICATION_PROGRESS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -116,6 +117,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getHba1cProgressData: action.payload,
+      };
+    }
+    case GET_MEDICATION_PROGRESS: {
+      return {
+        ...state,
+        getMedicationProgressData: action.payload,
       };
     }
     default:
