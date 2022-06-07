@@ -56,8 +56,6 @@ const VideoList = ({ route }) => {
         onLoadStart={() => {
           console.log('start auto');
         }}
-        // posterResizeMode={'stretch'}
-        // poster={item.thumbnail}
       />
     </View>
   );
