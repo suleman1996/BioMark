@@ -22,7 +22,7 @@ import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/medication';
+import Medication from 'screens/main/home-page/your-health/health-trackers/Me7dication';
 import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/medication-form';
 import EditMedication from 'screens/main/home-page/your-health/health-trackers/edit-medication';
