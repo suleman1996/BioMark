@@ -12,6 +12,7 @@ import {
   GET_RESULT_OVERVIEW,
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
+  GET_NEW_TARGET,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -88,6 +89,13 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getPastResultData: action.payload,
+      };
+    }
+    case GET_NEW_TARGET: {
+      return {
+        ...state,
+        bloodSugarUnits: action.payload.blood_sugar_unit,
+        hbA1cUnits: action.payload.hba1c_unit,
       };
     }
 

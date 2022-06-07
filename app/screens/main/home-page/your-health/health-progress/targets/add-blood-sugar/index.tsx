@@ -1,23 +1,33 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import { useTheme } from 'react-native-paper';
+import { showMessage } from 'react-native-flash-message';
+import { useNavigation } from '@react-navigation/native';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import InputWithUnits from 'components/higher-order/input-with-units';
 import GradientButton from 'components/linear-gradient-button';
 
+import { userService } from 'services/user-service/user-service';
+
 import Styles from './styles';
-import { useTheme } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import { getNewTargetAction } from 'store/home/home-actions';
 
 const Index = () => {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const styles = Styles(colors);
-  //   const navigation = useNavigation();
-  const [value, setValue] = useState('');
-  const [value2, setValue2] = useState('');
-  const [value3, setValue3] = useState('');
-  const [value4, setValue4] = useState('');
-  const [selectedType, setSelectedType] = useState(2);
+  const [value, setValue] = useState<string>('');
+  const [value2, setValue2] = useState<string>('');
+  const [value3, setValue3] = useState<string>('');
+  const [value4, setValue4] = useState<string>('');
+  const [selectedType, setSelectedType] = useState<number>(2);
+
+  const units = useSelector((state: IAppState) => state.home.bloodSugarUnits);
+  const dispatch = useDispatch();
 
   const toText = (values) => {
     selectedType == '1' ? setValue(values.toString()) : setValue(values);
@@ -36,6 +46,41 @@ const Index = () => {
     selectedType == '1' ? setValue2(values.toString()) : setValue4(values);
     // setValue(value);
   };
+
+  const onSubmit = async () => {
+    if (!value || !value2 || !value3 || !value4) {
+      showMessage({
+        message: 'Please fill all fields!',
+        type: 'danger',
+      });
+      return;
+    }
+    const result = await userService.createNewTarget({
+      range_type: 1,
+      value_from: value,
+      value_to: value2,
+      unit_list_id: units[selectedType].id,
+      ppg_value_from: value3,
+      ppg_value_to: value4,
+      ppg_unit_id: units[selectedType].id,
+    });
+    if (result) {
+      showMessage({
+        message: result,
+        type: 'success',
+      });
+      navigation.goBack();
+      return;
+    }
+    showMessage({
+      message: 'Something went wrong',
+      type: 'danger',
+    });
+  };
+
+  useEffect(() => {
+    dispatch(getNewTargetAction());
+  }, [dispatch]);
 
   return (
     <ScrollView>
@@ -60,6 +105,7 @@ const Index = () => {
             setSelectedType={setSelectedType}
             setValue={setValue}
             isSecond={true}
+            units={units}
           />
 
           <InputWithUnits
@@ -72,6 +118,7 @@ const Index = () => {
             setSelectedType={setSelectedType}
             setValue={setValue2}
             isSecond={true}
+            units={units}
           />
           <Text style={styles.secondHeading}>After Meal (PPG)</Text>
 
@@ -85,6 +132,7 @@ const Index = () => {
             setSelectedType={setSelectedType}
             setValue={setValue3}
             isSecond={true}
+            units={units}
           />
 
           <InputWithUnits
@@ -97,11 +145,14 @@ const Index = () => {
             setSelectedType={setSelectedType}
             setValue={setValue4}
             isSecond={true}
+            units={units}
           />
           <GradientButton
             text="Save"
+            onPress={onSubmit}
             color={['#2C6CFC', '#2CBDFC']}
             style={styles.buttonContainer}
+            disabled={!value || !value2 || !value3 || !value4}
           />
         </View>
       </TitleWithBackWhiteBgLayout>

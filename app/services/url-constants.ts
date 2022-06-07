@@ -91,6 +91,10 @@ const API_URLS = {
   SAVE_MEDICATION: '/api/v1/patient/psp/medications',
   UPDATE_MEDICATION: '/api/v1/patient/psp/medications',
   DELETE_MEDICATION: '/api/v1/patient/psp/medications',
+
+  //Targets
+  GET_NEW_TARGET: '/api/v1/patient/psp/targets/new',
+  CREATE_NEW_TARGET: '/api/v1/patient/psp/targets',
 };
 
 export { API_URLS };

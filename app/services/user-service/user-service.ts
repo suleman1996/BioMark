@@ -1,5 +1,6 @@
 import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
+
 import {
   BootstrapData,
   GeoLocationData,
@@ -20,6 +21,9 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  NewTarget,
+  CreateTargetResponse,
+  CreateTargetRequest,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -967,6 +971,34 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
+const getNewTarget = () => {
+  return new Promise<NewTarget>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_NEW_TARGET)
+      .then(({ data }: { data: NewTarget }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      })
+  );
+};
+
+const createNewTarget = (target: CreateTargetRequest) => {
+  return new Promise<string>((resolve, reject) =>
+    client
+      .post(API_URLS.CREATE_NEW_TARGET, { target })
+      .then(({ data }: { data: CreateTargetResponse }) => {
+        resolve(data.message);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
 const getResultOverView = (id) => {
   return new Promise<ResultResponse>((resolve, reject) => {
     client
@@ -1046,4 +1078,6 @@ export const userService = {
   getResultOverView,
   getLatestResult,
   getPastResult,
+  getNewTarget,
+  createNewTarget,
 };

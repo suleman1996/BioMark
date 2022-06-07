@@ -13,6 +13,7 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  NewTarget,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -28,6 +29,7 @@ import {
   GET_RESULT_OVERVIEW,
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
+  GET_NEW_TARGET,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -80,6 +82,11 @@ export const addLabResultStatus = (data: LabStatusPayload) => ({
 
 export const getResultOverView = (data: ResultResponse) => ({
   type: GET_RESULT_OVERVIEW,
+  payload: data,
+});
+
+export const getUnits = (data: NewTarget) => ({
+  type: GET_NEW_TARGET,
   payload: data,
 });
 
@@ -237,6 +244,17 @@ export const getReduxResultOverview =
 
         await dispatch(getResultOverView(res));
       })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getNewTargetAction =
+  () =>
+  async (dispatch: (arg0: { type: string; payload?: NewTarget }) => void) => {
+    await userService
+      .getNewTarget()
+      .then(async (res) => dispatch(getUnits(res)))
       .catch((err) => {
         logNow(err);
       });

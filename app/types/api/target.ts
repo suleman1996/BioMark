@@ -29,10 +29,7 @@ export interface LatestHba1CResponse {
 }
 
 export interface CreateTargetResponse {
-  status: boolean;
-  data: {
-    message: string;
-  };
+  message: string;
 }
 
 export interface SetDefaultTargetResponse {
@@ -90,4 +87,42 @@ export interface Hba1cTarget {
   range_type: number;
   goal_value: string;
   unit_list_id: number;
+}
+
+export interface NewTarget {
+  blood_sugar_unit: TargetUnitsResponse[];
+  hba1c_unit: TargetUnitsResponse[];
+}
+
+export interface TargetUnitsResponse {
+  id: number;
+  name: string;
+  use_for: string;
+  status: boolean;
+}
+
+export interface TargetUnit {
+  id: number;
+  name: string;
+}
+export interface CreateTargetRequestBody {
+  target: {
+    range_type: number;
+    value_to: string;
+    value_from: string;
+    unit_list_id: number;
+    ppg_value_from?: string;
+    ppg_value_to?: string;
+    ppg_unit_id?: number;
+  };
+}
+
+export interface CreateTargetRequest {
+  range_type: number;
+  value_to: string;
+  value_from: string;
+  unit_list_id: number;
+  ppg_value_from?: string;
+  ppg_value_to?: string;
+  ppg_unit_id?: number;
 }
