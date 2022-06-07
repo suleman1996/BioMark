@@ -120,11 +120,11 @@ const HealthRecord = () => {
 
           <LatestResultCard
             title="Your Latest Results"
-            name={latestResult.name}
-            received={latestResult.received}
-            ref_no={latestResult.ref_no}
-            summary={latestResult.result.summary}
-            doctor={latestResult.result.doctor}
+            name={latestResult?.name}
+            received={latestResult?.received}
+            ref_no={latestResult?.ref_no}
+            summary={latestResult?.result?.summary}
+            doctor={latestResult?.result?.doctor}
           />
           {/* <FlatList
             data={latestResult}
