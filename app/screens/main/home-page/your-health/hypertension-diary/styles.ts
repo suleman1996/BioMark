@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -28,6 +29,16 @@ const styles = (colors: any) =>
       bottom: 0,
       marginBottom: 20,
     },
+    videoView: {
+      marginHorizontal: 15,
+      marginBottom: 5,
+    },
+    backgroundVideo: {
+      height: 200,
+      margin: 5,
+      justifyContent: 'center',
+      borderRadius: 5,
+    },
     demoTextView: {
       width: '100%',
       height: '50%',
@@ -53,26 +64,19 @@ const styles = (colors: any) =>
     },
 
     recordKeepingView: {
-      // marginHorizontal: 5,
-      marginHorizontal: 20,
+      backgroundColor: colors.white,
+      marginTop: heightToDp(2),
+      borderRadius: 5,
       flexDirection: 'row',
       alignItems: 'center',
-      padding: 25,
-      borderRadius: 8,
-      marginBottom: 15,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-
+      padding: 20,
+      justifyContent: 'space-between',
       elevation: 5,
-      // zIndex: 100,
+      marginBottom: heightToDp(1),
+      marginHorizontal: 15,
     },
     recordKeepinText: {
-      fontSize: 20,
+      fontSize: 17,
       paddingLeft: 10,
       color: colors.lightBlueish,
       fontFamily: fonts.mulishExtraBold,

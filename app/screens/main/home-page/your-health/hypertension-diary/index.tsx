@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
   Text,
@@ -6,6 +7,8 @@ import {
   ScrollView,
   Linking,
   TouchableWithoutFeedback,
+  ImageBackground,
+  Image,
 } from 'react-native';
 import React, { useEffect } from 'react';
 // import Video from 'react-native-video';
@@ -13,9 +16,21 @@ import React, { useEffect } from 'react';
 import SCREENS from 'navigation/constants/index';
 import { TitleWithBackLayout } from 'components/layouts';
 
-import RenderHealthTrack from 'components/health-tracker-card/index';
+// import RenderHealthTrack from 'components/health-tracker-card/index';
 import RenderHealthTrackDemo from 'components/health-tracker-card-demo/index';
+import {
+  BloodPressure,
+  Medication,
+  Weight,
+} from 'components/hypertension-card-dairy';
 import Config from 'react-native-config';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import {
+  getReduxPspHyperModules,
+  getReduxPspHypertensionHealthTrackerData,
+} from 'store/home/home-actions';
+import PdfList from 'components/pdf-list';
 
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
@@ -23,6 +38,7 @@ import PdfSvg from 'assets/svgs/pdf';
 import Messenger from 'assets/svgs/messenger';
 import { useNavigation } from '@react-navigation/native';
 import GradientButton from 'components/linear-gradient-button';
+import { navigate } from 'services/nav-ref';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
   Linking.openURL(Config.MESSENGER_URL);
@@ -31,13 +47,38 @@ const openMessenger = () => {
 const HypertensionDiary = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const dispatch = useDispatch();
 
-  const { PDF_HYPERTENSION } = SCREENS;
+  // const { PDF_HYPERTENSION } = SCREENS;
   const navigation = useNavigation();
 
+  const trackerData = useSelector(
+    (state: IAppState) => state.home.pspHypertensionHealthTracker
+  );
+  const hyperModuleData = useSelector(
+    (state: IAppState) => state.home.pspHyperModuleData
+  );
+
   const [showDemo, setShowDemo] = React.useState(false);
+  const [pdfData, setPdfData] = React.useState([]);
+  const [bloodPressureData, setbloodPressureData] = React.useState('');
+  const [medicationData, setMedicationData] = React.useState('');
+  const [weightData, setWeightData] = React.useState('');
+  const [video, setVideo] = React.useState([]);
 
   useEffect(() => {
+    dispatch(getReduxPspHypertensionHealthTrackerData());
+    dispatch(getReduxPspHyperModules());
+
+    console.log('hyper dataaa', hyperModuleData);
+    setVideo(hyperModuleData.video);
+    setPdfData(hyperModuleData.pdf);
+    // alert(JSON.stringify(hyperModuleData.pdf));
+
+    setbloodPressureData(trackerData.blood_pressure);
+    setMedicationData(trackerData.medication);
+    setWeightData(trackerData.weight);
+
     setShowDemo(0);
   }, []);
 
@@ -80,6 +121,32 @@ const HypertensionDiary = () => {
       <View style={{ width: '20%', alignItems: 'center' }}>{svg}</View>
     </TouchableOpacity>
   );
+
+  const renderItem = ({ item }) => (
+    <>
+      <ImageBackground
+        resizeMode="stretch"
+        imageStyle={{ borderRadius: 8 }}
+        source={{ uri: item.thumbnail }}
+        style={styles.backgroundVideo}
+      >
+        <TouchableOpacity
+          onPress={() =>
+            navigate(SCREENS.VIDEO_HYPERTENSION_LIST, { code: item })
+          }
+        >
+          <Image
+            source={require('../../../../../assets/images/home/playbutton.png')}
+            style={{
+              height: 30,
+              width: 30,
+              alignSelf: 'center',
+            }}
+          />
+        </TouchableOpacity>
+      </ImageBackground>
+    </>
+  );
   return (
     <>
       <TitleWithBackLayout
@@ -98,14 +165,90 @@ const HypertensionDiary = () => {
                   position: 'relative',
                 }}
               >
-                <FlatList
-                  style={{ alignSelf: 'center' }}
-                  data={healthTracker}
-                  renderItem={(item) => <RenderHealthTrack item={item} />}
-                  keyExtractor={(item) => item.id}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                />
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginHorizontal: 20,
+                  }}
+                >
+                  <BloodPressure
+                    heading={bloodPressureData?.name}
+                    value={bloodPressureData?.value}
+                    text={bloodPressureData?.unit}
+                    borderColor={
+                      bloodPressureData?.card_status == 'elevated'
+                        ? colors.lightYellow
+                        : bloodPressureData?.card_status == 'high'
+                        ? colors.dangerRed
+                        : bloodPressureData?.card_status == 'none'
+                        ? colors.primary
+                        : null
+                    }
+                    color={
+                      bloodPressureData?.card_status == 'elevated'
+                        ? colors.lightYellow
+                        : bloodPressureData?.card_status == 'high'
+                        ? colors.dangerRed
+                        : bloodPressureData?.card_status == 'none'
+                        ? colors.primary
+                        : null
+                    }
+                    onPressBloodPressure={() =>
+                      navigation.navigate(SCREENS.BLOOD_PRESSURE)
+                    }
+                  />
+                  <Medication
+                    heading={medicationData?.name}
+                    value={medicationData?.value}
+                    text={medicationData?.unit}
+                    borderColor={
+                      medicationData?.card_status == 'elevated'
+                        ? colors.lightYellow
+                        : medicationData?.card_status == 'high'
+                        ? colors.dangerRed
+                        : medicationData?.card_status == 'none'
+                        ? colors.primary
+                        : null
+                    }
+                    color={
+                      medicationData?.card_status == 'elevated'
+                        ? colors.lightYellow
+                        : medicationData?.card_status == 'high'
+                        ? colors.dangerRed
+                        : medicationData?.card_status == 'none'
+                        ? colors.primary
+                        : null
+                    }
+                    onPressMedication={() =>
+                      navigation.navigate(SCREENS.MEDICATION)
+                    }
+                  />
+                  <Weight
+                    heading={weightData?.name}
+                    value={weightData?.value}
+                    text={weightData?.unit}
+                    borderColor={
+                      weightData?.card_status == 'elevated'
+                        ? colors.lightYellow
+                        : weightData?.card_status == 'high'
+                        ? colors.dangerRed
+                        : weightData?.card_status == 'none'
+                        ? colors.primary
+                        : null
+                    }
+                    color={
+                      weightData?.card_status == 'elevated'
+                        ? colors.lightYellow
+                        : weightData?.card_status == 'high'
+                        ? colors.dangerRed
+                        : weightData?.card_status == 'none'
+                        ? colors.primary
+                        : null
+                    }
+                    onPressWeight={() => navigation.navigate(SCREENS.WEIGHT)}
+                  />
+                </View>
               </View>
               <View
                 style={{
@@ -113,7 +256,7 @@ const HypertensionDiary = () => {
                   zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
                   flexDirection: 'row',
                   top: 50,
-                  left: 30,
+                  left: 20,
                 }}
               >
                 {showDemo === 0 && (
@@ -121,14 +264,14 @@ const HypertensionDiary = () => {
                 )}
                 {showDemo === 1 && (
                   <>
-                    <View style={{ height: 120, width: 110, marginLeft: 10 }} />
+                    <View style={{ height: 110, width: 100 }} />
                     <RenderHealthTrackDemo item={healthTracker[1]} />
                   </>
                 )}
                 {showDemo === 2 && (
                   <>
-                    <View style={{ height: 120, width: 110, marginLeft: 15 }} />
-                    <View style={{ height: 120, width: 110 }} />
+                    <View style={{ height: 110, width: 100, marginLeft: 10 }} />
+                    <View style={{ height: 110, width: 100 }} />
                     <RenderHealthTrackDemo item={healthTracker[2]} />
                   </>
                 )}
@@ -136,54 +279,50 @@ const HypertensionDiary = () => {
               <Text style={[styles.headingText, { marginVertical: 10 }]}>
                 HYPERTENSION EDUCATION
               </Text>
-              <View style={styles.videoView}>
-                {/* <Video
-        source={{
-          uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-        }} // the video file
-        controls={true}
-        paused={true} // make it start
-        style={styles.backgroundVideo} // any style you want
-        repeat={true} // make it a loop
-        resizeMode="cover"
-        posterResizeMode={'cover'}
-        fullScreen={true}
-        poster="https://play-lh.googleusercontent.com/uf1TVrS58KmBNiWYR3LocIJMDXTmmfkYY79lDlG2eA4brjyw3q1BN4DDIriw7B9MfQ=w600-h300-pc0xffffff-pd"
-        // style={{ width: '100%', margin: 'auto' }}
-      /> */}
-              </View>
-              {/* view to show pdf on top */}
+
               <View
                 style={{
                   position: 'relative',
-                  zIndex: showDemo === 4 ? 33 : 29,
+                  zIndex: showDemo === 3 ? 33 : 29,
                 }}
               >
-                <PdfLink
-                  title="What Do I Need To Know About Hypertension?"
-                  svg={<PdfSvg />}
-                  onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-                />
+                <View style={styles.videoView}>
+                  <FlatList
+                    data={video}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                  />
+                </View>
               </View>
-              <PdfLink
-                title="What Do I Check My Blood Pressure?"
-                svg={<PdfSvg />}
-                onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-              />
-              <PdfLink
-                title="Shaking The Salt To Manage My Blood Pressure"
-                svg={<PdfSvg />}
-                onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-              />
-              <PdfLink
-                title="Modify My Lifestyle Can Help Control My Blood Presure"
-                svg={<PdfSvg />}
-                onPress={() => navigation.navigate(PDF_HYPERTENSION)}
-              />
-              <PdfLink
-                title="Tips on Accurately Measuring Your Blood Pressure At Home"
-                svg={<PdfSvg />}
-                onPress={() => navigation.navigate(PDF_HYPERTENSION)}
+
+              {/* view to show pdf on top */}
+              {showDemo !== 5 && (
+                <View
+                  style={{
+                    position: 'relative',
+                    zIndex: showDemo === 4 ? 33 : 29,
+                  }}
+                >
+                  <PdfLink
+                    title="What Do I Need To Know About Hypertension?"
+                    svg={<PdfSvg />}
+                  />
+                </View>
+              )}
+              <FlatList
+                data={pdfData}
+                renderItem={(item) => (
+                  <PdfList
+                    item={item}
+                    onPress={() => {
+                      navigate(SCREENS.PDF_HYPERTENSION_SUPPORT, {
+                        code: item,
+                      });
+                    }}
+                  />
+                )}
+                keyExtractor={(item) => item.id}
+                showsHorizontalScrollIndicator={false}
               />
               <View style={styles.bottomTextView}>
                 <Text style={[styles.bottomText, { color: colors.heading }]}>

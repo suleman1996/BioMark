@@ -11,6 +11,7 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  HealthTrackerPayloadData,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -20,9 +21,12 @@ export class HomeState {
   medicationList: MedicationListEntry[] = [];
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
   pspModuleData: PspModule[] = [];
+  pspHyperModuleData: PspModule[] = [];
   PspDataContents: PspModuleDataContents[] = [];
+  PspHyperDataContents: PspModuleDataContents[] = [];
   getLabStatusData: LabStatusPayload[] = [];
   getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
   getPastResultData: LabStatusResponse[] = [];
+  pspHypertensionHealthTracker: HealthTrackerPayloadData[] = [];
 }

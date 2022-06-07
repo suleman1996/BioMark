@@ -8,7 +8,7 @@ import { getReduxPspPdfLink } from 'store/home/home-actions';
 import Video from 'react-native-video';
 import { ActivityIndicator } from 'components';
 
-const VideoList = ({ route }) => {
+const VideoHypertensionList = ({ route }) => {
   const { colors } = useTheme();
   // const [videoLink, setVideoLink] = useState('');
   const [isVisiable, setIsVisible] = React.useState(false);
@@ -30,6 +30,7 @@ const VideoList = ({ route }) => {
       setIsVisible(true);
       dispatch(getReduxPspPdfLink(item.code));
       console.log('---------item-------------', item);
+      console.log('------link-----', pspVideoLinks);
       setVideoLink(pspVideoLinks.link);
       setIsVisible(false);
     } catch (err) {
@@ -37,7 +38,6 @@ const VideoList = ({ route }) => {
       console.log(err);
     }
   };
-  console.log('------link-----', pspVideoLinks);
 
   return (
     <View style={styles.listView}>
@@ -63,4 +63,4 @@ const VideoList = ({ route }) => {
   );
 };
 
-export default VideoList;
+export default VideoHypertensionList;

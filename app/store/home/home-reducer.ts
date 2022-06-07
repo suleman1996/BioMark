@@ -7,11 +7,14 @@ import {
   MEDICATION_LIST,
   GET_NEW_MEDICATION_TRACKER,
   PSP_MODULE,
+  PSP_HYPER_MODULE,
   PSP_PDF_LINK,
   GET_LAB_STATUS,
   GET_RESULT_OVERVIEW,
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
+  GET_PSP_HYPERTENSION_HEALTH_TRACKER,
+  PSP_PDF_HYPER_LINK,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -60,10 +63,28 @@ export default function (state = INITIAL_STATE, action: any) {
         pspModuleData: action.payload,
       };
     }
+    case PSP_HYPER_MODULE: {
+      return {
+        ...state,
+        pspHyperModuleData: action.payload,
+      };
+    }
+    case GET_PSP_HYPERTENSION_HEALTH_TRACKER: {
+      return {
+        ...state,
+        pspHypertensionHealthTracker: action.payload,
+      };
+    }
     case PSP_PDF_LINK: {
       return {
         ...state,
         PspDataContents: action.payload,
+      };
+    }
+    case PSP_PDF_HYPER_LINK: {
+      return {
+        ...state,
+        PspHyperDataContents: action.payload,
       };
     }
     case GET_LAB_STATUS: {

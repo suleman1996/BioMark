@@ -10,8 +10,8 @@ const styles = (colors: any) =>
       textAlign: 'center',
     },
     renderHealthView: {
-      height: 120,
-      width: 110,
+      height: 110,
+      width: 100,
       backgroundColor: colors.white,
       borderRadius: 5,
       shadowColor: '#000',
