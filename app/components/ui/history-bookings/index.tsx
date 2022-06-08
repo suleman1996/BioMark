@@ -4,6 +4,8 @@ import { FlatList, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { makeStyles } from './styles';
+import { navigate } from './../../../services/nav-ref';
+import SCREENS from 'navigation/constants';
 type Props = {};
 
 const HistoryBookings = (props: Props) => {
@@ -66,7 +68,11 @@ const HistoryBookings = (props: Props) => {
           bg={colors.lightBlue}
           color={colors.black}
           marginTop={1.2}
-          onPress={undefined}
+          onPress={() =>
+            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+              screen: SCREENS.FAQSCREEN,
+            })
+          }
           title={'FAQ'}
         />
       </View>
