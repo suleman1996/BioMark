@@ -25,6 +25,9 @@ const lbsToKg = () => {
   Number((prev.weight * (1 / 2.205)).toFixed(1));
 };
 
+const mgMmolConversion = (value: number, toUnit: 'mg/dL' | 'mmol/L' | string) =>
+  toUnit == 'mg/dL' ? value * 18 : value * (1 / 18); // These values might not be accurate
+
 const measurmentValidator = (is_metric, measurment, value) => {
   let errorr = '';
   if (value.length === 0)
@@ -92,4 +95,65 @@ const measurmentValidator = (is_metric, measurment, value) => {
   return errorr;
 };
 
-export { cmToFeet, feetToCm, kgToLbs, lbsToKg, measurmentValidator };
+const bloodSugarValidator = (
+  values: { fromfpg: number; tofpg: number; fromppg: number; toppg: number },
+  unit: 'mg/dL' | 'mmol/L' | string
+) => {
+  const errors = {
+    fromfpg: '',
+    tofpg: '',
+    fromppg: '',
+    toppg: '',
+  };
+  console.log({ values });
+  if (values.tofpg <= values.fromfpg) {
+    errors.tofpg = 'Please enter a reading higher than from';
+  }
+  if (values.toppg <= values.fromppg) {
+    errors.toppg = 'Please enter a reading higher than from';
+  }
+  if (
+    !(values.fromfpg >= limits[unit][0] && values.fromfpg <= limits[unit][1])
+  ) {
+    errors.fromfpg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
+  }
+  if (!(values.tofpg >= limits[unit][0] && values.tofpg <= limits[unit][1])) {
+    errors.tofpg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
+  }
+  if (
+    !(values.fromppg >= limits[unit][0] && values.fromppg <= limits[unit][1])
+  ) {
+    errors.fromppg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
+  }
+  if (!(values.toppg >= limits[unit][0] && values.toppg <= limits[unit][1])) {
+    errors.toppg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
+  }
+
+  return errors;
+};
+const hba1cValidator = (goal: number, unit: '%' | string) => {
+  const errors = {
+    goal: '',
+  };
+  if (!(goal >= limits[unit][0] && goal <= limits[unit][1])) {
+    errors.goal = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
+  }
+  return errors;
+};
+
+export {
+  cmToFeet,
+  feetToCm,
+  kgToLbs,
+  lbsToKg,
+  measurmentValidator,
+  mgMmolConversion,
+  bloodSugarValidator,
+  hba1cValidator,
+};
+
+const limits = {
+  'mg/dL': [1, 900],
+  'mmol/L': [0.06, 50],
+  '%': [5, 15],
+};

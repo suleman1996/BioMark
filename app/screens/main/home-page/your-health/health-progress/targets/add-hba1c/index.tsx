@@ -1,28 +1,100 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import React, { useState } from 'react';
+
+import { useTheme } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { showMessage } from 'react-native-flash-message';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
-import InputWithUnits from 'components/higher-order/input-with-units';
+import { ActivityIndicator, InputWithUnits } from 'components';
 import GradientButton from 'components/linear-gradient-button';
 
+import { userService } from 'services/user-service/user-service';
+import { TargetUnit } from 'types/api';
+
+import {
+  getHBA1CTargetsAction,
+  getLatestTargetsAction,
+} from 'store/home/home-actions';
+import { IAppState } from 'store/IAppState';
+
+import { hba1cValidator } from 'utils/functions/measurments';
+
 import Styles from './styles';
-import { useTheme } from 'react-native-paper';
+
+const units: TargetUnit[] = [{ id: 3, name: '%' }];
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  //   const navigation = useNavigation();
-  const [value, setValue] = useState('');
-  const [selectedType, setSelectedType] = useState(1);
+  const navigation = useNavigation();
 
-  const onChangeText = (values) => {
-    selectedType == '1' ? setValue(values.toString()) : setValue(values);
-    // setValue(value);
+  const dispatch = useDispatch();
+  const { latestHba1c } = useSelector((state: IAppState) => ({
+    latestHba1c: state.home.latestHba1c,
+  }));
+
+  const [value, setValue] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedType, setSelectedType] = useState<number>(0);
+  const [errors, setErrors] = useState({
+    goal: '',
+  });
+
+  const onUnitChange = useCallback(
+    (unit: string) => {
+      const newIndex = units.findIndex((e) => e.name == unit);
+      if (newIndex == selectedType) return;
+      setSelectedType(newIndex);
+    },
+    [selectedType]
+  );
+
+  const onSubmit = async () => {
+    setLoading(true);
+    if (!value) {
+      showMessage({
+        message: 'Please fill all fields!',
+        type: 'danger',
+      });
+      return;
+    }
+    const result = await userService.createNewTarget({
+      range_type: 3,
+      goal_value: value,
+      unit_list_id: 3,
+    });
+    setLoading(false);
+    if (result) {
+      dispatch(getLatestTargetsAction());
+      dispatch(getHBA1CTargetsAction());
+      showMessage({
+        message: result,
+        type: 'success',
+      });
+      navigation.goBack();
+      return;
+    }
+    showMessage({
+      message: 'Something went wrong',
+      type: 'danger',
+    });
   };
+
+  useEffect(() => {
+    setErrors(hba1cValidator(+value, units[selectedType].name));
+  }, [value, selectedType]);
+
+  useEffect(() => {
+    setValue(Number(latestHba1c?.goal_value).toFixed(1));
+  }, [latestHba1c]);
 
   return (
     <TitleWithBackWhiteBgLayout>
+      <ActivityIndicator visible={loading} />
+
       <View style={styles.innerContainer}>
         <Text style={styles.firstHeading}>Set your new Hba1c goal</Text>
         <Text style={styles.subHeading}>
@@ -31,20 +103,21 @@ const Index = () => {
           ADA.
         </Text>
         <InputWithUnits
-          height={6}
-          label="Goal"
+          small
+          title="Goal"
           placeholder={'0.0'}
-          onChangeText={onChangeText}
+          onChangeText={setValue}
           value={value}
-          selectedType={selectedType}
-          setSelectedType={setSelectedType}
-          setValue={setValue}
-          isFirst={true}
-          op1="%"
+          unit={units[selectedType] ? units[selectedType].name : ''}
+          units={units.map((unit) => unit.name)}
+          onUnitChange={onUnitChange}
+          error={errors.goal}
         />
         <GradientButton
+          onPress={onSubmit}
           text="Save"
           color={['#2C6CFC', '#2CBDFC']}
+          disabled={!value || errors.goal}
           style={styles.buttonContainer}
         />
       </View>

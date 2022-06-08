@@ -95,6 +95,9 @@ const API_URLS = {
   //Targets
   GET_NEW_TARGET: '/api/v1/patient/psp/targets/new',
   CREATE_NEW_TARGET: '/api/v1/patient/psp/targets',
+  GET_LATEST_TARGETS: '/api/v1/patient/psp/targets',
+  GET_BLOOD_SUGAR_TARGETS: '/api/v1/patient/psp/targets/blood_sugar?page=1',
+  GET_HBA1C_TARGETS: '/api/v1/patient/psp/targets/hba1c?page=1',
 };
 
 export { API_URLS };

@@ -103,26 +103,19 @@ export interface TargetUnitsResponse {
 
 export interface TargetUnit {
   id: number;
-  name: string;
+  name: 'mg/dL' | 'mmol/L' | '%';
 }
 export interface CreateTargetRequestBody {
-  target: {
-    range_type: number;
-    value_to: string;
-    value_from: string;
-    unit_list_id: number;
-    ppg_value_from?: string;
-    ppg_value_to?: string;
-    ppg_unit_id?: number;
-  };
+  target: CreateTargetRequest;
 }
 
 export interface CreateTargetRequest {
   range_type: number;
-  value_to: string;
-  value_from: string;
+  value_to?: string;
+  value_from?: string;
   unit_list_id: number;
   ppg_value_from?: string;
   ppg_value_to?: string;
   ppg_unit_id?: number;
+  goal_value?: string;
 }

@@ -14,6 +14,9 @@ import {
   EncodedResultOverviewPayload,
   LabStatusResponse,
   NewTarget,
+  LatestTargetResponse,
+  GetBloodSugarTargetsResponseData,
+  GetHba1cTargetsResponseData,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -30,6 +33,9 @@ import {
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
   GET_NEW_TARGET,
+  GET_LATEST_TARGET,
+  GET_BLOOD_SUGAR_TARGETS,
+  GET_HBA1C_TARGETS,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -87,6 +93,25 @@ export const getResultOverView = (data: ResultResponse) => ({
 
 export const getUnits = (data: NewTarget) => ({
   type: GET_NEW_TARGET,
+  payload: data,
+});
+
+export const getLatestTargetsCreator = (data: LatestTargetResponse) => ({
+  type: GET_LATEST_TARGET,
+  payload: data,
+});
+
+export const getBloodSugarTargetsCreator = (
+  data: GetBloodSugarTargetsResponseData[]
+) => ({
+  type: GET_BLOOD_SUGAR_TARGETS,
+  payload: data,
+});
+
+export const getHBA1CTargetsCreator = (
+  data: GetHba1cTargetsResponseData[]
+) => ({
+  type: GET_HBA1C_TARGETS,
   payload: data,
 });
 
@@ -254,7 +279,58 @@ export const getNewTargetAction =
   async (dispatch: (arg0: { type: string; payload?: NewTarget }) => void) => {
     await userService
       .getNewTarget()
-      .then(async (res) => dispatch(getUnits(res)))
+      .then((res) => {
+        console.log({ res: res.hba1c_unit });
+        dispatch(getUnits(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getLatestTargetsAction =
+  () =>
+  async (
+    dispatch: (arg0: { type: string; payload?: LatestTargetResponse }) => void
+  ) => {
+    await userService
+      .getLatestTargets()
+      .then((res) => dispatch(getLatestTargetsCreator(res)))
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getBloodSugarTargetsAction =
+  () =>
+  async (
+    dispatch: (arg0: {
+      type: string;
+      payload?: GetBloodSugarTargetsResponseData[];
+    }) => void
+  ) => {
+    await userService
+      .getBloodSugarTargets()
+      .then((res) => {
+        console.log({ res: res.length });
+        dispatch(getBloodSugarTargetsCreator(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getHBA1CTargetsAction =
+  () =>
+  async (
+    dispatch: (arg0: {
+      type: string;
+      payload?: GetHba1cTargetsResponseData[];
+    }) => void
+  ) => {
+    await userService
+      .getHBA1CTargets()
+      .then((res) => dispatch(getHBA1CTargetsCreator(res)))
       .catch((err) => {
         logNow(err);
       });

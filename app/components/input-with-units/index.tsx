@@ -18,8 +18,9 @@ type Props = {
   units: string[];
   title: string;
   placeholder: string;
-  onBlur: any;
-  error: string;
+  onBlur?: any;
+  error?: string;
+  small?: boolean;
 };
 
 const InputWithUnits = ({
@@ -32,10 +33,11 @@ const InputWithUnits = ({
   onBlur,
   placeholder,
   error,
+  small,
 }: Props) => {
   const menuRef = useRef<any>();
   const { colors } = useTheme();
-  const styles = makeStyles(colors);
+  const styles = makeStyles(colors, small);
 
   console.log(typeof error, 'here', error, error.length > 0);
   return (
@@ -60,7 +62,7 @@ const InputWithUnits = ({
             <Text style={styles.menuText}>{unit}</Text>
 
             <MaterialCommunityIcons
-              name="chevron-down"
+              name={small ? 'menu-down' : 'chevron-down'}
               size={responsiveFontSize(28)}
               color="grey"
             />

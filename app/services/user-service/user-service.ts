@@ -24,6 +24,9 @@ import {
   NewTarget,
   CreateTargetResponse,
   CreateTargetRequest,
+  LatestTargetResponse,
+  GetHba1cTargetsResponseData,
+  GetBloodSugarTargetsResponseData,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -999,6 +1002,48 @@ const createNewTarget = (target: CreateTargetRequest) => {
   );
 };
 
+const getLatestTargets = () => {
+  return new Promise<LatestTargetResponse>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_LATEST_TARGETS)
+      .then(({ data }: { data: LatestTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getBloodSugarTargets = () => {
+  return new Promise<GetBloodSugarTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_BLOOD_SUGAR_TARGETS)
+      .then(({ data }: { data: GetBloodSugarTargetsResponseData[] }) => {
+        resolve(data.slice(1, data.length));
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getHBA1CTargets = () => {
+  return new Promise<GetHba1cTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_HBA1C_TARGETS)
+      .then(({ data }: { data: GetHba1cTargetsResponseData[] }) => {
+        resolve(data.slice(1, data.length));
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
 const getResultOverView = (id) => {
   return new Promise<ResultResponse>((resolve, reject) => {
     client
@@ -1080,4 +1125,7 @@ export const userService = {
   getPastResult,
   getNewTarget,
   createNewTarget,
+  getLatestTargets,
+  getBloodSugarTargets,
+  getHBA1CTargets,
 };

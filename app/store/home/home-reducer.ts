@@ -13,6 +13,9 @@ import {
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
   GET_NEW_TARGET,
+  GET_LATEST_TARGET,
+  GET_BLOOD_SUGAR_TARGETS,
+  GET_HBA1C_TARGETS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -96,6 +99,25 @@ export default function (state = INITIAL_STATE, action: any) {
         ...state,
         bloodSugarUnits: action.payload.blood_sugar_unit,
         hbA1cUnits: action.payload.hba1c_unit,
+      };
+    }
+    case GET_LATEST_TARGET: {
+      return {
+        ...state,
+        latestBloodSugar: action.payload.blood_sugar,
+        latestHba1c: action.payload.hba1c,
+      };
+    }
+    case GET_BLOOD_SUGAR_TARGETS: {
+      return {
+        ...state,
+        bloodSugarTargets: action.payload,
+      };
+    }
+    case GET_HBA1C_TARGETS: {
+      return {
+        ...state,
+        hbA1cTargets: action.payload,
       };
     }
 
