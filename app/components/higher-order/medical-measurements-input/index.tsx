@@ -16,6 +16,7 @@ type Props = {
   onChangeText: (text: string) => void;
   value: string;
   maxLength: number;
+  defaultValue: string;
 };
 
 const MedicalInput = ({
@@ -26,6 +27,7 @@ const MedicalInput = ({
   onChangeText,
   value,
   maxLength,
+  defaultValue,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -51,6 +53,7 @@ const MedicalInput = ({
         theme={{ colors: { text: colors.smoke } }}
         onChangeText={onChangeText}
         value={value}
+        defaultValue={defaultValue}
         autoFocus={false}
         underlineColor="transparent"
         activeUnderlineColor="transparent"

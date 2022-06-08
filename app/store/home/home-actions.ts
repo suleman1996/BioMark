@@ -14,6 +14,10 @@ import {
   EncodedResultOverviewPayload,
   LabStatusResponse,
   HealthTrackerPayloadData,
+  WeightProgressEntryPayload,
+  BloodPressureProgressEntryPayload,
+  BloodSugarProgressEntryPayload,
+  Hba1CProgressEntryPayload,
   WeightProgressLogsPayload,
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
@@ -36,6 +40,11 @@ import {
   GET_PSP_HYPERTENSION_HEALTH_TRACKER,
   PSP_HYPER_MODULE,
   PSP_PDF_HYPER_LINK,
+  GET_WEIGHT_PROGRESS,
+  GET_BP_PROGRESS,
+  GET_BS_PROGRESS,
+  GET_HBA1C_PROGRESS,
+  GET_MEDICATION_PROGRESS,
   GET_RESULT_LOGS,
   GET_BLOOD_SUGAR_LOGS,
   GET_HBA1C_LOGS,
@@ -108,6 +117,30 @@ export const addLabResultStatus = (data: LabStatusPayload) => ({
 
 export const getResultOverView = (data: ResultResponse) => ({
   type: GET_RESULT_OVERVIEW,
+  payload: data,
+});
+export const getWeightProgress = (data: WeightProgressEntryPayload) => ({
+  type: GET_WEIGHT_PROGRESS,
+  payload: data,
+});
+export const getBloodPressureProgress = (
+  data: BloodPressureProgressEntryPayload
+) => ({
+  type: GET_BP_PROGRESS,
+  payload: data,
+});
+export const getBloodSugarProgress = (
+  data: BloodSugarProgressEntryPayload
+) => ({
+  type: GET_BS_PROGRESS,
+  payload: data,
+});
+export const getHba1cProgress = (data: Hba1CProgressEntryPayload) => ({
+  type: GET_HBA1C_PROGRESS,
+  payload: data,
+});
+export const getMedicationProgress = (data: Hba1CProgressEntryPayload) => ({
+  type: GET_MEDICATION_PROGRESS,
   payload: data,
 });
 
@@ -326,6 +359,18 @@ export const getReduxResultOverview =
         logNow(err);
       });
   };
+export const getReduxWeightProgress =
+  (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getWeightProgress(id)
+      .then(async (res) => {
+        console.log('Result progress', res);
+        await dispatch(getWeightProgress(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
 
 export const getReduxWeightLogs =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
@@ -340,7 +385,19 @@ export const getReduxWeightLogs =
         logNow(err);
       });
   };
+export const getReduxBloodPressurProgress =
+  (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getBloodPressureProgress(id)
+      .then(async (res) => {
+        console.log('Result progress', res);
 
+        await dispatch(getBloodPressureProgress(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
 export const getReduxBloodSugarLogs =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
@@ -354,7 +411,19 @@ export const getReduxBloodSugarLogs =
         logNow(err);
       });
   };
+export const getReduxBloodSugarProgress =
+  (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getBloodSugarProgress(id)
+      .then(async (res) => {
+        console.log('BS progress', res);
 
+        await dispatch(getBloodSugarProgress(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
 export const getReduxHba1cLogs =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
@@ -363,6 +432,32 @@ export const getReduxHba1cLogs =
         // console.log('Result Overview', res);
 
         await dispatch(getHba1cLogs(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+export const getReduxHba1cProgress =
+  (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getHba1cProgress(id)
+      .then(async (res) => {
+        console.log('HB progress', res);
+
+        await dispatch(getHba1cProgress(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+export const getReduxMedicationProgress =
+  (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getMedicationProgress(id)
+      .then(async (res) => {
+        console.log('MED progress', res);
+
+        await dispatch(getMedicationProgress(res));
       })
       .catch((err) => {
         logNow(err);
