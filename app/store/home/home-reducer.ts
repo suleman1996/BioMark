@@ -12,6 +12,11 @@ import {
   GET_RESULT_OVERVIEW,
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
+  GET_WEIGHT_PROGRESS,
+  GET_BP_PROGRESS,
+  GET_BS_PROGRESS,
+  GET_HBA1C_PROGRESS,
+  GET_MEDICATION_PROGRESS,
   GET_RESULT_LOGS,
   GET_BLOOD_SUGAR_LOGS,
   GET_HBA1C_LOGS,
@@ -92,6 +97,36 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getPastResultData: action.payload,
+      };
+    }
+    case GET_WEIGHT_PROGRESS: {
+      return {
+        ...state,
+        getWeightProgressData: action.payload,
+      };
+    }
+    case GET_BP_PROGRESS: {
+      return {
+        ...state,
+        getBpProgressData: action.payload,
+      };
+    }
+    case GET_BS_PROGRESS: {
+      return {
+        ...state,
+        getBsProgressData: action.payload,
+      };
+    }
+    case GET_HBA1C_PROGRESS: {
+      return {
+        ...state,
+        getHba1cProgressData: action.payload,
+      };
+    }
+    case GET_MEDICATION_PROGRESS: {
+      return {
+        ...state,
+        getMedicationProgressData: action.payload,
       };
     }
     case GET_RESULT_LOGS: {

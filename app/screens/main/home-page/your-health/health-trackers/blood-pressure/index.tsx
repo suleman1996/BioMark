@@ -23,10 +23,18 @@ import {
 } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReduxBloodPressurProgress } from 'store/home/home-actions';
+import { IAppState } from 'store/IAppState';
 
 const BloodPressure = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const dispatch = useDispatch();
+
+  const bloodPressureProgress = useSelector(
+    (state: IAppState) => state.home.getBpProgressData
+  );
 
   const [highValue, setHighValue] = useState('');
   const [lowValue, setLowValue] = useState('');
@@ -47,6 +55,13 @@ const BloodPressure = () => {
       getTime(today);
     setDateAndTime(dateTime);
   }, []);
+
+  useEffect(() => {
+    dispatch(getReduxBloodPressurProgress(4740));
+    if (bloodPressureProgress) {
+      setDateAndTime(bloodPressureProgress?.date_entry);
+    }
+  }, [dispatch, bloodPressureProgress]);
 
   const onChangeTextHigh = (values) => {
     console.log('value', values);
@@ -143,7 +158,7 @@ const BloodPressure = () => {
             textAlign="center"
             placeholder={'High (SYS)'}
             onChangeText={onChangeTextHigh}
-            // value={value}
+            defaultValue={bloodPressureProgress?.bp_systolic}
             maxLength={3}
           />
           <MedicalInput
@@ -151,7 +166,7 @@ const BloodPressure = () => {
             textAlign="center"
             placeholder={'Low (DIA)'}
             onChangeText={onChangeTextLow}
-            //  value={value}
+            defaultValue={bloodPressureProgress?.bp_diastolic}
             maxLength={3}
           />
           {validation ? (
