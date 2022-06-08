@@ -339,7 +339,7 @@ const MedicationForm = (props: any) => {
           </View>
           {SELECTED_MEDICATION_ID ? (
             <GradientButton
-              text="Save and Edit"
+              text="Save Edit"
               color={['#2C6CFC', '#2CBDFC']}
               disabled={!BUTTON_DISABLED}
               style={styles.gradientButton}
@@ -348,7 +348,11 @@ const MedicationForm = (props: any) => {
           ) : (
             <GradientButton
               text="Add"
-              color={['#2C6CFC', '#2CBDFC']}
+              color={
+                BUTTON_DISABLED
+                  ? ['#2C6CFC', '#2CBDFC']
+                  : [colors.disabled, colors.disabled]
+              }
               disabled={!BUTTON_DISABLED}
               style={styles.gradientButton}
               onPress={saveMedication}
