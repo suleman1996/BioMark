@@ -27,41 +27,62 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getReduxBloodPressurProgress } from 'store/home/home-actions';
 import { IAppState } from 'store/IAppState';
 
-const BloodPressure = () => {
+const BloodPressure = ({ route }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.event.loading);
 
   const bloodPressureProgress = useSelector(
     (state: IAppState) => state.home.getBpProgressData
   );
 
-  const [highValue, setHighValue] = useState('');
-  const [lowValue, setLowValue] = useState('');
+  const [highValue, setHighValue] = useState();
+  const [lowValue, setLowValue] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [dateAndtime, setDateAndTime] = useState<any>();
   const [validation, setValidation] = useState<any>(false);
   const [validation2, setValidation2] = useState<any>(false);
 
   useEffect(() => {
-    let today = new Date();
-    let dateTime =
-      getMonth(today) +
-      ' ' +
-      getDay(today) +
-      ', ' +
-      getYear(today) +
-      ' ' +
-      getTime(today);
-    setDateAndTime(dateTime);
+    if (!route?.params?.logId) {
+      let today = new Date();
+      let dateTime =
+        getMonth(today) +
+        ' ' +
+        getDay(today) +
+        ', ' +
+        getYear(today) +
+        ' ' +
+        getTime(today);
+      setDateAndTime(dateTime);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    dispatch(getReduxBloodPressurProgress(4740));
-    if (bloodPressureProgress) {
-      setDateAndTime(bloodPressureProgress?.date_entry);
+    if (route?.params?.logId) {
+      dispatch(getReduxBloodPressurProgress(route?.params?.logId));
     }
-  }, [dispatch, bloodPressureProgress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (route?.params?.logId) {
+      if (bloodPressureProgress) {
+        console.log(
+          'bloodPressureProgress',
+          bloodPressureProgress,
+          route?.params?.logId
+        );
+
+        setDateAndTime(bloodPressureProgress?.date_entry);
+        setHighValue(bloodPressureProgress?.bp_systolic);
+        setLowValue(bloodPressureProgress?.bp_diastolic);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChangeTextHigh = (values) => {
     console.log('value', values);
@@ -143,7 +164,7 @@ const BloodPressure = () => {
 
   return (
     <TitleWithBackWhiteBgLayout title="Blood Pressure">
-      <ActivityIndicator visible={isLoading} />
+      <ActivityIndicator visible={isLoading || loading} />
       <ScrollView style={styles.container}>
         <View
           style={{
@@ -158,7 +179,7 @@ const BloodPressure = () => {
             textAlign="center"
             placeholder={'High (SYS)'}
             onChangeText={onChangeTextHigh}
-            defaultValue={bloodPressureProgress?.bp_systolic}
+            defaultValue={route?.params?.logId ? highValue : ''}
             maxLength={3}
           />
           <MedicalInput
@@ -166,7 +187,7 @@ const BloodPressure = () => {
             textAlign="center"
             placeholder={'Low (DIA)'}
             onChangeText={onChangeTextLow}
-            defaultValue={bloodPressureProgress?.bp_diastolic}
+            defaultValue={route?.params?.logId ? lowValue : ''}
             maxLength={3}
           />
           {validation ? (
@@ -193,7 +214,7 @@ const BloodPressure = () => {
 
         <ButtonWithShadowContainer
           onPress={onSubmit}
-          title={'Add'}
+          title={route?.params?.logId ? 'Save Edit' : 'Add'}
           disabled={
             highValue === '' || lowValue === '' || validation || validation2
               ? true

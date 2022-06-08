@@ -30,7 +30,7 @@ import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
 import { getReduxBloodSugarProgress } from 'store/home/home-actions';
 
-const BloodSugar = () => {
+const BloodSugar = ({ route }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -76,15 +76,24 @@ const BloodSugar = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch2(getReduxBloodSugarProgress(2968));
-    console.log('bloodSugarProgress', bloodSugarProgress);
-    if (bloodSugarProgress) {
-      setValue(bloodSugarProgress?.data_value);
-      setDropdown(bloodSugarProgress?.meal_type_id);
-      setDateAndTime(bloodSugarProgress?.record_date);
+    if (route?.params?.logId) {
+      if (bloodSugarProgress) {
+        setValue(bloodSugarProgress?.data_value);
+        setDropdown(bloodSugarProgress?.meal_type_id);
+        setDateAndTime(bloodSugarProgress?.record_date);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch2]);
+  }, []);
+
+  useEffect(() => {
+    console.log('logIdBS', route?.params?.logId);
+    if (route?.params?.logId) {
+      dispatch2(getReduxBloodSugarProgress(route?.params?.logId));
+      console.log('bloodSugarProgress', bloodSugarProgress);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChangeText = (values) => {
     console.log('value', value);
@@ -218,7 +227,7 @@ const BloodSugar = () => {
 
         <ButtonWithShadowContainer
           onPress={onSubmit}
-          title={'Add'}
+          title={route?.params?.logId ? 'Save Edit' : 'Add'}
           disabled={
             value === '' || !isDropdownChanged || validation || validation2
               ? true

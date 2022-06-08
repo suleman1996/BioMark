@@ -33,6 +33,8 @@ const Weight = ({ route }) => {
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
 
+  const loading = useSelector((state) => state.event.loading);
+
   const weightProgress = useSelector(
     (state: IAppState) => state.home.getWeightProgressData
   );
@@ -76,22 +78,32 @@ const Weight = ({ route }) => {
   }, [weightTracker.is_metric]);
 
   useEffect(() => {
-    console.log('logId', route?.params?.logId);
-
     if (route?.params?.logId) {
       dispatch(getReduxWeightProgress(route?.params?.logId));
       console.log('weightProg', weightProgress);
-      const is_metric = weightProgress?.is_metric;
-      if (weightProgress?.is_metric) {
-        setWeightTracker({
-          date_entry: weightProgress.date_entry,
-          weight: weightProgress.weight,
-          is_metric,
-        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    console.log('logId', route?.params?.logId);
+
+    if (weightProgress) {
+      if (route?.params?.logId) {
+        // dispatch(getReduxWeightProgress(route?.params?.logId));
+        console.log('weightProg', weightProgress);
+        const is_metric = weightProgress?.is_metric;
+        if (weightProgress?.is_metric) {
+          setWeightTracker({
+            date_entry: weightProgress.date_entry,
+            weight: weightProgress.weight,
+            is_metric,
+          });
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, weightProgress]);
+  }, [weightProgress]);
 
   const onSubmit = async () => {
     let dateTime = '';
@@ -154,7 +166,7 @@ const Weight = ({ route }) => {
 
   return (
     <TitleWithBackWhiteBgLayout title="Weight">
-      <ActivityIndicator visible={isLoading} />
+      <ActivityIndicator visible={isLoading || loading} />
       <ScrollView style={styles.container}>
         <View
           style={{
