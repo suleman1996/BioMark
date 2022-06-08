@@ -25,7 +25,7 @@ const lbsToKg = () => {
   Number((prev.weight * (1 / 2.205)).toFixed(1));
 };
 
-const measurmentValidator = (is_metric, measurment, value) => {
+const measurementValidator = (is_metric, measurment, value) => {
   let errorr = '';
   if (value.length === 0 || value == 0)
     return measurment === 'height'
@@ -99,4 +99,10 @@ const measurmentValidator = (is_metric, measurment, value) => {
   return errorr;
 };
 
-export { cmToFeet, feetToCm, kgToLbs, lbsToKg, measurmentValidator };
+export {
+  cmToFeet,
+  feetToCm,
+  kgToLbs,
+  lbsToKg,
+  measurementValidator as measurementValidator,
+};

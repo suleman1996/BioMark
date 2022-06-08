@@ -14,30 +14,16 @@ import {
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
-import {
-  getDay,
-  getMonth,
-  getTime,
-  getYear,
-} from 'utils/functions/date-format';
-import { getReduxWeightProgress } from 'store/home/home-actions';
-import { measurmentValidator } from 'utils/functions/measurments';
+import { getCalendarDate } from 'utils/functions/date-format';
+import { measurementValidator } from 'utils/functions/measurments';
 import SCREENS from 'navigation/constants/index';
-import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
-import { useDispatch, useSelector } from 'react-redux';
-import { IAppState } from 'store/IAppState';
 
-const Weight = ({ route }) => {
+import makeStyles from './styles';
+
+const Weight = ({ route }: any) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const dispatch = useDispatch();
-
-  const loading = useSelector((state) => state.event.loading);
-
-  const weightProgress = useSelector(
-    (state: IAppState) => state.home.getWeightProgressData
-  );
 
   const [weightTracker, setWeightTracker] = useState({
     weight: '0.0',
@@ -49,73 +35,45 @@ const Weight = ({ route }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    let today = new Date();
-    let dateTime =
-      getMonth(today) +
-      ' ' +
-      getDay(today) +
-      ', ' +
-      getYear(today) +
-      ' ' +
-      getTime(today);
-
-    setWeightTracker((tracker) => ({ ...tracker, date_entry: dateTime }));
+    if (route?.params?.logId) {
+      getWeightDataByID(route?.params?.logId);
+    } else {
+      setWeightTracker({
+        ...weightTracker,
+        date_entry: getCalendarDate(new Date()),
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (!weightTracker.is_metric) {
-      setWeightTracker({
-        ...weightTracker,
-        weight: Number((weightTracker.weight * 2.205).toFixed(1)),
-      });
+      setWeightTracker((prev: any) => ({
+        ...prev,
+        weight: Number((prev.weight * 2.205).toFixed(1)),
+      }));
     } else {
-      setWeightTracker({
-        ...weightTracker,
-        weight: Number((weightTracker.weight * (1 / 2.205)).toFixed(1)),
-      });
+      setWeightTracker((prev: any) => ({
+        ...prev,
+        weight: Number((prev.weight * (1 / 2.205)).toFixed(1)),
+      }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [weightTracker.is_metric]);
 
-  useEffect(() => {
-    if (route?.params?.logId) {
-      dispatch(getReduxWeightProgress(route?.params?.logId));
-      console.log('weightProg', weightProgress);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    console.log('logId', route?.params?.logId);
-
-    if (weightProgress) {
-      if (route?.params?.logId) {
-        // dispatch(getReduxWeightProgress(route?.params?.logId));
-        console.log('weightProg', weightProgress);
-        const is_metric = weightProgress?.is_metric;
-        if (weightProgress?.is_metric) {
-          setWeightTracker({
-            date_entry: weightProgress.date_entry,
-            weight: weightProgress.weight,
-            is_metric,
-          });
-        }
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [weightProgress]);
+  const getWeightDataByID = async (id) => {
+    const weightData = await userService.getWeightProgress(id);
+    setWeightTracker({
+      date_entry: weightData.date_entry,
+      weight: weightData.weight,
+      is_metric: weightData?.is_metric,
+    });
+  };
 
   const onSubmit = async () => {
     let dateTime = '';
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateTime =
-      getMonth(weightTracker.date_entry) +
-      ' ' +
-      getDay(weightTracker.date_entry) +
-      ', ' +
-      getYear(weightTracker.date_entry) +
-      ' ' +
-      getTime(weightTracker.date_entry);
+    dateTime = getCalendarDate(weightTracker.date_entry);
 
     try {
       setIsLoading(true);
@@ -153,16 +111,15 @@ const Weight = ({ route }) => {
       ...prev,
       is_metric: metric,
     }));
-    setError(measurmentValidator(metric, 'weight', weightTracker.weight) || '');
+    setError(
+      measurementValidator(metric, 'weight', weightTracker.weight) || ''
+    );
   };
 
   const handleChange = (value: number, key: string) => {
-    console.log(weightTracker.is_metric, key, value);
-    setWeightTracker((prev: any) => ({ ...prev, [key]: value }));
-    setError(measurmentValidator(weightTracker.is_metric, key, value) || '');
+    setWeightTracker({ ...weightTracker, [key]: value });
+    setError(measurementValidator(weightTracker.is_metric, key, value) || '');
   };
-
-  console.log(weightTracker);
 
   return (
     <TitleWithBackWhiteBgLayout title="Weight">
@@ -185,7 +142,7 @@ const Weight = ({ route }) => {
             error={error || ''}
             onBlur={() => {
               setError(
-                measurmentValidator(
+                measurementValidator(
                   weightTracker.is_metric,
                   'weight',
                   weightTracker.weight
