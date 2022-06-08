@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, FlatList, Pressable } from 'react-native';
+import { View, Text, FlatList, Pressable, Linking } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 import EnJson from '../../../i18n/en.json';
@@ -107,15 +107,22 @@ const FaqScreen = (props: Props) => {
                   <Text style={styles.headerText}>
                     {`Do you have further questions? \nWrite in to us at`}
                   </Text>
-                  <Text style={styles.emailText}>
-                    {`support@biomarking.com!`}
-                  </Text>
+                  <Pressable
+                    onPress={() =>
+                      Linking.openURL('mailto:support@biomarking.com')
+                    }
+                  >
+                    <Text style={styles.emailText}>
+                      {`support@biomarking.com!`}
+                    </Text>
+                  </Pressable>
                 </View>
                 <View style={{ paddingBottom: heightToDp(2) }} />
               </>
             );
           }}
         />
+        <View style={styles.fab}></View>
       </View>
     </>
   );

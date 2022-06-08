@@ -42,6 +42,7 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(18),
       color: colors.darkPrimary,
     },
+    fab: {},
   });
 
 export default makeStyles;
