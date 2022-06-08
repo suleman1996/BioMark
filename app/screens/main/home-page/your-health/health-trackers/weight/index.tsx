@@ -123,7 +123,7 @@ const Weight = ({ route }: any) => {
 
   return (
     <TitleWithBackWhiteBgLayout title="Weight">
-      <ActivityIndicator visible={isLoading} />
+      <ActivityIndicator visible={isLoading || loading} />
       <ScrollView style={styles.container}>
         <View
           style={{

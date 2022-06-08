@@ -28,7 +28,7 @@ import { IAppState } from 'store/IAppState';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxHba1cProgress } from 'store/home/home-actions';
 
-const HbA1c = () => {
+const HbA1c = ({ route }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -55,17 +55,30 @@ const HbA1c = () => {
       ' ' +
       getTime(today);
     setDateAndTime(dateTime);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    dispatch(getReduxHba1cProgress(2970));
-
-    if (hba1cData) {
-      // setValue(bloodSugarProgress?.data_value);
-      setHbvalue(hba1cData?.data_value);
-      setDateAndTime(hba1cData?.record_date);
+    if (route?.params?.logId) {
+      dispatch(getReduxHba1cProgress(route?.params?.logId));
+      console.log('hba1cData', hba1cData);
+    } else {
+      setHbvalue('');
     }
-  }, [dispatch, hba1cData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    console.log('logIdHba1c', route?.params?.logId);
+    if (route?.params?.logId && route?.params?.logId) {
+      if (hba1cData) {
+        // setValue(bloodSugarProgress?.data_value);
+        setHbvalue(hba1cData?.data_value);
+        setDateAndTime(hba1cData?.record_date);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChangeText = (values) => {
     console.log('value', values);
@@ -148,7 +161,8 @@ const HbA1c = () => {
             placeholder={'0.0'}
             onChangeText={onChangeText}
             showIcon={true}
-            value={hba1cData?.data_value}
+            // value={hba1cData?.data_value}
+            defaultValue={route?.params?.logId ? hba1cData?.data_value : ''}
             maxLength={5}
           />
 
@@ -176,7 +190,7 @@ const HbA1c = () => {
 
         <ButtonWithShadowContainer
           onPress={onSubmit}
-          title={'Add'}
+          title={route?.params?.logId ? 'Save Edit' : 'Add'}
           disabled={!hbvalue || validation ? true : false}
         />
       </ScrollView>
