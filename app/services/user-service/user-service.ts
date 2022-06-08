@@ -1223,6 +1223,26 @@ const updateWeightTracker = (
   });
 };
 
+const deleteWeightLog = (weight_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_WEIGHT}/${weight_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -1291,4 +1311,5 @@ export const userService = {
   getBloodSugarLogs,
   getHba1cLogs,
   getBloodPressureLogs,
+  deleteWeightLog,
 };

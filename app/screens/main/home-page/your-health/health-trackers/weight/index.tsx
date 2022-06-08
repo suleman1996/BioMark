@@ -20,6 +20,7 @@ import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
 
 import makeStyles from './styles';
+import { AccountDeActivateModal } from 'components/ui';
 
 const Weight = ({ route }: any) => {
   const { colors } = useTheme();
@@ -32,8 +33,8 @@ const Weight = ({ route }: any) => {
     date_entry: '',
   });
   const [error, setError] = useState<string>('');
-
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
     if (SELECTED_WEIGHT_ID) {
@@ -63,12 +64,14 @@ const Weight = ({ route }: any) => {
   }, [weightTracker.is_metric]);
 
   const getWeightDataByID = async (id) => {
+    setIsLoading(true);
     const weightData = await userService.getWeightProgress(id);
     setWeightTracker({
       date_entry: weightData.date_entry,
       weight: weightData.weight,
       is_metric: weightData?.is_metric,
     });
+    setIsLoading(false);
   };
 
   // const onSubmit = async () => {
@@ -150,8 +153,21 @@ const Weight = ({ route }: any) => {
     setError(measurementValidator(weightTracker.is_metric, key, value) || '');
   };
 
+  const deleteWeightLog = async () => {
+    try {
+      await userService.deleteWeightLog(SELECTED_WEIGHT_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <TitleWithBackWhiteBgLayout title="Weight">
+    <TitleWithBackWhiteBgLayout
+      binIcon={SELECTED_WEIGHT_ID ? true : false}
+      onPressIcon={() => setShowDeleteModal(true)}
+      title="Weight"
+    >
       <ActivityIndicator visible={isLoading || isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -193,6 +209,17 @@ const Weight = ({ route }: any) => {
           ) : null}
         </View>
       </ScrollView>
+      {showDeleteModal && (
+        <AccountDeActivateModal
+          headerText="Weight"
+          subHeading="Are you sure you wish to delete this weight log?"
+          buttonUpperText="Yes"
+          buttonLowerText="Skip"
+          isVisible={showDeleteModal}
+          setIsVisible={setShowDeleteModal}
+          callMe={deleteWeightLog}
+        />
+      )}
       <ButtonWithShadowContainer
         onPress={saveWeightLog}
         title={SELECTED_WEIGHT_ID ? 'Save Edit' : 'Add'}
