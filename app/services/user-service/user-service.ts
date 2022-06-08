@@ -20,6 +20,11 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  WeightProgressEntryPayload,
+  BloodPressureProgressEntryPayload,
+  BloodSugarProgressEntryPayload,
+  Hba1CProgressEntryPayload,
+  MedicationTrackerPayload,
   WeightProgressLogsPayload,
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
@@ -991,7 +996,46 @@ const getResultOverView = (id) => {
       });
   });
 };
+const getWeightProgress = (id) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_WEIGTH_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('getWeightProgress', response);
 
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('getWeightProgress error', err);
+        reject(err);
+      });
+  });
+};
+const getBloodPressureProgress = (id) => {
+  return new Promise<BloodPressureProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_BP_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('BPProgress', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BPProgress error', err);
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
 const getWeightLogs = () => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
@@ -1012,7 +1056,26 @@ const getWeightLogs = () => {
       });
   });
 };
+const getBloodSugarProgress = (id) => {
+  return new Promise<BloodSugarProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_BS_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('BSProgress', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BSProgress error', err);
 
+        reject(err);
+      });
+  });
+};
 const getBloodSugarLogs = () => {
   return new Promise<BloodSugarProgressLogsPayload>((resolve, reject) => {
     client
@@ -1028,7 +1091,27 @@ const getBloodSugarLogs = () => {
         }
       })
       .catch(async (err: ErrorResponse) => {
-        logNow('get weight log error', err);
+        logNow('get bs log error', err);
+        reject(err);
+      });
+  });
+};
+const getHba1cProgress = (id) => {
+  return new Promise<Hba1CProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_HBA1C_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('hba1c', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('hba1c error', err);
         reject(err);
       });
   });
@@ -1049,7 +1132,27 @@ const getHba1cLogs = () => {
         }
       })
       .catch(async (err: ErrorResponse) => {
-        logNow('get weight log error', err);
+        logNow('get hb1c log error', err);
+        reject(err);
+      });
+  });
+};
+const getMedicationProgress = (id) => {
+  return new Promise<MedicationTrackerPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_MEDICATION_TRACKER_BY_ID}${id}`)
+      .then(async (response) => {
+        try {
+          console.log('MED', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('MED error', err);
         reject(err);
       });
   });
@@ -1134,6 +1237,11 @@ export const userService = {
   getResultOverView,
   getLatestResult,
   getPastResult,
+  getWeightProgress,
+  getBloodPressureProgress,
+  getBloodSugarProgress,
+  getHba1cProgress,
+  getMedicationProgress,
   getWeightLogs,
   getBloodSugarLogs,
   getHba1cLogs,

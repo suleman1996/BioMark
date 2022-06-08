@@ -29,7 +29,10 @@ import {
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
-import { getReduxNewMedicationTracker } from 'store/home/home-actions';
+import {
+  getReduxMedicationProgress,
+  getReduxNewMedicationTracker,
+} from 'store/home/home-actions';
 import { makeStyles } from './styles';
 import { navigate } from 'services/nav-ref';
 
@@ -45,6 +48,7 @@ const Medication = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
+  const dispatch1 = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [dateAndtime, setDateAndTime] = useState<any>();
@@ -70,6 +74,9 @@ const Medication = () => {
   const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
+  );
+  const getMedicationProgressData = useSelector(
+    (state: IAppState) => state.home.getMedicationProgressData
   );
   useEffect(() => {
     console.log('getMedNewTracker', getMedNewTracker);
@@ -98,6 +105,13 @@ const Medication = () => {
       getTime(today);
     setDateAndTime(dateTime);
   }, []);
+  useEffect(() => {
+    dispatch1(getReduxMedicationProgress(48819));
+    console.log('getMedicationProgressData', getMedicationProgressData);
+    if (getMedicationProgressData) {
+      setDosage(getMedicationProgressData?.medication?.dosage);
+    }
+  }, [dispatch1]);
 
   const onSubmit = async () => {
     let dateTime = '';
