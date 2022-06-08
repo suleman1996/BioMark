@@ -24,6 +24,7 @@ import makeStyles from './styles';
 const Weight = ({ route }: any) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const SELECTED_WEIGHT_ID = route?.params?.logId;
 
   const [weightTracker, setWeightTracker] = useState({
     weight: '0.0',
@@ -35,8 +36,8 @@ const Weight = ({ route }: any) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (route?.params?.logId) {
-      getWeightDataByID(route?.params?.logId);
+    if (SELECTED_WEIGHT_ID) {
+      getWeightDataByID(SELECTED_WEIGHT_ID);
     } else {
       setWeightTracker({
         ...weightTracker,
@@ -70,39 +71,67 @@ const Weight = ({ route }: any) => {
     });
   };
 
-  const onSubmit = async () => {
-    let dateTime = '';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateTime = getCalendarDate(weightTracker.date_entry);
+  // const onSubmit = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     await userService.createWeight({
+  //       medical: {
+  //         ...weightTracker,
+  //       },
+  //     });
+  //     navigate(SCREENS.HEALTH_PROGRESS, 0);
+  //     setIsLoading(false);
+  //     // eslint-disable-next-line no-catch-shadow
+  //   } catch (error: any) {
+  //     setIsLoading(false);
+  //     if (error?.errMsg.status === '500') {
+  //       showMessage({
+  //         message: 'Internal Server Error',
+  //         type: 'danger',
+  //       });
+  //     } else if (error.errMsg.status === false) {
+  //       showMessage({
+  //         message: error.errMsg.data.error,
+  //         type: 'danger',
+  //       });
+  //     } else {
+  //       showMessage({
+  //         message: error.errMsg,
+  //         type: 'danger',
+  //       });
+  //     }
+  //   }
+  // };
 
+  // // Save & Update Medication
+  const saveWeightLog = async () => {
+    setIsLoading(true);
+    const API_FUNCTION = SELECTED_WEIGHT_ID
+      ? 'updateWeightTracker'
+      : 'createWeightTracker';
     try {
-      setIsLoading(true);
-      await userService.createWeight({
-        medical: {
-          ...weightTracker,
-        },
-      });
-      navigate(SCREENS.HEALTH_PROGRESS, 0);
-      setIsLoading(false);
-    } catch (errorr) {
-      setIsLoading(false);
-      if (errorr.errMsg.status === '500') {
+      await userService[API_FUNCTION](weightTracker, SELECTED_WEIGHT_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err: any) {
+      console.error(err);
+      if (error?.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (errorr.errMsg.status === false) {
+      } else if (error?.errMsg.status === false) {
         showMessage({
-          message: errorr.errMsg.data.error,
+          message: error?.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: errorr.errMsg,
+          message: error?.errMsg,
           type: 'danger',
         });
       }
     }
+    setIsLoading(false);
   };
 
   const handleUnitChange = (selectedUnit: string) => {
@@ -123,7 +152,7 @@ const Weight = ({ route }: any) => {
 
   return (
     <TitleWithBackWhiteBgLayout title="Weight">
-      <ActivityIndicator visible={isLoading || loading} />
+      <ActivityIndicator visible={isLoading || isLoading} />
       <ScrollView style={styles.container}>
         <View
           style={{
@@ -163,13 +192,12 @@ const Weight = ({ route }: any) => {
             </>
           ) : null}
         </View>
-
-        <ButtonWithShadowContainer
-          onPress={onSubmit}
-          title={route?.params?.logId ? 'Save Edit' : 'Add'}
-          disabled={!weightTracker ? true : false}
-        />
       </ScrollView>
+      <ButtonWithShadowContainer
+        onPress={saveWeightLog}
+        title={SELECTED_WEIGHT_ID ? 'Save Edit' : 'Add'}
+        disabled={!weightTracker ? true : false}
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };

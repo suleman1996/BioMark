@@ -29,6 +29,7 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  WeightProgressEntryRequest,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -470,11 +471,7 @@ const createBloodPressure = ({ medical }: Props) => {
     medical,
   });
 };
-const createWeight = ({ medical }: Props) => {
-  return client.post(API_URLS.CREATE_WEIGHT, {
-    medical,
-  });
-};
+
 const createHba1c = ({ hba1c }: Props) => {
   return client.post(API_URLS.CREATE_HBA1C, {
     hba1c,
@@ -1179,6 +1176,53 @@ const getBloodPressureLogs = () => {
   });
 };
 
+const createWeightTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_WEIGHT, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateWeightTracker = (
+  medical: WeightProgressEntryRequest,
+  id: string
+) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_WEIGHT}/${id}`, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -1216,7 +1260,8 @@ export const userService = {
   getMedicalDropDown,
   createBloodSugar,
   createBloodPressure,
-  createWeight,
+  updateWeightTracker,
+  createWeightTracker,
   createHba1c,
   getHealthRisks,
   getJumioData,
