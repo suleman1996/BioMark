@@ -50,9 +50,10 @@ export const makeStyles = (colors: any) =>
       fontFamily: fonts.OpenSansRegular,
     },
     text6: {
-      color: colors.black,
+      color: colors.smoke,
       marginHorizontal: widthToDp(5),
       marginTop: heightToDp(2),
+      fontSize: responsiveFontSize('13'),
       fontWeight: 'bold',
     },
     text7: {

@@ -348,29 +348,31 @@ const Index = () => {
     </View>
   );
 
-  const RenderHealthRisk = ({ description, name, card_status, onPress }) => (
-    <Animated.View
-      {...panResponder.panHandlers}
-      style={[pan.getLayout(), styles.healthRisk]}
-    >
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Heart fill={colors.lightGrey} />
-          <Text style={styles.healthName}>{name}</Text>
+  const RenderHealthRisk = ({ description, name, card_status, onPress }) => {
+    return (
+      <Animated.View
+        {...panResponder.panHandlers}
+        style={[pan.getLayout(), styles.healthRisk]}
+      >
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Heart fill={colors.lightGrey} />
+            <Text style={styles.healthName}>{name}</Text>
+          </View>
+          <Text style={styles.healthCardStatusName}>{card_status}</Text>
         </View>
-        <Text style={styles.healthCardStatusName}>{card_status}</Text>
-      </View>
-      <Text style={styles.descriptionHealthRisk}>
-        <Text>{description} </Text>
-        <TouchableWithoutFeedback onPress={onPress}>
-          <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
-            Tap here{' '}
-          </Text>
-        </TouchableWithoutFeedback>
-        <Text>to complete your information</Text>
-      </Text>
-    </Animated.View>
-  );
+        <Text style={styles.descriptionHealthRisk}>
+          <Text>{description} </Text>
+          <TouchableWithoutFeedback onPress={onPress}>
+            <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
+              Tap here{' '}
+            </Text>
+          </TouchableWithoutFeedback>
+          <Text>to complete your information</Text>
+        </Text>
+      </Animated.View>
+    );
+  };
 
   const pan = useRef(new Animated.ValueXY()).current;
 
@@ -509,6 +511,7 @@ const Index = () => {
               Calculations={Sleeping_Calc}
             />
           </View>
+          {console.log(selectedHealthRisk)}
           {selectedHealthRisk && (
             <RenderHealthRisk
               onPress={() =>

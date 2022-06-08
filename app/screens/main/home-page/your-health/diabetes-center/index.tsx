@@ -43,11 +43,14 @@ const DiabetesCenter = () => {
     (state: IAppState) => state.home.pspModuleData
   );
   const hell = useSelector((state: IAppState) => state.home.healthTracker);
+  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
 
   useEffect(() => {
     PspModuleData();
     handleHEalthTracker();
     console.log('Health diabetes api =======>', hell);
+    console.log('dashborad api result', dashboard);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
