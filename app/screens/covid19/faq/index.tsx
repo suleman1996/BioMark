@@ -101,7 +101,19 @@ const FaqScreen = (props: Props) => {
           renderItem={renderQuestionAns}
           data={questionAns}
           ListFooterComponent={() => {
-            return <View style={{ paddingBottom: heightToDp(2) }} />;
+            return (
+              <>
+                <View style={styles.card}>
+                  <Text style={styles.headerText}>
+                    {`Do you have further questions? \nWrite in to us at`}
+                  </Text>
+                  <Text style={styles.emailText}>
+                    {`support@biomarking.com!`}
+                  </Text>
+                </View>
+                <View style={{ paddingBottom: heightToDp(2) }} />
+              </>
+            );
           }}
         />
       </View>

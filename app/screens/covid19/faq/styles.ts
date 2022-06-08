@@ -37,6 +37,11 @@ export const makeStyles = (colors: any) =>
       color: colors.black,
       marginTop: heightToDp(1),
     },
+    emailText: {
+      fontFamily: fonts.bold,
+      fontSize: responsiveFontSize(18),
+      color: colors.darkPrimary,
+    },
   });
 
 export default makeStyles;
