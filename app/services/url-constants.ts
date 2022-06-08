@@ -28,6 +28,9 @@ const API_URLS = {
   GET_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
 
+  //Home
+  BARCODE_CHECK: '/api/v1/patient/scanners/midas',
+
   // Dependent
   DEPENDENTS: '/api/v1/patient/dependents',
 
