@@ -170,7 +170,7 @@ const Index = () => {
             }
           }}
           overlayColor={colors.opacityBlackDark}
-          color={colors.shineBlue}
+          // color={colors.shineBlue}
           buttonSize={53}
           distanceToEdge={35}
           actionsPaddingTopBottom={5}
