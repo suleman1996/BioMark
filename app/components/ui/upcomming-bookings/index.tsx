@@ -9,6 +9,8 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
 import SCREENS from 'navigation/constants';
+import BioBookings from 'components/svg/bio-bookings';
+import EmptyResultComponent from 'components/higher-order/empty-result';
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
@@ -76,7 +78,19 @@ const UpcommingBookings = (props: Props) => {
       <FlatList
         ListHeaderComponent={() => <SuggestionsText />}
         renderItem={_renderItem}
-        data={[1, 2, 3]}
+        data={[]}
+        ListEmptyComponent={() => {
+          return (
+            <>
+              <View style={{ paddingTop: heightToDp(5) }} />
+              <EmptyResultComponent
+                title="No Upcomming Bookings"
+                subTitle="You have no COVID bookings scheduled yet."
+                icon={<BioBookings width={14} height={14} />}
+              />
+            </>
+          );
+        }}
         ListFooterComponent={() => (
           <View style={{ paddingTop: heightToDp(20) }} />
         )}

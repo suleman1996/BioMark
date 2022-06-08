@@ -6,6 +6,8 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { makeStyles } from './styles';
 import { navigate } from './../../../services/nav-ref';
 import SCREENS from 'navigation/constants';
+import EmptyResultComponent from 'components/higher-order/empty-result';
+import BioBookings from 'components/svg/bio-bookings';
 type Props = {};
 
 const HistoryBookings = (props: Props) => {
@@ -58,10 +60,22 @@ const HistoryBookings = (props: Props) => {
     <View style={{ flex: 1 }}>
       <FlatList
         renderItem={_renderItem}
-        data={[1, 2, 3]}
+        data={[]}
         ListFooterComponent={() => (
           <View style={{ paddingTop: heightToDp(20) }} />
         )}
+        ListEmptyComponent={() => {
+          return (
+            <>
+              <View style={{ paddingTop: heightToDp(5) }} />
+              <EmptyResultComponent
+                title="No Recent Bookings"
+                subTitle={`This is where you can see your\npast COVID bookings.`}
+                icon={<BioBookings width={14} height={14} />}
+              />
+            </>
+          );
+        }}
       />
       <View style={styles.buttonContainer}>
         <ButtonComponent
