@@ -32,6 +32,8 @@ import EmpowerProgram from 'screens/main/home-page/empower-program';
 import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
 import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
 import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-list';
+import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
+import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
 import {
   getHealthTrackerRisks,
   getReduxDashboard,
@@ -42,6 +44,9 @@ import {
   getReduxNewMedicationTracker,
   getReduxLatestResult,
   getReduxPastResult,
+  getReduxPspHypertensionHealthTrackerData,
+  getReduxPspHyperModules,
+  getReduxPspPdfHyperLink,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
@@ -79,6 +84,7 @@ const {
   EDIT_MEDICATION,
   RESULT_UPLOAD,
   MORE_INFO,
+  PDF_HYPERTENSION_SUPPORT,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -95,8 +101,11 @@ const AppNavigator = () => {
     dispatch(getReduxLabResultStatus());
     dispatch(getReduxPspModules());
     dispatch(getReduxPspPdfLink(link));
+    dispatch(getReduxPspPdfHyperLink(link));
     dispatch(getReduxLatestResult());
     dispatch(getReduxPastResult());
+    dispatch(getReduxPspHypertensionHealthTrackerData());
+    dispatch(getReduxPspHyperModules());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -139,8 +148,19 @@ const AppNavigator = () => {
             component={VideoList}
           />
           <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name={SCREENS.VIDEO_HYPERTENSION_LIST}
+            component={VideoHypertensionList}
+          />
+          <Stack.Screen
             name={PDF_DIABETES_SUPPORT}
             component={PdfDiabetesSupportCenter}
+          />
+          <Stack.Screen
+            name={PDF_HYPERTENSION_SUPPORT}
+            component={PdfHypertensionSupportCenter}
           />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
           <Stack.Screen name={SUPPORT_SYSTEM} component={SupportCenter} />

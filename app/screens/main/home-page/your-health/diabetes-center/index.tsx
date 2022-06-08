@@ -85,37 +85,6 @@ const DiabetesCenter = () => {
     });
   };
 
-  // const [healthTrackers] = React.useState([
-  //   {
-  //     id: 0,
-  //     title: 'Blood Sugar',
-  //     value: '5.5',
-  //     subTitle: 'mg/dL',
-  //     color: colors.lightYellow,
-  //   },
-  //   {
-  //     id: 1,
-  //     title: 'Medication',
-  //     value: '-',
-  //     subTitle: 'Add',
-  //     color: colors.blue,
-  //   },
-  //   {
-  //     id: 1,
-  //     title: 'HbA1c',
-  //     value: '5.0',
-  //     subTitle: '%',
-  //     color: colors.green,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Weight',
-  //     value: '56',
-  //     subTitle: 'kg',
-  //     color: colors.blue,
-  //   },
-  // ]);
-
   const renderItem = ({ item }) => (
     <>
       {console.log(item, '---------------item-------------------')}

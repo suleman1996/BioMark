@@ -20,6 +20,7 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
   BloodSugarProgressEntryPayload,
@@ -729,6 +730,46 @@ function getPspModules() {
   });
 }
 
+function getPspHyperModules() {
+  return new Promise<PspModule>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_HYPER_MODULE_DATA)
+      .then(async (response) => {
+        try {
+          console.log('Hyper Module data', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('psp hyper error', err);
+        reject(err);
+      });
+  });
+}
+
+function getHypertensionHealthTracker() {
+  return new Promise<HealthTrackerPayloadData>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_HYPERTENSION_MODULES)
+      .then(async (response) => {
+        try {
+          console.log('hypertension Modules', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('hypertension error', err);
+        reject(err);
+      });
+  });
+}
+
 function getLatestResult() {
   return new Promise<EncodedResultOverviewPayload>((resolve, reject) => {
     client
@@ -786,6 +827,30 @@ function getPspPdfLink(link) {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('pdf error', err);
+        logNow('lab status error', err);
+        reject(err);
+      });
+  });
+}
+
+function getPspHyperPdfLink(link) {
+  console.log(link, 'linkkkkkkkkkkkkkkkkkkkkk');
+  return new Promise<PspModuleDataContents>((resolve, reject) => {
+    client
+      .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
+      .then(async (response) => {
+        try {
+          console.log('PSP PDF Hyper LINK', response);
+          console.log('lab staus', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('pdf Hyper error', err);
         logNow('lab status error', err);
         reject(err);
       });
@@ -1237,6 +1302,9 @@ export const userService = {
   getResultOverView,
   getLatestResult,
   getPastResult,
+  getHypertensionHealthTracker,
+  getPspHyperModules,
+  getPspHyperPdfLink,
   getWeightProgress,
   getBloodPressureProgress,
   getBloodSugarProgress,
