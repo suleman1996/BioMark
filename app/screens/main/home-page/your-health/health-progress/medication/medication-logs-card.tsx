@@ -45,9 +45,9 @@ const MedicationLogsCard = ({
             <Text style={styles.timeText}>{frequency_time}</Text>
           </View>
           <View style={styles.checkboxView}>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Checkbox
-                status={taken}
+                // status={taken}
                 onPress={() =>
                   navigation.navigate(SCREENS.MEDICATION, {
                     medication_log_id: medication_log_id,
@@ -67,9 +67,9 @@ const MedicationLogsCard = ({
             <Text style={styles.timeTextSuccess}>{frequency_time}</Text>
           </View>
           <View style={styles.checkboxView}>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Checkbox
-                status={taken}
+                status={'checked'}
                 onPress={() =>
                   navigation.navigate(SCREENS.MEDICATION, {
                     medication_log_id: medication_log_id,

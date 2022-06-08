@@ -12,15 +12,16 @@ const styles = (colors: any) =>
       borderRadius: 5,
       flexDirection: 'row',
       alignItems: 'center',
-      padding: 10,
+      padding: 20,
       justifyContent: 'space-between',
       elevation: 5,
       marginBottom: heightToDp(1),
+      marginHorizontal: 15,
     },
     listTitle: {
       flex: 1,
       fontSize: responsiveFontSize(20),
-      color: colors.primary,
+      color: colors.lightBlueish,
       fontFamily: fonts.mulishExtraBold,
     },
   });
