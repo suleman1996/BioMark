@@ -16,7 +16,10 @@ import RenderHealthTrack from 'components/health-tracker-card/index';
 import PdfList from 'components/pdf-list';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
+import { ActivityIndicator } from 'components';
 import WithdrawProgram from 'components/widthdraw-from-program';
+import { userService } from 'services/user-service/user-service';
+
 import SCREENS from 'navigation/constants';
 import Messenger from 'assets/svgs/messenger';
 import { navigate } from 'services/nav-ref';
@@ -24,16 +27,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { getReduxPspModules } from 'store/home/home-actions';
 import Config from 'react-native-config';
+import { showMessage } from 'react-native-flash-message';
 
 const openMessenger = () => {
   Linking.openURL(Config.MESSENGER_URL);
 };
 
 const DiabetesCenter = () => {
+  const [isVisiable, setIsVisible] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [pdfData, setPdfData] = useState([]);
   const [video, setVideo] = useState([]);
   const [healthTracker] = React.useState([]);
+  const [barCodeData, setBarCodeData] = React.useState('');
   const dispatch = useDispatch();
 
   const { colors } = useTheme();
@@ -50,6 +56,8 @@ const DiabetesCenter = () => {
     handleHEalthTracker();
     console.log('Health diabetes api =======>', hell);
     console.log('dashborad api result', dashboard);
+    setBarCodeData(dashboard.program_detail.barcode);
+    // alert(JSON.stringify(dashboard.program_detail.barcode));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -109,8 +117,32 @@ const DiabetesCenter = () => {
     </>
   );
 
+  const onWithdraw = async () => {
+    try {
+      setIsVisible(true);
+      const response = await userService.withdraw({
+        module: {
+          barcode: barCodeData,
+        },
+      });
+      console.log(response.data, 'withdrawwwwwwwwwwwwwwwwwwwwwww');
+      setModalVisible(!modalVisible);
+      navigate(SCREENS.YOUR_HEALTH);
+      setIsVisible(false);
+    } catch (err) {
+      showMessage({
+        message: err.errMsg.data.message,
+        type: 'danger',
+      });
+      setIsVisible(false);
+      setModalVisible(!modalVisible);
+      console.log('error response', err.errMsg.data.message);
+    }
+  };
+
   return (
     <TitleWithBackLayout isGradient={true} title="Diabetes Support Center">
+      <ActivityIndicator visible={isVisiable} />
       <View style={styles.containerBody}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={[styles.headingText, { marginVertical: 10 }]}>
@@ -165,6 +197,7 @@ const DiabetesCenter = () => {
             cancel="Cancel"
             cancelModal={() => setModalVisible(!modalVisible)}
             closeModal={() => setModalVisible(!modalVisible)}
+            onPress={() => onWithdraw()}
           />
 
           <View style={styles.bottomTextView}>

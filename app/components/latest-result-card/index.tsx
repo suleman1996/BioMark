@@ -7,8 +7,8 @@ type props = {
   name?: string;
   received?: string;
   ref_no?: string;
-  summary?: any;
-  doctor?: any;
+  summary?: string;
+  doctor?: string;
   title?: string;
 };
 

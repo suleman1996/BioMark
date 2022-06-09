@@ -69,6 +69,7 @@ const API_URLS = {
   // Health Record
 
   GET_RESULT_OVERVIEW: '/api/v1/patient/results/',
+  GET_FILTER_RESULT: '/api/v1/patient/results/past',
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
@@ -86,6 +87,7 @@ const API_URLS = {
     '/api/v1/patient/health_trackers?page=hypertension',
   PSP_GET_HYPER_MODULE_DATA: '/api/v1/patient/psp/modules?program=3',
   GET_LAB_STATUS: '/api/v1/patient/results/lab_status',
+  WITHDRAW: '/api/v1/patient/psp/modules/withdraw',
 
   LAB_STATUS_VERYFY: '/api/v1/patient/results/verify',
 

@@ -14,6 +14,7 @@ import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleFitButton } from 'components/button';
+import { userService } from 'services/user-service/user-service';
 
 import HealthRecordFilter from 'components/health-records-filter';
 
@@ -27,12 +28,16 @@ import {
 import Filter from '../../../../../assets/svgs/filter';
 import SCREENS from 'navigation/constants/index';
 import LatestResultCard from 'components/latest-result-card';
+import moment from 'moment';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
   const [pastResults, setPastResults] = useState([]);
-  // const [checked, setChecked] = React.useState('');
+  const [filterData, setFilterData] = useState([]);
+  const [checked, setChecked] = React.useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const { colors } = useTheme();
 
@@ -58,10 +63,64 @@ const HealthRecord = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onConfirm = async () => {
+    const result = await userService.getFilterResult({
+      type: checked,
+      start: startDate,
+      end: endDate,
+    });
+    setFilterData(result.data);
+    console.log('resultttt-----------------------dataaaa', result.data);
+  };
+
+  const handleConfirm = (date) => {
+    console.log('A date has been picked: ', date);
+    setStartDate(date);
+  };
+  const handleConfirm2 = (date) => {
+    console.log('A date has been picked: ', date);
+    setEndDate(date);
+  };
+
   const renderItem2 = ({ item }) => (
     <TouchableOpacity
       onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
       style={styles.pastResultMainView}
+    >
+      <View style={styles.view}>
+        <Image
+          source={require('../../../../../assets/images/home/GD.png')}
+          style={{ height: 30, width: 30 }}
+        />
+        <Text style={styles.title}>{item.name}</Text>
+      </View>
+      <Text style={styles.text3}>{item.received}</Text>
+      <Text style={styles.text3}>REF: {item.ref_no}</Text>
+
+      <View style={styles.pastResultView}>
+        <Image
+          source={require('../../../../../assets/images/home/GD.png')}
+          style={styles.prImage}
+        />
+        <Text style={styles.text6}>{item.result.summary}</Text>
+      </View>
+
+      <View style={styles.pastResultView2}>
+        <Image
+          source={require('../../../../../assets/images/home/GD.png')}
+          style={styles.prImage}
+        />
+        <Text style={styles.text7}>{item.result.doctor}</Text>
+      </View>
+
+      <View style={styles.bottomView}></View>
+    </TouchableOpacity>
+  );
+
+  const renderFilterItem = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
+      style={styles.filterResultMainView}
     >
       <View style={styles.view}>
         <Image
@@ -153,15 +212,39 @@ const HealthRecord = () => {
             closeModal={() => setModalVisible(!modalVisible)}
             firstValue={'first'}
             secondValue={'second'}
-            // clearFilter={()=>set}
-            // status={checked === 'first' ? 'checked' : 'unchecked'}
-            // onPressRadio1={() => setChecked('first')}
-            // touchableRadio1={() => setChecked('first')}
+            touchableRadio1={() => setChecked('first')}
+            onPressRadio1={() => setChecked('first')}
+            status={checked === 'first' ? 'checked' : 'unchecked'}
+            touchableRadio2={() => setChecked('second')}
+            onPressRadio2={() => setChecked('second')}
+            status2={checked === 'second' ? 'checked' : 'unchecked'}
+            startDateText={`Date:  ${
+              startDate
+                ? moment(startDate).format('MM/DD/YYYY')
+                : 'Please select date'
+            }`}
+            endDateText={`Date:  ${
+              endDate
+                ? moment(endDate).format('MM/DD/YYYY')
+                : 'Please select end date'
+            }`}
+            handleConfirm={handleConfirm}
+            handleConfirm2={handleConfirm2}
+            onPressClearFilter={() => {
+              setChecked(''), setStartDate(''), setEndDate('');
+            }}
+            onConifrm={() => onConfirm()}
           />
 
           <FlatList
             data={pastResults}
             renderItem={renderItem2}
+            keyExtractor={(item) => item.id}
+          />
+
+          <FlatList
+            data={filterData}
+            renderItem={renderFilterItem}
             keyExtractor={(item) => item.id}
           />
 

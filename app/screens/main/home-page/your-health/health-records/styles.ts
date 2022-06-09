@@ -72,6 +72,14 @@ const styles = (colors: any) =>
       elevation: 10,
       marginBottom: 0,
     },
+    filterResultMainView: {
+      backgroundColor: 'red',
+      paddingTop: 10,
+      marginTop: 20,
+      borderRadius: 10,
+      elevation: 10,
+      marginBottom: 0,
+    },
     view: {
       flex: 1,
       flexDirection: 'row',

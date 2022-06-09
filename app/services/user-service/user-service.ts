@@ -380,6 +380,7 @@ type Props = {
   lifestyle: any;
   medical_history: any;
   has_allergy: any;
+  module: any;
 };
 const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
@@ -406,6 +407,12 @@ const bodyMeasurement = ({ medical }: Props) => {
 const exercise = ({ lifestyle }: Props) => {
   return client.post(API_URLS.EXERCISE, {
     lifestyle,
+  });
+};
+
+const withdraw = ({ module }: Props) => {
+  return client.post(API_URLS.WITHDRAW, {
+    module,
   });
 };
 
@@ -438,6 +445,19 @@ const getStress = () => {
 const getLifeStyle = () => {
   return client.get(API_URLS.GET_LIFE_STYLE);
 };
+
+const getFilterResult = ({ type, start, end }) => {
+  return client.get(API_URLS.GET_FILTER_RESULT, {
+    params: {
+      page: 1,
+      type,
+      start,
+      end,
+    },
+  });
+};
+
+// .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
 
 const getMedicalHistory = () => {
   return client.get(API_URLS.GET_MEDICAL_HISTORY);
@@ -1314,4 +1334,6 @@ export const userService = {
   getBloodSugarLogs,
   getHba1cLogs,
   getBloodPressureLogs,
+  withdraw,
+  getFilterResult,
 };
