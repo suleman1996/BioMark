@@ -14,19 +14,19 @@ import {
 } from 'react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import * as Yup from 'yup';
-import Styles from './styles';
-import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { ActivityIndicator, useTheme } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { navigate } from 'services/nav-ref';
+import LinearGradient from 'react-native-linear-gradient';
+
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
+
 import { Button } from 'components/button';
 import { ArrowBack } from 'assets/svgs';
-import { useNavigation } from '@react-navigation/native';
-import LinearGradient from 'react-native-linear-gradient';
-import SCREENS from 'navigation/constants/index';
-import { navigate } from 'services/nav-ref';
-import makeStyles from './styles';
+
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
+import RenderSvg from 'components/render-svg/index';
 import {
   Diabetess,
   Heart_Disease,
@@ -52,6 +52,12 @@ import {
   Stress_Calc,
   Sleeping_Calc,
 } from '../health-risk/list-data';
+
+import * as Yup from 'yup';
+import Styles from './styles';
+import SCREENS from 'navigation/constants/index';
+import makeStyles from './styles';
+
 import Heart from '../../../../assets/svgs/heart';
 import Camera from '../../../../assets/svgs/report-scan';
 import ReportVerify from '../../../../assets/svgs/report-verify';
@@ -105,6 +111,7 @@ const QrInputPopup = ({ visible, children, loading }: Props) => {
     </Modal>
   );
 };
+
 const Index = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -125,6 +132,19 @@ const Index = () => {
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
+
+  useEffect(() => {
+    setHealthRisksData(healthRisk);
+    handleHEalthTracker();
+    console.log('getLabStatusData', getLabStatusData);
+
+    console.log('getMedNewTracker', getMedNewTracker);
+    console.log('Health Trackeer api =======>', hell);
+    console.log('Dashboard api =======>', dashboard);
+    console.log('healthRisk api =======>', healthRisk);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   const handleHEalthTracker = () => {
     healthTracker.length = 0;
     let id = -1;
@@ -144,18 +164,6 @@ const Index = () => {
         });
     });
   };
-
-  useEffect(() => {
-    setHealthRisksData(healthRisk);
-    handleHEalthTracker();
-    console.log('getLabStatusData', getLabStatusData);
-
-    console.log('getMedNewTracker', getMedNewTracker);
-    console.log('Health Trackeer api =======>', hell);
-    console.log('Dashboard api =======>', dashboard);
-    console.log('healthRisk api =======>', healthRisk);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
 
   const [highlights] = React.useState([
     {
@@ -192,7 +200,7 @@ const Index = () => {
   const [selectedFootNotes, setSelectedFootNotes] = React.useState();
   const [selectedCalculations, setselectedCalculations] = React.useState();
   const [colorr, setColorr] = useState('');
-  const [svgImage, setSvgImage] = useState('');
+  const [idHealth, setId] = useState();
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState('');
@@ -244,13 +252,14 @@ const Index = () => {
     }
   };
   const RenderHealthRiskView = ({
-    svg,
+    Svg,
     color,
     healthRisks,
     hardCode,
     References,
     FootNotes,
     Calculations,
+    id,
   }) => (
     <>
       <TouchableOpacity
@@ -261,7 +270,7 @@ const Index = () => {
           setSelectedFootNotes(FootNotes);
           setselectedCalculations(Calculations);
           setColorr(color);
-          setSvgImage(svg);
+          setId(id);
         }}
         style={[
           styles.renderHealthRisk,
@@ -273,7 +282,7 @@ const Index = () => {
           },
         ]}
       >
-        {svg}
+        <Svg />
       </TouchableOpacity>
       <View style={styles.dot} />
     </>
@@ -348,14 +357,21 @@ const Index = () => {
     </View>
   );
 
-  const RenderHealthRisk = ({ description, name, card_status, onPress }) => (
+  const RenderHealthRisk = ({
+    description,
+    name,
+    card_status,
+    onPress,
+    id,
+  }) => (
     <Animated.View
       {...panResponder.panHandlers}
       style={[pan.getLayout(), styles.healthRisk]}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Heart fill={colors.lightGrey} />
+          <RenderSvg color={colorr} id={id} />
+
           <Text style={styles.healthName}>{name}</Text>
         </View>
         <Text style={styles.healthCardStatusName}>{card_status}</Text>
@@ -426,6 +442,25 @@ const Index = () => {
       </>
     );
   };
+
+  const healthRisksColor = (status) => {
+    if (status == 'Obese') {
+      return colors.Obese;
+    } else if (status == 'High') {
+      return colors.High;
+    } else if (status == 'none') {
+      return colors.none;
+    } else if (status == 'normal') {
+      return colors.normal;
+    } else if (status == 'high') {
+      return colors.high;
+    } else if (status == 'bad') {
+      return colors.bad;
+    } else {
+      return colors.none;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
@@ -446,65 +481,73 @@ const Index = () => {
           <Text style={styles.headingText}>Your Health Risks</Text>
           <View style={styles.healthRiskView}>
             <RenderHealthRiskView
+              id={0}
               healthRisks={healthRisksData?.heart}
-              color={colors.lightGreen}
-              svg={<Heart fill={colors.danger} />}
+              color={healthRisksColor(healthRisksData?.heart?.status)}
+              Svg={Heart}
               hardCode={Heart_Disease}
               References={Heart_Disease_ref}
               FootNotes={Heart_Disease_footnotes}
               Calculations={heart_Diease_Calc}
             />
             <RenderHealthRiskView
-              color={colors.lightGreen}
+              id={1}
+              color={healthRisksColor(healthRisksData?.diabetes?.status)}
               healthRisks={healthRisksData?.diabetes}
-              svg={<Diabetes />}
+              Svg={Diabetes}
               hardCode={Diabetess}
               References={Diabetes_ref}
               FootNotes={Diabetes_footnotes}
               Calculations={diabetes_Calc}
             />
             <RenderHealthRiskView
-              color={colors.lightGreen}
+              id={2}
+              color={healthRisksColor(healthRisksData?.bp?.status)}
               healthRisks={healthRisksData?.bp}
-              svg={<BP />}
+              Svg={BP}
               hardCode={Blood_Presure}
               References={Blood_Pressure_ref}
               Calculations={Blood_Pressure_Calc}
             />
             <RenderHealthRiskView
-              color={colors.lightYellow}
+              id={3}
+              color={healthRisksColor(healthRisksData?.bmi?.status)}
               healthRisks={healthRisksData?.bmi}
-              svg={<BMI />}
+              Svg={BMI}
               hardCode={BMII}
               References={BMI_ref}
               Calculations={BMI_Calc}
             />
             <RenderHealthRiskView
-              color={colors.lightGreen}
+              id={4}
+              color={healthRisksColor(healthRisksData?.smoking?.status)}
               healthRisks={healthRisksData?.smoking}
-              svg={<Smoking />}
+              Svg={Smoking}
               References={Smoking_ref}
               Calculations={Smoking_Calc}
             />
             <RenderHealthRiskView
-              color={colors.lightYellow}
+              id={5}
+              color={healthRisksColor(healthRisksData?.drinking?.status)}
               healthRisks={healthRisksData?.drinking}
-              svg={<Drinking />}
+              Svg={Drinking}
               hardCode={Drinkings}
               References={Drinking_ref}
               Calculations={Drinking_Calc}
             />
             <RenderHealthRiskView
-              color={colors.lightGreen}
+              id={6}
+              color={healthRisksColor(healthRisksData?.stress?.status)}
               healthRisks={healthRisksData?.stress}
-              svg={<Stress />}
+              Svg={Stress}
               References={Stress_ref}
               Calculations={Stress_Calc}
             />
             <RenderHealthRiskView
-              color={colors.dangerRed}
+              id={7}
+              color={healthRisksColor(healthRisksData?.sleeping?.status)}
               healthRisks={healthRisksData?.sleeping}
-              svg={<Sleep />}
+              Svg={Sleep}
               References={Sleeping_ref}
               Calculations={Sleeping_Calc}
             />
@@ -519,12 +562,13 @@ const Index = () => {
                   footNotesData: selectedFootNotes,
                   calc: selectedCalculations,
                   clr: colorr,
-                  icon: svgImage,
+                  i_d: idHealth,
                 })
               }
               name={selectedHealthRisk?.name}
               description={selectedHealthRisk?.description}
               card_status={selectedHealthRisk?.card_status}
+              id={idHealth}
             />
           )}
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
