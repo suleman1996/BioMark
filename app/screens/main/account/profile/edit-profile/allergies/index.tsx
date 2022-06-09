@@ -65,7 +65,6 @@ const AllergiesScreen = () => {
   );
 
   useEffect(() => {
-    console.log('===>allergies in redux', allergiesMedicalHistory);
     const hasAller = allergiesMedicalHistory.has_allergy;
     setValue(
       hasAller == 0

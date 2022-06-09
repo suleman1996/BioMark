@@ -41,22 +41,17 @@ const SearchBarWithLeftScanIcon = () => {
 
   const handleCode = async (opt) => {
     try {
-      console.log(code, '---------------------');
       const response = await userService.barcodeCheck({
         scanner: {
           code: code,
         },
       });
-      console.log(response, 'codee---------------code------------------');
+
       // navigate(Screeb, {
       //   SHOW_DEMO: true
       // })
-    } catch (err) {
-      console.log(err, 'errrr-codeeee---------------');
-    }
+    } catch (err) {}
   };
-
-  console.log(code);
 
   const bgColor = isMenuOpen
     ? { backgroundColor: colors.primary }

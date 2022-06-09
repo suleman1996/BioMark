@@ -35,13 +35,11 @@ export default function PdfDiabetesSupportCenter({ route }) {
     try {
       setIsVisible(true);
       await dispatch(getReduxPspPdfLink(item.item.code));
-      console.log('---------item-------------', item);
-      console.log('------link-----', pspPdfLinks);
+
       setPdf(pspPdfLinks.link);
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);
-      console.log(err);
     }
   };
 
@@ -56,18 +54,10 @@ export default function PdfDiabetesSupportCenter({ route }) {
             uri: pspPdfLinks.link,
             cache: true,
           }}
-          onLoadComplete={(numberOfPages, filePath) => {
-            console.log(`Number of pages: ${numberOfPages}`);
-          }}
-          onPageChanged={(page, numberOfPages) => {
-            console.log(`Current page: ${page}`);
-          }}
-          onError={(error) => {
-            console.log(error);
-          }}
-          onPressLink={(uri) => {
-            console.log(`Link pressed: ${uri}`);
-          }}
+          onLoadComplete={(numberOfPages, filePath) => {}}
+          onPageChanged={(page, numberOfPages) => {}}
+          onError={(error) => {}}
+          onPressLink={(uri) => {}}
           trustAllCerts={false}
           style={styles.pdfView}
         />

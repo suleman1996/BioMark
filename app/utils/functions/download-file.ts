@@ -21,7 +21,6 @@ export const checkPermissionAndDownload = async (file: string) => {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         // Start downloading
         downloadFile(file);
-        console.log('Storage Permission Granted.');
       } else {
         // If permission denied then show alert
         Alert.alert('Error', 'Storage Permission Not Granted');

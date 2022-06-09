@@ -70,7 +70,6 @@ const HypertensionDiary = () => {
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
 
-    console.log('hyper dataaa', hyperModuleData);
     setVideo(hyperModuleData.video);
     setPdfData(hyperModuleData.pdf);
     // alert(JSON.stringify(hyperModuleData.pdf));

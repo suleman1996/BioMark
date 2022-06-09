@@ -7,7 +7,6 @@ import PdfSvg from 'assets/svgs/pdf';
 const PdfList = ({ item, onPress }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  console.log('item', item.item.name);
 
   return (
     <TouchableOpacity style={styles.listView} onPress={onPress}>

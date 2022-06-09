@@ -54,7 +54,7 @@ const Index = () => {
 
   React.useEffect(() => {
     dispatch(getReduxBloodPressureLogs());
-    // console.log('Blood Pressure Logs ', bPLogsData);
+    //
     bPLogsData?.log?.map((item) =>
       logData.push({
         id: item?.id,
