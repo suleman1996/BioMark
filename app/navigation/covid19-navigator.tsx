@@ -11,6 +11,7 @@ import PaymentStep from 'screens/covid19/steps/payments';
 import PaymentSuccess from 'screens/covid19/steps/payment-success';
 import ViewCovidResults from 'screens/covid19/view-results';
 import SingleCovidResult from 'screens/covid19/view-results/single-result';
+import FaqScreen from 'screens/covid19/faq';
 
 const Stack = createNativeStackNavigator();
 
@@ -98,6 +99,19 @@ const Covid19Navigator = () => {
         }}
         name={SCREENS.SINGLECOVIDRESULT}
         component={SingleCovidResult}
+      />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          headerTintColor: colors.darkPrimary,
+          headerTitleStyle: {
+            fontFamily: GlobalFonts.bold,
+            color: colors.darkPrimary,
+          },
+          title: 'FAQ',
+        }}
+        name={SCREENS.FAQSCREEN}
+        component={FaqScreen}
       />
     </Stack.Navigator>
   );

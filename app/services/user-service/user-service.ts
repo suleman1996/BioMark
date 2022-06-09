@@ -381,6 +381,7 @@ type Props = {
   medical_history: any;
   has_allergy: any;
   module: any;
+  scanner: any;
 };
 const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
@@ -413,6 +414,13 @@ const exercise = ({ lifestyle }: Props) => {
 const withdraw = ({ module }: Props) => {
   return client.post(API_URLS.WITHDRAW, {
     module,
+  });
+};
+
+const barcodeCheck = ({ scanner }: Props) => {
+  console.log(scanner);
+  return client.post(API_URLS.BARCODE_CHECK, {
+    scanner,
   });
 };
 
@@ -1336,4 +1344,5 @@ export const userService = {
   getBloodPressureLogs,
   withdraw,
   getFilterResult,
+  barcodeCheck,
 };

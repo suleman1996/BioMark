@@ -52,6 +52,15 @@ const theme = {
     pureRed: '#EB3342',
     dangerBg: '#EA4C5920',
 
+    // health risk status color
+
+    Obese: '#EB3342',
+    High: '#EB3342',
+    none: '#D9DFEB',
+    normal: '#54CB83',
+    high: '#EB3342',
+    bad: '#EB3342',
+
     //gradient
   },
 
