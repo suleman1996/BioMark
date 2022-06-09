@@ -24,6 +24,13 @@ const kgToLbs = () => {
 const lbsToKg = () => {
   Number((prev.weight * (1 / 2.205)).toFixed(1));
 };
+const mgdlToMmol = () => {
+  Number((prev.weight * 2.205).toFixed(1));
+};
+
+const mmolToMgdl = () => {
+  Number((prev.weight * (1 / 2.205)).toFixed(1));
+};
 
 const measurementValidator = (is_metric, measurment, value) => {
   let errorr = '';
@@ -98,11 +105,82 @@ const measurementValidator = (is_metric, measurment, value) => {
 
   return errorr;
 };
+const bloodPressureValidator = (measurment, value) => {
+  let errorr = '';
+  if (value.length === 0 || value == 0)
+    return measurment === 'bp_systolic'
+      ? 'Please input a systolic BP'
+      : 'Please input a diastolic BP';
+  const BP_RANGE = {
+    sys: {
+      min: 60,
+      max: 200,
+      errorr: 'Please input a valid systolic BP from 60-200 mmHg',
+    },
+    dia: {
+      min: 30,
+      max: 120,
+      errorr: 'Please input a valid diastolic BP from 30-120 mmHg',
+    },
+  };
+
+  // KG
+  if (measurment === 'bp_systolic') {
+    errorr =
+      BP_RANGE.sys.min < value && value <= BP_RANGE.sys.max
+        ? ''
+        : BP_RANGE.sys.errorr;
+  } else {
+    errorr =
+      BP_RANGE.dia.min < value && value <= BP_RANGE.dia.max
+        ? ''
+        : BP_RANGE.dia.errorr;
+  }
+
+  return errorr;
+};
+const bloodSugarValidator = (measurment, value) => {
+  let errorr = '';
+  if (value.length === 0 || value == 0)
+    return 'Please input a valid measurement';
+
+  const BS_RANGE = {
+    mgdl: {
+      min: 1,
+      max: 600,
+      errorr: 'Please input a valid measurement from 1-600 mg/dL',
+    },
+    mmol: {
+      min: 0.06,
+      max: 50,
+      errorr: ' Please input a valid measurement from 0.06-50 mmol/L',
+    },
+  };
+
+  // KG
+  if (measurment === 'mg/dl') {
+    errorr =
+      BS_RANGE.mgdl.min < value && value <= BS_RANGE.mgdl.max
+        ? ''
+        : BS_RANGE.mgdl.errorr;
+  } else {
+    errorr =
+      BS_RANGE.mmol.min < value && value <= BS_RANGE.mmol.max
+        ? ''
+        : BS_RANGE.mmol.errorr;
+  }
+
+  return errorr;
+};
 
 export {
   cmToFeet,
   feetToCm,
   kgToLbs,
   lbsToKg,
+  mgdlToMmol,
+  mmolToMgdl,
   measurementValidator as measurementValidator,
+  bloodPressureValidator,
+  bloodSugarValidator,
 };

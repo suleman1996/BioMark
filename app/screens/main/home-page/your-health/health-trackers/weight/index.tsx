@@ -74,39 +74,6 @@ const Weight = ({ route }: any) => {
     setIsLoading(false);
   };
 
-  // const onSubmit = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     await userService.createWeight({
-  //       medical: {
-  //         ...weightTracker,
-  //       },
-  //     });
-  //     navigate(SCREENS.HEALTH_PROGRESS, 0);
-  //     setIsLoading(false);
-  //     // eslint-disable-next-line no-catch-shadow
-  //   } catch (error: any) {
-  //     setIsLoading(false);
-  //     if (error?.errMsg.status === '500') {
-  //       showMessage({
-  //         message: 'Internal Server Error',
-  //         type: 'danger',
-  //       });
-  //     } else if (error.errMsg.status === false) {
-  //       showMessage({
-  //         message: error.errMsg.data.error,
-  //         type: 'danger',
-  //       });
-  //     } else {
-  //       showMessage({
-  //         message: error.errMsg,
-  //         type: 'danger',
-  //       });
-  //     }
-  //   }
-  // };
-
-  // // Save & Update Medication
   const saveWeightLog = async () => {
     setIsLoading(true);
     const API_FUNCTION = SELECTED_WEIGHT_ID
@@ -223,7 +190,7 @@ const Weight = ({ route }: any) => {
       <ButtonWithShadowContainer
         onPress={saveWeightLog}
         title={SELECTED_WEIGHT_ID ? 'Save Edit' : 'Add'}
-        disabled={!weightTracker ? true : false}
+        disabled={!weightTracker.weight || error ? true : false}
       />
     </TitleWithBackWhiteBgLayout>
   );
