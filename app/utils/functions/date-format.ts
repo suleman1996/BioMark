@@ -38,6 +38,14 @@ export const getDay = (date: string) => {
   return newDate || '';
 };
 
+export const getDayName = (date: string) => {
+  if (date) {
+    var newDate: any = format(new Date(date), 'EEEE');
+  }
+
+  return newDate || '';
+};
+
 export const getYear = (date: string) => {
   if (date) {
     var newDate: any = format(new Date(date), 'yyyy');

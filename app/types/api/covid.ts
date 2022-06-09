@@ -30,18 +30,27 @@ export interface BookingListDataUpcoming {
   declaration_complete: boolean;
   declaration_enabled: boolean;
   is_cancellable: boolean;
+  is_dependent: boolean;
+  patient_name: string;
+  reference_code: string;
 }
 
 export interface BookingListData {
   id: number;
+  booking_schedule: Date;
   test_type_name: string;
   test_country_name: string;
   test_city_name: string;
   test_centre_name: string;
-  booking_schedule: Date;
   booking_slot_time: Time;
   booking_test_type: string;
   booking_status: string;
+  declaration_complete: boolean;
+  declaration_enabled: boolean;
+  is_cancellable: boolean;
+  is_dependent: boolean;
+  patient_name: string;
+  reference_code: string;
 }
 
 export interface CovidResultListResponse {
