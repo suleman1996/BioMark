@@ -14,6 +14,7 @@ const theme = {
     primaryGray: '#FAFAFA',
     white: '#FFFFFF',
     opacityBlack: 'hsla(133, 50%, 7%, 0.18)',
+    opacityBlackDark: 'hsla(000, 1%, 10%, 0.9)',
     gray: '#EBEFF2',
     bgContainer: '#E5E5E5',
     red: 'red',

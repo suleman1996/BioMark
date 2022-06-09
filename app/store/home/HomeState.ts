@@ -11,6 +11,7 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
   BloodSugarProgressEntryPayload,
@@ -29,11 +30,14 @@ export class HomeState {
   medicationList: MedicationListEntry[] = [];
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
   pspModuleData: PspModule[] = [];
+  pspHyperModuleData: PspModule[] = [];
   PspDataContents: PspModuleDataContents[] = [];
+  PspHyperDataContents: PspModuleDataContents[] = [];
   getLabStatusData: LabStatusPayload[] = [];
   getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
   getPastResultData: LabStatusResponse[] = [];
+  pspHypertensionHealthTracker: HealthTrackerPayloadData[] = [];
   getWeightProgressData: WeightProgressEntryPayload[] = [];
   getBpProgressData: BloodPressureProgressEntryPayload[] = [];
   getBsProgressData: BloodSugarProgressEntryPayload[] = [];

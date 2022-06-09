@@ -337,13 +337,27 @@ const MedicationForm = (props: any) => {
               width={'100%'}
             />
           </View>
-          <GradientButton
-            text="Add"
-            color={['#2C6CFC', '#2CBDFC']}
-            disabled={!BUTTON_DISABLED}
-            style={styles.gradientButton}
-            onPress={saveMedication}
-          />
+          {SELECTED_MEDICATION_ID ? (
+            <GradientButton
+              text="Save Edit"
+              color={['#2C6CFC', '#2CBDFC']}
+              disabled={!BUTTON_DISABLED}
+              style={styles.gradientButton}
+              onPress={saveMedication}
+            />
+          ) : (
+            <GradientButton
+              text="Add"
+              color={
+                BUTTON_DISABLED
+                  ? ['#2C6CFC', '#2CBDFC']
+                  : [colors.disabled, colors.disabled]
+              }
+              disabled={!BUTTON_DISABLED}
+              style={styles.gradientButton}
+              onPress={saveMedication}
+            />
+          )}
         </View>
         {showDeleteModal && (
           <AccountDeActivateModal
