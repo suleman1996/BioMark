@@ -35,11 +35,9 @@ const DependantsList = (props: Props) => {
   const userProfile = async () => {
     try {
       const result = await userService.getUserProfile();
-      console.log('here ', result.data);
+
       authContext.setUserData(result.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const deleteSingleDependent = () => {
     dependentService

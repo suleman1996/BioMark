@@ -44,7 +44,6 @@ const SearchBarWithLeftScanIcon = () => {
 
   const handleCode = async () => {
     try {
-      console.log(code, '---------------------');
       const response = await userService.barcodeCheck({
         scanner: {
           code: code,
@@ -63,8 +62,6 @@ const SearchBarWithLeftScanIcon = () => {
       console.log(err, 'errrr-codeeee---------------');
     }
   };
-
-  console.log(code);
 
   const bgColor = isMenuOpen
     ? { backgroundColor: colors.primary }

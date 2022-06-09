@@ -64,8 +64,6 @@ const BloodPressure = () => {
   }, [dispatch, bloodPressureProgress]);
 
   const onChangeTextHigh = (values) => {
-    console.log('value', values);
-
     if (values < 60 || values > 600) {
       setValidation2(false);
       setValidation(true);

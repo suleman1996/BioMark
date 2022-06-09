@@ -56,11 +56,10 @@ const Index = () => {
     id: 0,
     title: 'kg',
   });
-  const [logData] = React.useState(weightLogs?.log);
 
   React.useEffect(() => {
     dispatch(getReduxWeightLogs());
-    // console.log('Result weight logs ', weightLogs);
+    //
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -94,7 +93,7 @@ const Index = () => {
             </TouchableOpacity>
           </View>
           <LineGraph />
-          <Logs navigate={SCREENS.WEIGHT} logData={logData} />
+          <Logs navigate={SCREENS.WEIGHT} logData={weightLogs?.log} />
           <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton svg={<Person height={28} width={28} />} />
