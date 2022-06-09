@@ -53,7 +53,7 @@ export default function PdfDiabetesSupportCenter({ route }) {
         {/* <ActivityIndicator visible={loading} /> */}
         <Pdf
           source={{
-            uri: pdf,
+            uri: pspPdfLinks.link,
             cache: true,
           }}
           onLoadComplete={(numberOfPages, filePath) => {
