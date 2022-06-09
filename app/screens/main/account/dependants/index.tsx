@@ -30,8 +30,6 @@ const DependantsScreen = (props: Props) => {
   React.useEffect(
     () =>
       props.navigation.addListener('beforeRemove', (e) => {
-        console.log('e', e);
-
         // alert('hii');
       }),
     [props.navigation, hasUnsavedChanges]

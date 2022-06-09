@@ -55,7 +55,6 @@ const BloodSugar = () => {
   useEffect(() => {
     let arr = [];
     drop?.meal_type?.map((ele) => {
-      console.log('ele', ele);
       arr.push({ label: ele.name, value: ele.id });
     });
     setOptions(arr);

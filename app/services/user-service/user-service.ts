@@ -180,9 +180,6 @@ function registerUser(username: string, values, gender: any, date: string) {
   });
 }
 function createProfile(values, gender: any, date: string) {
-  console.log('values', values);
-  console.log('gender', gender);
-  console.log('date', date);
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_PROFILE, {
@@ -275,8 +272,6 @@ function autoLogout() {
 }
 function saveAutoLogout(auto_logout: boolean) {
   return new Promise<AutoLogoutRes>((resolve, reject) => {
-    console.log('auto_logout', auto_logout);
-
     client
       .post(API_URLS.SAVE_AUTO_LOG_OUT, {
         settings: {
@@ -411,7 +406,6 @@ const exercise = ({ lifestyle }: Props) => {
 };
 
 const barcodeCheck = ({ scanner }: Props) => {
-  console.log(scanner);
   return client.post(API_URLS.BARCODE_CHECK, {
     scanner,
   });
@@ -555,8 +549,6 @@ function geoLocation() {
       .get(API_URLS.LOCATION)
       .then(async (response) => {
         try {
-          console.log('rees', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('Register user error block login1.', e);
@@ -580,8 +572,6 @@ function updateUserEthnic(ethnic: string) {
       })
       .then(async (response) => {
         try {
-          console.log('updateUserEthnic response', response.data);
-
           resolve(response.data);
         } catch (e) {
           logNow('updateUserEthnic user error block login1.', e);
@@ -601,8 +591,6 @@ function getHealthTracker() {
       .get(API_URLS.GET_HEALTH_TRACKER)
       .then(async (response) => {
         try {
-          console.log('rrr', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -622,8 +610,6 @@ function getDashboard() {
       .get(API_URLS.DASHBOARD)
       .then(async (response) => {
         try {
-          console.log('rrr', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -642,8 +628,6 @@ function getMedicalDropDown() {
       .get(API_URLS.GET_HEALTH_DROPDOWN)
       .then(async (response) => {
         try {
-          console.log('med', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -662,8 +646,6 @@ function getMedicationList() {
       .get(API_URLS.GET_MEDICATION_DROPDWON)
       .then(async (response) => {
         try {
-          console.log('memm', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -683,8 +665,6 @@ function getHealthRisks() {
       .get(API_URLS.GET_HEALTH_RISKS)
       .then(async (response) => {
         try {
-          console.log('med', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -703,8 +683,6 @@ function getNewMedicationTracker() {
       .get(API_URLS.GET_NEW_MEDICATION_TRACKER)
       .then(async (response) => {
         try {
-          console.log('new med tracker', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -724,7 +702,6 @@ function getPspModules() {
       .get(API_URLS.PSP_GET_MODULES)
       .then(async (response) => {
         try {
-          console.log('PSP Modules', response);
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -744,7 +721,6 @@ function getPspHyperModules() {
       .get(API_URLS.PSP_GET_HYPER_MODULE_DATA)
       .then(async (response) => {
         try {
-          console.log('Hyper Module data', response);
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -764,7 +740,6 @@ function getHypertensionHealthTracker() {
       .get(API_URLS.PSP_GET_HYPERTENSION_MODULES)
       .then(async (response) => {
         try {
-          console.log('hypertension Modules', response);
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -784,7 +759,6 @@ function getLatestResult() {
       .get(API_URLS.HEALTH_LATEST_RESULTS)
       .then(async (response) => {
         try {
-          console.log('LATEST RESULTS', response);
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -804,7 +778,6 @@ function getPastResult() {
       .get(API_URLS.HEALTH_PAST_RESULTS)
       .then(async (response) => {
         try {
-          console.log('PAST RESULTS', response);
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -818,15 +791,11 @@ function getPastResult() {
   });
 }
 function getPspPdfLink(link) {
-  console.log(link, 'linkkkkkkkkkkkkkkkkkkkkk');
   return new Promise<PspModuleDataContents>((resolve, reject) => {
     client
       .get(API_URLS.PDF_GET_LINK + link)
       .then(async (response) => {
         try {
-          console.log('PSP PDF LINK', response);
-          console.log('lab staus', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -842,15 +811,11 @@ function getPspPdfLink(link) {
 }
 
 function getPspHyperPdfLink(link) {
-  console.log(link, 'linkkkkkkkkkkkkkkkkkkkkk');
   return new Promise<PspModuleDataContents>((resolve, reject) => {
     client
       .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
       .then(async (response) => {
         try {
-          console.log('PSP PDF Hyper LINK', response);
-          console.log('lab staus', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -870,8 +835,6 @@ function getLabResultStatus() {
       .get(API_URLS.GET_LAB_STATUS)
       .then(async (response) => {
         try {
-          console.log('lab staus', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -890,7 +853,6 @@ const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
 const deleteMedicationTracker = (id: number) => {
-  console.log('iid', id);
   return client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
 };
 
@@ -1010,7 +972,6 @@ const deleteMedication = (medication_id) => {
       .delete(`${API_URLS.DELETE_MEDICATION}/${medication_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -1055,7 +1016,7 @@ const getResultOverView = (id, filter) => {
       .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter='}${filter}`)
       .then(async (response) => {
         try {
-          // console.log('RESULT api overview', response);
+          //
 
           resolve(response.data);
         } catch (e) {
@@ -1076,8 +1037,6 @@ const getWeightProgress = (id) => {
       .get(`${API_URLS.GET_WEIGTH_TRACKER}${id}`)
       .then(async (response) => {
         try {
-          console.log('getWeightProgress', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1096,7 +1055,6 @@ const getBloodPressureProgress = (id) => {
       .get(`${API_URLS.GET_BP_TRACKER}${id}`)
       .then(async (response) => {
         try {
-          console.log('BPProgress', response);
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1116,7 +1074,7 @@ const getWeightLogs = () => {
       .get(API_URLS.GET_WEIGHT_LOGS)
       .then(async (response) => {
         try {
-          // console.log('RESULT api overview', response);
+          //
 
           resolve(response.data);
         } catch (e) {
@@ -1136,7 +1094,6 @@ const getBloodSugarProgress = (id) => {
       .get(`${API_URLS.GET_BS_TRACKER}${id}`)
       .then(async (response) => {
         try {
-          console.log('BSProgress', response);
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1156,7 +1113,7 @@ const getBloodSugarLogs = () => {
       .get(API_URLS.GET_BLOOD_SUGAR_LOGS)
       .then(async (response) => {
         try {
-          // console.log('RESULT api overview', response);
+          //
 
           resolve(response.data);
         } catch (e) {
@@ -1176,8 +1133,6 @@ const getHba1cProgress = (id) => {
       .get(`${API_URLS.GET_HBA1C_TRACKER}${id}`)
       .then(async (response) => {
         try {
-          console.log('hba1c', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1197,7 +1152,7 @@ const getHba1cLogs = () => {
       .get(API_URLS.GET_HBA1C_LOGS)
       .then(async (response) => {
         try {
-          // console.log('RESULT api overview', response);
+          //
 
           resolve(response.data);
         } catch (e) {
@@ -1217,8 +1172,6 @@ const getMedicationProgress = (id) => {
       .get(`${API_URLS.GET_MEDICATION_TRACKER_BY_ID}${id}`)
       .then(async (response) => {
         try {
-          console.log('MED', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1238,7 +1191,7 @@ const getBloodPressureLogs = () => {
       .get(API_URLS.GET_BLOOD_PRESSURE_LOGS)
       .then(async (response) => {
         try {
-          // console.log('RESULT api overview', response);
+          //
 
           resolve(response.data);
         } catch (e) {

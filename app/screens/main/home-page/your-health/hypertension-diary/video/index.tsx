@@ -29,13 +29,11 @@ const VideoHypertensionList = ({ route }) => {
     try {
       setIsVisible(true);
       dispatch(getReduxPspPdfLink(item.code));
-      console.log('---------item-------------', item);
-      console.log('------link-----', pspVideoLinks);
+
       setVideoLink(pspVideoLinks.link);
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);
-      console.log(err);
     }
   };
 
@@ -53,9 +51,7 @@ const VideoHypertensionList = ({ route }) => {
         playWhenInactive={true}
         resizeMode="contain"
         fullscreen={true}
-        onLoadStart={() => {
-          console.log('start auto');
-        }}
+        onLoadStart={() => {}}
         // posterResizeMode={'stretch'}
         // poster={item.thumbnail}
       />

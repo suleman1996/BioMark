@@ -76,11 +76,9 @@ const Weight = ({ route }) => {
   }, [weightTracker.is_metric]);
 
   useEffect(() => {
-    console.log('logId', route?.params?.logId);
-
     if (route?.params?.logId) {
       dispatch(getReduxWeightProgress(route?.params?.logId));
-      console.log('weightProg', weightProgress);
+
       const is_metric = weightProgress?.is_metric;
       if (weightProgress?.is_metric) {
         setWeightTracker({
@@ -145,12 +143,9 @@ const Weight = ({ route }) => {
   };
 
   const handleChange = (value: number, key: string) => {
-    console.log(weightTracker.is_metric, key, value);
     setWeightTracker((prev: any) => ({ ...prev, [key]: value }));
     setError(measurmentValidator(weightTracker.is_metric, key, value) || '');
   };
-
-  console.log(weightTracker);
 
   return (
     <TitleWithBackWhiteBgLayout title="Weight">

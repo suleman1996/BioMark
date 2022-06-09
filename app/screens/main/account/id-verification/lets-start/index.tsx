@@ -38,7 +38,6 @@ const LetsStartIdVerfiication = (props: Props) => {
   const GetJumioData = async () => {
     setIsLoading(true);
     const result = await userService.getJumioData();
-    console.log('result', result?.data?.sdk?.token);
     startJumio(result?.data?.sdk?.token);
     setIsLoading(false);
   };
