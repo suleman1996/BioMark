@@ -28,6 +28,7 @@ import {
 } from 'utils/functions/date-format';
 import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
+import { getReduxBloodSugarProgress } from 'store/home/home-actions';
 
 const BloodSugar = () => {
   const { colors } = useTheme();
@@ -45,7 +46,11 @@ const BloodSugar = () => {
   const [validation2, setValidation2] = useState<any>(false);
   const [options, setOptions] = useState<any>([]);
   const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+  const bloodSugarProgress = useSelector(
+    (state: IAppState) => state.home.getBsProgressData
+  );
   const dispatch = useDispatch();
+  const dispatch2 = useDispatch();
 
   useEffect(() => {
     let arr = [];
@@ -66,9 +71,20 @@ const BloodSugar = () => {
       ' ' +
       getTime(today);
     setDateAndTime(dateTime);
-    console.log('dt', dateTime);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch2(getReduxBloodSugarProgress(2968));
+    console.log('bloodSugarProgress', bloodSugarProgress);
+    if (bloodSugarProgress) {
+      setValue(bloodSugarProgress?.data_value);
+      setDropdown(bloodSugarProgress?.meal_type_id);
+      setDateAndTime(bloodSugarProgress?.record_date);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch2]);
 
   const onChangeText = (values) => {
     console.log('value', value);

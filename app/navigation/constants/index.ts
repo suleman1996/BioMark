@@ -78,6 +78,7 @@ export default {
   PAYMENT_SUCCESS: 'PaymentSuccess',
   VIEWCOVIDRESULTS: 'ViewCovidResults',
   SINGLECOVIDRESULT: 'SingleCovidResult',
+  FAQSCREEN: 'FaqScreen',
 
   BLOOD_SUGAR: 'BLOOD_SUGAR',
   BLOOD_PRESSURE: 'BLOOD_PRESSURE',

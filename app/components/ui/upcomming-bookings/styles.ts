@@ -60,6 +60,12 @@ export const makeStyles = (colors: any) =>
       paddingBottom: heightToDp(2),
       backgroundColor: colors.white,
     },
+    emptyContainer: {
+      flex: 1,
+      borderWidth: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   });
 
 export default makeStyles;

@@ -24,16 +24,25 @@ import {
   getYear,
 } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
+import { IAppState } from 'store/IAppState';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReduxHba1cProgress } from 'store/home/home-actions';
 
 const HbA1c = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
+  const dispatch = useDispatch();
 
   const [hbvalue, setHbvalue] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
   const [dateAndtime, setDateAndTime] = useState<any>();
   const [validation, setValidation] = useState<any>(false);
+
+  const hba1cData = useSelector(
+    (state: IAppState) => state.home.getHba1cProgressData
+  );
 
   useEffect(() => {
     let today = new Date();
@@ -47,6 +56,16 @@ const HbA1c = () => {
       getTime(today);
     setDateAndTime(dateTime);
   }, []);
+
+  useEffect(() => {
+    dispatch(getReduxHba1cProgress(2970));
+
+    if (hba1cData) {
+      // setValue(bloodSugarProgress?.data_value);
+      setHbvalue(hba1cData?.data_value);
+      setDateAndTime(hba1cData?.record_date);
+    }
+  }, [dispatch, hba1cData]);
 
   const onChangeText = (values) => {
     console.log('value', values);
@@ -109,6 +128,8 @@ const HbA1c = () => {
     }
   };
 
+  console.log('hba1cData', hba1cData);
+
   return (
     <TitleWithBackWhiteBgLayout title="HbA1c">
       <ActivityIndicator visible={isLoading} />
@@ -127,8 +148,8 @@ const HbA1c = () => {
             placeholder={'0.0'}
             onChangeText={onChangeText}
             showIcon={true}
-            // value={value}
-            maxLength={3}
+            value={hba1cData?.data_value}
+            maxLength={5}
           />
 
           {validation && hbvalue ? (
@@ -144,7 +165,7 @@ const HbA1c = () => {
 
           {!validation && hbvalue ? (
             <>
-              <Text style={styles.label}>Date of Birth</Text>
+              <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
                 date={dateAndtime}
                 setDate={(e: any) => setDateAndTime(e)}

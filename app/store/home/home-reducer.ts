@@ -16,6 +16,15 @@ import {
   GET_LATEST_TARGET,
   GET_BLOOD_SUGAR_TARGETS,
   GET_HBA1C_TARGETS,
+  GET_WEIGHT_PROGRESS,
+  GET_BP_PROGRESS,
+  GET_BS_PROGRESS,
+  GET_HBA1C_PROGRESS,
+  GET_MEDICATION_PROGRESS,
+  GET_RESULT_LOGS,
+  GET_BLOOD_SUGAR_LOGS,
+  GET_HBA1C_LOGS,
+  GET_BP_LOGS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -118,6 +127,61 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         hbA1cTargets: action.payload,
+      };
+    }
+
+    case GET_WEIGHT_PROGRESS: {
+      return {
+        ...state,
+        getWeightProgressData: action.payload,
+      };
+    }
+    case GET_BP_PROGRESS: {
+      return {
+        ...state,
+        getBpProgressData: action.payload,
+      };
+    }
+    case GET_BS_PROGRESS: {
+      return {
+        ...state,
+        getBsProgressData: action.payload,
+      };
+    }
+    case GET_HBA1C_PROGRESS: {
+      return {
+        ...state,
+        getHba1cProgressData: action.payload,
+      };
+    }
+    case GET_MEDICATION_PROGRESS: {
+      return {
+        ...state,
+        getMedicationProgressData: action.payload,
+      };
+    }
+    case GET_RESULT_LOGS: {
+      return {
+        ...state,
+        weightLogsData: action.payload,
+      };
+    }
+    case GET_BLOOD_SUGAR_LOGS: {
+      return {
+        ...state,
+        bloodSugarLogsData: action.payload,
+      };
+    }
+    case GET_HBA1C_LOGS: {
+      return {
+        ...state,
+        hba1cLogsData: action.payload,
+      };
+    }
+    case GET_BP_LOGS: {
+      return {
+        ...state,
+        bPLogsData: action.payload,
       };
     }
 

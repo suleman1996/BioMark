@@ -82,7 +82,7 @@ const InputWithUnits = ({
           </MenuOptions>
         </Menu>
       </View>
-      {error?.length > 0 && <ErrorMessage errorMessage={error} />}
+      {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}
     </>
   );
 };

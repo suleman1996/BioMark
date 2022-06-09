@@ -197,7 +197,14 @@ const Index = () => {
             onPress={onSubmit}
             color={['#2C6CFC', '#2CBDFC']}
             style={styles.buttonContainer}
-            disabled={!value || !value2 || !value3 || !value4}
+            disabled={
+              !value ||
+              !value2 ||
+              !value3 ||
+              !value4 ||
+              Object.keys(errors).filter((key: string) => errors[key]).length >
+                0
+            }
           />
         </View>
       </TitleWithBackWhiteBgLayout>

@@ -30,7 +30,7 @@ const mgMmolConversion = (value: number, toUnit: 'mg/dL' | 'mmol/L' | string) =>
 
 const measurmentValidator = (is_metric, measurment, value) => {
   let errorr = '';
-  if (value.length === 0)
+  if (value.length === 0 || value == 0)
     return measurment === 'height'
       ? 'Please provide your height measurement'
       : 'Please provide your weight measurement';
@@ -38,12 +38,12 @@ const measurmentValidator = (is_metric, measurment, value) => {
     kg: {
       min: 0,
       max: 200,
-      errorr: 'Please enter a valid weight between 0 - 440 lbs',
+      errorr: 'Please enter a valid weight between 0 - 200 kg',
     },
     lbs: {
       min: 0,
       max: 440,
-      errorr: 'Please enter a valid weight between 0 - 200 kg',
+      errorr: 'Please enter a valid weight between 0 - 440 lbs',
     },
   };
 
@@ -78,8 +78,15 @@ const measurmentValidator = (is_metric, measurment, value) => {
   } else {
     // LBS
     if (measurment === 'weight') {
+      console.log(
+        WEIGHT_RANGE.lbs.min,
+        value,
+        WEIGHT_RANGE.lbs.max,
+        '-=------>',
+        WEIGHT_RANGE.lbs.min < Number(value) <= WEIGHT_RANGE.lbs.max
+      );
       errorr =
-        WEIGHT_RANGE.lbs.min < value <= WEIGHT_RANGE.lbs.max
+        WEIGHT_RANGE.lbs.min < value && value <= WEIGHT_RANGE.lbs.max
           ? ''
           : WEIGHT_RANGE.lbs.errorr;
     } else if (measurment === 'height') {
