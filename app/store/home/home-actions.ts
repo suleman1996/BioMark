@@ -347,9 +347,10 @@ export const getReduxLabResultStatus =
   };
 
 export const getReduxResultOverview =
-  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+  (id, title) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
-      .getResultOverView(140)
+      .getResultOverView(id, title)
       .then(async (res) => {
         // console.log('Result Overview', res);
 

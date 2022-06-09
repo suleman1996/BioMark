@@ -17,6 +17,7 @@ const Index = ({
   selectedfilterOption2,
   setSelectedfilterOption1,
   setSelectedfilterOption2,
+  onApplyPress,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
@@ -75,7 +76,7 @@ const Index = ({
           text="Apply"
           color={['#2C6CFC', '#2CBDFC']}
           style={{ marginBottom: 5, marginTop: 30 }}
-          onPress={() => console.log('xnxnxnxnxnx')}
+          onPress={onApplyPress}
         />
       </View>
     </View>

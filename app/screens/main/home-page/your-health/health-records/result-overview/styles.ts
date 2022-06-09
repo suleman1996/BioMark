@@ -79,11 +79,11 @@ const styles = (colors: any) =>
       justifyContent: 'center',
     },
     resultViewHeaderCenter: {
-      width: '65%',
+      width: '60%',
       justifyContent: 'center',
     },
     resultViewHeaderRight: {
-      width: '25%',
+      width: '30%',
       justifyContent: 'center',
       alignItems: 'center',
     },

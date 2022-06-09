@@ -7,7 +7,7 @@ import Styles from './styles';
 import SearIcon from 'react-native-vector-icons/Fontisto';
 import Filter from '../../assets/svgs/filter';
 
-type Props = { placeHolder: string };
+type Props = { placeHolder: string; onPress: any };
 
 const Index = (props: Props) => {
   const { colors } = useTheme();
@@ -31,7 +31,7 @@ const Index = (props: Props) => {
       </View>
 
       <View style={styles.filterView}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={props.onPress}>
           <Filter fill={colors.blue} />
         </TouchableOpacity>
       </View>

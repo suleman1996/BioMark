@@ -24,31 +24,35 @@ const Card = ({ item }: Props) => {
         styles.radio,
         {
           backgroundColor:
-            item?.status == 'danger' ? colors.white : colors.lightGreen,
+            item?.findings == 'high' ? colors.white : colors.lightGreen,
           shadowColor: colors.lightGreen,
         },
       ]}
     />
   );
 
-  const RenderMoreInfo = () => (
+  const RenderMoreInfo = ({ resultId }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate(SCREENS.MORE_INFO)}
+      onPress={() =>
+        navigation.navigate(SCREENS.MORE_INFO, { result_id: resultId })
+      }
       style={[
         styles.moreView,
         {
           borderColor:
-            item?.status == 'danger' ? colors.pureRed : colors.lightGreen,
+            item?.findings == 'high' ? colors.pureRed : colors.lightGreen,
         },
       ]}
     >
       <Filter
-        fill={item?.status == 'danger' ? colors.pureRed : colors.heading}
+        fill={item?.findings == 'high' ? colors.pureRed : colors.heading}
       />
       <Text
         style={[
           styles.moreText,
-          { color: item?.status == 'danger' ? colors.pureRed : colors.heading },
+          {
+            color: item?.findings == 'high' ? colors.pureRed : colors.heading,
+          },
         ]}
       >
         More Info
@@ -70,7 +74,7 @@ const Card = ({ item }: Props) => {
         style={[
           styles.resultViewHeader,
           {
-            backgroundColor: item?.status == 'danger' ? colors.pureRed : '#fff',
+            backgroundColor: item?.findings == 'high' ? colors.pureRed : '#fff',
           },
         ]}
       >
@@ -82,21 +86,21 @@ const Card = ({ item }: Props) => {
             style={[
               styles.resultViewHeaderTitle,
               {
-                color: item?.status == 'danger' ? colors.white : colors.heading,
+                color: item?.findings == 'high' ? colors.white : colors.heading,
               },
             ]}
           >
-            {item?.title}
+            {item?.name}
           </Text>
         </View>
         <View style={styles.resultViewHeaderRight}>
           <Text
             style={[
               styles.resultViewHeaderSubTitle,
-              { color: item?.status == 'danger' ? colors.white : colors.bg },
+              { color: item?.findings == 'high' ? colors.white : colors.bg },
             ]}
           >
-            {item?.subTitle}
+            {item?.value} {item?.unit}
           </Text>
         </View>
       </TouchableOpacity>
@@ -107,22 +111,22 @@ const Card = ({ item }: Props) => {
               styles.resultViewBody,
               {
                 backgroundColor:
-                  item?.status == 'danger' ? colors.dangerBg : colors.white,
+                  item?.findings == 'high' ? colors.highBg : colors.white,
               },
             ]}
           >
-            <Text style={styles.bodyText}>{item?.summary}</Text>
+            <Text style={styles.bodyText}>{item?.definition}</Text>
           </View>
           <View
             style={[
               styles.resultViewFooter,
               {
                 backgroundColor:
-                  item?.status == 'danger' ? colors.dangerBg : colors.white,
+                  item?.findings == 'high' ? colors.highBg : colors.white,
               },
             ]}
           >
-            <RenderMoreInfo />
+            <RenderMoreInfo resultId={item?.biomarker_id} />
           </View>
         </>
       )}

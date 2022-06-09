@@ -1049,10 +1049,10 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
-const getResultOverView = (id) => {
+const getResultOverView = (id, filter) => {
   return new Promise<ResultResponse>((resolve, reject) => {
     client
-      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter=abnormal'}`)
+      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter='}${filter}`)
       .then(async (response) => {
         try {
           // console.log('RESULT api overview', response);
@@ -1069,6 +1069,7 @@ const getResultOverView = (id) => {
       });
   });
 };
+
 const getWeightProgress = (id) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
@@ -1252,6 +1253,10 @@ const getBloodPressureLogs = () => {
   });
 };
 
+const getMoreInfoResult = (id) => {
+  return client.get(`${API_URLS.GET_RESULT_MORE_INFO}${id}/summary`);
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -1323,4 +1328,5 @@ export const userService = {
   getHba1cLogs,
   getBloodPressureLogs,
   barcodeCheck,
+  getMoreInfoResult,
 };
