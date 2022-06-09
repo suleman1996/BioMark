@@ -59,7 +59,7 @@ const SearchBarWithLeftScanIcon = () => {
         message: err.errMsg.data.message,
         type: 'danger',
       });
-      console.log(err, 'errrr-codeeee---------------');
+      // console.log(err, 'errrr-codeeee---------------');
     }
   };
 
