@@ -20,7 +20,6 @@ export default function Splash() {
 
   const getUser = async () => {
     const onboardingg = await getOnboarding();
-    console.log('onboarding ', onboardingg);
 
     setOnboarding(onboardingg);
 

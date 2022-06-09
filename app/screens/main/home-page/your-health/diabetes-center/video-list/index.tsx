@@ -29,15 +29,13 @@ const VideoList = ({ route }) => {
     try {
       setIsVisible(true);
       dispatch(getReduxPspPdfLink(item.code));
-      console.log('---------item-------------', item);
+
       setVideoLink(pspVideoLinks.link);
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);
-      console.log(err);
     }
   };
-  console.log('------link-----', pspVideoLinks);
 
   return (
     <View style={styles.listView}>
@@ -53,9 +51,7 @@ const VideoList = ({ route }) => {
         playWhenInactive={true}
         resizeMode="contain"
         fullscreen={true}
-        onLoadStart={() => {
-          console.log('start auto');
-        }}
+        onLoadStart={() => {}}
       />
     </View>
   );

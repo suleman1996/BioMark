@@ -7,7 +7,6 @@ import { getReduxNewMedicationTracker } from 'store/home/home-actions';
 
 const RenderHealthTrackDemo = ({ item }) => {
   const { colors } = useTheme();
-  console.log('iii', item);
 
   const dispatch = useDispatch();
   const styles = Styles(colors);

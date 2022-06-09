@@ -44,6 +44,14 @@ const DiabetesCenter = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
 
+  const scrollRef = React.useRef(<ScrollView />);
+  const scrollToView = (value) => {
+    scrollRef.current?.scrollTo({
+      y: value,
+      animated: true,
+    });
+  };
+
   const pspModuleData = useSelector(
     (state: IAppState) => state.home.pspModuleData
   );
@@ -52,7 +60,6 @@ const DiabetesCenter = () => {
   useEffect(() => {
     PspModuleData();
     handleHEalthTracker();
-    console.log('Health diabetes api =======>', hell);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     setShowDemo(0);
   }, []);
@@ -153,9 +160,13 @@ const DiabetesCenter = () => {
   );
 
   return (
-    <TitleWithBackLayout isGradient={true} title="Diabetes Support Center">
+    <TitleWithBackLayout
+      backTo={SCREENS.YOUR_HEALTH}
+      isGradient={true}
+      title="Diabetes Support Center"
+    >
       <View style={{ flex: 1 }}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
           {showDemo !== 5 && <View style={styles.demoContainer}></View>}
           <Text style={[styles.headingText, { marginVertical: 10 }]}>
             YOUR DIABETES DIARY
@@ -191,13 +202,13 @@ const DiabetesCenter = () => {
             )}
             {showDemo === 1 && (
               <>
-                <View style={{ height: 110, width: 100 }} />
+                <View style={{ height: 110, width: 100, marginLeft: '9%' }} />
                 <RenderHealthTrackDemo item={healthTrackerDemo[1]} />
               </>
             )}
             {showDemo === 2 && (
               <>
-                <View style={{ height: 110, width: 100, marginLeft: 10 }} />
+                <View style={{ height: 110, width: 100, marginLeft: '10%' }} />
                 <View style={{ height: 110, width: 100 }} />
                 <RenderHealthTrackDemo item={healthTrackerDemo[2]} />
               </>
@@ -326,7 +337,11 @@ const DiabetesCenter = () => {
                 text={showDemo === 4 ? 'Finish' : 'Next'}
                 color={['#2C6CFC', '#2CBDFC']}
                 style={styles.gradientButton2}
-                onPress={() => setShowDemo((demo) => demo + 1)}
+                onPress={() => {
+                  setShowDemo((demo) => demo + 1),
+                    showDemo == 2 && scrollToView(150);
+                  showDemo == 3 && scrollToView(700);
+                }}
               />
             </View>
           </View>

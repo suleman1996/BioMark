@@ -54,7 +54,6 @@ const AddDependantForm = (props: Props) => {
   );
 
   useEffect(() => {
-    console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
       let countryCodeParse = geoLocation.dial_code.replace('+', '');

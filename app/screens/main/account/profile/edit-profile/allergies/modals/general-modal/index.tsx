@@ -135,7 +135,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
       setIsVisible={setIsVisible}
       title={name}
       onPress={() => {
-        console.log('clicked');
         setIsVisible();
       }}
     >

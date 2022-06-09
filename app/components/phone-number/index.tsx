@@ -38,7 +38,6 @@ export default function (props: Props) {
   ]);
 
   const onSelect = (Country: any) => {
-    console.log(Country);
     props.setCountryCode(Country.cca2);
     props.setSelectCountryCode(Country.callingCode[0]);
   };
