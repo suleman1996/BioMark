@@ -24,13 +24,6 @@ const kgToLbs = () => {
 const lbsToKg = () => {
   Number((prev.weight * (1 / 2.205)).toFixed(1));
 };
-const mgdlToMmol = () => {
-  Number((prev.weight * 2.205).toFixed(1));
-};
-
-const mmolToMgdl = () => {
-  Number((prev.weight * (1 / 2.205)).toFixed(1));
-};
 
 const measurementValidator = (is_metric, measurment, value) => {
   let errorr = '';
@@ -106,6 +99,8 @@ const measurementValidator = (is_metric, measurment, value) => {
   return errorr;
 };
 const bloodPressureValidator = (measurment, value) => {
+  console.log('measu', measurment);
+
   let errorr = '';
   if (value.length === 0 || value == 0)
     return measurment === 'bp_systolic'
@@ -127,12 +122,12 @@ const bloodPressureValidator = (measurment, value) => {
   // KG
   if (measurment === 'bp_systolic') {
     errorr =
-      BP_RANGE.sys.min < value && value <= BP_RANGE.sys.max
+      BP_RANGE.sys.min <= value && value <= BP_RANGE.sys.max
         ? ''
         : BP_RANGE.sys.errorr;
   } else {
     errorr =
-      BP_RANGE.dia.min < value && value <= BP_RANGE.dia.max
+      BP_RANGE.dia.min <= value && value <= BP_RANGE.dia.max
         ? ''
         : BP_RANGE.dia.errorr;
   }
@@ -140,6 +135,9 @@ const bloodPressureValidator = (measurment, value) => {
   return errorr;
 };
 const bloodSugarValidator = (measurment, value) => {
+  console.log('measur', measurment);
+  console.log('value', value);
+
   let errorr = '';
   if (value.length === 0 || value == 0)
     return 'Please input a valid measurement';
@@ -157,7 +155,6 @@ const bloodSugarValidator = (measurment, value) => {
     },
   };
 
-  // KG
   if (measurment === 'mg/dl') {
     errorr =
       BS_RANGE.mgdl.min < value && value <= BS_RANGE.mgdl.max
@@ -178,8 +175,6 @@ export {
   feetToCm,
   kgToLbs,
   lbsToKg,
-  mgdlToMmol,
-  mmolToMgdl,
   measurementValidator as measurementValidator,
   bloodPressureValidator,
   bloodSugarValidator,

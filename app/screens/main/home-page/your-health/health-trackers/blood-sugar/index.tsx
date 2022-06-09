@@ -20,13 +20,7 @@ import { showMessage } from 'react-native-flash-message';
 import makeStyles from './styles';
 import { ActivityIndicator, InputWithUnits } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getCalendarDate,
-  getDay,
-  getMonth,
-  getTime,
-  getYear,
-} from 'utils/functions/date-format';
+import { getCalendarDate } from 'utils/functions/date-format';
 import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
 import { bloodSugarValidator } from 'utils/functions/measurments';
@@ -38,25 +32,32 @@ const BloodSugar = ({ route }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [dropdownValue, setDropdown] = useState<any>();
-  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
-  const [dateAndtime, setDateAndTime] = useState<any>();
-  const [validation, setValidation] = useState<any>(false);
-  const [validation2, setValidation2] = useState<any>(false);
   const [options, setOptions] = useState<any>([]);
   const [error, setError] = useState<string>('');
   const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
-  const bloodSugarProgress = useSelector(
-    (state: IAppState) => state.home.getBsProgressData
-  );
 
   const [bloodSugarTracker, setBloodSugarTracker] = useState({
-    data_value: '0',
+    data_value: '0.0',
     unit_list_id: 1,
     record_date: '',
     meal_type_id: 0,
   });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (bloodSugarTracker.unit_list_id !== 1) {
+      setBloodSugarTracker((prev: any) => ({
+        ...prev,
+        data_value: Number((prev.data_value / 18).toFixed(1)),
+      }));
+    } else {
+      setBloodSugarTracker((prev: any) => ({
+        ...prev,
+        data_value: Number((prev.data_value * (1 * 18)).toFixed(1)),
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bloodSugarTracker.unit_list_id]);
 
   useEffect(() => {
     let arr = [];
@@ -65,18 +66,6 @@ const BloodSugar = ({ route }) => {
       arr.push({ label: ele.name, value: ele.id });
     });
     setOptions(arr);
-
-    let today = new Date();
-    let dateTime = '';
-    dateTime =
-      getMonth(today) +
-      ' ' +
-      getDay(today) +
-      ', ' +
-      getYear(today) +
-      ' ' +
-      getTime(today);
-    setDateAndTime(dateTime);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -142,27 +131,21 @@ const BloodSugar = ({ route }) => {
       ...prev,
       unit_list_id: unitListId,
     }));
-
-    // setWeightTracker((prev: any) => ({
-    //   ...prev,
-    //   is_metric: metric,
-    // }));
-    console.log('bloodSugarTracker', bloodSugarTracker);
-
-    // const metric = selectedUnit == 'kg' ? true : false;
-    // setBloodSugarTracker((prev: any) => ({
-    //   ...prev,
-    //   is_metric: metric,
-    // }));
     setError(
       bloodSugarValidator(selectedUnit, bloodSugarTracker.data_value) || ''
     );
   };
   const handleChange = (value: number, key: string) => {
     setBloodSugarTracker({ ...bloodSugarTracker, [key]: value });
-    setError(bloodSugarValidator(bloodSugarTracker.unit_list_id, key) || '');
+    setError(
+      bloodSugarValidator(
+        bloodSugarTracker.unit_list_id === 1 ? 'mg/dl' : 'mmol/L',
+        value
+      ) || ''
+    );
     console.log('lllll', bloodSugarTracker);
   };
+
   return (
     <TitleWithBackWhiteBgLayout title="Blood Sugar">
       <ActivityIndicator visible={isLoading} />
@@ -170,28 +153,15 @@ const BloodSugar = ({ route }) => {
         <View
           style={{
             paddingHorizontal: widthToDp(4),
-            // borderWidth: 5,
             marginBottom: heightToDp(25),
           }}
         >
-          {/* <BloodSugarChooser
-            width={'70%'}
-            height={15}
-            label="Your Reading"
-            textAlign="right"
-            placeholder={'0'}
-            onChangeText={onChangeText}
-            value={bloodSugarTracker?.data_value}
-            selectedType={selectedType} 
-            setSelectedType={setSelectedType}
-            setValue={setValue}
-          /> */}
           <InputWithUnits
             title="Your Reading"
             placeholder="0.0"
             units={['mg/dl', 'mmol/L']}
             unit={bloodSugarTracker.unit_list_id === 1 ? 'mg/dl' : 'mmol/L'}
-            value={bloodSugarTracker?.data_value}
+            value={bloodSugarTracker?.data_value.toString()}
             onChangeText={(val: any) => handleChange(val, 'data_value')}
             onUnitChange={handleUnitChange}
             error={error || ''}
@@ -205,18 +175,7 @@ const BloodSugar = ({ route }) => {
             }}
           />
 
-          {/* {validation ? (
-            <Text style={styles.errorMessage}>
-              Please input a valid measurement from 1-600 mg/dL
-            </Text>
-          ) : null}
-          {validation2 ? (
-            <Text style={styles.errorMessage}>
-              Please input a valid measurement from 0.06-50 mmol/L
-            </Text>
-          ) : null} */}
-
-          {bloodSugarTracker?.data_value && !validation && !validation2 ? (
+          {bloodSugarTracker?.data_value !== '0.0' && !error ? (
             <>
               <View style={styles.dropDown}>
                 <Text style={styles.textStyle}>Meal</Text>
@@ -228,15 +187,7 @@ const BloodSugar = ({ route }) => {
                       ...bloodSugarTracker,
                       meal_type_id: text,
                     });
-                    setIsDropDownChanged(true);
                   }}
-                  error={
-                    isDropdownChanged
-                      ? dropdownValue === '---'
-                        ? 'Please select your ethnicity'
-                        : ''
-                      : ''
-                  }
                 />
               </View>
               <Text style={styles.label}>Date of Birth</Text>
@@ -252,13 +203,18 @@ const BloodSugar = ({ route }) => {
             </>
           ) : null}
         </View>
-
-        <ButtonWithShadowContainer
-          onPress={saveBsLog}
-          title={route?.params?.logId ? 'Save Edit' : 'Add'}
-          disabled={false}
-        />
       </ScrollView>
+      <ButtonWithShadowContainer
+        onPress={saveBsLog}
+        title={route?.params?.logId ? 'Save Edit' : 'Add'}
+        disabled={
+          bloodSugarTracker.data_value === '0.0' ||
+          bloodSugarTracker.meal_type_id == 0 ||
+          error
+            ? true
+            : false
+        }
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };
