@@ -15,6 +15,7 @@ import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { userService } from 'services/user-service/user-service';
+import SCREENS from 'navigation/constants';
 
 import { SearchBarLeftIcon } from 'components/svg';
 import { ActivityIndicator } from 'components';
@@ -26,6 +27,8 @@ import MyImage from 'assets/images';
 import fonts from 'assets/fonts';
 
 import makeStyles from './styles';
+import { navigate } from 'services/nav-ref';
+import { showMessage } from 'react-native-flash-message';
 // import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
@@ -39,18 +42,25 @@ const SearchBarWithLeftScanIcon = () => {
 
   const menuRef = useRef<any>();
 
-  const handleCode = async (opt) => {
+  const handleCode = async () => {
     try {
       const response = await userService.barcodeCheck({
         scanner: {
           code: code,
         },
       });
-
+      navigate(SCREENS.SUPPORT_SYSTEM);
+      console.log(response, 'codee---------------code------------------');
       // navigate(Screeb, {
       //   SHOW_DEMO: true
       // })
-    } catch (err) {}
+    } catch (err) {
+      showMessage({
+        message: err.errMsg.data.message,
+        type: 'danger',
+      });
+      // console.log(err, 'errrr-codeeee---------------');
+    }
   };
 
   const bgColor = isMenuOpen
@@ -132,7 +142,11 @@ const SearchBarWithLeftScanIcon = () => {
                     <View style={{ marginTop: 40 }}>
                       <TouchableOpacity>
                         <Button
-                          onPress={() => handleCode()}
+                          onPress={() => {
+                            setVisible(false);
+                            setIsMenuOpen(false);
+                            handleCode();
+                          }}
                           title="Save Code"
                           marginHorizontal={0.1}
                           marginVertical={0.1}

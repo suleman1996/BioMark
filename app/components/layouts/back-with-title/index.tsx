@@ -9,7 +9,7 @@ import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import { hitSlop } from 'constants/hit-slop';
-import { goBack } from 'services/nav-ref';
+import { goBack, navigate } from 'services/nav-ref';
 
 import makeStyles from './styles';
 
@@ -22,6 +22,7 @@ type Props = {
   isShare: boolean;
   shadow: string;
   onPressInfo: any;
+  backTo?: string;
 };
 
 const TitleWithBackLayout = ({
@@ -32,6 +33,7 @@ const TitleWithBackLayout = ({
   isInfo,
   isShare,
   shadow,
+  backTo,
   onPressInfo,
 }: Props) => {
   const { colors } = useTheme();
@@ -50,7 +52,10 @@ const TitleWithBackLayout = ({
       >
         <View style={[styles.header, { backgroundColor: shadow }]}>
           <View style={{ flexDirection: 'row' }}>
-            <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
+            <Pressable
+              hitSlop={hitSlop.one}
+              onPress={() => (backTo ? navigate(backTo) : goBack())}
+            >
               <MaterialIcons
                 color={colors.white}
                 size={responsiveFontSize(35)}
