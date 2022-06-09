@@ -34,11 +34,13 @@ export interface CreateTargetResponse {
 
 export interface SetDefaultTargetResponse {
   status: boolean;
-  data: [
-    {
-      message: string;
-    }
-  ];
+  data:
+    | [
+        {
+          message: string;
+        }
+      ]
+    | { message: string };
 }
 
 export interface GetBloodSugarTargetsResponse {

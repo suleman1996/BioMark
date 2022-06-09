@@ -36,6 +36,7 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  SetDefaultTargetResponse,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -983,6 +984,8 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
+//Targets API calls
+
 const getNewTarget = () => {
   return new Promise<NewTarget>((resolve, reject) =>
     client
@@ -1030,7 +1033,7 @@ const getBloodSugarTargets = () => {
     client
       .get(API_URLS.GET_BLOOD_SUGAR_TARGETS)
       .then(({ data }: { data: GetBloodSugarTargetsResponseData[] }) => {
-        resolve(data.slice(1, data.length));
+        resolve(data);
       })
       .catch(async (err: ErrorResponse) => {
         logNow('get med error', err);
@@ -1044,7 +1047,35 @@ const getHBA1CTargets = () => {
     client
       .get(API_URLS.GET_HBA1C_TARGETS)
       .then(({ data }: { data: GetHba1cTargetsResponseData[] }) => {
-        resolve(data.slice(1, data.length));
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultBloodSugarTarget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .get(API_URLS.SET_DEFAULT_BLOOD_SUGAR_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultHba1carget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .get(API_URLS.SET_DEFAULT_HBA1C_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
       })
       .catch(async (err: ErrorResponse) => {
         logNow('get med error', err);
@@ -1073,6 +1104,7 @@ const getResultOverView = (id) => {
       });
   });
 };
+
 const getWeightProgress = (id) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
@@ -1093,6 +1125,7 @@ const getWeightProgress = (id) => {
       });
   });
 };
+
 const getBloodPressureProgress = (id) => {
   return new Promise<BloodPressureProgressEntryPayload>((resolve, reject) => {
     client
@@ -1113,6 +1146,7 @@ const getBloodPressureProgress = (id) => {
       });
   });
 };
+
 const getWeightLogs = () => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
@@ -1133,6 +1167,7 @@ const getWeightLogs = () => {
       });
   });
 };
+
 const getBloodSugarProgress = (id) => {
   return new Promise<BloodSugarProgressEntryPayload>((resolve, reject) => {
     client
@@ -1328,4 +1363,6 @@ export const userService = {
   getBloodSugarLogs,
   getHba1cLogs,
   getBloodPressureLogs,
+  setDefaultBloodSugarTarget,
+  setDefaultHba1carget,
 };

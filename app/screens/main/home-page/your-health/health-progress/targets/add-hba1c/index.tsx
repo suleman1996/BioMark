@@ -36,12 +36,14 @@ const Index = () => {
     latestHba1c: state.home.latestHba1c,
   }));
 
-  const [value, setValue] = useState('');
+  const [goalValue, setGoalValue] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedType, setSelectedType] = useState<number>(0);
   const [errors, setErrors] = useState({
     goal: '',
   });
+
+  const unitsNames = units.map((unit) => unit.name);
 
   const onUnitChange = useCallback(
     (unit: string) => {
@@ -54,7 +56,7 @@ const Index = () => {
 
   const onSubmit = async () => {
     setLoading(true);
-    if (!value) {
+    if (!goalValue) {
       showMessage({
         message: 'Please fill all fields!',
         type: 'danger',
@@ -63,7 +65,7 @@ const Index = () => {
     }
     const result = await userService.createNewTarget({
       range_type: 3,
-      goal_value: value,
+      goal_value: goalValue,
       unit_list_id: 3,
     });
     setLoading(false);
@@ -84,11 +86,11 @@ const Index = () => {
   };
 
   useEffect(() => {
-    setErrors(hba1cValidator(+value, units[selectedType].name));
-  }, [value, selectedType]);
+    setErrors(hba1cValidator(+goalValue, units[selectedType].name));
+  }, [goalValue, selectedType]);
 
   useEffect(() => {
-    setValue(Number(latestHba1c?.goal_value).toFixed(1));
+    setGoalValue(Number(latestHba1c?.goal_value).toFixed(1));
   }, [latestHba1c]);
 
   return (
@@ -106,10 +108,10 @@ const Index = () => {
           small
           title="Goal"
           placeholder={'0.0'}
-          onChangeText={setValue}
-          value={value}
-          unit={units[selectedType] ? units[selectedType].name : ''}
-          units={units.map((unit) => unit.name)}
+          onChangeText={setGoalValue}
+          value={goalValue}
+          unit={unitsNames[selectedType]}
+          units={unitsNames}
           onUnitChange={onUnitChange}
           error={errors.goal}
         />
@@ -117,7 +119,7 @@ const Index = () => {
           onPress={onSubmit}
           text="Save"
           color={['#2C6CFC', '#2CBDFC']}
-          disabled={!value || errors.goal}
+          disabled={!goalValue || errors.goal}
           style={styles.buttonContainer}
         />
       </View>

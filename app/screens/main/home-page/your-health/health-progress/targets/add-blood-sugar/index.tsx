@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
@@ -31,12 +31,14 @@ const Index = () => {
   const styles = Styles(colors);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [value, setValue] = useState<string>('');
-  const [value2, setValue2] = useState<string>('');
-  const [value3, setValue3] = useState<string>('');
-  const [value4, setValue4] = useState<string>('');
+  const [fromfpg, setFromfpg] = useState<string>('');
+  const [tofpg, setTofpg] = useState<string>('');
+  const [fromppg, setFromppg] = useState<string>('');
+  const [toppg, setToppg] = useState<string>('');
   const [selectedType, setSelectedType] = useState<number>(0);
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<{
+    [key: string]: string;
+  }>({
     fromfpg: '',
     tofpg: '',
     fromppg: '',
@@ -50,22 +52,27 @@ const Index = () => {
   }));
   const dispatch = useDispatch();
 
+  const unitsNames = useMemo<string[]>(
+    () => units.map((unit) => unit.name),
+    [units]
+  );
+
   const onUnitChange = useCallback(
     (unit: string) => {
       const newIndex = units.findIndex((e) => e.name == unit);
       if (newIndex == selectedType) return;
       setSelectedType(newIndex);
 
-      setValue((prev) =>
+      setFromfpg((prev) =>
         Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
       );
-      setValue2((prev) =>
+      setTofpg((prev) =>
         Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
       );
-      setValue3((prev) =>
+      setFromppg((prev) =>
         Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
       );
-      setValue4((prev) =>
+      setToppg((prev) =>
         Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
       );
     },
@@ -74,7 +81,7 @@ const Index = () => {
 
   const onSubmit = async () => {
     setLoading(true);
-    if (!value || !value2 || !value3 || !value4) {
+    if (!fromfpg || !tofpg || !fromppg || !toppg) {
       showMessage({
         message: 'Please fill all fields!',
         type: 'danger',
@@ -83,11 +90,11 @@ const Index = () => {
     }
     const result = await userService.createNewTarget({
       range_type: 1,
-      value_from: value,
-      value_to: value2,
+      value_from: fromfpg,
+      value_to: tofpg,
       unit_list_id: units[selectedType]?.id,
-      ppg_value_from: value3,
-      ppg_value_to: value4,
+      ppg_value_from: fromppg,
+      ppg_value_to: toppg,
       ppg_unit_id: units[selectedType]?.id,
     });
     setLoading(false);
@@ -112,22 +119,22 @@ const Index = () => {
       setErrors(
         bloodSugarValidator(
           {
-            fromfpg: +value,
-            tofpg: +value2,
-            fromppg: +value3,
-            toppg: +value4,
+            fromfpg: +fromfpg,
+            tofpg: +tofpg,
+            fromppg: +fromppg,
+            toppg: +toppg,
           },
           units[selectedType]?.name
         )
       );
     }
-  }, [value, value2, value3, value4, selectedType, units]);
+  }, [fromfpg, tofpg, fromppg, toppg, selectedType, units]);
 
   useEffect(() => {
-    setValue(String(latestBloodSugar?.value_from));
-    setValue2(String(latestBloodSugar?.value_to));
-    setValue3(String(latestBloodSugar?.ppg_value_from));
-    setValue4(String(latestBloodSugar?.ppg_value_to));
+    setFromfpg(String(latestBloodSugar?.value_from));
+    setTofpg(String(latestBloodSugar?.value_to));
+    setFromppg(String(latestBloodSugar?.ppg_value_from));
+    setToppg(String(latestBloodSugar?.ppg_value_to));
     setSelectedType(
       units.findIndex((e) => e.name == latestBloodSugar?.unit_name)
     );
@@ -151,22 +158,22 @@ const Index = () => {
             small
             title="From"
             placeholder={'0'}
-            value={value}
-            onChangeText={setValue}
+            value={fromfpg}
+            onChangeText={setFromfpg}
             onUnitChange={onUnitChange}
-            units={units.map((unit) => unit.name)}
-            unit={units[selectedType]?.name}
+            units={unitsNames}
+            unit={unitsNames[selectedType]}
             error={errors.fromfpg}
           />
           <InputWithUnits
             small
             title="To"
             placeholder={'0'}
-            value={value2}
-            onChangeText={setValue2}
+            value={tofpg}
+            onChangeText={setTofpg}
             onUnitChange={onUnitChange}
-            units={units.map((unit) => unit.name)}
-            unit={units[selectedType]?.name}
+            units={unitsNames}
+            unit={unitsNames[selectedType]}
             error={errors.tofpg}
           />
           <Text style={styles.secondHeading}>After Meal (PPG)</Text>
@@ -174,23 +181,23 @@ const Index = () => {
             small
             title="From"
             placeholder={'0'}
-            onChangeText={setValue3}
-            value={value3}
+            onChangeText={setFromppg}
+            value={fromppg}
             onUnitChange={onUnitChange}
-            units={units.map((unit) => unit.name)}
+            units={unitsNames}
             error={errors.fromppg}
-            unit={units[selectedType]?.name}
+            unit={unitsNames[selectedType]}
           />
           <InputWithUnits
             small
             title="To"
             placeholder={'0'}
-            onChangeText={setValue4}
-            value={value4}
+            onChangeText={setToppg}
+            value={toppg}
             onUnitChange={onUnitChange}
-            units={units.map((unit) => unit.name)}
+            units={unitsNames}
             error={errors.toppg}
-            unit={units[selectedType]?.name}
+            unit={unitsNames[selectedType]}
           />
           <GradientButton
             text="Save"
@@ -198,10 +205,10 @@ const Index = () => {
             color={['#2C6CFC', '#2CBDFC']}
             style={styles.buttonContainer}
             disabled={
-              !value ||
-              !value2 ||
-              !value3 ||
-              !value4 ||
+              !fromfpg ||
+              !tofpg ||
+              !fromppg ||
+              !toppg ||
               Object.keys(errors).filter((key: string) => errors[key]).length >
                 0
             }

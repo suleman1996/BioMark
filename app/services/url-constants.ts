@@ -102,6 +102,9 @@ const API_URLS = {
   GET_LATEST_TARGETS: '/api/v1/patient/psp/targets',
   GET_BLOOD_SUGAR_TARGETS: '/api/v1/patient/psp/targets/blood_sugar?page=1',
   GET_HBA1C_TARGETS: '/api/v1/patient/psp/targets/hba1c?page=1',
+  SET_DEFAULT_BLOOD_SUGAR_TARGET:
+    '/api/v1/patient/psp/targets/default_blood_sugar',
+  SET_DEFAULT_HBA1C_TARGET: '/api/v1/patient/psp/targets/default_hba1c',
 
   //Progress Entry for tracker
   GET_WEIGTH_TRACKER: '/api/v1/patient/weight_trackers/',

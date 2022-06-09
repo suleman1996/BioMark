@@ -7,32 +7,14 @@ import TargetCard from './target-card';
 import TargetContainer from './target-container';
 
 export function BloodSugar() {
-  const { bloodSugarTargets, latestBloodSugar } = useSelector(
-    (state: IAppState) => ({
-      latestBloodSugar: state.home.latestBloodSugar,
-      bloodSugarTargets: state.home.bloodSugarTargets,
-    })
-  );
+  const { bloodSugarTargets } = useSelector((state: IAppState) => ({
+    bloodSugarTargets: state.home.bloodSugarTargets,
+  }));
   return (
     <TargetContainer>
-      {latestBloodSugar && (
+      {bloodSugarTargets.map((target, index) => (
         <TargetCard
-          isLatest
-          date={latestBloodSugar.record_date_day}
-          content={[
-            {
-              label: 'FPG (Fasting)',
-              value: `${latestBloodSugar.value_from}-${latestBloodSugar.value_to} ${latestBloodSugar.unit_name}`,
-            },
-            {
-              label: 'PPG (Fasting)',
-              value: `${latestBloodSugar.ppg_value_from}-${latestBloodSugar.ppg_value_to} ${latestBloodSugar.unit_name}`,
-            },
-          ]}
-        />
-      )}
-      {bloodSugarTargets.map((target) => (
-        <TargetCard
+          isLatest={index == 0}
           date={target.created_at}
           content={[
             {
@@ -51,26 +33,14 @@ export function BloodSugar() {
 }
 
 export function HbA1c() {
-  const { latestHba1c, hbA1cTargets } = useSelector((state: IAppState) => ({
-    latestHba1c: state.home.latestHba1c,
+  const { hbA1cTargets } = useSelector((state: IAppState) => ({
     hbA1cTargets: state.home.hbA1cTargets,
   }));
   return (
     <TargetContainer>
-      {latestHba1c && (
+      {hbA1cTargets.map((target, index) => (
         <TargetCard
-          isLatest
-          date={latestHba1c.record_date_day}
-          content={[
-            {
-              label: 'Goal Percentage',
-              value: `${latestHba1c.goal_value} ${latestHba1c.unit_name}`,
-            },
-          ]}
-        />
-      )}
-      {hbA1cTargets.map((target) => (
-        <TargetCard
+          isLatest={index == 0}
           date={target.created_at}
           content={[
             {
