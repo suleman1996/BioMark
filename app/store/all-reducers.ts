@@ -5,6 +5,7 @@ import notificationsReducer from './notifications/notifications-reducer';
 import profileReducer from './profile/profile-reducer';
 import homeReducer from './home/home-reducer';
 import covidReducer from './covid/covid-reducer';
+import eventReducer from './events/event-reducer';
 
 export const allReducers = combineReducers({
   auth: authReducer,
@@ -13,4 +14,5 @@ export const allReducers = combineReducers({
   profile: profileReducer,
   home: homeReducer,
   covid: covidReducer,
+  event: eventReducer,
 });
