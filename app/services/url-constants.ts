@@ -28,6 +28,9 @@ const API_URLS = {
   GET_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories',
   CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
 
+  //Home
+  BARCODE_CHECK: '/api/v1/patient/scanners/midas',
+
   // Dependent
   DEPENDENTS: '/api/v1/patient/dependents',
 
@@ -80,6 +83,11 @@ const API_URLS = {
   // Psp Modules
   PSP_GET_MODULES: '/api/v1/patient/psp/modules',
   PDF_GET_LINK: '/api/v1/patient/psp/modules/',
+  PDF_GET_HYPER_LINK:
+    'https://bm-dev-api.biomarking.com/api/v1/patient/psp/modules/',
+  PSP_GET_HYPERTENSION_MODULES:
+    '/api/v1/patient/health_trackers?page=hypertension',
+  PSP_GET_HYPER_MODULE_DATA: '/api/v1/patient/psp/modules?program=3',
   GET_LAB_STATUS: '/api/v1/patient/results/lab_status',
 
   LAB_STATUS_VERYFY: '/api/v1/patient/results/verify',

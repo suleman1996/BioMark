@@ -14,6 +14,7 @@ const theme = {
     primaryGray: '#FAFAFA',
     white: '#FFFFFF',
     opacityBlack: 'hsla(133, 50%, 7%, 0.18)',
+    opacityBlackDark: 'hsla(000, 1%, 10%, 0.9)',
     gray: '#EBEFF2',
     bgContainer: '#E5E5E5',
     red: 'red',
@@ -50,6 +51,15 @@ const theme = {
     innerBackground: '#F0F0EF',
     pureRed: '#EB3342',
     dangerBg: '#EA4C5920',
+
+    // health risk status color
+
+    Obese: '#EB3342',
+    High: '#EB3342',
+    none: '#D9DFEB',
+    normal: '#54CB83',
+    high: '#EB3342',
+    bad: '#EB3342',
 
     //gradient
   },

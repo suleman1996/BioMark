@@ -27,6 +27,7 @@ import {
   LatestTargetResponse,
   GetHba1cTargetsResponseData,
   GetBloodSugarTargetsResponseData,
+  HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
   BloodSugarProgressEntryPayload,
@@ -387,6 +388,7 @@ type Props = {
   lifestyle: any;
   medical_history: any;
   has_allergy: any;
+  scanner: any;
 };
 const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
@@ -413,6 +415,13 @@ const bodyMeasurement = ({ medical }: Props) => {
 const exercise = ({ lifestyle }: Props) => {
   return client.post(API_URLS.EXERCISE, {
     lifestyle,
+  });
+};
+
+const barcodeCheck = ({ scanner }: Props) => {
+  console.log(scanner);
+  return client.post(API_URLS.BARCODE_CHECK, {
+    scanner,
   });
 };
 
@@ -737,6 +746,46 @@ function getPspModules() {
   });
 }
 
+function getPspHyperModules() {
+  return new Promise<PspModule>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_HYPER_MODULE_DATA)
+      .then(async (response) => {
+        try {
+          console.log('Hyper Module data', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('psp hyper error', err);
+        reject(err);
+      });
+  });
+}
+
+function getHypertensionHealthTracker() {
+  return new Promise<HealthTrackerPayloadData>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_HYPERTENSION_MODULES)
+      .then(async (response) => {
+        try {
+          console.log('hypertension Modules', response);
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('hypertension error', err);
+        reject(err);
+      });
+  });
+}
+
 function getLatestResult() {
   return new Promise<EncodedResultOverviewPayload>((resolve, reject) => {
     client
@@ -794,6 +843,30 @@ function getPspPdfLink(link) {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('pdf error', err);
+        logNow('lab status error', err);
+        reject(err);
+      });
+  });
+}
+
+function getPspHyperPdfLink(link) {
+  console.log(link, 'linkkkkkkkkkkkkkkkkkkkkk');
+  return new Promise<PspModuleDataContents>((resolve, reject) => {
+    client
+      .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
+      .then(async (response) => {
+        try {
+          console.log('PSP PDF Hyper LINK', response);
+          console.log('lab staus', response);
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('pdf Hyper error', err);
         logNow('lab status error', err);
         reject(err);
       });
@@ -1354,6 +1427,9 @@ export const userService = {
   getLatestTargets,
   getBloodSugarTargets,
   getHBA1CTargets,
+  getHypertensionHealthTracker,
+  getPspHyperModules,
+  getPspHyperPdfLink,
   getWeightProgress,
   getBloodPressureProgress,
   getBloodSugarProgress,
@@ -1365,4 +1441,5 @@ export const userService = {
   getBloodPressureLogs,
   setDefaultBloodSugarTarget,
   setDefaultHba1carget,
+  barcodeCheck,
 };

@@ -62,24 +62,26 @@ const Index = () => {
     id: 0,
     title: 'mg/dL',
   });
-  const [logData] = React.useState([]);
+  const [logData, setLogData] = React.useState([]);
 
   React.useEffect(() => {
     dispatch(getReduxBloodSugarLogs());
-    // console.log('Blood Sugar Logs ', bloodSugarLogs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
+  React.useEffect(() => {
+    let arr = [];
     bloodSugarLogs?.log?.map((item) =>
-      logData.push({
+      arr.push({
         id: item?.id,
         weight: item?.data_value,
         unit: item?.unit_name,
         date_entry: item?.record_date,
       })
     );
-
+    setLogData(arr);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  }, [bloodSugarLogs]);
   return (
     <>
       <HealthProgressFilter

@@ -17,6 +17,7 @@ import {
   LatestTargetResponse,
   GetBloodSugarTargetsResponseData,
   GetHba1cTargetsResponseData,
+  HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
   BloodSugarProgressEntryPayload,
@@ -44,6 +45,9 @@ import {
   GET_LATEST_TARGET,
   GET_BLOOD_SUGAR_TARGETS,
   GET_HBA1C_TARGETS,
+  GET_PSP_HYPERTENSION_HEALTH_TRACKER,
+  PSP_HYPER_MODULE,
+  PSP_PDF_HYPER_LINK,
   GET_WEIGHT_PROGRESS,
   GET_BP_PROGRESS,
   GET_BS_PROGRESS,
@@ -86,8 +90,24 @@ export const addPspModule = (data: PspModule) => ({
   payload: data,
 });
 
+export const addPspHyperModule = (data: PspModule) => ({
+  type: PSP_HYPER_MODULE,
+  payload: data,
+});
+
+export const showPspHypertensionHealthTracker = (
+  data: HealthTrackerPayloadData
+) => ({
+  type: GET_PSP_HYPERTENSION_HEALTH_TRACKER,
+  payload: data,
+});
+
 export const addPspPdfLink = (data: PspModuleDataContents) => ({
   type: PSP_PDF_LINK,
+  payload: data,
+});
+export const addPspPdfHyperLink = (data: PspModuleDataContents) => ({
+  type: PSP_PDF_HYPER_LINK,
   payload: data,
 });
 export const showLatestResult = (data: EncodedResultOverviewPayload) => ({
@@ -266,6 +286,32 @@ export const getReduxPspModules =
       });
   };
 
+export const getReduxPspHyperModules =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getPspHyperModules()
+      .then(async (res) => {
+        console.log('psp hyper redux', res);
+        await dispatch(addPspHyperModule(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxPspHypertensionHealthTrackerData =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getHypertensionHealthTracker()
+      .then(async (res) => {
+        console.log('hyper health tracker redux', res);
+        await dispatch(showPspHypertensionHealthTracker(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
 export const getReduxLatestResult =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
@@ -300,6 +346,19 @@ export const getReduxPspPdfLink =
       .then(async (res) => {
         console.log('psp redux', res);
         await dispatch(addPspPdfLink(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+export const getReduxPspPdfHyperLink =
+  (link: string) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getPspHyperPdfLink(link)
+      .then(async (res) => {
+        console.log('psp pdf hyper link redux', res);
+        await dispatch(addPspPdfHyperLink(res));
       })
       .catch((err) => {
         logNow(err);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView, Text, ScrollView, View, Image } from 'react-native';
 import { TitleWithBackLayout } from 'components/layouts';
 import { useTheme } from 'react-native-paper';
@@ -7,6 +7,8 @@ import HealthCard from 'components/health-risk-card';
 import HealthListCard from 'components/health-list-card';
 import fonts from 'assets/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+
+import RenderSvg from 'components/render-svg';
 
 const HealthRisk = ({ route }) => {
   const { colors } = useTheme();
@@ -18,11 +20,7 @@ const HealthRisk = ({ route }) => {
   const footNote = route.params.footNotesData;
   const calculations = route.params.calc;
   const color = route.params.clr;
-  const svgIcon = route.params.icon;
-
-  useEffect(() => {
-    console.log('icon a jaaaaaaaaaaaaaaaaaaaa', svgIcon);
-  });
+  const svgi_d = route.params.i_d;
 
   const renderItem = ({ item }) => {
     return (
@@ -53,7 +51,7 @@ const HealthRisk = ({ route }) => {
               fontFamily: fonts.OpenSansBold,
               color: color,
             }}
-            svg={svgIcon}
+            svg={<RenderSvg color={color} id={svgi_d} />}
             description={listItems.summary}
           />
           <HealthListCard

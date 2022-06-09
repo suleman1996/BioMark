@@ -37,13 +37,16 @@ const Index = () => {
     title: '1M',
     complete: '1 Month',
   });
-  const [logData] = React.useState([]);
+  const [logData, setLogData] = React.useState([]);
 
   React.useEffect(() => {
     dispatch(getReduxHba1cLogs());
-    // console.log('Hba1c Logs ', hba1cLogsData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  React.useEffect(() => {
+    let arr = [];
     hba1cLogsData?.log?.map((item) =>
-      logData.push({
+      arr.push({
         id: item?.id,
         weight: item?.data_value,
         unit: item?.unit_name,
@@ -51,8 +54,9 @@ const Index = () => {
         color: item?.record_status == 'high' ? colors.dangerRed : colors.green,
       })
     );
+    setLogData(arr);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [hba1cLogsData]);
 
   return (
     <>

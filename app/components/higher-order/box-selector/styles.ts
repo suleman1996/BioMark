@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalStyles } from 'utils/theme/global-styles';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -14,6 +13,7 @@ export const makeStyles = (colors: any) =>
       flex: 1,
       flexDirection: 'row',
       width: '100%',
+      marginLeft: 5,
     },
     button: {
       flex: 1,
@@ -22,9 +22,18 @@ export const makeStyles = (colors: any) =>
       backgroundColor: '#fff',
       width: widthToDp(25),
       marginRight: widthToDp(3),
+      marginVertical: 3,
       borderRadius: widthToDp(2),
       height: heightToDp(5.5),
-      ...GlobalStyles(colors).shadow,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1.41,
+
+      elevation: 3,
     },
     label: {
       fontSize: responsiveFontSize(22),

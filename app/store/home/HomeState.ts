@@ -16,6 +16,7 @@ import {
   LatestHba1CResponse,
   GetBloodSugarTargetsResponseData,
   GetHba1cTargetsResponseData,
+  HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
   BloodSugarProgressEntryPayload,
@@ -34,7 +35,9 @@ export class HomeState {
   medicationList: MedicationListEntry[] = [];
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
   pspModuleData: PspModule[] = [];
+  pspHyperModuleData: PspModule[] = [];
   PspDataContents: PspModuleDataContents[] = [];
+  PspHyperDataContents: PspModuleDataContents[] = [];
   getLabStatusData: LabStatusPayload[] = [];
   getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
@@ -45,6 +48,7 @@ export class HomeState {
   hbA1cTargets: GetHba1cTargetsResponseData[] = [];
   latestBloodSugar: LatestBloodSugarResponse | null = null;
   latestHba1c: LatestHba1CResponse | null = null;
+  pspHypertensionHealthTracker: HealthTrackerPayloadData[] = [];
   getWeightProgressData: WeightProgressEntryPayload[] = [];
   getBpProgressData: BloodPressureProgressEntryPayload[] = [];
   getBsProgressData: BloodSugarProgressEntryPayload[] = [];
