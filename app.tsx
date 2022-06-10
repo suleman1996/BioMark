@@ -18,11 +18,14 @@ import { store } from './app/store/store';
 import AuthContext from './app/utils/auth-context';
 import theme from 'utils/theme';
 
+import { LogBox } from 'react-native';
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
 
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState({});
+  LogBox.ignoreAllLogs(true);
 
   return (
     <ErrorBoundary>

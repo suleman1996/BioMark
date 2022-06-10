@@ -356,7 +356,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             (el) => el.condition_id === condition_id
           );
           if (d) {
-            console.log('value', value);
             updatedItems = familyMedicalHistory?.map((el) =>
               el.condition_id === condition_id
                 ? {
@@ -573,7 +572,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
       setIsVisible={setIsVisible}
       title={name}
       onPress={() => {
-        console.log('clicked');
         setIsVisible();
       }}
     >

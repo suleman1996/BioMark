@@ -56,9 +56,7 @@ const HealthRecord = () => {
   useEffect(() => {
     dispatch(getReduxLatestResult());
     dispatch(getReduxPastResult());
-    console.log('past results ', pastResult);
     setPastResults(pastResult);
-    console.log('latest results =======>', newResult);
     // alert(JSON.stringify(newResult.result.summary));
     setLatestResult(newResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps

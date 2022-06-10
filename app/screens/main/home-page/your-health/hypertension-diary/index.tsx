@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
@@ -44,6 +45,8 @@ const openMessenger = () => {
   Linking.openURL(Config.MESSENGER_URL);
 };
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
 const HypertensionDiary = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
@@ -51,6 +54,14 @@ const HypertensionDiary = () => {
 
   // const { PDF_HYPERTENSION } = SCREENS;
   const navigation = useNavigation();
+
+  const scrollRef = React.useRef(<ScrollView />);
+  const scrollToView = (value) => {
+    scrollRef.current?.scrollTo({
+      y: value,
+      animated: true,
+    });
+  };
 
   const trackerData = useSelector(
     (state: IAppState) => state.home.pspHypertensionHealthTracker
@@ -70,7 +81,6 @@ const HypertensionDiary = () => {
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
 
-    console.log('hyper dataaa', hyperModuleData);
     setVideo(hyperModuleData.video);
     setPdfData(hyperModuleData.pdf);
     // alert(JSON.stringify(hyperModuleData.pdf));
@@ -151,10 +161,11 @@ const HypertensionDiary = () => {
     <>
       <TitleWithBackLayout
         isGradient={true}
+        backTo={SCREENS.YOUR_HEALTH}
         title="Hypertension Support Center"
       >
         <View style={{ flex: 1 }}>
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
             {showDemo !== 5 && <View style={styles.demoContainer}></View>}
             <View>
               <Text style={[styles.headingText, { marginVertical: 10 }]}>
@@ -264,13 +275,17 @@ const HypertensionDiary = () => {
                 )}
                 {showDemo === 1 && (
                   <>
-                    <View style={{ height: 110, width: 100 }} />
+                    <View
+                      style={{ height: 110, width: 100, marginLeft: '14%' }}
+                    />
                     <RenderHealthTrackDemo item={healthTracker[1]} />
                   </>
                 )}
                 {showDemo === 2 && (
                   <>
-                    <View style={{ height: 110, width: 100, marginLeft: 10 }} />
+                    <View
+                      style={{ height: 110, width: 100, marginLeft: '18%' }}
+                    />
                     <View style={{ height: 110, width: 100 }} />
                     <RenderHealthTrackDemo item={healthTracker[2]} />
                   </>
@@ -372,7 +387,11 @@ const HypertensionDiary = () => {
                   text={showDemo === 4 ? 'Finish' : 'Next'}
                   color={['#2C6CFC', '#2CBDFC']}
                   style={styles.gradientButton2}
-                  onPress={() => setShowDemo((demo) => demo + 1)}
+                  onPress={() => {
+                    setShowDemo((demo) => demo + 1),
+                      showDemo == 2 && scrollToView(150);
+                    showDemo == 3 && scrollToView(250);
+                  }}
                 />
               </View>
             </View>

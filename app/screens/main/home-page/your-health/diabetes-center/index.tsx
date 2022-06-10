@@ -50,6 +50,14 @@ const DiabetesCenter = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
 
+  const scrollRef = React.useRef(<ScrollView />);
+  const scrollToView = (value) => {
+    scrollRef.current?.scrollTo({
+      y: value,
+      animated: true,
+    });
+  };
+
   const pspModuleData = useSelector(
     (state: IAppState) => state.home.pspModuleData
   );
@@ -208,6 +216,27 @@ const DiabetesCenter = () => {
               />
             </View>
             {/* <FlatList
+    <TitleWithBackLayout
+      backTo={SCREENS.YOUR_HEALTH}
+      isGradient={true}
+      title="Diabetes Support Center"
+    >
+      <View style={{ flex: 1 }}>
+        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+          {showDemo !== 5 && <View style={styles.demoContainer}></View>}
+          <Text style={[styles.headingText, { marginVertical: 10 }]}>
+            YOUR DIABETES DIARY
+          </Text>
+          <View style={{ marginHorizontal: 15 }}>
+            <FlatList
+              data={healthTracker}
+              renderItem={(item) => <RenderHealthTrack item={item} />}
+              keyExtractor={(item) => item.index}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          {/* <FlatList
             style={{ alignSelf: 'center' }}
             data={healthTracker}
             renderItem={(item) => <RenderHealthTrack item={item} />}
@@ -229,18 +258,51 @@ const DiabetesCenter = () => {
               )}
               {showDemo === 1 && (
                 <>
-                  <View style={{ height: 110, width: 100 }} />
+                  <View style={{ height: 110, width: 100, marginLeft: '9%' }} />
                   <RenderHealthTrackDemo item={healthTrackerDemo[1]} />
                 </>
               )}
               {showDemo === 2 && (
                 <>
-                  <View style={{ height: 110, width: 100, marginLeft: 10 }} />
+                  <View
+                    style={{ height: 110, width: 100, marginLeft: '10%' }}
+                  />
                   <View style={{ height: 110, width: 100 }} />
                   <RenderHealthTrackDemo item={healthTrackerDemo[2]} />
                 </>
               )}
             </View>
+            <Text style={[styles.headingText, { marginVertical: 10 }]}>
+              DIABETES EDUCATION
+            </Text>
+            {showDemo === 3 && (
+              <View
+                style={{
+                  position: 'absolute',
+                  zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
+                  flexDirection: 'row',
+                  top: 50,
+                  left: 20,
+                }}
+              >
+                {showDemo === 0 && (
+                  <RenderHealthTrackDemo item={healthTrackerDemo[0]} />
+                )}
+                {showDemo === 1 && (
+                  <>
+                    <View style={{ height: 110, width: 100 }} />
+                    <RenderHealthTrackDemo item={healthTrackerDemo[1]} />
+                  </>
+                )}
+                {showDemo === 2 && (
+                  <>
+                    <View style={{ height: 110, width: 100, marginLeft: 10 }} />
+                    <View style={{ height: 110, width: 100 }} />
+                    <RenderHealthTrackDemo item={healthTrackerDemo[2]} />
+                  </>
+                )}
+              </View>
+            )}
             <Text style={[styles.headingText, { marginVertical: 10 }]}>
               DIABETES EDUCATION
             </Text>
@@ -382,6 +444,18 @@ const DiabetesCenter = () => {
           <TouchableWithoutFeedback onPress={() => openMessenger()}>
             <View style={styles.messengerView}>
               <Messenger />
+              <View style={styles.demoButtonView}>
+                <GradientButton
+                  text={showDemo === 4 ? 'Finish' : 'Next'}
+                  color={['#2C6CFC', '#2CBDFC']}
+                  style={styles.gradientButton2}
+                  onPress={() => {
+                    setShowDemo((demo) => demo + 1),
+                      showDemo == 2 && scrollToView(150);
+                    showDemo == 3 && scrollToView(700);
+                  }}
+                />
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </View>

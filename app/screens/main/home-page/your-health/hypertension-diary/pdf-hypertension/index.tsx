@@ -35,18 +35,17 @@ export default function PdfHypertensionSupportCenter({ route }) {
     try {
       setIsVisible(true);
       await dispatch(getReduxPspPdfHyperLink(item.item.code));
-      //   console.log('---------item-------------', item);
+      //
 
       setPdf(pspHyperPdfLinks.link);
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);
-      console.log(err);
     }
   };
 
   const [loading, setLoading] = useState(false);
-  console.log('------link-----', pspHyperPdfLinks);
+
   return (
     <TitleWithBackLayout isGradient={false} title={item.item.name}>
       <View style={{ height: '100%' }}>
@@ -57,18 +56,10 @@ export default function PdfHypertensionSupportCenter({ route }) {
             uri: pspHyperPdfLinks.link,
             cache: true,
           }}
-          onLoadComplete={(numberOfPages, filePath) => {
-            console.log(`Number of pages: ${numberOfPages}`);
-          }}
-          onPageChanged={(page, numberOfPages) => {
-            console.log(`Current page: ${page}`);
-          }}
-          onError={(error) => {
-            console.log(error);
-          }}
-          onPressLink={(uri) => {
-            console.log(`Link pressed: ${uri}`);
-          }}
+          onLoadComplete={(numberOfPages, filePath) => {}}
+          onPageChanged={(page, numberOfPages) => {}}
+          onError={(error) => {}}
+          onPressLink={(uri) => {}}
           trustAllCerts={false}
           style={styles.pdfView}
         />
