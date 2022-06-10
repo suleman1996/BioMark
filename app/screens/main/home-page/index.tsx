@@ -16,8 +16,7 @@ import {
   View,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { navigate } from 'services/nav-ref';
-import SCREENS from 'navigation/constants';
+
 import { useDispatch } from 'react-redux';
 import { userService } from 'services/user-service/user-service';
 import { getReduxBootstrap } from 'store/account/account-actions';
@@ -109,10 +108,7 @@ export default function Home() {
                   </Text>
                 </View>
                 <View style={{ width: '35%' }}>
-                  <SmallButton
-                    title="Book Now"
-                    onPress={() => navigate(SCREENS.SUPPORT_SYSTEM)}
-                  />
+                  <SmallButton title="Book Now" />
                 </View>
               </View>
             </ImageBackground>

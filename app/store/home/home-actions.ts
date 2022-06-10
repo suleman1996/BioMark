@@ -1,4 +1,5 @@
 import { userService } from 'services/user-service/user-service';
+import { HIDE_LOADER, SHOW_LOADER } from 'store/events/constants';
 
 import {
   HealthTrackerPayload,
@@ -167,7 +168,7 @@ export const getReduxHealthTracker =
     await userService
       .getHealthTracker()
       .then(async (res) => {
-        // console.log('res', res);
+        //
 
         await dispatch(addAllHealthTracker(res));
       })
@@ -181,7 +182,7 @@ export const getReduxDashboard =
     await userService
       .getDashboard()
       .then(async (res) => {
-        // console.log('res', res);
+        //
 
         await dispatch(addDashboard(res));
       })
@@ -194,8 +195,6 @@ export const getReduxMedicalDropDown =
     await userService
       .getMedicalDropDown()
       .then(async (res) => {
-        console.log('MM', res);
-
         await dispatch(addMedicalDropDown(res));
       })
       .catch((err) => {
@@ -207,8 +206,6 @@ export const getReduxMedicationList =
     await userService
       .getMedicationList()
       .then(async (res) => {
-        console.log('MEDICATION LIST', res);
-
         await dispatch(addMedicalList(res));
       })
       .catch((err) => {
@@ -220,8 +217,6 @@ export const getHealthTrackerRisks =
     await userService
       .getHealthRisks()
       .then(async (res) => {
-        console.log('MM', res);
-
         await dispatch(addHealthRisks(res));
       })
       .catch((err) => {
@@ -233,8 +228,6 @@ export const getReduxNewMedicationTracker =
     await userService
       .getNewMedicationTracker()
       .then(async (res) => {
-        console.log('new med tracker', res);
-
         await dispatch(addNewMedicationTracker(res));
       })
       .catch((err) => {
@@ -246,7 +239,6 @@ export const getReduxPspModules =
     await userService
       .getPspModules()
       .then(async (res) => {
-        console.log('psp redux', res);
         await dispatch(addPspModule(res));
       })
       .catch((err) => {
@@ -259,7 +251,6 @@ export const getReduxPspHyperModules =
     await userService
       .getPspHyperModules()
       .then(async (res) => {
-        console.log('psp hyper redux', res);
         await dispatch(addPspHyperModule(res));
       })
       .catch((err) => {
@@ -272,7 +263,6 @@ export const getReduxPspHypertensionHealthTrackerData =
     await userService
       .getHypertensionHealthTracker()
       .then(async (res) => {
-        console.log('hyper health tracker redux', res);
         await dispatch(showPspHypertensionHealthTracker(res));
       })
       .catch((err) => {
@@ -285,7 +275,6 @@ export const getReduxLatestResult =
     await userService
       .getLatestResult()
       .then(async (res) => {
-        console.log('latest show result', res);
         await dispatch(showLatestResult(res));
       })
       .catch((err) => {
@@ -298,7 +287,6 @@ export const getReduxPastResult =
     await userService
       .getPastResult()
       .then(async (res) => {
-        console.log('past show result', res);
         await dispatch(showPastResult(res));
       })
       .catch((err) => {
@@ -312,7 +300,6 @@ export const getReduxPspPdfLink =
     await userService
       .getPspPdfLink(link)
       .then(async (res) => {
-        console.log('psp redux', res);
         await dispatch(addPspPdfLink(res));
       })
       .catch((err) => {
@@ -325,7 +312,6 @@ export const getReduxPspPdfHyperLink =
     await userService
       .getPspHyperPdfLink(link)
       .then(async (res) => {
-        console.log('psp pdf hyper link redux', res);
         await dispatch(addPspPdfHyperLink(res));
       })
       .catch((err) => {
@@ -337,8 +323,6 @@ export const getReduxLabResultStatus =
     await userService
       .getLabResultStatus()
       .then(async (res) => {
-        console.log('lab status', res);
-
         await dispatch(addLabResultStatus(res));
       })
       .catch((err) => {
@@ -351,7 +335,7 @@ export const getReduxResultOverview =
     await userService
       .getResultOverView(140)
       .then(async (res) => {
-        // console.log('Result Overview', res);
+        //
 
         await dispatch(getResultOverView(res));
       })
@@ -361,11 +345,12 @@ export const getReduxResultOverview =
   };
 export const getReduxWeightProgress =
   (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    dispatch({ type: SHOW_LOADER });
     await userService
       .getWeightProgress(id)
       .then(async (res) => {
-        console.log('Result progress', res);
         await dispatch(getWeightProgress(res));
+        dispatch({ type: HIDE_LOADER });
       })
       .catch((err) => {
         logNow(err);
@@ -377,7 +362,7 @@ export const getReduxWeightLogs =
     await userService
       .getWeightLogs()
       .then(async (res) => {
-        // console.log('Result Overview', res);
+        //
 
         await dispatch(getWeightLogs(res));
       })
@@ -387,12 +372,12 @@ export const getReduxWeightLogs =
   };
 export const getReduxBloodPressurProgress =
   (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    dispatch({ type: SHOW_LOADER });
     await userService
       .getBloodPressureProgress(id)
       .then(async (res) => {
-        console.log('Result progress', res);
-
         await dispatch(getBloodPressureProgress(res));
+        dispatch({ type: HIDE_LOADER });
       })
       .catch((err) => {
         logNow(err);
@@ -403,7 +388,7 @@ export const getReduxBloodSugarLogs =
     await userService
       .getBloodSugarLogs()
       .then(async (res) => {
-        // console.log('Result Overview', res);
+        //
 
         await dispatch(getBloodSuarLogs(res));
       })
@@ -416,8 +401,6 @@ export const getReduxBloodSugarProgress =
     await userService
       .getBloodSugarProgress(id)
       .then(async (res) => {
-        console.log('BS progress', res);
-
         await dispatch(getBloodSugarProgress(res));
       })
       .catch((err) => {
@@ -429,7 +412,7 @@ export const getReduxHba1cLogs =
     await userService
       .getHba1cLogs()
       .then(async (res) => {
-        // console.log('Result Overview', res);
+        //
 
         await dispatch(getHba1cLogs(res));
       })
@@ -442,8 +425,6 @@ export const getReduxHba1cProgress =
     await userService
       .getHba1cProgress(id)
       .then(async (res) => {
-        console.log('HB progress', res);
-
         await dispatch(getHba1cProgress(res));
       })
       .catch((err) => {
@@ -455,8 +436,6 @@ export const getReduxMedicationProgress =
     await userService
       .getMedicationProgress(id)
       .then(async (res) => {
-        console.log('MED progress', res);
-
         await dispatch(getMedicationProgress(res));
       })
       .catch((err) => {
@@ -469,7 +448,7 @@ export const getReduxBloodPressureLogs =
     await userService
       .getBloodPressureLogs()
       .then(async (res) => {
-        // console.log('Result Overview', res);
+        //
 
         await dispatch(getBPLogs(res));
       })

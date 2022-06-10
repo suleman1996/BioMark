@@ -29,6 +29,7 @@ const EmpowerProgram = () => {
             text="Continue to Hypertension Center"
             color={['#2C6CFC', '#2CBDFC']}
             style={styles.gradientButton}
+            onPress={() => navigate(SCREENS.HYPERTENSION)}
           />
           <GradientButton
             text="Continue to Diabetes Center"

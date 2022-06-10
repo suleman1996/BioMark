@@ -49,9 +49,7 @@ const setIsOnboarding = async (value) => {
   try {
     const jsonObj = JSON.stringify(value);
     await AsyncStorage.setItem('onBoarding', jsonObj);
-  } catch (e) {
-    console.log('Error storing the onboarding token', e);
-  }
+  } catch (e) {}
 };
 
 const getOnboarding = async () => {
@@ -63,9 +61,7 @@ const getOnboarding = async () => {
     } else {
       return null;
     }
-  } catch (e) {
-    console.log('Error getting the onboarding token', e);
-  }
+  } catch (e) {}
 };
 
 async function removeOnboarding() {

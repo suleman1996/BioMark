@@ -76,7 +76,7 @@ export default function SignupVerification() {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+
       if (error.errMsg.status == '500') {
         showMessage({
           message: "User already exist's",

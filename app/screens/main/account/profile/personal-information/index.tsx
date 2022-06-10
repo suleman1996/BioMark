@@ -62,13 +62,13 @@ const PersonalInformationScreen = () => {
         ic_number,
         email
       );
-      console.log('success ', result.data);
+
       authContext?.setUserData(result.data);
       goBack();
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      console.log('Error ', error);
+
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',

@@ -61,3 +61,12 @@ export const monthLLLDayDD = (date: string) => {
 
   return newDate || '';
 };
+
+export const getCalendarDate = (today: any) =>
+  getMonth(today) +
+  ' ' +
+  getDay(today) +
+  ', ' +
+  getYear(today) +
+  ' ' +
+  getTime(today);
