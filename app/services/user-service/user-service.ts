@@ -1198,10 +1198,10 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
-const getResultOverView = (id) => {
+const getResultOverView = (id, filter) => {
   return new Promise<ResultResponse>((resolve, reject) => {
     client
-      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter=abnormal'}`)
+      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter='}${filter}`)
       .then(async (response) => {
         try {
           //
@@ -1218,6 +1218,7 @@ const getResultOverView = (id) => {
       });
   });
 };
+
 const getWeightProgress = (id) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
@@ -1393,6 +1394,10 @@ const getBloodPressureLogs = () => {
   });
 };
 
+const getMoreInfoResult = (id) => {
+  return client.get(`${API_URLS.GET_RESULT_MORE_INFO}${id}/summary`);
+};
+
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
   console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
@@ -1541,4 +1546,5 @@ export const userService = {
   updateHba1cTracker,
   deleteHba1cLog,
   barcodeCheck,
+  getMoreInfoResult,
 };

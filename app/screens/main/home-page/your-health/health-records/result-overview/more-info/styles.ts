@@ -52,5 +52,25 @@ const styles = (colors: any) =>
       backgroundColor: '#3D3D3D40',
       marginVertical: 5,
     },
+    definationView: {
+      padding: 15,
+      backgroundColor: colors.white,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+      borderRadius: 5,
+    },
+    definationText: {
+      fontFamily: fonts.regular,
+      fontSize: 14,
+      color: colors.heading,
+      textAlign: 'justify',
+    },
   });
 export default styles;
