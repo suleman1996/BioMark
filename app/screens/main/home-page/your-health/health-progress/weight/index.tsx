@@ -93,7 +93,11 @@ const Index = () => {
             </TouchableOpacity>
           </View>
           <LineGraph />
-          <Logs navigate={SCREENS.WEIGHT} logData={weightLogs?.log} />
+          <Logs
+            navigate={SCREENS.WEIGHT}
+            logData={weightLogs?.log}
+            showMore={'Show more'}
+          />
           <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton svg={<Person height={28} width={28} />} />

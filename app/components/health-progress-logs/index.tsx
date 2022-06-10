@@ -10,7 +10,7 @@ import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
 
-type Props = { logData: array; navigate: any };
+type Props = { logData: array; navigate: any; showMore: string };
 
 const Index = (props: Props) => {
   const { colors } = useTheme();
@@ -29,14 +29,20 @@ const Index = (props: Props) => {
           <Text
             style={{
               color: item?.color ? item?.color : colors.heading,
-              fontFamily: fonts.bold,
+              fontFamily: fonts.mulishExtraBold,
             }}
           >
             {item?.weight} {item?.unit}
           </Text>
         </View>
         <View style={{ width: '60%', alignItems: 'flex-end' }}>
-          <Text style={{ color: colors.blue, fontSize: 12 }}>
+          <Text
+            style={{
+              color: colors.blue,
+              fontFamily: fonts.mulishRegular,
+              fontSize: 12,
+            }}
+          >
             {moment(item?.date_entry).format('hh:mm a MMMM Do, YYYY')}
           </Text>
         </View>
@@ -52,6 +58,11 @@ const Index = (props: Props) => {
       </TouchableOpacity>
 
       {log && props?.logData?.map((item) => <RenderLog item={item} />)}
+      {log && (
+        <TouchableOpacity>
+          <Text style={styles.showMoreText}>{props?.showMore}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
