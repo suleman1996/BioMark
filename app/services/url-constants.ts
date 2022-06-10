@@ -81,6 +81,7 @@ const API_URLS = {
   GET_NEW_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/new',
   DELETE_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/',
   GET_BOOKINGS: '/api/v1/patient/covid/get_bookings',
+  COVID_HEALTH_DECLARATION: '/api/v1/patient/covid/health_declaration',
 
   // Psp Modules
   PSP_GET_MODULES: '/api/v1/patient/psp/modules',
