@@ -21,7 +21,7 @@ const RenderLastResult = ({ title, date, svg, onPress }) => {
       >
         {title}
       </Text>
-      <Text style={[styles.date]}>Receive on {date}</Text>
+      <Text style={[styles.date]}>{date}</Text>
     </TouchableOpacity>
   );
 };

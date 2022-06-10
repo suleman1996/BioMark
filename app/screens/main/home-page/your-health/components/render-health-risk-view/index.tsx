@@ -6,42 +6,22 @@ import makeStyles from './styles';
 const RenderHealthRiskView = ({
   Svg,
   color,
-  healthRisks,
-  hardCode,
-  References,
-  FootNotes,
-  Calculations,
-  id,
-  setSelectedHealthRisk,
-  setSelectedHardCode,
-  setSelectedRef,
-  setSelectedFootNotes,
-  setselectedCalculations,
-  setColorr,
-  setId,
   selectedHealthRisk,
+  onRiskPress,
+  name,
 }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
   return (
     <>
       <TouchableOpacity
-        onPress={() => {
-          setSelectedHealthRisk(healthRisks),
-            setSelectedHardCode(hardCode),
-            setSelectedRef(References);
-          setSelectedFootNotes(FootNotes);
-          setselectedCalculations(Calculations);
-          setColorr(color);
-          setId(id);
-        }}
+        onPress={onRiskPress}
         style={[
           styles.renderHealthRisk,
           {
             backgroundColor:
-              healthRisks?.name == selectedHealthRisk?.name
-                ? colors.lightGrey
-                : color,
+              name == selectedHealthRisk?.name ? colors.lightGrey : color,
           },
         ]}
       >

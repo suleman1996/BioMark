@@ -13,54 +13,25 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
+import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-
 import { Button } from 'components/button';
 import { ArrowBack } from 'assets/svgs';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 
-import {
-  Diabetess,
-  Heart_Disease,
-  Blood_Presure,
-  BMII,
-  Drinkings,
-  Heart_Disease_ref,
-  Heart_Disease_footnotes,
-  Diabetes_ref,
-  Diabetes_footnotes,
-  Blood_Pressure_ref,
-  BMI_ref,
-  Smoking_ref,
-  Drinking_ref,
-  Stress_ref,
-  Sleeping_ref,
-  heart_Diease_Calc,
-  diabetes_Calc,
-  Blood_Pressure_Calc,
-  BMI_Calc,
-  Smoking_Calc,
-  Drinking_Calc,
-  Stress_Calc,
-  Sleeping_Calc,
-} from '../health-risk/list-data';
+import { healthRiskData } from '../health-risk/list-data';
 
 import * as Yup from 'yup';
 import Styles from './styles';
 import SCREENS from 'navigation/constants/index';
 
-import Heart from '../../../../assets/svgs/heart';
 import Camera from '../../../../assets/svgs/report-scan';
 import ReportVerify from '../../../../assets/svgs/report-verify';
 import Diabetes from '../../../../assets/svgs/diabtes';
 import BP from '../../../../assets/svgs/bP';
-import BMI from '../../../../assets/svgs/Bmi';
-import Smoking from '../../../../assets/svgs/smoking';
-import Drinking from '../../../../assets/svgs/Drinking';
-import Stress from '../../../../assets/svgs/stress';
-import Sleep from '../../../../assets/svgs/sleep';
 import Health from '../../../../assets/svgs/Health';
 import Progress from '../../../../assets/svgs/Progress';
 import Processing from '../../../../assets/svgs/report-processing';
@@ -74,7 +45,12 @@ import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
 import { showMessage } from 'react-native-flash-message';
 import { InputWithLabel } from 'components/base';
-import { getReduxLabResultStatus } from 'store/home/home-actions';
+import {
+  getHealthTrackerRisks,
+  getReduxDashboard,
+  getReduxHealthTracker,
+  getReduxLabResultStatus,
+} from 'store/home/home-actions';
 import RenderHealthRiskView from './components/render-health-risk-view/index';
 import QrInputPopup from './components/qr-input-popup';
 import RenderRecordKeeping from './components/render-record-keeping';
@@ -84,59 +60,43 @@ import RenderCircle from './components/render-circle';
 import RenderHighlights from './components/render-high-lights';
 import RenderHealthRisk from './components/render-health-risk';
 
+import { healthRisksColor } from 'utils/functions/your-health';
+
 const Index = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
+
   const { colors } = useTheme();
-
   const styles = Styles(colors);
-  const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
-  // const { HEALTH_STRESS } = SCREENS;
 
-  const hell = useSelector((state: IAppState) => state.home.healthTracker);
+  const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
+
+  // Redux Store data
+  const healthTrackerFromStore = useSelector(
+    (state: IAppState) => state.home.healthTracker
+  );
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
-
-  const getMedNewTracker = useSelector(
-    (state: IAppState) => state.home.getNewMedicationTracker
-  );
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
+  console.log('getLabStatusData', getLabStatusData);
 
-  useEffect(() => {
-    setHealthRisksData(healthRisk);
-    handleHEalthTracker();
-    console.log('getLabStatusData', getLabStatusData);
+  // States
+  const [healthTracker, setHealthTracker] = React.useState([]);
+  const [stepIndicatorIcons] = React.useState([
+    <Camera />,
+    <Processing />,
+    <ReportView />,
+    <ReportVerify />,
+  ]);
 
-    console.log('getMedNewTracker', getMedNewTracker);
-    console.log('Health Trackeer api =======>', hell);
-    console.log('Dashboard api =======>', dashboard);
-    console.log('healthRisk api =======>', healthRisk);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  const [selectedRisk, setSelectedRisk] = useState('');
 
-  const handleHEalthTracker = () => {
-    healthTracker.length = 0;
-    let id = -1;
-    Object.entries(hell).map((item) => {
-      item[1]?.name &&
-        healthTracker.push({
-          id: id + 1,
-          title: item[1]?.name,
-          value: item[1]?.value,
-          subTitle: item[1]?.unit,
-          color:
-            item[1]?.card_status == 'none'
-              ? colors.blue
-              : item[1]?.card_status == 'high'
-              ? colors.dangerRed
-              : colors.lightYellow,
-        });
-    });
-  };
-
+  const [visible, setVisible] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [showApiError, setShowApiError] = React.useState('');
   const [highlights] = React.useState([
     {
       id: 0,
@@ -156,26 +116,42 @@ const Index = () => {
         'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
     },
   ]);
+  const pan = useRef(new Animated.ValueXY()).current;
 
-  const [healthTracker] = React.useState([]);
-  const [stepIndicatorIcons] = React.useState([
-    <Camera />,
-    <Processing />,
-    <ReportView />,
-    <ReportVerify />,
-  ]);
-  const [healthRisksData, setHealthRisksData] = React.useState([]);
+  useEffect(() => {
+    dispatch(getReduxDashboard());
+    dispatch(getReduxHealthTracker());
+    dispatch(getHealthTrackerRisks());
+    dispatch(getReduxLabResultStatus());
 
-  const [selectedHealthRisk, setSelectedHealthRisk] = React.useState();
-  const [selectedHardCode, setSelectedHardCode] = React.useState();
-  const [selectedRef, setSelectedRef] = React.useState();
-  const [selectedFootNotes, setSelectedFootNotes] = React.useState();
-  const [selectedCalculations, setselectedCalculations] = React.useState();
-  const [colorr, setColorr] = useState('');
-  const [idHealth, setId] = useState();
-  const [visible, setVisible] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [showApiError, setShowApiError] = React.useState('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
+  useEffect(() => {
+    handleHEalthTracker();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthTrackerFromStore]);
+
+  const handleHEalthTracker = () => {
+    const tempTracker = [];
+    let id = -1;
+    Object.entries(healthTrackerFromStore).map((item) => {
+      item[1]?.name &&
+        tempTracker.push({
+          id: id + 1,
+          title: item[1]?.name,
+          value: item[1]?.value,
+          subTitle: item[1]?.unit,
+          color:
+            item[1]?.card_status == 'none'
+              ? colors.blue
+              : item[1]?.card_status == 'high'
+              ? colors.dangerRed
+              : colors.lightYellow,
+        });
+    });
+    setHealthTracker([...tempTracker]);
+  };
 
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
   const handleCode = async ({ qrInput }: any) => {
@@ -224,25 +200,7 @@ const Index = () => {
     }
   };
 
-  const pan = useRef(new Animated.ValueXY()).current;
-
-  const healthRisksColor = (status) => {
-    if (status == 'Obese') {
-      return colors.Obese;
-    } else if (status == 'High') {
-      return colors.High;
-    } else if (status == 'none') {
-      return colors.none;
-    } else if (status == 'normal') {
-      return colors.normal;
-    } else if (status == 'high') {
-      return colors.high;
-    } else if (status == 'bad') {
-      return colors.bad;
-    } else {
-      return colors.none;
-    }
-  };
+  console.log('================>', dashboard);
 
   return (
     <View style={styles.container}>
@@ -263,163 +221,38 @@ const Index = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.headingText}>Your Health Risks</Text>
           <View style={styles.healthRiskView}>
-            <RenderHealthRiskView
-              id={0}
-              healthRisks={healthRisksData?.heart}
-              color={healthRisksColor(healthRisksData?.heart?.status)}
-              Svg={Heart}
-              hardCode={Heart_Disease}
-              References={Heart_Disease_ref}
-              FootNotes={Heart_Disease_footnotes}
-              Calculations={heart_Diease_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
-            <RenderHealthRiskView
-              id={1}
-              color={healthRisksColor(healthRisksData?.diabetes?.status)}
-              healthRisks={healthRisksData?.diabetes}
-              Svg={Diabetes}
-              hardCode={Diabetess}
-              References={Diabetes_ref}
-              FootNotes={Diabetes_footnotes}
-              Calculations={diabetes_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
-            <RenderHealthRiskView
-              id={2}
-              color={healthRisksColor(healthRisksData?.bp?.status)}
-              healthRisks={healthRisksData?.bp}
-              Svg={BP}
-              hardCode={Blood_Presure}
-              References={Blood_Pressure_ref}
-              Calculations={Blood_Pressure_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
-            <RenderHealthRiskView
-              id={3}
-              color={healthRisksColor(healthRisksData?.bmi?.status)}
-              healthRisks={healthRisksData?.bmi}
-              Svg={BMI}
-              hardCode={BMII}
-              References={BMI_ref}
-              Calculations={BMI_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
-            <RenderHealthRiskView
-              id={4}
-              color={healthRisksColor(healthRisksData?.smoking?.status)}
-              healthRisks={healthRisksData?.smoking}
-              Svg={Smoking}
-              References={Smoking_ref}
-              Calculations={Smoking_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
-            <RenderHealthRiskView
-              id={5}
-              color={healthRisksColor(healthRisksData?.drinking?.status)}
-              healthRisks={healthRisksData?.drinking}
-              Svg={Drinking}
-              hardCode={Drinkings}
-              References={Drinking_ref}
-              Calculations={Drinking_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
-            <RenderHealthRiskView
-              id={6}
-              color={healthRisksColor(healthRisksData?.stress?.status)}
-              healthRisks={healthRisksData?.stress}
-              Svg={Stress}
-              References={Stress_ref}
-              Calculations={Stress_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
-            <RenderHealthRiskView
-              id={7}
-              color={healthRisksColor(healthRisksData?.sleeping?.status)}
-              healthRisks={healthRisksData?.sleeping}
-              Svg={Sleep}
-              References={Sleeping_ref}
-              Calculations={Sleeping_Calc}
-              setSelectedHealthRisk={setSelectedHealthRisk}
-              setSelectedHardCode={setSelectedHardCode}
-              setSelectedRef={setSelectedRef}
-              setSelectedFootNotes={setSelectedFootNotes}
-              setselectedCalculations={setselectedCalculations}
-              setColorr={setColorr}
-              setId={setId}
-              selectedHealthRisk={selectedHealthRisk}
-            />
+            {Object.entries(healthRisk).map(([key, value]: any) => (
+              <RenderHealthRiskView
+                key={key}
+                name={value?.name}
+                onRiskPress={() => setSelectedRisk(key)}
+                color={healthRisksColor(colors, value?.status)}
+                Svg={healthRiskData[key].icon}
+              />
+            ))}
           </View>
-          {selectedHealthRisk && (
+          {selectedRisk ? (
             <RenderHealthRisk
               onPress={() =>
                 navigate(SCREENS.HEALTH_RISK, {
-                  item: selectedHealthRisk,
-                  cardData: selectedHardCode,
-                  refData: selectedRef,
-                  footNotesData: selectedFootNotes,
-                  calc: selectedCalculations,
-                  clr: colorr,
-                  i_d: idHealth,
+                  item: healthRisk[selectedRisk],
+                  cardData: healthRiskData[selectedRisk].disease,
+                  refData: healthRiskData[selectedRisk].refrence,
+                  footNotesData: healthRiskData[selectedRisk].footnotes,
+                  calc: healthRiskData[selectedRisk].calculations,
+                  clr: healthRisksColor(
+                    colors,
+                    healthRisk[selectedRisk]?.status
+                  ),
+                  SVG: healthRiskData[selectedRisk].icon,
                 })
               }
-              name={selectedHealthRisk?.name}
-              description={selectedHealthRisk?.description}
-              card_status={selectedHealthRisk?.card_status}
-              id={idHealth}
-              colorr={colorr}
+              healthRisk={healthRisk[selectedRisk]}
+              Svg={healthRiskData[selectedRisk].icon}
+              color={healthRisksColor(colors, healthRisk[selectedRisk]?.status)}
               pan={pan}
             />
-          )}
+          ) : null}
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Health Trackers
           </Text>
@@ -436,24 +269,54 @@ const Index = () => {
             Record Keeping
           </Text>
 
-          <RenderRecordKeeping
-            svg={<Diabetes />}
-            title="Enter Diabetes Support Center"
-            id="4y6yb5y5yb56b56y"
-            onPress={() => navigate(SCREENS.DIABETES_CENTER)}
-          />
-          <RenderRecordKeeping
-            svg={<BP />}
-            title="Enter Hypertension Support Center"
-            id="4y6yb5y5yb56b56y"
-            onPress={() => navigation.navigate(HYPERTENSION)}
-          />
+          {dashboard?.psp_user &&
+            [2, 4].includes(dashboard?.program_detail?.program_id) && (
+              <RenderRecordKeeping
+                svg={<Diabetes />}
+                title="Enter Diabetes Support Center"
+                id="4y6yb5y5yb56b56y"
+                onPress={() => navigate(SCREENS.DIABETES_CENTER)}
+              />
+            )}
+          {dashboard?.psp_user &&
+            [3, 4].includes(dashboard?.program_detail?.program_id) && (
+              <RenderRecordKeeping
+                svg={<BP />}
+                title="Enter Hypertension Support Center"
+                id="4y6yb5y5yb56b56y"
+                onPress={() => navigation.navigate(HYPERTENSION)}
+              />
+            )}
 
-          <RenderLastResult
-            title="Your Last Result"
-            date={'Dec 12 2022'}
-            svg={<BP fill={colors.blue} />}
-          />
+          {dashboard?.latest_result && (
+            <RenderLastResult
+              title="Your Last Result"
+              date={dashboard?.latest_result?.received}
+              onPress={() =>
+                navigate(SCREENS.RESULT_OVERVIEW, {
+                  lab_id: dashboard?.latest_result?.lab_id,
+                })
+              }
+              svg={
+                <MaterialCommunityIcons
+                  name="file-document"
+                  size={25}
+                  color={colors.primary}
+                />
+              }
+            />
+          )}
+
+          {!dashboard?.complete_profile && (
+            <RenderLastResult
+              title="Complete Your Profile"
+              date={'Fill in your profile to know your health risks'}
+              onPress={() => navigate(SCREENS.ACCOUNT)}
+              svg={
+                <MaterialIcons name="person" size={25} color={colors.primary} />
+              }
+            />
+          )}
 
           <View style={styles.circleView}>
             <RenderCircle
@@ -467,19 +330,21 @@ const Index = () => {
               onPress={() => navigation.navigate(HEALTH_PROGRESS)}
             />
           </View>
-          <FlatList
-            data={getLabStatusData}
-            renderItem={(item) => (
-              <RendreLabResult
-                item={item.item}
-                setVisible={setVisible}
-                stepIndicatorIcons={stepIndicatorIcons}
-              />
-            )}
-            keyExtractor={(item) => item.id}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 10 }}
-          />
+          {getLabStatusData ? (
+            <FlatList
+              data={getLabStatusData}
+              renderItem={(item) => (
+                <RendreLabResult
+                  item={item.item}
+                  setVisible={setVisible}
+                  stepIndicatorIcons={stepIndicatorIcons}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingBottom: 10 }}
+            />
+          ) : null}
 
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
             Article Highlights

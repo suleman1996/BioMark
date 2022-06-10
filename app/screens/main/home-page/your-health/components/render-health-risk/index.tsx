@@ -3,25 +3,16 @@ import {
   Animated,
   TouchableWithoutFeedback,
   PanResponder,
+  Text,
 } from 'react-native';
 import React from 'react';
-import { Text, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
-import RenderSvg from 'components/render-svg';
 
-const RenderHealthRisk = ({
-  description,
-  name,
-  card_status,
-  onPress,
-  id,
-  colorr,
-  pan,
-}) => {
-  console.log('pan', pan.getLayout());
-
+const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderMove: Animated.event([
@@ -38,6 +29,9 @@ const RenderHealthRisk = ({
       ).start();
     },
   });
+
+  console.log(color);
+
   return (
     <Animated.View
       {...panResponder.panHandlers}
@@ -50,21 +44,29 @@ const RenderHealthRisk = ({
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <RenderSvg color={colorr} id={id} />
+          <Svg fill={color} />
 
-          <Text style={[styles.healthName]}>{name}</Text>
+          {healthRisk?.name ? (
+            <Text style={[styles.healthName]}>{healthRisk?.name}</Text>
+          ) : null}
         </View>
-        <Text style={styles.healthCardStatusName}>{card_status}</Text>
-      </View>
-      <Text style={styles.descriptionHealthRisk}>
-        {description}
-        <TouchableWithoutFeedback onPress={onPress}>
-          <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
-            Tap here{' '}
+        {healthRisk?.card_status ? (
+          <Text style={styles.healthCardStatusName}>
+            {healthRisk?.card_status}
           </Text>
-        </TouchableWithoutFeedback>
-        to complete your information
-      </Text>
+        ) : null}
+      </View>
+      {healthRisk?.description ? (
+        <Text style={styles.descriptionHealthRisk}>
+          {healthRisk?.description}
+          <TouchableWithoutFeedback onPress={onPress}>
+            <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
+              Tap here{' '}
+            </Text>
+          </TouchableWithoutFeedback>
+          to complete your information
+        </Text>
+      ) : null}
     </Animated.View>
   );
 };
