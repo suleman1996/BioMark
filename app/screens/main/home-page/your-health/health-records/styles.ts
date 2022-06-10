@@ -73,7 +73,7 @@ const styles = (colors: any) =>
       marginBottom: 0,
     },
     filterResultMainView: {
-      backgroundColor: 'red',
+      backgroundColor: 'grey',
       paddingTop: 10,
       marginTop: 20,
       borderRadius: 10,

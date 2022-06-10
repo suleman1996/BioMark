@@ -61,7 +61,8 @@ const DiabetesCenter = () => {
     handleHEalthTracker();
     console.log('Health diabetes api =======>', hell);
     console.log('dashborad api result', dashboard);
-    setBarCodeData(dashboard.program_detail.barcode);
+    setBarCodeData(dashboard?.program_detail?.barcode);
+    // alert(JSON.stringify(dashboard));
     // alert(JSON.stringify(dashboard.program_detail.barcode));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -169,6 +170,7 @@ const DiabetesCenter = () => {
       const response = await userService.withdraw({
         module: {
           barcode: barCodeData,
+          // bm_program_id: 3,
         },
       });
       console.log(response.data, 'withdrawwwwwwwwwwwwwwwwwwwwwww');

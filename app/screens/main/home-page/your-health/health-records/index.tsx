@@ -34,10 +34,11 @@ const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
   const [pastResults, setPastResults] = useState([]);
-  const [filterData, setFilterData] = useState([]);
+  // const [filterData, setFilterData] = useState([]);
   const [checked, setChecked] = React.useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [page, setPage] = useState(1);
 
   const { colors } = useTheme();
 
@@ -61,15 +62,16 @@ const HealthRecord = () => {
     // alert(JSON.stringify(newResult.result.summary));
     setLatestResult(newResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page]);
 
   const onConfirm = async () => {
     const result = await userService.getFilterResult({
+      page: page,
       type: checked,
       start: startDate,
       end: endDate,
     });
-    setFilterData(result.data);
+    setPastResults(result.data);
     console.log('resultttt-----------------------dataaaa', result.data);
   };
 
@@ -86,41 +88,6 @@ const HealthRecord = () => {
     <TouchableOpacity
       onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
       style={styles.pastResultMainView}
-    >
-      <View style={styles.view}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={{ height: 30, width: 30 }}
-        />
-        <Text style={styles.title}>{item.name}</Text>
-      </View>
-      <Text style={styles.text3}>{item.received}</Text>
-      <Text style={styles.text3}>REF: {item.ref_no}</Text>
-
-      <View style={styles.pastResultView}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text6}>{item.result.summary}</Text>
-      </View>
-
-      <View style={styles.pastResultView2}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text7}>{item.result.doctor}</Text>
-      </View>
-
-      <View style={styles.bottomView}></View>
-    </TouchableOpacity>
-  );
-
-  const renderFilterItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
-      style={styles.filterResultMainView}
     >
       <View style={styles.view}>
         <Image
@@ -204,6 +171,15 @@ const HealthRecord = () => {
             </TouchableOpacity>
           </View>
 
+          <Text
+            style={{
+              color: 'red',
+              textAlign: 'center',
+            }}
+          >
+            {pastResults.message == 'No results' && 'No Result Found'}
+          </Text>
+
           <HealthRecordFilter
             visible={modalVisible}
             title="Filter Results"
@@ -231,7 +207,11 @@ const HealthRecord = () => {
             handleConfirm={handleConfirm}
             handleConfirm2={handleConfirm2}
             onPressClearFilter={() => {
-              setChecked(''), setStartDate(''), setEndDate('');
+              setChecked(''),
+                setStartDate(''),
+                setEndDate(''),
+                setModalVisible(!modalVisible);
+              setPastResults(pastResult);
             }}
             onConifrm={() => onConfirm()}
           />
@@ -242,17 +222,11 @@ const HealthRecord = () => {
             keyExtractor={(item) => item.id}
           />
 
-          <FlatList
-            data={filterData}
-            renderItem={renderFilterItem}
-            keyExtractor={(item) => item.id}
-          />
-
           <TouchableOpacity style={styles.uploadResult}>
             <GoogleFitButton
               disabled={false}
               title="Load more data"
-              onPress={() => console.log('pressed')}
+              onPress={() => setPage((prev) => prev + 1)}
             />
           </TouchableOpacity>
         </ScrollView>

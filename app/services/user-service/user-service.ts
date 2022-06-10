@@ -454,10 +454,10 @@ const getLifeStyle = () => {
   return client.get(API_URLS.GET_LIFE_STYLE);
 };
 
-const getFilterResult = ({ type, start, end }) => {
+const getFilterResult = ({ type, start, end, page }) => {
   return client.get(API_URLS.GET_FILTER_RESULT, {
     params: {
-      page: 1,
+      page,
       type,
       start,
       end,
