@@ -2,6 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { showMessage } from 'react-native-flash-message';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { IAppState } from 'store/IAppState';
+import { getReduxDashboard } from 'store/home/home-actions';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
@@ -9,26 +14,22 @@ import {
   DateTimePickerModal,
   DropdownMenu,
 } from 'components/base';
-import { IAppState } from 'store/IAppState';
+import { ActivityIndicator, InputWithUnits } from 'components';
+import { AccountDeActivateModal } from 'components/ui';
+
+import { userService } from 'services/user-service/user-service';
+
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { userService } from 'services/user-service/user-service';
-// import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
-import { showMessage } from 'react-native-flash-message';
-
-import makeStyles from './styles';
-import { ActivityIndicator, InputWithUnits } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
 import { getCalendarDate } from 'utils/functions/date-format';
-import SCREENS from 'navigation/constants/index';
-import { navigate } from 'services/nav-ref';
 import {
   bloodSugarValidator,
   mgMmolConversion,
 } from 'utils/functions/measurments';
-import { AccountDeActivateModal } from 'components/ui';
-import { getReduxDashboard } from 'store/home/home-actions';
+
+import makeStyles from './styles';
 
 const BloodSugar = ({ route }) => {
   const SELECTED_BS_ID = route?.params?.logId;
@@ -44,8 +45,6 @@ const BloodSugar = ({ route }) => {
     drop: state.home.medicalDropDown,
     hasBloodSugarTarget: state.home?.dashboard?.has_blood_sugar_target,
   }));
-
-  console.log({ hasBloodSugarTarget });
 
   const [bloodSugarTracker, setBloodSugarTracker] = useState({
     data_value: '0.0',
