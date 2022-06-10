@@ -79,7 +79,9 @@ const Index = () => {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity onPress={() => navigation.navigate(TARGETS)}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(TARGETS, { key: 1 })}
+            >
               <Target size={24} name="target" color={colors.blue} />
             </TouchableOpacity>
           </View>

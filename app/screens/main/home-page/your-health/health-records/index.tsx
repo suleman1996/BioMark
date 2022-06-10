@@ -84,7 +84,9 @@ const HealthRecord = () => {
 
   const renderItem2 = ({ item }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
+      onPress={() =>
+        navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item })
+      }
       style={styles.pastResultMainView}
     >
       <View style={styles.view}>

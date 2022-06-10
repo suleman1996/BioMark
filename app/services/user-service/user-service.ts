@@ -1,5 +1,6 @@
 import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
+
 import {
   BootstrapData,
   GeoLocationData,
@@ -20,6 +21,12 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  NewTarget,
+  CreateTargetResponse,
+  CreateTargetRequest,
+  LatestTargetResponse,
+  GetHba1cTargetsResponseData,
+  GetBloodSugarTargetsResponseData,
   HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
@@ -30,6 +37,7 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  SetDefaultTargetResponse,
   WeightProgressEntryRequest,
   Hba1CProgressEntryRequest,
 } from 'types/api';
@@ -181,6 +189,7 @@ function registerUser(username: string, values, gender: any, date: string) {
       });
   });
 }
+
 function createProfile(values, gender: any, date: string) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
     client
@@ -210,6 +219,7 @@ function createProfile(values, gender: any, date: string) {
       });
   });
 }
+
 function getUserContacts() {
   return new Promise<UserContacts>((resolve, reject) => {
     client
@@ -253,6 +263,7 @@ function saveUserContacts(email_address: string) {
       });
   });
 }
+
 function autoLogout() {
   return new Promise<AutoLogoutRes>((resolve, reject) => {
     client
@@ -272,6 +283,7 @@ function autoLogout() {
       });
   });
 }
+
 function saveAutoLogout(auto_logout: boolean) {
   return new Promise<AutoLogoutRes>((resolve, reject) => {
     client
@@ -295,6 +307,7 @@ function saveAutoLogout(auto_logout: boolean) {
       });
   });
 }
+
 async function logout() {
   let uniqueId = DeviceInfo.getUniqueId();
 
@@ -371,6 +384,7 @@ const Vaccination = ({ medical_history }: Props) => {
     // },
   });
 };
+
 type Props = {
   conditions: any;
   medical: any;
@@ -381,6 +395,7 @@ type Props = {
   scanner: any;
   lab_upload: any;
 };
+
 const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
     medical_history: {
@@ -587,7 +602,7 @@ const createBsTracker = (medical: WeightProgressEntryRequest) => {
 const updateBsTracker = (medical: WeightProgressEntryRequest, id: string) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
-      .put(`${API_URLS.CREATE_HBA1C}/${id}`, {
+      .put(`${API_URLS.CREATE_BLOOD_SUGAR}/${id}`, {
         blood_sugar: medical,
       })
       .then(async ({ data }) => {
@@ -607,15 +622,17 @@ const updateBsTracker = (medical: WeightProgressEntryRequest, id: string) => {
 };
 
 const deleteBsLog = (bp_log_id: any) => {
+  console.log('bp_log_id', bp_log_id);
+
   return new Promise<any>((resolve, reject) => {
     client
-      .delete(`${API_URLS.CREATE_HBA1C}/${bp_log_id}`)
+      .delete(`${API_URLS.CREATE_BLOOD_SUGAR}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
+          console.log('deleteBsLog', data);
           resolve({ ...data });
         } catch (e) {
-          logNow('err.', e);
+          logNow('err deleteBsLog.', e);
           reject(e);
         }
       })
@@ -1225,10 +1242,111 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
-const getResultOverView = (id) => {
+//Targets API START
+
+const getNewTarget = () => {
+  return new Promise<NewTarget>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_NEW_TARGET)
+      .then(({ data }: { data: NewTarget }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      })
+  );
+};
+
+const createNewTarget = (target: CreateTargetRequest) => {
+  return new Promise<string>((resolve, reject) =>
+    client
+      .post(API_URLS.CREATE_NEW_TARGET, { target })
+      .then(({ data }: { data: CreateTargetResponse }) => {
+        resolve(data.message);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getLatestTargets = () => {
+  return new Promise<LatestTargetResponse>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_LATEST_TARGETS)
+      .then(({ data }: { data: LatestTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getBloodSugarTargets = () => {
+  return new Promise<GetBloodSugarTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_BLOOD_SUGAR_TARGETS)
+      .then(({ data }: { data: GetBloodSugarTargetsResponseData[] }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getHBA1CTargets = () => {
+  return new Promise<GetHba1cTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_HBA1C_TARGETS)
+      .then(({ data }: { data: GetHba1cTargetsResponseData[] }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultBloodSugarTarget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .post(API_URLS.SET_DEFAULT_BLOOD_SUGAR_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultHba1carget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .post(API_URLS.SET_DEFAULT_HBA1C_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+// Targets API END
+const getResultOverView = (id, filter) => {
   return new Promise<ResultResponse>((resolve, reject) => {
     client
-      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter=abnormal'}`)
+      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter='}${filter}`)
       .then(async (response) => {
         try {
           //
@@ -1245,6 +1363,7 @@ const getResultOverView = (id) => {
       });
   });
 };
+
 const getWeightProgress = (id) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
@@ -1263,6 +1382,7 @@ const getWeightProgress = (id) => {
       });
   });
 };
+
 const getBloodPressureProgress = (id) => {
   return new Promise<BloodPressureProgressEntryPayload>((resolve, reject) => {
     client
@@ -1282,6 +1402,7 @@ const getBloodPressureProgress = (id) => {
       });
   });
 };
+
 const getWeightLogs = () => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
@@ -1302,6 +1423,7 @@ const getWeightLogs = () => {
       });
   });
 };
+
 const getBloodSugarProgress = (id) => {
   return new Promise<BloodSugarProgressEntryPayload>((resolve, reject) => {
     client
@@ -1418,6 +1540,10 @@ const getBloodPressureLogs = () => {
         reject(err);
       });
   });
+};
+
+const getMoreInfoResult = (id) => {
+  return client.get(`${API_URLS.GET_RESULT_MORE_INFO}${id}/summary`);
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
@@ -1545,6 +1671,11 @@ export const userService = {
   getResultOverView,
   getLatestResult,
   getPastResult,
+  getNewTarget,
+  createNewTarget,
+  getLatestTargets,
+  getBloodSugarTargets,
+  getHBA1CTargets,
   getHypertensionHealthTracker,
   getPspHyperModules,
   getPspHyperPdfLink,
@@ -1559,6 +1690,8 @@ export const userService = {
   getBloodPressureLogs,
   withdraw,
   getFilterResult,
+  setDefaultBloodSugarTarget,
+  setDefaultHba1carget,
   deleteWeightLog,
   createBpTracker,
   updateBpTracker,
@@ -1571,4 +1704,5 @@ export const userService = {
   deleteHba1cLog,
   barcodeCheck,
   uploadResult,
+  getMoreInfoResult,
 };

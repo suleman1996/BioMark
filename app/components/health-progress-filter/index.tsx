@@ -17,6 +17,7 @@ const Index = ({
   selectedfilterOption2,
   setSelectedfilterOption1,
   setSelectedfilterOption2,
+  onApplyPress,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
@@ -30,11 +31,16 @@ const Index = ({
         style={[
           styles.radio,
           {
+            marginLeft: 5,
             borderWidth: selectedfilterOption.title == item.title ? 3.5 : 2,
             borderColor:
               selectedfilterOption.title == item.title
                 ? colors.heading
                 : colors.lightGrey,
+            backgroundColor:
+              selectedfilterOption.title == item.title
+                ? colors.shineBlue
+                : colors.white,
           },
         ]}
       />
@@ -75,7 +81,7 @@ const Index = ({
           text="Apply"
           color={['#2C6CFC', '#2CBDFC']}
           style={{ marginBottom: 5, marginTop: 30 }}
-          onPress={() => console.log('xnxnxnxnxnx')}
+          onPress={onApplyPress}
         />
       </View>
     </View>
