@@ -4,6 +4,9 @@ import fonts from 'assets/fonts';
 
 const styles = (colors: any) =>
   StyleSheet.create({
+    container: {
+      flex: 1,
+    },
     innerContainer: {
       marginHorizontal: 30,
     },
@@ -28,9 +31,9 @@ const styles = (colors: any) =>
       marginTop: 20,
     },
     buttonContainer: {
-      width: '100%',
-      marginTop: 30,
-      marginBottom: 20,
+      width: '80%',
+      marginVertical: 30,
+      alignSelf: 'center',
     },
   });
 export default styles;

@@ -40,6 +40,7 @@ import {
   SetDefaultTargetResponse,
   WeightProgressEntryRequest,
   Hba1CProgressEntryRequest,
+  MedicationTrackerRequest,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -715,11 +716,12 @@ const createHba1c = ({ hba1c }: Props) => {
     hba1c,
   });
 };
-const createMedication = ({ medication }: Props) => {
-  return client.post(API_URLS.CREATE_MEDICATION, {
+
+const createMedication = ({ medication }: MedicationTrackerRequest) =>
+  client.post(API_URLS.CREATE_MEDICATION, {
     medication,
   });
-};
+
 const labStatusVerify = ({ result }: Props) => {
   return client.post(API_URLS.LAB_STATUS_VERYFY, {
     result,
@@ -1084,8 +1086,8 @@ function getLabResultStatus() {
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
-const deleteMedicationTracker = (id: number) => {
-  return client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
+const deleteMedicationTracker = async (id: number) => {
+  return await client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
 };
 
 const getNewMedicationFormData = () => {
