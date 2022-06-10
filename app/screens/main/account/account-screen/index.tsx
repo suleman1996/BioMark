@@ -36,7 +36,6 @@ const AccountScreen = () => {
     userService
       .saveAutoLogout(!autoLogoutCheck)
       .then(async (res) => {
-        console.log('resSave', res);
         setAutoLogoutCheck(res?.auto_logout);
       })
       .catch((e) => {
@@ -49,7 +48,6 @@ const AccountScreen = () => {
     userService
       .autoLogout()
       .then(async (res) => {
-        console.log('res', res);
         setAutoLogoutCheck(res?.auto_logout);
       })
       .catch((e) => {

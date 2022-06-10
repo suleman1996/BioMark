@@ -28,7 +28,7 @@ const Weight = ({ route }: any) => {
   const SELECTED_WEIGHT_ID = route?.params?.logId;
 
   const [weightTracker, setWeightTracker] = useState({
-    weight: '0.0',
+    weight: '',
     is_metric: true,
     date_entry: '',
   });
@@ -52,12 +52,12 @@ const Weight = ({ route }: any) => {
     if (!weightTracker.is_metric) {
       setWeightTracker((prev: any) => ({
         ...prev,
-        weight: Number((prev.weight * 2.205).toFixed(1)),
+        weight: (Number(prev.weight) * 2.205).toFixed(1).toString(),
       }));
     } else {
       setWeightTracker((prev: any) => ({
         ...prev,
-        weight: Number((prev.weight * (1 / 2.205)).toFixed(1)),
+        weight: ((Number(prev.weight) * 1) / 2.205).toFixed(1).toString(),
       }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,6 +128,8 @@ const Weight = ({ route }: any) => {
       console.error(err);
     }
   };
+
+  console.log(weightTracker.weight.toString());
 
   return (
     <TitleWithBackWhiteBgLayout

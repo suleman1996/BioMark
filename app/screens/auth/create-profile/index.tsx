@@ -71,7 +71,6 @@ export default function CreateProfile() {
   async function getHasprofileAsyncStorage() {
     const data = await getAuthAsyncStorage();
     dispatch3(loggedIn(data));
-    console.log('data', data);
   }
 
   //functions

@@ -60,7 +60,6 @@ const AddDependantScreen = () => {
   );
 
   useEffect(() => {
-    console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
       let countryCodeParse = geoLocation.dial_code.replace('+', '');
@@ -71,11 +70,9 @@ const AddDependantScreen = () => {
   const userProfile = async () => {
     try {
       const result = await userService.getUserProfile();
-      console.log('Here is the user profile ', result.data);
+
       authContext.setUserData(result.data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const AddDependentSchema = Yup.object({

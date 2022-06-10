@@ -72,6 +72,7 @@ const API_URLS = {
   // Health Record
 
   GET_RESULT_OVERVIEW: '/api/v1/patient/results/',
+  GET_RESULT_MORE_INFO: '/api/v1/patient/results/',
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',

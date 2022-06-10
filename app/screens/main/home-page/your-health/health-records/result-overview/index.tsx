@@ -11,6 +11,7 @@ import { useTheme } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxResultOverview } from 'store/home/home-actions';
+import { useRoute } from '@react-navigation/native';
 
 import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -18,9 +19,11 @@ import SearchMeuBar from 'components/search-menu-bar/index';
 import { Button } from 'components/button';
 import Pdf from 'assets/svgs/pdf';
 import RenderResults from './result-card';
+import HealthProgressFilter from 'components/health-progress-filter/index';
 
 const Index = () => {
   const { colors } = useTheme();
+  const route = useRoute();
   const styles = Styles(colors);
   const dispatch = useDispatch();
   const resultOverView = useSelector(
@@ -30,34 +33,19 @@ const Index = () => {
   const [showSummaryummary, setSummary] = React.useState(true);
   const [lapid, setLapid] = React.useState(true);
   const [isInfo, setIsInfo] = React.useState(false);
-  const [lipidData] = React.useState([
-    {
-      id: 0,
-      title: 'Total Cholestrol',
-      subTitle: '4 mmol/L',
-      summary:
-        'Unlike the calculated LDL, this Direct LDL actually meassures the level of your LDL or bad cholestrol. This test is used to access your risk of cardiovascular disease and monitor your LDL level.',
-    },
-    {
-      id: 1,
-      title: 'Total Cholestrol',
-      subTitle: '4 mmol/L',
-      summary:
-        'Unlike the calculated LDL, this Direct LDL actually meassures the level of your LDL or bad cholestrol. This test is used to access your risk of cardiovascular disease and monitor your LDL level.',
-      status: 'danger',
-    },
-    {
-      id: 3,
-      title: 'Total Cholestrol',
-      subTitle: '4 mmol/L',
-      summary:
-        'Unlike the calculated LDL, this Direct LDL actually meassures the level of your LDL or bad cholestrol. This test is used to access your risk of cardiovascular disease and monitor your LDL level.',
-    },
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [filterOption1] = React.useState([
+    { id: 0, title: 'All' },
+    { id: 1, title: 'Abnormal' },
   ]);
+  const [selectedfilterOption1, setSelectedfilterOption1] = React.useState({
+    id: 0,
+    title: 'All',
+  });
 
   React.useEffect(() => {
-    dispatch(getReduxResultOverview());
-    console.log('Result OverView Redux ', resultOverView);
+    dispatch(getReduxResultOverview(route?.params?.result?.lab_id));
+    // console.log('Result OverView Redux ', resultOverView);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -135,9 +123,28 @@ const Index = () => {
     );
   };
 
+  const applyFilter = () => {
+    dispatch(
+      getReduxResultOverview(
+        route?.params?.result?.lab_id,
+        selectedfilterOption1?.title
+      )
+    );
+    setIsVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <ResultsDetails visible={isInfo} />
+      <HealthProgressFilter
+        option1="Filter Type"
+        visible={isVisible}
+        setIsVisible={setIsVisible}
+        filterOption1={filterOption1}
+        selectedfilterOption1={selectedfilterOption1}
+        setSelectedfilterOption1={setSelectedfilterOption1}
+        onApplyPress={() => applyFilter()}
+      />
       <TitleWithBackLayout
         shadow={colors.blue}
         title="Result Overview"
@@ -150,25 +157,31 @@ const Index = () => {
         </View>
         <View style={[styles.container, { paddingHorizontal: 10 }]}>
           <View style={{ marginTop: -18 }}>
-            <SearchMeuBar placeHolder="Search Biomark..." />
+            <SearchMeuBar
+              onPress={() => setIsVisible(!isVisible)}
+              placeHolder="Search Biomark..."
+            />
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             <RenderSummary />
             <Button svg={<Pdf fill={colors.white} />} title="See Report" />
-            <RenderTitle
-              title="LIPID STUDIES"
-              state={lapid}
-              setState={setLapid}
-            />
-            {lapid && (
+            {resultOverView?.panel?.map((result) => (
               <>
                 <FlatList
-                  data={lipidData}
+                  ListHeaderComponent={
+                    <RenderTitle
+                      title={result?.name}
+                      state={lapid}
+                      setState={setLapid}
+                    />
+                  }
+                  data={result?.biomarker}
                   keyExtractor={(item) => item.id}
                   renderItem={({ item }) => <RenderResults item={item} />}
                 />
+                <View style={{ height: 20 }} />
               </>
-            )}
+            ))}
           </ScrollView>
         </View>
       </TitleWithBackLayout>

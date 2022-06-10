@@ -14,6 +14,7 @@ import { bloodPressureValidator } from 'utils/functions/measurments';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
 import { showMessage } from 'react-native-flash-message';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import makeStyles from './styles';
 import { ActivityIndicator } from 'components';
@@ -21,6 +22,8 @@ import { getCalendarDate } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
 import { AccountDeActivateModal } from 'components/ui';
+import { Tip } from 'react-native-tip';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 const BloodPressure = ({ route }: any) => {
   const SELECTED_BP_ID = route?.params?.logId;
@@ -102,7 +105,7 @@ const BloodPressure = ({ route }: any) => {
   const onChangeBloodPressure = (key, value) => {
     console.log(key, value);
     setBloodPressure((prev) => ({ ...prev, [key]: value }));
-    setError(bloodPressureValidator('key', value) || '');
+    setError(bloodPressureValidator(key, value) || '');
   };
 
   console.log('Error', error);
@@ -122,13 +125,34 @@ const BloodPressure = ({ route }: any) => {
             marginBottom: heightToDp(25),
           }}
         >
-          <Text style={styles.label}>Your Reading (mmHg)</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.label}>Your Reading (mmHg)</Text>
+            <View
+              style={{ marginTop: heightToDp(3), marginLeft: widthToDp(4) }}
+            >
+              <Tip
+                //title=""
+                body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats.."
+                bodyStyle={{ color: '#fff' }}
+                tipContainerStyle={{
+                  backgroundColor: colors.darkPrimary,
+                  width: '60%',
+                }}
+                overlayOpacity={0.001}
+              >
+                <Icon
+                  name="ios-information-circle-outline"
+                  size={responsiveFontSize(22)}
+                  color={colors.darkPrimary}
+                />
+              </Tip>
+            </View>
+          </View>
           <MedicalInput
             height={15}
             textAlign="center"
             placeholder={'High (SYS)'}
             onChangeText={(val) => {
-              console.log('u');
               onChangeBloodPressure('bp_systolic', val);
             }}
             value={bloodPressure.bp_systolic}
@@ -141,7 +165,6 @@ const BloodPressure = ({ route }: any) => {
             textAlign="center"
             placeholder={'Low (DIA)'}
             onChangeText={(val) => {
-              console.log('u');
               onChangeBloodPressure('bp_diastolic', val);
             }}
             value={bloodPressure.bp_diastolic}
@@ -174,7 +197,13 @@ const BloodPressure = ({ route }: any) => {
       <ButtonWithShadowContainer
         onPress={saveBloodPressureLog}
         title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-        disabled={!bloodPressure ? true : false}
+        disabled={
+          bloodPressure.bp_systolic === '' ||
+          bloodPressure.bp_diastolic === '' ||
+          error
+            ? true
+            : false
+        }
       />
     </TitleWithBackWhiteBgLayout>
   );

@@ -50,9 +50,7 @@ const HealthRecord = () => {
   useEffect(() => {
     dispatch(getReduxLatestResult());
     dispatch(getReduxPastResult());
-    console.log('past results ', pastResult);
     setPastResults(pastResult);
-    console.log('latest results =======>', newResult);
     // alert(JSON.stringify(newResult.result.summary));
     setLatestResult(newResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +58,9 @@ const HealthRecord = () => {
 
   const renderItem2 = ({ item }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
+      onPress={() =>
+        navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item })
+      }
       style={styles.pastResultMainView}
     >
       <View style={styles.view}>

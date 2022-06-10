@@ -79,11 +79,8 @@ const Medication = ({ route }) => {
     (state: IAppState) => state.home.getMedicationProgressData
   );
   useEffect(() => {
-    console.log('getMedNewTracker', getMedNewTracker);
     let arr = [];
     getMedNewTracker?.medication?.map((ele) => {
-      console.log('ele', ele);
-
       arr.push({ label: ele.name, value: ele.medication_log_id });
     });
     setOptions(arr);
@@ -132,11 +129,6 @@ const Medication = ({ route }) => {
       ' ' +
       getTime(dateAndtime);
 
-    console.log('dosage', dosage);
-    console.log('record_date', dateTime);
-    console.log('medication_log_id', medicatioDropdownValue);
-    console.log('meal_type', mealDropDown);
-
     try {
       setIsLoading(true);
       if (
@@ -151,7 +143,6 @@ const Medication = ({ route }) => {
             medication_log_id: medicatioDropdownValue,
           },
         });
-        console.log('Take Medication successful', response.data);
       } else {
         const response = await userService.createMedication({
           medication: {
@@ -161,7 +152,7 @@ const Medication = ({ route }) => {
             meal_type: mealDropDown,
           },
         });
-        console.log('Take Medication successful', response.data);
+
         navigate(SCREENS.HEALTH_PROGRESS, 2);
       }
 
@@ -170,7 +161,7 @@ const Medication = ({ route }) => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
       if (error.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
@@ -196,12 +187,11 @@ const Medication = ({ route }) => {
         medicatioDropdownValue
       );
       dispatch(getReduxNewMedicationTracker());
-      console.log('deleted', response?.data);
 
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      console.log('eeeee', error?.errMsg);
+
       if (error.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',

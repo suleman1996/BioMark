@@ -103,6 +103,8 @@ const measurementValidator = (is_metric, measurment, value) => {
 };
 
 const bloodPressureValidator = (measurment, value) => {
+  console.log('measu', measurment);
+
   let errorr = '';
   if (value.length === 0 || value == 0)
     return measurment === 'bp_systolic'
@@ -122,12 +124,12 @@ const bloodPressureValidator = (measurment, value) => {
   };
   if (measurment === 'bp_systolic') {
     errorr =
-      BP_RANGE.sys.min < value && value <= BP_RANGE.sys.max
+      BP_RANGE.sys.min <= value && value <= BP_RANGE.sys.max
         ? ''
         : BP_RANGE.sys.errorr;
   } else {
     errorr =
-      BP_RANGE.dia.min < value && value <= BP_RANGE.dia.max
+      BP_RANGE.dia.min <= value && value <= BP_RANGE.dia.max
         ? ''
         : BP_RANGE.dia.errorr;
   }
