@@ -8,8 +8,6 @@ import HealthListCard from 'components/health-list-card';
 import fonts from 'assets/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import RenderSvg from 'components/render-svg';
-
 const HealthRisk = ({ route }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -20,7 +18,7 @@ const HealthRisk = ({ route }) => {
   const footNote = route.params.footNotesData;
   const calculations = route.params.calc;
   const color = route.params.clr;
-  const svgi_d = route.params.i_d;
+  const SVG = route.params.SVG;
 
   const renderItem = ({ item }) => {
     return (
@@ -51,7 +49,7 @@ const HealthRisk = ({ route }) => {
               fontFamily: fonts.OpenSansBold,
               color: color,
             }}
-            svg={<RenderSvg color={color} id={svgi_d} />}
+            svg={<SVG fill={color} />}
             description={listItems.summary}
           />
           <HealthListCard

@@ -35,13 +35,8 @@ import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-
 import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
 import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
 import {
-  getHealthTrackerRisks,
-  getReduxDashboard,
-  getReduxHealthTracker,
   getReduxPspModules,
   getReduxPspPdfLink,
-  getReduxLabResultStatus,
-  getReduxNewMedicationTracker,
   getReduxLatestResult,
   getReduxPastResult,
   getReduxPspHypertensionHealthTrackerData,
@@ -96,11 +91,7 @@ const AppNavigator = () => {
 
   useEffect((link: string) => {
     getHasProfileAsyncStorage();
-    dispatch(getReduxNewMedicationTracker());
-    dispatch(getReduxHealthTracker());
-    dispatch(getReduxDashboard());
-    dispatch(getHealthTrackerRisks());
-    dispatch(getReduxLabResultStatus());
+
     dispatch(getReduxPspModules());
     dispatch(getReduxPspPdfLink(link));
     dispatch(getReduxPspPdfHyperLink(link));
