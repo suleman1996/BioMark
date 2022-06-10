@@ -16,7 +16,7 @@ const MoreInfo = () => {
 
   const styles = Styles(colors);
 
-  const [summary, setSummary] = React.useState();
+  const [summary, setSummary] = React.useState({});
 
   const moreInfoData = async () => {
     try {
@@ -141,22 +141,27 @@ const MoreInfo = () => {
                 />
               </ScrollView>
             </View>
-
-            <Text
-              style={[
-                styles.heading,
-                {
-                  marginLeft: 10,
-                  color: colors.greenDark,
-                  marginVertical: 10,
-                },
-              ]}
-            >
-              DEFINITION
-            </Text>
-            <View style={styles.definationView}>
-              <Text style={styles?.definationText}>{summary?.definition}</Text>
-            </View>
+            {summary.definition != '' && (
+              <>
+                <Text
+                  style={[
+                    styles.heading,
+                    {
+                      marginLeft: 10,
+                      color: colors.greenDark,
+                      marginVertical: 10,
+                    },
+                  ]}
+                >
+                  DEFINITION
+                </Text>
+                <View style={styles.definationView}>
+                  <Text style={styles?.definationText}>
+                    {summary?.definition}
+                  </Text>
+                </View>
+              </>
+            )}
           </View>
         </View>
       </ScrollView>
