@@ -44,20 +44,20 @@ export const makeStyles = (colors: any) =>
     lowerContainer: {
       backgroundColor: colors.white,
       alignItems: 'center',
-      justifyContent: 'center',
+      flex: 1,
       //   marginBottom: heightToDp(10),
+      borderStartColor: 'red',
     },
     pagerView: {
       width: widthToDp(92),
-      height: '100%',
       flexGrow: 1,
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: heightToDp(1.5),
-      marginBottom: heightToDp(10),
+      paddingBottom: heightToDp(10),
       //   backgroundColor: 'yellow',
-      // flex: 1
     },
+    tabScrollContainerSize: { paddingBottom: heightToDp(10) },
     tabNameContainer: {
       //   width: widthToDp(90),
       flexDirection: 'row',
@@ -80,20 +80,7 @@ export const makeStyles = (colors: any) =>
       color: colors.darkPrimary,
       fontSize: responsiveFontSize(20),
     },
-    TabContainer: {
-      width: '100%',
-      borderWidth: 2,
-      paddingHorizontal: 25,
-      paddingVertical: 30,
-      borderColor: colors.gray,
-      borderRadius: widthToDp(4),
-      flex: 1,
-    },
-    yourTargetsHeading: {
-      fontFamily: fonts.mulishRegular,
-      fontSize: 17,
-      color: colors.darkPrimary,
-    },
+
     outerTarget: {
       borderWidth: 0.7,
       borderColor: colors.darkGray,
@@ -105,9 +92,16 @@ export const makeStyles = (colors: any) =>
       borderColor: colors.darkGray,
       paddingVertical: 15,
       borderBottomWidth: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     targetText: {
       fontFamily: fonts.mulishRegular,
+      fontSize: 17,
+    },
+    targetLabel: {
+      fontFamily: fonts.mulishBold,
       fontSize: 17,
     },
     fixedIconView: {

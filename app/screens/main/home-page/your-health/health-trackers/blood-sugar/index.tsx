@@ -2,6 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { showMessage } from 'react-native-flash-message';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { IAppState } from 'store/IAppState';
+import { getReduxDashboard } from 'store/home/home-actions';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
@@ -9,21 +14,22 @@ import {
   DateTimePickerModal,
   DropdownMenu,
 } from 'components/base';
-import { IAppState } from 'store/IAppState';
+import { ActivityIndicator, InputWithUnits } from 'components';
+import { AccountDeActivateModal } from 'components/ui';
+
+import { userService } from 'services/user-service/user-service';
+
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { userService } from 'services/user-service/user-service';
-// import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
-import { showMessage } from 'react-native-flash-message';
+import { getCalendarDate } from 'utils/functions/date-format';
+import {
+  bloodSugarValidator,
+  mgMmolConversion,
+} from 'utils/functions/measurments';
 
 import makeStyles from './styles';
-import { ActivityIndicator, InputWithUnits } from 'components';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCalendarDate } from 'utils/functions/date-format';
-import SCREENS from 'navigation/constants/index';
-import { navigate } from 'services/nav-ref';
-import { bloodSugarValidator } from 'utils/functions/measurments';
 
 const BloodSugar = ({ route }) => {
   const SELECTED_BS_ID = route?.params?.logId;
@@ -34,7 +40,11 @@ const BloodSugar = ({ route }) => {
 
   const [options, setOptions] = useState<any>([]);
   const [error, setError] = useState<string>('');
-  const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { drop, hasBloodSugarTarget } = useSelector((state: IAppState) => ({
+    drop: state.home.medicalDropDown,
+    hasBloodSugarTarget: state.home?.dashboard?.has_blood_sugar_target,
+  }));
 
   const [bloodSugarTracker, setBloodSugarTracker] = useState({
     data_value: '0.0',
@@ -45,17 +55,13 @@ const BloodSugar = ({ route }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (bloodSugarTracker.unit_list_id !== 1) {
-      setBloodSugarTracker((prev: any) => ({
-        ...prev,
-        data_value: Number((prev.data_value / 18).toFixed(1)),
-      }));
-    } else {
-      setBloodSugarTracker((prev: any) => ({
-        ...prev,
-        data_value: Number((prev.data_value * (1 * 18)).toFixed(1)),
-      }));
-    }
+    setBloodSugarTracker((prev: any) => ({
+      ...prev,
+      data_value: mgMmolConversion(
+        +prev.data_value,
+        bloodSugarTracker.unit_list_id === 1 ? 'mg/dL' : 'mmol/L'
+      ),
+    }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bloodSugarTracker.unit_list_id]);
 
@@ -80,6 +86,7 @@ const BloodSugar = ({ route }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const getBloodSugarProgressDataByID = async (id) => {
     setIsLoading(true);
     const weightData = await userService.getBloodSugarProgress(id);
@@ -100,18 +107,25 @@ const BloodSugar = ({ route }) => {
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BS_ID ? 'updateBsTracker' : 'createBsTracker';
     try {
+      if (!hasBloodSugarTarget) {
+        console.log(
+          '        await userService.setDefaultBloodSugarTarget();        '
+        );
+        await userService.setDefaultBloodSugarTarget();
+        dispatch(getReduxDashboard());
+      }
       await userService[API_FUNCTION](bloodSugarTracker, SELECTED_BS_ID);
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err: any) {
       console.error(err);
-      if (error?.errMsg.status === '500') {
+      if (error?.errMsg?.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error?.errMsg.status === false) {
+      } else if (error?.errMsg?.status === false) {
         showMessage({
-          message: error?.errMsg.data.error,
+          message: error?.errMsg?.data?.error,
           type: 'danger',
         });
       } else {
@@ -123,30 +137,39 @@ const BloodSugar = ({ route }) => {
     }
     setIsLoading(false);
   };
+  const deleteBsLog = async () => {
+    try {
+      await userService.deleteBsLog(SELECTED_BS_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleUnitChange = (selectedUnit: string) => {
-    const unitListId = selectedUnit == 'mg/dl' ? 1 : 21;
+    const unitListId = selectedUnit == 'mg/dL' ? 1 : 21;
     console.log('selectedUnit', selectedUnit);
     setBloodSugarTracker((prev: any) => ({
       ...prev,
       unit_list_id: unitListId,
     }));
-    setError(
-      bloodSugarValidator(selectedUnit, bloodSugarTracker.data_value) || ''
-    );
   };
+
   const handleChange = (value: number, key: string) => {
-    setBloodSugarTracker({ ...bloodSugarTracker, [key]: value });
+    setBloodSugarTracker((prev) => ({ ...prev, [key]: value }));
     setError(
       bloodSugarValidator(
-        bloodSugarTracker.unit_list_id === 1 ? 'mg/dl' : 'mmol/L',
+        bloodSugarTracker.unit_list_id === 1 ? 'mg/dL' : 'mmol/L',
         value
       ) || ''
     );
-    console.log('lllll', bloodSugarTracker);
   };
 
   return (
-    <TitleWithBackWhiteBgLayout title="Blood Sugar">
+    <TitleWithBackWhiteBgLayout
+      binIcon={SELECTED_BS_ID ? true : false}
+      onPressIcon={() => setShowDeleteModal(true)}
+    >
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -158,8 +181,8 @@ const BloodSugar = ({ route }) => {
           <InputWithUnits
             title="Your Reading"
             placeholder="0.0"
-            units={['mg/dl', 'mmol/L']}
-            unit={bloodSugarTracker.unit_list_id === 1 ? 'mg/dl' : 'mmol/L'}
+            units={['mg/dL', 'mmol/L']}
+            unit={bloodSugarTracker.unit_list_id === 1 ? 'mg/dL' : 'mmol/L'}
             value={bloodSugarTracker?.data_value.toString()}
             onChangeText={(val: any) => handleChange(val, 'data_value')}
             onUnitChange={handleUnitChange}
@@ -167,7 +190,7 @@ const BloodSugar = ({ route }) => {
             onBlur={() => {
               setError(
                 bloodSugarValidator(
-                  bloodSugarTracker?.unit_list_id === 1 ? 'mg/dl' : 'mmol/L',
+                  bloodSugarTracker?.unit_list_id === 1 ? 'mg/dL' : 'mmol/L',
                   bloodSugarTracker.data_value
                 ) || ''
               );
@@ -182,27 +205,36 @@ const BloodSugar = ({ route }) => {
                   options={options}
                   selectedValue={bloodSugarTracker.meal_type_id}
                   onValueChange={(text: any) => {
-                    setBloodSugarTracker({
-                      ...bloodSugarTracker,
+                    setBloodSugarTracker((prev) => ({
+                      ...prev,
                       meal_type_id: text,
-                    });
+                    }));
                   }}
                 />
               </View>
-              <Text style={styles.label}>Date of Birth</Text>
+              <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
                 date={bloodSugarTracker?.record_date}
                 setDate={(e: any) =>
-                  setBloodSugarTracker({
+                  setBloodSugarTracker((prev) => ({
                     ...bloodSugarTracker,
                     record_date: e,
-                  })
+                  }))
                 }
               />
             </>
           ) : null}
         </View>
       </ScrollView>
+      <AccountDeActivateModal
+        headerText="Weight"
+        subHeading="Are you sure you wish to delete this weight log?"
+        buttonUpperText="Yes"
+        buttonLowerText="Skip"
+        isVisible={showDeleteModal}
+        setIsVisible={setShowDeleteModal}
+        callMe={deleteBsLog}
+      />
       <ButtonWithShadowContainer
         onPress={saveBsLog}
         title={route?.params?.logId ? 'Save Edit' : 'Add'}
