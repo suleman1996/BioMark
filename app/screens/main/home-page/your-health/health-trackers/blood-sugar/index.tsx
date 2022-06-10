@@ -24,6 +24,7 @@ import { getCalendarDate } from 'utils/functions/date-format';
 import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
 import { bloodSugarValidator } from 'utils/functions/measurments';
+import { AccountDeActivateModal } from 'components/ui';
 
 const BloodSugar = ({ route }) => {
   const SELECTED_BS_ID = route?.params?.logId;
@@ -34,6 +35,7 @@ const BloodSugar = ({ route }) => {
 
   const [options, setOptions] = useState<any>([]);
   const [error, setError] = useState<string>('');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
 
   const [bloodSugarTracker, setBloodSugarTracker] = useState({
@@ -123,6 +125,14 @@ const BloodSugar = ({ route }) => {
     }
     setIsLoading(false);
   };
+  const deleteBsLog = async () => {
+    try {
+      await userService.deleteBsLog(SELECTED_BS_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const handleUnitChange = (selectedUnit: string) => {
     const unitListId = selectedUnit == 'mg/dl' ? 1 : 21;
     console.log('selectedUnit', selectedUnit);
@@ -146,7 +156,10 @@ const BloodSugar = ({ route }) => {
   };
 
   return (
-    <TitleWithBackWhiteBgLayout title="Blood Sugar">
+    <TitleWithBackWhiteBgLayout
+      binIcon={SELECTED_BS_ID ? true : false}
+      onPressIcon={() => setShowDeleteModal(true)}
+    >
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -203,6 +216,15 @@ const BloodSugar = ({ route }) => {
           ) : null}
         </View>
       </ScrollView>
+      <AccountDeActivateModal
+        headerText="Weight"
+        subHeading="Are you sure you wish to delete this weight log?"
+        buttonUpperText="Yes"
+        buttonLowerText="Skip"
+        isVisible={showDeleteModal}
+        setIsVisible={setShowDeleteModal}
+        callMe={deleteBsLog}
+      />
       <ButtonWithShadowContainer
         onPress={saveBsLog}
         title={route?.params?.logId ? 'Save Edit' : 'Add'}

@@ -169,6 +169,27 @@ const bloodSugarValidator = (measurment, value) => {
 
   return errorr;
 };
+const hba1cValidator = (value) => {
+  console.log('value', value);
+
+  let errorr = '';
+  if (value.length === 0 || value == 0)
+    return 'Please provide your measurement';
+
+  const HBA1C_RANGE = {
+    hba1c: {
+      min: 5,
+      max: 15,
+      errorr: 'Your HbA1c measurement should be between 5-15%',
+    },
+  };
+
+  errorr =
+    HBA1C_RANGE.hba1c.min <= value && value <= HBA1C_RANGE.hba1c.max
+      ? ''
+      : HBA1C_RANGE.hba1c.errorr;
+  return errorr;
+};
 
 export {
   cmToFeet,
@@ -178,4 +199,5 @@ export {
   measurementValidator as measurementValidator,
   bloodPressureValidator,
   bloodSugarValidator,
+  hba1cValidator,
 };
