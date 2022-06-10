@@ -125,10 +125,18 @@ const Index = () => {
     const currentUnit = units[state.selectedType]?.name;
     if (currentUnit && (currentUnit == 'mg/dL' || currentUnit == 'mmol/L')) {
       setErrors({
-        fromfpg: bloodSugarValidator(currentUnit, +state.fromfpg),
-        fromppg: bloodSugarValidator(currentUnit, +state.fromfpg),
-        toppg: bloodSugarValidator(currentUnit, +state.fromfpg),
-        tofpg: bloodSugarValidator(currentUnit, +state.fromfpg),
+        fromfpg: bloodSugarValidator(currentUnit, +state.fromfpg, 'target'),
+        fromppg: bloodSugarValidator(currentUnit, +state.fromppg, 'target'),
+        toppg:
+          bloodSugarValidator(currentUnit, +state.toppg, 'target') ||
+          +state.toppg < +state.fromppg
+            ? 'Please enter a reading higher than From'
+            : '',
+        tofpg:
+          bloodSugarValidator(currentUnit, +state.tofpg, 'target') ||
+          +state.tofpg < +state.fromfpg
+            ? 'Please enter a reading higher than From'
+            : '',
       });
     }
   }, [state, units]);

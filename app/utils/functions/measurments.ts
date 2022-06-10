@@ -26,7 +26,7 @@ const lbsToKg = () => {
 };
 
 const mgMmolConversion = (value: number, toUnit: 'mg/dL' | 'mmol/L' | string) =>
-  toUnit == 'mg/dL' ? value * 18 : value * (1 / 18); // These values might not be accurate
+  Number(toUnit == 'mg/dL' ? value * 18 : value * (1 / 18)).toFixed(2); // These values might not be accurate
 
 const measurementValidator = (is_metric, measurment, value) => {
   let errorr = '';
@@ -137,7 +137,7 @@ const bloodPressureValidator = (measurment, value) => {
   return errorr;
 };
 
-const hba1cValidator = (goal: number, unit: '%') => {
+const hba1cValidator = (goal: number, unit: '%' = '%') => {
   const errors = {
     goal: '',
   };
@@ -153,8 +153,8 @@ const bloodSugarValidator = (
   type: string = 'measurement'
 ) => {
   const val = Number(value);
-  if (!val) return 'Please input a valid measurement';
-  return LIMITS[unit][0] < val && val <= LIMITS[unit][1]
+  if (!val) return `Please input a valid ${type}`;
+  return LIMITS[unit][0] <= val && val <= LIMITS[unit][1]
     ? ''
     : `Please input a valid ${type} between ${LIMITS[unit][0]}-${LIMITS[unit][1]} ${unit}`;
 };

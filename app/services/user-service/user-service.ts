@@ -575,7 +575,7 @@ const createBsTracker = (medical: WeightProgressEntryRequest) => {
 const updateBsTracker = (medical: WeightProgressEntryRequest, id: string) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
-      .put(`${API_URLS.CREATE_HBA1C}/${id}`, {
+      .put(`${API_URLS.CREATE_BLOOD_SUGAR}/${id}`, {
         blood_sugar: medical,
       })
       .then(async ({ data }) => {
@@ -595,15 +595,17 @@ const updateBsTracker = (medical: WeightProgressEntryRequest, id: string) => {
 };
 
 const deleteBsLog = (bp_log_id: any) => {
+  console.log('bp_log_id', bp_log_id);
+
   return new Promise<any>((resolve, reject) => {
     client
-      .delete(`${API_URLS.CREATE_HBA1C}/${bp_log_id}`)
+      .delete(`${API_URLS.CREATE_BLOOD_SUGAR}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
+          console.log('deleteBsLog', data);
           resolve({ ...data });
         } catch (e) {
-          logNow('err.', e);
+          logNow('err deleteBsLog.', e);
           reject(e);
         }
       })
@@ -1213,7 +1215,7 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
-//Targets API calls
+//Targets API START
 
 const getNewTarget = () => {
   return new Promise<NewTarget>((resolve, reject) =>
@@ -1288,7 +1290,7 @@ const getHBA1CTargets = () => {
 const setDefaultBloodSugarTarget = () => {
   return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
     client
-      .get(API_URLS.SET_DEFAULT_BLOOD_SUGAR_TARGET)
+      .post(API_URLS.SET_DEFAULT_BLOOD_SUGAR_TARGET)
       .then(({ data }: { data: SetDefaultTargetResponse }) => {
         resolve(data);
       })
@@ -1302,7 +1304,7 @@ const setDefaultBloodSugarTarget = () => {
 const setDefaultHba1carget = () => {
   return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
     client
-      .get(API_URLS.SET_DEFAULT_HBA1C_TARGET)
+      .post(API_URLS.SET_DEFAULT_HBA1C_TARGET)
       .then(({ data }: { data: SetDefaultTargetResponse }) => {
         resolve(data);
       })
@@ -1313,6 +1315,7 @@ const setDefaultHba1carget = () => {
   );
 };
 
+// Targets API END
 const getResultOverView = (id, filter) => {
   return new Promise<ResultResponse>((resolve, reject) => {
     client

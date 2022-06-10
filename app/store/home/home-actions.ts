@@ -214,9 +214,7 @@ export const getReduxDashboard =
     await userService
       .getDashboard()
       .then(async (res) => {
-        //
-
-        await dispatch(addDashboard(res));
+        dispatch(addDashboard(res));
       })
       .catch((err) => {
         logNow(err);

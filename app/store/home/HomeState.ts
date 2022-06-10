@@ -30,7 +30,7 @@ import {
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
   medicalDropDown: MedicationSetupPayload[] = [];
-  dashboard: DashboardResponseData[] = [];
+  dashboard: DashboardResponseData = null;
   healthRisks: RiskData[] = [];
   medicationList: MedicationListEntry[] = [];
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
