@@ -2,22 +2,17 @@ import {
   View,
   Text,
   ScrollView,
-  ImageBackground,
   FlatList,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Animated,
-  PanResponder,
-  Modal,
   Image,
   Keyboard,
 } from 'react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import { ActivityIndicator, useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
-import LinearGradient from 'react-native-linear-gradient';
 
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 
@@ -25,8 +20,7 @@ import { Button } from 'components/button';
 import { ArrowBack } from 'assets/svgs';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
-import LabResultProgressBar from '../../../../components/lab-result-pregress-bar/index';
-import RenderSvg from 'components/render-svg/index';
+
 import {
   Diabetess,
   Heart_Disease,
@@ -56,7 +50,6 @@ import {
 import * as Yup from 'yup';
 import Styles from './styles';
 import SCREENS from 'navigation/constants/index';
-import makeStyles from './styles';
 
 import Heart from '../../../../assets/svgs/heart';
 import Camera from '../../../../assets/svgs/report-scan';
@@ -75,7 +68,6 @@ import ReportView from '../../../../assets/svgs/report-viewing';
 import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
-import { SmallButton } from 'components/button';
 import MyImage from 'assets/images';
 import { Formik } from 'formik';
 import { userService } from 'services/user-service/user-service';
@@ -83,34 +75,14 @@ import AuthContext from 'utils/auth-context';
 import { showMessage } from 'react-native-flash-message';
 import { InputWithLabel } from 'components/base';
 import { getReduxLabResultStatus } from 'store/home/home-actions';
-
-const QrInputPopup = ({ visible, children, loading }: Props) => {
-  const { colors } = useTheme();
-  const styles = makeStyles(colors);
-  const [showModal, setShowModal] = React.useState(visible);
-
-  React.useEffect(() => {
-    togglePopUp();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible]);
-
-  const togglePopUp = () => {
-    if (visible) {
-      setShowModal(true);
-    } else {
-      setShowModal(false);
-    }
-  };
-
-  return (
-    <Modal transparent visible={showModal}>
-      <ActivityIndicator visible={loading} />
-      <View style={styles.popUpBackground}>
-        <View style={styles.popUpContainer}>{children}</View>
-      </View>
-    </Modal>
-  );
-};
+import RenderHealthRiskView from './components/render-health-risk-view/index';
+import QrInputPopup from './components/qr-input-popup';
+import RenderRecordKeeping from './components/render-record-keeping';
+import RenderLastResult from './components/render-last-result';
+import RendreLabResult from './components/render-lab-result';
+import RenderCircle from './components/render-circle';
+import RenderHighlights from './components/render-high-lights';
+import RenderHealthRisk from './components/render-health-risk';
 
 const Index = () => {
   const navigation = useNavigation();
@@ -251,197 +223,8 @@ const Index = () => {
       }
     }
   };
-  const RenderHealthRiskView = ({
-    Svg,
-    color,
-    healthRisks,
-    hardCode,
-    References,
-    FootNotes,
-    Calculations,
-    id,
-  }) => (
-    <>
-      <TouchableOpacity
-        onPress={() => {
-          setSelectedHealthRisk(healthRisks),
-            setSelectedHardCode(hardCode),
-            setSelectedRef(References);
-          setSelectedFootNotes(FootNotes);
-          setselectedCalculations(Calculations);
-          setColorr(color);
-          setId(id);
-        }}
-        style={[
-          styles.renderHealthRisk,
-          {
-            backgroundColor:
-              healthRisks?.name == selectedHealthRisk?.name
-                ? colors.lightGrey
-                : color,
-          },
-        ]}
-      >
-        <Svg />
-      </TouchableOpacity>
-      <View style={styles.dot} />
-    </>
-  );
-
-  const RenderRecordKeeping = ({ title, id, svg, onPress }) => (
-    <LinearGradient
-      start={{ x: 0, y: 0.75 }}
-      end={{ x: 1, y: 0.25 }}
-      colors={['#2C6CFC', '#2CBDFC']}
-      style={styles.recordKeepingView}
-    >
-      <TouchableOpacity onPress={onPress} style={{ alignItems: 'center' }}>
-        {svg}
-        <Text style={[styles.recordKeepinText, { marginTop: 10 }]}>
-          {title}
-        </Text>
-        <Text
-          style={[
-            styles.recordKeepinText,
-            { fontSize: 14, fontFamily: fonts.light, marginBottom: 10 },
-          ]}
-        >
-          Empower ID: {id}
-        </Text>
-      </TouchableOpacity>
-    </LinearGradient>
-  );
-
-  const RenderLastResult = ({ title, date, svg, onPress }) => (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.recordKeepingView, { backgroundColor: colors.white }]}
-    >
-      {svg}
-      <Text
-        style={[
-          styles.recordKeepinText,
-          { marginTop: 10, color: colors.heading, fontWeight: 'bold' },
-        ]}
-      >
-        {title}
-      </Text>
-      <Text style={[styles.date]}>Receive on {date}</Text>
-    </TouchableOpacity>
-  );
-
-  const RenderCircle = ({ svg, title, onPress }) => (
-    <View style={{ alignItems: 'center' }}>
-      <TouchableOpacity style={styles.circle} onPress={onPress}>
-        {svg}
-      </TouchableOpacity>
-      <Text style={styles.circleText}>{title}</Text>
-    </View>
-  );
-
-  const RenderHighlights = ({ item }) => (
-    <View style={styles.highlightsView}>
-      <ImageBackground
-        style={{ flex: 1 }}
-        // resizeMode="stretch"
-        source={{ uri: item.image }}
-      >
-        <BlurView title={item.title} />
-      </ImageBackground>
-    </View>
-  );
-
-  const BlurView = ({ title }) => (
-    <View style={styles.blurView}>
-      <Text style={styles.highlightstext}>{title}</Text>
-    </View>
-  );
-
-  const RenderHealthRisk = ({
-    description,
-    name,
-    card_status,
-    onPress,
-    id,
-  }) => (
-    <Animated.View
-      {...panResponder.panHandlers}
-      style={[pan.getLayout(), styles.healthRisk]}
-    >
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <RenderSvg color={colorr} id={id} />
-
-          <Text style={styles.healthName}>{name}</Text>
-        </View>
-        <Text style={styles.healthCardStatusName}>{card_status}</Text>
-      </View>
-      <Text style={styles.descriptionHealthRisk}>
-        <Text>{description} </Text>
-        <TouchableWithoutFeedback onPress={onPress}>
-          <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
-            Tap here{' '}
-          </Text>
-        </TouchableWithoutFeedback>
-        <Text>to complete your information</Text>
-      </Text>
-    </Animated.View>
-  );
 
   const pan = useRef(new Animated.ValueXY()).current;
-
-  const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onPanResponderMove: Animated.event([
-      null,
-      {
-        dx: pan.x, // x,y are Animated.Value
-        // dy: pan.y,
-      },
-    ]),
-    onPanResponderRelease: () => {
-      Animated.spring(
-        pan, // Auto-multiplexed
-        { toValue: { x: 0, y: 0 } } // Back to zero
-      ).start();
-    },
-  });
-
-  const RendreLabResult = ({ item }) => {
-    return (
-      <>
-        <View style={styles.resultStatusView}>
-          <View style={{ alignItems: 'center' }}>
-            <Text style={styles.resultStatus}>Your Lab Result Status</Text>
-            <Text style={[styles.barcode]}>Barcode {item?.lab_ref_id}</Text>
-          </View>
-          <LabResultProgressBar
-            currentPosition={4 - item?.status_order}
-            icons={stepIndicatorIcons}
-          />
-          <View style={{ alignItems: 'center' }}>
-            <Text style={styles.resultStatus}>{item?.status_name}</Text>
-            <Text style={[styles.barcode]}>{item?.status_message}</Text>
-          </View>
-          {item?.result_status === 'verified' ? (
-            <View
-              style={{
-                width: '40%',
-                alignSelf: 'center',
-                paddingVertical: 10,
-              }}
-            >
-              <SmallButton
-                title="See Results"
-                style={{ height: 45 }}
-                onPress={() => setVisible(true)}
-              />
-            </View>
-          ) : null}
-        </View>
-      </>
-    );
-  };
 
   const healthRisksColor = (status) => {
     if (status == 'Obese') {
@@ -489,6 +272,14 @@ const Index = () => {
               References={Heart_Disease_ref}
               FootNotes={Heart_Disease_footnotes}
               Calculations={heart_Diease_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
             <RenderHealthRiskView
               id={1}
@@ -499,6 +290,14 @@ const Index = () => {
               References={Diabetes_ref}
               FootNotes={Diabetes_footnotes}
               Calculations={diabetes_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
             <RenderHealthRiskView
               id={2}
@@ -508,6 +307,14 @@ const Index = () => {
               hardCode={Blood_Presure}
               References={Blood_Pressure_ref}
               Calculations={Blood_Pressure_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
             <RenderHealthRiskView
               id={3}
@@ -517,6 +324,14 @@ const Index = () => {
               hardCode={BMII}
               References={BMI_ref}
               Calculations={BMI_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
             <RenderHealthRiskView
               id={4}
@@ -525,6 +340,14 @@ const Index = () => {
               Svg={Smoking}
               References={Smoking_ref}
               Calculations={Smoking_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
             <RenderHealthRiskView
               id={5}
@@ -534,6 +357,14 @@ const Index = () => {
               hardCode={Drinkings}
               References={Drinking_ref}
               Calculations={Drinking_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
             <RenderHealthRiskView
               id={6}
@@ -542,6 +373,14 @@ const Index = () => {
               Svg={Stress}
               References={Stress_ref}
               Calculations={Stress_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
             <RenderHealthRiskView
               id={7}
@@ -550,6 +389,14 @@ const Index = () => {
               Svg={Sleep}
               References={Sleeping_ref}
               Calculations={Sleeping_Calc}
+              setSelectedHealthRisk={setSelectedHealthRisk}
+              setSelectedHardCode={setSelectedHardCode}
+              setSelectedRef={setSelectedRef}
+              setSelectedFootNotes={setSelectedFootNotes}
+              setselectedCalculations={setselectedCalculations}
+              setColorr={setColorr}
+              setId={setId}
+              selectedHealthRisk={selectedHealthRisk}
             />
           </View>
           {selectedHealthRisk && (
@@ -569,6 +416,8 @@ const Index = () => {
               description={selectedHealthRisk?.description}
               card_status={selectedHealthRisk?.card_status}
               id={idHealth}
+              colorr={colorr}
+              pan={pan}
             />
           )}
           <Text style={[styles.headingText, { marginVertical: 20 }]}>
@@ -621,7 +470,11 @@ const Index = () => {
           <FlatList
             data={getLabStatusData}
             renderItem={(item) => (
-              <RendreLabResult item={item.item} setVisible={setVisible} />
+              <RendreLabResult
+                item={item.item}
+                setVisible={setVisible}
+                stepIndicatorIcons={stepIndicatorIcons}
+              />
             )}
             keyExtractor={(item) => item.id}
             showsHorizontalScrollIndicator={false}
@@ -635,7 +488,7 @@ const Index = () => {
           <FlatList
             keyExtractor={(item) => item.id}
             data={highlights}
-            renderItem={(item) => RenderHighlights(item)}
+            renderItem={(item) => <RenderHighlights item={item.item} />}
             horizontal
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
