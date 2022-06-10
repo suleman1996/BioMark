@@ -14,9 +14,9 @@ import makeStyles from './styles';
 
 type Props = {
   children?: any;
-  title: string;
+  title?: string;
   style?: any;
-  binIcon: boolean;
+  binIcon?: boolean;
   onPressIcon?: any;
 };
 

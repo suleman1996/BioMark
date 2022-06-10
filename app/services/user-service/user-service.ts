@@ -1,5 +1,6 @@
 import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
+
 import {
   BootstrapData,
   GeoLocationData,
@@ -20,6 +21,12 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  NewTarget,
+  CreateTargetResponse,
+  CreateTargetRequest,
+  LatestTargetResponse,
+  GetHba1cTargetsResponseData,
+  GetBloodSugarTargetsResponseData,
   HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
@@ -30,6 +37,7 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  SetDefaultTargetResponse,
   WeightProgressEntryRequest,
   Hba1CProgressEntryRequest,
 } from 'types/api';
@@ -181,6 +189,7 @@ function registerUser(username: string, values, gender: any, date: string) {
       });
   });
 }
+
 function createProfile(values, gender: any, date: string) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
     client
@@ -210,6 +219,7 @@ function createProfile(values, gender: any, date: string) {
       });
   });
 }
+
 function getUserContacts() {
   return new Promise<UserContacts>((resolve, reject) => {
     client
@@ -253,6 +263,7 @@ function saveUserContacts(email_address: string) {
       });
   });
 }
+
 function autoLogout() {
   return new Promise<AutoLogoutRes>((resolve, reject) => {
     client
@@ -272,6 +283,7 @@ function autoLogout() {
       });
   });
 }
+
 function saveAutoLogout(auto_logout: boolean) {
   return new Promise<AutoLogoutRes>((resolve, reject) => {
     client
@@ -295,6 +307,7 @@ function saveAutoLogout(auto_logout: boolean) {
       });
   });
 }
+
 async function logout() {
   let uniqueId = DeviceInfo.getUniqueId();
 
@@ -371,6 +384,7 @@ const Vaccination = ({ medical_history }: Props) => {
     // },
   });
 };
+
 type Props = {
   conditions: any;
   medical: any;
@@ -379,6 +393,7 @@ type Props = {
   has_allergy: any;
   scanner: any;
 };
+
 const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
     medical_history: {
@@ -1200,6 +1215,107 @@ const getMedicationTrackers = (date: string) => {
   });
 };
 
+//Targets API START
+
+const getNewTarget = () => {
+  return new Promise<NewTarget>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_NEW_TARGET)
+      .then(({ data }: { data: NewTarget }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      })
+  );
+};
+
+const createNewTarget = (target: CreateTargetRequest) => {
+  return new Promise<string>((resolve, reject) =>
+    client
+      .post(API_URLS.CREATE_NEW_TARGET, { target })
+      .then(({ data }: { data: CreateTargetResponse }) => {
+        resolve(data.message);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getLatestTargets = () => {
+  return new Promise<LatestTargetResponse>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_LATEST_TARGETS)
+      .then(({ data }: { data: LatestTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getBloodSugarTargets = () => {
+  return new Promise<GetBloodSugarTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_BLOOD_SUGAR_TARGETS)
+      .then(({ data }: { data: GetBloodSugarTargetsResponseData[] }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getHBA1CTargets = () => {
+  return new Promise<GetHba1cTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_HBA1C_TARGETS)
+      .then(({ data }: { data: GetHba1cTargetsResponseData[] }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultBloodSugarTarget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .post(API_URLS.SET_DEFAULT_BLOOD_SUGAR_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultHba1carget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .post(API_URLS.SET_DEFAULT_HBA1C_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+// Targets API END
 const getResultOverView = (id, filter) => {
   return new Promise<ResultResponse>((resolve, reject) => {
     client
@@ -1239,6 +1355,7 @@ const getWeightProgress = (id) => {
       });
   });
 };
+
 const getBloodPressureProgress = (id) => {
   return new Promise<BloodPressureProgressEntryPayload>((resolve, reject) => {
     client
@@ -1258,6 +1375,7 @@ const getBloodPressureProgress = (id) => {
       });
   });
 };
+
 const getWeightLogs = () => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
@@ -1278,6 +1396,7 @@ const getWeightLogs = () => {
       });
   });
 };
+
 const getBloodSugarProgress = (id) => {
   return new Promise<BloodSugarProgressEntryPayload>((resolve, reject) => {
     client
@@ -1525,6 +1644,11 @@ export const userService = {
   getResultOverView,
   getLatestResult,
   getPastResult,
+  getNewTarget,
+  createNewTarget,
+  getLatestTargets,
+  getBloodSugarTargets,
+  getHBA1CTargets,
   getHypertensionHealthTracker,
   getPspHyperModules,
   getPspHyperPdfLink,
@@ -1537,6 +1661,9 @@ export const userService = {
   getBloodSugarLogs,
   getHba1cLogs,
   getBloodPressureLogs,
+  setDefaultBloodSugarTarget,
+  setDefaultHba1carget,
+  barcodeCheck,
   deleteWeightLog,
   createBpTracker,
   updateBpTracker,
@@ -1547,6 +1674,5 @@ export const userService = {
   createHba1cTracker,
   updateHba1cTracker,
   deleteHba1cLog,
-  barcodeCheck,
   getMoreInfoResult,
 };
