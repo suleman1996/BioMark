@@ -14,28 +14,18 @@ import {
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
-import {
-  getDay,
-  getMonth,
-  getTime,
-  getYear,
-} from 'utils/functions/date-format';
-import { getReduxWeightProgress } from 'store/home/home-actions';
-import { measurmentValidator } from 'utils/functions/measurments';
+import { getCalendarDate } from 'utils/functions/date-format';
+import { measurementValidator } from 'utils/functions/measurments';
 import SCREENS from 'navigation/constants/index';
-import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
-import { useDispatch, useSelector } from 'react-redux';
-import { IAppState } from 'store/IAppState';
 
-const Weight = ({ route }) => {
+import makeStyles from './styles';
+import { AccountDeActivateModal } from 'components/ui';
+
+const Weight = ({ route }: any) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const dispatch = useDispatch();
-
-  const weightProgress = useSelector(
-    (state: IAppState) => state.home.getWeightProgressData
-  );
+  const SELECTED_WEIGHT_ID = route?.params?.logId;
 
   const [weightTracker, setWeightTracker] = useState({
     weight: '0.0',
@@ -43,96 +33,75 @@ const Weight = ({ route }) => {
     date_entry: '',
   });
   const [error, setError] = useState<string>('');
-
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
-    let today = new Date();
-    let dateTime =
-      getMonth(today) +
-      ' ' +
-      getDay(today) +
-      ', ' +
-      getYear(today) +
-      ' ' +
-      getTime(today);
-
-    setWeightTracker((tracker) => ({ ...tracker, date_entry: dateTime }));
+    if (SELECTED_WEIGHT_ID) {
+      getWeightDataByID(SELECTED_WEIGHT_ID);
+    } else {
+      setWeightTracker({
+        ...weightTracker,
+        date_entry: getCalendarDate(new Date()),
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (!weightTracker.is_metric) {
-      setWeightTracker({
-        ...weightTracker,
-        weight: Number((weightTracker.weight * 2.205).toFixed(1)),
-      });
+      setWeightTracker((prev: any) => ({
+        ...prev,
+        weight: Number((prev.weight * 2.205).toFixed(1)),
+      }));
     } else {
-      setWeightTracker({
-        ...weightTracker,
-        weight: Number((weightTracker.weight * (1 / 2.205)).toFixed(1)),
-      });
+      setWeightTracker((prev: any) => ({
+        ...prev,
+        weight: Number((prev.weight * (1 / 2.205)).toFixed(1)),
+      }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [weightTracker.is_metric]);
 
-  useEffect(() => {
-    console.log('logId', route?.params?.logId);
+  const getWeightDataByID = async (id) => {
+    setIsLoading(true);
+    const weightData = await userService.getWeightProgress(id);
+    setWeightTracker({
+      date_entry: weightData.date_entry,
+      weight: weightData.weight,
+      is_metric: weightData?.is_metric,
+    });
+    setIsLoading(false);
+  };
 
-    if (route?.params?.logId) {
-      dispatch(getReduxWeightProgress(route?.params?.logId));
-      console.log('weightProg', weightProgress);
-      const is_metric = weightProgress?.is_metric;
-      if (weightProgress?.is_metric) {
-        setWeightTracker({
-          date_entry: weightProgress.date_entry,
-          weight: weightProgress.weight,
-          is_metric,
-        });
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, weightProgress]);
-
-  const onSubmit = async () => {
-    let dateTime = '';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateTime =
-      getMonth(weightTracker.date_entry) +
-      ' ' +
-      getDay(weightTracker.date_entry) +
-      ', ' +
-      getYear(weightTracker.date_entry) +
-      ' ' +
-      getTime(weightTracker.date_entry);
-
+  const saveWeightLog = async () => {
+    setIsLoading(true);
+    const API_FUNCTION = SELECTED_WEIGHT_ID
+      ? 'updateWeightTracker'
+      : 'createWeightTracker';
     try {
-      setIsLoading(true);
-      await userService.createWeight({
-        medical: {
-          ...weightTracker,
-        },
-      });
-      navigate(SCREENS.HEALTH_PROGRESS, 0);
-      setIsLoading(false);
-    } catch (errorr) {
-      setIsLoading(false);
-      if (errorr.errMsg.status === '500') {
+      await userService[API_FUNCTION](weightTracker, SELECTED_WEIGHT_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err: any) {
+      console.error(err);
+      if (error?.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (errorr.errMsg.status === false) {
+      } else if (error?.errMsg.status === false) {
         showMessage({
-          message: errorr.errMsg.data.error,
+          message: error?.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: errorr.errMsg,
+          message: error?.errMsg,
           type: 'danger',
         });
       }
     }
+    setIsLoading(false);
   };
 
   const handleUnitChange = (selectedUnit: string) => {
@@ -141,20 +110,32 @@ const Weight = ({ route }) => {
       ...prev,
       is_metric: metric,
     }));
-    setError(measurmentValidator(metric, 'weight', weightTracker.weight) || '');
+    setError(
+      measurementValidator(metric, 'weight', weightTracker.weight) || ''
+    );
   };
 
   const handleChange = (value: number, key: string) => {
-    console.log(weightTracker.is_metric, key, value);
-    setWeightTracker((prev: any) => ({ ...prev, [key]: value }));
-    setError(measurmentValidator(weightTracker.is_metric, key, value) || '');
+    setWeightTracker({ ...weightTracker, [key]: value });
+    setError(measurementValidator(weightTracker.is_metric, key, value) || '');
   };
 
-  console.log(weightTracker);
+  const deleteWeightLog = async () => {
+    try {
+      await userService.deleteWeightLog(SELECTED_WEIGHT_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <TitleWithBackWhiteBgLayout title="Weight">
-      <ActivityIndicator visible={isLoading} />
+    <TitleWithBackWhiteBgLayout
+      binIcon={SELECTED_WEIGHT_ID ? true : false}
+      onPressIcon={() => setShowDeleteModal(true)}
+      title="Weight"
+    >
+      <ActivityIndicator visible={isLoading || isLoading} />
       <ScrollView style={styles.container}>
         <View
           style={{
@@ -173,7 +154,7 @@ const Weight = ({ route }) => {
             error={error || ''}
             onBlur={() => {
               setError(
-                measurmentValidator(
+                measurementValidator(
                   weightTracker.is_metric,
                   'weight',
                   weightTracker.weight
@@ -194,13 +175,23 @@ const Weight = ({ route }) => {
             </>
           ) : null}
         </View>
-
-        <ButtonWithShadowContainer
-          onPress={onSubmit}
-          title={route?.params?.logId ? 'Save Edit' : 'Add'}
-          disabled={!weightTracker ? true : false}
-        />
       </ScrollView>
+      {showDeleteModal && (
+        <AccountDeActivateModal
+          headerText="Weight"
+          subHeading="Are you sure you wish to delete this weight log?"
+          buttonUpperText="Yes"
+          buttonLowerText="Skip"
+          isVisible={showDeleteModal}
+          setIsVisible={setShowDeleteModal}
+          callMe={deleteWeightLog}
+        />
+      )}
+      <ButtonWithShadowContainer
+        onPress={saveWeightLog}
+        title={SELECTED_WEIGHT_ID ? 'Save Edit' : 'Add'}
+        disabled={!weightTracker.weight || error ? true : false}
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };

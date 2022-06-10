@@ -7,7 +7,9 @@ import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
   ButtonWithShadowContainer,
   DateTimePickerModal,
+  ErrorMessage,
 } from 'components/base';
+import { bloodPressureValidator } from 'utils/functions/measurments';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
@@ -15,134 +17,102 @@ import { showMessage } from 'react-native-flash-message';
 
 import makeStyles from './styles';
 import { ActivityIndicator } from 'components';
-import {
-  getDay,
-  getMonth,
-  getTime,
-  getYear,
-} from 'utils/functions/date-format';
+import { getCalendarDate } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
-import { useDispatch, useSelector } from 'react-redux';
-import { getReduxBloodPressurProgress } from 'store/home/home-actions';
-import { IAppState } from 'store/IAppState';
+import { AccountDeActivateModal } from 'components/ui';
 
-const BloodPressure = () => {
+const BloodPressure = ({ route }: any) => {
+  const SELECTED_BP_ID = route?.params?.logId;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const dispatch = useDispatch();
 
-  const bloodPressureProgress = useSelector(
-    (state: IAppState) => state.home.getBpProgressData
-  );
-
-  const [highValue, setHighValue] = useState('');
-  const [lowValue, setLowValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [dateAndtime, setDateAndTime] = useState<any>();
-  const [validation, setValidation] = useState<any>(false);
-  const [validation2, setValidation2] = useState<any>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [error, setError] = useState<string>('');
 
+  const [bloodPressure, setBloodPressure] = useState({
+    bp_systolic: '',
+    bp_diastolic: '',
+    date_entry: '',
+  });
+
+  const getBloodPressureByID = async (id) => {
+    setIsLoading(true);
+    const bloodPressureResponse = await userService.getBloodPressureProgress(
+      id
+    );
+    console.log('===========>', bloodPressureResponse);
+
+    setBloodPressure({
+      bp_systolic: bloodPressureResponse.bp_systolic,
+      bp_diastolic: bloodPressureResponse.bp_diastolic,
+      date_entry: bloodPressureResponse?.date_entry,
+    });
+    setIsLoading(false);
+  };
   useEffect(() => {
-    let today = new Date();
-    let dateTime =
-      getMonth(today) +
-      ' ' +
-      getDay(today) +
-      ', ' +
-      getYear(today) +
-      ' ' +
-      getTime(today);
-    setDateAndTime(dateTime);
+    if (SELECTED_BP_ID) {
+      getBloodPressureByID(SELECTED_BP_ID);
+    } else {
+      setBloodPressure({
+        ...bloodPressure,
+        date_entry: getCalendarDate(new Date()),
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    dispatch(getReduxBloodPressurProgress(4740));
-    if (bloodPressureProgress) {
-      setDateAndTime(bloodPressureProgress?.date_entry);
-    }
-  }, [dispatch, bloodPressureProgress]);
-
-  const onChangeTextHigh = (values) => {
-    console.log('value', values);
-
-    if (values < 60 || values > 600) {
-      setValidation2(false);
-      setValidation(true);
-    } else {
-      setValidation(false);
-      setValidation2(false);
-      console.log('emmty');
-    }
-    setHighValue(values);
-    // setValue(value);
-  };
-  const onChangeTextLow = (values) => {
-    console.log('value', values);
-
-    if (values < 30 || values > 120) {
-      setValidation2(false);
-      setValidation(true);
-    } else {
-      setValidation(false);
-      setValidation2(false);
-      console.log('emmty');
-    }
-    setLowValue(values);
-    // setValue(value);
-  };
-
-  const onSubmit = async () => {
-    let dateTime = '';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateTime =
-      getMonth(dateAndtime) +
-      ' ' +
-      getDay(dateAndtime) +
-      ', ' +
-      getYear(dateAndtime) +
-      ' ' +
-      getTime(dateAndtime);
-
-    console.log('bp_systolic', highValue);
-    console.log('bp_diastolic', lowValue);
-    console.log('date_entry', dateAndtime);
+  const saveBloodPressureLog = async () => {
+    setIsLoading(true);
+    const API_FUNCTION = SELECTED_BP_ID ? 'updateBpTracker' : 'createBpTracker';
     try {
-      setIsLoading(true);
-      const response = await userService.createBloodPressure({
-        medical: {
-          bp_systolic: highValue,
-          bp_diastolic: lowValue,
-          date_entry: dateAndtime,
-        },
-      });
-      console.log('blood pressure successful', response.data);
-      navigate(SCREENS.HEALTH_PROGRESS, 4);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      if (error.errMsg.status === '500') {
+      await userService[API_FUNCTION](bloodPressure, SELECTED_BP_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err: any) {
+      console.error(err);
+      if (error?.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status === false) {
+      } else if (error?.errMsg.status === false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: error?.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: error?.errMsg,
           type: 'danger',
         });
       }
     }
+    setIsLoading(false);
+  };
+  const deleteBpLog = async () => {
+    try {
+      await userService.deleteBpLog(SELECTED_BP_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
+  const onChangeBloodPressure = (key, value) => {
+    console.log(key, value);
+    setBloodPressure((prev) => ({ ...prev, [key]: value }));
+    setError(bloodPressureValidator('key', value) || '');
+  };
+
+  console.log('Error', error);
+
   return (
-    <TitleWithBackWhiteBgLayout title="Blood Pressure">
+    <TitleWithBackWhiteBgLayout
+      title="Blood Pressure"
+      binIcon={SELECTED_BP_ID ? true : false}
+      onPressIcon={() => setShowDeleteModal(true)}
+    >
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -157,50 +127,55 @@ const BloodPressure = () => {
             height={15}
             textAlign="center"
             placeholder={'High (SYS)'}
-            onChangeText={onChangeTextHigh}
-            defaultValue={bloodPressureProgress?.bp_systolic}
+            onChangeText={(val) => {
+              console.log('u');
+              onChangeBloodPressure('bp_systolic', val);
+            }}
+            value={bloodPressure.bp_systolic}
             maxLength={3}
+            width={''}
+            // defaultValue={''}
           />
           <MedicalInput
             height={15}
             textAlign="center"
             placeholder={'Low (DIA)'}
-            onChangeText={onChangeTextLow}
-            defaultValue={bloodPressureProgress?.bp_diastolic}
+            onChangeText={(val) => {
+              console.log('u');
+              onChangeBloodPressure('bp_diastolic', val);
+            }}
+            value={bloodPressure.bp_diastolic}
             maxLength={3}
+            width={''}
+            // defaultValue={''}
           />
-          {validation ? (
-            <Text style={styles.errorMessage}>
-              Please input a valid systolic BP from 60-200 mmHg
-            </Text>
-          ) : null}
-          {validation2 ? (
-            <Text style={styles.errorMessage}>
-              Please input a valid diastolic BP from 30-120 mmHg
-            </Text>
-          ) : null}
+          {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}
 
-          {!validation && !validation2 ? (
-            <>
-              <Text style={styles.label}>Date of Birth</Text>
-              <DateTimePickerModal
-                date={dateAndtime}
-                setDate={(e: any) => setDateAndTime(e)}
-              />
-            </>
-          ) : null}
+          <Text style={styles.label}>Date of Birth</Text>
+          <DateTimePickerModal
+            date={bloodPressure.date_entry}
+            setDate={(e: any) =>
+              setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
+            }
+          />
         </View>
-
-        <ButtonWithShadowContainer
-          onPress={onSubmit}
-          title={'Add'}
-          disabled={
-            highValue === '' || lowValue === '' || validation || validation2
-              ? true
-              : false
-          }
-        />
       </ScrollView>
+      {showDeleteModal && (
+        <AccountDeActivateModal
+          headerText="Weight"
+          subHeading="Are you sure you wish to delete this weight log?"
+          buttonUpperText="Yes"
+          buttonLowerText="Skip"
+          isVisible={showDeleteModal}
+          setIsVisible={setShowDeleteModal}
+          callMe={deleteBpLog}
+        />
+      )}
+      <ButtonWithShadowContainer
+        onPress={saveBloodPressureLog}
+        title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+        disabled={!bloodPressure ? true : false}
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };

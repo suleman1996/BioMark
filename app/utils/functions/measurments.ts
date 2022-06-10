@@ -28,7 +28,7 @@ const lbsToKg = () => {
 const mgMmolConversion = (value: number, toUnit: 'mg/dL' | 'mmol/L' | string) =>
   toUnit == 'mg/dL' ? value * 18 : value * (1 / 18); // These values might not be accurate
 
-const measurmentValidator = (is_metric, measurment, value) => {
+const measurementValidator = (is_metric, measurment, value) => {
   let errorr = '';
   if (value.length === 0 || value == 0)
     return measurment === 'height'
@@ -102,50 +102,59 @@ const measurmentValidator = (is_metric, measurment, value) => {
   return errorr;
 };
 
-const bloodSugarValidator = (
-  values: { fromfpg: number; tofpg: number; fromppg: number; toppg: number },
-  unit: 'mg/dL' | 'mmol/L' | string
-) => {
-  const errors = {
-    fromfpg: '',
-    tofpg: '',
-    fromppg: '',
-    toppg: '',
+const bloodPressureValidator = (measurment, value) => {
+  let errorr = '';
+  if (value.length === 0 || value == 0)
+    return measurment === 'bp_systolic'
+      ? 'Please input a systolic BP'
+      : 'Please input a diastolic BP';
+  const BP_RANGE = {
+    sys: {
+      min: 60,
+      max: 200,
+      errorr: 'Please input a valid systolic BP from 60-200 mmHg',
+    },
+    dia: {
+      min: 30,
+      max: 120,
+      errorr: 'Please input a valid diastolic BP from 30-120 mmHg',
+    },
   };
-  console.log({ values });
-  if (values.tofpg <= values.fromfpg) {
-    errors.tofpg = 'Please enter a reading higher than from';
-  }
-  if (values.toppg <= values.fromppg) {
-    errors.toppg = 'Please enter a reading higher than from';
-  }
-  if (
-    !(values.fromfpg >= limits[unit][0] && values.fromfpg <= limits[unit][1])
-  ) {
-    errors.fromfpg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
-  }
-  if (!(values.tofpg >= limits[unit][0] && values.tofpg <= limits[unit][1])) {
-    errors.tofpg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
-  }
-  if (
-    !(values.fromppg >= limits[unit][0] && values.fromppg <= limits[unit][1])
-  ) {
-    errors.fromppg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
-  }
-  if (!(values.toppg >= limits[unit][0] && values.toppg <= limits[unit][1])) {
-    errors.toppg = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
+  if (measurment === 'bp_systolic') {
+    errorr =
+      BP_RANGE.sys.min < value && value <= BP_RANGE.sys.max
+        ? ''
+        : BP_RANGE.sys.errorr;
+  } else {
+    errorr =
+      BP_RANGE.dia.min < value && value <= BP_RANGE.dia.max
+        ? ''
+        : BP_RANGE.dia.errorr;
   }
 
-  return errors;
+  return errorr;
 };
-const hba1cValidator = (goal: number, unit: '%' | string) => {
+
+const hba1cValidator = (goal: number, unit: '%') => {
   const errors = {
     goal: '',
   };
-  if (!(goal >= limits[unit][0] && goal <= limits[unit][1])) {
-    errors.goal = `Please input a valid target between ${limits[unit][0]}-${limits[unit][1]} ${unit}`;
+  if (!(goal >= LIMITS[unit][0] && goal <= LIMITS[unit][1])) {
+    errors.goal = `Please input a valid target between ${LIMITS[unit][0]}-${LIMITS[unit][1]} ${unit}`;
   }
   return errors;
+};
+
+const bloodSugarValidator = (
+  unit: 'mg/dL' | 'mmol/L',
+  value: string | number,
+  type: string = 'measurement'
+) => {
+  const val = Number(value);
+  if (!val) return 'Please input a valid measurement';
+  return LIMITS[unit][0] < val && val <= LIMITS[unit][1]
+    ? ''
+    : `Please input a valid ${type} between ${LIMITS[unit][0]}-${LIMITS[unit][1]} ${unit}`;
 };
 
 export {
@@ -153,13 +162,15 @@ export {
   feetToCm,
   kgToLbs,
   lbsToKg,
-  measurmentValidator,
   mgMmolConversion,
   bloodSugarValidator,
   hba1cValidator,
+  measurementValidator,
+  bloodPressureValidator,
 };
 
-const limits = {
+//Value on the left side is min and the right side is max
+const LIMITS = {
   'mg/dL': [1, 900],
   'mmol/L': [0.06, 50],
   '%': [5, 15],

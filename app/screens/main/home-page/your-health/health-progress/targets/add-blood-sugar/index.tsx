@@ -31,11 +31,17 @@ const Index = () => {
   const styles = Styles(colors);
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [fromfpg, setFromfpg] = useState<string>('');
-  const [tofpg, setTofpg] = useState<string>('');
-  const [fromppg, setFromppg] = useState<string>('');
-  const [toppg, setToppg] = useState<string>('');
-  const [selectedType, setSelectedType] = useState<number>(0);
+  const [state, setState] = useState({
+    fromfpg: '',
+    tofpg: '',
+    fromppg: '',
+    toppg: '',
+    selectedType: 0,
+  });
+
+  const updateState = (name: string, value: string | number) =>
+    setState((prev) => ({ ...prev, [name]: value }));
+
   const [errors, setErrors] = useState<{
     [key: string]: string;
   }>({
@@ -46,9 +52,9 @@ const Index = () => {
   });
 
   //Redux hooks
-  const { units, latestBloodSugar } = useSelector((state: IAppState) => ({
-    units: state.home.bloodSugarUnits,
-    latestBloodSugar: state.home.latestBloodSugar,
+  const { units, latestBloodSugar } = useSelector((reduxState: IAppState) => ({
+    units: reduxState.home.bloodSugarUnits,
+    latestBloodSugar: reduxState.home.latestBloodSugar,
   }));
   const dispatch = useDispatch();
 
@@ -60,28 +66,29 @@ const Index = () => {
   const onUnitChange = useCallback(
     (unit: string) => {
       const newIndex = units.findIndex((e) => e.name == unit);
-      if (newIndex == selectedType) return;
-      setSelectedType(newIndex);
-
-      setFromfpg((prev) =>
-        Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
-      );
-      setTofpg((prev) =>
-        Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
-      );
-      setFromppg((prev) =>
-        Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
-      );
-      setToppg((prev) =>
-        Number(mgMmolConversion(+prev, units[newIndex]?.name)).toFixed(2)
-      );
+      if (newIndex == state.selectedType) return;
+      setState({
+        selectedType: newIndex,
+        fromfpg: Number(
+          mgMmolConversion(+state.fromfpg, units[newIndex]?.name)
+        ).toFixed(2),
+        fromppg: Number(
+          mgMmolConversion(+state.fromppg, units[newIndex]?.name)
+        ).toFixed(2),
+        tofpg: Number(
+          mgMmolConversion(+state.tofpg, units[newIndex]?.name)
+        ).toFixed(2),
+        toppg: Number(
+          mgMmolConversion(+state.toppg, units[newIndex]?.name)
+        ).toFixed(2),
+      });
     },
-    [units, selectedType]
+    [units, state]
   );
 
   const onSubmit = async () => {
     setLoading(true);
-    if (!fromfpg || !tofpg || !fromppg || !toppg) {
+    if (!state.fromfpg || !state.tofpg || !state.fromppg || !state.toppg) {
       showMessage({
         message: 'Please fill all fields!',
         type: 'danger',
@@ -90,12 +97,12 @@ const Index = () => {
     }
     const result = await userService.createNewTarget({
       range_type: 1,
-      value_from: fromfpg,
-      value_to: tofpg,
-      unit_list_id: units[selectedType]?.id,
-      ppg_value_from: fromppg,
-      ppg_value_to: toppg,
-      ppg_unit_id: units[selectedType]?.id,
+      value_from: state.fromfpg,
+      value_to: state.tofpg,
+      unit_list_id: units[state.selectedType]?.id,
+      ppg_value_from: state.fromppg,
+      ppg_value_to: state.toppg,
+      ppg_unit_id: units[state.selectedType]?.id,
     });
     setLoading(false);
     if (result) {
@@ -115,29 +122,27 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (units[selectedType]) {
-      setErrors(
-        bloodSugarValidator(
-          {
-            fromfpg: +fromfpg,
-            tofpg: +tofpg,
-            fromppg: +fromppg,
-            toppg: +toppg,
-          },
-          units[selectedType]?.name
-        )
-      );
+    const currentUnit = units[state.selectedType]?.name;
+    if (currentUnit && (currentUnit == 'mg/dL' || currentUnit == 'mmol/L')) {
+      setErrors({
+        fromfpg: bloodSugarValidator(currentUnit, +state.fromfpg),
+        fromppg: bloodSugarValidator(currentUnit, +state.fromfpg),
+        toppg: bloodSugarValidator(currentUnit, +state.fromfpg),
+        tofpg: bloodSugarValidator(currentUnit, +state.fromfpg),
+      });
     }
-  }, [fromfpg, tofpg, fromppg, toppg, selectedType, units]);
+  }, [state, units]);
 
   useEffect(() => {
-    setFromfpg(String(latestBloodSugar?.value_from));
-    setTofpg(String(latestBloodSugar?.value_to));
-    setFromppg(String(latestBloodSugar?.ppg_value_from));
-    setToppg(String(latestBloodSugar?.ppg_value_to));
-    setSelectedType(
-      units.findIndex((e) => e.name == latestBloodSugar?.unit_name)
-    );
+    setState({
+      selectedType: units.findIndex(
+        (e) => e.name == latestBloodSugar?.unit_name
+      ),
+      fromfpg: String(latestBloodSugar?.value_from),
+      fromppg: String(latestBloodSugar?.ppg_value_from),
+      tofpg: String(latestBloodSugar?.value_to),
+      toppg: String(latestBloodSugar?.ppg_value_to),
+    });
   }, [latestBloodSugar, units]);
 
   return (
@@ -158,22 +163,22 @@ const Index = () => {
             small
             title="From"
             placeholder={'0'}
-            value={fromfpg}
-            onChangeText={setFromfpg}
+            value={state.fromfpg}
+            onChangeText={(value: string) => updateState('fromfpg', value)}
             onUnitChange={onUnitChange}
             units={unitsNames}
-            unit={unitsNames[selectedType]}
+            unit={unitsNames[state.selectedType]}
             error={errors.fromfpg}
           />
           <InputWithUnits
             small
             title="To"
             placeholder={'0'}
-            value={tofpg}
-            onChangeText={setTofpg}
+            value={state.tofpg}
+            onChangeText={(value: string) => updateState('tofpg', value)}
             onUnitChange={onUnitChange}
             units={unitsNames}
-            unit={unitsNames[selectedType]}
+            unit={unitsNames[state.selectedType]}
             error={errors.tofpg}
           />
           <Text style={styles.secondHeading}>After Meal (PPG)</Text>
@@ -181,23 +186,23 @@ const Index = () => {
             small
             title="From"
             placeholder={'0'}
-            onChangeText={setFromppg}
-            value={fromppg}
+            value={state.fromppg}
+            onChangeText={(value: string) => updateState('fromppg', value)}
             onUnitChange={onUnitChange}
             units={unitsNames}
             error={errors.fromppg}
-            unit={unitsNames[selectedType]}
+            unit={unitsNames[state.selectedType]}
           />
           <InputWithUnits
             small
             title="To"
             placeholder={'0'}
-            onChangeText={setToppg}
-            value={toppg}
+            value={state.toppg}
+            onChangeText={(value: string) => updateState('toppg', value)}
             onUnitChange={onUnitChange}
             units={unitsNames}
             error={errors.toppg}
-            unit={unitsNames[selectedType]}
+            unit={unitsNames[state.selectedType]}
           />
           <GradientButton
             text="Save"
@@ -205,10 +210,10 @@ const Index = () => {
             color={['#2C6CFC', '#2CBDFC']}
             style={styles.buttonContainer}
             disabled={
-              !fromfpg ||
-              !tofpg ||
-              !fromppg ||
-              !toppg ||
+              !state.fromfpg ||
+              !state.tofpg ||
+              !state.fromppg ||
+              !state.toppg ||
               Object.keys(errors).filter((key: string) => errors[key]).length >
                 0
             }

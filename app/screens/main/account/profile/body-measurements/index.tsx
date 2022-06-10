@@ -10,7 +10,7 @@ import { ActivityIndicator, InputWithUnits } from 'components';
 import {
   cmToFeet,
   feetToCm,
-  measurmentValidator,
+  measurementValidator,
 } from 'utils/functions/measurments';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -131,7 +131,7 @@ const BodyMeasurementScreen = () => {
     setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
     setError((err) => ({
       ...err,
-      [key]: measurmentValidator(bodyMeasurment.is_metric, key, value),
+      [key]: measurementValidator(bodyMeasurment.is_metric, key, value),
     }));
   };
 
@@ -157,7 +157,7 @@ const BodyMeasurementScreen = () => {
             onBlur={() => {
               setError({
                 ...error,
-                height: measurmentValidator(
+                height: measurementValidator(
                   bodyMeasurment.is_metric,
                   'height',
                   bodyMeasurment.height
@@ -178,7 +178,7 @@ const BodyMeasurementScreen = () => {
             onBlur={() => {
               setError({
                 ...error,
-                weight: measurmentValidator(
+                weight: measurementValidator(
                   bodyMeasurment.is_metric,
                   'weight',
                   bodyMeasurment.weight
