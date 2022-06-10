@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { BookingListDataUpcoming } from 'types/api';
 import { dateFormat1, getTime, getDayName } from 'utils/functions/date-format';
+import CovidHealthDeclarationModal from './../covid-health-declaration/index';
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
@@ -123,6 +124,7 @@ const UpcommingBookings = (props: Props) => {
   };
   return (
     <View style={{ flex: 1 }}>
+      <CovidHealthDeclarationModal setIsVisible={undefined} isVisible={true} />
       <FlatList
         ListHeaderComponent={() => <SuggestionsText />}
         renderItem={_renderItem}

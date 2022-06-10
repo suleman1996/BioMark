@@ -91,7 +91,7 @@ function getBookingsData() {
 }
 
 // en.json
-// covidHealthcare
+// pages => covid =>  bookCovid => covidHealthcare
 // declaration
 function updateHealthDeclaration(
   request: CovidBookingHealthDeclarationRequest
