@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -97,7 +97,7 @@ const Index = () => {
     <TitleWithBackWhiteBgLayout>
       <ActivityIndicator visible={loading} />
 
-      <View style={styles.innerContainer}>
+      <ScrollView style={styles.innerContainer}>
         <Text style={styles.firstHeading}>Set your new Hba1c goal</Text>
         <Text style={styles.subHeading}>
           Your doctor should help you set these ranges. if you leave these
@@ -115,14 +115,14 @@ const Index = () => {
           onUnitChange={onUnitChange}
           error={errors.goal}
         />
-        <GradientButton
-          onPress={onSubmit}
-          text="Save"
-          color={['#2C6CFC', '#2CBDFC']}
-          disabled={!goalValue || errors.goal}
-          style={styles.buttonContainer}
-        />
-      </View>
+      </ScrollView>
+      <GradientButton
+        onPress={onSubmit}
+        text="Save"
+        color={['#2C6CFC', '#2CBDFC']}
+        disabled={!goalValue || errors.goal}
+        style={styles.buttonContainer}
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };

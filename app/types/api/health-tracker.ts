@@ -16,4 +16,13 @@ export interface HealthTrackerPayloadData {
   card_status: string;
 }
 
+export interface MedicationTrackerRequest {
+  medication: {
+    dosage: string;
+    record_date: string;
+    medication_log_id: number;
+    meal_type?: number;
+  };
+}
+
 export type HealthTrackerResponse = ApiResponse<HealthTrackerPayload>;
