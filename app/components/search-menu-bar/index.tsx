@@ -1,4 +1,4 @@
-import { View, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import React from 'react';
 
 import { useTheme } from 'react-native-paper';
@@ -19,15 +19,19 @@ const Index = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchView}>
-        <View style={styles.inputView}>
+        <TouchableOpacity
+          onPress={() => Keyboard.dismiss()}
+          style={styles.inputView}
+        >
           <TextInput
             style={styles.input}
             onChangeText={onChangeNumber}
             value={number}
             placeholder={props.placeHolder}
+            editable={false}
           />
           <SearIcon style={{ marginRight: 10 }} size={18} name="search" />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.filterView}>

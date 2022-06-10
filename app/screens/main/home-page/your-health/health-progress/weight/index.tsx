@@ -15,6 +15,7 @@ import Logs from '../../../../../../components/health-progress-logs/index';
 
 import FloatingButton from '../../../../../../components/floating-button/index';
 import Person from '../../../../../../assets/svgs/Bmi';
+import { userService } from 'services/user-service/user-service';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -57,9 +58,24 @@ const Index = () => {
     title: 'kg',
   });
 
+  const weightGraphData = async () => {
+    try {
+      const result = await userService.getWeightMapData({
+        date: selectedValue.title,
+      });
+      console.log('weight api map ', result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    weightGraphData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValue]);
+
   React.useEffect(() => {
     dispatch(getReduxWeightLogs());
-    //
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

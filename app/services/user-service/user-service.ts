@@ -1354,6 +1354,7 @@ const getHba1cLogs = () => {
       });
   });
 };
+
 const getMedicationProgress = (id) => {
   return new Promise<MedicationTrackerPayload>((resolve, reject) => {
     client
@@ -1396,6 +1397,16 @@ const getBloodPressureLogs = () => {
 
 const getMoreInfoResult = (id) => {
   return client.get(`${API_URLS.GET_RESULT_MORE_INFO}${id}/summary`);
+};
+
+const getResultPdf = (id) => {
+  return client.get(`${API_URLS.GET_RESULT_PDF}${id}/download`);
+};
+
+const getWeightMapData = (obj) => {
+  return client.get(API_URLS.GET_WEIGHT_MAP, {
+    params: obj,
+  });
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
@@ -1547,4 +1558,6 @@ export const userService = {
   deleteHba1cLog,
   barcodeCheck,
   getMoreInfoResult,
+  getResultPdf,
+  getWeightMapData,
 };

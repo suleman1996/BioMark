@@ -7,11 +7,12 @@ import {
 } from 'react-native';
 import React from 'react';
 
+import moment from 'moment';
 import { useTheme } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxResultOverview } from 'store/home/home-actions';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -20,9 +21,11 @@ import { Button } from 'components/button';
 import Pdf from 'assets/svgs/pdf';
 import RenderResults from './result-card';
 import HealthProgressFilter from 'components/health-progress-filter/index';
+import SCREENS from 'navigation/constants/index';
 
 const Index = () => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const route = useRoute();
   const styles = Styles(colors);
   const dispatch = useDispatch();
@@ -45,7 +48,7 @@ const Index = () => {
 
   React.useEffect(() => {
     dispatch(getReduxResultOverview(route?.params?.result?.lab_id));
-    // console.log('Result OverView Redux ', resultOverView);
+    console.log('Result OverView Redux ', resultOverView);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -70,15 +73,20 @@ const Index = () => {
         />
       </View>
       {showSummaryummary && (
-        <View style={styles.infoView}>
-          <AntDesign color={colors.blue} name="infocirlceo" />
-          <Text style={styles.infoText}>
-            {/* <Text>You have</Text>
+        <>
+          <View style={styles.infoView}>
+            <AntDesign color={colors.blue} name="infocirlceo" />
+            <Text style={styles.infoText}>
+              {/* <Text>You have</Text>
             <Text style={{ color: colors.heading }}> 1 out of 3 </Text>
             <Text>That need attention</Text> */}
-            {resultOverView?.result?.summary}
+              {resultOverView?.result?.summary}
+            </Text>
+          </View>
+          <Text style={[styles.overLayHeading, { fontSize: 16 }]}>
+            {resultOverView?.result?.doctor}
           </Text>
-        </View>
+        </>
       )}
     </View>
   );
@@ -100,15 +108,23 @@ const Index = () => {
         <View style={styles.overLayContainer}>
           <RenderHeading title="Results Details" />
           <RenderHeading title="Source" />
-          <RenderSubheading subTitle="Gribbles Pathoogy" />
+          <RenderSubheading subTitle={resultOverView?.provider} />
           <RenderHeading title="Referring Doctor or Clinic" />
-          <RenderSubheading subTitle="Clinic Queen's Avenue Cilnic" />
+          <RenderSubheading subTitle={resultOverView?.result?.doctor} />
           <RenderHeading title="Lab Reference Number" />
-          <RenderSubheading subTitle="CVD-HSVOBP" />
+          <RenderSubheading subTitle={resultOverView?.ref_no} />
           <RenderHeading title="Report Received" />
-          <RenderSubheading subTitle="Mar 04,2022" />
+          <RenderSubheading
+            subTitle={moment(resultOverView?.report_received).format(
+              'MMM DD, YYYY'
+            )}
+          />
           <RenderHeading title="Report Printed" />
-          <RenderSubheading subTitle="Mar 04,2022" />
+          <RenderSubheading
+            subTitle={moment(resultOverView?.report_printed).format(
+              'MMM DD, YYYY'
+            )}
+          />
 
           <View style={{ marginTop: 20 }}>
             <Button
@@ -153,7 +169,10 @@ const Index = () => {
         onPressInfo={setIsInfo}
       >
         <View style={styles.miniHeader}>
-          <Text style={styles.miniHeaderText}>Received on March 23, 2022</Text>
+          <Text style={styles.miniHeaderText}>
+            Received on{' '}
+            {moment(resultOverView?.report_received).format('MMM DD, YYYY')}
+          </Text>
         </View>
         <View style={[styles.container, { paddingHorizontal: 10 }]}>
           <View style={{ marginTop: -18 }}>
@@ -164,7 +183,16 @@ const Index = () => {
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             <RenderSummary />
-            <Button svg={<Pdf fill={colors.white} />} title="See Report" />
+            <Button
+              svg={<Pdf fill={colors.white} />}
+              onPress={() =>
+                navigation.navigate(SCREENS.SEE_REPORT, {
+                  date: resultOverView?.report_received,
+                  resultId: resultOverView?.lab_id,
+                })
+              }
+              title="See Report"
+            />
             {resultOverView?.panel?.map((result) => (
               <>
                 <FlatList
