@@ -31,11 +31,16 @@ const Index = ({
         style={[
           styles.radio,
           {
+            marginLeft: 5,
             borderWidth: selectedfilterOption.title == item.title ? 3.5 : 2,
             borderColor:
               selectedfilterOption.title == item.title
                 ? colors.heading
                 : colors.lightGrey,
+            backgroundColor:
+              selectedfilterOption.title == item.title
+                ? colors.shineBlue
+                : colors.white,
           },
         ]}
       />

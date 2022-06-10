@@ -25,7 +25,7 @@ const styles = (colors: any) =>
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      paddingVertical: 10,
+      padding: 5,
       alignItems: 'center',
     },
     headingText: {
@@ -36,13 +36,13 @@ const styles = (colors: any) =>
     subHeading: {
       fontFamily: fonts.bold,
       fontSize: 14,
-      color: colors.heading,
+      color: colors.shineBlue,
+      marginLeft: 5,
     },
     radio: {
       height: 15,
       width: 15,
       borderRadius: 7.5,
-
       marginRight: 5,
     },
   });
