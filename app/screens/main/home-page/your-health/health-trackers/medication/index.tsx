@@ -44,7 +44,7 @@ type RenderDosageProps = {
   Add: React.ReactNode;
   Minus: React.ReactNode;
 };
-const Medication = () => {
+const Medication = ({ route }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
@@ -104,11 +104,18 @@ const Medication = () => {
   }, []);
   useEffect(() => {
     dispatch1(getReduxMedicationProgress(48819));
+    console.log('getMedicationProgressData', getMedicationProgressData);
+  }, []);
 
-    if (getMedicationProgressData) {
-      setDosage(getMedicationProgressData?.medication?.dosage);
+  useEffect(() => {
+    console.log('logIdmed', route?.params?.logId);
+    if (route?.params?.logId) {
+      if (getMedicationProgressData) {
+        setDosage(getMedicationProgressData?.medication?.dosage);
+      }
     }
-  }, [dispatch1]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = async () => {
     let dateTime = '';

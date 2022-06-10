@@ -1,4 +1,5 @@
 import { userService } from 'services/user-service/user-service';
+import { HIDE_LOADER, SHOW_LOADER } from 'store/events/constants';
 
 import {
   HealthTrackerPayload,
@@ -345,10 +346,12 @@ export const getReduxResultOverview =
   };
 export const getReduxWeightProgress =
   (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    dispatch({ type: SHOW_LOADER });
     await userService
       .getWeightProgress(id)
       .then(async (res) => {
         await dispatch(getWeightProgress(res));
+        dispatch({ type: HIDE_LOADER });
       })
       .catch((err) => {
         logNow(err);
@@ -370,10 +373,12 @@ export const getReduxWeightLogs =
   };
 export const getReduxBloodPressurProgress =
   (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    dispatch({ type: SHOW_LOADER });
     await userService
       .getBloodPressureProgress(id)
       .then(async (res) => {
         await dispatch(getBloodPressureProgress(res));
+        dispatch({ type: HIDE_LOADER });
       })
       .catch((err) => {
         logNow(err);

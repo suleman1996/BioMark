@@ -30,6 +30,8 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  WeightProgressEntryRequest,
+  Hba1CProgressEntryRequest,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -468,14 +470,200 @@ const createBloodSugar = ({ blood_sugar }: Props) => {
     blood_sugar,
   });
 };
-const createBloodPressure = ({ medical }: Props) => {
-  return client.post(API_URLS.CREATE_BLOOD_PRESSURE, {
-    medical,
+const createBpTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_BLOOD_PRESSURE, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log('create data', data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
   });
 };
-const createWeight = ({ medical }: Props) => {
-  return client.post(API_URLS.CREATE_WEIGHT, {
-    medical,
+
+const updateBpTracker = (medical: WeightProgressEntryRequest, id: string) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_BLOOD_PRESSURE}/${id}`, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        console.log('update data', data);
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteBpLog = (bp_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_BLOOD_PRESSURE}/${bp_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+const createBsTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_BLOOD_SUGAR, {
+        blood_sugar: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log('create data', data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateBsTracker = (medical: WeightProgressEntryRequest, id: string) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_HBA1C}/${id}`, {
+        blood_sugar: medical,
+      })
+      .then(async ({ data }) => {
+        console.log('update data', data);
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteBsLog = (bp_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_HBA1C}/${bp_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_HBA1C, {
+        hba1c: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log('create data', data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateHba1cTracker = (medical: Hba1CProgressEntryRequest, id: string) => {
+  console.log('id', id);
+
+  console.log('medical', medical);
+
+  return new Promise<Hba1CProgressEntryRequest>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_HBA1C}/${id}`, {
+        hba1c: medical,
+      })
+      .then(async ({ data }) => {
+        console.log('update data', data);
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteHba1cLog = (bp_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_HBA1C}/${bp_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
   });
 };
 const createHba1c = ({ hba1c }: Props) => {
@@ -1210,6 +1398,73 @@ const getMoreInfoResult = (id) => {
   return client.get(`${API_URLS.GET_RESULT_MORE_INFO}${id}/summary`);
 };
 
+const createWeightTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_WEIGHT, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateWeightTracker = (
+  medical: WeightProgressEntryRequest,
+  id: string
+) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_WEIGHT}/${id}`, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteWeightLog = (weight_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_WEIGHT}/${weight_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
 export const userService = {
   login,
   federatedlogin,
@@ -1246,8 +1501,8 @@ export const userService = {
   getDashboard,
   getMedicalDropDown,
   createBloodSugar,
-  createBloodPressure,
-  createWeight,
+  updateWeightTracker,
+  createWeightTracker,
   createHba1c,
   getHealthRisks,
   getJumioData,
@@ -1280,6 +1535,16 @@ export const userService = {
   getBloodSugarLogs,
   getHba1cLogs,
   getBloodPressureLogs,
+  deleteWeightLog,
+  createBpTracker,
+  updateBpTracker,
+  deleteBpLog,
+  createBsTracker,
+  updateBsTracker,
+  deleteBsLog,
+  createHba1cTracker,
+  updateHba1cTracker,
+  deleteHba1cLog,
   barcodeCheck,
   getMoreInfoResult,
 };

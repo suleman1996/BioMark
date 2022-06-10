@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { BloodSugarChooser } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
   ButtonWithShadowContainer,
@@ -18,39 +18,46 @@ import { userService } from 'services/user-service/user-service';
 import { showMessage } from 'react-native-flash-message';
 
 import makeStyles from './styles';
-import { ActivityIndicator } from 'components';
+import { ActivityIndicator, InputWithUnits } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getDay,
-  getMonth,
-  getTime,
-  getYear,
-} from 'utils/functions/date-format';
+import { getCalendarDate } from 'utils/functions/date-format';
 import SCREENS from 'navigation/constants/index';
 import { navigate } from 'services/nav-ref';
-import { getReduxBloodSugarProgress } from 'store/home/home-actions';
+import { bloodSugarValidator } from 'utils/functions/measurments';
 
-const BloodSugar = () => {
+const BloodSugar = ({ route }) => {
+  const SELECTED_BS_ID = route?.params?.logId;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const [value, setValue] = useState('');
-  const [selectedType, setSelectedType] = useState(1);
-
   const [isLoading, setIsLoading] = useState(false);
 
-  const [dropdownValue, setDropdown] = useState<any>();
-  const [isDropdownChanged, setIsDropDownChanged] = useState(false);
-  const [dateAndtime, setDateAndTime] = useState<any>();
-  const [validation, setValidation] = useState<any>(false);
-  const [validation2, setValidation2] = useState<any>(false);
   const [options, setOptions] = useState<any>([]);
+  const [error, setError] = useState<string>('');
   const drop = useSelector((state: IAppState) => state.home.medicalDropDown);
-  const bloodSugarProgress = useSelector(
-    (state: IAppState) => state.home.getBsProgressData
-  );
+
+  const [bloodSugarTracker, setBloodSugarTracker] = useState({
+    data_value: '0.0',
+    unit_list_id: 1,
+    record_date: '',
+    meal_type_id: 0,
+  });
   const dispatch = useDispatch();
-  const dispatch2 = useDispatch();
+
+  useEffect(() => {
+    if (bloodSugarTracker.unit_list_id !== 1) {
+      setBloodSugarTracker((prev: any) => ({
+        ...prev,
+        data_value: Number((prev.data_value / 18).toFixed(1)),
+      }));
+    } else {
+      setBloodSugarTracker((prev: any) => ({
+        ...prev,
+        data_value: Number((prev.data_value * (1 * 18)).toFixed(1)),
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bloodSugarTracker.unit_list_id]);
 
   useEffect(() => {
     let arr = [];
@@ -59,97 +66,83 @@ const BloodSugar = () => {
     });
     setOptions(arr);
 
-    let today = new Date();
-    let dateTime = '';
-    dateTime =
-      getMonth(today) +
-      ' ' +
-      getDay(today) +
-      ', ' +
-      getYear(today) +
-      ' ' +
-      getTime(today);
-    setDateAndTime(dateTime);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch2(getReduxBloodSugarProgress(2968));
-    console.log('bloodSugarProgress', bloodSugarProgress);
-    if (bloodSugarProgress) {
-      setValue(bloodSugarProgress?.data_value);
-      setDropdown(bloodSugarProgress?.meal_type_id);
-      setDateAndTime(bloodSugarProgress?.record_date);
+    if (SELECTED_BS_ID) {
+      getBloodSugarProgressDataByID(SELECTED_BS_ID);
+    } else {
+      setBloodSugarTracker({
+        ...bloodSugarTracker,
+        record_date: getCalendarDate(new Date()),
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch2]);
+  }, []);
+  const getBloodSugarProgressDataByID = async (id) => {
+    setIsLoading(true);
+    const weightData = await userService.getBloodSugarProgress(id);
+    console.log('weightData', weightData);
+    setBloodSugarTracker({
+      data_value: weightData?.data_value,
+      unit_list_id: weightData?.unit_list_id,
+      record_date: weightData?.record_date,
+      meal_type_id: weightData?.meal_type_id,
+    });
 
-  const onChangeText = (values) => {
-    console.log('value', value);
-
-    if ((values < 1 || values > 600) && selectedType === 1) {
-      setValidation2(false);
-      setValidation(true);
-    } else if ((values < 0.06 || values > 50) && selectedType === 21) {
-      setValidation(false);
-      setValidation2(true);
-    } else {
-      setValidation(false);
-      setValidation2(false);
-      console.log('emmty');
-    }
-    setValue(values);
-    // setValue(value);
+    setIsLoading(false);
   };
 
-  const onSubmit = async () => {
-    let dateTime = '';
-    dateTime =
-      getMonth(dateAndtime) +
-      ' ' +
-      getDay(dateAndtime) +
-      ', ' +
-      getYear(dateAndtime) +
-      ' ' +
-      getTime(dateAndtime);
-    console.log('data_value', value);
-    console.log('unit_list_id', selectedType);
-    console.log('record_date', dateTime);
-    console.log('meal_type_id', dropdownValue);
+  const saveBsLog = async () => {
+    console.log('bloodSugarTracker', bloodSugarTracker);
+
+    setIsLoading(true);
+    const API_FUNCTION = SELECTED_BS_ID ? 'updateBsTracker' : 'createBsTracker';
     try {
-      setIsLoading(true);
-      const response = await userService.createBloodSugar({
-        blood_sugar: {
-          data_value: value,
-          unit_list_id: selectedType,
-          record_date: dateTime,
-          meal_type_id: dropdownValue,
-        },
-      });
-      console.log('blood sugar successful', response.data);
-      navigate(SCREENS.HEALTH_PROGRESS, 1);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      if (error.errMsg.status == '500') {
+      await userService[API_FUNCTION](bloodSugarTracker, SELECTED_BS_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err: any) {
+      console.error(err);
+      if (error?.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
+      } else if (error?.errMsg.status === false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: error?.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: error?.errMsg,
           type: 'danger',
         });
       }
     }
+    setIsLoading(false);
+  };
+  const handleUnitChange = (selectedUnit: string) => {
+    const unitListId = selectedUnit == 'mg/dl' ? 1 : 21;
+    console.log('selectedUnit', selectedUnit);
+    setBloodSugarTracker((prev: any) => ({
+      ...prev,
+      unit_list_id: unitListId,
+    }));
+    setError(
+      bloodSugarValidator(selectedUnit, bloodSugarTracker.data_value) || ''
+    );
+  };
+  const handleChange = (value: number, key: string) => {
+    setBloodSugarTracker({ ...bloodSugarTracker, [key]: value });
+    setError(
+      bloodSugarValidator(
+        bloodSugarTracker.unit_list_id === 1 ? 'mg/dl' : 'mmol/L',
+        value
+      ) || ''
+    );
+    console.log('lllll', bloodSugarTracker);
   };
 
   return (
@@ -159,72 +152,68 @@ const BloodSugar = () => {
         <View
           style={{
             paddingHorizontal: widthToDp(4),
-            // borderWidth: 5,
             marginBottom: heightToDp(25),
           }}
         >
-          <BloodSugarChooser
-            width={'70%'}
-            height={15}
-            label="Your Reading"
-            textAlign="right"
-            placeholder={'0'}
-            onChangeText={onChangeText}
-            value={value}
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            setValue={setValue}
+          <InputWithUnits
+            title="Your Reading"
+            placeholder="0.0"
+            units={['mg/dl', 'mmol/L']}
+            unit={bloodSugarTracker.unit_list_id === 1 ? 'mg/dl' : 'mmol/L'}
+            value={bloodSugarTracker?.data_value.toString()}
+            onChangeText={(val: any) => handleChange(val, 'data_value')}
+            onUnitChange={handleUnitChange}
+            error={error || ''}
+            onBlur={() => {
+              setError(
+                bloodSugarValidator(
+                  bloodSugarTracker?.unit_list_id === 1 ? 'mg/dl' : 'mmol/L',
+                  bloodSugarTracker.data_value
+                ) || ''
+              );
+            }}
           />
-          {validation ? (
-            <Text style={styles.errorMessage}>
-              Please input a valid measurement from 1-600 mg/dL
-            </Text>
-          ) : null}
-          {validation2 ? (
-            <Text style={styles.errorMessage}>
-              Please input a valid measurement from 0.06-50 mmol/L
-            </Text>
-          ) : null}
 
-          {value && !validation && !validation2 ? (
+          {bloodSugarTracker?.data_value !== '0.0' && !error ? (
             <>
               <View style={styles.dropDown}>
                 <Text style={styles.textStyle}>Meal</Text>
                 <DropdownMenu
                   options={options}
-                  selectedValue={dropdownValue}
+                  selectedValue={bloodSugarTracker.meal_type_id}
                   onValueChange={(text: any) => {
-                    setDropdown(text);
-                    setIsDropDownChanged(true);
+                    setBloodSugarTracker({
+                      ...bloodSugarTracker,
+                      meal_type_id: text,
+                    });
                   }}
-                  error={
-                    isDropdownChanged
-                      ? dropdownValue === '---'
-                        ? 'Please select your ethnicity'
-                        : ''
-                      : ''
-                  }
                 />
               </View>
               <Text style={styles.label}>Date of Birth</Text>
               <DateTimePickerModal
-                date={dateAndtime}
-                setDate={(e: any) => setDateAndTime(e)}
+                date={bloodSugarTracker?.record_date}
+                setDate={(e: any) =>
+                  setBloodSugarTracker({
+                    ...bloodSugarTracker,
+                    record_date: e,
+                  })
+                }
               />
             </>
           ) : null}
         </View>
-
-        <ButtonWithShadowContainer
-          onPress={onSubmit}
-          title={'Add'}
-          disabled={
-            value === '' || !isDropdownChanged || validation || validation2
-              ? true
-              : false
-          }
-        />
       </ScrollView>
+      <ButtonWithShadowContainer
+        onPress={saveBsLog}
+        title={route?.params?.logId ? 'Save Edit' : 'Add'}
+        disabled={
+          bloodSugarTracker.data_value === '0.0' ||
+          bloodSugarTracker.meal_type_id == 0 ||
+          error
+            ? true
+            : false
+        }
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };
