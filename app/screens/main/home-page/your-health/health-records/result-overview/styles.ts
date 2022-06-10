@@ -67,7 +67,7 @@ const styles = (colors: any) =>
       margin: 5,
     },
     resultViewHeader: {
-      height: 50,
+      minHeight: 50,
       flexDirection: 'row',
       borderRadius: 5,
     },

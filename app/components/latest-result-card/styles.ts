@@ -102,6 +102,7 @@ const styles = (colors: any) =>
       borderRadius: 10,
       elevation: 7,
       marginBottom: 10,
+      marginHorizontal: 5,
     },
   });
 export default styles;

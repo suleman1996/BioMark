@@ -11,6 +11,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import makeStyles from './styles';
 import fonts from 'assets/fonts';
+import { TargetUnit } from 'types/api';
 
 type Props = {
   label: string;
@@ -22,9 +23,10 @@ type Props = {
   selectedType: any;
   value: string;
   setValue: any;
-  isSecond: bool;
-  isFirst: bool;
+  isSecond: boolean;
+  isFirst: boolean;
   op1: string;
+  units?: TargetUnit[];
 };
 
 const InputWithUnits = ({
@@ -40,6 +42,7 @@ const InputWithUnits = ({
   isSecond,
   isFirst,
   op1,
+  units,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -88,10 +91,16 @@ const InputWithUnits = ({
                 color: colors.smoke,
                 fontFamily: fonts.mulishRegular,
                 fontSize: responsiveFontSize(22),
-                marginright: 15,
+                marginRight: 15,
               }}
             >
-              {selectedType == 1 ? (op1 ? op1 : 'mg/dL') : 'mmol/L'}
+              {units
+                ? units[selectedType]?.name
+                : selectedType == 1
+                ? op1
+                  ? op1
+                  : 'mg/dL'
+                : 'mmol/L'}
             </Text>
 
             <MaterialCommunityIcons
@@ -101,27 +110,12 @@ const InputWithUnits = ({
             />
           </MenuTrigger>
           <MenuOptions optionsContainerStyle={styles.popupMenu}>
-            {isFirst && (
-              <Pressable
-                onPress={() => {
-                  setSelectedType(1);
-                  selectedType != 1 && setValue(value.toString());
-                  menuRef.current.close();
-                }}
-                style={[
-                  styles.singleMenuItem,
-                  selectedType == 1 ? { backgroundColor: colors.gray } : {},
-                ]}
-              >
-                <Text style={styles.menuText}>%</Text>
-              </Pressable>
-            )}
-            {isSecond && (
-              <>
+            {units ? (
+              units.map((unit, index) => (
                 <Pressable
                   onPress={() => {
-                    setSelectedType(1);
-                    selectedType != 1 && setValue(value.toString());
+                    setSelectedType(index);
+                    selectedType != index && setValue(value.toString());
                     menuRef.current.close();
                   }}
                   style={[
@@ -129,21 +123,61 @@ const InputWithUnits = ({
                     selectedType == 1 ? { backgroundColor: colors.gray } : {},
                   ]}
                 >
-                  <Text style={styles.menuText}>mg/dL</Text>
+                  <Text style={styles.menuText}>{unit.name}</Text>
                 </Pressable>
-                <Pressable
-                  onPress={() => {
-                    setSelectedType(2);
-                    selectedType != 2 && setValue(parseInt(value).toString());
-                    menuRef.current.close();
-                  }}
-                  style={[
-                    styles.singleMenuItem,
-                    selectedType == 2 ? { backgroundColor: colors.gray } : {},
-                  ]}
-                >
-                  <Text style={styles.menuText}>mmol/L</Text>
-                </Pressable>
+              ))
+            ) : (
+              <>
+                {isFirst && (
+                  <Pressable
+                    onPress={() => {
+                      setSelectedType(1);
+                      selectedType != 1 && setValue(value.toString());
+                      menuRef.current.close();
+                    }}
+                    style={[
+                      styles.singleMenuItem,
+                      selectedType == 1 ? { backgroundColor: colors.gray } : {},
+                    ]}
+                  >
+                    <Text style={styles.menuText}>%</Text>
+                  </Pressable>
+                )}
+                {isSecond && (
+                  <>
+                    <Pressable
+                      onPress={() => {
+                        setSelectedType(1);
+                        selectedType != 1 && setValue(value.toString());
+                        menuRef.current.close();
+                      }}
+                      style={[
+                        styles.singleMenuItem,
+                        selectedType == 1
+                          ? { backgroundColor: colors.gray }
+                          : {},
+                      ]}
+                    >
+                      <Text style={styles.menuText}>mg/dL</Text>
+                    </Pressable>
+                    <Pressable
+                      onPress={() => {
+                        setSelectedType(2);
+                        selectedType != 2 &&
+                          setValue(parseInt(value).toString());
+                        menuRef.current.close();
+                      }}
+                      style={[
+                        styles.singleMenuItem,
+                        selectedType == 2
+                          ? { backgroundColor: colors.gray }
+                          : {},
+                      ]}
+                    >
+                      <Text style={styles.menuText}>mmol/L</Text>
+                    </Pressable>
+                  </>
+                )}
               </>
             )}
           </MenuOptions>

@@ -5,24 +5,24 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { widthToDp, heightToDp } from 'utils/functions/responsive-dimensions';
 import fonts from 'assets/fonts';
 
-export const makeStyles = (colors: any) =>
+export const makeStyles = (colors: any, small?: boolean) =>
   StyleSheet.create({
     mainView: {
-      height: heightToDp(18),
-      backgroundColor: colors.fieldGrey,
+      height: heightToDp(small ? 5 : 18),
+      backgroundColor: small ? colors.inputBg : colors.fieldGrey, //input bg is not accurate
       marginTop: heightToDp(2),
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      borderRadius: 5,
+      borderRadius: small ? 8 : 5,
     },
     textInput: {
       flexDirection: 'row-reverse',
-      // width: '70%',
+      ...(small && { flex: 1, paddingHorizontal: 15 }),
       backgroundColor: 'transparent',
-      fontSize: responsiveFontSize(50),
-      fontFamily: fonts.OpenSansBold,
-      color: '#808080',
+      fontSize: responsiveFontSize(small ? 22 : 50),
+      fontFamily: small ? fonts.mulishRegular : fonts.OpenSansBold,
+      color: small ? colors.black : '#808080',
     },
     menuTrigger: {
       flexDirection: 'row',
@@ -30,9 +30,10 @@ export const makeStyles = (colors: any) =>
       marginHorizontal: widthToDp(5),
     },
     menuText: {
-      color: colors.heading,
-      fontSize: responsiveFontSize(22),
-      fontFamily: fonts.OpenSansBold,
+      color: small ? colors.lightGrey : colors.heading,
+      fontSize: responsiveFontSize(small ? 18 : 22),
+      fontFamily: small ? fonts.OpenSansSemiBold : fonts.OpenSansBold,
+      ...(small && { marginRight: 10 }),
     },
     optionContainer: {
       flex: 1,

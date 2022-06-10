@@ -5,14 +5,22 @@ import { useTheme } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import fonts from 'assets/fonts';
 
-type Props = { data: array; setSelectedValue: any; selectedValue: any };
+type Props = {
+  data: array;
+  setSelectedValue: any;
+  selectedValue: any;
+};
 
 const Index = (props: Props) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
 
   const RenderTitle = ({ title }) => (
-    <TouchableOpacity onPress={() => props.setSelectedValue(title)}>
+    <TouchableOpacity
+      onPress={() => {
+        props.setSelectedValue(title);
+      }}
+    >
       <LinearGradient
         style={
           props.selectedValue?.title == title?.title ? styles.selected : null

@@ -72,15 +72,23 @@ const API_URLS = {
   // Health Record
 
   GET_RESULT_OVERVIEW: '/api/v1/patient/results/',
+  GET_FILTER_RESULT: '/api/v1/patient/results/past',
+  UPLOAD_RESULTS: '/api/v1/patient/lab_uploads',
   GET_RESULT_MORE_INFO: '/api/v1/patient/results/',
+  GET_RESULT_PDF: '/api/v1/patient/results/',
+  GET_WEIGHT_MAP: '/api/v1/patient/weight_trackers/chart?page=1',
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   COVID_GET_RESUTLS_DOWNLOAD_V1: '/api/v1/patient/results/',
   GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
+
+  //Medication Tracker
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
   GET_NEW_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/new',
   DELETE_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/',
+  GET_MEDICATION_TRACKER_BY_ID: '/api/v1/patient/psp/trackers/medication/',
+
   // Psp Modules
   PSP_GET_MODULES: '/api/v1/patient/psp/modules',
   PDF_GET_LINK: '/api/v1/patient/psp/modules/',
@@ -90,6 +98,7 @@ const API_URLS = {
     '/api/v1/patient/health_trackers?page=hypertension',
   PSP_GET_HYPER_MODULE_DATA: '/api/v1/patient/psp/modules?program=3',
   GET_LAB_STATUS: '/api/v1/patient/results/lab_status',
+  WITHDRAW: '/api/v1/patient/psp/modules/withdraw',
 
   LAB_STATUS_VERYFY: '/api/v1/patient/results/verify',
 
@@ -105,12 +114,21 @@ const API_URLS = {
   UPDATE_MEDICATION: '/api/v1/patient/psp/medications',
   DELETE_MEDICATION: '/api/v1/patient/psp/medications',
 
+  //Targets
+  GET_NEW_TARGET: '/api/v1/patient/psp/targets/new',
+  CREATE_NEW_TARGET: '/api/v1/patient/psp/targets',
+  GET_LATEST_TARGETS: '/api/v1/patient/psp/targets',
+  GET_BLOOD_SUGAR_TARGETS: '/api/v1/patient/psp/targets/blood_sugar?page=1',
+  GET_HBA1C_TARGETS: '/api/v1/patient/psp/targets/hba1c?page=1',
+  SET_DEFAULT_BLOOD_SUGAR_TARGET:
+    '/api/v1/patient/psp/targets/default_blood_sugar',
+  SET_DEFAULT_HBA1C_TARGET: '/api/v1/patient/psp/targets/default_hba1c',
+
   //Progress Entry for tracker
   GET_WEIGTH_TRACKER: '/api/v1/patient/weight_trackers/',
   GET_BP_TRACKER: '/api/v1/patient/bp_trackers/',
   GET_BS_TRACKER: '/api/v1/patient/psp/trackers/blood_sugar/',
   GET_HBA1C_TRACKER: '/api/v1/patient/psp/trackers/hba1c/',
-  GET_MEDICATION_TRACKER_BY_ID: '/api/v1/patient/psp/trackers/medication/',
 };
 
 export { API_URLS };

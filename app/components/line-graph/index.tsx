@@ -7,14 +7,14 @@ const Index = () => {
   const [option] = React.useState({
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      data: ['6pm', '12am', '6am', '12pm'],
     },
     yAxis: {
       type: 'value',
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: [0, 20, 40, 60],
         type: 'line',
       },
     ],

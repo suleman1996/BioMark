@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 const styles = (colors: any) =>
@@ -27,6 +28,12 @@ const styles = (colors: any) =>
       alignItems: 'center',
       paddingHorizontal: 5,
       flexDirection: 'row',
+    },
+    showMoreText: {
+      fontFamily: fonts.mulishRegular,
+      color: colors.heading,
+      marginLeft: 10,
+      marginTop: 5,
     },
   });
 export default styles;

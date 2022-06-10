@@ -23,8 +23,9 @@ const styles = (colors: any) =>
       marginBottom: 20,
     },
     buttonContainer: {
-      width: '100%',
-      marginTop: 30,
+      width: '80%',
+      marginVertical: 30,
+      alignSelf: 'center',
     },
   });
 export default styles;
