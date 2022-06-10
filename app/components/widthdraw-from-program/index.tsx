@@ -13,6 +13,8 @@ const WithdrawProgram = ({
   visible,
   cancelModal,
   closeModal,
+  text2,
+  color,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
@@ -29,9 +31,11 @@ const WithdrawProgram = ({
             </TouchableOpacity>
           </View>
           <Text style={styles.modalText2}>{text}</Text>
+
           <GradientButton
-            text="Yes"
-            color={['#2C6CFC', '#2CBDFC']}
+            text={text2}
+            color={color}
+            // color={['#2C6CFC', '#2CBDFC']}
             style={styles.gradientButton}
             onPress={onPress}
           />

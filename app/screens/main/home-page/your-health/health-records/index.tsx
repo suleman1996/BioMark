@@ -89,29 +89,62 @@ const HealthRecord = () => {
     >
       <View style={styles.view}>
         <Image
-          source={require('../../../../../assets/images/home/GD.png')}
+          source={require('../../../../../assets/images/home/pad.png')}
           style={{ height: 30, width: 30 }}
         />
         <Text style={styles.title}>{item.name}</Text>
       </View>
-      <Text style={styles.text3}>{item.received}</Text>
-      <Text style={styles.text3}>REF: {item.ref_no}</Text>
+      <Text style={styles.text3}>
+        {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
+      </Text>
+      {item.ref_no == null ? null : (
+        <Text style={styles.text3}>REF: {item.ref_no}</Text>
+      )}
 
-      <View style={styles.pastResultView}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text6}>{item.result.summary}</Text>
-      </View>
+      {item.result.summary && (
+        <View style={styles.pastResultView}>
+          <Image
+            source={require('../../../../../assets/images/home/info.png')}
+            style={styles.prImage}
+          />
+          <Text style={styles.text6}>{item.result.summary}</Text>
+        </View>
+      )}
 
-      <View style={styles.pastResultView2}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text7}>{item.result.doctor}</Text>
-      </View>
+      {item.result.status == 'Pending' ? (
+        <View
+          style={{
+            backgroundColor: 'lightgrey',
+            flexDirection: 'row',
+            padding: 5,
+            alignItems: 'center',
+            width: '40%',
+            borderRadius: 15,
+            marginHorizontal: 15,
+            marginTop: 10,
+          }}
+        >
+          <View
+            style={{
+              borderRadius: 20,
+              backgroundColor: 'white',
+              width: 15,
+              height: 15,
+            }}
+          ></View>
+          <Text style={{ marginHorizontal: 8 }}>
+            {item?.result?.status == 'Pending' ? 'Under Review' : null}
+          </Text>
+        </View>
+      ) : (
+        <View style={styles.pastResultView2}>
+          <Image
+            source={require('../../../../../assets/images/home/doctor.png')}
+            style={styles.prImage}
+          />
+          <Text style={styles.text7}>{item.result.doctor}</Text>
+        </View>
+      )}
 
       <View style={styles.bottomView}></View>
     </TouchableOpacity>
@@ -145,16 +178,14 @@ const HealthRecord = () => {
           <LatestResultCard
             title="Your Latest Results"
             name={latestResult?.name}
-            received={latestResult?.received}
+            received={moment(latestResult?.received).format(
+              'hh:mm a MMMM Do, YYYY'
+            )}
             ref_no={latestResult?.ref_no}
             summary={latestResult?.result?.summary}
             doctor={latestResult?.result?.doctor}
           />
-          {/* <FlatList
-            data={latestResult}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          /> */}
+
           <TouchableOpacity
             style={styles.uploadResult}
             onPress={() => navigation.navigate(SCREENS.RESULT_UPLOAD)}
@@ -169,12 +200,7 @@ const HealthRecord = () => {
             </TouchableOpacity>
           </View>
 
-          <Text
-            style={{
-              color: 'red',
-              textAlign: 'center',
-            }}
-          >
+          <Text style={styles.resultMessage}>
             {pastResults.message == 'No results' && 'No Result Found'}
           </Text>
 

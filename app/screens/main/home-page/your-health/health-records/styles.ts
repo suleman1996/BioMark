@@ -34,7 +34,7 @@ const styles = (colors: any) =>
     },
     containerBody: {
       flex: 1,
-      paddingHorizontal: 15,
+      paddingHorizontal: 10,
       paddingTop: 40,
       backgroundColor: 'white',
     },
@@ -42,6 +42,8 @@ const styles = (colors: any) =>
       backgroundColor: '#C9E1F2',
       borderRadius: 8,
       paddingTop: 10,
+      padding: 5,
+      marginHorizontal: 5,
       // marginTop: heightToDp(2),
     },
     text: {
@@ -71,6 +73,7 @@ const styles = (colors: any) =>
       borderRadius: 10,
       elevation: 10,
       marginBottom: 0,
+      marginHorizontal: 5,
     },
     filterResultMainView: {
       backgroundColor: 'grey',
@@ -176,6 +179,11 @@ const styles = (colors: any) =>
       color: colors.heading,
       fontFamily: fonts.OpenSansBold,
       fontSize: responsiveFontSize(18),
+    },
+    resultMessage: {
+      color: colors.smoke,
+      textAlign: 'center',
+      marginTop: heightToDp(2),
     },
   });
 export default styles;

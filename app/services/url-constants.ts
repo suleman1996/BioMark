@@ -73,6 +73,7 @@ const API_URLS = {
 
   GET_RESULT_OVERVIEW: '/api/v1/patient/results/',
   GET_FILTER_RESULT: '/api/v1/patient/results/past',
+  UPLOAD_RESULTS: '/api/v1/patient/lab_uploads',
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',

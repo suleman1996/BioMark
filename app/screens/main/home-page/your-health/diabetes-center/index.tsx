@@ -178,7 +178,7 @@ const DiabetesCenter = () => {
       const response = await userService.withdraw({
         module: {
           barcode: barCodeData,
-          // bm_program_id: 3,
+          bm_program_id: 2,
         },
       });
       console.log(response.data, 'withdrawwwwwwwwwwwwwwwwwwwwwww');
@@ -369,6 +369,7 @@ const DiabetesCenter = () => {
             />
 
             <WithdrawProgram
+              text2="Yes"
               visible={modalVisible}
               title="Are You Sure?"
               text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
@@ -376,6 +377,7 @@ const DiabetesCenter = () => {
               cancelModal={() => setModalVisible(!modalVisible)}
               closeModal={() => setModalVisible(!modalVisible)}
               onPress={() => onWithdraw()}
+              color={['#2C6CFC', '#2CBDFC']}
             />
 
             <View style={styles.bottomTextView}>

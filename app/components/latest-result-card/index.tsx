@@ -22,7 +22,7 @@ const LatestResultCard = (Props: props) => {
       <View style={styles.latestResultView}>
         <View style={styles.view}>
           <Image
-            source={require('../../assets/images/home/GD.png')}
+            source={require('../../assets/images/home/pad.png')}
             style={{ height: 30, width: 30 }}
           />
           <Text style={styles.title}>{Props.name}</Text>
@@ -30,13 +30,15 @@ const LatestResultCard = (Props: props) => {
         <Text style={styles.text3}>{Props.received}</Text>
         <Text style={styles.text3}>REF: {Props.ref_no}</Text>
 
-        <View style={styles.pastResultView}>
-          <Image
-            source={require('../../assets/images/home/GD.png')}
-            style={styles.prImage}
-          />
-          <Text style={styles.text6}>{Props.summary}</Text>
-        </View>
+        {Props.summary && (
+          <View style={styles.pastResultView}>
+            <Image
+              source={require('../../assets/images/home/GD.png')}
+              style={styles.prImage}
+            />
+            <Text style={styles.text6}>{Props.summary}</Text>
+          </View>
+        )}
 
         <View style={styles.pastResultView2}>
           <Image

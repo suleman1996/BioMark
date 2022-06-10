@@ -379,6 +379,7 @@ type Props = {
   has_allergy: any;
   module: any;
   scanner: any;
+  lab_upload: any;
 };
 const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
@@ -417,6 +418,12 @@ const withdraw = ({ module }: Props) => {
 const barcodeCheck = ({ scanner }: Props) => {
   return client.post(API_URLS.BARCODE_CHECK, {
     scanner,
+  });
+};
+
+const uploadResult = ({ lab_upload }: Props) => {
+  return client.post(API_URLS.UPLOAD_RESULTS, {
+    lab_upload,
   });
 };
 
@@ -1563,4 +1570,5 @@ export const userService = {
   updateHba1cTracker,
   deleteHba1cLog,
   barcodeCheck,
+  uploadResult,
 };

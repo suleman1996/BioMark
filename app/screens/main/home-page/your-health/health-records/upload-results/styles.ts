@@ -43,9 +43,59 @@ export const makeStyles = (colors: any) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
+    imageView2: {
+      height: heightToDp(22),
+      width: widthToDp(40),
+      backgroundColor: colors.fieldGrey,
+      marginHorizontal: widthToDp(10),
+      marginTop: heightToDp(2),
+      borderRadius: 8,
+      alignItems: 'flex-end',
+    },
     addPage: {
       color: colors.heading,
       fontFamily: fonts.mulishRegular,
+    },
+    deleteIcon: {
+      marginTop: heightToDp(2),
+      marginHorizontal: widthToDp(2),
+    },
+    document: {
+      color: colors.primary,
+      marginHorizontal: widthToDp(3),
+      fontSize: responsiveFontSize(22),
+      fontFamily: fonts.mulishBold,
+    },
+    textinputView: {
+      marginHorizontal: widthToDp(10),
+      // marginTop: heightToDp(5),
+      marginTop: 10,
+      borderColor: colors.heading,
+    },
+    note: {
+      marginHorizontal: widthToDp(10),
+      backgroundColor: colors.normal,
+      borderWidth: 1,
+      borderColor: colors.normal,
+      borderRadius: 5,
+      marginTop: heightToDp(6),
+      paddingHorizontal: widthToDp(5),
+      paddingTop: heightToDp(2),
+      paddingBottom: heightToDp(2),
+    },
+    noteText: {
+      flex: 1,
+      marginHorizontal: 8,
+    },
+    noteText2: {
+      marginHorizontal: 8,
+      flex: 1,
+      paddingTop: 10,
+      paddingBottom: 10,
+    },
+    noteView: {
+      paddingTop: 10,
+      justifyContent: 'space-between',
     },
   });
 export default makeStyles;
