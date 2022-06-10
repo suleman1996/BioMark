@@ -391,7 +391,9 @@ type Props = {
   lifestyle: any;
   medical_history: any;
   has_allergy: any;
+  module: any;
   scanner: any;
+  lab_upload: any;
 };
 
 const Allergies = ({ conditions, has_allergy }: Props) => {
@@ -422,9 +424,21 @@ const exercise = ({ lifestyle }: Props) => {
   });
 };
 
+const withdraw = ({ module }: Props) => {
+  return client.post(API_URLS.WITHDRAW, {
+    module,
+  });
+};
+
 const barcodeCheck = ({ scanner }: Props) => {
   return client.post(API_URLS.BARCODE_CHECK, {
     scanner,
+  });
+};
+
+const uploadResult = ({ lab_upload }: Props) => {
+  return client.post(API_URLS.UPLOAD_RESULTS, {
+    lab_upload,
   });
 };
 
@@ -457,6 +471,19 @@ const getStress = () => {
 const getLifeStyle = () => {
   return client.get(API_URLS.GET_LIFE_STYLE);
 };
+
+const getFilterResult = ({ type, start, end, page }) => {
+  return client.get(API_URLS.GET_FILTER_RESULT, {
+    params: {
+      page,
+      type,
+      start,
+      end,
+    },
+  });
+};
+
+// .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
 
 const getMedicalHistory = () => {
   return client.get(API_URLS.GET_MEDICAL_HISTORY);
@@ -1672,9 +1699,10 @@ export const userService = {
   getBloodSugarLogs,
   getHba1cLogs,
   getBloodPressureLogs,
+  withdraw,
+  getFilterResult,
   setDefaultBloodSugarTarget,
   setDefaultHba1carget,
-  barcodeCheck,
   deleteWeightLog,
   createBpTracker,
   updateBpTracker,
@@ -1685,6 +1713,8 @@ export const userService = {
   createHba1cTracker,
   updateHba1cTracker,
   deleteHba1cLog,
+  barcodeCheck,
+  uploadResult,
   getMoreInfoResult,
   getResultPdf,
   getWeightMapData,

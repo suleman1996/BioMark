@@ -7,6 +7,7 @@ import makeStyles from './styles';
 
 type Props = {
   text?: string;
+  text2?: string;
   onPress?: any;
   disabled?: any;
   color?: any;
@@ -36,6 +37,7 @@ const GradientButton = (props: Props) => {
           }}
         >
           <Text style={styles.text}>{props.text}</Text>
+          <Text style={styles.text}>{props.text2}</Text>
         </LinearGradient>
       </TouchableOpacity>
     </>
