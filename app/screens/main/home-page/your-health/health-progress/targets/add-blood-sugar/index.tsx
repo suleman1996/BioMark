@@ -1,46 +1,163 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import { useTheme } from 'react-native-paper';
+import { showMessage } from 'react-native-flash-message';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
-import InputWithUnits from 'components/higher-order/input-with-units';
+import { InputWithUnits, ActivityIndicator } from 'components';
 import GradientButton from 'components/linear-gradient-button';
 
+import { userService } from 'services/user-service/user-service';
+
+import {
+  bloodSugarValidator,
+  mgMmolConversion,
+} from 'utils/functions/measurments';
+
+import {
+  getBloodSugarTargetsAction,
+  getLatestTargetsAction,
+} from 'store/home/home-actions';
+import { IAppState } from 'store/IAppState';
+
 import Styles from './styles';
-import { useTheme } from 'react-native-paper';
 
 const Index = () => {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const styles = Styles(colors);
-  //   const navigation = useNavigation();
-  const [value, setValue] = useState('');
-  const [value2, setValue2] = useState('');
-  const [value3, setValue3] = useState('');
-  const [value4, setValue4] = useState('');
-  const [selectedType, setSelectedType] = useState(2);
 
-  const toText = (values) => {
-    selectedType == '1' ? setValue(values.toString()) : setValue(values);
-    // setValue(value);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [state, setState] = useState({
+    fromfpg: '',
+    tofpg: '',
+    fromppg: '',
+    toppg: '',
+    selectedType: 0,
+  });
+
+  const updateState = (name: string, value: string | number) =>
+    setState((prev) => ({ ...prev, [name]: value }));
+
+  const [errors, setErrors] = useState<{
+    [key: string]: string;
+  }>({
+    fromfpg: '',
+    tofpg: '',
+    fromppg: '',
+    toppg: '',
+  });
+
+  //Redux hooks
+  const { units, latestBloodSugar } = useSelector((reduxState: IAppState) => ({
+    units: reduxState.home.bloodSugarUnits,
+    latestBloodSugar: reduxState.home.latestBloodSugar,
+  }));
+  const dispatch = useDispatch();
+
+  const unitsNames = useMemo<string[]>(
+    () => units.map((unit) => unit.name),
+    [units]
+  );
+
+  const onUnitChange = useCallback(
+    (unit: string) => {
+      const newIndex = units.findIndex((e) => e.name == unit);
+      if (newIndex == state.selectedType) return;
+      setState({
+        selectedType: newIndex,
+        fromfpg: Number(
+          mgMmolConversion(+state.fromfpg, units[newIndex]?.name)
+        ).toFixed(2),
+        fromppg: Number(
+          mgMmolConversion(+state.fromppg, units[newIndex]?.name)
+        ).toFixed(2),
+        tofpg: Number(
+          mgMmolConversion(+state.tofpg, units[newIndex]?.name)
+        ).toFixed(2),
+        toppg: Number(
+          mgMmolConversion(+state.toppg, units[newIndex]?.name)
+        ).toFixed(2),
+      });
+    },
+    [units, state]
+  );
+
+  const onSubmit = async () => {
+    setLoading(true);
+    if (!state.fromfpg || !state.tofpg || !state.fromppg || !state.toppg) {
+      showMessage({
+        message: 'Please fill all fields!',
+        type: 'danger',
+      });
+      return;
+    }
+    const result = await userService.createNewTarget({
+      range_type: 1,
+      value_from: state.fromfpg,
+      value_to: state.tofpg,
+      unit_list_id: units[state.selectedType]?.id,
+      ppg_value_from: state.fromppg,
+      ppg_value_to: state.toppg,
+      ppg_unit_id: units[state.selectedType]?.id,
+    });
+    setLoading(false);
+    if (result) {
+      dispatch(getLatestTargetsAction());
+      dispatch(getBloodSugarTargetsAction());
+      showMessage({
+        message: result,
+        type: 'success',
+      });
+      navigation.goBack();
+      return;
+    }
+    showMessage({
+      message: 'Something went wrong',
+      type: 'danger',
+    });
   };
 
-  const fromText = (values) => {
-    selectedType == '1' ? setValue2(values.toString()) : setValue2(values);
-    // setValue(value);
-  };
-  const secondToText = (values) => {
-    selectedType == '1' ? setValue2(values.toString()) : setValue3(values);
-    // setValue(value);
-  };
-  const secondFromText = (values) => {
-    selectedType == '1' ? setValue2(values.toString()) : setValue4(values);
-    // setValue(value);
-  };
+  useEffect(() => {
+    const currentUnit = units[state.selectedType]?.name;
+    if (currentUnit && (currentUnit == 'mg/dL' || currentUnit == 'mmol/L')) {
+      setErrors({
+        fromfpg: bloodSugarValidator(currentUnit, +state.fromfpg, 'target'),
+        fromppg: bloodSugarValidator(currentUnit, +state.fromppg, 'target'),
+        toppg:
+          bloodSugarValidator(currentUnit, +state.toppg, 'target') ||
+          +state.toppg < +state.fromppg
+            ? 'Please enter a reading higher than From'
+            : '',
+        tofpg:
+          bloodSugarValidator(currentUnit, +state.tofpg, 'target') ||
+          +state.tofpg < +state.fromfpg
+            ? 'Please enter a reading higher than From'
+            : '',
+      });
+    }
+  }, [state, units]);
+
+  useEffect(() => {
+    setState({
+      selectedType: units.findIndex(
+        (e) => e.name == latestBloodSugar?.unit_name
+      ),
+      fromfpg: String(latestBloodSugar?.value_from),
+      fromppg: String(latestBloodSugar?.ppg_value_from),
+      tofpg: String(latestBloodSugar?.value_to),
+      toppg: String(latestBloodSugar?.ppg_value_to),
+    });
+  }, [latestBloodSugar, units]);
 
   return (
-    <ScrollView>
+    <View style={styles.container}>
+      <ActivityIndicator visible={loading} />
       <TitleWithBackWhiteBgLayout>
-        <View style={styles.innerContainer}>
+        <ScrollView style={styles.innerContainer}>
           <Text style={styles.firstHeading}>
             Set your new target blood sugar ranges
           </Text>
@@ -51,61 +168,66 @@ const Index = () => {
           </Text>
           <Text style={styles.secondHeading}>Fasting (FPG)</Text>
           <InputWithUnits
-            height={6}
-            label="From"
+            small
+            title="From"
             placeholder={'0'}
-            onChangeText={toText}
-            value={value}
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            setValue={setValue}
-            isSecond={true}
+            value={state.fromfpg}
+            onChangeText={(value: string) => updateState('fromfpg', value)}
+            onUnitChange={onUnitChange}
+            units={unitsNames}
+            unit={unitsNames[state.selectedType]}
+            error={errors.fromfpg}
           />
-
           <InputWithUnits
-            height={6}
-            label="To"
+            small
+            title="To"
             placeholder={'0'}
-            onChangeText={fromText}
-            value={value2}
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            setValue={setValue2}
-            isSecond={true}
+            value={state.tofpg}
+            onChangeText={(value: string) => updateState('tofpg', value)}
+            onUnitChange={onUnitChange}
+            units={unitsNames}
+            unit={unitsNames[state.selectedType]}
+            error={errors.tofpg}
           />
           <Text style={styles.secondHeading}>After Meal (PPG)</Text>
-
           <InputWithUnits
-            height={6}
-            label="From"
+            small
+            title="From"
             placeholder={'0'}
-            onChangeText={secondToText}
-            value={value3}
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            setValue={setValue3}
-            isSecond={true}
+            value={state.fromppg}
+            onChangeText={(value: string) => updateState('fromppg', value)}
+            onUnitChange={onUnitChange}
+            units={unitsNames}
+            error={errors.fromppg}
+            unit={unitsNames[state.selectedType]}
           />
-
           <InputWithUnits
-            height={6}
-            label="To"
+            small
+            title="To"
             placeholder={'0'}
-            onChangeText={secondFromText}
-            value={value4}
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            setValue={setValue4}
-            isSecond={true}
+            value={state.toppg}
+            onChangeText={(value: string) => updateState('toppg', value)}
+            onUnitChange={onUnitChange}
+            units={unitsNames}
+            error={errors.toppg}
+            unit={unitsNames[state.selectedType]}
           />
-          <GradientButton
-            text="Save"
-            color={['#2C6CFC', '#2CBDFC']}
-            style={styles.buttonContainer}
-          />
-        </View>
+        </ScrollView>
+        <GradientButton
+          text="Save"
+          onPress={onSubmit}
+          color={['#2C6CFC', '#2CBDFC']}
+          style={styles.buttonContainer}
+          disabled={
+            !state.fromfpg ||
+            !state.tofpg ||
+            !state.fromppg ||
+            !state.toppg ||
+            Object.keys(errors).filter((key: string) => errors[key]).length > 0
+          }
+        />
       </TitleWithBackWhiteBgLayout>
-    </ScrollView>
+    </View>
   );
 };
 

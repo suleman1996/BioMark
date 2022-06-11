@@ -18,6 +18,7 @@ import makeStyles from './styles';
 type Props = {
   date: any;
   setDate: any;
+  maxDate?: string;
 };
 
 const DateTimePickerModalComponent = (props: Props) => {
@@ -56,6 +57,7 @@ const DateTimePickerModalComponent = (props: Props) => {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="datetime"
+        {...(props.maxDate && { maximumDate: new Date(props.maxDate) })}
         onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}
       />

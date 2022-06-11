@@ -14,6 +14,10 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  NewTarget,
+  LatestTargetResponse,
+  GetBloodSugarTargetsResponseData,
+  GetHba1cTargetsResponseData,
   HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
@@ -23,6 +27,7 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  MedicationTracker,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -38,6 +43,10 @@ import {
   GET_RESULT_OVERVIEW,
   GET_LATEST_RESULT,
   GET_PAST_RESULT,
+  GET_NEW_TARGET,
+  GET_LATEST_TARGET,
+  GET_BLOOD_SUGAR_TARGETS,
+  GET_HBA1C_TARGETS,
   GET_PSP_HYPERTENSION_HEALTH_TRACKER,
   PSP_HYPER_MODULE,
   PSP_PDF_HYPER_LINK,
@@ -50,6 +59,7 @@ import {
   GET_BLOOD_SUGAR_LOGS,
   GET_HBA1C_LOGS,
   GET_BP_LOGS,
+  GET_MEDICATION_TRACKER,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -163,6 +173,35 @@ export const getBPLogs = (data: BloodPressureProgressLogsPayload) => ({
   payload: data,
 });
 
+export const getUnits = (data: NewTarget) => ({
+  type: GET_NEW_TARGET,
+  payload: data,
+});
+
+export const getLatestTargetsCreator = (data: LatestTargetResponse) => ({
+  type: GET_LATEST_TARGET,
+  payload: data,
+});
+
+export const getBloodSugarTargetsCreator = (
+  data: GetBloodSugarTargetsResponseData[]
+) => ({
+  type: GET_BLOOD_SUGAR_TARGETS,
+  payload: data,
+});
+
+export const getHBA1CTargetsCreator = (
+  data: GetHba1cTargetsResponseData[]
+) => ({
+  type: GET_HBA1C_TARGETS,
+  payload: data,
+});
+
+export const getMedicationsTrackerCreator = (data: MedicationTracker) => ({
+  type: GET_MEDICATION_TRACKER,
+  payload: data,
+});
+
 export const getReduxHealthTracker =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
@@ -182,9 +221,7 @@ export const getReduxDashboard =
     await userService
       .getDashboard()
       .then(async (res) => {
-        //
-
-        await dispatch(addDashboard(res));
+        dispatch(addDashboard(res));
       })
       .catch((err) => {
         logNow(err);
@@ -331,13 +368,28 @@ export const getReduxLabResultStatus =
   };
 
 export const getReduxResultOverview =
-  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+  (id, title) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
-      .getResultOverView(140)
+      .getResultOverView(id, title)
       .then(async (res) => {
         //
 
         await dispatch(getResultOverView(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getNewTargetAction =
+  () =>
+  async (dispatch: (arg0: { type: string; payload?: NewTarget }) => void) => {
+    await userService
+      .getNewTarget()
+      .then((res) => {
+        console.log({ res: res.hba1c_unit });
+        dispatch(getUnits(res));
       })
       .catch((err) => {
         logNow(err);
@@ -357,6 +409,18 @@ export const getReduxWeightProgress =
       });
   };
 
+export const getLatestTargetsAction =
+  () =>
+  async (
+    dispatch: (arg0: { type: string; payload?: LatestTargetResponse }) => void
+  ) => {
+    await userService
+      .getLatestTargets()
+      .then((res) => dispatch(getLatestTargetsCreator(res)))
+      .catch((err) => {
+        logNow(err);
+      });
+  };
 export const getReduxWeightLogs =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
@@ -370,6 +434,26 @@ export const getReduxWeightLogs =
         logNow(err);
       });
   };
+
+export const getBloodSugarTargetsAction =
+  () =>
+  async (
+    dispatch: (arg0: {
+      type: string;
+      payload?: GetBloodSugarTargetsResponseData[];
+    }) => void
+  ) => {
+    await userService
+      .getBloodSugarTargets()
+      .then((res) => {
+        console.log({ res: res.length });
+        dispatch(getBloodSugarTargetsCreator(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
 export const getReduxBloodPressurProgress =
   (id) => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     dispatch({ type: SHOW_LOADER });
@@ -443,14 +527,42 @@ export const getReduxMedicationProgress =
       });
   };
 
+export const getHBA1CTargetsAction =
+  () =>
+  async (
+    dispatch: (arg0: {
+      type: string;
+      payload?: GetHba1cTargetsResponseData[];
+    }) => void
+  ) => {
+    await userService
+      .getHBA1CTargets()
+      .then((res) => dispatch(getHBA1CTargetsCreator(res)))
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
 export const getReduxBloodPressureLogs =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
       .getBloodPressureLogs()
       .then(async (res) => {
-        //
+        dispatch(getBPLogs(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
 
-        await dispatch(getBPLogs(res));
+export const getMedicationsTrackersAction =
+  (date: string) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getMedicationTrackers(date)
+      .then(async (res) => {
+        console.log({ res });
+        dispatch(getMedicationsTrackerCreator(res));
       })
       .catch((err) => {
         logNow(err);

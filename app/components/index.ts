@@ -14,3 +14,6 @@ export { default as InputField } from './input-field/input-field';
 export { default as TextInput } from './input-field/text-input';
 export { default as Button } from './button/button';
 export { default as InputWithUnits } from './input-with-units';
+export { default as TargetCard } from './targets/target-card';
+export { default as TargetContainer } from './targets/target-container';
+export { BloodSugar as BloodSugar, HbA1c as HbA1c } from './targets';

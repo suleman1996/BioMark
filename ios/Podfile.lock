@@ -306,6 +306,8 @@ PODS:
     - react-native-config/App (= 1.4.5)
   - react-native-config/App (1.4.5):
     - React-Core
+  - react-native-document-picker (8.1.0):
+    - React-Core
   - react-native-fbsdk-next (8.0.5):
     - React-Core
     - react-native-fbsdk-next/Core (= 8.0.5)
@@ -323,7 +325,7 @@ PODS:
     - React-Core
   - react-native-geolocation (2.1.0):
     - React-Core
-  - react-native-image-picker (4.8.3):
+  - react-native-image-picker (4.8.4):
     - React-Core
   - react-native-jumio-mobilesdk (4.1.0):
     - Jumio (= 4.1.0)
@@ -338,7 +340,7 @@ PODS:
     - React
   - react-native-progress-view (1.3.1):
     - React-Core
-  - react-native-safe-area-context (4.2.5):
+  - react-native-safe-area-context (4.3.1):
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -349,7 +351,7 @@ PODS:
     - react-native-video/Video (= 5.2.0)
   - react-native-video/Video (5.2.0):
     - React-Core
-  - react-native-webview (11.21.1):
+  - react-native-webview (11.21.2):
     - React-Core
   - React-perflogger (0.68.1)
   - React-RCTActionSheet (0.68.1):
@@ -418,9 +420,9 @@ PODS:
     - React-perflogger (= 0.68.1)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNAppleAuthentication (2.2.0):
+  - RNAppleAuthentication (2.2.1):
     - React-Core
-  - RNCAsyncStorage (1.17.5):
+  - RNCAsyncStorage (1.17.6):
     - React-Core
   - RNCClipboard (1.5.1):
     - React-Core
@@ -475,7 +477,7 @@ PODS:
   - RNScreens (3.13.1):
     - React-Core
     - React-RCTImage
-  - RNShare (7.5.0):
+  - RNShare (7.6.1):
     - React-Core
   - RNSVG (12.3.0):
     - React-Core
@@ -513,6 +515,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
@@ -627,6 +630,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-blob-util"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
   react-native-fbsdk-next:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-geolocation:
@@ -756,18 +761,19 @@ SPEC CHECKSUMS:
   React-logger: f79dd3cc0f9b44f5611c6c7862badd891a862cf8
   react-native-blob-util: 2d49d135d6fe1410c019fb5bff241dac7f12d73d
   react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
+  react-native-document-picker: 5663fe4bcdb646200683a41790464d2793307ac8
   react-native-fbsdk-next: 79815a5b8f66ab0990fbb370b4a4b5bdf0a15e6c
   react-native-geolocation: 69f4fd37650b8e7fee91816d395e62dd16f5ab8d
-  react-native-image-picker: e95b4785b685cfc06609bc50ed6fb55b59990c99
+  react-native-image-picker: cffb727cf2f59bd5c0408e30b3dbe0b935f88835
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
   react-native-pager-view: 95d0418c3c74279840abec6926653d32447bafb6
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b
   react-native-progress-bar-android: be43138ab7da30d51fc038bafa98e9ed594d0c40
   react-native-progress-view: 9e6b6a5305a9115c2157ae3b8852081aba0aab7c
-  react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
+  react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28
-  react-native-webview: e6125da6d1cb245ff0692f545b0e5eb3572e12ab
+  react-native-webview: 6e600df419b3fb92ee209d0bb7a71c1934e41938
   React-perflogger: 30ab8d6db10e175626069e742eead3ebe8f24fd5
   React-RCTActionSheet: 4b45da334a175b24dabe75f856b98fed3dfd6201
   React-RCTAnimation: d6237386cb04500889877845b3e9e9291146bc2e
@@ -781,8 +787,8 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7285b499d0339104b2813a1f58ad1ada4adbd6c0
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNAppleAuthentication: cbe1ab5c0f398ce07a215e6b247048092bf4feb3
-  RNCAsyncStorage: 81187912cc9a5c2591ddb161e03e587688afb764
+  RNAppleAuthentication: dab41edef916715148ce94a7dd04041a01590ddc
+  RNCAsyncStorage: 466b9df1a14bccda91da86e0b7d9a345d78e1673
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNDateTimePicker: 04b805a3cb4d386e5e6aff54b47ace7bad706fda
@@ -794,7 +800,7 @@ SPEC CHECKSUMS:
   RNQrGenerator: 34beaf1996de4a2f2122c7019dccd1717b22d8d7
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
-  RNShare: 2e8e9dadea058057642a9351ca2878867ad4ad5c
+  RNShare: d0257bcf7aaf75d9502cea73496661c8d68f3cfc
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   RNVectorIcons: 7923e585eaeb139b9f4531d25a125a1500162a0b
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e

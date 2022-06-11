@@ -22,7 +22,7 @@ import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
+import Medication from 'screens/main/home-page/your-health/health-trackers/medication';
 import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/medication-form';
 import EditMedication from 'screens/main/home-page/your-health/health-trackers/edit-medication';
@@ -35,13 +35,8 @@ import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-
 import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
 import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
 import {
-  getHealthTrackerRisks,
-  getReduxDashboard,
-  getReduxHealthTracker,
   getReduxPspModules,
   getReduxPspPdfLink,
-  getReduxLabResultStatus,
-  getReduxNewMedicationTracker,
   getReduxLatestResult,
   getReduxPastResult,
   getReduxPspHypertensionHealthTrackerData,
@@ -51,6 +46,7 @@ import {
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
 import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
+import SeeResult from 'screens/main/home-page/your-health/health-records/result-overview/see-report/index';
 import ResultUpload from 'screens/main/home-page/your-health/health-records/upload-results';
 import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
 
@@ -85,6 +81,7 @@ const {
   RESULT_UPLOAD,
   MORE_INFO,
   PDF_HYPERTENSION_SUPPORT,
+  SEE_REPORT,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -94,11 +91,7 @@ const AppNavigator = () => {
 
   useEffect((link: string) => {
     getHasProfileAsyncStorage();
-    dispatch(getReduxNewMedicationTracker());
-    dispatch(getReduxHealthTracker());
-    dispatch(getReduxDashboard());
-    dispatch(getHealthTrackerRisks());
-    dispatch(getReduxLabResultStatus());
+
     dispatch(getReduxPspModules());
     dispatch(getReduxPspPdfLink(link));
     dispatch(getReduxPspPdfHyperLink(link));
@@ -187,6 +180,7 @@ const AppNavigator = () => {
           <Stack.Screen name={RESULT_OVERVIEW} component={ResultOverView} />
           <Stack.Screen name={MORE_INFO} component={MoreInfo} />
           <Stack.Screen name={RESULT_UPLOAD} component={ResultUpload} />
+          <Stack.Screen name={SEE_REPORT} component={SeeResult} />
         </>
       ) : (
         <>

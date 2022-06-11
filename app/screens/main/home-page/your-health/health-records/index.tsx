@@ -14,6 +14,7 @@ import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleFitButton } from 'components/button';
+import { userService } from 'services/user-service/user-service';
 
 import HealthRecordFilter from 'components/health-records-filter';
 
@@ -27,12 +28,17 @@ import {
 import Filter from '../../../../../assets/svgs/filter';
 import SCREENS from 'navigation/constants/index';
 import LatestResultCard from 'components/latest-result-card';
+import moment from 'moment';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
   const [pastResults, setPastResults] = useState([]);
-  // const [checked, setChecked] = React.useState('');
+  // const [filterData, setFilterData] = useState([]);
+  const [checked, setChecked] = React.useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [page, setPage] = useState(1);
 
   const { colors } = useTheme();
 
@@ -54,38 +60,93 @@ const HealthRecord = () => {
     // alert(JSON.stringify(newResult.result.summary));
     setLatestResult(newResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page]);
+
+  const onConfirm = async () => {
+    const result = await userService.getFilterResult({
+      page: page,
+      type: checked,
+      start: startDate,
+      end: endDate,
+    });
+    setPastResults(result.data);
+    console.log('resultttt-----------------------dataaaa', result.data);
+  };
+
+  const handleConfirm = (date) => {
+    console.log('A date has been picked: ', date);
+    setStartDate(date);
+  };
+  const handleConfirm2 = (date) => {
+    console.log('A date has been picked: ', date);
+    setEndDate(date);
+  };
 
   const renderItem2 = ({ item }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate(SCREENS.RESULT_OVERVIEW)}
+      onPress={() =>
+        navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item })
+      }
       style={styles.pastResultMainView}
     >
       <View style={styles.view}>
         <Image
-          source={require('../../../../../assets/images/home/GD.png')}
+          source={require('../../../../../assets/images/home/pad.png')}
           style={{ height: 30, width: 30 }}
         />
         <Text style={styles.title}>{item.name}</Text>
       </View>
-      <Text style={styles.text3}>{item.received}</Text>
-      <Text style={styles.text3}>REF: {item.ref_no}</Text>
+      <Text style={styles.text3}>
+        {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
+      </Text>
+      {item.ref_no == null ? null : (
+        <Text style={styles.text3}>REF: {item.ref_no}</Text>
+      )}
 
-      <View style={styles.pastResultView}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text6}>{item.result.summary}</Text>
-      </View>
+      {item.result.summary && (
+        <View style={styles.pastResultView}>
+          <Image
+            source={require('../../../../../assets/images/home/info.png')}
+            style={styles.prImage}
+          />
+          <Text style={styles.text6}>{item.result.summary}</Text>
+        </View>
+      )}
 
-      <View style={styles.pastResultView2}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text7}>{item.result.doctor}</Text>
-      </View>
+      {item.result.status == 'Pending' ? (
+        <View
+          style={{
+            backgroundColor: 'lightgrey',
+            flexDirection: 'row',
+            padding: 5,
+            alignItems: 'center',
+            width: '40%',
+            borderRadius: 15,
+            marginHorizontal: 15,
+            marginTop: 10,
+          }}
+        >
+          <View
+            style={{
+              borderRadius: 20,
+              backgroundColor: 'white',
+              width: 15,
+              height: 15,
+            }}
+          ></View>
+          <Text style={{ marginHorizontal: 8 }}>
+            {item?.result?.status == 'Pending' ? 'Under Review' : null}
+          </Text>
+        </View>
+      ) : (
+        <View style={styles.pastResultView2}>
+          <Image
+            source={require('../../../../../assets/images/home/doctor.png')}
+            style={styles.prImage}
+          />
+          <Text style={styles.text7}>{item.result.doctor}</Text>
+        </View>
+      )}
 
       <View style={styles.bottomView}></View>
     </TouchableOpacity>
@@ -119,16 +180,14 @@ const HealthRecord = () => {
           <LatestResultCard
             title="Your Latest Results"
             name={latestResult?.name}
-            received={latestResult?.received}
+            received={moment(latestResult?.received).format(
+              'hh:mm a MMMM Do, YYYY'
+            )}
             ref_no={latestResult?.ref_no}
             summary={latestResult?.result?.summary}
             doctor={latestResult?.result?.doctor}
           />
-          {/* <FlatList
-            data={latestResult}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          /> */}
+
           <TouchableOpacity
             style={styles.uploadResult}
             onPress={() => navigation.navigate(SCREENS.RESULT_UPLOAD)}
@@ -143,6 +202,10 @@ const HealthRecord = () => {
             </TouchableOpacity>
           </View>
 
+          <Text style={styles.resultMessage}>
+            {pastResults.message == 'No results' && 'No Result Found'}
+          </Text>
+
           <HealthRecordFilter
             visible={modalVisible}
             title="Filter Results"
@@ -151,10 +214,32 @@ const HealthRecord = () => {
             closeModal={() => setModalVisible(!modalVisible)}
             firstValue={'first'}
             secondValue={'second'}
-            // clearFilter={()=>set}
-            // status={checked === 'first' ? 'checked' : 'unchecked'}
-            // onPressRadio1={() => setChecked('first')}
-            // touchableRadio1={() => setChecked('first')}
+            touchableRadio1={() => setChecked('first')}
+            onPressRadio1={() => setChecked('first')}
+            status={checked === 'first' ? 'checked' : 'unchecked'}
+            touchableRadio2={() => setChecked('second')}
+            onPressRadio2={() => setChecked('second')}
+            status2={checked === 'second' ? 'checked' : 'unchecked'}
+            startDateText={`Date:  ${
+              startDate
+                ? moment(startDate).format('MM/DD/YYYY')
+                : 'Please select date'
+            }`}
+            endDateText={`Date:  ${
+              endDate
+                ? moment(endDate).format('MM/DD/YYYY')
+                : 'Please select end date'
+            }`}
+            handleConfirm={handleConfirm}
+            handleConfirm2={handleConfirm2}
+            onPressClearFilter={() => {
+              setChecked(''),
+                setStartDate(''),
+                setEndDate(''),
+                setModalVisible(!modalVisible);
+              setPastResults(pastResult);
+            }}
+            onConifrm={() => onConfirm()}
           />
 
           <FlatList
@@ -167,7 +252,7 @@ const HealthRecord = () => {
             <GoogleFitButton
               disabled={false}
               title="Load more data"
-              onPress={() => console.log('pressed')}
+              onPress={() => setPage((prev) => prev + 1)}
             />
           </TouchableOpacity>
         </ScrollView>

@@ -8,7 +8,6 @@ import { RadioButton } from 'react-native-paper';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GoogleFitButton } from 'components/button';
-import moment from 'moment';
 
 const HealthRecordFilter = ({
   title,
@@ -19,14 +18,23 @@ const HealthRecordFilter = ({
   title2,
   firstValue,
   secondValue,
+  touchableRadio1,
+  touchableRadio2,
+  status,
+  onPressRadio1,
+  status2,
+  onPressRadio2,
+  startDateText,
+  endDateText,
+  handleConfirm,
+  handleConfirm2,
+  onPressClearFilter,
+  onConifrm,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
   const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
-  const [selectedDate, setSelectedDate] = useState();
-  const [endDate, setEndDate] = useState('');
-  const [checked, setChecked] = React.useState('');
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -39,21 +47,12 @@ const HealthRecordFilter = ({
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
-  const handleConfirm = (date) => {
-    console.log('A date has been picked: ', date);
-    setSelectedDate(date);
-    hideDatePicker();
-  };
 
   //end date picker
   const hideDatePicker2 = () => {
     setEndDatePickerVisibility(false);
   };
-  const handleConfirm2 = (date) => {
-    console.log('A date has been picked: ', date);
-    setEndDate(date);
-    hideDatePicker2();
-  };
+
   return (
     <Modal animationType="none" transparent={true} visible={visible}>
       <View style={styles.centeredView}>
@@ -66,30 +65,21 @@ const HealthRecordFilter = ({
           </View>
           <Text style={styles.modaltitle2}>{title2}</Text>
 
-          <TouchableOpacity
-            style={styles.radioview}
-            // onPress={touchableRadio1}
-            onPress={() => setChecked('first')}
-          >
+          <TouchableOpacity style={styles.radioview} onPress={touchableRadio1}>
             <RadioButton
               value={firstValue}
-              // status={status}
-              // onPress={onPressRadio1}
-              status={checked === 'first' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('first')}
+              status={status}
+              onPress={onPressRadio1}
               color={colors.heading}
             />
             <Text style={styles.radiotext}>Uplaoded By Me</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.radioview}
-            onPress={() => setChecked('second')}
-          >
+          <TouchableOpacity style={styles.radioview} onPress={touchableRadio2}>
             <RadioButton
               value={secondValue}
-              status={checked === 'second' ? 'checked' : 'unchecked'}
-              onPress={() => setChecked('second')}
+              status={status2}
+              onPress={onPressRadio2}
               color={colors.heading}
             />
             <Text style={styles.radiotext}>Sent By Doctor</Text>
@@ -97,21 +87,13 @@ const HealthRecordFilter = ({
           <Text style={styles.modalText2}>Start Date</Text>
 
           <Pressable style={styles.datepicker} onPress={showDatePicker}>
-            <Text style={styles.datePickerText}>{`Date:  ${
-              selectedDate
-                ? moment(selectedDate).format('MM/DD/YYYY')
-                : 'Please select date'
-            }`}</Text>
+            <Text style={styles.datePickerText}>{startDateText}</Text>
             <Icon name="calendar-month-outline" size={30} />
           </Pressable>
 
           <Text style={styles.modalText2}>End Date</Text>
           <Pressable style={styles.datepicker} onPress={showEndDatePicker}>
-            <Text style={styles.datePickerText}>{`Date:  ${
-              endDate
-                ? moment(selectedDate).format('MM/DD/YYYY')
-                : 'Please select end date'
-            }`}</Text>
+            <Text style={styles.datePickerText}>{endDateText}</Text>
             <Icon name="calendar-month-outline" size={30} />
           </Pressable>
 
@@ -131,15 +113,10 @@ const HealthRecordFilter = ({
             <GoogleFitButton
               disabled={false}
               title="Confirm"
-              onPress={() => console.log('pressed')}
+              onPress={onConifrm}
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.clear}
-            onPress={() => {
-              setChecked(''), setSelectedDate(''), setEndDate('');
-            }}
-          >
+          <TouchableOpacity style={styles.clear} onPress={onPressClearFilter}>
             <Text style={styles.clearText}>Clear Filters</Text>
           </TouchableOpacity>
 

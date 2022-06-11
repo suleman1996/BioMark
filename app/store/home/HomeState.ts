@@ -11,6 +11,11 @@ import {
   ResultResponse,
   EncodedResultOverviewPayload,
   LabStatusResponse,
+  TargetUnit,
+  LatestBloodSugarResponse,
+  LatestHba1CResponse,
+  GetBloodSugarTargetsResponseData,
+  GetHba1cTargetsResponseData,
   HealthTrackerPayloadData,
   WeightProgressEntryPayload,
   BloodPressureProgressEntryPayload,
@@ -21,11 +26,12 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  MedicationTracker,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
   medicalDropDown: MedicationSetupPayload[] = [];
-  dashboard: DashboardResponseData[] = [];
+  dashboard: DashboardResponseData | undefined = undefined;
   healthRisks: RiskData[] = [];
   medicationList: MedicationListEntry[] = [];
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
@@ -37,6 +43,12 @@ export class HomeState {
   getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
   getPastResultData: LabStatusResponse[] = [];
+  bloodSugarUnits: TargetUnit[] = [];
+  hbA1cUnits: TargetUnit[] = [];
+  bloodSugarTargets: GetBloodSugarTargetsResponseData[] = [];
+  hbA1cTargets: GetHba1cTargetsResponseData[] = [];
+  latestBloodSugar: LatestBloodSugarResponse | null = null;
+  latestHba1c: LatestHba1CResponse | null = null;
   pspHypertensionHealthTracker: HealthTrackerPayloadData[] = [];
   getWeightProgressData: WeightProgressEntryPayload[] = [];
   getBpProgressData: BloodPressureProgressEntryPayload[] = [];
@@ -47,4 +59,5 @@ export class HomeState {
   bloodSugarLogsData: BloodSugarProgressLogsPayload[] = [];
   hba1cLogsData: Hba1CProgressLogsPayload[] = [];
   bPLogsData: BloodPressureProgressLogsPayload[] = [];
+  medicationTrackers: MedicationTracker | null = null;
 }

@@ -25,6 +25,9 @@ const lbsToKg = () => {
   Number((prev.weight * (1 / 2.205)).toFixed(1));
 };
 
+const mgMmolConversion = (value: number, toUnit: 'mg/dL' | 'mmol/L' | string) =>
+  Number(toUnit == 'mg/dL' ? value * 18 : value * (1 / 18)).toFixed(2); // These values might not be accurate
+
 const measurementValidator = (is_metric, measurment, value) => {
   let errorr = '';
   if (value.length === 0 || value == 0)
@@ -98,6 +101,7 @@ const measurementValidator = (is_metric, measurment, value) => {
 
   return errorr;
 };
+
 const bloodPressureValidator = (measurment, value) => {
   console.log('measu', measurment);
 
@@ -118,8 +122,6 @@ const bloodPressureValidator = (measurment, value) => {
       errorr: 'Please input a valid diastolic BP from 30-120 mmHg',
     },
   };
-
-  // KG
   if (measurment === 'bp_systolic') {
     errorr =
       BP_RANGE.sys.min <= value && value <= BP_RANGE.sys.max
@@ -134,40 +136,27 @@ const bloodPressureValidator = (measurment, value) => {
 
   return errorr;
 };
-const bloodSugarValidator = (measurment, value) => {
-  console.log('measur', measurment);
-  console.log('value', value);
 
-  let errorr = '';
-  if (value.length === 0 || value == 0)
-    return 'Please input a valid measurement';
-
-  const BS_RANGE = {
-    mgdl: {
-      min: 1,
-      max: 600,
-      errorr: 'Please input a valid measurement from 1-600 mg/dL',
-    },
-    mmol: {
-      min: 0.06,
-      max: 50,
-      errorr: ' Please input a valid measurement from 0.06-50 mmol/L',
-    },
+const hba1cValidator = (goal: number, unit: '%' = '%') => {
+  const errors = {
+    goal: '',
   };
-
-  if (measurment === 'mg/dl') {
-    errorr =
-      BS_RANGE.mgdl.min < value && value <= BS_RANGE.mgdl.max
-        ? ''
-        : BS_RANGE.mgdl.errorr;
-  } else {
-    errorr =
-      BS_RANGE.mmol.min < value && value <= BS_RANGE.mmol.max
-        ? ''
-        : BS_RANGE.mmol.errorr;
+  if (!(goal >= LIMITS[unit][0] && goal <= LIMITS[unit][1])) {
+    errors.goal = `Please input a valid target between ${LIMITS[unit][0]}-${LIMITS[unit][1]} ${unit}`;
   }
+  return errors;
+};
 
-  return errorr;
+const bloodSugarValidator = (
+  unit: 'mg/dL' | 'mmol/L',
+  value: string | number,
+  type: string = 'measurement'
+) => {
+  const val = Number(value);
+  if (!val) return `Please input a valid ${type}`;
+  return LIMITS[unit][0] <= val && val <= LIMITS[unit][1]
+    ? ''
+    : `Please input a valid ${type} between ${LIMITS[unit][0]}-${LIMITS[unit][1]} ${unit}`;
 };
 
 export {
@@ -175,7 +164,16 @@ export {
   feetToCm,
   kgToLbs,
   lbsToKg,
-  measurementValidator as measurementValidator,
-  bloodPressureValidator,
+  mgMmolConversion,
   bloodSugarValidator,
+  hba1cValidator,
+  measurementValidator,
+  bloodPressureValidator,
+};
+
+//Value on the left side is min and the right side is max
+const LIMITS = {
+  'mg/dL': [1, 900],
+  'mmol/L': [0.06, 50],
+  '%': [5, 15],
 };
