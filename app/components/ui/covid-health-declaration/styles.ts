@@ -97,6 +97,7 @@ export const makeStyles = (colors: any) =>
       backgroundColor: colors.white,
       paddingTop: heightToDp(3),
       justifyContent: 'space-between',
+      alignSelf: 'center',
     },
     btn: {
       width: widthToDp(35),
