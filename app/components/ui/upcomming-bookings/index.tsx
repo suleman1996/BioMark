@@ -15,8 +15,10 @@ import { BookingListDataUpcoming } from 'types/api';
 import { dateFormat1, getDayName, getTime } from 'utils/functions/date-format';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import BarCodeModal from '../bar-code-modal';
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
+
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
@@ -27,8 +29,10 @@ const UpcommingBookings = (props: Props) => {
   );
 
   const [isHealthDeclaration, setIsHealthDeclaration] = useState(false);
+  const [barCodeText, setBarCodeText] = useState('');
 
   const [modalData, setModalData] = useState({});
+  const [isBarModal, setIsBarModal] = useState(false);
 
   const styles = makeStyles(colors);
   const _renderItem = ({ item }: { item: BookingListDataUpcoming }) => {
@@ -61,6 +65,12 @@ const UpcommingBookings = (props: Props) => {
     };
     return (
       <View style={styles.singleItemContainer}>
+        <BarCodeModal
+          setIsVisible={setIsBarModal}
+          isVisible={isBarModal}
+          text={barCodeText}
+        />
+
         <View
           style={{
             flexDirection: 'row',
@@ -91,11 +101,18 @@ const UpcommingBookings = (props: Props) => {
           )}, ${dateFormat1(booking_schedule_date)} ${getTime(
             booking_slot_time
           )}`}</Text>
-          <MaterialCommunityIcons
-            name="barcode-scan"
-            color={colors.darkPrimary}
-            size={responsiveFontSize(20)}
-          />
+          <Pressable
+            onPress={() => {
+              setIsBarModal(true);
+              setBarCodeText(booking_id);
+            }}
+          >
+            <MaterialCommunityIcons
+              name="barcode-scan"
+              color={colors.darkPrimary}
+              size={responsiveFontSize(30)}
+            />
+          </Pressable>
         </View>
         <Text
           style={styles.cityNameText}
@@ -150,16 +167,12 @@ const UpcommingBookings = (props: Props) => {
   };
   return (
     <View style={{ flex: 1 }}>
-      {/* {
-        isHealthDeclaration ?  */}
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
         isVisible={isHealthDeclaration}
         data={modalData}
       />
-      {/* :
-      null
-      } */}
+
       <FlatList
         ListHeaderComponent={() => <SuggestionsText />}
         renderItem={_renderItem}

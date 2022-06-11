@@ -15,7 +15,7 @@ import { dateFormat1, getTime } from 'utils/functions/date-format';
 import { covidService } from 'services/covid-service';
 import { useDispatch } from 'react-redux';
 import { getAllBookingsDataR } from 'store/covid/covid-actions';
-import HealthDeclartionCompleted from '../healthDeclarationCompleted';
+import HealthDeclartionCompleted from 'components/ui/health-declaration-completed';
 
 type Props = {
   setIsVisible: any;
