@@ -9,14 +9,15 @@ import makeStyles from './styles';
 type Props = {
   isChecked: boolean;
   setIsChecked: any;
-  rightText: string;
+  rightText?: string;
+  textComponent?: any;
 };
 
 const CheckBoxWithText = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const { isChecked, setIsChecked, rightText } = props;
+  const { isChecked, setIsChecked, rightText, textComponent } = props;
   return (
     <View style={styles.container}>
       <CheckBox
@@ -28,7 +29,13 @@ const CheckBoxWithText = (props: Props) => {
         }}
         isChecked={isChecked}
       />
-      {rightText ? <Text style={styles.rightText}>{rightText}</Text> : null}
+      {rightText ? (
+        textComponent ? (
+          textComponent
+        ) : (
+          <Text style={styles.rightText}>{rightText}</Text>
+        )
+      ) : null}
     </View>
   );
 };

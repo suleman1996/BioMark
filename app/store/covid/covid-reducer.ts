@@ -1,4 +1,4 @@
-import { COVID_RESULTS_DATA } from './constants';
+import { COVID_RESULTS_DATA, COVID_BOOKINGS_DATA } from './constants';
 import { CovidState } from './CovidState';
 
 const INITIAL_STATE = new CovidState();
@@ -9,6 +9,13 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         allCovidResults: action.payload,
+      };
+    }
+
+    case COVID_BOOKINGS_DATA: {
+      return {
+        ...state,
+        allBookingsData: action.payload,
       };
     }
 
