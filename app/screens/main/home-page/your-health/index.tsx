@@ -19,6 +19,7 @@ import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { Button } from 'components/button';
 import { ArrowBack } from 'assets/svgs';
+import WebView from 'components/article-webview';
 
 import RenderHealthTrack from '../../../../components/health-tracker-card/index';
 
@@ -97,6 +98,7 @@ const Index = () => {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState('');
+  const [showArticleWebView, setShowArticleWebView] = React.useState(false);
   const [highlights] = React.useState([
     {
       id: 0,
@@ -203,240 +205,261 @@ const Index = () => {
   console.log('================>', dashboard);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.navBar}>
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 20 }}
-        >
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <ArrowBack fill={colors.white} />
-          </TouchableOpacity>
-          <Text style={styles.navHeading}>Your Health</Text>
-        </View>
-        <View style={styles.navSearch}>
-          <SearchBarWithLeftScanIcon />
-        </View>
-      </View>
-      <View style={styles.containerBody}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Text style={styles.headingText}>Your Health Risks</Text>
-          <View style={styles.healthRiskView}>
-            {Object.entries(healthRisk).map(([key, value]: any) => (
-              <RenderHealthRiskView
-                key={key}
-                name={value?.name}
-                onRiskPress={() => setSelectedRisk(key)}
-                color={healthRisksColor(colors, value?.status)}
-                Svg={healthRiskData[key].icon}
-              />
-            ))}
+    <>
+      <View style={styles.container}>
+        <View style={styles.navBar}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginLeft: 20,
+            }}
+          >
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <ArrowBack fill={colors.white} />
+            </TouchableOpacity>
+            <Text style={styles.navHeading}>Your Health</Text>
           </View>
-          {selectedRisk ? (
-            <RenderHealthRisk
-              onPress={() =>
-                navigate(SCREENS.HEALTH_RISK, {
-                  item: healthRisk[selectedRisk],
-                  cardData: healthRiskData[selectedRisk].disease,
-                  refData: healthRiskData[selectedRisk].refrence,
-                  footNotesData: healthRiskData[selectedRisk].footnotes,
-                  calc: healthRiskData[selectedRisk].calculations,
-                  clr: healthRisksColor(
-                    colors,
-                    healthRisk[selectedRisk]?.status
-                  ),
-                  SVG: healthRiskData[selectedRisk].icon,
-                })
-              }
-              healthRisk={healthRisk[selectedRisk]}
-              Svg={healthRiskData[selectedRisk].icon}
-              color={healthRisksColor(colors, healthRisk[selectedRisk]?.status)}
-              pan={pan}
-            />
-          ) : null}
-          <Text style={[styles.headingText, { marginVertical: 20 }]}>
-            Health Trackers
-          </Text>
-
-          <FlatList
-            data={healthTracker}
-            renderItem={(item) => <RenderHealthTrack item={item} />}
-            keyExtractor={(item) => item.index}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-
-          <Text style={[styles.headingText, { marginVertical: 20 }]}>
-            Record Keeping
-          </Text>
-
-          {dashboard?.psp_user &&
-            [2, 4].includes(dashboard?.program_detail?.program_id) && (
-              <RenderRecordKeeping
-                svg={<Diabetes />}
-                title="Enter Diabetes Support Center"
-                id="4y6yb5y5yb56b56y"
-                onPress={() => navigate(SCREENS.DIABETES_CENTER)}
-              />
-            )}
-          {dashboard?.psp_user &&
-            [3, 4].includes(dashboard?.program_detail?.program_id) && (
-              <RenderRecordKeeping
-                svg={<BP />}
-                title="Enter Hypertension Support Center"
-                id="4y6yb5y5yb56b56y"
-                onPress={() => navigation.navigate(HYPERTENSION)}
-              />
-            )}
-
-          {dashboard?.latest_result && (
-            <RenderLastResult
-              title="Your Last Result"
-              date={dashboard?.latest_result?.received}
-              onPress={() =>
-                navigate(SCREENS.RESULT_OVERVIEW, {
-                  lab_id: dashboard?.latest_result?.lab_id,
-                })
-              }
-              svg={
-                <MaterialCommunityIcons
-                  name="file-document"
-                  size={25}
-                  color={colors.primary}
+          <View style={styles.navSearch}>
+            <SearchBarWithLeftScanIcon />
+          </View>
+        </View>
+        <View style={styles.containerBody}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Text style={styles.headingText}>Your Health Risks</Text>
+            <View style={styles.healthRiskView}>
+              {Object.entries(healthRisk).map(([key, value]: any) => (
+                <RenderHealthRiskView
+                  key={key}
+                  name={value?.name}
+                  onRiskPress={() => setSelectedRisk(key)}
+                  color={healthRisksColor(colors, value?.status)}
+                  Svg={healthRiskData[key].icon}
                 />
-              }
-            />
-          )}
+              ))}
+            </View>
+            {selectedRisk ? (
+              <RenderHealthRisk
+                onPress={() =>
+                  navigate(SCREENS.HEALTH_RISK, {
+                    item: healthRisk[selectedRisk],
+                    cardData: healthRiskData[selectedRisk].disease,
+                    refData: healthRiskData[selectedRisk].refrence,
+                    footNotesData: healthRiskData[selectedRisk].footnotes,
+                    calc: healthRiskData[selectedRisk].calculations,
+                    clr: healthRisksColor(
+                      colors,
+                      healthRisk[selectedRisk]?.status
+                    ),
+                    SVG: healthRiskData[selectedRisk].icon,
+                  })
+                }
+                healthRisk={healthRisk[selectedRisk]}
+                Svg={healthRiskData[selectedRisk].icon}
+                color={healthRisksColor(
+                  colors,
+                  healthRisk[selectedRisk]?.status
+                )}
+                pan={pan}
+              />
+            ) : null}
+            <Text style={[styles.headingText, { marginVertical: 20 }]}>
+              Health Trackers
+            </Text>
 
-          {!dashboard?.complete_profile && (
-            <RenderLastResult
-              title="Complete Your Profile"
-              date={'Fill in your profile to know your health risks'}
-              onPress={() => navigate(SCREENS.ACCOUNT)}
-              svg={
-                <MaterialIcons name="person" size={25} color={colors.primary} />
-              }
-            />
-          )}
-
-          <View style={styles.circleView}>
-            <RenderCircle
-              title="Health Records"
-              svg={<Health />}
-              onPress={() => navigate(SCREENS.HEALTH_RECORD)}
-            />
-            <RenderCircle
-              title="Health Progress"
-              svg={<Progress />}
-              onPress={() => navigation.navigate(HEALTH_PROGRESS)}
-            />
-          </View>
-          {getLabStatusData ? (
             <FlatList
-              data={getLabStatusData}
-              renderItem={(item) => (
-                <RendreLabResult
-                  item={item.item}
-                  setVisible={setVisible}
-                  stepIndicatorIcons={stepIndicatorIcons}
+              data={healthTracker}
+              renderItem={(item) => <RenderHealthTrack item={item} />}
+              keyExtractor={(item) => item.index}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+
+            <Text style={[styles.headingText, { marginVertical: 20 }]}>
+              Record Keeping
+            </Text>
+
+            {dashboard?.psp_user &&
+              [2, 4].includes(dashboard?.program_detail?.program_id) && (
+                <RenderRecordKeeping
+                  svg={<Diabetes />}
+                  title="Enter Diabetes Support Center"
+                  id="4y6yb5y5yb56b56y"
+                  onPress={() => navigate(SCREENS.DIABETES_CENTER)}
                 />
               )}
+            {dashboard?.psp_user &&
+              [3, 4].includes(dashboard?.program_detail?.program_id) && (
+                <RenderRecordKeeping
+                  svg={<BP />}
+                  title="Enter Hypertension Support Center"
+                  id="4y6yb5y5yb56b56y"
+                  onPress={() => navigation.navigate(HYPERTENSION)}
+                />
+              )}
+
+            {dashboard?.latest_result && (
+              <RenderLastResult
+                title="Your Last Result"
+                date={dashboard?.latest_result?.received}
+                onPress={() =>
+                  navigate(SCREENS.RESULT_OVERVIEW, {
+                    lab_id: dashboard?.latest_result?.lab_id,
+                  })
+                }
+                svg={
+                  <MaterialCommunityIcons
+                    name="file-document"
+                    size={25}
+                    color={colors.primary}
+                  />
+                }
+              />
+            )}
+
+            {!dashboard?.complete_profile && (
+              <RenderLastResult
+                title="Complete Your Profile"
+                date={'Fill in your profile to know your health risks'}
+                onPress={() => navigate(SCREENS.ACCOUNT)}
+                svg={
+                  <MaterialIcons
+                    name="person"
+                    size={25}
+                    color={colors.primary}
+                  />
+                }
+              />
+            )}
+
+            <View style={styles.circleView}>
+              <RenderCircle
+                title="Health Records"
+                svg={<Health />}
+                onPress={() => navigate(SCREENS.HEALTH_RECORD)}
+              />
+              <RenderCircle
+                title="Health Progress"
+                svg={<Progress />}
+                onPress={() => navigation.navigate(HEALTH_PROGRESS)}
+              />
+            </View>
+            {getLabStatusData ? (
+              <FlatList
+                data={getLabStatusData}
+                renderItem={(item) => (
+                  <RendreLabResult
+                    item={item.item}
+                    setVisible={setVisible}
+                    stepIndicatorIcons={stepIndicatorIcons}
+                  />
+                )}
+                keyExtractor={(item) => item.id}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingBottom: 10 }}
+              />
+            ) : null}
+
+            <Text style={[styles.headingText, { marginVertical: 20 }]}>
+              Article Highlights
+            </Text>
+
+            <FlatList
               keyExtractor={(item) => item.id}
+              data={highlights}
+              renderItem={(item) => (
+                <RenderHighlights
+                  item={item.item}
+                  onPress={() => setShowArticleWebView(true)}
+                />
+              )}
+              horizontal
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ paddingBottom: 10 }}
+              ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
             />
-          ) : null}
-
-          <Text style={[styles.headingText, { marginVertical: 20 }]}>
-            Article Highlights
-          </Text>
-
-          <FlatList
-            keyExtractor={(item) => item.id}
-            data={highlights}
-            renderItem={(item) => <RenderHighlights item={item.item} />}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
-          />
-          <TouchableOpacity style={styles.singleMenuItem}>
-            {/* popup Modal */}
-            <Formik
-              initialValues={{
-                qrInput: '',
-              }}
-              onSubmit={(values) => handleCode(values)}
-              validationSchema={QRschemma}
-            >
-              {({ handleChange, handleSubmit, errors, isValid }) => (
-                <QrInputPopup loading={loading} visible={visible}>
-                  <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                    <View style={styles.popUpHeader}>
-                      <Text style={styles.popUpHeading}>Results Available</Text>
-                      <TouchableOpacity onPress={() => setVisible(false)}>
-                        <Image
-                          source={MyImage.closeIcon}
-                          style={{
-                            height: 15,
-                            width: 15,
-                          }}
-                        />
-                      </TouchableOpacity>
+            <TouchableOpacity style={styles.singleMenuItem}>
+              {/* popup Modal */}
+              <Formik
+                initialValues={{
+                  qrInput: '',
+                }}
+                onSubmit={(values) => handleCode(values)}
+                validationSchema={QRschemma}
+              >
+                {({ handleChange, handleSubmit, errors, isValid }) => (
+                  <QrInputPopup loading={loading} visible={visible}>
+                    <View style={{ alignItems: 'center', marginBottom: 20 }}>
+                      <View style={styles.popUpHeader}>
+                        <Text style={styles.popUpHeading}>
+                          Results Available
+                        </Text>
+                        <TouchableOpacity onPress={() => setVisible(false)}>
+                          <Image
+                            source={MyImage.closeIcon}
+                            style={{
+                              height: 15,
+                              width: 15,
+                            }}
+                          />
+                        </TouchableOpacity>
+                      </View>
                     </View>
-                  </View>
-                  <Text
-                    style={{
-                      fontFamily: fonts.regular,
-                      fontSize: 17,
-                      color: '#8493AE',
-                    }}
-                  >
-                    Please enter your IC or passport number to verify your
-                    identity
-                  </Text>
+                    <Text
+                      style={{
+                        fontFamily: fonts.regular,
+                        fontSize: 17,
+                        color: '#8493AE',
+                      }}
+                    >
+                      Please enter your IC or passport number to verify your
+                      identity
+                    </Text>
 
-                  <View style={{ width: '100%' }}>
-                    {/* <TextInput
+                    <View style={{ width: '100%' }}>
+                      {/* <TextInput
                       backgroundColor={colors.inputBg}
                       style={styles.textInput}
                       marginTop={10}
                       onChange={handleChange('qrInput')}
                       placeholder={'Enter your IC / Passport number'}
                     /> */}
-                    <InputWithLabel
-                      label="IC or Passport Number"
-                      placeholder={'Enter your IC / Passport number'}
-                      onChange={() => {
-                        handleChange('qrInput');
-                        setShowApiError('');
-                      }}
-                      error={
-                        errors.qrInput
-                          ? errors.qrInput
-                          : showApiError
-                          ? showApiError
-                          : ''
-                      }
-                    />
-                    <View style={{ marginTop: 40 }}>
-                      <TouchableOpacity>
-                        <Button
-                          onPress={() => handleSubmit()}
-                          title="Verify"
-                          marginHorizontal={0.1}
-                          marginVertical={0.1}
-                          //   disabled={!isValid && errors}
-                          disabled={!isValid && errors ? true : false}
-                        />
-                      </TouchableOpacity>
+                      <InputWithLabel
+                        label="IC or Passport Number"
+                        placeholder={'Enter your IC / Passport number'}
+                        onChange={() => {
+                          handleChange('qrInput');
+                          setShowApiError('');
+                        }}
+                        error={
+                          errors.qrInput
+                            ? errors.qrInput
+                            : showApiError
+                            ? showApiError
+                            : ''
+                        }
+                      />
+                      <View style={{ marginTop: 40 }}>
+                        <TouchableOpacity>
+                          <Button
+                            onPress={() => handleSubmit()}
+                            title="Verify"
+                            marginHorizontal={0.1}
+                            marginVertical={0.1}
+                            //   disabled={!isValid && errors}
+                            disabled={!isValid && errors ? true : false}
+                          />
+                        </TouchableOpacity>
+                      </View>
                     </View>
-                  </View>
-                </QrInputPopup>
-              )}
-            </Formik>
-          </TouchableOpacity>
-        </ScrollView>
+                  </QrInputPopup>
+                )}
+              </Formik>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
       </View>
-    </View>
+      {showArticleWebView ? <WebView /> : null}
+    </>
   );
 };
 export default Index;
