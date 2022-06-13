@@ -75,7 +75,7 @@ export const makeStyles = (colors: any) =>
     },
     note: {
       marginHorizontal: widthToDp(10),
-      backgroundColor: colors.normal,
+      backgroundColor: '#E5F7F3',
       borderWidth: 1,
       borderColor: colors.normal,
       borderRadius: 5,
@@ -87,12 +87,14 @@ export const makeStyles = (colors: any) =>
     noteText: {
       flex: 1,
       marginHorizontal: 8,
+      color: colors.heading,
     },
     noteText2: {
       marginHorizontal: 8,
       flex: 1,
-      paddingTop: 10,
+      paddingTop: heightToDp(3),
       paddingBottom: 10,
+      color: colors.heading,
     },
     noteView: {
       paddingTop: 10,

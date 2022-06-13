@@ -9,6 +9,7 @@ import {
   ImageBackground,
   FlatList,
   ScrollView,
+  Keyboard,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
@@ -22,6 +23,7 @@ import ShowPicModal from 'components/show-upload-pic-modal';
 import { TextInput } from 'components';
 import SCREENS from 'navigation/constants';
 import { ActivityIndicator } from 'components';
+import { getReduxPastResult } from 'store/home/home-actions';
 
 import LabResultModal from 'components/lab-results-modal';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
@@ -30,6 +32,8 @@ import { userService } from 'services/user-service/user-service';
 
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
+import { useSelector, useDispatch } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
 // let cameraIs = false;
 
@@ -48,6 +52,11 @@ export default function ResultUpload() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
+  const dispatch = useDispatch();
+  const pastResult = useSelector(
+    (state: IAppState) => state.home.getPastResultData
+  );
+
   const updateResults = async () => {
     let body = {
       lab_upload: {
@@ -59,7 +68,8 @@ export default function ResultUpload() {
       setIsVisible(true);
       const profilePic = await userService.uploadResult(body);
       if (profilePic.status == true) {
-        navigate(SCREENS.HEALTH_RECORD);
+        dispatch(getReduxPastResult());
+        navigate(SCREENS.YOUR_HEALTH);
         console.log('ppppppppppppppppppp', profilePic);
       }
     } catch (error) {
@@ -276,7 +286,7 @@ export default function ResultUpload() {
               <View style={styles.uploadView}>
                 <Text style={styles.uploadText}>Your Uploads</Text>
                 <Text style={styles.numberText}>
-                  {list.length > 0 ? splices + 1 : '0'}
+                  {list.length > 0 ? splices + 1 : '(0)'}
                 </Text>
               </View>
 
@@ -335,92 +345,95 @@ export default function ResultUpload() {
         </>
       ) : (
         <TitleWithBackLayout title="Upload Results">
-          <View style={styles.infoView}>
-            <Feather color={colors.heading} name="info" size={25} />
-            <Text style={styles.text}>
-              For results with multiple pages, select Add Page to add more
-              pages.
-            </Text>
-          </View>
+          <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+            <View style={styles.infoView}>
+              <Feather color={colors.heading} name="info" size={25} />
+              <Text style={styles.text}>
+                For results with multiple pages, select Add Page to add more
+                pages.
+              </Text>
+            </View>
 
-          <View style={styles.uploadView}>
-            <Text style={styles.uploadText}>Your Uploads</Text>
-            <Text style={styles.numberText}>
-              {list.length > 0 ? splices + 1 : '0'}
-            </Text>
-          </View>
+            <View style={styles.uploadView}>
+              <Text style={styles.uploadText}>Your Uploads</Text>
+              <Text style={styles.numberText}>
+                {list.length > 0 ? splices + 1 : '0'}
+              </Text>
+            </View>
 
-          <View>
-            <FlatList
-              data={list}
-              horizontal={false}
-              numColumns={2}
-              showsVerticalScrollIndicator={false}
-              extraData={refresh}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item, index }) => {
-                setSplices(index);
-                setUri(item?.uri);
-                return (
-                  <Pressable onPress={() => setShowPicModal(true)}>
-                    <ImageBackground
-                      imageStyle={{ borderRadius: 8 }}
-                      source={{ uri: item?.uri }}
-                      style={styles.imageView2}
-                    >
-                      <MaterialCommunityIcons
-                        name="delete"
-                        color={colors.primary}
-                        size={25}
-                        style={styles.deleteIcon}
-                        onPress={() => {
-                          setModalVisible(true);
-                        }}
-                      />
-                    </ImageBackground>
-                  </Pressable>
-                );
-              }}
+            <View>
+              <FlatList
+                data={list}
+                horizontal={false}
+                numColumns={2}
+                showsVerticalScrollIndicator={false}
+                extraData={refresh}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item, index }) => {
+                  setSplices(index);
+                  setUri(item?.uri);
+                  return (
+                    <Pressable onPress={() => setShowPicModal(true)}>
+                      <ImageBackground
+                        imageStyle={{ borderRadius: 8 }}
+                        source={{ uri: item?.uri }}
+                        style={styles.imageView2}
+                      >
+                        <MaterialCommunityIcons
+                          name="delete"
+                          color={colors.primary}
+                          size={25}
+                          style={styles.deleteIcon}
+                          onPress={() => {
+                            setModalVisible(true);
+                          }}
+                        />
+                      </ImageBackground>
+                    </Pressable>
+                  );
+                }}
+              />
+              <WithdrawProgram
+                text2="Delete"
+                visible={modalVisible}
+                title="Are You Sure?"
+                text="This action is final and cannot be reverted."
+                cancel="Cancel"
+                cancelModal={() => setModalVisible(!modalVisible)}
+                closeModal={() => setModalVisible(!modalVisible)}
+                color={['#EB3342', '#EB3342']}
+                onPress={() => {
+                  list.splice(splices, 1);
+                  setRefreh(!refresh);
+                  setModalVisible(false);
+                }}
+              />
+            </View>
+
+            <Pressable
+              style={styles.imageView}
+              onPress={() => setShowModal(true)}
+            >
+              <Feather color={colors.heading} name="plus" size={35} />
+              <Text style={styles.addPage}>Add Page</Text>
+            </Pressable>
+
+            <ShowPicModal
+              visible={showPicModal}
+              image={{ uri: uri }}
+              onClose={() => setShowPicModal(false)}
             />
-            <WithdrawProgram
-              text2="Delete"
-              visible={modalVisible}
-              title="Are You Sure?"
-              text="This action is final and cannot be reverted."
-              cancel="Cancel"
-              cancelModal={() => setModalVisible(!modalVisible)}
-              closeModal={() => setModalVisible(!modalVisible)}
-              color={['#EB3342', '#EB3342']}
-              onPress={() => {
-                list.splice(splices, 1);
-                setRefreh(!refresh);
-                setModalVisible(false);
-              }}
+
+            <LabResultModal
+              visible={showModal}
+              title="Upload Lab Results"
+              closeModal={() => setShowModal(!showModal)}
+              onTakePhoto={() => imagePickerFromCamera()}
+              onUploadFromGallery={() => imagePickerFromGallery()}
+              onUploadPdf={undefined}
             />
-          </View>
+          </ScrollView>
 
-          <Pressable
-            style={styles.imageView}
-            onPress={() => setShowModal(true)}
-          >
-            <Feather color={colors.heading} name="plus" size={35} />
-            <Text style={styles.addPage}>Add Page</Text>
-          </Pressable>
-
-          <ShowPicModal
-            visible={showPicModal}
-            image={{ uri: uri }}
-            onClose={() => setShowPicModal(false)}
-          />
-
-          <LabResultModal
-            visible={showModal}
-            title="Upload Lab Results"
-            closeModal={() => setShowModal(!showModal)}
-            onTakePhoto={() => imagePickerFromCamera()}
-            onUploadFromGallery={() => imagePickerFromGallery()}
-            onUploadPdf={() => uploadPDF()}
-          />
           <ButtonWithShadowContainer
             title="Save & Continue"
             disabled={list.length <= 0 ? true : false}

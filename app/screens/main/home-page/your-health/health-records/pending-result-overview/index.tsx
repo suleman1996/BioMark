@@ -11,7 +11,10 @@ import React, { useState } from 'react';
 import { useTheme } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
 import { useDispatch, useSelector } from 'react-redux';
-import { getReduxPendingResultOverview } from 'store/home/home-actions';
+import {
+  getReduxPendingResultOverview,
+  getReduxPastResult,
+} from 'store/home/home-actions';
 import { useRoute } from '@react-navigation/native';
 
 import Styles from './styles';
@@ -55,7 +58,8 @@ const PendingResultOverview = () => {
       );
       if (result.status == true) {
         setModalVisible(false);
-        navigate(SCREENS.HEALTH_RECORD);
+        dispatch(getReduxPastResult());
+        navigate(SCREENS.YOUR_HEALTH);
         console.log('delte----------------------------------', result.data);
       }
     } catch (error) {

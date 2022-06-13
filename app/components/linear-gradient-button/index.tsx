@@ -30,10 +30,9 @@ const GradientButton = (props: Props) => {
           colors={props?.color}
           style={{
             height: 50,
-            // marginHorizontal: 30,
             borderRadius: 8,
-            // alignItems: 'center',
-            // justifyContent: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           <Text style={styles.text}>{props.text}</Text>
