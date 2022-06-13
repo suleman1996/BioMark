@@ -42,6 +42,7 @@ import {
   getReduxPspHypertensionHealthTrackerData,
   getReduxPspHyperModules,
   getReduxPspPdfHyperLink,
+  getReduxHealthFeeds,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
@@ -99,6 +100,7 @@ const AppNavigator = () => {
     dispatch(getReduxPastResult());
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
+    dispatch(getReduxHealthFeeds());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

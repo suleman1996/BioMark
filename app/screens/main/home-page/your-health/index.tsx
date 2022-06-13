@@ -51,6 +51,7 @@ import {
   getReduxDashboard,
   getReduxHealthTracker,
   getReduxLabResultStatus,
+  getReduxHealthFeeds,
 } from 'store/home/home-actions';
 import RenderHealthRiskView from './components/render-health-risk-view/index';
 import QrInputPopup from './components/qr-input-popup';
@@ -79,6 +80,9 @@ const Index = () => {
   );
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+  const healthFeeds = useSelector(
+    (state: IAppState) => state.home.getHealthFeeds
+  );
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
@@ -99,25 +103,26 @@ const Index = () => {
   const [loading, setLoading] = React.useState(false);
   const [showApiError, setShowApiError] = React.useState('');
   const [showArticleWebView, setShowArticleWebView] = React.useState(false);
-  const [highlights] = React.useState([
-    {
-      id: 0,
-      title: 'Drink Milk Everyday',
-      image:
-        'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
-    },
-    {
-      id: 1,
-      title: 'Face Mast is a Must',
-      image: 'https://m.media-amazon.com/images/I/415R2a9DgmL.jpg',
-    },
-    {
-      id: 2,
-      title: 'Dangue Fever',
-      image:
-        'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
-    },
-  ]);
+  const [articlesUrl, setArticlesUrl] = React.useState();
+  // const [highlights] = React.useState([
+  //   {
+  //     id: 0,
+  //     title: 'Drink Milk Everyday',
+  //     image:
+  //       'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
+  //   },
+  //   {
+  //     id: 1,
+  //     title: 'Face Mast is a Must',
+  //     image: 'https://m.media-amazon.com/images/I/415R2a9DgmL.jpg',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Dangue Fever',
+  //     image:
+  //       'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
+  //   },
+  // ]);
   const pan = useRef(new Animated.ValueXY()).current;
 
   useEffect(() => {
@@ -125,6 +130,9 @@ const Index = () => {
     dispatch(getReduxHealthTracker());
     dispatch(getHealthTrackerRisks());
     dispatch(getReduxLabResultStatus());
+    dispatch(getReduxHealthFeeds());
+
+    console.log('helthfeddddddddddddddddd', healthFeeds);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -202,8 +210,6 @@ const Index = () => {
     }
   };
 
-  console.log('================>', dashboard);
-
   return (
     <>
       <View style={styles.container}>
@@ -215,7 +221,7 @@ const Index = () => {
               marginLeft: 20,
             }}
           >
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigate(SCREENS.HOME)}>
               <ArrowBack fill={colors.white} />
             </TouchableOpacity>
             <Text style={styles.navHeading}>Your Health</Text>
@@ -366,17 +372,21 @@ const Index = () => {
 
             <FlatList
               keyExtractor={(item) => item.id}
-              data={highlights}
+              data={healthFeeds}
               renderItem={(item) => (
                 <RenderHighlights
                   item={item.item}
-                  onPress={() => setShowArticleWebView(true)}
+                  onPress={() => {
+                    setShowArticleWebView(true), setArticlesUrl(item.item.link);
+                    // console.log('-------------------->', item.item.link);
+                  }}
                 />
               )}
               horizontal
               showsHorizontalScrollIndicator={false}
               ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
             />
+
             <TouchableOpacity style={styles.singleMenuItem}>
               {/* popup Modal */}
               <Formik
@@ -458,7 +468,7 @@ const Index = () => {
           </ScrollView>
         </View>
       </View>
-      {showArticleWebView ? <WebView /> : null}
+      {showArticleWebView ? <WebView url={articlesUrl} /> : null}
     </>
   );
 };

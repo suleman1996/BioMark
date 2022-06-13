@@ -77,6 +77,7 @@ const API_URLS = {
   GET_RESULT_MORE_INFO: '/api/v1/patient/results/',
   GET_RESULT_PDF: '/api/v1/patient/results/',
   GET_WEIGHT_MAP: '/api/v1/patient/weight_trackers/chart?page=1',
+  GET_HEALTH_FEEDS: '/api/v1/patient/health_feeds',
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
