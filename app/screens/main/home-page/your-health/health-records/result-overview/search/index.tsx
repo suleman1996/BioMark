@@ -130,6 +130,7 @@ const Search = () => {
               }}
               value={searchText}
               placeholder={'Search BioMarker..'}
+              autoFocus={true}
             />
             <TouchableOpacity onPress={() => setSearchText('')}>
               <CrossIcon style={{ marginRight: 10 }} size={18} name="close" />
