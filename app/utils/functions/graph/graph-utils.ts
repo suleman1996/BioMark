@@ -1,6 +1,6 @@
-import { RangeValue } from '../../api/models';
+import { RangeValue } from 'types/api';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import {
   graphBlackColor,
   graphGreyColor,

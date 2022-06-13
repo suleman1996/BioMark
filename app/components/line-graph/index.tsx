@@ -3,25 +3,10 @@ import React from 'react';
 
 import { ECharts } from 'react-native-echarts-wrapper';
 
-const Index = () => {
-  const [option] = React.useState({
-    xAxis: {
-      type: 'category',
-      data: ['6pm', '12am', '6am', '12pm'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [0, 20, 40, 60],
-        type: 'line',
-      },
-    ],
-  });
+const Index = ({ chartRef }) => {
   return (
-    <View style={{ height: 280, marginTop: 10 }}>
-      <ECharts option={option} backgroundColor={'#3D3D3D10'} />
+    <View style={{ height: 280, marginTop: 10, marginBottom: 10 }}>
+      <ECharts option={{}} ref={chartRef} />
     </View>
   );
 };

@@ -20,6 +20,8 @@ const RenderHealthTrack = ({ item }) => {
     dispatch(getReduxNewMedicationTracker());
   }, [dispatch]);
 
+  console.log(item);
+
   return (
     <TouchableOpacity
       onPress={() => {
