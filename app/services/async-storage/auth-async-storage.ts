@@ -54,13 +54,8 @@ const setIsOnboarding = async (value) => {
 
 const getOnboarding = async () => {
   try {
-    const value = await AsyncStorage.getItem('onBoarding');
-    if (value !== null) {
-      const jsonVal = JSON.parse(value);
-      return jsonVal;
-    } else {
-      return null;
-    }
+    const value = !(await AsyncStorage.getItem('onBoarding'));
+    return value;
   } catch (e) {}
 };
 

@@ -130,8 +130,8 @@ const Index = () => {
     if (chartState && chartRef.current) {
       const { chartOptions, legendChartOptions } = createChart(chartState);
       setTimeout(() => {
-        chartRef.current.setOption(chartOptions);
-        lagendChartRef?.current.setOption(legendChartOptions);
+        chartRef?.current?.setOption(chartOptions);
+        lagendChartRef?.current?.setOption(legendChartOptions);
       }, 10);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
