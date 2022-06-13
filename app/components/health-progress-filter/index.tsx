@@ -24,8 +24,8 @@ const Index = ({
 
   useEffect(() => {
     if (!values) return;
-    setSelectedfilterOption1(values.selectedfilterOption1);
-    setSelectedfilterOption2(values.selectedfilterOption2);
+    setSelectedfilterOption1(values?.selectedfilterOption1);
+    setSelectedfilterOption2(values?.selectedfilterOption2);
   }, [values]);
 
   const RenderRadio = ({ item, onPress, selectedfilterOption }) => (
@@ -62,7 +62,10 @@ const Index = ({
       <View style={styles.filterView}>
         <View style={styles.header}>
           <Text style={styles.headingText}>Filters</Text>
-          <TouchableOpacity onPress={() => setIsVisible(false)}>
+          <TouchableOpacity
+            style={{ padding: 5 }}
+            onPress={() => setIsVisible(!visible)}
+          >
             <Close />
           </TouchableOpacity>
         </View>

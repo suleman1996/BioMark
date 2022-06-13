@@ -23,7 +23,7 @@ import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/Medication';
+import Medication from 'screens/main/home-page/your-health/health-trackers/medication';
 import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/medication-form';
 import EditMedication from 'screens/main/home-page/your-health/health-trackers/edit-medication';
@@ -43,6 +43,7 @@ import {
   getReduxPspHypertensionHealthTrackerData,
   getReduxPspHyperModules,
   getReduxPspPdfHyperLink,
+  getReduxHealthFeeds,
   getReduxPendingResultOverview,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
@@ -106,6 +107,7 @@ const AppNavigator = () => {
     dispatch(getReduxPastResult());
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
+    dispatch(getReduxHealthFeeds());
     dispatch(getReduxPendingResultOverview(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

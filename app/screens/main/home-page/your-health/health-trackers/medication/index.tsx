@@ -222,7 +222,7 @@ const Medication = ({ route }) => {
 
   return (
     <TitleWithBackWhiteBgLayout
-      title="Take Medication"
+      title={SELECTED_MEDICATION_LOG_ID ? 'Medication' : 'Take Medication'}
       binIcon={SELECTED_MEDICATION_LOG_ID}
       onPressIcon={() => setShowDeleteModal(true)}
     >
@@ -309,7 +309,7 @@ const Medication = ({ route }) => {
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={onSubmit}
-        title={'Take'}
+        title={SELECTED_MEDICATION_LOG_ID ? 'Save Edit' : 'Take'}
         disabled={validation}
       />
       <AccountDeActivateModal

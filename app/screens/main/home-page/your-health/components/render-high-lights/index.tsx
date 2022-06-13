@@ -6,7 +6,7 @@ import BlurView from '../blur-view';
 const RenderHighlights = ({ item, onPress }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  console.log('item', item);
+  console.log('item', item.filename.url);
 
   return (
     <TouchableOpacity onPress={onPress}>
@@ -14,9 +14,9 @@ const RenderHighlights = ({ item, onPress }) => {
         <ImageBackground
           style={{ flex: 1 }}
           // resizeMode="stretch"
-          source={{ uri: item.image }}
+          source={{ uri: item.filename.url }}
         >
-          <BlurView title={item.title} />
+          <BlurView title={item.caption} />
         </ImageBackground>
       </View>
     </TouchableOpacity>

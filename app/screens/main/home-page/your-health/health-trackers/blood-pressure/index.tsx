@@ -24,10 +24,13 @@ import SCREENS from 'navigation/constants/index';
 import { AccountDeActivateModal } from 'components/ui';
 import { Tip } from 'react-native-tip';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { useDispatch } from 'react-redux';
+import { getReduxBloodPressureLogs } from 'store/home/home-actions';
 
 const BloodPressure = ({ route }: any) => {
   const SELECTED_BP_ID = route?.params?.logId;
   const { colors } = useTheme();
+  const disptach = useDispatch();
   const styles = makeStyles(colors);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +74,7 @@ const BloodPressure = ({ route }: any) => {
     const API_FUNCTION = SELECTED_BP_ID ? 'updateBpTracker' : 'createBpTracker';
     try {
       await userService[API_FUNCTION](bloodPressure, SELECTED_BP_ID);
+      disptach(getReduxBloodPressureLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err: any) {
       console.error(err);

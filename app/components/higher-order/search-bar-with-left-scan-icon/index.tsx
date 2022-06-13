@@ -50,6 +50,7 @@ const SearchBarWithLeftScanIcon = () => {
         },
       });
       navigate(SCREENS.SUPPORT_SYSTEM);
+
       console.log(response, 'codee---------------code------------------');
       // navigate(Screeb, {
       //   SHOW_DEMO: true
@@ -172,7 +173,10 @@ const SearchBarWithLeftScanIcon = () => {
                   Input Barcode
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.singleMenuItem}>
+              <TouchableOpacity
+                style={styles.singleMenuItem}
+                onPress={() => navigate(SCREENS.RESULT_UPLOAD)}
+              >
                 <MaterialCommunityIcons
                   name="upload"
                   size={responsiveFontSize(25)}
