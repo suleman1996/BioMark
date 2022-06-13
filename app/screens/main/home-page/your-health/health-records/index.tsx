@@ -70,6 +70,7 @@ const HealthRecord = () => {
       end: endDate,
     });
     setPastResults(result.data);
+    setModalVisible(!modalVisible);
     console.log('resultttt-----------------------dataaaa', result.data);
   };
 
@@ -84,9 +85,13 @@ const HealthRecord = () => {
 
   const renderItem2 = ({ item }) => (
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item })
-      }
+      onPress={() => {
+        item.result.status == 'Pending'
+          ? navigation.navigate(SCREENS.PENDING_RESULT_OVERVIEW, {
+              result: item,
+            })
+          : navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item });
+      }}
       style={styles.pastResultMainView}
     >
       <View style={styles.view}>

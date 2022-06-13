@@ -26,6 +26,7 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  LabUploadPayload,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -42,6 +43,7 @@ export class HomeState {
   getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
   getPastResultData: LabStatusResponse[] = [];
+  getPendingResultOverviewData: LabUploadPayload[] = [];
   bloodSugarUnits: TargetUnit[] = [];
   hbA1cUnits: TargetUnit[] = [];
   bloodSugarTargets: GetBloodSugarTargetsResponseData[] = [];
