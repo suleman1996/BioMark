@@ -70,7 +70,7 @@ const Index = () => {
         date: selectedValue.title,
         type: selectedfilterOption1.title.toLowerCase(),
       });
-      createChart(result.data.chart);
+      createChart(result.chart);
     } catch (error) {
       console.log(error);
     }
