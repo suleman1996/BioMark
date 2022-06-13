@@ -29,12 +29,15 @@ import {
 } from 'utils/functions/graph/graph-utils';
 import { graphGreyColor } from 'utils/functions/graph/graph.types';
 import { userService } from 'services/user-service/user-service';
+import { useNavigation } from '@react-navigation/native';
+import { Tip } from 'react-native-tip';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const chartRef = useRef();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const bPLogsData = useSelector((state: IAppState) => state.home.bPLogsData);
 
@@ -80,13 +83,15 @@ const Index = () => {
   };
 
   React.useEffect(() => {
-    bloodPressureGraphData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue, selectedfilterOption1]);
+    dispatch(getReduxBloodPressureLogs());
+  }, [dispatch]);
 
   React.useEffect(() => {
-    dispatch(getReduxBloodPressureLogs());
-    //
+    bloodPressureGraphData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValue, selectedfilterOption1, bPLogsData]);
+
+  React.useEffect(() => {
     setLogData(
       bPLogsData?.log?.map((item) => ({
         id: item?.id,
@@ -96,7 +101,7 @@ const Index = () => {
       }))
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [bPLogsData]);
 
   const createChart = (data: BloodPressureProgressChartDataPoint[]) => {
     const points1 =
@@ -144,7 +149,7 @@ const Index = () => {
       const { chartOptions } = createChart(chartState);
       setTimeout(() => {
         chartRef?.current?.setOption(chartOptions);
-      }, 1000);
+      }, 10);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartState]);
@@ -177,14 +182,20 @@ const Index = () => {
             </View>
 
             <View style={styles.rowCenter}>
-              <TouchableOpacity>
-                <Info
-                  color={colors.heading}
-                  style={{ marginRight: 10 }}
-                  name="infocirlceo"
-                />
-              </TouchableOpacity>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ marginRight: 10 }}>
+                <Tip
+                  body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beaats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats."
+                  bodyStyle={{ color: '#fff' }}
+                  tipContainerStyle={{
+                    backgroundColor: '#2f6b64',
+                    width: '60%',
+                  }}
+                  overlayOpacity={0.001}
+                >
+                  <Info color={colors.heading} name="infocirlceo" />
+                </Tip>
+              </View>
+              <View style={styles.rowCenter}>
                 <View style={styles.dash} />
                 <Text style={styles.sys}>SYS</Text>
                 <Text style={styles.sys}> / </Text>
@@ -205,7 +216,10 @@ const Index = () => {
           <Logs navigate={SCREENS.BLOOD_PRESSURE} logData={logData} />
           <View style={{ height: 70 }} />
         </ScrollView>
-        <FloatingButton svg={<BloodPressure height={28} width={28} />} />
+        <FloatingButton
+          onPress={() => navigation.navigate(SCREENS.BLOOD_PRESSURE)}
+          svg={<BloodPressure height={28} width={28} />}
+        />
       </View>
     </>
   );

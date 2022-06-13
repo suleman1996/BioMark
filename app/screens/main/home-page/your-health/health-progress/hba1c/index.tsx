@@ -24,6 +24,7 @@ import {
 import { Hba1CProgressChart } from 'types/api';
 import { userService } from 'services/user-service/user-service';
 import LineGraph from 'components/line-graph';
+import { Tip } from 'react-native-tip';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -71,7 +72,7 @@ const Index = () => {
   React.useEffect(() => {
     hBa1CData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue]);
+  }, [selectedValue, hba1cLogsData]);
 
   React.useEffect(() => {
     let arr = [];
@@ -131,7 +132,7 @@ const Index = () => {
       setTimeout(() => {
         chartRef.current.setOption(chartOptions);
         lagendChartRef?.current.setOption(legendChartOptions);
-      }, 1000);
+      }, 10);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartState]);
@@ -148,13 +149,19 @@ const Index = () => {
           <View style={styles.headingView}>
             <View style={styles.rowCenter}>
               <Text style={styles.heading}>hbA1c (%)</Text>
-              <TouchableOpacity>
-                <Info
-                  color={colors.heading}
-                  style={{ marginLeft: 10 }}
-                  name="infocirlceo"
-                />
-              </TouchableOpacity>
+              <View style={{ marginLeft: 10 }}>
+                <Tip
+                  body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beaats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats."
+                  bodyStyle={{ color: '#fff' }}
+                  tipContainerStyle={{
+                    backgroundColor: '#2f6b64',
+                    width: '60%',
+                  }}
+                  overlayOpacity={0.001}
+                >
+                  <Info color={colors.heading} name="infocirlceo" />
+                </Tip>
+              </View>
             </View>
 
             <TouchableOpacity
@@ -171,7 +178,10 @@ const Index = () => {
           />
           <Logs navigate={SCREENS.HBA1C} logData={logData} />
         </ScrollView>
-        <FloatingButton svg={<Hba1 height={28} width={28} />} />
+        <FloatingButton
+          onPress={() => navigation.navigate(SCREENS.HBA1C)}
+          svg={<Hba1 height={28} width={28} />}
+        />
       </View>
     </>
   );

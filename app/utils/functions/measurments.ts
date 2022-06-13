@@ -138,13 +138,11 @@ const bloodPressureValidator = (measurment, value) => {
 };
 
 const hba1cValidator = (goal: number, unit: '%' = '%') => {
-  const errors = {
-    goal: '',
-  };
+  let error = '';
   if (!(goal >= LIMITS[unit][0] && goal <= LIMITS[unit][1])) {
-    errors.goal = `Please input a valid target between ${LIMITS[unit][0]}-${LIMITS[unit][1]} ${unit}`;
+    error = `Please input a valid target between ${LIMITS[unit][0]}-${LIMITS[unit][1]} ${unit}`;
   }
-  return errors;
+  return error;
 };
 
 const bloodSugarValidator = (

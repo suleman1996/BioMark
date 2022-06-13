@@ -62,7 +62,10 @@ const Index = ({
       <View style={styles.filterView}>
         <View style={styles.header}>
           <Text style={styles.headingText}>Filters</Text>
-          <TouchableOpacity onPress={() => setIsVisible(!visible)}>
+          <TouchableOpacity
+            style={{ padding: 5 }}
+            onPress={() => setIsVisible(!visible)}
+          >
             <Close />
           </TouchableOpacity>
         </View>
@@ -87,7 +90,9 @@ const Index = ({
           text="Apply"
           color={['#2C6CFC', '#2CBDFC']}
           style={{ marginBottom: 5, marginTop: 30 }}
-          onPress={onApplyPress}
+          onPress={() =>
+            onApplyPress(selectedfilterOption1, selectedfilterOption2)
+          }
         />
       </View>
     </View>

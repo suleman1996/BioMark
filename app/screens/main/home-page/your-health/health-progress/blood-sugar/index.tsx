@@ -30,6 +30,7 @@ import {
   getTricolorGraphOptions,
 } from 'utils/functions/graph/graph-tricolor';
 import { BloodSugarGraphFactory } from './factory';
+import { Tip } from 'react-native-tip';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -96,7 +97,12 @@ const Index = () => {
   React.useEffect(() => {
     bloodSugarGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue, selectedfilterOption1, selectedfilterOption2]);
+  }, [
+    selectedValue,
+    selectedfilterOption1,
+    selectedfilterOption2,
+    bloodSugarLogs,
+  ]);
 
   React.useEffect(() => {
     dispatch(getReduxBloodSugarLogs());
@@ -187,7 +193,7 @@ const Index = () => {
       setTimeout(() => {
         chartRef.current.setOption(chartOptions);
         lagendChartRef?.current.setOption(legendChartOptions);
-      }, 1000);
+      }, 10);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartState]);
@@ -222,13 +228,19 @@ const Index = () => {
               <Text style={styles.heading}>
                 Blood Sugar ({selectedfilterOption2.title})
               </Text>
-              <TouchableOpacity>
-                <Info
-                  color={colors.heading}
-                  style={{ marginLeft: 10 }}
-                  name="infocirlceo"
-                />
-              </TouchableOpacity>
+              <View style={{ marginLeft: 10 }}>
+                <Tip
+                  body="Blood sugar also known as blood glucose, is the main sugar found in your blood."
+                  bodyStyle={{ color: '#fff' }}
+                  tipContainerStyle={{
+                    backgroundColor: '#2f6b64',
+                    width: '60%',
+                  }}
+                  overlayOpacity={0.001}
+                >
+                  <Info color={colors.heading} name="infocirlceo" />
+                </Tip>
+              </View>
             </View>
             <View style={styles.rowCenter}>
               <TouchableOpacity
@@ -257,7 +269,10 @@ const Index = () => {
           <Logs navigate={SCREENS.BLOOD_SUGAR} logData={logData} />
           <View style={{ height: 70 }} />
         </ScrollView>
-        <FloatingButton svg={<BloodSugar height={28} width={28} />} />
+        <FloatingButton
+          onPress={() => navigation.navigate(SCREENS.BLOOD_SUGAR)}
+          svg={<BloodSugar height={28} width={28} />}
+        />
       </View>
     </>
   );
