@@ -91,7 +91,7 @@ export const getGraphOptions = (
       },
     },
     axisLabel: {
-      margin: 16,
+      margin: 12,
       fontSize: 9,
       color: graphBlackColor,
       fontWeight: 'bold',
@@ -139,8 +139,6 @@ export const getGraphOptions = (
   },
   series: [
     ...series.map((dataGroup) => {
-      console.log(dataGroup.type);
-      console.log(dataGroup.data.map((d) => d.value));
       return {
         type: dataGroup.type,
         data:

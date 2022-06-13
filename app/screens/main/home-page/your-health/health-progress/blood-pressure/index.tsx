@@ -70,6 +70,7 @@ const Index = () => {
     try {
       const result = await userService.getBloodPressureMapData({
         date: selectedValue.title,
+        type: selectedfilterOption1.title.toLowerCase(),
       });
       createChart(result.data.chart);
     } catch (error) {
@@ -80,7 +81,7 @@ const Index = () => {
   React.useEffect(() => {
     bloodPressureGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue]);
+  }, [selectedValue, selectedfilterOption1]);
 
   React.useEffect(() => {
     dispatch(getReduxBloodPressureLogs());
@@ -127,7 +128,17 @@ const Index = () => {
 
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
-      0,
+      selectedValue.title == '1D'
+        ? 0
+        : selectedValue.title == '7D'
+        ? 1
+        : selectedValue.title == '1M'
+        ? 2
+        : selectedValue.title == '3M'
+        ? 3
+        : selectedValue.title == '1Y'
+        ? 4
+        : 5,
       points1.map((p) => p[0] as number)
     );
 
@@ -140,6 +151,11 @@ const Index = () => {
     });
   };
 
+  const onApplyFilters = (filter1) => {
+    setSelectedfilterOption1(filter1);
+    setIsVisible(false);
+  };
+
   return (
     <>
       <HealthProgressFilter
@@ -147,8 +163,8 @@ const Index = () => {
         visible={isVisible}
         setIsVisible={setIsVisible}
         filterOption1={filterOption1}
-        selectedfilterOption1={selectedfilterOption1}
-        setSelectedfilterOption1={setSelectedfilterOption1}
+        values={{ selectedfilterOption1 }}
+        onApplyPress={onApplyFilters}
       />
       <View style={styles.container}>
         <ScrollView>
@@ -177,7 +193,7 @@ const Index = () => {
                 <View
                   style={[styles.dash, { borderColor: colors.lightGrey }]}
                 />
-                <Text style={styles.sys}>SYS</Text>
+                <Text style={styles.sys}>DIA</Text>
               </View>
               <TouchableOpacity
                 style={{ marginLeft: 15 }}

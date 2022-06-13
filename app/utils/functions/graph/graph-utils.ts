@@ -35,7 +35,6 @@ export const dateFormat = (
   if (index === 0) {
     return ``;
   }
-
   switch (dateRange) {
     case RangeValue.oneDay:
       return `${moment(value).format('ha')}`;

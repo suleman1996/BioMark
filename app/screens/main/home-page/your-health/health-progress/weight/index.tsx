@@ -38,6 +38,8 @@ const Index = () => {
     (state: IAppState) => state.home.weightLogsData
   );
 
+  const [chartState, setChartState] = React.useState(null);
+
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
     { id: 1, title: '7D', complete: '7 Days' },
@@ -77,7 +79,7 @@ const Index = () => {
         metric: selectedfilterOption2.id == 0,
         type: selectedfilterOption1.title.toLowerCase(),
       });
-      createChart(result.data.chart);
+      setChartState(result.data.chart);
     } catch (error) {
       console.log(error);
     }
@@ -93,6 +95,16 @@ const Index = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    if (chartState) {
+      const { chartOptions } = createChart(chartState);
+      setTimeout(() => {
+        chartRef.current.setOption(chartOptions);
+      }, 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartState]);
 
   // COPIED FUNCTIONS
   const createChart = (data: any) => {
@@ -125,9 +137,7 @@ const Index = () => {
       points.map((p) => p[0])
     );
 
-    chartRef.current.setOption({
-      ...getGraphOptions(convertedDataPoint, graphConfig),
-    });
+    return { chartOptions: getGraphOptions(convertedDataPoint, graphConfig) };
   };
 
   const onApplyFilters = (filter1, filter2) => {
@@ -160,7 +170,9 @@ const Index = () => {
           data={headerValue}
         />
         <View style={styles.headingView}>
-          <Text style={styles.heading}>Weight (kg)</Text>
+          <Text style={styles.heading}>
+            Weight ({selectedfilterOption2.title})
+          </Text>
           <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
             <Filter fill={colors.heading} />
           </TouchableOpacity>

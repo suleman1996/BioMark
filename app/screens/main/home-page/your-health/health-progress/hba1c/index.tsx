@@ -91,7 +91,13 @@ const Index = () => {
   const createChart = (chartData: Hba1CProgressChart) => {
     const graphData = createHba1CGraph(chartData);
     const graphConfig = graphXAxisHba1CConfig(
-      0,
+      selectedValue.title == '1M'
+        ? 0
+        : selectedValue.title == '3M'
+        ? 1
+        : selectedValue.title == '1Y'
+        ? 2
+        : 3,
       graphData.points.map((p) => p[0])
     );
     const points =
@@ -120,7 +126,7 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (chartState) {
+    if (chartState && chartRef.current) {
       const { chartOptions, legendChartOptions } = createChart(chartState);
       setTimeout(() => {
         chartRef.current.setOption(chartOptions);

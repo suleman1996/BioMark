@@ -192,7 +192,7 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (chartState) {
+    if (chartState && chartRef.current) {
       const { chartOptions, legendChartOptions } = createChart(chartState);
       setTimeout(() => {
         chartRef.current.setOption(chartOptions);
@@ -229,7 +229,9 @@ const Index = () => {
           />
           <View style={styles.headingView}>
             <View style={styles.rowCenter}>
-              <Text style={styles.heading}>Blood Sugar (mg/dL)</Text>
+              <Text style={styles.heading}>
+                Blood Sugar ({selectedfilterOption2.title})
+              </Text>
               <TouchableOpacity>
                 <Info
                   color={colors.heading}

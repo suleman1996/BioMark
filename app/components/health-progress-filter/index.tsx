@@ -24,8 +24,8 @@ const Index = ({
 
   useEffect(() => {
     if (!values) return;
-    setSelectedfilterOption1(values.selectedfilterOption1);
-    setSelectedfilterOption2(values.selectedfilterOption2);
+    setSelectedfilterOption1(values?.selectedfilterOption1);
+    setSelectedfilterOption2(values?.selectedfilterOption2);
   }, [values]);
 
   const RenderRadio = ({ item, onPress, selectedfilterOption }) => (
