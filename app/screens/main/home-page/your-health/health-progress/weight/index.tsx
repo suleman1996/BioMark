@@ -1,5 +1,5 @@
 import { TouchableOpacity, View, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useRef } from 'react';
 
 import Styles from './styles';
 import SCREENS from 'navigation/constants/index';
@@ -7,19 +7,31 @@ import { Text, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxWeightLogs } from 'store/home/home-actions';
 
-import GraphHeader from '../../../../../../components/graph-header/index';
-import LineGraph from '../../../../../../components/line-graph/index';
+import GraphHeader from 'components/graph-header/index';
+import LineGraph from 'components/line-graph/index';
 import Filter from '../../..//../../../assets/svgs/filter';
-import HealthProgressFilter from '../../../../../../components/health-progress-filter/index';
-import Logs from '../../../../../../components/health-progress-logs/index';
+import HealthProgressFilter from 'components/health-progress-filter/index';
+import Logs from 'components/health-progress-logs/index';
 
-import FloatingButton from '../../../../../../components/floating-button/index';
-import Person from '../../../../../../assets/svgs/Bmi';
+import FloatingButton from 'components/floating-button/index';
+import Person from 'assets/svgs/Bmi';
 import { userService } from 'services/user-service/user-service';
+
+import {
+  convertDataset,
+  createGraphDataPoints,
+  getGraphOptions,
+} from 'utils/functions/graph/graph-monocromatic';
+import {
+  convertDate,
+  createGraphDataPointOptions,
+  graphXAxisConfig,
+} from 'utils/functions/graph/graph-utils';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const chartRef = useRef();
 
   const dispatch = useDispatch();
   const weightLogs = useSelector(
@@ -63,7 +75,7 @@ const Index = () => {
       const result = await userService.getWeightMapData({
         date: selectedValue.title,
       });
-      console.log('weight api map ', result.data);
+      createChart(result.data.chart);
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +91,32 @@ const Index = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // COPIED FUNCTIONS
+  const createChart = (data: any) => {
+    const points =
+      data.length === 0
+        ? []
+        : data
+            .map((point) => [
+              convertDate(point.date),
+              point.weight !== null ? point.weight : null,
+            ])
+            .reverse();
+
+    const dataset = [
+      createGraphDataPoints(points, createGraphDataPointOptions()),
+    ];
+    const convertedDataPoint = convertDataset(dataset);
+    const graphConfig = graphXAxisConfig(
+      0,
+      points.map((p) => p[0])
+    );
+
+    chartRef.current.setOption({
+      ...getGraphOptions(convertedDataPoint, graphConfig),
+    });
+  };
 
   return (
     <>
@@ -108,7 +146,7 @@ const Index = () => {
               <Filter fill={colors.heading} />
             </TouchableOpacity>
           </View>
-          <LineGraph />
+          <LineGraph chartRef={chartRef} />
           <Logs
             navigate={SCREENS.WEIGHT}
             logData={weightLogs?.log}

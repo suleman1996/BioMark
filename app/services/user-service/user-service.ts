@@ -1559,6 +1559,12 @@ const getWeightMapData = (obj) => {
   });
 };
 
+const getBloodSugarMapData = (obj) => {
+  return client.get(API_URLS.GET_BLOOD_SUGAR_CHART, {
+    params: obj,
+  });
+};
+
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
   console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
@@ -1719,5 +1725,6 @@ export const userService = {
   uploadResult,
   getMoreInfoResult,
   getResultPdf,
+  getBloodSugarMapData,
   getWeightMapData,
 };

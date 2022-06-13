@@ -1,4 +1,4 @@
-import { RangeValue } from '../../api/models';
+import { RangeValue } from 'types/api';
 
 export const symbolSvgPath =
   'path://M120.79,164.61h0a15.51,15.51,0,0,1-15.57-15.46l-.11-27.83a15.52,' +
