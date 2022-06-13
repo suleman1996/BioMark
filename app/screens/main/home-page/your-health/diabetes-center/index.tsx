@@ -73,8 +73,6 @@ const DiabetesCenter = () => {
     console.log('Health diabetes api =======>', hell);
     console.log('dashborad api result', dashboard);
     setBarCodeData(dashboard?.program_detail?.barcode);
-    // alert(JSON.stringify(dashboard));
-    // alert(JSON.stringify(dashboard.program_detail.barcode));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     setShowDemo(0);
@@ -84,7 +82,6 @@ const DiabetesCenter = () => {
     try {
       dispatch(getReduxPspModules());
       setPdfData(pspModuleData.pdf);
-      // console.log('ps--------------------p', pspModuleData);
       setVideo(pspModuleData.video);
     } catch (err) {
       console.log(err);
@@ -114,7 +111,7 @@ const DiabetesCenter = () => {
   const [healthTrackerDemo] = React.useState([
     {
       id: 0,
-      title: 'Blood Sygar',
+      title: 'Blood Sugar',
       value: '110',
       subTitle: 'mg/dL',
       color: colors.lightYellow,
@@ -256,8 +253,8 @@ const DiabetesCenter = () => {
               position: 'absolute',
               zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
               flexDirection: 'row',
-              top: 50,
-              left: 20,
+              top: 45,
+              marginHorizontal: 15,
             }}
           >
             {showDemo === 0 && (
