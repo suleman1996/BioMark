@@ -327,6 +327,8 @@ PODS:
     - React-Core
   - react-native-geolocation (2.1.0):
     - React-Core
+  - react-native-image-base64 (0.1.4):
+    - React
   - react-native-image-picker (4.8.4):
     - React-Core
   - react-native-jumio-mobilesdk (4.1.0):
@@ -521,6 +523,7 @@ DEPENDENCIES:
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-image-base64 (from `../node_modules/react-native-image-base64`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-jumio-mobilesdk (from `../node_modules/react-native-jumio-mobilesdk`)
   - react-native-maps (from `../node_modules/react-native-maps`)
@@ -641,6 +644,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
+  react-native-image-base64:
+    :path: "../node_modules/react-native-image-base64"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-jumio-mobilesdk:
@@ -770,6 +775,7 @@ SPEC CHECKSUMS:
   react-native-document-picker: 5663fe4bcdb646200683a41790464d2793307ac8
   react-native-fbsdk-next: 79815a5b8f66ab0990fbb370b4a4b5bdf0a15e6c
   react-native-geolocation: 69f4fd37650b8e7fee91816d395e62dd16f5ab8d
+  react-native-image-base64: 2ff9ac788639c87a91361ab6652cc95e871b1e54
   react-native-image-picker: cffb727cf2f59bd5c0408e30b3dbe0b935f88835
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
