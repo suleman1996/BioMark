@@ -42,13 +42,16 @@ import {
   getReduxPspHypertensionHealthTrackerData,
   getReduxPspHyperModules,
   getReduxPspPdfHyperLink,
+  getReduxPendingResultOverview,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
 import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
+import SearchResult from 'screens/main/home-page/your-health/health-records/result-overview/search/index';
 import SeeResult from 'screens/main/home-page/your-health/health-records/result-overview/see-report/index';
 import ResultUpload from 'screens/main/home-page/your-health/health-records/upload-results';
 import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
+import PendingResultOverview from 'screens/main/home-page/your-health/health-records/pending-result-overview';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -81,7 +84,9 @@ const {
   RESULT_UPLOAD,
   MORE_INFO,
   PDF_HYPERTENSION_SUPPORT,
+  PENDING_RESULT_OVERVIEW,
   SEE_REPORT,
+  SEARCH_RESULT,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -89,7 +94,7 @@ const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
   const hasProfile = auth.hasProfile ? true : false;
 
-  useEffect((link: string) => {
+  useEffect((link: string, id: number) => {
     getHasProfileAsyncStorage();
 
     dispatch(getReduxPspModules());
@@ -99,6 +104,7 @@ const AppNavigator = () => {
     dispatch(getReduxPastResult());
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
+    dispatch(getReduxPendingResultOverview(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -178,8 +184,13 @@ const AppNavigator = () => {
           <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />
           <Stack.Screen name={ADD_HBA1C} component={AddHba1c} />
           <Stack.Screen name={RESULT_OVERVIEW} component={ResultOverView} />
+          <Stack.Screen name={SEARCH_RESULT} component={SearchResult} />
           <Stack.Screen name={MORE_INFO} component={MoreInfo} />
           <Stack.Screen name={RESULT_UPLOAD} component={ResultUpload} />
+          <Stack.Screen
+            name={PENDING_RESULT_OVERVIEW}
+            component={PendingResultOverview}
+          />
           <Stack.Screen name={SEE_REPORT} component={SeeResult} />
         </>
       ) : (
