@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,9 +8,9 @@ import { getReduxBloodSugarLogs } from 'store/home/home-actions';
 import Styles from './styles';
 import SCREENS from 'navigation/constants/index';
 
-import GraphHeader from '../../../../../../components/graph-header/index';
-import Filter from '../../..//../../../assets/svgs/filter';
-import HealthProgressFilter from '../../../../../../components/health-progress-filter/index';
+import GraphHeader from 'components/graph-header/index';
+import Filter from 'assets/svgs/filter';
+import HealthProgressFilter from 'components/health-progress-filter/index';
 import Logs from '../../../../../../components/health-progress-logs/index';
 import FloatingButton from '../../../../../../components/floating-button/index';
 
@@ -18,9 +18,23 @@ import Target from 'react-native-vector-icons/MaterialCommunityIcons';
 import Info from 'react-native-vector-icons/AntDesign';
 import BloodSugar from '../../../../../../assets/svgs/diabtes';
 import LineGraph from '../../../../../../components/line-graph/index';
+import { userService } from 'services/user-service/user-service';
+import {
+  BloodSugarProgressChart,
+  defaultBloodSugarProgressChartFilters,
+} from 'types/api';
+import { graphXAxisConfig } from 'utils/functions/graph/graph-utils';
+import {
+  createBloodSugarFastingMarkLine,
+  getTricolorGraphLegendOptions,
+  getTricolorGraphOptions,
+} from 'utils/functions/graph/graph-tricolor';
+import { BloodSugarGraphFactory } from './factory';
 
 const Index = () => {
   const { colors } = useTheme();
+  const chartRef = useRef();
+  const lagendChartRef = useRef();
   const styles = Styles(colors);
   const navigation = useNavigation();
   const { TARGETS } = SCREENS;
@@ -63,6 +77,23 @@ const Index = () => {
     title: 'mg/dL',
   });
   const [logData, setLogData] = React.useState([]);
+  const [chartState, setChartState] = React.useState(null);
+
+  const bloodSugarGraphData = async () => {
+    try {
+      const result = await userService.getBloodSugarMapData({
+        date: selectedValue.title,
+      });
+      setChartState(result.data.chart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    bloodSugarGraphData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValue]);
 
   React.useEffect(() => {
     dispatch(getReduxBloodSugarLogs());
@@ -82,6 +113,82 @@ const Index = () => {
     setLogData(arr);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bloodSugarLogs]);
+
+  enum MealTypeUnit {
+    beforeBreakfast = 'Before Breakfast',
+    afterBreakfast = 'After Breakfast',
+    beforeLunch = 'Before Lunch',
+    afterLunch = 'After Lunch',
+    beforeDinner = 'Before Dinner',
+    afterDinner = 'After Dinner',
+    bedtime = 'Bedtime',
+    afterMeal = 'After Meal',
+    fasting = 'Fasting',
+    all = 'All',
+  }
+  enum BloodSugarUnitId {
+    mgDl = 1,
+    mmolL = 21,
+  }
+
+  const createChart = (chartData: BloodSugarProgressChart) => {
+    const chartParams = { ...defaultBloodSugarProgressChartFilters };
+    const isMealAll = chartParams.meal === MealTypeUnit.all;
+
+    const graphData = BloodSugarGraphFactory.createBloodSugarGraph(
+      chartData,
+      isMealAll,
+      chartParams.unit === BloodSugarUnitId.mgDl
+    );
+
+    const graphConfig = graphXAxisConfig(
+      0,
+      graphData.points.map((p) => p[0])
+    );
+
+    const legendChartOptions = getTricolorGraphLegendOptions(
+      graphData.sections,
+      graphData.overallMax,
+      1
+    );
+
+    let chartOptions = getTricolorGraphOptions(
+      graphData.points,
+      graphData.positiveRanges,
+      graphData.warningRanges,
+      graphData.lowNegativeRanges,
+      graphData.highNegativeRanges,
+      graphData.marks,
+      graphData.overallMax,
+      1,
+      graphConfig
+    );
+
+    if (isMealAll) {
+      chartOptions = {
+        ...chartOptions,
+        series: chartOptions.series.concat(
+          createBloodSugarFastingMarkLine([
+            chartData.target === null ? 0 : parseFloat(chartData.target.ppg_to),
+          ])
+        ),
+      };
+    }
+
+    return { chartOptions, legendChartOptions };
+  };
+
+  useEffect(() => {
+    if (chartState) {
+      const { chartOptions, legendChartOptions } = createChart(chartState);
+      setTimeout(() => {
+        chartRef.current.setOption(chartOptions);
+        lagendChartRef?.current.setOption(legendChartOptions);
+      }, 500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartState]);
+
   return (
     <>
       <HealthProgressFilter
@@ -128,7 +235,11 @@ const Index = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <LineGraph />
+          <LineGraph
+            chartRef={chartRef}
+            lagendChartRef={lagendChartRef}
+            showLegend={true}
+          />
           <Text
             style={[styles.heading, { alignSelf: 'center', marginTop: 10 }]}
           >
