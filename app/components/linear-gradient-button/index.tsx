@@ -36,7 +36,7 @@ const GradientButton = (props: Props) => {
           }}
         >
           <Text style={styles.text}>{props.text}</Text>
-          <Text style={styles.text}>{props.text2}</Text>
+          {/* <Text style={styles.text}>{props.text2}</Text> */}
         </LinearGradient>
       </TouchableOpacity>
     </>

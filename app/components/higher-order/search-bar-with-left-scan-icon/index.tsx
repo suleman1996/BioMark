@@ -50,6 +50,7 @@ const SearchBarWithLeftScanIcon = () => {
         },
       });
       navigate(SCREENS.SUPPORT_SYSTEM);
+
       console.log(response, 'codee---------------code------------------');
       // navigate(Screeb, {
       //   SHOW_DEMO: true
