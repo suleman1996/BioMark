@@ -80,13 +80,13 @@ export interface BloodSugarProgressEntryRequest {
 }
 
 export interface BloodSugarProgressEntryPayload {
-  id: number;
+  id?: number;
   data_value: string;
   unit_list_id: number;
   record_date: string;
-  meal_type: string;
+  meal_type?: string;
   meal_type_id: number;
-  unit_name: string;
+  unit_name?: string;
 }
 
 export interface BloodSugarProgressMealTypePayload {

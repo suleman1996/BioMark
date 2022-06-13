@@ -578,7 +578,7 @@ const deleteBpLog = (bp_log_id: any) => {
       });
   });
 };
-const createBsTracker = (medical: WeightProgressEntryRequest) => {
+const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
   console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
@@ -601,7 +601,10 @@ const createBsTracker = (medical: WeightProgressEntryRequest) => {
   });
 };
 
-const updateBsTracker = (medical: WeightProgressEntryRequest, id: string) => {
+const updateBsTracker = (
+  medical: BloodSugarProgressEntryPayload,
+  id: string
+) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
       .put(`${API_URLS.CREATE_BLOOD_SUGAR}/${id}`, {
@@ -1583,6 +1586,10 @@ const getWeightMapData = (obj) => {
   });
 };
 
+const getSearchResult = (lab_id) => {
+  return client.get(`${API_URLS.GET_SEARCH_RESULT}${lab_id}&q=li`);
+};
+
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
   console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
@@ -1746,4 +1753,5 @@ export const userService = {
   deleteLabUploads,
   getResultPdf,
   getWeightMapData,
+  getSearchResult,
 };
