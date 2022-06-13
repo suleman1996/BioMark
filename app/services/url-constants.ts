@@ -79,6 +79,7 @@ const API_URLS = {
   GET_WEIGHT_MAP: '/api/v1/patient/weight_trackers/chart?page=1',
 
   GET_HBA1C_MAP: '/api/v1/patient/psp/trackers/hba1c/chart?page=1',
+  GET_BLOOD_PRESSURE_MAP: '/api/v1/patient/bp_trackers/chart?page=1',
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
