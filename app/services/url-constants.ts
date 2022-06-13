@@ -139,8 +139,10 @@ const API_URLS = {
   GET_BS_TRACKER: '/api/v1/patient/psp/trackers/blood_sugar/',
   GET_HBA1C_TRACKER: '/api/v1/patient/psp/trackers/hba1c/',
   GET_HBA1C_TRACKER_CHART: '/api/v1/patient/psp/trackers/hba1c/chart',
-
   GET_BLOOD_SUGAR_CHART: '/api/v1/patient/psp/trackers/blood_sugar/chart',
+  
+  // Tryvitals Modules
+  TRYVITALS_LINK_TOKEN: '/api/v2/try_vitals/link_token',
 };
 
 export { API_URLS };
