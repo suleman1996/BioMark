@@ -8,6 +8,7 @@ import moment from 'moment';
 import makeStyles from './styles';
 
 type Props = {
+  label: string;
   width: any;
   date: any;
   setDate: any;
@@ -19,7 +20,7 @@ const DatePicker = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const { width, date, setDate, isPickerShow, setIsPickerShow } = props;
+  const { width, date, setDate, isPickerShow, setIsPickerShow, label } = props;
   let otherStyles = [];
 
   if (width) {
@@ -27,32 +28,39 @@ const DatePicker = (props: Props) => {
   }
 
   return (
-    <TouchableOpacity
-      onPress={() => {
-        setIsPickerShow(true);
-      }}
-      style={[styles.container, otherStyles, { width: width ? width : '90%' }]}
-    >
-      {isPickerShow && (
-        <DateTimePicker
-          style={[styles.datePickerStyle]}
-          mode="date"
-          display={Platform.OS === 'ios' ? 'default' : 'default'}
-          value={new Date(date)}
-          minimumDate={new Date(1950, 0, 1)}
-          maximumDate={new Date()}
-          onChange={(d) => {
-            setIsPickerShow(false),
-              d.type == 'set' &&
-                setDate(moment(d.nativeEvent.timestamp).format('L'));
-          }}
-        />
-      )}
-      <Text style={styles.dateText}>
-        {moment(date).format('MM/DD/YYYY')}
-        {/* January             |  01                         |  1990 */}
-      </Text>
-    </TouchableOpacity>
+    <>
+      {label && <Text style={[styles.label]}>{label}</Text>}
+      <TouchableOpacity
+        onPress={() => {
+          setIsPickerShow(true);
+        }}
+        style={[
+          styles.container,
+          otherStyles,
+          { width: width ? width : '90%' },
+        ]}
+      >
+        {isPickerShow && (
+          <DateTimePicker
+            style={[styles.datePickerStyle]}
+            mode="date"
+            display={Platform.OS === 'ios' ? 'default' : 'default'}
+            value={new Date(date)}
+            minimumDate={new Date(1950, 0, 1)}
+            maximumDate={new Date()}
+            onChange={(d) => {
+              setIsPickerShow(false),
+                d.type == 'set' &&
+                  setDate(moment(d.nativeEvent.timestamp).format('L'));
+            }}
+          />
+        )}
+        <Text style={styles.dateText}>
+          {moment(date).format('MM/DD/YYYY')}
+          {/* January             |  01                         |  1990 */}
+        </Text>
+      </TouchableOpacity>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -17,6 +17,7 @@ import {
 import { BoxSelector, RelationMenu } from 'components/higher-order';
 
 import { goBack } from 'services/nav-ref';
+import { Header } from 'components';
 import { dependentService } from 'services/account-service/dependent-service';
 import { getAllDependents } from 'store/account/account-actions';
 import { dateFormat } from 'utils/functions/date-format';
@@ -27,6 +28,8 @@ import { GenderEnum } from 'enum/gender-enum';
 
 import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
+import { userService } from 'services/user-service/user-service';
+import AuthContext from 'utils/auth-context';
 
 const AddDependantScreen = () => {
   const { colors } = useTheme();
@@ -35,6 +38,7 @@ const AddDependantScreen = () => {
   const formikRef = useRef<any>();
   const dispatch = useDispatch();
 
+  const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('');
   const [selectedCountryCode, setSelectedCountryCode] = useState('');
@@ -56,13 +60,20 @@ const AddDependantScreen = () => {
   );
 
   useEffect(() => {
-    console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
       let countryCodeParse = geoLocation.dial_code.replace('+', '');
       setSelectedCountryCode(countryCodeParse);
     }
   }, [geoLocation]);
+
+  const userProfile = async () => {
+    try {
+      const result = await userService.getUserProfile();
+
+      authContext.setUserData(result.data);
+    } catch (error) {}
+  };
 
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
@@ -139,6 +150,7 @@ const AddDependantScreen = () => {
       .finally(async () => {
         setIsLoading(false);
         await dispatch(getAllDependents());
+        userProfile();
         goBack();
       });
     formikRef.current.submitForm();
@@ -147,6 +159,7 @@ const AddDependantScreen = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
+      <Header isBold={true} isColor={true} title="Add Dependents" />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -208,7 +221,7 @@ const AddDependantScreen = () => {
                   countryCode={countryCode}
                   // error={values.phone_number ? errors.phone_number : ''}
                   setCountryCode={setCountryCode}
-                  setselectedCountryCode={setSelectedCountryCode}
+                  setSelectCountryCode={setSelectedCountryCode}
                   maxLength={numberCondition.max}
                 />
                 {values.phone_number !== '' &&

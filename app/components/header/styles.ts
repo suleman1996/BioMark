@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import fonts from 'assets/fonts';
-
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     header: {
@@ -26,9 +24,8 @@ export const makeStyles = (colors: any) =>
     },
     title: {
       marginLeft: 5,
-      fontFamily: fonts.regular,
+
       fontSize: 16,
-      color: colors.black,
     },
   });
 export default makeStyles;

@@ -20,13 +20,10 @@ export default function Splash() {
 
   const getUser = async () => {
     const onboardingg = await getOnboarding();
-    console.log('onboarding ', onboardingg);
 
     setOnboarding(onboardingg);
 
     setTimeout(() => {
-      console.log('timeout ', onBoarding);
-
       onBoarding == 'false'
         ? navigations.replace(SCREENS.LOGIN)
         : navigations.replace(SCREENS.ONBOARDING);

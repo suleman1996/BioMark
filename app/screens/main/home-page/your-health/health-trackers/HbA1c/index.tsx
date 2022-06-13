@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { IAppState } from 'store/IAppState';
+import { getReduxDashboard } from 'store/home/home-actions';
 
 import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
@@ -12,104 +17,117 @@ import {
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
 // import { navigate } from 'services/nav-ref';
-// import SCREENS from 'navigation/constants';
+import SCREENS from 'navigation/constants/index';
 import { showMessage } from 'react-native-flash-message';
+import { hba1cValidator } from 'utils/functions/measurments';
 
 import makeStyles from './styles';
 import { ActivityIndicator } from 'components';
-import {
-  getDay,
-  getMonth,
-  getTime,
-  getYear,
-} from 'utils/functions/date-format';
+import { getCalendarDate } from 'utils/functions/date-format';
+import { navigate } from 'services/nav-ref';
+import { ErrorMessage } from 'components/base';
+import { AccountDeActivateModal } from 'components/ui';
 
-const HbA1c = () => {
+const HbA1c = ({ route }) => {
+  const SELECTED_HBA1C_ID = route?.params?.logId;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const [hbvalue, setHbvalue] = useState('');
+  const dispatch = useDispatch();
+  const { hasHBA1cTarget } = useSelector((state: IAppState) => ({
+    hasHBA1cTarget: state.home?.dashboard?.has_hba1c_target,
+  }));
 
+  const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
-  const [dateAndtime, setDateAndTime] = useState<any>();
-  const [validation, setValidation] = useState<any>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const [hba1cTracker, setHba1cTracker] = useState({
+    data_value: '',
+    unit_list_id: 3,
+    record_date: '',
+  });
 
   useEffect(() => {
-    let today = new Date();
-    let dateTime =
-      getMonth(today) +
-      ' ' +
-      getDay(today) +
-      ', ' +
-      getYear(today) +
-      ' ' +
-      getTime(today);
-    setDateAndTime(dateTime);
-  }, []);
-
-  const onChangeText = (values) => {
-    console.log('value', values);
-
-    if (values < 5 || values > 15) {
-      setValidation(true);
+    if (SELECTED_HBA1C_ID) {
+      getBloodSugarProgressDataByID(SELECTED_HBA1C_ID);
     } else {
-      setValidation(false);
-      console.log('emmty');
-    }
-    setHbvalue(values);
-    // setValue(value);
-  };
-
-  const onSubmit = async () => {
-    let dateTime = '';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateTime =
-      getMonth(dateAndtime) +
-      ' ' +
-      getDay(dateAndtime) +
-      ', ' +
-      getYear(dateAndtime) +
-      ' ' +
-      getTime(dateAndtime);
-
-    console.log('bp_systolic', hbvalue);
-
-    try {
-      setIsLoading(true);
-      const response = await userService.createHba1c({
-        hba1c: {
-          data_value: hbvalue,
-          unit_list_id: 3,
-          record_date: dateAndtime,
-        },
+      setHba1cTracker({
+        ...hba1cTracker,
+        record_date: getCalendarDate(new Date()),
       });
-      console.log('HbA1c successful', response.data);
-      alert('HbA1c successful');
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      if (error.errMsg.status === '500') {
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const getBloodSugarProgressDataByID = async (id) => {
+    setIsLoading(true);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    const hba1cData = await userService.getHba1cProgress(id);
+    console.log('hba1cData', hba1cData);
+    setHba1cTracker({
+      data_value: hba1cData?.data_value,
+      unit_list_id: hba1cData?.unit_list_id,
+      record_date: hba1cData?.record_date,
+    });
+
+    setIsLoading(false);
+  };
+  const saveHab1cLog = async () => {
+    console.log('hba1cTracker', hba1cTracker);
+
+    setIsLoading(true);
+    if (!hasHBA1cTarget) {
+      await userService.setDefaultBloodSugarTarget();
+      dispatch(getReduxDashboard());
+    }
+    const API_FUNCTION = SELECTED_HBA1C_ID
+      ? 'updateHba1cTracker'
+      : 'createHba1cTracker';
+    try {
+      await userService[API_FUNCTION](hba1cTracker, SELECTED_HBA1C_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err: any) {
+      console.error(err);
+      if (error?.errMsg.status === '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status === false) {
+      } else if (error?.errMsg.status === false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: error?.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: error?.errMsg,
           type: 'danger',
         });
       }
     }
+    setIsLoading(false);
+  };
+  const deleteHba1cLog = async () => {
+    try {
+      await userService.deleteHba1cLog(SELECTED_HBA1C_ID);
+      navigate(SCREENS.HEALTH_PROGRESS);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const onChangeHba1c = (key, value) => {
+    console.log(key, value);
+    setHba1cTracker((prev) => ({ ...prev, [key]: value }));
+    setError(hba1cValidator(value) || '');
   };
 
   return (
-    <TitleWithBackWhiteBgLayout title="HbA1c">
+    <TitleWithBackWhiteBgLayout
+      title="HbA1c"
+      binIcon={SELECTED_HBA1C_ID ? true : false}
+      onPressIcon={() => setShowDeleteModal(true)}
+    >
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -124,40 +142,45 @@ const HbA1c = () => {
             height={15}
             textAlign="center"
             placeholder={'0.0'}
-            onChangeText={onChangeText}
+            onChangeText={(val) => {
+              onChangeHba1c('data_value', val);
+            }}
             showIcon={true}
-            // value={value}
-            maxLength={3}
+            value={hba1cTracker?.data_value ? hba1cTracker?.data_value : ''}
+            // maxLength={5}
           />
+          {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}
 
-          {validation && hbvalue ? (
-            <Text style={styles.errorMessage}>
-              Your HbA1c measurement should be between 5-15%
-            </Text>
-          ) : null}
-          {!hbvalue ? (
-            <Text style={styles.errorMessage}>
-              Please provide your measurement
-            </Text>
-          ) : null}
-
-          {!validation && hbvalue ? (
+          {!error && hba1cTracker?.data_value ? (
             <>
-              <Text style={styles.label}>Date of Birth</Text>
+              <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
-                date={dateAndtime}
-                setDate={(e: any) => setDateAndTime(e)}
+                date={hba1cTracker.record_date}
+                setDate={(e: any) =>
+                  setHba1cTracker({
+                    ...hba1cData,
+                    record_date: e,
+                  })
+                }
               />
             </>
           ) : null}
         </View>
-
-        <ButtonWithShadowContainer
-          onPress={onSubmit}
-          title={'Add'}
-          disabled={!hbvalue || validation ? true : false}
-        />
       </ScrollView>
+      <AccountDeActivateModal
+        headerText="Weight"
+        subHeading="Are you sure you wish to delete this weight log?"
+        buttonUpperText="Yes"
+        buttonLowerText="Skip"
+        isVisible={showDeleteModal}
+        setIsVisible={setShowDeleteModal}
+        callMe={deleteHba1cLog}
+      />
+      <ButtonWithShadowContainer
+        onPress={saveHab1cLog}
+        title={route?.params?.logId ? 'Save Edit' : 'Add'}
+        disabled={error || hba1cTracker.data_value === '' ? true : false}
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };

@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { TouchableRipple, useTheme } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
 import { logNow } from 'utils/functions/log-binder';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
 import HistoryBookings from './../../../components/ui/history-bookings/index';
 import UpcommingBookings from './../../../components/ui/upcomming-bookings/index';
 import makeStyles from './styles';
+import { getAllBookingsDataR } from 'store/covid/covid-actions';
 
 type Props = {};
 
 const Covid19Bookings = (props: Props) => {
   const {} = props;
-  const { colors } = useTheme();
+  const { colors }: any = useTheme();
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
   const styles = makeStyles(colors);
   const [selectedHorizontal, setSelectedHorizontal] = useState(0);
+
+  /*eslint-disable */
+  const getAllBookingsData = async () => {
+    await dispatch(getAllBookingsDataR());
+  };
+
+  useEffect(() => {
+    getAllBookingsData();
+  }, [focused]);
+  /*eslint-enable */
 
   const horizontalListItem = ({
     item,

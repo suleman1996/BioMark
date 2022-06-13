@@ -1,3 +1,12 @@
+import BMI from 'assets/svgs/Bmi';
+import Smoking from 'assets/svgs/smoking';
+import Drinking from 'assets/svgs/Drinking';
+import Stress from 'assets/svgs/stress';
+import Sleep from 'assets/svgs/sleep';
+import Heart from 'assets/svgs/heart';
+import BP from 'assets/svgs/bP';
+import Diabetes from 'assets/svgs/diabtes';
+
 const Diabetess = [
   {
     image: require('../../../../assets/images/home/people.png'),
@@ -41,7 +50,7 @@ const Diabetess = [
   },
 ];
 
-const Heart_Disease = [
+const HEART_DISEASE = [
   {
     image: require('../../../../assets/images/home/people.png'),
     title: 'Age',
@@ -157,10 +166,10 @@ const Drinkings = [
   },
 ];
 
-const Heart_Disease_ref = {
+const HEART_DISEASE_REF = {
   text: 'Management of Dyslipidaemia 2017 (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia.',
 };
-const Heart_Disease_footnotes = {
+const HEART_DISEASE_FOOTNOTE = {
   text: 'Your heart risk score is only an estimate. Additionally, your risk changes over time. Please discuss with your doctor for more information',
 };
 
@@ -174,7 +183,7 @@ const Diabetes_footnotes = {
 const Blood_Pressure_ref = {
   text: 'Management of Hypertension (4th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia',
 };
-const BMI_ref = {
+const BMI_REF = {
   text: '1. World Health Organisation (International Association For The Study of Obesity)\n\n2. Management of Type 2 Diabetes Mellitus (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia',
 };
 const Smoking_ref = {
@@ -190,7 +199,7 @@ const Sleeping_ref = {
   text: 'National Sleep Foundation, USA https://sleepshow.org/how-much-sleep/',
 };
 
-const heart_Diease_Calc = {
+const HEART_DISEASE_CALC = {
   text: 'This heart risk calculation is validated by the Framingham Heart Study for people between ages of 30 and 74 and without prior history of heart disease. \n\nThe calculation takes the following factors into account:',
 };
 const diabetes_Calc = {
@@ -199,7 +208,7 @@ const diabetes_Calc = {
 const Blood_Pressure_Calc = {
   text: 'Your blood pressure measures the pressure of the blood that is flowing in your blood vessels.\n\nThe top number is your systolic reading which measures the pressure when your heart beats.\n\nThe bottom number is your diastolic reading which measure the pressure when your hear relaxes in between beats.\n\nHypertension is defined as persistent elevation of systolic blood pressure (BP) of 130 mmHg or greater and/or diastolic BP of 90 mmHg or greater, taken at least twice on two separate occasions.\n\nIf your systolic and diastolic values are in different categories, we take the higher of the two classifications. For example, if your systolic is normal but your diastolic is elevated, then your blood pressure will be classified as elevated.\n\nThe following are the different classifications:',
 };
-const BMI_Calc = {
+const BMI_CALC = {
   text: 'Your Body Mass Index (BMI) is a method of estimating the amount of body fat based on your height and weight.\n\nBMI is calculated by dividing your weight (kg) by the square of your height (m<sup>2</sup>).\n\nBMI often miscategorises bodybuilders as overweight due to their abundance of muscle mass. Therefore it should not be used for this group of individuals.\n\nThe following are the different classifications:',
 };
 const Smoking_Calc = {
@@ -215,28 +224,59 @@ const Sleeping_Calc = {
   text: 'Good sleep hygiene can help you get good night time sleep.\n\nSome of sleep hygiene checklist includes establishing bedtime routine which is going to bed and waking in the morning, at the same time every day. Limiting screen time before going to bed, and avoiding stimulants (caffeine, nicotine, alcohol) as bedtime approaches will help to speed the onset of sleep. Otherwise, keeping your bedroom dark and cool will help you sleep throughout the night without waking up. \n\nThis sleep requirement is recommended by the National Sleep Foundation(USA).',
 };
 
-export {
-  Diabetess,
-  Heart_Disease,
-  Blood_Presure,
-  BMII,
-  Drinkings,
-  Heart_Disease_ref,
-  Heart_Disease_footnotes,
-  Diabetes_ref,
-  Diabetes_footnotes,
-  Blood_Pressure_ref,
-  BMI_ref,
-  Smoking_ref,
-  Drinking_ref,
-  Stress_ref,
-  Sleeping_ref,
-  heart_Diease_Calc,
-  diabetes_Calc,
-  Blood_Pressure_Calc,
-  BMI_Calc,
-  Smoking_Calc,
-  Drinking_Calc,
-  Stress_Calc,
-  Sleeping_Calc,
+// const icons = {
+//   heart: Heart,
+//   bmi: ,
+//   bp: ,
+
+// }
+
+export const healthRiskData = {
+  heart: {
+    icon: Heart,
+    calculations: HEART_DISEASE_CALC,
+    disease: HEART_DISEASE,
+    footnotes: HEART_DISEASE_FOOTNOTE,
+    refrence: HEART_DISEASE_REF,
+  },
+  bmi: {
+    icon: BMI,
+    calculations: BMI_CALC,
+    disease: BMII,
+    refrence: BMI_REF,
+  },
+  bp: {
+    icon: BP,
+    calculations: Blood_Pressure_Calc,
+    disease: Blood_Presure,
+    refrence: Blood_Pressure_ref,
+  },
+  diabetes: {
+    icon: Diabetes,
+    calculations: diabetes_Calc,
+    disease: Diabetess,
+    footnotes: Diabetes_footnotes,
+    refrence: Diabetes_ref,
+  },
+  drinking: {
+    icon: Drinking,
+    calculations: Drinking_Calc,
+    disease: Drinkings,
+    refrence: Drinking_ref,
+  },
+  sleeping: {
+    icon: Sleep,
+    calculations: Sleeping_Calc,
+    refrence: Sleeping_ref,
+  },
+  smoking: {
+    icon: Smoking,
+    calculations: Smoking_Calc,
+    refrence: Smoking_ref,
+  },
+  stress: {
+    icon: Stress,
+    calculations: Stress_Calc,
+    refrence: Stress_ref,
+  },
 };

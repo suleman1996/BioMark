@@ -15,10 +15,12 @@ import {
 } from 'components/base';
 import { BoxSelector, RelationMenu } from 'components/higher-order';
 import { ActivityIndicator } from 'components';
+import { Header } from 'components';
 
 import { Regex } from 'constants/regex';
 import { dependentService } from 'services/account-service/dependent-service';
-import { goBack } from 'services/nav-ref';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
 import { getAllDependents } from 'store/account/account-actions';
 import { DependentSingleGetResponse } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
@@ -27,6 +29,7 @@ import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 
 import makeStyles from './styles';
+import { getUserProfileData } from 'store/profile/profile-actions';
 
 type Props = {
   route?: any;
@@ -37,6 +40,8 @@ const EditDependantScreen = (props: Props) => {
   const styles = makeStyles(colors);
 
   const dispatch = useDispatch();
+  const dispatch1 = useDispatch();
+
   const [nationalNumber, setNationalNumber] = useState<any>();
 
   const id = props.route?.params?.id;
@@ -128,7 +133,10 @@ const EditDependantScreen = (props: Props) => {
       .finally(async () => {
         setIsLoading(false);
         await dispatch(getAllDependents());
-        goBack();
+        await dispatch1(getUserProfileData());
+        navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+          screen: SCREENS.DEPENDANTS,
+        });
       });
     formikRef.current.submitForm();
   };
@@ -136,6 +144,7 @@ const EditDependantScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
+      <Header isBold={true} isColor={true} title="Edit Dependent" />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}

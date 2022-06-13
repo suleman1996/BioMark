@@ -1,8 +1,6 @@
 import { View } from 'react-native';
 import React from 'react';
-import { Text, useTheme } from 'react-native-paper';
-
-import { TextInput } from 'react-native-paper';
+import { Text, useTheme, TextInput } from 'react-native-paper';
 
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 
@@ -16,6 +14,7 @@ type Props = {
   onChangeText: (text: string) => void;
   value: string;
   maxLength: number;
+  defaultValue: string;
 };
 
 const MedicalInput = ({
@@ -25,7 +24,6 @@ const MedicalInput = ({
   textAlign,
   onChangeText,
   value,
-  maxLength,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -49,14 +47,17 @@ const MedicalInput = ({
         placeholderTextColor={colors.smoke}
         style={[styles.textFieldStyle, otherStyle]}
         theme={{ colors: { text: colors.smoke } }}
-        onChangeText={onChangeText}
+        // onChangeText={onChangeText}
+        // onChange={(e) => console.log('onchange', e)}
+        onChangeText={(e) => onChangeText(e)}
         value={value}
+        // defaultValue={defaultValue}
         autoFocus={false}
         underlineColor="transparent"
         activeUnderlineColor="transparent"
         borderBottomWidth={0}
         keyboardType="numeric"
-        maxLength={maxLength}
+        // maxLength={maxLength}
       />
       <Text style={styles.label}>%</Text>
     </View>

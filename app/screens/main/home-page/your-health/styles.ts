@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -42,14 +43,7 @@ const styles = (colors: any) =>
       justifyContent: 'space-around',
       paddingTop: 5,
     },
-    renderHealthRisk: {
-      height: 32,
-      width: 32,
-      borderRadius: 16,
 
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     dot: {
       backgroundColor: colors.dangerRed,
       height: 10,
@@ -87,29 +81,7 @@ const styles = (colors: any) =>
       paddingHorizontal: 10,
       marginHorizontal: 5,
     },
-    recordKeepingView: {
-      //   height: 100,
-      marginHorizontal: 5,
-      alignItems: 'center',
-      paddingTop: 15,
-      backgroundColor: colors.blue,
-      borderRadius: 8,
-      marginBottom: 10,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
 
-      elevation: 5,
-    },
-    recordKeepinText: {
-      fontFamily: fonts.regular,
-      fontSize: 16,
-      color: colors.white,
-    },
     circle: {
       height: 60,
       width: 60,
@@ -144,57 +116,7 @@ const styles = (colors: any) =>
       color: colors.heading,
       fontWeight: 'bold',
     },
-    resultStatusView: {
-      marginTop: 20,
-      //   height: 100,
-      backgroundColor: colors.white,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
 
-      elevation: 5,
-      borderRadius: 10,
-      marginHorizontal: 5,
-      padding: 5,
-    },
-    resultStatus: {
-      fontFamily: fonts.regular,
-      fontWeight: '900',
-      fontSize: 16,
-      color: colors.heading,
-    },
-    barcode: {
-      fontFamily: fonts.light,
-      fontSize: 13,
-      color: colors.heading,
-      textAlign: 'center',
-    },
-    highlightsView: {
-      height: 85,
-      width: 187,
-
-      borderRadius: 5,
-      //   padding: 5,
-      overflow: 'hidden',
-    },
-    highlightstext: {
-      fontFamily: fonts.regular,
-      fontSize: 14,
-      color: colors.white,
-    },
-    blurView: {
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: '#3D3D3D90',
-      paddingHorizontal: 10,
-    },
     healthRisk: {
       // height: 100,
       backgroundColor: colors.white,
@@ -219,6 +141,42 @@ const styles = (colors: any) =>
     descriptionHealthRisk: {
       fontFamily: fonts.light,
       marginTop: 10,
+    },
+    textInput: {
+      borderRadius: 8,
+      padding: 10,
+    },
+    popUpHeader: {
+      width: '100%',
+      height: 40,
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    popUpHeading: {
+      fontFamily: fonts.bold,
+      fontSize: 21,
+      color: colors.heading,
+    },
+    popUpSubHeading: {
+      fontFamily: fonts.extraBold,
+      fontSize: 15,
+      color: colors.heading,
+    },
+    singleMenuItem: {
+      paddingHorizontal: widthToDp(4),
+      paddingVertical: widthToDp(2.5),
+      borderBottomLeftRadius: 4,
+      borderBottomRightRadius: 4,
+      borderBottomColor: colors.primary,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+
+    errorMessage: {
+      marginHorizontal: 5,
+      fontSize: 12,
+      color: colors.danger,
     },
   });
 export default styles;

@@ -68,10 +68,10 @@ function saveAllMedicalHistoryPersonalData(data: MedicalHistoryRequest) {
   });
 }
 
-function saveAllFamilyMedicalHistoryPersonalData(data: MedicalHistoryRequest) {
+function saveAllergiesMedicalHistoryData(data: any) {
   return new Promise<MedicalHistoryResponseData>((resolve, reject) => {
     client
-      .post(`${API_URLS.MEDICAL_HISTORY}/family`, data)
+      .post(`${API_URLS.MEDICAL_HISTORY}/allergy`, data)
       .then(async (response) => {
         try {
           //logNow('all notification inbox success response', response.data);
@@ -88,9 +88,30 @@ function saveAllFamilyMedicalHistoryPersonalData(data: MedicalHistoryRequest) {
   });
 }
 
+function saveAllFamilyMedicalHistoryPersonalData(data: any) {
+  return new Promise<MedicalHistoryResponseData>((resolve, reject) => {
+    client
+      .post(`${API_URLS.MEDICAL_HISTORY}/family`, data)
+      .then(async (response) => {
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('allergies error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('allergies error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
 export const profileServices = {
   getUserProfile,
   getAllMedicalHistoryData,
   saveAllMedicalHistoryPersonalData,
+  saveAllergiesMedicalHistoryData,
   saveAllFamilyMedicalHistoryPersonalData,
 };

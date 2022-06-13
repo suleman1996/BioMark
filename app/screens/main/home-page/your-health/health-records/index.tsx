@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Styles from './styles';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
@@ -14,165 +14,207 @@ import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleFitButton } from 'components/button';
-import Filter from '../../../../../assets/svgs/filter';
+import { userService } from 'services/user-service/user-service';
+
+import HealthRecordFilter from 'components/health-records-filter';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import {
-  getReduxHealthTracker,
-  getReduxDashboard,
-  getHealthTrackerRisks,
+  getReduxLatestResult,
+  getReduxPastResult,
 } from 'store/home/home-actions';
 
+import Filter from '../../../../../assets/svgs/filter';
+import SCREENS from 'navigation/constants/index';
+import LatestResultCard from 'components/latest-result-card';
+import moment from 'moment';
+import fonts from 'assets/fonts';
+import { showMessage } from 'react-native-flash-message';
+
 const HealthRecord = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [latestResult, setLatestResult] = useState('');
+  const [pastResults, setPastResults] = useState([]);
+  const [checked, setChecked] = React.useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [page, setPage] = useState(1);
+
   const { colors } = useTheme();
 
   const styles = Styles(colors);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const hell = useSelector((state: IAppState) => state.home.healthTracker);
-  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
-  const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
-
-  useEffect(() => {
-    dispatch(getReduxHealthTracker());
-    console.log('Health Trackeer api =======>', hell);
-    dispatch(getReduxDashboard());
-    console.log('Dashboard api =======>', dashboard);
-    dispatch(getHealthTrackerRisks());
-    console.log('healthRisk api =======>', healthRisk);
-    // handleHEalthTracker();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-
-  //   const pan = useRef(new Animated.ValueXY()).current;
-
-  //   const panResponder = PanResponder.create({
-  //     onStartShouldSetPanResponder: () => true,
-  //     onPanResponderMove: Animated.event([
-  //       null,
-  //       {
-  //         dx: pan.x, // x,y are Animated.Value
-  //         // dy: pan.y,
-  //       },
-  //     ]),
-  //     onPanResponderRelease: () => {
-  //       Animated.spring(
-  //         pan, // Auto-multiplexed
-  //         { toValue: { x: 0, y: 0 } } // Back to zero
-  //       ).start();
-  //     },
-  //   });
-
-  const latestResult = [
-    {
-      title: 'Test',
-      text: 'March 22, 2022 09:00pm',
-      Ref: 'REF:555444333',
-      text2: 'Converted',
-    },
-  ];
-
-  const pastResult = [
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-    {
-      title: 'Result Printed on March 22, 2022',
-      text: 'March 21, 2022 09:00pm',
-      Ref: 'CVD-VGTKYP',
-      text2: 'You have 6 out of 25 tests that need attention',
-      text3: 'Clinic Queen Avenue Clinic',
-    },
-  ];
-
-  const renderItem = ({ item }) => (
-    <View
-      style={{
-        backgroundColor: 'white',
-        paddingTop: 10,
-        marginTop: 20,
-        borderRadius: 10,
-        elevation: 7,
-        marginBottom: 10,
-      }}
-    >
-      <View style={styles.view}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={{ height: 30, width: 30 }}
-        />
-        <Text style={styles.title}>{item.title}</Text>
-      </View>
-      <Text style={styles.text3}>{item.text}</Text>
-      <Text style={styles.text3}>{item.Ref}</Text>
-
-      <View style={styles.roundView}>
-        <View style={styles.round}></View>
-        <Text style={styles.text4}>{item.text2}</Text>
-      </View>
-      <View style={styles.bottomView}></View>
-    </View>
+  const newResult = useSelector(
+    (state: IAppState) => state.home.getLatestResultData
+  );
+  const pastResult = useSelector(
+    (state: IAppState) => state.home.getPastResultData
   );
 
+  useEffect(() => {
+    dispatch(getReduxLatestResult());
+    dispatch(getReduxPastResult());
+    setPastResults(pastResult);
+    setLatestResult(newResult);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  const onConfirm = async () => {
+    try {
+      const result = await userService.getFilterResult({
+        page: page,
+        type: checked,
+        start: startDate,
+        end: endDate,
+      });
+      setPastResults(result?.data);
+      setModalVisible(!modalVisible);
+      console.log('resultttt-----------------------dataaaa', result?.data);
+    } catch (error) {
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.message,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+
+    // const result = await userService.getFilterResult({
+    //   page: page,
+    //   type: checked,
+    //   start: startDate,
+    //   end: endDate,
+    // });
+    // setPastResults(result?.data);
+    // setModalVisible(!modalVisible);
+    // console.log('resultttt-----------------------dataaaa', result?.data);
+  };
+
+  const handleConfirm = (date) => {
+    console.log('A date has been picked: ', date);
+    setStartDate(date);
+  };
+  const handleConfirm2 = (date) => {
+    console.log('A date has been picked: ', date);
+    setEndDate(date);
+  };
+
   const renderItem2 = ({ item }) => (
-    <View
-      style={{
-        backgroundColor: 'white',
-        paddingTop: 10,
-        marginTop: 20,
-        borderRadius: 10,
-        elevation: 10,
-        marginBottom: 0,
+    <TouchableOpacity
+      onPress={() => {
+        item?.result?.status == 'Pending'
+          ? navigation.navigate(SCREENS.PENDING_RESULT_OVERVIEW, {
+              result: item,
+            })
+          : navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item });
       }}
+      style={styles.pastResultMainView}
     >
       <View style={styles.view}>
         <Image
-          source={require('../../../../../assets/images/home/GD.png')}
+          source={require('../../../../../assets/images/home/pad.png')}
           style={{ height: 30, width: 30 }}
         />
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item?.name}</Text>
       </View>
-      <Text style={styles.text3}>{item.text}</Text>
-      <Text style={styles.text3}>{item.Ref}</Text>
+      <Text style={styles.text3}>
+        {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
+      </Text>
+      {item.ref_no == null ? null : (
+        <Text style={styles.text3}>REF: {item?.ref_no}</Text>
+      )}
 
-      <View style={styles.pastResultView}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text6}>{item.text2}</Text>
-      </View>
+      {item.result.summary && (
+        <View style={styles.pastResultView}>
+          <Image
+            source={require('../../../../../assets/images/home/info.png')}
+            style={styles.prImage}
+          />
+          <Text style={styles.text6}>{item?.result?.summary}</Text>
+        </View>
+      )}
 
-      <View style={styles.pastResultView2}>
-        <Image
-          source={require('../../../../../assets/images/home/GD.png')}
-          style={styles.prImage}
-        />
-        <Text style={styles.text7}>{item.text3}</Text>
-      </View>
+      {item?.result?.status == 'Pending' ? (
+        <View
+          style={{
+            backgroundColor: 'lightgrey',
+            flexDirection: 'row',
+            padding: 5,
+            alignItems: 'center',
+            width: '40%',
+            borderRadius: 15,
+            marginHorizontal: 15,
+            marginTop: 10,
+          }}
+        >
+          <View
+            style={{
+              borderRadius: 20,
+              backgroundColor: 'white',
+              width: 15,
+              height: 15,
+            }}
+          ></View>
+          <Text
+            style={{
+              marginHorizontal: 8,
+              fontFamily: fonts.OpenSansBold,
+              color: 'black',
+            }}
+          >
+            {item?.result?.status == 'Pending' ? 'Under Review' : null}
+          </Text>
+        </View>
+      ) : item?.result?.status == 'Converted' ? (
+        <View
+          style={{
+            backgroundColor: 'lightgrey',
+            flexDirection: 'row',
+            padding: 5,
+            alignItems: 'center',
+            width: '40%',
+            borderRadius: 15,
+            marginHorizontal: 15,
+            marginTop: 10,
+            marginBottom: 10,
+          }}
+        >
+          <View
+            style={{
+              borderRadius: 20,
+              backgroundColor: 'green',
+              width: 15,
+              height: 15,
+            }}
+          ></View>
+          <Text style={{ marginHorizontal: 8 }}>{item.result.status}</Text>
+        </View>
+      ) : (
+        <View style={styles.pastResultView2}>
+          <Image
+            source={require('../../../../../assets/images/home/doctor.png')}
+            style={styles.prImage}
+          />
+          <Text style={styles.text7}>{item.result.doctor}</Text>
+        </View>
+      )}
 
       <View style={styles.bottomView}></View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -200,36 +242,87 @@ const HealthRecord = () => {
             </Text>
           </View>
 
-          <Text style={styles.latestResult}>Your Latest Results</Text>
-          <FlatList
-            data={latestResult}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
+          <LatestResultCard
+            title="Your Latest Results"
+            name={latestResult?.name}
+            received={moment(latestResult?.received).format(
+              'hh:mm a MMMM Do, YYYY'
+            )}
+            ref_no={latestResult?.ref_no}
+            status={latestResult?.result?.status}
+            onPress={() =>
+              latestResult?.result?.status == 'Converted'
+                ? navigation.navigate(SCREENS.RESULT_OVERVIEW)
+                : null
+            }
+            // summary={latestResult?.result?.summary}
+            // doctor={latestResult?.result?.doctor}
           />
 
-          <TouchableOpacity style={styles.uploadResult}>
-            <GoogleFitButton
-              disabled={false}
-              title="Upload Results"
-              onPress={() => console.log('pressed')}
-            />
+          <TouchableOpacity
+            style={styles.uploadResult}
+            onPress={() => navigation.navigate(SCREENS.RESULT_UPLOAD)}
+          >
+            <GoogleFitButton disabled={false} title="Upload Results" />
           </TouchableOpacity>
 
           <View style={styles.filterView}>
             <Text style={styles.text5}>Past Results</Text>
-            <Filter fill={colors.heading} />
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <Filter fill={colors.heading} />
+            </TouchableOpacity>
           </View>
 
+          <Text style={styles.resultMessage}>
+            {pastResults?.message == 'No results' && 'No Result Found'}
+          </Text>
+
+          <HealthRecordFilter
+            visible={modalVisible}
+            title="Filter Results"
+            title2="Document Upload Type"
+            cancelModal={() => setModalVisible(!modalVisible)}
+            closeModal={() => setModalVisible(!modalVisible)}
+            firstValue={'first'}
+            secondValue={'second'}
+            touchableRadio1={() => setChecked('first')}
+            onPressRadio1={() => setChecked('first')}
+            status={checked === 'first' ? 'checked' : 'unchecked'}
+            touchableRadio2={() => setChecked('second')}
+            onPressRadio2={() => setChecked('second')}
+            status2={checked === 'second' ? 'checked' : 'unchecked'}
+            startDateText={`Date:  ${
+              startDate
+                ? moment(startDate).format('MM/DD/YYYY')
+                : 'Please select date'
+            }`}
+            endDateText={`Date:  ${
+              endDate
+                ? moment(endDate).format('MM/DD/YYYY')
+                : 'Please select end date'
+            }`}
+            handleConfirm={handleConfirm}
+            handleConfirm2={handleConfirm2}
+            onPressClearFilter={() => {
+              setChecked(''),
+                setStartDate(''),
+                setEndDate(''),
+                setPastResults(pastResult);
+            }}
+            onConifrm={() => onConfirm()}
+          />
+
           <FlatList
-            data={pastResult}
+            data={pastResults}
             renderItem={renderItem2}
             keyExtractor={(item) => item.id}
           />
+
           <TouchableOpacity style={styles.uploadResult}>
             <GoogleFitButton
               disabled={false}
               title="Load more data"
-              onPress={() => console.log('pressed')}
+              onPress={() => setPage((prev) => prev + 1)}
             />
           </TouchableOpacity>
         </ScrollView>
@@ -237,5 +330,4 @@ const HealthRecord = () => {
     </View>
   );
 };
-
 export default HealthRecord;

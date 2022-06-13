@@ -13,7 +13,7 @@ export interface BloodPressureProgressEntryRequest {
 export interface BloodPressureProgressEntryPayload {
   id: number;
   bp_systolic: string;
-  bp_diastolic: boolean;
+  bp_diastolic: string;
   date_entry: string;
   is_doctor: boolean;
   formated_date_entry: string;

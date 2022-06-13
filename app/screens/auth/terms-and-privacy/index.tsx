@@ -34,7 +34,6 @@ export default function TermsAndPrivacy({ route }) {
   );
   const [downloaded, setisdownloaded] = useState(false);
   const header = route?.params?.headerHome;
-  console.log('route?.params', route);
 
   const navigations = useNavigation();
 
@@ -64,8 +63,6 @@ export default function TermsAndPrivacy({ route }) {
       android: configfb,
     });
 
-    console.log('The file saved to 23233', configfb, dirs);
-
     ReactNativeBlobUtil.config(configOptions)
       .fetch('GET', privacyPolicy ? Config.PRIVACY_POLICY : Config.TNC, {})
       .then((res) => {
@@ -77,12 +74,10 @@ export default function TermsAndPrivacy({ route }) {
         if (Platform.OS == 'android') {
           Alert.alert('File downloaded');
         }
-        console.log('The file saved to ', res);
       })
       .catch((e) => {
         setisdownloaded(true);
         Alert.alert(e.message);
-        console.log('The file saved to ERROR', e.message);
       });
   };
   const permissionFunc = async () => {
@@ -101,14 +96,12 @@ export default function TermsAndPrivacy({ route }) {
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           // Start downloading
           downloadFile();
-          console.log('Storage Permission Granted.');
         } else {
           // If permission denied then show alert
           Alert.alert('Error', 'Storage Permission Not Granted');
         }
       } catch (err) {
         // To handle permission related exception
-        console.log('++++' + err);
       }
     }
   };
@@ -150,7 +143,7 @@ export default function TermsAndPrivacy({ route }) {
           // ReactNativeBlobUtil.ios.openDocument(res.data);
         }
         // Alert after successful downloading
-        console.log('res -> ', JSON.stringify(res));
+
         // alert('File Downloaded Successfully.');
       });
   };
@@ -222,18 +215,10 @@ export default function TermsAndPrivacy({ route }) {
             uri: Config.PRIVACY_POLICY,
             cache: true,
           }}
-          onLoadComplete={(numberOfPages, filePath) => {
-            console.log(`Number of pages: ${numberOfPages}`);
-          }}
-          onPageChanged={(page, numberOfPages) => {
-            console.log(`Current page: ${page}`);
-          }}
-          onError={(error) => {
-            console.log(error);
-          }}
-          onPressLink={(uri) => {
-            console.log(`Link pressed: ${uri}`);
-          }}
+          onLoadComplete={(numberOfPages, filePath) => {}}
+          onPageChanged={(page, numberOfPages) => {}}
+          onError={(error) => {}}
+          onPressLink={(uri) => {}}
           trustAllCerts={false}
           style={styles.pdfView}
         />
@@ -243,18 +228,10 @@ export default function TermsAndPrivacy({ route }) {
             uri: Config.TNC,
             cache: true,
           }}
-          onLoadComplete={(numberOfPages, filePath) => {
-            console.log(`Number of pages: ${numberOfPages}`);
-          }}
-          onPageChanged={(page, numberOfPages) => {
-            console.log(`Current page: ${page}`);
-          }}
-          onError={(error) => {
-            console.log(error);
-          }}
-          onPressLink={(uri) => {
-            console.log(`Link pressed: ${uri}`);
-          }}
+          onLoadComplete={(numberOfPages, filePath) => {}}
+          onPageChanged={(page, numberOfPages) => {}}
+          onError={(error) => {}}
+          onPressLink={(uri) => {}}
           trustAllCerts={false}
           style={styles.pdfView}
         />

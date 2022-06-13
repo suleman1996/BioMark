@@ -84,18 +84,22 @@ const SupportCenter = () => {
           </Text>
         </View>
         {checked ? (
-          <GradientButton
-            text="Accept & Continue"
-            color={['#2C6CFC', '#2CBDFC']}
-            disabled={!checked ? true : false}
-            onPress={() => navigate(SCREENS.EMPOWER_PROGRAM)}
-          />
+          <View style={styles.gradientButtonView}>
+            <GradientButton
+              text="Accept & Continue"
+              color={['#2C6CFC', '#2CBDFC']}
+              disabled={!checked ? true : false}
+              onPress={() => navigate(SCREENS.EMPOWER_PROGRAM)}
+            />
+          </View>
         ) : (
-          <GradientButton
-            text="Accept & Continue"
-            color={['#cccccc', '#cccccc']}
-            disabled={!checked ? true : false}
-          />
+          <View style={styles.gradientButtonView}>
+            <GradientButton
+              text="Accept & Continue"
+              color={['#cccccc', '#cccccc']}
+              disabled={!checked ? true : false}
+            />
+          </View>
         )}
         <WaveIcon style={{ height: 100, width: '100%' }} />
       </ScrollView>

@@ -39,7 +39,7 @@ const InputWithLabel = ({
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.label, ifLabelSize]}>{label}</Text>
+      {label && <Text style={[styles.label, ifLabelSize]}>{label}</Text>}
       <InputField
         onFocus={onFocus}
         placeholder={placeholder}

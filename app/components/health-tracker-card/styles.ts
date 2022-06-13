@@ -11,7 +11,7 @@ const styles = (colors: any) =>
     },
     renderHealthView: {
       height: 120,
-      width: 110,
+      width: 120,
       backgroundColor: colors.white,
       borderRadius: 5,
       shadowColor: '#000',

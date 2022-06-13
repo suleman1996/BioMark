@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -15,6 +15,8 @@ import { DependentData } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
 
 import makeStyles from './styles';
+import { userService } from 'services/user-service/user-service';
+import AuthContext from 'utils/auth-context';
 
 type Props = {
   data: DependentData[];
@@ -26,14 +28,23 @@ const DependantsList = (props: Props) => {
 
   const dispatch = useDispatch();
   const { data } = props;
+  const authContext = useContext(AuthContext);
   const [isDelete, setIsDelete] = useState(false);
   const [deleteId, setDeleteId] = useState<any>();
 
+  const userProfile = async () => {
+    try {
+      const result = await userService.getUserProfile();
+
+      authContext.setUserData(result.data);
+    } catch (error) {}
+  };
   const deleteSingleDependent = () => {
     dependentService
       .deleteSingleDependentData(deleteId)
       .then(async () => {
         await dispatch(getAllDependents());
+        userProfile();
       })
       .catch(() => {})
       .finally(() => {});

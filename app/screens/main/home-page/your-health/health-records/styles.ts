@@ -34,7 +34,7 @@ const styles = (colors: any) =>
     },
     containerBody: {
       flex: 1,
-      paddingHorizontal: 15,
+      paddingHorizontal: 10,
       paddingTop: 40,
       backgroundColor: 'white',
     },
@@ -42,6 +42,9 @@ const styles = (colors: any) =>
       backgroundColor: '#C9E1F2',
       borderRadius: 8,
       paddingTop: 10,
+      padding: 5,
+      marginHorizontal: 5,
+      // marginTop: heightToDp(2),
     },
     text: {
       textAlign: 'center',
@@ -53,6 +56,7 @@ const styles = (colors: any) =>
       textAlign: 'center',
       marginTop: heightToDp(1),
       color: colors.black,
+      fontSize: responsiveFontSize(14),
       fontFamily: fonts.mulishRegular,
       marginBottom: heightToDp(3),
     },
@@ -61,6 +65,23 @@ const styles = (colors: any) =>
       color: colors.primary,
       fontFamily: fonts.OpenSansBold,
       marginTop: heightToDp(5),
+    },
+    pastResultMainView: {
+      backgroundColor: 'white',
+      paddingTop: 10,
+      marginTop: 20,
+      borderRadius: 10,
+      elevation: 10,
+      marginBottom: 0,
+      marginHorizontal: 5,
+    },
+    filterResultMainView: {
+      backgroundColor: 'grey',
+      paddingTop: 10,
+      marginTop: 20,
+      borderRadius: 10,
+      elevation: 10,
+      marginBottom: 0,
     },
     view: {
       flex: 1,
@@ -113,6 +134,7 @@ const styles = (colors: any) =>
     },
     uploadResult: {
       marginTop: heightToDp(4),
+      paddingBottom: heightToDp(1),
     },
     filterView: {
       flexDirection: 'row',
@@ -129,8 +151,9 @@ const styles = (colors: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: '#C9E1F2',
-      paddingTop: heightToDp(2),
-      paddingBottom: heightToDp(2),
+      padding: 4,
+      // paddingTop: heightToDp(2),
+      // paddingBottom: heightToDp(2),
       marginHorizontal: widthToDp(2),
       borderRadius: 10,
       borderWidth: 1,
@@ -158,6 +181,11 @@ const styles = (colors: any) =>
       color: colors.heading,
       fontFamily: fonts.OpenSansBold,
       fontSize: responsiveFontSize(18),
+    },
+    resultMessage: {
+      color: colors.smoke,
+      textAlign: 'center',
+      marginTop: heightToDp(2),
     },
   });
 export default styles;

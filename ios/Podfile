@@ -30,6 +30,12 @@ pre_install do |installer|
       end
     end
   end
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
+  target 'BioMarkTests' do
+    inherit! :complete
+    # Pods for testing
+  end
 end
 
 post_install do |installer|

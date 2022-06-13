@@ -1,4 +1,6 @@
 import DeviceInfo from 'react-native-device-info';
+import moment from 'moment';
+
 import {
   BootstrapData,
   GeoLocationData,
@@ -8,6 +10,40 @@ import {
   RiskData,
   MedicationListEntry,
   MedicationTrackerSetup,
+  PspModule,
+  PspModuleDataContents,
+  LabStatusPayload,
+  MedicalResponseData,
+  ShowMedication,
+  MedicationEditRequest,
+  MedicationUpdateResponse,
+  MedicationTracker,
+  ResultResponse,
+  EncodedResultOverviewPayload,
+  LabStatusResponse,
+  NewTarget,
+  CreateTargetResponse,
+  CreateTargetRequest,
+  LatestTargetResponse,
+  GetHba1cTargetsResponseData,
+  GetBloodSugarTargetsResponseData,
+  HealthTrackerPayloadData,
+  WeightProgressEntryPayload,
+  BloodPressureProgressEntryPayload,
+  BloodSugarProgressEntryPayload,
+  Hba1CProgressEntryPayload,
+  MedicationTrackerPayload,
+  WeightProgressLogsPayload,
+  BloodSugarProgressLogsPayload,
+  Hba1CProgressLogsPayload,
+  BloodPressureProgressLogsPayload,
+  SetDefaultTargetResponse,
+  WeightProgressEntryRequest,
+  Hba1CProgressEntryRequest,
+  LabUploadPayload,
+  MedicationTrackerRequest,
+  BloodPressureProgressChartDataResponse,
+  Hba1CProgressChartDataResponse,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -157,10 +193,8 @@ function registerUser(username: string, values, gender: any, date: string) {
       });
   });
 }
+
 function createProfile(values, gender: any, date: string) {
-  console.log('values', values);
-  console.log('gender', gender);
-  console.log('date', date);
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_PROFILE, {
@@ -189,6 +223,7 @@ function createProfile(values, gender: any, date: string) {
       });
   });
 }
+
 function getUserContacts() {
   return new Promise<UserContacts>((resolve, reject) => {
     client
@@ -232,6 +267,7 @@ function saveUserContacts(email_address: string) {
       });
   });
 }
+
 function autoLogout() {
   return new Promise<AutoLogoutRes>((resolve, reject) => {
     client
@@ -251,10 +287,9 @@ function autoLogout() {
       });
   });
 }
+
 function saveAutoLogout(auto_logout: boolean) {
   return new Promise<AutoLogoutRes>((resolve, reject) => {
-    console.log('auto_logout', auto_logout);
-
     client
       .post(API_URLS.SAVE_AUTO_LOG_OUT, {
         settings: {
@@ -276,6 +311,7 @@ function saveAutoLogout(auto_logout: boolean) {
       });
   });
 }
+
 async function logout() {
   let uniqueId = DeviceInfo.getUniqueId();
 
@@ -352,13 +388,18 @@ const Vaccination = ({ medical_history }: Props) => {
     // },
   });
 };
+
 type Props = {
   conditions: any;
   medical: any;
   lifestyle: any;
   medical_history: any;
   has_allergy: any;
+  module: any;
+  scanner: any;
+  lab_upload: any;
 };
+
 const Allergies = ({ conditions, has_allergy }: Props) => {
   return client.post(API_URLS.ALLERGIES, {
     medical_history: {
@@ -384,6 +425,24 @@ const bodyMeasurement = ({ medical }: Props) => {
 const exercise = ({ lifestyle }: Props) => {
   return client.post(API_URLS.EXERCISE, {
     lifestyle,
+  });
+};
+
+const withdraw = ({ module }: Props) => {
+  return client.post(API_URLS.WITHDRAW, {
+    module,
+  });
+};
+
+const barcodeCheck = ({ scanner }: Props) => {
+  return client.post(API_URLS.BARCODE_CHECK, {
+    scanner,
+  });
+};
+
+const uploadResult = ({ lab_upload }: Props) => {
+  return client.post(API_URLS.UPLOAD_RESULTS, {
+    lab_upload,
   });
 };
 
@@ -417,26 +476,245 @@ const getLifeStyle = () => {
   return client.get(API_URLS.GET_LIFE_STYLE);
 };
 
+const getFilterResult = ({ type, start, end, page }) => {
+  return client.get(API_URLS.GET_FILTER_RESULT, {
+    params: {
+      page,
+      type,
+      start,
+      end,
+    },
+  });
+};
+
+// .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
+
 const getMedicalHistory = () => {
   return client.get(API_URLS.GET_MEDICAL_HISTORY);
 };
 
 const getBodyMeasurements = () => {
-  return client.get(API_URLS.GET_BODY_MEASUREMENT);
+  return new Promise<MedicalResponseData>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BODY_MEASUREMENT)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('Register user error block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get profile error', err);
+        reject(err);
+      });
+  });
 };
 const createBloodSugar = ({ blood_sugar }: Props) => {
   return client.post(API_URLS.CREATE_BLOOD_SUGAR, {
     blood_sugar,
   });
 };
-const createBloodPressure = ({ medical }: Props) => {
-  return client.post(API_URLS.CREATE_BLOOD_PRESSURE, {
-    medical,
+const createBpTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_BLOOD_PRESSURE, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log('create data', data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
   });
 };
-const createWeight = ({ medical }: Props) => {
-  return client.post(API_URLS.CREATE_WEIGHT, {
-    medical,
+
+const updateBpTracker = (medical: WeightProgressEntryRequest, id: string) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_BLOOD_PRESSURE}/${id}`, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        console.log('update data', data);
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteBpLog = (bp_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_BLOOD_PRESSURE}/${bp_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_BLOOD_SUGAR, {
+        blood_sugar: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log('create data', data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateBsTracker = (
+  medical: BloodSugarProgressEntryPayload,
+  id: string
+) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_BLOOD_SUGAR}/${id}`, {
+        blood_sugar: medical,
+      })
+      .then(async ({ data }) => {
+        console.log('update data', data);
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteBsLog = (bp_log_id: any) => {
+  console.log('bp_log_id', bp_log_id);
+
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_BLOOD_SUGAR}/${bp_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log('deleteBsLog', data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err deleteBsLog.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_HBA1C, {
+        hba1c: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log('create data', data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateHba1cTracker = (medical: Hba1CProgressEntryRequest, id: string) => {
+  console.log('id', id);
+
+  console.log('medical', medical);
+
+  return new Promise<Hba1CProgressEntryRequest>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_HBA1C}/${id}`, {
+        hba1c: medical,
+      })
+      .then(async ({ data }) => {
+        console.log('update data', data);
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteHba1cLog = (bp_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_HBA1C}/${bp_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
   });
 };
 const createHba1c = ({ hba1c }: Props) => {
@@ -444,9 +722,15 @@ const createHba1c = ({ hba1c }: Props) => {
     hba1c,
   });
 };
-const createMedication = ({ medication }: Props) => {
-  return client.post(API_URLS.CREATE_MEDICATION, {
+
+const createMedication = ({ medication }: MedicationTrackerRequest) =>
+  client.post(API_URLS.CREATE_MEDICATION, {
     medication,
+  });
+
+const labStatusVerify = ({ result }: Props) => {
+  return client.post(API_URLS.LAB_STATUS_VERYFY, {
+    result,
   });
 };
 
@@ -505,8 +789,6 @@ function geoLocation() {
       .get(API_URLS.LOCATION)
       .then(async (response) => {
         try {
-          console.log('rees', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('Register user error block login1.', e);
@@ -530,8 +812,6 @@ function updateUserEthnic(ethnic: string) {
       })
       .then(async (response) => {
         try {
-          console.log('updateUserEthnic response', response.data);
-
           resolve(response.data);
         } catch (e) {
           logNow('updateUserEthnic user error block login1.', e);
@@ -551,8 +831,6 @@ function getHealthTracker() {
       .get(API_URLS.GET_HEALTH_TRACKER)
       .then(async (response) => {
         try {
-          console.log('rrr', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -572,8 +850,6 @@ function getDashboard() {
       .get(API_URLS.DASHBOARD)
       .then(async (response) => {
         try {
-          console.log('rrr', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -592,8 +868,6 @@ function getMedicalDropDown() {
       .get(API_URLS.GET_HEALTH_DROPDOWN)
       .then(async (response) => {
         try {
-          console.log('med', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -612,8 +886,6 @@ function getMedicationList() {
       .get(API_URLS.GET_MEDICATION_DROPDWON)
       .then(async (response) => {
         try {
-          console.log('memm', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -633,8 +905,6 @@ function getHealthRisks() {
       .get(API_URLS.GET_HEALTH_RISKS)
       .then(async (response) => {
         try {
-          console.log('med', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -653,8 +923,6 @@ function getNewMedicationTracker() {
       .get(API_URLS.GET_NEW_MEDICATION_TRACKER)
       .then(async (response) => {
         try {
-          console.log('new med tracker', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -667,8 +935,789 @@ function getNewMedicationTracker() {
       });
   });
 }
+
+function getPspModules() {
+  return new Promise<PspModule>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_MODULES)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('psp error', err);
+        reject(err);
+      });
+  });
+}
+
+function getPspHyperModules() {
+  return new Promise<PspModule>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_HYPER_MODULE_DATA)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('psp hyper error', err);
+        reject(err);
+      });
+  });
+}
+
+function getHypertensionHealthTracker() {
+  return new Promise<HealthTrackerPayloadData>((resolve, reject) => {
+    client
+      .get(API_URLS.PSP_GET_HYPERTENSION_MODULES)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('hypertension error', err);
+        reject(err);
+      });
+  });
+}
+
+function getLatestResult() {
+  return new Promise<EncodedResultOverviewPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.HEALTH_LATEST_RESULTS)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('latest result error', err);
+        reject(err);
+      });
+  });
+}
+
+function getLabUploadResult(id) {
+  return new Promise<LabUploadPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_LAB_UPLOADS + id)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get upload result error', err);
+        reject(err);
+      });
+  });
+}
+
+const deleteLabUploads = (id: number) => {
+  return client.delete(API_URLS.DELETE_LAB_UPLOADS + id);
+};
+
+function getPastResult() {
+  return new Promise<LabStatusResponse>((resolve, reject) => {
+    client
+      .get(API_URLS.HEALTH_PAST_RESULTS)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('past result error', err);
+        reject(err);
+      });
+  });
+}
+function getPspPdfLink(link) {
+  return new Promise<PspModuleDataContents>((resolve, reject) => {
+    client
+      .get(API_URLS.PDF_GET_LINK + link)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('pdf error', err);
+        logNow('lab status error', err);
+        reject(err);
+      });
+  });
+}
+
+function getPspHyperPdfLink(link) {
+  return new Promise<PspModuleDataContents>((resolve, reject) => {
+    client
+      .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('pdf Hyper error', err);
+        logNow('lab status error', err);
+        reject(err);
+      });
+  });
+}
+function getLabResultStatus() {
+  return new Promise<LabStatusPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_LAB_STATUS)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('pdf error', err);
+        logNow('lab status error', err);
+        reject(err);
+      });
+  });
+}
+
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
+};
+const deleteMedicationTracker = async (id: number) => {
+  return await client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
+};
+
+const getNewMedicationFormData = () => {
+  return new Promise<MedicationSetupPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_NEW_MEDICATION_DATA)
+      .then(async ({ data }) => {
+        try {
+          const medication_list: any = data.medication_list.map((item) => ({
+            ...item,
+            value: item.id,
+            label: item.name,
+            disease_list: item.disease_list.map((d) => ({
+              ...d,
+              value: d.id,
+              label: d.name,
+            })),
+          }));
+
+          const frequency_list: any = data.frequency_list.map((item) => ({
+            ...item,
+            value: item.id,
+            label: item.name,
+          }));
+          resolve({
+            medication_list,
+            frequency_list,
+            unit_list: data.unit_list,
+          });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const getSelectedMedicationData = (id: number) => {
+  return new Promise<ShowMedication>((resolve, reject) => {
+    client
+      .get(`${API_URLS.SHOW_MEDICATION}/${id}`)
+      .then(async ({ data }) => {
+        try {
+          resolve({
+            name: data.name,
+            disease_type: data.disease_type_id,
+            medication_list_id: data.medication_list_id,
+            unit_list_id: data.unit_list_id,
+            dosage: data.dosage,
+            frequency: data.frequency_id,
+            frequency_time: [...data.frequency_time],
+            start_date: new Date(data.start_date),
+            end_date: new Date(data.end_date),
+          });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const saveMedication = (medication: MedicationEditRequest) => {
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.SAVE_MEDICATION, {
+        ...medication,
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateMedication = (medication: MedicationEditRequest, medication_id) => {
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .put(`${API_URLS.SAVE_MEDICATION}/${medication_id}`, {
+        ...medication,
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteMedication = (medication_id) => {
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.DELETE_MEDICATION}/${medication_id}`)
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+const getMedicationTrackers = (date: string) => {
+  return new Promise<MedicationTracker>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_MEDICATION_TRACKER)
+      .then(async ({ data }) => {
+        try {
+          let response;
+          data.map((item) => {
+            if (moment(item.date).format('MMM D, YYYY') === date) {
+              response = { ...item };
+            }
+          });
+          resolve({ ...response });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
+};
+
+//Targets API START
+
+const getNewTarget = () => {
+  return new Promise<NewTarget>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_NEW_TARGET)
+      .then(({ data }: { data: NewTarget }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      })
+  );
+};
+
+const createNewTarget = (target: CreateTargetRequest) => {
+  return new Promise<string>((resolve, reject) =>
+    client
+      .post(API_URLS.CREATE_NEW_TARGET, { target })
+      .then(({ data }: { data: CreateTargetResponse }) => {
+        resolve(data.message);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getLatestTargets = () => {
+  return new Promise<LatestTargetResponse>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_LATEST_TARGETS)
+      .then(({ data }: { data: LatestTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getBloodSugarTargets = () => {
+  return new Promise<GetBloodSugarTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_BLOOD_SUGAR_TARGETS)
+      .then(({ data }: { data: GetBloodSugarTargetsResponseData[] }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const getHBA1CTargets = () => {
+  return new Promise<GetHba1cTargetsResponseData[]>((resolve, reject) =>
+    client
+      .get(API_URLS.GET_HBA1C_TARGETS)
+      .then(({ data }: { data: GetHba1cTargetsResponseData[] }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultBloodSugarTarget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .post(API_URLS.SET_DEFAULT_BLOOD_SUGAR_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+const setDefaultHba1carget = () => {
+  return new Promise<SetDefaultTargetResponse>((resolve, reject) =>
+    client
+      .post(API_URLS.SET_DEFAULT_HBA1C_TARGET)
+      .then(({ data }: { data: SetDefaultTargetResponse }) => {
+        resolve(data);
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject('');
+      })
+  );
+};
+
+// Targets API END
+const getResultOverView = (id, filter) => {
+  return new Promise<ResultResponse>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter='}${filter}`)
+      .then(async (response) => {
+        try {
+          //
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get result overview error', err);
+        reject(err);
+      });
+  });
+};
+
+const getWeightProgress = (id) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_WEIGTH_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('getWeightProgress error', err);
+        reject(err);
+      });
+  });
+};
+
+const getBloodPressureProgress = (id) => {
+  return new Promise<BloodPressureProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_BP_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BPProgress error', err);
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getBloodPressureChart = (params) => {
+  return new Promise<BloodPressureProgressChartDataResponse>(
+    (resolve, reject) => {
+      client
+        .get(`${API_URLS.GET_BP_TRACKER_CHART}`, { params })
+        .then(async ({ data }) => {
+          try {
+            resolve(data);
+          } catch (e) {
+            logNow('err.', e);
+            reject(e);
+          }
+        })
+        .catch(async (err: ErrorResponse) => {
+          logNow('BPProgress error', err);
+          logNow('get weight log error', err);
+          reject(err);
+        });
+    }
+  );
+};
+
+const getHBA1cChart = (params) => {
+  return new Promise<Hba1CProgressChartDataResponse>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_HBA1C_TRACKER_CHART}`, {
+        params: { ...params, page: 1 },
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve(data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BPProgress error', err);
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getWeightLogs = () => {
+  return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_WEIGHT_LOGS)
+      .then(async (response) => {
+        try {
+          //
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getBloodSugarProgress = (id) => {
+  return new Promise<BloodSugarProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_BS_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BSProgress error', err);
+
+        reject(err);
+      });
+  });
+};
+const getBloodSugarLogs = () => {
+  return new Promise<BloodSugarProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BLOOD_SUGAR_LOGS)
+      .then(async (response) => {
+        try {
+          //
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get bs log error', err);
+        reject(err);
+      });
+  });
+};
+const getHba1cProgress = (id) => {
+  return new Promise<Hba1CProgressEntryPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_HBA1C_TRACKER}${id}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('hba1c error', err);
+        reject(err);
+      });
+  });
+};
+
+const getHba1cLogs = () => {
+  return new Promise<Hba1CProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_HBA1C_LOGS)
+      .then(async (response) => {
+        try {
+          //
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get hb1c log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getMedicationProgress = (id) => {
+  return new Promise<MedicationTrackerPayload>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_MEDICATION_TRACKER_BY_ID}${id}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('MED error', err);
+        reject(err);
+      });
+  });
+};
+
+const getBloodPressureLogs = () => {
+  return new Promise<BloodPressureProgressLogsPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_BLOOD_PRESSURE_LOGS)
+      .then(async (response) => {
+        try {
+          //
+
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
+const getMoreInfoResult = (id) => {
+  return client.get(`${API_URLS.GET_RESULT_MORE_INFO}${id}/summary`);
+};
+
+const getResultPdf = (id) => {
+  return client.get(`${API_URLS.GET_RESULT_PDF}${id}/download`);
+};
+
+const getWeightMapData = (obj) => {
+  return client.get(API_URLS.GET_WEIGHT_MAP, {
+    params: obj,
+  });
+};
+
+const getHbA1cMapData = (obj) => {
+  return client.get(API_URLS.GET_HBA1C_MAP, {
+    params: obj,
+  });
+};
+
+const getBloodPressureMapData = (obj) => {
+  return client.get(API_URLS.GET_BLOOD_PRESSURE_MAP, {
+    params: obj,
+  });
+};
+
+const getBloodSugarMapData = (obj) => {
+  return client.get(API_URLS.GET_BLOOD_SUGAR_CHART, {
+    params: obj,
+  });
+};
+const getSearchResult = (lab_id) => {
+  return client.get(`${API_URLS.GET_SEARCH_RESULT}${lab_id}&q=li`);
+};
+
+const createWeightTracker = (medical: WeightProgressEntryRequest) => {
+  console.log(medical);
+  return new Promise<MedicationUpdateResponse>((resolve, reject) => {
+    client
+      .post(API_URLS.CREATE_WEIGHT, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
+const updateWeightTracker = (
+  medical: WeightProgressEntryRequest,
+  id: string
+) => {
+  return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
+    client
+      .put(`${API_URLS.CREATE_WEIGHT}/${id}`, {
+        medical: medical,
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get weight error', err);
+        reject(err);
+      });
+  });
+};
+
+const deleteWeightLog = (weight_log_id: any) => {
+  return new Promise<any>((resolve, reject) => {
+    client
+      .delete(`${API_URLS.CREATE_WEIGHT}/${weight_log_id}`)
+      .then(async ({ data }) => {
+        try {
+          console.log(data);
+          resolve({ ...data });
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get med error', err);
+        reject(err);
+      });
+  });
 };
 
 export const userService = {
@@ -707,12 +1756,70 @@ export const userService = {
   getDashboard,
   getMedicalDropDown,
   createBloodSugar,
-  createBloodPressure,
-  createWeight,
+  updateWeightTracker,
+  createWeightTracker,
   createHba1c,
   getHealthRisks,
   getJumioData,
   getMedicationList,
   createMedication,
   getNewMedicationTracker,
+  getPspModules,
+  getPspPdfLink,
+  getLabResultStatus,
+  labStatusVerify,
+  deleteMedicationTracker,
+  getNewMedicationFormData,
+  getSelectedMedicationData,
+  saveMedication,
+  updateMedication,
+  deleteMedication,
+  getMedicationTrackers,
+  getResultOverView,
+  getLatestResult,
+  getPastResult,
+  getNewTarget,
+  createNewTarget,
+  getLatestTargets,
+  getBloodSugarTargets,
+  getHBA1CTargets,
+  getHypertensionHealthTracker,
+  getPspHyperModules,
+  getPspHyperPdfLink,
+  getWeightProgress,
+  getBloodPressureProgress,
+  getBloodSugarProgress,
+  getHba1cProgress,
+  getMedicationProgress,
+  getWeightLogs,
+  getBloodSugarLogs,
+  getHba1cLogs,
+  getBloodPressureLogs,
+  withdraw,
+  getFilterResult,
+  setDefaultBloodSugarTarget,
+  setDefaultHba1carget,
+  deleteWeightLog,
+  createBpTracker,
+  updateBpTracker,
+  deleteBpLog,
+  createBsTracker,
+  updateBsTracker,
+  deleteBsLog,
+  createHba1cTracker,
+  updateHba1cTracker,
+  deleteHba1cLog,
+  barcodeCheck,
+  uploadResult,
+  getMoreInfoResult,
+  getLabUploadResult,
+  deleteLabUploads,
+  getResultPdf,
+  getBloodSugarMapData,
+  getWeightMapData,
+  getBloodPressureChart,
+  getHbA1cMapData,
+  getHBA1cChart,
+  getBloodPressureMapData,
+  getSearchResult,
 };

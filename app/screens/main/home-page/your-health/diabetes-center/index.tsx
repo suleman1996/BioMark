@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
   Text,
@@ -6,162 +7,462 @@ import {
   ScrollView,
   Linking,
   TouchableWithoutFeedback,
+  ImageBackground,
+  Image,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import RenderHealthTrack from 'components/health-tracker-card/index';
+import RenderHealthTrackDemo from 'components/health-tracker-card-demo/index';
 import PdfList from 'components/pdf-list';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
+import { ActivityIndicator } from 'components';
 import WithdrawProgram from 'components/widthdraw-from-program';
-import Video from 'react-native-video';
-import SCREENS from 'navigation/constants'; // import { useNavigation } from '@react-navigation/native';
-// import Pdf from 'assets/svgs/pdf';
+import { userService } from 'services/user-service/user-service';
+
+import SCREENS from 'navigation/constants';
+import PdfSvg from 'assets/svgs/pdf';
 import Messenger from 'assets/svgs/messenger';
 import { navigate } from 'services/nav-ref';
-// import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import { getReduxPspModules } from 'store/home/home-actions';
+import Config from 'react-native-config';
+import { showMessage } from 'react-native-flash-message';
+import GradientButton from 'components/linear-gradient-button';
+
 const openMessenger = () => {
-  Linking.openURL(
-    'mailto:support@biomarking.com?subject=SendMail&body=Description'
-  );
+  Linking.openURL(Config.MESSENGER_URL);
 };
 
 const DiabetesCenter = () => {
+  const [isVisiable, setIsVisible] = React.useState(false);
+  const [showDemo, setShowDemo] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [pdfData, setPdfData] = useState([]);
+  const [video, setVideo] = useState([]);
+  const [healthTracker] = React.useState([]);
+  const [barCodeData, setBarCodeData] = React.useState('');
+  const dispatch = useDispatch();
 
   const { colors } = useTheme();
   const styles = Styles(colors);
-  //   const navigation = useNavigation();
 
-  const [healthTracker] = React.useState([
+  const scrollRef = React.useRef(<ScrollView />);
+  const scrollToView = (value) => {
+    scrollRef.current?.scrollTo({
+      y: value,
+      animated: true,
+    });
+  };
+
+  const pspModuleData = useSelector(
+    (state: IAppState) => state.home.pspModuleData
+  );
+  const hell = useSelector((state: IAppState) => state.home.healthTracker);
+  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
+
+  useEffect(() => {
+    PspModuleData();
+    handleHEalthTracker();
+    console.log('Health diabetes api =======>', hell);
+    console.log('dashborad api result', dashboard);
+    setBarCodeData(dashboard?.program_detail?.barcode);
+    // alert(JSON.stringify(dashboard));
+    // alert(JSON.stringify(dashboard.program_detail.barcode));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setShowDemo(0);
+  }, []);
+
+  const PspModuleData = () => {
+    try {
+      dispatch(getReduxPspModules());
+      setPdfData(pspModuleData.pdf);
+      // console.log('ps--------------------p', pspModuleData);
+      setVideo(pspModuleData.video);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleHEalthTracker = () => {
+    healthTracker.length = 0;
+    let id = -1;
+    Object.entries(hell).map((item) => {
+      item[1]?.name &&
+        healthTracker.push({
+          id: id + 1,
+          title: item[1]?.name,
+          value: item[1]?.value,
+          subTitle: item[1]?.unit,
+          color:
+            item[1]?.card_status == 'none'
+              ? colors.blue
+              : item[1]?.card_status == 'high'
+              ? colors.dangerRed
+              : colors.lightYellow,
+        });
+    });
+  };
+
+  const [healthTrackerDemo] = React.useState([
     {
       id: 0,
-      title: 'Blood Sugar',
-      value: '5.5',
+      title: 'Blood Sygar',
+      value: '110',
       subTitle: 'mg/dL',
       color: colors.lightYellow,
     },
     {
       id: 1,
       title: 'Medication',
-      value: '-',
-      subTitle: 'Add',
+      value: '50',
+      subTitle: 'Units',
       color: colors.blue,
     },
     {
-      id: 1,
-      title: 'HbA1c',
-      value: '5.0',
-      subTitle: '%',
-      color: colors.green,
-    },
-    {
       id: 2,
-      title: 'Weight',
-      value: '56',
+      title: 'HbA1c',
+      value: '8',
       subTitle: 'kg',
       color: colors.blue,
     },
   ]);
 
-  const [Pdflist] = React.useState([
-    {
-      id: 1,
-      title: 'Diabetes Patient Manual',
-    },
-    {
-      id: 2,
-      title: 'Diabetes Myths and Facts',
-    },
-    {
-      id: 3,
-      title: 'Diabetes Patient Manual',
-    },
-    {
-      id: 4,
-      title: 'Diabetes Patient Manual',
-    },
-  ]);
+  const PdfLink = ({ title, svg, onPress }) => (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[
+        styles.recordKeepingView,
+        { backgroundColor: colors.white, paddingHorizontal: 10 },
+      ]}
+    >
+      <View style={{ width: '80%' }}>
+        <Text style={styles.recordKeepinText}>{title}</Text>
+      </View>
+
+      <View style={{ width: '20%', alignItems: 'center' }}>{svg}</View>
+    </TouchableOpacity>
+  );
+
+  const renderItem = ({ item }) => (
+    <>
+      {console.log(item, '---------------item-------------------')}
+      <ImageBackground
+        resizeMode="stretch"
+        source={{ uri: item.thumbnail }}
+        style={styles.backgroundVideo}
+      >
+        <TouchableOpacity
+          onPress={() => navigate(SCREENS.VIDEO_LIST, { code: item })}
+        >
+          <Image
+            source={require('../../../../../assets/images/home/playbutton.png')}
+            style={{
+              height: 30,
+              width: 30,
+              alignSelf: 'center',
+            }}
+          />
+        </TouchableOpacity>
+      </ImageBackground>
+    </>
+  );
+
+  const onWithdraw = async () => {
+    try {
+      setIsVisible(true);
+      const response = await userService.withdraw({
+        module: {
+          barcode: barCodeData,
+          bm_program_id: 2,
+        },
+      });
+      console.log(response.data, 'withdrawwwwwwwwwwwwwwwwwwwwwww');
+      setModalVisible(!modalVisible);
+      navigate(SCREENS.YOUR_HEALTH);
+      setIsVisible(false);
+    } catch (err) {
+      showMessage({
+        message: err.errMsg.data.message,
+        type: 'danger',
+      });
+      setIsVisible(false);
+      setModalVisible(!modalVisible);
+      console.log('error response', err.errMsg.data.message);
+    }
+  };
 
   return (
     <TitleWithBackLayout isGradient={true} title="Diabetes Support Center">
+      <ActivityIndicator visible={isVisiable} />
       <View style={styles.containerBody}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ flex: 1 }}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {showDemo !== 5 && <View style={styles.demoContainer}></View>}
+            <Text style={[styles.headingText, { marginVertical: 10 }]}>
+              YOUR DIABETES DIARY
+            </Text>
+            <View style={{ marginHorizontal: 15 }}>
+              <FlatList
+                data={healthTracker}
+                renderItem={(item) => <RenderHealthTrack item={item} />}
+                keyExtractor={(item) => item.index}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              />
+            </View>
+            {/* <FlatList
+    <TitleWithBackLayout
+      backTo={SCREENS.YOUR_HEALTH}
+      isGradient={true}
+      title="Diabetes Support Center"
+    >
+      <View style={{ flex: 1 }}>
+        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+          {showDemo !== 5 && <View style={styles.demoContainer}></View>}
           <Text style={[styles.headingText, { marginVertical: 10 }]}>
             YOUR DIABETES DIARY
           </Text>
-          <FlatList
+          <View style={{ marginHorizontal: 15 }}>
+            <FlatList
+              data={healthTracker}
+              renderItem={(item) => <RenderHealthTrack item={item} />}
+              keyExtractor={(item) => item.index}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          {/* <FlatList
             style={{ alignSelf: 'center' }}
             data={healthTracker}
             renderItem={(item) => <RenderHealthTrack item={item} />}
             keyExtractor={(item) => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
-          />
-          <Text style={[styles.headingText, { marginVertical: 10 }]}>
-            DIABETES EDUCATION
-          </Text>
-
-          <Video
-            source={{
-              uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
-            }}
-            controls={true}
-            paused={true}
-            style={styles.backgroundVideo}
-            repeat={true}
-            resizeMode="stretch"
-            fullscreen={true}
-            posterResizeMode={'cover'}
-            poster="https://play-lh.googleusercontent.com/uf1TVrS58KmBNiWYR3LocIJMDXTmmfkYY79lDlG2eA4brjyw3q1BN4DDIriw7B9MfQ=w600-h300-pc0xffffff-pd"
-            //   style={{ flex: 1, width: '100%', margin: 'auto' }}
-          />
-
-          <FlatList
-            data={Pdflist}
-            renderItem={(item) => (
-              <PdfList
-                item={item}
-                onPress={() => navigate(SCREENS.PDF_DIABETES_SUPPORT)}
-              />
-            )}
-            keyExtractor={(item) => item.id}
-            showsHorizontalScrollIndicator={false}
-          />
-          <WithdrawProgram
-            visible={modalVisible}
-            title="Are You Sure?"
-            text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
-            cancel="Cancel"
-            cancelModal={() => setModalVisible(!modalVisible)}
-            closeModal={() => setModalVisible(!modalVisible)}
-          />
-
-          <View style={styles.bottomTextView}>
-            <Text style={[styles.bottomText, { color: colors.heading }]}>
-              Tap to{' '}
+          /> */}
+            <View
+              style={{
+                position: 'absolute',
+                zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
+                flexDirection: 'row',
+                top: 50,
+                left: 20,
+              }}
+            >
+              {showDemo === 0 && (
+                <RenderHealthTrackDemo item={healthTrackerDemo[0]} />
+              )}
+              {showDemo === 1 && (
+                <>
+                  <View style={{ height: 110, width: 100, marginLeft: '9%' }} />
+                  <RenderHealthTrackDemo item={healthTrackerDemo[1]} />
+                </>
+              )}
+              {showDemo === 2 && (
+                <>
+                  <View
+                    style={{ height: 110, width: 100, marginLeft: '10%' }}
+                  />
+                  <View style={{ height: 110, width: 100 }} />
+                  <RenderHealthTrackDemo item={healthTrackerDemo[2]} />
+                </>
+              )}
+            </View>
+            <Text style={[styles.headingText, { marginVertical: 10 }]}>
+              DIABETES EDUCATION
             </Text>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Text
-                style={[
-                  styles.bottomText,
-                  { color: colors.blue, textDecorationLine: 'underline' },
-                ]}
+            {showDemo === 3 && (
+              <View
+                style={{
+                  position: 'absolute',
+                  zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
+                  flexDirection: 'row',
+                  top: 50,
+                  left: 20,
+                }}
               >
-                Withdraw from Program
+                {showDemo === 0 && (
+                  <RenderHealthTrackDemo item={healthTrackerDemo[0]} />
+                )}
+                {showDemo === 1 && (
+                  <>
+                    <View style={{ height: 110, width: 100 }} />
+                    <RenderHealthTrackDemo item={healthTrackerDemo[1]} />
+                  </>
+                )}
+                {showDemo === 2 && (
+                  <>
+                    <View style={{ height: 110, width: 100, marginLeft: 10 }} />
+                    <View style={{ height: 110, width: 100 }} />
+                    <RenderHealthTrackDemo item={healthTrackerDemo[2]} />
+                  </>
+                )}
+              </View>
+            )}
+            <Text style={[styles.headingText, { marginVertical: 10 }]}>
+              DIABETES EDUCATION
+            </Text>
+            {showDemo === 3 && (
+              <View
+                style={{
+                  position: 'relative',
+                  zIndex: 33,
+                  marginHorizontal: 15,
+                }}
+              >
+                <ImageBackground
+                  resizeMode="stretch"
+                  source={{
+                    uri: 'http://s3-ap-southeast-1.amazonaws.com/assets.biomarking.com/videos/DE-Toujeo-thumbnail.jpg',
+                  }}
+                  style={styles.backgroundVideo}
+                >
+                  <TouchableOpacity>
+                    <Image
+                      source={require('../../../../../assets/images/home/playbutton.png')}
+                      style={{
+                        height: 30,
+                        width: 30,
+                        alignSelf: 'center',
+                      }}
+                    />
+                  </TouchableOpacity>
+                </ImageBackground>
+              </View>
+            )}
+            <View style={styles.videoView}>
+              <FlatList
+                data={video}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+              />
+            </View>
+
+            {/* view to show pdf on top */}
+            {showDemo !== 5 && (
+              <View
+                style={{
+                  position: 'relative',
+                  zIndex: showDemo === 4 ? 33 : 29,
+                  marginHorizontal: 15,
+                }}
+              >
+                <PdfLink title="Diabetes Patient Manual" svg={<PdfSvg />} />
+              </View>
+            )}
+            <FlatList
+              data={pdfData}
+              renderItem={(item) => (
+                <PdfList
+                  item={item}
+                  onPress={() => {
+                    navigate(SCREENS.PDF_DIABETES_SUPPORT, { code: item });
+                  }}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+              showsHorizontalScrollIndicator={false}
+            />
+
+            <WithdrawProgram
+              text2="Yes"
+              visible={modalVisible}
+              title="Are You Sure?"
+              text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
+              cancel="Cancel"
+              cancelModal={() => setModalVisible(!modalVisible)}
+              closeModal={() => setModalVisible(!modalVisible)}
+              onPress={() => onWithdraw()}
+              color={['#2C6CFC', '#2CBDFC']}
+            />
+
+            <View style={styles.bottomTextView}>
+              <Text style={[styles.bottomText, { color: colors.heading }]}>
+                Tap to{' '}
               </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-        <TouchableWithoutFeedback onPress={() => openMessenger()}>
+              <TouchableOpacity onPress={() => setModalVisible(true)}>
+                <Text
+                  style={[
+                    styles.bottomText,
+                    { color: colors.blue, textDecorationLine: 'underline' },
+                  ]}
+                >
+                  Withdraw from Program
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+          {/* <TouchableWithoutFeedback onPress={() => openMessenger()}>
           <View style={styles.messengerView}>
             <Messenger />
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback> */}
+          {showDemo !== 5 && (
+            <View style={styles.demobottomView}>
+              <View style={styles.demoTextView}>
+                {showDemo === 0 && (
+                  <Text style={styles.demoText}>
+                    Log your blood sugar here.
+                  </Text>
+                )}
+                {showDemo === 1 && (
+                  <Text style={styles.demoText}>Log your medication here.</Text>
+                )}
+                {showDemo === 2 && (
+                  <Text style={styles.demoText}>Log your HbA1c here.</Text>
+                )}
+                {showDemo === 3 && (
+                  <Text style={styles.demoText}>
+                    View helpful video tutorials here.
+                  </Text>
+                )}
+                {showDemo === 4 && (
+                  <Text style={styles.demoText}>
+                    Learn more about diabetes here.
+                  </Text>
+                )}
+              </View>
+              <View style={styles.demoButtonView}>
+                <GradientButton
+                  text={showDemo === 4 ? 'Finish' : 'Next'}
+                  color={['#2C6CFC', '#2CBDFC']}
+                  style={styles.gradientButton2}
+                  onPress={() => setShowDemo((demo) => demo + 1)}
+                />
+              </View>
+            </View>
+          )}
+        </View>
+        <View
+          style={{
+            zIndex: 29,
+            position: showDemo != 5 ? 'absolute' : 'relative',
+          }}
+        >
+          <TouchableWithoutFeedback onPress={() => openMessenger()}>
+            <View style={styles.messengerView}>
+              <Messenger />
+              <View style={styles.demoButtonView}>
+                <GradientButton
+                  text={showDemo === 4 ? 'Finish' : 'Next'}
+                  color={['#2C6CFC', '#2CBDFC']}
+                  style={styles.gradientButton2}
+                  onPress={() => {
+                    setShowDemo((demo) => demo + 1),
+                      showDemo == 2 && scrollToView(150);
+                    showDemo == 3 && scrollToView(700);
+                  }}
+                />
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
     </TitleWithBackLayout>
   );
 };
-
 export default DiabetesCenter;

@@ -20,7 +20,7 @@ import { dateFormat } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import * as Yup from 'yup';
-import makeStyles from './styles';
+import { makeStyles } from './styles';
 
 type Props = {
   callMe: any;
@@ -54,7 +54,6 @@ const AddDependantForm = (props: Props) => {
   );
 
   useEffect(() => {
-    console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
       let countryCodeParse = geoLocation.dial_code.replace('+', '');

@@ -2,26 +2,28 @@ import { View } from 'react-native';
 import React from 'react';
 
 import { ECharts } from 'react-native-echarts-wrapper';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
-const Index = () => {
-  const [option] = React.useState({
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-      },
-    ],
-  });
+const Index = ({ chartRef, lagendChartRef, showLegend }) => {
   return (
-    <View style={{ height: 280, marginTop: 10 }}>
-      <ECharts option={option} backgroundColor={'#3D3D3D10'} />
+    <View
+      style={{
+        height: heightToDp(45),
+        marginTop: 0,
+        marginBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+      }}
+    >
+      {showLegend ? (
+        <View style={{ width: '10%' }}>
+          <ECharts option={{}} ref={lagendChartRef} />
+        </View>
+      ) : null}
+
+      <View style={{ width: showLegend ? '90%' : '100%' }}>
+        <ECharts option={{}} ref={chartRef} />
+      </View>
     </View>
   );
 };

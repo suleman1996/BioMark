@@ -1,15 +1,18 @@
+import React, { useState } from 'react';
+
+import { FlatList, Text, View } from 'react-native';
+import { TouchableRipple, useTheme } from 'react-native-paper';
+
 import BookTestButton from 'components/button/book-test';
 import TestBookinButton from 'components/button/bookings';
 import DependentButton from 'components/button/dependents';
 import ViewResultsButton from 'components/button/view-results';
+import QRCarousel from 'components/ui/qr-carousel';
 import { TitleWithSearchBarLayout } from 'components/layouts';
-import React, { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { TouchableRipple, useTheme } from 'react-native-paper';
+
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import makeStyles from './styles';
-import QRCarousel from 'components/ui/qr-carousel';
 
 type Props = {};
 

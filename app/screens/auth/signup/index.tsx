@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme, TouchableRipple } from 'react-native-paper';
 
 import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
@@ -26,7 +28,7 @@ import {
 } from 'components';
 
 import SCREENS from 'navigation/constants';
-import { navigate } from 'services/nav-ref';
+import { navigate, goBack } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { RegisterUserErrorResponse } from 'types/auth/RegisterUser';
 import { logNow } from 'utils/functions/log-binder';
@@ -78,7 +80,6 @@ export default function Signup() {
   }, [selectCountryCode]);
 
   useEffect(() => {
-    console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
       let countryCodeParse = geoLocation.dial_code.replace('+', '');
@@ -152,12 +153,17 @@ export default function Signup() {
   return (
     <>
       <ActivityIndicator visible={loading} />
+
       <View style={styles.signupNav}>
         <View style={styles.csNav}>
-          <TouchableOpacity>
-            {/* <BackIcon onPress={() => goBack()} /> */}
-            <BackIcon onPress={() => console.log('goback')} />
-          </TouchableOpacity>
+          <TouchableRipple
+            borderless
+            style={styles.ripple}
+            onPress={() => goBack()}
+            rippleColor={'#8493AE20'}
+          >
+            <BackIcon />
+          </TouchableRipple>
           <Text style={styles.signupText}>Signup</Text>
         </View>
         <StepIndicator
@@ -166,87 +172,103 @@ export default function Signup() {
           labels={labels}
         />
       </View>
-      <ScrollView keyboardShouldPersistTaps={'handled'}>
-        <Formik
-          initialValues={{
-            fName: '',
-            lName: '',
-            IcPnum: '',
-            email: '',
-            password: '',
-          }}
-          onSubmit={(values) => handleSignup(values)}
-          validationSchema={ResetPassSchema}
-        >
-          {({ handleChange, handleSubmit, errors, isValid }) => (
-            <>
-              <View style={styles.biContainer}>
-                <Text style={styles.heading}>Basic Information</Text>
-                <Text style={styles.inputLablel}>First Name</Text>
-                <TextInput
-                  placeholder="First Name"
-                  onChange={handleChange('fName')}
-                  margin={20}
-                />
-                {errors.fName && (
-                  <Text style={styles.errorMessage}>{errors.fName}</Text>
-                )}
-                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
-                  Last Name
-                </Text>
-                <TextInput
-                  placeholder="Last Name"
-                  onChange={handleChange('lName')}
-                  margin={20}
-                />
-                {errors.lName && (
-                  <Text style={styles.errorMessage}>{errors.lName}</Text>
-                )}
-                <Text style={styles.inputLablel}>Gender</Text>
-                <View style={styles.ChoiceBtnDOB}>
-                  <FlatList
-                    data={gender}
-                    renderItem={RenderRadio}
-                    keyExtractor={(item) => item.id}
-                    horizontal
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <ScrollView keyboardShouldPersistTaps={'handled'}>
+          <Formik
+            initialValues={{
+              fName: '',
+              lName: '',
+              IcPnum: '',
+              email: '',
+              password: '',
+            }}
+            onSubmit={(values) => handleSignup(values)}
+            validationSchema={ResetPassSchema}
+          >
+            {({ handleChange, handleSubmit, errors, isValid }) => (
+              <>
+                <View style={styles.biContainer}>
+                  <Text style={styles.heading}>Basic Information</Text>
+                  <Text style={styles.inputLablel}>First Name</Text>
+                  <TextInput
+                    placeholder="First Name"
+                    onChange={handleChange('fName')}
+                    margin={20}
                   />
-                </View>
-                {errors.password && selectedGender == '' && (
-                  <Text style={styles.errorMessage}>Please select gender</Text>
-                )}
-                <Text style={styles.inputLablel}>Date of Birth</Text>
-                <DatePicker
-                  isPickerShow={isPickerShow}
-                  setIsPickerShow={setIsPickerShow}
-                  date={date}
-                  setDate={setDate}
-                />
+                  {errors.fName && (
+                    <Text style={styles.errorMessage}>{errors.fName}</Text>
+                  )}
+                  <Text style={[styles.inputLablel, { marginTop: 20 }]}>
+                    Last Name
+                  </Text>
+                  <TextInput
+                    placeholder="Last Name"
+                    onChange={handleChange('lName')}
+                    margin={20}
+                  />
+                  {errors.lName && (
+                    <Text style={styles.errorMessage}>{errors.lName}</Text>
+                  )}
+                  <Text style={styles.inputLablel}>Gender</Text>
+                  <View style={styles.ChoiceBtnDOB}>
+                    <FlatList
+                      data={gender}
+                      renderItem={RenderRadio}
+                      keyExtractor={(item) => item.id}
+                      horizontal
+                    />
+                  </View>
+                  {errors.password && selectedGender == '' && (
+                    <Text style={styles.errorMessage}>
+                      Please select gender
+                    </Text>
+                  )}
+                  <Text style={styles.inputLablel}>Date of Birth</Text>
+                  <DatePicker
+                    isPickerShow={isPickerShow}
+                    setIsPickerShow={setIsPickerShow}
+                    date={date}
+                    setDate={setDate}
+                  />
 
-                <Text style={[styles.inputLablel, { marginTop: 20 }]}>
-                  Identity Card/Passport Number
-                </Text>
-                <TextInput
-                  placeholder="E.g.A1234567X"
-                  onChange={handleChange('IcPnum')}
-                  margin={20}
-                />
-                <View style={styles.aiContainer}>
-                  <Text style={styles.heading}>Account Information</Text>
-                  <Text style={styles.inputLablel}>Mobile Number</Text>
-                  <PhoneNumber
-                    countryCode={countryCode}
-                    setCountryCode={setCountryCode}
-                    phoneNumber={phoneNumber}
-                    setPhoneNumber={setPhoneNumber}
-                    setSelectCountryCode={setSelectCountryCode}
-                    maxLength={numberCondition.max}
+                  <Text style={[styles.inputLablel, { marginTop: 20 }]}>
+                    Identity Card/Passport Number
+                  </Text>
+                  <TextInput
+                    placeholder="E.g.A1234567X"
+                    onChange={handleChange('IcPnum')}
+                    margin={20}
                   />
-                  {(phoneNumber !== '' || errors.password) &&
-                    (selectCountryCode == 63 ? (
-                      phoneNumber.charAt(0) == 0 ? (
-                        <Text style={styles.errorMessage}>
-                          Phonenumber must not start with 0
-                        </Text>
+                  <View style={styles.aiContainer}>
+                    <Text style={styles.heading}>Account Information</Text>
+                    <Text style={styles.inputLablel}>Mobile Number</Text>
+                    <PhoneNumber
+                      countryCode={countryCode}
+                      setCountryCode={setCountryCode}
+                      phoneNumber={phoneNumber}
+                      setPhoneNumber={setPhoneNumber}
+                      setSelectCountryCode={setSelectCountryCode}
+                      maxLength={numberCondition.max}
+                    />
+                    {(phoneNumber !== '' || errors.password) &&
+                      (selectCountryCode == 63 ? (
+                        phoneNumber.charAt(0) == 0 ? (
+                          <Text style={styles.errorMessage}>
+                            Phonenumber must not start with 0
+                          </Text>
+                        ) : (
+                          phoneNumber.length < numberCondition.min && (
+                            <Text style={styles.errorMessage}>
+                              Must have {numberCondition.min}
+                              {numberCondition.max !== numberCondition.min &&
+                                -numberCondition.max}{' '}
+                              characters
+                            </Text>
+                          )
+                        )
                       ) : (
                         phoneNumber.length < numberCondition.min && (
                           <Text style={styles.errorMessage}>
@@ -256,92 +278,85 @@ export default function Signup() {
                             characters
                           </Text>
                         )
-                      )
-                    ) : (
-                      phoneNumber.length < numberCondition.min && (
-                        <Text style={styles.errorMessage}>
-                          Must have {numberCondition.min}
-                          {numberCondition.max !== numberCondition.min &&
-                            -numberCondition.max}{' '}
-                          characters
-                        </Text>
-                      )
-                    ))}
+                      ))}
 
-                  <Text style={styles.inputLablel}>Email</Text>
-                  <TextInput
-                    placeholder="E.g. Sample@email.com"
-                    onChange={handleChange('email')}
-                    margin={20}
-                    keyboardType="email-address"
-                  />
-                  <Text style={styles.inputLablel}>Password</Text>
-                  <TextInput
-                    placeholder="Enter your new password..."
-                    secureTextEntry={hidePassword}
-                    eye={!hidePassword ? 'eye' : 'eye-off'}
-                    onEyePress={() => setHidePassword(!hidePassword)}
-                    onChange={handleChange('password')}
-                    margin={20}
-                  />
-                  {errors.password && (
-                    <Text style={styles.errorMessage}>{errors.password}</Text>
-                  )}
-                </View>
-                <View style={styles.tcText}>
-                  <CheckBox checked={checked} setChecked={setChecked} />
-                  <Text style={styles.tcTextStyle}>
-                    <Text>I accept the </Text>
-                    <TouchableWithoutFeedback
-                      onPress={() =>
-                        navigate(SCREENS.TERMS_AND_PRIVACY, {
-                          privacyPolicy: false,
-                        })
-                      }
-                    >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                          // bottom: 2,
-                        }}
+                    <Text style={styles.inputLablel}>Email</Text>
+                    <TextInput
+                      placeholder="E.g. Sample@email.com"
+                      onChange={handleChange('email')}
+                      margin={20}
+                      keyboardType="email-address"
+                    />
+                    <Text style={styles.inputLablel}>Password</Text>
+                    <TextInput
+                      placeholder="Enter your new password..."
+                      secureTextEntry={hidePassword}
+                      eye={!hidePassword ? 'eye' : 'eye-off'}
+                      onEyePress={() => setHidePassword(!hidePassword)}
+                      onChange={handleChange('password')}
+                      margin={20}
+                    />
+                    {errors.password && (
+                      <Text style={styles.errorMessage}>{errors.password}</Text>
+                    )}
+                  </View>
+                  <View style={styles.tcText}>
+                    <CheckBox checked={checked} setChecked={setChecked} />
+                    <Text style={styles.tcTextStyle}>
+                      <Text>I accept the </Text>
+                      <TouchableWithoutFeedback
+                        onPress={() =>
+                          navigate(SCREENS.TERMS_AND_PRIVACY, {
+                            privacyPolicy: false,
+                          })
+                        }
                       >
-                        terms and conditions
-                      </Text>
-                    </TouchableWithoutFeedback>
-                    <Text> and the </Text>
-                    <TouchableWithoutFeedback
-                      onPress={() =>
-                        navigate(SCREENS.TERMS_AND_PRIVACY, {
-                          privacyPolicy: true,
-                        })
-                      }
-                    >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}
+                        <Text
+                          style={{
+                            color: colors.blue,
+                            fontSize: 17,
+                            textDecorationLine: 'underline',
+                            // bottom: 2,
+                          }}
+                        >
+                          terms and conditions
+                        </Text>
+                      </TouchableWithoutFeedback>
+                      <Text> and the </Text>
+                      <TouchableWithoutFeedback
+                        onPress={() =>
+                          navigate(SCREENS.TERMS_AND_PRIVACY, {
+                            privacyPolicy: true,
+                          })
+                        }
                       >
-                        privacy policy.
-                      </Text>
-                    </TouchableWithoutFeedback>
-                  </Text>
+                        <Text
+                          style={{
+                            color: colors.blue,
+                            fontSize: 17,
+                            textDecorationLine: 'underline',
+                          }}
+                        >
+                          privacy policy.
+                        </Text>
+                      </TouchableWithoutFeedback>
+                    </Text>
+                  </View>
+                  <TouchableOpacity>
+                    <Button
+                      title="Continue"
+                      disabled={
+                        !isValid || phoneNumber.length < 8 ? true : false
+                      }
+                      onPress={() => handleSubmit()}
+                    />
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity>
-                  <Button
-                    title="Continue"
-                    disabled={!isValid || phoneNumber.length < 8 ? true : false}
-                    onPress={() => handleSubmit()}
-                  />
-                </TouchableOpacity>
-              </View>
-            </>
-          )}
-        </Formik>
-      </ScrollView>
+              </>
+            )}
+          </Formik>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </>
   );
 }

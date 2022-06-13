@@ -24,17 +24,20 @@ const EmpowerProgram = () => {
           Welcome to the Empower Program. Our goal is to empower you in your
           treatment journey!
         </Text>
-        <GradientButton
-          text="Continue to Hypertension Center"
-          color={['#2C6CFC', '#2CBDFC']}
-          style={styles.gradientButton}
-        />
-        <GradientButton
-          text="Continue to Diabetes Center"
-          color={['#2C6CFC', '#2CBDFC']}
-          style={styles.gradientButton2}
-          onPress={() => navigate(SCREENS.DIABETES_SUPPORT_CENTER)}
-        />
+        <View style={styles.gradientButtonView}>
+          <GradientButton
+            text="Continue to Hypertension Center"
+            color={['#2C6CFC', '#2CBDFC']}
+            style={styles.gradientButton}
+            onPress={() => navigate(SCREENS.HYPERTENSION)}
+          />
+          <GradientButton
+            text="Continue to Diabetes Center"
+            color={['#2C6CFC', '#2CBDFC']}
+            style={styles.gradientButton2}
+            onPress={() => navigate(SCREENS.DIABETES_SUPPORT_CENTER)}
+          />
+        </View>
       </ScrollView>
     </TitleWithBackWhiteBgLayout>
   );

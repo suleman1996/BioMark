@@ -4,11 +4,12 @@ import { useTheme } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import { hitSlop } from 'constants/hit-slop';
-import { goBack } from 'services/nav-ref';
+import { goBack, navigate } from 'services/nav-ref';
 
 import makeStyles from './styles';
 
@@ -17,9 +18,25 @@ type Props = {
   title: string;
   style: any;
   isGradient: boolean;
+  isInfo: boolean;
+  isShare: boolean;
+  shadow: string;
+  onPressInfo: any;
+  backTo?: string;
+  onPressDelete?: any;
+  deleteIcon?: any;
 };
 
-const TitleWithBackLayout = ({ children, title, style, isGradient }: Props) => {
+const TitleWithBackLayout = ({
+  children,
+  title,
+  style,
+  isGradient,
+  shadow,
+  backTo,
+  onPressDelete,
+  deleteIcon,
+}: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -34,14 +51,28 @@ const TitleWithBackLayout = ({ children, title, style, isGradient }: Props) => {
         ]}
         style={{ borderRadius: 0 }}
       >
-        <View style={styles.header}>
-          <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
-            <MaterialIcons
-              color={colors.white}
-              size={responsiveFontSize(35)}
-              name="arrow-back-ios"
-            />
-          </Pressable>
+        <View style={[styles.header, { backgroundColor: shadow }]}>
+          <View style={{ flexDirection: 'row' }}>
+            <Pressable
+              hitSlop={hitSlop.one}
+              onPress={() => (backTo ? navigate(backTo) : goBack())}
+            >
+              <MaterialIcons
+                color={colors.white}
+                size={responsiveFontSize(35)}
+                name="arrow-back-ios"
+              />
+            </Pressable>
+            {}
+            <View style={styles.optionsView}>
+              <MaterialCommunityIcons
+                name={deleteIcon}
+                color="white"
+                size={25}
+                onPress={onPressDelete}
+              />
+            </View>
+          </View>
           <View>
             <Text style={styles.textStyle}>{title ? title : ''}</Text>
           </View>

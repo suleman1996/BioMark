@@ -44,9 +44,9 @@ const TextInputButton = ({
         />
         <Pressable style={styles.addBtn} onPress={onPress} disabled={disabled}>
           <Ionicons
-            color={colors.darkGray}
+            color={colors.white}
             name="add"
-            size={responsiveFontSize(22)}
+            size={responsiveFontSize(30)}
           />
         </Pressable>
       </View>

@@ -12,6 +12,7 @@ type Props = {
   disabled?: boolean;
   onPress: any;
   title?: string;
+  svg?: any;
 };
 
 export default function Button(props: Props) {
@@ -29,13 +30,16 @@ export default function Button(props: Props) {
     >
       <TouchableOpacity>
         <PaperButton
+          icon={() => (props?.svg ? props.svg : null)}
           mode="contained"
           uppercase={false}
           disabled={props.disabled}
           contentStyle={{ height: 50 }}
           style={[
             styles.btn,
-            { backgroundColor: props?.disabled ? colors.disable : colors.blue },
+            {
+              backgroundColor: props?.disabled ? colors.disable : colors.blue,
+            },
           ]}
           labelStyle={{ color: colors.white }}
           onPress={props.onPress}

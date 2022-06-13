@@ -7,23 +7,27 @@ import { Modal } from 'components/base';
 import makeStyles from './styles';
 
 type Props = {
-  heading: string;
+  heading?: string;
   isVisible: boolean;
   setIsVisible: any;
   subHeading: string;
   callMe: any;
 };
 
-const DeleteModalComponent = ({ isVisible, setIsVisible, callMe }: Props) => {
+const DeleteModalComponent = ({
+  isVisible,
+  setIsVisible,
+  callMe,
+  heading = 'Delete Dependant?',
+  subHeading = 'Are you sure you want to delete profiles?',
+}: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
-        <Text style={styles.heading}>Delete Dependant?</Text>
-        <Text style={styles.subHeading}>
-          Are you sure you want to delete profiles
-        </Text>
+        <Text style={styles.heading}>{heading}</Text>
+        <Text style={styles.subHeading}>{subHeading}</Text>
         <View style={styles.buttonsContainer}>
           <Pressable
             onPress={() => {

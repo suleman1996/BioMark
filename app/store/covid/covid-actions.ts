@@ -1,0 +1,56 @@
+import { covidService } from 'services/covid-service';
+import {
+  CovidBookingListResponseData,
+  CovidResultListResponse,
+} from 'types/api';
+import { logNow } from 'utils/functions/log-binder';
+import { COVID_RESULTS_DATA, COVID_BOOKINGS_DATA } from './constants';
+
+export const addAllCovidResultsData = (data: CovidResultListResponse[]) => ({
+  type: COVID_RESULTS_DATA,
+  payload: data,
+});
+
+export const getAllCovidResultsR =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await covidService
+      .getCovidResults()
+      .then(async (res: any) => {
+        // logNow('response for redux ============>', res);
+        await dispatch(addAllCovidResultsData(res));
+      })
+      .catch((err) => {
+        logNow(err);
+        // After developer alow below function on line 66
+        // dispatch(errorLogOut('Error logging out.'));
+      })
+      .finally(() => {
+        // After developer alow below function on line 69
+        // dispatch(loggingOut(false));
+      });
+  };
+
+// adding bookings data
+export const addAllBookingsData = (data: CovidBookingListResponseData) => ({
+  type: COVID_BOOKINGS_DATA,
+  payload: data,
+});
+
+export const getAllBookingsDataR =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await covidService
+      .getBookingsData()
+      .then(async (res: any) => {
+        // logNow('response for redux ============>', res);
+        await dispatch(addAllBookingsData(res));
+      })
+      .catch((err) => {
+        logNow(err);
+        // After developer alow below function on line 66
+        // dispatch(errorLogOut('Error logging out.'));
+      })
+      .finally(() => {
+        // After developer alow below function on line 69
+        // dispatch(loggingOut(false));
+      });
+  };

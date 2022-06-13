@@ -27,7 +27,7 @@ const Sleep = () => {
     { value: 3, label: 'more than 10 hours' },
   ];
   const [selectedSleep, setSelectedSleep] = React.useState(
-    sleepOptions[0].title
+    sleepOptions[0]?.value
   );
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -79,13 +79,13 @@ const Sleep = () => {
       const result = await userService.getLifeStyle();
       console.log('lifeStyle success ', result.data);
       result.data?.sleep?.sleep_duration == 'less than 4 hours' &&
-        setSelectedSleep(sleepOptions[0].title);
+        setSelectedSleep(sleepOptions[0].value);
       result.data?.sleep?.sleep_duration == '4-7 hours' &&
-        setSelectedSleep(sleepOptions[1].title);
+        setSelectedSleep(sleepOptions[1].value);
       result.data?.sleep?.sleep_duration == '7-10 hours' &&
-        setSelectedSleep(sleepOptions[2].title);
+        setSelectedSleep(sleepOptions[2].value);
       result.data?.sleep?.sleep_duration == 'more than 10 hours ' &&
-        setSelectedSleep(sleepOptions[3].title);
+        setSelectedSleep(sleepOptions[3].value);
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);

@@ -25,12 +25,14 @@ const DiabetesSupportCenter = () => {
           to help you manage your diabetes.
         </Text>
 
-        <GradientButton
-          text="Continue"
-          color={['#2C6CFC', '#2CBDFC']}
-          style={styles.gradientButton2}
-          onPress={() => navigate(SCREENS.DIABETES_CENTER)}
-        />
+        <View style={styles.gradientButtonView}>
+          <GradientButton
+            text="Continue"
+            color={['#2C6CFC', '#2CBDFC']}
+            style={styles.gradientButton2}
+            onPress={() => navigate(SCREENS.DIABETES_CENTER)}
+          />
+        </View>
       </ScrollView>
     </TitleWithBackWhiteBgLayout>
   );

@@ -9,3 +9,4 @@ export { default as InputWithLabel } from './input-with-label';
 export { default as Modal } from './modal';
 export { default as PasswordInputWithLabel } from './password-input-with-label';
 export { default as PhoneNumberWithLabel } from './phone-with-label';
+export { default as ErrorMessage } from './error-messsage';

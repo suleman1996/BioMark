@@ -6,6 +6,8 @@ import {
   MEDICAL_HISTORY_UPDATE,
   USER_PROFILE,
   FAMILY_MEDICAL_HISTORY_UPDATE,
+  ALLERGIES_MEDICAL_HISTORY_UPDATE,
+  ALLERGIES_CONDITIONS_UPDATE,
 } from './constants';
 
 export const addMedicalHistoryUpdate = (data: any) => ({
@@ -23,6 +25,16 @@ export const addFamilyMedicalHistoryUpdate = (data: any) => ({
   payload: data,
 });
 
+export const addAllergiesMedicalHistoryUpdate = (data: any) => ({
+  type: ALLERGIES_MEDICAL_HISTORY_UPDATE,
+  payload: data,
+});
+
+export const addAllergiesConditionsUpdate = (data: any) => ({
+  type: ALLERGIES_CONDITIONS_UPDATE,
+  payload: data,
+});
+
 export const addUserProfileData = (data: any) => ({
   type: USER_PROFILE,
   payload: data,
@@ -36,6 +48,7 @@ export const getAndAddMedicalHistoryDataR =
         logNow(' all medical history response for redux ============>', res);
         await dispatch(addMedicalHistoryData(res));
         await dispatch(addMedicalHistoryUpdate(res.personal));
+        await dispatch(addAllergiesMedicalHistoryUpdate(res.allergy));
         await dispatch(addFamilyMedicalHistoryUpdate(res.family));
       })
       .catch((err) => {

@@ -1,4 +1,5 @@
 import {
+  AlergiesRequestBody,
   MedicalHistoryCondition,
   MedicalHistoryResponseData,
   Profile,
@@ -7,6 +8,7 @@ import {
 export class ProfileState {
   medicalHistoryUpdate: MedicalHistoryCondition[] = [];
   familyMedicalHistoryUpdate: MedicalHistoryCondition[] = [];
+  allergiesMedicalHistoryUpdate: AlergiesRequestBody = [];
   medicalHistoryData: MedicalHistoryResponseData = {};
   userProfile: Partial<Profile> = {};
 }

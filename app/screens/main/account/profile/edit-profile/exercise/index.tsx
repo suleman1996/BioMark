@@ -26,7 +26,6 @@ import makeStyles from './styles';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 const Options = [
-  { label: '', value: '' },
   { label: '1', value: '1' },
   { label: '2', value: '2' },
   { label: '3', value: '3' },
@@ -40,7 +39,6 @@ const Options = [
 ];
 
 const Options2 = [
-  { label: '', value: '' },
   { label: 'less than 20 mins', value: 'less than 20 mins' },
   { label: '20-40 mins', value: '20-40 mins' },
   { label: '40-60 mins', value: '40-60 mins' },
@@ -67,6 +65,9 @@ export default function ExerciseScreen() {
   }, [bootstrap]);
 
   const onSave = async () => {
+    console.log('isExercise', isExercise);
+    console.log('exerciseWeek', exerciseWeek);
+    console.log('exerciseSession', exerciseSession);
     try {
       setIsVisible(true);
       if (isExercise === 'true') {

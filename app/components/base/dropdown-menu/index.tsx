@@ -10,10 +10,11 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
   options: any;
-  selectedValue: string;
+  selectedValue: string | number;
   onValueChange: (text: string) => void;
   error?: string;
   marginTop?: number;
+  label: string;
 };
 
 const DropdownMenuComponent = ({
@@ -22,6 +23,7 @@ const DropdownMenuComponent = ({
   onValueChange,
   error,
   marginTop,
+  label,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -31,6 +33,8 @@ const DropdownMenuComponent = ({
   const [showDropDown, setShowDropDown] = useState(false);
   return (
     <View style={[ifMT]}>
+      {label && <Text style={[styles.label]}>{label}</Text>}
+
       <DropDown
         mode={'flat'}
         visible={showDropDown}
@@ -46,6 +50,7 @@ const DropdownMenuComponent = ({
             flex: 1,
             borderRadius: widthToDp(2),
             maxHeight: heightToDp(6.5),
+            backgroundColor: colors.background,
           },
           underlineColor: '#fff',
         }}

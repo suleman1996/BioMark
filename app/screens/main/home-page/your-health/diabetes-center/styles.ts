@@ -5,6 +5,41 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 const styles = (colors: any) =>
   StyleSheet.create({
+    demoContainer: {
+      // flex: 1,
+      backgroundColor: colors.opacityBlackDark,
+      position: 'absolute',
+      bottom: 0,
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 30,
+    },
+    demobottomView: {
+      position: 'absolute',
+      width: '100%',
+      height: '23%',
+      justifyContent: 'space-between',
+      bottom: 0,
+      marginBottom: 20,
+    },
+    demoTextView: {
+      width: '100%',
+      height: '50%',
+      backgroundColor: colors.white,
+      justifyContent: 'center',
+      alignItems: 'center',
+      // marginBottom: 20,
+    },
+    demoText: {
+      fontFamily: fonts.extraBold,
+      color: colors.heading,
+      fontSize: 17,
+    },
+    demoButtonView: {
+      width: '100%',
+      paddingHorizontal: 15,
+    },
     container: {
       flex: 1,
     },
@@ -17,6 +52,7 @@ const styles = (colors: any) =>
     headingText: {
       //   fontFamily: fonts.bold,
       fontSize: 18,
+      paddingHorizontal: 20,
       color: colors.heading,
     },
     recordKeepingView: {
@@ -64,6 +100,8 @@ const styles = (colors: any) =>
     backgroundVideo: {
       height: 200,
       borderRadius: 5,
+      margin: 5,
+      justifyContent: 'center',
     },
 
     // modal
@@ -73,6 +111,10 @@ const styles = (colors: any) =>
       alignItems: 'center',
       marginTop: 22,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    videoView: {
+      marginHorizontal: 15,
+      marginBottom: 5,
     },
     modalView: {
       backgroundColor: 'white',

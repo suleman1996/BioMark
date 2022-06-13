@@ -7,6 +7,7 @@ export interface MedicationTrackersParams {
 export interface MedicationTracker {
   selected: boolean;
   date: string;
+  has_medication: boolean;
   logs: MedicationTrackerLog[];
 }
 
@@ -169,4 +170,20 @@ export interface MedicationEditRequest {
     start_date: string;
     end_date: string;
   };
+}
+
+export interface ShowMedication {
+  id: number;
+  name: string;
+  disease_type: string;
+  disease_type_id: number;
+  dosage: string;
+  frequency: number;
+  frequency_time: string;
+  start_date: string;
+  end_date: string;
+}
+
+export interface MedicationUpdateResponse {
+  message: string;
 }

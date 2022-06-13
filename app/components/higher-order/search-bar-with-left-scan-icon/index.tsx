@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useRef } from 'react';
 import {
   Text,
@@ -6,28 +7,29 @@ import {
   TextInput,
   Image,
   Modal,
-  Keyboard,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-import { showMessage } from 'react-native-flash-message';
+
+import { userService } from 'services/user-service/user-service';
+import SCREENS from 'navigation/constants';
 
 import { SearchBarLeftIcon } from 'components/svg';
 import { ActivityIndicator } from 'components';
 import { Button } from 'components/button';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { inputBarcode } from 'services/auth-service';
 
 import MyImage from 'assets/images';
 import fonts from 'assets/fonts';
 
 import makeStyles from './styles';
+import { navigate } from 'services/nav-ref';
+import { showMessage } from 'react-native-flash-message';
+// import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
   const { colors } = useTheme();
@@ -36,41 +38,28 @@ const SearchBarWithLeftScanIcon = () => {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [code, setCode] = React.useState('');
 
   const menuRef = useRef<any>();
 
-  const handleCode = async ({ qrInput }: any) => {
-    Keyboard.dismiss();
+  const handleCode = async () => {
     try {
-      setLoading(true);
-      await inputBarcode({
+      const response = await userService.barcodeCheck({
         scanner: {
-          code: qrInput,
+          code: code,
         },
       });
-      Keyboard.dismiss();
-      setVisible(false);
-      setLoading(false);
-    } catch (error: any) {
-      setLoading(false);
-      Keyboard.dismiss();
-      setVisible(false);
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: "User not exist's",
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.message,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
+      navigate(SCREENS.SUPPORT_SYSTEM);
+      console.log(response, 'codee---------------code------------------');
+      // navigate(Screeb, {
+      //   SHOW_DEMO: true
+      // })
+    } catch (err) {
+      showMessage({
+        message: err.errMsg.data.message,
+        type: 'danger',
+      });
+      // console.log(err, 'errrr-codeeee---------------');
     }
   };
 
@@ -113,72 +102,63 @@ const SearchBarWithLeftScanIcon = () => {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.singleMenuItem}>
-                {/* popup Modal */}
-                <Formik
-                  initialValues={{
-                    qrInput: '',
-                  }}
-                  validationSchema={QRschemma}
-                  onSubmit={handleCode}
-                >
-                  {({ handleChange, handleSubmit, errors, isValid }) => (
-                    <QrInputPopup loading={loading} visible={visible}>
-                      <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                        <View style={styles.popUpHeader}>
-                          <Text style={styles.popUpHeading}>
-                            Input QR or Barcode
-                          </Text>
-                          <TouchableOpacity onPress={() => setVisible(false)}>
-                            <Image
-                              source={MyImage.closeIcon}
-                              style={{
-                                height: 15,
-                                width: 15,
-                              }}
-                            />
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                      <Text
-                        style={{
-                          fontFamily: fonts.regular,
-                          fontSize: 17,
-                          color: '#8493AE',
-                        }}
-                      >
-                        This is the number below QR or Barcode.
+                <QrInputPopup loading={loading} visible={visible}>
+                  <View style={{ alignItems: 'center', marginBottom: 20 }}>
+                    <View style={styles.popUpHeader}>
+                      <Text style={styles.popUpHeading}>
+                        Input QR or Barcode
                       </Text>
-                      <Text style={styles.popUpSubHeading}>QR or Barcode</Text>
-                      <View style={{ width: '100%' }}>
-                        <TextInput
-                          backgroundColor={colors.inputBg}
-                          style={styles.textInput}
-                          marginTop={10}
-                          onChange={handleChange('qrInput')}
+                      <TouchableOpacity onPress={() => setVisible(false)}>
+                        <Image
+                          source={MyImage.closeIcon}
+                          style={{
+                            height: 15,
+                            width: 15,
+                          }}
                         />
-                        {errors.qrInput && (
-                          <Text style={styles.errorMessage}>
-                            {errors.qrInput}
-                          </Text>
-                        )}
-                        <View style={{ marginTop: 40 }}>
-                          <TouchableOpacity>
-                            <Button
-                              onPress={() => handleSubmit()}
-                              title="Save Code"
-                              marginHorizontal={0.1}
-                              marginVertical={0.1}
-                              onChange={handleChange('qrInput')}
-                              disabled={!isValid && errors}
-                              // disabled={!isValid && errors ? true : false}
-                            />
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    </QrInputPopup>
-                  )}
-                </Formik>
-
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <Text
+                    style={{
+                      fontFamily: fonts.regular,
+                      fontSize: 17,
+                      color: '#8493AE',
+                    }}
+                  >
+                    This is the number below QR or Barcode.
+                  </Text>
+                  <Text style={styles.popUpSubHeading}>QR or Barcode</Text>
+                  <View style={{ width: '100%' }}>
+                    <TextInput
+                      value={code}
+                      backgroundColor={colors.inputBg}
+                      style={styles.textInput}
+                      marginTop={10}
+                      // onChangeText={handleChange}
+                      onChangeText={(e) => setCode(e)}
+                      // onChange={handleChange('qrInput')}
+                    />
+                    <View style={{ marginTop: 40 }}>
+                      <TouchableOpacity>
+                        <Button
+                          onPress={() => {
+                            setVisible(false);
+                            setIsMenuOpen(false);
+                            handleCode();
+                          }}
+                          title="Save Code"
+                          marginHorizontal={0.1}
+                          marginVertical={0.1}
+                          disabled={false}
+                          // onChange={handleChange('qrInput')}
+                          // disabled={!isValid && errors}
+                          // disabled={!isValid && errors ? true : false}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </QrInputPopup>
                 <MaterialCommunityIcons
                   name="barcode-scan"
                   size={responsiveFontSize(22)}
@@ -227,12 +207,6 @@ const SearchBarWithLeftScanIcon = () => {
 };
 
 export default SearchBarWithLeftScanIcon;
-
-const QRschemma = Yup.object({
-  qrInput: Yup.string()
-    .required('Please type QR or Barcode.')
-    .min(8, 'Invalid.'),
-});
 
 type Props = {
   visible: Boolean;

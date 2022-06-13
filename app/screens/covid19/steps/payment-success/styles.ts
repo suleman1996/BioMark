@@ -23,6 +23,7 @@ export const makeStyles = (colors: any) =>
       marginBottom: heightToDp(1.5),
       width: widthToDp(88),
       padding: widthToDp(3),
+      alignItems: 'center',
     },
     innerView: {
       borderColor: colors.inputBg,
@@ -37,10 +38,45 @@ export const makeStyles = (colors: any) =>
       borderWidth: 1,
       borderColor: colors.lightPrimary,
     },
-    innerTitle: {
+    title1: {
+      fontSize: responsiveFontSize(23),
+      fontFamily: GlobalFonts.bold,
+      color: colors.darkPrimary,
+      marginTop: heightToDp(2),
+    },
+    title2: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.extraLight,
+      color: colors.black,
+    },
+    title3: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.bold,
+      color: colors.black,
+      marginTop: heightToDp(2),
+      textAlign: 'center',
+    },
+    title3inner: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.extraLight,
+      color: colors.black,
+    },
+    title4: {
       fontSize: responsiveFontSize(20),
       fontFamily: GlobalFonts.medium,
-      color: colors.darkPrimary,
+      color: colors.black,
+      marginTop: heightToDp(2),
+      textAlign: 'center',
+    },
+    title4inner: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.extraLight,
+      color: colors.black,
+    },
+    userCodeText: {
+      fontSize: responsiveFontSize(20),
+      fontFamily: GlobalFonts.medium,
+      color: colors.black,
     },
     stepContainer: {
       borderBottomWidth: 2,
@@ -66,12 +102,12 @@ export const makeStyles = (colors: any) =>
     },
     bottom2Btns: {
       position: 'absolute',
-      flexDirection: 'row',
       bottom: 0,
       justifyContent: 'space-between',
       width: widthToDp(88),
       paddingBottom: heightToDp(2),
       backgroundColor: colors.white,
+      alignItems: 'center',
     },
     btn: {
       width: widthToDp(40),
@@ -96,6 +132,15 @@ export const makeStyles = (colors: any) =>
       fontFamily: GlobalFonts.medium,
       fontSize: responsiveFontSize(19),
       color: colors.white,
+    },
+    circle: {
+      width: widthToDp(28),
+      height: widthToDp(28),
+      backgroundColor: colors.primary,
+      borderRadius: widthToDp(14),
+      alignSelf: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   });
 

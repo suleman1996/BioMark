@@ -1,7 +1,17 @@
 import { format } from 'date-fns';
+import moment from 'moment';
+
 export const dateFormat = (date: string) => {
   if (date) {
     var newDate: any = format(new Date(date), 'yyyy-MM-dd');
+  }
+
+  return newDate || '';
+};
+
+export const dateFormat1 = (date: string) => {
+  if (date) {
+    var newDate: any = format(new Date(date), 'dd/MM/yyyy');
   }
 
   return newDate || '';
@@ -30,6 +40,14 @@ export const getDay = (date: string) => {
   return newDate || '';
 };
 
+export const getDayName = (date: string) => {
+  if (date) {
+    var newDate: any = format(new Date(date), 'EEEE');
+  }
+
+  return newDate || '';
+};
+
 export const getYear = (date: string) => {
   if (date) {
     var newDate: any = format(new Date(date), 'yyyy');
@@ -45,3 +63,15 @@ export const monthLLLDayDD = (date: string) => {
 
   return newDate || '';
 };
+
+export const getCalendarDate = (today: any) =>
+  getMonth(today) +
+  ' ' +
+  getDay(today) +
+  ', ' +
+  getYear(today) +
+  ' ' +
+  getTime(today);
+
+export const convertDate = (date: string) =>
+  parseFloat(moment.parseZone(date).local().format('x'));

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Pressable,
   ScrollView,
@@ -8,26 +8,38 @@ import {
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-
 import PagerView from 'react-native-pager-view';
-
-import { heightToDp } from 'utils/functions/responsive-dimensions';
 import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch } from 'react-redux';
 
-import makeStyles from './styles';
-import { ArrowBack } from 'assets/svgs';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-import AddGradient from 'assets/svgs/add-gradient';
+import { BloodSugar, HbA1c } from 'components';
+
 import SCREENS from 'navigation/constants/index';
 
-export default function InboxScreen() {
+import {
+  getBloodSugarTargetsAction,
+  getHBA1CTargetsAction,
+  getLatestTargetsAction,
+  getNewTargetAction,
+} from 'store/home/home-actions';
+
+import { ArrowBack } from 'assets/svgs';
+import AddGradient from 'assets/svgs/add-gradient';
+
+import makeStyles from './styles';
+
+export default function InboxScreen({ route }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const navigation = useNavigation();
-  const { ADD_HBA1C, ADD_BLOOD_SUGAR } = SCREENS;
+  const dispatch = useDispatch();
 
   const pagerRef = useRef<any>();
   const [currentPage, setCurrentPage] = useState(0);
+
+  const { ADD_HBA1C, ADD_BLOOD_SUGAR } = SCREENS;
+
   const onPageScroll = (event: any) => {
     const { position } = event.nativeEvent;
     if (position !== currentPage) {
@@ -35,53 +47,16 @@ export default function InboxScreen() {
     }
   };
 
-  const BloodSugar = () => {
-    return (
-      <View style={styles.TabContainer}>
-        <Text style={styles.yourTargetsHeading}>Your Targets</Text>
-        <View style={styles.outerTarget}>
-          <View style={styles.targetsContainer}>
-            <Text style={styles.targetText}>12:59 pm Apr 4, 2022</Text>
-          </View>
-          <View style={styles.targetsContainer}>
-            <Text style={styles.targetText}>FPG Fasting 80.0-130.0 mg/dL</Text>
-          </View>
-          <View style={styles.targetsContainer}>
-            <Text style={styles.targetText}>
-              PPG Post-Meal 80.0-180.0 mg/dL
-            </Text>
-          </View>
-        </View>
-      </View>
-    );
-  };
+  useEffect(() => {
+    dispatch(getLatestTargetsAction());
+    dispatch(getNewTargetAction());
+    dispatch(getBloodSugarTargetsAction());
+    dispatch(getHBA1CTargetsAction());
+  }, [dispatch]);
 
-  const HbA1c = () => {
-    return (
-      <View style={styles.TabContainer}>
-        <Text style={styles.yourTargetsHeading}>Your Targets</Text>
-        <View style={styles.outerTarget}>
-          <View style={styles.targetsContainer}>
-            <Text style={styles.targetText}>06:19 pm May 16, 2022</Text>
-          </View>
-          <View style={styles.targetsContainer}>
-            <Text style={styles.targetText}>Goal Percentage 6.0%</Text>
-          </View>
-        </View>
-
-        {/* <View
-          style={[styles.outerTarget, { backgroundColor: colors.opacityBlack }]}
-        >
-          <View style={styles.targetsContainer}>
-            <Text style={styles.targetText}>05:57 pm May 16, 2022</Text>
-          </View>
-          <View style={styles.targetsContainer}>
-            <Text style={styles.targetText}>Goal Percentage 6.0%</Text>
-          </View>
-        </View> */}
-      </View>
-    );
-  };
+  useEffect(() => {
+    pagerRef.current.setPage(route.params.key);
+  }, [route.params.key]);
 
   return (
     <View style={styles.container}>
@@ -124,27 +99,27 @@ export default function InboxScreen() {
           </Pressable>
         </View>
       </LinearGradient>
-      <ScrollView>
-        <View style={styles.lowerContainer}>
-          <View
-            style={{ height: heightToDp(100), paddingBottom: heightToDp(20) }}
+      <View style={styles.lowerContainer}>
+        <PagerView
+          ref={pagerRef}
+          onPageScroll={onPageScroll}
+          style={styles.pagerView}
+          initialPage={0}
+        >
+          <ScrollView
+            contentContainerStyle={styles.tabScrollContainerSize}
+            key="0"
           >
-            <PagerView
-              ref={pagerRef}
-              onPageScroll={onPageScroll}
-              style={styles.pagerView}
-              initialPage={0}
-            >
-              <View key="0">
-                <BloodSugar />
-              </View>
-              <View key="1">
-                <HbA1c />
-              </View>
-            </PagerView>
-          </View>
-        </View>
-      </ScrollView>
+            <BloodSugar />
+          </ScrollView>
+          <ScrollView
+            contentContainerStyle={styles.tabScrollContainerSize}
+            key="1"
+          >
+            <HbA1c />
+          </ScrollView>
+        </PagerView>
+      </View>
       <TouchableOpacity
         onPress={() => {
           if (currentPage === 0) {

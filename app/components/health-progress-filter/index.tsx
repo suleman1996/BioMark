@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
@@ -13,13 +13,20 @@ const Index = ({
   option2,
   filterOption1,
   filterOption2,
-  selectedfilterOption1,
-  selectedfilterOption2,
-  setSelectedfilterOption1,
-  setSelectedfilterOption2,
+  values,
+  onApplyPress,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+
+  const [selectedfilterOption1, setSelectedfilterOption1] = useState(null);
+  const [selectedfilterOption2, setSelectedfilterOption2] = useState(null);
+
+  useEffect(() => {
+    if (!values) return;
+    setSelectedfilterOption1(values.selectedfilterOption1);
+    setSelectedfilterOption2(values.selectedfilterOption2);
+  }, [values]);
 
   const RenderRadio = ({ item, onPress, selectedfilterOption }) => (
     <TouchableOpacity
@@ -30,11 +37,16 @@ const Index = ({
         style={[
           styles.radio,
           {
-            borderWidth: selectedfilterOption.title == item.title ? 3.5 : 2,
+            marginLeft: 5,
+            borderWidth: selectedfilterOption?.title == item.title ? 3.5 : 2,
             borderColor:
-              selectedfilterOption.title == item.title
+              selectedfilterOption?.title == item.title
                 ? colors.heading
                 : colors.lightGrey,
+            backgroundColor:
+              selectedfilterOption?.title == item.title
+                ? colors.shineBlue
+                : colors.white,
           },
         ]}
       />
@@ -50,7 +62,7 @@ const Index = ({
       <View style={styles.filterView}>
         <View style={styles.header}>
           <Text style={styles.headingText}>Filters</Text>
-          <TouchableOpacity onPress={() => setIsVisible(!visible)}>
+          <TouchableOpacity onPress={() => setIsVisible(false)}>
             <Close />
           </TouchableOpacity>
         </View>
@@ -75,7 +87,9 @@ const Index = ({
           text="Apply"
           color={['#2C6CFC', '#2CBDFC']}
           style={{ marginBottom: 5, marginTop: 30 }}
-          onPress={() => console.log('xnxnxnxnxnx')}
+          onPress={() =>
+            onApplyPress(selectedfilterOption1, selectedfilterOption2)
+          }
         />
       </View>
     </View>

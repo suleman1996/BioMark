@@ -1,76 +1,89 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { showMessage } from 'react-native-flash-message';
 
-import { HeightChooser, WeightChooser } from 'components/higher-order';
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
+import { ActivityIndicator, InputWithUnits } from 'components';
+import {
+  cmToFeet,
+  feetToCm,
+  measurementValidator,
+} from 'utils/functions/measurments';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
+
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
-import { showMessage } from 'react-native-flash-message';
 
 import makeStyles from './styles';
-import { ActivityIndicator } from 'components/';
 
 const BodyMeasurementScreen = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-
-  const [value, setValue] = useState('');
-  const [value2, setValue2] = useState('');
-  const [selectedType, setSelectedType] = useState(2);
-  const [selectedTypeWeight, setSelectedTypeWeight] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
-
-  const onChangeText = (values) => {
-    selectedType == '1'
-      ? setValue((values / 2.54).toFixed(4).toString())
-      : setValue(values);
-    // setValue(value);
-  };
-  const onChangeText2 = (values) => {
-    // setValue2(values);
-
-    selectedTypeWeight == '1'
-      ? setValue2((values * 2.2).toFixed(4).toString())
-      : setValue2(values);
-  };
+  const [bodyMeasurment, setBodyMeasurment] = useState({
+    height: '0',
+    weight: 0,
+    is_metric: true,
+  });
+  const [error, setError] = useState({
+    height: '',
+    weight: '',
+  });
 
   React.useEffect(() => {
     bodyMeasurements();
   }, []);
 
+  useEffect(() => {
+    if (!bodyMeasurment.is_metric) {
+      setBodyMeasurment((prev) => ({
+        ...prev,
+        weight: Number((prev.weight * 2.205).toFixed(1)),
+        height: cmToFeet(prev.height),
+      }));
+    } else {
+      setBodyMeasurment((prev) => ({
+        ...prev,
+        weight: Number((prev.weight * (1 / 2.205)).toFixed(1)),
+        height: feetToCm(bodyMeasurment.height),
+      }));
+    }
+  }, [bodyMeasurment.is_metric]);
+
   const bodyMeasurements = async () => {
     try {
       setIsLoading(true);
-      const result = await userService.getBodyMeasurements();
-      console.log('body measurements ', result.data);
-      result?.data?.height_attr
-        ? setValue(result?.data?.height_attr)
-        : setValue(0);
-      result?.data?.weight_attr
-        ? setValue2(result?.data?.weight_attr)
-        : setValue2(0);
+      const { height_attr, weight_attr, is_metric }: any =
+        await userService.getBodyMeasurements();
+
+      if (is_metric) {
+        setBodyMeasurment({
+          height: height_attr,
+          weight: weight_attr,
+          is_metric,
+        });
+      }
       setIsLoading(false);
-    } catch (error) {
+    } catch (err) {
       setIsLoading(false);
-      console.log(error);
-      if (error.errMsg.status == '500') {
+      if (err.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
+      } else if (err.errMsg.status == false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: err.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: err.errMsg,
           type: 'danger',
         });
       }
@@ -80,36 +93,46 @@ const BodyMeasurementScreen = () => {
   const onSubmit = async () => {
     try {
       setIsLoading(true);
-      const response = await userService.bodyMeasurement({
+      await userService.bodyMeasurement({
         medical: {
-          height: value,
-          weight: value2,
-          is_metric: true,
+          ...bodyMeasurment,
         },
       });
-      console.log('measurement successful', response.data);
       navigate(SCREENS.EDIT_PROFILE);
       setIsLoading(false);
-    } catch (error) {
+    } catch (err) {
       setIsLoading(false);
-      console.log(error);
-      if (error.errMsg.status == '500') {
+      if (err.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
+      } else if (err.errMsg.status == false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: err.errMsg.data.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: err.errMsg,
           type: 'danger',
         });
       }
     }
+  };
+  const handleUnitChange = (selectedUnit: string) => {
+    setBodyMeasurment((prev: any) => ({
+      ...prev,
+      is_metric: ['kg', 'cm'].includes(selectedUnit) ? true : false,
+    }));
+  };
+
+  const handleChange = (value: number, key: string) => {
+    setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
+    setError((err) => ({
+      ...err,
+      [key]: measurementValidator(bodyMeasurment.is_metric, key, value),
+    }));
   };
 
   return (
@@ -119,42 +142,63 @@ const BodyMeasurementScreen = () => {
         <View
           style={{
             paddingHorizontal: widthToDp(4),
-            // borderWidth: 5,
             marginBottom: heightToDp(37),
           }}
         >
-          <HeightChooser
-            height={15}
-            label="Height"
-            textAlign="right"
-            placeholder={'0'}
-            onChangeText={onChangeText}
-            value={value}
-            selectedType={selectedType}
-            setSelectedType={setSelectedType}
-            setValue={setValue}
+          <InputWithUnits
+            title="Height"
+            placeholder="0'0*.0"
+            units={['cm', 'ft/in']}
+            unit={bodyMeasurment.is_metric ? 'cm' : 'ft/in'}
+            value={bodyMeasurment.height}
+            onChangeText={(val: any) => handleChange(val, 'height')}
+            onUnitChange={handleUnitChange}
+            error={error.height}
+            onBlur={() => {
+              setError({
+                ...error,
+                height: measurementValidator(
+                  bodyMeasurment.is_metric,
+                  'height',
+                  bodyMeasurment.height
+                ),
+              });
+            }}
           />
-          <WeightChooser
-            height={15}
-            label="Weight"
-            textAlign="right"
-            placeholder={'0.0'}
-            onChangeText={onChangeText2}
-            value={value2}
-            selectedType={selectedTypeWeight}
-            setSelectedType={setSelectedTypeWeight}
-            setValue={setValue2}
+
+          <InputWithUnits
+            title="Weight"
+            placeholder="0.0"
+            units={['kg', 'lbs']}
+            unit={bodyMeasurment.is_metric ? 'kg' : 'lbs'}
+            value={bodyMeasurment.weight.toString()}
+            onChangeText={(val: any) => handleChange(val, 'weight')}
+            onUnitChange={handleUnitChange}
+            error={error.weight}
+            onBlur={() => {
+              setError({
+                ...error,
+                weight: measurementValidator(
+                  bodyMeasurment.is_metric,
+                  'weight',
+                  bodyMeasurment.weight
+                ),
+              });
+            }}
           />
         </View>
 
         <ButtonWithShadowContainer
           onPress={onSubmit}
           title={'Save & Continue'}
-          disabled={value == '' || value2 == '' ? true : false}
+          disabled={
+            bodyMeasurment.height == '' || bodyMeasurment.weight == ''
+              ? true
+              : false
+          }
         />
       </ScrollView>
     </TitleWithBackLayout>
   );
 };
-
 export default BodyMeasurementScreen;

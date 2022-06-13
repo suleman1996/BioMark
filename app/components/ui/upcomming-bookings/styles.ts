@@ -60,6 +60,22 @@ export const makeStyles = (colors: any) =>
       paddingBottom: heightToDp(2),
       backgroundColor: colors.white,
     },
+    emptyContainer: {
+      flex: 1,
+      borderWidth: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    completeDecContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    completeDecText: {
+      fontFamily: GlobalFonts.light,
+      fontSize: responsiveFontSize(14),
+      color: colors.darkPrimary,
+      paddingLeft: widthToDp(1.5),
+    },
   });
 
 export default makeStyles;

@@ -6,6 +6,8 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -138,33 +140,47 @@ const EditProfileScreen = () => {
     }
   };
 
-  const imagePickerFromCamera = () => {
+  const imagePickerFromCamera = async () => {
     setShowModal(false);
-    if (!cameraIs) {
-      cameraIs = true;
 
-      let options = {
-        mediaType: 'photo',
-        includeBase64: true,
-      };
-      launchCamera(options, (res) => {
-        if (res.didCancel) {
-          console.log('User cancelled image picker');
-          cameraIs = false;
-        } else if (res.errorMessage) {
-          console.log('Camera error: ', res.errorMessage);
-          cameraIs = false;
-        } else {
-          updateProfilePhoto(res.assets[0].base64);
-          setEdit(false);
-          cameraIs = false;
-        }
-      });
+    const granted =
+      Platform.OS == 'ios' ||
+      (await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
+        title: 'App Camera Permission',
+        message: 'App needs access to your camera',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      }));
+    if (granted) {
+      if (!cameraIs) {
+        cameraIs = true;
+
+        let options = {
+          mediaType: 'photo',
+          includeBase64: true,
+        };
+        launchCamera(options, (res) => {
+          if (res.didCancel) {
+            console.log('User cancelled image picker');
+            cameraIs = false;
+          } else if (res.errorMessage) {
+            console.log('Camera error: ', res.errorMessage);
+            cameraIs = false;
+          } else {
+            if (res.assets) {
+              updateProfilePhoto(res.assets[0].base64);
+              setEdit(false);
+            }
+            cameraIs = false;
+          }
+        });
+      }
     }
   };
 
   return (
-    <TitleWithBackLayout title="Your Profile">
+    <TitleWithBackLayout shadow={colors.blue} title="Your Profile">
       <ActivityIndicator visible={isLoading} />
       <EditProfileModal
         iconPress={() => setShowModal(false)}
@@ -297,29 +313,25 @@ const EditProfileScreen = () => {
                 color={colors.darkPrimary}
               />
             </Pressable>
+            <Pressable
+              onPress={() => navigate(SCREENS.FAMILY_MEDICAL_HISTORY)}
+              style={styles.menuOption}
+            >
+              <View style={styles.menuTitleAndIcon}>
+                <MaterialIcons
+                  name="groups"
+                  size={responsiveFontSize(22)}
+                  color={colors.darkPrimary}
+                />
+                <Text style={styles.menuTitleText}>Family Medical History</Text>
+              </View>
 
-            <View style={styles.menuOption}>
-              <Pressable
-                onPress={() => navigate(SCREENS.FAMILY_MEDICAL_HISTORY)}
-                style={styles.menuOption}
-              >
-                <View style={styles.menuTitleAndIcon}>
-                  <MaterialIcons
-                    name="groups"
-                    size={responsiveFontSize(22)}
-                    color={colors.darkPrimary}
-                  />
-                  <Text style={styles.menuTitleText}>
-                    Family Medical History
-                  </Text>
-                </View>
-              </Pressable>
               <Fontisto
                 name="angle-right"
                 size={responsiveFontSize(18)}
                 color={colors.darkPrimary}
               />
-            </View>
+            </Pressable>
 
             <Pressable
               onPress={() => navigate(SCREENS.SMOKING)}

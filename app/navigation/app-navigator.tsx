@@ -17,26 +17,42 @@ import HealthProgress from 'screens/main/home-page/your-health/health-progress/i
 import Targets from 'screens/main/home-page/your-health/health-progress/targets/index';
 import AddBloodSugar from 'screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
 import AddHba1c from 'screens/main/home-page/your-health/health-progress/targets/add-hba1c/index';
+import DeviceConnection from 'screens/main/home-page/device-connection';
 import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/medication/index';
-import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/add-new-medication/index';
+import Medication from 'screens/main/home-page/your-health/health-trackers/Medication';
+import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication';
+import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/medication-form';
+import EditMedication from 'screens/main/home-page/your-health/health-trackers/edit-medication';
 import Covid19Navigator from './covid19-navigator';
 import SupportCenter from 'screens/main/home-page/support-center';
 import EmpowerProgram from 'screens/main/home-page/empower-program';
 import DiabetesSupportCenter from 'screens/main/home-page/diabetes-support-system';
 import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
+import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-list';
+import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
+import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
 import {
-  getHealthTrackerRisks,
-  getReduxDashboard,
-  getReduxHealthTracker,
-  getReduxNewMedicationTracker,
+  getReduxPspModules,
+  getReduxPspPdfLink,
+  getReduxLatestResult,
+  getReduxPastResult,
+  getReduxPspHypertensionHealthTrackerData,
+  getReduxPspHyperModules,
+  getReduxPspPdfHyperLink,
+  getReduxPendingResultOverview,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
+import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
+import SearchResult from 'screens/main/home-page/your-health/health-records/result-overview/search/index';
+import SeeResult from 'screens/main/home-page/your-health/health-records/result-overview/see-report/index';
+import ResultUpload from 'screens/main/home-page/your-health/health-records/upload-results';
+import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
+import PendingResultOverview from 'screens/main/home-page/your-health/health-records/pending-result-overview';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -56,6 +72,7 @@ const {
   WEIGHT,
   HBA1C,
   MEDICATION,
+  SHOW_MEDICATION,
   ADD_NEW_MEDICATION,
   HEALTH_PROGRESS,
   TARGETS,
@@ -63,6 +80,15 @@ const {
   ADD_HBA1C,
   PDF_DIABETES_SUPPORT,
   HEALTH_RECORD,
+  RESULT_OVERVIEW,
+  EDIT_MEDICATION,
+  RESULT_UPLOAD,
+  MORE_INFO,
+  PDF_HYPERTENSION_SUPPORT,
+  PENDING_RESULT_OVERVIEW,
+  SEE_REPORT,
+  SEARCH_RESULT,
+  DEVICE_CONNECTION,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -70,13 +96,17 @@ const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
   const hasProfile = auth.hasProfile ? true : false;
 
-  useEffect(() => {
+  useEffect((link: string, id: number) => {
     getHasProfileAsyncStorage();
-    dispatch(getReduxNewMedicationTracker());
-    dispatch(getReduxHealthTracker());
-    dispatch(getReduxDashboard());
-    dispatch(getHealthTrackerRisks());
 
+    dispatch(getReduxPspModules());
+    dispatch(getReduxPspPdfLink(link));
+    dispatch(getReduxPspPdfHyperLink(link));
+    dispatch(getReduxLatestResult());
+    dispatch(getReduxPastResult());
+    dispatch(getReduxPspHypertensionHealthTrackerData());
+    dispatch(getReduxPspHyperModules());
+    dispatch(getReduxPendingResultOverview(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -97,6 +127,7 @@ const AppNavigator = () => {
             name={SCREENS.MAIN_NAVIGATOR}
             component={BottomTabNavigator}
           />
+
           <Stack.Screen
             name={NESTED_ACCOUNT_NAVIGATOR}
             component={AccountNavigator}
@@ -111,8 +142,26 @@ const AppNavigator = () => {
           <Stack.Screen name={PDF_HYPERTENSION} component={PdfHypertension} />
           <Stack.Screen name={HEALTH_RECORD} component={HealthRecord} />
           <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name={SCREENS.VIDEO_LIST}
+            component={VideoList}
+          />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name={SCREENS.VIDEO_HYPERTENSION_LIST}
+            component={VideoHypertensionList}
+          />
+          <Stack.Screen
             name={PDF_DIABETES_SUPPORT}
             component={PdfDiabetesSupportCenter}
+          />
+          <Stack.Screen
+            name={PDF_HYPERTENSION_SUPPORT}
+            component={PdfHypertensionSupportCenter}
           />
           <Stack.Screen name={BLOOD_SUGAR} component={BloodSugar} />
           <Stack.Screen name={SUPPORT_SYSTEM} component={SupportCenter} />
@@ -126,6 +175,8 @@ const AppNavigator = () => {
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
           <Stack.Screen name={MEDICATION} component={Medication} />
+          <Stack.Screen name={SHOW_MEDICATION} component={ShowMedication} />
+          <Stack.Screen name={EDIT_MEDICATION} component={EditMedication} />
           <Stack.Screen
             name={ADD_NEW_MEDICATION}
             component={AddNewMedication}
@@ -134,6 +185,16 @@ const AppNavigator = () => {
           <Stack.Screen name={TARGETS} component={Targets} />
           <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />
           <Stack.Screen name={ADD_HBA1C} component={AddHba1c} />
+          <Stack.Screen name={RESULT_OVERVIEW} component={ResultOverView} />
+          <Stack.Screen name={SEARCH_RESULT} component={SearchResult} />
+          <Stack.Screen name={MORE_INFO} component={MoreInfo} />
+          <Stack.Screen name={RESULT_UPLOAD} component={ResultUpload} />
+          <Stack.Screen
+            name={PENDING_RESULT_OVERVIEW}
+            component={PendingResultOverview}
+          />
+          <Stack.Screen name={SEE_REPORT} component={SeeResult} />
+          <Stack.Screen name={DEVICE_CONNECTION} component={DeviceConnection} />
         </>
       ) : (
         <>
