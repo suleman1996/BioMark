@@ -134,6 +134,7 @@ const styles = (colors: any) =>
     },
     uploadResult: {
       marginTop: heightToDp(4),
+      paddingBottom: heightToDp(1),
     },
     filterView: {
       flexDirection: 'row',
@@ -150,8 +151,9 @@ const styles = (colors: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: '#C9E1F2',
-      paddingTop: heightToDp(2),
-      paddingBottom: heightToDp(2),
+      padding: 4,
+      // paddingTop: heightToDp(2),
+      // paddingBottom: heightToDp(2),
       marginHorizontal: widthToDp(2),
       borderRadius: 10,
       borderWidth: 1,

@@ -32,6 +32,8 @@ import {
   getReduxPspHypertensionHealthTrackerData,
 } from 'store/home/home-actions';
 import PdfList from 'components/pdf-list';
+import { userService } from 'services/user-service/user-service';
+import { ActivityIndicator } from 'components';
 
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
@@ -40,6 +42,8 @@ import Messenger from 'assets/svgs/messenger';
 import { useNavigation } from '@react-navigation/native';
 import GradientButton from 'components/linear-gradient-button';
 import { navigate } from 'services/nav-ref';
+import WithdrawProgram from 'components/widthdraw-from-program';
+import { showMessage } from 'react-native-flash-message';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
   Linking.openURL(Config.MESSENGER_URL);
@@ -50,6 +54,8 @@ const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const HypertensionDiary = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const [modalVisible, setModalVisible] = React.useState(false);
+
   const dispatch = useDispatch();
 
   // const { PDF_HYPERTENSION } = SCREENS;
@@ -69,6 +75,7 @@ const HypertensionDiary = () => {
   const hyperModuleData = useSelector(
     (state: IAppState) => state.home.pspHyperModuleData
   );
+  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
 
   const [showDemo, setShowDemo] = React.useState(false);
   const [pdfData, setPdfData] = React.useState([]);
@@ -76,6 +83,8 @@ const HypertensionDiary = () => {
   const [medicationData, setMedicationData] = React.useState('');
   const [weightData, setWeightData] = React.useState('');
   const [video, setVideo] = React.useState([]);
+  const [isVisiable, setIsVisible] = React.useState(false);
+  const [barCodeData, setBarCodeData] = React.useState('');
 
   useEffect(() => {
     dispatch(getReduxPspHypertensionHealthTrackerData());
@@ -83,8 +92,8 @@ const HypertensionDiary = () => {
 
     setVideo(hyperModuleData.video);
     setPdfData(hyperModuleData.pdf);
+    setBarCodeData(dashboard?.program_detail?.barcode);
     // alert(JSON.stringify(hyperModuleData.pdf));
-
     setbloodPressureData(trackerData.blood_pressure);
     setMedicationData(trackerData.medication);
     setWeightData(trackerData.weight);
@@ -132,6 +141,33 @@ const HypertensionDiary = () => {
     </TouchableOpacity>
   );
 
+  const onWithdraw = async () => {
+    try {
+      setIsVisible(true);
+      const response = await userService.withdraw({
+        module: {
+          barcode: barCodeData,
+          bm_program_id: 3,
+        },
+      });
+      console.log(
+        response.data,
+        'withdraw---------hypertension---------------'
+      );
+      setModalVisible(!modalVisible);
+      navigate(SCREENS.YOUR_HEALTH);
+      setIsVisible(false);
+    } catch (err) {
+      showMessage({
+        message: err.errMsg.data.message,
+        type: 'danger',
+      });
+      setIsVisible(false);
+      setModalVisible(!modalVisible);
+      console.log('error response', err.errMsg.data.message);
+    }
+  };
+
   const renderItem = ({ item }) => (
     <>
       <ImageBackground
@@ -164,6 +200,8 @@ const HypertensionDiary = () => {
         backTo={SCREENS.YOUR_HEALTH}
         title="Hypertension Support Center"
       >
+        <ActivityIndicator visible={isVisiable} />
+
         <View style={{ flex: 1 }}>
           <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
             {showDemo !== 5 && <View style={styles.demoContainer}></View>}
@@ -339,11 +377,23 @@ const HypertensionDiary = () => {
                 keyExtractor={(item) => item.id}
                 showsHorizontalScrollIndicator={false}
               />
+
+              <WithdrawProgram
+                text2="Yes"
+                visible={modalVisible}
+                title="Are You Sure?"
+                text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
+                cancel="Cancel"
+                cancelModal={() => setModalVisible(!modalVisible)}
+                closeModal={() => setModalVisible(!modalVisible)}
+                onPress={() => onWithdraw()}
+                color={['#2C6CFC', '#2CBDFC']}
+              />
               <View style={styles.bottomTextView}>
                 <Text style={[styles.bottomText, { color: colors.heading }]}>
                   Tap to
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => setModalVisible(true)}>
                   <Text
                     style={[
                       styles.bottomText,

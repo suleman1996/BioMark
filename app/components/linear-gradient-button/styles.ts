@@ -12,6 +12,7 @@ export const makeStyles = (colors: any) =>
       fontFamily: fonts.mulishRegular,
       color: colors.white,
       fontSize: responsiveFontSize(18),
+      textAlign: 'center',
     },
   });
 export default makeStyles;

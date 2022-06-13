@@ -28,6 +28,7 @@ import {
   GET_BLOOD_SUGAR_LOGS,
   GET_HBA1C_LOGS,
   GET_BP_LOGS,
+  GET_PENDING_RESULT_OVERVIEW,
   GET_MEDICATION_TRACKER,
 } from './constants';
 
@@ -123,6 +124,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         getPastResultData: action.payload,
+      };
+    }
+    case GET_PENDING_RESULT_OVERVIEW: {
+      return {
+        ...state,
+        getPendingResultOverviewData: action.payload,
       };
     }
     case GET_NEW_TARGET: {

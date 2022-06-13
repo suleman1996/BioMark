@@ -58,7 +58,6 @@ const styles = (colors: any) =>
       height: 5,
       borderBottomLeftRadius: 12,
       borderBottomRightRadius: 12,
-      //   marginTop: 12,
     },
     pastResultView: {
       flexDirection: 'row',

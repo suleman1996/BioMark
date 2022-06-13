@@ -40,6 +40,7 @@ import {
   SetDefaultTargetResponse,
   WeightProgressEntryRequest,
   Hba1CProgressEntryRequest,
+  LabUploadPayload,
   MedicationTrackerRequest,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
@@ -1009,6 +1010,29 @@ function getLatestResult() {
   });
 }
 
+function getLabUploadResult(id) {
+  return new Promise<LabUploadPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_LAB_UPLOADS + id)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get upload result error', err);
+        reject(err);
+      });
+  });
+}
+
+const deleteLabUploads = (id: number) => {
+  return client.delete(API_URLS.DELETE_LAB_UPLOADS + id);
+};
+
 function getPastResult() {
   return new Promise<LabStatusResponse>((resolve, reject) => {
     client
@@ -1725,6 +1749,8 @@ export const userService = {
   barcodeCheck,
   uploadResult,
   getMoreInfoResult,
+  getLabUploadResult,
+  deleteLabUploads,
   getResultPdf,
   getWeightMapData,
   getSearchResult,

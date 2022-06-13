@@ -70,12 +70,13 @@ const API_URLS = {
   GET_BLOOD_PRESSURE_LOGS: '/api/v1/patient/bp_trackers/logs?page=1',
 
   // Health Record
-
   GET_RESULT_OVERVIEW: '/api/v1/patient/results/',
   GET_SEARCH_RESULT: '/api/v1/patient/results/search?lab=',
   GET_FILTER_RESULT: '/api/v1/patient/results/past',
   UPLOAD_RESULTS: '/api/v1/patient/lab_uploads',
   GET_RESULT_MORE_INFO: '/api/v1/patient/results/',
+  // Delete Lab Uploads
+  DELETE_LAB_UPLOADS: '/api/v1/patient/lab_uploads/',
   GET_RESULT_PDF: '/api/v1/patient/results/',
   GET_WEIGHT_MAP: '/api/v1/patient/weight_trackers/chart?page=1',
 
@@ -108,6 +109,7 @@ const API_URLS = {
   // Health Records
   HEALTH_LATEST_RESULTS: '/api/v1/patient/results/latest',
   HEALTH_PAST_RESULTS: '/api/v1/patient/results/past',
+  GET_LAB_UPLOADS: '/api/v1/patient/lab_uploads/',
 
   // Medication
   GET_NEW_MEDICATION_DATA: '/api/v1/patient/psp/medications/new',
