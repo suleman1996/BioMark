@@ -374,10 +374,10 @@ const DiabetesCenter = () => {
           />
 
           <WithdrawProgram
-            text2="Yes"
+            text="Yes"
             visible={modalVisible}
             title="Are You Sure?"
-            text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
+            text2="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
             cancel="Cancel"
             cancelModal={() => setModalVisible(!modalVisible)}
             closeModal={() => setModalVisible(!modalVisible)}
