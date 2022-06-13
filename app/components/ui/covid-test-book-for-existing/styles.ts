@@ -59,7 +59,7 @@ export const makeStyles = (colors: any) =>
     },
     dName: {
       fontSize: responsiveFontSize(20),
-      fontFamily: GlobalFonts.regular,
+      fontFamily: GlobalFonts.medium,
       color: colors.darkPrimary,
     },
     dType: {

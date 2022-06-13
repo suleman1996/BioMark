@@ -82,6 +82,7 @@ const API_URLS = {
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   COVID_GET_RESUTLS_DOWNLOAD_V1: '/api/v1/patient/results/',
   GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
+  COVID_BOOKING_FORM: '/api/v1/patient/covid/booking_form',
 
   //Medication Tracker
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',

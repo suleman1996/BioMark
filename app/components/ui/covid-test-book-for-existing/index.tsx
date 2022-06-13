@@ -1,6 +1,6 @@
 import ExpandableView from '@pietile-native-kit/expandable-view';
 import { DropdownMenu } from 'components/base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -12,6 +12,14 @@ import { makeStyles } from './styles';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { GlobalFonts } from 'utils/theme/fonts';
 import TimeSlots from './../time-slots/index';
+import { IAppState } from 'store/IAppState';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllDependents } from 'store/account/account-actions';
+import { getCovidBookingFormR } from 'store/covid/covid-actions';
+import { DependentData } from 'types/api/dependent';
+import { useIsFocused } from '@react-navigation/native';
+import DropdownCountryCity from 'components/base/dropdown-country-city';
+import { logNow } from 'utils/functions/log-binder';
 
 type Props = {};
 
@@ -27,41 +35,66 @@ const options = [
 
 const ExisitingBookingForDependent = (props: Props) => {
   const {} = props;
-  const { colors } = useTheme();
+  const { colors }: any = useTheme();
   const styles = makeStyles(colors);
   const [show, setShow] = useState(true);
-  const [selectedDependant, setSelectedDependant] = useState(-1);
+  const focused = useIsFocused();
 
   const [countryDropdownValue, setCountryDropDown] = useState<any>();
   const [cityDropdownValue, setCityDropDown] = useState<any>();
   const [covidTestCenterValue, setCovidTestCenter] = useState<any>();
   const [testCenterValue, setTestCenter] = useState<any>();
+  const dispatch = useDispatch();
+
+  /*eslint-disable */
+  const dependants = useSelector(
+    (state: IAppState) => state.account.allDependents
+  );
+  const bookingFormData = useSelector(
+    (state: IAppState) => state.covid.bookingForm
+  );
+  useEffect(() => {
+    dispatch(getAllDependents());
+    dispatch(getCovidBookingFormR());
+  }, [focused]);
+  /*eslint-enable*/
+
+  // Database values for update or delete operations
+  const [selectedDependant, setSelectedDependant] = useState(-1);
+  const [sDName, setSDName] = useState('');
 
   function onPress() {
     setShow(!show);
   }
 
-  const _renderItemForDependants = ({ item, index }: any) => {
+  const _renderItemForDependants = ({
+    item,
+  }: // index,
+  {
+    item: DependentData;
+    // index: number;
+  }) => {
     const {} = item;
     const selectedDependentBg =
-      selectedDependant === index ? { backgroundColor: colors.primary } : {};
+      selectedDependant === item.id ? { backgroundColor: colors.primary } : {};
     const selectedDependantTxtColor =
-      selectedDependant === index
+      selectedDependant === item.id
         ? { color: colors.white }
         : { color: colors.darkPrimary };
     return (
       <Pressable
         onPress={() => {
-          setSelectedDependant(index);
+          setSelectedDependant(item.id);
+          setSDName(item.name);
         }}
         style={[styles.dependantConatiner, selectedDependentBg]}
       >
         <Text style={[styles.dName, selectedDependantTxtColor]}>
-          Dependents
+          {item.name}
         </Text>
         <View style={styles.bookingStatusContainer}>
           <Text style={[styles.dType, selectedDependantTxtColor]}>
-            Siblings
+            {item.type}
           </Text>
         </View>
       </Pressable>
@@ -71,7 +104,7 @@ const ExisitingBookingForDependent = (props: Props) => {
   return (
     <View style={styles.parent}>
       <Pressable onPress={onPress} style={styles.container}>
-        <Text style={styles.titleText}>Dependents</Text>
+        <Text style={styles.titleText}>{sDName ? sDName : 'Dependants'}</Text>
         <View style={styles.bookingStatusContainer}>
           <Text style={styles.statusText}>Not Booked Yet</Text>
           <Entypo
@@ -89,7 +122,7 @@ const ExisitingBookingForDependent = (props: Props) => {
         <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
           <View style={styles.expendedContainer}>
             <Text style={styles.innerTitle}>Choose a Dependent</Text>
-            <FlatList renderItem={_renderItemForDependants} data={[1, 2, 3]} />
+            <FlatList renderItem={_renderItemForDependants} data={dependants} />
             <View
               style={[styles.headerLine, { marginVertical: heightToDp(2) }]}
             />
@@ -126,10 +159,14 @@ const ExisitingBookingForDependent = (props: Props) => {
             </View>
             <Text style={styles.innerTitle}>Country</Text>
             <View style={{ position: 'relative' }}>
-              <DropdownMenu
-                options={options}
+              <DropdownCountryCity
+                options={bookingFormData.country_list.map((item) => {
+                  return { value: item.id, label: item.name };
+                })}
                 selectedValue={countryDropdownValue}
                 onValueChange={(value: any) => {
+                  logNow(value);
+                  setCityDropDown(undefined);
                   setCountryDropDown(value);
                 }}
               />
@@ -138,8 +175,12 @@ const ExisitingBookingForDependent = (props: Props) => {
               {countryDropdownValue ? (
                 <>
                   <Text style={styles.innerTitle}>City</Text>
-                  <DropdownMenu
-                    options={options}
+                  <DropdownCountryCity
+                    options={bookingFormData.country_list
+                      .filter((item2) => item2.id == countryDropdownValue)[0]
+                      ?.cities.map((item3) => {
+                        return { value: item3.id, label: item3.name };
+                      })}
                     selectedValue={cityDropdownValue}
                     onValueChange={(value: any) => {
                       setCityDropDown(value);

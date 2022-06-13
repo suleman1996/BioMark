@@ -1,4 +1,5 @@
 import {
+  BookingFormDataResponse,
   CovidBookingListResponseData,
   CovidResultListResponse,
 } from 'types/api';
@@ -8,5 +9,10 @@ export class CovidState {
   allBookingsData: CovidBookingListResponseData = {
     history: [],
     upcoming: [],
+  };
+  bookingForm: BookingFormDataResponse = {
+    country_list: [],
+    first_booking_voucher: false,
+    has_user_ic: false,
   };
 }

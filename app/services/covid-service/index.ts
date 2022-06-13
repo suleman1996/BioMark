@@ -1,5 +1,6 @@
 import { API_URLS } from 'services/url-constants';
 import {
+  BookingFormDataResponse,
   CovidBookingHealthDeclarationRequest,
   CovidBookingListResponseData,
   CovidResponseData,
@@ -115,10 +116,31 @@ function updateHealthDeclaration(
   });
 }
 
+function getBookingsForm() {
+  return new Promise<Array<BookingFormDataResponse>>((resolve, reject) => {
+    client
+      .get(`${API_URLS.COVID_BOOKING_FORM}`)
+      .then(async (response: any) => {
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('covid bookings form get', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('covid bookings form error.', err);
+        reject(err);
+      });
+  });
+}
+
 export const covidService = {
   getCovidResults,
   getCovidSingleResults,
   getCovidResultDownload,
   getBookingsData,
   updateHealthDeclaration,
+  getBookingsForm,
 };
