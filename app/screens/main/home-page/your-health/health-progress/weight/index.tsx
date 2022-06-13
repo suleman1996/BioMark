@@ -123,17 +123,7 @@ const Index = () => {
     ];
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
-      selectedValue.title == '1D'
-        ? 0
-        : selectedValue.title == '7D'
-        ? 1
-        : selectedValue.title == '1M'
-        ? 2
-        : selectedValue.title == '3M'
-        ? 3
-        : selectedValue.title == '1Y'
-        ? 4
-        : 5,
+      selectedValue.title,
       points.map((p) => p[0])
     );
 

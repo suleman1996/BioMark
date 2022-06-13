@@ -1,12 +1,3 @@
-import fonts from 'assets/fonts';
-import MyImage from 'assets/images';
-import {
-  Covid19Btn,
-  GoogleFitButton,
-  SmallButton,
-  YourHealthBtn,
-} from 'components/button';
-import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import React, { useContext, useEffect } from 'react';
 import {
   ImageBackground,
@@ -18,6 +9,19 @@ import {
 import { useTheme } from 'react-native-paper';
 
 import { useDispatch } from 'react-redux';
+
+import fonts from 'assets/fonts';
+import MyImage from 'assets/images';
+import {
+  Covid19Btn,
+  GoogleFitButton,
+  SmallButton,
+  YourHealthBtn,
+} from 'components/button';
+import { SearchBarWithLeftScanIcon } from 'components/higher-order';
+
+import FloatingActionButton from 'components/floating-action-button';
+
 import { userService } from 'services/user-service/user-service';
 import { getReduxBootstrap } from 'store/account/account-actions';
 import { getReduxMedicalDropDown } from 'store/home/home-actions';
@@ -140,6 +144,7 @@ export default function Home() {
           </View>
         </View>
       </ScrollView>
+      <FloatingActionButton />
     </View>
   );
 }

@@ -7,6 +7,7 @@ import {
   HealthTrackerPayload,
   DashboardResponseData,
   MedicationSetupPayload,
+  HealthFeed,
   RiskData,
   MedicationListEntry,
   MedicationTrackerSetup,
@@ -876,6 +877,25 @@ function getMedicalDropDown() {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('get med error', err);
+        reject(err);
+      });
+  });
+}
+// get health feeds
+function getHealthFeeds() {
+  return new Promise<HealthFeed>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_HEALTH_FEEDS)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get health feed error', err);
         reject(err);
       });
   });
@@ -1755,6 +1775,7 @@ export const userService = {
   getHealthTracker,
   getDashboard,
   getMedicalDropDown,
+  getHealthFeeds,
   createBloodSugar,
   updateWeightTracker,
   createWeightTracker,

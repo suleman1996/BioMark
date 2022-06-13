@@ -17,6 +17,7 @@ import HealthProgress from 'screens/main/home-page/your-health/health-progress/i
 import Targets from 'screens/main/home-page/your-health/health-progress/targets/index';
 import AddBloodSugar from 'screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
 import AddHba1c from 'screens/main/home-page/your-health/health-progress/targets/add-hba1c/index';
+import DeviceConnection from 'screens/main/home-page/device-connection';
 import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
@@ -42,6 +43,7 @@ import {
   getReduxPspHypertensionHealthTrackerData,
   getReduxPspHyperModules,
   getReduxPspPdfHyperLink,
+  getReduxHealthFeeds,
   getReduxPendingResultOverview,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
@@ -87,6 +89,7 @@ const {
   PENDING_RESULT_OVERVIEW,
   SEE_REPORT,
   SEARCH_RESULT,
+  DEVICE_CONNECTION,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -104,6 +107,7 @@ const AppNavigator = () => {
     dispatch(getReduxPastResult());
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
+    dispatch(getReduxHealthFeeds());
     dispatch(getReduxPendingResultOverview(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -192,6 +196,7 @@ const AppNavigator = () => {
             component={PendingResultOverview}
           />
           <Stack.Screen name={SEE_REPORT} component={SeeResult} />
+          <Stack.Screen name={DEVICE_CONNECTION} component={DeviceConnection} />
         </>
       ) : (
         <>

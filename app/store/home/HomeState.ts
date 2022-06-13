@@ -28,6 +28,7 @@ import {
   BloodPressureProgressLogsPayload,
   LabUploadPayload,
   MedicationTracker,
+  HealthFeed,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
@@ -52,6 +53,7 @@ export class HomeState {
   latestBloodSugar: LatestBloodSugarResponse | null = null;
   latestHba1c: LatestHba1CResponse | null = null;
   pspHypertensionHealthTracker: HealthTrackerPayloadData[] = [];
+  getHealthFeeds: HealthFeed[] = [];
   getWeightProgressData: WeightProgressEntryPayload[] = [];
   getBpProgressData: BloodPressureProgressEntryPayload[] = [];
   getBsProgressData: BloodSugarProgressEntryPayload[] = [];

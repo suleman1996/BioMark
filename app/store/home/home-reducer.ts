@@ -30,6 +30,7 @@ import {
   GET_BP_LOGS,
   GET_PENDING_RESULT_OVERVIEW,
   GET_MEDICATION_TRACKER,
+  GET_HEALTH_FEEDS,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -88,6 +89,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         pspHypertensionHealthTracker: action.payload,
+      };
+    }
+    case GET_HEALTH_FEEDS: {
+      return {
+        ...state,
+        getHealthFeeds: action.payload,
       };
     }
     case PSP_PDF_LINK: {

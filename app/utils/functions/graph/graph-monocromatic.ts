@@ -92,11 +92,14 @@ export const getGraphOptions = (
     },
     axisLabel: {
       margin: 12,
-      fontSize: 9,
+      fontSize: 8,
       color: graphBlackColor,
       fontWeight: 'bold',
       interval: 0,
-      formatter: (value, index) => dateFormat(value, index, config.dateRange),
+      formatter: (value, index) => {
+        console.log({ value });
+        dateFormat(value, index, config.dateRange);
+      },
       showMaxLabel: config.dateRange !== RangeValue.all,
     },
     axisTick: {

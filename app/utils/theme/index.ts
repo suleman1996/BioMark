@@ -43,7 +43,7 @@ const theme = {
     greenish: '#03DAC6',
     lightGreen: '#54CB83',
     greenOpacity: '#03DAC610',
-    greenDark: '#007C4D',
+    greenDark: '0x00AC88',
     lightYellow: '#FFD75E',
     dangerRed: '#EA4C59',
     lightDark: '#455066',

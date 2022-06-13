@@ -65,6 +65,7 @@ const Index = () => {
   });
 
   const [logData, setLogData] = React.useState([]);
+  const [chartState, setChartState] = React.useState(null);
 
   const bloodPressureGraphData = async () => {
     try {
@@ -72,7 +73,7 @@ const Index = () => {
         date: selectedValue.title,
         type: selectedfilterOption1.title.toLowerCase(),
       });
-      createChart(result.data.chart);
+      setChartState(result.data.chart);
     } catch (error) {
       console.log(error);
     }
@@ -128,17 +129,7 @@ const Index = () => {
 
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
-      selectedValue.title == '1D'
-        ? 0
-        : selectedValue.title == '7D'
-        ? 1
-        : selectedValue.title == '1M'
-        ? 2
-        : selectedValue.title == '3M'
-        ? 3
-        : selectedValue.title == '1Y'
-        ? 4
-        : 5,
+      selectedValue.title,
       points1.map((p) => p[0] as number)
     );
 
@@ -146,10 +137,17 @@ const Index = () => {
       ...getGraphOptions(convertedDataPoint, graphConfig),
     };
 
-    chartRef?.current?.setOption({
-      ...chartOptions,
-    });
+    return { chartOptions };
   };
+  React.useEffect(() => {
+    if (chartState && chartRef.current) {
+      const { chartOptions } = createChart(chartState);
+      setTimeout(() => {
+        chartRef?.current?.setOption(chartOptions);
+      }, 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartState]);
 
   const onApplyFilters = (filter1) => {
     setSelectedfilterOption1(filter1);
