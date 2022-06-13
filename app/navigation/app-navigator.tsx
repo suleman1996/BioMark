@@ -46,6 +46,7 @@ import {
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
 import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
+import SearchResult from 'screens/main/home-page/your-health/health-records/result-overview/search/index';
 import SeeResult from 'screens/main/home-page/your-health/health-records/result-overview/see-report/index';
 import ResultUpload from 'screens/main/home-page/your-health/health-records/upload-results';
 import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
@@ -82,6 +83,7 @@ const {
   MORE_INFO,
   PDF_HYPERTENSION_SUPPORT,
   SEE_REPORT,
+  SEARCH_RESULT,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -178,6 +180,7 @@ const AppNavigator = () => {
           <Stack.Screen name={ADD_BLOOD_SUGAR} component={AddBloodSugar} />
           <Stack.Screen name={ADD_HBA1C} component={AddHba1c} />
           <Stack.Screen name={RESULT_OVERVIEW} component={ResultOverView} />
+          <Stack.Screen name={SEARCH_RESULT} component={SearchResult} />
           <Stack.Screen name={MORE_INFO} component={MoreInfo} />
           <Stack.Screen name={RESULT_UPLOAD} component={ResultUpload} />
           <Stack.Screen name={SEE_REPORT} component={SeeResult} />

@@ -72,6 +72,7 @@ const API_URLS = {
   // Health Record
 
   GET_RESULT_OVERVIEW: '/api/v1/patient/results/',
+  GET_SEARCH_RESULT: '/api/v1/patient/results/search?lab=',
   GET_FILTER_RESULT: '/api/v1/patient/results/past',
   UPLOAD_RESULTS: '/api/v1/patient/lab_uploads',
   GET_RESULT_MORE_INFO: '/api/v1/patient/results/',

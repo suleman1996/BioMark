@@ -1559,6 +1559,10 @@ const getWeightMapData = (obj) => {
   });
 };
 
+const getSearchResult = (lab_id) => {
+  return client.get(`${API_URLS.GET_SEARCH_RESULT}${lab_id}&q=li`);
+};
+
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
   console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
@@ -1720,4 +1724,5 @@ export const userService = {
   getMoreInfoResult,
   getResultPdf,
   getWeightMapData,
+  getSearchResult,
 };

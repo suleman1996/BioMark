@@ -1,16 +1,19 @@
-import { View, TextInput, TouchableOpacity, Keyboard } from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 import { useTheme } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 import Styles from './styles';
+import SCREENS from 'navigation/constants/index';
 import SearIcon from 'react-native-vector-icons/Fontisto';
 import Filter from '../../assets/svgs/filter';
 
-type Props = { placeHolder: string; onPress: any };
+type Props = { placeHolder: string; onPress: any; LabId: any };
 
 const Index = (props: Props) => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
   const styles = Styles(colors);
 
@@ -20,7 +23,9 @@ const Index = (props: Props) => {
     <View style={styles.container}>
       <View style={styles.searchView}>
         <TouchableOpacity
-          onPress={() => Keyboard.dismiss()}
+          onPress={() => {
+            navigation.navigate(SCREENS.SEARCH_RESULT, { labId: props.LabId });
+          }}
           style={styles.inputView}
         >
           <TextInput
