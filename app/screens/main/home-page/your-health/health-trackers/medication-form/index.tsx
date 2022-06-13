@@ -15,6 +15,9 @@ import { navigate } from 'services/nav-ref';
 
 import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
+import { useDispatch } from 'react-redux';
+import { getMedicationsTrackersAction } from 'store/home/home-actions';
+import moment from 'moment';
 
 const FREQUENCY_TIME_OPTIONS: any[] = [
   { label: '12AM', value: '12AM' },
@@ -57,6 +60,7 @@ type MEDICATION_TYPE = {
 const MedicationForm = (props: any) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const dispatch = useDispatch();
 
   // Form Options
   const [medicationOptionsData, setMedicationOptionsData] = useState<any>({
@@ -188,7 +192,8 @@ const MedicationForm = (props: any) => {
       : 'saveMedication';
     try {
       await userService[API_FUNCTION]({ medication }, SELECTED_MEDICATION_ID);
-      navigate(SCREENS.SHOW_MEDICATION);
+      navigate(SCREENS.HEALTH_PROGRESS);
+      dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
     } catch (err) {
       console.error(err);
     }

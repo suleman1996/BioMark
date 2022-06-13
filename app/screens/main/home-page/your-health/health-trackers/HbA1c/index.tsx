@@ -5,7 +5,7 @@ import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IAppState } from 'store/IAppState';
-import { getReduxDashboard } from 'store/home/home-actions';
+import { getReduxDashboard, getReduxHba1cLogs } from 'store/home/home-actions';
 
 import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
@@ -85,6 +85,7 @@ const HbA1c = ({ route }) => {
       : 'createHba1cTracker';
     try {
       await userService[API_FUNCTION](hba1cTracker, SELECTED_HBA1C_ID);
+      dispatch(getReduxHba1cLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err: any) {
       console.error(err);
