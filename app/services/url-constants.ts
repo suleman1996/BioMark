@@ -80,6 +80,9 @@ const API_URLS = {
   GET_RESULT_PDF: '/api/v1/patient/results/',
   GET_WEIGHT_MAP: '/api/v1/patient/weight_trackers/chart?page=1',
 
+  GET_HBA1C_MAP: '/api/v1/patient/psp/trackers/hba1c/chart?page=1',
+  GET_BLOOD_PRESSURE_MAP: '/api/v1/patient/bp_trackers/chart?page=1',
+
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   COVID_GET_RESUTLS_DOWNLOAD_V1: '/api/v1/patient/results/',
@@ -132,8 +135,12 @@ const API_URLS = {
   //Progress Entry for tracker
   GET_WEIGTH_TRACKER: '/api/v1/patient/weight_trackers/',
   GET_BP_TRACKER: '/api/v1/patient/bp_trackers/',
+  GET_BP_TRACKER_CHART: '/api/v1/patient/bp_trackers/chart',
   GET_BS_TRACKER: '/api/v1/patient/psp/trackers/blood_sugar/',
   GET_HBA1C_TRACKER: '/api/v1/patient/psp/trackers/hba1c/',
+  GET_HBA1C_TRACKER_CHART: '/api/v1/patient/psp/trackers/hba1c/chart',
+
+  GET_BLOOD_SUGAR_CHART: '/api/v1/patient/psp/trackers/blood_sugar/chart',
 };
 
 export { API_URLS };
