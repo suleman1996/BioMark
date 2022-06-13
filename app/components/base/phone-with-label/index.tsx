@@ -17,6 +17,7 @@ type Props = {
   error?: string;
   setCountryCode: any;
   setSelectCountryCode: any;
+  onBlur?: any;
 };
 
 const PhoneNumberWithLabel = ({
@@ -29,6 +30,7 @@ const PhoneNumberWithLabel = ({
   error,
   setCountryCode,
   setSelectCountryCode,
+  onBlur,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -47,6 +49,7 @@ const PhoneNumberWithLabel = ({
             width={'100%'}
             placeholder={placeholder}
             maxLength={undefined}
+            onBlur={onBlur}
           />
         </View>
         {error ? (

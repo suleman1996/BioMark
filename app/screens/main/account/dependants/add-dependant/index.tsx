@@ -82,11 +82,11 @@ const AddDependantScreen = () => {
     last_name: Yup.string()
       // .matches(Regex.alphabets, 'Please enter valid last name')
       .required('lastname is required'),
-    // phone_number: Yup.string()
-    //   // .matches(Regex.minNum, 'Enter valid phone number')
-    //   .required('Please provide your phone number')
-    //   .min(min)
-    //   .max(max),
+    phone_number: Yup.string()
+      // .matches(Regex.minNum, 'Enter valid phone number')
+      .required('Please provide your phone number'),
+    // .min(min)
+    // .max(max),
     email: Yup.string()
       .email('Enter valid email address')
       .required('Email is required'),
@@ -193,7 +193,8 @@ const AddDependantScreen = () => {
               // isSubmitting,
               isValid,
               setFieldValue,
-              // touched,
+              touched,
+              setFieldTouched,
             }) => (
               <>
                 <InputWithLabel
@@ -201,14 +202,16 @@ const AddDependantScreen = () => {
                   placeholder={''}
                   onChange={handleChange('first_name')}
                   value={values.first_name}
-                  error={values.first_name ? errors.first_name : ''}
+                  error={touched.first_name ? errors.first_name : ''}
+                  onBlur={() => setFieldTouched('first_name')}
                 />
                 <InputWithLabel
                   label="Last Name"
                   placeholder={''}
                   onChange={handleChange('last_name')}
                   value={values.last_name}
-                  error={values.last_name ? errors.last_name : ''}
+                  error={touched.last_name ? errors.last_name : ''}
+                  onBlur={() => setFieldTouched('last_name')}
                 />
                 <PhoneNumberWithLabel
                   label="Mobile Number"
@@ -223,22 +226,36 @@ const AddDependantScreen = () => {
                   setCountryCode={setCountryCode}
                   setSelectCountryCode={setSelectedCountryCode}
                   maxLength={numberCondition.max}
+                  onBlur={() => setFieldTouched('phone_number')}
                 />
-                {values.phone_number !== '' &&
-                  values.phone_number.length < numberCondition.min && (
-                    <Text style={styles.errorMessage}>
-                      Must have {numberCondition.min}
-                      {numberCondition.max !== numberCondition.min &&
-                        -numberCondition.max}{' '}
-                      characters
-                    </Text>
-                  )}
+
+                {console.log(errors.phone_number)}
+                {touched.phone_number &&
+                  (errors.phone_number ? (
+                    <View style={styles.errorContainer}>
+                      <Text style={styles.errorText}>
+                        {errors.phone_number}
+                      </Text>
+                    </View>
+                  ) : (
+                    values.phone_number.length < numberCondition.min && (
+                      <View style={styles.errorContainer}>
+                        <Text style={styles.errorText}>
+                          Must have {numberCondition.min}
+                          {numberCondition.max !== numberCondition.min &&
+                            -numberCondition.max}{' '}
+                          characters
+                        </Text>
+                      </View>
+                    )
+                  ))}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
                   label="Email"
                   onChange={handleChange('email')}
                   value={values.email}
-                  error={values.email ? errors.email : ''}
+                  error={touched.email ? errors.email : ''}
+                  onBlur={() => setFieldTouched('email')}
                 />
                 <Text style={styles.label}>Date of Birth</Text>
                 <DatePickerModal
@@ -251,7 +268,8 @@ const AddDependantScreen = () => {
                   placeholder={''}
                   onChange={handleChange('id_number')}
                   value={values.id_number}
-                  error={values.id_number ? errors.id_number : ''}
+                  error={touched.id_number ? errors.id_number : ''}
+                  onBlur={() => setFieldTouched('id_number')}
                 />
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('gender_id', e)}
