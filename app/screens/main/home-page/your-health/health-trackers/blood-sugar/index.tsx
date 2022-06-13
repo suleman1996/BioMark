@@ -108,9 +108,6 @@ const BloodSugar = ({ route }) => {
     const API_FUNCTION = SELECTED_BS_ID ? 'updateBsTracker' : 'createBsTracker';
     try {
       if (!hasBloodSugarTarget) {
-        console.log(
-          '        await userService.setDefaultBloodSugarTarget();        '
-        );
         await userService.setDefaultBloodSugarTarget();
         dispatch(getReduxDashboard());
       }
