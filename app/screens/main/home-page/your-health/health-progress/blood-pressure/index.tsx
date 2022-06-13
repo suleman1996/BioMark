@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxBloodPressureLogs } from 'store/home/home-actions';
@@ -16,10 +16,22 @@ import Info from 'react-native-vector-icons/AntDesign';
 import BloodPressure from '../../../../../../assets/svgs/bP';
 
 import Styles from './styles';
+import {
+  convertDataset,
+  createGraphDataPoints,
+  getGraphOptions,
+} from 'utils/functions/graph/graph-monocromatic';
+import { userService } from 'services/user-service/user-service';
+import {
+  convertDate,
+  createGraphDataPointOptions,
+  graphXAxisConfig,
+} from 'utils/functions/graph/graph-utils';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const chartRef = useRef();
   const dispatch = useDispatch();
 
   const bPLogsData = useSelector((state: IAppState) => state.home.bPLogsData);
@@ -50,21 +62,75 @@ const Index = () => {
     title: 'All',
   });
 
-  const [logData] = React.useState([]);
+  const [logData, setLogData] = React.useState([]);
+
+  const fetchData = async () => {
+    try {
+      const result = await userService.getBloodPressureChart({
+        date: selectedValue.title,
+        type: selectedfilterOption1.title.toLowerCase(),
+      });
+      createChart(result.data.chart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   React.useEffect(() => {
     dispatch(getReduxBloodPressureLogs());
     //
-    bPLogsData?.log?.map((item) =>
-      logData.push({
+    setLogData(
+      bPLogsData?.log?.map((item) => ({
         id: item?.id,
         weight: item?.bp_diastolic + '/' + item?.bp_systolic,
         unit: 'mmHg',
         date_entry: item?.date_entry,
-      })
+      }))
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValue, selectedfilterOption1]);
+
+  // COPIED FUNCTIONS
+  const createChart = (data: any) => {
+    const points =
+      data.length === 0
+        ? []
+        : data
+            .map((point) => [
+              convertDate(point.date),
+              point.systolic,
+              point.diastolic,
+            ])
+            .reverse();
+
+    const dataset = [
+      createGraphDataPoints(points, createGraphDataPointOptions()),
+    ];
+    const convertedDataPoint = convertDataset(dataset);
+    const graphConfig = graphXAxisConfig(
+      selectedValue.title == '1D'
+        ? 0
+        : selectedValue.title == '7D'
+        ? 1
+        : selectedValue.title == '1M'
+        ? 2
+        : selectedValue.title == '3M'
+        ? 3
+        : selectedValue.title == '1Y'
+        ? 4
+        : 5,
+      points.map((p) => p[0])
+    );
+
+    chartRef.current.setOption({
+      ...getGraphOptions(convertedDataPoint, graphConfig),
+    });
+  };
 
   return (
     <>
@@ -113,7 +179,7 @@ const Index = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <LineGraph />
+          <LineGraph chartRef={chartRef} />
           <Logs navigate={SCREENS.BLOOD_PRESSURE} logData={logData} />
           <View style={{ height: 70 }} />
         </ScrollView>

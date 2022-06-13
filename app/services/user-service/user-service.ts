@@ -41,6 +41,7 @@ import {
   WeightProgressEntryRequest,
   Hba1CProgressEntryRequest,
   MedicationTrackerRequest,
+  BloodPressureProgressChartDataResponse,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -1408,6 +1409,28 @@ const getBloodPressureProgress = (id) => {
   });
 };
 
+const getBloodPressureChart = (params) => {
+  return new Promise<BloodPressureProgressChartDataResponse>(
+    (resolve, reject) => {
+      client
+        .get(`${API_URLS.GET_BP_TRACKER_CHART}`, { params })
+        .then(async ({ data }) => {
+          try {
+            resolve(data);
+          } catch (e) {
+            logNow('err.', e);
+            reject(e);
+          }
+        })
+        .catch(async (err: ErrorResponse) => {
+          logNow('BPProgress error', err);
+          logNow('get weight log error', err);
+          reject(err);
+        });
+    }
+  );
+};
+
 const getWeightLogs = () => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
@@ -1730,4 +1753,5 @@ export const userService = {
   getResultPdf,
   getBloodSugarMapData,
   getWeightMapData,
+  getBloodPressureChart,
 };

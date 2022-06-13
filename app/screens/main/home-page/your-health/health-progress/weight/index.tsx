@@ -74,6 +74,8 @@ const Index = () => {
     try {
       const result = await userService.getWeightMapData({
         date: selectedValue.title,
+        metric: selectedfilterOption2.id == 0,
+        type: selectedfilterOption1.title.toLowerCase(),
       });
       createChart(result.data.chart);
     } catch (error) {
@@ -84,7 +86,7 @@ const Index = () => {
   React.useEffect(() => {
     weightGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue]);
+  }, [selectedValue, selectedfilterOption1, selectedfilterOption2]);
 
   React.useEffect(() => {
     dispatch(getReduxWeightLogs());
@@ -109,13 +111,29 @@ const Index = () => {
     ];
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
-      0,
+      selectedValue.title == '1D'
+        ? 0
+        : selectedValue.title == '7D'
+        ? 1
+        : selectedValue.title == '1M'
+        ? 2
+        : selectedValue.title == '3M'
+        ? 3
+        : selectedValue.title == '1Y'
+        ? 4
+        : 5,
       points.map((p) => p[0])
     );
 
     chartRef.current.setOption({
       ...getGraphOptions(convertedDataPoint, graphConfig),
     });
+  };
+
+  const onApplyFilters = (filter1, filter2) => {
+    setSelectedfilterOption1(filter1);
+    setSelectedfilterOption2(filter2);
+    setIsVisible(false);
   };
 
   return (
@@ -127,10 +145,11 @@ const Index = () => {
         setIsVisible={setIsVisible}
         filterOption1={filterOption1}
         filterOption2={filterOption2}
-        selectedfilterOption1={selectedfilterOption1}
-        setSelectedfilterOption1={setSelectedfilterOption1}
-        selectedfilterOption2={selectedfilterOption2}
-        setSelectedfilterOption2={setSelectedfilterOption2}
+        onApplyPress={onApplyFilters}
+        values={{
+          selectedfilterOption1,
+          selectedfilterOption2,
+        }}
       />
 
       <View style={styles.container}>
