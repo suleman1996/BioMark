@@ -66,6 +66,16 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
+    completeDecContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    completeDecText: {
+      fontFamily: GlobalFonts.light,
+      fontSize: responsiveFontSize(14),
+      color: colors.darkPrimary,
+      paddingLeft: widthToDp(1.5),
+    },
   });
 
 export default makeStyles;

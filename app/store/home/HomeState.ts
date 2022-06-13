@@ -27,11 +27,12 @@ import {
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
   LabUploadPayload,
+  MedicationTracker,
 } from 'types/api';
 export class HomeState {
   healthTracker: HealthTrackerPayload[] = [];
   medicalDropDown: MedicationSetupPayload[] = [];
-  dashboard: DashboardResponseData = null;
+  dashboard: DashboardResponseData | undefined = undefined;
   healthRisks: RiskData[] = [];
   medicationList: MedicationListEntry[] = [];
   getNewMedicationTracker: MedicationTrackerSetup[] = [];
@@ -60,4 +61,5 @@ export class HomeState {
   bloodSugarLogsData: BloodSugarProgressLogsPayload[] = [];
   hba1cLogsData: Hba1CProgressLogsPayload[] = [];
   bPLogsData: BloodPressureProgressLogsPayload[] = [];
+  medicationTrackers: MedicationTracker | null = null;
 }

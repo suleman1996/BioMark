@@ -29,6 +29,7 @@ import {
   GET_HBA1C_LOGS,
   GET_BP_LOGS,
   GET_PENDING_RESULT_OVERVIEW,
+  GET_MEDICATION_TRACKER,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -210,6 +211,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         bPLogsData: action.payload,
+      };
+    }
+    case GET_MEDICATION_TRACKER: {
+      return {
+        ...state,
+        medicationTrackers: action.payload,
       };
     }
 

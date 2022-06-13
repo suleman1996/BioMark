@@ -30,6 +30,12 @@ export const makeStyles = (colors: any) =>
     dropDown: {
       marginVertical: 10,
     },
+    medicationNameStyle: {
+      fontSize: responsiveFontSize(24),
+      fontFamily: GlobalFonts.regular,
+      marginTop: heightToDp(2),
+      color: colors.darkPrimary,
+    },
     textStyle: {
       fontSize: responsiveFontSize(22),
       fontFamily: GlobalFonts.medium,

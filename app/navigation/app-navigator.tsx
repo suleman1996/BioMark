@@ -35,13 +35,8 @@ import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-
 import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
 import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
 import {
-  getHealthTrackerRisks,
-  getReduxDashboard,
-  getReduxHealthTracker,
   getReduxPspModules,
   getReduxPspPdfLink,
-  getReduxLabResultStatus,
-  getReduxNewMedicationTracker,
   getReduxLatestResult,
   getReduxPastResult,
   getReduxPspHypertensionHealthTrackerData,
@@ -52,6 +47,7 @@ import {
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
 import ResultOverView from 'screens/main/home-page/your-health/health-records/result-overview/index';
+import SeeResult from 'screens/main/home-page/your-health/health-records/result-overview/see-report/index';
 import ResultUpload from 'screens/main/home-page/your-health/health-records/upload-results';
 import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
 import PendingResultOverview from 'screens/main/home-page/your-health/health-records/pending-result-overview';
@@ -88,6 +84,7 @@ const {
   MORE_INFO,
   PDF_HYPERTENSION_SUPPORT,
   PENDING_RESULT_OVERVIEW,
+  SEE_REPORT,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -97,11 +94,7 @@ const AppNavigator = () => {
 
   useEffect((link: string, id: number) => {
     getHasProfileAsyncStorage();
-    dispatch(getReduxNewMedicationTracker());
-    dispatch(getReduxHealthTracker());
-    dispatch(getReduxDashboard());
-    dispatch(getHealthTrackerRisks());
-    dispatch(getReduxLabResultStatus());
+
     dispatch(getReduxPspModules());
     dispatch(getReduxPspPdfLink(link));
     dispatch(getReduxPspPdfHyperLink(link));
@@ -195,6 +188,7 @@ const AppNavigator = () => {
             name={PENDING_RESULT_OVERVIEW}
             component={PendingResultOverview}
           />
+          <Stack.Screen name={SEE_REPORT} component={SeeResult} />
         </>
       ) : (
         <>

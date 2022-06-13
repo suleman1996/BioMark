@@ -43,14 +43,7 @@ const styles = (colors: any) =>
       justifyContent: 'space-around',
       paddingTop: 5,
     },
-    renderHealthRisk: {
-      height: 32,
-      width: 32,
-      borderRadius: 16,
 
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     dot: {
       backgroundColor: colors.dangerRed,
       height: 10,
@@ -88,29 +81,7 @@ const styles = (colors: any) =>
       paddingHorizontal: 10,
       marginHorizontal: 5,
     },
-    recordKeepingView: {
-      //   height: 100,
-      marginHorizontal: 5,
-      alignItems: 'center',
-      paddingTop: 15,
-      backgroundColor: colors.blue,
-      borderRadius: 8,
-      marginBottom: 10,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
 
-      elevation: 5,
-    },
-    recordKeepinText: {
-      fontFamily: fonts.regular,
-      fontSize: 16,
-      color: colors.white,
-    },
     circle: {
       height: 60,
       width: 60,
@@ -145,57 +116,7 @@ const styles = (colors: any) =>
       color: colors.heading,
       fontWeight: 'bold',
     },
-    resultStatusView: {
-      marginTop: 20,
-      //   height: 100,
-      backgroundColor: colors.white,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
 
-      elevation: 5,
-      borderRadius: 10,
-      marginHorizontal: 5,
-      padding: 5,
-    },
-    resultStatus: {
-      fontFamily: fonts.regular,
-      fontWeight: '900',
-      fontSize: 16,
-      color: colors.heading,
-    },
-    barcode: {
-      fontFamily: fonts.light,
-      fontSize: 13,
-      color: colors.heading,
-      textAlign: 'center',
-    },
-    highlightsView: {
-      height: 85,
-      width: 187,
-
-      borderRadius: 5,
-      //   padding: 5,
-      overflow: 'hidden',
-    },
-    highlightstext: {
-      fontFamily: fonts.regular,
-      fontSize: 14,
-      color: colors.white,
-    },
-    blurView: {
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: '#3D3D3D90',
-      paddingHorizontal: 10,
-    },
     healthRisk: {
       // height: 100,
       backgroundColor: colors.white,
@@ -251,19 +172,7 @@ const styles = (colors: any) =>
       flexDirection: 'row',
       alignItems: 'center',
     },
-    popUpBackground: {
-      flex: 1,
-      backgroundColor: 'rgba(0,0,0,0.4)',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    popUpContainer: {
-      width: '80%',
-      backgroundColor: 'white',
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      borderRadius: 9,
-    },
+
     errorMessage: {
       marginHorizontal: 5,
       fontSize: 12,

@@ -1,25 +1,76 @@
 import ButtonComponent from 'components/base/button';
-import React from 'react';
+import EmptyResultComponent from 'components/higher-order/empty-result';
+import BioBookings from 'components/svg/bio-bookings';
+import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
+import SCREENS from 'navigation/constants';
+import React, { useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useSelector } from 'react-redux';
 import { navigate } from 'services/nav-ref';
+import { IAppState } from 'store/IAppState';
+import { BookingListDataUpcoming } from 'types/api';
+import { dateFormat1, getDayName, getTime } from 'utils/functions/date-format';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import BarCodeModal from '../bar-code-modal';
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
-import SCREENS from 'navigation/constants';
-import BioBookings from 'components/svg/bio-bookings';
-import EmptyResultComponent from 'components/higher-order/empty-result';
+
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
   const {} = props;
-  const { colors } = useTheme();
+  const { colors }: any = useTheme();
+  const allUpcommingBookings = useSelector(
+    (state: IAppState) => state.covid.allBookingsData.upcoming
+  );
+
+  const [isHealthDeclaration, setIsHealthDeclaration] = useState(false);
+  const [barCodeText, setBarCodeText] = useState('');
+
+  const [modalData, setModalData] = useState({});
+  const [isBarModal, setIsBarModal] = useState(false);
+
   const styles = makeStyles(colors);
-  const _renderItem = () => {
+  const _renderItem = ({ item }: { item: BookingListDataUpcoming }) => {
+    const {
+      patient_name = '',
+      booking_id = '',
+      booking_test_type = '',
+      test_centre_name = '',
+      booking_schedule_date = '',
+      booking_slot_time = '',
+      test_country_name = '',
+      test_city_name = '',
+      declaration_enabled = false,
+      declaration_complete = true,
+      is_cancellable = false,
+      is_dependent = false,
+    } = {
+      patient_name: item.patient_name,
+      booking_id: item.reference_code,
+      booking_test_type: item.booking_test_type,
+      test_centre_name: item.test_centre_name,
+      booking_schedule_date: item.booking_schedule.toString(),
+      booking_slot_time: item.booking_slot_time,
+      test_country_name: item.test_country_name,
+      test_city_name: item.test_city_name,
+      declaration_enabled: item.declaration_enabled,
+      declaration_complete: item.declaration_complete,
+      is_cancellable: item.is_cancellable,
+      is_dependent: item.is_dependent,
+    };
     return (
       <View style={styles.singleItemContainer}>
+        <BarCodeModal
+          setIsVisible={setIsBarModal}
+          isVisible={isBarModal}
+          text={barCodeText}
+        />
+
         <View
           style={{
             flexDirection: 'row',
@@ -27,15 +78,17 @@ const UpcommingBookings = (props: Props) => {
             justifyContent: 'space-between',
           }}
         >
-          <Text style={styles.whoIsText}>You</Text>
+          <Text style={styles.whoIsText}>
+            {is_dependent ? patient_name : 'You'}
+          </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={styles.bookingId}>Booking ID -</Text>
-            <Text style={styles.idText}>CVD-FCBTVH</Text>
+            <Text style={styles.idText}>{booking_id}</Text>
           </View>
         </View>
-        <Text style={styles.locationText}>
-          COVID-19 RT-PCR (Urgent) at Kuching General Hospital
-        </Text>
+        <Text
+          style={styles.locationText}
+        >{`${booking_test_type} ${test_centre_name}`}</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -43,14 +96,27 @@ const UpcommingBookings = (props: Props) => {
             justifyContent: 'space-between',
           }}
         >
-          <Text style={styles.dateandtimeText}>Friday,20/05/2022 10:30 AM</Text>
-          <MaterialCommunityIcons
-            name="barcode-scan"
-            color={colors.darkPrimary}
-            size={responsiveFontSize(20)}
-          />
+          <Text style={styles.dateandtimeText}>{`${getDayName(
+            booking_schedule_date
+          )}, ${dateFormat1(booking_schedule_date)} ${getTime(
+            booking_slot_time
+          )}`}</Text>
+          <Pressable
+            onPress={() => {
+              setIsBarModal(true);
+              setBarCodeText(booking_id);
+            }}
+          >
+            <MaterialCommunityIcons
+              name="barcode-scan"
+              color={colors.darkPrimary}
+              size={responsiveFontSize(30)}
+            />
+          </Pressable>
         </View>
-        <Text style={styles.cityNameText}>Malaysia, Sarawak</Text>
+        <Text
+          style={styles.cityNameText}
+        >{`${test_country_name}, ${test_city_name}`}</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -59,11 +125,37 @@ const UpcommingBookings = (props: Props) => {
             marginTop: heightToDp(1),
           }}
         >
-          <Pressable style={styles.button}>
-            <Text style={styles.dateandtimeText}>Health Declaration</Text>
-          </Pressable>
+          {declaration_complete ? (
+            <View style={styles.completeDecContainer}>
+              <AntDesign name="checkcircle" color={colors.primary} />
+              <Text style={styles.completeDecText}>
+                Health Declaration Completed
+              </Text>
+            </View>
+          ) : (
+            <Pressable
+              disabled={!declaration_enabled}
+              onPress={() => {
+                setIsHealthDeclaration(true);
+                setModalData(item);
+              }}
+              style={[
+                styles.button,
+                declaration_enabled
+                  ? {}
+                  : { backgroundColor: colors.fieldGrey },
+              ]}
+            >
+              <Text style={styles.dateandtimeText}>Health Declaration</Text>
+            </Pressable>
+          )}
+
           <Pressable
-            style={[styles.button, { backgroundColor: colors.fieldGrey }]}
+            disabled={!is_cancellable}
+            style={[
+              styles.button,
+              !is_cancellable ? {} : { backgroundColor: colors.fieldGrey },
+            ]}
           >
             <Text style={[styles.dateandtimeText, { color: colors.darkGray }]}>
               Cancel Test
@@ -75,10 +167,16 @@ const UpcommingBookings = (props: Props) => {
   };
   return (
     <View style={{ flex: 1 }}>
+      <CovidHealthDeclarationModal
+        setIsVisible={setIsHealthDeclaration}
+        isVisible={isHealthDeclaration}
+        data={modalData}
+      />
+
       <FlatList
         ListHeaderComponent={() => <SuggestionsText />}
         renderItem={_renderItem}
-        data={[]}
+        data={allUpcommingBookings}
         ListEmptyComponent={() => {
           return (
             <>

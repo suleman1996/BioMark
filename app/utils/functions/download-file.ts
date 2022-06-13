@@ -73,3 +73,64 @@ const getFileExtention = (fileUrl: string) => {
   // To get the file extension
   return /[.]/.exec(fileUrl) ? /[^.]+$/.exec(fileUrl) : undefined;
 };
+
+export const checkPermissionAndDownloadBase64 = async (file: string) => {
+  // Function to check the platform
+  // If Platform is Android then check for permissions.
+
+  if (Platform.OS === 'ios') {
+    downloadFileBase64(file);
+  } else {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: 'Storage Permission Required',
+          message: 'Application needs access to your storage to download File',
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // Start downloading
+        downloadFileBase64(file);
+        // Alert.alert('Success', 'Storage Permission  Granted');
+      } else {
+        // If permission denied then show alert
+        Alert.alert('Error', 'Storage Permission Not Granted');
+      }
+    } catch (err) {
+      // To handle permission related exception
+      console.log('++++' + err);
+    }
+  }
+};
+
+const downloadFileBase64 = (fileUrl: string) => {
+  RNFetchBlob.config({
+    addAndroidDownloads: {
+      useDownloadManager: true, // <-- this is the only thing required
+      // Optional, override notification setting (default to true)
+      notification: true,
+      // Optional, but recommended since android DownloadManager will fail when
+      // the url does not contains a file extension, by default the mime type will be text/plain
+      mime: 'application/pdf',
+      description: 'File downloaded by download manager.',
+    },
+  })
+    .fetch(
+      'GET',
+      `${'https://cran.r-project.org/web/packages/BioMark/BioMark.pdf'}`
+    )
+    .then((res) => {
+      console.log(res);
+
+      // the path of downloaded file
+      // resp.path()
+      // let base64Str = fileUrl;
+      let pdfLocation = RNFetchBlob.fs.dirs.DocumentDir + '/' + 'test.pdf';
+      RNFetchBlob.fs.writeFile(
+        pdfLocation,
+        RNFetchBlob.base64.encode(fileUrl),
+        'base64'
+      );
+    });
+};

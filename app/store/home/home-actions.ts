@@ -28,6 +28,7 @@ import {
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
   LabUploadPayload,
+  MedicationTracker,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import {
@@ -60,6 +61,7 @@ import {
   GET_HBA1C_LOGS,
   GET_BP_LOGS,
   GET_PENDING_RESULT_OVERVIEW,
+  GET_MEDICATION_TRACKER,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -198,6 +200,11 @@ export const getHBA1CTargetsCreator = (
   data: GetHba1cTargetsResponseData[]
 ) => ({
   type: GET_HBA1C_TARGETS,
+  payload: data,
+});
+
+export const getMedicationsTrackerCreator = (data: MedicationTracker) => ({
+  type: GET_MEDICATION_TRACKER,
   payload: data,
 });
 
@@ -561,6 +568,20 @@ export const getReduxBloodPressureLogs =
       .getBloodPressureLogs()
       .then(async (res) => {
         dispatch(getBPLogs(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getMedicationsTrackersAction =
+  (date: string) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getMedicationTrackers(date)
+      .then(async (res) => {
+        console.log({ res });
+        dispatch(getMedicationsTrackerCreator(res));
       })
       .catch((err) => {
         logNow(err);

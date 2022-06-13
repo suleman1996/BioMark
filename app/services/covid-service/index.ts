@@ -1,5 +1,7 @@
 import { API_URLS } from 'services/url-constants';
 import {
+  CovidBookingHealthDeclarationRequest,
+  CovidBookingListResponseData,
   CovidResponseData,
   CovidResultListResponse,
   ResultSummaryLabPDFResponse,
@@ -12,7 +14,7 @@ function getCovidResults() {
   return new Promise<Array<CovidResultListResponse[]>>((resolve, reject) => {
     client
       .get(`${API_URLS.COVID_GET_RESUTLS}`)
-      .then(async (response) => {
+      .then(async (response: any) => {
         try {
           //logNow('all notification inbox success response', response.data);
           resolve(response.data);
@@ -32,7 +34,7 @@ function getCovidSingleResults(id: string) {
   return new Promise<CovidResponseData>((resolve, reject) => {
     client
       .get(`${API_URLS.COVID_GET_RESUTLS}/${id}`)
-      .then(async (response) => {
+      .then(async (response: any) => {
         try {
           //logNow('all notification inbox success response', response.data);
           resolve(response.data);
@@ -52,7 +54,7 @@ function getCovidResultDownload(id: string) {
   return new Promise<ResultSummaryLabPDFResponse>((resolve, reject) => {
     client
       .get(`${API_URLS.COVID_GET_RESUTLS_DOWNLOAD_V1}/${id}/download`)
-      .then(async (response) => {
+      .then(async (response: any) => {
         try {
           //logNow('all notification inbox success response', response.data);
           resolve(response.data);
@@ -68,8 +70,55 @@ function getCovidResultDownload(id: string) {
   });
 }
 
+function getBookingsData() {
+  return new Promise<Array<CovidBookingListResponseData>>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_BOOKINGS}`)
+      .then(async (response: any) => {
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('covid get results block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('covid get results error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
+// en.json
+// pages => covid =>  bookCovid => covidHealthcare
+// declaration
+function updateHealthDeclaration(
+  request: CovidBookingHealthDeclarationRequest
+) {
+  return new Promise<Array<CovidBookingListResponseData>>((resolve, reject) => {
+    client
+      .post(`${API_URLS.COVID_HEALTH_DECLARATION}`, request)
+      .then(async (response: any) => {
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('covid get results block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('covid get results error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
 export const covidService = {
   getCovidResults,
   getCovidSingleResults,
   getCovidResultDownload,
+  getBookingsData,
+  updateHealthDeclaration,
 };

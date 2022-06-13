@@ -7,7 +7,7 @@ export interface MedicationTrackersParams {
 export interface MedicationTracker {
   selected: boolean;
   date: string;
-  MedicationTracker: boolean;
+  has_medication: boolean;
   logs: MedicationTrackerLog[];
 }
 

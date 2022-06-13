@@ -76,14 +76,22 @@ const API_URLS = {
   GET_RESULT_MORE_INFO: '/api/v1/patient/results/',
   // Delete Lab Uploads
   DELETE_LAB_UPLOADS: '/api/v1/patient/lab_uploads/',
+  GET_RESULT_PDF: '/api/v1/patient/results/',
+  GET_WEIGHT_MAP: '/api/v1/patient/weight_trackers/chart?page=1',
 
   // Covid
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   COVID_GET_RESUTLS_DOWNLOAD_V1: '/api/v1/patient/results/',
   GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
+
+  //Medication Tracker
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
   GET_NEW_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/new',
   DELETE_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/',
+  GET_BOOKINGS: '/api/v1/patient/covid/get_bookings',
+  COVID_HEALTH_DECLARATION: '/api/v1/patient/covid/health_declaration',
+  GET_MEDICATION_TRACKER_BY_ID: '/api/v1/patient/psp/trackers/medication/',
+
   // Psp Modules
   PSP_GET_MODULES: '/api/v1/patient/psp/modules',
   PDF_GET_LINK: '/api/v1/patient/psp/modules/',
@@ -125,7 +133,6 @@ const API_URLS = {
   GET_BP_TRACKER: '/api/v1/patient/bp_trackers/',
   GET_BS_TRACKER: '/api/v1/patient/psp/trackers/blood_sugar/',
   GET_HBA1C_TRACKER: '/api/v1/patient/psp/trackers/hba1c/',
-  GET_MEDICATION_TRACKER_BY_ID: '/api/v1/patient/psp/trackers/medication/',
 };
 
 export { API_URLS };

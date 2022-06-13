@@ -154,10 +154,10 @@ const Index = () => {
   }, [latestBloodSugar, units]);
 
   return (
-    <ScrollView>
+    <View style={styles.container}>
       <ActivityIndicator visible={loading} />
       <TitleWithBackWhiteBgLayout>
-        <View style={styles.innerContainer}>
+        <ScrollView style={styles.innerContainer}>
           <Text style={styles.firstHeading}>
             Set your new target blood sugar ranges
           </Text>
@@ -212,23 +212,22 @@ const Index = () => {
             error={errors.toppg}
             unit={unitsNames[state.selectedType]}
           />
-          <GradientButton
-            text="Save"
-            onPress={onSubmit}
-            color={['#2C6CFC', '#2CBDFC']}
-            style={styles.buttonContainer}
-            disabled={
-              !state.fromfpg ||
-              !state.tofpg ||
-              !state.fromppg ||
-              !state.toppg ||
-              Object.keys(errors).filter((key: string) => errors[key]).length >
-                0
-            }
-          />
-        </View>
+        </ScrollView>
+        <GradientButton
+          text="Save"
+          onPress={onSubmit}
+          color={['#2C6CFC', '#2CBDFC']}
+          style={styles.buttonContainer}
+          disabled={
+            !state.fromfpg ||
+            !state.tofpg ||
+            !state.fromppg ||
+            !state.toppg ||
+            Object.keys(errors).filter((key: string) => errors[key]).length > 0
+          }
+        />
       </TitleWithBackWhiteBgLayout>
-    </ScrollView>
+    </View>
   );
 };
 
