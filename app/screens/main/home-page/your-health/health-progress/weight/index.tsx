@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, ScrollView } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import React, { useRef } from 'react';
 
 import Styles from './styles';
@@ -153,26 +153,26 @@ const Index = () => {
       />
 
       <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <GraphHeader
-            selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
-            data={headerValue}
-          />
-          <View style={styles.headingView}>
-            <Text style={styles.heading}>Weight (kg)</Text>
-            <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-              <Filter fill={colors.heading} />
-            </TouchableOpacity>
-          </View>
-          <LineGraph chartRef={chartRef} />
-          <Logs
-            navigate={SCREENS.WEIGHT}
-            logData={weightLogs?.log}
-            showMore={'Show more'}
-          />
-          <View style={{ height: 70 }} />
-        </ScrollView>
+        {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+        <GraphHeader
+          selectedValue={selectedValue}
+          setSelectedValue={setSelectedValue}
+          data={headerValue}
+        />
+        <View style={styles.headingView}>
+          <Text style={styles.heading}>Weight (kg)</Text>
+          <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+            <Filter fill={colors.heading} />
+          </TouchableOpacity>
+        </View>
+        <LineGraph chartRef={chartRef} />
+        <Logs
+          navigate={SCREENS.WEIGHT}
+          logData={weightLogs?.log}
+          showMore={'Show more'}
+        />
+        <View style={{ height: 70 }} />
+        {/* </ScrollView> */}
         <FloatingButton svg={<Person height={28} width={28} />} />
       </View>
     </>

@@ -125,7 +125,7 @@ const Index = () => {
       setTimeout(() => {
         chartRef.current.setOption(chartOptions);
         lagendChartRef?.current.setOption(legendChartOptions);
-      }, 500);
+      }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartState]);

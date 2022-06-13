@@ -16,17 +16,19 @@ import Info from 'react-native-vector-icons/AntDesign';
 import BloodPressure from '../../../../../../assets/svgs/bP';
 
 import Styles from './styles';
+import { BloodPressureProgressChartDataPoint } from 'types/api';
+import { convertDate } from 'utils/functions/date-format';
 import {
   convertDataset,
   createGraphDataPoints,
   getGraphOptions,
 } from 'utils/functions/graph/graph-monocromatic';
-import { userService } from 'services/user-service/user-service';
 import {
-  convertDate,
   createGraphDataPointOptions,
   graphXAxisConfig,
 } from 'utils/functions/graph/graph-utils';
+import { graphGreyColor } from 'utils/functions/graph/graph.types';
+import { userService } from 'services/user-service/user-service';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -64,17 +66,21 @@ const Index = () => {
 
   const [logData, setLogData] = React.useState([]);
 
-  const fetchData = async () => {
+  const bloodPressureGraphData = async () => {
     try {
-      const result = await userService.getBloodPressureChart({
+      const result = await userService.getBloodPressureMapData({
         date: selectedValue.title,
-        type: selectedfilterOption1.title.toLowerCase(),
       });
-      createChart(result.chart);
+      createChart(result.data.chart);
     } catch (error) {
       console.log(error);
     }
   };
+
+  React.useEffect(() => {
+    bloodPressureGraphData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValue]);
 
   React.useEffect(() => {
     dispatch(getReduxBloodPressureLogs());
@@ -90,45 +96,47 @@ const Index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue, selectedfilterOption1]);
-
-  // COPIED FUNCTIONS
-  const createChart = (data: any) => {
-    const points =
+  const createChart = (data: BloodPressureProgressChartDataPoint[]) => {
+    const points1 =
       data.length === 0
         ? []
         : data
             .map((point) => [
               convertDate(point.date),
-              point.systolic,
-              point.diastolic,
+              point.systolic !== null ? point.systolic : null,
+            ])
+            .reverse();
+
+    const points2 =
+      data.length === 0
+        ? []
+        : data
+            .map((point) => [
+              convertDate(point.date),
+              point.diastolic !== null ? point.diastolic : null,
             ])
             .reverse();
 
     const dataset = [
-      createGraphDataPoints(points, createGraphDataPointOptions()),
+      createGraphDataPoints(points1, createGraphDataPointOptions()),
+      createGraphDataPoints(
+        points2,
+        createGraphDataPointOptions(graphGreyColor, graphGreyColor)
+      ),
     ];
+
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
-      selectedValue.title == '1D'
-        ? 0
-        : selectedValue.title == '7D'
-        ? 1
-        : selectedValue.title == '1M'
-        ? 2
-        : selectedValue.title == '3M'
-        ? 3
-        : selectedValue.title == '1Y'
-        ? 4
-        : 5,
-      points.map((p) => p[0])
+      0,
+      points1.map((p) => p[0] as number)
     );
 
-    chartRef.current.setOption({
+    const chartOptions = {
       ...getGraphOptions(convertedDataPoint, graphConfig),
+    };
+
+    chartRef?.current?.setOption({
+      ...chartOptions,
     });
   };
 
