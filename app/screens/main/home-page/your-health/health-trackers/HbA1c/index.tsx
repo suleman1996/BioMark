@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { IAppState } from 'store/IAppState';
+import { getReduxDashboard } from 'store/home/home-actions';
 
 import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
@@ -28,6 +32,11 @@ const HbA1c = ({ route }) => {
   const SELECTED_HBA1C_ID = route?.params?.logId;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
+  const dispatch = useDispatch();
+  const { hasHBA1cTarget } = useSelector((state: IAppState) => ({
+    hasHBA1cTarget: state.home?.dashboard?.has_hba1c_target,
+  }));
 
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
@@ -67,6 +76,10 @@ const HbA1c = ({ route }) => {
     console.log('hba1cTracker', hba1cTracker);
 
     setIsLoading(true);
+    if (!hasHBA1cTarget) {
+      await userService.setDefaultBloodSugarTarget();
+      dispatch(getReduxDashboard());
+    }
     const API_FUNCTION = SELECTED_HBA1C_ID
       ? 'updateHba1cTracker'
       : 'createHba1cTracker';

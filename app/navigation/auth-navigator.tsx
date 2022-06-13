@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import CreatePassword from 'screens/auth/create-password';
 import Confirmation from 'screens/auth/confirmation';
@@ -18,9 +19,25 @@ import SCREENS from './constants';
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => {
-  return (
+  const [loading, setLoading] = useState<boolean>(true);
+  const [showSplash, setShowSplash] = useState<boolean>(false);
+
+  const checkIfFirstTIme = async () => {
+    const isFirstTime = !(await AsyncStorage.getItem('hasSeenSplash'));
+    if (isFirstTime) {
+      setShowSplash(true);
+      await AsyncStorage.setItem('hasSeenSplash', 'true');
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    checkIfFirstTIme();
+  }, []);
+
+  return loading ? null : (
     <Stack.Navigator
-      initialRouteName={SCREENS.SPLASH}
+      initialRouteName={showSplash ? SCREENS.SPLASH : SCREENS.ONBOARDING}
       screenOptions={{
         headerShown: false,
       }}
