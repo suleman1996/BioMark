@@ -1559,6 +1559,12 @@ const getWeightMapData = (obj) => {
   });
 };
 
+const getHbA1cMapData = (obj) => {
+  return client.get(API_URLS.GET_HBA1C_MAP, {
+    params: obj,
+  });
+};
+
 const getBloodSugarMapData = (obj) => {
   return client.get(API_URLS.GET_BLOOD_SUGAR_CHART, {
     params: obj,
@@ -1727,4 +1733,5 @@ export const userService = {
   getResultPdf,
   getBloodSugarMapData,
   getWeightMapData,
+  getHbA1cMapData,
 };
