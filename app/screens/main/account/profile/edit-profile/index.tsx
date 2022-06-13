@@ -6,6 +6,8 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -138,28 +140,42 @@ const EditProfileScreen = () => {
     }
   };
 
-  const imagePickerFromCamera = () => {
+  const imagePickerFromCamera = async () => {
     setShowModal(false);
-    if (!cameraIs) {
-      cameraIs = true;
 
-      let options = {
-        mediaType: 'photo',
-        includeBase64: true,
-      };
-      launchCamera(options, (res) => {
-        if (res.didCancel) {
-          console.log('User cancelled image picker');
-          cameraIs = false;
-        } else if (res.errorMessage) {
-          console.log('Camera error: ', res.errorMessage);
-          cameraIs = false;
-        } else {
-          updateProfilePhoto(res.assets[0].base64);
-          setEdit(false);
-          cameraIs = false;
-        }
-      });
+    const granted =
+      Platform.OS == 'ios' ||
+      (await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
+        title: 'App Camera Permission',
+        message: 'App needs access to your camera',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      }));
+    if (granted) {
+      if (!cameraIs) {
+        cameraIs = true;
+
+        let options = {
+          mediaType: 'photo',
+          includeBase64: true,
+        };
+        launchCamera(options, (res) => {
+          if (res.didCancel) {
+            console.log('User cancelled image picker');
+            cameraIs = false;
+          } else if (res.errorMessage) {
+            console.log('Camera error: ', res.errorMessage);
+            cameraIs = false;
+          } else {
+            if (res.assets) {
+              updateProfilePhoto(res.assets[0].base64);
+              setEdit(false);
+            }
+            cameraIs = false;
+          }
+        });
+      }
     }
   };
 

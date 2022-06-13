@@ -1,6 +1,18 @@
 import { ApiResponse } from './api-response';
-import { MealTypeUnit } from '../../modules/progress/models/measurement-units';
 import { RangeValue } from './progress';
+
+enum MealTypeUnit {
+  beforeBreakfast = 'Before Breakfast',
+  afterBreakfast = 'After Breakfast',
+  beforeLunch = 'Before Lunch',
+  afterLunch = 'After Lunch',
+  beforeDinner = 'Before Dinner',
+  afterDinner = 'After Dinner',
+  bedtime = 'Bedtime',
+  afterMeal = 'After Meal',
+  fasting = 'Fasting',
+  all = 'All',
+}
 
 export interface BloodSugarProgressTarget {
   fpg_from: string;
@@ -80,13 +92,13 @@ export interface BloodSugarProgressEntryRequest {
 }
 
 export interface BloodSugarProgressEntryPayload {
-  id: number;
+  id?: number;
   data_value: string;
   unit_list_id: number;
   record_date: string;
-  meal_type: string;
+  meal_type?: string;
   meal_type_id: number;
-  unit_name: string;
+  unit_name?: string;
 }
 
 export interface BloodSugarProgressMealTypePayload {

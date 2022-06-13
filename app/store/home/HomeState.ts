@@ -26,6 +26,7 @@ import {
   BloodSugarProgressLogsPayload,
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
+  LabUploadPayload,
   MedicationTracker,
   HealthFeed,
 } from 'types/api';
@@ -44,6 +45,7 @@ export class HomeState {
   getResultOverViewData: ResultResponse[] = [];
   getLatestResultData: EncodedResultOverviewPayload[] = [];
   getPastResultData: LabStatusResponse[] = [];
+  getPendingResultOverviewData: LabUploadPayload[] = [];
   bloodSugarUnits: TargetUnit[] = [];
   hbA1cUnits: TargetUnit[] = [];
   bloodSugarTargets: GetBloodSugarTargetsResponseData[] = [];

@@ -12,7 +12,7 @@ type Props = {
   disabled?: boolean;
   onPress: any;
   title?: string;
-  svg: any;
+  svg?: any;
 };
 
 export default function Button(props: Props) {

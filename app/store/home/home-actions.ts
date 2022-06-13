@@ -28,6 +28,7 @@ import {
   Hba1CProgressLogsPayload,
   BloodPressureProgressLogsPayload,
   HealthFeed,
+  LabUploadPayload,
   MedicationTracker,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
@@ -60,6 +61,7 @@ import {
   GET_BLOOD_SUGAR_LOGS,
   GET_HBA1C_LOGS,
   GET_BP_LOGS,
+  GET_PENDING_RESULT_OVERVIEW,
   GET_MEDICATION_TRACKER,
   GET_HEALTH_FEEDS,
 } from './constants';
@@ -125,6 +127,10 @@ export const showLatestResult = (data: EncodedResultOverviewPayload) => ({
 });
 export const showPastResult = (data: LabStatusResponse) => ({
   type: GET_PAST_RESULT,
+  payload: data,
+});
+export const getPendingResultOverview = (data: LabUploadPayload) => ({
+  type: GET_PENDING_RESULT_OVERVIEW,
   payload: data,
 });
 export const addLabResultStatus = (data: LabStatusPayload) => ({
@@ -342,6 +348,19 @@ export const getReduxPastResult =
       .getPastResult()
       .then(async (res) => {
         await dispatch(showPastResult(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      });
+  };
+
+export const getReduxPendingResultOverview =
+  (id: number) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await userService
+      .getLabUploadResult(id)
+      .then(async (res) => {
+        await dispatch(getPendingResultOverview(res));
       })
       .catch((err) => {
         logNow(err);

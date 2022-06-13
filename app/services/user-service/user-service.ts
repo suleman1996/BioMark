@@ -41,7 +41,10 @@ import {
   SetDefaultTargetResponse,
   WeightProgressEntryRequest,
   Hba1CProgressEntryRequest,
+  LabUploadPayload,
   MedicationTrackerRequest,
+  BloodPressureProgressChartDataResponse,
+  Hba1CProgressChartDataResponse,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
 import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
@@ -578,7 +581,7 @@ const deleteBpLog = (bp_log_id: any) => {
       });
   });
 };
-const createBsTracker = (medical: WeightProgressEntryRequest) => {
+const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
   console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
@@ -601,7 +604,10 @@ const createBsTracker = (medical: WeightProgressEntryRequest) => {
   });
 };
 
-const updateBsTracker = (medical: WeightProgressEntryRequest, id: string) => {
+const updateBsTracker = (
+  medical: BloodSugarProgressEntryPayload,
+  id: string
+) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
       .put(`${API_URLS.CREATE_BLOOD_SUGAR}/${id}`, {
@@ -1026,6 +1032,29 @@ function getLatestResult() {
   });
 }
 
+function getLabUploadResult(id) {
+  return new Promise<LabUploadPayload>((resolve, reject) => {
+    client
+      .get(API_URLS.GET_LAB_UPLOADS + id)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get upload result error', err);
+        reject(err);
+      });
+  });
+}
+
+const deleteLabUploads = (id: number) => {
+  return client.delete(API_URLS.DELETE_LAB_UPLOADS + id);
+};
+
 function getPastResult() {
   return new Promise<LabStatusResponse>((resolve, reject) => {
     client
@@ -1425,6 +1454,50 @@ const getBloodPressureProgress = (id) => {
   });
 };
 
+const getBloodPressureChart = (params) => {
+  return new Promise<BloodPressureProgressChartDataResponse>(
+    (resolve, reject) => {
+      client
+        .get(`${API_URLS.GET_BP_TRACKER_CHART}`, { params })
+        .then(async ({ data }) => {
+          try {
+            resolve(data);
+          } catch (e) {
+            logNow('err.', e);
+            reject(e);
+          }
+        })
+        .catch(async (err: ErrorResponse) => {
+          logNow('BPProgress error', err);
+          logNow('get weight log error', err);
+          reject(err);
+        });
+    }
+  );
+};
+
+const getHBA1cChart = (params) => {
+  return new Promise<Hba1CProgressChartDataResponse>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_HBA1C_TRACKER_CHART}`, {
+        params: { ...params, page: 1 },
+      })
+      .then(async ({ data }) => {
+        try {
+          resolve(data);
+        } catch (e) {
+          logNow('err.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('BPProgress error', err);
+        logNow('get weight log error', err);
+        reject(err);
+      });
+  });
+};
+
 const getWeightLogs = () => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
@@ -1577,6 +1650,27 @@ const getWeightMapData = (obj) => {
   return client.get(API_URLS.GET_WEIGHT_MAP, {
     params: obj,
   });
+};
+
+const getHbA1cMapData = (obj) => {
+  return client.get(API_URLS.GET_HBA1C_MAP, {
+    params: obj,
+  });
+};
+
+const getBloodPressureMapData = (obj) => {
+  return client.get(API_URLS.GET_BLOOD_PRESSURE_MAP, {
+    params: obj,
+  });
+};
+
+const getBloodSugarMapData = (obj) => {
+  return client.get(API_URLS.GET_BLOOD_SUGAR_CHART, {
+    params: obj,
+  });
+};
+const getSearchResult = (lab_id) => {
+  return client.get(`${API_URLS.GET_SEARCH_RESULT}${lab_id}&q=li`);
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
@@ -1739,6 +1833,14 @@ export const userService = {
   barcodeCheck,
   uploadResult,
   getMoreInfoResult,
+  getLabUploadResult,
+  deleteLabUploads,
   getResultPdf,
+  getBloodSugarMapData,
   getWeightMapData,
+  getBloodPressureChart,
+  getHbA1cMapData,
+  getHBA1cChart,
+  getBloodPressureMapData,
+  getSearchResult,
 };

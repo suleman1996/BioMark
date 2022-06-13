@@ -221,7 +221,7 @@ const Index = () => {
               marginLeft: 20,
             }}
           >
-            <TouchableOpacity onPress={() => navigate(SCREENS.HOME)}>
+            <TouchableOpacity onPress={() => navigation.navigate(SCREENS.HOME)}>
               <ArrowBack fill={colors.white} />
             </TouchableOpacity>
             <Text style={styles.navHeading}>Your Health</Text>
