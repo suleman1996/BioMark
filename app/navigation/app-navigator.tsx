@@ -17,12 +17,13 @@ import HealthProgress from 'screens/main/home-page/your-health/health-progress/i
 import Targets from 'screens/main/home-page/your-health/health-progress/targets/index';
 import AddBloodSugar from 'screens/main/home-page/your-health/health-progress/targets/add-blood-sugar/index';
 import AddHba1c from 'screens/main/home-page/your-health/health-progress/targets/add-hba1c/index';
+import DeviceConnection from 'screens/main/home-page/device-connection';
 import SCREENS from './constants';
 import BloodSugar from 'screens/main/home-page/your-health/health-trackers/blood-sugar/index';
 import BloodPressure from 'screens/main/home-page/your-health/health-trackers/blood-pressure/index';
 import Weight from 'screens/main/home-page/your-health/health-trackers/weight/index';
 import HbA1c from 'screens/main/home-page/your-health/health-trackers/HbA1c/index';
-import Medication from 'screens/main/home-page/your-health/health-trackers/medication';
+import Medication from 'screens/main/home-page/your-health/health-trackers/Medication';
 import ShowMedication from 'screens/main/home-page/your-health/health-progress/medication';
 import AddNewMedication from 'screens/main/home-page/your-health/health-trackers/medication-form';
 import EditMedication from 'screens/main/home-page/your-health/health-trackers/edit-medication';
@@ -87,6 +88,7 @@ const {
   PENDING_RESULT_OVERVIEW,
   SEE_REPORT,
   SEARCH_RESULT,
+  DEVICE_CONNECTION,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -192,6 +194,7 @@ const AppNavigator = () => {
             component={PendingResultOverview}
           />
           <Stack.Screen name={SEE_REPORT} component={SeeResult} />
+          <Stack.Screen name={DEVICE_CONNECTION} component={DeviceConnection} />
         </>
       ) : (
         <>
