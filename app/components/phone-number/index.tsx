@@ -20,6 +20,7 @@ type Props = {
   phoneNumber: string;
   setPhoneNumber: any;
   placeholder: string;
+  onBlur?: any;
 };
 
 export default function (props: Props) {
@@ -79,6 +80,7 @@ export default function (props: Props) {
         value={props.phoneNumber}
         keyboardType={'number-pad'}
         onChangeText={(value) => props.setPhoneNumber(value)}
+        onBlur={props.onBlur}
       />
     </View>
   );
