@@ -91,12 +91,15 @@ export const getGraphOptions = (
       },
     },
     axisLabel: {
-      margin: 16,
-      fontSize: 9,
+      margin: 12,
+      fontSize: 8,
       color: graphBlackColor,
       fontWeight: 'bold',
       interval: 0,
-      formatter: (value, index) => dateFormat(value, index, config.dateRange),
+      formatter: (value, index) => {
+        console.log({ value });
+        dateFormat(value, index, config.dateRange);
+      },
       showMaxLabel: config.dateRange !== RangeValue.all,
     },
     axisTick: {
@@ -139,8 +142,6 @@ export const getGraphOptions = (
   },
   series: [
     ...series.map((dataGroup) => {
-      console.log(dataGroup.type);
-      console.log(dataGroup.data.map((d) => d.value));
       return {
         type: dataGroup.type,
         data:

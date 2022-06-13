@@ -4,7 +4,7 @@ import { useTheme } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native';
 
-type Props = { svg: any };
+type Props = { svg: any; onPress: () => void };
 
 const Index = (props: Props) => {
   const { colors } = useTheme();
@@ -16,7 +16,7 @@ const Index = (props: Props) => {
       colors={['#2C6CFC', '#2CBDFC']}
       style={styles.container}
     >
-      <TouchableOpacity>{props.svg}</TouchableOpacity>
+      <TouchableOpacity onPress={props.onPress}>{props.svg}</TouchableOpacity>
     </LinearGradient>
   );
 };

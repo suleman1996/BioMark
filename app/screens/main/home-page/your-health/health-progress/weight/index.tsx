@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import React, { useRef } from 'react';
 
 import Styles from './styles';
@@ -27,16 +27,20 @@ import {
   createGraphDataPointOptions,
   graphXAxisConfig,
 } from 'utils/functions/graph/graph-utils';
+import { useNavigation } from '@react-navigation/native';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const chartRef = useRef();
+  const navigation = useNavigation();
 
   const dispatch = useDispatch();
   const weightLogs = useSelector(
     (state: IAppState) => state.home.weightLogsData
   );
+
+  const [chartState, setChartState] = React.useState(null);
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -77,7 +81,7 @@ const Index = () => {
         metric: selectedfilterOption2.id == 0,
         type: selectedfilterOption1.title.toLowerCase(),
       });
-      createChart(result.data.chart);
+      setChartState(result.data.chart);
     } catch (error) {
       console.log(error);
     }
@@ -86,13 +90,23 @@ const Index = () => {
   React.useEffect(() => {
     weightGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue, selectedfilterOption1, selectedfilterOption2]);
+  }, [selectedValue, selectedfilterOption1, selectedfilterOption2, weightLogs]);
 
   React.useEffect(() => {
     dispatch(getReduxWeightLogs());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    if (chartState) {
+      const { chartOptions } = createChart(chartState);
+      setTimeout(() => {
+        chartRef.current.setOption(chartOptions);
+      }, 10);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartState]);
 
   // COPIED FUNCTIONS
   const createChart = (data: any) => {
@@ -111,23 +125,11 @@ const Index = () => {
     ];
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
-      selectedValue.title == '1D'
-        ? 0
-        : selectedValue.title == '7D'
-        ? 1
-        : selectedValue.title == '1M'
-        ? 2
-        : selectedValue.title == '3M'
-        ? 3
-        : selectedValue.title == '1Y'
-        ? 4
-        : 5,
+      selectedValue.title,
       points.map((p) => p[0])
     );
 
-    chartRef.current.setOption({
-      ...getGraphOptions(convertedDataPoint, graphConfig),
-    });
+    return { chartOptions: getGraphOptions(convertedDataPoint, graphConfig) };
   };
 
   const onApplyFilters = (filter1, filter2) => {
@@ -153,27 +155,32 @@ const Index = () => {
       />
 
       <View style={styles.container}>
-        {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-        <GraphHeader
-          selectedValue={selectedValue}
-          setSelectedValue={setSelectedValue}
-          data={headerValue}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <GraphHeader
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
+            data={headerValue}
+          />
+          <View style={styles.headingView}>
+            <Text style={styles.heading}>
+              Weight ({selectedfilterOption2.title})
+            </Text>
+            <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+              <Filter fill={colors.heading} />
+            </TouchableOpacity>
+          </View>
+          <LineGraph chartRef={chartRef} />
+          <Logs
+            navigate={SCREENS.WEIGHT}
+            logData={weightLogs?.log}
+            showMore={'Show more'}
+          />
+          <View style={{ height: 70 }} />
+        </ScrollView>
+        <FloatingButton
+          onPress={() => navigation.navigate(SCREENS.WEIGHT)}
+          svg={<Person height={28} width={28} />}
         />
-        <View style={styles.headingView}>
-          <Text style={styles.heading}>Weight (kg)</Text>
-          <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-            <Filter fill={colors.heading} />
-          </TouchableOpacity>
-        </View>
-        <LineGraph chartRef={chartRef} />
-        <Logs
-          navigate={SCREENS.WEIGHT}
-          logData={weightLogs?.log}
-          showMore={'Show more'}
-        />
-        <View style={{ height: 70 }} />
-        {/* </ScrollView> */}
-        <FloatingButton svg={<Person height={28} width={28} />} />
       </View>
     </>
   );

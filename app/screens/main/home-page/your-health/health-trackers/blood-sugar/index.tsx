@@ -6,7 +6,10 @@ import { showMessage } from 'react-native-flash-message';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IAppState } from 'store/IAppState';
-import { getReduxDashboard } from 'store/home/home-actions';
+import {
+  getReduxBloodSugarLogs,
+  getReduxDashboard,
+} from 'store/home/home-actions';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
@@ -112,6 +115,7 @@ const BloodSugar = ({ route }) => {
         dispatch(getReduxDashboard());
       }
       await userService[API_FUNCTION](bloodSugarTracker, SELECTED_BS_ID);
+      dispatch(getReduxBloodSugarLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err: any) {
       console.error(err);
