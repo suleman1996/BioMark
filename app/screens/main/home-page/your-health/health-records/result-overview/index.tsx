@@ -48,7 +48,7 @@ const Index = () => {
 
   React.useEffect(() => {
     dispatch(getReduxResultOverview(route?.params?.result?.lab_id));
-    // console.log('Result OverView Redux ', resultOverView);
+    console.log('Result OverView Redux ', resultOverView);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
