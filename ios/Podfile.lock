@@ -327,8 +327,6 @@ PODS:
     - React-Core
   - react-native-geolocation (2.1.0):
     - React-Core
-  - react-native-image-base64 (0.1.4):
-    - React
   - react-native-image-picker (4.8.4):
     - React-Core
   - react-native-jumio-mobilesdk (4.1.0):
@@ -443,6 +441,8 @@ PODS:
     - Firebase/Auth (= 8.15.0)
     - React-Core
     - RNFBApp
+  - RNFS (2.20.0):
+    - React-Core
   - RNGestureHandler (2.4.2):
     - React-Core
   - RNGoogleSignin (7.2.2):
@@ -523,7 +523,6 @@ DEPENDENCIES:
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
-  - react-native-image-base64 (from `../node_modules/react-native-image-base64`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-jumio-mobilesdk (from `../node_modules/react-native-jumio-mobilesdk`)
   - react-native-maps (from `../node_modules/react-native-maps`)
@@ -555,6 +554,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNQrGenerator (from `../node_modules/rn-qr-generator`)
@@ -644,8 +644,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
-  react-native-image-base64:
-    :path: "../node_modules/react-native-image-base64"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-jumio-mobilesdk:
@@ -708,6 +706,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
     :path: "../node_modules/@react-native-firebase/auth"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
@@ -775,7 +775,6 @@ SPEC CHECKSUMS:
   react-native-document-picker: 5663fe4bcdb646200683a41790464d2793307ac8
   react-native-fbsdk-next: 79815a5b8f66ab0990fbb370b4a4b5bdf0a15e6c
   react-native-geolocation: 69f4fd37650b8e7fee91816d395e62dd16f5ab8d
-  react-native-image-base64: 2ff9ac788639c87a91361ab6652cc95e871b1e54
   react-native-image-picker: cffb727cf2f59bd5c0408e30b3dbe0b935f88835
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
@@ -807,6 +806,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
   RNFBApp: b1b5a80a676a07dea17e778bda7c1e8b69b2f5ec
   RNFBAuth: e28fb7cd1b956086e68233b9ea19fb97c428f86b
+  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
   RNQrGenerator: 34beaf1996de4a2f2122c7019dccd1717b22d8d7

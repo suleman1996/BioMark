@@ -132,7 +132,7 @@ const Index = () => {
     dispatch(getReduxLabResultStatus());
     dispatch(getReduxHealthFeeds());
 
-    console.log('helthfeddddddddddddddddd', healthFeeds);
+    // console.log('helthfeddddddddddddddddd', healthFeeds);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
