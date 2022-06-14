@@ -518,7 +518,6 @@ const createBloodSugar = ({ blood_sugar }: Props) => {
   });
 };
 const createBpTracker = (medical: WeightProgressEntryRequest) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_BLOOD_PRESSURE, {
