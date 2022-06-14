@@ -59,6 +59,8 @@ const HealthRecord = () => {
     dispatch(getReduxPastResult());
     setPastResults(pastResult);
     setLatestResult(newResult);
+    console.log('latesttttttttt-------------', latestResult);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
@@ -70,8 +72,8 @@ const HealthRecord = () => {
         start: startDate,
         end: endDate,
       });
-      setPastResults(result?.data);
       setModalVisible(!modalVisible);
+      setPastResults(result?.data);
       console.log('resultttt-----------------------dataaaa', result?.data);
     } catch (error) {
       console.log(error);
@@ -92,16 +94,6 @@ const HealthRecord = () => {
         });
       }
     }
-
-    // const result = await userService.getFilterResult({
-    //   page: page,
-    //   type: checked,
-    //   start: startDate,
-    //   end: endDate,
-    // });
-    // setPastResults(result?.data);
-    // setModalVisible(!modalVisible);
-    // console.log('resultttt-----------------------dataaaa', result?.data);
   };
 
   const handleConfirm = (date) => {
@@ -114,107 +106,111 @@ const HealthRecord = () => {
   };
 
   const renderItem2 = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => {
-        item?.result?.status == 'Pending'
-          ? navigation.navigate(SCREENS.PENDING_RESULT_OVERVIEW, {
-              result: item,
-            })
-          : navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item });
-      }}
-      style={styles.pastResultMainView}
-    >
-      <View style={styles.view}>
-        <Image
-          source={require('../../../../../assets/images/home/pad.png')}
-          style={{ height: 30, width: 30 }}
-        />
-        <Text style={styles.title}>{item?.name}</Text>
-      </View>
-      <Text style={styles.text3}>
-        {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
-      </Text>
-      {item.ref_no == null ? null : (
-        <Text style={styles.text3}>REF: {item?.ref_no}</Text>
-      )}
-
-      {item.result.summary && (
-        <View style={styles.pastResultView}>
+    <>
+      <TouchableOpacity
+        onPress={() => {
+          item?.result?.status == 'Pending'
+            ? navigation.navigate(SCREENS.PENDING_RESULT_OVERVIEW, {
+                result: item,
+              })
+            : navigation.navigate(SCREENS.RESULT_OVERVIEW, {
+                result: item,
+              });
+        }}
+        style={styles.pastResultMainView}
+      >
+        <View style={styles.view}>
           <Image
-            source={require('../../../../../assets/images/home/info.png')}
-            style={styles.prImage}
+            source={require('assets/images/home/pad.png')}
+            style={{ height: 30, width: 30 }}
           />
-          <Text style={styles.text6}>{item?.result?.summary}</Text>
+          <Text style={styles.title}>{item?.name}</Text>
         </View>
-      )}
+        <Text style={styles.text3}>
+          {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
+        </Text>
+        {item.ref_no == null ? null : (
+          <Text style={styles.text3}>REF: {item?.ref_no}</Text>
+        )}
 
-      {item?.result?.status == 'Pending' ? (
-        <View
-          style={{
-            backgroundColor: 'lightgrey',
-            flexDirection: 'row',
-            padding: 5,
-            alignItems: 'center',
-            width: '40%',
-            borderRadius: 15,
-            marginHorizontal: 15,
-            marginTop: 10,
-          }}
-        >
+        {item.result.summary && (
+          <View style={styles.pastResultView}>
+            <Image
+              source={require('assets/images/home/info.png')}
+              style={styles.prImage}
+            />
+            <Text style={styles.text6}>{item?.result?.summary}</Text>
+          </View>
+        )}
+
+        {item?.result?.status == 'Pending' ? (
           <View
             style={{
-              borderRadius: 20,
-              backgroundColor: 'white',
-              width: 15,
-              height: 15,
-            }}
-          ></View>
-          <Text
-            style={{
-              marginHorizontal: 8,
-              fontFamily: fonts.OpenSansBold,
-              color: 'black',
+              backgroundColor: 'lightgrey',
+              flexDirection: 'row',
+              padding: 5,
+              alignItems: 'center',
+              width: '40%',
+              borderRadius: 15,
+              marginHorizontal: 15,
+              marginTop: 10,
             }}
           >
-            {item?.result?.status == 'Pending' ? 'Under Review' : null}
-          </Text>
-        </View>
-      ) : item?.result?.status == 'Converted' ? (
-        <View
-          style={{
-            backgroundColor: 'lightgrey',
-            flexDirection: 'row',
-            padding: 5,
-            alignItems: 'center',
-            width: '40%',
-            borderRadius: 15,
-            marginHorizontal: 15,
-            marginTop: 10,
-            marginBottom: 10,
-          }}
-        >
+            <View
+              style={{
+                borderRadius: 20,
+                backgroundColor: 'white',
+                width: 15,
+                height: 15,
+              }}
+            ></View>
+            <Text
+              style={{
+                marginHorizontal: 8,
+                fontFamily: fonts.OpenSansBold,
+                color: 'black',
+              }}
+            >
+              {item?.result?.status == 'Pending' ? 'Under Review' : null}
+            </Text>
+          </View>
+        ) : item?.result?.status == 'Converted' ? (
           <View
             style={{
-              borderRadius: 20,
-              backgroundColor: 'green',
-              width: 15,
-              height: 15,
+              backgroundColor: 'lightgrey',
+              flexDirection: 'row',
+              padding: 5,
+              alignItems: 'center',
+              width: '40%',
+              borderRadius: 15,
+              marginHorizontal: 15,
+              marginTop: 10,
+              marginBottom: 10,
             }}
-          ></View>
-          <Text style={{ marginHorizontal: 8 }}>{item.result.status}</Text>
-        </View>
-      ) : (
-        <View style={styles.pastResultView2}>
-          <Image
-            source={require('../../../../../assets/images/home/doctor.png')}
-            style={styles.prImage}
-          />
-          <Text style={styles.text7}>{item.result.doctor}</Text>
-        </View>
-      )}
+          >
+            <View
+              style={{
+                borderRadius: 20,
+                backgroundColor: 'green',
+                width: 15,
+                height: 15,
+              }}
+            ></View>
+            <Text style={{ marginHorizontal: 8 }}>{item.result.status}</Text>
+          </View>
+        ) : (
+          <View style={styles.pastResultView2}>
+            <Image
+              source={require('../../../../../assets/images/home/doctor.png')}
+              style={styles.prImage}
+            />
+            <Text style={styles.text7}>{item.result.doctor}</Text>
+          </View>
+        )}
 
-      <View style={styles.bottomView}></View>
-    </TouchableOpacity>
+        <View style={styles.bottomView}></View>
+      </TouchableOpacity>
+    </>
   );
 
   return (
@@ -242,6 +238,7 @@ const HealthRecord = () => {
             </Text>
           </View>
 
+          <Text style={styles.latestResult}>Your Latest Results</Text>
           <LatestResultCard
             title="Your Latest Results"
             name={latestResult?.name}
@@ -312,19 +309,23 @@ const HealthRecord = () => {
             onConifrm={() => onConfirm()}
           />
 
-          <FlatList
-            data={pastResults}
-            renderItem={renderItem2}
-            keyExtractor={(item) => item.id}
-          />
-
-          <TouchableOpacity style={styles.uploadResult}>
-            <GoogleFitButton
-              disabled={false}
-              title="Load more data"
-              onPress={() => setPage((prev) => prev + 1)}
+          {!pastResults?.message && (
+            <FlatList
+              data={pastResults}
+              renderItem={renderItem2}
+              keyExtractor={(item) => item.id}
             />
-          </TouchableOpacity>
+          )}
+
+          {pastResults.length > 0 ? (
+            <TouchableOpacity style={styles.uploadResult}>
+              <GoogleFitButton
+                disabled={false}
+                title="Load more data"
+                onPress={() => setPage((prev) => prev + 1)}
+              />
+            </TouchableOpacity>
+          ) : null}
         </ScrollView>
       </View>
     </View>

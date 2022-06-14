@@ -5,12 +5,6 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 const styles = (colors: any) =>
   StyleSheet.create({
-    latestResult: {
-      fontSize: responsiveFontSize(20),
-      color: colors.primary,
-      fontFamily: fonts.OpenSansBold,
-      marginTop: heightToDp(5),
-    },
     view: {
       flex: 1,
       flexDirection: 'row',
