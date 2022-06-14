@@ -1,5 +1,5 @@
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
-import RNFetchBlob from 'rn-fetch-blob';
+import ReactNativeBlobUtil from 'react-native-blob-util';
 // const fileUrl =
 //   'https://www.techup.co.in/wp-content/uploads/2020/01/techup_logo_72-scaled.jpg';
 
@@ -39,12 +39,10 @@ const downloadFile = (fileUrl: string) => {
   let FILE_URL = fileUrl;
   // Function to get extention of the file url
   let file_ext: any = getFileExtention(fileUrl);
-
   file_ext = '.' + file_ext[0];
-
   // config: To get response by passing the downloading related options
   // fs: Root directory path to download
-  const { config, fs } = RNFetchBlob;
+  const { config, fs } = ReactNativeBlobUtil;
   let RootDir = fs.dirs.PictureDir;
   let options = {
     fileCache: true,
@@ -105,7 +103,7 @@ export const checkPermissionAndDownloadBase64 = async (file: string) => {
 };
 
 const downloadFileBase64 = (fileUrl: string) => {
-  RNFetchBlob.config({
+  ReactNativeBlobUtil.config({
     addAndroidDownloads: {
       useDownloadManager: true, // <-- this is the only thing required
       // Optional, override notification setting (default to true)
@@ -122,14 +120,14 @@ const downloadFileBase64 = (fileUrl: string) => {
     )
     .then((res) => {
       console.log(res);
-
       // the path of downloaded file
       // resp.path()
       // let base64Str = fileUrl;
-      let pdfLocation = RNFetchBlob.fs.dirs.DocumentDir + '/' + 'test.pdf';
-      RNFetchBlob.fs.writeFile(
+      let pdfLocation =
+        ReactNativeBlobUtil.fs.dirs.DocumentDir + '/' + 'test.pdf';
+      ReactNativeBlobUtil.fs.writeFile(
         pdfLocation,
-        RNFetchBlob.base64.encode(fileUrl),
+        ReactNativeBlobUtil.base64.encode(fileUrl),
         'base64'
       );
     });
