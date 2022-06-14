@@ -1,5 +1,6 @@
 import {
   BookingFormDataResponse,
+  BookTestBooking,
   CovidBookingListResponseData,
   CovidResultListResponse,
 } from 'types/api';
@@ -15,4 +16,5 @@ export class CovidState {
     first_booking_voucher: false,
     has_user_ic: false,
   };
+  booking: BookTestBooking[] = [];
 }

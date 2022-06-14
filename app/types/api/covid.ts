@@ -175,6 +175,31 @@ export interface CovidBookingRequest {
   };
 }
 
+export interface BookTestBooking {
+  is_dependant: boolean;
+  dependent_id: number;
+  test_type_id: number;
+  schedule_id: number;
+  slot_id: number;
+  test_location: string;
+  test_centre_name: string;
+  test_city_name: string;
+  test_country_name: string;
+  test_centre_id: number;
+  city_id: number;
+  country_id: number;
+  test_address: string;
+  test_address_details: string;
+  confirmation_date: Date;
+  amount: number;
+  booking_status: number;
+  q1: boolean;
+  q2: boolean;
+  q3: boolean;
+  q4: boolean;
+  q5: boolean;
+}
+
 export interface CovidBookingMultipleHealthDeclarationRequest {
   booking: [CovidBookingHealthDeclarationRequest];
 }

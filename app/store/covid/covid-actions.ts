@@ -1,6 +1,7 @@
 import { covidService } from 'services/covid-service';
 import {
   BookingFormDataResponse,
+  BookTestBooking,
   CovidBookingListResponseData,
   CovidResultListResponse,
 } from 'types/api';
@@ -9,6 +10,7 @@ import {
   COVID_RESULTS_DATA,
   COVID_BOOKINGS_DATA,
   COVID_BOOKING_FORM,
+  COVID_BOOKING,
 } from './constants';
 
 export const addAllCovidResultsData = (data: CovidResultListResponse[]) => ({
@@ -83,3 +85,9 @@ export const getCovidBookingFormR =
         // dispatch(loggingOut(false));
       });
   };
+
+// covid booking
+export const addCovidBooking = (data: BookTestBooking[]) => ({
+  type: COVID_BOOKING,
+  payload: data,
+});
