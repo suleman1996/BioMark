@@ -90,6 +90,7 @@ const Index = () => {
   }, [goalValue, selectedType]);
 
   useEffect(() => {
+    if (!latestHba1c) return;
     setGoalValue(Number(latestHba1c?.goal_value).toFixed(1));
   }, [latestHba1c]);
 
