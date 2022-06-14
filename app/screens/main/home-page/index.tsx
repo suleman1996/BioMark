@@ -63,7 +63,7 @@ export default function Home() {
   const userProfile = async () => {
     try {
       const result = await userService.getUserProfile();
-      console.log('Here is the user profile ', result.data);
+      console.log('user profile ', result.data);
       authContext.setUserData(result.data);
     } catch (error) {
       console.log(error);
