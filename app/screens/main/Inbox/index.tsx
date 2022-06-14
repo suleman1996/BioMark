@@ -123,9 +123,9 @@ export default function InboxScreen() {
               <>
                 {isReadMoreInboxNoti && allInboxNotificationsData.length > 0 ? (
                   <Pressable
-                    onPress={() => {
-                      setCurrentPageInboxNoti(currentPageInboxNoti + 1);
-                    }}
+                    // onPress={() => {
+                    //   setCurrentPageInboxNoti(currentPageInboxNoti + 1);
+                    // }}
                     style={styles.readMoreContainer}
                   >
                     <Text style={styles.readMoreText}>Read More</Text>
@@ -157,9 +157,9 @@ export default function InboxScreen() {
                 {isReadMoreOtherNoti &&
                 allOthersNotificationsData.length > 0 ? (
                   <Pressable
-                    onPress={() => {
-                      setCurrentPageOtherNoti(currentPageOtherNoti + 1);
-                    }}
+                    // onPress={() => {
+                    //   setCurrentPageOtherNoti(currentPageOtherNoti + 1);
+                    // }}
                     style={styles.readMoreContainer}
                   >
                     <Text style={styles.readMoreText}>Read More</Text>
