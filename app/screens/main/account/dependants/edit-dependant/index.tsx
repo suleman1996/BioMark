@@ -24,7 +24,6 @@ import SCREENS from 'navigation/constants';
 import { getAllDependents } from 'store/account/account-actions';
 import { DependentSingleGetResponse } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 
@@ -64,8 +63,9 @@ const EditDependantScreen = (props: Props) => {
         logNow('single dependent response', res);
         setDependentData(res);
         const phoneNumber: any = parsePhoneNumber(res.dependent_mobile_number);
+        console.log('hhhhhhh', phoneNumber);
         setCountryCode(phoneNumber?.country);
-        setSelectedCountryCode(phoneNumber?.country_phone_code);
+        setSelectedCountryCode(phoneNumber?.countryCallingCode);
         setNationalNumber(phoneNumber?.nationalNumber);
       })
       .catch((err) => {
@@ -105,7 +105,7 @@ const EditDependantScreen = (props: Props) => {
       country_code: countryCode,
       country_phone_code: `${selectedCountryCode}`,
     });
-    const pN = `${selectedCountryCode}${phone_number}`;
+    const pN = `+${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
 
     setIsLoading(true);
@@ -148,7 +148,11 @@ const EditDependantScreen = (props: Props) => {
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: heightToDp(20) }}
+          contentContainerStyle={
+            {
+              // paddingBottom: heightToDp(20)
+            }
+          }
         >
           <Text style={styles.headerText}>Enter your Dependant Details</Text>
           <Formik
