@@ -51,7 +51,7 @@ const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
           ) : null}
         </View>
         {healthRisk?.card_status ? (
-          <Text style={styles.healthCardStatusName}>
+          <Text style={[styles.healthCardStatusName, { color: color }]}>
             {healthRisk?.card_status}
           </Text>
         ) : null}
