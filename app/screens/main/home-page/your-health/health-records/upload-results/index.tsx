@@ -394,10 +394,10 @@ export default function ResultUpload() {
                 }}
               />
               <WithdrawProgram
-                text2="Delete"
+                text="Delete"
                 visible={modalVisible}
                 title="Are You Sure?"
-                text="This action is final and cannot be reverted."
+                text2="This action is final and cannot be reverted."
                 cancel="Cancel"
                 cancelModal={() => setModalVisible(!modalVisible)}
                 closeModal={() => setModalVisible(!modalVisible)}

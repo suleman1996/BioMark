@@ -196,10 +196,10 @@ const SearchBarWithLeftScanIcon = () => {
         </View>
 
         <WithdrawProgram
-          text2="Back"
+          text="Back"
           visible={modalVisible}
           title="Code Already Entered"
-          text="It seems like this code has already been entered."
+          text2="It seems like this code has already been entered."
           cancelModal={() => setModalVisible(!modalVisible)}
           closeModal={() => setModalVisible(!modalVisible)}
           color={['#1B96D8', '#1B96D8']}

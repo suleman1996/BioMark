@@ -40,7 +40,7 @@ const styles = (colors: any) =>
     cancel: {
       textAlign: 'center',
       marginTop: heightToDp(3),
-      marginBottom: heightToDp(4),
+      marginBottom: heightToDp(2),
     },
     cancelText: {
       textAlign: 'center',
@@ -51,6 +51,7 @@ const styles = (colors: any) =>
       marginHorizontal: 10,
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
       marginTop: 20,
     },
   });
