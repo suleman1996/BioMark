@@ -22,7 +22,7 @@ export const makeStyles = (colors: any) =>
     healthCardStatusName: {
       fontFamily: fonts.regular,
       fontWeight: 'bold',
-      color: colors.lightGrey,
+
       fontSize: 12,
     },
     descriptionHealthRisk: {

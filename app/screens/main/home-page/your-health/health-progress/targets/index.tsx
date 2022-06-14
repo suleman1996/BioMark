@@ -86,7 +86,16 @@ export default function InboxScreen({ route }) {
               currentPage == 0 ? { borderBottomWidth: 3 } : {},
             ]}
           >
-            <Text style={styles.tabText}>Blood Sugar</Text>
+            <Text
+              style={[
+                styles.tabText,
+                currentPage == 0
+                  ? { color: colors.shineBlue }
+                  : { color: colors.darkPrimary },
+              ]}
+            >
+              Blood Sugar
+            </Text>
           </Pressable>
           <Pressable
             onPress={() => pagerRef.current.setPage(1)}
@@ -95,7 +104,16 @@ export default function InboxScreen({ route }) {
               currentPage == 1 ? { borderBottomWidth: 3 } : {},
             ]}
           >
-            <Text style={styles.tabText}>HbA1c</Text>
+            <Text
+              style={[
+                styles.tabText,
+                currentPage == 1
+                  ? { color: colors.shineBlue }
+                  : { color: colors.darkPrimary },
+              ]}
+            >
+              HbA1c
+            </Text>
           </Pressable>
         </View>
       </LinearGradient>
