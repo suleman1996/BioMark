@@ -1,11 +1,12 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 const styles = (colors: any) =>
   StyleSheet.create({
     healthTrackerHeading: {
-      //   fontFamily: fonts.bold,
-      fontWeight: 'bold',
-      fontSize: 11,
+      fontFamily: fonts.mulishBold,
+      // fontWeight: 'bold',
+      fontSize: 14,
       color: colors.lightDark,
       textAlign: 'center',
     },

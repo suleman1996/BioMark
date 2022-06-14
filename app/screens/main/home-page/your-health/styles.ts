@@ -34,8 +34,8 @@ const styles = (colors: any) =>
     },
     containerBody: { flex: 1, paddingHorizontal: 15, paddingTop: 40 },
     headingText: {
-      fontFamily: fonts.bold,
-      fontSize: 16,
+      fontFamily: fonts.mulishBold,
+      fontSize: 17,
       color: colors.heading,
     },
     healthRiskView: {

@@ -24,7 +24,7 @@ export default function TargetCard({ date, content = [], isLatest }: Props) {
     <View
       style={[
         styles.outerTarget,
-        isLatest ? {} : { backgroundColor: colors.fieldGrey },
+        isLatest ? {} : { backgroundColor: colors.targetCardsDull },
       ]}
     >
       <View style={styles.targetsContainer}>
