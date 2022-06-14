@@ -2,11 +2,9 @@ import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 // const fileUrl =
 //   'https://www.techup.co.in/wp-content/uploads/2020/01/techup_logo_72-scaled.jpg';
-
 export const checkPermissionAndDownload = async (file: string) => {
   // Function to check the platform
   // If Platform is Android then check for permissions.
-
   if (Platform.OS === 'ios') {
     downloadFile(file);
   } else {
@@ -31,7 +29,6 @@ export const checkPermissionAndDownload = async (file: string) => {
     }
   }
 };
-
 const downloadFile = (fileUrl: string) => {
   // Get today's date to add the time suffix in filename
   let date = new Date();
@@ -66,16 +63,13 @@ const downloadFile = (fileUrl: string) => {
       alert('File Downloaded Successfully.');
     });
 };
-
 const getFileExtention = (fileUrl: string) => {
   // To get the file extension
   return /[.]/.exec(fileUrl) ? /[^.]+$/.exec(fileUrl) : undefined;
 };
-
 export const checkPermissionAndDownloadBase64 = async (file: string) => {
   // Function to check the platform
   // If Platform is Android then check for permissions.
-
   if (Platform.OS === 'ios') {
     downloadFileBase64(file);
   } else {
@@ -101,7 +95,6 @@ export const checkPermissionAndDownloadBase64 = async (file: string) => {
     }
   }
 };
-
 const downloadFileBase64 = (fileUrl: string) => {
   ReactNativeBlobUtil.config({
     addAndroidDownloads: {
