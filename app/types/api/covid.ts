@@ -227,6 +227,7 @@ export interface Schedule {
   status: boolean;
   has_available_slot: boolean;
   slots: TimeSlot[];
+  morning_time_slots: TimeSlot[];
 }
 export interface TimeSlot {
   id: number;

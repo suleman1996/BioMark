@@ -10,7 +10,7 @@ function getAllDependents() {
       .get(API_URLS.DEPENDENTS)
       .then(async (response) => {
         try {
-          logNow('Register user success response', response.data);
+          // logNow('Register user success response', response.data);
           resolve(response.data);
         } catch (e) {
           logNow('Register user error block login1.', e);
@@ -76,7 +76,7 @@ function createDependent(
       })
       .then(async (response) => {
         try {
-          logNow('Register user success response', response.data);
+          // logNow('Register user success response', response.data);
           resolve(response.data);
         } catch (e) {
           logNow('Register user error block login1.', e);
@@ -123,7 +123,7 @@ function editDependent(
       })
       .then(async (response) => {
         try {
-          logNow('Register user success response', response.data);
+          // logNow('Register user success response', response.data);
           resolve(response.data);
         } catch (e) {
           logNow('Register user error block login1.', e);

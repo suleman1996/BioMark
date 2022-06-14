@@ -1,37 +1,42 @@
 import ExpandableView from '@pietile-native-kit/expandable-view';
+import { useIsFocused } from '@react-navigation/native';
 import { DropdownMenu } from 'components/base';
+import DropdownCountryCity from 'components/base/dropdown-country-city';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useTheme } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { useDispatch, useSelector } from 'react-redux';
+import { covidService } from 'services/covid-service';
+import { getAllDependents } from 'store/account/account-actions';
+import { getCovidBookingFormR } from 'store/covid/covid-actions';
+import { IAppState } from 'store/IAppState';
+import {
+  TestCenterResponse,
+  TestCentreScheduleResponse,
+  TestClinic,
+} from 'types/api';
+import { DependentData } from 'types/api/dependent';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { GlobalFonts } from 'utils/theme/fonts';
 import CircleBtn from '../../button/circleBtn';
 import { responsiveFontSize } from './../../../utils/functions/responsive-text';
 import CalenderStrip from './../../higher-order/calender-strip/index';
-import { makeStyles } from './styles';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { GlobalFonts } from 'utils/theme/fonts';
 import TimeSlots from './../time-slots/index';
-import { IAppState } from 'store/IAppState';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllDependents } from 'store/account/account-actions';
-import { getCovidBookingFormR } from 'store/covid/covid-actions';
-import { DependentData } from 'types/api/dependent';
-import { useIsFocused } from '@react-navigation/native';
-import DropdownCountryCity from 'components/base/dropdown-country-city';
-import { logNow } from 'utils/functions/log-binder';
+import { makeStyles } from './styles';
 
 type Props = {};
 
-const options = [
-  { value: '---', label: '---' },
-  { value: 'Caucasian', label: 'Caucasian' },
-  { value: 'Chinese', label: 'Chinese' },
-  { value: 'Filpino', label: 'Filpino' },
-  { value: 'Indian', label: 'Indian' },
-  { value: 'Malay', label: 'Malay' },
-  { value: 'Other / NA', label: 'Other / NA' },
-];
+// const options = [
+//   { value: '---', label: '---' },
+//   { value: 'Caucasian', label: 'Caucasian' },
+//   { value: 'Chinese', label: 'Chinese' },
+//   { value: 'Filpino', label: 'Filpino' },
+//   { value: 'Indian', label: 'Indian' },
+//   { value: 'Malay', label: 'Malay' },
+//   { value: 'Other / NA', label: 'Other / NA' },
+// ];
 
 const ExisitingBookingForDependent = (props: Props) => {
   const {} = props;
@@ -40,10 +45,36 @@ const ExisitingBookingForDependent = (props: Props) => {
   const [show, setShow] = useState(true);
   const focused = useIsFocused();
 
+  const [morningTimeSlots, setMorningTimeSlots] = useState([]);
+  const [eveningTimeSlots, setEveningTimeSlots] = useState([]);
+  const [testCentersBasedOnCities, setTestCenters] = useState<
+    TestCenterResponse[]
+  >([]);
+  const getTestCentersOnCity = (id: string) => {
+    covidService.getCovidTestAndTestCenters(id).then((res: any) => {
+      // logNow(res);
+      setTestCenters(res);
+    });
+  };
+
+  const [testCenterSchedules, setTestCentersSchedules] =
+    useState<TestCentreScheduleResponse>();
+  const getTestCenterSchedules = (test_center_id: number) => {
+    covidService
+      .getCovidTestCentersSchedules(test_center_id)
+      .then((res: any) => {
+        // logNow(res);
+        setTestCentersSchedules(res);
+      });
+  };
+
   const [countryDropdownValue, setCountryDropDown] = useState<any>();
   const [cityDropdownValue, setCityDropDown] = useState<any>();
   const [covidTestCenterValue, setCovidTestCenter] = useState<any>();
   const [testCenterValue, setTestCenter] = useState<any>();
+  const [testDate, setTestDate] = useState('');
+  const [testTime, setTestTime] = useState('');
+
   const dispatch = useDispatch();
 
   /*eslint-disable */
@@ -57,8 +88,52 @@ const ExisitingBookingForDependent = (props: Props) => {
     dispatch(getAllDependents());
     dispatch(getCovidBookingFormR());
   }, [focused]);
-  /*eslint-enable*/
 
+  // update test centers
+  useEffect(() => {
+    if (cityDropdownValue) {
+      getTestCentersOnCity(cityDropdownValue);
+    }
+  }, [cityDropdownValue]);
+
+  // on test center selected
+  useEffect(() => {
+    if (testCenterValue) {
+      getTestCenterSchedules(testCenterValue);
+    }
+  }, [testCenterValue]);
+
+  // on test date change
+
+  useEffect(() => {
+    console.log(testDate);
+    const mSlots: any =
+      testCenterSchedules?.test_centre_schedules.filter((item) => {
+        return item?.schedule_date.toString() == testDate;
+      })[0] ?? [];
+    try {
+      console.log(mSlots);
+    } catch (err) {}
+    setMorningTimeSlots(mSlots?.morning_time_slots ?? []);
+    setEveningTimeSlots(mSlots?.afternoon_time_slots ?? []);
+  }, [testDate]);
+
+  useEffect(() => {
+    setCityDropDown(null);
+    setCovidTestCenter(null);
+    setTestCenter('');
+    setTestCenters([]);
+    setTestTime('');
+    setTestDate('');
+  }, [countryDropdownValue]);
+
+  useEffect(() => {
+    setTestCenter('');
+    setTestCenters([]);
+    setTestTime('');
+    setTestDate('');
+  }, [cityDropdownValue]);
+  /*eslint-enable*/
   // Database values for update or delete operations
   const [selectedDependant, setSelectedDependant] = useState(-1);
   const [sDName, setSDName] = useState('');
@@ -98,6 +173,39 @@ const ExisitingBookingForDependent = (props: Props) => {
           </Text>
         </View>
       </Pressable>
+    );
+  };
+
+  const MapMarkerRender = ({ item }: { item: TestClinic }) => {
+    // logNow('this is item ====>',item);
+    return (
+      <Marker
+        key={0}
+        coordinate={{
+          latitude: parseFloat(item.test_centre_lat.toString()),
+          longitude: parseFloat(item.test_centre_long.toString()),
+        }}
+        title={'My ttile'}
+      >
+        <View
+          style={{
+            width: widthToDp(15),
+            height: heightToDp(3),
+            backgroundColor: 'white',
+            borderWidth: 0.2,
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: GlobalFonts.medium,
+              color: colors.primary,
+            }}
+          >
+            {`${item.currency} ${item.test_amount}`}
+          </Text>
+        </View>
+      </Marker>
     );
   };
 
@@ -165,9 +273,10 @@ const ExisitingBookingForDependent = (props: Props) => {
                 })}
                 selectedValue={countryDropdownValue}
                 onValueChange={(value: any) => {
-                  logNow(value);
-                  setCityDropDown(undefined);
-                  setCountryDropDown(value);
+                  // logNow(value);
+                  setTimeout(() => {
+                    setCountryDropDown(value);
+                  }, 1000);
                 }}
               />
               <View style={{ marginTop: heightToDp(1) }} />
@@ -181,7 +290,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                       ?.cities.map((item3) => {
                         return { value: item3.id, label: item3.name };
                       })}
-                    selectedValue={cityDropdownValue}
+                    selectedValue={cityDropdownValue ?? undefined}
                     onValueChange={(value: any) => {
                       setCityDropDown(value);
                     }}
@@ -191,11 +300,13 @@ const ExisitingBookingForDependent = (props: Props) => {
 
               {/* Select Test Center */}
               <View style={{ marginTop: heightToDp(1) }} />
-              {cityDropdownValue ? (
+              {testCentersBasedOnCities.length > 0 ? (
                 <>
                   <Text style={styles.innerTitle}>Select a covid Test</Text>
                   <DropdownMenu
-                    options={options}
+                    options={testCentersBasedOnCities.map((item) => {
+                      return { label: item.name, value: item.id };
+                    })}
                     selectedValue={covidTestCenterValue}
                     onValueChange={(value: any) => {
                       setCovidTestCenter(value);
@@ -203,12 +314,52 @@ const ExisitingBookingForDependent = (props: Props) => {
                   />
                 </>
               ) : null}
+              {testCentersBasedOnCities.filter(
+                (item) => item.id == covidTestCenterValue
+              ).length > 0 ? (
+                <>
+                  <Text style={styles.innerTitle}>City Test Centers</Text>
+
+                  {testCentersBasedOnCities
+                    .filter((item) => item.id == covidTestCenterValue)[0]
+                    ?.clinics?.map((item2) => {
+                      return (
+                        <MapView
+                          style={{
+                            width: widthToDp(88),
+                            height: heightToDp(20),
+                          }}
+                          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                          region={{
+                            latitude: parseFloat(
+                              item2.test_centre_lat.toString()
+                            ),
+                            longitude: parseFloat(
+                              item2.test_centre_long.toString()
+                            ),
+                            latitudeDelta: 0.015,
+                            longitudeDelta: 0.0121,
+                          }}
+                        >
+                          <MapMarkerRender item={item2} />
+                        </MapView>
+                      );
+                    })}
+                </>
+              ) : null}
               <View style={{ marginTop: heightToDp(1) }} />
               {covidTestCenterValue ? (
                 <>
-                  <Text style={styles.innerTitle}>Select a covid Test</Text>
+                  <Text style={styles.innerTitle}>Test Center</Text>
                   <DropdownMenu
-                    options={options}
+                    options={testCentersBasedOnCities
+                      .filter((item) => item.id == covidTestCenterValue)[0]
+                      ?.clinics.map((item2) => {
+                        return {
+                          label: `${item2.currency} ${item2.test_amount} - ${item2.test_centre_address}`,
+                          value: item2.test_centre_id,
+                        };
+                      })}
                     selectedValue={testCenterValue}
                     onValueChange={(value: any) => {
                       setTestCenter(value);
@@ -217,56 +368,39 @@ const ExisitingBookingForDependent = (props: Props) => {
                 </>
               ) : null}
             </View>
-            {true ? (
+
+            {testCenterValue ? (
               <>
-                <Text style={styles.innerTitle}>City Test Centers</Text>
-                <MapView
-                  style={{ width: widthToDp(88), height: heightToDp(20) }}
-                  provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                  region={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.015,
-                    longitudeDelta: 0.0121,
-                  }}
-                >
-                  <Marker
-                    key={0}
-                    coordinate={{
-                      latitude: 37.78825,
-                      longitude: -122.4324,
-                    }}
-                    title={'My ttile'}
-                  >
-                    <View
-                      style={{
-                        width: widthToDp(15),
-                        height: heightToDp(3),
-                        backgroundColor: 'white',
-                        borderWidth: 0.2,
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontFamily: GlobalFonts.medium,
-                          color: colors.primary,
-                        }}
-                      >
-                        RM 143
-                      </Text>
-                    </View>
-                  </Marker>
-                </MapView>
+                <Text style={styles.innerTitle}>Choose a test date</Text>
+                <CalenderStrip setValue={setTestDate} />
+                <View style={{ marginTop: heightToDp(1) }} />
               </>
             ) : null}
-            <Text style={styles.innerTitle}>Choose a test date</Text>
-            <CalenderStrip />
-            <View style={{ marginTop: heightToDp(1) }} />
 
             {/* shift chooser */}
-            <Text style={styles.innerTitle}>Morning timeslots</Text>
-            <TimeSlots />
+
+            {morningTimeSlots.length > 0 ? (
+              <>
+                <Text style={styles.innerTitle}>Morning timeslots</Text>
+                <TimeSlots
+                  testDate={testDate}
+                  time={testTime}
+                  setTime={setTestTime}
+                  slots={morningTimeSlots}
+                />
+              </>
+            ) : null}
+            {eveningTimeSlots.length > 0 ? (
+              <>
+                <Text style={styles.innerTitle}>Evening timeslots</Text>
+                <TimeSlots
+                  testDate={testDate}
+                  time={testTime}
+                  setTime={setTestTime}
+                  slots={eveningTimeSlots}
+                />
+              </>
+            ) : null}
             <View style={styles.bottomBtnContainer}>
               <View
                 style={[styles.bottomBtn, { backgroundColor: colors.white }]}

@@ -22,6 +22,42 @@ export const getTime = (date: string) => {
 
   return newDate || '';
 };
+
+export const getZonedTime = (d: string, t: string) => {
+  const date = new Date(d);
+  const time = new Date(t);
+
+  var slotDateTime = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    time.getUTCHours(),
+    time.getUTCMinutes(),
+    time.getUTCSeconds()
+  );
+  if (date) {
+    var newDate: any = format(new Date(slotDateTime), 'hh:mm a', {});
+  }
+
+  return newDate || '';
+};
+
+export const isZonedTiimeIsPast = (d: string, t: string) => {
+  const currentDate = new Date();
+  const date = new Date(d);
+  const time = new Date(t);
+
+  var slotDateTime = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    time.getUTCHours(),
+    time.getUTCMinutes(),
+    time.getUTCSeconds()
+  );
+  return currentDate > slotDateTime;
+};
+
 export const getMonth = (date: string) => {
   if (date) {
     var newDate: any = format(new Date(date), 'LLLL');
