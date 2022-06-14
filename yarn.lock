@@ -7510,8 +7510,6 @@ react-native-autocomplete-input@^5.1.0:
   resolved "https://registry.yarnpkg.com/react-native-autocomplete-input/-/react-native-autocomplete-input-5.1.0.tgz#01bb16873a4b2589ad47cda4ad69ae67dcf3c793"
   integrity sha512-y6gIBm189hcsJO+6a4Hn8lNdy1qmY7yw1NAA6Bgvg8rznZk0r+35xXd1tu81aOZYJo9/LxGNlNL6Zblo3N1kGw==
 
-<<<<<<< HEAD
-=======
 react-native-barcode-builder@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-barcode-builder/-/react-native-barcode-builder-2.0.0.tgz#17e898de7325c9b2fffd6e5e0be3760a05571115"
@@ -7520,7 +7518,6 @@ react-native-barcode-builder@^2.0.0:
     "@react-native-community/art" "^1.2.0"
     jsbarcode "^3.8.0"
 
->>>>>>> bm_dev
 react-native-blob-util@^0.16.0:
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/react-native-blob-util/-/react-native-blob-util-0.16.0.tgz#175299992d4db3b788bd6cf8545fc42a2917b544"
