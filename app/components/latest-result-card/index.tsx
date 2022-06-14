@@ -21,7 +21,6 @@ const LatestResultCard = (Props: props) => {
 
   return (
     <>
-      <Text style={styles.latestResult}>{Props.title}</Text>
       <TouchableOpacity style={styles.latestResultView} onPress={Props.onPress}>
         <View style={styles.view}>
           <Image

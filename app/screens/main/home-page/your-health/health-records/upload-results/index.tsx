@@ -70,6 +70,7 @@ export default function ResultUpload() {
       if (profilePic.status == true) {
         dispatch(getReduxPastResult());
         navigate(SCREENS.YOUR_HEALTH);
+        Keyboard.dismiss();
         console.log('ppppppppppppppppppp', profilePic);
       }
     } catch (error) {
@@ -120,11 +121,9 @@ export default function ResultUpload() {
           if (res.didCancel) {
             setIsVisible(false);
             console.log('User cancelled image picker');
-            cameraIs = false;
           } else if (res.errorMessage) {
             setIsVisible(false);
             console.log('ImagePicker Error: ', res.errorMessage);
-            cameraIs = false;
           } else {
             setIsVisible(false);
             let body = {
@@ -143,7 +142,6 @@ export default function ResultUpload() {
             data.push(body);
             setList(data);
             setShowModal(!showModal);
-            cameraIs = false;
           }
         });
         console.log('Camera permission given');
@@ -224,11 +222,9 @@ export default function ResultUpload() {
           if (res.didCancel) {
             setIsVisible(false);
             console.log('User cancelled image picker');
-            cameraIs = false;
           } else if (res.errorMessage) {
             setIsVisible(false);
             console.log('ImagePicker Error: ', res.errorMessage);
-            cameraIs = false;
           } else {
             setIsVisible(false);
             let body = {
@@ -247,7 +243,6 @@ export default function ResultUpload() {
             data.push(body);
             setList(data);
             setShowModal(false);
-            cameraIs = false;
           }
         });
         console.log('Camera permission given');
@@ -408,6 +403,11 @@ export default function ResultUpload() {
                   setModalVisible(false);
                 }}
               />
+              <ShowPicModal
+                visible={showPicModal}
+                image={{ uri: uri }}
+                onClose={() => setShowPicModal(false)}
+              />
             </View>
 
             <Pressable
@@ -417,12 +417,6 @@ export default function ResultUpload() {
               <Feather color={colors.heading} name="plus" size={35} />
               <Text style={styles.addPage}>Add Page</Text>
             </Pressable>
-
-            <ShowPicModal
-              visible={showPicModal}
-              image={{ uri: uri }}
-              onClose={() => setShowPicModal(false)}
-            />
 
             <LabResultModal
               visible={showModal}

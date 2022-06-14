@@ -10,8 +10,8 @@ const styles = (colors: any) =>
       textAlign: 'center',
     },
     renderHealthView: {
-      height: 120,
-      width: 120,
+      height: 110,
+      width: 100,
       backgroundColor: colors.white,
       borderRadius: 5,
       shadowColor: '#000',
@@ -27,7 +27,8 @@ const styles = (colors: any) =>
       justifyContent: 'center',
       paddingVertical: 20,
       paddingHorizontal: 10,
-      marginHorizontal: 5,
+      margin: 5,
+      // marginHorizontal: 5,
     },
   });
 export default styles;
