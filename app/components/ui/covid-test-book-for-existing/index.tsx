@@ -10,7 +10,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { useDispatch, useSelector } from 'react-redux';
 import { covidService } from 'services/covid-service';
 import { getAllDependents } from 'store/account/account-actions';
-import { getCovidBookingFormR } from 'store/covid/covid-actions';
+import {
+  addCovidBooking,
+  getCovidBookingFormR,
+} from 'store/covid/covid-actions';
 import { IAppState } from 'store/IAppState';
 import {
   TestCenterResponse,
@@ -18,6 +21,7 @@ import {
   TestClinic,
 } from 'types/api';
 import { DependentData } from 'types/api/dependent';
+import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
 import CircleBtn from '../../button/circleBtn';
@@ -26,7 +30,11 @@ import CalenderStrip from './../../higher-order/calender-strip/index';
 import TimeSlots from './../time-slots/index';
 import { makeStyles } from './styles';
 
-type Props = {};
+type Props = {
+  setOpendedBooking: any;
+  openedBooking: number;
+  itemIndex: number;
+};
 
 // const options = [
 //   { value: '---', label: '---' },
@@ -39,10 +47,20 @@ type Props = {};
 // ];
 
 const ExisitingBookingForDependent = (props: Props) => {
-  const {} = props;
+  const booking = useSelector((state: IAppState) => state.covid.booking);
+
+  const { setOpendedBooking, openedBooking, itemIndex } = props;
+  function openAndCloseBooking(index: number) {
+    logNow(openedBooking);
+    if (index == openedBooking) {
+      setOpendedBooking(-1);
+    } else {
+      setOpendedBooking(index);
+    }
+  }
+
   const { colors }: any = useTheme();
   const styles = makeStyles(colors);
-  const [show, setShow] = useState(true);
   const focused = useIsFocused();
 
   const [morningTimeSlots, setMorningTimeSlots] = useState([]);
@@ -135,12 +153,94 @@ const ExisitingBookingForDependent = (props: Props) => {
   }, [cityDropdownValue]);
   /*eslint-enable*/
   // Database values for update or delete operations
-  const [selectedDependant, setSelectedDependant] = useState(-1);
   const [sDName, setSDName] = useState('');
 
   function onPress() {
-    setShow(!show);
+    openAndCloseBooking(itemIndex);
+    // setShow(!show);
   }
+
+  // changing dependent Id
+  const changeDependantId = async (id: number) => {
+    const copyArray = booking;
+    copyArray[itemIndex].dependent_id = id;
+    await dispatch(addCovidBooking(copyArray));
+  };
+
+  // change country name and country id
+  const changeCountryNameAndCountryId = async (id: number) => {
+    const copyArray = booking;
+    const obj = bookingFormData.country_list.find((item) => item.id == id);
+    copyArray[itemIndex].country_id = id;
+    copyArray[itemIndex].test_country_name = obj?.name;
+    logNow(booking);
+    await dispatch(addCovidBooking(copyArray));
+  };
+
+  // change country name and country id
+  const changeCityNameAndCityId = async (id: number) => {
+    const copyArray = booking;
+    const obj = bookingFormData.country_list
+      .filter((item2) => item2.id == countryDropdownValue)[0]
+      ?.cities.find((item) => item.id == id);
+    copyArray[itemIndex].city_id = id;
+    copyArray[itemIndex].test_city_name = obj?.name;
+    logNow(booking);
+    await dispatch(addCovidBooking(copyArray));
+  };
+
+  // changing test center name
+  const changeTestCenterTypeAndName = async (id: number) => {
+    logNow(booking);
+
+    const copyArray = booking;
+    const obj = testCentersBasedOnCities.find((item) => item.id == id);
+    copyArray[itemIndex].test_type_id = id;
+    copyArray[itemIndex].test_location = obj?.name;
+    await dispatch(addCovidBooking(copyArray));
+  };
+
+  // changing test center name
+  const changeTestCenterNameAndId = async (id: number) => {
+    logNow(booking);
+
+    const copyArray = booking;
+    const obj = testCentersBasedOnCities
+      .find((item) => item.id == booking[itemIndex].test_type_id)
+      ?.clinics.find((item) => item.test_centre_id == id);
+    copyArray[itemIndex].test_centre_id = id;
+    copyArray[itemIndex].test_centre_name = obj?.test_centre_name;
+    copyArray[itemIndex].amount = obj?.test_amount;
+    copyArray[itemIndex].total_amount = obj?.test_amount;
+    copyArray[itemIndex].test_address = '';
+    copyArray[itemIndex].test_address_details = '';
+    await dispatch(addCovidBooking(copyArray));
+  };
+
+  // change country name and country id
+  const changeScheduleId = async (date: any) => {
+    const tD = date?.toISOString().slice(0, 10);
+    const copyArray = booking;
+    // const obj = bookingFormData.country_list.find((item) => item.id == id);
+    const mSlots = testCenterSchedules?.test_centre_schedules.find((item) => {
+      return item?.schedule_date == tD;
+    });
+
+    logNow({ tD: tD, mSlots });
+    copyArray[itemIndex].confirmation_date = date.toISOString();
+    copyArray[itemIndex].schedule_id = mSlots?.id;
+    logNow(booking);
+    await dispatch(addCovidBooking(copyArray));
+  };
+
+  // change slot time id
+  const changeSlotId = async (id: number) => {
+    logNow(id);
+    const copyArray = booking;
+    copyArray[itemIndex].slot_id = id;
+    logNow(booking);
+    await dispatch(addCovidBooking(copyArray));
+  };
 
   const _renderItemForDependants = ({
     item,
@@ -151,15 +251,18 @@ const ExisitingBookingForDependent = (props: Props) => {
   }) => {
     const {} = item;
     const selectedDependentBg =
-      selectedDependant === item.id ? { backgroundColor: colors.primary } : {};
+      booking[itemIndex].dependent_id === item.id
+        ? { backgroundColor: colors.primary }
+        : {};
     const selectedDependantTxtColor =
-      selectedDependant === item.id
+      booking[itemIndex].dependent_id === item.id
         ? { color: colors.white }
         : { color: colors.darkPrimary };
     return (
       <Pressable
         onPress={() => {
-          setSelectedDependant(item.id);
+          // setSelectedDependant(item.id);
+          changeDependantId(item.id);
           setSDName(item.name);
         }}
         style={[styles.dependantConatiner, selectedDependentBg]}
@@ -217,15 +320,19 @@ const ExisitingBookingForDependent = (props: Props) => {
           <Text style={styles.statusText}>Not Booked Yet</Text>
           <Entypo
             size={responsiveFontSize(30)}
-            name={show ? 'chevron-small-down' : 'chevron-small-right'}
+            name={
+              itemIndex == openedBooking
+                ? 'chevron-small-down'
+                : 'chevron-small-right'
+            }
           />
         </View>
       </Pressable>
-      {show ? <View style={styles.headerLine} /> : null}
+      {itemIndex == openedBooking ? <View style={styles.headerLine} /> : null}
       <ExpandableView
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}
-        show={show}
+        show={itemIndex == openedBooking}
       >
         <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
           <View style={styles.expendedContainer}>
@@ -276,6 +383,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                   // logNow(value);
                   setTimeout(() => {
                     setCountryDropDown(value);
+                    changeCountryNameAndCountryId(value);
                   }, 1000);
                 }}
               />
@@ -293,6 +401,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                     selectedValue={cityDropdownValue ?? undefined}
                     onValueChange={(value: any) => {
                       setCityDropDown(value);
+                      changeCityNameAndCityId(value);
                     }}
                   />
                 </>
@@ -310,6 +419,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                     selectedValue={covidTestCenterValue}
                     onValueChange={(value: any) => {
                       setCovidTestCenter(value);
+                      changeTestCenterTypeAndName(value);
                     }}
                   />
                 </>
@@ -363,6 +473,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                     selectedValue={testCenterValue}
                     onValueChange={(value: any) => {
                       setTestCenter(value);
+                      changeTestCenterNameAndId(value);
                     }}
                   />
                 </>
@@ -372,7 +483,12 @@ const ExisitingBookingForDependent = (props: Props) => {
             {testCenterValue ? (
               <>
                 <Text style={styles.innerTitle}>Choose a test date</Text>
-                <CalenderStrip setValue={setTestDate} />
+                <CalenderStrip
+                  setValue={(value) => {
+                    setTestDate(value?.toISOString().slice(0, 10));
+                    changeScheduleId(value);
+                  }}
+                />
                 <View style={{ marginTop: heightToDp(1) }} />
               </>
             ) : null}
@@ -385,7 +501,10 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <TimeSlots
                   testDate={testDate}
                   time={testTime}
-                  setTime={setTestTime}
+                  setTime={(t: any) => {
+                    setTestTime(t);
+                    changeSlotId(t);
+                  }}
                   slots={morningTimeSlots}
                 />
               </>
@@ -396,7 +515,10 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <TimeSlots
                   testDate={testDate}
                   time={testTime}
-                  setTime={setTestTime}
+                  setTime={(t: any) => {
+                    setTestTime(t);
+                    changeSlotId(t);
+                  }}
                   slots={eveningTimeSlots}
                 />
               </>
@@ -407,11 +529,21 @@ const ExisitingBookingForDependent = (props: Props) => {
               >
                 <Text style={styles.bottomBtnText}>Remove</Text>
               </View>
-              <View style={styles.bottomBtn}>
+              <Pressable
+                onPress={() => {
+                  setOpendedBooking(-1);
+                }}
+                style={[
+                  styles.bottomBtn,
+                  testTime
+                    ? { backgroundColor: colors.primary }
+                    : { backgroundColor: colors.fieldGrey },
+                ]}
+              >
                 <Text style={[styles.bottomBtnText, { color: colors.white }]}>
                   Done
                 </Text>
-              </View>
+              </Pressable>
             </View>
           </View>
         </ScrollView>

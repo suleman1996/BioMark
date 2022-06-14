@@ -20,7 +20,7 @@ const CalenderStrip = (props: Props) => {
       <CalendarStrip
         onDateSelected={(date) => {
           // logNow(date.toISOString().slice(0, 10))
-          setValue(date.toISOString().slice(0, 10));
+          setValue(date);
         }}
         calendarAnimation={{ type: 'sequence', duration: 30 }}
         daySelectionAnimation={{
