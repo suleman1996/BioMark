@@ -300,8 +300,6 @@ PODS:
   - React-jsinspector (0.68.1)
   - React-logger (0.68.1):
     - glog
-  - react-native-barcode-creator (0.1.4):
-    - React-Core
   - react-native-blob-util (0.16.0):
     - React-Core
   - react-native-config (1.4.6):
@@ -515,7 +513,6 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
-  - react-native-barcode-creator (from `../node_modules/react-native-barcode-creator`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
@@ -629,8 +626,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
-  react-native-barcode-creator:
-    :path: "../node_modules/react-native-barcode-creator"
   react-native-blob-util:
     :path: "../node_modules/react-native-blob-util"
   react-native-config:
@@ -764,7 +759,6 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 4a4bae5671b064a2248a690cf75957669489d08c
   React-jsinspector: 218a2503198ff28a085f8e16622a8d8f507c8019
   React-logger: f79dd3cc0f9b44f5611c6c7862badd891a862cf8
-  react-native-barcode-creator: 4346c0aaf140d23ec0ef8228ef60bf895e6ef037
   react-native-blob-util: 2d49d135d6fe1410c019fb5bff241dac7f12d73d
   react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
   react-native-document-picker: f68191637788994baed5f57d12994aa32cf8bf88
