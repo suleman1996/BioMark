@@ -17,6 +17,7 @@ import Styles from './styles';
 import fonts from 'assets/fonts';
 import { userService } from 'services/user-service/user-service';
 import Charts from './charts';
+import { ActivityIndicator } from 'components/';
 
 const MoreInfo = () => {
   const { colors } = useTheme();
@@ -27,6 +28,7 @@ const MoreInfo = () => {
   const [summary, setSummary] = React.useState({});
   const [chartState, setChartState] = React.useState(false);
   const [summaryState, setSummaryState] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const moreInfoData = async () => {
     try {
@@ -42,10 +44,13 @@ const MoreInfo = () => {
 
   const getPdf = async (id) => {
     try {
+      setIsLoading(true);
       const result = await userService.getResultPdf(id);
       console.log('her is the download pdf  ', result.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -116,6 +121,7 @@ const MoreInfo = () => {
 
   return (
     <TitleWithBackLayout title={summary?.name}>
+      <ActivityIndicator visible={isLoading} />
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', margin: 10 }}>
           <TouchableOpacity
