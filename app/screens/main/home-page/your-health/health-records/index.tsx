@@ -29,12 +29,13 @@ import Filter from '../../../../../assets/svgs/filter';
 import SCREENS from 'navigation/constants/index';
 import LatestResultCard from 'components/latest-result-card';
 import moment from 'moment';
+import fonts from 'assets/fonts';
+import { showMessage } from 'react-native-flash-message';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
   const [pastResults, setPastResults] = useState([]);
-  // const [filterData, setFilterData] = useState([]);
   const [checked, setChecked] = React.useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -57,20 +58,50 @@ const HealthRecord = () => {
     dispatch(getReduxLatestResult());
     dispatch(getReduxPastResult());
     setPastResults(pastResult);
-    // alert(JSON.stringify(newResult.result.summary));
     setLatestResult(newResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const onConfirm = async () => {
-    const result = await userService.getFilterResult({
-      page: page,
-      type: checked,
-      start: startDate,
-      end: endDate,
-    });
-    setPastResults(result.data);
-    console.log('resultttt-----------------------dataaaa', result.data);
+    try {
+      const result = await userService.getFilterResult({
+        page: page,
+        type: checked,
+        start: startDate,
+        end: endDate,
+      });
+      setPastResults(result?.data);
+      setModalVisible(!modalVisible);
+      console.log('resultttt-----------------------dataaaa', result?.data);
+    } catch (error) {
+      console.log(error);
+      if (error.errMsg.status == '500') {
+        showMessage({
+          message: 'Internal Server Error',
+          type: 'danger',
+        });
+      } else if (error.errMsg.status == false) {
+        showMessage({
+          message: error.errMsg.data.message,
+          type: 'danger',
+        });
+      } else {
+        showMessage({
+          message: error.errMsg,
+          type: 'danger',
+        });
+      }
+    }
+
+    // const result = await userService.getFilterResult({
+    //   page: page,
+    //   type: checked,
+    //   start: startDate,
+    //   end: endDate,
+    // });
+    // setPastResults(result?.data);
+    // setModalVisible(!modalVisible);
+    // console.log('resultttt-----------------------dataaaa', result?.data);
   };
 
   const handleConfirm = (date) => {
@@ -84,9 +115,13 @@ const HealthRecord = () => {
 
   const renderItem2 = ({ item }) => (
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item })
-      }
+      onPress={() => {
+        item?.result?.status == 'Pending'
+          ? navigation.navigate(SCREENS.PENDING_RESULT_OVERVIEW, {
+              result: item,
+            })
+          : navigation.navigate(SCREENS.RESULT_OVERVIEW, { result: item });
+      }}
       style={styles.pastResultMainView}
     >
       <View style={styles.view}>
@@ -94,13 +129,13 @@ const HealthRecord = () => {
           source={require('../../../../../assets/images/home/pad.png')}
           style={{ height: 30, width: 30 }}
         />
-        <Text style={styles.title}>{item.name}</Text>
+        <Text style={styles.title}>{item?.name}</Text>
       </View>
       <Text style={styles.text3}>
         {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
       </Text>
       {item.ref_no == null ? null : (
-        <Text style={styles.text3}>REF: {item.ref_no}</Text>
+        <Text style={styles.text3}>REF: {item?.ref_no}</Text>
       )}
 
       {item.result.summary && (
@@ -109,11 +144,11 @@ const HealthRecord = () => {
             source={require('../../../../../assets/images/home/info.png')}
             style={styles.prImage}
           />
-          <Text style={styles.text6}>{item.result.summary}</Text>
+          <Text style={styles.text6}>{item?.result?.summary}</Text>
         </View>
       )}
 
-      {item.result.status == 'Pending' ? (
+      {item?.result?.status == 'Pending' ? (
         <View
           style={{
             backgroundColor: 'lightgrey',
@@ -134,9 +169,39 @@ const HealthRecord = () => {
               height: 15,
             }}
           ></View>
-          <Text style={{ marginHorizontal: 8 }}>
+          <Text
+            style={{
+              marginHorizontal: 8,
+              fontFamily: fonts.OpenSansBold,
+              color: 'black',
+            }}
+          >
             {item?.result?.status == 'Pending' ? 'Under Review' : null}
           </Text>
+        </View>
+      ) : item?.result?.status == 'Converted' ? (
+        <View
+          style={{
+            backgroundColor: 'lightgrey',
+            flexDirection: 'row',
+            padding: 5,
+            alignItems: 'center',
+            width: '40%',
+            borderRadius: 15,
+            marginHorizontal: 15,
+            marginTop: 10,
+            marginBottom: 10,
+          }}
+        >
+          <View
+            style={{
+              borderRadius: 20,
+              backgroundColor: 'green',
+              width: 15,
+              height: 15,
+            }}
+          ></View>
+          <Text style={{ marginHorizontal: 8 }}>{item.result.status}</Text>
         </View>
       ) : (
         <View style={styles.pastResultView2}>
@@ -184,8 +249,14 @@ const HealthRecord = () => {
               'hh:mm a MMMM Do, YYYY'
             )}
             ref_no={latestResult?.ref_no}
-            summary={latestResult?.result?.summary}
-            doctor={latestResult?.result?.doctor}
+            status={latestResult?.result?.status}
+            onPress={() =>
+              latestResult?.result?.status == 'Converted'
+                ? navigation.navigate(SCREENS.RESULT_OVERVIEW)
+                : null
+            }
+            // summary={latestResult?.result?.summary}
+            // doctor={latestResult?.result?.doctor}
           />
 
           <TouchableOpacity
@@ -203,7 +274,7 @@ const HealthRecord = () => {
           </View>
 
           <Text style={styles.resultMessage}>
-            {pastResults.message == 'No results' && 'No Result Found'}
+            {pastResults?.message == 'No results' && 'No Result Found'}
           </Text>
 
           <HealthRecordFilter
@@ -236,8 +307,7 @@ const HealthRecord = () => {
               setChecked(''),
                 setStartDate(''),
                 setEndDate(''),
-                setModalVisible(!modalVisible);
-              setPastResults(pastResult);
+                setPastResults(pastResult);
             }}
             onConifrm={() => onConfirm()}
           />

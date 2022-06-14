@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxBloodPressureLogs } from 'store/home/home-actions';
@@ -16,11 +16,28 @@ import Info from 'react-native-vector-icons/AntDesign';
 import BloodPressure from '../../../../../../assets/svgs/bP';
 
 import Styles from './styles';
+import { BloodPressureProgressChartDataPoint } from 'types/api';
+import { convertDate } from 'utils/functions/date-format';
+import {
+  convertDataset,
+  createGraphDataPoints,
+  getGraphOptions,
+} from 'utils/functions/graph/graph-monocromatic';
+import {
+  createGraphDataPointOptions,
+  graphXAxisConfig,
+} from 'utils/functions/graph/graph-utils';
+import { graphGreyColor } from 'utils/functions/graph/graph.types';
+import { userService } from 'services/user-service/user-service';
+import { useNavigation } from '@react-navigation/native';
+import { Tip } from 'react-native-tip';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const chartRef = useRef();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const bPLogsData = useSelector((state: IAppState) => state.home.bPLogsData);
 
@@ -50,21 +67,97 @@ const Index = () => {
     title: 'All',
   });
 
-  const [logData] = React.useState([]);
+  const [logData, setLogData] = React.useState([]);
+  const [chartState, setChartState] = React.useState(null);
+
+  const bloodPressureGraphData = async () => {
+    try {
+      const result = await userService.getBloodPressureMapData({
+        date: selectedValue.title,
+        type: selectedfilterOption1.title.toLowerCase(),
+      });
+      setChartState(result.data.chart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   React.useEffect(() => {
     dispatch(getReduxBloodPressureLogs());
-    //
-    bPLogsData?.log?.map((item) =>
-      logData.push({
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    bloodPressureGraphData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValue, selectedfilterOption1, bPLogsData]);
+
+  React.useEffect(() => {
+    setLogData(
+      bPLogsData?.log?.map((item) => ({
         id: item?.id,
         weight: item?.bp_diastolic + '/' + item?.bp_systolic,
         unit: 'mmHg',
         date_entry: item?.date_entry,
-      })
+      }))
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [bPLogsData]);
+
+  const createChart = (data: BloodPressureProgressChartDataPoint[]) => {
+    const points1 =
+      data.length === 0
+        ? []
+        : data
+            .map((point) => [
+              convertDate(point.date),
+              point.systolic !== null ? point.systolic : null,
+            ])
+            .reverse();
+
+    const points2 =
+      data.length === 0
+        ? []
+        : data
+            .map((point) => [
+              convertDate(point.date),
+              point.diastolic !== null ? point.diastolic : null,
+            ])
+            .reverse();
+
+    const dataset = [
+      createGraphDataPoints(points1, createGraphDataPointOptions()),
+      createGraphDataPoints(
+        points2,
+        createGraphDataPointOptions(graphGreyColor, graphGreyColor)
+      ),
+    ];
+
+    const convertedDataPoint = convertDataset(dataset);
+    const graphConfig = graphXAxisConfig(
+      selectedValue.title,
+      points1.map((p) => p[0] as number)
+    );
+
+    const chartOptions = {
+      ...getGraphOptions(convertedDataPoint, graphConfig),
+    };
+
+    return { chartOptions };
+  };
+  React.useEffect(() => {
+    if (chartState && chartRef.current) {
+      const { chartOptions } = createChart(chartState);
+      setTimeout(() => {
+        chartRef?.current?.setOption(chartOptions);
+      }, 10);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartState]);
+
+  const onApplyFilters = (filter1) => {
+    setSelectedfilterOption1(filter1);
+    setIsVisible(false);
+  };
 
   return (
     <>
@@ -73,8 +166,8 @@ const Index = () => {
         visible={isVisible}
         setIsVisible={setIsVisible}
         filterOption1={filterOption1}
-        selectedfilterOption1={selectedfilterOption1}
-        setSelectedfilterOption1={setSelectedfilterOption1}
+        values={{ selectedfilterOption1 }}
+        onApplyPress={onApplyFilters}
       />
       <View style={styles.container}>
         <ScrollView>
@@ -89,21 +182,27 @@ const Index = () => {
             </View>
 
             <View style={styles.rowCenter}>
-              <TouchableOpacity>
-                <Info
-                  color={colors.heading}
-                  style={{ marginRight: 10 }}
-                  name="infocirlceo"
-                />
-              </TouchableOpacity>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ marginRight: 10 }}>
+                <Tip
+                  body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beaats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats."
+                  bodyStyle={{ color: '#fff' }}
+                  tipContainerStyle={{
+                    backgroundColor: '#2f6b64',
+                    width: '60%',
+                  }}
+                  overlayOpacity={0.001}
+                >
+                  <Info color={colors.heading} name="infocirlceo" />
+                </Tip>
+              </View>
+              <View style={styles.rowCenter}>
                 <View style={styles.dash} />
                 <Text style={styles.sys}>SYS</Text>
                 <Text style={styles.sys}> / </Text>
                 <View
                   style={[styles.dash, { borderColor: colors.lightGrey }]}
                 />
-                <Text style={styles.sys}>SYS</Text>
+                <Text style={styles.sys}>DIA</Text>
               </View>
               <TouchableOpacity
                 style={{ marginLeft: 15 }}
@@ -113,11 +212,14 @@ const Index = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <LineGraph />
+          <LineGraph chartRef={chartRef} />
           <Logs navigate={SCREENS.BLOOD_PRESSURE} logData={logData} />
           <View style={{ height: 70 }} />
         </ScrollView>
-        <FloatingButton svg={<BloodPressure height={28} width={28} />} />
+        <FloatingButton
+          onPress={() => navigation.navigate(SCREENS.BLOOD_PRESSURE)}
+          svg={<BloodPressure height={28} width={28} />}
+        />
       </View>
     </>
   );

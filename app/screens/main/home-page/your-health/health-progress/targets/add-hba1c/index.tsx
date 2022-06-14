@@ -86,7 +86,7 @@ const Index = () => {
   };
 
   useEffect(() => {
-    setErrors(hba1cValidator(+goalValue, units[selectedType].name));
+    setErrors({ goal: hba1cValidator(+goalValue, units[selectedType].name) });
   }, [goalValue, selectedType]);
 
   useEffect(() => {

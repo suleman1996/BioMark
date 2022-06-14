@@ -10,21 +10,21 @@ import SCREENS from 'navigation/constants';
 import { Logo } from 'assets/svgs/index';
 
 import makeStyles from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Splash() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const navigations = useNavigation();
 
-  const [onBoarding, setOnboarding] = React.useState('');
-
   const getUser = async () => {
     const onboardingg = await getOnboarding();
 
-    setOnboarding(onboardingg);
-
+    if (onboardingg) {
+      await AsyncStorage.setItem('onBoarding', 'true');
+    }
     setTimeout(() => {
-      onBoarding == 'false'
+      !onboardingg
         ? navigations.replace(SCREENS.LOGIN)
         : navigations.replace(SCREENS.ONBOARDING);
     }, 2000);

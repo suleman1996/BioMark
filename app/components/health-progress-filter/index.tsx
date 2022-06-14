@@ -39,7 +39,7 @@ const Index = ({
                 : colors.lightGrey,
             backgroundColor:
               selectedfilterOption.title == item.title
-                ? colors.shineBlue
+                ? colors.white
                 : colors.white,
           },
         ]}

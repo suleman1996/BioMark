@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   Text,
   View,
@@ -29,6 +29,7 @@ import fonts from 'assets/fonts';
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
+import WithdrawProgram from 'components/widthdraw-from-program';
 // import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
@@ -39,6 +40,7 @@ const SearchBarWithLeftScanIcon = () => {
   const [loading, setLoading] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [code, setCode] = React.useState('');
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   const menuRef = useRef<any>();
 
@@ -49,17 +51,17 @@ const SearchBarWithLeftScanIcon = () => {
           code: code,
         },
       });
+      setIsMenuOpen(false);
       navigate(SCREENS.SUPPORT_SYSTEM);
+
       console.log(response, 'codee---------------code------------------');
-      // navigate(Screeb, {
-      //   SHOW_DEMO: true
-      // })
     } catch (err) {
-      showMessage({
-        message: err.errMsg.data.message,
-        type: 'danger',
-      });
-      // console.log(err, 'errrr-codeeee---------------');
+      setModalVisible(true);
+
+      // showMessage({
+      //   message: err.errMsg.data.message,
+      //   type: 'danger',
+      // });
     }
   };
 
@@ -144,7 +146,6 @@ const SearchBarWithLeftScanIcon = () => {
                         <Button
                           onPress={() => {
                             setVisible(false);
-                            setIsMenuOpen(false);
                             handleCode();
                           }}
                           title="Save Code"
@@ -164,15 +165,23 @@ const SearchBarWithLeftScanIcon = () => {
                   size={responsiveFontSize(22)}
                   color={colors.primary}
                 />
-                <Text
-                  style={styles.menuText}
-                  fontSize={responsiveFontSize(15)}
-                  onPress={() => setVisible(true)}
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsMenuOpen(false), setVisible(true);
+                  }}
                 >
-                  Input Barcode
-                </Text>
+                  <Text
+                    style={styles.menuText}
+                    fontSize={responsiveFontSize(15)}
+                  >
+                    Input Barcode
+                  </Text>
+                </TouchableOpacity>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.singleMenuItem}>
+              <TouchableOpacity
+                style={styles.singleMenuItem}
+                onPress={() => navigate(SCREENS.RESULT_UPLOAD)}
+              >
                 <MaterialCommunityIcons
                   name="upload"
                   size={responsiveFontSize(25)}
@@ -185,6 +194,18 @@ const SearchBarWithLeftScanIcon = () => {
             </MenuOptions>
           </Menu>
         </View>
+
+        <WithdrawProgram
+          text2="Back"
+          visible={modalVisible}
+          title="Code Already Entered"
+          text="It seems like this code has already been entered."
+          cancelModal={() => setModalVisible(!modalVisible)}
+          closeModal={() => setModalVisible(!modalVisible)}
+          color={['#1B96D8', '#1B96D8']}
+          cancel={undefined}
+          onPress={() => setModalVisible(false)}
+        />
 
         <View style={styles.inputContainer}>
           <Fontisto

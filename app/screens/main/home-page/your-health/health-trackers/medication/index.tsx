@@ -31,6 +31,8 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { navigate, goBack } from 'services/nav-ref';
 
 import { makeStyles } from './styles';
+import { DeleteModal } from 'components/higher-order';
+import { AccountDeActivateModal } from 'components/ui';
 
 type RenderDosageProps = {
   title: string;
@@ -43,6 +45,8 @@ type RenderDosageProps = {
   minRange: number;
 };
 const Medication = ({ route }) => {
+  const SELECTED_MEDICATION_LOG_ID = route?.params?.medication_log_id;
+
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
@@ -54,6 +58,7 @@ const Medication = ({ route }) => {
     meal_type: 0,
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [validation, setValidation] = useState<any>(true);
   const [options, setOptions] = useState<any>([]);
   const [options2, setOptions2] = useState<any>([]);
@@ -92,9 +97,9 @@ const Medication = ({ route }) => {
   }, [getMedNewTracker]);
 
   useEffect(() => {
-    if (!route?.params?.medication_log_id) return;
+    if (!SELECTED_MEDICATION_LOG_ID) return;
     init();
-  }, [route?.params?.medication_log_id]);
+  }, [SELECTED_MEDICATION_LOG_ID]);
 
   const onSubmit = async () => {
     const dateTime = getCalendarDate(medicationTrackerState.record_date);
@@ -137,9 +142,8 @@ const Medication = ({ route }) => {
   const deleteMedication = useCallback(async () => {
     try {
       setIsLoading(true);
-      await userService.deleteMedicationTracker(
-        route?.params?.medication_log_id
-      );
+      setShowDeleteModal(false);
+      await userService.deleteMedicationTracker(SELECTED_MEDICATION_LOG_ID);
       dispatch(getReduxNewMedicationTracker());
       goBack();
     } catch (error) {
@@ -161,10 +165,9 @@ const Medication = ({ route }) => {
           type: 'danger',
         });
       }
-
       setIsLoading(false);
     }
-  }, [route?.params?.medication_log_id]);
+  }, [SELECTED_MEDICATION_LOG_ID]);
 
   const setDosageFromDropDown = (text) => {
     let medId = 0;
@@ -189,7 +192,7 @@ const Medication = ({ route }) => {
     setIsLoading(true);
 
     const res = await userService.getMedicationProgress(
-      route?.params?.medication_log_id
+      SELECTED_MEDICATION_LOG_ID
     );
 
     const recordDate = res.medication.record_date
@@ -213,15 +216,15 @@ const Medication = ({ route }) => {
     setMedicationName(res.medication.name);
     setValidation(false);
     setIsLoading(false);
-  }, [route?.params?.medication_log_id]);
+  }, [SELECTED_MEDICATION_LOG_ID]);
 
   console.log({ options2, meal: medicationTrackerState.meal_type });
 
   return (
     <TitleWithBackWhiteBgLayout
-      title="Take Medication"
-      binIcon={route?.params?.medication_log_id}
-      onPressIcon={deleteMedication}
+      title={SELECTED_MEDICATION_LOG_ID ? 'Medication' : 'Take Medication'}
+      binIcon={SELECTED_MEDICATION_LOG_ID}
+      onPressIcon={() => setShowDeleteModal(true)}
     >
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
@@ -233,7 +236,7 @@ const Medication = ({ route }) => {
             backgroundColor: colors.white,
           }}
         >
-          {route?.params?.medication_log_id ? (
+          {SELECTED_MEDICATION_LOG_ID ? (
             <Text style={styles.medicationNameStyle}>{medicationName}</Text>
           ) : getMedNewTracker?.medication_dropdown ? (
             <View style={styles.dropDown}>
@@ -306,8 +309,17 @@ const Medication = ({ route }) => {
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={onSubmit}
-        title={'Take'}
+        title={SELECTED_MEDICATION_LOG_ID ? 'Save Edit' : 'Take'}
         disabled={validation}
+      />
+      <AccountDeActivateModal
+        callMe={deleteMedication}
+        isVisible={showDeleteModal}
+        setIsVisible={setShowDeleteModal}
+        subHeading="Are you sure you want to delete this medication log?"
+        headerText="Medication"
+        buttonLowerText="No"
+        buttonUpperText="Yes"
       />
     </TitleWithBackWhiteBgLayout>
   );

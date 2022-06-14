@@ -1,6 +1,6 @@
-import { RangeValue } from '../../api/models';
+import { RangeValue } from 'types/api';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import {
   graphBlackColor,
   graphGreyColor,
@@ -35,7 +35,6 @@ export const dateFormat = (
   if (index === 0) {
     return ``;
   }
-
   switch (dateRange) {
     case RangeValue.oneDay:
       return `${moment(value).format('ha')}`;
@@ -53,9 +52,21 @@ export const dateFormat = (
 };
 
 export const graphXAxisConfig = (
-  selectedIndex: number,
+  range: string,
   dates: number[]
 ): GraphXAxisConfig => {
+  const selectedIndex =
+    range == '1D'
+      ? 0
+      : range == '7D'
+      ? 1
+      : range == '1M'
+      ? 2
+      : range == '3M'
+      ? 3
+      : range == '1Y'
+      ? 4
+      : 5;
   const today = moment(dates[dates.length - 1]);
   const todayMilliSecs = parseFloat(today.format('x'));
 

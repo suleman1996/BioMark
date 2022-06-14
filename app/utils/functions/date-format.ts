@@ -1,4 +1,6 @@
 import { format } from 'date-fns';
+import moment from 'moment';
+
 export const dateFormat = (date: string) => {
   if (date) {
     var newDate: any = format(new Date(date), 'yyyy-MM-dd');
@@ -106,3 +108,6 @@ export const getCalendarDate = (today: any) =>
   getYear(today) +
   ' ' +
   getTime(today);
+
+export const convertDate = (date: string) =>
+  parseFloat(moment.parseZone(date).local().format('x'));

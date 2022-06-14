@@ -12,6 +12,7 @@ export const makeStyles = (colors: any) =>
     },
     text: {
       color: colors.navyblue,
+      fontFamily: fonts.OpenSansBold,
       fontSize: responsiveFontSize('17'),
       marginTop: heightToDp(2),
       marginHorizontal: widthToDp(8),

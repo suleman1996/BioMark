@@ -14,7 +14,7 @@ export const makeStyles = (colors: any) =>
       textAlign: 'center',
       color: colors.heading,
       fontSize: responsiveFontSize(28),
-      marginTop: heightToDp(10),
+      // marginTop: heightToDp(10),
       fontFamily: fonts.RobotoBold,
     },
     text2: {

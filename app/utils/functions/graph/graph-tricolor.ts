@@ -14,7 +14,7 @@ import {
   symbolSvgPath,
 } from './graph.types';
 import { dateFormat } from './graph-utils';
-import { RangeValue } from '../../api/models';
+import { RangeValue } from 'types/api';
 
 const zIndex = 100;
 

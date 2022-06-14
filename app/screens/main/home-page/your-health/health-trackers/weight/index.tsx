@@ -21,11 +21,14 @@ import { navigate } from 'services/nav-ref';
 
 import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
+import { useDispatch } from 'react-redux';
+import { getReduxWeightLogs } from 'store/home/home-actions';
 
 const Weight = ({ route }: any) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const SELECTED_WEIGHT_ID = route?.params?.logId;
+  const dispatch = useDispatch();
 
   const [weightTracker, setWeightTracker] = useState({
     weight: '',
@@ -81,6 +84,7 @@ const Weight = ({ route }: any) => {
       : 'createWeightTracker';
     try {
       await userService[API_FUNCTION](weightTracker, SELECTED_WEIGHT_ID);
+      dispatch(getReduxWeightLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err: any) {
       console.error(err);
