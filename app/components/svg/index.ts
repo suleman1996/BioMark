@@ -12,3 +12,4 @@ export { default as BioSettings } from './bio-settings';
 export { default as BioSupport } from './bio-support';
 export { default as Pencil } from './pencil';
 export { default as SearchBarLeftIcon } from './search-bar-left-icon';
+export { default as DependentIcon } from './bio_dependant_icon';
