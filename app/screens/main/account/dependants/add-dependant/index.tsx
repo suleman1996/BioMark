@@ -229,7 +229,6 @@ const AddDependantScreen = () => {
                   onBlur={() => setFieldTouched('phone_number')}
                 />
 
-                {console.log(errors.phone_number)}
                 {touched.phone_number &&
                   (errors.phone_number ? (
                     <View style={styles.errorContainer}>
