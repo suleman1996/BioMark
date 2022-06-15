@@ -195,16 +195,25 @@ function registerUser(username: string, values, gender: any, date: string) {
   });
 }
 
-function createProfile(values, gender: any, date: string) {
+function createProfile(
+  values: any,
+  phone: string,
+  finialDate: string,
+  gender: any
+) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
+    console.log('=======>', values);
+    console.log('others', phone, finialDate, gender);
+
     client
       .post(API_URLS.CREATE_PROFILE, {
         profile: {
           first_name: values.fName,
           last_name: values.lName,
+          mobile: phone,
           ic_number: values.IcPnum,
           gender_id: gender,
-          birth_date: date,
+          birth_date: finialDate,
           email_address: values.email,
           terms: true,
         },
