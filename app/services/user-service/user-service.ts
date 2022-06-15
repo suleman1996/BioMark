@@ -1684,8 +1684,17 @@ const getBloodSugarMapData = (obj) => {
     params: obj,
   });
 };
-const getSearchResult = (lab_id) => {
-  return client.get(`${API_URLS.GET_SEARCH_RESULT}${lab_id}&q=li`);
+const getSearchResult = (lab_id, query) => {
+  return client.get(`${API_URLS.GET_SEARCH_RESULT}`, {
+    params: {
+      lab: lab_id,
+      q: query,
+    },
+  });
+};
+
+const getResultOverViewChartData = () => {
+  return client.get(API_URLS.RESULT_OVERVIEW_CHARTDATA);
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
@@ -1859,4 +1868,5 @@ export const userService = {
   getBloodPressureMapData,
   getSearchResult,
   Terms,
+  getResultOverViewChartData,
 };

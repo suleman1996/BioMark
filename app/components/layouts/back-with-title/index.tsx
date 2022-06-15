@@ -23,6 +23,7 @@ type Props = {
   isShare: boolean;
   shadow: string;
   onPressInfo: any;
+  onSharePress: any;
   deleteIcon: any;
 };
 
@@ -35,6 +36,7 @@ const TitleWithBackLayout = ({
   isShare,
   shadow,
   onPressInfo,
+  onSharePress,
   deleteIcon,
 }: Props) => {
   const { colors } = useTheme();
@@ -73,7 +75,7 @@ const TitleWithBackLayout = ({
 
             <View style={styles.optionsView}>
               {isShare && (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onSharePress}>
                   <AntDesignIcons
                     color={colors.white}
                     size={responsiveFontSize(22)}

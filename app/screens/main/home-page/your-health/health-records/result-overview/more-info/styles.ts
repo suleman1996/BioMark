@@ -7,7 +7,7 @@ const styles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      padding: 15,
+      // padding: 15,
     },
     heading: {
       fontFamily: fonts.bold,
@@ -29,6 +29,7 @@ const styles = (colors: any) =>
       shadowRadius: 3.84,
 
       elevation: 5,
+      margin: 15,
     },
     lastResult: {
       padding: 10,
@@ -71,6 +72,10 @@ const styles = (colors: any) =>
       fontSize: 14,
       color: colors.heading,
       textAlign: 'justify',
+    },
+    gestureView: {
+      flexDirection: 'row-reverse',
+      width: '100%',
     },
   });
 export default styles;
