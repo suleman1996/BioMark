@@ -10,10 +10,11 @@ type Props = {
   setTime: any;
   time: any;
   testDate: any;
+  setTimeFormat: any;
 };
 
 const TimeSlots = (props: Props) => {
-  const { slots, setTime, time, testDate } = props;
+  const { slots, setTime, time, testDate, setTimeFormat } = props;
 
   const { colors }: any = useTheme();
   const styles = makeStyles(colors);
@@ -62,7 +63,10 @@ const TimeSlots = (props: Props) => {
       {slots?.map((item) => (
         <Pressable
           disabled={isBtnDisable(item.status, item.slot_time)}
-          onPress={() => setTime(item.id)}
+          onPress={() => {
+            setTime(item.id);
+            setTimeFormat(item.slot_time);
+          }}
           style={[
             styles.singleTimeItem,
             ifSelected(item.id),

@@ -21,6 +21,7 @@ import {
   TestClinic,
 } from 'types/api';
 import { DependentData } from 'types/api/dependent';
+import { getZonedTimeDate } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
@@ -92,6 +93,7 @@ const ExisitingBookingForDependent = (props: Props) => {
   const [testCenterValue, setTestCenter] = useState<any>();
   const [testDate, setTestDate] = useState('');
   const [testTime, setTestTime] = useState('');
+  const [testTimeFormat, setTimeFormat] = useState('');
 
   const dispatch = useDispatch();
 
@@ -227,7 +229,7 @@ const ExisitingBookingForDependent = (props: Props) => {
     });
 
     logNow({ tD: tD, mSlots });
-    copyArray[itemIndex].confirmation_date = date.toISOString();
+
     copyArray[itemIndex].schedule_id = mSlots?.id;
     logNow(booking);
     await dispatch(addCovidBooking(copyArray));
@@ -238,6 +240,18 @@ const ExisitingBookingForDependent = (props: Props) => {
     logNow(id);
     const copyArray = booking;
     copyArray[itemIndex].slot_id = id;
+    try {
+      logNow(
+        '1',
+        new Date(getZonedTimeDate(testDate, testTimeFormat).toISOString())
+      );
+      logNow('2', getZonedTimeDate(testDate, testTimeFormat).toString());
+      logNow('3', getZonedTimeDate(testDate, testTimeFormat).toUTCString());
+    } catch (err) {}
+    copyArray[itemIndex].confirmation_date = getZonedTimeDate(
+      testDate,
+      testTimeFormat
+    ).toISOString();
     logNow(booking);
     await dispatch(addCovidBooking(copyArray));
   };
@@ -538,6 +552,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                     setTestTime(t);
                     changeSlotId(t);
                   }}
+                  setTimeFormat={setTimeFormat}
                   slots={morningTimeSlots}
                 />
               </>
@@ -552,6 +567,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                     setTestTime(t);
                     changeSlotId(t);
                   }}
+                  setTimeFormat={setTimeFormat}
                   slots={eveningTimeSlots}
                 />
               </>
