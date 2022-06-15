@@ -12,7 +12,6 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 import TopBarWithBackText from 'components/higher-order/topBarWithBackText/index';
 import CancelBookingTestModal from 'components/ui/cancelBookingTestModal/index';
-import CovidTestBookForPersonal from 'components/ui/covid-test-book-for-personal/index';
 import { useSelector } from 'react-redux';
 import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
 import { addCovidBooking } from 'store/covid/covid-actions';
@@ -30,9 +29,7 @@ const BookCovidTest = (props: Props) => {
 
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const [isExistingBtn] = useState(false);
   const [isDependantAdd, setIsDependantAdd] = useState(false);
-  const [isPersonal, setIsPersonal] = useState(false);
 
   const [isCancelModal, setIsCancelModal] = useState(false);
 
@@ -48,6 +45,13 @@ const BookCovidTest = (props: Props) => {
   const pushOneMoreToBooking = async () => {
     let copyArray = booking;
     copyArray.push({ is_dependant: true });
+    store.dispatch(addCovidBooking(copyArray));
+    console.log('booking', booking);
+  };
+
+  const pushOneAddSelf = async () => {
+    let copyArray = booking;
+    copyArray.push({ is_dependant: false, dependent_id: 0 });
     store.dispatch(addCovidBooking(copyArray));
     console.log('booking', booking);
   };
@@ -90,12 +94,6 @@ const BookCovidTest = (props: Props) => {
 
           {/* ) : null} */}
 
-          {isPersonal && !isDependantAdd && !isExistingBtn ? (
-            <View>
-              <CovidTestBookForPersonal />
-            </View>
-          ) : null}
-
           <ButtonComponent
             onPress={() => {
               // setIsExisting(true);
@@ -122,7 +120,8 @@ const BookCovidTest = (props: Props) => {
           ) : null}
           <ButtonComponent
             onPress={() => {
-              setIsPersonal(true);
+              // setIsExisting(true);
+              pushOneAddSelf();
             }}
             marginTop={1}
             title={'Add Self'}

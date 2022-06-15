@@ -323,7 +323,13 @@ const ExisitingBookingForDependent = (props: Props) => {
   return (
     <View style={styles.parent}>
       <Pressable onPress={onPress} style={styles.container}>
-        <Text style={styles.titleText}>{sDName ? sDName : 'Dependants'}</Text>
+        <Text style={styles.titleText}>
+          {sDName
+            ? sDName
+            : !booking[itemIndex].is_dependant
+            ? 'You'
+            : 'Dependants'}
+        </Text>
         <View style={styles.bookingStatusContainer}>
           <Text
             style={[
@@ -355,11 +361,19 @@ const ExisitingBookingForDependent = (props: Props) => {
       >
         <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
           <View style={styles.expendedContainer}>
-            <Text style={styles.innerTitle}>Choose a Dependent</Text>
-            <FlatList renderItem={_renderItemForDependants} data={dependants} />
-            <View
-              style={[styles.headerLine, { marginVertical: heightToDp(2) }]}
-            />
+            {!booking[itemIndex].is_dependant ? null : (
+              <>
+                <Text style={styles.innerTitle}>Choose a Dependent</Text>
+                <FlatList
+                  renderItem={_renderItemForDependants}
+                  data={dependants}
+                />
+                <View
+                  style={[styles.headerLine, { marginVertical: heightToDp(2) }]}
+                />
+              </>
+            )}
+
             <Text style={styles.innerTitle}>
               Where would you like to get tested?
             </Text>
