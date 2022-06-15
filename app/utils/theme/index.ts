@@ -47,6 +47,7 @@ const theme = {
     greenOpacity: '#03DAC610',
     blueOpacity: '#B8CDED',
     greenDark: '#00AC88',
+    medicationRed: '#E6404C',
     lightYellow: '#FFD75E',
     dangerRed: '#EA4C59',
     lightDark: '#455066',

@@ -40,6 +40,7 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(20),
       fontFamily: GlobalFonts.bold,
       color: colors.darkPrimary,
+      width: widthToDp(55),
     },
     editText: {
       fontSize: responsiveFontSize(15),

@@ -33,7 +33,7 @@ import Camera from '../../../../assets/svgs/report-scan';
 import ReportVerify from '../../../../assets/svgs/report-verify';
 import Diabetes from '../../../../assets/svgs/diabtes';
 import BP from '../../../../assets/svgs/bP';
-import Health from '../../../../assets/svgs/Health';
+// import Health from '../../../../assets/svgs/Health';
 import Progress from '../../../../assets/svgs/Progress';
 import Processing from '../../../../assets/svgs/report-processing';
 import ReportView from '../../../../assets/svgs/report-viewing';
@@ -341,7 +341,13 @@ const Index = () => {
             <View style={styles.circleView}>
               <RenderCircle
                 title="Health Records"
-                svg={<Health />}
+                Image={
+                  <Image
+                    style={{ height: 25, width: 25 }}
+                    source={require('assets/images/home/HealthRecord.png')}
+                  />
+                }
+                // svg={<Health />}
                 onPress={() => navigate(SCREENS.HEALTH_RECORD)}
               />
               <RenderCircle

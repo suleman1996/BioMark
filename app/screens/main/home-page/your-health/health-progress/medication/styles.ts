@@ -72,7 +72,7 @@ const styles = (colors: any) =>
       height: 30,
       paddingVertical: heightToDp(0.3),
       paddingHorizontal: widthToDp(4),
-      backgroundColor: colors.red,
+      backgroundColor: colors.medicationRed,
       borderBottomLeftRadius: widthToDp(2),
       borderBottomRightRadius: widthToDp(2),
       flexDirection: 'row',
