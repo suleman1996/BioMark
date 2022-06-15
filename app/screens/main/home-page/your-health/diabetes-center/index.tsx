@@ -253,8 +253,13 @@ const DiabetesCenter = () => {
               position: 'absolute',
               zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
               flexDirection: 'row',
-              top: 45,
-              marginHorizontal: 15,
+              top: 50,
+              left: 20,
+              // position: 'absolute',
+              // zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
+              // flexDirection: 'row',
+              // top: 45,
+              // marginHorizontal: 15,
             }}
           >
             {showDemo === 0 && (
@@ -262,14 +267,14 @@ const DiabetesCenter = () => {
             )}
             {showDemo === 1 && (
               <>
-                <View style={{ height: 110, width: 100, marginLeft: '9%' }} />
+                <View style={{ height: 110, width: 100, marginLeft: '4%' }} />
                 <RenderHealthTrackDemo item={healthTrackerDemo[1]} />
               </>
             )}
             {showDemo === 2 && (
               <>
-                <View style={{ height: 110, width: 100, marginLeft: '10%' }} />
-                <View style={{ height: 110, width: 100 }} />
+                <View style={{ height: 110, width: 100, marginLeft: '36%' }} />
+                {/* <View style={{ height: 110, width: 100 }} /> */}
                 <RenderHealthTrackDemo item={healthTrackerDemo[2]} />
               </>
             )}

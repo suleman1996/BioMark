@@ -47,7 +47,7 @@ const makeStyles = (colors: any) =>
       },
       shadowOpacity: 0.58,
       shadowRadius: 16.0,
-      elevation: 10,
+      elevation: 3,
       marginBottom: 5,
     },
     covidText: {

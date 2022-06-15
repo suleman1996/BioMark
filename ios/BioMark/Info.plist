@@ -71,11 +71,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This will allow to take photos of your credentials.</string>
+	<string>BioMark would like to use your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>BioMark would like to your microphone (for videos)</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library Access Warning</string>
+	<string>BioMark would like access to your photo gallery</string>
 	<key>Privacy – Camera Usage Description	</key>
 	<string>BioMark needs Camera Access Permission</string>
 	<key>Privacy – Photo Library Additions Usage Description</key>
@@ -158,11 +160,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>BioMark would like to use your camera</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>BioMark would like to your microphone (for videos)</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>BioMark would like access to your photo gallery</string>
 </dict>
 </plist>

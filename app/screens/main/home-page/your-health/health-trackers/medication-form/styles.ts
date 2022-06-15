@@ -19,6 +19,7 @@ export const makeStyles = (colors: any) =>
     },
     gradientButton: {
       marginVertical: 15,
+      marginHorizontal: 20,
       marginTop: 30,
     },
     dropDownMenu: {

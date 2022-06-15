@@ -22,9 +22,10 @@ export const makeStyles = (colors: any) =>
     },
     circleText: {
       marginTop: 10,
-      fontFamily: fonts.regular,
+      fontFamily: fonts.mulishBold,
       color: colors.heading,
-      fontWeight: 'bold',
+      fontSize: 15,
+      // fontWeight: 'bold',
     },
   });
 export default makeStyles;
