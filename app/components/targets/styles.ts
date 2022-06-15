@@ -8,17 +8,16 @@ export const makeStyles = (colors: any) =>
     outerTarget: {
       // borderWidth: 0.7,
       // borderColor: colors.darkGray,
-      // shadowColor: 'rgba(0,0,0,0.8)',
       backgroundColor: 'white',
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
         height: 1,
       },
-      shadowOpacity: 0.2,
+      shadowOpacity: 0.1,
       shadowRadius: 1.41,
 
-      elevation: 2,
+      elevation: 3,
       borderRadius: 8,
       marginVertical: 10,
     },
