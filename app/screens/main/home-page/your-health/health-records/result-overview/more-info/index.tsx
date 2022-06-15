@@ -13,11 +13,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import moment from 'moment';
 import { TitleWithBackLayout } from 'components/layouts';
+import { checkPermissionAndDownloadBase64 } from 'utils/functions/download-file';
 import Styles from './styles';
 import fonts from 'assets/fonts';
 import { userService } from 'services/user-service/user-service';
 import Charts from './charts';
 import { ActivityIndicator } from 'components/';
+import DescriptiveBtn from 'components/descriptive-btn';
 
 const MoreInfo = () => {
   const { colors } = useTheme();
@@ -47,6 +49,7 @@ const MoreInfo = () => {
       setIsLoading(true);
       const result = await userService.getResultPdf(id);
       console.log('her is the download pdf  ', result.data);
+      checkPermissionAndDownloadBase64(result.data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -66,8 +69,8 @@ const MoreInfo = () => {
       <Text
         style={{
           fontFamily: fonts.bold,
-          color: color && colors.black,
-          fontSize: color && 16,
+          color: color ? color : colors.bg,
+          fontSize: 14,
         }}
       >
         {title}
@@ -75,13 +78,13 @@ const MoreInfo = () => {
     </View>
   );
 
-  const RenderDownload = ({ width, resultId }) => (
+  const RenderDownload = ({ width, resultId, name }) => (
     <View
       style={{ width: width, alignItems: 'center', justifyContent: 'center' }}
     >
       <TouchableOpacity onPress={() => getPdf(resultId)}>
         <MaterialCommunityIcons
-          name="download"
+          name={name}
           style={{ fontSize: 30, color: colors.greenDark }}
         />
       </TouchableOpacity>
@@ -90,8 +93,13 @@ const MoreInfo = () => {
 
   const RenderTable = ({ data }) => (
     <View style={{ flexDirection: 'row' }}>
+      <RenderDownload
+        name="chart-timeline-variant"
+        resultId={data?.id}
+        width={50}
+      />
       <RenderView
-        width={80}
+        width={70}
         title={moment(data.date_of_test).format('MMMM D YYYY')}
       />
       <RenderView width={80} title={data.observation_value} />
@@ -103,13 +111,14 @@ const MoreInfo = () => {
       />
       <RenderView width={120} title={data?.comment} />
       <RenderView width={130} title={data.provider_name} />
-      <RenderDownload resultId={data?.id} width={70} />
+      <RenderDownload name="download" resultId={data?.id} width={70} />
     </View>
   );
 
   const RenderTableHeader = () => (
     <View style={{ flexDirection: 'row' }}>
-      <RenderView color={colors.black} width={80} title="Date" />
+      <RenderView color={colors.black} width={50} />
+      <RenderView color={colors.black} width={70} title="Date" />
       <RenderView color={colors.black} width={80} title="Result" />
       <RenderView color={colors.black} width={70} title="Unit" />
       <RenderView color={colors.black} width={100} title="Ref. Range" />
@@ -181,6 +190,7 @@ const MoreInfo = () => {
                     {summary?.latest?.value} {summary?.latest?.unit}
                   </Text>
                   <View style={styles.divider} />
+
                   <Text style={styles.heading}>
                     <Text style={{ fontSize: 14 }}>Reference Range : </Text>
                     <Text style={{ fontSize: 14, fontFamily: fonts.regular }}>
@@ -202,7 +212,6 @@ const MoreInfo = () => {
                 >
                   HISTORY
                 </Text>
-
                 <View style={[styles.lastResult]}>
                   <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <FlatList
@@ -243,6 +252,28 @@ const MoreInfo = () => {
                       </Text>
                     </View>
                   </>
+                )}
+
+                {summary?.description?.normal_reading !== null && (
+                  <DescriptiveBtn
+                    status="normal"
+                    question="What if my Urea is normal?"
+                    description={summary?.description?.normal_reading}
+                  />
+                )}
+                {summary?.description?.low_reading !== null && (
+                  <DescriptiveBtn
+                    status="low"
+                    question="What if my Urea is low?"
+                    description={summary?.description?.low_reading}
+                  />
+                )}
+                {summary?.description?.high_reading !== null && (
+                  <DescriptiveBtn
+                    status="high"
+                    question="What if my Urea is high?"
+                    description={summary?.description?.high_reading}
+                  />
                 )}
               </View>
             </ScrollView>

@@ -16,12 +16,14 @@ import { useRoute, useNavigation } from '@react-navigation/native';
 
 import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
+import { onShare } from 'components/social-share/index';
 import SearchMeuBar from 'components/search-menu-bar/index';
 import { Button } from 'components/button';
 import Pdf from 'assets/svgs/pdf';
 import RenderResults from './result-card';
 import HealthProgressFilter from 'components/health-progress-filter/index';
 import SCREENS from 'navigation/constants/index';
+import { userService } from 'services/user-service/user-service';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -45,13 +47,26 @@ const Index = () => {
     id: 0,
     title: 'All',
   });
+  const [pdfReport, setPdfReport] = React.useState('');
 
   React.useEffect(() => {
     dispatch(getReduxResultOverview(route?.params?.result?.lab_id));
     console.log('Result OverView Redux ', resultOverView);
-
+    PdfData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const PdfData = async () => {
+    try {
+      const result = await userService.getResultPdf(resultOverView?.lab_id);
+
+      setPdfReport(result.data);
+
+      //   setPdf(pspPdfLinks.link);
+    } catch (err) {
+      console.log('Pdf report error ', err);
+    }
+  };
 
   const RenderTitle = ({ state, setState, title }) => (
     <TouchableOpacity
@@ -167,6 +182,14 @@ const Index = () => {
         isShare={true}
         isInfo={true}
         onPressInfo={setIsInfo}
+        // onSharePress={() => onShare(pdfReport)}
+        onSharePress={async () => {
+          await onShare({
+            title: 'Sharing pdf file from BioMark',
+            message: 'Please take a look at this file',
+            url: `data:application/pdf;base64,${pdfReport}`,
+          });
+        }}
       >
         <View style={styles.miniHeader}>
           <Text style={styles.miniHeaderText}>
