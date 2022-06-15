@@ -20,6 +20,7 @@ type Props = {
   defaultValue: any;
   onBlur?: any;
   containerStyles: any;
+  maxLength?: number;
 };
 
 const InputWithLabel = ({
@@ -33,6 +34,7 @@ const InputWithLabel = ({
   defaultValue,
   onBlur,
   containerStyles,
+  maxLength,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -52,6 +54,7 @@ const InputWithLabel = ({
         value={value}
         defaultValue={defaultValue}
         onBlur={onBlur}
+        maxLength={maxLength}
       />
       {error ? (
         <View style={styles.errorContainer}>

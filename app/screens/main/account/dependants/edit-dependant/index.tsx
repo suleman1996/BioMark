@@ -204,6 +204,7 @@ const EditDependantScreen = (props: Props) => {
                   label="First Name"
                   placeholder={''}
                   onChange={handleChange('first_name')}
+                  maxLength={50}
                   value={values.first_name}
                   error={touched.first_name ? errors.first_name : ''}
                   onBlur={() => setFieldTouched('first_name')}
@@ -212,6 +213,7 @@ const EditDependantScreen = (props: Props) => {
                   label="Last Name"
                   placeholder={''}
                   onChange={handleChange('last_name')}
+                  maxLength={50}
                   value={values.last_name}
                   error={touched.last_name ? errors.last_name : ''}
                   onBlur={() => setFieldTouched('last_name')}
@@ -273,6 +275,7 @@ const EditDependantScreen = (props: Props) => {
                   label="NRIC /Passport Number"
                   placeholder={''}
                   onChange={handleChange('id_number')}
+                  maxLength={20}
                   value={values.id_number}
                   error={touched.id_number ? errors.id_number : ''}
                   onBlur={() => setFieldTouched('id_number')}

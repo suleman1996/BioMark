@@ -17,6 +17,7 @@ import { logNow } from 'utils/functions/log-binder';
 import makeStyles from './styles';
 import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
   data: DependentData[];
@@ -31,6 +32,7 @@ const DependantsList = (props: Props) => {
   const authContext = useContext(AuthContext);
   const [isDelete, setIsDelete] = useState(false);
   const [deleteId, setDeleteId] = useState<any>();
+  const [showFullText, setShowFullText] = useState<any>(false);
 
   const userProfile = async () => {
     try {
@@ -65,7 +67,28 @@ const DependantsList = (props: Props) => {
     return (
       <View style={styles.cardItem}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>{name}</Text>
+          {name.length < 20 ? (
+            <Text style={styles.headerTitle}>{name}</Text>
+          ) : (
+            <>
+              {showFullText ? (
+                <Text
+                  onPress={() => setShowFullText(false)}
+                  style={[styles.headerTitle]}
+                >
+                  {name}
+                </Text>
+              ) : (
+                <Text
+                  onPress={() => setShowFullText(true)}
+                  style={[styles.headerTitle, { maxHeight: heightToDp(5) }]}
+                >
+                  {name.substring(0, 20)}...
+                </Text>
+              )}
+            </>
+          )}
+
           <View style={styles.headerEnd}>
             <Pressable
               onPress={() =>
