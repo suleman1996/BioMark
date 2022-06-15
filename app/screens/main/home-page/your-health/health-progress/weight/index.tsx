@@ -41,6 +41,8 @@ const Index = () => {
   );
 
   const [chartState, setChartState] = React.useState(null);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [noMoreData, setNoMoreData] = React.useState(false);
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -99,10 +101,12 @@ const Index = () => {
   }, []);
 
   React.useEffect(() => {
+    console.log('CHART STATE CHANGED');
+
     if (chartState) {
       const { chartOptions } = createChart(chartState);
       setTimeout(() => {
-        chartRef.current.setOption(chartOptions);
+        chartRef?.current?.setOption(chartOptions);
       }, 10);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +114,7 @@ const Index = () => {
 
   // COPIED FUNCTIONS
   const createChart = (data: any) => {
+    console.log('CREATING CHART');
     const points =
       data.length === 0
         ? []
@@ -133,6 +138,7 @@ const Index = () => {
   };
 
   const onApplyFilters = (filter1, filter2) => {
+    console.log({ filter1, filter2 });
     setSelectedfilterOption1(filter1);
     setSelectedfilterOption2(filter2);
     setIsVisible(false);
@@ -173,7 +179,16 @@ const Index = () => {
           <Logs
             navigate={SCREENS.WEIGHT}
             logData={weightLogs?.log}
-            showMore={'Show more'}
+            showMore={noMoreData ? 'No more data to show' : 'Show more'}
+            onNextPage={() => {
+              if (noMoreData) return;
+              setCurrentPage((prev) => prev + 1);
+              dispatch(
+                getReduxWeightLogs(currentPage + 1, () => {
+                  setNoMoreData(true);
+                })
+              );
+            }}
           />
           <View style={{ height: 70 }} />
         </ScrollView>

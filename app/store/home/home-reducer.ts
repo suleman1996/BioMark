@@ -199,7 +199,10 @@ export default function (state = INITIAL_STATE, action: any) {
     case GET_RESULT_LOGS: {
       return {
         ...state,
-        weightLogsData: action.payload,
+        weightLogsData:
+          action.payload.page > 1
+            ? [...state.weightLogsData, action.payload.data || []]
+            : action.payload.data,
       };
     }
     case GET_BLOOD_SUGAR_LOGS: {

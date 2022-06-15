@@ -64,7 +64,7 @@ const API_URLS = {
   CREATE_WEIGHT: '/api/v1/patient/weight_trackers',
   CREATE_HBA1C: '/api/v1/patient/psp/trackers/hba1c',
   GET_HEALTH_RISKS: '/api/v1/patient/risks',
-  GET_WEIGHT_LOGS: '/api/v1/patient/weight_trackers/logs?page=1',
+  GET_WEIGHT_LOGS: '/api/v1/patient/weight_trackers/logs',
   GET_BLOOD_SUGAR_LOGS: '/api/v1/patient/psp/trackers/blood_sugar/logs?page=1',
   GET_HBA1C_LOGS: '/api/v1/patient/psp/trackers/hba1c/logs?page=1',
   GET_BLOOD_PRESSURE_LOGS: '/api/v1/patient/bp_trackers/logs?page=1',
