@@ -192,9 +192,9 @@ export interface BookTestBooking {
   test_address_details?: string;
   confirmation_date?: Date;
   schedule_id?: number;
-
   slot_id?: number;
   booking_status?: number;
+
   q1?: boolean;
   q2?: boolean;
   q3?: boolean;

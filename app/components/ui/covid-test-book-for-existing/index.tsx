@@ -242,6 +242,14 @@ const ExisitingBookingForDependent = (props: Props) => {
     await dispatch(addCovidBooking(copyArray));
   };
 
+  // change slot time id
+  const changeToBookingStatus = async () => {
+    const copyArray = booking;
+    copyArray[itemIndex].booking_status = 0;
+    logNow(booking);
+    await dispatch(addCovidBooking(copyArray));
+  };
+
   const _renderItemForDependants = ({
     item,
   }: // index,
@@ -317,7 +325,18 @@ const ExisitingBookingForDependent = (props: Props) => {
       <Pressable onPress={onPress} style={styles.container}>
         <Text style={styles.titleText}>{sDName ? sDName : 'Dependants'}</Text>
         <View style={styles.bookingStatusContainer}>
-          <Text style={styles.statusText}>Not Booked Yet</Text>
+          <Text
+            style={[
+              styles.statusText,
+              booking[itemIndex].booking_status == 0
+                ? { color: colors.lightGreen }
+                : { color: colors.red },
+            ]}
+          >
+            {booking[itemIndex].booking_status == 0
+              ? 'Declared'
+              : 'Not Booked Yet'}
+          </Text>
           <Entypo
             size={responsiveFontSize(30)}
             name={
@@ -531,8 +550,10 @@ const ExisitingBookingForDependent = (props: Props) => {
               </View>
               <Pressable
                 onPress={() => {
+                  changeToBookingStatus();
                   setOpendedBooking(-1);
                 }}
+                disabled={!testTime}
                 style={[
                   styles.bottomBtn,
                   testTime
