@@ -50,7 +50,13 @@ const Index = () => {
   const [pdfReport, setPdfReport] = React.useState('');
 
   React.useEffect(() => {
-    dispatch(getReduxResultOverview(route?.params?.result?.lab_id));
+    dispatch(
+      getReduxResultOverview(
+        route?.params?.result
+          ? route?.params?.result?.lab_id
+          : route?.params?.lab_id
+      )
+    );
     console.log('Result OverView Redux ', resultOverView);
     PdfData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -157,7 +163,9 @@ const Index = () => {
   const applyFilter = () => {
     dispatch(
       getReduxResultOverview(
-        route?.params?.result?.lab_id,
+        route?.params?.result
+          ? route?.params?.result?.lab_id
+          : route?.params?.lab_id,
         selectedfilterOption1?.title
       )
     );
