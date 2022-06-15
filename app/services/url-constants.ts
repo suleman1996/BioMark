@@ -107,6 +107,7 @@ const API_URLS = {
   PSP_GET_HYPER_MODULE_DATA: '/api/v1/patient/psp/modules?program=3',
   GET_LAB_STATUS: '/api/v1/patient/results/lab_status',
   WITHDRAW: '/api/v1/patient/psp/modules/withdraw',
+  TERMS: '/api/v1/patient/psp/modules/terms',
 
   LAB_STATUS_VERYFY: '/api/v1/patient/results/verify',
 

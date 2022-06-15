@@ -31,6 +31,7 @@ import LatestResultCard from 'components/latest-result-card';
 import moment from 'moment';
 import fonts from 'assets/fonts';
 import { showMessage } from 'react-native-flash-message';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -150,7 +151,7 @@ const HealthRecord = () => {
               flexDirection: 'row',
               padding: 5,
               alignItems: 'center',
-              width: '40%',
+              width: widthToDp('38%'),
               borderRadius: 15,
               marginHorizontal: 15,
               marginTop: 10,
@@ -181,7 +182,7 @@ const HealthRecord = () => {
               flexDirection: 'row',
               padding: 5,
               alignItems: 'center',
-              width: '40%',
+              width: widthToDp('30%'),
               borderRadius: 15,
               marginHorizontal: 15,
               marginTop: 10,
@@ -191,12 +192,20 @@ const HealthRecord = () => {
             <View
               style={{
                 borderRadius: 20,
-                backgroundColor: 'green',
+                backgroundColor: colors.greenDark,
                 width: 15,
                 height: 15,
               }}
             ></View>
-            <Text style={{ marginHorizontal: 8 }}>{item.result.status}</Text>
+            <Text
+              style={{
+                marginHorizontal: 8,
+                fontFamily: fonts.OpenSansBold,
+                color: 'black',
+              }}
+            >
+              {item.result.status}
+            </Text>
           </View>
         ) : (
           <View style={styles.pastResultView2}>
