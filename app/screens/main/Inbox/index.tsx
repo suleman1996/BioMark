@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
-import PagerView from 'react-native-pager-view';
+// import PagerView from 'react-native-pager-view';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TitleWithSearchBarLayout } from 'components/layouts';
@@ -62,6 +62,8 @@ export default function InboxScreen() {
     setCurrentPageInboxNoti(1);
     setIsReadMoreOtherNoti(true);
     setCurrentPageOtherNoti(1);
+    PreviousNotification();
+    OtherNotification();
   }, [focused]);
 
   // on page number change update all inbox unread
@@ -95,14 +97,15 @@ export default function InboxScreen() {
   }, [currentPageOtherNoti]);
   /*eslint-enable */
 
-  const pagerRef = useRef<any>();
+  // const pagerRef = useRef<any>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPage, setCurrentPage] = useState(0);
-  const onPageScroll = (event: any) => {
-    const { position } = event.nativeEvent;
-    if (position !== currentPage) {
-      setCurrentPage(position);
-    }
-  };
+  // const onPageScroll = (event: any) => {
+  //   const { position } = event.nativeEvent;
+  //   if (position !== currentPage) {
+  //     setCurrentPage(position);
+  //   }
+  // };
 
   const PreviousNotification = () => {
     return (
@@ -194,7 +197,8 @@ export default function InboxScreen() {
           >
             <View style={styles.tabNameContainer}>
               <Pressable
-                onPress={() => pagerRef.current.setPage(0)}
+                onPress={() => PreviousNotification()}
+                // onPress={() => pagerRef.current.setPage(0)}
                 style={[
                   styles.tab,
                   currentPage == 0 ? { borderBottomWidth: 3 } : {},
@@ -205,7 +209,8 @@ export default function InboxScreen() {
                 </Text>
               </Pressable>
               <Pressable
-                onPress={() => pagerRef.current.setPage(1)}
+                onPress={() => OtherNotification()}
+                // onPress={() => pagerRef.current.setPage(1)}
                 style={[
                   styles.tab,
                   currentPage == 1 ? { borderBottomWidth: 3 } : {},
@@ -216,7 +221,8 @@ export default function InboxScreen() {
                 </Text>
               </Pressable>
             </View>
-            <PagerView
+
+            {/* <PagerView
               ref={pagerRef}
               onPageScroll={onPageScroll}
               style={styles.pagerView}
@@ -228,7 +234,7 @@ export default function InboxScreen() {
               <View key="1">
                 <OtherNotification />
               </View>
-            </PagerView>
+            </PagerView> */}
           </View>
         </View>
       </TitleWithSearchBarLayout>

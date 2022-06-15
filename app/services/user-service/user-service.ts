@@ -456,6 +456,12 @@ const uploadResult = ({ lab_upload }: Props) => {
   });
 };
 
+const Terms = ({ module }: Props) => {
+  return client.post(API_URLS.TERMS, {
+    module,
+  });
+};
+
 const updateProfileAvatar = (pic: String) => {
   return client.post(API_URLS.PROFILE_AVATAR, {
     profile: {
@@ -1861,5 +1867,6 @@ export const userService = {
   getHBA1cChart,
   getBloodPressureMapData,
   getSearchResult,
+  Terms,
   getResultOverViewChartData,
 };
