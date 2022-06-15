@@ -6,6 +6,7 @@ import { useTheme } from 'react-native-paper';
 import StepIndicator from 'react-native-step-indicator';
 
 import Camera from 'assets/svgs/report-scan';
+import makeStyles from './styles';
 import ReportVerify from 'assets/svgs/report-verify';
 import Processing from 'assets/svgs/report-processing';
 import ReportView from 'assets/svgs/report-viewing';
@@ -14,6 +15,7 @@ type Props = { currentPosition: number; label: boolean; icons: array };
 
 const Index = (props: Props) => {
   const { colors } = useTheme();
+  const styles = makeStyles(colors);
 
   const customStyles = {
     stepIndicatorSize: 30,
@@ -51,22 +53,25 @@ const Index = (props: Props) => {
       <View
         style={{
           width: '100%',
-          borderWidth: 1,
+          // borderWidth: 1,
           height: widthToDp(15),
           flexDirection: 'row',
-          justifyContent: 'space-around',
+          justifyContent: 'center',
           alignItems: 'center',
         }}
       >
         <View style={styles.circleView}>
           <Camera fill={colors.white} />
         </View>
+        <View style={styles.blueBar} />
         <View style={styles.circleView}>
           <Processing fill={colors.white} />
         </View>
+        <View style={styles.blueBar} />
         <View style={styles.circleView}>
           <ReportView fill={colors.white} />
         </View>
+        <View style={styles.blueBar} />
         <View style={styles.circleView}>
           <ReportVerify />
         </View>
@@ -76,14 +81,3 @@ const Index = (props: Props) => {
 };
 
 export default Index;
-const styles = StyleSheet.create({
-  circleView: {
-    borderWidth: 1,
-    height: widthToDp(11),
-    width: widthToDp(11),
-    borderRadius: widthToDp(13),
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#1B96D8',
-  },
-});
