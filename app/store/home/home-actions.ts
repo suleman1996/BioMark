@@ -427,7 +427,6 @@ export const getNewTargetAction =
     await userService
       .getNewTarget()
       .then((res) => {
-        console.log({ res: res.hba1c_unit });
         dispatch(getUnits(res));
       })
       .catch((err) => {
@@ -488,7 +487,6 @@ export const getBloodSugarTargetsAction =
     await userService
       .getBloodSugarTargets()
       .then((res) => {
-        console.log({ res: res.length });
         dispatch(getBloodSugarTargetsCreator(res));
       })
       .catch((err) => {
@@ -515,7 +513,6 @@ export const getReduxBloodSugarLogs =
       .getBloodSugarLogs()
       .then(async (res) => {
         //
-        console.log({ res });
         await dispatch(getBloodSuarLogs(res));
       })
       .catch((err) => {
@@ -590,7 +587,6 @@ export const getReduxBloodPressureLogs =
     await userService
       .getBloodPressureLogs()
       .then(async (res) => {
-        console.log({ res: res.log });
         dispatch(getBPLogs(res));
       })
       .catch((err) => {
@@ -604,7 +600,6 @@ export const getMedicationsTrackersAction =
     await userService
       .getMedicationTrackers(date)
       .then(async (res) => {
-        console.log({ res });
         dispatch(getMedicationsTrackerCreator(res));
       })
       .catch((err) => {

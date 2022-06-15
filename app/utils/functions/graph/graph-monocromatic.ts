@@ -97,7 +97,6 @@ export const getGraphOptions = (
       fontWeight: 'bold',
       interval: 0,
       formatter: (value, index) => {
-        console.log({ value });
         dateFormat(value, index, config.dateRange);
       },
       showMaxLabel: config.dateRange !== RangeValue.all,

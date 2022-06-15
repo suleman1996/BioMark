@@ -117,7 +117,7 @@ const BloodPressure = ({ route }: any) => {
 
   useEffect(() => {
     if (
-      bloodPressure.bp_diastolic >= bloodPressure.bp_systolic &&
+      +bloodPressure.bp_diastolic >= +bloodPressure.bp_systolic &&
       bloodPressure.bp_diastolic !== ''
     ) {
       setError(

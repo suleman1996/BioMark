@@ -69,8 +69,7 @@ const styles = (colors: any) =>
     },
     errorContainer: {
       width: '100%',
-      height: 30,
-      paddingVertical: heightToDp(0.3),
+      paddingVertical: heightToDp(1),
       paddingHorizontal: widthToDp(4),
       backgroundColor: colors.red,
       borderBottomLeftRadius: widthToDp(2),
@@ -87,8 +86,8 @@ const styles = (colors: any) =>
     },
     successContainer: {
       width: '100%',
-      height: 30,
-      paddingVertical: heightToDp(0.3),
+      // height: 30,
+      paddingVertical: heightToDp(1),
       paddingHorizontal: widthToDp(4),
       backgroundColor: colors.greenDark,
       borderBottomLeftRadius: widthToDp(2),

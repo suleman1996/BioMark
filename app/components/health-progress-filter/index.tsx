@@ -20,12 +20,14 @@ const Index = ({
   const styles = Styles(colors);
   const [selectedfilterOption1, setSelectedfilterOption1] = React.useState();
   const [selectedfilterOption2, setSelectedfilterOption2] = React.useState();
+
   React.useEffect(() => {
     if (values?.selectedfilterOption1)
       setSelectedfilterOption1(values.selectedfilterOption1);
     if (values?.selectedfilterOption2)
       setSelectedfilterOption2(values.selectedfilterOption2);
   }, [values]);
+
   const RenderRadio = ({ item, onPress, selectedfilterOption }) => (
     <TouchableOpacity
       onPress={onPress}

@@ -220,8 +220,6 @@ const Medication = ({ route }) => {
     setIsLoading(false);
   }, [SELECTED_MEDICATION_LOG_ID]);
 
-  console.log({ options2, meal: medicationTrackerState.meal_type });
-
   return (
     <TitleWithBackWhiteBgLayout
       title={SELECTED_MEDICATION_LOG_ID ? 'Medication' : 'Take Medication'}
