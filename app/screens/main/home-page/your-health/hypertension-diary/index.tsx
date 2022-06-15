@@ -314,7 +314,7 @@ const HypertensionDiary = () => {
                 {showDemo === 1 && (
                   <>
                     <View
-                      style={{ height: 110, width: 100, marginLeft: '14%' }}
+                      style={{ height: 110, width: 100, marginLeft: '4%' }}
                     />
                     <RenderHealthTrackDemo item={healthTracker[1]} />
                   </>
@@ -322,7 +322,7 @@ const HypertensionDiary = () => {
                 {showDemo === 2 && (
                   <>
                     <View
-                      style={{ height: 110, width: 100, marginLeft: '18%' }}
+                      style={{ height: 110, width: 100, marginLeft: '6%' }}
                     />
                     <View style={{ height: 110, width: 100 }} />
                     <RenderHealthTrackDemo item={healthTracker[2]} />
@@ -379,10 +379,10 @@ const HypertensionDiary = () => {
               />
 
               <WithdrawProgram
-                text2="Yes"
+                text="Yes"
                 visible={modalVisible}
                 title="Are You Sure?"
-                text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
+                text2="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
                 cancel="Cancel"
                 cancelModal={() => setModalVisible(!modalVisible)}
                 closeModal={() => setModalVisible(!modalVisible)}

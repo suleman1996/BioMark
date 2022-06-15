@@ -30,10 +30,10 @@ const WithdrawProgram = ({
               <Close />
             </TouchableOpacity>
           </View>
-          <Text style={styles.modalText2}>{text}</Text>
+          <Text style={styles.modalText2}>{text2}</Text>
 
           <GradientButton
-            text={text2}
+            text={text}
             color={color}
             // color={['#2C6CFC', '#2CBDFC']}
             style={styles.gradientButton}

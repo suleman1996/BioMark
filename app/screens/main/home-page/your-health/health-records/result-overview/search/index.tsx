@@ -4,118 +4,50 @@ import React from 'react';
 import { Text, useTheme } from 'react-native-paper';
 import { TitleWithBackLayout } from 'components/layouts';
 import { useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import Styles from './styles';
 import CrossIcon from 'react-native-vector-icons/AntDesign';
 import { userService } from 'services/user-service/user-service';
 import fonts from 'assets/fonts';
+import SCREENS from 'navigation/constants/index';
 
 const Search = () => {
   const { colors } = useTheme();
   const route = useRoute();
   const styles = Styles(colors);
+  const navigation = useNavigation();
 
   const [searchText, setSearchText] = React.useState('');
-  const [searchDummy] = React.useState([
-    {
-      id: 5,
-      header_name: 'Liver Function',
-      mapping_priority: 5,
-      biomarkers: [
-        {
-          id: 119,
-          name: 'Alkaline Phosphatase',
-        },
-        {
-          id: 120,
-          name: 'Albumin',
-        },
-        {
-          id: 121,
-          name: 'Albumin',
-        },
-        {
-          id: 122,
-          name: 'Alanine Transaminase (ALT)',
-        },
-        {
-          id: 151,
-          name: 'Aspartate Transferase (AST)',
-        },
-        {
-          id: 152,
-          name: 'Albumin',
-        },
-        {
-          id: 153,
-          name: 'Albumin',
-        },
-        {
-          id: 154,
-          name: 'Aspartate Transferase (AST)',
-        },
-      ],
-    },
-    {
-      id: 6,
-      header_name: 'Lipid Studies',
-      mapping_priority: 6,
-      biomarkers: [
-        {
-          id: 105,
-          name: 'Apolipoprotein B',
-        },
-        {
-          id: 115,
-          name: 'Aspartate Transferase (AST)',
-        },
-        {
-          id: 116,
-          name: 'Alkaline Phosphatase',
-        },
-        {
-          id: 156,
-          name: 'Alkaline Phosphatase',
-        },
-        {
-          id: 157,
-          name: 'Aspartate Transferase (AST)',
-        },
-        {
-          id: 158,
-          name: 'Alkaline Phosphatase',
-        },
-        {
-          id: 167,
-          name: 'Apolipoprotein A1',
-        },
-        {
-          id: 168,
-          name: 'Aspartate Transferase (AST)',
-        },
-        {
-          id: 170,
-          name: 'Apo B / Apo A1 Ratio',
-        },
-      ],
-    },
-  ]);
+  const [searchData, setSearchData] = React.useState();
 
-  const searchResult = async () => {
+  const searchResult = async (search) => {
     try {
-      const result = await userService.getSearchResult(route?.params?.labId);
-      console.log('Search Result ', result.data);
+      console.log(route?.params?.labId, search);
+      const result = await userService.getSearchResult(
+        route?.params?.labId,
+        search
+      );
+
+      setSearchData(result.data.results);
     } catch (error) {
       console.log('error ', error);
     }
   };
 
   const RenderSearch = ({ item }) => (
-    <View style={styles.renderSearchView}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(SCREENS.MORE_INFO, {
+          result_id: item?.biomarker_id,
+        })
+      }
+      style={styles.renderSearchView}
+    >
       <Text style={{ fontFamily: fonts.regular, fontSize: 14 }}>
         {item?.name}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -126,7 +58,8 @@ const Search = () => {
             <TextInput
               style={styles.input}
               onChangeText={(item) => {
-                setSearchText(item), searchResult();
+                setSearchText(item);
+                searchResult(item);
               }}
               value={searchText}
               placeholder={'Search BioMarker..'}
@@ -139,7 +72,7 @@ const Search = () => {
         </View>
         <ScrollView>
           {searchText !== '' &&
-            searchDummy?.map((item) => (
+            searchData?.panel_card?.map((item) => (
               <>
                 <Text
                   style={{
@@ -151,7 +84,7 @@ const Search = () => {
                 >
                   {item?.header_name}
                 </Text>
-                {item?.biomarkers?.map((lable) => (
+                {searchData?.biomarker_card?.map((lable) => (
                   <RenderSearch item={lable} />
                 ))}
               </>

@@ -22,7 +22,7 @@ const SupportCenter = () => {
     <TitleWithBackWhiteBgLayout title={undefined}>
       <ScrollView>
         <Icon height={70} />
-        <Text style={styles.text}>By signing this form:</Text>
+        <Text style={styles.text}>By signing this form, you hereby:</Text>
 
         <SupportSystemForm
           text={

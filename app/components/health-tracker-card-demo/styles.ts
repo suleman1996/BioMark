@@ -27,7 +27,7 @@ const styles = (colors: any) =>
       justifyContent: 'center',
       paddingVertical: 20,
       paddingHorizontal: 10,
-      marginHorizontal: 5,
+      // marginHorizontal: 5,
     },
   });
 export default styles;

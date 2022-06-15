@@ -7,6 +7,7 @@ import SCREENS from 'navigation/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { getReduxNewMedicationTracker } from 'store/home/home-actions';
+import fonts from 'assets/fonts';
 
 const RenderHealthTrack = ({ item }) => {
   const { colors } = useTheme();
@@ -55,7 +56,12 @@ const RenderHealthTrack = ({ item }) => {
       >
         {item?.item?.value}
       </Text>
-      <Text style={[styles.healthTrackerHeading, { color: colors.lightGrey }]}>
+      <Text
+        style={[
+          styles.healthTrackerHeading,
+          { color: colors.lightGrey, fontFamily: fonts.mulishRegular },
+        ]}
+      >
         {item?.item?.subTitle}
       </Text>
     </TouchableOpacity>

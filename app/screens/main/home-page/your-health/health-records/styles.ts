@@ -60,12 +60,12 @@ const styles = (colors: any) =>
       fontFamily: fonts.mulishRegular,
       marginBottom: heightToDp(3),
     },
-    latestResult: {
-      fontSize: responsiveFontSize(20),
-      color: colors.primary,
-      fontFamily: fonts.OpenSansBold,
-      marginTop: heightToDp(5),
-    },
+    // latestResult: {
+    //   fontSize: responsiveFontSize(20),
+    //   color: colors.primary,
+    //   fontFamily: fonts.OpenSansBold,
+    //   marginTop: heightToDp(5),
+    // },
     pastResultMainView: {
       backgroundColor: 'white',
       paddingTop: 10,
@@ -186,6 +186,12 @@ const styles = (colors: any) =>
       color: colors.smoke,
       textAlign: 'center',
       marginTop: heightToDp(2),
+    },
+    latestResult: {
+      fontSize: responsiveFontSize(20),
+      color: colors.primary,
+      fontFamily: fonts.OpenSansBold,
+      marginTop: heightToDp(5),
     },
   });
 export default styles;

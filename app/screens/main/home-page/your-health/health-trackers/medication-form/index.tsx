@@ -5,6 +5,7 @@ import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import SCREENS from 'navigation/constants';
+import { ActivityIndicator } from 'components';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import DatePicker from 'components/date-picker/index';
 import GradientButton from 'components/linear-gradient-button';
@@ -15,6 +16,9 @@ import { navigate } from 'services/nav-ref';
 
 import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
+import { useDispatch } from 'react-redux';
+import { getMedicationsTrackersAction } from 'store/home/home-actions';
+import moment from 'moment';
 
 const FREQUENCY_TIME_OPTIONS: any[] = [
   { label: '12AM', value: '12AM' },
@@ -57,6 +61,7 @@ type MEDICATION_TYPE = {
 const MedicationForm = (props: any) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const dispatch = useDispatch();
 
   // Form Options
   const [medicationOptionsData, setMedicationOptionsData] = useState<any>({
@@ -78,6 +83,7 @@ const MedicationForm = (props: any) => {
   const [dosageRangeError, setDosageRangeError] = useState<string>('');
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const medicationIndex = medicationOptionsData.medication_list.findIndex(
     ({ id }) => id === medication.medication_list_id
@@ -183,15 +189,18 @@ const MedicationForm = (props: any) => {
 
   // Save & Update Medication
   const saveMedication = async () => {
+    setLoading(true);
     const API_FUNCTION = SELECTED_MEDICATION_ID
       ? 'updateMedication'
       : 'saveMedication';
     try {
       await userService[API_FUNCTION]({ medication }, SELECTED_MEDICATION_ID);
-      navigate(SCREENS.SHOW_MEDICATION);
+      navigate(SCREENS.HEALTH_PROGRESS);
+      dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
     } catch (err) {
       console.error(err);
     }
+    setLoading(false);
   };
 
   // Delete Medication
@@ -205,15 +214,17 @@ const MedicationForm = (props: any) => {
   };
 
   return (
-    <View style={styles.outerContainer}>
-      <ScrollView>
-        <TitleWithBackWhiteBgLayout
-          binIcon={SELECTED_MEDICATION_ID ? true : false}
-          onPressIcon={() => setShowDeleteModal(true)}
-          title={
-            SELECTED_MEDICATION_ID ? 'Edit Medication' : 'Add New Medication'
-          }
-        >
+    <>
+      <ActivityIndicator visible={loading} />
+      <View style={styles.outerContainer}>
+        <ScrollView>
+          <TitleWithBackWhiteBgLayout
+            binIcon={SELECTED_MEDICATION_ID ? true : false}
+            onPressIcon={() => setShowDeleteModal(true)}
+            title={
+              SELECTED_MEDICATION_ID ? 'Edit Medication' : 'Add New Medication'
+            }
+          />
           <View style={styles.container}>
             {SELECTED_MEDICATION_ID ? (
               <>
@@ -237,9 +248,9 @@ const MedicationForm = (props: any) => {
                 <DropdownMenu
                   label="Disease"
                   options={
-                    medicationOptionsData.medication_list[
-                      0 || medication.medication_list_id
-                    ]?.disease_list || []
+                    medicationOptionsData.medication_list.find(
+                      (a) => a.id === medication.medication_list_id
+                    )?.disease_list || []
                   }
                   selectedValue={medication?.disease_type}
                   onValueChange={(text: any) =>
@@ -258,6 +269,9 @@ const MedicationForm = (props: any) => {
                     }}
                   >
                     <InputWithLabel
+                      containerStyles={{
+                        marginTop: 0,
+                      }}
                       value={medication.dosage}
                       error={dosageRangeError}
                       onChange={(val) => {
@@ -275,6 +289,8 @@ const MedicationForm = (props: any) => {
                   <View
                     style={{
                       width: '20%',
+                      // alignItems: 'center',
+                      // justifyContent: 'center',
                     }}
                   >
                     <Text style={styles.unitText}>unit(s)</Text>
@@ -354,30 +370,31 @@ const MedicationForm = (props: any) => {
               callMe={deleteMedication}
             />
           )}
-        </TitleWithBackWhiteBgLayout>
-      </ScrollView>
-      {SELECTED_MEDICATION_ID ? (
-        <GradientButton
-          text="Save Edit"
-          color={['#2C6CFC', '#2CBDFC']}
-          disabled={!BUTTON_DISABLED}
-          style={styles.gradientButton}
-          onPress={saveMedication}
-        />
-      ) : (
-        <GradientButton
-          text="Add"
-          color={
-            BUTTON_DISABLED
-              ? ['#2C6CFC', '#2CBDFC']
-              : [colors.disabled, colors.disabled]
-          }
-          disabled={!BUTTON_DISABLED}
-          style={styles.gradientButton}
-          onPress={saveMedication}
-        />
-      )}
-    </View>
+          {/* </TitleWithBackWhiteBgLayout> */}
+          {SELECTED_MEDICATION_ID ? (
+            <GradientButton
+              text="Save Edit"
+              color={['#2C6CFC', '#2CBDFC']}
+              disabled={!BUTTON_DISABLED}
+              style={styles.gradientButton}
+              onPress={saveMedication}
+            />
+          ) : (
+            <GradientButton
+              text="Add"
+              color={
+                BUTTON_DISABLED
+                  ? ['#2C6CFC', '#2CBDFC']
+                  : [colors.disabled, colors.disabled]
+              }
+              disabled={!BUTTON_DISABLED}
+              style={styles.gradientButton}
+              onPress={saveMedication}
+            />
+          )}
+        </ScrollView>
+      </View>
+    </>
   );
 };
 

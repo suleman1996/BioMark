@@ -73,8 +73,6 @@ const DiabetesCenter = () => {
     console.log('Health diabetes api =======>', hell);
     console.log('dashborad api result', dashboard);
     setBarCodeData(dashboard?.program_detail?.barcode);
-    // alert(JSON.stringify(dashboard));
-    // alert(JSON.stringify(dashboard.program_detail.barcode));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     setShowDemo(0);
@@ -84,7 +82,6 @@ const DiabetesCenter = () => {
     try {
       dispatch(getReduxPspModules());
       setPdfData(pspModuleData.pdf);
-      // console.log('ps--------------------p', pspModuleData);
       setVideo(pspModuleData.video);
     } catch (err) {
       console.log(err);
@@ -114,7 +111,7 @@ const DiabetesCenter = () => {
   const [healthTrackerDemo] = React.useState([
     {
       id: 0,
-      title: 'Blood Sygar',
+      title: 'Blood Sugar',
       value: '110',
       subTitle: 'mg/dL',
       color: colors.lightYellow,
@@ -258,6 +255,11 @@ const DiabetesCenter = () => {
               flexDirection: 'row',
               top: 50,
               left: 20,
+              // position: 'absolute',
+              // zIndex: [0, 1, 2].includes(showDemo) ? 33 : 29,
+              // flexDirection: 'row',
+              // top: 45,
+              // marginHorizontal: 15,
             }}
           >
             {showDemo === 0 && (
@@ -265,14 +267,14 @@ const DiabetesCenter = () => {
             )}
             {showDemo === 1 && (
               <>
-                <View style={{ height: 110, width: 100, marginLeft: '9%' }} />
+                <View style={{ height: 110, width: 100, marginLeft: '4%' }} />
                 <RenderHealthTrackDemo item={healthTrackerDemo[1]} />
               </>
             )}
             {showDemo === 2 && (
               <>
-                <View style={{ height: 110, width: 100, marginLeft: '10%' }} />
-                <View style={{ height: 110, width: 100 }} />
+                <View style={{ height: 110, width: 100, marginLeft: '36%' }} />
+                {/* <View style={{ height: 110, width: 100 }} /> */}
                 <RenderHealthTrackDemo item={healthTrackerDemo[2]} />
               </>
             )}
@@ -374,10 +376,10 @@ const DiabetesCenter = () => {
           />
 
           <WithdrawProgram
-            text2="Yes"
+            text="Yes"
             visible={modalVisible}
             title="Are You Sure?"
-            text="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
+            text2="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
             cancel="Cancel"
             cancelModal={() => setModalVisible(!modalVisible)}
             closeModal={() => setModalVisible(!modalVisible)}

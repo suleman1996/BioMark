@@ -24,7 +24,6 @@ import SCREENS from 'navigation/constants';
 import { getAllDependents } from 'store/account/account-actions';
 import { DependentSingleGetResponse } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 
@@ -53,6 +52,19 @@ const EditDependantScreen = (props: Props) => {
   const [countryCode, setCountryCode] = useState('MY');
   const [selectedCountryCode, setSelectedCountryCode] = useState('+60');
 
+  const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
+  useEffect(() => {
+    if (selectedCountryCode == '60') {
+      setNumberCondition({ min: 8, max: 11 });
+    } else if (selectedCountryCode == '63') {
+      setNumberCondition({ min: 10, max: 10 });
+    } else if (selectedCountryCode == '65') {
+      setNumberCondition({ min: 8, max: 8 });
+    } else {
+      setNumberCondition({ min: 4, max: 13 });
+    }
+  }, [selectedCountryCode]);
+
   const [dependentData, setDependentData] =
     useState<DependentSingleGetResponse>();
   /*eslint-disable */
@@ -64,8 +76,9 @@ const EditDependantScreen = (props: Props) => {
         logNow('single dependent response', res);
         setDependentData(res);
         const phoneNumber: any = parsePhoneNumber(res.dependent_mobile_number);
+        console.log('hhhhhhh', phoneNumber);
         setCountryCode(phoneNumber?.country);
-        setSelectedCountryCode(phoneNumber?.country_phone_code);
+        setSelectedCountryCode(phoneNumber?.countryCallingCode);
         setNationalNumber(phoneNumber?.nationalNumber);
       })
       .catch((err) => {
@@ -105,7 +118,7 @@ const EditDependantScreen = (props: Props) => {
       country_code: countryCode,
       country_phone_code: `${selectedCountryCode}`,
     });
-    const pN = `${selectedCountryCode}${phone_number}`;
+    const pN = `+${selectedCountryCode}${phone_number}`;
     const cPC = `+${selectedCountryCode}`;
 
     setIsLoading(true);
@@ -148,7 +161,11 @@ const EditDependantScreen = (props: Props) => {
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: heightToDp(20) }}
+          contentContainerStyle={
+            {
+              // paddingBottom: heightToDp(20)
+            }
+          }
         >
           <Text style={styles.headerText}>Enter your Dependant Details</Text>
           <Formik
@@ -162,7 +179,7 @@ const EditDependantScreen = (props: Props) => {
               id_number: dependentData?.id_number,
               birth_date: dependentData?.dependent_dob,
               email: dependentData?.dependent_email,
-              phone_number: nationalNumber,
+              phone_number: nationalNumber + '',
               gender_id: dependentData?.dependent_gender,
             }}
             onSubmit={() => {
@@ -179,7 +196,8 @@ const EditDependantScreen = (props: Props) => {
               // isSubmitting,
               isValid,
               setFieldValue,
-              // touched,
+              touched,
+              setFieldTouched,
             }) => (
               <>
                 <InputWithLabel
@@ -187,14 +205,16 @@ const EditDependantScreen = (props: Props) => {
                   placeholder={''}
                   onChange={handleChange('first_name')}
                   value={values.first_name}
-                  error={values.first_name ? errors.first_name : ''}
+                  error={touched.first_name ? errors.first_name : ''}
+                  onBlur={() => setFieldTouched('first_name')}
                 />
                 <InputWithLabel
                   label="Last Name"
                   placeholder={''}
                   onChange={handleChange('last_name')}
                   value={values.last_name}
-                  error={values.last_name ? errors.last_name : ''}
+                  error={touched.last_name ? errors.last_name : ''}
+                  onBlur={() => setFieldTouched('last_name')}
                 />
                 <PhoneNumberWithLabel
                   label="Mobile Number"
@@ -205,16 +225,37 @@ const EditDependantScreen = (props: Props) => {
                     setFieldValue('phone_number', e);
                   }}
                   countryCode={countryCode}
-                  error={values.phone_number ? errors.phone_number : ''}
                   setCountryCode={setCountryCode}
                   setSelectCountryCode={setSelectedCountryCode}
+                  maxLength={numberCondition.max}
+                  onBlur={() => setFieldTouched('phone_number')}
                 />
+                {touched.phone_number &&
+                  (errors.phone_number ? (
+                    <View style={styles.errorContainer}>
+                      <Text style={styles.errorText}>
+                        {errors.phone_number}
+                      </Text>
+                    </View>
+                  ) : (
+                    values.phone_number.length < numberCondition.min && (
+                      <View style={styles.errorContainer}>
+                        <Text style={styles.errorText}>
+                          Must have {numberCondition.min}
+                          {numberCondition.max !== numberCondition.min &&
+                            -numberCondition.max}{' '}
+                          characters
+                        </Text>
+                      </View>
+                    )
+                  ))}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
                   label="Email"
                   onChange={handleChange('email')}
                   value={values.email}
-                  error={values.email ? errors.email : ''}
+                  error={touched.email ? errors.email : ''}
+                  onBlur={() => setFieldTouched('email')}
                 />
                 <Text style={styles.label}>Date of Birth</Text>
                 <DatePickerModal
@@ -233,7 +274,8 @@ const EditDependantScreen = (props: Props) => {
                   placeholder={''}
                   onChange={handleChange('id_number')}
                   value={values.id_number}
-                  error={values.id_number ? errors.id_number : ''}
+                  error={touched.id_number ? errors.id_number : ''}
+                  onBlur={() => setFieldTouched('id_number')}
                 />
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('gender_id', e)}
@@ -258,7 +300,13 @@ const EditDependantScreen = (props: Props) => {
                 />
                 <View style={styles.bottomBtnContainer}>
                   <Button
-                    disabled={!isValid || !values.first_name}
+                    disabled={
+                      !isValid ||
+                      !values.first_name ||
+                      values.phone_number.length < numberCondition.min
+                        ? true
+                        : false
+                    }
                     onPress={() => onSubmit()}
                     title={'Confirm'}
                   />
