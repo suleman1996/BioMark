@@ -19,6 +19,7 @@ type Props = {
   error?: any;
   defaultValue: any;
   onBlur?: any;
+  containerStyles: any;
 };
 
 const InputWithLabel = ({
@@ -31,6 +32,7 @@ const InputWithLabel = ({
   error,
   defaultValue,
   onBlur,
+  containerStyles,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -40,7 +42,7 @@ const InputWithLabel = ({
     : {};
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyles]}>
       {label && <Text style={[styles.label, ifLabelSize]}>{label}</Text>}
       <InputField
         onFocus={onFocus}

@@ -314,7 +314,7 @@ const HypertensionDiary = () => {
                 {showDemo === 1 && (
                   <>
                     <View
-                      style={{ height: 110, width: 100, marginLeft: '14%' }}
+                      style={{ height: 110, width: 100, marginLeft: '4%' }}
                     />
                     <RenderHealthTrackDemo item={healthTracker[1]} />
                   </>
@@ -322,7 +322,7 @@ const HypertensionDiary = () => {
                 {showDemo === 2 && (
                   <>
                     <View
-                      style={{ height: 110, width: 100, marginLeft: '18%' }}
+                      style={{ height: 110, width: 100, marginLeft: '6%' }}
                     />
                     <View style={{ height: 110, width: 100 }} />
                     <RenderHealthTrackDemo item={healthTracker[2]} />
