@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import {
   Text,
   View,
@@ -11,7 +11,12 @@ import {
 import { useTheme } from 'react-native-paper';
 
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+import {
+  Menu,
+  MenuOption,
+  MenuOptions,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { userService } from 'services/user-service/user-service';
@@ -29,7 +34,6 @@ import fonts from 'assets/fonts';
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
-import WithdrawProgram from 'components/widthdraw-from-program';
 // import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
@@ -40,7 +44,6 @@ const SearchBarWithLeftScanIcon = () => {
   const [loading, setLoading] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [code, setCode] = React.useState('');
-  const [modalVisible, setModalVisible] = React.useState(false);
 
   const menuRef = useRef<any>();
 
@@ -51,17 +54,18 @@ const SearchBarWithLeftScanIcon = () => {
           code: code,
         },
       });
-      setIsMenuOpen(false);
       navigate(SCREENS.SUPPORT_SYSTEM);
 
       console.log(response, 'codee---------------code------------------');
+      // navigate(Screeb, {
+      //   SHOW_DEMO: true
+      // })
     } catch (err) {
-      setModalVisible(true);
-
-      // showMessage({
-      //   message: err.errMsg.data.message,
-      //   type: 'danger',
-      // });
+      showMessage({
+        message: err.errMsg.data.message,
+        type: 'danger',
+      });
+      // console.log(err, 'errrr-codeeee---------------');
     }
   };
 
@@ -93,119 +97,66 @@ const SearchBarWithLeftScanIcon = () => {
               />
             </MenuTrigger>
             <MenuOptions optionsContainerStyle={styles.popupMenu}>
-              <TouchableOpacity style={styles.singleMenuItem}>
-                <MaterialCommunityIcons
-                  name="barcode-scan"
-                  size={responsiveFontSize(22)}
-                  color={colors.primary}
-                />
-                <Text style={styles.menuText} fontSize={responsiveFontSize(15)}>
-                  Scan QR/Barcode
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.singleMenuItem}>
-                <QrInputPopup loading={loading} visible={visible}>
-                  <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                    <View style={styles.popUpHeader}>
-                      <Text style={styles.popUpHeading}>
-                        Input QR or Barcode
-                      </Text>
-                      <TouchableOpacity onPress={() => setVisible(false)}>
-                        <Image
-                          source={MyImage.closeIcon}
-                          style={{
-                            height: 15,
-                            width: 15,
-                          }}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
+              <MenuOption
+                onSelect={() => alert(`Save`)}
+                style={styles.singleMenuItem}
+              >
+                <>
+                  <MaterialCommunityIcons
+                    name="barcode-scan"
+                    size={responsiveFontSize(22)}
+                    color={colors.primary}
+                  />
                   <Text
-                    style={{
-                      fontFamily: fonts.regular,
-                      fontSize: 17,
-                      color: '#8493AE',
-                    }}
+                    style={styles.menuText}
+                    fontSize={responsiveFontSize(15)}
                   >
-                    This is the number below QR or Barcode.
+                    Scan QR/Barcode
                   </Text>
-                  <Text style={styles.popUpSubHeading}>QR or Barcode</Text>
-                  <View style={{ width: '100%' }}>
-                    <TextInput
-                      value={code}
-                      backgroundColor={colors.inputBg}
-                      style={styles.textInput}
-                      marginTop={10}
-                      // onChangeText={handleChange}
-                      onChangeText={(e) => setCode(e)}
-                      // onChange={handleChange('qrInput')}
-                    />
-                    <View style={{ marginTop: 40 }}>
-                      <TouchableOpacity>
-                        <Button
-                          onPress={() => {
-                            setVisible(false);
-                            handleCode();
-                          }}
-                          title="Save Code"
-                          marginHorizontal={0.1}
-                          marginVertical={0.1}
-                          disabled={false}
-                          // onChange={handleChange('qrInput')}
-                          // disabled={!isValid && errors}
-                          // disabled={!isValid && errors ? true : false}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </QrInputPopup>
-                <MaterialCommunityIcons
-                  name="barcode-scan"
-                  size={responsiveFontSize(22)}
-                  color={colors.primary}
-                />
-                <TouchableOpacity
-                  onPress={() => {
-                    setIsMenuOpen(false), setVisible(true);
-                  }}
-                >
+                </>
+              </MenuOption>
+              <MenuOption
+                onSelect={() => {
+                  setIsMenuOpen(false);
+                  setVisible(true);
+                }}
+                style={styles.singleMenuItem}
+              >
+                <>
+                  <MaterialCommunityIcons
+                    name="barcode-scan"
+                    size={responsiveFontSize(22)}
+                    color={colors.primary}
+                  />
                   <Text
                     style={styles.menuText}
                     fontSize={responsiveFontSize(15)}
                   >
                     Input Barcode
                   </Text>
-                </TouchableOpacity>
-              </TouchableOpacity>
-              <TouchableOpacity
+                </>
+              </MenuOption>
+              <MenuOption
+                onSelect={() => navigate(SCREENS.RESULT_UPLOAD)}
                 style={styles.singleMenuItem}
-                onPress={() => navigate(SCREENS.RESULT_UPLOAD)}
               >
-                <MaterialCommunityIcons
-                  name="upload"
-                  size={responsiveFontSize(25)}
-                  color={colors.primary}
-                />
-                <Text style={styles.menuText} fontSize={responsiveFontSize(15)}>
-                  Upload Results
-                </Text>
-              </TouchableOpacity>
+                <>
+                  <MaterialCommunityIcons
+                    name="upload"
+                    size={responsiveFontSize(25)}
+                    color={colors.primary}
+                  />
+                  <Text
+                    style={styles.menuText}
+                    fontSize={responsiveFontSize(15)}
+                  >
+                    Upload Results
+                  </Text>
+                </>
+              </MenuOption>
             </MenuOptions>
           </Menu>
         </View>
-
-        <WithdrawProgram
-          text2="Back"
-          visible={modalVisible}
-          title="Code Already Entered"
-          text="It seems like this code has already been entered."
-          cancelModal={() => setModalVisible(!modalVisible)}
-          closeModal={() => setModalVisible(!modalVisible)}
-          color={['#1B96D8', '#1B96D8']}
-          cancel={undefined}
-          onPress={() => setModalVisible(false)}
-        />
 
         <View style={styles.inputContainer}>
           <Fontisto
@@ -223,6 +174,61 @@ const SearchBarWithLeftScanIcon = () => {
           />
         </View>
       </View>
+
+      <QrInputPopup loading={loading} visible={visible}>
+        <View style={{ alignItems: 'center', marginBottom: 20 }}>
+          <View style={styles.popUpHeader}>
+            <Text style={styles.popUpHeading}>Input QR or Barcode</Text>
+            <TouchableOpacity onPress={() => setVisible(false)}>
+              <Image
+                source={MyImage.closeIcon}
+                style={{
+                  height: 15,
+                  width: 15,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Text
+          style={{
+            fontFamily: fonts.regular,
+            fontSize: 17,
+            color: '#8493AE',
+          }}
+        >
+          This is the number below QR or Barcode.
+        </Text>
+        <Text style={styles.popUpSubHeading}>QR or Barcode</Text>
+        <View style={{ width: '100%' }}>
+          <TextInput
+            value={code}
+            backgroundColor={colors.inputBg}
+            style={styles.textInput}
+            marginTop={10}
+            // onChangeText={handleChange}
+            onChangeText={(e) => setCode(e)}
+            // onChange={handleChange('qrInput')}
+          />
+          <View style={{ marginTop: 40 }}>
+            <TouchableOpacity>
+              <Button
+                onPress={() => {
+                  setVisible(false);
+                  handleCode();
+                }}
+                title="Save Code"
+                marginHorizontal={0.1}
+                marginVertical={0.1}
+                disabled={false}
+                // onChange={handleChange('qrInput')}
+                // disabled={!isValid && errors}
+                // disabled={!isValid && errors ? true : false}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </QrInputPopup>
     </>
   );
 };

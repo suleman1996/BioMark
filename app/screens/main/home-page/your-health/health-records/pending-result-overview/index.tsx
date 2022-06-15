@@ -94,8 +94,7 @@ const PendingResultOverview = () => {
       <TitleWithBackLayout
         shadow={colors.blue}
         title="Result Overview"
-        deleteIcon={'delete'}
-        onPressDelete={() => setModalVisible(true)}
+        deleteIcon={() => setModalVisible(true)}
       >
         <View style={[styles.container, { paddingHorizontal: 10 }]}>
           <View style={styles.topView}>
@@ -159,10 +158,10 @@ const PendingResultOverview = () => {
             </View>
 
             <WithdrawProgram
-              text2="Yes"
+              text="Yes"
               visible={modalVisible}
               title="Are You Sure?"
-              text="Are you sure you want to delete this test result? This action can’t be undone."
+              text2="Are you sure you want to delete this test result? This action can’t be undone."
               cancel="Cancel"
               cancelModal={() => setModalVisible(!modalVisible)}
               closeModal={() => setModalVisible(!modalVisible)}

@@ -1,17 +1,18 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 const styles = (colors: any) =>
   StyleSheet.create({
     healthTrackerHeading: {
-      //   fontFamily: fonts.bold,
-      fontWeight: 'bold',
-      fontSize: 11,
+      fontFamily: fonts.mulishBold,
+      // fontWeight: 'bold',
+      fontSize: 14,
       color: colors.lightDark,
       textAlign: 'center',
     },
     renderHealthView: {
-      height: 120,
-      width: 120,
+      height: 110,
+      width: 100,
       backgroundColor: colors.white,
       borderRadius: 5,
       shadowColor: '#000',
@@ -27,7 +28,8 @@ const styles = (colors: any) =>
       justifyContent: 'center',
       paddingVertical: 20,
       paddingHorizontal: 10,
-      marginHorizontal: 5,
+      margin: 5,
+      // marginHorizontal: 5,
     },
   });
 export default styles;

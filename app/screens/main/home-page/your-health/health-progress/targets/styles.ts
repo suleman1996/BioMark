@@ -70,14 +70,14 @@ export const makeStyles = (colors: any) =>
       paddingHorizontal: widthToDp(3),
       alignItems: 'center',
       borderColor: colors.lightDark,
-      backgroundColor: colors.lightPrimary,
+      backgroundColor: colors.targetsTab,
       borderRadius: 5,
       borderBottomRightRadius: 0,
       borderBottomLeftRadius: 0,
     },
     tabText: {
       fontFamily: GlobalFonts.bold,
-      color: colors.darkPrimary,
+      // color: colors.shineBlue,
       fontSize: responsiveFontSize(20),
     },
 

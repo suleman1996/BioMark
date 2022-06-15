@@ -142,6 +142,7 @@ const Index = () => {
   }, [state, units]);
 
   useEffect(() => {
+    if (!latestBloodSugar) return;
     setState({
       selectedType: units.findIndex(
         (e) => e.name == latestBloodSugar?.unit_name

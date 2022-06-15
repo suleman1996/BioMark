@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
@@ -23,6 +24,7 @@ type Props = {
   shadow: string;
   onPressInfo: any;
   onSharePress: any;
+  deleteIcon: any;
 };
 
 const TitleWithBackLayout = ({
@@ -35,6 +37,7 @@ const TitleWithBackLayout = ({
   shadow,
   onPressInfo,
   onSharePress,
+  deleteIcon,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -59,7 +62,17 @@ const TitleWithBackLayout = ({
                 name="arrow-back-ios"
               />
             </Pressable>
-            {}
+            <View style={styles.optionsView}>
+              {deleteIcon && (
+                <MaterialCommunityIcons
+                  color={colors.white}
+                  size={responsiveFontSize(35)}
+                  name="delete"
+                  onPress={deleteIcon}
+                />
+              )}
+            </View>
+
             <View style={styles.optionsView}>
               {isShare && (
                 <TouchableOpacity onPress={onSharePress}>

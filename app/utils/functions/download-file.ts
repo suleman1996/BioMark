@@ -95,7 +95,6 @@ export const checkPermissionAndDownloadBase64 = async (file: string) => {
     }
   }
 };
-
 const downloadFileBase64 = (fileUrl: string) => {
   ReactNativeBlobUtil.config({
     addAndroidDownloads: {
