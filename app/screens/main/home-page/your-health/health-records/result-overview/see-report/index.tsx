@@ -58,7 +58,7 @@ const SeeReport = () => {
 
         <Pdf
           source={{ uri: `data:application/pdf;base64,${pdfLink}` }}
-          trustAllCerts={false}
+          trustAllCerts={true}
           style={styles.pdfView}
         />
       </View>
