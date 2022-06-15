@@ -12,11 +12,31 @@ import GradientButton from 'components/linear-gradient-button';
 
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
+import { userService } from 'services/user-service/user-service';
+// import { showMessage } from 'react-native-flash-message';
 
 const SupportCenter = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const [checked, setChecked] = useState(false);
+
+  const termsCondition = async () => {
+    try {
+      const response = await userService.Terms({
+        module: {
+          terms: checked,
+        },
+      });
+      console.log(response, 'termsssssssssssssssssssss---------------');
+      navigate(SCREENS.EMPOWER_PROGRAM);
+    } catch (err) {
+      console.log('errrrrrrrrr', err.errMsg);
+      // showMessage({
+      //   message: err.errMsg.error,
+      //   type: 'danger',
+      // });
+    }
+  };
 
   return (
     <TitleWithBackWhiteBgLayout title={undefined}>
@@ -89,7 +109,8 @@ const SupportCenter = () => {
               text="Accept & Continue"
               color={['#2C6CFC', '#2CBDFC']}
               disabled={!checked ? true : false}
-              onPress={() => navigate(SCREENS.EMPOWER_PROGRAM)}
+              onPress={() => termsCondition()}
+              // onPress={() => navigate(SCREENS.EMPOWER_PROGRAM)}
             />
           </View>
         ) : (

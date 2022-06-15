@@ -192,6 +192,7 @@ export default function VaccinationScreen() {
               </RadioButton.Group>
             )
           )}
+
           {value == 1 ? (
             <TextInputButton
               placeholder={undefined}
