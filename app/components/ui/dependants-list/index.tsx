@@ -102,6 +102,7 @@ const DependantsList = (props: Props) => {
         heading="Delete Dependants?"
         subHeading="Are you sure you want to delete profiles?"
       />
+      {}
       <FlatList
         showsVerticalScrollIndicator={false}
         data={data}
