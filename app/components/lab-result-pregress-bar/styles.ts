@@ -5,7 +5,6 @@ const styles = (colors: any) =>
   StyleSheet.create({
     // modal
     circleView: {
-      borderWidth: 7,
       borderColor: colors.blueOpacity,
       height: widthToDp(10),
       width: widthToDp(10),
@@ -15,7 +14,7 @@ const styles = (colors: any) =>
       backgroundColor: colors.primary,
     },
     blueBar: {
-      height: heightToDp(0.5),
+      height: heightToDp(0.3),
       width: '15%',
       backgroundColor: colors.primary,
     },
