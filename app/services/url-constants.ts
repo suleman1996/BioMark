@@ -91,6 +91,9 @@ const API_URLS = {
   COVID_BOOKING_FORM: '/api/v1/patient/covid/booking_form',
   COVID_TEST_AND_TEST_CENTERS: '/api/v1/patient/covid/test_centers',
   COVID_GET_TEST_CENTER_SCHEDULES: '/api/v1/patient/covid/get_schedule',
+  BILLPLZ: '/payment/v1/billplz',
+  STRIPE: '/payment/v1/stripe',
+  STRIPE_PAY_SESSION: '/payment/v1/stripe/pay_session',
 
   //Medication Tracker
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
