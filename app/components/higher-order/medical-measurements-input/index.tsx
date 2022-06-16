@@ -15,6 +15,7 @@ type Props = {
   value: string;
   maxLength: number;
   defaultValue: string;
+  selectionColor: string;
 };
 
 const MedicalInput = ({
@@ -24,6 +25,7 @@ const MedicalInput = ({
   textAlign,
   onChangeText,
   value,
+  selectionColor,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -57,6 +59,7 @@ const MedicalInput = ({
         activeUnderlineColor="transparent"
         borderBottomWidth={0}
         keyboardType="numeric"
+        selectionColor={selectionColor}
         // maxLength={maxLength}
       />
       <Text style={styles.label}>%</Text>

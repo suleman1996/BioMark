@@ -176,6 +176,7 @@ const BloodPressure = ({ route }: any) => {
             value={bloodPressure.bp_systolic}
             maxLength={3}
             width={''}
+            selectionColor="darkblue"
             // defaultValue={''}
           />
           <MedicalInput
@@ -187,6 +188,7 @@ const BloodPressure = ({ route }: any) => {
             }}
             value={bloodPressure.bp_diastolic}
             maxLength={3}
+            selectionColor="darkblue"
             width={''}
             // defaultValue={''}
           />
