@@ -170,10 +170,10 @@ export default function ResultUpload() {
   //     //Printing the log realted to the file
   //     console.log('res : ' + JSON.stringify(res));
   //     let body = {
-  //       filename: res?.fileName,
-  //       uri: res?.uri,
+  //       filename: res?.[0]?.name,
+  //       uri: res?.[0]?.uri,
   //       base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
-  //       filetype: res?.type,
+  //       filetype: res?.[0]?.type,
   //     };
   //     let data = list;
   //     data.push(body);
