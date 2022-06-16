@@ -10,7 +10,7 @@ export const makeStyles = (colors: any) =>
       // borderWidth: 2,
       backgroundColor: colors.white,
       bottom: 0,
-      paddingHorizontal: widthToDp(6),
+      paddingHorizontal: widthToDp(7),
       paddingVertical: heightToDp(3),
       ...GlobalStyles(colors).shadow,
     },
