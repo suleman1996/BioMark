@@ -1,11 +1,14 @@
 import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
+// let deviceWidth = Dimensions.get('window').width;
+
 const styles = (colors: any) =>
   StyleSheet.create({
     overLay: {
       position: 'absolute',
       backgroundColor: '#3D3D3D90',
+      // width: deviceWidth,
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 100,
