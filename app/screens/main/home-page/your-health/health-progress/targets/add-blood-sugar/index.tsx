@@ -6,6 +6,8 @@ import { showMessage } from 'react-native-flash-message';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Tip } from 'react-native-tip';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { InputWithUnits, ActivityIndicator } from 'components';
 import GradientButton from 'components/linear-gradient-button';
@@ -167,7 +169,34 @@ const Index = () => {
             ranges blank we will use the default range of 80-130 mg/dL for
             fasting and 80-180 mg/dL for after meals as suggested by the ADA.
           </Text>
-          <Text style={styles.secondHeading}>Fasting (FPG)</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Text style={styles.secondHeading}>Fasting (FPG)</Text>
+            <Tip
+              //title=""
+              body="FPG (Fasting Plasma Glucose) is the measure of your blood sugar level after fasting or not having anything to eat or drink for at least 8 hours. This test is usually done first thing in the morning, before breakfast."
+              bodyStyle={{ color: '#fff' }}
+              tipContainerStyle={{
+                backgroundColor: colors.shineBlue,
+                width: '60%',
+              }}
+              overlayOpacity={0.001}
+              style={{
+                marginTop: 12,
+                marginLeft: 10,
+              }}
+            >
+              <Icon
+                name="ios-information-circle-outline"
+                size={18}
+                color={colors.blue}
+              />
+            </Tip>
+          </View>
           <InputWithUnits
             small
             title="From"
@@ -190,7 +219,34 @@ const Index = () => {
             unit={unitsNames[state.selectedType]}
             error={errors.tofpg}
           />
-          <Text style={styles.secondHeading}>After Meal (PPG)</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Text style={styles.secondHeading}>After Meal (PPG)</Text>
+            <Tip
+              //title=""
+              body="PPG (Postprandial Plasma Glucose) is the measure of your blood sugar level after a meal. Measuring PPG can keep track of blood sugar spikes, which can determine if your mealtime insulin is working."
+              bodyStyle={{ color: '#fff' }}
+              tipContainerStyle={{
+                backgroundColor: colors.shineBlue,
+                width: '60%',
+              }}
+              overlayOpacity={0.001}
+              style={{
+                marginTop: 12,
+                marginLeft: 10,
+              }}
+            >
+              <Icon
+                name="ios-information-circle-outline"
+                size={18}
+                color={colors.blue}
+              />
+            </Tip>
+          </View>
           <InputWithUnits
             small
             title="From"

@@ -70,6 +70,8 @@ const BloodPressure = ({ route }: any) => {
   }, []);
 
   const saveBloodPressureLog = async () => {
+    // console.log({ SELECTED_BP_ID });
+    // return;
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BP_ID ? 'updateBpTracker' : 'createBpTracker';
     try {
@@ -100,6 +102,7 @@ const BloodPressure = ({ route }: any) => {
   const deleteBpLog = async () => {
     try {
       await userService.deleteBpLog(SELECTED_BP_ID);
+      disptach(getReduxBloodPressureLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err) {
       console.error(err);
@@ -111,6 +114,17 @@ const BloodPressure = ({ route }: any) => {
     setBloodPressure((prev) => ({ ...prev, [key]: value }));
     setError(bloodPressureValidator(key, value) || '');
   };
+
+  useEffect(() => {
+    if (
+      +bloodPressure.bp_diastolic >= +bloodPressure.bp_systolic &&
+      bloodPressure.bp_diastolic !== ''
+    ) {
+      setError(
+        'Please enter a valid diastolic value. Diastolic value should be less than systolic value.'
+      );
+    }
+  }, [bloodPressure]);
 
   console.log('Error', error);
 
@@ -162,6 +176,7 @@ const BloodPressure = ({ route }: any) => {
             value={bloodPressure.bp_systolic}
             maxLength={3}
             width={''}
+            selectionColor="darkblue"
             // defaultValue={''}
           />
           <MedicalInput
@@ -173,13 +188,15 @@ const BloodPressure = ({ route }: any) => {
             }}
             value={bloodPressure.bp_diastolic}
             maxLength={3}
+            selectionColor="darkblue"
             width={''}
             // defaultValue={''}
           />
           {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}
 
-          <Text style={styles.label}>Date of Birth</Text>
+          <Text style={styles.label}>Date - Time</Text>
           <DateTimePickerModal
+            maxDate={new Date()}
             date={bloodPressure.date_entry}
             setDate={(e: any) =>
               setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))

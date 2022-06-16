@@ -167,9 +167,12 @@ export const getMedicationProgress = (data: Hba1CProgressEntryPayload) => ({
   payload: data,
 });
 
-export const getWeightLogs = (data: WeightProgressLogsPayload) => ({
+export const getWeightLogs = (
+  data: WeightProgressLogsPayload,
+  page: number
+) => ({
   type: GET_RESULT_LOGS,
-  payload: data,
+  payload: { data, page },
 });
 
 export const getBloodSuarLogs = (data: BloodSugarProgressLogsPayload) => ({
@@ -424,7 +427,6 @@ export const getNewTargetAction =
     await userService
       .getNewTarget()
       .then((res) => {
-        console.log({ res: res.hba1c_unit });
         dispatch(getUnits(res));
       })
       .catch((err) => {
@@ -458,13 +460,16 @@ export const getLatestTargetsAction =
       });
   };
 export const getReduxWeightLogs =
-  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+  (page: number = 1, onEmpty?: () => void) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
-      .getWeightLogs()
+      .getWeightLogs({ page })
       .then(async (res) => {
         //
-
-        await dispatch(getWeightLogs(res));
+        if (res.log.length == 0) {
+          onEmpty && onEmpty();
+        }
+        await dispatch(getWeightLogs(res, page));
       })
       .catch((err) => {
         logNow(err);
@@ -482,7 +487,6 @@ export const getBloodSugarTargetsAction =
     await userService
       .getBloodSugarTargets()
       .then((res) => {
-        console.log({ res: res.length });
         dispatch(getBloodSugarTargetsCreator(res));
       })
       .catch((err) => {
@@ -509,7 +513,6 @@ export const getReduxBloodSugarLogs =
       .getBloodSugarLogs()
       .then(async (res) => {
         //
-
         await dispatch(getBloodSuarLogs(res));
       })
       .catch((err) => {
@@ -597,7 +600,6 @@ export const getMedicationsTrackersAction =
     await userService
       .getMedicationTrackers(date)
       .then(async (res) => {
-        console.log({ res });
         dispatch(getMedicationsTrackerCreator(res));
       })
       .catch((err) => {

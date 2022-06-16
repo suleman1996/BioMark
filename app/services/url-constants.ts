@@ -29,7 +29,7 @@ const API_URLS = {
   CREATE_FAMILY_MEDICAL_HISTORY: '/api/v1/patient/medical_histories/family',
 
   //Home
-  BARCODE_CHECK: '/api/v1/patient/scanners/midas',
+  BARCODE_CHECK: '/api/v1/patient/scanners',
 
   // Dependent
   DEPENDENTS: '/api/v1/patient/dependents',
@@ -56,6 +56,7 @@ const API_URLS = {
 
   DASHBOARD: 'api/v1/patient/dashboard',
   GET_JUMIO_DATA: '/integration/v1/id_verifications/get_authtoken',
+  JUMIO_CALLBACK: '/integration/v1/id_verifications/callback',
 
   // Health Traqcker
   GET_HEALTH_DROPDOWN: '/api/v1/patient/psp/trackers/blood_sugar/new',
@@ -64,7 +65,7 @@ const API_URLS = {
   CREATE_WEIGHT: '/api/v1/patient/weight_trackers',
   CREATE_HBA1C: '/api/v1/patient/psp/trackers/hba1c',
   GET_HEALTH_RISKS: '/api/v1/patient/risks',
-  GET_WEIGHT_LOGS: '/api/v1/patient/weight_trackers/logs?page=1',
+  GET_WEIGHT_LOGS: '/api/v1/patient/weight_trackers/logs',
   GET_BLOOD_SUGAR_LOGS: '/api/v1/patient/psp/trackers/blood_sugar/logs?page=1',
   GET_HBA1C_LOGS: '/api/v1/patient/psp/trackers/hba1c/logs?page=1',
   GET_BLOOD_PRESSURE_LOGS: '/api/v1/patient/bp_trackers/logs?page=1',
