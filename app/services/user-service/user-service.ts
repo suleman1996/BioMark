@@ -601,7 +601,10 @@ const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_BLOOD_SUGAR, {
-        blood_sugar: medical,
+        blood_sugar: {
+          ...medical,
+          record_date: moment(medical.record_date).toDate(),
+        },
       })
       .then(async ({ data }) => {
         try {
@@ -626,7 +629,10 @@ const updateBsTracker = (
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
       .put(`${API_URLS.CREATE_BLOOD_SUGAR}/${id}`, {
-        blood_sugar: medical,
+        blood_sugar: {
+          ...medical,
+          record_date: moment(medical.record_date).toDate(),
+        },
       })
       .then(async ({ data }) => {
         console.log('update data', data);
@@ -1513,10 +1519,10 @@ const getHBA1cChart = (params) => {
   });
 };
 
-const getWeightLogs = () => {
+const getWeightLogs = ({ page = 1 }: { page: number }) => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
-      .get(API_URLS.GET_WEIGHT_LOGS)
+      .get(API_URLS.GET_WEIGHT_LOGS, { params: { page } })
       .then(async (response) => {
         try {
           //
@@ -1693,8 +1699,16 @@ const getSearchResult = (lab_id, query) => {
   });
 };
 
-const getResultOverViewChartData = () => {
-  return client.get(API_URLS.RESULT_OVERVIEW_CHARTDATA);
+const getResultOverViewChartData = (id, date, provider) => {
+  return client.get(
+    `${API_URLS.RESULT_OVERVIEW_CHARTDATA}${id}/chart?provider=1&date=all`,
+    {
+      params: {
+        provider: provider,
+        date: date,
+      },
+    }
+  );
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {

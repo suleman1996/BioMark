@@ -74,6 +74,7 @@
 	<string>BioMark would like to use your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>BioMark would like to your microphone (for videos)</string>
 	<key>NSPhotoLibraryUsageDescription</key>

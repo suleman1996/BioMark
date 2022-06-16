@@ -39,7 +39,7 @@ const styles = (colors: any) =>
     subHeading: {
       fontFamily: fonts.bold,
       fontSize: 14,
-      color: colors.shineBlue,
+      color: colors.heading,
       marginLeft: 5,
     },
     radio: {
