@@ -210,9 +210,12 @@ const ExisitingBookingForDependent = (props: Props) => {
     const obj = testCentersBasedOnCities
       .find((item) => item.id == booking[itemIndex].test_type_id)
       ?.clinics.find((item) => item.test_centre_id == id);
+    console.log('bookingFormData ====>', obj);
     copyArray[itemIndex].test_centre_id = id;
     copyArray[itemIndex].test_centre_name = obj?.test_centre_name;
     copyArray[itemIndex].amount = obj?.test_amount;
+    copyArray[itemIndex].test_type_name = obj?.test_type_name;
+    copyArray[itemIndex].currency = obj?.currency;
     copyArray[itemIndex].total_amount = obj?.test_amount;
     copyArray[itemIndex].test_address = '';
     copyArray[itemIndex].test_address_details = '';

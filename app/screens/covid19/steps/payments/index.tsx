@@ -22,6 +22,7 @@ import { userService } from 'services/user-service/user-service';
 import { addUserContactsDetails } from 'store/auth/auth-actions';
 import { BookTestBooking } from 'types/api';
 import { dateFormat1, getTime } from 'utils/functions/date-format';
+import { logNow } from 'utils/functions/log-binder';
 
 type Props = {};
 
@@ -49,7 +50,6 @@ const PaymentStep = (props: Props) => {
       .catch(() => {})
       .finally(() => {});
   }, []);
-  /*eslint-enable */
 
   const SingleCardForPayment = ({ item }: { item: BookTestBooking }) => {
     const nName = dependants.find(
@@ -63,7 +63,7 @@ const PaymentStep = (props: Props) => {
     } = {
       name: item.is_dependant ? nName : 'You',
       confirmationDate: item.confirmation_date,
-      currency: 'SGD',
+      currency: item.currency,
       amount: item.amount,
     };
     return (
@@ -172,11 +172,30 @@ const PaymentStep = (props: Props) => {
     );
   };
 
-  const { totalPrice = 0 } = {
+  const { totalPrice = 0, currency = '' } = {
     totalPrice: booking.reduce(function (acc, obj) {
       return acc + obj?.amount;
     }, 0),
+    currency: booking[0].currency,
   };
+
+  const makeItems = () => {
+    let items = booking.map((e) => {
+      return {
+        item_name: e.test_type_id,
+        amount: e.amount,
+        quantity: 1,
+        currency: 'sgd',
+      };
+    });
+    logNow(items);
+  };
+
+  useEffect(() => {
+    makeItems();
+  }, []);
+
+  /*eslint-enable */
 
   return (
     <>
@@ -248,7 +267,7 @@ const PaymentStep = (props: Props) => {
                   textAlign: 'right',
                 }}
               >
-                SGD {totalPrice}
+                {currency} {totalPrice}
               </Text>
             </View>
             <View

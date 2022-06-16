@@ -93,8 +93,12 @@ const API_URLS = {
   COVID_TEST_AND_TEST_CENTERS: '/api/v1/patient/covid/test_centers',
   COVID_GET_TEST_CENTER_SCHEDULES: '/api/v1/patient/covid/get_schedule',
   BILLPLZ: '/payment/v1/billplz',
+
+  // stripe
   STRIPE: '/payment/v1/stripe',
   STRIPE_PAY_SESSION: '/payment/v1/stripe/pay_session',
+  STRIPE_SUCCESS: '/payment/v1/stripe/success',
+  STRIPE_CANCEL: '/payment/v1/stripe/cancel',
 
   //Medication Tracker
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',

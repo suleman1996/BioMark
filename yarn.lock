@@ -831,7 +831,7 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@expo/config-plugins@^4.0.4", "@expo/config-plugins@^4.1.5":
+"@expo/config-plugins@^4.0.4", "@expo/config-plugins@^4.1.4", "@expo/config-plugins@^4.1.5":
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-4.1.5.tgz#9d357d2cda9c095e511b51583ede8a3b76174068"
   integrity sha512-RVvU40RtZt12HavuDAe+LDIq9lHj7sheOfMEHdmpJ/uTA8pgvkbc56XF6JHQD+yRr6+uhhb+JnAasGq49dsQbw==
@@ -1563,6 +1563,13 @@
   integrity sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==
   dependencies:
     "@sinonjs/commons" "^1.7.0"
+
+"@stripe/stripe-react-native@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-react-native/-/stripe-react-native-0.13.0.tgz#66ee89d497de2a63b49890a462204f42ee46f53c"
+  integrity sha512-in0z3jypGDin+ryfuaVHcke9QOV5EvrSTJy7T5RJeCybkUeu3KljaJSIhGBQE5K50BwdaOio6fIlOLsDwpZhbg==
+  dependencies:
+    "@expo/config-plugins" "^4.1.4"
 
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
