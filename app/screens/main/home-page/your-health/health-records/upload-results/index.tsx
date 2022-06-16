@@ -456,6 +456,8 @@ import {
 import { useTheme } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
 // var RNFS = require('react-native-fs');
+var RNFS = require('react-native-fs');
+
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import Feather from 'react-native-vector-icons/Feather';
@@ -470,10 +472,14 @@ import LabResultModal from 'components/lab-results-modal';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { userService } from 'services/user-service/user-service';
 import DocumentPicker from 'react-native-document-picker';
+
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
 import { useSelector, useDispatch } from 'react-redux';
 import { IAppState } from 'store/IAppState';
+import Pdf from 'react-native-pdf';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+
 // let cameraIs = false;
 export default function ResultUpload() {
   const [showModal, setShowModal] = React.useState(false);
@@ -486,6 +492,9 @@ export default function ResultUpload() {
   const [list, setList] = useState([]);
   const [showPicModal, setShowPicModal] = useState(false);
   const [uri, setUri] = useState('');
+
+  const [modalData, setModalData] = useState([]);
+
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
@@ -499,6 +508,7 @@ export default function ResultUpload() {
         attachments: list,
       },
     };
+    console.log('body', body);
     try {
       setIsVisible(true);
       const profilePic = await userService.uploadResult(body);
@@ -627,6 +637,48 @@ export default function ResultUpload() {
   //     }
   //   }
   // };
+
+  const uploadPDF = async () => {
+    //Opening Document Picker for selection of one file
+    try {
+      const res = await DocumentPicker.pickSingle({
+        type: [DocumentPicker.types.pdf],
+      });
+      //Printing the log realted to the file
+      console.log('res : ', res);
+      var b64 = await RNFS.readFile(res.uri, 'base64');
+      console.log('Data', data);
+
+      let body = {
+        filename: res?.name,
+        //  base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
+        base64: `data:application/pdf;base64,${b64}`,
+        filetype: 'pdf',
+      };
+      let data = list;
+      data.push(body);
+      setList(data);
+      setShowModal(false);
+      console.log('docment------------', data);
+
+      console.log('URI : ' + res.uri);
+      console.log('Type : ' + res.type);
+      console.log('File Name : ' + res.name);
+      console.log('File Size : ' + res.size);
+      //Setting the state to show single file attributes
+    } catch (err) {
+      //Handling any exception (If any)
+      if (DocumentPicker.isCancel(err)) {
+        //If user canceled the document selection
+        console.log('Canceled from single doc picker');
+      } else {
+        //For Unknown Error
+        // alert('Unknown Error: ' + JSON.stringify(err));
+        throw err;
+      }
+    }
+  };
+
   const imagePickerFromCamera = async () => {
     try {
       setIsVisible(true);
@@ -721,11 +773,22 @@ export default function ResultUpload() {
                   renderItem={({ item, index }) => {
                     return (
                       <>
-                        <ImageBackground
-                          imageStyle={{ borderRadius: 8 }}
-                          source={{ uri: item.uri }}
-                          style={styles.imageView2}
-                        ></ImageBackground>
+                        {item?.filetype === 'pdf' ? (
+                          <Pdf
+                            source={{
+                              uri: item.base64,
+                            }}
+                            singlePage={true}
+                            trustAllCerts={true}
+                            style={styles.imageView2}
+                          />
+                        ) : (
+                          <ImageBackground
+                            imageStyle={{ borderRadius: 8 }}
+                            source={{ uri: item?.uri }}
+                            style={styles.imageView2}
+                          />
+                        )}
                       </>
                     );
                   }}
@@ -790,22 +853,49 @@ export default function ResultUpload() {
                   setUri(item?.uri);
                   console.log('item', item);
                   return (
-                    <Pressable onPress={() => setShowPicModal(true)}>
-                      <ImageBackground
-                        imageStyle={{ borderRadius: 8 }}
-                        source={{ uri: item?.uri }}
-                        style={styles.imageView2}
-                      >
-                        <MaterialCommunityIcons
-                          name="delete"
-                          color={colors.primary}
-                          size={25}
-                          style={styles.deleteIcon}
-                          onPress={() => {
-                            setModalVisible(true);
-                          }}
-                        />
-                      </ImageBackground>
+                    <Pressable
+                      onPress={() => {
+                        setShowPicModal(true);
+                        setModalData(item);
+                      }}
+                    >
+                      {item?.filetype === 'pdf' ? (
+                        <View>
+                          <MaterialCommunityIcons
+                            name="delete"
+                            color={colors.primary}
+                            size={25}
+                            style={styles.pdfWithBin}
+                            onPress={() => {
+                              setModalVisible(true);
+                            }}
+                          />
+                          <Pdf
+                            source={{
+                              uri: item?.base64,
+                            }}
+                            singlePage={true}
+                            trustAllCerts={true}
+                            style={styles.imageView2}
+                          />
+                        </View>
+                      ) : (
+                        <ImageBackground
+                          imageStyle={{ borderRadius: 8 }}
+                          source={{ uri: item?.uri }}
+                          style={styles.imageView2}
+                        >
+                          <MaterialCommunityIcons
+                            name="delete"
+                            color={colors.primary}
+                            size={25}
+                            style={styles.deleteIcon}
+                            onPress={() => {
+                              setModalVisible(true);
+                            }}
+                          />
+                        </ImageBackground>
+                      )}
                     </Pressable>
                   );
                 }}
@@ -827,7 +917,7 @@ export default function ResultUpload() {
               />
               <ShowPicModal
                 visible={showPicModal}
-                image={{ uri: uri }}
+                modalData={modalData}
                 onClose={() => setShowPicModal(false)}
               />
             </View>
@@ -845,6 +935,7 @@ export default function ResultUpload() {
               onTakePhoto={() => imagePickerFromCamera()}
               onUploadFromGallery={() => imagePickerFromGallery()}
               // onUploadPdf={() => uploadPDF()}
+              onUploadPdf={() => uploadPDF()}
             />
           </ScrollView>
           <ButtonWithShadowContainer

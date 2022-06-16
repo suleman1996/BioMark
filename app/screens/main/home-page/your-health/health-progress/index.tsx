@@ -46,10 +46,6 @@ const Index = () => {
     item: any;
     index: number;
   }) => {
-    const ifST =
-      selectedHorizontal === index
-        ? { color: colors.darkPrimary }
-        : { color: colors.inactive };
     const ifSBLine =
       selectedHorizontal === index
         ? { borderBottomWidth: 3 }
@@ -61,7 +57,7 @@ const Index = () => {
         }}
         style={[styles.horizontalListItem, ifSBLine]}
       >
-        <Text style={[styles.horizontalListItemText, ifST]}>{item?.title}</Text>
+        <Text style={styles.horizontalListItemText}>{item?.title}</Text>
       </TouchableRipple>
     );
   };

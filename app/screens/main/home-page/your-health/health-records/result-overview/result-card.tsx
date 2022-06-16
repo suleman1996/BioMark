@@ -111,7 +111,7 @@ const Card = ({ item }: Props) => {
               styles.resultViewBody,
               {
                 backgroundColor:
-                  item?.findings == 'high' ? colors.highBg : colors.white,
+                  item?.findings == 'high' ? colors.dangerBg : colors.white,
               },
             ]}
           >
@@ -122,7 +122,7 @@ const Card = ({ item }: Props) => {
               styles.resultViewFooter,
               {
                 backgroundColor:
-                  item?.findings == 'high' ? colors.highBg : colors.white,
+                  item?.findings == 'high' ? colors.dangerBg : colors.white,
               },
             ]}
           >

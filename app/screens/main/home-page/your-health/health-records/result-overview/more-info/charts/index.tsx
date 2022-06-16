@@ -2,120 +2,55 @@ import { View, Text } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 
 import { useTheme } from 'react-native-paper';
-import {
-  BloodSugarProgressChart,
-  defaultBloodSugarProgressChartFilters,
-} from 'types/api';
+import { ResultSummaryChartPayload } from 'types/api';
 
 import GraphHeader from 'components/graph-header/index';
-import LineGraph from 'components/line-graph/index';
 import Styles from './styles';
-import fonts from 'assets/fonts';
-import { userService } from 'services/user-service/user-service';
 
-const Charts = () => {
+import { userService } from 'services/user-service/user-service';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import DropDown from 'react-native-paper-dropdown';
+import LineGraph from 'components/line-graph';
+import {
+  createGraph5,
+  createResultGraph,
+} from 'utils/functions/graph/graph-factory';
+import {
+  getResultGraphLegendOptions,
+  getResultGraphOptions,
+} from 'utils/functions/graph/graph-result';
+import { getChart5GraphOptions } from 'utils/functions/graph/graph-type-5';
+
+const Charts = ({ biomarker_id, provider }) => {
   const { colors } = useTheme();
   const chartRef = useRef();
   const lagendChartRef = useRef();
   const styles = Styles(colors);
 
   const [headerValue] = React.useState([
-    { id: 0, title: '90', complete: '90 Days' },
-    { id: 1, title: 'Last Year', complete: 'Last Year' },
-    { id: 3, title: 'All', complete: 'All' },
+    { id: 0, title: '90', complete: '90 Days', date: '90' },
+    { id: 1, title: 'Last Year', complete: 'Last Year', date: 'last_year' },
+    { id: 3, title: 'All', complete: 'All', date: 'all' },
   ]);
   const [selectedValue, setSelectedValue] = React.useState({
-    id: 0,
-    title: '90',
-    complete: '1 Day',
+    id: 1,
+    title: 'Last Year',
+    complete: 'Last Year',
+    date: 'last_year',
   });
-  const [chartState] = React.useState(null);
+  const [showDropDown, setShowDropDown] = React.useState(false);
+  const reportOptions = [{ value: 0, label: provider[0]?.name }];
+  const [selectedReport] = React.useState(reportOptions[0]?.value);
+  const [chartData, setChartData] = React.useState();
 
-  const RangesView = () => (
-    <View style={{ flexDirection: 'row', marginVertical: 3 }}>
-      <View
-        style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}
-      >
-        <View
-          style={{
-            backgroundColor: colors.danger,
-            paddingHorizontal: 15,
-            borderRadius: 12,
-            paddingVertical: 0.5,
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: fonts.regular,
-              color: colors.white,
-              fontSize: 11,
-            }}
-          >
-            H
-          </Text>
-        </View>
-      </View>
-      <View style={{ width: '15%', alignItems: 'center' }}>
-        <Text style={{ fontFamily: fonts.bold, color: colors.heading }}>
-          High
-        </Text>
-      </View>
-      <View style={{ width: '60%', alignItems: 'flex-end' }}>
-        {/* <Text>>116 umol/L</Text> */}
-      </View>
-    </View>
-  );
-
-  const createChart = (chartData: BloodSugarProgressChart) => {
-    const chartParams = { ...defaultBloodSugarProgressChartFilters };
-    const isMealAll = chartParams.meal === MealTypeUnit.all;
-
-    const graphData = BloodSugarGraphFactory.createBloodSugarGraph(
-      chartData,
-      isMealAll,
-      chartParams.unit === BloodSugarUnitId.mgDl
-    );
-
-    const graphConfig = graphXAxisConfig(
-      selectedValue.title,
-      graphData.points.map((p) => p[0])
-    );
-
-    const legendChartOptions = getTricolorGraphLegendOptions(
-      graphData.sections,
-      graphData.overallMax,
-      1
-    );
-
-    let chartOptions = getTricolorGraphOptions(
-      graphData.points,
-      graphData.positiveRanges,
-      graphData.warningRanges,
-      graphData.lowNegativeRanges,
-      graphData.highNegativeRanges,
-      graphData.marks,
-      graphData.overallMax,
-      1,
-      graphConfig
-    );
-
-    if (isMealAll) {
-      chartOptions = {
-        ...chartOptions,
-        series: chartOptions.series.concat(
-          createBloodSugarFastingMarkLine([
-            chartData.target === null ? 0 : parseFloat(chartData.target.ppg_to),
-          ])
-        ),
-      };
-    }
-
-    return { chartOptions, legendChartOptions };
-  };
-
-  const bloodSugarGraphData = async () => {
+  const getReportChartData = async (biomarker) => {
     try {
-      const result = userService.getResultOverViewChartData();
+      const result = await userService.getResultOverViewChartData(
+        biomarker,
+        selectedValue?.date,
+        provider[0]?.id
+      );
+      setChartData(result.data);
       console.log('chart data ', result.data);
     } catch (error) {
       console.log(error);
@@ -123,20 +58,81 @@ const Charts = () => {
   };
 
   React.useEffect(() => {
-    bloodSugarGraphData();
+    getReportChartData(biomarker_id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedValue]);
 
   useEffect(() => {
-    if (chartState && chartRef.current) {
-      const { chartOptions, legendChartOptions } = createChart(chartState);
-      setTimeout(() => {
-        chartRef?.current?.setOption(chartOptions);
-        lagendChartRef?.current?.setOption(legendChartOptions);
-      }, 10);
+    if (chartData && chartRef.current) {
+      if (chartData?.chart_type === 5) {
+        const chartOptions = createChart5(chartData);
+        setTimeout(() => {
+          chartRef?.current?.setOption(chartOptions);
+        }, 10);
+      } else {
+        const { chartOptions, legendChartOptions } = createGraph(chartData);
+        setTimeout(() => {
+          chartRef?.current?.setOption(chartOptions);
+          lagendChartRef?.current?.setOption(legendChartOptions);
+        }, 10);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartState]);
+  }, [chartData]);
+
+  const createGraph = (chart: ResultSummaryChartPayload) => {
+    const graphData = createResultGraph(chart);
+
+    const legendOptions = getResultGraphLegendOptions(
+      graphData.labels,
+      graphData.sections,
+      graphData.overallMax,
+      chart.chart_type
+    );
+
+    const options = getResultGraphOptions(
+      graphData.labels,
+      graphData.dataset,
+      graphData.positiveRanges,
+      graphData.warningRanges,
+      graphData.lowNegativeRanges,
+      graphData.highNegativeRanges,
+      graphData.marks,
+      graphData.overallMax,
+      chart.chart_type
+    );
+    return { chartOptions: options, legendChartOptions: legendOptions };
+  };
+
+  const createChart5 = (chart: ResultSummaryChartPayload) => {
+    const graphData = createGraph5(chart);
+
+    return getChart5GraphOptions(graphData.labels, graphData.dataset);
+  };
+
+  const RangesView = ({ item }) => (
+    <View style={styles.rangesView}>
+      <View style={styles.leftView}>
+        <View
+          style={[
+            styles.rangesTitleView,
+            {
+              backgroundColor:
+                item?.simple_label == 'N' ? colors.greenDark : colors.dangerRed,
+            },
+          ]}
+        >
+          <Text style={styles.rangesTitle}>{item?.simple_label}</Text>
+        </View>
+      </View>
+      <View style={styles.centerView}>
+        <Text style={styles.referanceStatus}>{item?.long_label}</Text>
+      </View>
+      <View style={styles.rightView}>
+        <Text style={styles.referanceValue}>{item?.range_label}</Text>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -145,18 +141,49 @@ const Charts = () => {
         setSelectedValue={setSelectedValue}
         data={headerValue}
       />
-      <Text style={styles.headingChart}>Urea (mmol/L)</Text>
+      <Text style={styles.headingChart}>
+        {chartData?.name} {chartData?.unit}
+      </Text>
       <LineGraph
         chartRef={chartRef}
         lagendChartRef={lagendChartRef}
-        showLegend={true}
+        showLegend={chartData?.chart_type !== 5 ? true : false}
       />
-      <Text style={styles.headingChart}>Results available from 1 source</Text>
-
-      <Text style={styles.headingChart}>REFERENCE RANGES</Text>
-      <RangesView />
-      <RangesView />
-      <RangesView />
+      <Text style={styles.headingChart}>
+        Results available from {provider.length} source
+      </Text>
+      <DropDown
+        mode={'flat'}
+        visible={showDropDown}
+        showDropDown={() => setShowDropDown(true)}
+        onDismiss={() => setShowDropDown(false)}
+        value={selectedReport}
+        setValue={(itemValue) => {
+          console.log('Here is the value ', itemValue);
+        }}
+        list={reportOptions}
+        inputProps={{
+          style: {
+            width: '100%',
+            height: heightToDp(5),
+            // flex: 1,
+            borderRadius: widthToDp(2),
+            maxHeight: heightToDp(6.5),
+          },
+          underlineColor: '#fff',
+        }}
+        activeColor={colors.heading}
+      />
+      {chartData?.chart_type !== 5 && (
+        <>
+          <Text style={[styles.headingChart, { marginVertical: 20 }]}>
+            REFERENCE RANGES
+          </Text>
+          {chartData?.sections.map((item) => (
+            <RangesView item={item} />
+          ))}
+        </>
+      )}
     </View>
   );
 };
