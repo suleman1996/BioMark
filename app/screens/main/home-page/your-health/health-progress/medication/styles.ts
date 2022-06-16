@@ -51,18 +51,18 @@ const styles = (colors: any) =>
     medicineText: {
       fontFamily: fonts.mulishRegular,
       color: colors.primary,
-      fontSize: 17,
-      marginLeft: 10,
+      fontSize: 15,
+      // marginLeft: 5,
     },
     medicineTextSuccess: {
       fontFamily: fonts.mulishRegular,
       color: colors.greenDark,
-      fontSize: 17,
-      marginLeft: 10,
+      fontSize: 15,
+      // marginLeft: 10,
     },
     checkboxView: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
       alignItems: 'center',
       width: '100%',
       padding: 10,
@@ -100,7 +100,7 @@ const styles = (colors: any) =>
     greenText: {
       color: colors.white,
       fontFamily: fonts.mulishLight,
-      fontSize: 13,
+      fontSize: 12,
       paddingLeft: widthToDp(3),
     },
   });

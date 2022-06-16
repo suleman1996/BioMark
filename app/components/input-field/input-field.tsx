@@ -19,6 +19,7 @@ type Props = {
   onFocus?: any;
   defaultValue?: any;
   maxLength?: number;
+  keyboardType?: string;
 };
 
 export default function InputField(props: Props) {
@@ -42,6 +43,7 @@ export default function InputField(props: Props) {
           onChangeText={props.onChange}
           onBlur={props.onBlur}
           maxLength={props.maxLength}
+          keyboardType={props.keyboardType}
         />
         <TouchableOpacity onPress={props.onEyePress}>
           {props.eye}

@@ -170,6 +170,7 @@ const BloodSugar = ({ route }) => {
     <TitleWithBackWhiteBgLayout
       binIcon={SELECTED_BS_ID ? true : false}
       onPressIcon={() => setShowDeleteModal(true)}
+      title="Blood Sugar"
     >
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>

@@ -178,7 +178,7 @@ const BloodPressure = ({ route }: any) => {
           />
           {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}
 
-          <Text style={styles.label}>Date of Birth</Text>
+          <Text style={styles.label}>Date - Time</Text>
           <DateTimePickerModal
             date={bloodPressure.date_entry}
             setDate={(e: any) =>

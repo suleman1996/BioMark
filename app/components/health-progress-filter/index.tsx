@@ -32,19 +32,19 @@ const Index = ({
           styles.radio,
           {
             marginLeft: 5,
-            borderWidth: selectedfilterOption.title == item.title ? 3.5 : 2,
+            borderWidth: selectedfilterOption?.title == item?.title ? 3.5 : 2,
             borderColor:
-              selectedfilterOption.title == item.title
+              selectedfilterOption?.title == item?.title
                 ? colors.heading
                 : colors.lightGrey,
             backgroundColor:
-              selectedfilterOption.title == item.title
+              selectedfilterOption?.title == item?.title
                 ? colors.white
                 : colors.white,
           },
         ]}
       />
-      <Text>{item.title}</Text>
+      <Text>{item?.title}</Text>
     </TouchableOpacity>
   );
 
