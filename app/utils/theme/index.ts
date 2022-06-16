@@ -19,6 +19,7 @@ const theme = {
     bgContainer: '#E5E5E5',
     red: 'red',
     transparentBlack: { background: '#343434', opacity: 0.8 },
+    transparentWhite: 'rgba(255,255,255,0.4)',
     heading: '#06599E',
     blue: '#1B96D8',
     lightBlueish: '#2CBDFC',

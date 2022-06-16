@@ -23,6 +23,7 @@ import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
 import { useDispatch } from 'react-redux';
 import { getReduxWeightLogs } from 'store/home/home-actions';
+import moment from 'moment';
 
 const Weight = ({ route }: any) => {
   const { colors } = useTheme();
@@ -52,6 +53,7 @@ const Weight = ({ route }: any) => {
   }, []);
 
   useEffect(() => {
+    if (weightTracker.weight == '') return;
     if (!weightTracker.is_metric) {
       setWeightTracker((prev: any) => ({
         ...prev,
@@ -83,7 +85,13 @@ const Weight = ({ route }: any) => {
       ? 'updateWeightTracker'
       : 'createWeightTracker';
     try {
-      await userService[API_FUNCTION](weightTracker, SELECTED_WEIGHT_ID);
+      await userService[API_FUNCTION](
+        {
+          ...weightTracker,
+          date_entry: moment(weightTracker.date_entry).toDate().toString(),
+        },
+        SELECTED_WEIGHT_ID
+      );
       dispatch(getReduxWeightLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err: any) {

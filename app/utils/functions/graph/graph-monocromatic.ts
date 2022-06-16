@@ -96,9 +96,7 @@ export const getGraphOptions = (
       color: graphBlackColor,
       fontWeight: 'bold',
       interval: 0,
-      formatter: (value, index) => {
-        dateFormat(value, index, config.dateRange);
-      },
+      formatter: dateFormat,
       showMaxLabel: config.dateRange !== RangeValue.all,
     },
     axisTick: {
@@ -166,20 +164,20 @@ export const getGraphOptions = (
         },
       };
     }),
-    {
-      type: 'line',
-      data: [
-        { value: [config.minDate, 0], symbol: 'none' },
-        // { value: [ new Date().getTime(), 0 ], symbol: 'none' }
-      ],
-      hoverAnimation: false,
-      z: 99,
-      label: {
-        show: false,
-      },
-      lineStyle: {
-        opacity: 0,
-      },
-    },
+    // {
+    //   type: 'line',
+    //   data: [
+    //     { value: [config.minDate, 0], symbol: 'none' },
+    //     // { value: [ new Date().getTime(), 0 ], symbol: 'none' }
+    //   ],
+    //   hoverAnimation: false,
+    //   z: 99,
+    //   label: {
+    //     show: false,
+    //   },
+    //   lineStyle: {
+    //     opacity: 0,
+    //   },
+    // },
   ],
 });

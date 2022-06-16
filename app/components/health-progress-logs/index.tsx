@@ -1,5 +1,11 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
+import React, { useMemo } from 'react';
 
 import moment from 'moment';
 import { TouchableRipple } from 'react-native-paper';
@@ -11,7 +17,7 @@ import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
 
 type Props = {
-  logData: array;
+  logData: [];
   navigate: any;
   showMore: string;
   onNextPage?: () => void;
@@ -23,12 +29,17 @@ const Index = (props: Props) => {
   const navigations = useNavigation();
 
   const [log, setLog] = React.useState(false);
+  const [page, setPage] = React.useState(1);
+  const maxPage = useMemo(
+    () => Math.ceil((props?.logData?.length || 0) / 20),
+    [props.logData]
+  );
 
   const RenderLog = ({ item }) => (
     <TouchableRipple
       onPress={() => {
         try {
-          console.log({ item, screen: props.navigate });
+          // console.log({ item, screen: props.navigate });
           navigations.navigate(props.navigate, { logId: item?.id });
         } catch (error) {
           console.log(error);
@@ -63,7 +74,7 @@ const Index = (props: Props) => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <TouchableOpacity onPress={() => setLog(!log)} style={styles.logView}>
         <Text
           style={{ color: colors.heading, fontFamily: fonts.OpenSansRegular }}
@@ -72,14 +83,26 @@ const Index = (props: Props) => {
         </Text>
         <Arrow color={colors.heading} name={log ? 'up' : 'down'} />
       </TouchableOpacity>
-
-      {log &&
-        props?.logData?.map((item) => <RenderLog key={item.id} item={item} />)}
-      {log && (
-        <TouchableOpacity onPress={props.onNextPage}>
-          <Text style={styles.showMoreText}>{props?.showMore}</Text>
-        </TouchableOpacity>
-      )}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ maxHeight: styles.renderLog.height * 4 }}
+      >
+        {log && (
+          <FlatList
+            data={props.logData.slice(0, 20 * page)}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <RenderLog key={item} item={item} />}
+          />
+        )}
+        {log &&
+          (page == maxPage ? (
+            <Text style={styles.showMoreText}>No more data to show</Text>
+          ) : (
+            <TouchableOpacity onPress={() => setPage((prev) => prev + 1)}>
+              <Text style={styles.showMoreText}>{props?.showMore}</Text>
+            </TouchableOpacity>
+          ))}
+      </ScrollView>
     </View>
   );
 };

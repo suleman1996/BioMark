@@ -28,6 +28,7 @@ import {
   graphXAxisConfig,
 } from 'utils/functions/graph/graph-utils';
 import { useNavigation } from '@react-navigation/native';
+import { BarIndicator } from 'react-native-indicators';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -41,8 +42,7 @@ const Index = () => {
   );
 
   const [chartState, setChartState] = React.useState(null);
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [noMoreData, setNoMoreData] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -78,12 +78,14 @@ const Index = () => {
 
   const weightGraphData = async () => {
     try {
+      setIsLoading(true);
       const result = await userService.getWeightMapData({
         date: selectedValue.title,
         metric: selectedfilterOption2.id == 0,
         type: selectedfilterOption1.title.toLowerCase(),
       });
       setChartState(result.data.chart);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -125,7 +127,11 @@ const Index = () => {
             .reverse();
 
     const dataset = [
-      createGraphDataPoints(points, createGraphDataPointOptions()),
+      createGraphDataPoints(
+        points,
+        createGraphDataPointOptions(),
+        selectedValue.title
+      ),
     ];
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
@@ -174,22 +180,20 @@ const Index = () => {
               <Filter fill={colors.heading} />
             </TouchableOpacity>
           </View>
-          <LineGraph chartRef={chartRef} />
+
+          <View>
+            <LineGraph chartRef={chartRef} />
+          </View>
+          {isLoading && (
+            <View style={styles.loaderContainer}>
+              <BarIndicator color={colors.blue} size={40} />
+            </View>
+          )}
           <Logs
             navigate={SCREENS.WEIGHT}
             logData={weightLogs?.log}
-            showMore={noMoreData ? 'No more data to show' : 'Show more'}
-            onNextPage={() => {
-              if (noMoreData) return;
-              setCurrentPage((prev) => prev + 1);
-              dispatch(
-                getReduxWeightLogs(currentPage + 1, () => {
-                  setNoMoreData(true);
-                })
-              );
-            }}
+            showMore={'Show more'}
           />
-          <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton
           onPress={() => navigation.navigate(SCREENS.WEIGHT)}
