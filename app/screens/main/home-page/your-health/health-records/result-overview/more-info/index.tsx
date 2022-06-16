@@ -48,7 +48,7 @@ const MoreInfo = () => {
     try {
       setIsLoading(true);
       const result = await userService.getResultPdf(id);
-      console.log('her is the download pdf  ', result.data);
+      // console.log('her is the download pdf  ', result.data);
       checkPermissionAndDownloadBase64(result.data);
       setIsLoading(false);
     } catch (error) {
@@ -147,20 +147,22 @@ const MoreInfo = () => {
               Summary
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setChartState(true), setSummaryState(false);
-            }}
-          >
-            <Text
-              style={[
-                styles.heading,
-                { marginLeft: 20, fontSize: chartState ? 18 : 16 },
-              ]}
+          {summary?.providers?.length !== 0 && (
+            <TouchableOpacity
+              onPress={() => {
+                setChartState(true), setSummaryState(false);
+              }}
             >
-              Charts
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  styles.heading,
+                  { marginLeft: 20, fontSize: chartState ? 18 : 16 },
+                ]}
+              >
+                Charts
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
         {summaryState ? (
           <>
@@ -257,21 +259,21 @@ const MoreInfo = () => {
                 {summary?.description?.normal_reading !== null && (
                   <DescriptiveBtn
                     status="normal"
-                    question="What if my Urea is normal?"
+                    question={`What if my ${summary?.name} is normal?`}
                     description={summary?.description?.normal_reading}
                   />
                 )}
                 {summary?.description?.low_reading !== null && (
                   <DescriptiveBtn
                     status="low"
-                    question="What if my Urea is low?"
+                    question={`What if my ${summary?.name} is low?`}
                     description={summary?.description?.low_reading}
                   />
                 )}
                 {summary?.description?.high_reading !== null && (
                   <DescriptiveBtn
                     status="high"
-                    question="What if my Urea is high?"
+                    question={`What if my ${summary?.name} is high?`}
                     description={summary?.description?.high_reading}
                   />
                 )}
@@ -281,7 +283,10 @@ const MoreInfo = () => {
         ) : (
           <ScrollView>
             <View style={{ flex: 1, margin: 15 }}>
-              <Charts />
+              <Charts
+                provider={summary?.providers}
+                biomarker_id={route?.params?.result_id}
+              />
             </View>
           </ScrollView>
         )}
