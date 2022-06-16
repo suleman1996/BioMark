@@ -224,175 +224,175 @@ const MedicationForm = (props: any) => {
             title={
               SELECTED_MEDICATION_ID ? 'Edit Medication' : 'Add New Medication'
             }
-          >
-            <View style={styles.container}>
-              {SELECTED_MEDICATION_ID ? (
-                <>
-                  <Text style={styles.textStyle}>{medication?.name}</Text>
-                </>
-              ) : (
-                <View style={styles.dropDownMenu}>
-                  <DropdownMenu
-                    label="Medication"
-                    options={medicationOptionsData.medication_list}
-                    selectedValue={medication.medication_list_id}
-                    onValueChange={(text: any) => {
-                      updateMedication('medication_list_id', text);
-                    }}
-                  />
-                </View>
-              )}
-
-              {!SELECTED_MEDICATION_ID && SHOW_DISEASE_LIST && (
-                <View>
-                  <DropdownMenu
-                    label="Disease"
-                    options={
-                      medicationOptionsData.medication_list.find(
-                        (a) => a.id === medication.medication_list_id
-                      )?.disease_list || []
-                    }
-                    selectedValue={medication?.disease_type}
-                    onValueChange={(text: any) =>
-                      updateMedication('disease_type', text)
-                    }
-                  />
-                </View>
-              )}
-              <View>
-                <Text style={styles.textStyle}>Dosage</Text>
-                {SHOW_DOSAGE_INPUT ? (
-                  <View style={styles.dosageView}>
-                    <View
-                      style={{
-                        width: '78%',
-                      }}
-                    >
-                      <InputWithLabel
-                        containerStyles={{
-                          marginTop: 0,
-                        }}
-                        value={medication.dosage}
-                        error={dosageRangeError}
-                        onChange={(val) => {
-                          const err =
-                            Number(val) > DOSAGE_RANGE.MAX ||
-                            Number(val) < DOSAGE_RANGE.MIN
-                              ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
-                              : '';
-
-                          updateMedication('dosage', val);
-                          setDosageRangeError(err);
-                        }}
-                      />
-                    </View>
-                    <View
-                      style={{
-                        width: '20%',
-                        // alignItems: 'center',
-                        // justifyContent: 'center',
-                      }}
-                    >
-                      <Text style={styles.unitText}>unit(s)</Text>
-                    </View>
-                  </View>
-                ) : (
-                  <Text style={styles.subText}>1 pill(s)</Text>
-                )}
-              </View>
+          />
+          <View style={styles.container}>
+            {SELECTED_MEDICATION_ID ? (
+              <>
+                <Text style={styles.textStyle}>{medication?.name}</Text>
+              </>
+            ) : (
               <View style={styles.dropDownMenu}>
-                <Text style={styles.textStyle}>Frequency of Dosage</Text>
-                {DOSAGE_RANGE.MAX > 1 || DOSAGE_RANGE.MAX === 0 ? (
-                  <View style={styles.dropDownMenu}>
-                    <DropdownMenu
-                      options={medicationOptionsData.frequency_list}
-                      selectedValue={medication.frequency}
-                      onValueChange={(text: any) =>
-                        updateMedication('frequency', text)
-                      }
+                <DropdownMenu
+                  label="Medication"
+                  options={medicationOptionsData.medication_list}
+                  selectedValue={medication.medication_list_id}
+                  onValueChange={(text: any) => {
+                    updateMedication('medication_list_id', text);
+                  }}
+                />
+              </View>
+            )}
+
+            {!SELECTED_MEDICATION_ID && SHOW_DISEASE_LIST && (
+              <View>
+                <DropdownMenu
+                  label="Disease"
+                  options={
+                    medicationOptionsData.medication_list.find(
+                      (a) => a.id === medication.medication_list_id
+                    )?.disease_list || []
+                  }
+                  selectedValue={medication?.disease_type}
+                  onValueChange={(text: any) =>
+                    updateMedication('disease_type', text)
+                  }
+                />
+              </View>
+            )}
+            <View>
+              <Text style={styles.textStyle}>Dosage</Text>
+              {SHOW_DOSAGE_INPUT ? (
+                <View style={styles.dosageView}>
+                  <View
+                    style={{
+                      width: '78%',
+                    }}
+                  >
+                    <InputWithLabel
+                      containerStyles={{
+                        marginTop: 0,
+                      }}
+                      value={medication.dosage}
+                      error={dosageRangeError}
+                      onChange={(val) => {
+                        const err =
+                          Number(val) > DOSAGE_RANGE.MAX ||
+                          Number(val) < DOSAGE_RANGE.MIN
+                            ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
+                            : '';
+
+                        updateMedication('dosage', val);
+                        setDosageRangeError(err);
+                      }}
                     />
                   </View>
-                ) : (
-                  <Text style={styles.subText}>1x a day</Text>
-                )}
-
-                {medication.frequency &&
-                  medication.frequency_time.map((time, index) => (
-                    <View style={styles.dropDownMenu} key={index}>
-                      <DropdownMenu
-                        options={[...FREQUENCY_TIME_OPTIONS]}
-                        selectedValue={medication.frequency_time[index]}
-                        onValueChange={(text: any) => {
-                          let tempMedFrequency = [...medication.frequency_time];
-                          tempMedFrequency[index] = text;
-                          updateMedication('frequency_time', [
-                            ...tempMedFrequency,
-                          ]);
-                        }}
-                      />
-                    </View>
-                  ))}
-              </View>
-
-              <View>
-                <DatePicker
-                  label="Start Date"
-                  isPickerShow={isPickerShow}
-                  setIsPickerShow={setIsPickerShow}
-                  date={medication.start_date}
-                  setDate={(newDate: any) =>
-                    updateMedication('start_date', newDate)
-                  }
-                  width={'100%'}
-                />
-              </View>
-              <View>
-                <DatePicker
-                  label="End Date"
-                  isPickerShow={isPickerShow}
-                  setIsPickerShow={setIsPickerShow}
-                  date={medication.end_date}
-                  setDate={(newDate: any) =>
-                    updateMedication('end_date', newDate)
-                  }
-                  width={'100%'}
-                />
-              </View>
+                  <View
+                    style={{
+                      width: '20%',
+                      // alignItems: 'center',
+                      // justifyContent: 'center',
+                    }}
+                  >
+                    <Text style={styles.unitText}>unit(s)</Text>
+                  </View>
+                </View>
+              ) : (
+                <Text style={styles.subText}>1 pill(s)</Text>
+              )}
             </View>
-            {showDeleteModal && (
-              <AccountDeActivateModal
-                headerText="Medication"
-                subHeading="Are you sure you wish to delete this medication?"
-                buttonUpperText="Yes"
-                buttonLowerText="Skip"
-                isVisible={showDeleteModal}
-                setIsVisible={setShowDeleteModal}
-                callMe={deleteMedication}
+            <View style={styles.dropDownMenu}>
+              <Text style={styles.textStyle}>Frequency of Dosage</Text>
+              {DOSAGE_RANGE.MAX > 1 || DOSAGE_RANGE.MAX === 0 ? (
+                <View style={styles.dropDownMenu}>
+                  <DropdownMenu
+                    options={medicationOptionsData.frequency_list}
+                    selectedValue={medication.frequency}
+                    onValueChange={(text: any) =>
+                      updateMedication('frequency', text)
+                    }
+                  />
+                </View>
+              ) : (
+                <Text style={styles.subText}>1x a day</Text>
+              )}
+
+              {medication.frequency &&
+                medication.frequency_time.map((time, index) => (
+                  <View style={styles.dropDownMenu} key={index}>
+                    <DropdownMenu
+                      options={[...FREQUENCY_TIME_OPTIONS]}
+                      selectedValue={medication.frequency_time[index]}
+                      onValueChange={(text: any) => {
+                        let tempMedFrequency = [...medication.frequency_time];
+                        tempMedFrequency[index] = text;
+                        updateMedication('frequency_time', [
+                          ...tempMedFrequency,
+                        ]);
+                      }}
+                    />
+                  </View>
+                ))}
+            </View>
+
+            <View>
+              <DatePicker
+                label="Start Date"
+                isPickerShow={isPickerShow}
+                setIsPickerShow={setIsPickerShow}
+                date={medication.start_date}
+                setDate={(newDate: any) =>
+                  updateMedication('start_date', newDate)
+                }
+                width={'100%'}
               />
-            )}
-          </TitleWithBackWhiteBgLayout>
+            </View>
+            <View>
+              <DatePicker
+                label="End Date"
+                isPickerShow={isPickerShow}
+                setIsPickerShow={setIsPickerShow}
+                date={medication.end_date}
+                setDate={(newDate: any) =>
+                  updateMedication('end_date', newDate)
+                }
+                width={'100%'}
+              />
+            </View>
+          </View>
+          {showDeleteModal && (
+            <AccountDeActivateModal
+              headerText="Medication"
+              subHeading="Are you sure you wish to delete this medication?"
+              buttonUpperText="Yes"
+              buttonLowerText="Skip"
+              isVisible={showDeleteModal}
+              setIsVisible={setShowDeleteModal}
+              callMe={deleteMedication}
+            />
+          )}
+          {/* </TitleWithBackWhiteBgLayout> */}
+          {SELECTED_MEDICATION_ID ? (
+            <GradientButton
+              text="Save Edit"
+              color={['#2C6CFC', '#2CBDFC']}
+              disabled={!BUTTON_DISABLED}
+              style={styles.gradientButton}
+              onPress={saveMedication}
+            />
+          ) : (
+            <GradientButton
+              text="Add"
+              color={
+                BUTTON_DISABLED
+                  ? ['#2C6CFC', '#2CBDFC']
+                  : [colors.disabled, colors.disabled]
+              }
+              disabled={!BUTTON_DISABLED}
+              style={styles.gradientButton}
+              onPress={saveMedication}
+            />
+          )}
         </ScrollView>
-        {SELECTED_MEDICATION_ID ? (
-          <GradientButton
-            text="Save Edit"
-            color={['#2C6CFC', '#2CBDFC']}
-            disabled={!BUTTON_DISABLED}
-            style={styles.gradientButton}
-            onPress={saveMedication}
-          />
-        ) : (
-          <GradientButton
-            text="Add"
-            color={
-              BUTTON_DISABLED
-                ? ['#2C6CFC', '#2CBDFC']
-                : [colors.disabled, colors.disabled]
-            }
-            disabled={!BUTTON_DISABLED}
-            style={styles.gradientButton}
-            onPress={saveMedication}
-          />
-        )}
       </View>
     </>
   );

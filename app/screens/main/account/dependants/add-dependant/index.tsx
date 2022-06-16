@@ -204,6 +204,7 @@ const AddDependantScreen = () => {
                   value={values.first_name}
                   error={touched.first_name ? errors.first_name : ''}
                   onBlur={() => setFieldTouched('first_name')}
+                  maxLength={50}
                 />
                 <InputWithLabel
                   label="Last Name"
@@ -212,6 +213,7 @@ const AddDependantScreen = () => {
                   value={values.last_name}
                   error={touched.last_name ? errors.last_name : ''}
                   onBlur={() => setFieldTouched('last_name')}
+                  maxLength={50}
                 />
                 <PhoneNumberWithLabel
                   label="Mobile Number"
@@ -229,7 +231,6 @@ const AddDependantScreen = () => {
                   onBlur={() => setFieldTouched('phone_number')}
                 />
 
-                {console.log(errors.phone_number)}
                 {touched.phone_number &&
                   (errors.phone_number ? (
                     <View style={styles.errorContainer}>
@@ -270,6 +271,7 @@ const AddDependantScreen = () => {
                   value={values.id_number}
                   error={touched.id_number ? errors.id_number : ''}
                   onBlur={() => setFieldTouched('id_number')}
+                  maxLength={20}
                 />
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('gender_id', e)}

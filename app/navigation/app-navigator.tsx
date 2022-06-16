@@ -54,6 +54,7 @@ import SeeResult from 'screens/main/home-page/your-health/health-records/result-
 import ResultUpload from 'screens/main/home-page/your-health/health-records/upload-results';
 import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
 import PendingResultOverview from 'screens/main/home-page/your-health/health-records/pending-result-overview';
+import TermsAndPrivacy from 'screens/auth/terms-and-privacy';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -201,6 +202,10 @@ const AppNavigator = () => {
       ) : (
         <>
           <Stack.Screen name={CREATE_PROFILE} component={CreateProfile} />
+          <Stack.Screen
+            name={SCREENS.TERMS_AND_PRIVACY}
+            component={TermsAndPrivacy}
+          />
         </>
       )}
     </Stack.Navigator>
