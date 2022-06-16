@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
-import { GlobalStyles } from 'utils/theme/global-styles';
+// import { GlobalStyles } from 'utils/theme/global-styles';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -13,13 +13,21 @@ export const makeStyles = (colors: any) =>
     },
     header: {
       width: widthToDp(100),
-      backgroundColor: colors.white,
+      // backgroundColor: colors.white,
       paddingHorizontal: widthToDp(4),
       paddingTop: heightToDp(2.5),
       paddingBottom: heightToDp(2),
-      ...GlobalStyles(colors).shadow,
-      borderBottomWidth: heightToDp(0.5),
-      borderBottomColor: colors.gray,
+      // ...GlobalStyles(colors).shadow,
+      // borderBottomWidth: heightToDp(0.4),
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1.41,
+
+      elevation: 2,
     },
     titleContainer: {
       paddingVertical: heightToDp(1),

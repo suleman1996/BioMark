@@ -34,5 +34,21 @@ export const makeStyles = (colors: any) =>
     bottomBtnContainer: {
       marginTop: heightToDp(4),
     },
+    errorContainer: {
+      width: '100%',
+      paddingVertical: heightToDp(0.3),
+      paddingHorizontal: widthToDp(4),
+      backgroundColor: colors.red,
+      borderBottomLeftRadius: widthToDp(2),
+      borderBottomRightRadius: widthToDp(2),
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    errorText: {
+      color: colors.white,
+      fontFamily: GlobalFonts.light,
+      fontSize: responsiveFontSize(14),
+      paddingLeft: widthToDp(3),
+    },
   });
 export default makeStyles;

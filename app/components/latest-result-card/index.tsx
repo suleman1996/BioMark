@@ -3,6 +3,7 @@ import React from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 type props = {
   name?: string;
@@ -48,7 +49,7 @@ const LatestResultCard = (Props: props) => {
             flexDirection: 'row',
             padding: 5,
             alignItems: 'center',
-            width: '40%',
+            width: widthToDp('30%'),
             borderRadius: 15,
             marginHorizontal: 15,
             marginTop: 10,
