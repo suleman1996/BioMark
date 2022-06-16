@@ -13,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getReduxPendingResultOverview,
-  getReduxPastResult,
+  // getReduxPastResult,
 } from 'store/home/home-actions';
 import { useRoute } from '@react-navigation/native';
 
@@ -58,7 +58,7 @@ const PendingResultOverview = () => {
       );
       if (result.status == true) {
         setModalVisible(false);
-        dispatch(getReduxPastResult());
+        // dispatch(getReduxPastResult());
         navigate(SCREENS.YOUR_HEALTH);
         console.log('delte----------------------------------', result.data);
       }
