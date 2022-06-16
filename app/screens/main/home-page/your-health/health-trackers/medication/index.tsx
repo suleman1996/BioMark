@@ -145,6 +145,8 @@ const Medication = ({ route }) => {
       setShowDeleteModal(false);
       await userService.deleteMedicationTracker(SELECTED_MEDICATION_LOG_ID);
       dispatch(getReduxNewMedicationTracker());
+      dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
+
       goBack();
     } catch (error) {
       console.log(error);
@@ -217,8 +219,6 @@ const Medication = ({ route }) => {
     setValidation(false);
     setIsLoading(false);
   }, [SELECTED_MEDICATION_LOG_ID]);
-
-  console.log({ options2, meal: medicationTrackerState.meal_type });
 
   return (
     <TitleWithBackWhiteBgLayout
@@ -300,7 +300,7 @@ const Medication = ({ route }) => {
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
                 date={medicationTrackerState.record_date}
-                maxDate={new Date().toString()}
+                maxDate={new Date()}
                 setDate={(e: any) => updateState('record_date', e)}
               />
             </>

@@ -124,7 +124,7 @@ const AppNavigator = () => {
         headerShown: false,
       }}
     >
-      {!hasProfile ? (
+      {hasProfile ? (
         <>
           <Stack.Screen
             name={SCREENS.MAIN_NAVIGATOR}

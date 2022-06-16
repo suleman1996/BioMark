@@ -13,14 +13,20 @@ const Index = ({
   option2,
   filterOption1,
   filterOption2,
-  selectedfilterOption1,
-  selectedfilterOption2,
-  setSelectedfilterOption1,
-  setSelectedfilterOption2,
+  values,
   onApplyPress,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
+  const [selectedfilterOption1, setSelectedfilterOption1] = React.useState();
+  const [selectedfilterOption2, setSelectedfilterOption2] = React.useState();
+
+  React.useEffect(() => {
+    if (values?.selectedfilterOption1)
+      setSelectedfilterOption1(values.selectedfilterOption1);
+    if (values?.selectedfilterOption2)
+      setSelectedfilterOption2(values.selectedfilterOption2);
+  }, [values]);
 
   const RenderRadio = ({ item, onPress, selectedfilterOption }) => (
     <TouchableOpacity
@@ -32,13 +38,13 @@ const Index = ({
           styles.radio,
           {
             marginLeft: 5,
-            borderWidth: selectedfilterOption.title == item.title ? 3.5 : 2,
+            borderWidth: selectedfilterOption?.title == item.title ? 3.5 : 2,
             borderColor:
-              selectedfilterOption.title == item.title
+              selectedfilterOption?.title == item.title
                 ? colors.heading
                 : colors.lightGrey,
             backgroundColor:
-              selectedfilterOption.title == item.title
+              selectedfilterOption?.title == item.title
                 ? colors.white
                 : colors.white,
           },
@@ -81,7 +87,9 @@ const Index = ({
           text="Apply"
           color={['#2C6CFC', '#2CBDFC']}
           style={{ marginBottom: 5, marginTop: 30 }}
-          onPress={onApplyPress}
+          onPress={() =>
+            onApplyPress(selectedfilterOption1, selectedfilterOption2)
+          }
         />
       </View>
     </View>

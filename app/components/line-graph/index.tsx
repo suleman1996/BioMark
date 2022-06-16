@@ -8,7 +8,7 @@ const Index = ({ chartRef, lagendChartRef, showLegend }) => {
   return (
     <View
       style={{
-        height: heightToDp(45),
+        height: heightToDp(35),
         marginTop: 0,
         marginBottom: 10,
         flexDirection: 'row',
@@ -17,12 +17,12 @@ const Index = ({ chartRef, lagendChartRef, showLegend }) => {
     >
       {showLegend ? (
         <View style={{ width: '10%' }}>
-          <ECharts option={{}} ref={lagendChartRef} />
+          <ECharts ref={lagendChartRef} />
         </View>
       ) : null}
 
       <View style={{ width: showLegend ? '90%' : '100%' }}>
-        <ECharts option={{}} ref={chartRef} />
+        <ECharts ref={chartRef} />
       </View>
     </View>
   );

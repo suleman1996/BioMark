@@ -23,6 +23,8 @@ export const makeStyles = (colors: any, small?: boolean) =>
       fontSize: responsiveFontSize(small ? 20 : 50),
       fontFamily: small ? fonts.mulishRegular : fonts.OpenSansBold,
       color: small ? colors.black : '#808080',
+      flex: 1,
+      textAlign: 'right',
     },
     menuTrigger: {
       flexDirection: 'row',
