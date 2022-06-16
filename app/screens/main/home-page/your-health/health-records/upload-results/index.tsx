@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
+var RNFS = require('react-native-fs');
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
@@ -28,12 +29,14 @@ import { getReduxPastResult } from 'store/home/home-actions';
 import LabResultModal from 'components/lab-results-modal';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { userService } from 'services/user-service/user-service';
-// import DocumentPicker from 'react-native-document-picker';
+import DocumentPicker from 'react-native-document-picker';
 
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
 import { useSelector, useDispatch } from 'react-redux';
 import { IAppState } from 'store/IAppState';
+import Pdf from 'react-native-pdf';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 // let cameraIs = false;
 
@@ -48,6 +51,8 @@ export default function ResultUpload() {
   const [list, setList] = useState([]);
   const [showPicModal, setShowPicModal] = useState(false);
   const [uri, setUri] = useState('');
+
+  const [modalData, setModalData] = useState([]);
 
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -64,6 +69,7 @@ export default function ResultUpload() {
         attachments: list,
       },
     };
+    console.log('body', body);
     try {
       setIsVisible(true);
       const profilePic = await userService.uploadResult(body);
@@ -101,103 +107,84 @@ export default function ResultUpload() {
   const imagePickerFromGallery = async () => {
     try {
       setIsVisible(true);
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: 'App Camera Permission',
-          message: 'App needs access to your camera',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
+      let options = {
+        mediaType: 'photo',
+        selectionLimit: 0,
+        includeBase64: true,
+      };
+      launchImageLibrary(options, (res) => {
+        if (res.didCancel) {
+          setIsVisible(false);
+          console.log('User cancelled image picker');
+        } else if (res.errorMessage) {
+          setIsVisible(false);
+          console.log('ImagePicker Error: ', res.errorMessage);
+        } else {
+          setIsVisible(false);
+          let body = {
+            filename: res?.assets[0]?.fileName,
+            uri: res?.assets[0]?.uri,
+            base64:
+              'data:' +
+              res?.assets[0]?.type +
+              ';' +
+              'base64' +
+              ',' +
+              res?.assets[0]?.base64,
+            filetype: res?.assets[0]?.type,
+          };
+          let data = list;
+          data.push(body);
+          setList(data);
+          setShowModal(!showModal);
         }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        let options = {
-          mediaType: 'photo',
-          selectionLimit: 0,
-          includeBase64: true,
-        };
-        launchImageLibrary(options, (res) => {
-          if (res.didCancel) {
-            setIsVisible(false);
-            console.log('User cancelled image picker');
-          } else if (res.errorMessage) {
-            setIsVisible(false);
-            console.log('ImagePicker Error: ', res.errorMessage);
-          } else {
-            setIsVisible(false);
-            let body = {
-              filename: res?.assets[0]?.fileName,
-              uri: res?.assets[0]?.uri,
-              base64:
-                'data:' +
-                res?.assets[0]?.type +
-                ';' +
-                'base64' +
-                ',' +
-                res?.assets[0]?.base64,
-              filetype: res?.assets[0]?.type,
-            };
-            let data = list;
-            data.push(body);
-            setList(data);
-            setShowModal(!showModal);
-          }
-        });
-        console.log('Camera permission given');
-      } else {
-        setIsVisible(false);
-        console.log('Camera permission denied');
-      }
+      });
     } catch (err) {
       setIsVisible(false);
       console.warn(err);
     }
   };
 
-  // const uploadPDF = async () => {
-  //   //Opening Document Picker for selection of one file
-  //   try {
-  //     const res = await DocumentPicker.pick({
-  //       type: [DocumentPicker.types.allFiles],
-  //       //There can me more options as well
-  //       // DocumentPicker.types.allFiles
-  //       // DocumentPicker.types.images
-  //       // DocumentPicker.types.plainText
-  //       // DocumentPicker.types.audio
-  //       // DocumentPicker.types.pdf
-  //     });
-  //     //Printing the log realted to the file
-  //     console.log('res : ' + JSON.stringify(res));
-  //     let body = {
-  //       filename: res?.fileName,
-  //       uri: res?.uri,
-  //       base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
-  //       filetype: res?.type,
-  //     };
-  //     let data = list;
-  //     data.push(body);
-  //     setList(data);
-  //     setShowModal(false);
-  //     console.log('docment------------', data);
+  const uploadPDF = async () => {
+    //Opening Document Picker for selection of one file
+    try {
+      const res = await DocumentPicker.pickSingle({
+        type: [DocumentPicker.types.pdf],
+      });
+      //Printing the log realted to the file
+      console.log('res : ', res);
+      var b64 = await RNFS.readFile(res.uri, 'base64');
+      console.log('Data', data);
 
-  //     // console.log('URI : ' + res.uri);
-  //     // console.log('Type : ' + res.type);
-  //     // console.log('File Name : ' + res.name);
-  //     // console.log('File Size : ' + res.size);
-  //     //Setting the state to show single file attributes
-  //   } catch (err) {
-  //     //Handling any exception (If any)
-  //     if (DocumentPicker.isCancel(err)) {
-  //       //If user canceled the document selection
-  //       console.log('Canceled from single doc picker');
-  //     } else {
-  //       //For Unknown Error
-  //       // alert('Unknown Error: ' + JSON.stringify(err));
-  //       throw err;
-  //     }
-  //   }
-  // };
+      let body = {
+        filename: res?.name,
+        //  base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
+        base64: 'data:application/pdf;base64,' + b64,
+        filetype: 'pdf',
+      };
+      let data = list;
+      data.push(body);
+      setList(data);
+      setShowModal(false);
+      console.log('docment------------', data);
+
+      console.log('URI : ' + res.uri);
+      console.log('Type : ' + res.type);
+      console.log('File Name : ' + res.name);
+      console.log('File Size : ' + res.size);
+      //Setting the state to show single file attributes
+    } catch (err) {
+      //Handling any exception (If any)
+      if (DocumentPicker.isCancel(err)) {
+        //If user canceled the document selection
+        console.log('Canceled from single doc picker');
+      } else {
+        //For Unknown Error
+        // alert('Unknown Error: ' + JSON.stringify(err));
+        throw err;
+      }
+    }
+  };
 
   const imagePickerFromCamera = async () => {
     try {
@@ -296,11 +283,22 @@ export default function ResultUpload() {
                   renderItem={({ item, index }) => {
                     return (
                       <>
-                        <ImageBackground
-                          imageStyle={{ borderRadius: 8 }}
-                          source={{ uri: item.uri }}
-                          style={styles.imageView2}
-                        ></ImageBackground>
+                        {item?.filetype === 'pdf' ? (
+                          <Pdf
+                            source={{
+                              uri: item.base64,
+                            }}
+                            singlePage={true}
+                            trustAllCerts={true}
+                            style={styles.imageView2}
+                          />
+                        ) : (
+                          <ImageBackground
+                            imageStyle={{ borderRadius: 8 }}
+                            source={{ uri: item?.uri }}
+                            style={styles.imageView2}
+                          />
+                        )}
                       </>
                     );
                   }}
@@ -367,23 +365,51 @@ export default function ResultUpload() {
                 renderItem={({ item, index }) => {
                   setSplices(index);
                   setUri(item?.uri);
+                  console.log('item', item);
                   return (
-                    <Pressable onPress={() => setShowPicModal(true)}>
-                      <ImageBackground
-                        imageStyle={{ borderRadius: 8 }}
-                        source={{ uri: item?.uri }}
-                        style={styles.imageView2}
-                      >
-                        <MaterialCommunityIcons
-                          name="delete"
-                          color={colors.primary}
-                          size={25}
-                          style={styles.deleteIcon}
-                          onPress={() => {
-                            setModalVisible(true);
-                          }}
-                        />
-                      </ImageBackground>
+                    <Pressable
+                      onPress={() => {
+                        setShowPicModal(true);
+                        setModalData(item);
+                      }}
+                    >
+                      {item?.filetype === 'pdf' ? (
+                        <View>
+                          <MaterialCommunityIcons
+                            name="delete"
+                            color={colors.primary}
+                            size={25}
+                            style={styles.pdfWithBin}
+                            onPress={() => {
+                              setModalVisible(true);
+                            }}
+                          />
+                          <Pdf
+                            source={{
+                              uri: item?.base64,
+                            }}
+                            singlePage={true}
+                            trustAllCerts={true}
+                            style={styles.imageView2}
+                          />
+                        </View>
+                      ) : (
+                        <ImageBackground
+                          imageStyle={{ borderRadius: 8 }}
+                          source={{ uri: item?.uri }}
+                          style={styles.imageView2}
+                        >
+                          <MaterialCommunityIcons
+                            name="delete"
+                            color={colors.primary}
+                            size={25}
+                            style={styles.deleteIcon}
+                            onPress={() => {
+                              setModalVisible(true);
+                            }}
+                          />
+                        </ImageBackground>
+                      )}
                     </Pressable>
                   );
                 }}
@@ -405,7 +431,7 @@ export default function ResultUpload() {
               />
               <ShowPicModal
                 visible={showPicModal}
-                image={{ uri: uri }}
+                modalData={modalData}
                 onClose={() => setShowPicModal(false)}
               />
             </View>
@@ -424,7 +450,7 @@ export default function ResultUpload() {
               closeModal={() => setShowModal(!showModal)}
               onTakePhoto={() => imagePickerFromCamera()}
               onUploadFromGallery={() => imagePickerFromGallery()}
-              onUploadPdf={undefined}
+              onUploadPdf={() => uploadPDF()}
             />
           </ScrollView>
 
