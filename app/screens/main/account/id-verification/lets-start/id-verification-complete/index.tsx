@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Image, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import Styles from './styles';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,13 +15,28 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 import { useNavigation } from '@react-navigation/native';
+import AuthContext from 'utils/auth-context';
+import { userService } from 'services/user-service/user-service';
 type Props = {};
 
 const IdVerfiicationComplete = (props: Props) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  const {} = props;
   const navigation = useNavigation();
+  const data = props.route.params;
+  const authContext = useContext(AuthContext);
+  const userProfile = async () => {
+    try {
+      const result = await userService.getUserProfile();
+
+      authContext.setUserData(result.data);
+    } catch (error) {}
+  };
+  useEffect(async () => {
+    const result = await userService.jumioCallBack(data);
+    userProfile();
+  }, []);
+
   return (
     <>
       <SafeAreaView style={styles.container}>

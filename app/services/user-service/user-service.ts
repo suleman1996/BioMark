@@ -1150,6 +1150,11 @@ function getLabResultStatus() {
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
+const jumioCallBack = (id_verification) => {
+  return client.post(API_URLS.JUMIO_CALLBACK, {
+    id_verification: id_verification,
+  });
+};
 const deleteMedicationTracker = async (id: number) => {
   return await client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
 };
@@ -1869,4 +1874,5 @@ export const userService = {
   getSearchResult,
   Terms,
   getResultOverViewChartData,
+  jumioCallBack,
 };

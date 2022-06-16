@@ -56,6 +56,7 @@ const API_URLS = {
 
   DASHBOARD: 'api/v1/patient/dashboard',
   GET_JUMIO_DATA: '/integration/v1/id_verifications/get_authtoken',
+  JUMIO_CALLBACK: '/integration/v1/id_verifications/callback',
 
   // Health Traqcker
   GET_HEALTH_DROPDOWN: '/api/v1/patient/psp/trackers/blood_sugar/new',
