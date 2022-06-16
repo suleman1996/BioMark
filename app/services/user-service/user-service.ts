@@ -1693,8 +1693,16 @@ const getSearchResult = (lab_id, query) => {
   });
 };
 
-const getResultOverViewChartData = () => {
-  return client.get(API_URLS.RESULT_OVERVIEW_CHARTDATA);
+const getResultOverViewChartData = (id, date, provider) => {
+  return client.get(
+    `${API_URLS.RESULT_OVERVIEW_CHARTDATA}${id}/chart?provider=1&date=all`,
+    {
+      params: {
+        provider: provider,
+        date: date,
+      },
+    }
+  );
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {

@@ -169,9 +169,9 @@ const HbA1c = ({ route }) => {
         </View>
       </ScrollView>
       <AccountDeActivateModal
-        headerText="Weight"
-        subHeading="Are you sure you wish to delete this weight log?"
-        buttonUpperText="Yes"
+        headerText="HbA1c"
+        subHeading="Are you sure you wish to delete this HbA1c log?"
+        buttonUpperText="Delete"
         buttonLowerText="Skip"
         isVisible={showDeleteModal}
         setIsVisible={setShowDeleteModal}
