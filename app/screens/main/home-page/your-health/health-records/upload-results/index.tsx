@@ -159,7 +159,7 @@ export default function ResultUpload() {
       let body = {
         filename: res?.name,
         //  base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
-        base64: 'data:application/pdf;base64,' + b64,
+        base64: `data:application/pdf;base64,${b64}`,
         filetype: 'pdf',
       };
       let data = list;

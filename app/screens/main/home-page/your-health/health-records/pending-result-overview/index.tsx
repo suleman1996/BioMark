@@ -155,7 +155,6 @@ const PendingResultOverview = () => {
                             uri: item?.document?.url,
                             cache: true,
                           }}
-                          singlePage={true}
                           trustAllCerts={true}
                           style={styles.imageView2}
                         />
