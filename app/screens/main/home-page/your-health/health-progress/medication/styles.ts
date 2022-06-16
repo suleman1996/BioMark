@@ -71,7 +71,7 @@ const styles = (colors: any) =>
       width: '100%',
       paddingVertical: heightToDp(1),
       paddingHorizontal: widthToDp(4),
-      backgroundColor: colors.red,
+      backgroundColor: colors.medicationRed,
       borderBottomLeftRadius: widthToDp(2),
       borderBottomRightRadius: widthToDp(2),
       flexDirection: 'row',

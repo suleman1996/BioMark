@@ -16,7 +16,7 @@ const RendreLabResult = ({ item, setVisible, stepIndicatorIcons }) => {
           <Text style={[styles.barcode]}>Barcode {item?.lab_ref_id}</Text>
         </View>
         <LabResultProgressBar
-          currentPosition={4 - item?.status_order}
+          currentPosition={5 - item?.status_order}
           icons={stepIndicatorIcons}
         />
         <View style={{ alignItems: 'center' }}>
