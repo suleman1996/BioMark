@@ -221,6 +221,7 @@ function createProfile(
       .then(async (response) => {
         try {
           logNow('create user success response', response.data);
+          await setAuthAsyncStorage(response.data);
           resolve(response.data);
         } catch (e) {
           logNow('create user error block login1.', e);

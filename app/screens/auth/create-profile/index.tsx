@@ -95,6 +95,7 @@ export default function CreateProfile() {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectedCountryCode]);
+
   async function getHasprofileAsyncStorage() {
     const data = await getAuthAsyncStorage();
     dispatch3(loggedIn(data));
