@@ -41,6 +41,7 @@ export default function (props: Props) {
         keyboardShouldPersistTaps={'handled'}
         autoCapitalize="none"
         keyboardType={props?.keyboardType}
+        onBlur={props?.onBlur}
         autoCorrect={false}
         right={
           props?.eye && (

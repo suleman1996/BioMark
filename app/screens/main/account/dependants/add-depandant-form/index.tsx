@@ -132,6 +132,7 @@ const AddDependantForm = (props: Props) => {
       })
       .catch((err) => {
         logNow(err);
+        callMe();
       })
       .finally(async () => {
         await dispatch(getAllDependents());

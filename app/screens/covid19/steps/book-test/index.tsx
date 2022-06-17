@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Pressable, ScrollView, Text, View } from 'react-native';
-import StepIndicator from 'react-native-step-indicator';
 import { useTheme } from 'react-native-paper';
+import StepIndicator from 'react-native-step-indicator';
 
 import ButtonComponent from 'components/base/button';
 import ExisitingBookingForDependent from 'components/ui/covid-test-book-for-existing/index';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
-import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
+import { navigate } from 'services/nav-ref';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
-import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
-import CovidTestBookForPersonal from 'components/ui/covid-test-book-for-personal/index';
 import TopBarWithBackText from 'components/higher-order/topBarWithBackText/index';
 import CancelBookingTestModal from 'components/ui/cancelBookingTestModal/index';
+import { useSelector } from 'react-redux';
+import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
+import { addCovidBooking } from 'store/covid/covid-actions';
+import { IAppState } from 'store/IAppState';
+import { store } from 'store/store';
+import { logNow } from 'utils/functions/log-binder';
 import makeStyles from './styles';
 
 type Props = {};
@@ -22,13 +26,35 @@ const labels = ['Booking', 'Payment', 'Confirmation'];
 
 const BookCovidTest = (props: Props) => {
   const {} = props;
+
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const [isExistingBtn, setIsExisting] = useState(false);
   const [isDependantAdd, setIsDependantAdd] = useState(false);
-  const [isPersonal, setIsPersonal] = useState(false);
 
   const [isCancelModal, setIsCancelModal] = useState(false);
+
+  // booking array is
+  const booking = useSelector((state: IAppState) => state.covid.booking);
+  const bookState = useSelector((state: IAppState) => state.covid);
+  useEffect(() => {
+    logNow('Changed');
+  }, [bookState.booking]);
+
+  const [openedBooking, setOpendedBooking] = useState(-1);
+  // push if dependants
+  const pushOneMoreToBooking = async () => {
+    let copyArray = booking;
+    copyArray.push({ is_dependant: true });
+    store.dispatch(addCovidBooking(copyArray));
+    console.log('booking', booking);
+  };
+
+  const pushOneAddSelf = async () => {
+    let copyArray = booking;
+    copyArray.push({ is_dependant: false, dependent_id: 0 });
+    store.dispatch(addCovidBooking(copyArray));
+    console.log('booking', booking);
+  };
 
   return (
     <>
@@ -55,21 +81,23 @@ const BookCovidTest = (props: Props) => {
           keyboardShouldPersistTaps="always"
           contentContainerStyle={styles.scrollView}
         >
-          {isExistingBtn && !isDependantAdd ? (
+          {/* {isExistingBtn && !isDependantAdd ? ( */}
+          {[...booking].map((item, index) => (
             <View>
-              <ExisitingBookingForDependent />
+              <ExisitingBookingForDependent
+                setOpendedBooking={setOpendedBooking}
+                openedBooking={openedBooking}
+                itemIndex={index}
+              />
             </View>
-          ) : null}
+          ))}
 
-          {isPersonal && !isDependantAdd && !isExistingBtn ? (
-            <View>
-              <CovidTestBookForPersonal />
-            </View>
-          ) : null}
+          {/* ) : null} */}
 
           <ButtonComponent
             onPress={() => {
-              setIsExisting(true);
+              // setIsExisting(true);
+              pushOneMoreToBooking();
             }}
             title={'Add Existing Dependent'}
           />
@@ -92,7 +120,8 @@ const BookCovidTest = (props: Props) => {
           ) : null}
           <ButtonComponent
             onPress={() => {
-              setIsPersonal(true);
+              // setIsExisting(true);
+              pushOneAddSelf();
             }}
             marginTop={1}
             title={'Add Self'}

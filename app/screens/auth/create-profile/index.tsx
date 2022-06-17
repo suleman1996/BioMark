@@ -272,7 +272,7 @@ export default function CreateProfile() {
                 /> */}
                   <InputWithLabel
                     label="Identity Card/Passport Number"
-                    placeholder={''}
+                    placeholder={'E.g. A1234567X'}
                     containerStyles={{ paddingHorizontal: 20 }}
                     labelFontSize={15}
                     onChange={(value) => {
