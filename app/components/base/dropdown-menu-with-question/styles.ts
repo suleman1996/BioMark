@@ -12,11 +12,9 @@ export const makeStyles = (colors: any) =>
     },
     container: {
       width: '100%',
-      height: heightToDp(6),
-      backgroundColor: colors.gray,
-      flex: 0,
+
       borderRadius: widthToDp(2),
-      minHeight: heightToDp(6.5),
+      paddingBottom: 0,
     },
     errorContainer: {
       width: '100%',

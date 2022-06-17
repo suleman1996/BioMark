@@ -27,6 +27,8 @@ import { getCalendarDate } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import { ErrorMessage } from 'components/base';
 import { AccountDeActivateModal } from 'components/ui';
+import { roundToDecimalPlaces } from 'utils/functions';
+import moment from 'moment';
 
 const HbA1c = ({ route }) => {
   const SELECTED_HBA1C_ID = route?.params?.logId;
@@ -34,8 +36,9 @@ const HbA1c = ({ route }) => {
   const styles = makeStyles(colors);
 
   const dispatch = useDispatch();
-  const { hasHBA1cTarget } = useSelector((state: IAppState) => ({
+  const { hasHBA1cTarget, latestHba1c } = useSelector((state: IAppState) => ({
     hasHBA1cTarget: state.home?.dashboard?.has_hba1c_target,
+    latestHba1c: state.home.latestHba1c,
   }));
 
   const [error, setError] = useState<string>('');
@@ -65,7 +68,7 @@ const HbA1c = ({ route }) => {
     const hba1cData = await userService.getHba1cProgress(id);
     console.log('hba1cData', hba1cData);
     setHba1cTracker({
-      data_value: hba1cData?.data_value,
+      data_value: roundToDecimalPlaces(hba1cData?.data_value, 2),
       unit_list_id: hba1cData?.unit_list_id,
       record_date: hba1cData?.record_date,
     });
@@ -84,9 +87,15 @@ const HbA1c = ({ route }) => {
       ? 'updateHba1cTracker'
       : 'createHba1cTracker';
     try {
-      await userService[API_FUNCTION](hba1cTracker, SELECTED_HBA1C_ID);
+      await userService[API_FUNCTION](
+        {
+          ...hba1cTracker,
+          record_date: moment(hba1cTracker.record_date).toDate().toString(),
+        },
+        SELECTED_HBA1C_ID
+      );
       dispatch(getReduxHba1cLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 3);
     } catch (err: any) {
       console.error(err);
       if (error?.errMsg.status === '500') {
@@ -112,15 +121,25 @@ const HbA1c = ({ route }) => {
     try {
       await userService.deleteHba1cLog(SELECTED_HBA1C_ID);
       dispatch(getReduxHba1cLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 3);
     } catch (err) {
       console.error(err);
     }
   };
 
   const onChangeHba1c = (key, value) => {
-    console.log(key, value);
     setHba1cTracker((prev) => ({ ...prev, [key]: value }));
+    if (value < latestHba1c?.goal_value) {
+      showMessage({
+        message: 'Your HbA1c is below target',
+        type: 'danger',
+      });
+    } else if (value > latestHba1c?.goal_value) {
+      showMessage({
+        message: 'Your HbA1c is above target',
+        type: 'danger',
+      });
+    }
     setError(hba1cValidator(value) || '');
   };
 
@@ -161,10 +180,10 @@ const HbA1c = ({ route }) => {
                 maxDate={new Date()}
                 date={hba1cTracker.record_date}
                 setDate={(e: any) =>
-                  setHba1cTracker({
-                    ...hba1cData,
+                  setHba1cTracker((prev) => ({
+                    ...prev,
                     record_date: e,
-                  })
+                  }))
                 }
               />
             </>

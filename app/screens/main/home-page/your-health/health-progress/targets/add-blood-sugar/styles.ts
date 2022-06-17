@@ -20,13 +20,13 @@ const styles = (colors: any) =>
       marginVertical: 20,
     },
     subHeading: {
-      fontSize: 20,
+      fontSize: 18,
       fontFamily: fonts.mulishRegular,
       color: colors.heading,
     },
     secondHeading: {
       fontSize: 17,
-      fontFamily: fonts.mulishSemiBold,
+      fontFamily: fonts.mulishBold,
       color: colors.shineBlue,
       marginTop: 20,
     },
@@ -34,6 +34,15 @@ const styles = (colors: any) =>
       width: '80%',
       marginVertical: 30,
       alignSelf: 'center',
+    },
+    inputLabelStyle: {
+      color: colors.shineBlue,
+      paddingLeft: 0,
+      marginLeft: 0,
+      marginTop: 0,
+    },
+    inputStyle: {
+      margin: 0,
     },
   });
 export default styles;

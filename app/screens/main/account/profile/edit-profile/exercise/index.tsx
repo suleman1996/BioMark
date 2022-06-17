@@ -160,7 +160,7 @@ export default function ExerciseScreen() {
                 },
               ]}
             >
-              <RadioButton
+              <RadioButton.Android
                 color={value == 'first' ? colors.white : null}
                 value="first"
               />
@@ -188,7 +188,7 @@ export default function ExerciseScreen() {
                 },
               ]}
             >
-              <RadioButton
+              <RadioButton.Android
                 color={value == 'second' ? colors.white : null}
                 value="second"
               />

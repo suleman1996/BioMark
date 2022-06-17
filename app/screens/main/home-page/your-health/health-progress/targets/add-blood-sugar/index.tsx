@@ -207,6 +207,8 @@ const Index = () => {
             units={unitsNames}
             unit={unitsNames[state.selectedType]}
             error={errors.fromfpg}
+            textAlign={'left'}
+            labelStyle={styles.inputLabelStyle}
           />
           <InputWithUnits
             small
@@ -218,11 +220,14 @@ const Index = () => {
             units={unitsNames}
             unit={unitsNames[state.selectedType]}
             error={errors.tofpg}
+            textAlign={'left'}
+            labelStyle={{ ...styles.inputLabelStyle, marginTop: 20 }}
           />
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
+              marginTop: 30,
             }}
           >
             <Text style={styles.secondHeading}>After Meal (PPG)</Text>
@@ -257,6 +262,8 @@ const Index = () => {
             units={unitsNames}
             error={errors.fromppg}
             unit={unitsNames[state.selectedType]}
+            textAlign={'left'}
+            labelStyle={styles.inputLabelStyle}
           />
           <InputWithUnits
             small
@@ -268,6 +275,8 @@ const Index = () => {
             units={unitsNames}
             error={errors.toppg}
             unit={unitsNames[state.selectedType]}
+            textAlign={'left'}
+            labelStyle={{ ...styles.inputLabelStyle, marginTop: 20 }}
           />
         </ScrollView>
         <GradientButton

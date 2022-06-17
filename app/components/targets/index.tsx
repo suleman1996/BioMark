@@ -14,6 +14,7 @@ export function BloodSugar() {
     <TargetContainer>
       {bloodSugarTargets.map((target, index) => (
         <TargetCard
+          key={target.created_at}
           isLatest={index == 0}
           date={target.created_at}
           content={[
@@ -40,6 +41,7 @@ export function HbA1c() {
     <TargetContainer>
       {hbA1cTargets.map((target, index) => (
         <TargetCard
+          key={target.created_at}
           isLatest={index == 0}
           date={target.created_at}
           content={[

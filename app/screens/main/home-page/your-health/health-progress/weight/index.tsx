@@ -27,14 +27,14 @@ import {
   createGraphDataPointOptions,
   graphXAxisConfig,
 } from 'utils/functions/graph/graph-utils';
-import { useNavigation } from '@react-navigation/native';
-import { BarIndicator } from 'react-native-indicators';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   let chartRef = useRef();
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   const dispatch = useDispatch();
   const weightLogs = useSelector(
@@ -43,6 +43,7 @@ const Index = () => {
 
   const [chartState, setChartState] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [hideGraph, setHideGraph] = React.useState(false);
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -86,6 +87,7 @@ const Index = () => {
       });
       setChartState(result.data.chart);
       setIsLoading(false);
+      setHideGraph(false);
     } catch (error) {
       console.log(error);
     }
@@ -94,13 +96,24 @@ const Index = () => {
   React.useEffect(() => {
     weightGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue, selectedfilterOption1, selectedfilterOption2, weightLogs]);
+  }, [
+    selectedValue,
+    selectedfilterOption1,
+    selectedfilterOption2,
+    weightLogs,
+    isFocused,
+  ]);
 
   React.useEffect(() => {
-    dispatch(getReduxWeightLogs());
+    dispatch(
+      getReduxWeightLogs({
+        metric: selectedfilterOption2.id == 0,
+        type: selectedfilterOption1.title.toLowerCase(),
+      })
+    );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedfilterOption1, selectedfilterOption2]);
 
   React.useEffect(() => {
     console.log('CHART STATE CHANGED');
@@ -181,18 +194,19 @@ const Index = () => {
             </TouchableOpacity>
           </View>
 
-          <View>
-            <LineGraph chartRef={chartRef} />
-          </View>
-          {isLoading && (
-            <View style={styles.loaderContainer}>
-              <BarIndicator color={colors.blue} size={40} />
+          {!hideGraph && (
+            <View>
+              <LineGraph isLoading={isLoading} chartRef={chartRef} />
             </View>
           )}
+
           <Logs
             navigate={SCREENS.WEIGHT}
             logData={weightLogs?.log}
             showMore={'Show more'}
+            onNavigate={() => {
+              setHideGraph(true);
+            }}
           />
         </ScrollView>
         <FloatingButton
