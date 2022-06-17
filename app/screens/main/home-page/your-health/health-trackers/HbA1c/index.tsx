@@ -168,6 +168,7 @@ const HbA1c = ({ route }) => {
             }}
             showIcon={true}
             value={hba1cTracker?.data_value ? hba1cTracker?.data_value : ''}
+            selectionColor="darkblue"
             // maxLength={5}
           />
           {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}

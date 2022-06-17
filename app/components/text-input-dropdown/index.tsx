@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
-import { View, TouchableOpacity, FlatList, Text } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  FlatList,
+  Text,
+  Pressable,
+} from 'react-native';
 
 import { useTheme } from 'react-native-paper';
 
@@ -26,51 +32,40 @@ const TextInputDropdown = ({
   const styles = makeStyles(colors);
   const [newValue, setNewValue] = useState(false);
   const [showDropdown, setshowDropdown] = React.useState('');
-  const [dropdown, setDropdown] = useState([
-    {
-      value: 'hello',
-    },
-    {
-      value: 'hello 2',
-    },
-    {
-      value: 'hello 33',
-    },
-  ]);
 
   return (
     <>
-      <View style={styles.inputContainer}>
-        <TouchableOpacity
-          style={styles.dropDownView}
-          onPress={() => setshowDropdown([])}
-          //   disabled={disabled}
-        >
-          <Text>{newValue}</Text>
-        </TouchableOpacity>
-        <View style={styles.downBtn}>
-          {showDropdown ? (
-            <TouchableOpacity onPress={() => setshowDropdown(false)}>
+      <Pressable onPress={() => setshowDropdown(!showDropdown)}>
+        <View style={styles.inputContainer}>
+          <View
+            style={styles.dropDownView}
+
+            //   disabled={disabled}
+          >
+            <Text>{newValue ? newValue : value}</Text>
+          </View>
+          <View style={styles.downBtn}>
+            {showDropdown ? (
               <Entypo
                 color={colors.black}
                 name="chevron-up"
                 size={responsiveFontSize(30)}
               />
-            </TouchableOpacity>
-          ) : (
-            <Entypo
-              color={colors.black}
-              name="chevron-down"
-              size={responsiveFontSize(30)}
-            />
-          )}
+            ) : (
+              <Entypo
+                color={colors.black}
+                name="chevron-down"
+                size={responsiveFontSize(30)}
+              />
+            )}
+          </View>
         </View>
-      </View>
+      </Pressable>
 
       {showDropdown ? (
         <View style={styles.dropdownOptions}>
           <FlatList
-            data={dropdown}
+            data={dropdownData}
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => {
               return (
@@ -78,6 +73,7 @@ const TextInputDropdown = ({
                   <TouchableOpacity
                     onPress={() => {
                       setNewValue(item.value), setshowDropdown(false);
+                      onChangeText(item.value);
                     }}
                   >
                     <View

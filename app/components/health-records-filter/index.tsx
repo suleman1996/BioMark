@@ -66,7 +66,7 @@ const HealthRecordFilter = ({
           <Text style={styles.modaltitle2}>{title2}</Text>
 
           <TouchableOpacity style={styles.radioview} onPress={touchableRadio1}>
-            <RadioButton
+            <RadioButton.Android
               value={firstValue}
               status={status}
               onPress={onPressRadio1}
@@ -76,7 +76,7 @@ const HealthRecordFilter = ({
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.radioview} onPress={touchableRadio2}>
-            <RadioButton
+            <RadioButton.Android
               value={secondValue}
               status={status2}
               onPress={onPressRadio2}

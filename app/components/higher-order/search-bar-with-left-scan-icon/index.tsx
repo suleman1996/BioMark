@@ -47,6 +47,7 @@ const SearchBarWithLeftScanIcon = () => {
   const [code, setCode] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
   const [invalidError, setInvalidError] = React.useState('');
+  const [actionError, setActionError] = React.useState('');
 
   const menuRef = useRef<any>();
 
@@ -67,11 +68,8 @@ const SearchBarWithLeftScanIcon = () => {
     } catch (err) {
       console.log('errrrrrrrrr', err.errMsg.data);
       setInvalidError(err.errMsg.data.message);
+      setActionError(err.errMsg.data.action);
       setModalVisible(true);
-      // showMessage({
-      //   message: err.errMsg.data.message,
-      //   type: 'danger',
-      // });
     }
   };
 
@@ -186,6 +184,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'Manually Enter Code'
             : invalidError == 'Already a member'
             ? 'Back'
+            : actionError == 'sfi_member'
+            ? 'Already a Member'
             : invalidError == 'Code already used'
             ? 'Already a Member'
             : 'Back'
@@ -194,25 +194,21 @@ const SearchBarWithLeftScanIcon = () => {
         title={
           invalidError == 'Invalid code'
             ? 'Invalid Code'
-            : // invalidError == 'Code already used'
-            // ? 'Code Already Entered'
-            // :
-            invalidError == 'Code already used'
+            : actionError == 'sfi_member'
+            ? 'Already a Member'
+            : invalidError == 'Code already used'
             ? 'Already a Member'
             : undefined
         }
         text2={
           invalidError == 'Invalid code'
             ? 'Multiple invalid code entries detected.Try manually entering the code.'
-            : // invalidError == 'Code already used'
-            // ? 'It seems like this code has already been entered.'
-            // :
-            invalidError == 'Code already used'
+            : actionError == 'sfi_member'
+            ? 'It seems like this code has already been entered.'
+            : invalidError == 'Code already used'
             ? 'You are already a member of the Empower Program.You can already log your blood sugar and medications.'
             : undefined
         }
-        // cancel="Cancel"
-        // cancelModal={() => setModalVisible(!modalVisible)}
         closeModal={() => {
           setModalVisible(false) || setCode('');
         }}
@@ -222,10 +218,9 @@ const SearchBarWithLeftScanIcon = () => {
             ? setModalVisible(false) || setCode('') || setVisible(true)
             : invalidError == 'Code already used'
             ? setModalVisible(false)
-            : // :
-              //  invalidError == 'Code already used'
-              // ? setModalVisible(false)
-              undefined;
+            : actionError == 'sfi_member'
+            ? setModalVisible(false)
+            : undefined;
         }}
       />
 
