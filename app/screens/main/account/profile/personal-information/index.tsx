@@ -62,26 +62,26 @@ const PersonalInformationScreen = () => {
         ic_number,
         email
       );
-
       authContext?.setUserData(result.data);
       goBack();
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+      console.log(error);
 
-      if (error.errMsg.status == '500') {
+      if (error?.errMsg?.status == 500) {
         showMessage({
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (error.errMsg.status == false) {
+      } else if (error?.errMsg?.status == false) {
         showMessage({
-          message: error.errMsg.data.error,
+          message: error?.errMsg?.data?.error,
           type: 'danger',
         });
       } else {
         showMessage({
-          message: error.errMsg,
+          message: error?.errMsg,
           type: 'danger',
         });
       }

@@ -27,5 +27,11 @@ const styles = (colors: any) =>
       marginVertical: 30,
       alignSelf: 'center',
     },
+    inputLabelStyle: {
+      color: colors.shineBlue,
+      paddingLeft: 0,
+      marginLeft: 0,
+      marginTop: 20,
+    },
   });
 export default styles;

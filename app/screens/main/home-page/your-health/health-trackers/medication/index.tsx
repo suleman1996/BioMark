@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
@@ -28,10 +28,9 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { getCalendarDate } from 'utils/functions/date-format';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
-import { navigate, goBack } from 'services/nav-ref';
+import { navigate } from 'services/nav-ref';
 
 import { makeStyles } from './styles';
-import { DeleteModal } from 'components/higher-order';
 import { AccountDeActivateModal } from 'components/ui';
 
 type RenderDosageProps = {
@@ -147,7 +146,7 @@ const Medication = ({ route }) => {
       dispatch(getReduxNewMedicationTracker());
       dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
 
-      goBack();
+      navigate(SCREENS.HEALTH_PROGRESS, 2);
     } catch (error) {
       console.log(error);
 

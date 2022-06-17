@@ -16,7 +16,7 @@ const styles = (colors: any) =>
     },
     heading: {
       fontFamily: fonts.bold,
-      fontSize: 16,
+      fontSize: 18,
       color: colors.heading,
     },
     rowCenter: { flexDirection: 'row', alignItems: 'center' },

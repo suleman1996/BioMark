@@ -26,6 +26,8 @@ import { Tip } from 'react-native-tip';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { useDispatch } from 'react-redux';
 import { getReduxBloodPressureLogs } from 'store/home/home-actions';
+import { roundToDecimalPlaces } from 'utils/functions';
+import moment from 'moment';
 
 const BloodPressure = ({ route }: any) => {
   const SELECTED_BP_ID = route?.params?.logId;
@@ -35,7 +37,7 @@ const BloodPressure = ({ route }: any) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState({});
 
   const [bloodPressure, setBloodPressure] = useState({
     bp_systolic: '',
@@ -51,8 +53,8 @@ const BloodPressure = ({ route }: any) => {
     console.log('===========>', bloodPressureResponse);
 
     setBloodPressure({
-      bp_systolic: bloodPressureResponse.bp_systolic,
-      bp_diastolic: bloodPressureResponse.bp_diastolic,
+      bp_systolic: roundToDecimalPlaces(bloodPressureResponse.bp_systolic, 0),
+      bp_diastolic: roundToDecimalPlaces(bloodPressureResponse.bp_diastolic, 0),
       date_entry: bloodPressureResponse?.date_entry,
     });
     setIsLoading(false);
@@ -75,9 +77,17 @@ const BloodPressure = ({ route }: any) => {
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BP_ID ? 'updateBpTracker' : 'createBpTracker';
     try {
-      await userService[API_FUNCTION](bloodPressure, SELECTED_BP_ID);
+      await userService[API_FUNCTION](
+        {
+          ...bloodPressure,
+          bp_systolic: roundToDecimalPlaces(bloodPressure.bp_systolic, 0),
+          bp_diastolic: roundToDecimalPlaces(bloodPressure.bp_diastolic, 0),
+          date_entry: moment(bloodPressure.date_entry).toDate().toString(),
+        },
+        SELECTED_BP_ID
+      );
       disptach(getReduxBloodPressureLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err: any) {
       console.error(err);
       if (error?.errMsg.status === '500') {
@@ -103,7 +113,7 @@ const BloodPressure = ({ route }: any) => {
     try {
       await userService.deleteBpLog(SELECTED_BP_ID);
       disptach(getReduxBloodPressureLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err) {
       console.error(err);
     }
@@ -112,7 +122,18 @@ const BloodPressure = ({ route }: any) => {
   const onChangeBloodPressure = (key, value) => {
     console.log(key, value);
     setBloodPressure((prev) => ({ ...prev, [key]: value }));
-    setError(bloodPressureValidator(key, value) || '');
+    setError((prev) => {
+      const copy = { ...prev };
+      const err = bloodPressureValidator(key, value);
+      if (err) {
+        copy[key] = err;
+      } else {
+        delete copy[key];
+      }
+      return {
+        ...copy,
+      };
+    });
   };
 
   useEffect(() => {
@@ -120,9 +141,30 @@ const BloodPressure = ({ route }: any) => {
       +bloodPressure.bp_diastolic >= +bloodPressure.bp_systolic &&
       bloodPressure.bp_diastolic !== ''
     ) {
-      setError(
-        'Please enter a valid diastolic value. Diastolic value should be less than systolic value.'
-      );
+      setError((prev) => ({
+        ...prev,
+        bp_diastolic:
+          'Please enter a valid diastolic value. Diastolic value should be less than systolic value.',
+      }));
+    } else {
+      setError((prev) => {
+        const copy = { ...prev };
+        if (
+          copy.bp_diastolic ==
+          'Please enter a valid diastolic value. Diastolic value should be less than systolic value.'
+        ) {
+          const err = bloodPressureValidator(
+            'bp_diastolic',
+            bloodPressure.bp_diastolic
+          );
+          if (err) {
+            copy.bp_diastolic = err;
+          } else {
+            delete copy.bp_diastolic;
+          }
+        }
+        return { ...copy };
+      });
     }
   }, [bloodPressure]);
 
@@ -175,7 +217,6 @@ const BloodPressure = ({ route }: any) => {
             }}
             value={bloodPressure.bp_systolic}
             maxLength={3}
-            width={''}
             selectionColor="darkblue"
             // defaultValue={''}
           />
@@ -189,10 +230,11 @@ const BloodPressure = ({ route }: any) => {
             value={bloodPressure.bp_diastolic}
             maxLength={3}
             selectionColor="darkblue"
-            width={''}
             // defaultValue={''}
           />
-          {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}
+          {Object.keys(error)?.length > 0 ? (
+            <ErrorMessage errorMessage={error[Object.keys(error)[0]]} />
+          ) : null}
 
           <Text style={styles.label}>Date - Time</Text>
           <DateTimePickerModal
@@ -206,8 +248,8 @@ const BloodPressure = ({ route }: any) => {
       </ScrollView>
       {showDeleteModal && (
         <AccountDeActivateModal
-          headerText="Weight"
-          subHeading="Are you sure you wish to delete this weight log?"
+          headerText="Blood Pressure"
+          subHeading="Are you sure you wish to delete this blood pressure log?"
           buttonUpperText="Yes"
           buttonLowerText="Skip"
           isVisible={showDeleteModal}
@@ -221,9 +263,7 @@ const BloodPressure = ({ route }: any) => {
         disabled={
           bloodPressure.bp_systolic === '' ||
           bloodPressure.bp_diastolic === '' ||
-          error
-            ? true
-            : false
+          Object.keys(error).length
         }
       />
     </TitleWithBackWhiteBgLayout>
