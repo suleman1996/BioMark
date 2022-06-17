@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import React from 'react';
-import { Text, useTheme, TextInput } from 'react-native-paper';
+import { useTheme, TextInput } from 'react-native-paper';
 
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 
@@ -62,7 +62,7 @@ const MedicalInput = ({
         selectionColor={selectionColor}
         // maxLength={maxLength}
       />
-      <Text style={styles.label}>%</Text>
+      {/* <Text style={styles.label}>%</Text> */}
     </View>
   );
 };

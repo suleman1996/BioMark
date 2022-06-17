@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
-  ButtonWithShadowContainer,
+  // ButtonWithShadowContainer,
   DateTimePickerModal,
   ErrorMessage,
 } from 'components/base';
@@ -133,6 +133,13 @@ const BloodPressure = ({ route }: any) => {
       binIcon={SELECTED_BP_ID ? true : false}
       onPressIcon={() => setShowDeleteModal(true)}
     >
+      {/* <View style={{ flex: 1, backgroundColor: 'grey' }}>
+        <TextInput placeholder="useless placeholder" keyboardType="numeric" />
+
+        <TouchableOpacity style={{ backgroundColor: 'blue' }}>
+          <Text></Text>
+        </TouchableOpacity>
+      </View> */}
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -202,31 +209,84 @@ const BloodPressure = ({ route }: any) => {
             }
           />
         </View>
+        {showDeleteModal && (
+          <AccountDeActivateModal
+            headerText="Weight"
+            subHeading="Are you sure you wish to delete this weight log?"
+            buttonUpperText="Yes"
+            buttonLowerText="Skip"
+            isVisible={showDeleteModal}
+            setIsVisible={setShowDeleteModal}
+            callMe={deleteBpLog}
+          />
+        )}
+
+        {/* //neww add */}
+        <View
+          style={{
+            width: '100%',
+            backgroundColor: colors.white,
+            justifyContent: 'center',
+            alignItems: 'center',
+            // paddingHorizontal: widthToDp(7),
+            // paddingVertical: heightToDp(2),
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                bloodPressure.bp_systolic === '' ||
+                bloodPressure.bp_diastolic === '' ||
+                error
+                  ? '#D3D3D3'
+                  : colors.primary,
+              height: heightToDp(6),
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: widthToDp(2.5),
+              width: '100%',
+              maxWidth: widthToDp(86),
+              marginBottom: heightToDp(2),
+              marginTop: heightToDp(2),
+            }}
+            onPress={saveBloodPressureLog}
+            disabled={
+              bloodPressure.bp_systolic === '' ||
+              bloodPressure.bp_diastolic === '' ||
+              error
+                ? true
+                : false
+            }
+          >
+            <Text
+              style={{
+                color:
+                  bloodPressure.bp_systolic === '' ||
+                  bloodPressure.bp_diastolic === '' ||
+                  error
+                    ? '#888888'
+                    : colors.white,
+              }}
+            >
+              {SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        {/* //new add */}
+
+        {/* <ButtonWithShadowContainer
+          onPress={saveBloodPressureLog}
+          title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+          disabled={
+            bloodPressure.bp_systolic === '' ||
+            bloodPressure.bp_diastolic === '' ||
+            error
+              ? true
+              : false
+          }
+        /> */}
       </ScrollView>
-      {showDeleteModal && (
-        <AccountDeActivateModal
-          headerText="Weight"
-          subHeading="Are you sure you wish to delete this weight log?"
-          buttonUpperText="Yes"
-          buttonLowerText="Skip"
-          isVisible={showDeleteModal}
-          setIsVisible={setShowDeleteModal}
-          callMe={deleteBpLog}
-        />
-      )}
-      <ButtonWithShadowContainer
-        onPress={saveBloodPressureLog}
-        title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-        disabled={
-          bloodPressure.bp_systolic === '' ||
-          bloodPressure.bp_diastolic === '' ||
-          error
-            ? true
-            : false
-        }
-      />
     </TitleWithBackWhiteBgLayout>
   );
 };
-
 export default BloodPressure;
