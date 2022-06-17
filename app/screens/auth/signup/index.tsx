@@ -19,13 +19,13 @@ import * as Yup from 'yup';
 import moment from 'moment';
 
 import { Button } from 'components/button';
+import { CheckBox, ActivityIndicator, TextInput } from 'components';
+import { BioDangerWhite } from 'components/svg';
 import {
-  CheckBox,
-  DatePicker,
-  ActivityIndicator,
-  TextInput,
-  PhoneNumber,
-} from 'components';
+  DatePickerModal,
+  PhoneNumberWithLabel,
+  InputWithLabel,
+} from 'components/base';
 
 import SCREENS from 'navigation/constants';
 import { navigate, goBack } from 'services/nav-ref';
@@ -38,6 +38,7 @@ import { BackIcon } from 'assets/svgs/index';
 import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
+import { IC_AND_PASSPORT, NAME } from 'utils/regix';
 
 export default function Signup() {
   //initial hooks define
@@ -49,7 +50,6 @@ export default function Signup() {
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
   const [loading, setLoading] = useState(false);
   const [countryCode, setCountryCode] = useState('MY');
-  const [phoneNumber, setPhoneNumber] = useState(''); //International Phone Picker
   const [selectCountryCode, setSelectCountryCode] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gender, setGender] = useState([
@@ -90,7 +90,9 @@ export default function Signup() {
   const signupApi = async (values: string) => {
     // setLoading(true);
     Keyboard.dismiss();
-    const username = `+${selectCountryCode}${phoneNumber}`;
+    const username = `+${selectCountryCode}${values?.phone_number}`;
+    console.log('username', username);
+
     const newDate = moment(date).format('YYYY-MM-DD');
     const password = values.password;
     userService
@@ -112,8 +114,7 @@ export default function Signup() {
   };
 
   const handleSignup = async (values) => {
-    if (phoneNumber == '' || gender == '') {
-    } else if (checked == true) {
+    if (checked == true) {
       signupApi(values);
     } else {
       showMessage({
@@ -184,34 +185,48 @@ export default function Signup() {
               IcPnum: '',
               email: '',
               password: '',
+              phone_number: '',
             }}
             onSubmit={(values) => handleSignup(values)}
             validationSchema={ResetPassSchema}
           >
-            {({ handleChange, handleSubmit, errors, isValid }) => (
+            {({
+              handleSubmit,
+              errors,
+              handleChange,
+              // handleSubmit,
+              // setFieldTouched,
+              values,
+              // isSubmitting,
+              isValid,
+              setFieldValue,
+              touched,
+              setFieldTouched,
+            }) => (
               <>
                 <View style={styles.biContainer}>
                   <Text style={styles.heading}>Basic Information</Text>
-                  <Text style={styles.inputLablel}>First Name</Text>
-                  <TextInput
-                    placeholder="First Name"
+                  <InputWithLabel
+                    label="First Name"
+                    placeholder={''}
+                    containerStyles={{ paddingHorizontal: 20 }}
+                    labelFontSize={15}
                     onChange={handleChange('fName')}
-                    margin={20}
+                    value={values.fName}
+                    error={touched.fName ? errors.fName : ''}
+                    onBlur={() => setFieldTouched('fName')}
                   />
-                  {errors.fName && (
-                    <Text style={styles.errorMessage}>{errors.fName}</Text>
-                  )}
-                  <Text style={[styles.inputLablel, { marginTop: 20 }]}>
-                    Last Name
-                  </Text>
-                  <TextInput
-                    placeholder="Last Name"
+
+                  <InputWithLabel
+                    label="Last Name"
+                    placeholder={''}
+                    containerStyles={{ paddingHorizontal: 20 }}
+                    labelFontSize={15}
                     onChange={handleChange('lName')}
-                    margin={20}
+                    value={values.lName}
+                    error={touched.lName ? errors.lName : ''}
+                    onBlur={() => setFieldTouched('lName')}
                   />
-                  {errors.lName && (
-                    <Text style={styles.errorMessage}>{errors.lName}</Text>
-                  )}
                   <Text style={styles.inputLablel}>Gender</Text>
                   <View style={styles.ChoiceBtnDOB}>
                     <FlatList
@@ -221,30 +236,34 @@ export default function Signup() {
                       horizontal
                     />
                   </View>
-                  {errors.password && selectedGender == '' && (
-                    <Text style={styles.errorMessage}>
-                      Please select gender
-                    </Text>
-                  )}
-                  <Text style={styles.inputLablel}>Date of Birth</Text>
-                  <DatePicker
-                    isPickerShow={isPickerShow}
-                    setIsPickerShow={setIsPickerShow}
-                    date={date}
-                    setDate={setDate}
-                  />
 
-                  <Text style={[styles.inputLablel, { marginTop: 20 }]}>
-                    Identity Card/Passport Number
-                  </Text>
-                  <TextInput
-                    placeholder="E.g.A1234567X"
-                    onChange={handleChange('IcPnum')}
-                    margin={20}
+                  <Text style={styles.inputLablel}>Date of Birth</Text>
+                  <View style={{ paddingHorizontal: 20 }}>
+                    <DatePickerModal
+                      isPickerShow={isPickerShow}
+                      setIsPickerShow={setIsPickerShow}
+                      date={date}
+                      setDate={setDate}
+                      maximumDate={new Date()}
+                      minimumDate={new Date('Dec 31 1922')}
+                    />
+                  </View>
+                  <InputWithLabel
+                    label="Identity Card/Passport Number"
+                    placeholder={'E.g. A1234567X'}
+                    containerStyles={{ paddingHorizontal: 20 }}
+                    labelFontSize={15}
+                    onChange={(value) => {
+                      if (IC_AND_PASSPORT.test(value))
+                        setFieldValue('IcPnum', value);
+                    }}
+                    value={values.IcPnum}
+                    error={touched.IcPnum ? errors.IcPnum : ''}
+                    onBlur={() => setFieldTouched('IcPnum')}
                   />
                   <View style={styles.aiContainer}>
                     <Text style={styles.heading}>Account Information</Text>
-                    <Text style={styles.inputLablel}>Mobile Number</Text>
+                    {/* <Text style={styles.inputLablel}>Mobile Number</Text>
                     <PhoneNumber
                       countryCode={countryCode}
                       setCountryCode={setCountryCode}
@@ -278,14 +297,55 @@ export default function Signup() {
                             characters
                           </Text>
                         )
-                      ))}
+                      ))} */}
+                    <View style={{ paddingHorizontal: 20 }}>
+                      <PhoneNumberWithLabel
+                        label="Mobile Number"
+                        placeholder={''}
+                        disabled={false}
+                        number={values.phone_number}
+                        setPhoneNumber={(e: any) => {
+                          setFieldValue('phone_number', e);
+                        }}
+                        countryCode={countryCode}
+                        // error={values.phone_number ? errors.phone_number : ''}
+                        setCountryCode={setCountryCode}
+                        setSelectCountryCode={setSelectCountryCode}
+                        maxLength={numberCondition.max}
+                        onBlur={() => setFieldTouched('phone_number')}
+                      />
+                    </View>
+                    <View style={{ paddingHorizontal: 20 }}>
+                      {touched.phone_number &&
+                        (errors.phone_number ? (
+                          <View style={[styles.errorContainer]}>
+                            <Text style={styles.errorText}>
+                              {errors.phone_number}
+                            </Text>
+                          </View>
+                        ) : (
+                          values.phone_number.length < numberCondition.min && (
+                            <View style={styles.errorContainer}>
+                              <Text style={styles.errorText}>
+                                Must have {numberCondition.min}
+                                {numberCondition.max !== numberCondition.min &&
+                                  -numberCondition.max}{' '}
+                                characters
+                              </Text>
+                            </View>
+                          )
+                        ))}
+                    </View>
 
-                    <Text style={styles.inputLablel}>Email</Text>
-                    <TextInput
+                    <InputWithLabel
+                      label="Email"
                       placeholder="E.g. Sample@email.com"
+                      containerStyles={{ paddingHorizontal: 20 }}
+                      labelFontSize={15}
                       onChange={handleChange('email')}
-                      margin={20}
-                      keyboardType="email-address"
+                      value={values.email}
+                      error={touched.email ? errors.email : ''}
+                      onBlur={() => setFieldTouched('email')}
                     />
                     <Text style={styles.inputLablel}>Password</Text>
                     <TextInput
@@ -295,10 +355,18 @@ export default function Signup() {
                       onEyePress={() => setHidePassword(!hidePassword)}
                       onChange={handleChange('password')}
                       margin={20}
+                      onBlur={() => setFieldTouched('password')}
                     />
-                    {errors.password && (
-                      <Text style={styles.errorMessage}>{errors.password}</Text>
-                    )}
+                    {touched.password && errors.password ? (
+                      <View style={{ paddingHorizontal: 20 }}>
+                        <View style={styles.errorContainer}>
+                          <BioDangerWhite width={3.5} height={3.5} />
+                          <Text style={styles.errorText}>
+                            {errors.password}
+                          </Text>
+                        </View>
+                      </View>
+                    ) : null}
                   </View>
                   <View style={styles.tcText}>
                     <CheckBox checked={checked} setChecked={setChecked} />
@@ -345,7 +413,14 @@ export default function Signup() {
 
                   <Button
                     title="Continue"
-                    disabled={!isValid || phoneNumber.length < 8 ? true : false}
+                    disabled={
+                      !isValid ||
+                      values.phone_number.length < numberCondition.min
+                        ? true
+                        : false || !selectedGender
+                        ? true
+                        : false
+                    }
                     onPress={() => handleSubmit()}
                   />
                 </View>
@@ -359,10 +434,20 @@ export default function Signup() {
 }
 
 const ResetPassSchema = Yup.object({
-  fName: Yup.string().required('Please provide your first name'),
-  lName: Yup.string().required('Please provide your last name'),
-  IcPnum: Yup.string(),
-  email: Yup.string(),
+  fName: Yup.string()
+    .required('Please provide your first name')
+    .matches(NAME, 'Name should only contain latin letters'),
+  lName: Yup.string()
+    .required('Please provide your last name')
+    .matches(NAME, 'Name should only contain latin letters'),
+
+  IcPnum: Yup.string().required('Please provide Identity Card/Passport Number'),
+  phone_number: Yup.string()
+    // .matches(Regex.minNum, 'Enter valid phone number')
+    .required('Please provide your phone number'),
+  email: Yup.string()
+    .email('Enter valid email address')
+    .required('Email is required'),
   password: Yup.string()
     .required('Please type your new password')
     .min(8)
