@@ -5,7 +5,7 @@ import { useTheme } from 'react-native-paper';
 import { Modal, ButtonWithShadowContainer } from 'components/base';
 
 import makeStyles from './styles';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
   isVisible: boolean;
@@ -43,7 +43,12 @@ const ModalWithBottomBtn = ({
         </ScrollView>
         <ButtonWithShadowContainer
           title="Save"
-          style={{ borderRadius: widthToDp(3) }}
+          style={{
+            borderRadius: widthToDp(3),
+            backgroundColor: null,
+            paddingHorizontal: widthToDp(7),
+            paddingTop: heightToDp(0),
+          }}
           onPress={() => {
             setIsModal(false);
             onPress();
