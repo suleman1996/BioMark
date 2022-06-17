@@ -18,11 +18,11 @@ export default function YourHealthBtn() {
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate(YOUR_HEALTH)}>
-        <View style={styles.circleBtn}>
+      <View style={styles.circleBtn}>
+        <TouchableOpacity onPress={() => navigation.navigate(YOUR_HEALTH)}>
           <YourHealth />
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
       <View>
         <Text style={styles.healthText}>Your Health</Text>
       </View>
@@ -42,8 +42,8 @@ const makeStyles = (colors: any) =>
         width: 0,
         height: 12,
       },
-      shadowOpacity: 0.58,
-      shadowRadius: 16.0,
+      shadowOpacity: 1,
+      shadowRadius: 1.0,
       elevation: 3,
       marginBottom: 5,
     },

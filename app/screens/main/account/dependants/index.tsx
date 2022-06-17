@@ -47,7 +47,7 @@ const DependantsScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Header isBold={true} isColor={true} title="Dependent" />
+      <Header isBold={true} isColor={true} title="Dependant" />
       <View style={styles.bottomBtnContainer}>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.noDependetView}>
@@ -56,7 +56,7 @@ const DependantsScreen = (props: Props) => {
                 <DependentIcon width={20} height={20} fill={colors.primary} />
                 <Text style={styles.name}>No Dependants Yet</Text>
                 <Text style={styles.subHead}>
-                  No dependants to to see them here
+                  No dependants to see them here
                 </Text>
                 <Button
                   onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}

@@ -18,7 +18,7 @@ export const makeStyles = (colors: any, small?: boolean, textAlign?: string) =>
     },
     textInput: {
       flexDirection: 'row-reverse',
-      ...(small && { flex: 1, paddingHorizontal: 15 }),
+      ...(small && { flex: 1, paddingHorizontal: 15, paddingBottom: 5 }),
       backgroundColor: 'transparent',
       fontSize: responsiveFontSize(small ? 20 : 50),
       fontFamily: small ? fonts.mulishRegular : fonts.OpenSansBold,
