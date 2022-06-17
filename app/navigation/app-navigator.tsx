@@ -59,6 +59,11 @@ import ResultUpload from 'screens/main/home-page/your-health/health-records/uplo
 import MoreInfo from 'screens/main/home-page/your-health/health-records/result-overview/more-info';
 import PendingResultOverview from 'screens/main/home-page/your-health/health-records/pending-result-overview';
 import TermsAndPrivacy from 'screens/auth/terms-and-privacy';
+import SmokingScreen from 'screens/main/account/profile/edit-profile/smoking';
+import StressScreen from 'screens/main/account/profile/edit-profile/stress/index';
+import Sleep from 'screens/main/account/profile/edit-profile/sleep';
+import Drinking from 'screens/main/account/profile/edit-profile/drinking';
+import BodyMeasurementScreen from 'screens/main/account/profile/body-measurements';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -95,6 +100,7 @@ const {
   SEE_REPORT,
   SEARCH_RESULT,
   DEVICE_CONNECTION,
+  BODY_MEASUREMENT,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -182,7 +188,16 @@ const AppNavigator = () => {
             name={DIABETES_SUPPORT_CENTER}
             component={DiabetesSupportCenter}
           />
+
+          <Stack.Screen name={SCREENS.SMOKING} component={SmokingScreen} />
+          <Stack.Screen name={SCREENS.STRESS} component={StressScreen} />
+          <Stack.Screen name={SCREENS.SLEEP} component={Sleep} />
+          <Stack.Screen name={SCREENS.DRINKING} component={Drinking} />
           <Stack.Screen name={BLOOD_PRESSURE} component={BloodPressure} />
+          <Stack.Screen
+            name={BODY_MEASUREMENT}
+            component={BodyMeasurementScreen}
+          />
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />
           <Stack.Screen name={MEDICATION} component={Medication} />

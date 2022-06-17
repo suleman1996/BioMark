@@ -133,6 +133,7 @@ const Index = () => {
     dispatch(getReduxHealthFeeds());
 
     // console.log('helthfeddddddddddddddddd', healthFeeds);
+    console.log('Here is the health tracker risk ', healthRisk);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -166,8 +167,6 @@ const Index = () => {
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
   const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
-    console.log('qrInput', qrInput);
-    console.log('identification_id', authContext?.userData?.ic_number);
 
     try {
       setLoading(true);
@@ -177,7 +176,7 @@ const Index = () => {
           identification_id: authContext?.userData?.ic_number,
         },
       });
-      console.log('res', response);
+      // console.log('res', response);
       dispatch(getReduxLabResultStatus());
       if (response?.data?.message === 'Invalid request') {
         setShowApiError(
@@ -208,6 +207,41 @@ const Index = () => {
         });
       }
     }
+  };
+
+  const healthRiskCheck = (item) => {
+    console.log('HEre is the selected health risk ', item);
+
+    item?.name === 'Blood Pressure' &&
+      navigation.navigate(SCREENS.BLOOD_PRESSURE);
+    item?.name === 'Smoking' && navigation.navigate(SCREENS.SMOKING);
+    item?.name === 'Stress' && navigation.navigate(SCREENS.STRESS);
+    item?.name === 'Sleeping' && navigation.navigate(SCREENS.SLEEP);
+    item?.name === 'Drinking' && navigation.navigate(SCREENS.DRINKING);
+    (item?.name === 'Heart Disease' ||
+      item?.name === 'Diabetes' ||
+      item?.name === 'BMI') &&
+      navigate(SCREENS.HEALTH_RISK, {
+        item: healthRisk[selectedRisk],
+        cardData: healthRiskData[selectedRisk].disease,
+        refData: healthRiskData[selectedRisk].refrence,
+        footNotesData: healthRiskData[selectedRisk].footnotes,
+        calc: healthRiskData[selectedRisk].calculations,
+        clr: healthRisksColor(colors, healthRisk[selectedRisk]?.status),
+        SVG: healthRiskData[selectedRisk].icon,
+        title:
+          item?.name === 'Heart Disease'
+            ? 'Upload Results'
+            : item?.name === 'Diabetes'
+            ? 'Update Height and Weight'
+            : 'Enter Height and Weight',
+        onPress:
+          item?.name === 'Heart Disease'
+            ? SCREENS.RESULT_UPLOAD
+            : item?.name === 'Diabetes'
+            ? SCREENS.BODY_MEASUREMENT
+            : SCREENS.BODY_MEASUREMENT,
+      });
   };
 
   return (
@@ -241,24 +275,27 @@ const Index = () => {
                   onRiskPress={() => setSelectedRisk(key)}
                   color={healthRisksColor(colors, value?.status)}
                   Svg={healthRiskData[key].icon}
+                  status={value?.status}
                 />
               ))}
             </View>
             {selectedRisk ? (
               <RenderHealthRisk
                 onPress={() =>
-                  navigate(SCREENS.HEALTH_RISK, {
-                    item: healthRisk[selectedRisk],
-                    cardData: healthRiskData[selectedRisk].disease,
-                    refData: healthRiskData[selectedRisk].refrence,
-                    footNotesData: healthRiskData[selectedRisk].footnotes,
-                    calc: healthRiskData[selectedRisk].calculations,
-                    clr: healthRisksColor(
-                      colors,
-                      healthRisk[selectedRisk]?.status
-                    ),
-                    SVG: healthRiskData[selectedRisk].icon,
-                  })
+                  healthRisk[selectedRisk]?.status == 'none'
+                    ? healthRiskCheck(healthRisk[selectedRisk])
+                    : navigate(SCREENS.HEALTH_RISK, {
+                        item: healthRisk[selectedRisk],
+                        cardData: healthRiskData[selectedRisk].disease,
+                        refData: healthRiskData[selectedRisk].refrence,
+                        footNotesData: healthRiskData[selectedRisk].footnotes,
+                        calc: healthRiskData[selectedRisk].calculations,
+                        clr: healthRisksColor(
+                          colors,
+                          healthRisk[selectedRisk]?.status
+                        ),
+                        SVG: healthRiskData[selectedRisk].icon,
+                      })
                 }
                 healthRisk={healthRisk[selectedRisk]}
                 Svg={healthRiskData[selectedRisk].icon}
