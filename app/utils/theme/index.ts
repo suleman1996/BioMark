@@ -22,6 +22,7 @@ const theme = {
     transparentWhite: 'rgba(255,255,255,0.4)',
     heading: '#06599E',
     blue: '#1B96D8',
+    blueTransparent: 'rgba(6, 89, 157, 0.15)',
     lightBlueish: '#2CBDFC',
     black: '#000',
     navyblue: '#04589E',

@@ -460,16 +460,12 @@ export const getLatestTargetsAction =
       });
   };
 export const getReduxWeightLogs =
-  (page: number = 1, onEmpty?: () => void) =>
+  (params: { type: string; metric: boolean } | undefined) =>
   async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
-      .getWeightLogs({ page })
+      .getWeightLogs(params)
       .then(async (res) => {
-        //
-        if (res.log.length == 0) {
-          onEmpty && onEmpty();
-        }
-        await dispatch(getWeightLogs(res, page));
+        await dispatch(getWeightLogs(res, 1));
       })
       .catch((err) => {
         logNow(err);
@@ -508,9 +504,10 @@ export const getReduxBloodPressurProgress =
       });
   };
 export const getReduxBloodSugarLogs =
-  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+  (params: { meal?: string; unit?: number } | undefined) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
-      .getBloodSugarLogs()
+      .getBloodSugarLogs(params)
       .then(async (res) => {
         //
         await dispatch(getBloodSuarLogs(res));
@@ -583,9 +580,10 @@ export const getHBA1CTargetsAction =
   };
 
 export const getReduxBloodPressureLogs =
-  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+  (params: { type: string } | undefined) =>
+  async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
-      .getBloodPressureLogs()
+      .getBloodPressureLogs(params)
       .then(async (res) => {
         dispatch(getBPLogs(res));
       })
