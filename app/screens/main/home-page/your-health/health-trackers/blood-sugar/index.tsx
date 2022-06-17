@@ -75,18 +75,42 @@ const BloodSugar = ({ route }) => {
   useEffect(() => {
     //According to Issue 76 in https://docs.google.com/spreadsheets/d/1MfJWtiXKDeaRkD7utJ51CMwg275E15NQex2VGHNc2SA/edit#gid=416167280
     //These errors was supposed to be displayed.
-    console.log({ drop, latestBloodSugarTarget });
-    if (!SELECTED_BS_ID) return;
-    if (bloodSugarTracker.data_value.trim() !== '') {
-      const value = +(bloodSugarTracker.unit_list_id == 1
+    console.log('-------------');
+    console.log({
+      drop: drop.meal_type,
+      latestBloodSugarTarget,
+      bloodSugarTracker,
+    });
+    console.log('-------------');
+    if (
+      bloodSugarTracker.data_value &&
+      bloodSugarTracker.meal_type_id &&
+      bloodSugarTracker.record_date
+    ) {
+      let range = [
+        latestBloodSugarTarget.ppg_value_from,
+        latestBloodSugarTarget.ppg_value_to,
+      ];
+      if ([1, 3, 5, 8].includes(bloodSugarTracker.meal_type_id)) {
+        range = [
+          latestBloodSugarTarget.value_from,
+          latestBloodSugarTarget.value_to,
+        ];
+      }
+      const value = +(bloodSugarTracker.unit_list_id ==
+      latestBloodSugarTarget.unit_list_id
         ? bloodSugarTracker.data_value
-        : mgMmolConversion(+bloodSugarTracker.data_value, 'mg/dL'));
-      if (value <= 50) {
+        : mgMmolConversion(
+            +bloodSugarTracker.data_value,
+            latestBloodSugarTarget.unit_name
+          ));
+
+      if (value < range[0]) {
         showMessage({
           message: 'Your blood sugar is below range',
           type: 'danger',
         });
-      } else if (value >= 140) {
+      } else if (value > range[1]) {
         showMessage({
           message: 'Your blood sugar is above range',
           type: 'danger',
@@ -94,7 +118,7 @@ const BloodSugar = ({ route }) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bloodSugarTracker.data_value, drop, latestBloodSugarTarget]);
+  }, [bloodSugarTracker, drop, latestBloodSugarTarget]);
 
   useEffect(() => {
     let arr = [];
@@ -258,8 +282,8 @@ const BloodSugar = ({ route }) => {
         </View>
       </ScrollView>
       <AccountDeActivateModal
-        headerText="Weight"
-        subHeading="Are you sure you wish to delete this weight log?"
+        headerText="Blood Sugar"
+        subHeading="Are you sure you wish to delete this blood sugar log?"
         buttonUpperText="Yes"
         buttonLowerText="Skip"
         isVisible={showDeleteModal}

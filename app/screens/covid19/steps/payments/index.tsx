@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import SCREENS from 'navigation/constants';
 import { useTheme } from 'react-native-paper';
 
@@ -15,6 +15,14 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { makeStyles } from './styles';
+import fonts from 'assets/fonts';
+import { IAppState } from 'store/IAppState';
+import { useDispatch, useSelector } from 'react-redux';
+import { userService } from 'services/user-service/user-service';
+import { addUserContactsDetails } from 'store/auth/auth-actions';
+import { BookTestBooking } from 'types/api';
+import { dateFormat1, getTime } from 'utils/functions/date-format';
+import { logNow } from 'utils/functions/log-binder';
 
 type Props = {};
 
@@ -23,23 +31,201 @@ const labels = ['Booking', 'Payment', 'Confirmation'];
 const PaymentStep = (props: Props) => {
   const {} = props;
   const { colors } = useTheme();
+  const dispatch = useDispatch();
   const styles = makeStyles(colors);
+  const booking = useSelector((state: IAppState) => state.covid.booking);
+  const userContacts = useSelector(
+    (state: IAppState) => state.auth.userContacts
+  );
+  const dependants = useSelector(
+    (state: IAppState) => state.account.allDependents
+  );
+  /*eslint-disable */
+  useEffect(() => {
+    userService
+      .getUserContacts()
+      .then((res) => {
+        dispatch(addUserContactsDetails(res));
+      })
+      .catch(() => {})
+      .finally(() => {});
+  }, []);
+
+  const SingleCardForPayment = ({ item }: { item: BookTestBooking }) => {
+    const nName = dependants.find(
+      (item2) => item2.id == item.dependent_id
+    )?.name;
+    const {
+      name = '',
+      confirmationDate = new Date(),
+      currency = '',
+      amount = 0,
+    } = {
+      name: item.is_dependant ? nName : 'You',
+      confirmationDate: item.confirmation_date,
+      currency: item.currency,
+      amount: item.amount,
+    };
+    return (
+      <View style={styles.innerView}>
+        <Text
+          style={{
+            fontFamily: GlobalFonts.bold,
+            color: colors.darkPrimary,
+            fontSize: responsiveFontSize(20),
+          }}
+        >
+          {name}
+        </Text>
+        <Text
+          style={{
+            fontFamily: GlobalFonts.medium,
+            color: colors.black,
+            fontSize: responsiveFontSize(20),
+          }}
+        >
+          {`${item.test_location} at ${item.test_centre_name}`}
+        </Text>
+        <Text
+          style={{
+            fontFamily: GlobalFonts.regular,
+            color: colors.smoke,
+            fontSize: responsiveFontSize(18),
+          }}
+        >
+          {`${item.test_country_name}, ${item.test_city_name}`}
+        </Text>
+        <Text
+          style={{
+            fontFamily: GlobalFonts.regular,
+            color: colors.smoke,
+            fontSize: responsiveFontSize(18),
+          }}
+        >
+          {`${item.test_centre_name}`}
+        </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: heightToDp(1),
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: GlobalFonts.medium,
+              color: colors.black,
+              fontSize: responsiveFontSize(20),
+            }}
+          >
+            TEST Date{' '}
+            <Text
+              style={{
+                fontFamily: GlobalFonts.light,
+                color: colors.smoke,
+                fontSize: responsiveFontSize(20),
+              }}
+            >
+              {dateFormat1(confirmationDate.toString())}
+            </Text>
+          </Text>
+          <Text
+            style={{
+              fontFamily: GlobalFonts.medium,
+              color: colors.black,
+              fontSize: responsiveFontSize(20),
+            }}
+          >
+            Time Slot{' '}
+            <Text
+              style={{
+                fontFamily: GlobalFonts.light,
+                color: colors.smoke,
+                fontSize: responsiveFontSize(20),
+              }}
+            >
+              {getTime(confirmationDate.toString())}
+            </Text>
+          </Text>
+        </View>
+        <Text
+          style={{
+            fontFamily: GlobalFonts.medium,
+            color: colors.black,
+            fontSize: responsiveFontSize(20),
+            textAlign: 'right',
+          }}
+        >
+          Test Price:{' '}
+          <Text
+            style={{
+              fontFamily: GlobalFonts.bold,
+              color: colors.lightGreen,
+              fontSize: responsiveFontSize(35),
+              textAlign: 'right',
+            }}
+          >
+            {`${currency} ${amount}`}
+          </Text>
+        </Text>
+      </View>
+    );
+  };
+
+  const { totalPrice = 0, currency = '' } = {
+    totalPrice: booking.reduce(function (acc, obj) {
+      return acc + obj?.amount;
+    }, 0),
+    currency: booking[0].currency,
+  };
+
+  const makeItems = () => {
+    let items = booking.map((e) => {
+      return {
+        item_name: e.test_type_id,
+        amount: e.amount,
+        quantity: 1,
+        currency: 'sgd',
+      };
+    });
+    logNow(items);
+  };
+
+  useEffect(() => {
+    makeItems();
+  }, []);
+
+  /*eslint-enable */
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.stepContainer}>
           <StepIndicator
-            renderStepIndicator={() => {
-              return (
-                <View>
-                  <Feather
-                    name="check"
-                    size={responsiveFontSize(20)}
-                    color="white"
-                  />
-                </View>
-              );
+            renderStepIndicator={({ position }) => {
+              if (position == 1) {
+                return (
+                  <Text
+                    style={{
+                      fontFamily: fonts.medium,
+                      color: 'white',
+                      fontSize: responsiveFontSize(22),
+                    }}
+                  >
+                    2
+                  </Text>
+                );
+              } else {
+                return (
+                  <View>
+                    <Feather
+                      name="check"
+                      size={responsiveFontSize(20)}
+                      color="white"
+                    />
+                  </View>
+                );
+              }
             }}
             stepCount={3}
             currentPosition={1}
@@ -54,108 +240,7 @@ const PaymentStep = (props: Props) => {
         >
           <View style={styles.parent}>
             <Text style={styles.innerTitle}>Your Test Order</Text>
-            <View style={styles.innerView}>
-              <Text
-                style={{
-                  fontFamily: GlobalFonts.bold,
-                  color: colors.darkPrimary,
-                  fontSize: responsiveFontSize(20),
-                }}
-              >
-                Deku Midoriya
-              </Text>
-              <Text
-                style={{
-                  fontFamily: GlobalFonts.medium,
-                  color: colors.black,
-                  fontSize: responsiveFontSize(20),
-                }}
-              >
-                COVID-19 PCR (Saliva) at PW TEST
-              </Text>
-              <Text
-                style={{
-                  fontFamily: GlobalFonts.regular,
-                  color: colors.smoke,
-                  fontSize: responsiveFontSize(18),
-                }}
-              >
-                Malaysia, Terengganu
-              </Text>
-              <Text
-                style={{
-                  fontFamily: GlobalFonts.regular,
-                  color: colors.smoke,
-                  fontSize: responsiveFontSize(18),
-                }}
-              >
-                PW TEST
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: heightToDp(1),
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: GlobalFonts.medium,
-                    color: colors.black,
-                    fontSize: responsiveFontSize(20),
-                  }}
-                >
-                  TEST Date{' '}
-                  <Text
-                    style={{
-                      fontFamily: GlobalFonts.light,
-                      color: colors.smoke,
-                      fontSize: responsiveFontSize(20),
-                    }}
-                  >
-                    24/5/22
-                  </Text>
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: GlobalFonts.medium,
-                    color: colors.black,
-                    fontSize: responsiveFontSize(20),
-                  }}
-                >
-                  Time Slot{' '}
-                  <Text
-                    style={{
-                      fontFamily: GlobalFonts.light,
-                      color: colors.smoke,
-                      fontSize: responsiveFontSize(20),
-                    }}
-                  >
-                    9:30 AM
-                  </Text>
-                </Text>
-              </View>
-              <Text
-                style={{
-                  fontFamily: GlobalFonts.medium,
-                  color: colors.black,
-                  fontSize: responsiveFontSize(20),
-                  textAlign: 'right',
-                }}
-              >
-                Test Price:{' '}
-                <Text
-                  style={{
-                    fontFamily: GlobalFonts.bold,
-                    color: colors.lightGreen,
-                    fontSize: responsiveFontSize(35),
-                    textAlign: 'right',
-                  }}
-                >
-                  RM 143
-                </Text>
-              </Text>
-            </View>
+            <FlatList renderItem={SingleCardForPayment} data={booking} />
             <View style={[styles.headerLine, { marginTop: heightToDp(1) }]} />
             <View
               style={{
@@ -182,7 +267,7 @@ const PaymentStep = (props: Props) => {
                   textAlign: 'right',
                 }}
               >
-                RM 143
+                {currency} {totalPrice}
               </Text>
             </View>
             <View
@@ -192,7 +277,7 @@ const PaymentStep = (props: Props) => {
               labelFontSize={18}
               label={'Email address'}
               placeholder={'Enter your email address'}
-              value={'junaid.younas@sprintx.net'}
+              value={userContacts.email_address}
               onFocus={() => undefined}
               onChange={undefined}
               defaultValue={undefined}
@@ -200,7 +285,10 @@ const PaymentStep = (props: Props) => {
             <Text style={[styles.innerTitle, { marginTop: heightToDp(1) }]}>
               Choose Payment Method
             </Text>
-            <ButtonComponent onPress={undefined} title={'Online Payment'} />
+            <ButtonComponent
+              onPress={undefined}
+              title={'Debit/Credit Card Payment'}
+            />
           </View>
           <View style={styles.bottom2Btns}>
             <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>

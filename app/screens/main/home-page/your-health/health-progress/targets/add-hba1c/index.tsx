@@ -36,7 +36,7 @@ const Index = () => {
     latestHba1c: state.home.latestHba1c,
   }));
 
-  const [goalValue, setGoalValue] = useState('');
+  const [goalValue, setGoalValue] = useState('6');
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedType, setSelectedType] = useState<number>(0);
   const [errors, setErrors] = useState({
@@ -116,6 +116,7 @@ const Index = () => {
           onUnitChange={onUnitChange}
           error={errors.goal}
           textAlign={'left'}
+          labelStyle={styles.inputLabelStyle}
         />
       </ScrollView>
       <GradientButton

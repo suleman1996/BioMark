@@ -1,21 +1,28 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { View } from 'react-native';
-import CalendarStrip from 'react-native-calendar-strip';
+//import CalendarStrip from 'react-native-calendar-strip';
 import { useTheme } from 'react-native-paper';
-import { widthToDp, heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { makeStyles } from './styles';
 
-type Props = {};
+type Props = {
+  setValue: any;
+};
 
 const CalenderStrip = (props: Props) => {
-  const {} = props;
+  const { setValue } = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   return (
     <View style={styles.container}>
-      <CalendarStrip
+      {/* <CalendarStrip
+        onDateSelected={(date) => {
+          // logNow(date.toISOString().slice(0, 10))
+          setValue(date);
+        }}
         calendarAnimation={{ type: 'sequence', duration: 30 }}
         daySelectionAnimation={{
           type: 'border',
@@ -46,7 +53,7 @@ const CalenderStrip = (props: Props) => {
         disabledDateNameStyle={styles.disabledDateNameStyle}
         disabledDateNumberStyle={styles.disabledDateNumberStyle}
         iconContainer={{ flex: 0.00001 }}
-      />
+      /> */}
     </View>
   );
 };

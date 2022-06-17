@@ -12,13 +12,15 @@ import makeStyles from './styles';
 type Props = {
   date: any;
   setDate: any;
+  maximumDate?: any;
+  minimumDate?: any;
 };
 
 const DatePickerModal = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const { date, setDate } = props;
+  const { date, setDate, maximumDate, minimumDate } = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const hideDatePicker = () => {
@@ -51,6 +53,8 @@ const DatePickerModal = (props: Props) => {
         onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}
         accentColor={colors.primary}
+        maximumDate={maximumDate}
+        minimumDate={minimumDate}
       />
     </View>
   );

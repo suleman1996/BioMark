@@ -63,6 +63,8 @@ export const makeStyles = (colors: any) =>
       currentStepLabelColor: colors.darBlue,
       separatorFinishedColor: colors.blue,
       separatorUnFinishedColor: colors.lightBlue,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     bottom2Btns: {
       position: 'absolute',

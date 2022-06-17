@@ -1,37 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { TimeSlot } from 'types/api';
+import { getZonedTime, isZonedTiimeIsPast } from 'utils/functions/date-format';
 import makeStyles from './styles';
 
-type Props = {};
+type Props = {
+  slots: TimeSlot[];
+  setTime: any;
+  time: any;
+  testDate: any;
+  setTimeFormat: any;
+};
 
 const TimeSlots = (props: Props) => {
-  const {} = props;
-  const { colors } = useTheme();
-  const styles = makeStyles(colors);
-  const [selected, setSelected] = useState(-1);
+  const { slots, setTime, time, testDate, setTimeFormat } = props;
 
-  const ifSelected = (index: number) => {
-    return selected == index
+  const { colors }: any = useTheme();
+  const styles = makeStyles(colors);
+
+  // useEffect(() => {
+  //   try{
+  //     slots.map(item => {
+  //       const t = getZonedTime(testDate, item.slot_time);
+  //       console.log('time is',t);
+  //     })
+  //   }catch(err){
+
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   try {
+  //     slots.map((item) => {
+  //       console.log(isZonedTiimeIsPast(testDate, item.slot_time));
+  //     });
+  //   } catch (err) {}
+  // }, []);
+
+  const ifSelected = (id: number) => {
+    return time == id
       ? { backgroundColor: colors.primary }
       : { backgroundColor: colors.white };
   };
 
-  const ifSelectedText = (index: number) => {
-    return selected == index
-      ? { color: colors.white }
-      : { color: colors.smoke };
+  const ifSelectedText = (id: number) => {
+    return time == id ? { color: colors.white } : { color: colors.smoke };
+  };
+
+  const isDisabled = (status: boolean, slot_time: any) => {
+    return !status || isZonedTiimeIsPast(testDate, slot_time)
+      ? { backgroundColor: colors.gray }
+      : {};
+  };
+
+  const isBtnDisable = (status: boolean, slot_time: any) => {
+    return !status || isZonedTiimeIsPast(testDate, slot_time) ? true : false;
   };
 
   return (
     <View style={styles.container}>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6].map((item, index) => (
+      {slots?.map((item) => (
         <Pressable
-          onPress={() => setSelected(index)}
-          style={[styles.singleTimeItem, ifSelected(index)]}
+          disabled={isBtnDisable(item.status, item.slot_time)}
+          onPress={() => {
+            setTime(item.id);
+            setTimeFormat(item.slot_time);
+          }}
+          style={[
+            styles.singleTimeItem,
+            ifSelected(item.id),
+            isDisabled(item.status, item.slot_time),
+          ]}
         >
-          <Text style={[styles.singleTimeItemText, ifSelectedText(index)]}>
-            8:00AM
+          <Text
+            style={[
+              styles.singleTimeItemText,
+              ifSelectedText(item.id),
+              isDisabled(item.status, item.slot_time),
+            ]}
+          >
+            {getZonedTime(testDate, item.slot_time)}
           </Text>
         </Pressable>
       ))}

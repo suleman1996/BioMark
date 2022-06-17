@@ -248,8 +248,8 @@ const BloodPressure = ({ route }: any) => {
       </ScrollView>
       {showDeleteModal && (
         <AccountDeActivateModal
-          headerText="Weight"
-          subHeading="Are you sure you wish to delete this weight log?"
+          headerText="Blood Pressure"
+          subHeading="Are you sure you wish to delete this blood pressure log?"
           buttonUpperText="Yes"
           buttonLowerText="Skip"
           isVisible={showDeleteModal}

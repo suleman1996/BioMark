@@ -1,5 +1,12 @@
 import React, { useRef } from 'react';
-import { View, Text, Pressable, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  TextInput,
+  StyleProp,
+  TextStyle,
+} from 'react-native';
 import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTheme } from 'react-native-paper';
@@ -22,6 +29,8 @@ type Props = {
   error?: string;
   small?: boolean;
   textAlign?: string;
+  labelStyle?: StyleProp<TextStyle>;
+  inputStyle?: StyleProp<TextStyle>;
 };
 
 const InputWithUnits = ({
@@ -36,6 +45,8 @@ const InputWithUnits = ({
   error,
   small,
   textAlign,
+  labelStyle,
+  inputStyle,
 }: Props) => {
   const menuRef = useRef<any>();
   const { colors } = useTheme();
@@ -43,7 +54,7 @@ const InputWithUnits = ({
 
   return (
     <>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, labelStyle || {}]}>{title}</Text>
       <View style={styles.mainView}>
         <TextInput
           placeholder={placeholder}
@@ -54,7 +65,7 @@ const InputWithUnits = ({
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           keyboardType="numeric"
-          style={styles.textInput}
+          style={[styles.textInput, inputStyle || {}]}
           selectionColor="darkblue"
           onBlur={onBlur}
         />

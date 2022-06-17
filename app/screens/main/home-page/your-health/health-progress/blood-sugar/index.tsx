@@ -43,13 +43,11 @@ const Index = () => {
 
   const { TARGETS } = SCREENS;
   const dispatch = useDispatch();
-  const { bloodSugarLogs, latestTarget, drop } = useSelector(
-    (state: IAppState) => ({
-      bloodSugarLogs: state.home.bloodSugarLogsData,
-      latestTarget: state.home.bloodSugarTargets[0],
-      drop: state.home.medicalDropDown,
-    })
-  );
+  const { bloodSugarLogs } = useSelector((state: IAppState) => ({
+    bloodSugarLogs: state.home.bloodSugarLogsData,
+    latestTarget: state.home.bloodSugarTargets[0],
+    drop: state.home.medicalDropDown,
+  }));
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -129,7 +127,6 @@ const Index = () => {
 
   React.useEffect(() => {
     let arr = [];
-    console.log({ latestTarget, log: bloodSugarLogs.log[0], drop });
     bloodSugarLogs?.log?.map((item) => {
       arr.push({
         id: item?.id,

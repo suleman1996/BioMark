@@ -156,7 +156,7 @@ const Index = () => {
               <Text style={styles.heading}>HbA1c (%)</Text>
               <View style={{ marginLeft: 10 }}>
                 <Tip
-                  body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beaats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats."
+                  body="HbA1c (Haemoglobin A1C) is a test that reflects your average blood glucose level over the last 2 - 3 months."
                   bodyStyle={{ color: '#fff' }}
                   tipContainerStyle={{
                     backgroundColor: colors.shineBlue,
