@@ -178,11 +178,11 @@ const PersonalInformationScreen = () => {
           value={value}
         >
           <View style={styles.radioContainer}>
-            <RadioButton color={colors.darkPrimary} value="first" />
+            <RadioButton.Android color={colors.darkPrimary} value="first" />
             <Text style={styles.radioText}>Male</Text>
           </View>
           <View style={styles.radioContainer}>
-            <RadioButton color={colors.darkPrimary} value="second" />
+            <RadioButton.Android color={colors.darkPrimary} value="second" />
             <Text style={styles.radioText}>Female</Text>
           </View>
         </RadioButton.Group>

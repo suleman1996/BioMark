@@ -9,6 +9,7 @@ const RenderHealthRiskView = ({
   selectedHealthRisk,
   onRiskPress,
   name,
+  status,
 }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -27,7 +28,7 @@ const RenderHealthRiskView = ({
       >
         <Svg />
       </TouchableOpacity>
-      <View style={styles.dot} />
+      <View style={status == 'none' ? styles.dot : styles.notDot} />
     </>
   );
 };

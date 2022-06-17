@@ -60,7 +60,7 @@ const HealthRecord = () => {
     dispatch(getReduxPastResult());
     setPastResults(pastResult);
     setLatestResult(newResult);
-    console.log('latesttttttttt-------------', latestResult);
+    // console.log('latesttttttttt-------------', latestResult);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
@@ -75,7 +75,7 @@ const HealthRecord = () => {
       });
       setModalVisible(!modalVisible);
       setPastResults(result?.data);
-      console.log('resultttt-----------------------dataaaa', result?.data);
+      // console.log('resultttt-----------------------dataaaa', result?.data);
     } catch (error) {
       console.log(error);
       if (error.errMsg.status == '500') {
