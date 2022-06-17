@@ -1,28 +1,30 @@
 import React, { useEffect } from 'react';
 
-import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import SCREENS from 'navigation/constants';
+import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import ButtonComponent from 'components/base/button';
 import { InputWithLabel } from 'components/base';
+import ButtonComponent from 'components/base/button';
 
 import StepIndicator from 'react-native-step-indicator';
 import Feather from 'react-native-vector-icons/Feather';
 
+import fonts from 'assets/fonts';
+import { useDispatch, useSelector } from 'react-redux';
 import { navigate } from 'services/nav-ref';
+import { paymentService } from 'services/payments';
+import { userService } from 'services/user-service/user-service';
+import { addUserContactsDetails } from 'store/auth/auth-actions';
+import { IAppState } from 'store/IAppState';
+import { getUserProfileData } from 'store/profile/profile-actions';
+import { BookTestBooking } from 'types/api';
+import { dateFormat1, getTime } from 'utils/functions/date-format';
+import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { makeStyles } from './styles';
-import fonts from 'assets/fonts';
-import { IAppState } from 'store/IAppState';
-import { useDispatch, useSelector } from 'react-redux';
-import { userService } from 'services/user-service/user-service';
-import { addUserContactsDetails } from 'store/auth/auth-actions';
-import { BookTestBooking } from 'types/api';
-import { dateFormat1, getTime } from 'utils/functions/date-format';
-import { logNow } from 'utils/functions/log-binder';
 
 type Props = {};
 
@@ -40,8 +42,15 @@ const PaymentStep = (props: Props) => {
   const dependants = useSelector(
     (state: IAppState) => state.account.allDependents
   );
+  const userDetails = useSelector(
+    (state: IAppState) => state.profile?.userProfile
+  );
   /*eslint-disable */
+  const getUserOnFocus = async () => {
+    await dispatch(getUserProfileData());
+  };
   useEffect(() => {
+    getUserOnFocus();
     userService
       .getUserContacts()
       .then((res) => {
@@ -172,11 +181,20 @@ const PaymentStep = (props: Props) => {
     );
   };
 
-  const { totalPrice = 0, currency = '' } = {
+  const {
+    totalPrice = 0,
+    currency = '',
+    countryName = '',
+    email = '',
+    name = '',
+  } = {
     totalPrice: booking.reduce(function (acc, obj) {
       return acc + obj?.amount;
     }, 0),
     currency: booking[0].currency,
+    countryName: booking[0]?.test_country_name,
+    email: userContacts.email_address,
+    name: userDetails.patient_name,
   };
 
   const makeItems = () => {
@@ -285,10 +303,24 @@ const PaymentStep = (props: Props) => {
             <Text style={[styles.innerTitle, { marginTop: heightToDp(1) }]}>
               Choose Payment Method
             </Text>
-            <ButtonComponent
-              onPress={undefined}
-              title={'Debit/Credit Card Payment'}
-            />
+            {countryName == 'Malaysia' ? (
+              <ButtonComponent
+                onPress={() => {
+                  paymentService.openBillPlzBrowser(
+                    email,
+                    name,
+                    totalPrice,
+                    booking
+                  );
+                }}
+                title={'Online'}
+              />
+            ) : countryName == 'Singapore' ? (
+              <ButtonComponent
+                onPress={undefined}
+                title={'Debit/Credit Card Payment'}
+              />
+            ) : null}
           </View>
           <View style={styles.bottom2Btns}>
             <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>

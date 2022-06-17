@@ -1,6 +1,8 @@
+import Config from 'react-native-config';
 import { API_URLS } from 'services/url-constants';
 import {
   BillplzPayment,
+  BookTestBooking,
   CreateBillplzPaymentRequest,
   CreateStripeSessionRequest,
   StripeSession,
@@ -8,6 +10,41 @@ import {
 import { ErrorResponse } from 'types/ErrorResponse';
 import { logNow } from 'utils/functions/log-binder';
 import client from '../client';
+
+function openBillPlzBrowser(
+  email: string,
+  name: string,
+  amount: any,
+  booking: BookTestBooking[]
+) {
+  let desc = '';
+  booking.forEach((e) => {
+    desc = desc + e.test_type_id + '\n';
+  });
+  const payload = {
+    email: email,
+    name: name,
+    amount: amount,
+    description: desc,
+  };
+  //  console.log({payload: payload})
+  purchaseViaBillPlz({
+    payment: {
+      email: payload.email,
+      name: payload.name,
+      callback: Config.BASE_URL + '/payment/v1/billplz/callback',
+      redirect: Config.BASE_URL + '/payment/v1/billplz/callback',
+      amount: payload.amount,
+      description: payload.description,
+    },
+  })
+    .then((res) => {
+      logNow({ res: res });
+    })
+    .catch((err) => {
+      logNow(err);
+    });
+}
 
 function purchaseViaBillPlz(data: CreateBillplzPaymentRequest) {
   return new Promise<BillplzPayment>((resolve, reject) => {
@@ -52,4 +89,5 @@ function purchaseViaStripe(data: CreateStripeSessionRequest) {
 export const paymentService = {
   purchaseViaBillPlz,
   purchaseViaStripe,
+  openBillPlzBrowser,
 };
