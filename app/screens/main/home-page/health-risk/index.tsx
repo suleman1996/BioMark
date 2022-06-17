@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, Text, ScrollView, View, Image } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 import SCREENS from 'navigation/constants';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -11,10 +12,12 @@ import makeStyles from './styles';
 import fonts from 'assets/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { Button } from 'components/button';
+import ButtonComponent from 'components/base/button';
 
 const HealthRisk = ({ route }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const navigation = useNavigation();
 
   const listItems = route.params.item;
   const listData = route.params.cardData;
@@ -38,7 +41,7 @@ const HealthRisk = ({ route }) => {
     );
   };
 
-  console.log(RISK_BTNS[listItems?.button_type]);
+  // console.log(RISK_BTNS[listItems?.button_type]);
 
   return (
     <SafeAreaView style={styles.safeareaview}>
@@ -58,6 +61,14 @@ const HealthRisk = ({ route }) => {
             svg={<SVG fill={color} />}
             description={listItems.summary}
           />
+          {route?.params?.title && (
+            <View style={{ alignItems: 'center', paddingBottom: 20 }}>
+              <ButtonComponent
+                onPress={() => navigation.navigate(route?.params?.onPress)}
+                title={route?.params?.title}
+              />
+            </View>
+          )}
           {Object.keys(listItems?.button_type).includes(
             listItems?.button_type
           ) && (
