@@ -35,6 +35,28 @@ const AccountMenu = (props) => {
     Linking.openURL(Config.MESSENGER_URL);
   };
 
+  const setVerificationText = () => {
+    let status;
+    switch (props.id_verification) {
+      case 'SUCCESS':
+        status = 'verified';
+        break;
+      case 'PENDING':
+        status = 'pending';
+        break;
+      case 'DENIED':
+        status = 'notVerified';
+        break;
+      case false:
+        status = 'notVerified';
+        break;
+      default:
+        status = 'error';
+        break;
+    }
+    return status;
+  };
+
   return (
     <View style={styles.container}>
       <TouchableRipple
@@ -51,7 +73,7 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Identify Verification </Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            <Text style={styles.secondText}>Not Verified</Text>
+            <Text style={styles.secondText}>{setVerificationText()}</Text>
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}

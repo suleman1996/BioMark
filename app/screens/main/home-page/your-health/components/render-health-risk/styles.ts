@@ -27,6 +27,7 @@ export const makeStyles = (colors: any) =>
     },
     descriptionHealthRisk: {
       fontFamily: fonts.light,
+      color: colors.heading,
       marginTop: 10,
     },
   });

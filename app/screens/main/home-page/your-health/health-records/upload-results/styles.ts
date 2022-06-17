@@ -100,5 +100,11 @@ export const makeStyles = (colors: any) =>
       paddingTop: 10,
       justifyContent: 'space-between',
     },
+    pdfWithBin: {
+      position: 'absolute',
+      right: heightToDp(2),
+      zIndex: 10,
+      top: heightToDp(3.5),
+    },
   });
 export default makeStyles;

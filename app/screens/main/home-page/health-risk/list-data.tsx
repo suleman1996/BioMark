@@ -217,19 +217,12 @@ const Smoking_Calc = {
 const Drinking_Calc = {
   text: 'Measuring alcohol units is a useful way to check whether your alcohol intake is above or within recommended limits.\n\nThis calculation uses alcohol units which depend on the alcohol by volume (ABV) % and the size of the drink.\n\nYour alcohol status is an estimate as it is difficult to ensure reliability of alcohol units. This is due to the variety of different strengths and drink sizes of alcohol beverages that are available.',
 };
-const Stress_Calc = {
-  text: 'Perceived Stress Scale are among the most widely used tools to measure perceived stress. This particular questionaire uses the PSS-4 framework.',
-};
 const Sleeping_Calc = {
   text: 'Good sleep hygiene can help you get good night time sleep.\n\nSome of sleep hygiene checklist includes establishing bedtime routine which is going to bed and waking in the morning, at the same time every day. Limiting screen time before going to bed, and avoiding stimulants (caffeine, nicotine, alcohol) as bedtime approaches will help to speed the onset of sleep. Otherwise, keeping your bedroom dark and cool will help you sleep throughout the night without waking up. \n\nThis sleep requirement is recommended by the National Sleep Foundation(USA).',
 };
-
-// const icons = {
-//   heart: Heart,
-//   bmi: ,
-//   bp: ,
-
-// }
+const Stress_Calc = {
+  text: 'Perceived Stress Scale are among the most widely used tools to measure perceived stress. This particular questionaire uses the PSS-4 framework.',
+};
 
 export const healthRiskData = {
   heart: {

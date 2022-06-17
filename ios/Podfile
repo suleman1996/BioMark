@@ -13,6 +13,8 @@ end
 
 target "BioMark" do
     pods()
+  pod 'react-native-pdf', :path => '../node_modules/react-native-pdf'
+
 end
 
 dynamic_frameworks = ['Socket.IO-Client-Swift', 'Starscream', 'iProov']

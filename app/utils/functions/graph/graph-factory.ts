@@ -12,7 +12,7 @@ import {
   graphWarningColorLight,
 } from './graph.types';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { convertDate } from './graph-utils';
 
 export const findNumberLength = (num: number): number => {

@@ -1,5 +1,10 @@
 import { AccountState } from './AccountState';
-import { DEPENDENTS, BOOTSTRAP, LOCATION } from './constants';
+import {
+  DEPENDENTS,
+  BOOTSTRAP,
+  LOCATION,
+  WORK_FLOW_EXECUTION_ID,
+} from './constants';
 
 const INITIAL_STATE = new AccountState();
 
@@ -23,6 +28,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         geolocation: action.payload,
+      };
+    }
+    case WORK_FLOW_EXECUTION_ID: {
+      return {
+        ...state,
+        executionId: action.payload,
       };
     }
 

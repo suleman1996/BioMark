@@ -23,7 +23,7 @@ export const makeStyles = (colors: any) =>
       marginTop: 30,
     },
     dropDownMenu: {
-      marginVertical: 15,
+      marginVertical: 8,
     },
     subText: {
       fontSize: 17,

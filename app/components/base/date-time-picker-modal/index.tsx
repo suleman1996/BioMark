@@ -18,7 +18,7 @@ import makeStyles from './styles';
 type Props = {
   date: any;
   setDate: any;
-  maxDate?: string;
+  maxDate?: Date;
 };
 
 const DateTimePickerModalComponent = (props: Props) => {

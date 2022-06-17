@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 const styles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: colors.white,
     },
     body: {
       flex: 1,
@@ -30,10 +31,10 @@ const styles = (colors: any) =>
       width: '100%',
     },
     navHeading: {
-      fontFamily: fonts.bold,
-      fontSize: 18,
+      fontFamily: fonts.extraBold,
+      fontSize: 22,
       color: colors.white,
-      paddingLeft: 21,
+      paddingLeft: 10,
       paddingTop: 10,
       paddingBottom: 10,
     },
@@ -48,7 +49,11 @@ const styles = (colors: any) =>
       backgroundColor: 'white',
       borderRadius: 8,
     },
-    containerBody: { flex: 1, paddingHorizontal: 15, paddingTop: 40 },
+    containerBody: {
+      flex: 1,
+      paddingHorizontal: 15,
+      paddingTop: heightToDp(4),
+    },
     headingText: {
       fontFamily: fonts.bold,
       fontSize: 16,
@@ -61,8 +66,9 @@ const styles = (colors: any) =>
       borderBottomColor: colors.darkPrimary,
     },
     horizontalListItemText: {
-      fontFamily: fonts.regular,
-      fontSize: responsiveFontSize(17),
+      fontFamily: fonts.semiBold,
+      fontSize: responsiveFontSize(20),
+      color: colors.darkPrimary,
     },
   });
 export default styles;

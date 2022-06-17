@@ -6,7 +6,7 @@ const styles = (colors: any) =>
     container: {
       width: '100%',
       flexDirection: 'row',
-      marginTop: 10,
+      marginTop: 20,
       borderRadius: 5,
       padding: 10,
       shadowColor: '#000',

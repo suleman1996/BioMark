@@ -28,11 +28,12 @@ import {
   graphXAxisConfig,
 } from 'utils/functions/graph/graph-utils';
 import { useNavigation } from '@react-navigation/native';
+import { BarIndicator } from 'react-native-indicators';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  const chartRef = useRef();
+  let chartRef = useRef();
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const Index = () => {
   );
 
   const [chartState, setChartState] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -76,12 +78,14 @@ const Index = () => {
 
   const weightGraphData = async () => {
     try {
+      setIsLoading(true);
       const result = await userService.getWeightMapData({
         date: selectedValue.title,
         metric: selectedfilterOption2.id == 0,
         type: selectedfilterOption1.title.toLowerCase(),
       });
       setChartState(result.data.chart);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -99,10 +103,11 @@ const Index = () => {
   }, []);
 
   React.useEffect(() => {
+    console.log('CHART STATE CHANGED');
     if (chartState) {
       const { chartOptions } = createChart(chartState);
       setTimeout(() => {
-        chartRef.current.setOption(chartOptions);
+        chartRef?.current?.setOption(chartOptions);
       }, 10);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +115,7 @@ const Index = () => {
 
   // COPIED FUNCTIONS
   const createChart = (data: any) => {
+    console.log('CREATING CHART');
     const points =
       data.length === 0
         ? []
@@ -121,7 +127,11 @@ const Index = () => {
             .reverse();
 
     const dataset = [
-      createGraphDataPoints(points, createGraphDataPointOptions()),
+      createGraphDataPoints(
+        points,
+        createGraphDataPointOptions(),
+        selectedValue.title
+      ),
     ];
     const convertedDataPoint = convertDataset(dataset);
     const graphConfig = graphXAxisConfig(
@@ -133,6 +143,7 @@ const Index = () => {
   };
 
   const onApplyFilters = (filter1, filter2) => {
+    console.log({ filter1, filter2 });
     setSelectedfilterOption1(filter1);
     setSelectedfilterOption2(filter2);
     setIsVisible(false);
@@ -169,13 +180,20 @@ const Index = () => {
               <Filter fill={colors.heading} />
             </TouchableOpacity>
           </View>
-          <LineGraph chartRef={chartRef} />
+
+          <View>
+            <LineGraph chartRef={chartRef} />
+          </View>
+          {isLoading && (
+            <View style={styles.loaderContainer}>
+              <BarIndicator color={colors.blue} size={40} />
+            </View>
+          )}
           <Logs
             navigate={SCREENS.WEIGHT}
             logData={weightLogs?.log}
             showMore={'Show more'}
           />
-          <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton
           onPress={() => navigation.navigate(SCREENS.WEIGHT)}
