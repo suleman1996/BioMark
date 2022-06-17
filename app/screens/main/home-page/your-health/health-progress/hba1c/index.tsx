@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 import { useTheme } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxHba1cLogs } from 'store/home/home-actions';
 
@@ -30,6 +30,7 @@ const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const navigation = useNavigation();
+  const focused = useIsFocused();
   const { TARGETS } = SCREENS;
   const dispatch = useDispatch();
   const hba1cLogsData = useSelector(
@@ -39,6 +40,8 @@ const Index = () => {
   const lagendChartRef = useRef();
 
   const [chartState, setChartState] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [hideGraph, setHideGraph] = React.useState(false);
 
   const [headerValue] = React.useState([
     { id: 0, title: '1M', complete: '1 Month' },
@@ -60,10 +63,12 @@ const Index = () => {
 
   const hBa1CData = async () => {
     try {
+      setIsLoading(true);
       const result = await userService.getHbA1cMapData({
         date: selectedValue.title,
       });
       setChartState(result.data.chart);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +77,7 @@ const Index = () => {
   React.useEffect(() => {
     hBa1CData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue, hba1cLogsData]);
+  }, [selectedValue, hba1cLogsData, focused]);
 
   React.useEffect(() => {
     let arr = [];
@@ -170,13 +175,19 @@ const Index = () => {
               <Target size={24} name="target" color={colors.blue} />
             </TouchableOpacity>
           </View>
-
-          <LineGraph
-            chartRef={chartRef}
-            lagendChartRef={lagendChartRef}
-            showLegend={true}
+          {!hideGraph && (
+            <LineGraph
+              chartRef={chartRef}
+              lagendChartRef={lagendChartRef}
+              showLegend={true}
+              isLoading={isLoading}
+            />
+          )}
+          <Logs
+            navigate={SCREENS.HBA1C}
+            logData={logData}
+            onNavigate={() => setHideGraph(true)}
           />
-          <Logs navigate={SCREENS.HBA1C} logData={logData} />
         </ScrollView>
         <FloatingButton
           onPress={() => navigation.navigate(SCREENS.HBA1C)}

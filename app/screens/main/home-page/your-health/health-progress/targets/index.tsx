@@ -10,19 +10,11 @@ import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import PagerView from 'react-native-pager-view';
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch } from 'react-redux';
 
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import { BloodSugar, HbA1c } from 'components';
 
 import SCREENS from 'navigation/constants/index';
-
-import {
-  getBloodSugarTargetsAction,
-  getHBA1CTargetsAction,
-  getLatestTargetsAction,
-  getNewTargetAction,
-} from 'store/home/home-actions';
 
 import { ArrowBack } from 'assets/svgs';
 import AddGradient from 'assets/svgs/add-gradient';
@@ -33,7 +25,6 @@ export default function InboxScreen({ route }) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const pagerRef = useRef<any>();
   const [currentPage, setCurrentPage] = useState(0);
@@ -46,13 +37,6 @@ export default function InboxScreen({ route }) {
       setCurrentPage(position);
     }
   };
-
-  useEffect(() => {
-    dispatch(getLatestTargetsAction());
-    dispatch(getNewTargetAction());
-    dispatch(getBloodSugarTargetsAction());
-    dispatch(getHBA1CTargetsAction());
-  }, [dispatch]);
 
   useEffect(() => {
     pagerRef.current.setPage(route.params.key);

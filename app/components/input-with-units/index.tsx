@@ -21,6 +21,7 @@ type Props = {
   onBlur?: any;
   error?: string;
   small?: boolean;
+  textAlign?: string;
 };
 
 const InputWithUnits = ({
@@ -34,10 +35,11 @@ const InputWithUnits = ({
   placeholder,
   error,
   small,
+  textAlign,
 }: Props) => {
   const menuRef = useRef<any>();
   const { colors } = useTheme();
-  const styles = makeStyles(colors, small);
+  const styles = makeStyles(colors, small, textAlign);
 
   return (
     <>

@@ -20,12 +20,14 @@ import {
   getResultGraphOptions,
 } from 'utils/functions/graph/graph-result';
 import { getChart5GraphOptions } from 'utils/functions/graph/graph-type-5';
+import { useIsFocused } from '@react-navigation/native';
 
 const Charts = ({ biomarker_id, provider }) => {
   const { colors } = useTheme();
   const chartRef = useRef();
   const lagendChartRef = useRef();
   const styles = Styles(colors);
+  const focused = useIsFocused();
 
   const [headerValue] = React.useState([
     { id: 0, title: '90', complete: '90 Days', date: '90' },
@@ -42,15 +44,18 @@ const Charts = ({ biomarker_id, provider }) => {
   const reportOptions = [{ value: 0, label: provider[0]?.name }];
   const [selectedReport] = React.useState(reportOptions[0]?.value);
   const [chartData, setChartData] = React.useState();
+  const [isLoading, setIsLoading] = React.useState();
 
   const getReportChartData = async (biomarker) => {
     try {
+      setIsLoading(true);
       const result = await userService.getResultOverViewChartData(
         biomarker,
         selectedValue?.date,
         provider[0]?.id
       );
       setChartData(result.data);
+      setIsLoading(false);
       console.log('chart data ', result.data);
     } catch (error) {
       console.log(error);
@@ -60,7 +65,7 @@ const Charts = ({ biomarker_id, provider }) => {
   React.useEffect(() => {
     getReportChartData(biomarker_id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue]);
+  }, [selectedValue, focused]);
 
   useEffect(() => {
     if (chartData && chartRef.current) {
@@ -144,11 +149,14 @@ const Charts = ({ biomarker_id, provider }) => {
       <Text style={styles.headingChart}>
         {chartData?.name} {chartData?.unit}
       </Text>
-      <LineGraph
-        chartRef={chartRef}
-        lagendChartRef={lagendChartRef}
-        showLegend={chartData?.chart_type !== 5 ? true : false}
-      />
+      {focused && (
+        <LineGraph
+          chartRef={chartRef}
+          lagendChartRef={lagendChartRef}
+          showLegend={chartData?.chart_type !== 5 ? true : false}
+          isLoading={isLoading}
+        />
+      )}
       <Text style={styles.headingChart}>
         Results available from {provider.length} source
       </Text>

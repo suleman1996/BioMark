@@ -207,6 +207,7 @@ const Index = () => {
             units={unitsNames}
             unit={unitsNames[state.selectedType]}
             error={errors.fromfpg}
+            textAlign={'left'}
           />
           <InputWithUnits
             small
@@ -218,6 +219,7 @@ const Index = () => {
             units={unitsNames}
             unit={unitsNames[state.selectedType]}
             error={errors.tofpg}
+            textAlign={'left'}
           />
           <View
             style={{
@@ -257,6 +259,7 @@ const Index = () => {
             units={unitsNames}
             error={errors.fromppg}
             unit={unitsNames[state.selectedType]}
+            textAlign={'left'}
           />
           <InputWithUnits
             small
@@ -268,6 +271,7 @@ const Index = () => {
             units={unitsNames}
             error={errors.toppg}
             unit={unitsNames[state.selectedType]}
+            textAlign={'left'}
           />
         </ScrollView>
         <GradientButton

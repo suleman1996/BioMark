@@ -27,6 +27,8 @@ import { getCalendarDate } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import { ErrorMessage } from 'components/base';
 import { AccountDeActivateModal } from 'components/ui';
+import { roundToDecimalPlaces } from 'utils/functions';
+import moment from 'moment';
 
 const HbA1c = ({ route }) => {
   const SELECTED_HBA1C_ID = route?.params?.logId;
@@ -65,7 +67,7 @@ const HbA1c = ({ route }) => {
     const hba1cData = await userService.getHba1cProgress(id);
     console.log('hba1cData', hba1cData);
     setHba1cTracker({
-      data_value: hba1cData?.data_value,
+      data_value: roundToDecimalPlaces(hba1cData?.data_value, 2),
       unit_list_id: hba1cData?.unit_list_id,
       record_date: hba1cData?.record_date,
     });
@@ -84,9 +86,15 @@ const HbA1c = ({ route }) => {
       ? 'updateHba1cTracker'
       : 'createHba1cTracker';
     try {
-      await userService[API_FUNCTION](hba1cTracker, SELECTED_HBA1C_ID);
+      await userService[API_FUNCTION](
+        {
+          ...hba1cTracker,
+          record_date: moment(hba1cTracker.record_date).toDate().toString(),
+        },
+        SELECTED_HBA1C_ID
+      );
       dispatch(getReduxHba1cLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 3);
     } catch (err: any) {
       console.error(err);
       if (error?.errMsg.status === '500') {
@@ -112,7 +120,7 @@ const HbA1c = ({ route }) => {
     try {
       await userService.deleteHba1cLog(SELECTED_HBA1C_ID);
       dispatch(getReduxHba1cLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 3);
     } catch (err) {
       console.error(err);
     }

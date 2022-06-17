@@ -90,7 +90,7 @@ const Index = () => {
   }, [goalValue, selectedType]);
 
   useEffect(() => {
-    if (!latestHba1c) return;
+    if (!latestHba1c?.goal_value) return;
     setGoalValue(Number(latestHba1c?.goal_value).toFixed(1));
   }, [latestHba1c]);
 
@@ -115,6 +115,7 @@ const Index = () => {
           units={unitsNames}
           onUnitChange={onUnitChange}
           error={errors.goal}
+          textAlign={'left'}
         />
       </ScrollView>
       <GradientButton

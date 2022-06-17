@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 import { useTheme } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReduxBloodSugarLogs } from 'store/home/home-actions';
 
@@ -31,6 +31,7 @@ import {
 } from 'utils/functions/graph/graph-tricolor';
 import { BloodSugarGraphFactory } from './factory';
 import { Tip } from 'react-native-tip';
+import { IAppState } from 'store/IAppState';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -38,10 +39,16 @@ const Index = () => {
   const lagendChartRef = useRef();
   const styles = Styles(colors);
   const navigation = useNavigation();
+  const focused = useIsFocused();
+
   const { TARGETS } = SCREENS;
   const dispatch = useDispatch();
-  const bloodSugarLogs = useSelector(
-    (state: IAppState) => state.home.bloodSugarLogsData
+  const { bloodSugarLogs, latestTarget, drop } = useSelector(
+    (state: IAppState) => ({
+      bloodSugarLogs: state.home.bloodSugarLogsData,
+      latestTarget: state.home.bloodSugarTargets[0],
+      drop: state.home.medicalDropDown,
+    })
   );
 
   const [headerValue] = React.useState([
@@ -59,6 +66,7 @@ const Index = () => {
   });
 
   const [isVisible, setIsVisible] = React.useState(false);
+  const [hideGraph, setHideGraph] = React.useState(false);
 
   const [filterOption1] = React.useState([
     { id: 0, title: 'Fasting' },
@@ -79,9 +87,11 @@ const Index = () => {
   });
   const [logData, setLogData] = React.useState([]);
   const [chartState, setChartState] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const bloodSugarGraphData = async () => {
     try {
+      setIsLoading(true);
       const result = await userService.getBloodSugarMapData({
         date: selectedValue.title,
         meal: selectedfilterOption1.title,
@@ -89,6 +99,8 @@ const Index = () => {
       });
       console.log({ result: result.data.chart.data });
       setChartState(result.data.chart);
+      setIsLoading(false);
+      setHideGraph(false);
     } catch (error) {
       console.log(error);
     }
@@ -102,23 +114,36 @@ const Index = () => {
     selectedfilterOption1,
     selectedfilterOption2,
     bloodSugarLogs,
+    focused,
   ]);
 
   React.useEffect(() => {
-    dispatch(getReduxBloodSugarLogs());
+    dispatch(
+      getReduxBloodSugarLogs({
+        meal: selectedfilterOption1.title,
+        unit: selectedfilterOption2.id,
+      })
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [selectedfilterOption1, selectedfilterOption2]);
 
   React.useEffect(() => {
     let arr = [];
-    bloodSugarLogs?.log?.map((item) =>
+    console.log({ latestTarget, log: bloodSugarLogs.log[0], drop });
+    bloodSugarLogs?.log?.map((item) => {
       arr.push({
         id: item?.id,
         weight: item?.data_value,
         unit: item?.unit_name,
         date_entry: item?.record_date,
-      })
-    );
+        color:
+          item.record_status == 'low'
+            ? colors.green
+            : item.record_status == 'high'
+            ? colors.red
+            : null,
+      });
+    });
     setLogData(arr);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bloodSugarLogs]);
@@ -256,17 +281,24 @@ const Index = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <LineGraph
-            chartRef={chartRef}
-            lagendChartRef={lagendChartRef}
-            showLegend={true}
-          />
+          {!hideGraph && (
+            <LineGraph
+              chartRef={chartRef}
+              lagendChartRef={lagendChartRef}
+              showLegend={true}
+              isLoading={isLoading}
+            />
+          )}
           <Text
             style={[styles.heading, { alignSelf: 'center', marginTop: 10 }]}
           >
-            Displaying Entries: All
+            Displaying Entries: {selectedfilterOption1.title}
           </Text>
-          <Logs navigate={SCREENS.BLOOD_SUGAR} logData={logData} />
+          <Logs
+            navigate={SCREENS.BLOOD_SUGAR}
+            logData={logData}
+            onNavigate={() => setHideGraph(true)}
+          />
           <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton
