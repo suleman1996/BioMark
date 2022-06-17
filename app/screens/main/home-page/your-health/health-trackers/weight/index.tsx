@@ -24,6 +24,7 @@ import { AccountDeActivateModal } from 'components/ui';
 import { useDispatch } from 'react-redux';
 import { getReduxWeightLogs } from 'store/home/home-actions';
 import moment from 'moment';
+import { roundToDecimalPlaces } from 'utils/functions';
 
 const Weight = ({ route }: any) => {
   const { colors } = useTheme();
@@ -71,9 +72,10 @@ const Weight = ({ route }: any) => {
   const getWeightDataByID = async (id) => {
     setIsLoading(true);
     const weightData = await userService.getWeightProgress(id);
+
     setWeightTracker({
       date_entry: weightData.date_entry,
-      weight: weightData.weight,
+      weight: roundToDecimalPlaces(weightData.weight),
       is_metric: weightData?.is_metric,
     });
     setIsLoading(false);
@@ -93,7 +95,7 @@ const Weight = ({ route }: any) => {
         SELECTED_WEIGHT_ID
       );
       dispatch(getReduxWeightLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 0);
     } catch (err: any) {
       console.error(err);
       if (error?.errMsg.status === '500') {
@@ -137,13 +139,11 @@ const Weight = ({ route }: any) => {
       await userService.deleteWeightLog(SELECTED_WEIGHT_ID);
       dispatch(getReduxWeightLogs());
 
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 0);
     } catch (err) {
       console.error(err);
     }
   };
-
-  console.log(weightTracker.weight.toString());
 
   return (
     <TitleWithBackWhiteBgLayout

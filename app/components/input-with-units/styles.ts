@@ -5,7 +5,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { widthToDp, heightToDp } from 'utils/functions/responsive-dimensions';
 import fonts from 'assets/fonts';
 
-export const makeStyles = (colors: any, small?: boolean) =>
+export const makeStyles = (colors: any, small?: boolean, textAlign?: string) =>
   StyleSheet.create({
     mainView: {
       height: heightToDp(small ? 5 : 18),
@@ -24,7 +24,7 @@ export const makeStyles = (colors: any, small?: boolean) =>
       fontFamily: small ? fonts.mulishRegular : fonts.OpenSansBold,
       color: small ? colors.black : '#808080',
       flex: 1,
-      textAlign: 'right',
+      textAlign: textAlign || 'right',
     },
     menuTrigger: {
       flexDirection: 'row',
