@@ -125,7 +125,6 @@ const BloodPressure = ({ route }: any) => {
       );
     }
   }, [bloodPressure]);
-
   console.log('Error', error);
 
   return (
