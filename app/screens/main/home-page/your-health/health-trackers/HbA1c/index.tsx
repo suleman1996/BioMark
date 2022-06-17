@@ -111,6 +111,7 @@ const HbA1c = ({ route }) => {
   const deleteHba1cLog = async () => {
     try {
       await userService.deleteHba1cLog(SELECTED_HBA1C_ID);
+      dispatch(getReduxHba1cLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err) {
       console.error(err);
@@ -156,6 +157,7 @@ const HbA1c = ({ route }) => {
             <>
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
+                maxDate={new Date()}
                 date={hba1cTracker.record_date}
                 setDate={(e: any) =>
                   setHba1cTracker({
@@ -169,9 +171,9 @@ const HbA1c = ({ route }) => {
         </View>
       </ScrollView>
       <AccountDeActivateModal
-        headerText="Weight"
-        subHeading="Are you sure you wish to delete this weight log?"
-        buttonUpperText="Yes"
+        headerText="HbA1c"
+        subHeading="Are you sure you wish to delete this HbA1c log?"
+        buttonUpperText="Delete"
         buttonLowerText="Skip"
         isVisible={showDeleteModal}
         setIsVisible={setShowDeleteModal}

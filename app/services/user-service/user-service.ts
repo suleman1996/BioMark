@@ -221,6 +221,7 @@ function createProfile(
       .then(async (response) => {
         try {
           logNow('create user success response', response.data);
+          await setAuthAsyncStorage(response.data);
           resolve(response.data);
         } catch (e) {
           logNow('create user error block login1.', e);
@@ -533,7 +534,6 @@ const createBloodSugar = ({ blood_sugar }: Props) => {
   });
 };
 const createBpTracker = (medical: WeightProgressEntryRequest) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_BLOOD_PRESSURE, {
@@ -601,7 +601,10 @@ const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_BLOOD_SUGAR, {
-        blood_sugar: medical,
+        blood_sugar: {
+          ...medical,
+          record_date: moment(medical.record_date).toDate(),
+        },
       })
       .then(async ({ data }) => {
         try {
@@ -626,7 +629,10 @@ const updateBsTracker = (
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
     client
       .put(`${API_URLS.CREATE_BLOOD_SUGAR}/${id}`, {
-        blood_sugar: medical,
+        blood_sugar: {
+          ...medical,
+          record_date: moment(medical.record_date).toDate(),
+        },
       })
       .then(async ({ data }) => {
         console.log('update data', data);
@@ -1150,6 +1156,11 @@ function getLabResultStatus() {
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
+const jumioCallBack = (id_verification) => {
+  return client.post(API_URLS.JUMIO_CALLBACK, {
+    id_verification: id_verification,
+  });
+};
 const deleteMedicationTracker = async (id: number) => {
   return await client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
 };
@@ -1513,10 +1524,10 @@ const getHBA1cChart = (params) => {
   });
 };
 
-const getWeightLogs = () => {
+const getWeightLogs = ({ page = 1 }: { page: number }) => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
-      .get(API_URLS.GET_WEIGHT_LOGS)
+      .get(API_URLS.GET_WEIGHT_LOGS, { params: { page } })
       .then(async (response) => {
         try {
           //
@@ -1693,8 +1704,16 @@ const getSearchResult = (lab_id, query) => {
   });
 };
 
-const getResultOverViewChartData = () => {
-  return client.get(API_URLS.RESULT_OVERVIEW_CHARTDATA);
+const getResultOverViewChartData = (id, date, provider) => {
+  return client.get(
+    `${API_URLS.RESULT_OVERVIEW_CHARTDATA}${id}/chart?provider=1&date=all`,
+    {
+      params: {
+        provider: provider,
+        date: date,
+      },
+    }
+  );
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
@@ -1869,4 +1888,5 @@ export const userService = {
   getSearchResult,
   Terms,
   getResultOverViewChartData,
+  jumioCallBack,
 };

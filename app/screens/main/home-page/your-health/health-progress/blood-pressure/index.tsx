@@ -187,7 +187,7 @@ const Index = () => {
                   body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beaats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats."
                   bodyStyle={{ color: '#fff' }}
                   tipContainerStyle={{
-                    backgroundColor: '#2f6b64',
+                    backgroundColor: colors.shineBlue,
                     width: '60%',
                   }}
                   overlayOpacity={0.001}

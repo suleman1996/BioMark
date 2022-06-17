@@ -13,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getReduxPendingResultOverview,
-  getReduxPastResult,
+  // getReduxPastResult,
 } from 'store/home/home-actions';
 import { useRoute } from '@react-navigation/native';
 
@@ -28,6 +28,7 @@ import { userService } from 'services/user-service/user-service';
 import SCREENS from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
 import { navigate } from 'services/nav-ref';
+import Pdf from 'react-native-pdf';
 
 const PendingResultOverview = () => {
   const { colors } = useTheme();
@@ -58,7 +59,7 @@ const PendingResultOverview = () => {
       );
       if (result.status == true) {
         setModalVisible(false);
-        dispatch(getReduxPastResult());
+        // dispatch(getReduxPastResult());
         navigate(SCREENS.YOUR_HEALTH);
         console.log('delte----------------------------------', result.data);
       }
@@ -143,14 +144,27 @@ const PendingResultOverview = () => {
                 numColumns={2}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => {
+                  console.log('itemuuu', item);
+
                   setSplices(index);
                   return (
                     <>
-                      <ImageBackground
-                        imageStyle={{ borderRadius: 8 }}
-                        source={{ uri: item?.document?.url }}
-                        style={styles.imageView2}
-                      ></ImageBackground>
+                      {item?.file_type === 'pdf' ? (
+                        <Pdf
+                          source={{
+                            uri: item?.document?.url,
+                            cache: true,
+                          }}
+                          trustAllCerts={true}
+                          style={styles.imageView2}
+                        />
+                      ) : (
+                        <ImageBackground
+                          imageStyle={{ borderRadius: 8 }}
+                          source={{ uri: item?.document?.url }}
+                          style={styles.imageView2}
+                        ></ImageBackground>
+                      )}
                     </>
                   );
                 }}

@@ -50,7 +50,7 @@ const BloodSugar = ({ route }) => {
   }));
 
   const [bloodSugarTracker, setBloodSugarTracker] = useState({
-    data_value: '0.0',
+    data_value: '',
     unit_list_id: 1,
     record_date: '',
     meal_type_id: 0,
@@ -141,6 +141,7 @@ const BloodSugar = ({ route }) => {
   const deleteBsLog = async () => {
     try {
       await userService.deleteBsLog(SELECTED_BS_ID);
+      dispatch(getReduxBloodSugarLogs());
       navigate(SCREENS.HEALTH_PROGRESS);
     } catch (err) {
       console.error(err);
@@ -169,6 +170,7 @@ const BloodSugar = ({ route }) => {
   return (
     <TitleWithBackWhiteBgLayout
       binIcon={SELECTED_BS_ID ? true : false}
+      title="Blood Sugar"
       onPressIcon={() => setShowDeleteModal(true)}
     >
       <ActivityIndicator visible={isLoading} />
@@ -184,7 +186,7 @@ const BloodSugar = ({ route }) => {
             placeholder="0.0"
             units={['mg/dL', 'mmol/L']}
             unit={bloodSugarTracker.unit_list_id === 1 ? 'mg/dL' : 'mmol/L'}
-            value={bloodSugarTracker?.data_value.toString()}
+            value={bloodSugarTracker?.data_value}
             onChangeText={(val: any) => handleChange(val, 'data_value')}
             onUnitChange={handleUnitChange}
             error={error || ''}
@@ -215,6 +217,7 @@ const BloodSugar = ({ route }) => {
               </View>
               <Text style={styles.label}>Date - Time</Text>
               <DateTimePickerModal
+                maxDate={new Date()}
                 date={bloodSugarTracker?.record_date}
                 setDate={(e: any) =>
                   setBloodSugarTracker((prev) => ({

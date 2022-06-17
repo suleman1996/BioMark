@@ -112,7 +112,8 @@ const MedicationForm = (props: any) => {
     medication.unit_list_id &&
     (DOSAGE_RANGE.MAX > 1 ? medication.dosage : 1) &&
     medication.frequency &&
-    medication.frequency_time.length > 0;
+    medication.frequency_time.length > 0 &&
+    !dosageRangeError;
 
   useLayoutEffect(() => {
     if (SELECTED_MEDICATION_ID) {
@@ -269,19 +270,21 @@ const MedicationForm = (props: any) => {
                     }}
                   >
                     <InputWithLabel
+                      keyboardType={'numeric'}
                       containerStyles={{
                         marginTop: 0,
                       }}
                       value={medication.dosage}
                       error={dosageRangeError}
-                      onChange={(val) => {
+                      onChange={(text) => {
+                        const val = text.replace(/[^0-9]/g, '');
+                        updateMedication('dosage', val);
                         const err =
                           Number(val) > DOSAGE_RANGE.MAX ||
                           Number(val) < DOSAGE_RANGE.MIN
                             ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
                             : '';
 
-                        updateMedication('dosage', val);
                         setDosageRangeError(err);
                       }}
                     />

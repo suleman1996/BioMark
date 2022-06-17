@@ -20,9 +20,11 @@ export const makeStyles = (colors: any, small?: boolean) =>
       flexDirection: 'row-reverse',
       ...(small && { flex: 1, paddingHorizontal: 15 }),
       backgroundColor: 'transparent',
-      fontSize: responsiveFontSize(small ? 22 : 50),
+      fontSize: responsiveFontSize(small ? 20 : 50),
       fontFamily: small ? fonts.mulishRegular : fonts.OpenSansBold,
       color: small ? colors.black : '#808080',
+      flex: 1,
+      textAlign: 'right',
     },
     menuTrigger: {
       flexDirection: 'row',

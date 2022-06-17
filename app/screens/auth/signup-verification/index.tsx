@@ -25,6 +25,7 @@ import fonts from 'assets/fonts';
 import BackIcon from 'assets/svgs/back';
 
 import makeStyles from './styles';
+import { setAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 
 export default function SignupVerification() {
   const { colors } = useTheme();
@@ -99,15 +100,18 @@ export default function SignupVerification() {
   const handleSignUP = async () => {
     try {
       setLoading(true);
-      await signupAccountConfirm({
+      const resData = await signupAccountConfirm({
         confirmation: {
           username: route?.params?.username,
           password: route?.params?.password,
           code: code,
         },
       });
+
       let uniqueId = DeviceInfo.getUniqueId();
       dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
+      console.log('resData', resData);
+      await setAuthAsyncStorage(resData);
       navigate(SCREENS.CONFIRMATION);
       setLoading(false);
     } catch (error) {
@@ -210,7 +214,7 @@ export default function SignupVerification() {
               </TouchableOpacity>
             </View>
             <Button
-              disabled={code.length < 6 ? true : false}
+              // disabled={code.length < 6 ? true : false}
               title="Continue"
               onPress={() => handleSignUP()}
             />

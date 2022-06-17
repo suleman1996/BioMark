@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import { Formik } from 'formik';
@@ -47,6 +48,7 @@ import { IAppState } from 'store/IAppState';
 import { dateFormat } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+import { IC_AND_PASSPORT, NAME } from 'utils/regix';
 
 export default function CreateProfile() {
   const { colors } = useTheme();
@@ -93,6 +95,7 @@ export default function CreateProfile() {
       setNumberCondition({ min: 4, max: 13 });
     }
   }, [selectedCountryCode]);
+
   async function getHasprofileAsyncStorage() {
     const data = await getAuthAsyncStorage();
     dispatch3(loggedIn(data));
@@ -205,57 +208,61 @@ export default function CreateProfile() {
           <Text style={styles.signupText}>Personal Details</Text>
         </View>
       </View>
-      <ScrollView keyboardShouldPersistTaps={'handled'}>
-        <Formik
-          initialValues={{
-            fName: '',
-            lName: '',
-            IcPnum: '',
-            email: '',
-            password: '',
-            phone_number: '',
-          }}
-          onSubmit={(values) => handleSignup(values)}
-          validationSchema={ResetPassSchema}
-        >
-          {({
-            handleSubmit,
-            errors,
-            handleChange,
-            // handleSubmit,
-            // setFieldTouched,
-            values,
-            // isSubmitting,
-            isValid,
-            setFieldValue,
-            touched,
-            setFieldTouched,
-          }) => (
-            <>
-              <View style={styles.biContainer}>
-                <Text style={styles.heading}>Basic Information</Text>
-                <InputWithLabel
-                  label="First Name"
-                  placeholder={''}
-                  containerStyles={{ paddingHorizontal: 20 }}
-                  labelFontSize={15}
-                  onChange={handleChange('fName')}
-                  value={values.fName}
-                  error={touched.fName ? errors.fName : ''}
-                  onBlur={() => setFieldTouched('fName')}
-                />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <ScrollView keyboardShouldPersistTaps={'handled'}>
+          <Formik
+            initialValues={{
+              fName: '',
+              lName: '',
+              IcPnum: '',
+              email: '',
+              password: '',
+              phone_number: '',
+            }}
+            onSubmit={(values) => handleSignup(values)}
+            validationSchema={ResetPassSchema}
+          >
+            {({
+              handleSubmit,
+              errors,
+              handleChange,
+              // handleSubmit,
+              // setFieldTouched,
+              values,
+              // isSubmitting,
+              isValid,
+              setFieldValue,
+              touched,
+              setFieldTouched,
+            }) => (
+              <>
+                <View style={styles.biContainer}>
+                  <Text style={styles.heading}>Basic Information</Text>
+                  <InputWithLabel
+                    label="First Name"
+                    placeholder={''}
+                    containerStyles={{ paddingHorizontal: 20 }}
+                    labelFontSize={15}
+                    onChange={handleChange('fName')}
+                    value={values.fName}
+                    error={touched.fName ? errors.fName : ''}
+                    onBlur={() => setFieldTouched('fName')}
+                  />
 
-                <InputWithLabel
-                  label="Last Name"
-                  placeholder={''}
-                  containerStyles={{ paddingHorizontal: 20 }}
-                  labelFontSize={15}
-                  onChange={handleChange('lName')}
-                  value={values.lName}
-                  error={touched.lName ? errors.lName : ''}
-                  onBlur={() => setFieldTouched('lName')}
-                />
-                {/* <Text style={[styles.inputLablel, { marginTop: 20 }]}>
+                  <InputWithLabel
+                    label="Last Name"
+                    placeholder={''}
+                    containerStyles={{ paddingHorizontal: 20 }}
+                    labelFontSize={15}
+                    onChange={handleChange('lName')}
+                    value={values.lName}
+                    error={touched.lName ? errors.lName : ''}
+                    onBlur={() => setFieldTouched('lName')}
+                  />
+                  {/* <Text style={[styles.inputLablel, { marginTop: 20 }]}>
                   Identity Card/Passport Number
                 </Text>
                 <TextInput
@@ -263,180 +270,172 @@ export default function CreateProfile() {
                   onChange={handleChange('IcPnum')}
                   margin={20}
                 /> */}
-                <InputWithLabel
-                  label="Identity Card/Passport Number"
-                  placeholder={''}
-                  containerStyles={{ paddingHorizontal: 20 }}
-                  labelFontSize={15}
-                  onChange={handleChange('IcPnum')}
-                  value={values.IcPnum}
-                  error={touched.IcPnum ? errors.IcPnum : ''}
-                  onBlur={() => setFieldTouched('IcPnum')}
-                />
-                {/* <Text style={styles.inputLablel}>Country</Text> */}
-
-                {/* <CountryPicker
-                    countryCode={countryCode}
-                    withCountryNameButton={true}
-                    withFilter={true}
-                    preferredCountries={preferredCountries}
-                    theme={{
-                      ...DEFAULT_THEME,
-                      backgroundColor: colors.white,
-                      onBackgroundTextColor: colors.heading,
-                      fontSize: 14,
-                    }}
-                    containerButtonStyle={styles.pickerButtonStyle}
-                    onSelect={(Country) => onSelect(Country)}
-                  /> */}
-                <View style={{ paddingHorizontal: 20 }}>
-                  <PhoneNumberWithLabel
-                    label="Mobile Number"
+                  <InputWithLabel
+                    label="Identity Card/Passport Number"
                     placeholder={''}
-                    disabled={false}
-                    number={values.phone_number}
-                    setPhoneNumber={(e: any) => {
-                      setFieldValue('phone_number', e);
+                    containerStyles={{ paddingHorizontal: 20 }}
+                    labelFontSize={15}
+                    onChange={(value) => {
+                      if (IC_AND_PASSPORT.test(value))
+                        setFieldValue('IcPnum', value);
                     }}
-                    countryCode={countryCode}
-                    // error={values.phone_number ? errors.phone_number : ''}
-                    setCountryCode={setCountryCode}
-                    setSelectCountryCode={setSelectedCountryCode}
-                    maxLength={numberCondition.max}
-                    onBlur={() => setFieldTouched('phone_number')}
+                    value={values.IcPnum}
+                    error={touched.IcPnum ? errors.IcPnum : ''}
+                    onBlur={() => setFieldTouched('IcPnum')}
                   />
-                </View>
-                <View style={{ paddingHorizontal: 20 }}>
-                  {touched.phone_number &&
-                    (errors.phone_number ? (
-                      <View style={[styles.errorContainer]}>
-                        <Text style={styles.errorText}>
-                          {errors.phone_number}
-                        </Text>
-                      </View>
-                    ) : (
-                      values.phone_number.length < numberCondition.min && (
-                        <View style={styles.errorContainer}>
+
+                  <View style={{ paddingHorizontal: 20 }}>
+                    <PhoneNumberWithLabel
+                      label="Mobile Number"
+                      placeholder={''}
+                      disabled={false}
+                      number={values.phone_number}
+                      setPhoneNumber={(e: any) => {
+                        setFieldValue('phone_number', e);
+                      }}
+                      countryCode={countryCode}
+                      // error={values.phone_number ? errors.phone_number : ''}
+                      setCountryCode={setCountryCode}
+                      setSelectCountryCode={setSelectedCountryCode}
+                      maxLength={numberCondition.max}
+                      onBlur={() => setFieldTouched('phone_number')}
+                    />
+                  </View>
+                  <View style={{ paddingHorizontal: 20 }}>
+                    {touched.phone_number &&
+                      (errors.phone_number ? (
+                        <View style={[styles.errorContainer]}>
                           <Text style={styles.errorText}>
-                            Must have {numberCondition.min}
-                            {numberCondition.max !== numberCondition.min &&
-                              -numberCondition.max}{' '}
-                            characters
+                            {errors.phone_number}
                           </Text>
                         </View>
-                      )
-                    ))}
-                </View>
+                      ) : (
+                        values.phone_number.length < numberCondition.min && (
+                          <View style={styles.errorContainer}>
+                            <Text style={styles.errorText}>
+                              Must have {numberCondition.min}
+                              {numberCondition.max !== numberCondition.min &&
+                                -numberCondition.max}{' '}
+                              characters
+                            </Text>
+                          </View>
+                        )
+                      ))}
+                  </View>
 
-                <Text style={styles.inputLablel}>Gender</Text>
-                <View style={styles.ChoiceBtnDOB}>
-                  <FlatList
-                    data={gender}
-                    renderItem={RenderRadio}
-                    keyExtractor={(item) => item.id}
-                    horizontal
-                  />
-                </View>
+                  <Text style={styles.inputLablel}>Gender</Text>
+                  <View style={styles.ChoiceBtnDOB}>
+                    <FlatList
+                      data={gender}
+                      renderItem={RenderRadio}
+                      keyExtractor={(item) => item.id}
+                      horizontal
+                    />
+                  </View>
 
-                <Text style={styles.inputLablel}>Date of Birth</Text>
-                <View style={{ paddingHorizontal: 20 }}>
-                  <DatePickerModal
-                    isPickerShow={isPickerShow}
-                    setIsPickerShow={setIsPickerShow}
-                    date={date}
-                    setDate={setDate}
-                  />
-                </View>
+                  <Text style={styles.inputLablel}>Date of Birth</Text>
+                  <View style={{ paddingHorizontal: 20 }}>
+                    <DatePickerModal
+                      isPickerShow={isPickerShow}
+                      setIsPickerShow={setIsPickerShow}
+                      date={date}
+                      setDate={setDate}
+                    />
+                  </View>
 
-                <View style={styles.aiContainer}>
-                  <Text style={styles.heading}>Account Information</Text>
-                  {/* <Text style={styles.inputLablel}>Email</Text>
+                  <View style={styles.aiContainer}>
+                    <Text style={styles.heading}>Account Information</Text>
+                    {/* <Text style={styles.inputLablel}>Email</Text>
                   <TextInput
                     placeholder="E.g. Sample@email.com"
                     onChange={handleChange('email')}
                     margin={20}
                     keyboardType="email-address"
                   /> */}
-                  <InputWithLabel
-                    label="Email"
-                    placeholder={''}
-                    containerStyles={{ paddingHorizontal: 20 }}
-                    labelFontSize={15}
-                    onChange={handleChange('email')}
-                    value={values.email}
-                    error={touched.email ? errors.email : ''}
-                    onBlur={() => setFieldTouched('email')}
-                  />
-                </View>
-                <View style={styles.tcText}>
-                  <CheckBox checked={checked} setChecked={setChecked} />
-                  <Text style={styles.tcTextStyle}>
-                    <Text>I accept the </Text>
-                    <TouchableWithoutFeedback
-                      onPress={() =>
-                        navigate(SCREENS.TERMS_AND_PRIVACY, {
-                          privacyPolicy: false,
-                        })
-                      }
-                    >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                          // bottom: 2,
-                        }}
+                    <InputWithLabel
+                      label="Email"
+                      placeholder={''}
+                      containerStyles={{ paddingHorizontal: 20 }}
+                      labelFontSize={15}
+                      onChange={handleChange('email')}
+                      value={values.email}
+                      error={touched.email ? errors.email : ''}
+                      onBlur={() => setFieldTouched('email')}
+                    />
+                  </View>
+                  <View style={styles.tcText}>
+                    <CheckBox checked={checked} setChecked={setChecked} />
+                    <Text style={styles.tcTextStyle}>
+                      <Text>I accept the </Text>
+                      <TouchableWithoutFeedback
+                        onPress={() =>
+                          navigate(SCREENS.TERMS_AND_PRIVACY, {
+                            privacyPolicy: false,
+                          })
+                        }
                       >
-                        terms and conditions
-                      </Text>
-                    </TouchableWithoutFeedback>
-                    <Text> and the </Text>
-                    <TouchableWithoutFeedback
-                      onPress={() =>
-                        navigate(SCREENS.TERMS_AND_PRIVACY, {
-                          privacyPolicy: true,
-                        })
-                      }
-                    >
-                      <Text
-                        style={{
-                          color: colors.blue,
-                          fontSize: 17,
-                          textDecorationLine: 'underline',
-                        }}
+                        <Text
+                          style={{
+                            color: colors.blue,
+                            fontSize: 17,
+                            textDecorationLine: 'underline',
+                            // bottom: 2,
+                          }}
+                        >
+                          terms and conditions
+                        </Text>
+                      </TouchableWithoutFeedback>
+                      <Text> and the </Text>
+                      <TouchableWithoutFeedback
+                        onPress={() =>
+                          navigate(SCREENS.TERMS_AND_PRIVACY, {
+                            privacyPolicy: true,
+                          })
+                        }
                       >
-                        privacy policy.
-                      </Text>
-                    </TouchableWithoutFeedback>
-                  </Text>
+                        <Text
+                          style={{
+                            color: colors.blue,
+                            fontSize: 17,
+                            textDecorationLine: 'underline',
+                          }}
+                        >
+                          privacy policy.
+                        </Text>
+                      </TouchableWithoutFeedback>
+                    </Text>
+                  </View>
+                  <TouchableOpacity>
+                    <Button
+                      title="Continue"
+                      disabled={
+                        !isValid ||
+                        values.phone_number.length < numberCondition.min
+                          ? true
+                          : false || !selectedGender
+                          ? true
+                          : false
+                      }
+                      onPress={() => handleSubmit()}
+                    />
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity>
-                  <Button
-                    title="Continue"
-                    disabled={
-                      !isValid ||
-                      values.phone_number.length < numberCondition.min
-                        ? true
-                        : false || !selectedGender
-                        ? true
-                        : false
-                    }
-                    onPress={() => handleSubmit()}
-                  />
-                </TouchableOpacity>
-              </View>
-            </>
-          )}
-        </Formik>
-      </ScrollView>
+              </>
+            )}
+          </Formik>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </>
   );
 }
 
 const ResetPassSchema = Yup.object({
-  fName: Yup.string().required('Please provide your first name'),
-
-  lName: Yup.string().required('Please provide your last name'),
+  fName: Yup.string()
+    .required('Please provide your first name')
+    .matches(NAME, 'Name should only contain latin letters'),
+  lName: Yup.string()
+    .required('Please provide your last name')
+    .matches(NAME, 'Name should only contain latin letters'),
 
   IcPnum: Yup.string().required('Please provide Identity Card/Passport Number'),
   phone_number: Yup.string()

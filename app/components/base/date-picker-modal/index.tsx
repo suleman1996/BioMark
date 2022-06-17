@@ -50,6 +50,7 @@ const DatePickerModal = (props: Props) => {
         mode="date"
         onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}
+        accentColor={colors.primary}
       />
     </View>
   );

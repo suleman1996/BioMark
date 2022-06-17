@@ -342,15 +342,12 @@ export default function Signup() {
                       </TouchableWithoutFeedback>
                     </Text>
                   </View>
-                  <TouchableOpacity>
-                    <Button
-                      title="Continue"
-                      disabled={
-                        !isValid || phoneNumber.length < 8 ? true : false
-                      }
-                      onPress={() => handleSubmit()}
-                    />
-                  </TouchableOpacity>
+
+                  <Button
+                    title="Continue"
+                    disabled={!isValid || phoneNumber.length < 8 ? true : false}
+                    onPress={() => handleSubmit()}
+                  />
                 </View>
               </>
             )}

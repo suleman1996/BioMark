@@ -55,10 +55,15 @@ const SearchBarWithLeftScanIcon = () => {
       const response = await userService.barcodeCheck({
         scanner: {
           code: code,
+          terms: 'true',
         },
       });
-      navigate(SCREENS.SUPPORT_SYSTEM);
-      console.log(response, 'codee---------------code------------------');
+      if (response.status == true) {
+        navigate(SCREENS.SUPPORT_SYSTEM);
+        console.log(response, 'codee---------------code------------------');
+      } else {
+        console.log('error', response);
+      }
     } catch (err) {
       console.log('errrrrrrrrr', err.errMsg.data);
       setInvalidError(err.errMsg.data.message);
@@ -176,20 +181,34 @@ const SearchBarWithLeftScanIcon = () => {
         </View>
       </View>
       <WithdrawProgram
-        text={invalidError == 'Invalid code' ? 'Manually Enter Code' : 'Back'}
+        text={
+          invalidError == 'Invalid code'
+            ? 'Manually Enter Code'
+            : invalidError == 'Already a member'
+            ? 'Back'
+            : invalidError == 'Code already used'
+            ? 'Already a Member'
+            : 'Back'
+        }
         visible={modalVisible}
         title={
           invalidError == 'Invalid code'
             ? 'Invalid Code'
-            : invalidError == 'Code already used'
-            ? 'Code Already Entered'
+            : // invalidError == 'Code already used'
+            // ? 'Code Already Entered'
+            // :
+            invalidError == 'Code already used'
+            ? 'Already a Member'
             : undefined
         }
         text2={
           invalidError == 'Invalid code'
             ? 'Multiple invalid code entries detected.Try manually entering the code.'
-            : invalidError == 'Code already used'
-            ? 'It seems like this code has already been entered.'
+            : // invalidError == 'Code already used'
+            // ? 'It seems like this code has already been entered.'
+            // :
+            invalidError == 'Code already used'
+            ? 'You are already a member of the Empower Program.You can already log your blood sugar and medications.'
             : undefined
         }
         // cancel="Cancel"
@@ -203,7 +222,10 @@ const SearchBarWithLeftScanIcon = () => {
             ? setModalVisible(false) || setCode('') || setVisible(true)
             : invalidError == 'Code already used'
             ? setModalVisible(false)
-            : undefined;
+            : // :
+              //  invalidError == 'Code already used'
+              // ? setModalVisible(false)
+              undefined;
         }}
       />
 
@@ -239,7 +261,7 @@ const SearchBarWithLeftScanIcon = () => {
             style={styles.textInput}
             marginTop={10}
             // onChangeText={handleChange}
-            onChangeText={(text) => setCode(text)}
+            onChangeText={(e) => setCode(e)}
             // onChange={handleChange('qrInput')}
           />
           <View style={{ marginTop: 40 }}>

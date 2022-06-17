@@ -22,7 +22,7 @@ export function BloodSugar() {
               value: `${target.value_from}-${target.value_to} ${target.unit_name}`,
             },
             {
-              label: 'PPG (Fasting)',
+              label: 'PPG (Post-Meal)',
               value: `${target.ppg_value_from}-${target.ppg_value_to} ${target.unit_name}`,
             },
           ]}
