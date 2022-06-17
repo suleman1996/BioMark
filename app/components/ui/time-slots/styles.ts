@@ -10,7 +10,7 @@ export const makeStyles = (colors: any) =>
       justifyContent: 'space-between',
     },
     singleTimeItem: {
-      paddingHorizontal: widthToDp(3),
+      paddingHorizontal: widthToDp(2),
       paddingVertical: widthToDp(1),
       borderWidth: 0.2,
       borderColor: colors.inactive,

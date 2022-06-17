@@ -221,6 +221,7 @@ function createProfile(
       .then(async (response) => {
         try {
           logNow('create user success response', response.data);
+          await setAuthAsyncStorage(response.data);
           resolve(response.data);
         } catch (e) {
           logNow('create user error block login1.', e);
@@ -533,7 +534,6 @@ const createBloodSugar = ({ blood_sugar }: Props) => {
   });
 };
 const createBpTracker = (medical: WeightProgressEntryRequest) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_BLOOD_PRESSURE, {
@@ -1155,6 +1155,11 @@ function getLabResultStatus() {
 
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
+};
+const jumioCallBack = (id_verification) => {
+  return client.post(API_URLS.JUMIO_CALLBACK, {
+    id_verification: id_verification,
+  });
 };
 const deleteMedicationTracker = async (id: number) => {
   return await client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
@@ -1883,4 +1888,5 @@ export const userService = {
   getSearchResult,
   Terms,
   getResultOverViewChartData,
+  jumioCallBack,
 };

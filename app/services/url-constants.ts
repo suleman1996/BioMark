@@ -56,6 +56,7 @@ const API_URLS = {
 
   DASHBOARD: 'api/v1/patient/dashboard',
   GET_JUMIO_DATA: '/integration/v1/id_verifications/get_authtoken',
+  JUMIO_CALLBACK: '/integration/v1/id_verifications/callback',
 
   // Health Traqcker
   GET_HEALTH_DROPDOWN: '/api/v1/patient/psp/trackers/blood_sugar/new',
@@ -89,6 +90,16 @@ const API_URLS = {
   COVID_GET_RESUTLS: '/api/v2/patient/results/covid',
   COVID_GET_RESUTLS_DOWNLOAD_V1: '/api/v1/patient/results/',
   GET_MEDICATION_DROPDWON: 'api/v1/patient/psp/medications',
+  COVID_BOOKING_FORM: '/api/v1/patient/covid/booking_form',
+  COVID_TEST_AND_TEST_CENTERS: '/api/v1/patient/covid/test_centers',
+  COVID_GET_TEST_CENTER_SCHEDULES: '/api/v1/patient/covid/get_schedule',
+  BILLPLZ: '/payment/v1/billplz',
+
+  // stripe
+  STRIPE: '/payment/v1/stripe',
+  STRIPE_PAY_SESSION: '/payment/v1/stripe/pay_session',
+  STRIPE_SUCCESS: '/payment/v1/stripe/success',
+  STRIPE_CANCEL: '/payment/v1/stripe/cancel',
 
   //Medication Tracker
   CREATE_MEDICATION: '/api/v1/patient/psp/trackers/medication',
