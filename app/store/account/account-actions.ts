@@ -24,7 +24,6 @@ export const getAllDependents =
     await dependentService
       .getAllDependents()
       .then(async (res: any) => {
-        logNow(res);
         await dispatch(addAllDependents(res));
       })
       .catch(() => {

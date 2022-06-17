@@ -1,10 +1,17 @@
 import { covidService } from 'services/covid-service';
 import {
+  BookingFormDataResponse,
+  BookTestBooking,
   CovidBookingListResponseData,
   CovidResultListResponse,
 } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
-import { COVID_RESULTS_DATA, COVID_BOOKINGS_DATA } from './constants';
+import {
+  COVID_RESULTS_DATA,
+  COVID_BOOKINGS_DATA,
+  COVID_BOOKING_FORM,
+  COVID_BOOKING,
+} from './constants';
 
 export const addAllCovidResultsData = (data: CovidResultListResponse[]) => ({
   type: COVID_RESULTS_DATA,
@@ -54,3 +61,33 @@ export const getAllBookingsDataR =
         // dispatch(loggingOut(false));
       });
   };
+
+export const addCovidBookingForm = (data: BookingFormDataResponse) => ({
+  type: COVID_BOOKING_FORM,
+  payload: data,
+});
+
+export const getCovidBookingFormR =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await covidService
+      .getBookingsForm()
+      .then(async (res: any) => {
+        // logNow('response for redux ============>', res);
+        await dispatch(addCovidBookingForm(res));
+      })
+      .catch((err) => {
+        logNow(err);
+        // After developer alow below function on line 66
+        // dispatch(errorLogOut('Error logging out.'));
+      })
+      .finally(() => {
+        // After developer alow below function on line 69
+        // dispatch(loggingOut(false));
+      });
+  };
+
+// covid booking
+export const addCovidBooking = (data: BookTestBooking[]) => ({
+  type: COVID_BOOKING,
+  payload: data,
+});

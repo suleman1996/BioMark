@@ -175,6 +175,33 @@ export interface CovidBookingRequest {
   };
 }
 
+export interface BookTestBooking {
+  is_dependant?: boolean;
+  dependent_id?: number;
+  test_city_name?: string;
+  test_country_name?: string;
+  country_id?: number;
+  city_id?: number;
+  test_centre_name?: string;
+  test_centre_id?: number;
+  test_type_id?: number;
+  test_location?: string;
+  amount?: number;
+  total_amount?: number;
+  test_address?: string;
+  test_address_details?: string;
+  confirmation_date?: Date;
+  schedule_id?: number;
+  slot_id?: number;
+  booking_status?: number;
+
+  q1?: boolean;
+  q2?: boolean;
+  q3?: boolean;
+  q4?: boolean;
+  q5?: boolean;
+}
+
 export interface CovidBookingMultipleHealthDeclarationRequest {
   booking: [CovidBookingHealthDeclarationRequest];
 }
@@ -227,6 +254,7 @@ export interface Schedule {
   status: boolean;
   has_available_slot: boolean;
   slots: TimeSlot[];
+  morning_time_slots: TimeSlot[];
 }
 export interface TimeSlot {
   id: number;
