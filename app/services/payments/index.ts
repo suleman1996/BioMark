@@ -17,33 +17,53 @@ function openBillPlzBrowser(
   amount: any,
   booking: BookTestBooking[]
 ) {
-  let desc = '';
-  booking.forEach((e) => {
-    desc = desc + e.test_type_id + '\n';
-  });
-  const payload = {
-    email: email,
-    name: name,
-    amount: amount,
-    description: desc,
-  };
-  //  console.log({payload: payload})
-  purchaseViaBillPlz({
-    payment: {
-      email: payload.email,
-      name: payload.name,
-      callback: Config.BASE_URL + '/payment/v1/billplz/callback',
-      redirect: Config.BASE_URL + '/payment/v1/billplz/callback',
-      amount: payload.amount,
-      description: payload.description,
-    },
-  })
-    .then((res) => {
-      logNow({ res: res });
-    })
-    .catch((err) => {
-      logNow(err);
+  return new Promise<string>((resolve, reject) => {
+    let desc = '';
+    booking.forEach((e) => {
+      desc = desc + e.test_type_id + '\n';
     });
+    const payload = {
+      email: email,
+      name: name,
+      amount: amount,
+      description: desc,
+    };
+    //  console.log({payload: payload})
+    purchaseViaBillPlz({
+      payment: {
+        email: payload.email,
+        name: payload.name,
+        callback: Config.BASE_URL + '/payment/v1/billplz/callback',
+        redirect: Config.BASE_URL + '/payment/v1/billplz/callback',
+        amount: payload.amount * 100,
+        description: payload.description,
+      },
+    })
+      .then(async (res) => {
+        logNow({ res: res });
+        resolve(res);
+
+        //  InAppBrowser.open(res.url, {
+        //    // iOS Properties
+        //    ephemeralWebSession: false,
+        //    // Android Properties
+        //    showTitle: false,
+        //    enableUrlBarHiding: true,
+        //    enableDefaultShare: false,
+        //  }).then((response) => {
+        //    if (response.status == true) {
+        //      console.log(response);
+        //    }
+        //    console.log('Else', response);
+        //  }).catch(err => {
+        //   console.log(err)
+        //  });
+      })
+      .catch((err) => {
+        logNow(err);
+        reject(err);
+      });
+  });
 }
 
 function purchaseViaBillPlz(data: CreateBillplzPaymentRequest) {

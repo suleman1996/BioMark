@@ -46,5 +46,12 @@
             android:name="android.support.FILE_PROVIDER_PATHS"
             android:resource="@xml/filepaths" />
     </provider>
+    <!-- payment billplz intent for callback -->
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="my-scheme" android:host="my-host" android:pathPrefix="" />
+    </intent-filter>
     </application>
 </manifest>

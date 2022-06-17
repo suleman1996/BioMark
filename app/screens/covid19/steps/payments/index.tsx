@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SCREENS from 'navigation/constants';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
@@ -21,10 +21,12 @@ import { getUserProfileData } from 'store/profile/profile-actions';
 import { BookTestBooking } from 'types/api';
 import { dateFormat1, getTime } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { makeStyles } from './styles';
+import Modal from 'react-native-modal';
+import WebView from 'react-native-webview';
 
 type Props = {};
 
@@ -35,6 +37,9 @@ const PaymentStep = (props: Props) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const styles = makeStyles(colors);
+  const [paymentModal, setPaymentModal] = useState(false);
+  const [paymentUrl, setPaymentUrl] = useState('');
+
   const booking = useSelector((state: IAppState) => state.covid.booking);
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
@@ -197,6 +202,8 @@ const PaymentStep = (props: Props) => {
     name: userDetails.patient_name,
   };
 
+  console.log({ countryName: booking });
+
   const makeItems = () => {
     let items = booking.map((e) => {
       return {
@@ -218,6 +225,31 @@ const PaymentStep = (props: Props) => {
   return (
     <>
       <View style={styles.container}>
+        <Modal
+          deviceWidth={widthToDp(100)}
+          deviceHeight={heightToDp(100)}
+          onBackdropPress={() => setPaymentModal(false)}
+          isVisible={paymentModal}
+        >
+          <WebView
+            source={{ uri: paymentUrl }}
+            onMessage={(event) => {
+              alert(event.nativeEvent.data);
+            }}
+            onNavigationStateChange={(webViewState) => {
+              if (
+                webViewState.url.includes(
+                  '/payment/v1/billplz/confirmation?paid=true'
+                )
+              ) {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_SUCCESS,
+                });
+              }
+              console.log('state changed', webViewState.url);
+            }}
+          />
+        </Modal>
         <View style={styles.stepContainer}>
           <StepIndicator
             renderStepIndicator={({ position }) => {
@@ -303,15 +335,20 @@ const PaymentStep = (props: Props) => {
             <Text style={[styles.innerTitle, { marginTop: heightToDp(1) }]}>
               Choose Payment Method
             </Text>
-            {countryName == 'Malaysia' ? (
+            {countryName === 'Malaysia' ? (
               <ButtonComponent
-                onPress={() => {
-                  paymentService.openBillPlzBrowser(
+                onPress={async () => {
+                  const data: any = await paymentService.openBillPlzBrowser(
                     email,
                     name,
                     totalPrice,
                     booking
                   );
+                  console.log({ data });
+                  setPaymentUrl(data.url);
+                  if (data.url) {
+                    setPaymentModal(true);
+                  }
                 }}
                 title={'Online'}
               />

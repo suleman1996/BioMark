@@ -69,6 +69,7 @@ const Covid19Navigator = () => {
           title: 'Back',
           headerShadowVisible: false,
         }}
+        path={'callback/'}
         name={SCREENS.PAYMENT_SUCCESS}
         component={PaymentSuccess}
       />
