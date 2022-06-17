@@ -53,6 +53,7 @@ const CancerModal = ({ isVisible, setIsVisible }: Props) => {
           onValueChange={setCancerType}
         />
       </View>
+
       <RadioButtonQuestion
         isTrue={ans2}
         setIsTrue={setAns2}

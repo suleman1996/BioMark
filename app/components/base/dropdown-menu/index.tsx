@@ -50,7 +50,7 @@ const DropdownMenuComponent = ({
             flex: 1,
             borderRadius: widthToDp(2),
             maxHeight: heightToDp(6.5),
-            backgroundColor: colors.inputBg,
+            backgroundColor: colors.fieldGrey,
           },
           underlineColor: '#fff',
         }}
