@@ -99,7 +99,12 @@ const BookCovidTest = (props: Props) => {
           />
           <View style={{ marginTop: heightToDp(12) }} />
           <View style={styles.bottom2Btns}>
-            <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>
+            <Pressable
+              style={[styles.btn, { backgroundColor: colors.white }]}
+              onPress={() => {
+                setIsCancelModal(true);
+              }}
+            >
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable

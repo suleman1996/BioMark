@@ -58,7 +58,12 @@ const Index = (props: Props) => {
             {item?.weight} {item?.unit}
           </Text>
         </View>
-        <View style={{ width: '60%', alignItems: 'flex-end' }}>
+        <View
+          style={{
+            width: '60%',
+            alignItems: 'flex-end',
+          }}
+        >
           <Text
             style={{
               color: colors.blue,
@@ -84,6 +89,7 @@ const Index = (props: Props) => {
         <Arrow color={colors.heading} name={log ? 'up' : 'down'} />
       </TouchableOpacity>
       <ScrollView
+        nestedScrollEnabled
         showsVerticalScrollIndicator={false}
         style={{ maxHeight: styles.renderLog.height * 4 }}
       >

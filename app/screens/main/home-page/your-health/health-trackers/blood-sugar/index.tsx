@@ -166,6 +166,7 @@ const BloodSugar = ({ route }) => {
       ) || ''
     );
   };
+  // console.log('--------------------------', bloodSugarTracker.unit_list_id);
 
   return (
     <TitleWithBackWhiteBgLayout

@@ -264,15 +264,6 @@ const AddDependantScreen = () => {
                   setDate={(e: any) => setFieldValue('birth_date', e)}
                 />
 
-                <InputWithLabel
-                  label="NRIC /Passport Number"
-                  placeholder={''}
-                  onChange={handleChange('id_number')}
-                  value={values.id_number}
-                  error={touched.id_number ? errors.id_number : ''}
-                  onBlur={() => setFieldTouched('id_number')}
-                  maxLength={20}
-                />
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('gender_id', e)}
                   value={values.gender_id}
@@ -283,6 +274,15 @@ const AddDependantScreen = () => {
                   onChange={(e: any) => setFieldValue('dependent_type_id', e)}
                   label={'Relation'}
                   options={DependentTypeEnum}
+                />
+                <InputWithLabel
+                  label="NRIC /Passport Number"
+                  placeholder={''}
+                  onChange={handleChange('id_number')}
+                  value={values.id_number}
+                  error={touched.id_number ? errors.id_number : ''}
+                  onBlur={() => setFieldTouched('id_number')}
+                  maxLength={20}
                 />
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('document_type', e)}

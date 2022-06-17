@@ -219,6 +219,7 @@ const Medication = ({ route }) => {
     setValidation(false);
     setIsLoading(false);
   }, [SELECTED_MEDICATION_LOG_ID]);
+  console.log('--------------------', getMedNewTracker);
 
   return (
     <TitleWithBackWhiteBgLayout
