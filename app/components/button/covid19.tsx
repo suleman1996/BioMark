@@ -13,19 +13,19 @@ export default function Covid19Btn({ onPress }) {
   const styles = makeStyles(colors);
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <View style={styles.circleBtn}>
-        <TouchableOpacity
-          onPress={() =>
-            onPress
-              ? onPress()
-              : navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                  screen: SCREENS.COVID19HOME,
-                })
-          }
-        >
+      <TouchableOpacity
+        onPress={() =>
+          onPress
+            ? onPress()
+            : navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                screen: SCREENS.COVID19HOME,
+              })
+        }
+      >
+        <View style={styles.circleBtn}>
           <Covid19 />
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
       <View>
         <Text style={styles.covidText}>COVID-19</Text>
       </View>
