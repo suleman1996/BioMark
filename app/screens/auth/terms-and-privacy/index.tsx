@@ -106,6 +106,7 @@ export default function TermsAndPrivacy({ route }) {
     }
   };
   const fileUrl = privacyPolicy ? Config.PRIVACY_POLICY : Config.TNC;
+  console.log('fileUrl', fileUrl);
 
   const downloadFile = () => {
     // Get today's date to add the time suffix in filename
