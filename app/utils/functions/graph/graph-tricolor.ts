@@ -13,7 +13,6 @@ import {
   GraphXAxisConfig,
   symbolSvgPath,
 } from './graph.types';
-import { dateFormat } from './graph-utils';
 import { RangeValue } from 'types/api';
 
 const zIndex = 100;
@@ -244,7 +243,38 @@ export const getTricolorGraphOptions = (
       color: graphBlackColor,
       fontWeight: 'bold',
       interval: 0,
-      formatter: (value, index) => dateFormat(value, index, config.dateRange),
+      formatter:
+        config.dateRange == '1D'
+          ? `function(value,index){
+          if(index==0) return '';
+          const hours = new Date(value).getHours();
+          const hourToDisplay = hours <=12 ? hours : hours-12;
+          const amOrPm = hours >=12?"pm":"am";
+          
+          return (hourToDisplay==0?12:hourToDisplay) +" "+amOrPm;
+    }`
+          : config.dateRange == '7D' ||
+            config.dateRange == '1M' ||
+            config.dateRange == '3M'
+          ? `function(value,index){
+          if(index==0) return '';
+
+          return new Date(value).getDate() + "/" + (new Date(value).getMonth()+1);
+        }`
+          : config.dateRange == '1Y'
+          ? `function(value,index){
+          if(index==0) return '';
+          const month = new Date(value).getMonth();
+          const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+          ];
+          return monthNames[month]
+        }
+        `
+          : `function(value,index){
+          if(index==0) return '';
+      return new Date(value).getFullYear()
+    }`,
       showMaxLabel: config.dateRange !== RangeValue.all,
     },
     axisTick: {
