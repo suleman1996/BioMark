@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import fonts from 'assets/fonts';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -47,7 +47,7 @@ export const makeStyles = (colors: any) =>
       borderColor: colors.gray,
       borderRadius: widthToDp(4),
       flex: 1,
-      minHeight: 100,
+      minHeight: heightToDp(70),
     },
     yourTargetsHeading: {
       fontFamily: fonts.mulishBold,
