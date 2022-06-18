@@ -28,7 +28,7 @@ type Props = {
   onBlur?: any;
   error?: string;
   small?: boolean;
-  textAlign?: string;
+  textAlign?: 'left' | 'right' | 'center';
   labelStyle?: StyleProp<TextStyle>;
   inputStyle?: StyleProp<TextStyle>;
 };

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { showMessage } from 'react-native-flash-message';
+import { hideMessage, showMessage } from 'react-native-flash-message';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IAppState } from 'store/IAppState';
@@ -75,13 +75,6 @@ const BloodSugar = ({ route }) => {
   useEffect(() => {
     //According to Issue 76 in https://docs.google.com/spreadsheets/d/1MfJWtiXKDeaRkD7utJ51CMwg275E15NQex2VGHNc2SA/edit#gid=416167280
     //These errors was supposed to be displayed.
-    console.log('-------------');
-    console.log({
-      drop: drop.meal_type,
-      latestBloodSugarTarget,
-      bloodSugarTracker,
-    });
-    console.log('-------------');
     if (
       bloodSugarTracker.data_value &&
       bloodSugarTracker.meal_type_id &&
@@ -105,16 +98,20 @@ const BloodSugar = ({ route }) => {
             latestBloodSugarTarget.unit_name
           ));
 
-      if (value < range[0]) {
+      if (+value < +range[0]) {
         showMessage({
           message: 'Your blood sugar is below range',
           type: 'danger',
+          icon: 'warning',
         });
-      } else if (value > range[1]) {
+      } else if (+value > +range[1]) {
         showMessage({
           message: 'Your blood sugar is above range',
           type: 'danger',
+          icon: 'warning',
         });
+      } else {
+        hideMessage();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -156,8 +153,6 @@ const BloodSugar = ({ route }) => {
   };
 
   const saveBsLog = async () => {
-    console.log('bloodSugarTracker', bloodSugarTracker);
-
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BS_ID ? 'updateBsTracker' : 'createBsTracker';
     try {
@@ -201,7 +196,6 @@ const BloodSugar = ({ route }) => {
 
   const handleUnitChange = (selectedUnit: string) => {
     const unitListId = selectedUnit == 'mg/dL' ? 1 : 21;
-    console.log('selectedUnit', selectedUnit);
     setBloodSugarTracker((prev: any) => ({
       ...prev,
       unit_list_id: unitListId,
