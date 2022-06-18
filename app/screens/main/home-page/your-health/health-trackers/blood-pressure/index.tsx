@@ -6,7 +6,6 @@ import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
   ButtonWithShadowContainer,
-  // ButtonWithShadowContainer,
   DateTimePickerModal,
   ErrorMessage,
 } from 'components/base';
@@ -51,7 +50,6 @@ const BloodPressure = ({ route }: any) => {
     const bloodPressureResponse = await userService.getBloodPressureProgress(
       id
     );
-    console.log('===========>', bloodPressureResponse);
 
     setBloodPressure({
       bp_systolic: roundToDecimalPlaces(bloodPressureResponse.bp_systolic, 0),
@@ -73,8 +71,6 @@ const BloodPressure = ({ route }: any) => {
   }, []);
 
   const saveBloodPressureLog = async () => {
-    // console.log({ SELECTED_BP_ID });
-    // return;
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BP_ID ? 'updateBpTracker' : 'createBpTracker';
     try {
@@ -121,7 +117,6 @@ const BloodPressure = ({ route }: any) => {
   };
 
   const onChangeBloodPressure = (key, value) => {
-    console.log(key, value);
     setBloodPressure((prev) => ({ ...prev, [key]: value }));
     setError((prev) => {
       const copy = { ...prev };
@@ -168,7 +163,6 @@ const BloodPressure = ({ route }: any) => {
       });
     }
   }, [bloodPressure]);
-  console.log('Error', error);
 
   return (
     <TitleWithBackWhiteBgLayout
