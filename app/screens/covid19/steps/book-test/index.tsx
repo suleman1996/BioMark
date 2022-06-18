@@ -99,7 +99,7 @@ const BookCovidTest = (props: Props) => {
               // setIsExisting(true);
               pushOneMoreToBooking();
             }}
-            title={'Add Existing Dependent'}
+            title={'Add Existing Dependant'}
           />
 
           <ButtonComponent
@@ -108,7 +108,7 @@ const BookCovidTest = (props: Props) => {
             }}
             marginTop={1}
             disabled={isDependantAdd}
-            title={'Add New Dependent'}
+            title={'Add New Dependant'}
           />
           {/* Add Dependant Form */}
           {isDependantAdd ? (
