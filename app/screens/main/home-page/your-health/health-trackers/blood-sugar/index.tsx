@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { showMessage } from 'react-native-flash-message';
+import { hideMessage, showMessage } from 'react-native-flash-message';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IAppState } from 'store/IAppState';
@@ -33,6 +33,7 @@ import {
 } from 'utils/functions/measurments';
 
 import makeStyles from './styles';
+import { roundToDecimalPlaces } from 'utils/functions';
 
 const BloodSugar = ({ route }) => {
   const SELECTED_BS_ID = route?.params?.logId;
@@ -44,10 +45,13 @@ const BloodSugar = ({ route }) => {
   const [options, setOptions] = useState<any>([]);
   const [error, setError] = useState<string>('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { drop, hasBloodSugarTarget } = useSelector((state: IAppState) => ({
-    drop: state.home.medicalDropDown,
-    hasBloodSugarTarget: state.home?.dashboard?.has_blood_sugar_target,
-  }));
+  const { drop, latestBloodSugarTarget, hasBloodSugarTarget } = useSelector(
+    (state: IAppState) => ({
+      drop: state.home.medicalDropDown,
+      hasBloodSugarTarget: state.home?.dashboard?.has_blood_sugar_target,
+      latestBloodSugarTarget: state.home.bloodSugarTargets[0],
+    })
+  );
 
   const [bloodSugarTracker, setBloodSugarTracker] = useState({
     data_value: '',
@@ -67,6 +71,51 @@ const BloodSugar = ({ route }) => {
     }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bloodSugarTracker.unit_list_id]);
+
+  useEffect(() => {
+    //According to Issue 76 in https://docs.google.com/spreadsheets/d/1MfJWtiXKDeaRkD7utJ51CMwg275E15NQex2VGHNc2SA/edit#gid=416167280
+    //These errors was supposed to be displayed.
+    if (
+      bloodSugarTracker.data_value &&
+      bloodSugarTracker.meal_type_id &&
+      bloodSugarTracker.record_date
+    ) {
+      let range = [
+        latestBloodSugarTarget.ppg_value_from,
+        latestBloodSugarTarget.ppg_value_to,
+      ];
+      if ([1, 3, 5, 8].includes(bloodSugarTracker.meal_type_id)) {
+        range = [
+          latestBloodSugarTarget.value_from,
+          latestBloodSugarTarget.value_to,
+        ];
+      }
+      const value = +(bloodSugarTracker.unit_list_id ==
+      latestBloodSugarTarget.unit_list_id
+        ? bloodSugarTracker.data_value
+        : mgMmolConversion(
+            +bloodSugarTracker.data_value,
+            latestBloodSugarTarget.unit_name
+          ));
+
+      if (+value < +range[0]) {
+        showMessage({
+          message: 'Your blood sugar is below range',
+          type: 'danger',
+          icon: 'warning',
+        });
+      } else if (+value > +range[1]) {
+        showMessage({
+          message: 'Your blood sugar is above range',
+          type: 'danger',
+          icon: 'warning',
+        });
+      } else {
+        hideMessage();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bloodSugarTracker, drop, latestBloodSugarTarget]);
 
   useEffect(() => {
     let arr = [];
@@ -93,9 +142,8 @@ const BloodSugar = ({ route }) => {
   const getBloodSugarProgressDataByID = async (id) => {
     setIsLoading(true);
     const weightData = await userService.getBloodSugarProgress(id);
-    console.log('weightData', weightData);
     setBloodSugarTracker({
-      data_value: weightData?.data_value,
+      data_value: roundToDecimalPlaces(weightData?.data_value, 2),
       unit_list_id: weightData?.unit_list_id,
       record_date: weightData?.record_date,
       meal_type_id: weightData?.meal_type_id,
@@ -105,8 +153,6 @@ const BloodSugar = ({ route }) => {
   };
 
   const saveBsLog = async () => {
-    console.log('bloodSugarTracker', bloodSugarTracker);
-
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BS_ID ? 'updateBsTracker' : 'createBsTracker';
     try {
@@ -116,7 +162,7 @@ const BloodSugar = ({ route }) => {
       }
       await userService[API_FUNCTION](bloodSugarTracker, SELECTED_BS_ID);
       dispatch(getReduxBloodSugarLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 1);
     } catch (err: any) {
       console.error(err);
       if (error?.errMsg?.status === '500') {
@@ -142,7 +188,7 @@ const BloodSugar = ({ route }) => {
     try {
       await userService.deleteBsLog(SELECTED_BS_ID);
       dispatch(getReduxBloodSugarLogs());
-      navigate(SCREENS.HEALTH_PROGRESS);
+      navigate(SCREENS.HEALTH_PROGRESS, 1);
     } catch (err) {
       console.error(err);
     }
@@ -150,7 +196,6 @@ const BloodSugar = ({ route }) => {
 
   const handleUnitChange = (selectedUnit: string) => {
     const unitListId = selectedUnit == 'mg/dL' ? 1 : 21;
-    console.log('selectedUnit', selectedUnit);
     setBloodSugarTracker((prev: any) => ({
       ...prev,
       unit_list_id: unitListId,
@@ -166,7 +211,6 @@ const BloodSugar = ({ route }) => {
       ) || ''
     );
   };
-
   return (
     <TitleWithBackWhiteBgLayout
       binIcon={SELECTED_BS_ID ? true : false}
@@ -231,8 +275,8 @@ const BloodSugar = ({ route }) => {
         </View>
       </ScrollView>
       <AccountDeActivateModal
-        headerText="Weight"
-        subHeading="Are you sure you wish to delete this weight log?"
+        headerText="Blood Sugar"
+        subHeading="Are you sure you wish to delete this blood sugar log?"
         buttonUpperText="Yes"
         buttonLowerText="Skip"
         isVisible={showDeleteModal}

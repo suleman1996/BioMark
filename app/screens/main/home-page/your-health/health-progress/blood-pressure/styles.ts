@@ -25,9 +25,9 @@ const styles = (colors: any) =>
       fontSize: 12,
     },
     dash: {
-      height: 3,
-      borderWidth: 1.3,
-      borderColor: colors.blue,
+      height: 4,
+      borderWidth: 1.8,
+      borderColor: colors.greenDark,
       width: 20,
       borderRadius: 2,
       marginRight: 5,

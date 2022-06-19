@@ -20,5 +20,11 @@ export const makeStyles = (colors: any) =>
       borderWidth: 1,
       borderColor: colors.white,
     },
+    notDot: {
+      height: 10,
+      width: 10,
+      borderRadius: 7.5,
+      right: 13,
+    },
   });
 export default makeStyles;

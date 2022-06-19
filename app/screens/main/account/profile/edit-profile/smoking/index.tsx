@@ -170,7 +170,10 @@ export default function SmokingScreen() {
                 },
               ]}
             >
-              <RadioButton color={value == 2 ? colors.white : null} value={2} />
+              <RadioButton.Android
+                color={value == 2 ? colors.white : null}
+                value={2}
+              />
               <Text
                 style={[
                   styles.radioText,
@@ -195,7 +198,10 @@ export default function SmokingScreen() {
                 },
               ]}
             >
-              <RadioButton color={value == 0 ? colors.white : null} value={0} />
+              <RadioButton.Android
+                color={value == 0 ? colors.white : null}
+                value={0}
+              />
               <Text
                 style={[
                   styles.radioText,
@@ -220,7 +226,10 @@ export default function SmokingScreen() {
                 },
               ]}
             >
-              <RadioButton color={value == 1 ? colors.white : null} value={1} />
+              <RadioButton.Android
+                color={value == 1 ? colors.white : null}
+                value={1}
+              />
               <Text
                 style={[
                   styles.radioText,

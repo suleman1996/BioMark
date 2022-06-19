@@ -15,12 +15,14 @@ import Arrow from 'react-native-vector-icons/AntDesign';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   logData: [];
   navigate: any;
   showMore: string;
   onNextPage?: () => void;
+  onNavigate?: () => void;
 };
 
 const Index = (props: Props) => {
@@ -40,36 +42,52 @@ const Index = (props: Props) => {
       onPress={() => {
         try {
           // console.log({ item, screen: props.navigate });
-          navigations.navigate(props.navigate, { logId: item?.id });
+          props.onNavigate && props.onNavigate();
+          setTimeout(() => {
+            navigations.navigate(props.navigate, { logId: item?.id });
+          }, 5);
         } catch (error) {
           console.log(error);
         }
       }}
       style={styles.renderLog}
     >
-      <>
-        <View style={{ width: '40%' }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+        }}
+      >
+        <View>
           <Text
             style={{
               color: item?.color ? item?.color : colors.heading,
               fontFamily: fonts.mulishExtraBold,
+              fontSize: responsiveFontSize(20),
             }}
           >
             {item?.weight} {item?.unit}
           </Text>
         </View>
-        <View style={{ width: '60%', alignItems: 'flex-end' }}>
+        <View
+          style={{
+            width: '60%',
+            alignItems: 'flex-end',
+          }}
+        >
           <Text
             style={{
-              color: colors.blue,
+              color: colors.heading,
               fontFamily: fonts.mulishRegular,
-              fontSize: 12,
+              fontSize: responsiveFontSize(15),
             }}
           >
             {moment(item?.date_entry).format('hh:mm a MMMM Do, YYYY')}
           </Text>
         </View>
-      </>
+      </View>
     </TouchableRipple>
   );
 
@@ -84,6 +102,7 @@ const Index = (props: Props) => {
         <Arrow color={colors.heading} name={log ? 'up' : 'down'} />
       </TouchableOpacity>
       <ScrollView
+        nestedScrollEnabled
         showsVerticalScrollIndicator={false}
         style={{ maxHeight: styles.renderLog.height * 4 }}
       >
@@ -92,10 +111,11 @@ const Index = (props: Props) => {
             data={props.logData.slice(0, 20 * page)}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => <RenderLog key={item} item={item} />}
+            contentContainerStyle={styles.logsList}
           />
         )}
         {log &&
-          (page == maxPage ? (
+          (page == maxPage || !maxPage ? (
             <Text style={styles.showMoreText}>No more data to show</Text>
           ) : (
             <TouchableOpacity onPress={() => setPage((prev) => prev + 1)}>

@@ -41,7 +41,7 @@ const EditDependantScreen = (props: Props) => {
   const dispatch = useDispatch();
   const dispatch1 = useDispatch();
 
-  const [nationalNumber, setNationalNumber] = useState<any>();
+  const [nationalNumber, setNationalNumber] = useState('');
 
   const id = props.route?.params?.id;
 

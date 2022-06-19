@@ -29,7 +29,7 @@ import {
 } from 'utils/functions/graph/graph-utils';
 import { graphGreyColor } from 'utils/functions/graph/graph.types';
 import { userService } from 'services/user-service/user-service';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { Tip } from 'react-native-tip';
 
 const Index = () => {
@@ -38,6 +38,7 @@ const Index = () => {
   const chartRef = useRef();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const focused = useIsFocused();
 
   const bPLogsData = useSelector((state: IAppState) => state.home.bPLogsData);
 
@@ -56,6 +57,7 @@ const Index = () => {
   });
 
   const [isVisible, setIsVisible] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [filterOption1] = React.useState([
     { id: 0, title: 'All' },
@@ -69,39 +71,47 @@ const Index = () => {
 
   const [logData, setLogData] = React.useState([]);
   const [chartState, setChartState] = React.useState(null);
+  const [hideGraph, setHideGraph] = React.useState(false);
 
   const bloodPressureGraphData = async () => {
     try {
+      setIsLoading(true);
       const result = await userService.getBloodPressureMapData({
         date: selectedValue.title,
         type: selectedfilterOption1.title.toLowerCase(),
       });
       setChartState(result.data.chart);
+      setIsLoading(false);
+      setHideGraph(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   React.useEffect(() => {
-    dispatch(getReduxBloodPressureLogs());
-  }, [dispatch]);
+    dispatch(
+      getReduxBloodPressureLogs({
+        type: selectedfilterOption1.title.toLowerCase(),
+      })
+    );
+  }, [dispatch, selectedfilterOption1]);
 
   React.useEffect(() => {
     bloodPressureGraphData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedValue, selectedfilterOption1, bPLogsData]);
+  }, [selectedValue, selectedfilterOption1, bPLogsData, focused]);
 
   React.useEffect(() => {
     setLogData(
       bPLogsData?.log?.map((item) => ({
         id: item?.id,
-        weight: item?.bp_diastolic + '/' + item?.bp_systolic,
+        weight: item?.bp_systolic + '/' + item?.bp_diastolic,
         unit: 'mmHg',
         date_entry: item?.date_entry,
       }))
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bPLogsData]);
+  }, [bPLogsData, selectedfilterOption1, selectedValue]);
 
   const createChart = (data: BloodPressureProgressChartDataPoint[]) => {
     const points1 =
@@ -178,7 +188,7 @@ const Index = () => {
           />
           <View style={styles.headingView}>
             <View style={{ width: '40%' }}>
-              <Text style={styles.heading}>Blood Pressure (mmmHg)</Text>
+              <Text style={styles.heading}>Blood Pressure (mmHg)</Text>
             </View>
 
             <View style={styles.rowCenter}>
@@ -200,7 +210,12 @@ const Index = () => {
                 <Text style={styles.sys}>SYS</Text>
                 <Text style={styles.sys}> / </Text>
                 <View
-                  style={[styles.dash, { borderColor: colors.lightGrey }]}
+                  style={[
+                    styles.dash,
+                    {
+                      borderColor: colors.lightDark,
+                    },
+                  ]}
                 />
                 <Text style={styles.sys}>DIA</Text>
               </View>
@@ -212,8 +227,14 @@ const Index = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <LineGraph chartRef={chartRef} />
-          <Logs navigate={SCREENS.BLOOD_PRESSURE} logData={logData} />
+          {!hideGraph && (
+            <LineGraph isLoading={isLoading} chartRef={chartRef} />
+          )}
+          <Logs
+            navigate={SCREENS.BLOOD_PRESSURE}
+            logData={logData}
+            onNavigate={() => setHideGraph(true)}
+          />
           <View style={{ height: 70 }} />
         </ScrollView>
         <FloatingButton

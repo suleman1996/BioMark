@@ -36,7 +36,7 @@ const Index = () => {
     latestHba1c: state.home.latestHba1c,
   }));
 
-  const [goalValue, setGoalValue] = useState('');
+  const [goalValue, setGoalValue] = useState('6');
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedType, setSelectedType] = useState<number>(0);
   const [errors, setErrors] = useState({
@@ -90,7 +90,7 @@ const Index = () => {
   }, [goalValue, selectedType]);
 
   useEffect(() => {
-    if (!latestHba1c) return;
+    if (!latestHba1c?.goal_value) return;
     setGoalValue(Number(latestHba1c?.goal_value).toFixed(1));
   }, [latestHba1c]);
 
@@ -115,6 +115,8 @@ const Index = () => {
           units={unitsNames}
           onUnitChange={onUnitChange}
           error={errors.goal}
+          textAlign={'left'}
+          labelStyle={styles.inputLabelStyle}
         />
       </ScrollView>
       <GradientButton

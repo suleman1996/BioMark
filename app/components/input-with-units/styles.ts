@@ -5,7 +5,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { widthToDp, heightToDp } from 'utils/functions/responsive-dimensions';
 import fonts from 'assets/fonts';
 
-export const makeStyles = (colors: any, small?: boolean) =>
+export const makeStyles = (colors: any, small?: boolean, textAlign?: string) =>
   StyleSheet.create({
     mainView: {
       height: heightToDp(small ? 5 : 18),
@@ -18,13 +18,14 @@ export const makeStyles = (colors: any, small?: boolean) =>
     },
     textInput: {
       flexDirection: 'row-reverse',
-      ...(small && { flex: 1, paddingHorizontal: 15 }),
+      ...(small && { paddingHorizontal: 15 }),
       backgroundColor: 'transparent',
       fontSize: responsiveFontSize(small ? 20 : 50),
       fontFamily: small ? fonts.mulishRegular : fonts.OpenSansBold,
       color: small ? colors.black : '#808080',
       flex: 1,
-      textAlign: 'right',
+      textAlign: textAlign || 'right',
+      paddingVertical: 0,
     },
     menuTrigger: {
       flexDirection: 'row',

@@ -221,7 +221,6 @@ function createProfile(
       .then(async (response) => {
         try {
           logNow('create user success response', response.data);
-          await setAuthAsyncStorage(response.data);
           resolve(response.data);
         } catch (e) {
           logNow('create user error block login1.', e);
@@ -1524,14 +1523,14 @@ const getHBA1cChart = (params) => {
   });
 };
 
-const getWeightLogs = ({ page = 1 }: { page: number }) => {
+const getWeightLogs = (
+  params: { type: string; metric: boolean } | undefined
+) => {
   return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
     client
-      .get(API_URLS.GET_WEIGHT_LOGS, { params: { page } })
+      .get(API_URLS.GET_WEIGHT_LOGS, { params })
       .then(async (response) => {
         try {
-          //
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);
@@ -1564,10 +1563,14 @@ const getBloodSugarProgress = (id) => {
       });
   });
 };
-const getBloodSugarLogs = () => {
+const getBloodSugarLogs = (
+  params: { meal?: string; unit?: number } | undefined
+) => {
   return new Promise<BloodSugarProgressLogsPayload>((resolve, reject) => {
     client
-      .get(API_URLS.GET_BLOOD_SUGAR_LOGS)
+      .get(API_URLS.GET_BLOOD_SUGAR_LOGS, {
+        params,
+      })
       .then(async (response) => {
         try {
           //
@@ -1643,14 +1646,12 @@ const getMedicationProgress = (id) => {
   });
 };
 
-const getBloodPressureLogs = () => {
+const getBloodPressureLogs = (params?: { type: string } | undefined) => {
   return new Promise<BloodPressureProgressLogsPayload>((resolve, reject) => {
     client
-      .get(API_URLS.GET_BLOOD_PRESSURE_LOGS)
+      .get(API_URLS.GET_BLOOD_PRESSURE_LOGS, { params })
       .then(async (response) => {
         try {
-          //
-
           resolve(response.data);
         } catch (e) {
           logNow('err.', e);

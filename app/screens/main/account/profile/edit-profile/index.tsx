@@ -434,7 +434,7 @@ const EditProfileScreen = () => {
             fontFamily: GlobalFonts.light,
           }}
         >
-          v50.18.205
+          v0.2.9
         </Text>
       </ScrollView>
     </TitleWithBackLayout>

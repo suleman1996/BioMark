@@ -210,7 +210,7 @@ const Drinking = () => {
                   { backgroundColor: value === 'first' ? '#054E8B' : null },
                 ]}
               >
-                <RadioButton
+                <RadioButton.Android
                   color={value == 'first' ? colors.white : null}
                   value="first"
                 />
@@ -236,7 +236,7 @@ const Drinking = () => {
                   { backgroundColor: value == 'second' ? '#054E8B' : null },
                 ]}
               >
-                <RadioButton
+                <RadioButton.Android
                   color={value == 'second' ? colors.white : null}
                   value="second"
                 />
