@@ -14,7 +14,8 @@ import { showMessage } from 'react-native-flash-message';
 import { TitleWithBackLayout } from 'components/layouts';
 import { Button } from 'components/button';
 import { InputWithLabel, Button as ButtonComponent } from 'components/base';
-import { DatePicker, ActivityIndicator } from 'components';
+import { ActivityIndicator } from 'components';
+import { DatePickerModal } from 'components/base';
 
 import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
@@ -36,16 +37,17 @@ const PersonalInformationScreen = () => {
   const [firstName, setFirstName] = useState(authContext?.userData?.first_name);
   const [lastName, setLastName] = useState(authContext?.userData?.last_name);
   const [date, setDate] = useState(authContext?.userData?.birth_date);
-  const [isPickerShow, setIsPickerShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [genderWar, setGenderWarn] = useState(false);
-  const [genderCheck, setGenderCheck] = useState(false);
   const [genderDisable, setGenderDisable] = useState(false);
 
-  React.useEffect(() => {
-    setGenderCheck(true);
-  }, [value]);
-
+  const makingData = () => {
+    if (genderDisable === true) {
+      setGenderWarn(true);
+    } else {
+      handleUpdateProfile();
+    }
+  };
   const handleUpdateProfile = async () => {
     Keyboard.dismiss();
     setGenderWarn(false);
@@ -163,13 +165,7 @@ const PersonalInformationScreen = () => {
         />
         <Text style={styles.label}>Date of Birth</Text>
         {/* <DatePicker width={'100%'} /> */}
-        <DatePicker
-          isPickerShow={isPickerShow}
-          setIsPickerShow={setIsPickerShow}
-          date={date}
-          setDate={setDate}
-          width="100%"
-        />
+        <DatePickerModal date={date} setDate={setDate} />
         <Text style={styles.label}>Gender</Text>
         <RadioButton.Group
           onValueChange={(newValue) => {
@@ -200,7 +196,7 @@ const PersonalInformationScreen = () => {
         }
         title="Save & Continue"
         onPress={() => {
-          !genderCheck ? handleUpdateProfile() : setGenderWarn(true);
+          makingData();
         }}
       />
     </TitleWithBackLayout>

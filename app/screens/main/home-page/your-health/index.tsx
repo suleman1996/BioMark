@@ -147,6 +147,8 @@ const Index = () => {
     const tempTracker = [];
     let id = -1;
     Object.entries(healthTrackerFromStore).map((item) => {
+      console.log('itemmm', item);
+
       item[1]?.name &&
         tempTracker.push({
           id: id + 1,

@@ -2,16 +2,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
 // import { useTheme } from 'react-native-paper';
+import { Pressable } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Covid19Home from 'screens/covid19';
-import BookCovidTest from 'screens/covid19/steps/book-test';
 import Covid19Bookings from 'screens/covid19/bookings';
-import { GlobalFonts } from 'utils/theme/fonts';
-import SCREENS from './constants';
-import PaymentStep from 'screens/covid19/steps/payments';
+import FaqScreen from 'screens/covid19/faq';
+import BookCovidTest from 'screens/covid19/steps/book-test';
+import PaymentFailed from 'screens/covid19/steps/payment-failed';
 import PaymentSuccess from 'screens/covid19/steps/payment-success';
+import PaymentStep from 'screens/covid19/steps/payments';
 import ViewCovidResults from 'screens/covid19/view-results';
 import SingleCovidResult from 'screens/covid19/view-results/single-result';
-import FaqScreen from 'screens/covid19/faq';
+import { navigate } from 'services/nav-ref';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import SCREENS from './constants';
 
 const Stack = createNativeStackNavigator();
 
@@ -66,11 +72,38 @@ const Covid19Navigator = () => {
           headerShown: true,
           headerTintColor: colors.black,
           headerTitleStyle: { fontFamily: GlobalFonts.light },
-          title: 'Back',
+          title: '',
           headerShadowVisible: false,
+          headerBackButtonMenuEnabled: false,
+          headerBackVisible: false,
         }}
         name={SCREENS.PAYMENT_SUCCESS}
         component={PaymentSuccess}
+      />
+
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          headerTintColor: colors.black,
+          headerTitleStyle: { fontFamily: GlobalFonts.light },
+          title: 'Back',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <Pressable
+              onPress={() => {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.BOOKCOVIDTEST,
+                });
+              }}
+              style={{ paddingRight: widthToDp(4) }}
+            >
+              <Ionicons name="arrow-back" size={responsiveFontSize(30)} />
+            </Pressable>
+          ),
+        }}
+        path={'callback/'}
+        name={SCREENS.PAYMENT_FAILED}
+        component={PaymentFailed}
       />
 
       <Stack.Screen

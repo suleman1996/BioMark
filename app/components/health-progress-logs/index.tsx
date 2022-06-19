@@ -15,6 +15,7 @@ import Arrow from 'react-native-vector-icons/AntDesign';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   logData: [];
@@ -64,7 +65,7 @@ const Index = (props: Props) => {
             style={{
               color: item?.color ? item?.color : colors.heading,
               fontFamily: fonts.mulishExtraBold,
-              fontSize: 18,
+              fontSize: responsiveFontSize(20),
             }}
           >
             {item?.weight} {item?.unit}
@@ -80,7 +81,7 @@ const Index = (props: Props) => {
             style={{
               color: colors.heading,
               fontFamily: fonts.mulishRegular,
-              fontSize: 14,
+              fontSize: responsiveFontSize(15),
             }}
           >
             {moment(item?.date_entry).format('hh:mm a MMMM Do, YYYY')}

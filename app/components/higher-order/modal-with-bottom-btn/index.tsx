@@ -35,19 +35,18 @@ const ModalWithBottomBtn = ({
     <Modal setIsVisible={setIsVisible} isVisible={isModal}>
       <View style={styles.card}>
         <ScrollView
-          contentContainerStyle={{ flex: 1 }}
+          // contentContainerStyle={{ flexGrow: 0 }}
           keyboardShouldPersistTaps="always"
         >
-          {title ? <Text style={styles.title}>{title}</Text> : null}
-          {children}
+          <View style={{ paddingBottom: heightToDp(13) }}>
+            {title ? <Text style={styles.title}>{title}</Text> : null}
+            {children}
+          </View>
         </ScrollView>
         <ButtonWithShadowContainer
           title="Save"
           style={{
             borderRadius: widthToDp(3),
-            backgroundColor: null,
-            paddingHorizontal: widthToDp(7),
-            paddingTop: heightToDp(0),
           }}
           onPress={() => {
             setIsModal(false);

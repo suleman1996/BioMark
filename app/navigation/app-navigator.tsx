@@ -43,12 +43,9 @@ import {
   getReduxPspHypertensionHealthTrackerData,
   getReduxPspHyperModules,
   getReduxPspPdfHyperLink,
-  getReduxHealthFeeds,
   getReduxPendingResultOverview,
   getLatestTargetsAction,
   getNewTargetAction,
-  getBloodSugarTargetsAction,
-  getHBA1CTargetsAction,
 } from 'store/home/home-actions';
 import PdfDiabetesSupportCenter from 'screens/main/home-page/your-health/diabetes-center/pdf-diabetes-support-center';
 import HealthRecord from 'screens/main/home-page/your-health/health-records';
@@ -110,7 +107,6 @@ const AppNavigator = () => {
 
   useEffect((link: string, id: number) => {
     getHasProfileAsyncStorage();
-
     dispatch(getReduxPspModules());
     dispatch(getReduxPspPdfLink(link));
     dispatch(getReduxPspPdfHyperLink(link));
@@ -118,12 +114,9 @@ const AppNavigator = () => {
     dispatch(getReduxPastResult());
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
-    dispatch(getReduxHealthFeeds());
     dispatch(getReduxPendingResultOverview(id));
     dispatch(getLatestTargetsAction());
     dispatch(getNewTargetAction());
-    dispatch(getBloodSugarTargetsAction());
-    dispatch(getHBA1CTargetsAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

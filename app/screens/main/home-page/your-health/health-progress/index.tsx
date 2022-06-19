@@ -21,11 +21,13 @@ import TickMedicationIcon from 'assets/svgs/tick-medication-icon';
 
 import Styles from './styles';
 import fonts from 'assets/fonts';
+import { getReduxHealthTracker } from 'store/home/home-actions';
+import { useDispatch } from 'react-redux';
 
 const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
   const [healthProgress] = useState([
@@ -127,7 +129,12 @@ const Index = () => {
         <View
           style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 20 }}
         >
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(getReduxHealthTracker());
+              navigation.navigate(SCREENS.YOUR_HEALTH);
+            }}
+          >
             <ArrowBack fill={colors.white} />
           </TouchableOpacity>
           <Text style={styles.navHeading}>Health Progress</Text>
