@@ -8,19 +8,22 @@ import BioBookTest from 'components/svg/bio-book-test';
 import { navigate } from 'services/nav-ref';
 import SCREENS from '../../navigation/constants/index';
 import fonts from 'assets/fonts';
+import { useDispatch } from 'react-redux';
+import { addCovidBooking } from './../../store/covid/covid-actions';
 
 export default function BookTestButton() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-
+  const dispatch = useDispatch();
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity
-        onPress={() =>
+        onPress={() => {
           navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
             screen: SCREENS.BOOKCOVIDTEST,
-          })
-        }
+          });
+          dispatch(addCovidBooking([]));
+        }}
       >
         <View style={styles.circleBtn}>
           <BioBookTest width={7} height={7} />

@@ -11,6 +11,26 @@ import { ErrorResponse } from 'types/ErrorResponse';
 import { logNow } from 'utils/functions/log-binder';
 import client from '../client';
 
+function purchaseViaBillPlz(data: CreateBillplzPaymentRequest) {
+  return new Promise<BillplzPayment>((resolve, reject) => {
+    client
+      .post(`${API_URLS.BILLPLZ}`, data)
+      .then(async (response: any) => {
+        try {
+          logNow('billplz', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('billplz catch error', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('bill plz error.', err);
+        reject(err);
+      });
+  });
+}
+
 function openBillPlzBrowser(
   email: string,
   name: string,
@@ -39,25 +59,9 @@ function openBillPlzBrowser(
         description: payload.description,
       },
     })
-      .then(async (res) => {
+      .then(async (res: any) => {
         logNow({ res: res });
         resolve(res);
-
-        //  InAppBrowser.open(res.url, {
-        //    // iOS Properties
-        //    ephemeralWebSession: false,
-        //    // Android Properties
-        //    showTitle: false,
-        //    enableUrlBarHiding: true,
-        //    enableDefaultShare: false,
-        //  }).then((response) => {
-        //    if (response.status == true) {
-        //      console.log(response);
-        //    }
-        //    console.log('Else', response);
-        //  }).catch(err => {
-        //   console.log(err)
-        //  });
       })
       .catch((err) => {
         logNow(err);
@@ -66,30 +70,41 @@ function openBillPlzBrowser(
   });
 }
 
-function purchaseViaBillPlz(data: CreateBillplzPaymentRequest) {
-  return new Promise<BillplzPayment>((resolve, reject) => {
-    client
-      .post(`${API_URLS.BILLPLZ}`, data)
-      .then(async (response: any) => {
-        try {
-          logNow('billplz', response.data);
-          resolve(response.data);
-        } catch (e) {
-          logNow('billplz catch error', e);
-          reject(e);
-        }
+function openStripeBrowser(booking: BookTestBooking[], email: string) {
+  return new Promise((resolve, reject) => {
+    let items = booking.map((e) => {
+      return {
+        item_name: 'Test id: ' + e.test_type_id,
+        amount: e.amount,
+        quantity: 1,
+        currency: e.currency,
+      };
+    });
+    let payload: any = {
+      payment: {
+        success_url: Config.BASE_URL + '/payment/v1/stripe/success',
+        cancel_url: Config.BASE_URL + '/payment/v1/stripe/cancel',
+        email: email,
+        mode: 'payment',
+        pay_methods: ['card'],
+        items: items,
+        voucher: 'BIOMARK21',
+      },
+    };
+    newStripeSession(payload)
+      .then((res: any) => {
+        resolve(res);
       })
-      .catch(async (err: ErrorResponse) => {
-        logNow('bill plz error.', err);
+      .catch((err) => {
         reject(err);
       });
   });
 }
 
-function purchaseViaStripe(data: CreateStripeSessionRequest) {
+function newStripeSession(data: CreateStripeSessionRequest) {
   return new Promise<StripeSession>((resolve, reject) => {
     client
-      .post(`${API_URLS.STRIPE}`, data)
+      .post(`${API_URLS.STRIPE_PAY_SESSION}`, data)
       .then(async (response: any) => {
         try {
           logNow('STRIPE', response.data);
@@ -108,6 +123,6 @@ function purchaseViaStripe(data: CreateStripeSessionRequest) {
 
 export const paymentService = {
   purchaseViaBillPlz,
-  purchaseViaStripe,
   openBillPlzBrowser,
+  openStripeBrowser,
 };

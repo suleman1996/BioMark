@@ -238,12 +238,22 @@ const PaymentStep = (props: Props) => {
             }}
             onNavigationStateChange={(webViewState) => {
               if (
-                webViewState.url.includes(
-                  '/payment/v1/billplz/confirmation?paid=true'
-                )
+                webViewState.url.includes('/payment/v1/billplz/confirmation')
               ) {
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_SUCCESS,
+                });
+              } else if (
+                webViewState.url.includes('/payment/v1/stripe/success')
+              ) {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_SUCCESS,
+                });
+              } else if (
+                webViewState.url.includes('payment/v1/stripe/cancel')
+              ) {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_FAILED,
                 });
               }
               console.log('state changed', webViewState.url);
@@ -336,25 +346,10 @@ const PaymentStep = (props: Props) => {
               Choose Payment Method
             </Text>
             {countryName === 'Malaysia' ? (
-              <ButtonComponent
-                onPress={async () => {
-                  const data: any = await paymentService.openBillPlzBrowser(
-                    email,
-                    name,
-                    totalPrice,
-                    booking
-                  );
-                  console.log({ data });
-                  setPaymentUrl(data.url);
-                  if (data.url) {
-                    setPaymentModal(true);
-                  }
-                }}
-                title={'Online'}
-              />
+              <ButtonComponent onPress={async () => {}} title={'Online'} />
             ) : countryName == 'Singapore' ? (
               <ButtonComponent
-                onPress={undefined}
+                onPress={async () => {}}
                 title={'Debit/Credit Card Payment'}
               />
             ) : null}
@@ -364,11 +359,27 @@ const PaymentStep = (props: Props) => {
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable
-              onPress={() =>
-                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                  screen: SCREENS.PAYMENT_SUCCESS,
-                })
-              }
+              onPress={async () => {
+                if (countryName == 'Malaysia') {
+                  const data: any = await paymentService.openBillPlzBrowser(
+                    email,
+                    name,
+                    totalPrice,
+                    booking
+                  );
+                  console.log({ data });
+                  setPaymentUrl(data.url);
+                  setPaymentModal(true);
+                } else if (countryName == 'Singapore') {
+                  const data: any = await paymentService.openStripeBrowser(
+                    booking,
+                    email
+                  );
+                  console.log({ data });
+                  setPaymentUrl(data.url);
+                  setPaymentModal(true);
+                }
+              }}
               style={styles.btnEnable}
             >
               <Text style={[styles.btnText2]}>Next</Text>

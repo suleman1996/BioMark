@@ -194,6 +194,7 @@ export interface BookTestBooking {
   schedule_id?: number;
   slot_id?: number;
   booking_status?: number;
+  currency?: string;
 
   q1?: boolean;
   q2?: boolean;
