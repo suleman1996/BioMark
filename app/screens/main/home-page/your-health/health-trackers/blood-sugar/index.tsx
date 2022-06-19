@@ -76,26 +76,26 @@ const BloodSugar = ({ route }) => {
     //According to Issue 76 in https://docs.google.com/spreadsheets/d/1MfJWtiXKDeaRkD7utJ51CMwg275E15NQex2VGHNc2SA/edit#gid=416167280
     //These errors was supposed to be displayed.
     if (
-      bloodSugarTracker.data_value &&
-      bloodSugarTracker.meal_type_id &&
-      bloodSugarTracker.record_date
+      bloodSugarTracker?.data_value &&
+      bloodSugarTracker?.meal_type_id &&
+      bloodSugarTracker?.record_date
     ) {
       let range = [
-        latestBloodSugarTarget.ppg_value_from,
-        latestBloodSugarTarget.ppg_value_to,
+        latestBloodSugarTarget?.ppg_value_from,
+        latestBloodSugarTarget?.ppg_value_to,
       ];
       if ([1, 3, 5, 8].includes(bloodSugarTracker.meal_type_id)) {
         range = [
-          latestBloodSugarTarget.value_from,
-          latestBloodSugarTarget.value_to,
+          latestBloodSugarTarget?.value_from,
+          latestBloodSugarTarget?.value_to,
         ];
       }
       const value = +(bloodSugarTracker.unit_list_id ==
-      latestBloodSugarTarget.unit_list_id
-        ? bloodSugarTracker.data_value
+      latestBloodSugarTarget?.unit_list_id
+        ? bloodSugarTracker?.data_value
         : mgMmolConversion(
-            +bloodSugarTracker.data_value,
-            latestBloodSugarTarget.unit_name
+            +bloodSugarTracker?.data_value,
+            latestBloodSugarTarget?.unit_name
           ));
 
       if (+value < +range[0]) {
@@ -206,7 +206,7 @@ const BloodSugar = ({ route }) => {
     setBloodSugarTracker((prev) => ({ ...prev, [key]: value }));
     setError(
       bloodSugarValidator(
-        bloodSugarTracker.unit_list_id === 1 ? 'mg/dL' : 'mmol/L',
+        bloodSugarTracker?.unit_list_id === 1 ? 'mg/dL' : 'mmol/L',
         value
       ) || ''
     );
@@ -229,7 +229,7 @@ const BloodSugar = ({ route }) => {
             title="Your Reading"
             placeholder="0.0"
             units={['mg/dL', 'mmol/L']}
-            unit={bloodSugarTracker.unit_list_id === 1 ? 'mg/dL' : 'mmol/L'}
+            unit={bloodSugarTracker?.unit_list_id === 1 ? 'mg/dL' : 'mmol/L'}
             value={bloodSugarTracker?.data_value}
             onChangeText={(val: any) => handleChange(val, 'data_value')}
             onUnitChange={handleUnitChange}
@@ -238,13 +238,13 @@ const BloodSugar = ({ route }) => {
               setError(
                 bloodSugarValidator(
                   bloodSugarTracker?.unit_list_id === 1 ? 'mg/dL' : 'mmol/L',
-                  bloodSugarTracker.data_value
+                  bloodSugarTracker?.data_value
                 ) || ''
               );
             }}
           />
 
-          {bloodSugarTracker?.data_value !== '0.0' && !error ? (
+          {bloodSugarTracker?.data_value && !error ? (
             <>
               <View style={styles.dropDown}>
                 <Text style={styles.textStyle}>Meal</Text>

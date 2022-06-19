@@ -26,6 +26,7 @@ import { useSelector } from 'react-redux';
 import { options } from './year';
 import makeStyles from './styles';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { NUMERIC_REGIX } from 'utils/regix';
 
 export default function SmokingScreen() {
   const { colors } = useTheme();
@@ -34,7 +35,7 @@ export default function SmokingScreen() {
   // const [value, setValue] = useState('');
   // const [isSmoking, setIsSmoking] = useState('');
   const [value, setValue] = useState(2);
-  const [day, setDay] = useState('');
+  const [day, setDay] = useState();
   const [stopSmoke, setStopSmoke] = useState('');
   const [startSmoke, setStartSmoke] = useState('');
   const [isVisiable, setIsVisible] = React.useState(false);
@@ -55,6 +56,7 @@ export default function SmokingScreen() {
       bootstrap?.attributes?.medical_template.smoking[0].content.fields
     );
   }, [isFocus, bootstrap]);
+
   useEffect(() => {
     const handleLifeStyle = async () => {
       try {
@@ -108,6 +110,7 @@ export default function SmokingScreen() {
     };
     handleLifeStyle();
   }, []);
+
   const onSubmit = async () => {
     try {
       console.log('day', day);
@@ -143,7 +146,13 @@ export default function SmokingScreen() {
       console.log(err);
     }
   };
+  const onChangedSmoke = (text) => {
+    console.log('tt', text);
 
+    if (NUMERIC_REGIX.test(text)) {
+      setDay(text);
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
@@ -258,10 +267,11 @@ export default function SmokingScreen() {
                   { borderWidth: day ? 1 : null, borderRadius: day ? 5 : null },
                 ]}
               >
+                {console.log('day', day)}
                 <TextInput
                   value={day + ''}
                   // defaultValue={'hello'}
-                  onChange={setDay}
+                  onChange={(text) => onChangedSmoke(text)}
                   margin={0}
                   keyboardType="numeric"
                   svg={undefined}

@@ -1,5 +1,6 @@
 import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -11,8 +12,8 @@ const styles = (colors: any) =>
       textAlign: 'center',
     },
     renderHealthView: {
-      height: 110,
-      width: 100,
+      height: 115,
+      width: widthToDp(28),
       backgroundColor: colors.white,
       borderRadius: 5,
       shadowColor: '#000',
