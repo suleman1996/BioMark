@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@crowdlinker/react-native-pager": "^0.2.3",
-    "@invertase/react-native-apple-authentication": "^2.1.5",
+    "@invertase/react-native-apple-authentication": "^2.2.1",
     "@pietile-native-kit/expandable-view": "^1.1.1",
     "@react-native-async-storage/async-storage": "^1.17.3",
     "@react-native-community/art": "^1.2.0",
