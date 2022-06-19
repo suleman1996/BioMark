@@ -67,7 +67,7 @@ export const getUserProfileData =
     await profileServices
       .getUserProfile()
       .then(async (res: Profile) => {
-        logNow(' all medical history response for redux ============>', res);
+        // logNow(' all medical history response for redux ============>', res);
         await dispatch(addUserProfileData(res));
       })
       .catch((err) => {
