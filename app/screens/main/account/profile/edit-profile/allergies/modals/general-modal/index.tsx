@@ -50,6 +50,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
       <TagsCloudInput
         question={'Please list these medications'}
         data={medication_list}
+        placeholder="Enter medications"
         setData={async (value: any) => {
           logNow('redux', allergiesMedicalHistory);
           let updatedItems = [];

@@ -225,15 +225,20 @@ const BloodPressure = ({ route }: any) => {
           {Object.keys(error)?.length > 0 ? (
             <ErrorMessage errorMessage={error[Object.keys(error)[0]]} />
           ) : null}
-
-          <Text style={styles.label}>Date - Time</Text>
-          <DateTimePickerModal
-            maxDate={new Date()}
-            date={bloodPressure.date_entry}
-            setDate={(e: any) =>
-              setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
-            }
-          />
+          {Object.keys(error).length === 0 &&
+          bloodPressure.bp_systolic &&
+          bloodPressure.bp_diastolic ? (
+            <>
+              <Text style={styles.label}>Date - Time</Text>
+              <DateTimePickerModal
+                maxDate={new Date()}
+                date={bloodPressure.date_entry}
+                setDate={(e: any) =>
+                  setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
+                }
+              />
+            </>
+          ) : null}
         </View>
       </ScrollView>
       {showDeleteModal && (

@@ -14,9 +14,15 @@ type Props = {
   question: string;
   setData: any;
   data: any;
+  placeholder?: string;
 };
 
-const TagsCloudInputComponent = ({ question, setData, data }: Props) => {
+const TagsCloudInputComponent = ({
+  question,
+  setData,
+  data,
+  placeholder,
+}: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -47,6 +53,7 @@ const TagsCloudInputComponent = ({ question, setData, data }: Props) => {
           underlineColor="transparent"
           onChangeText={setSingleTag}
           value={singleTag}
+          placeholder={placeholder}
           onSubmitEditing={({ nativeEvent: { text } }) => {
             if (text.trim() !== '') {
               setTags((state) => {
