@@ -8,9 +8,10 @@ import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import SCREENS from 'navigation/constants';
+import { navigate } from 'services/nav-ref';
 
 import { hitSlop } from 'constants/hit-slop';
-import { goBack } from 'services/nav-ref';
 
 import makeStyles from './styles';
 
@@ -55,7 +56,10 @@ const TitleWithBackLayout = ({
       >
         <View style={[styles.header, { backgroundColor: shadow }]}>
           <View style={{ flexDirection: 'row' }}>
-            <Pressable hitSlop={hitSlop.one} onPress={() => goBack()}>
+            <Pressable
+              hitSlop={hitSlop.one}
+              onPress={() => navigate(SCREENS.YOUR_HEALTH)}
+            >
               <MaterialIcons
                 color={colors.white}
                 size={responsiveFontSize(35)}

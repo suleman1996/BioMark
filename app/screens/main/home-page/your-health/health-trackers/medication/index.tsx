@@ -70,6 +70,7 @@ const Medication = ({ route }) => {
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
+  const disptach = useDispatch();
 
   const updateState = (name: string, value: number | string) =>
     setMedicationTrackerState((prev) => ({ ...prev, [name]: value }));
@@ -97,6 +98,7 @@ const Medication = ({ route }) => {
   }, [getMedNewTracker]);
 
   useEffect(() => {
+    dispatch(getReduxNewMedicationTracker());
     if (!SELECTED_MEDICATION_LOG_ID) return;
     init();
   }, [SELECTED_MEDICATION_LOG_ID]);

@@ -328,7 +328,7 @@ const Index = () => {
 
             {dashboard?.latest_result && (
               <RenderLastResult
-                title="Your Last Result"
+                title="Your Latest Result"
                 date={dashboard?.latest_result?.received}
                 onPress={() =>
                   navigate(SCREENS.RESULT_OVERVIEW, {

@@ -22,6 +22,7 @@ import {
   getReduxHealthTracker,
 } from 'store/home/home-actions';
 import moment from 'moment';
+import { NUMERIC_REGIX } from 'utils/regix';
 
 const FREQUENCY_TIME_OPTIONS: any[] = [
   { label: '12AM', value: '12AM' },
@@ -54,7 +55,7 @@ type MEDICATION_TYPE = {
   disease_type: number;
   medication_list_id: number;
   unit_list_id: number;
-  dosage: number;
+  dosage: number | string;
   frequency: number | null;
   frequency_time: string[];
   start_date: any;
@@ -77,7 +78,7 @@ const MedicationForm = (props: any) => {
     disease_type: 0,
     medication_list_id: 0,
     unit_list_id: 12,
-    dosage: 0,
+    dosage: '',
     frequency: null,
     frequency_time: [],
     start_date: new Date(),
@@ -140,7 +141,7 @@ const MedicationForm = (props: any) => {
         ...medication,
         frequency: null,
         disease_type: 0,
-        dosage: 0,
+        dosage: '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -218,6 +219,16 @@ const MedicationForm = (props: any) => {
     }
   };
 
+  console.log(
+    JSON.stringify(
+      {
+        medicationOptionsData,
+        medication,
+      },
+      null,
+      2
+    )
+  );
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -277,17 +288,20 @@ const MedicationForm = (props: any) => {
                         containerStyles={{
                           marginTop: 0,
                         }}
-                        value={medication.dosage}
+                        value={`${medication.dosage}`}
                         error={dosageRangeError}
-                        onChange={(val) => {
-                          const err =
-                            Number(val) > DOSAGE_RANGE.MAX ||
-                            Number(val) < DOSAGE_RANGE.MIN
-                              ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
-                              : '';
+                        placeholder="0"
+                        onChange={(val: string) => {
+                          if (NUMERIC_REGIX.test(val) || val == '') {
+                            const err =
+                              Number(val) > DOSAGE_RANGE.MAX ||
+                              Number(val) < DOSAGE_RANGE.MIN
+                                ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
+                                : '';
 
-                          updateMedication('dosage', val);
-                          setDosageRangeError(err);
+                            updateMedication('dosage', val);
+                            setDosageRangeError(err);
+                          }
                         }}
                       />
                     </View>

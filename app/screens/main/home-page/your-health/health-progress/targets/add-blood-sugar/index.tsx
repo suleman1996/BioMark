@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
 import { useNavigation } from '@react-navigation/native';
@@ -144,7 +144,14 @@ const Index = () => {
   }, [state, units]);
 
   useEffect(() => {
-    if (!latestBloodSugar) return;
+    if (
+      !latestBloodSugar?.unit_name &&
+      !latestBloodSugar?.value_from &&
+      !latestBloodSugar?.ppg_value_from &&
+      !latestBloodSugar?.value_to &&
+      !latestBloodSugar?.ppg_value_to
+    )
+      return;
     setState({
       selectedType: units.findIndex(
         (e) => e.name == latestBloodSugar?.unit_name
@@ -190,11 +197,13 @@ const Index = () => {
                 marginLeft: 10,
               }}
             >
-              <Icon
-                name="ios-information-circle-outline"
-                size={18}
-                color={colors.blue}
-              />
+              <View style={{ height: 20, width: 20 }}>
+                <Icon
+                  name="ios-information-circle-outline"
+                  size={18}
+                  color={colors.blue}
+                />
+              </View>
             </Tip>
           </View>
           <InputWithUnits
@@ -245,11 +254,13 @@ const Index = () => {
                 marginLeft: 10,
               }}
             >
-              <Icon
-                name="ios-information-circle-outline"
-                size={18}
-                color={colors.blue}
-              />
+              <View style={{ height: 20, width: 20 }}>
+                <Icon
+                  name="ios-information-circle-outline"
+                  size={18}
+                  color={colors.blue}
+                />
+              </View>
             </Tip>
           </View>
           <InputWithUnits
