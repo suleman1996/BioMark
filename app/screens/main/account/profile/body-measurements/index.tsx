@@ -187,17 +187,16 @@ const BodyMeasurementScreen = () => {
             }}
           />
         </View>
-
-        <ButtonWithShadowContainer
-          onPress={onSubmit}
-          title={'Save & Continue'}
-          disabled={
-            bodyMeasurment.height == '' || bodyMeasurment.weight == ''
-              ? true
-              : false
-          }
-        />
       </ScrollView>
+      <ButtonWithShadowContainer
+        onPress={onSubmit}
+        title={'Save & Continue'}
+        disabled={
+          bodyMeasurment.height == '' || bodyMeasurment.weight == ''
+            ? true
+            : false
+        }
+      />
     </TitleWithBackLayout>
   );
 };

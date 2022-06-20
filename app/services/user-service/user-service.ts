@@ -1646,7 +1646,7 @@ const getMedicationProgress = (id) => {
   });
 };
 
-const getBloodPressureLogs = (params: { type: string } | undefined) => {
+const getBloodPressureLogs = (params?: { type: string } | undefined) => {
   return new Promise<BloodPressureProgressLogsPayload>((resolve, reject) => {
     client
       .get(API_URLS.GET_BLOOD_PRESSURE_LOGS, { params })

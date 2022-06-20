@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View, Platform } from 'react-native';
 import React, { useState } from 'react';
 import { useTheme } from 'react-native-paper';
 
@@ -57,6 +57,7 @@ const DateTimePickerModalComponent = (props: Props) => {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="datetime"
+        display={Platform.OS === 'ios' ? 'inline' : 'default'}
         {...(props.maxDate && { maximumDate: new Date(props.maxDate) })}
         onConfirm={(value) => handleConfirm(value.toISOString())}
         onCancel={hideDatePicker}

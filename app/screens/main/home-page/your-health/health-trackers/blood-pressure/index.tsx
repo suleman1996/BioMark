@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
-  // ButtonWithShadowContainer,
+  ButtonWithShadowContainer,
   DateTimePickerModal,
   ErrorMessage,
 } from 'components/base';
@@ -50,7 +50,6 @@ const BloodPressure = ({ route }: any) => {
     const bloodPressureResponse = await userService.getBloodPressureProgress(
       id
     );
-    console.log('===========>', bloodPressureResponse);
 
     setBloodPressure({
       bp_systolic: roundToDecimalPlaces(bloodPressureResponse.bp_systolic, 0),
@@ -72,8 +71,6 @@ const BloodPressure = ({ route }: any) => {
   }, []);
 
   const saveBloodPressureLog = async () => {
-    // console.log({ SELECTED_BP_ID });
-    // return;
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BP_ID ? 'updateBpTracker' : 'createBpTracker';
     try {
@@ -120,7 +117,6 @@ const BloodPressure = ({ route }: any) => {
   };
 
   const onChangeBloodPressure = (key, value) => {
-    console.log(key, value);
     setBloodPressure((prev) => ({ ...prev, [key]: value }));
     setError((prev) => {
       const copy = { ...prev };
@@ -167,7 +163,6 @@ const BloodPressure = ({ route }: any) => {
       });
     }
   }, [bloodPressure]);
-  console.log('Error', error);
 
   return (
     <TitleWithBackWhiteBgLayout
@@ -175,19 +170,11 @@ const BloodPressure = ({ route }: any) => {
       binIcon={SELECTED_BP_ID ? true : false}
       onPressIcon={() => setShowDeleteModal(true)}
     >
-      {/* <View style={{ flex: 1, backgroundColor: 'grey' }}>
-        <TextInput placeholder="useless placeholder" keyboardType="numeric" />
-
-        <TouchableOpacity style={{ backgroundColor: 'blue' }}>
-          <Text></Text>
-        </TouchableOpacity>
-      </View> */}
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
           style={{
             paddingHorizontal: widthToDp(4),
-            // borderWidth: 5,
             marginBottom: heightToDp(25),
           }}
         >
@@ -197,7 +184,6 @@ const BloodPressure = ({ route }: any) => {
               style={{ marginTop: heightToDp(3), marginLeft: widthToDp(4) }}
             >
               <Tip
-                //title=""
                 body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats.."
                 bodyStyle={{ color: '#fff' }}
                 tipContainerStyle={{
@@ -224,7 +210,6 @@ const BloodPressure = ({ route }: any) => {
             value={bloodPressure.bp_systolic}
             maxLength={3}
             selectionColor="darkblue"
-            // defaultValue={''}
           />
           <MedicalInput
             height={15}
@@ -236,99 +221,27 @@ const BloodPressure = ({ route }: any) => {
             value={bloodPressure.bp_diastolic}
             maxLength={3}
             selectionColor="darkblue"
-            // defaultValue={''}
           />
           {Object.keys(error)?.length > 0 ? (
             <ErrorMessage errorMessage={error[Object.keys(error)[0]]} />
           ) : null}
-
-          <Text style={styles.label}>Date - Time</Text>
-          <DateTimePickerModal
-            maxDate={new Date()}
-            date={bloodPressure.date_entry}
-            setDate={(e: any) =>
-              setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
-            }
-          />
+          {Object.keys(error).length === 0 &&
+          bloodPressure.bp_systolic &&
+          bloodPressure.bp_diastolic ? (
+            <>
+              <Text style={styles.label}>Date - Time</Text>
+              <DateTimePickerModal
+                maxDate={new Date()}
+                date={bloodPressure.date_entry}
+                setDate={(e: any) =>
+                  setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
+                }
+              />
+            </>
+          ) : null}
         </View>
-        {showDeleteModal && (
-          <AccountDeActivateModal
-            headerText="Weight"
-            subHeading="Are you sure you wish to delete this weight log?"
-            buttonUpperText="Yes"
-            buttonLowerText="Skip"
-            isVisible={showDeleteModal}
-            setIsVisible={setShowDeleteModal}
-            callMe={deleteBpLog}
-          />
-        )}
-
-        {/* //neww add */}
-        <View
-          style={{
-            width: '100%',
-            backgroundColor: colors.white,
-            justifyContent: 'center',
-            alignItems: 'center',
-            // paddingHorizontal: widthToDp(7),
-            // paddingVertical: heightToDp(2),
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              backgroundColor:
-                bloodPressure.bp_systolic === '' ||
-                bloodPressure.bp_diastolic === '' ||
-                error
-                  ? '#D3D3D3'
-                  : colors.primary,
-              height: heightToDp(6),
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: widthToDp(2.5),
-              width: '100%',
-              maxWidth: widthToDp(86),
-              marginBottom: heightToDp(2),
-              marginTop: heightToDp(2),
-            }}
-            onPress={saveBloodPressureLog}
-            disabled={
-              bloodPressure.bp_systolic === '' ||
-              bloodPressure.bp_diastolic === '' ||
-              error
-                ? true
-                : false
-            }
-          >
-            <Text
-              style={{
-                color:
-                  bloodPressure.bp_systolic === '' ||
-                  bloodPressure.bp_diastolic === '' ||
-                  error
-                    ? '#888888'
-                    : colors.white,
-              }}
-            >
-              {SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/* //new add */}
-
-        {/* <ButtonWithShadowContainer
-          onPress={saveBloodPressureLog}
-          title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-          disabled={
-            bloodPressure.bp_systolic === '' ||
-            bloodPressure.bp_diastolic === '' ||
-            error
-              ? true
-              : false
-          }
-        /> */}
       </ScrollView>
-      {/* {showDeleteModal && (
+      {showDeleteModal && (
         <AccountDeActivateModal
           headerText="Blood Pressure"
           subHeading="Are you sure you wish to delete this blood pressure log?"
@@ -338,16 +251,17 @@ const BloodPressure = ({ route }: any) => {
           setIsVisible={setShowDeleteModal}
           callMe={deleteBpLog}
         />
-      )} */}
-      {/* <ButtonWithShadowContainer
+      )}
+
+      <ButtonWithShadowContainer
         onPress={saveBloodPressureLog}
         title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
         disabled={
           bloodPressure.bp_systolic === '' ||
           bloodPressure.bp_diastolic === '' ||
-          Object.keys(error).length
+          Object.keys(error).length !== 0
         }
-      /> */}
+      />
     </TitleWithBackWhiteBgLayout>
   );
 };

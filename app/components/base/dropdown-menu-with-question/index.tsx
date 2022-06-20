@@ -52,7 +52,7 @@ const DropdownMenuWithQuestion = ({
         </Picker> */}
         <TextInputDropdown
           onChangeText={(item) => onValueChange(item)}
-          value={selectedValue}
+          value={selectedValue ? selectedValue : dropdown[0]?.value}
           disabled={undefined}
           dropdownData={dropdown}
         />

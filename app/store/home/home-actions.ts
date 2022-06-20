@@ -580,7 +580,7 @@ export const getHBA1CTargetsAction =
   };
 
 export const getReduxBloodPressureLogs =
-  (params: { type: string } | undefined) =>
+  (params?: { type: string } | undefined) =>
   async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
     await userService
       .getBloodPressureLogs(params)
