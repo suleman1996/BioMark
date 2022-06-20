@@ -125,7 +125,9 @@ export default function InboxScreen({ route }) {
         </PagerView>
       </View>
       <TouchableOpacity
+        style={styles.fixedIconView}
         onPress={() => {
+          console.log(123);
           if (currentPage === 0) {
             navigation.navigate(ADD_BLOOD_SUGAR);
           } else {
@@ -133,9 +135,7 @@ export default function InboxScreen({ route }) {
           }
         }}
       >
-        <View style={styles.fixedIconView}>
-          <AddGradient />
-        </View>
+        <AddGradient />
       </TouchableOpacity>
     </View>
   );

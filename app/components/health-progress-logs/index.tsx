@@ -65,7 +65,7 @@ const Index = (props: Props) => {
             style={{
               color: item?.color ? item?.color : colors.heading,
               fontFamily: fonts.mulishExtraBold,
-              fontSize: responsiveFontSize(20),
+              fontSize: responsiveFontSize(18),
             }}
           >
             {item?.weight} {item?.unit}
