@@ -69,10 +69,10 @@ const styles = (colors: any) =>
     pastResultMainView: {
       backgroundColor: 'white',
       paddingTop: 10,
-      marginTop: 20,
+      marginTop: heightToDp(1),
       borderRadius: 10,
       elevation: 10,
-      marginBottom: 0,
+      marginBottom: heightToDp(1),
       marginHorizontal: 5,
     },
     filterResultMainView: {
@@ -126,10 +126,10 @@ const styles = (colors: any) =>
       fontFamily: fonts.OpenSansBold,
     },
     bottomView: {
-      backgroundColor: colors.primary,
+      // backgroundColor: colors.primary,
       height: 5,
-      borderBottomLeftRadius: 12,
-      borderBottomRightRadius: 12,
+      // borderBottomLeftRadius: 12,
+      // borderBottomRightRadius: 12,
       marginTop: 12,
     },
     uploadResult: {
@@ -139,7 +139,7 @@ const styles = (colors: any) =>
     filterView: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: heightToDp(8),
+      marginTop: heightToDp(5),
       alignItems: 'center',
     },
     text5: {
@@ -191,7 +191,7 @@ const styles = (colors: any) =>
       fontSize: responsiveFontSize(20),
       color: colors.primary,
       fontFamily: fonts.OpenSansBold,
-      marginTop: heightToDp(5),
+      marginTop: heightToDp(3),
     },
   });
 export default styles;

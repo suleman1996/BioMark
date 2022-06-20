@@ -54,6 +54,7 @@ const TagsCloudInputComponent = ({
           onChangeText={setSingleTag}
           value={singleTag}
           placeholder={placeholder}
+          selectionColor="darkblue"
           onSubmitEditing={({ nativeEvent: { text } }) => {
             if (text.trim() !== '') {
               setTags((state) => {

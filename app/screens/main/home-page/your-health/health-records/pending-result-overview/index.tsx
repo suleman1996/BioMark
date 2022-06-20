@@ -13,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getReduxPendingResultOverview,
-  // getReduxPastResult,
+  getReduxPastResult,
 } from 'store/home/home-actions';
 import { useRoute } from '@react-navigation/native';
 
@@ -58,9 +58,9 @@ const PendingResultOverview = () => {
         route.params.result.lab_id
       );
       if (result.status == true) {
-        setModalVisible(false);
-        // dispatch(getReduxPastResult());
-        navigate(SCREENS.YOUR_HEALTH);
+        setModalVisible(!modalVisible);
+        dispatch(getReduxPastResult());
+        navigate(SCREENS.HEALTH_RECORD);
         console.log('delte----------------------------------', result.data);
       }
     } catch (error) {
@@ -90,7 +90,7 @@ const PendingResultOverview = () => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator visible={isVisiable} />
+      <ActivityIndicator visible={isVisiable ? !modalVisible : isVisiable} />
 
       <TitleWithBackLayout
         shadow={colors.blue}
@@ -193,5 +193,4 @@ const PendingResultOverview = () => {
     </View>
   );
 };
-
 export default PendingResultOverview;
