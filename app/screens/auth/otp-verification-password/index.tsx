@@ -18,6 +18,7 @@ import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { userService } from 'services/user-service/user-service';
 import { logNow } from 'utils/functions/log-binder';
+import { useTranslation } from 'react-i18next';
 
 // import colors from 'assets/colors';
 
@@ -34,6 +35,7 @@ export default function OtpPassword(props: Props) {
   let initialMinutes = 1;
   let initialSeconds = 0;
 
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const [code, setCode] = React.useState('');
@@ -138,7 +140,7 @@ export default function OtpPassword(props: Props) {
     <>
       <ActivityIndicator visible={loading} />
       <View style={styles.container}>
-        <Header title="Reset Password" />
+        <Header title={t('pages.resetPassword.title')} />
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.body}>
             <Text style={styles.title}>

@@ -41,6 +41,7 @@ import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 import makeStyles from './styles';
 export const PASS_REGIX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
 export default function Login() {
   // redux
   const { t, i18n } = useTranslation();
@@ -209,7 +210,7 @@ export default function Login() {
           <Logo height="120" width="170" />
         </View>
         <Text style={styles.heading}>{t('pages.landing.welcome')}</Text>
-        <Text style={styles.inputLablel}>Mobile Number</Text>
+        <Text style={styles.inputLablel}>{t('userProfile.mobileNumber')}</Text>
         <PhoneNumber
           countryCode={countryCode}
           setCountryCode={setCountryCode}
@@ -246,7 +247,9 @@ export default function Login() {
           ))}
 
         <View style={{ height: 20 }} />
-        <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
+        <Text style={[styles.inputLablel, { marginTop: 20 }]}>
+          {t('userProfile.password')}
+        </Text>
         <TextInput
           secureTextEntry={hidePassword}
           eye={hidePassword ? 'eye-off' : 'eye'}
@@ -273,7 +276,9 @@ export default function Login() {
             style={{ marginVertical: 30 }}
             onPress={() => navigate(SCREENS.FORGOT_PASSWORD)}
           >
-            <Text style={styles.forgotPassword}>Forgot password?</Text>
+            <Text style={styles.forgotPassword}>
+              {t('pages.login.forgotPassword')}
+            </Text>
           </TouchableOpacity>
         </View>
         <Button
@@ -320,14 +325,14 @@ export default function Login() {
             <Text
               style={{ color: colors.black, fontFamily: fonts.mulishRegular }}
             >
-              Dont have an account?
+              {t('pages.login.newToBiomark')}
             </Text>
             <TouchableOpacity onPress={() => navigate(SCREENS.SIGNUP)}>
               <Text
                 style={{ color: colors.blue, fontFamily: fonts.mulishRegular }}
               >
                 {' '}
-                Sign up
+                {t('pages.login.signUp')}
               </Text>
             </TouchableOpacity>
           </View>
