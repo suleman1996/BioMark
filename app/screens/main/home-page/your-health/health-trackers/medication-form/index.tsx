@@ -17,7 +17,10 @@ import { navigate } from 'services/nav-ref';
 import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
 import { useDispatch } from 'react-redux';
-import { getMedicationsTrackersAction } from 'store/home/home-actions';
+import {
+  getMedicationsTrackersAction,
+  getReduxHealthTracker,
+} from 'store/home/home-actions';
 import moment from 'moment';
 
 const FREQUENCY_TIME_OPTIONS: any[] = [
@@ -197,6 +200,7 @@ const MedicationForm = (props: any) => {
       await userService[API_FUNCTION]({ medication }, SELECTED_MEDICATION_ID);
       navigate(SCREENS.HEALTH_PROGRESS, 2);
       dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
+      dispatch(getReduxHealthTracker());
     } catch (err) {
       console.error(err);
     }
@@ -208,6 +212,7 @@ const MedicationForm = (props: any) => {
     try {
       await userService.deleteMedication(SELECTED_MEDICATION_ID);
       navigate(SCREENS.SHOW_MEDICATION, 2);
+      dispatch(getReduxHealthTracker());
     } catch (err) {
       console.error(err);
     }

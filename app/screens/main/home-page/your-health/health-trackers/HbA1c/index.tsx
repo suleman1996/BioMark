@@ -5,7 +5,11 @@ import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IAppState } from 'store/IAppState';
-import { getReduxDashboard, getReduxHba1cLogs } from 'store/home/home-actions';
+import {
+  getReduxDashboard,
+  getReduxHba1cLogs,
+  getReduxHealthTracker,
+} from 'store/home/home-actions';
 
 import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
@@ -95,6 +99,7 @@ const HbA1c = ({ route }) => {
         SELECTED_HBA1C_ID
       );
       dispatch(getReduxHba1cLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 3);
     } catch (err: any) {
       console.error(err);
@@ -121,6 +126,7 @@ const HbA1c = ({ route }) => {
     try {
       await userService.deleteHba1cLog(SELECTED_HBA1C_ID);
       dispatch(getReduxHba1cLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 3);
     } catch (err) {
       console.error(err);
