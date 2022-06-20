@@ -72,7 +72,7 @@ const styles = (colors: any) =>
       marginTop: 20,
       borderRadius: 10,
       elevation: 10,
-      marginBottom: 0,
+      marginBottom: heightToDp(1),
       marginHorizontal: 5,
     },
     filterResultMainView: {
@@ -126,10 +126,10 @@ const styles = (colors: any) =>
       fontFamily: fonts.OpenSansBold,
     },
     bottomView: {
-      backgroundColor: colors.primary,
+      // backgroundColor: colors.primary,
       height: 5,
-      borderBottomLeftRadius: 12,
-      borderBottomRightRadius: 12,
+      // borderBottomLeftRadius: 12,
+      // borderBottomRightRadius: 12,
       marginTop: 12,
     },
     uploadResult: {

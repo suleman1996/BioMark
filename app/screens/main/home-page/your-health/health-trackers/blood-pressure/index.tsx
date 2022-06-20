@@ -328,7 +328,7 @@ const BloodPressure = ({ route }: any) => {
           }
         /> */}
       </ScrollView>
-      {showDeleteModal && (
+      {/* {showDeleteModal && (
         <AccountDeActivateModal
           headerText="Blood Pressure"
           subHeading="Are you sure you wish to delete this blood pressure log?"
@@ -338,7 +338,7 @@ const BloodPressure = ({ route }: any) => {
           setIsVisible={setShowDeleteModal}
           callMe={deleteBpLog}
         />
-      )}
+      )} */}
       {/* <ButtonWithShadowContainer
         onPress={saveBloodPressureLog}
         title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
