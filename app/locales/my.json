@@ -1,0 +1,1570 @@
+ {
+
+   "pages": {
+      "appointment": {
+         "title": "Temujanji",
+         "tabs": {
+            "upcoming": "Akan datang",
+            "history": "Sejarah"
+         }
+      },
+      "covid-booking": {
+         "title": "Tempahan Ujian COVID-19",
+         "orderId": "Order ID",
+         "tabs": {
+            "upcoming": "Akan datang",
+            "history": "Sejarah"
+         },
+         "emptyMessage": {
+            "upcomingTitle": "Tiada tempahan",
+            "upcomingSubTitle": "Anda tiada tempahan ujian COVID lagi",
+            "historyTitle": "Tiada Tempahan Terkini",
+            "historySubTitle": "Sini adalah ....... anda",
+            "historySubTitle1": "Tempahan COVID yang lalu",
+            "covidQrTitle": "Tiada Kod QR",
+            "covidQrSubTitle": "Kod QR akan dipaparkan di sini",
+            "covidQrSubTitle1": "apabila keputusan ujian COVID-19 anda sedia"
+         },
+         "button": {
+            "FAQButton": "Soalan lazim"
+         }
+      },
+      "landing": {
+         "signup": "Daftar Baru",
+         "login": "Log Masuk",
+         "board1": {
+            "image": "/assets/images/temperature-measure.svg",
+            "title": "Selamat datang ke BioMark",
+            "description": "Kesihatan dalam poket"
+         },
+         "board2": {
+            "image": "/assets/images/health-passport.svg",
+            "title": "Pasport Kesihatan Digital",
+            "description": "Pasport kesihatan anda untuk mengelilingi dunia lagi"
+         },
+         "board3": {
+            "image": "/assets/images/healthy-lifestyle.svg",
+            "title": "Mengesan Kesihatan Anda",
+            "description": "Kami bersama anda dalam setiap langkah anda untuk hidup lebih sihat"
+         }
+      },
+      "onboardWelcome": {
+         "welcome": "Selamat Datang",
+         "description": "Perjalanan biomarking anda bermula di sini"
+      },
+      "forceUpdate": {
+         "title": "Kemas Kini Aplikasi Tersedia",
+         "definition": "Pastikan aplikasi BioMark anda dikemaskini supaya anda mendapat pengalaman dan konten terbaik hanya untuk anda",
+         "continueButton": "Kemas Kini Aplikasi BioMark"
+      },
+      "maintenance": {
+         "title": "Sistem Dalam Penyelengaraan",
+         "definition": "Aplikasi BioMark tidak boleh diakses untuk ketika ini. Sila cuba semula sebentar lagi"
+      },
+      "clinics": {
+         "title": "Klinik",
+         "description": "Akan Datang"
+      },
+      "covid": {
+         "header": "COVID-19",
+         "title": "Lihat Keputusan Ujian COVID-19 Sebelum Ini",
+         "titleSub": "Kumpul dan Simpan Keputusan Ujian Kesihatan Anda Dalam Satu Tempat",
+         "newResult": "Keputusan Baru: Sampel Ujian COVID PCR Antigen",
+         "noData": "Tiada Rekod Ditemui",
+         "waitingVerification": "Sila tunggu sementara kami mengesahkan identiti anda",
+         "testResult": "Keputusan Ujian Anda adalah",
+         "testResultCovid": "untuk COVID-19",
+         "share": "Kongsi Keputusan Ujian",
+         "testCenter": "Fasiliti Kesihatan",
+         "testType": "Jenis Ujian",
+         "testDate": "Tarikh Ujian",
+         "reportDate": "Tarikh Laporan",
+         "positiveMessage": "Sila lakukan pengasingan dan kuarantin kendiri",
+         "negativeMessage": "Teruskan mengamalkan penjarakan sosial",
+         "bookCovid": {
+            "progress1": "Tempah",
+            "progress2": "Pengisytiharan",
+            "progress3": "Bayaran",
+            "progress4": "Pengesahan",
+            "continue": "Teruskan",
+            "next": "Seterusnya",
+            "cancel": "Batal",
+            "makePayment": "Membuat Bayaran",
+            "testTaking": {
+               "title": "Siapakah yang mengambil ujian?",
+               "me": "Anda",
+               "dependant": "Tanggungan",
+               "both": "Kedua-duanya"
+            },
+            "testBooking": {
+               "testTypeQuestion": "Pilih Ujian Covid",
+               "testType1": "Ujian PCR",
+               "testType2": "Ujian Antigen",
+               "testLocQuestion": "Dimanakan anda ingin mendapatkan ujian?",
+               "testLoc1": "Fasiliti Ujian",
+               "testLoc2": "Batalkan Ujian - Batal",
+               "testDependantQuestion": "Adakah test COVID ini untuk anda atau tanggungan anda?",
+               "testdependant1": "Saya",
+               "testdependant2": "Tanggungan",
+               "testCentreCountry": "Negara",
+               "testCentreCity": "Bandar",
+               "testCentre": "Fasiliti Ujian",
+               "testDateQuestion": "Pilih Tarikh Ujian",
+               "testSlotMorning": "Slot Pagi",
+               "testSlotAfternoon": "Slot Petang",
+               "addCovid": "Tambah Tanggungan"
+            },
+            "declaration": {
+               "question1": "Adakah anda mengalami sebarang simptom seperti demam, sakit tekak, batuk kering, hidung berair, lesu, sakit kepala, dan sesak nafas sejak 14 hari yang lepas?",
+               "question2": "Adakah anda pernah mengembara ke luar negara sejak 14 hari yang lepas?",
+               "question3": "Adakah anda mempunyai kontak rapat dengan sesiapa yang sedang melakukan kuarantin kendiri sejak 14 hari yang lepas?",
+               "question4": "Adakah anda merupakan kontak rapat kepada sesiapa yang disahkan positif COVID-19 sejak 14 hari yang lepas?",
+               "question5": "Adakah anda pernah menghadiri atau berada berdekatan sesiapa yang menghadiri majlis/program atau lokasi yang disahkan mempunyai kluster COVID-19 sejak 14 hari yang lepas?",
+               "dquestion1": "Adakah tanggungan anda mengalami sebarang simptom seperti demam, sakit tekak, batuk kering, hidung berair, lesu, sakit kepala, dan sesak nafas sejak 14 hari yang lepas?",
+               "dquestion2": "Adakah tanggungan anda pernah mengembara ke luar negara sejak 14 hari yang lepas?",
+               "dquestion3": "Adakah tanggungan anda mempunyai kontak rapat dengan sesiapa yang sedang melakukan kuarantin kendiri sejak 14 hari yang lepas?",
+               "dquestion4": "Adakah tanggungan anda merupakan kontak rapat kepada sesiapa yang disahkan positif COVID-19 sejak 14 hari yang lepas?",
+               "dquestion5": "Adakah tanggungan anda pernah menghadiri atau berada berdekatan sesiapa yang menghadiri majlis/program atau lokasi yang disahkan mempunyai kluster COVID-19 sejak 14 hari yang lepas?",
+               "terms": "Saya mengisytiharkan semua butiran maklumat di atas adalah tepat dan benar. Dengan menyerahkan borang pengisytiharan ini, saya bersetuju untuk maklumat ini dikumpul, digunakan, dan diberikan untuk langkah berjaga-jaga terhadap COVID-19."
+            },
+            "covidHealthcare": {
+               "doLater": "Buat Kemudian",
+               "submit": "Serahkan",
+               "covidTitle1": "Ujian COVID-19 anda dijadualkan pada",
+               "covidTitle2": "di",
+               "covidTitle3": "Sila isi borang pengisytiharan kesihatan ini sebelum anda datang ke Fasiliti Ujian Covid-19 anda. Anda perlu mengisi borang yang berasingan jika anda menempah untuk tanggungan.",
+               "declarationMyself": "Pengisytiharan Kesihatan untuk Diri Sendiri",
+               "declarationMyDependant": "Pengisytiharan Kesihatan untuk Tanggungan",
+               "confirmation": {
+                  "done": "Pengisytiharan Kesihatan Selesai!",
+                  "message": "Terima kasih kerana mengisi borang pengisytiharan. Pastikan anda bersedia pada slot masa ditempah di Fasiliti Ujian COVID-19 pilihan anda.",
+                  "yourId": "Order ID Anda:",
+                  "dependantId": "Order ID Tanggungan Anda:"
+               }
+            },
+            "confirmation": {
+               "done": "Pembayaran Berjaya",
+               "success": "Emel pengesahan sudah dihantar kepada anda",
+               "declaration": "Borang pengisytiharan kesihatan",
+               "declarationMessage": "akan dihantar kepada anda dalam 24 jam sebelum hari ujian COVID-19 anda",
+               "viewBooking": "Lihat Tempahan",
+               "return": "Kembali Ke Laman Utama"
+            },
+            "bookingDialog": {
+               "yes": "Ya",
+               "no": "Tidak",
+               "cancelBooking": "Batalkan Tempahan Ujian COVID",
+               "cancelBookingTitle": "Adakah anda pasti untuk membatalkan tempahan?",
+               "cancelTitle": "Batalkan Tempahan Ujian",
+               "cancelSubTitle": "Apabila anda meneruskan pembatalan, anda tidak dijamin mendapat slot ujian. Teruskan?",
+               "nextAlert": "Slot Ujian Tidak Ditempah",
+               "nextAlertTitle": "Anda tidak boleh teruskan ke pembayaran kerana anda belum menempah sebarang slot ujian lagi",
+               "nextAlertButton": "Okay",
+               "delete": "Padam Tanggungan?",
+               "deleteTitle": "Adakah anda pasti mahu memadamkan profil"
+            }
+         },
+         "covid-dependant": {
+            "firstname": "Nama Pertama",
+            "lastname": "Name Terakhir",
+            "age": "Umur",
+            "relation": "Perhubungan",
+            "ncr_passport": "NRIC/ Nombor Passport",
+            "title": "Masukan butiran tanggungan anda",
+            "document_type": "Jenis Dokumen",
+            "ic": "IC",
+            "passport": "Pasport",
+            "eKYC": "eKYC",
+            "addeKYC": "Lengkapkan Pengesahan eKYC",
+            "editeKYC": "Lengkapkan Pengesahan eKYC"
+         },
+         "covid-button": {
+            "save": "Simpan Tanggungan",
+            "add": "Tambah Tanggungan",
+            "addSelf": "Tambah Diri",
+            "confirm": "Sahkan",
+            "exist": "Tambah Tanggungan Sedia Ada"
+         },
+         "dependantDialog": {
+            "redoeKYC": "Lakukan Verifikasi eKYC semula?",
+            "redoeKYCTitle": "Adakah anda pasti untuk melakukan semula?"
+         },
+         "covid-booking-button": {
+            "healthDeclareButton": "Isytihar Status",
+            "cancelButton": "Batalkan Ujian",
+            "newBooking": "Tempah Ujian COVID-19 Baru"
+         },
+         "covid-info": {
+            "title": "Soalan Lazim untuk Tempah Ujian COVID-19",
+            "card1": {
+               "question": "Apakah dokumen yang diperlukan untuk melakukan ujian COVID-19?",
+               "answer": {
+                  "answer1": "Kad Pengenalan / Sijil Kelahiran (jika <15 tahun) atau pass pekerjaan / permit kerja (untuk pendatang asing)",
+                  "answer2": "Pasport",
+                  "answer3": "Butiran penerbangan (jika berkenaan sahaja, salinan digital diterima)"
+               }
+            },
+            "card2": {
+               "question": "Bagaimana saya akan mendapat keputusan ujian COVID-19 saya?",
+               "answer": {
+                  "answer1": "Anda akan dimaklumkan melalui aplikasi ini apabila keputusan ujian COVID-10 anda siap . Pastikan anda memberi masa sekurangnya sehari sebelum penerbangan anda."
+               }
+            },
+            "card3": {
+               "question": "Apakah persediaan saya perlu lakukan sebelum melakukan ujian COVID-19 saya?",
+               "answer": {
+                  "answer1": "Anda akan dimaklumkan untuk mengisi borang pengisytiharan kesihatan melalui aplikasi ini dalam masa 24 jam sebelum tarikh ujian anda. Pastikan anda bersedia dengan semua dokumen yang diperlukan sebelum ujian."
+               }
+            },
+            "card4": {
+               "question": "Saya perlukan lebih bantuan!",
+               "answer": {
+                  "answer1": "Untuk pertanyaan lebih lanjut, sila hubungi",
+                  "telNo": "1234 5353",
+                  "email": "Biomark@email.com",
+                  "middle_text": "atau emelkan kepada",
+                  "dot": "."
+               }
+            }
+         },
+         "errors": {
+            "firstname": "Masukkan nama pertama",
+            "lastname": "Masukkan nama terakhir",
+            "age": "Masukkan umur",
+            "ncr_passport": "Masukkan No Kad Pengenalan / Pasport",
+            "fnameformat": "Masukkan nama pertama yang betul",
+            "lnameformat": "Masukkan nama terakhir yang betul",
+            "ageformat": "Masukkan umur yang betul",
+            "ncr_passportformat": "Masukkan No Kad Pengenalan / Pasport yang betul"
+         },
+         "booking": {
+            "title": "Tempahan Ujian COVID-19"
+         },
+         "resultList": {
+            "title": "Keputusan Ujian COVID-19"
+         }
+      },
+      "companyList": {
+         "title": "Syarikat Anda",
+         "request": "Permintaan Baru",
+         "question": "Adakah anda terima?",
+         "accept": "Terima",
+         "reject": "Tolak",
+         "description": "Syarikat ini akan dibenarkan mengakses nama anda, ID verifikasi, gambar dan butiran kesihatan",
+         "company": {
+            "description": "Anda sedang berkongsi nama anda, gambar verifikasi ID, dan butiran kesihatan dengan syarikat ini",
+            "healthInfo": {
+               "title": "Butiran Kesihatan Dikongsi",
+               "testSample": "Sampel Ujian COVID PCR Antigen",
+               "testStatus": "Status Vaksinasi COVID",
+               "healthScreening": "Saringan Kesihatan Pekerja"
+            }
+         }
+      },
+      "bloodPressureTab": {
+         "title": "Tekanan Darah",
+         "sys": "SYS",
+         "dia": "DIA",
+         "logs": "Log",
+         "definition": "Tekanan Darah adalah bacaan tekanan di dalam salur darah. Nombor di atas adalah bacaan sistolik yang mengira jumlah tekanan yang dihasilkan oleh denyut jantung. Nombor di bawah adalah bacaan diastolik yang mengira jumlah tekanan apabila jantung anda berehat di antara denyutan.",
+         "filters": {
+            "title": "Tapis",
+            "uploadType": "Dikemaskini Oleh",
+            "confirm": "Memohon",
+            "clearFilters": "Buang Tapis"
+         }
+      },
+      "hba1cTab": {
+         "title": "HbA1c (%)",
+         "definition": "HbA1c (Haemoglobin A1C) adalah ujian yang mengira purata kandungan gula dalam darah sejak 2-3 bulan daripada masa bacaan.",
+         "logs": "Log"
+      },
+      "hba1cInput": {
+         "title": "HbA1c",
+         "yourReading": "Bacaan Anda",
+         "save": "Simpan Edit",
+         "add": "Tambah",
+         "dateTime": "Tarikh- Masa",
+         "errors": {
+            "required": "Sila berikan bacaan anda",
+            "outOfBoundaries": "Bacaan HbA1c anda mestilah antara 5-15%",
+            "dateTimeRequired": "Sila masukkan tarikh yang betul",
+            "aboveGoal": "Bacaan HbA1c adalah lebih tinggi daripada sasaran",
+            "belowGoal": "Bacaan HbA1c adalah lebih rendah daripada sasaran"
+         },
+         "info": {
+            "title": "Butiran",
+            "description": "Rekod ini dimasukkan oleh doktor anda, oleh itu anda tidak dibenarkan mengubah rekod ini."
+         },
+         "dialogs": {
+            "delete": {
+               "title": "HbA1c",
+               "description": "Adakah anda ingin memadam log HbA1c ini?",
+               "buttonText": "Padam",
+               "buttonCancelText": "Langkau"
+            }
+         }
+      },
+      "bloodPressureInput": {
+         "title": "Tekanan Darah",
+         "yourReading": "Bacaan Anda (mmHg)",
+         "definition": "Tekanan Darah adalah bacaan tekanan di dalam salur darah. Nombor di atas adalah bacaan sistolik yang mengira jumlah tekanan yang dihasilkan oleh denyut jantung. Nombor di bawah adalah bacaan diastolik yang mengira jumlah tekanan apabila jantung anda berehat di antara denyutan.",
+         "save": "Simpan Edit",
+         "add": "Tambah",
+         "dateTime": "Tarikh- Masa",
+         "errors": {
+            "systolicRequired": "Sila masukkan bacaan sistolik dan diastolik BP",
+            "diastolicRequired": "Sila masukkan bacaan diastolik dan sistolik BP",
+            "systolicExceedRanges": "Sila masukkan bacaan sistolik yang betul daripada 60-200 mmHg.",
+            "diastolicExceedRanges": "Sila masukkan bacaan diastolik yang betul daripada 30-120 mmHg.",
+            "bloodPressure": "Sila masukkan baccan diastolik yang betul. Bacaan diastolik tidak harus lebih daripada bacaan sistolik"
+         },
+         "info": {
+            "title": "Butiran",
+            "description": "Rekod ini dimasukkan oleh doktor anda, oleh itu anda tidak dibenarkan mengubah rekod ini."
+         },
+         "dialogs": {
+            "delete": {
+               "title": "Tekanan Darah",
+               "description": "Adakah anda pasti ingin memadam log tekanan darah ini?",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            }
+         }
+      },
+      "bloodSugarTab": {
+         "title": "Glukosa Darah",
+         "logs": "Log",
+         "displaying": "Paparkan Entri",
+         "filters": {
+            "title": "Tapis",
+            "meal": "Log",
+            "unit": "Unit Ukuran",
+            "confirm": "Memohon",
+            "clearFilters": "Buang Tapis"
+         }
+      },
+      "bloodSugarInput": {
+         "title": "Glukosa Darah",
+         "yourReading": "Bacaan Anda",
+         "save": "Simpan Edit",
+         "add": "Tambah",
+         "dateTime": "Tarikh- Masa",
+         "meal": "Masa Makan",
+         "mealSelect": "Pilih Masa Makan",
+         "errors": {
+            "mealTypeIdRequired": "Sila pilih masa makan yang betul",
+            "dateTimeRequired": "Sila masukkan tarikh yang betul",
+            "missingMeasurement": "Sila masukkan ukuran yang betul",
+            "measurementInvalid": "Sila masukkan ukuran yang betul",
+            "outOfBoundariesMgDl": "Sila masukkan ukuran yang betul antara 1-600 mg/dL",
+            "outOfBoundariesMmolDl": "Sila masukkan ukuran yang betul antara 0.06-50 mmol/L",
+            "belowRange": "Kadar glukosa darah anda adalah di bawah paras rendah",
+            "aboveRange": "Kadar glukosa darah anda adalah di bawah paras tinggi"
+         },
+         "info": {
+            "title": "Butiran",
+            "description": "Rekod ini dimasukkan oleh doktor anda, oleh itu anda tidak dibenarkan mengubah rekod ini."
+         },
+         "dialogs": {
+            "delete": {
+               "title": "Glukosa Darah",
+               "description": "Adakah anda pasti ingin memadam log glukosa darah ini?",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            },
+            "fastingClose": {
+               "title": "Anda sudah hampir di situ!",
+               "description": "Jangan mengalah dan kekal mencuba untuk mencapai sasaran paras glukosa darah anda! Teruskan!",
+               "buttonText": "Ya"
+            },
+            "fastingExact": {
+               "title": "Tahniah! Anda berjaya mencapai sasaran paras glukosa darah anda!",
+               "description": "Jangan putus asa dan cuba kekal konsisten!",
+               "buttonText": "Ya"
+            }
+         }
+      },
+      "bloodSugarTargets": {
+         "title": "Sasaran Anda",
+         "fasting": "Fasting (FPG)",
+         "postMeal": "PPG (Post-Meal)"
+      },
+      "bloodSugarTargetInput": {
+         "title": "Tetapkan sasaran paras glukosa darah yang baru",
+         "subtitle": "Dapatkan bantuan daripada doktor anda untuk menetapkan sasaran ini. Jika anda meninggalkan sasaran ini kosong, kami akan memberikan sasaran tetapan asal iaitu 80 -130 mg/dL untuk puasa dan 80 - 180 mg/dL untuk selepas makan seperti yang disarankan oleh ADA.",
+         "fasting": "Fasting (FPG)",
+         "fastingDefinition": "FPG (Fasting Plasma Glucose) adalah bacaan paras glukosa darah anda selepas anda berpuasa atau tidak makan atau minum untuk sekurang kurangnya dalam tempoh 8 jam. Ujian ini biasanya dilakukan pada pagi hari, sebelum mengambil sarapan pagi.",
+         "afterMeal": "Selepas Makan (PPG)",
+         "afterMealDefinition": "PPG (Postprandial Plasma Glucose) adalah bacaan paras glukosa darah selepas makan atau minum. Bacaan PPG ini dilakukan untuk melihat jika terdapat lonjakan pada paras glukosa darah agar dapat menentukan jika masa suntikan insulin adalah berkesan.",
+         "from": "Daripada",
+         "to": "Kepada",
+         "save": "Simpan",
+         "errors": {
+            "required": "Sila masukkan sasaran paras glukosa darah yang betul",
+            "outOfBoundariesMmolL": "Sila masukkan sasaran yang betul daripada 0.06-50 mmol/L",
+            "outOfBoundariesMgDl": "Sila masukkan sasaran yang betul daripada 1-900 mg/dl.",
+            "minValue": "Sila masukkan bacaan yang lebih tinggi Daripada"
+         }
+      },
+      "hba1cTargets": {
+         "title": "Sasaran Anda",
+         "goalPercentage": "Peratusan Sasaran",
+         "percent": "%"
+      },
+      "hba1cTargetInput": {
+         "title": "Tetapkan sasaran HbA1c anda",
+         "subtitle": "Dapatkan bantuan doktor anda untuk menetapkan sasaran ini. Jika sasaran ini ditinggalkan kosong, kami akan menetapkan sasaran tetapan asal iaitu 6% seperti yang disarankan ADA.",
+         "goal": "Sasaran",
+         "errors": {
+            "required": "Sila masukkan sasaran HbA1C yang betul.",
+            "minMax": "Sila masukkan sasaran HbA1C yang betul antasa 5% dan 15%"
+         }
+      },
+      "bodyMeasurements": {
+         "title": "Ukuran Badan",
+         "yourReadingHeight": "Tinggi",
+         "yourReadingWeight": "Berat",
+         "errors": {
+            "missingHeight": "Sila masukkan ukuran tinggi anda",
+            "missingWeight": "Sila masukkan ukuran berat anda",
+            "measurementInvalidMetric": "Sila masukkan ukuran yang betul (X'XX.XX)",
+            "measurementInvalidImperial": "Sila masukkan ukuran yang betul (XXX)",
+            "outOfBoundariesMetric": "Sila masukkan ukuran yang betul antara 60 -250 cm",
+            "outOfBoundariesImperial": "Sila masukkan ukuran yang betul antara 1'11.7 - 8'2.5 ft/in",
+            "outOfBoundariesKg": "Sila masukkan ukuran yang betul antara 0 - 200 kg",
+            "outOfBoundariesLbs": "Sila masukkan ukuran yang betul antara 0 - 400 lbs",
+            "measurementInvalid": "Sila masukkan ukuran yang betul (XXX.XX)"
+         }
+      },
+      "personalInformation": {
+         "title": "Butiran Peribadi"
+      },
+      "cameraOptionsDialog": {
+         "title": "Pilihan",
+         "scanBarcode": "Imbas Kod Bar",
+         "manuallyScanBarcode": "Masukkan Kod Bar Secara Manual",
+         "upload": "Muat Naik"
+      },
+      "dashboard": {
+         "title": "Skrin Utama",
+         "healthTrackers": "Pengesan Kesihatan",
+         "newMessage": "Mesej Baru",
+         "receivedOn": "Diterima pada",
+         "markAsRead": "Tandakan Sudah Dibaca",
+         "yourLatestResult": "Keputusan Ujian Terbaru",
+         "updateProfile": "Lengkapkan Butiran Profil Anda",
+         "updateProfileText": "Isi butiran anda untuk mengetahui risiko-risiko kesihatan anda",
+         "uploadResult": "Muat Naik Keputusan Ujian Makmal Anda",
+         "bookCovid": "Tempah Ujian Saringan Covid",
+         "uploadAnotherResult": "Muat Naik Keputusan Ujian Makmal yang Lain",
+         "labResultText": "Simpan keputusan ujian kesihatan anda dalam satu tempat",
+         "yourLabResultStatus": "Status Keputusan Ujian Makmal Anda",
+         "barcode": "Kod Bar",
+         "doctorMessage": "Lihat Mesej Doktor",
+         "seeResult": "Lihat Keputusan Ujian",
+         "suggestedReading": "Sorotan Artikel",
+         "riskTitle": "RIsiko Kesihatan Anda",
+         "healthRecords": "Rekod Kesihatan",
+         "covid19": "COVID-19",
+         "healthProgress": "Kesihatan",
+         "healthProvider": "Petugas Kesihatan",
+         "yourHealth": "Kesihatan Anda",
+         "dialogs": {
+            "verify": {
+               "title": "Keputusan Ujian Sedia",
+               "description": "Sila masukkan no kad pengenalan atau no pasport untuk mengesahkan identiti anda.",
+               "label": "Nombor Kad Pengenalan atau Nombor Pasport",
+               "errors": {
+                  "required": "Nombor Kad Pengenalan atau Nombor Pasport diperlukan",
+                  "unsuccessful": "Pengesahan Nombor Kad Pengenalan atau Nombor Pasport gagal."
+               }
+            },
+            "verifyNotAvailable": {
+               "title": "Pengesahan gagal",
+               "description": "Pengesahan Nombor kad pengenalan atau nombor pasport gagal. Anda sudah melebihi had percubaan pengesahan harian.",
+               "button": "Baik"
+            },
+            "unsuccessful": {
+               "title": "Keputusan Ujian Sedia",
+               "description": "Pengesahan Nombor kad pengenalan atau nombor pasport gagal. Anda sudah melebihi had percubaan pengesahan harian."
+            },
+            "bio-blood_sugar": {
+               "title": "Tetapkan",
+               "description": "Adakah anda ingin menetapkan sasaran paras glukosa darah? Jika anda tekan \"Langkau\", tetapan sasaran asal akan digunakan",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            },
+            "bio-hba1c": {
+               "title": "Tetapkan",
+               "description": "Adakah anda ingin menetapkan sasaran untuk keputusan HbA1c? Jika anda tekan \"Langkau\", sasaran tetapan asal akan digunakan.",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            },
+            "bio-medication": {
+               "title": "Tetapkan Ubat-Ubatan",
+               "description": "Adakah anda ingin menetapkan ubat-ubatan sekarang? Jika anda menekan \"Langkau\", tiada ubat-ubatan akan ditetapkan. Anda boleh mengemaskini pada bila-bila masa.",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            }
+         },
+         "psp": {
+            "yourActions": "Untuk Tindakan Anda",
+            "recordKeeping": "Simpanan Rekod",
+            "empower": "Empower ID:",
+            "titles": {
+               "titleDiabetes": "Masukkan Pusat Sokongan Diabetes",
+               "titleHypertension": "Masukkan Pusat Sokongan Hipertensi"
+            }
+         }
+      },
+      "diabetesSupport": {
+         "titles": {
+            "diabetes_title": "Pusat Sokongan Diabetes",
+            "hypertension_title": "Pusat Sokongan Hipertensi"
+         },
+         "diaries": {
+            "diabetes_diary": "Diari Diabetes Anda",
+            "hypertension_diary": "Diari Hipertensi Anda"
+         },
+         "educations": {
+            "diabetes_education": "Pendidikan tentang Diabetes",
+            "hypertension_education": "Pendidikan tentang Hipertensi"
+         },
+         "withdrawText": "tekan untuk",
+         "withdrawLink": "Keluar daripada Program",
+         "dialogs": {
+            "video": {
+               "title": "Strim Video",
+               "description": "Data yang banyak diperlukan. Kami sarankan anda menggunakan sambungan WIFI.",
+               "buttonText": "Baik"
+            },
+            "withdraw": {
+               "title": "Adakah Anda Pasti?",
+               "description": "Adakah anda pasti anda ingin keluar daripada Program Empower? Anda akan kehilangan akses kepada kelebihan-kelebihan Program Empower",
+               "buttonText": "Ya",
+               "buttonCancelText": "Batal"
+            }
+         },
+         "disclaimer": {
+            "titles": {
+               "titleDiabetes": "Dengan menandatangani borang ini, anda:",
+               "titleHypertension": "Dengan menandatangani borang ini:"
+            },
+            "paragraph": "<strong>1.</strong> Bersetuju untuk menyertai Program Pesakit Empower bagi Insulin Glargine/Lixisenatide dan Glargine U300 dimana anda telah sedia maklum oleh doktor berdaftar anda. Saya dengan ini bersetuju untuk mendaftar dalam Program yang dimaklum oleh doktor saya. <br><br> <strong>2.</strong> Mengaku yang anda sedia maklum bahawa semua maklumat yang berkaitan dengan anda hanya boleh diguna pakai oleh pembekal pihak ketiga Sanofi-Aventis Philippines Inc. yang terlibat dalam program dan segala data akan diurus dengan penuh kerahsian selari dengan Akta Privasi Data dan semua terbitan berkaitan.<br><br> <strong>3.</strong> Mengaku yang anda mempunyai hak untuk mengakses dan membetulkan maklumat peribadi anda pada bila-bila masa atas permintaan anda.<br><br> <strong>4.</strong> Mengaku yang anda boleh menarik diri dari Program Pesakit EMPOWER bagi Insulin Glargine/Lixisenatide and Glargine U300 pada bila-bila masa tanpa sebarang prejudis dengan menghubungi My Blood Profile Technologies Corporation, sebuah anak syarikat BioMark Pte Ltd, dan data yang telah diambil akan kekal di dalam pangkalan data Program Pesakit EMPOWER yang khusus, melainkan anda mohon untuk data ini untuk dihapuskan. Anda boleh menarik diri dari Program Pesakit EMPOWER pada bila-bila masa dengan menekan â€œKeluar dari Programâ€ pautan di laman Pusat Sokongan Diabetes.<br><br> <strong>5.</strong> Mengaku yang anda sedia maklum bahawa program ini mungkin boleh diberhentikan pada bila-bila masa dan anda akan dimaklumkan tiga puluh (30) hari sebelum tarikh pemberhentian.<br><br> <strong>6.</strong> Mengisytihar yang anda telah baca dengan teliti garis panduan/mekanik Program Pesakit EMPOWER bagi Insulin Glargine/Lixisenatide dan Gargine U300 dan menjamin bahawa anda akan mematuhi segala garis panduan/mekanik.<br><br>",
+            "paragraphHypertension": "<ul style='padding-inline-start: 20px;'> <li> <p><span>Anda bersetuju untuk menyertai Program Pesakit EMPOWER bagi Insulin Glargine/Lixisenatide (Soliqua) atau Insulin Glargine U300 (Toujeo), dan/atau Irbesartan + Amlodipine (Aprovasc) (the â€œProgramâ€). Anda mengesahkan bahawa anda telah dimaklumkan tentang Program ini, dan bersetuju untuk didaftarkan di dalamnya, oleh doktor anda yang mendaftar. </span></p> </li> <li style='list-style-type: circle;'> <p><span>Dengan mendaftar dengan Program ini, anda dengan nyata memberi kebenaran kepada pihak ketiga, dan/atau penyedia pihak ketiga yang (\"Sanofi\") terlibat atau berkontrak dengan (secara kolektif, \"Pihak Ketiga\") yang terlibat dalam Program untuk mengumpul dan memproses maklumat peribadi anda dan untuk menjalankan Program mengikut tujuan berikut (â€œPurposesâ€): </span></p> </li></ul><ul> <p style='margin-left: 108pt;'><span style='margin-left: 55px;'> 1. Memberi anda pendidikan tentang diabetes dan/atau pengurusan hipertensi, pengendalian produk, pentitratan dsb., sebagaimana yang berkenaan. Penilaian perubatan dan pemprosesan kes sekiranya berlaku kesan sampingan atau kejadian farmakovigilans. </span></p> <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>2. Memberi anda latihan alatan yang betul dari segi penggunaan alatan perubatan dan/atau Insulin Glargine/Lixisenatide (Soliqua) or Insulin Glargine U300 (Toujeo) solostar pen. </span></p> <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>3. Anda mungkin dibekalkan dengan tujuh (7) biji Irbesartan/Amlodipine (Aprovasc) setiap tiga (3) bulan dalam tempoh masa satu (1) tahun. Sanofi berhak untuk menangguhkan penyediaan dos, bergantung pada ketersediaan dan faktor lain. </span></p> <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>4. Memberi anda peringatan berkala tentang pemantauan glukosa darah, pemantauan tekanan darah, ujian makmal lain yang diperlukan oleh doktor anda. </span></p> <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>5. Memberikan doktor anda yang berdaftar laporan tetap mengenai aktiviti anda dalam Program untuk maklum balas dan pemantauan maklumat yang betul. </span></p></ul><ul style=\"padding-inline-start: 20px;\"> <li> <p><span>Anda mengakui bahawa anda sedar bahawa Program ini bukan kajian klinikal dan semua data yang berkaitan dengan anda hanya boleh diakses oleh Pihak Ketiga yang terlibat dalam Program, dan semua data akan dikendalikan dengan kerahsiaan penuh dengan mematuhi Akta Privasi Data dan semua terbitan berkaitan. Data tersebut akan disimpan dalam tempoh 10 tahun. </span></p> </li> <li> <p><span>Anda mengakui bahawa data yang dikumpul oleh Pendidik Jururawat kami dalam format rekod perubatan (â€œMedical Recordâ€) akan dikumpul dalam sistem pengurusan perhubungan pesakit (â€œPRMâ€) dikendalikan oleh My Blood Profile Technology Corp. (â€œBioMarkâ€) atau mana-mana Pihak Ketiga lain yang dikekalkan oleh Sanofi untuk tujuan itu, hanya boleh diakses oleh Pendidik Jururawat (dari Home Health Care Placements, Inc. (â€œHHCPâ€)), BioMark dari Pihak Ketiga. Untuk mengelakkan keraguan, Sanofi tidak akan mempunyai akses kepada rekod pesakit individu. </span></p> </li> <li> <p><span>Anda bersetuju bahawa Rekod Perubatan anda akan dikongsi oleh BioMark dan Pendidik Jururawat (dari HHCP) kepada doktor berdaftar anda. </span></p> </li> <li> <p><span>Anda mengakui bahawa laporan agregat daripada Program akan dijana dan boleh diakses Sanofi dan Pihak Ketiga untuk tujuan menilai keberkesanan Program untuk menyokong dalam pengurusan diabetes dan/atau hipertensi, dan dalam menilai potensi Program untuk penambahbaikan selanjutnya. Anda juga bersetuju bahawa data peribadi anda akan diberikan kepada Pihak Ketiga untuk tujuan menamakan data yang sama sebelum sebarang pemprosesan selanjutnya akan dilakukan, pemprosesan yang mana termasuk penjanaan data agregat. Anda mengakui bahawa data agregat daripada Program boleh digunakan untuk tujuan penerbitan oleh Sanofi atau Pihak Ketiga, seperti, tetapi tidak terhad kepada, kertas saintifik, laporan bertulis lain, dsb. Laporan agregat yang tidak dikenali terdiri daripada data yang disediakan dalam borang ini dan yang dikumpul dalam Programâ€™s platform digital (seperti Aplikasi Biomark). Anda memahami bahawa tahap kerahsiaan dan keselamatan yang paling ketat akan dikekalkan pada mana-mana peringkat pemprosesan data peribadi anda. </span></p> </li> <li> <p><span>Anda mengakui bahawa anda mempunyai hak untuk mengakses dan membetulkan maklumat peribadi anda pada bila-bila masa atas permintaan anda dengan memuat turun dan mengemas kini Aplikasi BioMark atau dengan menghubungi 0919-433-3392 (Smart). </span></p> </li> <li> <p><span>Anda mengakui bahawa sesi pendidikan yang dirancang dengan Pendidik Jururawat adalah hanya untuk satu (1) tahun. Selepas tempoh satu tahun ini, pesakit boleh menggunakan aplikasi BioMark dan pusat panggilan, selagi program EMPOWER masih aktif. </span></p> </li> <li> <p><span>Anda mengakui bahawa anda boleh menarik diri daripada Program pada bila-bila masa tanpa prejudis dengan menghantar mesej anda melalui Aplikasi Biomark atau dengan menghubungi 0919-433-3392 (Smart). Anda bersetuju bahawa data peribadi yang telah dikumpul daripada anda akan kekal dalam pangkalan data Program khusus untuk tempoh pengekalan yang dinyatakan di atas, melainkan anda meminta data ini dipadamkan. </span></p> </li> <li> <p><span>Anda mengakui bahawa anda sedar bahawa Program ini mungkin dihentikan pada bila-bila masa dan anda akan dimaklumkan tiga puluh (30) hari sebelum tarikh penamatan. </span></p> </li></ul>",
+            "checkboxLabel": "Saya dengan ini mengesahkan bahawa saya faham dan sedar akan polisi di atas dan bersetuju kepada pengumpulan, penggunaan dan pendedahan maklumat saya mengikut terma polisi.",
+            "buttonLabel": "Terima & Teruskan"
+         },
+         "welcome": {
+            "titles": {
+               "titleDiabetes": "Selamat Datang ke Pusat Sokongan Diabetes",
+               "titleHypertension": "Selamat Datang ke Pusat Sokongan Hipertensi",
+               "titleEmpower": "Selamat Datang ke Program Empower"
+            },
+            "intros": {
+               "introDiabetes": "Anda boleh menjejak paras glukosa darah anda, ubat-ubatan dan sumber bacaan untuk membantu anda menguruskan kencing manis anda.",
+               "introHypertension": "Anda boleh menjejak tekanan darah anda, ubat-ubatan dan sumber bacaan untuk membantu anda menguruskan darah tinggi anda.",
+               "introEmpower": "Selamat datang ke Program Empower. Matlamat kami adalah untuk memperkasakan anda dalam perjalanan rawatan anda!"
+            },
+            "buttonLabels": {
+               "continueDiabetes": "Teruskan ke Pusat Diabetes",
+               "continueHypertension": "Teruskan ke Pusat Hipertensi",
+               "continueEmpower": "Teruskan"
+            }
+         },
+         "onboarding": {
+            "next": "Seterusnya",
+            "finish": "Selesai",
+            "demo": {
+               "bloodSugar": "Log bacaan paras glukosa darah anda di sini",
+               "medication": "Log ubat-ubatan anda di sini",
+               "HbA1c": "Log bacaan HbA1C di sini",
+               "video": "Lihat Video Tutorial yang berguna di sini",
+               "more": "Belajar mengenai diabetes di sini",
+               "moreHypertension": "Belajar mengenai hipertensi di sini",
+               "bloodPressure": "Log bacaan tekanan darah anda di sini",
+               "weight": "Log ukuran berat anda di sini"
+            }
+         }
+      },
+      "drinking": {
+         "title": "Minum Arak"
+      },
+      "email": {
+         "title": "Emel",
+         "save": "Simpan",
+         "newEmail": {
+            "title": "Alamat Emel",
+            "placeholder": "",
+            "errors": {
+               "required": "Emel diperlukan",
+               "email": "Bukan Alamat Emel yang betul"
+            }
+         },
+         "confirmEmail": {
+            "title": "Sahkan Alamat Emel",
+            "placeholder": "",
+            "errors": {
+               "required": "Emel diperlukan",
+               "repeatRequired": "Pengesahan Emel diperlukan",
+               "email": "Bukan Alamat Emel yang betul",
+               "emailMismatch": "Alamat emel tidak sepadan"
+            }
+         }
+      },
+      "encodedResults": {
+         "filters": {
+            "title": "Keseluruhan Tapisan",
+            "confirm": "Sahkan",
+            "type": "Jenis tapisan",
+            "all": "Semua",
+            "abnormal": "Tidak Normal"
+         },
+         "info": {
+            "title": "Perincian Keputusan",
+            "source": "Sumber",
+            "reference": "Doktor atau Klinik Rujukan",
+            "labReference": "Nombor Rujukan Makmal",
+            "collected": "Sampel Sudah Dikumpul",
+            "received": "Keputusan DIterima",
+            "printed": "Keputusan Dicetak",
+            "close": "Tutup"
+         }
+      },
+      "healthRisks": {
+         "title": "Apakah RIsiko Kesihatan Anda?",
+         "description1": "Untuk menilai risiko kesihatan anda, sila beritahu kamu tentang tentang diri anda.",
+         "description2": "Ini ada soalan yang anda boleh langkau dan boleh dijawab pada bila-bila masa.",
+         "continue": "Teruskan",
+         "save": "Simpan",
+         "statusMedication": "Masukkan ubat ubatanâ€¦",
+         "statusList": "Masukkan namaâ€¦",
+         "conditions": "Masukkan kondisiâ€¦",
+         "medications": "Masukkan ubat ubatanâ€¦",
+         "dismissDialog": {
+            "title": "Adakah Anda Pasti?",
+            "description": "Dengan mengesahkan tindakan ini, anda akan melangkau soalan yang membantu kami menilai risiko kesihatan anda dan akan membawa ke skrin utama.",
+            "buttonText": "Ya"
+         }
+      },
+      "labResultOverview": {
+         "title": "Keseluruhan Keputusan",
+         "youUploads": "Muat Naik Anda",
+         "deleteUpload": "Padam Muat Naik",
+         "seeResults": "Lihat Keputusan",
+         "dialogs": {
+            "delete": {
+               "title": "Adakah Anda Pasti?",
+               "description": "Adakah anda pasti ingin memadam keputusan ujian ini? Anda tidak boleh dibatalkan",
+               "buttonText": "Ya",
+               "buttonCancelText": "Batal"
+            },
+            "success": {
+               "title": "Berjaya Disimpan",
+               "description": "Kemaskini anda berjaya disimpan.",
+               "buttonText": "Okay"
+            },
+            "edit": {
+               "title": "Ubah Butiran",
+               "newDocumentNamePlaceholder": "Ujian Diabetes daripada Julai",
+               "documentName": "Nama Dokumen",
+               "buttonText": "Memohon"
+            }
+         }
+      },
+      "language": {
+         "title": "Bahasa",
+         "description": "Pilih bahasa pilihan anda",
+         "save": "Simpan",
+         "dialog": {
+            "title": "Bahasa",
+            "description": "Bahasa telah ditukar",
+            "buttonText": "Sahkan"
+         }
+      },
+      "idVerification": {
+         "backButton": "Kembali",
+         "continue": "Teruskan",
+         "skip": "Langkau untuk masa ini",
+         "progress": {
+            "personal": "Butiran Peribadi",
+            "verification": "Verifikasi ID"
+         },
+         "personalDetails": {
+            "title": "Butiran Peribadi",
+            "description": "Sila teruskan untuk proses verifikasi ID"
+         },
+         "verification": {
+            "title": "Verifikasi ID",
+            "description": "Untuk teruskan, anda perlu mengesahkan verifikasi ID"
+         },
+         "complete": {
+            "title": "Lengkap",
+            "description": "Butiran anda telah berjaya disahkan!"
+         },
+         "terms": {
+            "title": "Terma & Syarat",
+            "description": "Sila nyatakan bahawa anda telah baca dan setuju dengan butiran terma privasi"
+         },
+         "tos": {
+            "start": "Saya telah membaca",
+            "middle": "",
+            "end": "polisi privasi.",
+            "tosLink": "terma dan syarat.",
+            "dppLink": ""
+         }
+      },
+      "login": {
+         "errors": {
+            "phoneNumberRequired": "Sila masukkan nombor telefon anda",
+            "phoneNumberZeroStart": "Mesti bermula dengan kosong",
+            "phoneNumberTooLong": "Tidak boleh melebihi",
+            "phoneNumberTooShort": "Mesti ada",
+            "password": "Sila berikan kata laluan anda",
+            "noConnection": "Tiada sambungan internet",
+            "characters": "ayat"
+         },
+         "forgotPassword": "Lupa kata laluan?",
+         "newToBiomark": "Tidak mempunyai akaun?",
+         "terms": "Terma & Polisi Privasi",
+         "signUp": "Daftar Baru",
+         "or": "atau",
+         "emailSignUp": "Daftar Baru dengan Emel",
+         "enterPassword": "Masukkan kata laluan anda...",
+         "enterEmail": "Masukkan emel anda",
+         "login": "Log Masuk",
+         "email": "Emel"
+      },
+      "marketingConsent": {
+         "title": "Persetujuan Pemasaran",
+         "intro": "BioMark ingin menghubungi anda mengenai butiran tawaran, promosi, dan perkhidmatan melalui emel dan SMS.",
+         "optIn": "Saya ingin menerima maklumat mengenai butiran tawaran, promosi, dan perkhidmatan melalui emel dan SMS.",
+         "save": "Simpan",
+         "dialog": {
+            "title": "Adakah Anda Pasti?",
+            "description": "Dengan menekan 'Sahkan' anda tidak lagi akan menerima maklumat mengenai butiran tawaran, promosi, dan perkhidmatan melalui emel dan SMS.",
+            "buttonText": "Sahkan",
+            "cancelButtonText": "Bukan Sekarang"
+         }
+      },
+      "medicalHistory": {
+         "title": "Sejarah Kesihatan",
+         "familyTitle": "Sejarah Kesihatan Keluarga",
+         "ethnicity": "Apakahtâ€™s etnik anda?",
+         "ethnicityHint": "Etnik anda akan memberi impak kepada nilai BMI anda.",
+         "diagnosis": "Adakah anda pernah didiagnos dengan mana-mana kondisi berikut?",
+         "familyDiagnosis": "Adakah keluarga anda pernah didiagnos dengan mana-mana kondisi berikut?",
+         "continue": "Simpan & Teruskan",
+         "save": "Simpan",
+         "allergies": {
+            "title": "{{nama}} Alahan",
+            "allergyTo": {
+               "Medication": "Adakah anda mempunyai alahan kepada ubat-ubatan?",
+               "Food": "Adakah anda mempunyai alahan kepada makanan?",
+               "Animal": "Adakah anda mempunyai alahan kepada haiwan?",
+               "Environment": "Adakah anda mempunyai alahan kepada allergen persekitaran?",
+               "Other": "Adakah anda mempunyai alahan kepada benda selain yang disenaraikan?"
+            },
+            "listAllergies": {
+               "Medication": {
+                  "label": "Sila senaraikan ubat ubatan ini",
+                  "placeholder": "Masukkan ubat ubatan"
+               },
+               "Food": {
+                  "label": "Sila senaraikan makanan ini",
+                  "placeholder": "Sila masukkan makanan"
+               },
+               "Animal": {
+                  "label": "Sila senaraikan haiwan ini",
+                  "placeholder": "Masukkan haiwan"
+               },
+               "Environment": {
+                  "label": "Sila senaraikan allergen persekitaran",
+                  "placeholder": "Masukkan allergen persekitaran"
+               },
+               "Other": {
+                  "label": "Sila senaraikan alahan ini",
+                  "placeholder": "Masukkan alahan"
+               }
+            }
+         },
+         "errors": {
+            "ethnicity": "Masukkan etnik anda"
+         }
+      },
+      "medicationInput": {
+         "titleEdit": "Kemaskini Ubat",
+         "titleSave": "Masukkan Ubat Baru",
+         "dosage": "Dos",
+         "meal": "Masa Makan",
+         "disease": "Penyakit",
+         "dateTime": "Tarikh- Masa",
+         "medication": "Ubat Ubatan",
+         "frequency": "Kekerapan Dos",
+         "editButton": "Simpan Edit",
+         "saveButton": "Tambah",
+         "tapTpAdd": "Tekan untuk tetapkan",
+         "endDate": "Tarikh Akhir",
+         "startDate": "Tarikh Mula",
+         "at": "di",
+         "start": "Mula",
+         "end": "Akhir",
+         "dialogs": {
+            "delete": {
+               "title": "Ubat Ubatan",
+               "description": "Adakah anda pasti ingin memadam ubat ini?",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            }
+         },
+         "errors": {
+            "missingMeasurement": "Sila masukkan nombor yang betul antara 1 dan 150.",
+            "dateOutOfBoundaries": "Tarikh Akhir mesti ditetapkan sebelum Tarikh Akhir",
+            "outOfBoundaries": "Sila masukkan nombor yang betul antara 1 dan 150."
+         }
+      },
+      "medicationList": {
+         "title": "Kemaskini Ubat",
+         "description": "Tekan pada ubat untuk mengemaskini butirannya.",
+         "continue": "Teruskan"
+      },
+      "medicationTake": {
+         "titleEdit": "Ubat Ubatan",
+         "titleSave": "Ambil Ubat",
+         "dosage": "Dos",
+         "meal": "Masa Makan",
+         "dateTime": "Tarikh- Masa",
+         "medication": "Ubat Ubatan",
+         "units": "Unit",
+         "editButton": "Simpan Edit",
+         "saveButton": "Ambil",
+         "dialogs": {
+            "delete": {
+               "title": "Ubat Ubatan",
+               "description": "Adakah anda pasti untuk memadam log ubat ini?",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            }
+         },
+         "errors": {
+            "missingMeasurement": "Sila masukkan nombor yang betul antara 1 dan 150",
+            "outOfBoundaries": "Sila masukkan nombor yang betul antara 1 dan 150"
+         }
+      },
+      "medicationTab": {
+         "title": "UBAT HARIAN ANDA"
+      },
+      "more": {
+         "title": "Lagi",
+         "links": {
+            "profile": "Profil",
+            "notifications": "Notifikasi",
+            "support": "Sokongan",
+            "about": "Tentang BioMark",
+            "policies": "Polisi",
+            "settings": "Tetapan",
+            "logout": "Log Keluar",
+            "autoLogout": "Auto Log Keluar",
+            "idVerification": "Verifikasi Identiti",
+            "dependants": "Tanggungan",
+            "verification": {
+               "notVerified": "Belum Disahkan",
+               "pending": "Pengesahan Belum Selesai",
+               "verified": "Disahkan"
+            }
+         }
+      },
+      "notification": {
+         "title": "Notifikasi",
+         "doctorMessage": {
+            "title": "Chat"
+         }
+      },
+      "password": {
+         "title": "Ubah Kata Laluan",
+         "description": "Masukkan kata laluan anda yang baru",
+         "passwordRules": "Sila masukkan kata laluan sekurangnya 8 karakter, mengandungi sekurangnya satu simbol, satu huruf besar dan satu nombor.",
+         "save": "Simpan",
+         "currentPassword": {
+            "title": "Kata Laluan Sekarang",
+            "description": "Sila masukkan kata laluan anda yang sekarang",
+            "placeholder": "Masukkan kata laluan anda yang sekarang...",
+            "errors": {
+               "required": "Kata laluan anda yang sekarang diperlukan...",
+               "invalidCurrent": "Kata laluan yang dimasukkan adalah salah."
+            }
+         },
+         "newPassword": {
+            "title": "Masukkan Kata Laluan Baru",
+            "placeholder": "Masukkan kata laluan anda yang baru...",
+            "errors": {
+               "required": "Kata laluan baru diperlukan",
+               "invalid": "Kata laluan baru tidak sah"
+            }
+         },
+         "newPasswordConfirm": {
+            "title": "Sahkan Kata Laluan Baru",
+            "placeholder": "Masukkan kata laluan baru anda sekali lagi...",
+            "errors": {
+               "passwordMismatch": "Kata laluan tidak padan",
+               "required": "Kata laluan keduanya diperlukan",
+               "invalid": "Kata laluan baru tidak sah"
+            }
+         },
+         "resetLimit": {
+            "title": "Permintaan anda tidak dapat diproses",
+            "error": {
+               "limit": "Melebihi had percubaan harian, sila cuba pada masa yang lain."
+            },
+            "buttonText": "Tutup"
+         }
+      },
+      "pdfViewer": {
+         "title": "Keseluruhan Keputusan",
+         "download": "Muat Turun Keputusan Ujian",
+         "info": "Anda boleh melihat keputusan ujian anda dengan menekan butang di atas. Kesemua keputusan ujian akan dimuat turun dan disimpan dalam format PDF."
+      },
+      "phoneNumber": {
+         "title": "Nombor Telefon (R)",
+         "mobileNumber": "Nombor Telefon (H)",
+         "save": "Simpan"
+      },
+      "policies": {
+         "title": "Polisi",
+         "privacyPolicy": {
+            "title": "Dasar Privasi"
+         },
+         "termsAndConditions": {
+            "title": "Terma & Syarat"
+         }
+      },
+      "profile": {
+         "title": "Butiran Anda",
+         "about": "Tentang Anda",
+         "links": {
+            "medicalHistory": "Sejarah Kesihatan",
+            "familyMedicalHistory": "Sejarah Kesihatan Keluarga",
+            "bodyMeasurement": "Ukuran Badan",
+            "personalInformation": "Butiran Peribadi",
+            "vaccination": "Vaksinasi",
+            "allergies": "Alahan",
+            "stress": "Tekanan",
+            "smoking": "Merokok",
+            "drinking": "Minum Arak",
+            "exercise": "Senaman",
+            "sleep": "Tidur"
+         }
+      },
+      "progress": {
+         "title": "Kemajuan"
+      },
+      "pspDashboard": {
+         "title": "Pusat Sokongan Diabetes"
+      },
+      "qrCode": {
+         "dialogs": {
+            "midas": {
+               "title": "Imbas Berjaya",
+               "description": "Kod berjaya diimbas. Sila tekan â€˜Nextâ€™ untuk teruskan.",
+               "buttonText": "Seterusnya"
+            },
+            "doctor": {
+               "title": "Hubungkan",
+               "titlePSP": "Persetujuan",
+               "descriptionPSP": "Dengan menekan 'Setuju', saya bersetuju untuk berkongsi butiran peribadi saya dengan Petugas Kesihatan yang ditugaskan dalam borang program pesakit Empower, termasuk profil butiran peribadi dan butiran pengesan kesihatan saya untuk tujuan menerima perkhidmatan kesihatan.",
+               "description": "Dengan menekan 'Hubung', saya bersetuju untuk berkongsi butiran peribadi saya dengan {{ nama }}, termasuk maklumat butiran profil dan butiran pengesan kesihatan saya untuk tujuan menerima perkhidmatan kesihatan.",
+               "buttonText": "Hubung",
+               "buttonTextPSP": "Setuju",
+               "buttonCancelText": "Tidak Setuju"
+            }
+         }
+      },
+      "resetPassword": {
+         "title": "Ubah Kata Laluan",
+         "otpCodeDescription": "Anda akan menerima kod verifikasi pada nombor telefon yang anda berikan. Sila lihat telefon anda dan masukkan kod OTP di bawah.",
+         "notReceived": "Tidak terima?",
+         "otpResend": "Hantar semula OTP",
+         "continue": "Teruskan",
+         "resetDescription": "Sila masukkan semula kata laluan yang baru",
+         "reset": "Ubah Kata Laluan",
+         "newPasswordPlaceholder": "Masukkan kata laluan baruâ€¦",
+         "confirmPasswordPlaceholder": "Masukkan semula kata laluan baruâ€¦",
+         "intro": "Jangan Risau! Kami akan membantu anda untuk kembali ke landasan sebenar"
+      },
+      "resultSummary": {
+         "tabs": {
+            "summary": {
+               "title": "RIngkasan",
+               "latestResult": "Keputusan Ujian Terbaru",
+               "referenceRange": "nilai rujukan:",
+               "source": "Sumber:",
+               "history": "Sejarah",
+               "definition": "definisi",
+               "seePDF": "Lihat PDF",
+               "description": {
+                  "normal": "Bagaimana jika bacaan {{ nama }} adalah normal?",
+                  "low": "Bagaimana jika bacaan {{ nama }} adalah rendah?",
+                  "high": "Bagaimana jika bacaan {{ nama }} adalah tinggi?",
+                  "abnormal": "Bagaimana jika bacaan {{ nama }} adalah tidak biasa?"
+               },
+               "tableHeaders": {
+                  "date": "Tarikh",
+                  "result": "Keputusan Ujian",
+                  "unit": "Unit",
+                  "refRange": "nilai rujukan:",
+                  "abnormal": "Tidak Normal",
+                  "comments": "Komen",
+                  "labSource": "Sumber makmal"
+               }
+            },
+            "chart": {
+               "title": "Carta"
+            },
+            "resources": {
+               "title": "Sumber"
+            }
+         }
+      },
+      "results": {
+         "title": "Keputusan Ujian",
+         "search": "Cari Keputusan Ujian",
+         "searchBiomarkers": "cari penanda bio",
+         "latestResults": "Keputusan Ujian Terbaru Anda",
+         "usefulReading": "Bacaan berguna",
+         "noLatestResults": "Anda tiada sebarang keputusan ujian",
+         "pastResults": "Keputusan Ujian Lama",
+         "noPastResults": "Anda tiada sebarang keputusan ujian lama",
+         "noMorePastResults": "Anda sudah tiada sebarang keputusan ujian lama",
+         "uploadResults": "Muat Naik Keputusan Ujian",
+         "loadMoreData": "Muatkan lebih banyak data",
+         "keepTrack": "Simpan keputusan ujian kesihatan anda dalam satu tempat",
+         "healthReport": "Keputusan Ujian Kesihatan Anda",
+         "healthReportDesc": "Ini adalah laporan kesihatan dimana anda boleh melihat keputusan terkini dan terdahulu daripada laporan makmal",
+         "filters": {
+            "title": "Tapis carian",
+            "confirm": "Sahkan",
+            "clearFilters": "Buang Tapis",
+            "uploadType": "Jenis dokumen untuk muat naik",
+            "uploadedByMe": "Dimuat naik oleh anda",
+            "sentByDoctor": "Dihantar oleh Doktor",
+            "startDate": "Tarikh Mula",
+            "endDate": "Tarikh Akhir"
+         }
+      },
+      "searchResults": {
+         "noResults": "Tiada Keputusan Dijumpai",
+         "noBiomarkerResults": "Keputusan penanda bio tidak dijumpai",
+         "cards": {
+            "bioMarkers": "Penanda bio",
+            "panel": "Panel",
+            "result": "Keputusan Ujian",
+            "doctor": "Doktor"
+         }
+      },
+      "settings": {
+         "title": "Tetapan",
+         "links": {
+            "password": "Kata Laluan",
+            "email": "Emel",
+            "phoneNumber": "Nombor Telefon (R)",
+            "marketingConsent": "Persetujuan Pemasaran",
+            "dataPrivacy": "Pertanyaan Data Privasi",
+            "language": "Bahasa",
+            "accountDeactivation": "Tutup Account"
+         },
+         "dialogs": {
+            "accountDeactivation": {
+               "title": "Adakah Anda Pasti?",
+               "description": "Adakah anda pasti untuk menutup akaun BioMark anda?",
+               "buttonText": "Sahkan",
+               "cancelButtonText": "Bukan Sekarang"
+            }
+         }
+      },
+      "register": {
+         "form": {
+            "basicLegend": "Butiran Asas",
+            "firstName": "Nama Pertama",
+            "lastName": "Name Terakhir",
+            "gender": "Jantina",
+            "dateOfBirth": "Tarikh Lahir",
+            "idNumber": "Kad Identiti/ Nombor Pasport",
+            "accountLegend": "Butiran Akaun",
+            "email": "Emel",
+            "mobile": "Nombor Telefon (H)",
+            "password": "Kata Laluan"
+         }
+      },
+      "signUp": {
+         "title": "Daftar Baru",
+         "welcome": "Selamat datang ke Biomark. Jom!",
+         "haveAccount": "Mempunyai akaun?",
+         "login": "Log Masuk",
+         "disclaimer": "PENAFIAN",
+         "disclaimerText": "Aplikasi ini tidak boleh digunakan untuk memberi diagnosis, mengelak, mengawasi, mengurus, mengurangkan atau menyembuhkan mana-mana kondisi kesihatan atau penyakit.",
+         "createPassword": "Cipta Kata Laluan",
+         "passwordRules": "Kata laluan anda mestilah mempunyai sekurangnya 8 huruf, termasuk simbol, satu huruf besar dan nombor.",
+         "continue": "Teruskan",
+         "skip": "Langkau",
+         "otpTitle": "Masukkan Kod Anda",
+         "otpCodeDescription": "Anda akan menerima kod verifikasi pada nombor telefon yang anda berikan. Sila lihat telefon anda dan masukkan kod OTP di bawah.",
+         "otpResend": "Hantar semula kod pengesahan (OTP)",
+         "provideNameTitle": "Nama anda?",
+         "dobTitle": "Tarikh Lahir",
+         "genderTitle": "Jantina anda?",
+         "countryTitle": "Di Manakah Negara Anda?",
+         "icTitle": "No Kad Pengenalan Anda",
+         "icDescription": "Sila masukkan nombor kad pengenalan anda supaya kami mengenali anda dan boleh menghantar keputusan ujian kepada anda",
+         "emailTitle": "dan Alamat Emel?",
+         "emailDescription": "BioMark ingin mengetahui alternatif lain untuk menghubungi anda supaya kami dapat memberitahu mengenai kesihatan dan keputusan ujian makmal anda. Anda boleh langkau jika mahu.",
+         "tos": {
+            "start": "Saya terima",
+            "middle": "dan juga",
+            "end": ".",
+            "tosLink": "terma dan syarat.",
+            "dppLink": "Dasar Privasi"
+         },
+         "buttontitle": {
+            "privacy": "Butiran Privasi",
+            "back": "Kembali"
+         },
+         "allSet": {
+            "title": "Semua Sudah Sedia",
+            "welcome": "Anda sudah berjaya mendaftar dengan BioMark. Apakah yang anda ingin lakukan seterusnya?",
+            "actions": {
+               "code": {
+                  "title": "Saya mempunyai kod bar",
+                  "description": "Jika anda diberikan kod QR or kod bar, tekan pilihan ini untuk imbas kod"
+               },
+               "noCode": {
+                  "title": "Mula",
+                  "description": "Jika anda tiada kod bar, tekan disini untuk bermula"
+               },
+               "trouble": {
+                  "text": "Hadapi masalah?",
+                  "link": "Hubungi kami"
+               }
+            },
+            "dialogs": {
+               "alreadyScanned": {
+                  "title": "Kod sudah dimasukkan",
+                  "description": "Nampaknya kod ini sudah pernah dimasukkan",
+                  "buttonText": "Kembali"
+               },
+               "alreadyMember": {
+                  "title": "Sudah Menjadi Ahli",
+                  "description": "Anda sudah pun menjadi ahli Program Empower. Anda sudah boleh memasukkan rekod bacaan paras glukosa darah dan ubat-ubatan.",
+                  "buttonText": "Kembali"
+               },
+               "alreadyHypertensionMember": {
+                  "title": "Sudah Menjadi Ahli",
+                  "description": "Anda sudah pun menjadi sebahagian daripada Program Empower. Anda sudah boleh memasukkan rekod bacaan tekanan darah dan ubat-ubatan.",
+                  "buttonText": "Kembali"
+               },
+               "alreadyConnected": {
+                  "title": "Anda sudah dihubungkan",
+                  "titleAlt": "Anda sudah dihubungkan dengan kod bar ini",
+                  "description": "Kumpul dan Rekod keputusan ujian kesihatan anda dan fahami risiko anda untuk menghidap penyakit kronik",
+                  "buttonText": "Hubungi kami",
+                  "buttonCancelText": "Okay",
+                  "buttonCancelTextAlt": "Kembali"
+               },
+               "invalidCode": {
+                  "title": "Kod Tidak Sah",
+                  "description": "Nampaknya kod ini tidak sah. Sila cuba semula",
+                  "buttonText": "Hubungi kami",
+                  "buttonCancelText": "Kembali"
+               },
+               "invalidCodeContact": {
+                  "title": "Kod Tidak Sah",
+                  "description": "Hubungi kami jika anda tidak berjaya melihat keputusan ujian anda",
+                  "buttonText": "Hubungi kami",
+                  "buttonCancelText": "Kembali"
+               },
+               "dailyLimit": {
+                  "title": "Melepasi Had Percubaan Harian",
+                  "description": "Anda sudah melepasi had percubaan harian",
+                  "buttonText": "Okay"
+               },
+               "invalidCodeAlt": {
+                  "title": "Kod Tidak Sah",
+                  "description": "Percubaan memasukkan kod tidak sah yang banyak. Sila cuba masukkan kod secara manual.",
+                  "buttonText": "Masukkan Kod Secara Manual"
+               },
+               "inDoctorReview": {
+                  "title": "Semakan Sedang Dijalankan",
+                  "description": "Keputusan Ujian anda sedang disemak oleh doktor anda",
+                  "buttonText": "Tutup"
+               },
+               "manualCode": {
+                  "title": "Masukkan kod bar atau QR",
+                  "description": "Ia adalah nombor dibawah kod bar atau QR",
+                  "inputLabel": "Kod Bar atau QR",
+                  "buttonText": "Simpan Kod",
+                  "qrCodeLabel": "Kod Bar atau QR",
+                  "qrCodeRequired": "Sila taip kod bar atau QR"
+               },
+               "success": {
+                  "title": "Kemasukan Berjaya",
+                  "titleAlt": "Imbas Berjaya",
+                  "description": "Kod berjaya dimasukkan. Sila tekan seterusnya untuk teruskan",
+                  "descriptionAlt": "Kod berjaya dimasukkan.",
+                  "buttonText": "Seterusnya",
+                  "buttonTextAlt": "Baik"
+               },
+               "fail": {
+                  "title": "Entri Gagal",
+                  "description": "Sila periksa sambungan internet anda dan cuba semula. Jika masih tidak berjaya, sila hubungi kami",
+                  "buttonText": "Okay"
+               }
+            }
+         },
+         "allSetScan": {
+            "title": "Saya mempunyai kod bar",
+            "welcome": "Bagaimana anda ingin menggunakan kod bar anda?",
+            "actions": {
+               "scan": {
+                  "title": "Imbas Kod Bar",
+                  "description": "Tekan pilihan ini untuk mengimbas kod bar menggunakan kamera telefon anda"
+               },
+               "manual": {
+                  "title": "Masukkan Kod Secara Manual",
+                  "description": "Jika anda ingin memasukkan kod bar secara manual, tekan pilihan ini"
+               }
+            },
+            "info1": "Hadapi masalah?",
+            "info2": "Hubungi kami"
+         }
+      },
+      "smoking": {
+         "title": "Merokok",
+         "errors": {
+            "min": "Masukkan sekurangnya satu puntung rokok sehari",
+            "wrongRange": "Tahun berhenti sepatutnya adalah selepas tahun bermula"
+         }
+      },
+      "summary": {
+         "headers": {
+            "calculation": "Pengiraan",
+            "description": "Huraian",
+            "references": "Sumber Rujukan",
+            "footNotes": "Nota kaki",
+            "age": "Umur",
+            "gender": "Jantina",
+            "HDLCholesterol": "Kolesterol HDL",
+            "gestationalDiabetes": "Kencing Manis Kehamilan",
+            "familyHistoryOfDiabetes": "Sejarah Keluarga Menghidap Kencing Manis",
+            "highBloodPressure": "Tekanan Darah Tinggi",
+            "exercise": "Senaman",
+            "height": "Tinggi",
+            "weight": "Berat",
+            "totalCholesterol": "Jumlah Kolesterol",
+            "systolicBloodPressure": "Tekanan Darah Sistolik",
+            "bloodPressureMedication": "Ubat Darah Tinggi",
+            "smoking": "Merokok",
+            "diabetes": "Kencing Manis",
+            "bpLevelLow": "Rendah",
+            "bpLevelNormal": "Normal",
+            "bpLevelElevated": "Tinggi",
+            "bpLevelHigh1": "Tinggi (HPT Tahap 1)",
+            "bpLevelHigh2": "Tinggi (HPT Tahap 2)",
+            "bpLevelHyper": "Krisis Darah Tinggi",
+            "pint": "Gelas Bir",
+            "wine": "Gelas Wain",
+            "shot": "Tegukan Spirit",
+            "bmiUnderweight": "Kurang Berat",
+            "bmiNormal": "Normal",
+            "bmiOverweight": "Terlebih Berat",
+            "bmiObese": "Obes"
+         },
+         "buttons": {
+            "common": {
+               "tapHere": "Tekan Sini",
+               "moreInfo": "untuk ketahui lebih lanjut",
+               "completeInfo": "untuk melengkapkan butiran anda"
+            },
+            "exercise": "Lengkapkan Senaman",
+            "bloodTest": "Muat Naik Keputusan Ujian",
+            "familyHistory": "Sejarah Kesihatan Keluarga Lengkap",
+            "medical": "Sejarah Kesihatan Lengkap",
+            "lifestyle": "Lengkapkan Soalan Gaya Hidup",
+            "hw": "Masukkan Tinggi dan Berat",
+            "bp": "Masukkan Bacaan Tekanan Darah",
+            "bmi": "Kemaskini Tinggi dan Berat",
+            "smoking": "Jawab Soalan Merokok",
+            "drinking": "Jawab Soalan Minum Arak",
+            "ethnic": "Kemaskini Kaum",
+            "notFound": ""
+         },
+         "heart": {
+            "text": "Pengiraan risiko jantung disahkan oleh Kajian Jantung Framingham untuk golongan berumur antara 30 dan 74, tanpa ada sejarah penyakit jantung. \n\n\n\nPengiraan mengambil kira faktor-faktor berikut:",
+            "references": "Management of Dyslipidaemia 2017 (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+            "footNotes": "Markah risiko sakit jantung anda hanyalah jangkaan. Malahan, risiko anda mungkin berubah dari semasa ke semasa. Sila rujuk dengan doktor anda untuk mengetahui lebih lanjut",
+            "cards": {
+               "age": "Risiko anda meningkat selepas melebihi umur 35 tahun.",
+               "gender": "Lelaki mempunyai risiko lebih tinggi daripada wanita.",
+               "HDLCholesterol": "Risiko anda meningkat jika mempunyai HDL Kolesterol yang rendah.",
+               "totalCholesterol": "Risiko anda meningkat jika mempunyai Jumlah Kolesterol yang tinggi.",
+               "systolicBloodPressure": "Risiko anda meningkat jika mempunyai bacaan tekanan darah Sistolik yang tinggi",
+               "bloodPressureMedication": "Jika anda sudah mengambil ubat darah tinggi bermakna anda sudah menghidap penyakit darah tinggi. Ini akan meningkatkan risiko anda.",
+               "smoking": "Merokok meningkatkan risiko anda.",
+               "diabetes": "Jika anda sudah disahkan menghidap kencing manis, risiko anda meningkat."
+            }
+         },
+         "diabetes": {
+            "text": "Skor risiko diabetes ini berdasarkan Ujian Risiko Diabetes Jenis 2 dari Persatuan Diabetes Amerika untuk golongan yang tiada sejarah diabetes atau pradiabetes. \n\n\nBerikut merupakan faktor-faktor yang diambil kira:",
+            "references": "American Diabetes Association",
+            "footNotes": "Markah risiko sakit kencing manis anda hanyalah jankaan. Malahan, risiko anda mungkin berubah dari semasa ke semasa. Hanya keputusan ujian darah boleh mengesahkan diagnosis. Sila rujuk dengan doktor anda untuk mengetahui dengan lebih lanjut.",
+            "cards": {
+               "age": "Risiko anda meningkat jika umur anda melebihi 40 tahun.",
+               "gender": "Lelaki mempunyai risiko lebih tinggi daripada wanita untuk mendapat kencing manis jenis kedua.",
+               "gestationalDiabetes": "Wanita yang pernah mendapat kencing manis semasa hamil mempunyai risiko lebih tinggi.",
+               "familyHistoryOfDiabetes": "Sejarah keluarga menghidap penyakit kencing manis meningkatkan risiko anda.",
+               "highBloodPressure": "Mempunyai penyakit darah tinggi meningkatkan risiko anda.",
+               "exercise": "Gaya hidup sedantari meningkatkan risiko anda.",
+               "height": "Ukuran ketinggian anda digunakan untuk mengira Indeks Jisim Tubuh (BMI) anda. Bacaan BMI yang tinggi meningkatkan risiko anda.",
+               "weight": "Ukuran berat anda digunakan untuk mengira Indeks Jisim Tubuh (BMI) anda. Bacaan BMI yang tinggi meningkatkan risiko anda."
+            }
+         },
+         "bp": {
+            "text": "\n\n\n\n\n\n\n\nMesin tekanan darah mengukur jumlah tekanan darah yang mengalir di dalam pembentung darah anda. \n\n\n\n\nNombor atas ialah bacaan sistolik anda yang mengukur tekanan apabila jantung anda berdegup\n\n\n\n\nNombor bawah ialah bacaan diastolik anda yang mengukur tekanan apabila jantung anda berehat antara degupan\n\n\n\n\nTekanan darah tinggi didefinisikan sebagai peningkatan bacaan sistolik tekanan darah (BP) sebanyak 130 mmHg atau lebih dan/atau bacaan diastolik sebanyak 90 mmHg atau lebih, diambil sekurang-kurangnya 2 kali bacaan pada 2 waktu yang berbeza\n\n\n\n\nJika nilai bacaan sistolik dan diastolik anda berada di kategori yang berbeza, bacaan yang lebih tinggi diambil di antara dua jenis kategori. Sebagai contoh, jika bacaan sistolik anda normal, tetapi bacaan diastolik anda tinggi, tekanan darah anda akan dikategorikan sebagai meningkat.\n\n\n\nBerikut merupakan kategori yang berbeza:",
+            "references": "Management of Hypertension (4th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+            "cards": {
+               "bpLevelLow": "<90 / <60 mmHg",
+               "bpLevelNormal": "<120 / <80 mmHg",
+               "bpLevelElevated": "120-129 / <80 mmHg",
+               "bpLevelHigh1": "130-139 / 80-89 mmHg",
+               "bpLevelHigh2": "140-179 / 90-119 mmHg",
+               "bpLevelHyper": ">180 / >120 mmHg\n\n(Dapatkan nasihat doktor anda dengan segera)"
+            }
+         },
+         "bmi": {
+            "text": "Indeks Jisim Tubuh (BMI) anda adalah kaedah untuk menganggar jumlah lemak di dalam badan berdasarkan ketinggian dan berat anda\n\n\n\n\nBMI dikira dengan membahagikan berat (kg) anda dengan persegi ketinggian anda\n(m<sup>2</sup>).\n\n\n\nBMI sering kali menyalah kategorikan ahli bina badan sebagai berat badan berlebihan kerana berat otot yang banyak. Oleh itu, BMI tidak patut digunakan untuk golongan ini\n\n\n\nBerikut merupakan kategori yang berbeza:",
+            "references": "1. World Health Organisation (International Association For The Study of Obesity)\n\n\n\n2. Management of Type 2 Diabetes Mellitus (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+            "cardsAsian": {
+               "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+               "bmiNormal": "18.50 - 22.99 kg/m<sup>2</sup>",
+               "bmiOverweight": "23.00 - 27.49 kg/m<sup>2</sup>",
+               "bmiObese": ">27.5 kg/m<sup>2</sup>"
+            },
+            "cardsCaucasian": {
+               "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+               "bmiNormal": "18.50 - 24.99 kg/m<sup>2</sup>",
+               "bmiOverweight": "25.00 - 29.99 kg/m<sup>2</sup>",
+               "bmiObese": ">30 kg/m<sup>2</sup>"
+            }
+         },
+         "drinking": {
+            "text": "Pengukuran unit alkohol adalah kaedah yang berguna untuk menyemak samada pengambilan alkohol anda berlebihan atau dalam had yang disyorkan.\n\n\n\nPengiraan ini menggunakan unit alkohol yang bergantung kepada alkohol mengikut isipadu (ABV) % dan saiz minuman. \n\n\n\n\nStatus alkohol anda adalah anggaran kerana sukar untuk memastikan kebergantungan unit alkohol. Hal ini kerana terdapat banyak jenis kekuatan dan saiz minuman alkohol yang tersedia.",
+            "references": "www.drinkaware.co.uk",
+            "cards": {
+               "pint": "Satu pint bir (ABV 3.6%) adalah bersamaan 2 unit",
+               "wine": "Satu gelas wain (ABV 12%) adalah bersamaan 2.1 unit",
+               "shot": "Satu tegukkan kecil spirits (25ml, ABV 40%) persamaan dengan 1 unit"
+            }
+         },
+         "smoking": {
+            "text": "Kotak-tahun adalah cara untuk mengira intensiti merokok. Ianya mengambil kira berapa lama dan berapa banyak anda sudah merokok.\n\nIanya dikira dengan membahagi jumlah puntung rokok dihisap dalam sehari dengan 20 dan kemudiannya didarab dengan jumlah berapa tahun anda merokok.",
+            "references": "American Cancer Society"
+         },
+         "stress": {
+            "text": "Skala Tekanan yang Dirasakan adalah antara salah satu cara yang popular untuk menentukan tahap tekanan seseorang. Soal selidik ini menggunakan rangka kerja PSS-4.",
+            "references": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5791241/"
+         },
+         "sleeping": {
+            "text": "Kebersihan tidur yang bagus akan membantu anda untuk mendapat tidur yang berkualiti.\n\nAntara senarai semak kebersihan tidur yang bagus adalah memastikan rutin waktu tidur yang konsisten. Mengehadkan waktu skrin sebelum tidur, mengelakkan menggambil bahan stimulan (caffein, nikotin, alkohol) dan memastikan tidur dalam keadaan yang gelap dan sejuk akan mempercepatkan dan memudahkan anda tidur. \n\nSaranan ini adalah diberikan oleh National Sleep Foundation (USA).",
+            "references": "National Sleep Foundation, USA https://sleepshow.org/how-much-sleep/"
+         }
+      },
+      "summaryChart": {
+         "sources1": "Keputusan Ujian sedia daripada",
+         "sources2": "sumber",
+         "referenceRanges": "Nilai Rujukan"
+      },
+      "tabController": {
+         "dashboard": "Skrin Utama",
+         "results": "Keputusan Ujian",
+         "progress": "Kemajuan",
+         "covid": "COVID-19",
+         "more": "Lagi",
+         "home": "Rumah",
+         "inbox": "Peti Masuk",
+         "appointment": "Temujanji",
+         "account": "Akaun"
+      },
+      "targets": {
+         "title": "Sasaran"
+      },
+      "uploadResult": {
+         "title": "Muat Naik Keputusan Ujian",
+         "info": "Untuk keputusan ujian yang mempunyai banyak helaian, tekan Tambah Muka Surat untuk muat naik lebih helaian",
+         "privacy": "Privasi anda adalah penting bagi kami. Anda mengawal maklumat kesihatan anda. Biomark tidak akan memberi maklumat anda kepada mana-mana pihak ketiga tanpa kebenaran anda. Biomark hanya menyokong muat naik keputusan makmal setakat ini. Kami berhak untuk membuang dokumen yang tidak berkaitan dengan keputusan makmal.",
+         "uploads": "Muat Naik Anda",
+         "documentName": "Nama Dokumen",
+         "addPage": "Tambah Muka Surat",
+         "continue": "Simpan & Teruskan",
+         "dialogs": {
+            "upload": {
+               "title": "Muat Naik Keputusan Ujian Makmal",
+               "takePhoto": "Ambil Gambar",
+               "galleryUpload": "Muat Naik Daripada Galeri",
+               "pdfUpload": "Muat Naik PDF",
+               "e2eUpload": "E2E Muat Naik Tipu"
+            },
+            "success": {
+               "title": "Muat Naik Berjaya",
+               "description": "Muat naik anda berjaya dan fail sedang disemak",
+               "buttonText": "Okay"
+            },
+            "delete": {
+               "title": "Adakah Anda Pasti?",
+               "description": "Langkah ini adalah muktamad dan tidak boleh diubah",
+               "buttonText": "Padam",
+               "buttonCancelText": "Batal"
+            },
+            "fail": {
+               "title": "Muat Naik Gagal",
+               "description": "Sila semak sambungan internet anda dan muat naik fail semula. Hubungi kami jika masih tidak berjaya",
+               "buttonText": "Okay"
+            }
+         }
+      },
+      "uploadAvatar": {
+         "dialogs": {
+            "upload": {
+               "title": "Ubah Gambar Profil"
+            }
+         }
+      },
+      "weightTab": {
+         "title": "Berat",
+         "logs": "Log",
+         "filters": {
+            "title": "Tapis",
+            "uploadType": "Dikemaskini Oleh",
+            "unit": "Unit",
+            "confirm": "Memohon",
+            "clearFilters": "Buang Tapis"
+         }
+      },
+      "weightInput": {
+         "title": "Berat",
+         "yourReading": "Bacaan Anda",
+         "save": "Simpan Edit",
+         "add": "Tambah",
+         "dateTime": "Tarikh- Masa",
+         "errors": {
+            "missingMeasurement": "Sila masukkan ukuran berat anda",
+            "dateTimeRequired": "Sila masukkan tarikh semasa ukuran ini diambil",
+            "outOfBoundariesKg": "Sila masukkan ukuran yang betul antara 0 - 200 kg",
+            "outOfBoundariesLbs": "Sila masukkan ukuran yang betul antara 0 - 400 lbs",
+            "measurementInvalid": "Sila masukkan ukuran yang betul (XXX.XX)"
+         },
+         "info": {
+            "title": "Butiran",
+            "description": "Rekod ini dimasukkan oleh doktor anda, oleh itu anda tidak dibenarkan mengubah rekod ini."
+         },
+         "dialogs": {
+            "delete": {
+               "title": "Berat",
+               "description": "Adakah anda pasti ingin memadam log berat ini?",
+               "buttonText": "Ya",
+               "buttonCancelText": "Langkau"
+            }
+         }
+      }
+   },
+   "userProfile": {
+      "mobileNumber": "Nombor Telefon (H)",
+      "password": "Kata Laluan",
+      "passwordConfirm": "Sahkan Kata Laluan",
+      "firstName": "Nama Pertama",
+      "lastName": "Name Terakhir",
+      "dob": "Tarikh Lahir",
+      "gender": "Jantina",
+      "icNumber": "Nombor Kad Pengenalan",
+      "country": "Negara",
+      "icNumberHint": "Jika anda tiada nombor IC, masukkan nombor Passport anda",
+      "email": "Alamat Emel",
+      "marketingAgree": "Ya, saya ingin menerima maklumat mengenai offer, promosi, dan servis melalui SMS dan emel.",
+      "passwordStrength": {
+         "low": "Rendah",
+         "medium": "Sederhana",
+         "high": "Tinggi"
+      },
+      "errors": {
+         "passwordLength": "Panjang kata laluan mestilah sekurangnya 8",
+         "passwordRequired": "Sila masukkan kata laluan baru",
+         "passwordMismatch": "Kata laluan tidak sepadan",
+         "passwordInvalid": "Format kata laluan tidak sah",
+         "firstNameRequired": "Sila masukkan nama (nama pertama) anda",
+         "lastNameRequired": "Sila masukkan nama belakang (terakhir) anda",
+         "nameFormat": "Nama patut hanya mempunyai huruf latin",
+         "dobRequired": "Sila masukkan tarikh lahir anda",
+         "minAge": "Anda mestilah berumur 18 tahun ke atas untuk mendaftar",
+         "icNumberRequired": "Sila masukkan nombor kad pengenalan anda",
+         "emailRequired": "Sila masukkan alamat emel anda",
+         "emailFormat": "Sila berikan alamat emel yang tepat"
+      },
+      "dialogs": {
+         "confirm": {
+            "title": "Adakah Anda Pasti?",
+            "description": "Adakah anda pasti ingin mengubah maklumat jantina anda? Butiran sejarah penyakit diabetes anda akan dikemaskini kepada 'Tidak Pasti'. Anda perlu mengemaskini semula butiran sejarah kesihatan anda.",
+            "buttonText": "Ya",
+            "buttonCancelText": "Bukan Sekarang"
+         }
+      }
+   },
+   "common": {
+      "time": {
+         "secondsShort": "saat"
+      },
+      "gender": {
+         "male": "Lelaki",
+         "female": "Perempuan"
+      },
+      "ethnicities": {
+         "malay": "Melayu",
+         "chinese": "Cina",
+         "indian": "India",
+         "caucasian": "Causasian",
+         "filipino": "Filipino",
+         "na": "Lain-lain / NA"
+      },
+      "date": {
+         "months": {
+            "full": [
+               "Januari",
+               "Februari",
+               "Mac",
+               "April",
+               "Mei",
+               "Jun",
+               "Julai",
+               "Ogos",
+               "September",
+               "Oktober",
+               "November",
+               "Disember"
+            ]
+         }
+      },
+      "facebookLogin": "Teruskan dengan Facebook",
+      "login": "Log Masuk",
+      "dashboard": "Skrin Utama",
+      "no": "Tidak",
+      "yes": "Ya",
+      "ok": "Baik",
+      "cancel": "Batal",
+      "contactUs": "Hubungi kami",
+      "verify": "Sahkan",
+      "showMore": "Tunjukkan lagi",
+      "noMore": "Tiada rekod untuk ditunjuk",
+      "passwordChangeSuccessBack": "Kembali ke Tetapan",
+      "passwordChangeSuccess": "Kata laluan anda sudah diubah!",
+      "wentOffline": "Anda tidak mempunyai sambungan internet",
+      "wentOnline": "Anda sudah mempunyai sambungan internet!",
+      "offlineNotification": "Peranti anda sedang berfungsi tanpa sambungan internet."
+   }
+}

@@ -5,6 +5,7 @@ import GeneralRadioQuestions from 'components/higher-order/general-radio-questio
 import React from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import { IAppState } from 'store/IAppState';
 import { addMedicalHistoryUpdate } from 'store/profile/profile-actions';
 import { MedicalTemplateAttribute, MedicalTemplateField } from 'types/api';
@@ -101,7 +102,8 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
         question={item.question}
         selectedValue={diabetes_type}
         onValueChange={async (value: any) => {
-          logNow('redux', medicalHistory);
+          // logNow('redux', medicalHistory);
+
           let updatedItems = [];
           if (medicalHistory.length > 0) {
             updatedItems = medicalHistory?.map((el) =>
@@ -115,80 +117,10 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
               medical_values: { diabetes_type: value },
             };
           }
-          await dispatch(addMedicalHistoryUpdate(updatedItems));
-          logNow('redux', updatedItems);
+          dispatch(addMedicalHistoryUpdate(updatedItems));
+          // logNow('redux', updatedItems);
         }}
       />
-    );
-  };
-
-  const DropDownOther = ({ item }: { item: MedicalTemplateField }) => {
-    return (
-      <>
-        <DropdownMenuWithQuestion
-          options={item.options}
-          question={item.question}
-          selectedValue={selectedOption}
-          onValueChange={async (value: any) => {
-            // logNow('redux', medicalHistory);
-            let updatedItems = [];
-            if (medicalHistory.length > 0) {
-              updatedItems = medicalHistory?.map((el) =>
-                el.condition_id === condition_id
-                  ? { ...el, medical_values: { options: value } }
-                  : el
-              );
-            } else {
-              updatedItems.push({
-                condition_id: condition_id,
-                has_condition: true,
-                medical_type: 'personal',
-                medical_values: { options: value },
-              });
-            }
-            await dispatch(addMedicalHistoryUpdate(updatedItems));
-            logNow('redux', updatedItems);
-          }}
-        />
-        {selectedOption == 'Other' ? (
-          <View
-            style={{
-              paddingHorizontal: widthToDp(4),
-              marginTop: -heightToDp(2),
-            }}
-          >
-            <InputWithLabel
-              labelFontSize={25}
-              // label={''}
-              defaultValue={otherOptions}
-              onChange={async (value: any) => {
-                logNow('redux', value);
-                let updatedItems = [];
-                if (medicalHistory.length > 0) {
-                  updatedItems = medicalHistory?.map((el) =>
-                    el.condition_id === condition_id
-                      ? {
-                          ...el,
-                          medical_values: {
-                            ...el.medical_values,
-                            otherOptions: value,
-                          },
-                        }
-                      : el
-                  );
-                } else {
-                  updatedItems[0] = {
-                    condition_id: condition_id,
-                    medical_values: { otherOptions: value },
-                  };
-                }
-                await dispatch(addMedicalHistoryUpdate(updatedItems));
-                logNow('redux', updatedItems);
-              }}
-            />
-          </View>
-        ) : null}
-      </>
     );
   };
 
@@ -200,7 +132,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
           question={item.question}
           selectedValue={treatmentType}
           onValueChange={async (value: any) => {
-            logNow('redux', medicalHistory);
+            // logNow('redux', medicalHistory);
             let updatedItems = [];
             if (medicalHistory.length > 0) {
               updatedItems = medicalHistory?.map((el) =>
@@ -220,8 +152,8 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
                 medical_values: { treatmentType: value },
               };
             }
-            await dispatch(addMedicalHistoryUpdate(updatedItems));
-            logNow('redux', updatedItems);
+            dispatch(addMedicalHistoryUpdate(updatedItems));
+            // logNow('redux', updatedItems);
           }}
         />
         {/* {treatmentType == 'Other' ? (
@@ -272,7 +204,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
         question={item.question}
         data={medication_list}
         setData={async (value: any) => {
-          logNow('redux', medicalHistory);
+          // logNow('redux', medicalHistory);
           let updatedItems = [];
           if (medicalHistory.length > 0) {
             updatedItems = medicalHistory?.map((el) =>
@@ -286,8 +218,8 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
               medication_list: value ? value.toString() : [],
             };
           }
-          await dispatch(addMedicalHistoryUpdate(updatedItems));
-          logNow('redux', updatedItems);
+          dispatch(addMedicalHistoryUpdate(updatedItems));
+          // logNow('redux', updatedItems);
         }}
       />
     );
@@ -320,7 +252,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
                   }
                 : el
             );
-            logNow('1');
+            // logNow('1');
           } else {
             updatedItems.push({
               condition_id: condition_id,
@@ -328,10 +260,10 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
               medical_type: 'personal',
               other_condition: value ? value.toString() : [],
             });
-            logNow('2', updatedItems);
+            // logNow('2', updatedItems);
           }
-          await dispatch(addMedicalHistoryUpdate(updatedItems));
-          logNow('redux', updatedItems);
+          dispatch(addMedicalHistoryUpdate(updatedItems));
+          // logNow('redux', updatedItems);
         }}
       />
     );
@@ -364,7 +296,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
                   }
                 : el
             );
-            logNow('1');
+            // logNow('1');
           } else {
             updatedItems.push({
               condition_id: condition_id,
@@ -372,12 +304,12 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
               medical_type: 'personal',
               medication_list: value ? value.toString() : [],
             });
-            logNow('2', updatedItems);
+            // logNow('2', updatedItems);
           }
 
           await dispatch(addMedicalHistoryUpdate(updatedItems));
 
-          logNow('redux', updatedItems);
+          // logNow('redux', updatedItems);
         }}
       />
     );
@@ -543,7 +475,16 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
     ) {
       allTsxFields.push(<DropDown item={item} />);
     } else if (item.id === 'dropdownList' && has_condition) {
-      allTsxFields.push(<DropDownOther item={item} />);
+      allTsxFields.push(
+        <DropDownOther
+          item={item}
+          condition_id={condition_id}
+          dispatch={dispatch}
+          medicalHistory={medicalHistory}
+          otherOptions={otherOptions}
+          selectedOption={selectedOption}
+        />
+      );
     } else if (item.type === 'radio' && has_condition) {
       allTsxFields.push(<RadioBtn item={item} />);
     } else if (
@@ -576,6 +517,90 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
     >
       {allTsxFields}
     </ModalWithBottomBtn>
+  );
+};
+
+const DropDownOther = ({
+  item,
+  selectedOption,
+  dispatch,
+  medicalHistory,
+  otherOptions,
+  condition_id,
+}: {
+  item: MedicalTemplateField;
+  selectedOption: any;
+  dispatch: Dispatch;
+  medicalHistory: any;
+  otherOptions: any;
+  condition_id: any;
+}) => {
+  return (
+    <>
+      <DropdownMenuWithQuestion
+        options={item.options}
+        question={item.question}
+        selectedValue={selectedOption}
+        onValueChange={async (value: any) => {
+          // logNow('redux', medicalHistory);
+          let updatedItems = [];
+          if (medicalHistory.length > 0) {
+            updatedItems = medicalHistory?.map((el) =>
+              el.condition_id === condition_id
+                ? { ...el, medical_values: { options: value } }
+                : el
+            );
+          } else {
+            updatedItems.push({
+              condition_id: condition_id,
+              has_condition: true,
+              medical_type: 'personal',
+              medical_values: { options: value },
+            });
+          }
+          await dispatch(addMedicalHistoryUpdate(updatedItems));
+          // logNow('redux', updatedItems);
+        }}
+      />
+      {selectedOption == 'Other' ? (
+        <View
+          style={{
+            paddingHorizontal: widthToDp(6.4),
+            marginTop: heightToDp(1),
+          }}
+        >
+          <InputWithLabel
+            labelFontSize={25}
+            // label={''}
+            defaultValue={otherOptions}
+            onChange={async (value: any) => {
+              logNow('redux', value);
+              let updatedItems = [];
+              if (medicalHistory.length > 0) {
+                updatedItems = medicalHistory?.map((el) =>
+                  el.condition_id === condition_id
+                    ? {
+                        ...el,
+                        medical_values: {
+                          ...el.medical_values,
+                          otherOptions: value,
+                        },
+                      }
+                    : el
+                );
+              } else {
+                updatedItems[0] = {
+                  condition_id: condition_id,
+                  medical_values: { otherOptions: value },
+                };
+              }
+              await dispatch(addMedicalHistoryUpdate(updatedItems));
+              // logNow('redux', updatedItems);
+            }}
+          />
+        </View>
+      ) : null}
+    </>
   );
 };
 

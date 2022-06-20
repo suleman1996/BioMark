@@ -69,6 +69,7 @@ const Index = () => {
       });
       setChartState(result.data.chart);
       setIsLoading(false);
+      setHideGraph(false);
     } catch (error) {
       console.log(error);
     }

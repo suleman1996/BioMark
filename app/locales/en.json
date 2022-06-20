@@ -1,0 +1,1856 @@
+{
+  "pages": {
+    "search": {
+      "scan": {
+        "qr": "Scan QR/Barcode",
+        "inputBarcode": "Input Barcode",
+        "uploadResults":"Upload Results"
+      },
+      "yourHealth":{
+        "label": "Your Health",
+        "suggestions":{
+          "heartDisease": "Heart Disease",
+          "diabetes": "Diabetes",
+          "bloodPressure": "Blood Pressure",
+          "bmi": "BMI",
+          "smoking": "Smoking",
+          "drinking": "Drinking",
+          "stress": "Stress",
+          "sleeping": "Sleeping"
+        }
+      },
+      "healthTrackers":{
+        "label": "Health Trackers",
+        "suggestions":{
+          "bloodSugarInput": "Blood Sugar Input",
+          "weightInput": "Weight Input",
+          "bloodPressureInput": "Blood Pressure Input"
+        }
+      },
+      "recordKeeping":{
+        "label": "Record Keeping",
+        "suggestions":{
+          "healthRecords": "Health Records",
+          "healthProgress": "Health Progress"
+        }
+      },
+      "covidBooking":{
+        "label": "Covid Booking",
+        "suggestions":{
+          "bookTests": "Book Tests",
+          "bookings": "Bookings",
+          "dependents": "Dependents",
+          "healthDeclaration": "Health Declaration",
+          "results": "Results"
+        }
+      }
+    },
+    "appointment": {
+      "title": "Appointment",
+      "tabs": {
+        "upcoming": "Upcoming",
+        "history": "History"
+      },
+      "healthDeclarationComplete":"Health Declaration Completed",
+      "hintText":"What appointments will be shown?",
+      "hintTextDesc":"Currently, only appointments for COVID-19 Test bookings will be shown here, in a future update we will collate all events here. Stay tuned!",
+      "noUpcoming": "No Upcoming Appointments",
+      "noUpcomingDesc": "You have no appointments scheduled yet.",
+      "noRecent": "No Recent Appointments",
+      "noRecentDesc": "This is where you can see your past appointment bookings."
+    },
+    "covid-booking": {
+      "title": "COVID-19 Bookings",
+      "orderId":"Booking ID",
+      "bookingId":"Booking ID",
+      "homeTitle": "Book your COVID-19 Test",
+      "homeDescription": "Planning a COVID-19 Test for you and your Dependant? Place an appointment with us by clicking “Book Now”",
+      "tabs": {
+        "upcoming": "Upcoming",
+        "history": "History"
+      },
+      "emptyMessage":{
+      "upcomingTitle":"No Upcoming Bookings",
+      "upcomingSubTitle":"You have no COVID bookings scheduled yet.",
+      "historyTitle":"No Recent Bookings",
+      "historySubTitle":"This is where you can see your",
+      "historySubTitle1":" past COVID bookings.",
+      "covidQrTitle":"No QR codes Yet",
+      "covidQrSubTitle":"QR codes will be displayed here",
+      "covidQrSubTitle1":"when you receive your COVID Results"
+      },
+      "button":{
+        "FAQButton":"FAQ"
+      }
+    },
+    "landing": {
+      "signup": "Sign up",
+      "login": "Login",
+      "welcome": "Welcome Back!",
+      "board1": {
+        "image": "/assets/images/temperature-measure.svg",
+        "title": "Welcome to Biomark",
+        "description": "Your health in your pocket."
+      },
+      "board2": {
+        "image": "/assets/images/health-passport.svg",
+        "title": "Digital Health Passport",
+        "description": "Your health passport to travelling around the world again."
+      },
+      "board3": {
+        "image": "/assets/images/healthy-lifestyle.svg",
+        "title": "Track Your Health",
+        "description": "We are with you every step of the way in your journey towards a healthier lifestyle."
+      }
+    },
+    "onboardWelcome": {
+      "welcome": "Welcome ",
+      "description": "Your biomarking journey begins here"
+    },
+    "forceUpdate": {
+      "title": "App Update Available!",
+      "definition": "Keep your BioMark App updated so you can get the best mobile experience and content just for you.",
+      "continueButton": "Update BioMark App"
+    },
+    "maintenance": {
+      "title": "System Under Maintenance",
+      "definition": "BioMark App is not available at the moment. Please come again later."
+    },
+    "clinics": {
+      "title": "Clinics",
+      "description": "Coming Soon"
+    },
+    "covid": {
+      "header": "COVID-19",
+      "title": "View Previous COVID-19 Test Results",
+      "titleSub": "Keep track of your results in one place",
+      "newResult": "New Results: COVID PCR Antigen Test Sample",
+      "noData": "No Data Records Found!",
+      "waitingVerification": "Please wait while we verify your identify",
+      "testResult": "Your Test Result is ",
+      "testResultCovid": "for COVID-19",
+      "share": "Share Test Result",
+      "testCenter": "Testing Centre",
+      "testType": "Testing Type",
+      "testDate": "Test Date",
+      "reportDate": "Report Date",
+      "positiveMessage": "Please isolate and quarantine yourself.",
+      "negativeMessage": "Continue to practice safe distancing.",
+      "home":{
+        "bookTests":"Book Tests",
+        "bookings":"Bookings",
+        "viewResults":"View Results",
+        "dependants":"Dependants",
+        "swipe":"Swipe to view other results",
+        "scan": "Scan to share latest COVID-19 Test Result"
+      },
+      "results":{
+        "title":"COVID-19 Results",
+        "scan": "Scan to share Covid-19 Test Result",
+        "noResults": "No Test Results",
+        "noResultsDesc":"You have no Test results recorded."
+      },
+      "bookCovid": {
+        "progress1": "Booking",
+        "progress2": "Payment",
+        "progress3": "Confirmation",
+        "continue": "Continue",
+        "next":"Next",
+        "cancel":"Cancel",
+        "makePayment": "Make Payment",
+        "cancelBookingProcess":"Cancel Entire Test Booking Process",
+        "cancelBookingProcessDesc":"By not proceeding you are not guranteed a test slot. Do you want to cancel?",
+        "covidICTitle":"Looks like your IC is missing",
+        "covidICDesc":"You will need to enter your IC in order to proceed with this feature of the app",
+        "covidICHint":"IC or Passport no.",
+        "testTaking":{
+         "title":"Who is taking the test?",
+         "me":"Me",
+         "dependant":"Dependants",
+         "both":"Both"
+        },
+        "testBooking":{
+          "testTypeQuestion": "Select a Covid Test",
+          "testType1": "PCR Test",
+          "testType2": "Antigen Test",
+          "testLocQuestion": "Where would you like to get tested?",
+          "testLoc1": "Test Centre",
+          "testLoc2": "Home Test",
+          "testDependantQuestion":"Is this Covid test for you or a dependant?",
+          "testdependant1":"Myself",
+          "testdependant2":"Dependant",
+          "testCentreCountry": "Country",
+          "testCentreCity": "City",
+          "testCenterMap": "City Test Centers",
+          "testCentre": "Test centre",
+          "testDateQuestion": "Choose a test date",
+          "testSlotMorning": "Morning timeslots",
+          "testSlotAfternoon": "Afternoon timeslots",
+          "addCovid":"Add New Dependant",
+          "countryInfoDialogTitle": "Why can’t I change Countries?",
+          "countryInfoDialogDescription": "Users are limited to one country for each booking order. If you wish to book for another country you would need to start another booking order.",
+          "countryInfoDialogButtonText": "Okay"
+        },
+        "declaration": {
+          "declarationHeaderUser": "Health Declaration for Myself",
+          "declarationHeaderDependant": "Health Declaration for My Dependant",
+          "question1": "Have you experienced the following symptons fever, Sore throat, dry cough, runny nose. tiredness, headaches, shortness of breath in the past 14 days?",
+          "question2": "Have you travelled out of the country in the past 14 days?",
+          "question3": "Have you been in close contact with someone who is under COVID-19 quarantine in the past 14 days?",
+          "question4": "Have you been in contact with a confirmed COVID-19 positive patient in the past 14 days?",
+          "question5": "Have you attended or come in contact with someone who attended an event or went to a place associated with COVID-19 outbreak in the past 14 days?",
+          "dquestion1": "Has your dependant experienced the following symptons fever, Sore throat, dry cough, runny nose. tiredness, headaches, shortness of breath in the past 14 days?",
+          "dquestion2": "Has your dependant travelled out of the country in the past 14 days?",
+          "dquestion3": "Has your dependant been in close contact with someone who is under COVID-19 quarantine in the past 14 days?",
+          "dquestion4": "Has your dependant been in contact with a confirmed COVID-19 positive patient in the past 14 days?",
+          "dquestion5": "Has your dependant attended or come in contact with someone who attended an event or went to a place associated with COVID-19 outbreak in the past 14 days?",
+          "terms": "I declare all the above to be true and correct. By submitting this declaration form, I agree to the collection, use, and disclosure of my personal information for the purpose of precautionary measure against COVID-19."
+        },
+        "covidHealthcare":{
+          "doLater":"Do later",
+          "submit":"Submit",
+          "covidTitle1":"Your COVID-19 test is scheduled on",
+          "covidTitle2":"at",
+          "covidTitle3":" Please provide your response to the following questions before your COVID-19 testing. A separate form must be filled for individual dependants, if any.",
+          "declarationMyself":"Health Declaration for Myself",
+          "declarationMyDependant":"Health Declaration for My Dependant",
+         "confirmation":{
+          "done":"Health Declaration Complete!",
+          "message":"Thank you for completing the declaration, do be ready at the test location for your stipulated test slot.",
+          "yourId":"Your Booking ID:",
+          "dependantId":"Your Dependant(s) Booking ID(s)"
+         }       
+        },
+        "confirmation": {
+          "done": "Payment is Successful",
+          "success": "A confirmation email has been sent to you.",
+          "declaration": "A health declaration form",
+          "declarationMessage": " will be sent to you 24 hours before your COVID-19 test day.",
+          "viewBooking": "View Bookings",
+          "return": "Return to Homepage"
+        },
+        "bookingDialog":{
+          "yes":"Yes",
+          "no":"No",
+          "cancelBooking":"Cancel COVID Test Booking",
+          "cancelBookingTitle":"Are you sure you want to cancel? All refunds are subjected to payment processing fees.",
+          "cancelTitle":"Cancel Test Booking",
+          "cancelSubTitle":"By not proceeding you are not guranteed a test slot. Do you want to cancel?",
+          "nextAlert":"Test Slot Not Booked",
+          "nextAlertTitle":"You can’t proceed to the payment as you have not booked a test slot yet.",
+          "nextAlertButton":"Okay",
+          "delete":"Delete Dependant?",
+          "deleteTitle":"Are you sure you want to delete profiles"
+        },
+        "paymentError":{
+          "header": "Payment is Unsuccessful",
+          "description": "No money has been deducted from your account.<br><br>Please retry the payment process to secure your COVID test slot.",
+          "retryPayment": "Retry Payment"
+        }
+      },
+      "covid-dependant": {
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "age": "Age",
+        "dob": "Date of Birth",
+        "gender": "Gender",
+        "relation": "Relation",
+        "ncr_passport": "NRIC/Passport Number",
+        "title":"Enter your Dependant Details ",
+        "document_type":"Document Type",
+        "ic":"IC",
+        "passport":"Passport",
+        "eKYC":"eKYC",
+        "addeKYC":"Complete eKYC Verification",
+        "editeKYC":"Complete eKYC Verification"
+      },
+      "covid-button": {
+        "save": "Save Dependant",
+        "add": "Add New Dependant",
+        "addSelf": "Add Self",
+        "confirm":"Confirm",
+        "exist":"Add Existing Dependant"
+      },
+      "covid-dependant-card":{
+       "title":"Dependants",
+       "addDependant": "Add Dependant",
+       "editDependant": "Edit Dependants",
+       "empty-title":"No Dependants Yet",
+       "empty-description":"Add dependants to see them here"
+      },
+      "dependantDialog":{
+        "redoeKYC":"Redo eKYC Verification",
+        "redoeKYCTitle":"Are you sure you want to redo?"
+       },
+      "covid-booking-button":{
+       "healthDeclareButton":"Health Declaration",
+       "cancelButton":"Cancel Test",
+       "newBooking":"Book New COVID-19 Test"
+      },
+      "covid-info": {
+        "title":"Test Bookings - FAQ",
+        "footer": "Do you have further questions?<br>Write in to us at <a href='mailto:support@biomarking.com'>support@biomarking.com<a>!",
+        "card1": {
+          "header": "Information Regarding Tests",
+          "item1": {
+            "question": "1. What is a COVID 19 PCR test and what is it for?",
+            "body": "PCR stands for ‘polymerase chain reaction’. It is a method that is used to detect and accurately identify genetic material from any organism. The COVID-19 PCR test is currently the preferred test for COVID-19 detection because of its speed, accuracy and success rate- hence is widely used as the testing method of choice for pre-departure travel, work and social responsibility purposes. It is considered the gold-standard (best-in-class) for detection of COVID-19.<br><br>Most COVID-19 PCR test results will be ready within a few hours. However we recommend that you ask the staff at your selected test center/clinic for a more precise time frame."
+          },
+          "item2": {
+            "question": "2. What is Antigen testing?",
+            "body": "An antigen test detects coronavirus proteins in the mouth and throat. It works by mixing the sample with a solution that unleashes specific viral proteins. However, it takes a shorter time to generate a result as compared to a PCR test. Antigen tests typically take 15-30mins to generate a result and are generally deemed to be less accurate than PCR tests."
+          },
+          "item3": {
+            "question": "3. What is Serology testing?",
+            "body": "Serology is also called the Antibody test that looks for the presence of antibodies. Antibodies are typically detected in the blood of people who are tested after infection and they show an immune response to the infection. It is important for detecting previous infections in people who had few or no symptoms."
+          },
+          "item4": {
+            "question": "4. What are the types of COVID-19 tests available?",
+            "body": "A comprehensive range of COVID-19 tests are offered on our platform, including COVID-19 PCR, antigen, and serology tests. However, different clinics may have different tests available, and you will be able to see what each clinic offers during the booking process."
+          },
+          "item5": {
+            "question": "5. How will the COVID-19 PCR test be performed?",
+            "body": "The test will be performed at the desired clinic by a healthcare professional (Doctor/Nurse). The COVID-19 PCR test is conducted by using a swab to collect respiratory samples found in your nose and your throat. A swab is a soft tip on a long flexible stick that goes into your nose. The sample is collected then sealed and sent to the laboratory for testing."
+          },
+          "item6": {
+            "question": "6. Where can I get tested?",
+            "body": "BioMark's partner test centers and clinics are listed in the app/website and displayed in a map for your convenience. "
+          },
+          "item7": {
+            "question": "7. Is BioMark a MOH-approved COVID-19 test provider?",
+            "body": "BioMark is only the facilitator to connect patients to healthcare providers to get tested for COVID-19. The healthcare providers providing the COVID-19 swab tests would be MOH-approved according to the guidelines of their respective country."
+          },
+          "item8": {
+            "question": "8. Who is eligible for the COVID-19 tests? Am I eligible?",
+            "body": "Suspected cases, quarantined, and under investigation are eligible to book a COVID-19 Test. For those with signs and symptoms prior to your clinic visit, kindly indicate it in your health declaration. A COVID-19 test can be used for anyone regardless of age. COVID-19 tests are not limited to travellers, but it can also be for people who would like to find out if they have COVID-19."
+          },
+          "item9": {
+            "question": "9. I need to get a COVID-19 PCR test urgently, are there any expedited options?",
+            "body": "Participating clinics that can do urgent swab tests will be indicated in the app/website during booking for your convenience. You may also select the express PCR test to receive your results within about 6 hours.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities. "
+          },
+          "item10": {
+            "question": "10. Can I do a home-testing instead of going to the test center?",
+            "body": "Yes. We have home testing available. Simply select ‘Home Test’ when you are making a booking and provide the relevant information as requested. We will be in contact with you after you have made your booking to organize appropriately."
+          },
+          "item11": {
+            "question": "11. How much are the COVID-19 tests?",
+            "body": "Test centers and clinics may choose to price their tests differently. When you make a booking on the app, the price should be displayed for you as you choose your tests."
+          },
+          "item12": {
+            "question": "12. Are there any subsidies/claims available for the COVID-19 tests?",
+            "body": "We apologise that BioMark, with the test centers, clinics and laboratories that provide the COVID-19 tests through the BioMark platforms currently do not have any arrangements for subsidies.<br><br>However, we do provide a receipt upon completion and confirmation of successful payment which may be requested by your company/insurer for this purpose. Please verify any ability for subsidies or claims with your company/insurer beforehand."
+          }
+        },
+        "card2": {
+          "header": "Bookings and Payment",
+          "item13": {
+            "question": "13. Why do I need to verify my identity?",
+            "body": "Identity verification is a faster alternative compared to in-person identity verification and removes your need to wait at patient registration counters."
+          },
+          "item14": {
+            "question": "14. Who are considered Dependants and how can I make a booking for them?",
+            "body": "You will be able to make bookings for yourself and others (eg. spouse, child, siblings, parents, grandparents, guardian, or others) via the app. Click on “Add New Dependant” and fill in the Dependant’s details to book an appointment for them."
+          },
+          "item15": {
+            "question": "15. Can I book a COVID-19 test for other countries?",
+            "body": "We currently support COVID-19 bookings in Singapore and Malaysia. You will be able to book a COVID-19 test in Singapore from Malaysia, and vice versa."
+          },
+          "item16": {
+            "question": "16. How will I know if my booking was made successfully?",
+            "body": "You will receive a confirmation email with your appointment details and/or receipt upon payment verification by your financial services provider.<br><br>You can also refer to your booking details under the COVID-19 Bookings section in our BioMark patient app."
+          },
+          "item17": {
+            "question": "17. What happens if I did not receive any confirmation email? ",
+            "body": "If the confirmation email does not show up in the inbox, kindly check your spam folder or contact us at <a href='mailto:support@biomarking.com'>support@biomarking.com</a> with your name and booking details so that we can resend the information to you."
+          },
+          "item18": {
+            "question": "18. What should I do to prepare for my COVID-19 test?",
+            "body": "A notification will be sent out for you to complete a health declaration form within 24 hours from your test date. Please fill up the form with information that is as accurate as possible.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities."
+          },
+          "item19": {
+            "question": "19. What documents do I need to bring for my appointment?",
+            "body": "Please bring your identity card and also have a copy of your appointment confirmation on hand. It is important that the copy of your appointment confirmation should display the confirmation number in the event that verification is required."
+          },
+          "item20": {
+            "question": "20. What are the supported methods of payment?",
+            "body": "Only e-payment is available currently via VISA, Mastercard. We are working to provide more payment options in the near future for your convenience."
+          },
+          "item21": {
+            "question": "21. What payment provider is BioMark using and can it be trusted?",
+            "body": "We engage trusted payment gateways to facilitate the payments for us. For Singapore, we are using Stripe as our payment partner and Billplz for Malaysia payments. Our payment partners process billions of dollars in payments annually and has best-in-class, bank grade security."
+          },
+          "item22": {
+            "question": "22. What should I do if I miss my appointment?",
+            "body": "Kindly contact us at <a href='mailto:support@biomarking.com'>support@biomarking.com</a> if you need to reschedule your appointment."
+          },
+          "item23": {
+            "question": "23. Can I walk into any BioMark participating PCR swab clinic for a test without making an appointment?",
+            "body": "It is up to each clinic’s discretion whether they accept walk-ins. BioMark will not be responsible for any miscommunication if the patient chooses to walk in instead of making a booking via the website/app. It is highly recommended to make a booking before heading down to the clinic."
+          }
+        },
+        "card3": {
+          "header": "Results",
+          "item24": {
+            "question": "24. How do I retrieve my COVID-19 PCR test results and how long will it take?",
+            "body": "Your COVID-19 PCR test results will be available in our BioMark App usually within 24-48 hours after the swab. The healthcare provider which you engaged to conduct the swab will also contact you in the event that your COVID-19 PCR test results return positive.<br><br>You will also be notified via email and receive a push notification from the app when your results are ready to view. "
+          },
+          "item25": {
+            "question": "25. Will I get a PDF result?",
+            "body": "You will receive a PDF result attached to your email notification or via the app once your results are ready to view."
+          },
+          "item26": {
+            "question": "26. Can I use the resulting QR code at the airport?",
+            "body": "We are using an encrypted QR code standard which is used to secure and verify your test result. The QR code is a secure certificate of your COVID-19 result.<br><br>When travelling abroad, the QR code can be shown to foreign travel authorities, who may scan the QR code with any reader (e.g. normal phone camera) to verify the authenticity of the digitally authenticated and endorsed QR code."
+          },
+          "item27": {
+            "question": "27. What happens if my COVID-19 PCR test result is inconclusive?",
+            "body": "There might be instances that COVID-19 PCR swab test results are inconclusive. If your COVID-19 PCR test result is inconclusive, you might have to undergo a repeat test and it is chargeable. BioMark will not be held responsible for any losses, expenses, or costs involved, should this result affect your flight departure.<br><br>The healthcare provider which you engaged to conduct the test will contact you if a repeat test is necessary."
+          },
+          "item28": {
+            "question": "28. What happens if my COVID-19 PCR test result is positive? ",
+            "body": "If your COVID-19 PCR test results are positive, you should isolate yourself from family members, monitor your temperature and symptoms and also notify your close contact of your COVID-19 positive status. Please also refer to your country’s guidelines on home quarantine and isolation for COVID-19.<br><br>If you are taking a PCR test for the purpose of pre-departure travel, kindly inform the relevant authorities that you would be unfit to fly. "
+          }
+        },
+        "card4": {
+          "header": "Refunds and Cancellations/Changes",
+          "item29": {
+            "question": "29. How do I change/cancel my booking?",
+            "body": "For cancellation or rescheduling of appointments, kindly email to <a href='mailto:support@biomarking.com'>support@biomarking.com</a> with your reason for changing the appointment."
+          },
+          "item30": {
+            "question": "30. Will I get a refund if I were to cancel my booking?",
+            "body": "Bookings that are cancelled 24 hours before the appointment timing will not be entitled to any refunds. You will also not be allowed to cancel your booking after you have been swabbed.<br><br>Appointment cancellation is also not allowed if the booking is made within 24 hours of the selected appointment time.<br><br>Do note that refunds are subjected to payment processing fees"
+          },
+          "item31": {
+            "question": "31. Are clinics allowed to cancel/make changes to my appointment? ",
+            "body": "Clinics are not allowed to cancel the appointment but may propose to reschedule the appointment, subject to your consent. Clinics have also been advised to reschedule only if it falls within the travel time and will not lead to any negative repercussions on flight departure."
+          },
+          "item32": {
+            "question": "32. When will I get my refunds? ",
+            "body": "If your cancellation is entitled to a refund,  the refund will show up on the bank account you used to pay for the transaction within 5-10 business days (depending on the bank’s processing time)."
+          },
+          "item33": {
+            "question": "33. Why is the refund not showing up on my bank statement after 10 business days?",
+            "body": "If the cancellation is processed not long after the payment was made, the refund may be processed as a reversal. In which case, the original charge will drop off the bank statement altogether, as if it never occurred.<br><br>Check your bank statement and look for the original charge. If you do not see the charge on your bank statement, the payment was reversed and the refund is complete."
+          }
+        },
+        "card5": {
+          "header": "General Information",
+          "item34": {
+            "question": "34. What is the Coronavirus Disease (COVID-19)?",
+            "body": "According to the World Health Organization (WHO), Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.<br><br>COVID-19 symptoms can include common cold symptoms, shortness of breath and in some cases, severe lung infection. Most people develop mild symptoms that can be treated with medication recommended by a doctor based on the patient’s clinical condition. However, severe cases may require hospital care where a patient may receive a combination of treatments."
+          },
+          "item35": {
+            "question": "35. How many variants of the coronavirus are there?",
+            "body": "Variants of a virus occurs when there is a change (mutation) to the virus’s genes. Mutation of viruses are neither new nor unexpected. As of now, many variants have emerged in different parts of the world, but the variants of concern for SARS-CoV-2 as listed by the WHO include the Delta variant and the Omicron variant."
+          },
+          "item36": {
+            "question": "36. What is the Delta variant?",
+            "body": "The Delta variant was first identified in late 2020s in India and identified to be more than twice as contagious as the previous variants. Some data also suggests that the Delta variant  has a higher probability of causing severe illness in unvaccinated people, as compared to the previous variants. However, if infected, the amount of viral genetic material may go down faster in fully vaccinated people when compared to unvaccinated people."
+          },
+          "item37": {
+            "question": "37. What is the Omicron variant and can it be detected?",
+            "body": "WHO describes the Omicron variant as a variant of concern based on the evidence of several mutations which affects the way it behaves. The variant was first detected in an outbreak at a University town in South Africa with a younger demographic. There is currently insufficient information about the variant in terms of how serious it is and its transmissibility. Studies are underway to understand more about this variant. But the presence of the Omicron variant can still be detected through COVID-19 tests, which is available for booking on the BioMark Platform. It is best to consult with a physician if you are concerned that you may have Covid."
+          }
+        }
+      },
+      "errors": {
+        "firstname": "Enter first name",
+        "lastname":"Enter last name",
+        "age": "Enter age",
+        "ncr_passport": "Enter NRIC / Passport",
+        "fnameformat": "Enter valid first name",
+        "lnameformat":"Enter valid last name",
+        "ageformat":"Enter valid age",
+        "ncr_passportformat":"Enter valid  NRIC / Passport"
+      },
+      "booking": {
+        "title": "COVID-19 Test Bookings"
+      },
+      "resultList": {
+        "title": "COVID-19 Test Results"
+      }
+    },
+    "companyList": {
+      "title": "Your Companies",
+      "request": "New Request",
+      "question": "Do you want to accept?",
+      "accept": "Accept",
+      "reject": "Reject",
+      "description": "The company will be able to access your name, ID verification photo, and health information.",
+      "company": {
+        "description": "You’re currently sharing your name, ID verification photos, and health information with this company.",
+        "healthInfo": {
+          "title": "Health Information Shared",
+          "testSample": "COVID PCR Antigen Test Sample",
+          "testStatus": "COVID Vaccination Status",
+          "healthScreening": " Employment Health Screening"
+        }
+      }
+    },
+    "bloodPressureTab": {
+      "title": "Blood Pressure",
+      "sys": "SYS",
+      "dia": "DIA",
+      "logs": "Logs",
+      "definition": "Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats.",
+      "filters": {
+        "title": "Filters",
+        "uploadType": "Updated By",
+        "confirm": "Apply",
+        "clearFilters": "Clear Filters"
+      }
+    },
+    "hba1cTab": {
+      "title": "HbA1c (%)",
+      "definition": "HbA1c (Haemoglobin A1C) is a test that reflects your average blood glucose level over the last 2 - 3 months.",
+      "logs": "Logs"
+    },
+    "hba1cInput": {
+      "title": "HbA1c",
+      "yourReading": "Your Reading",
+      "save": "Save Edit",
+      "add": "Add",
+      "dateTime": "Date - Time",
+      "errors": {
+        "required": "Please provide your measurement",
+        "outOfBoundaries": "Your HbA1c measurement should be between 5-15%",
+        "dateTimeRequired": "Please input a valid date.",
+        "aboveGoal": "Your HbA1c is above the target",
+        "belowGoal": "Your HbA1c is below the target"
+      },
+      "info": {
+        "title": "Info",
+        "description": "This record was added by you doctor, therefore you cannot edit any field."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "HbA1c",
+          "description": "Are you sure you wish to delete this HbA1c log?",
+          "buttonText": "Delete",
+          "buttonCancelText": "Skip"
+        }
+      }
+    },
+    "bloodPressureInput": {
+      "title": "Blood Pressure",
+      "yourReading": "Your Reading (mmHg)",
+      "definition": "Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats.",
+      "save": "Save Edit",
+      "add": "Add",
+      "dateTime": "Date - Time",
+      "errors": {
+        "systolicRequired": "Please input a systolic and diastolic BP.",
+        "diastolicRequired": "Please input a diastolic and diastolic BP.",
+        "systolicExceedRanges": "Please input a valid systolic BP from 60-200 mmHg.",
+        "diastolicExceedRanges": "Please input a valid diastolic BP from 30-120 mmHg",
+        "bloodPressure": "Please input a valid diastolic value. Diastolic value should be less than systolic value."
+      },
+      "info": {
+        "title": "Info",
+        "description": "This record was added by your doctor, therefore you cannot edit any field."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "Blood Pressure",
+          "description": "Are you sure you wish to delete this blood pressure log?",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        }
+      }
+    },
+    "bloodSugarTab": {
+      "title": "Blood Sugar",
+      "logs": "Logs",
+      "displaying": "Displaying Entries: ",
+      "filters": {
+        "title": "Filters",
+        "meal": "Logs",
+        "unit": "Unit of Measurement",
+        "confirm": "Apply",
+        "clearFilters": "Clear Filters"
+      }
+    },
+    "bloodSugarInput": {
+      "title": "Blood Sugar",
+      "yourReading": "Your Reading",
+      "save": "Save Edit",
+      "add": "Add",
+      "dateTime": "Date - Time",
+      "meal": "Meal",
+      "mealSelect": "Select Meal",
+      "errors": {
+        "mealTypeIdRequired": "Please select a valid meal.",
+        "dateTimeRequired": "Please input a valid date.",
+        "missingMeasurement": "Please input a valid measurement.",
+        "measurementInvalid": "Please input a valid measurement",
+        "outOfBoundariesMgDl": "Please input a valid measurement from 1-600 mg/dL.",
+        "outOfBoundariesMmolDl": "Please input a valid measurement from 0.06-50 mmol/L.",
+        "belowRange": "Your blood sugar is below range",
+        "aboveRange": "Your blood sugar is above range"
+      },
+      "info": {
+        "title": "Info",
+        "description": "This record was added by you doctor, therefore you cannot edit any field."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "Blood Sugar",
+          "description": "Are you sure you wish to delete this blood sugar log?",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        },
+        "fastingClose": {
+          "title": "You are almost there!",
+          "description": "Don't give up and try to reach your sugar level target! Keep going!",
+          "buttonText": "Yes"
+        },
+        "fastingExact": {
+          "title": "Congrats! You have reached your sugar level target!",
+          "description": "Don't give up and try to maintain it!",
+          "buttonText": "Yes"
+        }
+      }
+    },
+    "bloodSugarTargets": {
+      "title": "Your Targets",
+      "fasting": "FPG (Fasting)",
+      "postMeal": "PPG (Post-Meal)"
+    },
+    "bloodSugarTargetInput": {
+      "title": "Set your new target blood sugar ranges",
+      "subtitle": "Your doctor should help you set these ranges. If you leave these ranges blank, we will use the default range of 80 - 130 mg/dL for fasting and 80 - 180 mg/dL for after meals as suggested by the ADA.",
+      "fasting": "Fasting (FPG)",
+      "fastingDefinition": "FPG (Fasting Plasma Glucose) is the measure of your blood sugar level after fasting or not having anything to eat or drink for at least 8 hours. This test is usually done first thing in the morning, before breakfast.",
+      "afterMeal": "After Meal (PPG)",
+      "afterMealDefinition": "PPG (Postprandial Plasma Glucose) is the measure of your blood sugar level after a meal. Measuring PPG can keep track of blood sugar spikes, which can determine if your mealtime insulin is working.",
+      "from": "From",
+      "to": "To",
+      "save": "Save",
+      "errors": {
+        "required": "Please enter a valid blood sugar target",
+        "outOfBoundariesMmolL": "Please input a valid target between 0.06-50 mmol/L",
+        "outOfBoundariesMgDl": "Please input a valid target between 1-900 mg/dl.",
+        "minValue": "Please enter a reading higher than From"
+      }
+    },
+    "hba1cTargets": {
+      "title": "Your Targets",
+      "goalPercentage": "Goal Percentage",
+      "percent": "%"
+    },
+    "hba1cTargetInput": {
+      "title": "Set your new Hba1c goal",
+      "subtitle": "Your doctor should help you set these ranges. If you leave these ranges blank we will use the default range of 6% as suggested by the ADA.",
+      "goal": "Goal",
+      "errors": {
+        "required": "Please enter a valid HbA1c target",
+        "minMax": "Please enter a valid HbA1c target between 5% and 15%"
+      }
+    },
+    "bodyMeasurements": {
+      "title": "Body Measurements",
+      "yourReadingHeight": "Height",
+      "yourReadingWeight": "Weight",
+      "errors": {
+        "missingHeight": "Please provide your height measurement",
+        "missingWeight": "Please provide your weight measurement",
+        "measurementInvalidMetric": "Please enter a valid measurement (X'XX.XX)",
+        "measurementInvalidImperial": "Please enter a valid measurement (XXX)",
+        "outOfBoundariesMetric": "Please enter a valid height between 60 - 250 cm",
+        "outOfBoundariesImperial": "Please enter a valid height between 1'11.7 - 8'2.5 ft/in",
+        "outOfBoundariesKg": "Please enter a valid weight between 0 - 200 kg",
+        "outOfBoundariesLbs": "Please enter a valid weight between 0 - 440 lbs",
+        "measurementInvalid": "Please enter a valid measurement (XXX.XX)"
+      }
+    },
+    "personalInformation": {
+      "title": "Personal Information"
+    },
+    "cameraOptionsDialog": {
+      "title": "Options",
+      "scanBarcode": "Scan Barcode",
+      "manuallyScanBarcode": "Manually Enter Barcode",
+      "upload": "Upload"
+    },
+    "healthProgress":{
+      "weight": "Weight",
+      "bloodSugar": "Blood Sugar",
+      "medication":"Medication",
+      "hba1c":"HbA1c",
+      "bloodPressure":"Blood Pressure"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "healthTrackers": "Health Trackers",
+      "greetings": "Hello",
+      "newMessage": "New Message",
+      "receivedOn": "Received on ",
+      "markAsRead": "Mark As Read",
+      "yourLatestResult": "Your Latest Result",
+      "updateProfile": "Complete Your Profile",
+      "updateProfileText": "Fill in your profile to know your health risks",
+      "uploadResult": "Upload Your Lab Results",
+      "bookCovid": "Book a Covid Test",
+      "uploadAnotherResult": "Upload Another Lab Result",
+      "labResultText": "Keep track of your results in one place.",
+      "yourLabResultStatus": "Your Lab Result Status",
+      "barcode": "Barcode ",
+      "doctorMessage": "View Doctor Message",
+      "seeResult": "See Results",
+      "suggestedReading": "Article Highlights",
+      "riskTitle": "Your Health Risks",
+      "healthRecords": "Health Records",
+      "covid19": "COVID-19",
+      "bookings": "Bookings",
+      "healthProgress": "Health Progress",
+      "healthProvider": "Healthcare Providers",
+      "yourHealth": "Your Health",
+      "accessCode": "Do you have an Access Code?",
+      "accessCodeDesc": "You can enter your code at the button beside.",
+      "accessCodeHint": "What is an access code?",
+      "dialogs": {
+        "verify": {
+          "title": "Results Available",
+          "description": "Please enter your IC or passport number to verify your identity.",
+          "label": "IC or Passport Number",
+          "errors": {
+            "required": "IC or Passport are required",
+            "unsuccessful": "IC or Passport verification unsuccessful."
+          }
+        },
+        "verifyNotAvailable": {
+          "title": "Validation is unsuccessful",
+          "description": "IC or passport number validation is unsuccessful. You have reached the daily number of tries.",
+          "button": "OK"
+        },
+        "unsuccessful": {
+          "title": "Results Available",
+          "description": "IC or Passport number validation is unsuccessful. You have reached the daily number of tries."
+        },
+        "bio-blood_sugar": {
+          "title": "Set Target Ranges",
+          "description": "Would you like to set your target ranges for blood sugar? If you select 'skip', default ranges will be used.",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        },
+        "bio-hba1c": {
+          "title": "Set Target Ranges",
+          "description": "Would you like to set your target ranges for HbA1c? If you select 'skip', default ranges will be used.",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        },
+        "bio-medication": {
+          "title": "Set Medication",
+          "description": "Would you like to set your medication now? If you select 'skip', no medication will be entered. You can update this at any time.",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        }
+      },
+      "psp": {
+        "yourActions": "For Your Actions",
+        "recordKeeping": "Record Keeping",
+        "empower": "Empower ID:",
+        "titles": {
+          "titleDiabetes": "Enter Diabetes Support Center",
+          "titleHypertension": "Enter Hypertension Support Center"
+        }
+      }
+    },
+    "diabetesSupport": {
+      "titles": {
+        "diabetes_title": "Diabetes Support Center",
+        "hypertension_title": "Hypertension Support Center"
+      },
+      "diaries": {
+        "diabetes_diary": "Your Diabetes Diary",
+        "hypertension_diary": "Your Hypertension Diary"
+      },
+      "educations": {
+        "diabetes_education": "Diabetes Education",
+        "hypertension_education": "Hypertension Education"
+      },
+      "withdrawText": "Tap to",
+      "withdrawLink": "Withdraw from Program",
+      "dialogs": {
+        "video": {
+          "title": "Streaming Video",
+          "description": "This will consume more data. We suggest using your wifi instead.",
+          "buttonText": "Ok"
+        },
+        "withdraw": {
+          "title": "Are You Sure?",
+          "description": "Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges.",
+          "buttonText": "Yes",
+          "buttonCancelText": "Cancel"
+        }
+      },
+      "disclaimer": {
+        "titles": {
+          "titleDiabetes": "By signing this form, you hereby:",
+          "titleHypertension": "By signing this form:"
+        },
+        "paragraph": "<strong>1.</strong> Agree to participate in the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 for which you were informed by your enrolling physician. I likewise agree to be enrolled in the said Program by my physician. <br><br> <strong>2.</strong> Acknowledge that you are aware that all data related to you will be accessible only to the third party provider of Sanofi-Aventis Philippines Inc. involved in the program and all data will be handled with full confidentiality in compliance with the Data Privacy Act and all related issuances.<br><br> <strong>3.</strong> Acknowledge that you have the right to access and correct your personal information at any time upon your request.<br><br> <strong>4.</strong> Acknowledge that you can withdraw from the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 at any time without any prejudice by contacting My Blood Profile Technologies Corporation, a subsidiary of BioMark Pte Ltd, and that already collected data will remain in the specific EMPOWER Patient Program database, unless you request also for these data to be deleted. You can withdraw from the EMPOWER Patient Program at any time by clicking the “Withdraw from Program” link on the Diabetes Support Center page.<br><br> <strong>5.</strong> Acknowledge that you are aware that this program may be discontinued at any given time and that you will be notified thirty (30) days prior the discontinuation date.<br><br> <strong>6.</strong> Declare that you have carefully read the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Gargine U300 guidelines/mechanics and warrant that you will abide with such guidelines/mechanics.<br><br>",
+        "paragraphHypertension": "<ul style='padding-inline-start: 20px;'>    <li>        <p><span>You agree to participate in the EMPOWER Patient Program for Insulin            Glargine/Lixisenatide (Soliqua) or Insulin Glargine U300 (Toujeo), and/or Irbesartan +            Amlodipine (Aprovasc) (the “Program”). You confirm that you were informed of this            Program, and agree to be enrolled therein, by your enrolling physician.            </span></p>    </li>    <li style='list-style-type: circle;'>        <p><span>By enrolling in the Program, you expressly give consent to third parties, and/or third party            providers that sanofi-aventis Philippines Inc. (\"Sanofi\") engages or contracts with            (collectively, \"Third Party/ies\") that are involved in the Program to collect and process            your personal information and to conduct the Program in accordance with the following            purposes (“Purposes”):            </span></p>    </li></ul><ul>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>        1. Provide you education on diabetes and/or hypertension management, product        handling, titration etc., as may be applicable. Medical assessment and case        processing in the event of adverse drug reaction or Pharmacovigilance events.            </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>2. Give you proper device training in terms of proper and correct usage of medical        devices and/or the Insulin Glargine/Lixisenatide (Soliqua) or Insulin Glargine U300        (Toujeo) solostar pen.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>3. You may be provided with seven (7) pieces of Irbesartan/Amlodipine (Aprovasc)        every three (3) months for a period of one (1) year. Sanofi reserves the right to        suspend the provision of doses, depending on availability and other factors.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>4. Provide you with regular reminder on regular blood glucose monitoring, regular        blood pressure monitoring, other necessary laboratory test your doctor will        require.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>5. Provide your enrolling physician with regular report on your activities in the        Program for proper information feedback and monitoring.            </span></p></ul><ul style=\"padding-inline-start: 20px;\">    <li>        <p><span>You acknowledge that you are aware that the Program is not a clinical study and all data            related to you will be accessible only to Third Party/ies involved in the Program, and all            data will be handled with full confidentiality in compliance with the Data Privacy Act and            all related issuances. Such data will be stored for a period of 10 years.            </span></p>    </li>    <li>        <p><span>You acknowledge that data collected by our Nurse Educator in the format of medical            record/s (“Medical Record”) will be collected in a patient relationship management            system (“PRM”) operated by My Blood Profile Technology Corp. (“BioMark”) or any other            Third Party/ies retained by Sanofi for the purpose, accessible only by Nurse Educators            (from Home Health Care Placements, Inc. (“HHCP”)), BioMark and Third Party/ies. For the            avoidance of doubt, Sanofi shall have no access to individual patient records.            </span></p>    </li>    <li>        <p><span>You agree that your Medical Record will be shared by BioMark and Nurse Educators (from            HHCP) to your enrolling physician.            </span></p>    </li>    <li>        <p><span>You acknowledge that aggregated reports from the Program will be generated and            accessible to Sanofi and Third Party/ies for purposes of assessing the Program's            effectiveness to support in diabetes and/or hypertension management, and in evaluating            the Program's potential for further improvements. You likewise agree that your personal            data will be provided to Third Party/ies for the purpose of anonymizing the same before            any further processing will be done, which processing includes the generation of            aggregated data. You acknowledge that aggregated data from the Program may be used            for publication purposes by Sanofi or Third Party/ies, such as, but not limited to, scientific            papers, other written reports, etc. Aggregated reports that are anonymized consist of            data provided in this form and those collected in the Program’s digital platforms (such as            the Biomark Application). You understand that the strictest level of confidentiality and            security will be maintained at any stage of the processing of your personal data.            </span></p>    </li>    <li>        <p><span>You acknowledge that you have the right to access and correct your personal information            at any time upon your request by downloading and updating the BioMark Application or            by contacting 0919-433-3392 (Smart).            </span></p>    </li>    <li>        <p><span>You acknowledge that the planned education session with Nurse Educators is good for            one (1) year. Beyond this one-year period, the patient can avail of the BioMark application            and call center, as long as the EMPOWER program is still active.            </span></p>    </li>    <li>        <p><span>You acknowledge that you can withdraw from the Program at any time without prejudice            by sending your message through the Biomark App or by contacting 0919-433-3392            (Smart). You agree that personal data already collected from you will remain in the            specific Program database for the retention period mentioned above, unless you request            also for these data to be deleted.            </span></p>    </li>    <li>        <p><span>You acknowledge that you are aware that this Program may be discontinued at any given            time and that you will be notified thirty (30) days prior the discontinuation date.            </span></p>    </li></ul>",
+        "checkboxLabel": "I hereby confirm my understanding of the above policy and my consent to the collection, use and disclosure of my information in accordance to the terms of the policy.",
+        "buttonLabel": "Accept & Continue"
+      },
+      "welcome": {
+        "titles": {
+          "titleDiabetes": "Welcome to your Diabetes Support Center",
+          "titleHypertension": "Welcome to your Hypertension Support Center",
+          "titleEmpower": "Welcome to the Empower Program"
+        },
+        "intros": {
+          "introDiabetes": "Here you can track your blood sugar, medications, and access resources to help you manage your diabetes.",
+          "introHypertension": "Here you can track your Blood Pressure, Medication and access resources to help you manage your hypertension.",
+          "introEmpower": "Welcome to the Empower Program. Our goal is to empower you in your treatment journey!"
+        },
+        "buttonLabels": {
+          "continueDiabetes": "Continue to Diabetes Center",
+          "continueHypertension": "Continue to Hypertension Center",
+          "continueEmpower": "Continue"
+        }
+      },
+      "onboarding": {
+        "next": "Next",
+        "finish": "Finish",
+        "demo": {
+          "bloodSugar": "Log your blood sugar here.",
+          "medication": "Log your medication here.",
+          "HbA1c": "Log your HbA1c here.",
+          "video": "View helpful video tutorials here.",
+          "more": "Learn more about diabetes here.",
+          "moreHypertension": "Learn more about hypertension here.",
+          "bloodPressure": "Log your blood pressure here.",
+          "weight": "Log your weight here."
+        }
+      }
+    },
+    "drinking": {
+      "title": "Drinking"
+    },
+    "email": {
+      "title": "Email",
+      "save": "Save",
+      "newEmail": {
+        "title": "Email Address",
+        "placeholder": "",
+        "errors": {
+          "required": "Email required",
+          "email": "Not a valid email address"
+        }
+      },
+      "confirmEmail": {
+        "title": "Confirm Email Address",
+        "placeholder": "",
+        "errors": {
+          "required": "Email required",
+          "repeatRequired": "Email confirmation required",
+          "email": "Not a valid email address",
+          "emailMismatch": "Emails does not match"
+        }
+      }
+    },
+    "encodedResults": {
+      "filters": {
+        "title": "Filter Overview",
+        "confirm": "Confirm",
+        "type": "Filter type",
+        "all": "All",
+        "abnormal": "Abnormal"
+      },
+      "info": {
+        "title": "Results Details",
+        "source": "Source",
+        "reference": "Referring Doctor or Clinic",
+        "labReference": "Lab Reference Number",
+        "collected": "Sample Collected",
+        "received": "Report Received",
+        "printed": "Report Printed",
+        "close": "Close"
+      }
+    },
+    "healthRisks": {
+      "title": "What Are Your Health Risks?",
+      "description1": "In order to assess your health risks, please tell us a bit more about yourself.",
+      "description2": "These questions are skippable and you can update your answers at any time.",
+      "continue": "Continue",
+      "save": "Save",
+      "statusMedication": "Enter medication…",
+      "statusList": "Enter names…",
+      "conditions": "Enter condition…",
+      "medications": "Enter medication…",
+      "dismissDialog": {
+        "title": "Are You Sure?",
+        "description": "By confirming this action, you will be skipping questions that help us assess your health risks and will be taken to the dashboard.",
+        "buttonText": "Yes"
+      }
+    },
+    "labResultOverview": {
+      "title": "Result Overview",
+      "youUploads": "Your uploads",
+      "deleteUpload": "Delete Upload",
+      "seeResults": "See Report",
+      "dialogs": {
+        "delete": {
+          "title": "Are You Sure?",
+          "description": "Are you sure you want to delete this test result? This action can’t be undone.",
+          "buttonText": "Yes",
+          "buttonCancelText": "Cancel"
+        },
+        "success": {
+          "title": "Save Successful",
+          "description": "Your update has been successfully saved.",
+          "buttonText": "Okay"
+        },
+        "edit": {
+          "title": "Edit Information",
+          "newDocumentNamePlaceholder": "Diabetes test from July",
+          "documentName": "Document Name",
+          "buttonText": "Apply"
+        }
+      }
+    },
+    "language": {
+      "title": "Language",
+      "description": "Select your prefered language",
+      "save": "Save",
+      "dialog": {
+        "title": "Language",
+        "description": "Language has been changed",
+        "buttonText": "Confirm"
+      }
+    },
+    "idVerification": {
+      "backButton": "Back",
+      "continue": "Continue",
+      "skip": "Skip for now",
+      "progress": {
+        "personal": "Personal Details",
+        "verification": "ID Verification"
+      },
+      "personalDetails": {
+        "title": "Personal Details",
+        "description": "Please proceed with the ID Verification process"
+      },
+      "verification": {
+        "title": "ID Verification",
+        "description": "For you to continue, we need to verify your identity."
+      },
+      "complete": {
+        "title": "Complete",
+        "description": "Your details have been verified successfully!"
+      },
+      "terms": {
+        "title": "Terms & Conditions",
+        "description": "Please indicate that you have read and agreed to the privacy details"
+      },
+      "tos": {
+        "start": "I have read the",
+        "middle": "",
+        "end": "of the privacy policy.",
+        "tosLink": "terms and conditions",
+        "dppLink": ""
+      }
+    },
+    "login": {
+      "errors": {
+        "phoneNumberRequired": "Please provide your phone number",
+        "phoneNumberZeroStart": "Must not start with zero",
+        "phoneNumberTooLong": "Must not exceed     ",
+        "phoneNumberTooShort": "Must have  ",
+        "password": "Please provide your password",
+        "noConnection": "There is no internet connection",
+        "characters": " characters",
+        "phoneNumberLength":"Mobile number must consist between 4 - 13 digits",
+        "validNumber": "Please enter a valid mobile number"
+      },
+      "forgotPassword": "Forgot password?",
+      "newToBiomark": "Dont have an account?",
+      "terms": "Terms & Privacy Policy",
+      "signUp": "Sign up",
+      "or": "or",
+      "emailSignUp": "Sign Up With E-mail",
+      "enterPassword": "Enter your password...",
+      "enterEmail": "Enter your e-mail",
+      "login": "Login",
+      "email": "Email"
+    },
+    "marketingConsent": {
+      "title": "Marketing Consent",
+      "intro": "BioMark would like to contact you regarding information on offers, promotions and services via email and SMS.",
+      "optIn": "I would like to receive information on offers, promotions and services via email and SMS.",
+      "save": "Save",
+      "dialog": {
+        "title": "Are You Sure?",
+        "description": "By clicking 'Confirm' you will not receive any more offers, promotion and services via email and SMS.",
+        "buttonText": "Confirm",
+        "cancelButtonText": "Not Now"
+      }
+    },
+    "medicalHistory": {
+      "title": "Medical History",
+      "familyTitle": "Family Medical History",
+      "ethnicity": "What’s your ethnicity?",
+      "ethnicityHint": "Your ethnicity will impact the assessment of your BMI health indicator.",
+      "diagnosis": "Have you ever been diagnosed with any of the following conditions?",
+      "familyDiagnosis": "Have any of your family members been diagnosed with the following conditions?",
+      "continue": "Save & Continue",
+      "save": "Save",
+      "allergies": {
+        "title": "{{name}} Allergies",
+        "allergyTo": {
+          "Medication": "Are you allergic to medications?",
+          "Food": "Are you allergic to food?",
+          "Animal": "Are you allergic to animals?",
+          "Environment": "Are you allergic to any environmental allergens?",
+          "Other": "Are you allergic to anything else not listed?"
+        },
+        "listAllergies": {
+          "Medication": {
+            "label": "Please list these medications",
+            "placeholder": "Enter medications"
+          },
+          "Food": {
+            "label": "Please list these food",
+            "placeholder": "Enter food"
+          },
+          "Animal": {
+            "label": "Please list these animals",
+            "placeholder": "Enter animals"
+          },
+          "Environment": {
+            "label": "Please list these environmental allergens",
+            "placeholder": "Enter environmental allergens"
+          },
+          "Other": {
+            "label": "Please list these allergies",
+            "placeholder": "Enter allergies"
+          }
+        }
+      },
+      "errors": {
+        "ethnicity": "Please select your ethnicity"
+      }
+    },
+    "medicationInput": {
+      "titleEdit": "Edit Medication",
+      "titleSave": "Add New Medication",
+      "dosage": "Dosage",
+      "meal": "Meal",
+      "disease": "Disease",
+      "dateTime": "Date - Time",
+      "medication": "Medication",
+      "frequency": "Frequency of Dosage",
+      "editButton": "Save Edit",
+      "saveButton": "Add",
+      "tapTpAdd": "Tap to set",
+      "endDate": "End date",
+      "startDate": "Start date",
+      "at": "At",
+      "start": "Start",
+      "end": "End",
+      "dialogs": {
+        "delete": {
+          "title": "Medication",
+          "description": "Are you sure you wish to delete this medication?",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        }
+      },
+      "errors": {
+        "missingMeasurement": "Please input valid numbers between 1 and 150.",
+        "dateOutOfBoundaries": "End Date must not be before Start Date",
+        "outOfBoundaries": "Please input valid numbers between 1 and 150."
+      }
+    },
+    "medicationList": {
+      "title": "Edit Medication",
+      "description": "Click on a medicine to update its information.",
+      "continue": "Continue"
+    },
+    "medicationTake": {
+      "titleEdit": "Medication",
+      "titleSave": "Take Medication",
+      "dosage": "Dosage",
+      "meal": "Meal",
+      "dateTime": "Date - Time",
+      "medication": "Medication",
+      "units": "Units",
+      "editButton": "Save Edit",
+      "saveButton": "Take",
+      "dialogs": {
+        "delete": {
+          "title": "Medication",
+          "description": "Are you sure you wish to delete this medication log?",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        }
+      },
+      "errors": {
+        "missingMeasurement": "Please input valid numbers between 1 and 150.",
+        "outOfBoundaries": "Please input valid numbers between 1 and 150."
+      }
+    },
+    "medicationTab": {
+      "title": "YOUR DAILY MEDICATION"
+    },
+    "more": {
+      "title": "More",
+      "links": {
+        "profile": "Profile",
+        "editProfile": "Edit Profile",
+        "notifications": "Notifications",
+        "previousNotifications":"Previous Notifications",
+        "support": "Support",
+        "about": "About BioMark",
+        "policies": "Policies",
+        "settings": "Settings",
+        "logout": "Logout",
+        "autoLogout": "Auto Logout",
+        "idVerification": "Identity Verification",
+        "dependants": "Dependants",
+        "search": "Search Biomark app",
+        "verification": {
+          "notVerified": "Not Verified",
+          "pending": "Pending",
+          "verified": "Verified",
+          "error": "Verification error. Please resubmit details"
+        }
+      }
+    },
+    "notification": {
+      "title": "Notifications",
+      "doctorMessage": {
+        "title": "Chat"
+      }
+    },
+    "password": {
+      "title": "Update Password",
+      "description": "Please enter your new password",
+      "passwordRules": "Your new password must be at least 8 characters, include a symbol, a capital letter and a number.",
+      "save": "Save",
+      "currentPassword": {
+        "title": "Current Password",
+        "description": "Please enter your current password.",
+        "placeholder": "Enter your current password...",
+        "errors": {
+          "required": "Current password required",
+          "invalidCurrent": "The current password you inputted is incorrect."
+        }
+      },
+      "newPassword": {
+        "title": "Enter New Password",
+        "placeholder": "Enter your new password...",
+        "errors": {
+          "required": "New password required",
+          "invalid": "New password invalid"
+        }
+      },
+      "newPasswordConfirm": {
+        "title": "Confirm New Password",
+        "placeholder": "Enter your new password again...",
+        "errors": {
+          "passwordMismatch": "Passwords do not match",
+          "required": "Passwords are both required",
+          "invalid": "New password invalid"
+        }
+      },
+      "resetLimit": {
+        "title": "Can't process your request",
+        "error": {
+          "limit": "Attempt limit exceeded, please try after some time."
+        },
+        "buttonText": "Close"
+      }
+    },
+    "pdfViewer": {
+      "title": "Results Overview",
+      "download": "Download Report Results",
+      "info": "You can view your lab results by tapping the button above. All results are downloaded and stored in a PDF format."
+    },
+    "phoneNumber": {
+      "title": "Phone Number",
+      "mobileNumber": "Mobile Number",
+      "save": "Save"
+    },
+    "policies": {
+      "title": "Policies",
+      "privacyPolicy": {
+        "title": "Privacy Policy"
+      },
+      "termsAndConditions": {
+        "title": "Terms & Conditions"
+      }
+    },
+    "profile": {
+      "title": "Your Profile",
+      "about": "About me",
+      "links": {
+        "medicalHistory": "Medical History",
+        "familyMedicalHistory": "Family Medical History",
+        "bodyMeasurement": "Body Measurement",
+        "personalInformation": "Personal Information",
+        "vaccination": "Vaccination",
+        "allergies": "Allergies",
+        "stress": "Stress",
+        "smoking": "Smoking",
+        "drinking": "Drinking",
+        "exercise": "Exercise",
+        "sleep": "Sleep"
+      }
+    },
+    "progress": {
+      "title": "Progress"
+    },
+    "pspDashboard": {
+      "title": "Diabetes Support Center"
+    },
+    "hint": {
+      "dialogs": {
+        "code": {
+          "title": "What is an Access Code?",
+          "description": "This should be the code you received through SMS.",
+          "buttonText": "Enter Code"
+        }
+      }
+    },
+    "qrCode": {
+      "dialogs": {
+        "midas": {
+          "title": "Scan Successful",
+          "description": "Code was scanned successfully. Please click ‘Next’ to continue.",
+          "buttonText": "Next"
+        },
+        "doctor": {
+          "title": "Connect to",
+          "titlePSP": "Consent",
+          "descriptionPSP": "By clicking \"Agree\", I consent to sharing my personal information with the Healthcare Provider designated in my Empower Patient Program enrollment form, including my profile information and my health tracker information for the purpose of receiving healthcare services.",
+          "description": "By clicking \"Connect\", I consent to sharing my personal information with {{ name }}, including my profile information and my health tracker information for the purpose of receiving health care services.",
+          "buttonText": "Connect",
+          "buttonTextPSP": "Agree",
+          "buttonCancelText": "Decline"
+        }
+      }
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "otpCodeDescription": "You will receive a verification code on the mobile number you provided. Check your phone and enter the OTP code below.",
+      "notReceived": "Not received?",
+      "otpResend": "Resend OTP",
+      "continue": "Continue",
+      "resetDescription": "Please enter your new password.",
+      "reset": "Reset Password",
+      "newPasswordPlaceholder": "Enter your new password…",
+      "confirmPasswordPlaceholder": "Retype your new password…",
+      "intro": "Don't worry! We'll help you get back on track."
+    },
+    "resultSummary": {
+      "tabs": {
+        "summary": {
+          "title": "Summary",
+          "latestResult": "Your Latest Result",
+          "referenceRange": "Reference Range: ",
+          "source": "Source: ",
+          "history": "history",
+          "definition": "definition",
+          "seePDF": "See PDF",
+          "description": {
+            "normal": "What if my {{ name }} is normal?",
+            "low": "What if my {{ name }} is low?",
+            "high": "What if my {{ name }} is high?",
+            "abnormal": "What if my {{ name }} is abnormal?"
+          },
+          "tableHeaders": {
+            "date": "Date",
+            "result": "Result",
+            "unit": "Unit",
+            "refRange": "Ref. Range",
+            "abnormal": "Abnormal",
+            "comments": "Comments",
+            "labSource": "Lab Source"
+          }
+        },
+        "chart": {
+          "title": "Charts"
+        },
+        "resources": {
+          "title": "Resources"
+        }
+      }
+    },
+    "results": {
+      "title": "Results",
+      "search": "Search results...",
+      "searchBiomarkers": "Search biomarker...",
+      "latestResults": "Your Latest Results",
+      "usefulReading": "Useful Reading",
+      "noLatestResults": "You don't have any results.",
+      "pastResults": "Past Results",
+      "noPastResults": "You don't have any past results.",
+      "noMorePastResults": "You don't have any more past results.",
+      "uploadResults": "Upload Results",
+      "loadMoreData": "Load more data",
+      "keepTrack": "Keep track of your results in one place.",
+      "healthReport": "Your Health Reports",
+      "healthReportDesc": "This is your health reports where you can view present and past results from lab reports.",
+      "filters": {
+        "title": "Filter Results",
+        "confirm": "Confirm",
+        "clearFilters": "Clear Filters",
+        "uploadType": "Document Upload Type",
+        "uploadedByMe": "Uploaded By Me",
+        "sentByDoctor": "Sent By Doctor",
+        "startDate": "Start Date",
+        "endDate": "End Date"
+      }
+    },
+    "searchResults": {
+      "noResults": "No results found.",
+      "noBiomarkerResults": "No biomarker results found.",
+      "cards": {
+        "bioMarkers": "Biomarkers",
+        "panel": "Panel",
+        "result": "Result",
+        "doctor": "Doctor"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "links": {
+        "password": "Password",
+        "email": "Email",
+        "phoneNumber": "Phone Number",
+        "marketingConsent": "Marketing Consent",
+        "dataPrivacy": "Data Privacy Query",
+        "language": "Language",
+        "accountDeactivation": "Account Deactivation"
+      },
+      "dialogs": {
+        "accountDeactivation": {
+          "title": "Are You Sure?",
+          "description": "Are you sure you would like to deactivate your BioMark account?",
+          "buttonText": "Confirm",
+          "cancelButtonText": "Not Now"
+        }
+      }
+    },
+    "register": {
+      "form": {
+        "basicLegend": "Basic Information",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "gender": "Gender",
+        "dateOfBirth": "Date of Birth",
+        "idNumber": "Identity Card/Passport Number",
+        "accountLegend": "Account Information",
+        "email": "Email",
+        "mobile": "Mobile Number",
+        "password": "Password"
+      }
+    },
+    "signUp": {
+      "title": "Sign Up",
+      "welcome": "Welcome to BioMark. Let’s begin!",
+      "haveAccount": "Have an account?",
+      "login": "Log In",
+      "disclaimer": "DISCLAIMER",
+      "disclaimerText": "This app is not intended for use in the diagnosis, prevention, monitoring, management, alleviation or treatment of any medical condition or disease.",
+      "createPassword": "Create a Password",
+      "passwordRules": "Your password must be at least 8 characters, include a symbol, a capital letter and a number.",
+      "continue": "Continue",
+      "skip": "Skip",
+      "otpTitle": "Enter Your Code",
+      "otpCodeDescription": "You will receive a verification code on the mobile number you provided. Check your phone and enter the OTP code below.",
+      "otpResend": "Resend OTP code",
+      "provideNameTitle": "What’s Your Name?",
+      "dobTitle": "Date of Birth",
+      "genderTitle": "What’s Your Gender?",
+      "countryTitle": "What's Your Country?",
+      "icTitle": "Your IC Number",
+      "icDescription": "Please provide your IC Number so we can identify you and deliver your results.",
+      "emailTitle": "And Your Email?",
+      "emailDescription": "BioMark would like another way to contact you about your health and lab results. You can skip this step if you want.",
+      "tos": {
+        "start": "I accept the",
+        "middle": "and the",
+        "end": ".",
+        "tosLink": "terms and conditions",
+        "dppLink": "privacy policy"
+      },
+      "buttontitle": {
+        "privacy": "Privacy details",
+        "back": "Back"
+      },
+      "allSet": {
+        "title": "You're All Set",
+        "welcome": "Your sign-up to BioMark was successful. What would you like to do next?",
+        "actions": {
+          "code": {
+            "title": "I Have A Barcode",
+            "description": "If you were given a QR code or a barcode, select this option to scan it."
+          },
+          "noCode": {
+            "title": "Get Started",
+            "description": "If you don’t have a barcode, click here to get started."
+          },
+          "trouble": {
+            "text": "Having trouble? ",
+            "link": "contact us"
+          }
+        },
+        "dialogs": {
+          "alreadyScanned": {
+            "title": "Code Already Entered",
+            "description": "It seems like this code has already been entered.",
+            "buttonText": "Back"
+          },
+          "alreadyMember": {
+            "title": "Already a Member",
+            "description": "You are already a member of the Empower Program. You can already log your blood sugar and medications.",
+            "buttonText": "Back"
+          },
+          "alreadyHypertensionMember": {
+            "title": "Already a Member",
+            "description": "You are already a member of the Empower Program. You can already log your blood pressure and medications.",
+            "buttonText": "Back"
+          },
+          "alreadyConnected": {
+            "title": "You are already connected",
+            "titleAlt": "You are already connected to this barcode",
+            "description": "Track your results and understand your risk of developing chronic diseases.",
+            "buttonText": "Contact Us",
+            "buttonCancelText": "Okay",
+            "buttonCancelTextAlt": "Back"
+          },
+          "invalidCode": {
+            "title": "Invalid Code",
+            "description": "It seems like this code is invalid. Please try again.",
+            "buttonText": "Contact Us",
+            "buttonCancelText": "Back"
+          },
+          "invalidCodeContact": {
+            "title": "Invalid Code",
+            "description": "Please contact us if you are having trouble accessing your results.",
+            "buttonText": "Contact Us",
+            "buttonCancelText": "Back"
+          },
+          "dailyLimit": {
+            "title": "Daily Limit Reached",
+            "description": "You have reached the daily number of retries.",
+            "buttonText": "Okay"
+          },
+          "invalidCodeAlt": {
+            "title": "Invalid Code",
+            "description": "Multiple invalid code entries detected. Try manually entering the code.",
+            "buttonText": "Manually Enter Code"
+          },
+          "inDoctorReview": {
+            "title": "Review In Progress",
+            "description": "Your Results are being reviewed by your doctor.",
+            "buttonText": "Close"
+          },
+          "manualCode": {
+            "title": "Input QR or Barcode",
+            "description": "This is the number below the QR or barcode.",
+            "inputLabel": "QR or Barcode",
+            "buttonText": "Save Code",
+            "qrCodeLabel": "QR or Barcode",
+            "qrCodeRequired": "Please type QR or Barcode"
+          },
+          "success": {
+            "title": "Entry Successful",
+            "titleAlt": "Scan Successful",
+            "description": "Code was entered successfully. Please click ‘Next’ to continue.",
+            "descriptionAlt": "Code was entered successfully.",
+            "buttonText": "Next",
+            "buttonTextAlt": "OK"
+          },
+          "fail": {
+            "title": "Entry Failed",
+            "description": "Please check your connection and try again. If this fails, please contact us.",
+            "buttonText": "Okay"
+          }
+        }
+      },
+      "allSetScan": {
+        "title": "I Have A Barcode",
+        "welcome": "How would you like to use your barcode?",
+        "actions": {
+          "scan": {
+            "title": "Scan Barcode",
+            "description": "Select this option to scan your barcode with your device's camera."
+          },
+          "manual": {
+            "title": "Manually Enter Code",
+            "description": "If you would like to manually enter your code number, select this option."
+          }
+        },
+        "info1": "Having trouble?",
+        "info2": "Contact Us"
+      }
+    },
+    "smoking": {
+      "title": "Smoking",
+      "errors": {
+        "min": "Input should be at least 1 cigarette per day.",
+        "wrongRange": "Year stopped should be later than the year started."
+      }
+    },
+    "summary": {
+      "headers": {
+        "calculation": "Calculation",
+        "description": "Description",
+        "references": "References",
+        "footNotes": "Footnotes",
+        "age": "Age",
+        "gender": "Gender",
+        "HDLCholesterol": "HDL Cholesterol",
+        "gestationalDiabetes": "Gestational Diabetes",
+        "familyHistoryOfDiabetes": "Family History of Diabetes",
+        "highBloodPressure": "High Blood Pressure",
+        "exercise": "Exercise",
+        "height": "Height",
+        "weight": "Weight",
+        "totalCholesterol": "Total Cholesterol",
+        "systolicBloodPressure": "Systolic Blood Pressure",
+        "bloodPressureMedication": "Blood Pressure Medication",
+        "smoking": "Smoking",
+        "diabetes": "Diabetes",
+        "bpLevelLow": "Low",
+        "bpLevelNormal": "Normal",
+        "bpLevelElevated": "Elevated",
+        "bpLevelHigh1": "High (HPT Stage 1)",
+        "bpLevelHigh2": "High (HPT Stage 2)",
+        "bpLevelHyper": "Hypertensive Crisis",
+        "pint": "Pint of Beer",
+        "wine": "Glass of Wine",
+        "shot": "Shot of Spirit",
+        "bmiUnderweight": "Underweight",
+        "bmiNormal": "Normal",
+        "bmiOverweight": "Overweight",
+        "bmiObese": "Obese"
+      },
+      "buttons": {
+        "common": {
+          "tapHere": "Tap here ",
+          "moreInfo": "for more information.",
+          "completeInfo": "to complete your information."
+        },
+        "exercise": "Complete Exercise",
+        "bloodTest": "Upload Results",
+        "familyHistory": "Complete Family Medical History",
+        "medical": "Complete Medical History",
+        "lifestyle": "Complete Lifestyle Questions",
+        "hw": "Enter Height and Weight",
+        "bp": "Enter Blood Pressure",
+        "bmi": "Update Height and Weight",
+        "smoking": "Answer Smoking Questions",
+        "drinking": "Answer Alcohol Questions",
+        "sleeping": "Update Sleeping Hours",
+        "stress": "Answer Stress Questions",
+        "ethnic": "Update Ethnicity",
+        "notFound": ""
+      },
+      "heart": {
+        "text": "This heart risk calculation is validated by the Framingham Heart Study for people between ages of 30 and 74 and without prior history of heart disease. \n\nThe calculation takes the following factors into account:",
+        "references": "Management of Dyslipidaemia 2017 (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+        "footNotes": "Your heart risk score is only an estimate. Additionally, your risk changes over time. Please discuss with your doctor for more information.",
+        "cards": {
+          "age": "Your risk increases above the age of 35.",
+          "gender": "Men have a higher risk than women.",
+          "HDLCholesterol": "Your risk is increased with a lower HDL cholesterol.",
+          "totalCholesterol": "Your risk is increased with a higher total cholesterol.",
+          "systolicBloodPressure": "Your risk is increased with a higher systolic (upper) blood pressure reading.",
+          "bloodPressureMedication": "If you are currently taking blood pressure medication, it means you that you are already diagnosed with high blood pressure (hypertension). This puts you at a higher risk.",
+          "smoking": "Being a smoker significantly increases your risk.",
+          "diabetes": "If you have been diagnosed with diabetes, you are at a higher risk."
+        }
+      },
+      "diabetes": {
+        "text": "This diabetes risk score is based on the Type 2 Diabetes Risk Test by the American Diabetes Association for people who have no prior history of diabetes or prediabetes. \nIt takes the following factors into account:",
+        "references": "American Diabetes Association",
+        "footNotes": "Your diabetes risk score is only an estimate. Additionally, your risk changes over time. Only a blood test can determine a diagnosis. Please discuss with your doctor for more information.",
+        "cards": {
+          "age": "Your risk increases above the age of 40.",
+          "gender": "Men are more likely to have type 2 diabetes compared to women.",
+          "gestationalDiabetes": "Women who had gestational diabetes are at an increased risk.",
+          "familyHistoryOfDiabetes": "A family history of diabetes may increase your risk.",
+          "highBloodPressure": "Having high blood pressure increases your risk.",
+          "exercise": "Being physically inactive increases your risk.",
+          "height": "Your height is used to calculate Body Mass Index (BMI). Higher BMIs increases your risk.",
+          "weight": "Your weight is used to calculate Body Mass Index (BMI). Higher BMIs increases your risk."
+        }
+      },
+      "bp": {
+        "text": "Your blood pressure measures the pressure of the blood that is flowing in your blood vessels.\n\nThe top number is your systolic reading which measures the pressure when your heart beats.\n\nThe bottom number is your diastolic reading which measure the pressure when your hear relaxes in between beats.\n\nHypertension is defined as persistent elevation of systolic blood pressure (BP) of 130 mmHg or greater and/or diastolic BP of 90 mmHg or greater, taken at least twice on two separate occasions.\n\nIf your systolic and diastolic values are in different categories, we take the higher of the two classifications. For example, if your systolic is normal but your diastolic is elevated, then your blood pressure will be classified as elevated.\n\nThe following are the different classifications:",
+        "references": "Management of Hypertension (4th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+        "cards": {
+          "bpLevelLow": "<90 / <60 mmHg",
+          "bpLevelNormal": "<120 / <80 mmHg",
+          "bpLevelElevated": "120-129 / <80 mmHg",
+          "bpLevelHigh1": "130-139 / 80-89 mmHg",
+          "bpLevelHigh2": "140-179 / 90-119 mmHg",
+          "bpLevelHyper": ">180 / >120 mmHg\n(Consult your doctor immediately)"
+        }
+      },
+      "bmi": {
+        "text": "Your Body Mass Index (BMI) is a method of estimating the amount of body fat based on your height and weight.\n\nBMI is calculated by dividing your weight (kg) by the square of your height (m<sup>2</sup>).\n\nBMI often miscategorises bodybuilders as overweight due to their abundance of muscle mass. Therefore it should not be used for this group of individuals.\n\nThe following are the different classifications:",
+        "references": "1. World Health Organisation (International Association For The Study of Obesity)\n\n2. Management of Type 2 Diabetes Mellitus (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+        "cardsAsian": {
+          "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+          "bmiNormal": "18.50 - 22.99 kg/m<sup>2</sup>",
+          "bmiOverweight": "23.00 - 27.49 kg/m<sup>2</sup>",
+          "bmiObese": ">27.5 kg/m<sup>2</sup>"
+        },
+        "cardsCaucasian": {
+          "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+          "bmiNormal": "18.50 - 24.99 kg/m<sup>2</sup>",
+          "bmiOverweight": "25.00 - 29.99 kg/m<sup>2</sup>",
+          "bmiObese": ">30 kg/m<sup>2</sup>"
+        }
+      },
+      "drinking": {
+        "text": "Measuring alcohol units is a useful way to check whether your alcohol intake is above or within recommended limits.\n\nThis calculation uses alcohol units which depend on the alcohol by volume (ABV) % and the size of the drink.\n\nYour alcohol status is an estimate as it is difficult to ensure reliability of alcohol units. This is due to the variety of different strengths and drink sizes of alcohol beverages that are available.",
+        "references": "www.drinkaware.co.uk",
+        "cards": {
+          "pint": "One pint of beer (ABV 3.6%) is equivalent to 2 units.",
+          "wine": "One glass of wine (ABV 12%) is equivalent to 2.1 units.",
+          "shot": "Single small shot of spirits (25ml, ABV 40%) is equivalent to 1 unit."
+        }
+      },
+      "smoking": {
+        "text": "Pack-years is a way to measure smoking intensity. It takes into account how much and how long you have smoked.\n\nIt is calculated by dividing the number of cigarettes smoked in a day by 20 and then multiplying it by the number of years smoked.",
+        "references": "American Cancer Society"
+      },
+      "stress": {
+        "text": "Perceived Stress Scale are among the most widely used tools to measure perceived stress. This particular questionaire uses the PSS-4 framework.",
+        "references": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5791241/"
+      },
+      "sleeping": {
+        "text": "Good sleep hygiene can help you get good night time sleep.\n\nSome of sleep hygiene checklist includes establishing bedtime routine which is going to bed and waking in the morning, at the same time every day. Limiting screen time before going to bed, and avoiding stimulants (caffeine, nicotine, alcohol) as bedtime approaches will help to speed the onset of sleep. Otherwise, keeping your bedroom dark and cool will help you sleep throughout the night without waking up. \n\nThis sleep requirement is recommended by the National Sleep Foundation(USA).",
+        "references": "National Sleep Foundation, USA https://sleepshow.org/how-much-sleep/"
+      }
+    },
+    "summaryChart": {
+      "sources1": "Results available from ",
+      "sources2": " sources",
+      "referenceRanges": "Reference Ranges"
+    },
+    "tabController": {
+      "dashboard": "Dashboard",
+      "results": "Results",
+      "progress": "Progress",
+      "covid": "COVID-19",
+      "more": "More",
+      "home": "Home",
+      "inbox": "Inbox",
+      "other": "Other",
+      "appointment": "Appointment",
+      "account": "Account"
+    },
+    "targets": {
+      "title": "Targets"
+    },
+    "uploadResult": {
+      "title": "Upload Results",
+      "info": "For results with multiple pages, select Add Page to add more pages.",
+      "privacy": "Your privacy is important to us. You are in control of your health information. BioMark won’t provide your information to any third parties without your permission. <br><br> BioMark only supports the uploading of lab results for now. We reserve the right to remove documents that are not related to lab results.",
+      "uploads": "Your Uploads",
+      "documentName": "Document Name",
+      "addPage": "Add Page",
+      "continue": "Save & Continue",
+      "dialogs": {
+        "upload": {
+          "title": "Upload Lab Results",
+          "takePhoto": "Take Photo",
+          "galleryUpload": "Upload From Gallery",
+          "pdfUpload": "Upload PDF",
+          "e2eUpload": "E2E Fake Upload"
+        },
+        "success": {
+          "title": "Upload Successful",
+          "description": "Your upload was successful and is now under review.",
+          "buttonText": "Okay"
+        },
+        "delete": {
+          "title": "Are You Sure?",
+          "description": "This action is final and cannot be reverted.",
+          "buttonText": "Delete",
+          "buttonCancelText": "Cancel"
+        },
+        "fail": {
+          "title": "Upload Failed",
+          "description": "Please check your connection and try to upload your files again. If this fails, please contact us.",
+          "buttonText": "Okay"
+        }
+      }
+    },
+    "uploadAvatar": {
+      "dialogs": {
+        "upload": {
+          "title": "Change Profile Image"
+        }
+      }
+    },
+    "weightTab": {
+      "title": "Weight",
+      "logs": "Logs",
+      "filters": {
+        "title": "Filters",
+        "uploadType": "Updated By",
+        "unit": "Unit",
+        "confirm": "Apply",
+        "clearFilters": "Clear Filters"
+      }
+    },
+    "weightInput": {
+      "title": "Weight",
+      "yourReading": "Your Reading",
+      "save": "Save Edit",
+      "add": "Add",
+      "dateTime": "Date - Time",
+      "errors": {
+        "missingMeasurement": "Please provide your weight measurement",
+        "dateTimeRequired": "Please provide a date for this measurement",
+        "outOfBoundariesKg": "Please enter a valid weight between 0 - 200 kg",
+        "outOfBoundariesLbs": "Please enter a valid weight between 0 - 440 lbs",
+        "measurementInvalid": "Please enter a valid measurement (XXX.XX)"
+      },
+      "info": {
+        "title": "Info",
+        "description": "This record was added by your doctor, therefore you cannot edit any field."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "Weight",
+          "description": "Are you sure you wish to delete this weight log?",
+          "buttonText": "Yes",
+          "buttonCancelText": "Skip"
+        }
+      }
+    }
+  },
+  "healthSnapshot": {
+    "title": "Your Health Snapshot",
+    "widgets": "Health Snapshot Widgets",
+    "editGoals": "Edit Target Goals",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "ios": {
+      "connectButton": "Connect with Apple Health",
+      "modalTitle": "Link with Apple Health",
+      "modalBody": "Connect with Apple Health to see all your health data on the BioMark app. This lets you see all your health data in one place."
+    },
+    "android": {
+      "connectButton": "Connect with Google Fit",
+      "modalTitle": "Link with Google Fit",
+      "modalBody": "Connect with Google Fit to see all your health data on the BioMark app. This lets you see all your health data in one place."
+    }
+  },
+  "userProfile": {
+    "mobileNumber": "Mobile Number",
+    "password": "Password",
+    "passwordConfirm": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "dob": "Date of Birth",
+    "gender": "Gender",
+    "icNumber": "IC Number",
+    "country": "Country",
+    "icNumberHint": "If you don’t have an IC number, enter your Passport number.",
+    "email": "Email Address",
+    "marketingAgree": "Yes, I would like to receive information on offers, promotions and services via email and SMS.",
+    "passwordStrength": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "errors": {
+      "passwordLength": "Minimum Length of password must be 8",
+      "passwordRequired": "Please type new password",
+      "passwordMismatch": "Password does not match",
+      "passwordInvalid": "Invalid password format",
+      "firstNameRequired": "Please provide your first name",
+      "lastNameRequired": "Please provide your last name",
+      "nameFormat": "Name should only contain latin letters",
+      "dobRequired": "Please enter your date of birth",
+      "minAge": "You must be 18 years old or older to register",
+      "icNumberRequired": "Please type your IC Number",
+      "icFormat": "Invalid IC Number",
+      "emailRequired": "Please type your e-mail",
+      "emailFormat": "Please provide correct e-mail address"
+    },
+    "dialogs": {
+      "confirm": {
+        "title": "Are you sure?",
+        "description": "Are you sure you want to change your gender? Your diabetes medical history will be updated to Unsure. You will need to update your personal medical history again.",
+        "buttonText": "Yes",
+        "buttonCancelText": "Not now"
+      }
+    }
+  },
+  "common": {
+    "time": {
+      "secondsShort": "sec"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "ethnicities": {
+      "malay": "Malay",
+      "chinese": "Chinese",
+      "indian": "Indian",
+      "caucasian": "Caucasian",
+      "filipino": "Filipino",
+      "na": "Other / NA"
+    },
+    "date": {
+      "months": {
+        "full": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ]
+      }
+    },
+    "facebookLogin": "Continue with Facebook",
+    "login": "Log in",
+    "dashboard": "Dashboard",
+    "no": "No",
+    "yes": "Yes",
+    "ok": "Ok",
+    "cancel": "Cancel",
+    "contactUs": "Contact Us",
+    "verify": "Verify",
+    "showMore": "Show More",
+    "noMore": "No more logs to show",
+    "passwordChangeSuccessBack": "Back to Settings",
+    "passwordChangeSuccess": "Your password has been changed!",
+    "wentOffline": "Your internet connection went offline",
+    "wentOnline": "You're back online!",
+    "offlineNotification": "Your device is now working offline"
+  },
+  "prominentDisclosure": {
+    "title": "Disclosure",
+    "okText": "Allow",
+    "cancelText": "Cancel",
+    "healthApp": "Our app will track the physical activities to track your health, monitoring your body weight, blood pressure, heart rate, workout intensity, sleep, stress levels",
+    "storage": "Our app will require access to storage for uploading the profile picture, lab results, medical reports",
+    "camera": "Our app will use camera to upload kyc documents, perform kyc using facial recognition, scan QR code for lab reports, medicines prescription to show to doctor",
+    "wifi": "Our app will access Wifi to see if you have wifi connectivity for tracking your health and fitness",
+    "gps": "Our app will collect GPS location of your device for booking appointment with health care professionals and identifying clinics and hospitals nearby, to show the nearby locations of clinics and hospitals where a patient can go."
+
+  }
+}

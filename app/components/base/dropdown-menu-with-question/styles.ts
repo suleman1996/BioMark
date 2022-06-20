@@ -12,7 +12,6 @@ export const makeStyles = (colors: any) =>
     },
     container: {
       width: '100%',
-
       borderRadius: widthToDp(2),
       paddingBottom: 0,
     },

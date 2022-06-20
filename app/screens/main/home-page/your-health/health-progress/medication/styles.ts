@@ -52,13 +52,13 @@ const styles = (colors: any) =>
       fontFamily: fonts.mulishRegular,
       color: colors.primary,
       fontSize: 15,
-      // marginLeft: 5,
+      marginRight: 5,
     },
     medicineTextSuccess: {
       fontFamily: fonts.mulishRegular,
       color: colors.greenDark,
       fontSize: 15,
-      // marginLeft: 10,
+      marginRight: 5,
     },
     checkboxView: {
       flexDirection: 'row',

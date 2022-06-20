@@ -42,7 +42,7 @@ export const makeStyles = (colors: any) =>
     TabContainer: {
       width: '100%',
       borderWidth: 2,
-      paddingHorizontal: 25,
+      paddingHorizontal: 20,
       paddingVertical: 30,
       borderColor: colors.gray,
       borderRadius: widthToDp(4),
