@@ -104,25 +104,7 @@ const Index = () => {
   const [showApiError, setShowApiError] = React.useState('');
   const [showArticleWebView, setShowArticleWebView] = React.useState(false);
   const [articlesUrl, setArticlesUrl] = React.useState();
-  // const [highlights] = React.useState([
-  //   {
-  //     id: 0,
-  //     title: 'Drink Milk Everyday',
-  //     image:
-  //       'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
-  //   },
-  //   {
-  //     id: 1,
-  //     title: 'Face Mast is a Must',
-  //     image: 'https://m.media-amazon.com/images/I/415R2a9DgmL.jpg',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Dangue Fever',
-  //     image:
-  //       'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
-  //   },
-  // ]);
+
   const pan = useRef(new Animated.ValueXY()).current;
 
   useEffect(() => {
@@ -318,6 +300,7 @@ const Index = () => {
               keyExtractor={(item) => item.index}
               horizontal
               showsHorizontalScrollIndicator={false}
+              scrollT
             />
 
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
@@ -345,7 +328,7 @@ const Index = () => {
 
             {dashboard?.latest_result && (
               <RenderLastResult
-                title="Your Last Result"
+                title="Your Latest Result"
                 date={dashboard?.latest_result?.received}
                 onPress={() =>
                   navigate(SCREENS.RESULT_OVERVIEW, {

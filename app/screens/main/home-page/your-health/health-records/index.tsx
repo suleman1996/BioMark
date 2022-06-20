@@ -58,11 +58,15 @@ const HealthRecord = () => {
   useEffect(() => {
     dispatch(getReduxLatestResult());
     dispatch(getReduxPastResult());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     setPastResults(pastResult);
     setLatestResult(newResult);
     console.log('latesttttttttt-------------', latestResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, pastResult]);
 
   const onConfirm = async () => {
     try {

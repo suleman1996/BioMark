@@ -9,6 +9,7 @@ import { IAppState } from 'store/IAppState';
 import {
   getReduxBloodSugarLogs,
   getReduxDashboard,
+  getReduxHealthTracker,
 } from 'store/home/home-actions';
 
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
@@ -162,6 +163,7 @@ const BloodSugar = ({ route }) => {
       }
       await userService[API_FUNCTION](bloodSugarTracker, SELECTED_BS_ID);
       dispatch(getReduxBloodSugarLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 1);
     } catch (err: any) {
       console.error(err);
@@ -188,6 +190,7 @@ const BloodSugar = ({ route }) => {
     try {
       await userService.deleteBsLog(SELECTED_BS_ID);
       dispatch(getReduxBloodSugarLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 1);
     } catch (err) {
       console.error(err);
