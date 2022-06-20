@@ -8,7 +8,13 @@ import {
   Image,
   Keyboard,
 } from 'react-native';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -125,9 +131,10 @@ const Index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthTrackerFromStore]);
 
-  const handleHEalthTracker = () => {
+  const handleHEalthTracker = useCallback(() => {
     const tempTracker = [];
     let id = -1;
+    console.log('healthTrackerFromStore ', healthTrackerFromStore);
     Object.entries(healthTrackerFromStore).map((item) => {
       console.log('itemmm', item);
 
@@ -146,7 +153,7 @@ const Index = () => {
         });
     });
     setHealthTracker([...tempTracker]);
-  };
+  }, [healthTrackerFromStore, colors]);
 
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
   const handleCode = async ({ qrInput }: any) => {
@@ -194,8 +201,6 @@ const Index = () => {
   };
 
   const healthRiskCheck = (item) => {
-    console.log('HEre is the selected health risk ', item);
-
     item?.name === 'Blood Pressure' &&
       navigation.navigate(SCREENS.BLOOD_PRESSURE);
     item?.name === 'Smoking' && navigation.navigate(SCREENS.SMOKING);
@@ -297,10 +302,9 @@ const Index = () => {
             <FlatList
               data={healthTracker}
               renderItem={(item) => <RenderHealthTrack item={item} />}
-              keyExtractor={(item) => item.index}
+              keyExtractor={(item) => item.value}
               horizontal
               showsHorizontalScrollIndicator={false}
-              scrollT
             />
 
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
