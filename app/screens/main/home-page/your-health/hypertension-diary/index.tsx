@@ -51,7 +51,7 @@ const openMessenger = () => {
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
-const HypertensionDiary = () => {
+const HypertensionDiary = (props) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -97,8 +97,11 @@ const HypertensionDiary = () => {
     setbloodPressureData(trackerData.blood_pressure);
     setMedicationData(trackerData.medication);
     setWeightData(trackerData.weight);
-
-    setShowDemo(0);
+    if (props?.route?.params?.showDemo) {
+      setShowDemo(0);
+    } else {
+      setShowDemo(5);
+    }
   }, []);
 
   const [healthTracker] = React.useState([

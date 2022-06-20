@@ -36,7 +36,7 @@ import GradientButton from 'components/linear-gradient-button';
 const BloodPressure = ({ route }: any) => {
   const SELECTED_BP_ID = route?.params?.logId;
   const { colors } = useTheme();
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const styles = makeStyles(colors);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -87,7 +87,7 @@ const BloodPressure = ({ route }: any) => {
         },
         SELECTED_BP_ID
       );
-      disptach(getReduxBloodPressureLogs());
+      dispatch(getReduxBloodPressureLogs());
       dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err: any) {
@@ -114,7 +114,7 @@ const BloodPressure = ({ route }: any) => {
   const deleteBpLog = async () => {
     try {
       await userService.deleteBpLog(SELECTED_BP_ID);
-      disptach(getReduxBloodPressureLogs());
+      dispatch(getReduxBloodPressureLogs());
       dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err) {
