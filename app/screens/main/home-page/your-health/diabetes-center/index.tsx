@@ -40,7 +40,7 @@ const openMessenger = () => {
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
-const DiabetesCenter = () => {
+const DiabetesCenter = (props) => {
   const [isVisiable, setIsVisible] = React.useState(false);
   const [showDemo, setShowDemo] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -75,7 +75,11 @@ const DiabetesCenter = () => {
     setBarCodeData(dashboard?.program_detail?.barcode);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    setShowDemo(0);
+    if (props?.route?.params?.showDemo) {
+      setShowDemo(0);
+    } else {
+      setShowDemo(5);
+    }
   }, []);
 
   const PspModuleData = () => {

@@ -329,7 +329,7 @@ const Index = () => {
                 <RenderRecordKeeping
                   svg={<Diabetes />}
                   title="Enter Diabetes Support Center"
-                  id="4y6yb5y5yb56b56y"
+                  id={dashboard?.psp_code}
                   onPress={() => navigate(SCREENS.DIABETES_CENTER)}
                 />
               )}
@@ -338,7 +338,7 @@ const Index = () => {
                 <RenderRecordKeeping
                   svg={<BP />}
                   title="Enter Hypertension Support Center"
-                  id="4y6yb5y5yb56b56y"
+                  id={dashboard?.psp_code}
                   onPress={() => navigation.navigate(HYPERTENSION)}
                 />
               )}
