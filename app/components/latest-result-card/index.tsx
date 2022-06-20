@@ -3,7 +3,6 @@ import React from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 type props = {
   name?: string;
@@ -36,52 +35,66 @@ const LatestResultCard = (Props: props) => {
         {Props.summary && (
           <View style={styles.pastResultView}>
             <Image
-              source={require('../../assets/images/home/GD.png')}
+              source={require('../../assets/images/home/info.png')}
               style={styles.prImage}
             />
             <Text style={styles.text6}>{Props.summary}</Text>
           </View>
         )}
 
-        <View
-          style={{
-            backgroundColor: 'lightgrey',
-            flexDirection: 'row',
-            padding: 5,
-            alignItems: 'center',
-            width: widthToDp('30%'),
-            borderRadius: 15,
-            marginHorizontal: 15,
-            marginTop: 10,
-            marginBottom: 10,
-          }}
-        >
+        {Props.doctor && (
+          <View style={styles.pastResultView2}>
+            <Image
+              source={require('../../assets/images/home/doctor.png')}
+              style={styles.prImage}
+            />
+            <Text style={styles.text7}>{Props.doctor}</Text>
+          </View>
+        )}
+
+        {Props.status && (
           <View
             style={{
-              borderRadius: 20,
-              backgroundColor: colors.greenDark,
-              width: 15,
-              height: 15,
-            }}
-          ></View>
-          <Text
-            style={{
-              marginHorizontal: 8,
-              fontFamily: fonts.OpenSansBold,
-              color: 'black',
+              // backgroundColor: 'lightgrey',
+              flexDirection: 'row',
+              padding: 5,
+              alignItems: 'center',
+              borderRadius: 15,
+              marginHorizontal: 15,
+              marginTop: 10,
+              marginBottom: 10,
             }}
           >
-            {Props.status}
-          </Text>
-        </View>
-
-        {/* <View style={styles.pastResultView2}>
-          <Image
-            source={require('../../assets/images/home/GD.png')}
-            style={styles.prImage}
-          />
-          <Text style={styles.text7}>{Props.doctor}</Text>
-        </View> */}
+            <View
+              style={{
+                backgroundColor: '#EFEFEF',
+                flexDirection: 'row',
+                alignItems: 'center',
+                padding: 5,
+                borderRadius: 15,
+                marginHorizontal: 15,
+              }}
+            >
+              <View
+                style={{
+                  borderRadius: 20,
+                  backgroundColor: colors.greenDark,
+                  width: 15,
+                  height: 15,
+                }}
+              ></View>
+              <Text
+                style={{
+                  marginHorizontal: 8,
+                  fontFamily: fonts.OpenSansBold,
+                  color: 'black',
+                }}
+              >
+                {Props.status}
+              </Text>
+            </View>
+          </View>
+        )}
 
         <View style={styles.bottomView}></View>
       </TouchableOpacity>

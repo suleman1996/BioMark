@@ -222,7 +222,7 @@ const styles = (colors: any) =>
       color: colors.fieldGrey,
     },
     topView3: {
-      backgroundColor: colors.fieldGrey,
+      // backgroundColor: 'red',
       flexDirection: 'row',
       padding: 5,
       alignItems: 'center',
@@ -250,6 +250,13 @@ const styles = (colors: any) =>
       marginHorizontal: 10,
       color: colors.heading,
       fontFamily: fonts.mulishRegular,
+    },
+    topView5: {
+      backgroundColor: '#EFEFEF',
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 5,
+      borderRadius: 15,
     },
   });
 export default styles;
