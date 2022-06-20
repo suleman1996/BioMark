@@ -159,7 +159,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
           >
             <InputWithLabel
               labelFontSize={25}
-              label={''}
+              // label={''}
               defaultValue={otherOptions}
               onChange={async (value: any) => {
                 logNow('redux', value);

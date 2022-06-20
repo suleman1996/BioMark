@@ -11,7 +11,7 @@ const Index = ({ chartRef, lagendChartRef, showLegend, isLoading }) => {
   return (
     <View
       style={{
-        height: heightToDp(45),
+        height: heightToDp(showLegend ? 45 : 35),
         marginTop: 0,
         marginBottom: 10,
         flexDirection: 'row',
