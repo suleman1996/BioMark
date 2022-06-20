@@ -58,7 +58,7 @@ const AccountScreen = () => {
 
   return (
     <>
-      <TitleWithSearchBarLayout title={'Account'}>
+      <TitleWithSearchBarLayout title={'Account'} translation={true}>
         <View style={styles.content}>
           <View style={styles.accountScreenView}>
             <View style={[styles.image, { overflow: 'hidden' }]}>
