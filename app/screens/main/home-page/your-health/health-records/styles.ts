@@ -193,5 +193,39 @@ const styles = (colors: any) =>
       fontFamily: fonts.OpenSansBold,
       marginTop: heightToDp(3),
     },
+    loadMoreText: {
+      color: colors.smoke,
+      textAlign: 'center',
+      marginTop: heightToDp(2),
+      marginBottom: heightToDp(2),
+    },
+    pendingView: {
+      flexDirection: 'row',
+      padding: 5,
+      alignItems: 'center',
+      borderRadius: 15,
+      marginHorizontal: 15,
+    },
+    pendingView2: {
+      backgroundColor: '#EFEFEF',
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 5,
+      borderRadius: 15,
+      marginHorizontal: 15,
+      marginTop: 10,
+    },
+    pendingRoundView: {
+      borderRadius: 20,
+      backgroundColor: 'white',
+      width: 15,
+      height: 15,
+    },
+    convertedRoundView: {
+      borderRadius: 20,
+      backgroundColor: colors.greenDark,
+      width: 15,
+      height: 15,
+    },
   });
 export default styles;
