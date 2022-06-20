@@ -9,7 +9,7 @@ import { ActivityIndicator } from 'components';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import DatePicker from 'components/date-picker/index';
 import GradientButton from 'components/linear-gradient-button';
-import { DropdownMenu, InputWithLabel } from 'components/base';
+import { DropdownMenu, ErrorMessage, InputWithLabel } from 'components/base';
 
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
@@ -278,42 +278,46 @@ const MedicationForm = (props: any) => {
               <View>
                 <Text style={styles.textStyle}>Dosage</Text>
                 {SHOW_DOSAGE_INPUT ? (
-                  <View style={styles.dosageView}>
-                    <View
-                      style={{
-                        width: '78%',
-                      }}
-                    >
-                      <InputWithLabel
-                        containerStyles={{
-                          marginTop: 0,
+                  <View>
+                    <View style={styles.dosageView}>
+                      <View
+                        style={{
+                          width: '78%',
                         }}
-                        value={`${medication.dosage}`}
-                        error={dosageRangeError}
-                        placeholder="0"
-                        onChange={(val: string) => {
-                          if (NUMERIC_REGIX.test(val) || val == '') {
-                            const err =
-                              Number(val) > DOSAGE_RANGE.MAX ||
-                              Number(val) < DOSAGE_RANGE.MIN
-                                ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
-                                : '';
+                      >
+                        <InputWithLabel
+                          containerStyles={{
+                            marginTop: 0,
+                          }}
+                          value={`${medication.dosage}`}
+                          placeholder="0"
+                          onChange={(val: string) => {
+                            if (NUMERIC_REGIX.test(val) || val == '') {
+                              const err =
+                                Number(val) > DOSAGE_RANGE.MAX ||
+                                Number(val) < DOSAGE_RANGE.MIN
+                                  ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
+                                  : '';
 
-                            updateMedication('dosage', val);
-                            setDosageRangeError(err);
-                          }
+                              updateMedication('dosage', val);
+                              setDosageRangeError(err);
+                            }
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          width: '20%',
+                          // alignItems: 'center',
+                          // justifyContent: 'center',
                         }}
-                      />
+                      >
+                        <Text style={styles.unitText}>unit(s)</Text>
+                      </View>
                     </View>
-                    <View
-                      style={{
-                        width: '20%',
-                        // alignItems: 'center',
-                        // justifyContent: 'center',
-                      }}
-                    >
-                      <Text style={styles.unitText}>unit(s)</Text>
-                    </View>
+                    {dosageRangeError ? (
+                      <ErrorMessage errorMessage={dosageRangeError} />
+                    ) : null}
                   </View>
                 ) : (
                   <Text style={styles.subText}>1 pill(s)</Text>

@@ -159,7 +159,7 @@ const AddDependantScreen = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
-      <Header isBold={true} isColor={true} title="Add Dependents" />
+      <Header isBold={true} isColor={true} title="Add Dependants" />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}

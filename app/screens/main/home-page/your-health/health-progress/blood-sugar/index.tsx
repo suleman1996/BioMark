@@ -255,7 +255,7 @@ const Index = () => {
                   body="Blood sugar also known as blood glucose, is the main sugar found in your blood."
                   bodyStyle={{ color: '#fff' }}
                   tipContainerStyle={{
-                    backgroundColor: '#2f6b64',
+                    backgroundColor: colors.shineBlue,
                     width: '60%',
                   }}
                   overlayOpacity={0.001}
