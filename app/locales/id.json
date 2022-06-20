@@ -1012,7 +1012,8 @@
       "results": "Hasil",
       "progress": "Kemajuan",
       "clinics": "Klinik",
-      "more": "Lebih Banyak"
+      "more": "Lebih Banyak",
+      "account": "Account id"
     },
     "targets": {
       "title": "Target"

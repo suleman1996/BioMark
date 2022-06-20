@@ -9,7 +9,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import SCREENS from 'navigation/constants';
-import { navigate } from 'services/nav-ref';
+import { goBack, navigate } from 'services/nav-ref';
 
 import { hitSlop } from 'constants/hit-slop';
 
@@ -26,6 +26,7 @@ type Props = {
   onPressInfo: any;
   onSharePress: any;
   deleteIcon: any;
+  shouldGoBack?: boolean;
 };
 
 const TitleWithBackLayout = ({
@@ -39,6 +40,7 @@ const TitleWithBackLayout = ({
   onPressInfo,
   onSharePress,
   deleteIcon,
+  shouldGoBack,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -58,7 +60,9 @@ const TitleWithBackLayout = ({
           <View style={{ flexDirection: 'row' }}>
             <Pressable
               hitSlop={hitSlop.one}
-              onPress={() => navigate(SCREENS.YOUR_HEALTH)}
+              onPress={() =>
+                shouldGoBack ? goBack() : navigate(SCREENS.YOUR_HEALTH)
+              }
             >
               <MaterialIcons
                 color={colors.white}

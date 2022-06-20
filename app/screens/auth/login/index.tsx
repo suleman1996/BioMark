@@ -44,7 +44,6 @@ export const PASS_REGIX =
 export default function Login() {
   // redux
   const { t, i18n } = useTranslation();
-  console.log('ttt', t);
 
   const dispatch = useDispatch();
   const { colors } = useTheme();
