@@ -246,6 +246,24 @@ const Index = () => {
       });
   };
 
+  const getHealthRisksHash = (json: any) =>
+    JSON.parse(
+      JSON.stringify(
+        json,
+        [
+          'heart',
+          'diabetes',
+          'bp',
+          'bmi',
+          'smoking',
+          'drinking',
+          'stress',
+          'sleeping',
+        ],
+        4
+      )
+    );
+  // console.log(getHealthRisksHash());
   return (
     <>
       <View style={styles.container}>
@@ -270,16 +288,18 @@ const Index = () => {
           <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={styles.headingText}>Your Health Risks</Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(healthRisk).map(([key, value]: any) => (
-                <RenderHealthRiskView
-                  key={key}
-                  name={value?.name}
-                  onRiskPress={() => setSelectedRisk(key)}
-                  color={healthRisksColor(colors, value?.status)}
-                  Svg={healthRiskData[key].icon}
-                  status={value?.status}
-                />
-              ))}
+              {Object.entries(getHealthRisksHash(healthRisk)).map(
+                ([key, value]: any) => (
+                  <RenderHealthRiskView
+                    key={key}
+                    name={value?.name}
+                    onRiskPress={() => setSelectedRisk(key)}
+                    color={healthRisksColor(colors, value?.status)}
+                    Svg={healthRiskData[key].icon}
+                    status={value?.status}
+                  />
+                )
+              )}
             </View>
             {selectedRisk ? (
               <RenderHealthRisk
