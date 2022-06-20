@@ -100,7 +100,7 @@ const AccountScreen = () => {
               logOutCheck={autoLogoutCheck}
               onToggleAutoLogout={onToggleAutoLogout}
               dependentsCount={authContext?.userData?.dependent_count || 0}
-              id_verification={authContext?.userData?.id_verification || ''}
+              id_verification={authContext?.userData?.id_verification}
             />
           </View>
         </View>

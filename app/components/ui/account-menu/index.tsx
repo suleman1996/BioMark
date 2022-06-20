@@ -60,11 +60,18 @@ const AccountMenu = (props) => {
   return (
     <View style={styles.container}>
       <TouchableRipple
-        onPress={() =>
-          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
-            screen: SCREENS.ID_VERIFICATION_START,
-          })
-        }
+        onPress={() => {
+          if (
+            props.id_verification == 'DENIED' ||
+            props.id_verification == false
+          ) {
+            navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+              screen: SCREENS.ID_VERIFICATION_START,
+            });
+          } else {
+            console.log('error', props.id_verification);
+          }
+        }}
         style={styles.singleItem}
       >
         <>

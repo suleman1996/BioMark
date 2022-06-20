@@ -22,7 +22,10 @@ import { navigate } from 'services/nav-ref';
 import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
 import { useDispatch } from 'react-redux';
-import { getReduxWeightLogs } from 'store/home/home-actions';
+import {
+  getReduxHealthTracker,
+  getReduxWeightLogs,
+} from 'store/home/home-actions';
 import moment from 'moment';
 import { roundToDecimalPlaces } from 'utils/functions';
 
@@ -95,6 +98,7 @@ const Weight = ({ route }: any) => {
         SELECTED_WEIGHT_ID
       );
       dispatch(getReduxWeightLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 0);
     } catch (err: any) {
       console.error(err);
@@ -138,6 +142,7 @@ const Weight = ({ route }: any) => {
     try {
       await userService.deleteWeightLog(SELECTED_WEIGHT_ID);
       dispatch(getReduxWeightLogs());
+      dispatch(getReduxHealthTracker());
 
       navigate(SCREENS.HEALTH_PROGRESS, 0);
     } catch (err) {

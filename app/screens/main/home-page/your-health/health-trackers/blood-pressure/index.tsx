@@ -25,7 +25,10 @@ import { AccountDeActivateModal } from 'components/ui';
 import { Tip } from 'react-native-tip';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { useDispatch } from 'react-redux';
-import { getReduxBloodPressureLogs } from 'store/home/home-actions';
+import {
+  getReduxBloodPressureLogs,
+  getReduxHealthTracker,
+} from 'store/home/home-actions';
 import { roundToDecimalPlaces } from 'utils/functions';
 import moment from 'moment';
 
@@ -84,6 +87,7 @@ const BloodPressure = ({ route }: any) => {
         SELECTED_BP_ID
       );
       disptach(getReduxBloodPressureLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err: any) {
       console.error(err);
@@ -110,6 +114,7 @@ const BloodPressure = ({ route }: any) => {
     try {
       await userService.deleteBpLog(SELECTED_BP_ID);
       disptach(getReduxBloodPressureLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err) {
       console.error(err);
