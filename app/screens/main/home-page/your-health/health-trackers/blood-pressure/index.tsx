@@ -252,6 +252,7 @@ const BloodPressure = ({ route }: any) => {
           callMe={deleteBpLog}
         />
       )}
+
       <ButtonWithShadowContainer
         onPress={saveBloodPressureLog}
         title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
