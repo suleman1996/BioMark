@@ -114,10 +114,12 @@ const PendingResultOverview = () => {
                   )}
                 </Text>
                 <View style={styles.topView3}>
-                  <View style={styles.topRoundView}></View>
-                  <Text style={styles.topViewText3}>
-                    {pendingResult?.upload?.app_tag_name}
-                  </Text>
+                  <View style={styles.topView5}>
+                    <View style={styles.topRoundView}></View>
+                    <Text style={styles.topViewText3}>
+                      {pendingResult?.upload?.app_tag_name}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
