@@ -15,7 +15,7 @@ export const makeStyles = (colors: any) =>
     label: {
       fontSize: responsiveFontSize(22),
       fontFamily: GlobalFonts.medium,
-      color: colors.darkPrimary,
+      color: colors.shineBlue,
       marginTop: heightToDp(2),
     },
     radioContainer: {
