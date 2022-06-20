@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import i18next from 'i18next';
 import React, { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -46,7 +47,7 @@ const ChangeLanguage = () => {
               <Text style={styles.optionsHeading}>Change Language</Text>
             </View>
             <MenuOption
-              onSelect={() => alert(`english`)}
+              onSelect={() => i18next.changeLanguage('en')}
               style={styles.singleMenuItem}
             >
               <>
@@ -56,7 +57,7 @@ const ChangeLanguage = () => {
               </>
             </MenuOption>
             <MenuOption
-              onSelect={() => alert(`Bahasa Indonesia`)}
+              onSelect={() => i18next.changeLanguage('id')}
               style={styles.singleMenuItem}
             >
               <>
@@ -66,7 +67,7 @@ const ChangeLanguage = () => {
               </>
             </MenuOption>
             <MenuOption
-              onSelect={() => alert(`Bahasa Malaysia`)}
+              onSelect={() => i18next.changeLanguage('my')}
               style={styles.singleMenuItem}
             >
               <>
@@ -76,7 +77,7 @@ const ChangeLanguage = () => {
               </>
             </MenuOption>
             <MenuOption
-              onSelect={() => alert(`Chinese`)}
+              onSelect={() => i18next.changeLanguage('zh')}
               style={styles.singleMenuItem}
             >
               <>

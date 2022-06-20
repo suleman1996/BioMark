@@ -1,0 +1,1570 @@
+{
+   "pages": {
+      "signup": "Sign up",
+      "appointment": {
+         "title": "预约",
+         "tabs": {
+            "upcoming": "来临的预约",
+            "history": "历史记录"
+         }
+      },
+      "covid-booking": {
+         "title": "COVID-19 相关预约",
+         "orderId": "订单编号",
+         "tabs": {
+            "upcoming": "即将到来的",
+            "history": "历史记录"
+         },
+         "emptyMessage": {
+            "upcomingTitle": "无即将到来的预约",
+            "upcomingSubTitle": "您暂无 COVID 相关预约。",
+            "historyTitle": "无近期预约记录",
+            "historySubTitle": "您可以在此查阅",
+            "historySubTitle1": "您过往的 COVID 预约相关记录。",
+            "covidQrTitle": "暂无二维码（QR Codes）",
+            "covidQrSubTitle": "此处将显示二维码(QR Codes)",
+            "covidQrSubTitle1": "当您收到 COVID 检测结果时"
+         },
+         "button": {
+            "FAQButton": "常见问题"
+         }
+      },
+      "landing": {
+         "signup": "用户注册",
+         "login": "用户登入",
+         "board1": {
+            "image": "/assets/images/temperature-measure.svg",
+            "title": "欢迎来到Biomark",
+            "description": "随时掌握您的健康"
+         },
+         "board2": {
+            "image": "/assets/images/health-passport.svg",
+            "title": "电子健康护照",
+            "description": "让您再次环游世界的健康护照。"
+         },
+         "board3": {
+            "image": "/assets/images/healthy-lifestyle.svg",
+            "title": "追踪您的健康状况",
+            "description": "我们与你同行，打造健康生活。"
+         }
+      },
+      "onboardWelcome": {
+         "welcome": "欢迎",
+         "description": "您的Biomarking之旅由此开始"
+      },
+      "forceUpdate": {
+         "title": "可更新应用程式",
+         "definition": "即时更新您的BioMark，获取最佳体验及专享资讯。",
+         "continueButton": "更新 BioMark 应用程式"
+      },
+      "maintenance": {
+         "title": "系统维护中",
+         "definition": "BioMark应用程式暂不可用，请稍后再试。"
+      },
+      "clinics": {
+         "title": "诊所",
+         "description": "即将推出"
+      },
+      "covid": {
+         "header": "COVID-19",
+         "title": "查阅您的 COVID-19 检测记录",
+         "titleSub": "统合跟进您的检测结果",
+         "newResult": "最新检测结果：COVID PCR/抗原检测样本",
+         "noData": "查无资料",
+         "waitingVerification": "请稍候，我们正在验证您的身份。",
+         "testResult": "您的检测结果为 ",
+         "testResultCovid": "为Covid-19",
+         "share": "分享检测结果",
+         "testCenter": "检测中心",
+         "testType": "检测类型",
+         "testDate": "检测日期",
+         "reportDate": "报告日期",
+         "positiveMessage": "请进行自我隔离。",
+         "negativeMessage": "时刻与他人保持安全距离。",
+         "bookCovid": {
+            "progress1": "预约",
+            "progress2": "申报",
+            "progress3": "付款",
+            "progress4": "确认",
+            "continue": "继续",
+            "next": "下一步",
+            "cancel": "取消",
+            "makePayment": "进行付款",
+            "testTaking": {
+               "title": "谁将进行检测？",
+               "me": "我",
+               "dependant": "家属",
+               "both": "以上皆是"
+            },
+            "testBooking": {
+               "testTypeQuestion": "选择一种COVID检测的类型",
+               "testType1": "PCR 检测",
+               "testType2": "Antigen 抗原检测",
+               "testLocQuestion": "您希望在哪里进行检测？",
+               "testLoc1": "检测中心",
+               "testLoc2": "家中",
+               "testDependantQuestion": "这项COVID检测的对象为您或您的家属？",
+               "testdependant1": "我",
+               "testdependant2": "家属",
+               "testCentreCountry": "国家",
+               "testCentreCity": "城市",
+               "testCentre": "检测中心",
+               "testDateQuestion": "选择日期",
+               "testSlotMorning": "上午时段",
+               "testSlotAfternoon": "下午时段",
+               "addCovid": "增加新的家属资料"
+            },
+            "declaration": {
+               "question1": "在过去14天内，您是否曾出现发烧、喉咙痛、干咳、鼻塞、疲惫、头疼、气喘的症状？",
+               "question2": "在过去14天内，您是否到访其他国家？",
+               "question3": "在过去14天内，您否曾与正在进行COVID-19隔离的人士有近距离接触？",
+               "question4": "在过去14天内，您是否曾与COVID-19确诊者有近距离接触？",
+               "question5": "在过去14天内，您是否曾到访爆发COVID-19感染群的活动或地区，或与到访者接触？",
+               "dquestion1": "在过去14天内，您的家属是否曾出现发烧、喉咙痛、干咳、鼻塞、疲惫、头疼、气喘的症状？",
+               "dquestion2": "在过去14天内，您的家属是否到访其他国家？",
+               "dquestion3": "在过去14天内，您的家属否曾与正在进行COVID-19隔离的人士有近距离接触？",
+               "dquestion4": "在过去14天内，您的家属是否曾与COVID-19确诊者有近距离接触？",
+               "dquestion5": "在过去14天内，您的家属是否曾到访爆发COVID-19感染群的活动或地区，或与到访者接触？",
+               "terms": "我声明以上所有内容真实无误。提交此声明表，即表示我同意我的个人资讯被收集、使用及披露，以采取预防COVID-19的相关措施。"
+            },
+            "covidHealthcare": {
+               "doLater": "稍后继续",
+               "submit": "提交",
+               "covidTitle1": "您的COVID-19检测日期及时间为",
+               "covidTitle2": "地点为",
+               "covidTitle3": "进行COVID-19检测前，请务必先完成问卷。若有家属进行检测，也需个别填报问卷。",
+               "declarationMyself": "个人健康声明",
+               "declarationMyDependant": "家属健康声明",
+               "confirmation": {
+                  "done": "您已完成提交所有健康声明！",
+                  "message": "感谢您完成健康声明，请在指定时段抵达检测地点。",
+                  "yourId": "您的订单编号：",
+                  "dependantId": "您家属的订单编号："
+               }
+            },
+            "confirmation": {
+               "done": "付款成功",
+               "success": "确认电邮已发送至您注册时提供的邮箱。",
+               "declaration": "健康声明报表",
+               "declarationMessage": "将在您COVID-19检测日期前的24小时内发送给您",
+               "viewBooking": "查阅预约",
+               "return": "回到主页"
+            },
+            "bookingDialog": {
+               "yes": "是",
+               "no": "否",
+               "cancelBooking": "取消 COVID 检测预约",
+               "cancelBookingTitle": "确认取消？",
+               "cancelTitle": "取消检测预约",
+               "cancelSubTitle": "若停止执行，您的预约时段将不被保留。确定取消？",
+               "nextAlert": "检测预约时段未被保留",
+               "nextAlertTitle": "由于检测预约时段未被保留，无法进行付款。",
+               "nextAlertButton": "好的",
+               "delete": "删除家属资料？",
+               "deleteTitle": "您是否确定删除家属资料？"
+            }
+         },
+         "covid-dependant": {
+            "firstname": "名字",
+            "lastname": "姓氏",
+            "age": "年龄",
+            "relation": "关系",
+            "ncr_passport": "身份证/护照号码",
+            "title": "输入您的家属资料",
+            "document_type": "文件类型",
+            "ic": "身份证",
+            "passport": "护照",
+            "eKYC": "eKYC",
+            "addeKYC": "完成 eKYC 验证",
+            "editeKYC": "完成 eKYC 验证"
+         },
+         "covid-button": {
+            "save": "储存家属资料",
+            "add": "新增家属资料",
+            "addSelf": "新增个人资料",
+            "confirm": "确认",
+            "exist": "加入已储存的家属"
+         },
+         "dependantDialog": {
+            "redoeKYC": "重新进行eKYC验证",
+            "redoeKYCTitle": "您是否确定重新进行？"
+         },
+         "covid-booking-button": {
+            "healthDeclareButton": "健康声明",
+            "cancelButton": "取消检测",
+            "newBooking": "预约新的COVID-19检测"
+         },
+         "covid-info": {
+            "title": "检测预约 - 常见问答",
+            "card1": {
+               "question": "我需要什么文件以进行COVID-19检测？",
+               "answer": {
+                  "answer1": "身份证号码 / 出生证明（15岁以下）或 就业签证 / 工作许可证（非公民）",
+                  "answer2": "护照",
+                  "answer3": "航班详情（如有，可接受电子版）"
+               }
+            },
+            "card2": {
+               "question": "我将如何获得我的检测结果？",
+               "answer": {
+                  "answer1": "您将通过本应用程式获取您的检测结果。若准备搭乘航班，请提早一天进行检测。"
+               }
+            },
+            "card3": {
+               "question": "我在进行 COVID-19 检测前需要如何准备？",
+               "answer": {
+                  "answer1": "系统将在您的检测日前24小时送出一份健康声明报表，您需要在检测前完成该健康声明，并于检测当日准备所需的资料及文件。"
+               }
+            },
+            "card4": {
+               "question": "我有其他疑问！",
+               "answer": {
+                  "answer1": "任何询问可致电",
+                  "telNo": "1234 5353",
+                  "email": "Biomark@email.com",
+                  "middle_text": "或将您的疑问发送至我们的电邮与我们取得联系",
+                  "dot": "."
+               }
+            }
+         },
+         "errors": {
+            "firstname": "输入您的名字",
+            "lastname": "输入您的姓氏",
+            "age": "输入您的年龄",
+            "ncr_passport": "输入您的身份证号码 或 护照号码",
+            "fnameformat": "请输入有效的名字",
+            "lnameformat": "请输入有效的姓氏",
+            "ageformat": "请输入有效的年龄",
+            "ncr_passportformat": "请输入有效的身份证号码 或 护照号码"
+         },
+         "booking": {
+            "title": "COVID-19 检测预约"
+         },
+         "resultList": {
+            "title": "COVID-19 检测结果"
+         }
+      },
+      "companyList": {
+         "title": "您的公司名称",
+         "request": "新的许可请求",
+         "question": "您接受吗？",
+         "accept": "接受",
+         "reject": "拒绝",
+         "description": "此公司将能读取您的姓名、个人证明照片以及健康资讯。",
+         "company": {
+            "description": "您正在向此公司共享您的姓名、个人证明照片以及健康资讯。",
+            "healthInfo": {
+               "title": "已共享健康资讯。",
+               "testSample": "COVID PCR / 抗原检测样本",
+               "testStatus": "COVID 疫苗接种状态",
+               "healthScreening": "就业健康检查"
+            }
+         }
+      },
+      "bloodPressureTab": {
+         "title": "血压",
+         "sys": "收缩压",
+         "dia": "舒张压",
+         "logs": "系统记录",
+         "definition": "您的血压测量是显示血液在血管内流动时的压力值。上方数值是收缩压，显示您的心脏正在跳动时的压力；下方数值则是舒张压，显示您的心脏在两次跳动之间放松时的压力。",
+         "filters": {
+            "title": "条件过滤",
+            "uploadType": "更新者",
+            "confirm": "应用",
+            "clearFilters": "清除条件过滤"
+         }
+      },
+      "hba1cTab": {
+         "title": "HbA1c (%)",
+         "definition": "HbA1c (Haemoglobin A1C) 检测可显示您在过去 2至 3 个月的平均血糖水平。",
+         "logs": "系统记录"
+      },
+      "hba1cInput": {
+         "title": "HbA1c",
+         "yourReading": "您的数值",
+         "save": "储存已编辑内容",
+         "add": "新增",
+         "dateTime": "日期 - 时间",
+         "errors": {
+            "required": "请提供您的测量数值",
+            "outOfBoundaries": "您的 HbA1c 数值应处在5%-15%之间。",
+            "dateTimeRequired": "请输入有效的日期。",
+            "aboveGoal": "您的 HbA1c 偏高。",
+            "belowGoal": "您的 HbA1c 偏低。"
+         },
+         "info": {
+            "title": "资讯",
+            "description": "此项记录须由您的医生填报，您无法编辑此项目。"
+         },
+         "dialogs": {
+            "delete": {
+               "title": "HbA1c",
+               "description": "您是否确定删除您的 HbA1c 系统记录？",
+               "buttonText": "删除",
+               "buttonCancelText": "跳过"
+            }
+         }
+      },
+      "bloodPressureInput": {
+         "title": "血压",
+         "yourReading": "您的数值 (mmHg)",
+         "definition": "您的血压测量是显示血液在血管内流动时的压力值。上方数值是收缩压，显示您的心脏正在跳动时的压力；下方数值则是舒张压，显示您的心脏在两次跳动之间放松时的压力。",
+         "save": "储存已编辑内容",
+         "add": "新增",
+         "dateTime": "日期 - 时间",
+         "errors": {
+            "systolicRequired": "请输入您的收缩压及舒张压数值。",
+            "diastolicRequired": "请输入您的舒张压于舒张压数值。",
+            "systolicExceedRanges": "请输入有效的收缩压数值。有效的收缩压数值应介于50-200 mmHg 之间。",
+            "diastolicExceedRanges": "请输入有效的舒张压数值。有效的舒张压数值应介于30-120 mmHg 之间。",
+            "bloodPressure": "请输入有效的舒张压数值。有效的舒张压数值应低于您的收缩压数值。"
+         },
+         "info": {
+            "title": "资讯",
+            "description": "此项记录须由您的医生填报，您无法编辑此项目。"
+         },
+         "dialogs": {
+            "delete": {
+               "title": "血压",
+               "description": "您是否确定删除您的血压系统记录？",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            }
+         }
+      },
+      "bloodSugarTab": {
+         "title": "血糖",
+         "logs": "系统记录",
+         "displaying": "显示条目：",
+         "filters": {
+            "title": "条件过滤",
+            "meal": "系统记录",
+            "unit": "测量单位",
+            "confirm": "应用",
+            "clearFilters": "清除条件过滤"
+         }
+      },
+      "bloodSugarInput": {
+         "title": "血糖",
+         "yourReading": "您的数值",
+         "save": "储存已编辑内容",
+         "add": "新增",
+         "dateTime": "日期 - 时间",
+         "meal": "饮食资讯",
+         "mealSelect": "选择餐点",
+         "errors": {
+            "mealTypeIdRequired": "请选择一个有效的餐点内容。",
+            "dateTimeRequired": "请输入有效的日期。",
+            "missingMeasurement": "请输入有效的测量值。",
+            "measurementInvalid": "请输入有效的测量值。",
+            "outOfBoundariesMgDl": "请输入有效的测量值，有效测量值应介于 1-600 mg/dL 之间。",
+            "outOfBoundariesMmolDl": "请输入有效的测量值，有效测量值应介于 0.06-50 mmol/L 之间。",
+            "belowRange": "您的血糖低于范围。",
+            "aboveRange": "您的血糖高于范围。"
+         },
+         "info": {
+            "title": "资讯",
+            "description": "此项记录须由您的医生填报，您无法编辑此项目。"
+         },
+         "dialogs": {
+            "delete": {
+               "title": "血糖",
+               "description": "您是否确定删除您的血糖系统记录？",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            },
+            "fastingClose": {
+               "title": "就快完成了哦！",
+               "description": "加油！努力达到您的血糖水平目标！",
+               "buttonText": "是"
+            },
+            "fastingExact": {
+               "title": "恭喜您！您的血糖水平已达到目标！",
+               "description": "要继续保持哦！",
+               "buttonText": "是"
+            }
+         }
+      },
+      "bloodSugarTargets": {
+         "title": "您的目标",
+         "fasting": "空腹血糖",
+         "postMeal": "餐后血糖"
+      },
+      "bloodSugarTargetInput": {
+         "title": "为自己设定新的血糖目标范围。",
+         "subtitle": "您的医生应协助您设定您的血糖目标范围。若您将这项内容留空，我们将自动填入ADA建议的默认范围，即空腹血糖 80 - 130 mg/dL 及餐后血糖 80 - 180 mg/dL。",
+         "fasting": "空腹血糖",
+         "fastingDefinition": "空腹血糖 (Fasting Plasma Glucose, FPG) 是指您在未进行饮食8小时以上的血糖数值。这项检测一般在早餐前进行。",
+         "afterMeal": "餐后血糖",
+         "afterMealDefinition": "餐后血糖 (Postprandial Plasma Glucose, PPG) 是您在用餐后的血糖数值。测量PPG可监测您用餐后的血糖峰值，进而确定您是否正常分泌餐时胰岛素。",
+         "from": "从",
+         "to": "至",
+         "save": "储存",
+         "errors": {
+            "required": "请输入有效的血糖目标。",
+            "outOfBoundariesMmolL": "请输入介于 0.06 - 50 mmol/L 之间的有效血糖目标。",
+            "outOfBoundariesMgDl": "请输入介于 1 - 900 mg/dl 之间的有效血糖目标。",
+            "minValue": "请输入一个数值高于"
+         }
+      },
+      "hba1cTargets": {
+         "title": "您的目标",
+         "goalPercentage": "您的目标百分比",
+         "percent": "%"
+      },
+      "hba1cTargetInput": {
+         "title": "为自己设置一个新的 Hba1c 目标。",
+         "subtitle": "您的医生应协助您设定目标范围。若您将此项留空，我们将自动填入ADA建议的默认值，即6%。",
+         "goal": "目标",
+         "errors": {
+            "required": "请输入有效的 HbA1c 目标。",
+            "minMax": "请输入介于 5% 至 15% 之间的有效HbA1c目标。"
+         }
+      },
+      "bodyMeasurements": {
+         "title": "身体测量",
+         "yourReadingHeight": "身高",
+         "yourReadingWeight": "体重",
+         "errors": {
+            "missingHeight": "请输入您的身高",
+            "missingWeight": "请输入您的体重",
+            "measurementInvalidMetric": "请输入有效的身高数值 (X’XX.XX)",
+            "measurementInvalidImperial": "请输入有效的体重数值 (XXX)",
+            "outOfBoundariesMetric": "请输入介于 60 - 250 公分之间的有效身高数值。",
+            "outOfBoundariesImperial": "请输入介于 1'11.7 - 8’2.5 英尺之间的有效身高数值。",
+            "outOfBoundariesKg": "请输入介于 0 - 200 公斤的有效体重数值。",
+            "outOfBoundariesLbs": "请输入介于 0 - 440 磅之间的有效体重数值。",
+            "measurementInvalid": "请输入有效的身高数值 (XXX.XX)。"
+         }
+      },
+      "personalInformation": {
+         "title": "个人资料"
+      },
+      "cameraOptionsDialog": {
+         "title": "选项",
+         "scanBarcode": "扫描条码",
+         "manuallyScanBarcode": "手动输入条码",
+         "upload": "上传"
+      },
+      "dashboard": {
+         "title": "概要面板",
+         "healthTrackers": "健康追踪器",
+         "newMessage": "新的讯息",
+         "receivedOn": "收到日期",
+         "markAsRead": "标记为已读",
+         "yourLatestResult": "您的最新结果",
+         "updateProfile": "完成填写您的个人资料",
+         "updateProfileText": "输入您的个人资料以了解您的健康风险",
+         "uploadResult": "上传您的检验报告",
+         "bookCovid": "预约您的 COVID 检测",
+         "uploadAnotherResult": "上传另一个检验报告",
+         "labResultText": "同一平台查阅您的所有检测结果。",
+         "yourLabResultStatus": "您的健康检验状态",
+         "barcode": "条码",
+         "doctorMessage": "查阅来自医生的讯息",
+         "seeResult": "查看结果",
+         "suggestedReading": "内容重点",
+         "riskTitle": "您的健康风险",
+         "healthRecords": "健康记录",
+         "covid19": "COVID-19",
+         "healthProgress": "健康进展",
+         "healthProvider": "医疗保健机构",
+         "yourHealth": "您的健康",
+         "dialogs": {
+            "verify": {
+               "title": "查阅结果",
+               "description": "请输入您的 身份证号码 或 护照号码 以验证您的身份。",
+               "label": "身份证号码 或 护照号码",
+               "errors": {
+                  "required": "身份证号码 或 护照号码 为必填",
+                  "unsuccessful": "身份证 或 护照 验证失败。"
+               }
+            },
+            "verifyNotAvailable": {
+               "title": "验证失败",
+               "description": "身份证号码 或 护照号码 验证失败。您已达到每日尝试次数的上限。",
+               "button": "好的"
+            },
+            "unsuccessful": {
+               "title": "查阅结果",
+               "description": "身份证号码 或 护照号码 验证失败。您已达到每日尝试次数的上限。"
+            },
+            "bio-blood_sugar": {
+               "title": "设定目标范围",
+               "description": "您是否希望自行设定血糖目标范围？若您选择“跳过”，系统将使用默认范围。",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            },
+            "bio-hba1c": {
+               "title": "设定目标范围",
+               "description": "您是否希望自行设定HbA1c目标范围？若您选择“跳过”，系统将使用默认范围。",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            },
+            "bio-medication": {
+               "title": "输入用药史",
+               "description": "是否现在输入您正在使用或曾使用的药物？若选择“跳过”，将列为没有用药史。您可以随时更新此部分。",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            }
+         },
+         "psp": {
+            "yourActions": "请您回应",
+            "recordKeeping": "记录保存中",
+            "empower": "Empower 账号：",
+            "titles": {
+               "titleDiabetes": "进入糖尿病支援中心",
+               "titleHypertension": "进入高血压支援中心"
+            }
+         }
+      },
+      "diabetesSupport": {
+         "titles": {
+            "diabetes_title": "糖尿病支援中心",
+            "hypertension_title": "高血压支援中心"
+         },
+         "diaries": {
+            "diabetes_diary": "你的糖尿病日记",
+            "hypertension_diary": "你的高血压日记"
+         },
+         "educations": {
+            "diabetes_education": "糖尿病教学",
+            "hypertension_education": "高血压教学"
+         },
+         "withdrawText": "点击以",
+         "withdrawLink": "退出计划",
+         "dialogs": {
+            "video": {
+               "title": "观看影片",
+               "description": "观看影片将消耗大量移动数据。建议您改用 Wi-Fi。",
+               "buttonText": "是"
+            },
+            "withdraw": {
+               "title": "您是否确定？",
+               "description": "您确定退出 Empower计划吗？您将失去在 Empower 患者计划所赋予的全部特权。",
+               "buttonText": "是",
+               "buttonCancelText": "取消退出"
+            }
+         },
+         "disclaimer": {
+            "titles": {
+               "titleDiabetes": "通过签署此表格，您在此：",
+               "titleHypertension": "通过签署此表格："
+            },
+            "paragraph": "<strong>1.</strong> 同意参加针对甘精胰岛素/利西拉肽和甘精 U300 的 EMPOWER 患者计划，您的注册医生已告知您该计划。我同样同意由我的医生参加上述计划。 <br><br> <strong>2.</strong> 您确认您清楚参与该计划的第三方供应商 Sanofi-Aventis Philippines Inc. 将有权读取计划中与您相关的所有个人资料。这项过程中，所有资料将全面遵守《数据隐私法 Data Privacy Act》及相关法令，以完全保密的方式进行处理。<br><br> <strong>3.</strong> 确认您有权随时访问和更正您的个人信息。<br><br> <strong>4.</strong> 确认您将可以在不影响您原有的权利下随时退出针对甘精胰岛素/利西拉肽和甘精 U300 的EMPOWER 患者计划。您可以通过联系 My Blood Profile Technologies Corporation（一家 BioMark Pte Ltd 的子公司）退出这项计划。若您未特别要求删除所有在过程中已收集的资料，这些资料将保留在专为 EMPOWER 患者计划所建立的独立资料库中。您可以随时通过糖尿病支援中心页面上的“退出计划”链接退出 EMPOWER 患者计划。<br><br> <strong>5.</strong> 确认您知道该计划可在任何时间终止，您将在计划终止前的三十 (30) 天收到计划终止的通知。<br><br> <strong>6.</strong> 您声明您已仔细阅读针对甘精胰岛素/利西拉肽和甘精 U300 的EMPOWER 患者计划的所有相关指南及机制，并保证您将遵守此一计划下所制定的指南及机制。",
+            "paragraphHypertension": "<ul style='padding-inline-start: 20px;'>    <li>        <p><span>您同意参加甘精胰岛素/利西拉肽 (Soliqua) 或甘精胰岛素 U300 (Toujeo) 和/或厄贝沙坦氨氯地平 (Aprovasc) 的 EMPOWER 患者计划（“计划”）。您确认您已被您的注册医生告知了该计划，并同意参与其中。</span></p>    </li>    <li style='list-style-type: circle;'>        <p><span>通过注册该计划，您明确同意与Sanofi-Aventis Philippines Inc. (\"Sanofi\") 参与或与之签订合同的第三方和/或第三方供应商（统称为“第三方”）该计划收集和处理您的个人资料并根据以下目的（“目的”）执行该计划： </span></p>    </li></ul><ul>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>  1. 为您提供有关糖尿病和/或血压管理、产品处理、滴定等方面的教育，如适用。在发生药物不良反应或药物警戒事件时进行医学评估和病例处理。  </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>2. 在正确使用医疗设备方面为您提供适当的设备培训和/或甘精胰岛素/利西拉肽 (Soliqua) 或甘精胰岛素 U300 (Toujeo)注射剂。 </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>3. 每三 (3) 个月为您提供七 (7) 片厄贝沙坦/氨氯地平 (Aprovasc)，为期一 (1) 年。赛诺菲保留根据可用性和其他因素暂停提供剂量的权利。</span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>4. 定期提醒您进行定期血糖监测、定期血压监测以及医生要求的其他必要实验室检查。 </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>5. 定期向您的注册医师报告您在计划中的活动，以便进行适当的反馈和监控。</span></p></ul><ul style=\"padding-inline-start: 20px;\">    <li>        <p><span>您承认您知道该计划不是一项临床研究，与您相关的所有数据只能由参与该计划的第三方访问，并且所有数据都将按照《数据隐私法 Data Privacy Act》在完全保密的情况下进行处理以及所有相关的发行。此一数据将保存 10 年。</span></p>    </li>    <li>        <p><span> 您承认我们的护士教育者以医疗记录（“医疗记录”）格式收集的数据将收集在 My Blood Profile Technology Corp.（“BioMark”）运营的患者关系管理系统（“PRM”）中或赛诺菲为此目的保留的任何其他第三方，只能由 Nurse Educators（来自 Home Health Care Placements, Inc.（“HHCP”））、BioMark 和第三方访问。为避免发生疑问，赛诺菲不得访问个人患者记录。</span></p>    </li>    <li>        <p><span>您同意 BioMark 和护士教育者（来自 HHCP）将您的医疗记录分享给您的登记医生。</span></p>    </li>    <li>        <p><span>您承认，赛诺菲和第三方将生成和访问该计划的汇总报告，以评估该计划在支持糖尿病和/或高血压管理方面的有效性，并评估该计划进一步改进的潜力。您同样同意将您的个人数据提供给第三方 为了在进行任何进一步处理之前对其进行匿名化，该处理包括生成汇总数据。您承认赛诺菲或第三方可能会将来自本程序的汇总数据用于发布目的，例如但不限于科学论文、其他书面报告等。匿名汇总报告包含本文件中提供的数据表格以及在该计划的数字平台（例如 Biomark 应用程序）中收集的表格。您了解在处理您的个人数据的任何阶段都将保持最严格的保密和安全级别。</span></p>    </li>    <li>        <p><span>您承认您有权通过下载和更新 BioMark 应用程序或联系 0919-433-3392（Smart），随时根据您的要求访问和更正您的个人信息。 </span></p>    </li>    <li>        <p><span>您承认与护士教育者计划的教育课程有效期为一 (1) 年。超过这一年期间，患者 只要 EMPOWER 程序仍然有效，就可以使用 BioMark 应用程序和呼叫中心。</span></p>    </li>    <li>        <p><span>您承认您可以随时通过 Biomark 应用程序发送您的消息或联系 0919-433-3392（Smart）退出该计划而不会造成任何影响。您同意已从您那里收集的个人数据将在上述保留期内保留在特定计划数据库中，除非您还要求删除这些数据。</span></p>    </li>    <li>        <p><span>您承认您知道本计划可能会在任何时间终止，并且您将在终止日期前三十 (30) 日收到通知。 </span></p>    </li></ul>",
+            "checkboxLabel": "我在此确认我对上述政策的理解，并同意按照政策的条款收集、使用和揭露我的资料。",
+            "buttonLabel": "同意并继续"
+         },
+         "welcome": {
+            "titles": {
+               "titleDiabetes": "欢迎来到您的糖尿病支援中心",
+               "titleHypertension": "欢迎来到您的高血压支援中心",
+               "titleEmpower": "欢迎加入EMPOWER计划"
+            },
+            "intros": {
+               "introDiabetes": "您可以在此追踪您的血糖、药物和接触其他可帮助您管理糖尿病的资源。",
+               "introHypertension": "您可以在此追踪您的血压、药物和接触其他可帮助您管理糖尿病的资源。",
+               "introEmpower": "欢迎来到EMPOWER计划。我们的目标是在您的治疗之旅中为您提供支持！"
+            },
+            "buttonLabels": {
+               "continueDiabetes": "继续至糖尿病支援中心",
+               "continueHypertension": "继续至高血压支援中心",
+               "continueEmpower": "继续"
+            }
+         },
+         "onboarding": {
+            "next": "下一步",
+            "finish": "完成",
+            "demo": {
+               "bloodSugar": "请在此记录您的血糖值。",
+               "medication": "请在此记录您目前正在使用的药物。",
+               "HbA1c": "请在此记录您的HbA1c值。",
+               "video": "点此观看有用的影片教程。",
+               "more": "点此了解更多有关糖尿病的资讯。",
+               "moreHypertension": "点此了解更多有关高血压的资讯。",
+               "bloodPressure": "请在此记录您的血压。",
+               "weight": "请在此记录您的体重。"
+            }
+         }
+      },
+      "drinking": {
+         "title": "喝"
+      },
+      "email": {
+         "title": "电邮",
+         "save": "储存",
+         "newEmail": {
+            "title": "电邮地址",
+            "placeholder": "",
+            "errors": {
+               "required": "电邮为必填项目",
+               "email": "该电邮地址无效"
+            }
+         },
+         "confirmEmail": {
+            "title": "确认电邮地址",
+            "placeholder": "",
+            "errors": {
+               "required": "电邮为必填项目",
+               "repeatRequired": "确认电邮地址为必填项目",
+               "email": "该电邮地址无效",
+               "emailMismatch": "两次填写的电邮地址不符合"
+            }
+         }
+      },
+      "encodedResults": {
+         "filters": {
+            "title": "条件过滤一览",
+            "confirm": "确认",
+            "type": "条件过滤类型",
+            "all": "全选",
+            "abnormal": "异常"
+         },
+         "info": {
+            "title": "详细结果",
+            "source": "资料来源",
+            "reference": "转介医生或诊所",
+            "labReference": "实验室参考号",
+            "collected": "已完成样本收集",
+            "received": "已收到报告",
+            "printed": "已列印报告",
+            "close": "关闭"
+         }
+      },
+      "healthRisks": {
+         "title": "您的健康风险是什么？",
+         "description1": "为了让我们能有效评估您的健康风险，请告诉我们更多关于您的资料。",
+         "description2": "您可以随时跳过这些问题，也可在稍后更新您的答案。",
+         "continue": "继续",
+         "save": "储存",
+         "statusMedication": "输入您目前正在使用的药物",
+         "statusList": "输入药物名称",
+         "conditions": "输入药物使用情况",
+         "medications": "输入您目前正在使用的药物",
+         "dismissDialog": {
+            "title": "确认以上资料",
+            "description": "通过确认此操作，您将跳过有助于我们评估您的健康风险的问题，并将被带到概要面板。",
+            "buttonText": "是的"
+         }
+      },
+      "labResultOverview": {
+         "title": "结果一览",
+         "youUploads": "您上传的文件",
+         "deleteUpload": "删除上传文件",
+         "seeResults": "查阅报告",
+         "dialogs": {
+            "delete": {
+               "title": "您是否确定？",
+               "description": "您是否确定删除此一检测结果？此操作无法撤消。",
+               "buttonText": "是",
+               "buttonCancelText": "取消"
+            },
+            "success": {
+               "title": "成功储存",
+               "description": "您更新的资料已成功被储存",
+               "buttonText": "好的"
+            },
+            "edit": {
+               "title": "编辑资讯",
+               "newDocumentNamePlaceholder": "7月份的糖尿病检测",
+               "documentName": "文件名称",
+               "buttonText": "应用"
+            }
+         }
+      },
+      "language": {
+         "title": "语言",
+         "description": "选择您的语言",
+         "save": "储存",
+         "dialog": {
+            "title": "语言",
+            "description": "语言已更改",
+            "buttonText": "确认"
+         }
+      },
+      "idVerification": {
+         "backButton": "返回",
+         "continue": "继续",
+         "skip": "暂时跳过",
+         "progress": {
+            "personal": "个人信息",
+            "verification": "ID 验证"
+         },
+         "personalDetails": {
+            "title": "个人详情",
+            "description": "请进行 ID 验证"
+         },
+         "verification": {
+            "title": "ID 验证",
+            "description": "在您进行下一步前，我们需要验证您的身份。"
+         },
+         "complete": {
+            "title": "完成",
+            "description": "您的信息已成功被验证！"
+         },
+         "terms": {
+            "title": "条款和条件",
+            "description": "请注明您已阅读并同意隐私条款"
+         },
+         "tos": {
+            "start": "我已阅读",
+            "middle": "",
+            "end": "隐私政策的",
+            "tosLink": "条款和条件",
+            "dppLink": ""
+         }
+      },
+      "login": {
+         "errors": {
+            "phoneNumberRequired": "请输入您的电话号码",
+            "phoneNumberZeroStart": "不能从0开始",
+            "phoneNumberTooLong": "不得超过",
+            "phoneNumberTooShort": "必须含有",
+            "password": "请输入您的密码",
+            "noConnection": "您的互联网连接已离线",
+            "characters": "字符"
+         },
+         "forgotPassword": "忘记密码？",
+         "newToBiomark": "注册一个新账号",
+         "terms": "条款和隐私政策",
+         "signUp": "注册",
+         "or": "或",
+         "emailSignUp": "通过电邮注册",
+         "enterPassword": "输入您的密码",
+         "enterEmail": "输入您的电邮",
+         "login": "登入",
+         "email": "电邮"
+      },
+      "marketingConsent": {
+         "title": "营销同意",
+         "intro": "BioMark希望通过电邮及短信向您发送有关优惠、促销和服务的相关资讯。",
+         "optIn": "我希望通过电邮及短信接收有关优惠、促销和服务的相关资讯。",
+         "save": "储存",
+         "dialog": {
+            "title": "您是否确定？",
+            "description": "点击“确认”后，您将不会通过电邮及短信接收有关优惠、促销和服务的相关资讯。",
+            "buttonText": "确认",
+            "cancelButtonText": "暂时不要"
+         }
+      },
+      "medicalHistory": {
+         "title": "医疗史",
+         "familyTitle": "家庭医疗史",
+         "ethnicity": "您的种族是？",
+         "ethnicityHint": "种族会影响您的 BMI 健康指标的评估。",
+         "diagnosis": "您是否曾被诊断出以下任何一种情况？",
+         "familyDiagnosis": "您的家人中是否有人被诊断出以下任何一种情况？",
+         "continue": "储存及继续",
+         "save": "储存",
+         "allergies": {
+            "title": "{{name}}  过敏",
+            "allergyTo": {
+               "Medication": "您对药物过敏吗？",
+               "Food": "您对食物过敏吗？",
+               "Animal": "您对动物过敏吗？",
+               "Environment": "您对任何环境过敏原过敏吗？",
+               "Other": "您是否对未列出的其他物质过敏？"
+            },
+            "listAllergies": {
+               "Medication": {
+                  "label": "请列出这些药物",
+                  "placeholder": "输入药物名称"
+               },
+               "Food": {
+                  "label": "请列出这些食物",
+                  "placeholder": "输入食物"
+               },
+               "Animal": {
+                  "label": "请列出这些动物",
+                  "placeholder": "输入动物种类"
+               },
+               "Environment": {
+                  "label": "请列出环境过敏原",
+                  "placeholder": "输入环境过敏原"
+               },
+               "Other": {
+                  "label": "请列出过敏物质",
+                  "placeholder": "输入过敏物质"
+               }
+            }
+         },
+         "errors": {
+            "ethnicity": "请选择您的种族"
+         }
+      },
+      "medicationInput": {
+         "titleEdit": "编辑药物",
+         "titleSave": "新增药物",
+         "dosage": "剂量",
+         "meal": "餐点",
+         "disease": "疾病",
+         "dateTime": "日期 - 时间",
+         "medication": "药物",
+         "frequency": "剂量使用频率",
+         "editButton": "储存已编辑内容",
+         "saveButton": "新增",
+         "tapTpAdd": "点按设置",
+         "endDate": "结束日期",
+         "startDate": "开始日期",
+         "at": "在",
+         "start": "开始",
+         "end": "结束",
+         "dialogs": {
+            "delete": {
+               "title": "药物",
+               "description": "您是否确定删除此一药物？",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            }
+         },
+         "errors": {
+            "missingMeasurement": "请输入介于1 - 150的有效数字。",
+            "dateOutOfBoundaries": "结束日期不得早于开始日期。",
+            "outOfBoundaries": "请输入介于1 - 150的有效数字。"
+         }
+      },
+      "medicationList": {
+         "title": "编辑药物",
+         "description": "点击一种药物以更新其资料。",
+         "continue": "继续"
+      },
+      "medicationTake": {
+         "titleEdit": "药物",
+         "titleSave": "服药",
+         "dosage": "剂量",
+         "meal": "餐点",
+         "dateTime": "日期 - 时间",
+         "medication": "药物",
+         "units": "单位",
+         "editButton": "储存已编辑内容",
+         "saveButton": "服用",
+         "dialogs": {
+            "delete": {
+               "title": "药物",
+               "description": "您确定要删除此用药记录吗？",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            }
+         },
+         "errors": {
+            "missingMeasurement": "请输入介于1 - 150的有效数字。",
+            "outOfBoundaries": "请输入介于1 - 150的有效数字。"
+         }
+      },
+      "medicationTab": {
+         "title": "您的日常用药"
+      },
+      "more": {
+         "title": "更多的",
+         "links": {
+            "profile": "个人资料",
+            "notifications": "通知",
+            "support": "支持",
+            "about": "关于 BioMark",
+            "policies": "政策",
+            "settings": "设定",
+            "logout": "登出",
+            "autoLogout": "自动登出",
+            "idVerification": "身份验证",
+            "dependants": "家属",
+            "verification": {
+               "notVerified": "为认证",
+               "pending": "等待认证",
+               "verified": "已认证"
+            }
+         }
+      },
+      "notification": {
+         "title": "通知",
+         "doctorMessage": {
+            "title": "聊天"
+         }
+      },
+      "password": {
+         "title": "更新密码",
+         "description": "请输入您的新密码",
+         "passwordRules": "您的新密码必须至少包含 8 个字符，包括一个符号、一个大写字母和一个数字。",
+         "save": "储存",
+         "currentPassword": {
+            "title": "当前密码",
+            "description": "请输入您当前的密码。",
+            "placeholder": "输入当前密码",
+            "errors": {
+               "required": "需要当前密码",
+               "invalidCurrent": "您输入的当前密码不正确。"
+            }
+         },
+         "newPassword": {
+            "title": "输入新密码",
+            "placeholder": "输入您的新密码...",
+            "errors": {
+               "required": "需要新密码",
+               "invalid": "新密码无效"
+            }
+         },
+         "newPasswordConfirm": {
+            "title": "确认新密码",
+            "placeholder": "再次输入您的新密码",
+            "errors": {
+               "passwordMismatch": "密码不匹配",
+               "required": "密码都是必需的",
+               "invalid": "新密码无效"
+            }
+         },
+         "resetLimit": {
+            "title": "无法处理您的请求",
+            "error": {
+               "limit": "已超出尝试次数限制，请稍后再试。"
+            },
+            "buttonText": "关闭"
+         }
+      },
+      "pdfViewer": {
+         "title": "结果一览",
+         "download": "下载报告",
+         "info": "您可以点击上面的按钮查看您的检验报告。所有都以 PDF 格式下载及存储。"
+      },
+      "phoneNumber": {
+         "title": "电话号码",
+         "mobileNumber": "手机号码",
+         "save": "保存"
+      },
+      "policies": {
+         "title": "政策",
+         "privacyPolicy": {
+            "title": "隐私政策"
+         },
+         "termsAndConditions": {
+            "title": "条款和条件"
+         }
+      },
+      "profile": {
+         "title": "你的个人资料",
+         "about": "关于我",
+         "links": {
+            "medicalHistory": "病史",
+            "familyMedicalHistory": "家族病史",
+            "bodyMeasurement": "身体测量",
+            "personalInformation": "个人信息",
+            "vaccination": "疫苗接种",
+            "allergies": "过敏",
+            "stress": "压力",
+            "smoking": "抽烟",
+            "drinking": "喝",
+            "exercise": "运动",
+            "sleep": "睡觉"
+         }
+      },
+      "progress": {
+         "title": "进步"
+      },
+      "pspDashboard": {
+         "title": "糖尿病支援中心"
+      },
+      "qrCode": {
+         "dialogs": {
+            "midas": {
+               "title": "完成扫描",
+               "description": "代码已成功扫描。点击“下一步”继续。",
+               "buttonText": "下一步"
+            },
+            "doctor": {
+               "title": "连接至",
+               "titlePSP": "同意",
+               "descriptionPSP": "点击“同意”，即表示我同意与我的Empower Patient Program 登记表中所指定的医疗保健提供者，共享我的个人资料和健康追踪系统资料，以便接受医疗保健服务。",
+               "description": "点击“连接”，即表示我同意与 {{ name }} 共享我的个人资料，包括我的个人资料和我的健康追踪器资料，以便接受医疗保健服务。",
+               "buttonText": "连接",
+               "buttonTextPSP": "同意",
+               "buttonCancelText": "拒绝"
+            }
+         }
+      },
+      "resetPassword": {
+         "title": "重设密码",
+         "otpCodeDescription": "您将在提供的手机号码上收到验证码。检查您的手机并在下面输入 OTP 代码。",
+         "notReceived": "尚未收到OTP？",
+         "otpResend": "重新发送OTP",
+         "continue": "继续",
+         "resetDescription": "请输入您的新密码",
+         "reset": "重设密码",
+         "newPasswordPlaceholder": "输入您的新密码",
+         "confirmPasswordPlaceholder": "重新输入您的新密码",
+         "intro": "别担心！我们将尽全力协助您。"
+      },
+      "resultSummary": {
+         "tabs": {
+            "summary": {
+               "title": "总结",
+               "latestResult": "您的最新结果",
+               "referenceRange": "参考范围：",
+               "source": "资料来源：",
+               "history": "历史",
+               "definition": "定义",
+               "seePDF": "查阅 PDF",
+               "description": {
+                  "normal": "如果我的 {{ name }} 正常该如何？",
+                  "low": "如果我的 {{ name }} 偏低该如何？",
+                  "high": "如果我的 {{ name }} 偏高该如何？",
+                  "abnormal": "如果我的 {{ name }} 异常该如何？"
+               },
+               "tableHeaders": {
+                  "date": "日期",
+                  "result": "结果",
+                  "unit": "单元",
+                  "refRange": "参考范围",
+                  "abnormal": "不正常",
+                  "comments": "评论",
+                  "labSource": "实验室来源"
+               }
+            },
+            "chart": {
+               "title": "图表"
+            },
+            "resources": {
+               "title": "资源"
+            }
+         }
+      },
+      "results": {
+         "title": "结果",
+         "search": "搜索结果",
+         "searchBiomarkers": "搜索生物标记",
+         "latestResults": "您的最新结果",
+         "usefulReading": "有用的阅读资料",
+         "noLatestResults": "你暂无任何报告。",
+         "pastResults": "过去的报告",
+         "noPastResults": "您没有任何过去的报告。",
+         "noMorePastResults": "您已无更多过去的报告。",
+         "uploadResults": "上传结果",
+         "loadMoreData": "加载更多数据",
+         "keepTrack": "在一处跟踪您的结果。",
+         "healthReport": "您的健康报告",
+         "healthReportDesc": "这是您的健康报告，您可以在其中查看实验室报告的当前和过去结果。",
+         "filters": {
+            "title": "过滤结果",
+            "confirm": "确认",
+            "clearFilters": "清除条件过滤",
+            "uploadType": "文件上传类型",
+            "uploadedByMe": "由我上传",
+            "sentByDoctor": "由医生发送",
+            "startDate": "开始日期",
+            "endDate": "结束日期"
+         }
+      },
+      "searchResults": {
+         "noResults": "未找到结果。",
+         "noBiomarkerResults": "未发现生物标记结果",
+         "cards": {
+            "bioMarkers": "生物标记",
+            "panel": "控制板",
+            "result": "结果",
+            "doctor": "医生"
+         }
+      },
+      "settings": {
+         "title": "设置",
+         "links": {
+            "password": "密码",
+            "email": "电邮",
+            "phoneNumber": "电话号码",
+            "marketingConsent": "营销同意",
+            "dataPrivacy": "数据隐私查询",
+            "language": "语言",
+            "accountDeactivation": "停用帐户"
+         },
+         "dialogs": {
+            "accountDeactivation": {
+               "title": "您确定吗？",
+               "description": "您是否确定停用您的 BioMark 帐户？",
+               "buttonText": "确认",
+               "cancelButtonText": "现在不要"
+            }
+         }
+      },
+      "register": {
+         "form": {
+            "basicLegend": "基本资料",
+            "firstName": "名字",
+            "lastName": "姓氏",
+            "gender": "性别",
+            "dateOfBirth": "出生日期",
+            "idNumber": "身份证/护照号码",
+            "accountLegend": "帐户信息",
+            "email": "电邮",
+            "mobile": "手机号码",
+            "password": "密码"
+         }
+      },
+      "signUp": {
+         "title": "注册",
+         "welcome": "欢迎来到 BioMark。让我们开始吧！",
+         "haveAccount": "已有账户？",
+         "login": "登入",
+         "disclaimer": "免责声明",
+         "disclaimerText": "此应用程序不适用于任何医疗状况或疾病的诊断、预防、监测、管理、缓解或治疗。",
+         "createPassword": "创建一个密码",
+         "passwordRules": "您的密码必须至少为 8 个字符，包括一个符号、一个大写字母和一个数字。",
+         "continue": "继续",
+         "skip": "跳过",
+         "otpTitle": "输入您的代码",
+         "otpCodeDescription": "您将在提供的手机号码上收到验证码。检查您的手机并在下面输入 OTP 代码。",
+         "otpResend": "重新发送 OTP 代码",
+         "provideNameTitle": "你叫什么名字？",
+         "dobTitle": "出生日期",
+         "genderTitle": "什么是你的性别？",
+         "countryTitle": "你来自哪个国家？",
+         "icTitle": "您的身份证号码",
+         "icDescription": "请提供您的 身份证 号码以便识别，并为您提供结果。",
+         "emailTitle": "您的电子邮箱是？",
+         "emailDescription": "BioMark 希望通过其他方式联系您，以跟进您的健康状况和检验结果。您可以跳过此步骤。",
+         "tos": {
+            "start": "我接受",
+            "middle": "以及",
+            "end": ".",
+            "tosLink": "条款和条件",
+            "dppLink": "隐私政策"
+         },
+         "buttontitle": {
+            "privacy": "隐私详情",
+            "back": "返回"
+         },
+         "allSet": {
+            "title": "一切都准备就绪了",
+            "welcome": "您已成功注册 BioMark。你接下来想做什么？",
+            "actions": {
+               "code": {
+                  "title": "我有条码",
+                  "description": "如果您获得了二维码或条形码，点此进行扫描。"
+               },
+               "noCode": {
+                  "title": "开始使用",
+                  "description": "如果您没有条形码，请单击此处开始。"
+               },
+               "trouble": {
+                  "text": "遇到问题？",
+                  "link": "联系我们"
+               }
+            },
+            "dialogs": {
+               "alreadyScanned": {
+                  "title": "已输入代码",
+                  "description": "此代码已被使用。",
+                  "buttonText": "返回"
+               },
+               "alreadyMember": {
+                  "title": "已经是会员",
+                  "description": "您已经是 Empower 患者计划的会员。您现在开始记录您的血糖和药物。",
+                  "buttonText": "返回"
+               },
+               "alreadyHypertensionMember": {
+                  "title": "已经是会员",
+                  "description": "您已经是 Empower 患者计划的成员。您现在可以记录您的血糖和使用者的药物。",
+                  "buttonText": "返回"
+               },
+               "alreadyConnected": {
+                  "title": "您已经连接",
+                  "titleAlt": "您已经连接到此条码",
+                  "description": "追踪您的结果并了解您患慢性病的风险。",
+                  "buttonText": "联系我们",
+                  "buttonCancelText": "好的",
+                  "buttonCancelTextAlt": "返回"
+               },
+               "invalidCode": {
+                  "title": "代码无效",
+                  "description": "这段代码似乎无效。请再试一次。",
+                  "buttonText": "联系我们",
+                  "buttonCancelText": "返回"
+               },
+               "invalidCodeContact": {
+                  "title": "代码无效",
+                  "description": "如果您在访问结果时遇到问题，请联系我们。",
+                  "buttonText": "联系我们",
+                  "buttonCancelText": "返回"
+               },
+               "dailyLimit": {
+                  "title": "您已达到每日限额",
+                  "description": "您已达到每日重试次数。",
+                  "buttonText": "好的"
+               },
+               "invalidCodeAlt": {
+                  "title": "代码无效",
+                  "description": "检测到多个无效代码条目。请尝试手动输入代码。",
+                  "buttonText": "手动输入代码"
+               },
+               "inDoctorReview": {
+                  "title": "审查进行中",
+                  "description": "您的医生正在审查您的结果。",
+                  "buttonText": "关闭"
+               },
+               "manualCode": {
+                  "title": "输入二维码或条形码",
+                  "description": "这是 QR 或条形码下方的数字。",
+                  "inputLabel": "二维码或条形码",
+                  "buttonText": "保存代码",
+                  "qrCodeLabel": "二维码或条形码",
+                  "qrCodeRequired": "请输入二维码或条形码"
+               },
+               "success": {
+                  "title": "进入成功",
+                  "titleAlt": "扫描成功",
+                  "description": "代码输入成功。请单击“下一步”继续。",
+                  "descriptionAlt": "代码输入成功。",
+                  "buttonText": "下一个",
+                  "buttonTextAlt": "是"
+               },
+               "fail": {
+                  "title": "输入失败",
+                  "description": "请检查您的连接，然后重试。如果失败，请联系我们。",
+                  "buttonText": "好的"
+               }
+            }
+         },
+         "allSetScan": {
+            "title": "我有条码",
+            "welcome": "您想如何使用您的条码？",
+            "actions": {
+               "scan": {
+                  "title": "扫描条码",
+                  "description": "选择此选项以使用您设备的相机扫描您的条形码。"
+               },
+               "manual": {
+                  "title": "手动输入代码",
+                  "description": "如果您想手动输入您的代码，请选择此选项。"
+               }
+            },
+            "info1": "遇到麻烦？",
+            "info2": "联系我们"
+         }
+      },
+      "smoking": {
+         "title": "抽烟",
+         "errors": {
+            "min": "输入应至少为每天 1 支香烟。",
+            "wrongRange": "停止年份应晚于开始年份。"
+         }
+      },
+      "summary": {
+         "headers": {
+            "calculation": "计算",
+            "description": "描述",
+            "references": "参考",
+            "footNotes": "注脚",
+            "age": "年龄",
+            "gender": "性别",
+            "HDLCholesterol": "高密度脂蛋白胆固醇",
+            "gestationalDiabetes": "妊娠糖尿病",
+            "familyHistoryOfDiabetes": "糖尿病家族史",
+            "highBloodPressure": "高血压",
+            "exercise": "锻炼",
+            "height": "高度",
+            "weight": "重量",
+            "totalCholesterol": "总胆固醇",
+            "systolicBloodPressure": "收缩压",
+            "bloodPressureMedication": "血压药物",
+            "smoking": "抽烟",
+            "diabetes": "糖尿病",
+            "bpLevelLow": "低的",
+            "bpLevelNormal": "普通的",
+            "bpLevelElevated": "升高",
+            "bpLevelHigh1": "高（第1阶段高血压）",
+            "bpLevelHigh2": "高（第2阶段高血压）",
+            "bpLevelHyper": "高血压危象",
+            "pint": "一品脱啤酒",
+            "wine": "一杯酒",
+            "shot": "一份烈酒",
+            "bmiUnderweight": "体重不足",
+            "bmiNormal": "正常",
+            "bmiOverweight": "超重",
+            "bmiObese": "肥胖"
+         },
+         "buttons": {
+            "common": {
+               "tapHere": "点击这里",
+               "moreInfo": "获取更多资讯。",
+               "completeInfo": "完成填写您的资料"
+            },
+            "exercise": "完成运动",
+            "bloodTest": "上传结果",
+            "familyHistory": "完成填报您的家族病史",
+            "medical": "完成填报您的病历",
+            "lifestyle": "完成生活方式问答",
+            "hw": "输入身高和体重",
+            "bp": "输入血压",
+            "bmi": "更新身高和体重",
+            "smoking": "回答吸烟问题",
+            "drinking": "回答饮酒问题",
+            "ethnic": "更新种族",
+            "notFound": ""
+         },
+         "heart": {
+            "text": "这项心脏风险计算法获得弗雷明翰心脏研究（Framingham Heart Study）的认证，适用于 30 至 74 岁且没有心脏病史的人群。\n\n计算法考量以下因素：",
+            "references": "Management of Dyslipidaemia 2017 (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+            "footNotes": "您的心脏风险评分只是一个估计值。此外，您的风险会随着时间而变化。请与您的医生讨论以获取更多信息。",
+            "cards": {
+               "age": "您的风险在 35 岁以上时会增加。",
+               "gender": "男性的风险高于女性。",
+               "HDLCholesterol": "高密度脂蛋白胆固醇（HDL）降低会增加您的风险。",
+               "totalCholesterol": "总胆固醇升高会增加您的风险。",
+               "systolicBloodPressure": "更高的收缩压（上）血压数值会增加您的风险。",
+               "bloodPressureMedication": "如果您目前正在服用降压药，这意味着您已经被诊断出患有高血压。这会使您面临更高的风险。",
+               "smoking": "吸烟会显着增加您的风险。",
+               "diabetes": "如果您被诊断出患有糖尿病，您的风险会更高。"
+            }
+         },
+         "diabetes": {
+            "text": "这个糖尿病风险评分是依据 American Diabetes Association（ADA）针对没有糖尿病或糖尿病前期的病史者进行的第 2 型糖尿病风险测试，作为依据。 它考虑了以下因素：",
+            "references": "American Diabetes Association",
+            "footNotes": "您的糖尿病风险评分只是一个估计值。此外，您的风险会随着时间而变化。只有验血才能确定诊断。请与您的医生讨论以获取更多信息。",
+            "cards": {
+               "age": "您的风险在 40 岁以上时会增加。",
+               "gender": "与女性相比，男性更容易患 2 型糖尿病。",
+               "gestationalDiabetes": "患有妊娠糖尿病的女性风险增加。",
+               "familyHistoryOfDiabetes": "糖尿病家族史可能会增加您的风险。",
+               "highBloodPressure": "高血压会增加您的风险。",
+               "exercise": "不运动会增加你的风险。",
+               "height": "您的身高用于计算体重指数 (BMI)。较高的 BMI 会增加您的风险。",
+               "weight": "您的体重用于计算体重指数 (BMI)。较高的 BMI 会增加您的风险。"
+            }
+         },
+         "bp": {
+            "text": "血压测量的是您血管内的血液流动时的压力。\n\n上方的数字是您的「收缩压 (SYS) 」数值，它是您的心脏正在跳动时时的压力；\n\n而下方的数字则是您的「舒张压 (DIA) 」数值，它是您的心脏在两次跳动之间放松时的压力。\n\n若您的收缩压持续维持在 130 mmHg 或以上；同时您的舒张压持续维持在 90 mmHg 或以上，且在两个不同或以上的情境下达到相关数值，则代表您有高血压的状况。\n\n如果您的收缩压和舒张压值属于不同的类别，我们将采用两个类别中较高的一个。举例而言，若您的收缩压正常但舒张压升高，那么您的血压将被归类为升高。\n\n以下是不同的分类：",
+            "references": "Management of Hypertension (4th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+            "cards": {
+               "bpLevelLow": "<90 / <60 mmHg",
+               "bpLevelNormal": "<120 / <80 mmHg",
+               "bpLevelElevated": "120-129 / <80 mmHg",
+               "bpLevelHigh1": "130-139 / 80-89 mmHg",
+               "bpLevelHigh2": "140-179 / 90-119 mmHg",
+               "bpLevelHyper": ">180 / >120 mmHg\n(立即咨询您的医生)"
+            }
+         },
+         "bmi": {
+            "text": "您的身体质量指数 (BMI) 是根据您的身高和体重估算身体脂肪量的方法。  BMI 的计算法是将您的体重 (kg) 除以您的身高 (m<sup>2</sup>)。  BMI 通常误将健美运动员归类为超重，这是因为他们有高量的肌肉量。因此，它不应该用于这个群体。  以下是不同的分类：",
+            "references": "1. World Health Organisation (International Association For The Study of Obesity)\n\n2. Management of Type 2 Diabetes Mellitus (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
+            "cardsAsian": {
+               "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+               "bmiNormal": "18.50 - 22.99 kg/m<sup>2</sup>",
+               "bmiOverweight": "23.00 - 27.49 kg/m<sup>2</sup>",
+               "bmiObese": ">27.5 kg/m<sup>2</sup>"
+            },
+            "cardsCaucasian": {
+               "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+               "bmiNormal": "18.50 - 24.99 kg/m<sup>2</sup>",
+               "bmiOverweight": "25.00 - 29.99 kg/m<sup>2</sup>",
+               "bmiObese": ">30 kg/m<sup>2</sup>"
+            }
+         },
+         "drinking": {
+            "text": "测量酒精单位可协助您检查酒精摄入量是否高过或处于建议限度内的方法。 测量方式所使用的酒精单位，是取决于酒精体积 (ABV) % 及摄入的饮品容量。 由于种类繁多的酒类饮品皆有不同的浓度及饮用量，您的酒精指数仅是一个估计值。",
+            "references": "www.drinkaware.co.uk",
+            "cards": {
+               "pint": "一品脱 (One pint) 啤酒 (酒精体积/ABV 3.6%) 相当于 2 个单位。",
+               "wine": "一杯葡萄酒 (酒精体积/ABV 12%) 相当于 2.1 个单位。",
+               "shot": "一份 (Single shot) 烈酒 (25ml，酒精体积/ABV 40%) 相当于 1 个单位。"
+            }
+         },
+         "smoking": {
+            "text": "吸烟年包数 (Pack-years)是透过计算每日吸烟数量及烟龄，来评量个体吸烟强度的指数。  其计算方法是以每日吸烟数量除以20为包数，再以包数乘以吸烟的年数。",
+            "references": "American Cancer Society"
+         },
+         "stress": {
+            "text": "感知压力量表是测量感知压力最广泛被使用的工具。此一问卷使用 PSS-4 框架。",
+            "references": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5791241/"
+         },
+         "sleeping": {
+            "text": "良好的睡眠卫生可以帮助您获得优质的夜间睡眠。 睡眠卫生包括建立规律的睡眠，每天在固定时间入睡并在早上醒来、限制睡前的使用屏幕时间、避免在睡前摄入兴奋物质（咖啡因、尼古丁、酒精），将有助于加快入睡。除此之外，在睡眠时保持卧室环境阴暗及凉爽，也有助于您整夜安稳睡眠。 此睡眠建议是由美国国家睡眠基金会（National Sleep Foundation, NSF) 所推荐。\n",
+            "references": "National Sleep Foundation, USA https://sleepshow.org/how-much-sleep/"
+         }
+      },
+      "summaryChart": {
+         "sources1": "由此获取结果",
+         "sources2": "资料来源",
+         "referenceRanges": "参考范围"
+      },
+      "tabController": {
+         "dashboard": "概要面板",
+         "results": "结果",
+         "progress": "进度",
+         "covid": "COVID-19",
+         "more": "更多",
+         "home": "主页",
+         "inbox": "信箱",
+         "appointment": "预约",
+         "account": "账户"
+      },
+      "targets": {
+         "title": "目标"
+      },
+      "uploadResult": {
+         "title": "上传检验报告",
+         "info": "若您的检验报告有多页文件，请点击“新增页面”以上传更多的页面。",
+         "privacy": "您的隐私权对我们非常重要。您可以控制自己的健康信息。BioMark 不会在未经许可下将您的资料提供给任何第三方。 <br><br> BioMark 目前只支持上传健康检验结果。我们保留可删除与健检结果无关的文件的权利。",
+         "uploads": "您的上传文件",
+         "documentName": "文件名称",
+         "addPage": "新增页面",
+         "continue": "储存并继续",
+         "dialogs": {
+            "upload": {
+               "title": "上传检验结果",
+               "takePhoto": "拍照",
+               "galleryUpload": "从图库中上传",
+               "pdfUpload": "上传PDF",
+               "e2eUpload": "E2E Fake 上传"
+            },
+            "success": {
+               "title": "上传成功",
+               "description": "上传成功，资料目前正在审核中。",
+               "buttonText": "好的"
+            },
+            "delete": {
+               "title": "您是否确定？",
+               "description": "此操作是最终操作，无法恢复。",
+               "buttonText": "删除",
+               "buttonCancelText": "取消"
+            },
+            "fail": {
+               "title": "上传失败",
+               "description": "请检查您的网路连接并再次尝试上传您的文件。若问题持续，请与我们取得联系。",
+               "buttonText": "好的"
+            }
+         }
+      },
+      "uploadAvatar": {
+         "dialogs": {
+            "upload": {
+               "title": "更新头像"
+            }
+         }
+      },
+      "weightTab": {
+         "title": "体重",
+         "logs": "系统记录",
+         "filters": {
+            "title": "条件过滤",
+            "uploadType": "更新者",
+            "unit": "单位",
+            "confirm": "应用",
+            "clearFilters": "清除条件过滤"
+         }
+      },
+      "weightInput": {
+         "title": "体重",
+         "yourReading": "您的数值",
+         "save": "储存已编辑内容",
+         "add": "新增",
+         "dateTime": "日期 - 时间",
+         "errors": {
+            "missingMeasurement": "请提供您的体重数值。",
+            "dateTimeRequired": "请提供该数值的测量日期",
+            "outOfBoundariesKg": "请输入有效的体重数值。有效的体重数值应介于 0 - 200 公斤之间。",
+            "outOfBoundariesLbs": "请输入有效的体重数值。有效的体重数值应介于 0 - 440 磅之间。",
+            "measurementInvalid": "请输入有效的身高数值 (XXX.XX)。"
+         },
+         "info": {
+            "title": "资料",
+            "description": "此项记录须由您的医生填报，您无法编辑此项目。"
+         },
+         "dialogs": {
+            "delete": {
+               "title": "体重",
+               "description": "您是否确定删除此体重系统记录？",
+               "buttonText": "是",
+               "buttonCancelText": "跳过"
+            }
+         }
+      }
+   },
+   "userProfile": {
+      "mobileNumber": "手机号码",
+      "password": "密码",
+      "passwordConfirm": "确认密码",
+      "firstName": "名字",
+      "lastName": "姓氏",
+      "dob": "出生日期",
+      "gender": "性别",
+      "icNumber": "身份证号码",
+      "country": "国家",
+      "icNumberHint": "若您未有身份证号码，请输入您的护照号码。",
+      "email": "电邮",
+      "marketingAgree": "是的，我同意通过电邮及短信接收有关优惠、促销和服务的相关资讯。",
+      "passwordStrength": {
+         "low": "低",
+         "medium": "中",
+         "high": "高"
+      },
+      "errors": {
+         "passwordLength": "密码必须为8个字以上",
+         "passwordRequired": "输入新的密码",
+         "passwordMismatch": "密码不匹配",
+         "passwordInvalid": "无效的密码格式",
+         "firstNameRequired": "输入您的名字",
+         "lastNameRequired": "输入您的姓氏",
+         "nameFormat": "名字称只能包含拉丁字母",
+         "dobRequired": "名字只能包含拉丁字母",
+         "minAge": "您必须年满 18 岁才能进行注册",
+         "icNumberRequired": "输入您的身份证号码",
+         "emailRequired": "输入您的电邮",
+         "emailFormat": "请输入有效的电邮地址"
+      },
+      "dialogs": {
+         "confirm": {
+            "title": "您是否确定？",
+            "description": "您是否确定更改性别？您的糖尿病病史将更新为不确定。您将需要再次更新您的个人病史。",
+            "buttonText": "是的",
+            "buttonCancelText": "暂不更新"
+         }
+      }
+   },
+   "common": {
+      "time": {
+         "secondsShort": "sec"
+      },
+      "gender": {
+         "male": "男性",
+         "female": "女性"
+      },
+      "ethnicities": {
+         "malay": "巫裔",
+         "chinese": "华裔",
+         "indian": "印裔",
+         "caucasian": "白种人",
+         "filipino": "菲律宾裔",
+         "na": "其他 / 不适用"
+      },
+      "date": {
+         "months": {
+            "full": [
+               "1月",
+               "2月",
+               "3月",
+               "4月",
+               "5月",
+               "6月",
+               "7月",
+               "8月",
+               "9月",
+               "10月",
+               "11月",
+               "12月"
+            ]
+         }
+      },
+      "facebookLogin": "透过 Facebook 登入",
+      "login": "登录",
+      "dashboard": "概要面板",
+      "no": "否",
+      "yes": "是",
+      "ok": "是",
+      "cancel": "取消",
+      "contactUs": "联系我们",
+      "verify": "认证",
+      "showMore": "显示更多",
+      "noMore": "已无更多系统记录",
+      "passwordChangeSuccessBack": "返回设定",
+      "passwordChangeSuccess": "您的密码已被更改！",
+      "wentOffline": "您的互联网连接已离线",
+      "wentOnline": "您重新连线了！",
+      "offlineNotification": "您的设备正在离线操作"
+   }
+}

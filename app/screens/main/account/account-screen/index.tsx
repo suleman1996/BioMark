@@ -18,8 +18,10 @@ import { logNow } from 'utils/functions/log-binder';
 import Images from 'assets/images';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const AccountScreen = () => {
+  const { t } = useTranslation();
   const authContext = useContext(AuthContext);
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -58,7 +60,10 @@ const AccountScreen = () => {
 
   return (
     <>
-      <TitleWithSearchBarLayout title={'Account'} translation={true}>
+      <TitleWithSearchBarLayout
+        title={t('pages.tabController.account')}
+        translation={true}
+      >
         <View style={styles.content}>
           <View style={styles.accountScreenView}>
             <View style={[styles.image, { overflow: 'hidden' }]}>
