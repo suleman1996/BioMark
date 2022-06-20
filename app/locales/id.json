@@ -1,0 +1,1188 @@
+{
+
+  "pages": {
+    "clinics":{
+      "title":"Klinik",
+      "description":"Segera Datang"
+    },
+    "bloodPressureTab": {
+      "title": "Tekanan Darah",
+      "sys": "SYS",
+      "dia": "DIA",
+      "logs": "Log",
+      "definition": "Tekanan darah Anda mengukur tekanan darah yang mengalir dalam pembuluh darah Anda. Nilai teratas adalah penafsiran sistolik yang mengukur tekanan ketika jantung Anda berdetak. Angka di bawah adalah penafsiran diastolik Anda yang mengukur tekanan ketika jantung Anda beristirahat di antara denyutan jantung.",
+      "filters": {
+        "title": "Filter",
+        "uploadType": "Diperbaharui Oleh",
+        "confirm": "Terapkan",
+        "clearFilters": "Bersihkan Filter"
+      }
+    },
+    "hba1cTab": {
+      "title": "HbA1c (%)",
+      "definition": "HbA1c (Haemoglobin A1C) adalah suatu tes yang menggambarkan kadar gula darah rata-rata selama 2 - 3 bulan terakhir.",
+      "logs": "Catatan"
+    },
+    "hba1cInput": {
+      "title": "HbA1c",
+      "yourReading": "Pembacaan Anda",
+      "save": "Simpan Edit",
+      "add": "Tambahkan",
+      "dateTime": "Tanggal - Waktu",
+      "errors": {
+        "required": "Silakan sediakaan pengukuran Anda",
+        "outOfBoundaries": "Pengukuran HbA1c Anda seharusnya antara 5-15%",
+        "dateTimeRequired": "Silakan masukkan tanggal yang valid.",
+        "aboveGoal": "HbA1c Anda di atas target",
+        "belowGoal": "HbA1c Anda di bawah target"
+      },
+      "info": {
+        "title": "Info",
+        "description": "Catatan ini ditambahkan oleh dokter Anda, oleh karenanya Anda tidak dapat mengubah kolom manapun."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "HbA1c",
+          "description": "Apakah Anda yakin mau menghapus catatan HbA1c ini?",
+          "buttonText": "Hapus",
+          "buttonCancelText": "Lewati"
+        }
+      }
+    },
+    "bloodPressureInput": {
+      "title": "Tekanan Darah",
+      "yourReading": "Penafsiran Anda (mmHg)",
+      "definition": "Tekanan darah Anda mengukur darah yang mengalir dalam pembuluh darah Anda. Angka di atas adalah penafsiran sistolik yang mengukur tekanan ketika jantung berdetak. Angka di bawah adalah penafsiran diastolik yang mengukur tekanan ketika jantung Anda mengendur di antara detakan.",
+      "save": "Simpan Edit",
+      "add": "Tambahkan",
+      "dateTime": "Tanggal - Waktu",
+      "errors": {
+        "systolicRequired": "Silakan masukkan Tensi Darah sistolik dan diastolik.",
+        "diastolicRequired": "Silakan masukkan Tensi Darah diastolik dan diastolik.",
+        "systolicExceedRanges": "Silakan masukkan Tensi Darah sistolik yang valid dari 60-200 mmHg.",
+        "diastolicExceedRanges": "Silakan masukkan Tensi Darah diastolik dari 30-120 mmHg",
+        "bloodPressure": "Silakan masukkan nilai diastolik yang valid. Nilai Diastolik harus lebih kecil dari nilai sistolik."
+      },
+      "info": {
+        "title": "Info",
+        "description": "Catatan ini ditambahkan oleh dokter Anda, karenanya Anda tidak dapat mengubah kolom manapun."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "Tekanan Darah",
+          "description": "Apakah Anda yakin ingin menghapus catatan tekanan darah ini?",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        }
+      }
+    },
+    "bloodSugarTab": {
+      "title": "Tekanan Darah",
+      "logs": "Catatan",
+      "displaying": "Tampilkan Entri: ",
+      "filters": {
+        "title": "Filter",
+        "meal": "Catatan",
+        "unit": "Unit Pengukuran",
+        "confirm": "Terapkan",
+        "clearFilters": "Bersihkan Filter"
+      }
+    },
+    "bloodSugarInput": {
+      "title": "Tekanan Darah",
+      "yourReading": "Penafsiran Anda",
+      "save": "Simpan Edit",
+      "add": "Tambahkan",
+      "dateTime": "Tanggal - Waktu",
+      "meal": "Makanan",
+      "mealSelect": "Pilih Makanan",
+      "errors": {
+        "mealTypeIdRequired": "Silakan pilih makanan yang sesuai.",
+        "dateTimeRequired": "Silakan masukkan tanggal yang valid.",
+        "missingMeasurement": "Silakan masukkan pengukuran yang valid.",
+        "measurementInvalid": "Silakan masukkan pengukuran yang valid",
+        "outOfBoundariesMgDl": "Silakan masukkan pengukuran yang valid dari 1-600 mg/dL.",
+        "outOfBoundariesMmolDl": "Silakan masukkan pengukuran yang valid dari 0.06-50 mmol/L.",
+        "belowRange": "Tekanan darah Anda di bawah kisaran",
+        "aboveRange": "Tekanan darah Anda di atas kisaran"
+      },
+      "info": {
+        "title": "Info",
+        "description": "Catatan ini ditambahkan oleh dokter Anda, karenanya Anda tidak dapat mengedit kolom manapun."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "Tekanan Darah",
+          "description": "Apakah Anda yakin Anda ingin menghapus log gula darah ini?",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        },
+        "fastingClose": {
+          "title": "Anda hampir sampai!",
+          "description": "Jangan menyerah dan usahakan untuk mencapai target kadar gula Anda! Teruslah berusaha!",
+          "buttonText": "Ya"
+        },
+        "fastingExact": {
+          "title": "Selamat! Anda telah mencapai target kadar gula Anda!",
+          "description": "Jangan menyerah dan usahakan untuk mempertahankannya!",
+          "buttonText": "Ya"
+        }
+      }
+    },
+    "bloodSugarTargets": {
+      "title": "Target Anda",
+      "fasting": "FPG (Puasa)",
+      "postMeal": "PPG (Setelah-Makan)"
+    },
+    "bloodSugarTargetInput": {
+      "title": "Tetapkan kisaran target baru kadar gula Anda",
+      "subtitle": "Dokter Anda harus membantu menetapkan kisaran ini. Jika Anda membiarkan kisaran ini kosong, kami akan menggunakan kisaran baku 80 - 130 mg/dL untuk puasa dan 80 - 180 mg/dL untuk setelah makan seperti disarankan oleh ADA.",
+      "fasting": "Puasa (FPG)",
+      "fastingDefinition": "FPG (Gula Darah Plasma Puasa) adalah ukuran kadar gula darah Anda setelah puasa atau tidak memiliki apa pun untuk dimakan selama paling tidak 8 jam. Tes ini biasanya dilakukan terlebih dahulu di pagi hari, sebelum sarapan.",
+      "afterMeal": "Setelah Makan (PPG)",
+      "afterMealDefinition": "PPG (Gula Darah Postprandial) adalah ukuran kadar gula darah Anda setelah makan. Mengukur PPG dapat melacak lonjakan gula darah, yang dapat menentukan jika insulin waktu makan Anda bekerja.",
+      "from": "Dari",
+      "to": "Kepada",
+      "save": "Simpan",
+      "errors": {
+        "required": "Silakan masukkan target gula darah yang valid",
+        "outOfBoundariesMmolL": "Silakan masukkan target gula darah yang valid antara 0.06-50 mmol/L",
+        "outOfBoundariesMgDl": "Silakan masukkan target gula darah yang valid antara 1-900 mg/dl.",
+        "minValue": "Masukkan suatu penafsiran yang lebih tinggi Dari"
+      }
+    },
+    "hba1cTargets": {
+      "title": "Target Anda",
+      "goalPercentage": "Persentase Tujuan",
+      "percent": "%"
+    },
+    "hba1cTargetInput": {
+      "title": "Tetapkan tujuan Hba1c baru Anda",
+      "subtitle": "Dokter Anda harus membantu menetapkan kisaran ini. Jika Anda membiarkan kisaran ini kosong, kami akan menggunakan kisaran default 6% seperti disarankan oleh ADA.",
+      "goal": "Tujuan",
+      "errors": {
+        "required": "Silakan masukkan target HbA1c yang valid",
+        "minMax": "Silakan masukkan target HbA1c yang valid antara 5% dan 15%"
+      }
+    },
+    "bodyMeasurements": {
+      "title": "Pengukuran Badan",
+      "yourReadingHeight": "Tinggi",
+      "yourReadingWeight": "Berat",
+      "errors": {
+        "missingHeight": "Silakan sediakan pengukuran tinggi Anda",
+        "missingWeight": "Silakan sedikaan pengukuran berat Anda",
+        "measurementInvalidMetric": "Silakan masukkan pengukuran yang valid (X'XX.XX)",
+        "measurementInvalidImperial": "Silakan masukkan pengukuran yang valid (XXX)",
+        "outOfBoundariesMetric": "Silakan masukkan berat yang valid antara 60 - 250 cm",
+        "outOfBoundariesImperial": "Silakan masukkan berat yang valid antara 1'11.7 - 8'2.5 ft/in",
+        "outOfBoundariesKg": "Silakan masukkan berat yang valid antara 0 - 200 kg",
+        "outOfBoundariesLbs": "Silakan masukkan berat yang valid antara 0 - 440 lbs",
+        "measurementInvalid": "Silakan masukkan pengukuran yang valid (XXX.XX)"
+      }
+    },
+    "personalInformation": {
+      "title": "Informasi Pribadi"
+    },
+    "cameraOptionsDialog": {
+      "title": "Pilihan",
+      "scanBarcode": "Pindai Kode Batang",
+      "manuallyScanBarcode": "Masukkan Kode Batang Secara Manual",
+      "upload": "Unggah"
+    },
+    "dashboard": {
+      "title": "Dasbor",
+      "healthTrackers": "Pelacak Kesehatan",
+      "newMessage": "Pesan Baru",
+      "receivedOn": "Diterima pada ",
+      "markAsRead": "Tandai Telah Dibaca",
+      "yourLatestResult": "Hasil Terbaru Anda",
+      "updateProfile": "Lengkapi Profil Anda",
+      "updateProfileText": "Isi profil Anda untuk mengetahui risiko kesehatan Anda",
+      "uploadResult": "Unggah Hasil Lab Anda",
+      "uploadAnotherResult": "Unggah Hasil Lab Lainnya",
+      "labResultText": "Lacak hasil Anda dalam satu tempat.",
+      "yourLabResultStatus": "Status Hasil Lab",
+      "barcode": "Kode Batang ",
+      "doctorMessage": "Lihat Pesan Dokter",
+      "seeResult": "Lihat Hasil",
+      "suggestedReading": "Pembacaan Disarankan",
+       "riskTitle": "risiko kesehatan Anda",
+      "dialogs": {
+        "verify": {
+          "title": "Hasil Tersedia",
+          "description": "Silakan masukkan nomor KTP atau paspor Anda untuk memverifikasi identitas Anda.",
+          "label": "Nomor KTP atau Passpor Anda",
+          "errors": {
+            "required": "KTP atau Paspor diperlukan",
+            "unsuccessful": "Verifikasi KTP atau Paspor tidak berhasil."
+          }
+        },
+        "verifyNotAvailable": {
+          "title": "Validasi sukses",
+          "description": "Validasi nomor KTP atau paspor tidak berhasil. Anda telah mencapai angka harian dari percobaan.",
+          "button": "OK"
+        },
+        "unsuccessful": {
+          "title": "Hasil Tersedia",
+          "description": "Validasi nomor KTP atau Paspor tidak berhasil. Anda telah mencapai angka harian dari percobaan."
+        },
+        "bio-blood_sugar": {
+          "title": "Tetapkan Kisaran Target",
+          "description": "Apakah Anda ingin menetapkan kisaran target untuk gula darah? Jika Anda memilih 'lewati', kisaran default akan digunakan.",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        },
+        "bio-hba1c": {
+          "title": "Tetapkan Kisaran Target",
+          "description": "Apakah Anda ingin menetapkan kisaran target untuk HbA1c? Jika Anda memilih 'lewati', kisaran default akan digunakan.",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        },
+        "bio-medication": {
+          "title": "Tetapkan Pengobatan",
+          "description": "Apakah Anda ingin menetapkan pengobatan Anda sekarang? Jika Anda memilih 'lewati', tidak ada pengobatan yang akan dimasukkan. Anda dapat memperbarui ini kapan pun.",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        }
+      },
+      "psp": {
+        "yourActions": "untuk tindakan Anda",
+        "empower": "ID Empower:",
+        "title": "Masukkan Pusat Dukungan Diabetes"
+      }
+    },
+    "diabetesSupport": {
+      "title": "Pusat Dukungan Diabetes",
+      "diary": "Catatan Harian Diabetes Anda",
+      "education": "Edukasi Diabetes",
+      "withdrawText": "Ketuk Ke",
+      "withdrawLink": "Keluar dari Program",
+      "dialogs": {
+        "video": {
+          "title": "Video Streaming",
+          "description": "Ini akan menghabiskan lebih banyak data. Kami menyarakan menggunakan wifi Anda sebagai gantinya.",
+          "buttonText": "Ok"
+        },
+        "dengandraw": {
+          "title": "Apakah Anda Yakin?",
+          "description": "Apakah Anda yakin mau keluar dari Program Empower? Anda akan kehilangan akses atas semua hak-hak Program Empower Anda.",
+          "buttonText": "Ya",
+          "buttonCancelText": "Batalkan"
+        }
+      },
+      "disclaimer": {
+        "title": "Dengan menandatangani formulir ini, Anda dengan ini:",
+        "paragraph": "<strong>1.</strong> Setuju untuk berpartisipasi dalam Program Pasien EMPOWER untuk Insulin Glargine/Lixisenatide dan Glargine U300 yang mana Anda diberitahu oleh dokter yang mendaftarkan Anda. Saya dengan demikian menyetujui untuk didaftarkan dalam Program tersebut oleh dokter saya. <br><br> <strong>2.</strong> Mengakui bahwa Anda mengetahu semua data yang terkait dengan Anda hanya akan dapat diakses oleh penyedia pihak ketiga dari Sanofi-Aventis Philippines Inc. yang terlibat dalam program tersebut dan semua data akan diperlakukan dengan kerahasiaan penuh sesuai dengan Undang-Undang Privasi Data dan semua peraturan terkait yang diterbitkan.<br><br> <strong>3.</strong> Mengakui bahwa Anda memiliki hak untuk mengakses dan memperbaiki informasi pribadi Anda kapan pun atas permintaan Anda.<br><br> <strong>4.</strong> Mengakui bahwa Anda dapat keluar dari Program Pasien EMPOWER untuk Insulin Glargine/Lixisenatide dan Glargine U300 kapan pun tanpa prasangka apa pun dengan menghubungi My Blood Profile Technologies Corporation, anak perusahaan BioMark Pte Ltd, dan data yang telah terkumpul akan tetap berada pada database Program Pasien EMPOWER khusus, kecuali Anda juga meminta agar data ini dihapus. Anda dapat keluar dari Program Pasien EMPOWER kapan pun dengan mengklik tautan “Keluar dari Program” pada halaman Pusat Dukungan Diabetes.<br><br> <strong>5.</strong> Mengakui bahwa Anda mengerti bahwa program ini dapat dihentikan pada waktu tertentu dan Anda akan diberitahu tiga puluh (30) hari sebelum tanggal penghentian.<br><br> <strong>6.</strong> Menyatakan bahwa Anda telah membaca pedoman/mekanik Program Pasien EMPOWER untuk Insulin Glargine/Lixisenatide dan Gargine U300 secara seksama dan jaminan bahwa Anda akan mematuhi pedoman/mekanik tersebut.<br><br>",
+        "checkboxLabel": "Saya dengan ini mengkonfimasi pemahaman saya atas kebijakan di atas dan persetujuan saya untuk pengumpulanm penggunaan dan pengungkaopan informasi sesuai sesuai dengan ketentuan kebijakan.",
+        "buttonLabel": "Terima & Lanjutkan"
+      },
+      "welcome": {
+        "title": "Selamat Datang pada Pusat Dukungan Diabetes Anda",
+        "intro": "Di sini Anda dapat melacak gula darah Anda, pengobatan, dan akses sumber daya untuk membantu Anda mengatur diabetes Anda.",
+        "continue": "Lanjut"
+      },
+      "onboarding": {
+        "next": "Berikutnya",
+        "finish": "Selesai",
+        "demo": {
+          "bloodSugar": "Masukkan gula darah Anda di sini.",
+          "medication": "Masukkan pengobatan Anda di sini.",
+          "HbA1c": "Masukkan HbA1c Anda di sini.",
+          "video": "Lihat video tutorial yang bermanfaat di sini.",
+          "more": "Pelajari lebih lanjut tentang diabetes di sini."
+        }
+      }
+    },
+    "drinking": {
+      "title": "Minum"
+    },
+    "email": {
+      "title": "Email",
+      "save": "Simpan",
+      "newEmail": {
+        "title": "Alamat Email",
+        "placeholder": "",
+        "errors": {
+          "required": "Email diperlukan",
+          "email": "Bukan alamat email yang valid"
+        }
+      },
+      "confirmEmail": {
+        "title": "Konfirmasi Alamat Email",
+        "placeholder": "",
+        "errors": {
+          "required": "Email diperlukan",
+          "repeatRequired": "Konfirmasi email diperlukan",
+          "email": "Bukan alamat  email yang valid",
+          "emailMismatch": "Email tidak cocok"
+        }
+      }
+    },
+    "encodedResults": {
+      "filters": {
+        "title": "Ikhtisar Filter",
+        "confirm": "Konfirmasi",
+        "type": "Tipe Filter",
+        "all": "Semua",
+        "abnormal": "Abnormal"
+      },
+      "info": {
+        "title": "Rincian Hasil",
+        "source": "Sumber",
+        "reference": "Dokter atau Klinik Acuan",
+        "labReference": "Nomor Acuan Lab",
+        "collected": "Sampel Terkumpul",
+        "received": "Laporan Diterima",
+        "printed": "Laporan Dicetak",
+        "close": "Tunggu"
+      }
+    },
+    "healt risikos": {
+      "title": "Apa Risiko Kesehatan Anda?",
+      "description1": "Untuk mengakses risiko kesehatan Anda, silakan beritahu kami lebih rinci tentang diri Anda.",
+      "description2": "Pertanyaan-pertanyaan ini dapat dilewati dan Anda dapat memperbarui jawaban Anda kapan pun.",
+      "continue": "Lanjutkan",
+      "save": "Simpan",
+      "statusMedication": "Masukkan pengobatan…",
+      "statusList": "Masukkan nama…",
+      "conditions": "Masukkan kondisi…",
+      "medications": "Masukkan pengobatan…",
+      "dismissDialog":{
+        "title": "Apakah Anda Yakin?",
+        "description":"Dengan mengkonfirmasi tindakan ini, Anda akan melewati pertanyaan-pertanyaan yang membantu kami menilai risiko kesehatan Anda dan akan dibawa ke dashbor.",
+        "buttonText":"Ya"
+      }
+    },
+    "labResultOverview": {
+      "title": "Ikhtisar Hasil",
+      "youUploads": "Unggahan Anda",
+      "deleteUpload": "Hapus Unggahan",
+      "seeResults": "Lihat Laporan",
+      "dialogs": {
+        "delete": {
+          "title": "Apakah Anda Yakin?",
+          "description": "Apakah Anda yakin ingin menghapus hasil tes ini? Tindakan ini tidak dapat dilakukan lagi.",
+          "buttonText": "Ya",
+          "buttonCancelText": "Batal"
+        },
+        "success": {
+          "title": "Berhasil Menyimpan",
+          "description": "Pembaruan Anda telah berhasil disimpan.",
+          "buttonText": "Oke"
+        },
+        "edit": {
+          "title": "Edit Informasi",
+          "newDocumentNamePlaceholder": "Tes Diabetes dari Juli",
+          "documentName": "Nama Dokumen",
+          "buttonText": "Terapkan"
+        }
+      }
+    },
+    "login": {
+      "errors": {
+        "phoneNumberRequired": "Silakan sediakan nomor telepon Anda",
+        "phoneNumberZeroStart": "Tidak boleh mulai dengan nol",
+        "phoneNumberTooLong": "Tidak boleh melebihi 11 karakter",
+        "password": "Silakan sediakan kata sandi Anda",
+        "noConnection": "Tidak ada koneksi internet"
+      },
+      "forgotPassword": "Lupa Kata Sandi Anda?",
+      "newToBiomark": "Baru ke BioMark?",
+      "terms": "Ketentuan & Kebijakan Privasi",
+      "signUp": "Daftar",
+      "or": "atau",
+      "emailSignUp": "Daftar Dengan E-mail",
+      "enterPassword": "Masukkan kata sandi Anda...",
+      "enterEmail": "Masukkan e-mail Anda",
+      "login": "Masuk"
+    },
+    "marketingConsent": {
+      "title": "Persetujuan Pemasaran",
+      "intro": "BioMark mahu mengghubungi Anda sehubungan dengan informasi mengenai penawaran, promosi dan layanan via email dan SMS.",
+      "optIn": "Saya ingin menerima informasi tentang penawaran, promosi dan layanan via email dan SMS.",
+      "save": "Simpan",
+      "dialog": {
+        "title": "Apakah Anda Yakin?",
+        "description": "Dengan mengklik 'Konfirmasi' Anda tidak akan lagi menerima penawaran, promosi dan layanan via email dan SMS.",
+        "buttonText": "Konfirmasi",
+        "cancelButtonText": "Tidak Sekarang"
+      }
+    },
+    "medicalHistory": {
+      "title": "Riwayat Medis",
+      "familyTitle": "Riwayat Medis Keluarga",
+      "ethnicity": "Apakah suku Anda?",
+      "ethnicityHint": "Suku Anda akan memengaruhi penilaian indikator kesehatan IMT Anda.",
+      "diagnosis": "Apakah Anda pernah didiagnosa dengan salah satu gejala kondisi berikut?",
+      "familyDiagnosis": "Apakah ada anggota keluarga Anda didiagnosa dengan kondisi berikut?",
+      "continue": "Simpan & Lanjut",
+      "save": "Simpan",
+      "allergies": {
+        "title": "{{name}} Alergi",
+        "allergyTo": {
+          "Medication": "Apakah Anda alergi terhadap pengobatan?",
+          "Food": "Apakah Anda alergi terhadap makanan?",
+          "Animal": "Apakah Anda alergi terhadap binatang?",
+          "Environment": "Apakah Anda alergi terhadap alergen lingkungan?",
+          "Other": "Apakah Anda alergi terhadap sesuatu lainnya yang tidak disebutkan?"
+        },
+        "listAllergies": {
+          "Medication": {
+            "label":"Silakan daftar pengobatan ini",
+            "placeholder":"Masukkan pengobatan"
+          },
+          "Food": {
+            "label":"Silakan cantumkan makanan ini",
+            "placeholder":"Masukkan makanan"
+          },
+          "Animal": {
+            "label":"Silakan masukkan binatang ini",
+            "placeholder":"Masukkan binatang"
+          },
+          "Environment": {
+            "label":"Silakan masukkan alergen lingkungan ini",
+            "placeholder":"Masukkan alergen lingkungan"
+          },
+          "Other": {
+            "label":"Silakan cantumkan alergi ini",
+            "placeholder":"Masukkan alergi"
+          }
+        }
+      },
+      "errors": {
+        "ethnicity": "Silakan pilih suku Anda"
+      }
+    },
+    "medicationInput": {
+      "titleEdit": "Ubah Pengobatan",
+      "titleSave": "Tambahkan Pengobatan Baru",
+      "dosage": "Dosis",
+      "meal": "Masakan",
+      "disease": "Penyakit",
+      "dateTime": "Tanggal - Waktu",
+      "medication": "Pengobatan",
+      "frequency": "Frekuensi Dosis",
+      "editButton": "Simpan Perubahan",
+      "saveButton": "Tambahan",
+      "tapTpAdd": "Ketuk untuk menetapkan",
+      "endDate": "Tanggal Akhir",
+      "startDate": "Tanggal Mulai",
+      "at": "Pada",
+      "start": "Mulai",
+      "end": "Akhiri",
+      "dialogs": {
+        "delete": {
+          "title": "Pengobatan",
+          "description": "Apakah Anda yakin ingin menghapus pengobatan ini?",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        }
+      },
+      "errors": {
+        "missingMeasurement": "Silakan masukkan nomor yang valid antara 1 dan 150.",
+        "dateOutOfBoundaries": "Tanggal Akhir tidak boleh mendahului Tanggal Mulai",
+        "outOfBoundaries": "Silakan masukkan nomor antara 1 dan 150."
+      }
+    },
+    "medicationList": {
+      "title": "Ubah Pengobatan",
+      "description": "Klik pada obat untuk perbarui informasi pengobatan.",
+      "continue": "Lanjut"
+    },
+    "medicationTake": {
+      "titleEdit": "Pengobatan",
+      "titleSave": "Jalani Pengobatan",
+      "dosage": "Dosis",
+      "meal": "Makanan",
+      "dateTime": "Tanggal - Waktuime",
+      "medication": "Pengobatan",
+      "units": "Unit",
+      "editButton": "Simpan Edit",
+      "saveButton": "Jalani",
+      "dialogs": {
+        "delete": {
+          "title": "Pengobatan",
+          "description": "Apakah Anda yakin ingin menghapus log pengobatan ini?",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        }
+      },
+      "errors": {
+        "missingMeasurement": "Silakan masukkan nomor valid antara 1 dan 150.",
+        "outOfBoundaries": "Silakan masukkan nomor valid antara 1 dan 150."
+      }
+    },
+    "medicationTab": {
+      "title": "PENGOBATAN HARIAN ANDA"
+    },
+    "more": {
+      "title": "Lebih Lanjut",
+      "links": {
+        "profile": "Profil",
+        "notifications": "Notifikasi",
+        "support": "Dukungan",
+        "about": "Tentang BioMark",
+        "policies": "Kebijakan",
+        "settings": "Pengaturan",
+        "logout": "Log Keluar",
+        "autoLogout": "Log Keluar Otomatis"
+      }
+    },
+    "notification": {
+      "title": "Notifikasi",
+      "doctorMessage": {
+        "title": "Perbincangan"
+      }
+    },
+    "password": {
+      "title": "Perbarui Kata Sandi",
+      "description": "Silakan masukkan kata sandi baru Anda",
+      "passwordRules": "Kata sandi baru Anda harus paling sedikit 8 karakter, termasuk satu simbol, satu huruf besar dan satu angka.",
+      "save": "Simpan",
+      "currentPassword": {
+        "title": "Kata Sandi Saat Ini",
+        "description": "Masukkan kata sandi Anda saat ini.",
+        "placeholder": "Masukkan kata sandi Anda saat ini...",
+        "errors": {
+          "required": "Kata sandi saat ini diperlukan",
+          "invalidCurrent":"Kata sandi saat ini yang Anda masukkan salah."
+        }
+      },
+      "newPassword": {
+        "title": "Masukkan Kata Sandi Baru",
+        "placeholder": "Masukkan kata sandi baru Anda...",
+        "errors": {
+          "required": "Kata sandi baru diperlukan",
+          "invalid": "Kata sandi baru tidak valid"
+        }
+      },
+      "newPasswordConfirm": {
+        "title": "Setuju Kata Sandi Baru",
+        "placeholder": "Masukkan kembali kata sandi baru Anda...",
+        "errors": {
+          "passwordMismatch": "Kata sandi tidak cocok",
+          "required": "Kedua kata sandi diperlukan",
+          "invalid": "Kata Sandi tidak valid"
+        }
+      },
+      "resetLimit":{
+        "title": "Tidak dapat memproses permintaan Anda",
+        "error":{
+          "limit": "Batas percobaan terlampau, silakan ulangi lagi setelah beberapa saat."
+        },
+        "buttonText":"Tutup"
+      }
+    },
+    "pdfViewer": {
+      "title": "Ikhtisar Hasil",
+      "download": "Unduh Hasil Laporan",
+      "info": "Anda dapat melihat hasil lab Anda dengan menekan tombol di atas. Semua hasil diunduh dan disimpan dalam format PDF."
+    },
+    "phoneNumber": {
+      "title": "Nomor Telepon",
+      "mobileNumber": "Nomor Ponsel",
+      "save": "Simpan"
+    },
+    "policies": {
+      "title": "Kebijakan",
+      "privacyPolicy": {
+        "title": "Kebijakan Privasi"
+      },
+      "termsAndConditions": {
+        "title": "Syarat & Ketentuan"
+      }
+    },
+    "profile": {
+      "title": "Profil Anda",
+      "about": "Tentang saya",
+      "links": {
+        "medicalHistory": "Riwayat Medis",
+        "familyMedicalHistory": "Riwayat Medis Keluarga",
+        "bodyMeasurement": "Pengukuran Badan",
+        "personalInformation": "Informasi Pribadi",
+        "vaccination": "Vaksinasi",
+        "allergies": "Alergi",
+        "stress": "Stres",
+        "smoking": "Rokok",
+        "drinking": "Minum",
+        "exercise": "Olahraga",
+        "sleep": "Tidur"
+      }
+    },
+    "progress": {
+      "title": "Kemajuan"
+    },
+    "pspDashboard": {
+      "title": "Pusat Dukungan Diabetes"
+    },
+    "qrCode": {
+      "dialogs": {
+        "midas": {
+          "title": "Pemindaan Berhasil",
+          "description": "Kode berhasil dipindai. Silakan klik ‘Lanjut’ untuk meneruskan.",
+          "buttonText": "Berikutnya"
+        },
+        "doctor" : {
+          "title": "Berhubung ke",
+          "titlePSP": "Persetujuan",
+          "descriptionPSP": "Dengan mengklik \"Setuju\", Saya menyetujui untuk berbagi informasi pribadi dengan Penyedia Kesehatan yang ditunjukkan dalam formulir pendaftaran Program Pasien Empower, termasuk informasi profil saya dan informasi tracker kesehatan saya untuk tujuan penerimaan layanan kesehatan.",
+          "description": "Dengan mengklik \"Hubungkan\", Saya menyetujui untuk berbagi informasi pribadi dengan {{ name }}, termasuk informasi profil saya dan informasi tracker kesehatan saya untuk tujuan penerimaan layanan kesehatan.",
+          "buttonText": "Hubungkan",
+          "buttonTextPSP": "Setuju",
+          "buttonCancelText": "Tolak"
+        }
+      }
+    },
+    "resetPassword": {
+      "title": "Atur Ulang Kata Sandi",
+      "otpCodeDescription": "Anda akan menerima kode verifikasi pada ponsel yang Anda sediakan. Periksa ponsel Anda dan masukkan kode OTP di bawah ini.",
+      "notReceived": "Belum diterima?",
+      "otpResend": "Kirim ulang OTP",
+      "continue": "Lanjutkan",
+      "resetDescription": "Silakan masukkan kata sandi baru.",
+      "reset": "Atur Ulang Kata Sandi",
+      "newPasswordPlaceholder": "Masukkan kata sandi baru Anda…",
+      "confirmPasswordPlaceholder": "Ketik ulang kata sandi baru Anda…",
+      "intro": "Jangan khawatir! Kami akan membantu Anda kembali jalur yang benar."
+    },
+    "resultSummary": {
+      "tabs": {
+        "summary": {
+          "title": "Ringkasan",
+          "latestResult": "Hasil Terbaru Anda",
+          "referenceRange": "Kisaran Acuan: ",
+          "source": "Sumber: ",
+          "history": "sejarah",
+          "definition": "definisi",
+          "seePDF": "Lihat PDF",
+          "description": {
+            "normal": "Bagaimana jika {{ name }} saya adalah normal?",
+            "low": "Bagaimana jika {{ name }} saya adalah rendah?",
+            "high": "Bagaimana jika {{ name }} saya adalah tinggi?",
+            "abnormal": "Bagaimana jika {{ name }} saya adalah abnormal?"
+          },
+          "tableHeaders": {
+            "date": "Tanggal",
+            "result": "Hasil",
+            "unit": "Unit",
+            "refRange": "Kisaran Acuan",
+            "abnormal": "Abnormal",
+            "comments": "Komentar",
+            "labSource": "Sumber Lab"
+          }
+        },
+        "chart": {
+          "title": "Grafik"
+        },
+        "resources": {
+          "title": "Sumber Daya"
+        }
+      }
+    },
+    "results": {
+      "title": "Hasil",
+      "search": "Cari hasil...",
+      "searchBiomarkers": "Cari biomarker...",
+      "latestResults": "hasil terbaru Anda",
+      "usefulReading": "Pembacaan Yang Berguna",
+      "noLatestResults": "Anda tidak memiliki hasil apa pun.",
+      "pastResults": "hasil-hasil sebelumnya",
+      "noPastResults": "Anda tidak memiliki hasil-hasil sebelumnya.",
+      "noMorePastResults": "Anda tidak memiliki hasil-hasil sebelumnya lagi.",
+      "uploadResults": "Unggah Hasil Lab Anda",
+      "loadMoreData": "Muat lebih banyak data",
+      "keepTrack": "Telusuri hasil-hasil Anda dalams satu tempat.",
+      "filters": {
+        "title": "Filter Hasil",
+        "confirm": "Setuju",
+        "clearFilters": "Bersihkan Saringan",
+        "uploadType": "Jenis Dokumen Diunggah",
+        "uploadedByMe": "Diunggah Oleh Saya",
+        "sentByDoctor" : "Dikirim OLeh Dokter",
+        "startDate": "Tanggal Mulai",
+        "endDate": "Tanggal Akhir"
+      }
+    },
+    "searchResults": {
+      "noResults": "Tidak ada hasil yang ditemukan.",
+      "noBiomarkerResults": "Tidak ada hasil biomarker yang ditemukan.",
+      "cards": {
+        "bioMarkers": "Biomarker",
+        "panel": "Panel",
+        "result": "Hasil",
+        "yourdoctor" : "Dokter"
+      }
+    },
+    "settings": {
+      "title": "Pengaturan",
+      "links": {
+        "password": "Kata Sandi",
+        "email": "Email",
+        "phoneNumber": "Nomor Telepon",
+        "marketingConsent": "Persetujuan Pemasaran",
+        "dataPrivacy": "Pencarian Kebijakan Data",
+        "accountDeactivation": "Nonaktifkan Akun"
+      },
+      "dialogs": {
+        "accountDeactivation": {
+          "title": "Apakah Anda Yakin?",
+          "description": "Apakah Anda yakin ingin menonaktifkan akun BioMark Anda?",
+          "buttonText": "Setuju",
+          "cancelButtonText": "Tidak Sekarang"
+        }
+      }
+    },
+    "signUp": {
+      "title": "Daftar",
+      "welcome": "Selamat datang ke BioMark. Mari kita mulai!",
+      "haveAccount": "Memiliki sebuah akun?",
+      "login": "Log Masuk",
+      "disclaimer": "PELEPASAN TANGGUNG JAWAB",
+      "disclaimerText": "Aplikasi ini tidak dimaksudkan untuk penggunaan dalam diagnosis, pencegahan, pemantauan, pengelolaan, peredaan atau perawatan kondisi medis atau penyakit apa pun.",
+      "createPassword": "Buat Kata Sandi",
+      "passwordRules": "Kata sandi Anda harus sedikitnya 8 karakter, termasuk satu simbol, satu huruf besar dan satu angka.",
+      "continue": "Lanjutkan",
+      "skip": "Lewati",
+      "otpTitle": "Masukkan Kode Anda",
+      "otpCodeDescription": "Anda akan menerima kode verifikasi pada nomor ponsel yang Anda berikan. Periksa ponsel Anda dan masukkan kode OTP di bawah ini.",
+      "otpResend": "Kirim ulang OTP",
+      "provideNameTitle": "Apakah nama Anda?",
+      "dobTitle": "Tanggal Lahir",
+      "genderTitle": "Apa Jenis Kelamin Anda?",
+      "countryTitle": "Apa Negara Anda?",
+      "icTitle": "Nomor KTP Anda",
+      "icDescription": "Silakan sediakan nomor KTP Anda sehingga kita dapat mengidentifikasi dan mengirim hasil-hasil Anda.",
+      "emailTitle": "Dan Email Anda?",
+      "emailDescription": "BioMark mahu menghubungi Anda tentang kesehatan dan hasil-hasil Anda dengan cara lain. Anda dapat melewatkan tahap ini jika Anda menginginkan.",
+      "tos": {
+        "start": "Saya menerima",
+        "middle": "dan",
+        "end": ".",
+        "tosLink": "Ketentuan Layanan",
+        "dppLink": "Kebijakan Privasi Data"
+      },
+      "allSet": {
+        "title": "Anda Sudah Siap",
+        "welcome": "Pendaftaran anda ke BioMark berhasil. Apakah yang ingin Anda lakukan selanjutnya?",
+        "actions": {
+          "code": {
+            "title": "Saya Memiliki Sebuah Kode Batang",
+            "description": "Jika Anda diberikan sebuah kode QR atau sebuah kode batang, pilih opsi ini untuk memindainya."
+          },
+          "noCode": {
+            "title": "Mulai",
+            "description": "Jika Anda tidak memiliki sebuah kode batang, klik di sini untuk memulai."
+          },
+          "trouble": {
+            "text": "Mengalami kesulitan? ",
+            "link": "Hubungi Kami"
+          }
+        },
+        "dialogs": {
+          "alreadyScanned": {
+            "title": "Kode Telah Dimasukkan",
+            "description": "Sepertinya kode ini telah dimasukkan.",
+            "buttonText": "Kembali"
+          },
+          "alreadyMember": {
+            "title": "Telah Menjadi Anggota",
+            "description": "Anda telah menjadi anggota Program Empower. Anda sudah boleh mencatat gula darah dan pengobatan Anda.",
+            "buttonText": "Kembali"
+          },
+          "alreadyConnected": {
+            "title": "Anda telah terhubung",
+            "description": "Lacak hasil Anda dan pahami risiko munculnya penyakit kronis pada diri Anda.",
+            "buttonText": "Hubungi Kami",
+            "buttonCancelText": "Oke"
+          },
+          "invalidCode": {
+            "title": "Kode Tidak Valid",
+            "description": "Sepertinya kode ini tidak valid. Silakan ulangi lagi.",
+            "buttonText": "Hubungi Kami",
+            "buttonCancelText": "Kembali"
+          },
+          "invalidCodeContact": {
+            "title": "Kode Tidak Valid",
+            "description": "Silakan hubungi kami jika Anda mengalami kesulitan mengakses hasil-hasil Anda.",
+            "buttonText": "Hubungi Kami",
+            "buttonCancelText": "Kembali"
+          },
+          "dailyLimit": {
+            "title": "Limit Harian",
+            "description": "Anda telah mencapai pengulangan verifikasi harian.",
+            "buttonText": "Oke"
+          },
+          "invalidCodeAlt": {
+            "title": "Kode Tidak Valid",
+            "description": "Entri berbagai kode tidak valid telah dideteksi. Coba masukkan kode secara manual.",
+            "buttonText": "Masukkan Kode Secara Manual"
+          },
+          "indokterRAnda eview": {
+            "title": "Proses Reviu Sedang Berlangsung",
+            "description": "Hasil Anda sedang direviu oleh dokter Anda.",
+            "buttonText": "Tutup"
+          },
+          "manualCode": {
+            "title": "Masukkan QR atau Kode Batang",
+            "description": "Ini adalah angka di bawah QR atau kode batang.",
+            "inputLabel": "QR atau Kode Batang",
+            "buttonText": "Simpan Kode",
+            "qrCodeLabel": "QR atau Kode Batang",
+            "qrCodeRequired": "Silakan ketik QR atau Kode Batang"
+          },
+          "success": {
+            "title": "Entri Berhasil",
+            "description": "Kode berhasil dimasukkan. Silakan klik ‘Lanjut’ untuk meneruskan.",
+            "descriptionAlt": "Kode berhasil dimasukkan.",
+            "buttonText": "Lanjut",
+            "buttonTextAlt": "OK"
+          },
+          "fail": {
+            "title": "Entri Gagal",
+            "description": "Silakan periksa koneksi Anda dan cobalah lagi. Jika ini gagal, silakan hubungi kami.",
+            "buttonText": "Oke"
+          }
+        }
+      },
+      "allSetScan": {
+        "title": "Saya Memiliki Sebuah Kode Batang",
+        "welcome": "Bagaimana Anda akan menggunakan kode batang Anda?",
+        "actions": {
+          "scan": {
+            "title": "Pindai Kode Batang",
+            "description": "Pilih opsi ini untuk memindai kode batang Anda dengan kamera perangkat Anda."
+          },
+          "manual": {
+            "title": "Masukkan Kode Secara Manual",
+            "description": "Jika Anda ingin masukkan kode Anda secara manual, pilih opsi ini."
+          }
+        },
+        "info1": "Mengalami Kesulitan?",
+        "info2": "Hubungi Kami"
+      }
+    },
+    "smoking": {
+      "title": "Merokok",
+      "errors": {
+        "min": "Input harus paling sedikit satu batang rokok per hari.",
+        "wrongRange": "Tahun berhenti harus lebih lama daripada tahun mulai."
+      }
+    },
+    "summary": {
+      "headers": {
+        "calculation": "Kalkulasi",
+        "description": "Deskripsi",
+        "references": "Acuan",
+        "footNotes": "Catatan Kaki",
+        "age": "Usia",
+        "gender": "Jenis Kelamin",
+        "HDLCholesterol": "Kolesterol HDL",
+        "gestationalDiabetes": "Diabetes Gestational",
+        "familyHistoryOfDiabetes": "Riwayat Keluarga Diabetes",
+        "highBloodPressure": "Tekanan Darah Tinggi",
+        "exercise": "Olahraga",
+        "height": "Tinggi",
+        "weight": "Berat",
+        "totalCholesterol": "Total Kolesterol",
+        "systolicBloodPressure": "Tekanan Darah Sistolik",
+        "bloodPressureMedication": "Pengobatan Tekanan Darah",
+        "smoking": "Merokok",
+        "diabetes": "Diabetes",
+        "bpLevelLow": "Rendah",
+        "bpLevelNormal": "Normal",
+        "bpLevelElevated": "Tinggi",
+        "bpLevelHigh1": "Tinggi (HPT Tahap 1)",
+        "bpLevelHigh2": "Tinggi (HPT Tahap 2)",
+        "bpLevelHyper": "Krisis Hipertensi",
+        "pint": "Segelas Bir",
+        "wine": "Segelas Anggur",
+        "shot": "Satu Seloki Minuman Berkadar Alkohol",
+        "bmiUnderweight": "Kurus",
+        "bmiNormal": "Normal",
+        "bmiOverweight": "Kegemukan",
+        "bmiObese": "Obesitas"
+      },
+      "buttons": {
+        "common": {
+          "tapHere": "Ketuk di sini ",
+          "moreInfo": "untuk informasi lebih lanjut.",
+          "completeInfo": "untuk melengkapi informasi Anda."
+        },
+        "exercise": "Lengkapi Olahraga",
+        "bloodTest": "Unggah Hasil",
+        "familyHistory": "Lengkapi Riwayat Medis Keluarga",
+        "medical": "Lengkapi Riwayat Medis",
+        "lifestyle": "Lengkapi Pertanyaan Gaya Hidup",
+        "hw": "Masukkan Tinggi dan Berat Badan",
+        "bp": "Masukkan Tekanan Darah",
+        "bmi": "Perbarui Tinggi dan Berat Badan",
+        "smoking": "Jawablah Pertanyaan Merokok",
+        "drinking": "Jawablah Pertanyaan Alkohol",
+        "ethnic": "Perbarui Suku",
+        "notFound": ""
+      },
+      "heart": {
+        "text": "Perhitungan risiko jantung ini divalidasi oleh Studi Framingham Jantung untuk orang-orang berusia antara 30 dan 74 tahun dan tanpa riwayat penyakit jantung sebelumnya. \n\nPerhitungan mempertimbangkan faktor-faktor berikut:",
+        "references": "Pengelolaan Dyslipidaemia 2017 (Edisi Ke-5) Panduan Praktis Klinis, Kementerian Kesehatan Malaysia",
+        "footNotes": "Skor risiko kesehatan Anda hanyalah sebuah perkiraan. Selain itu, risiko Anda berubah setiap waktu. Silakan diskusikan dengan dokter Anda untuk informasi lebih lanjut.",
+        "cards": {
+          "age": "Risiko Anda meningkat pada usia di atas 35 tahun.",
+          "gender": "Laki-laki memiliki risiko yang lebih tinggi daripada perempuan.",
+          "HDLCholesterol": "Risiko Anda meningkat dengan kolesterol HDL yang lebih rendah.",
+          "totalCholesterol": "Risiko Anda meningkat dengan total kolesterol yang lebih tinggi.",
+          "systolicBloodPressure": "Risiko Anda meningkat dengan pembacaan tekanan darah sistolik (atas) yang lebih tinggi.",
+          "bloodPressureMedication": "Jika Anda saat ini sedang mengambil pengobatan tekanan darah, artinya Anda telah didiagnosa menderita tekanan darah tinggi (hipertensi). Ini menempatkan Anda pada risiko yang lebih tinggi.",
+          "smoking": "Menjadi perokok meningkatakan risiko Anda secara signifikan.",
+          "diabetes": "Jika Anda telah didiagnosa menderita diabetes, Anda berada dalam risiko yang lebih tinggi."
+        }
+      },
+      "diabetes": {
+        "text": "Skor risiko diabetes ini berdasarkan Ujian Risiko Diabetes Tipe 2 oleh Asosiasi Diabetes Amerika untuk orang-orang yang tidak memiliki riwayat diabetes atau pradiabetes sebelumnya. \nIni mempertimbangkan faktor-faktor berikut:",
+        "references": "American Diabetes Association",
+        "footNotes": "Skor risiko diabetes Anda hanyalah sebuah perkiraan. Selain itu, risiko Anda berubah setiap saat. Hanya tes darah yang dapat menentukan diagnosis. Silakan diskusikan dengan dokter Anda untuk informasi lebih lanjut.",
+        "cards": {
+          "age": "Risiko Anda meningkat pada usia di atas 40 tahun.",
+          "gender": "Laki-laki cenderung memiliki diabetes tipe 2 dibandingkan dengan perempuan.",
+          "gestationalDiabetes": "Perempuan yang memiliki diabetes gestasional berada dalam risiko lebih tinggi.",
+          "familyHistoryOfDiabetes": "Riwayat keluarga diabetes dapat meningkatkan risiko Anda.",
+          "highBloodPressure": "Memiliki tekanan darah tinggi meningkatkan risiko Anda.",
+          "exercise": "Tidak aktif secara fisik meningkatkan risiko Anda.",
+          "height": "Tinggi Anda digunakan untuk menghitung Indeks Masa Tubuh (IMT). IMT yang lebih tinggi meningkatkan risiko Anda.",
+          "weight": "Berat Anda digunakan untuk menghitung Indeks Masa Tubuh (IMT). IMT yang lebih tinggi meningkatkan risiko Anda."
+        }
+      },
+      "bp": {
+        "text": "Tekanan darah Anda mengukur tekanan darah yang mengalir dalam pembuluh darah Anda.\n\nAngka di atas adalah pembacaan sistolik Anda yang mengukur tekanan ketika jantung berdetak.\n\nAngka di bawah adalah pembacaan diastolik Anda yang mengukur tekanan ketika Anda mendengarnya dalam keadaan santai di antara detak jantung.\n\nHipertensi didefiniskan sebagai kenaikan tekanan darah (BP) systolic secara terus menerus 130 mmHg atau lebih besar dari dan/atau Tensi darah diastolik 90 mmHg atau lebih, yang diambil setidaknya dua kali dalam dua kesempatan terpisah.\n\nJika nilai sistolik dan diastolik Anda di dalam kategori yang berbeda, Kami mengambil yang lebih tinggi dari dua klasifikasi. Misalnya, jika sistolik adalah normal tapi diastolik naik, maka tensi darah Anda akan diklasifikasikan naik.\n\nBerikut adalah klasifikasi yang berbeda-beda:",
+        "references": "Pengelolaan Hipertensi (Edisi Keempat) Petunjuk Praktis Klinis, Kementrian Kesehatan Malaysia",
+        "cards": {
+          "bpLevelLow": "<90 / <60 mmHg",
+          "bpLevelNormal": "<120 / <80 mmHg",
+          "bpLevelElevated": "120-129 / <80 mmHg",
+          "bpLevelHigh1": "130-139 / 80-89 mmHg",
+          "bpLevelHigh2": "140-179 / 90-119 mmHg",
+          "bpLevelHyper": ">180 / >120 mmHg\n(Segera konsultasikan dokter Anda)"
+        }
+      },
+      "bmi": {
+        "text": "Indeks Masa Tubuh (IMT) anda adalah sebuah metode untuk memperkirakan jumlah lemak tubuh berdasarkan tinggi dan berat Anda.\n\nIMT dihitung dengan membagi berat (kg) Anda dengan angka kuadrad dari tinggi Anda (m<sup>2</sup>).\n\nIMT kerap salah kategorikan binaragawan sebagai kegemukan karena kelimpahan berat otot mereka. Oleh karenanya ia tidak seharusnya digunakan untuk kelompok individu ini.\n\nBerikut adalah klasifikasi yang berbeda-beda:",
+        "references": "1. Organisasi Kesehatan Dunia (Asosiasi Internasional Association Untuk Studi Obesitas)\n\n2. Penanganan Diabetes Mellitus Tipe 2 (Edisi Ke-5) Panduan Praktis Klinis, Kementerian Kesehatan Malaysia",
+        "cardsAsian": {
+          "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+          "bmiNormal": "18.50 - 22.99 kg/m<sup>2</sup>",
+          "bmiOverweight": "23.00 - 27.49 kg/m<sup>2</sup>",
+          "bmiObese": ">27.5 kg/m<sup>2</sup>"
+        },
+        "cardsCaucasian": {
+          "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
+          "bmiNormal": "18.50 - 24.99 kg/m<sup>2</sup>",
+          "bmiOverweight": "25.00 - 29.99 kg/m<sup>2</sup>",
+          "bmiObese": ">30 kg/m<sup>2</sup>"
+        }
+      },
+      "drinking": {
+        "text": "Mengukur unit alkohol adalah cara bermanfaat untuk memeriksa jika asupan alkohol Anda di atas atau di bawah batas yang dianjurkan.\n\nKalkulasi ini menggunakan unit alkohol yang bergantung pada volume (ABV) % dan takaran minuman tersebut.\n\nStatus alkohol Anda hanyalah sebuah perkiraan karena sangatlah sulit untuk memastikan keandalan unit alkohol. Ini karena ada berbagai takaran minuman alkohol yang tersedia.",
+        "references": "www.drinkaware.co.uk",
+        "cards": {
+          "pint": "Satu gelas bir (ABV 3.6%) setara dengan 2 unit.",
+          "wine": "Satu gelas anggur (ABV 12%) setara dengan 2.1 unit.",
+          "shot": "Satu seloki kecil minuman berkadar alkohol (25ml, ABV 40%) setara dengan 1 unit."
+        }
+      },
+      "smoking": {
+        "text": "Bungkus-tahun adalah satu cara untuk mengukur intensitas merokok. Ini mempertimbangkan berapa banyak dan berapa lama Anda telah merokok.\n\nIni dihitung dengan membagi jumlah batang rokok yang dihisap dalam satu hari dengan 20 dan kemudian mengalikannya dengan jumlah tahun merokok.",
+        "references": "Masyarakat Kanker Amerika"
+      },
+      "stress": {
+        "text": "Skala Persepsi Stres adalah di antara alat yang paling banyak digunakan untuk mengukur persepsi stres. Kuesioner ini menggunakan kerangka PSS-4.",
+        "references": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5791241/"
+      },
+      "sleeping": {
+        "text": "Kebersihan tidur yang baik dapat membantu Anda mendapatkan waktu tidur malam yang baik.\n\nSejumlah daftar periksa tidur mencakup menetapkan waktu tidur rutin kapan akan pergi tidur dan bangun di pagi hari, pada waktu yang sama setiap hari. Membatasi waktu layar sebelum tidur, dan menghindari stimulan (kafein, nikotin, alkohol) apabila pendekatan waktu tidur akan membantu Anda mempercepatkan awal waktu tidur. Cara lainnya, mempertahankan kamar tidur Anda gelap dan segar akan membantu Anda tidur sepanjang malam tanpa terjaga.\n\nPersyaratan tidur ini direkomendasikan oleh Yayasan Tidur Nasional (Amerika Serikat).",
+        "references": "Yayasan Tidur Nasional, Amerika Serikat https://sleepshow.org/how-much-sleep/"
+      }
+    },
+    "summaryChart": {
+      "sources1": "Hasil tersedia dari ",
+      "sources2": " sumber",
+      "referenceRanges": "Kisaran Acuan"
+    },
+    "tabController": {
+      "dashboard": "Dasbor",
+      "results": "Hasil",
+      "progress": "Kemajuan",
+      "clinics": "Klinik",
+      "more": "Lebih Banyak"
+    },
+    "targets": {
+      "title": "Target"
+    },
+    "uploadResult": {
+      "title": "Unggah Hasil",
+      "info": "Untuk hasil dengan banyak halaman, pilih Tambah Halaman untuk menambah lebih halaman.",
+      "privacy": "Privasi Anda adalah penting bagi kami. Anda memegang kendali atas informasi kesehatan Anda. BioMark tidak akan memberikan informasi Anda kepada pihak ketiga tanpa izin dari Anda. <br><br> BioMark hanya mendukung pengunggahan hasil lab untuk saat ini. Kami memiliki hak untuk menghapus dokumen yang tidak berkaitan dengan hasil lab.",
+      "uploads": "Unggahan Anda",
+      "documentName": "Nama Dokumen",
+      "addPage": "Tambah Halaman",
+      "continue": "Simpan & Lanjutkan",
+      "dialogs": {
+        "upload": {
+          "title": "Unggah Hasil Lab",
+          "takePhoto": "Ambil Foto",
+          "galleryUpload": "Unggah Dari Gallery",
+          "pdfUpload": "Unggah PDF",
+          "e2eUpload": "E2E Fake Upload"
+        },
+        "success": {
+          "title": "Unggah Berhasil",
+          "description": "Unggahan berhasil dan sekarang sedang direviu.",
+          "buttonText": "Oke"
+        },
+        "delete": {
+          "title": "Apakah Anda Yakin?",
+          "description": "Tindakan ini adalah final dan tidak dapat dipulihkan.",
+          "buttonText": "Hapus",
+          "buttonCancelText": "Batalkan"
+        },
+        "fail": {
+          "title": "Gagal Mengunggah",
+          "description": "Silakan periksa koneksi Anda dan coba unggah berkas kembali. Jika ini gagal, silakan hubungi kami.",
+   "buttonText": "Oke"
+        }
+      }
+    },
+    "uploadAvatar":{
+      "dialogs":{
+        "upload":{
+          "title": "Ubah Gambar Profil"
+        }
+      }
+    },
+    "weightTab": {
+      "title": "Berat",
+      "logs": "Log",
+      "filters": {
+        "title": "Filter",
+        "uploadType": "Diperbarui Oleh",
+        "unit": "Unit",
+        "confirm": "Terapkan",
+        "clearFilters": "Bersihkan Filter"
+      }
+    },
+    "weightInput": {
+      "title": "Berat",
+      "yourReading": "Pembacaan Anda",
+      "save": "Simpan Edit",
+      "add": "Tambahkan",
+      "dateTime": "Tanggal - Waktu",
+      "errors": {
+        "missingMeasurement": "Silakan berikan pengukuran berat Anda",
+        "dateTimeRequired": "Silakan berikan tanggal untuk pengukuran",
+        "outOfBoundariesKg": "Silakan masukkan berat yang valid antara 0 - 200 kg",
+        "outOfBoundariesLbs": "Silakan masukkan berat yang valid antara 0 - 440 lbs",
+        "measurementInvalid": "Silahkan masukkan pengukuran yang valid (XXX.XX)"
+      },
+      "info": {
+        "title": "Info",
+        "description": "Catatan ini ditambahkan oleh dokter Anda, karenanya Anda tidak dapat mengubah kolom apa pun."
+      },
+      "dialogs": {
+        "delete": {
+          "title": "Berat",
+          "description": "Apakah Anda yakin ingin menghapus catatan berat ini?",
+          "buttonText": "Ya",
+          "buttonCancelText": "Lewati"
+        }
+      }
+    }
+  },
+  "userProfile": {
+    "mobileNumber": "Nomor Ponsel",
+    "password": "Kata Sandi",
+    "passwordConfirm": "Konfirmasi Kata Sandi",
+    "firstName": "Nama Depan",
+    "lastName": "Nama Belakang",
+    "dob": "Tanggal Lahir",
+    "gender": "Jenis Kelamin",
+    "icNumber": "Nomor KTP",
+    "country": "Negara",
+    "icNumberHint": "Jika Anda tidak memiliki nomor KTP, masukkan nomor Paspor Anda.",
+    "email": "Alamat Email",
+    "marketingAgree": "Ya, Saya ingin menerima informasi tentang penawaran, promosi dan layanan via email dan SMS.",
+    "passwordStrength": {
+      "low": "Rendah",
+      "medium": "Sedang",
+      "high": "Tinggi"
+    },
+    "errors": {
+      "passwordLength": "Panjang minimum kata sandi harus 8",
+      "passwordRequired": "Silakan ketik kata sandi baru",
+      "passwordMismatch": "Kata sandi tidak cocok",
+      "passwordInvalid": "Format kata sandi salah",
+      "firstNameRequired": "Silakan sediakan nama depan Anda",
+      "lastNameRequired": "Silakan sediakan nama belakang Anda",
+      "nameFormat": "Nama harus hanya berisi huruf latin",
+      "dobRequired": "Silakan masukkan tanggal lahir Anda",
+      "minAge": "Anda harus berusia 18 tahun atau lebih untuk mendaftar",
+      "icNumberRequired": "Silakan ketik nomor KTP Anda",
+      "emailRequired": "Silakan ketik e-mail Anda",
+      "emailFormat": "Silakan sediakan alamat e-mail yang benar"
+    },
+    "dialogs": {
+      "confirm": {
+        "title": "Apakah Anda yakin?",
+        "description": "Apakah Anda yakin ingin mengubah jenis kelamin Anda? Riwayat medis diabetes Anda akan diperbarui menjadi Ragu-Ragu. Anda perlu memperbarui riwayat medis pribadi Anda kembali.",
+        "buttonText": "Ya",
+        "buttonCancelText": "Tidak sekarang"
+      }
+    }
+  },
+  "common": {
+    "time": {
+      "secondsShort": "detik"
+    },
+    "gender": {
+      "male": "Laki-Laki",
+      "female": "Perempuan"
+    },
+    "ethnicities": {
+      "malay": "Malay",
+      "chinese": "Cina",
+      "indian": "India",
+      "caucasian": "Kaukasia",
+      "filipino": "Filipino",
+      "na": "Lainnya / NA"
+    },
+    "date": {
+      "months": {
+        "full": [
+          "Januari",
+          "Februari",
+          "Maret",
+          "April",
+          "Mei",
+          "Juni",
+          "Juli",
+          "Agustus",
+          "September",
+          "Oktober",
+          "November",
+          "Desember"
+        ]
+      }
+    },
+    "facebookLogin": "Lanjutkan dengan Facebook",
+    "login": "Masuk",
+    "dashboard": "Dahbor",
+    "cancel": "Batalkan",
+    "contactUs": "Hubungi Kami",
+    "verify": "Verifikasi",
+    "showMore": "Tampakan Lebih Banyak",
+    "noMore": "Tidak ada lagi catatan untuk ditampilkan",
+    "passwordChangeSuccessBack": "Kembali ke Pengaturan",
+    "passwordChangeSuccess": "Kata sandi Anda telah diubah!",
+    "wentOffline": "Koneksi internet Anda terputus",
+    "wentOnline": "Anda kembali terhubung!",
+    "offlineNotification": "Perangkat Anda saat ini bekerja di luar jaringan"
+  }
+}

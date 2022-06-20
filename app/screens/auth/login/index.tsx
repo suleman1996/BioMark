@@ -33,16 +33,19 @@ import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { reduxLogin, reduxFederatedLogin } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
+import { useTranslation } from 'react-i18next';
 
 import fonts from 'assets/fonts';
 import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 
 import makeStyles from './styles';
-
 export const PASS_REGIX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 export default function Login() {
   // redux
+  const { t, i18n } = useTranslation();
+  console.log('ttt', t);
+
   const dispatch = useDispatch();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -64,6 +67,7 @@ export default function Login() {
   );
 
   useEffect(() => {
+    i18n.changeLanguage('en');
     if (selectCountryCode == '60') {
       setNumberCondition({ min: 8, max: 11 });
     } else if (selectCountryCode == '63') {
@@ -73,6 +77,7 @@ export default function Login() {
     } else {
       setNumberCondition({ min: 4, max: 13 });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectCountryCode]);
 
   // redux error check
@@ -204,7 +209,7 @@ export default function Login() {
         <View style={styles.icon}>
           <Logo height="120" width="170" />
         </View>
-        <Text style={styles.heading}>Welcome back!</Text>
+        <Text style={styles.heading}>{t('pages.landing.welcome')}</Text>
         <Text style={styles.inputLablel}>Mobile Number</Text>
         <PhoneNumber
           countryCode={countryCode}
