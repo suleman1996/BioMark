@@ -10,14 +10,14 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import makeStyles from './styles';
 
 type Props = {
-  label: string;
+  label?: string;
   placeholder: string;
   labelFontSize?: number;
   onChange: any;
   value: string;
   onFocus?: any;
   error?: any;
-  defaultValue: any;
+  defaultValue?: any;
   onBlur?: any;
   containerStyles: any;
   maxLength?: number;
@@ -46,26 +46,28 @@ const InputWithLabel = ({
     : {};
 
   return (
-    <View style={[styles.container, containerStyles]}>
-      {label && <Text style={[styles.label, ifLabelSize]}>{label}</Text>}
-      <InputField
-        onFocus={onFocus}
-        placeholder={placeholder}
-        onChange={onChange}
-        svg={undefined}
-        value={value}
-        defaultValue={defaultValue}
-        onBlur={onBlur}
-        maxLength={maxLength}
-        keyboardType={keyboardType}
-      />
-      {error ? (
-        <View style={styles.errorContainer}>
-          <BioDangerWhite width={3.5} height={3.5} />
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      ) : null}
-    </View>
+    <>
+      <View style={[styles.container, containerStyles]}>
+        {label && <Text style={[styles.label, ifLabelSize]}>{label}</Text>}
+        <InputField
+          onFocus={onFocus}
+          placeholder={placeholder}
+          onChange={onChange}
+          svg={undefined}
+          value={value}
+          defaultValue={defaultValue}
+          onBlur={onBlur}
+          maxLength={maxLength}
+          keyboardType={keyboardType}
+        />
+        {error ? (
+          <View style={styles.errorContainer}>
+            <BioDangerWhite width={3.5} height={3.5} />
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+        ) : null}
+      </View>
+    </>
   );
 };
 

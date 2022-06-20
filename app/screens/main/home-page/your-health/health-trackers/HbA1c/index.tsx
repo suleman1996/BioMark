@@ -175,7 +175,8 @@ const HbA1c = ({ route }) => {
             textAlign="center"
             placeholder={'0.0'}
             onChangeText={(val) => {
-              onChangeHba1c('data_value', val);
+              if (/^(\d)*(\.)?([0-9]{1})?$/gm.test(val) || val == '')
+                onChangeHba1c('data_value', val);
             }}
             showIcon={true}
             value={hba1cTracker?.data_value ? hba1cTracker?.data_value : ''}
