@@ -94,6 +94,7 @@ const API_URLS = {
   COVID_TEST_AND_TEST_CENTERS: '/api/v1/patient/covid/test_centers',
   COVID_GET_TEST_CENTER_SCHEDULES: '/api/v1/patient/covid/get_schedule',
   BILLPLZ: '/payment/v1/billplz',
+  SAVE_COVID_BOOKING_DEPENDANT: '/api/v1/patient/covid/booking',
 
   // stripe
   STRIPE: '/payment/v1/stripe',
