@@ -18,7 +18,7 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
 // import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
-import { showMessage } from 'react-native-flash-message';
+import { showMessage, hideMessage } from 'react-native-flash-message';
 import { hba1cValidator } from 'utils/functions/measurments';
 
 import makeStyles from './styles';
@@ -128,17 +128,22 @@ const HbA1c = ({ route }) => {
   };
 
   const onChangeHba1c = (key, value) => {
+    console.log(latestHba1c?.goal_value);
     setHba1cTracker((prev) => ({ ...prev, [key]: value }));
-    if (value < latestHba1c?.goal_value) {
+    if (+value < +latestHba1c?.goal_value) {
       showMessage({
         message: 'Your HbA1c is below target',
         type: 'danger',
+        icon: 'warning',
       });
-    } else if (value > latestHba1c?.goal_value) {
+    } else if (+value > +latestHba1c?.goal_value) {
       showMessage({
         message: 'Your HbA1c is above target',
         type: 'danger',
+        icon: 'warning',
       });
+    } else {
+      hideMessage();
     }
     setError(hba1cValidator(value) || '');
   };
@@ -168,6 +173,7 @@ const HbA1c = ({ route }) => {
             }}
             showIcon={true}
             value={hba1cTracker?.data_value ? hba1cTracker?.data_value : ''}
+            selectionColor="darkblue"
             // maxLength={5}
           />
           {error?.length > 0 ? <ErrorMessage errorMessage={error} /> : null}

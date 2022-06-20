@@ -28,7 +28,7 @@ export default function DependentButton() {
         </View>
       </TouchableOpacity>
       <View>
-        <Text style={styles.healthText}>Dependents</Text>
+        <Text style={styles.healthText}>Dependants</Text>
       </View>
     </View>
   );

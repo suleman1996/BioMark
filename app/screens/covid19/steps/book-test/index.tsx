@@ -99,7 +99,7 @@ const BookCovidTest = (props: Props) => {
               // setIsExisting(true);
               pushOneMoreToBooking();
             }}
-            title={'Add Existing Dependent'}
+            title={'Add Existing Dependant'}
           />
 
           <ButtonComponent
@@ -108,7 +108,7 @@ const BookCovidTest = (props: Props) => {
             }}
             marginTop={1}
             disabled={isDependantAdd}
-            title={'Add New Dependent'}
+            title={'Add New Dependant'}
           />
           {/* Add Dependant Form */}
           {isDependantAdd ? (
@@ -128,7 +128,12 @@ const BookCovidTest = (props: Props) => {
           />
           <View style={{ marginTop: heightToDp(12) }} />
           <View style={styles.bottom2Btns}>
-            <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>
+            <Pressable
+              style={[styles.btn, { backgroundColor: colors.white }]}
+              onPress={() => {
+                setIsCancelModal(true);
+              }}
+            >
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable

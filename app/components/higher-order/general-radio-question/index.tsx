@@ -21,6 +21,7 @@ const GeneralRadioQuestions = ({
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
   return (
     <View style={styles.container}>
       {question ? <Text style={styles.qText}>{question}</Text> : null}

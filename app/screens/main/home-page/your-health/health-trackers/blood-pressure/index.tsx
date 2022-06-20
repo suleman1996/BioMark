@@ -50,7 +50,6 @@ const BloodPressure = ({ route }: any) => {
     const bloodPressureResponse = await userService.getBloodPressureProgress(
       id
     );
-    console.log('===========>', bloodPressureResponse);
 
     setBloodPressure({
       bp_systolic: roundToDecimalPlaces(bloodPressureResponse.bp_systolic, 0),
@@ -72,8 +71,6 @@ const BloodPressure = ({ route }: any) => {
   }, []);
 
   const saveBloodPressureLog = async () => {
-    // console.log({ SELECTED_BP_ID });
-    // return;
     setIsLoading(true);
     const API_FUNCTION = SELECTED_BP_ID ? 'updateBpTracker' : 'createBpTracker';
     try {
@@ -120,7 +117,6 @@ const BloodPressure = ({ route }: any) => {
   };
 
   const onChangeBloodPressure = (key, value) => {
-    console.log(key, value);
     setBloodPressure((prev) => ({ ...prev, [key]: value }));
     setError((prev) => {
       const copy = { ...prev };
@@ -168,8 +164,6 @@ const BloodPressure = ({ route }: any) => {
     }
   }, [bloodPressure]);
 
-  console.log('Error', error);
-
   return (
     <TitleWithBackWhiteBgLayout
       title="Blood Pressure"
@@ -181,7 +175,6 @@ const BloodPressure = ({ route }: any) => {
         <View
           style={{
             paddingHorizontal: widthToDp(4),
-            // borderWidth: 5,
             marginBottom: heightToDp(25),
           }}
         >
@@ -191,7 +184,6 @@ const BloodPressure = ({ route }: any) => {
               style={{ marginTop: heightToDp(3), marginLeft: widthToDp(4) }}
             >
               <Tip
-                //title=""
                 body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats.."
                 bodyStyle={{ color: '#fff' }}
                 tipContainerStyle={{
@@ -218,7 +210,6 @@ const BloodPressure = ({ route }: any) => {
             value={bloodPressure.bp_systolic}
             maxLength={3}
             selectionColor="darkblue"
-            // defaultValue={''}
           />
           <MedicalInput
             height={15}
@@ -230,20 +221,24 @@ const BloodPressure = ({ route }: any) => {
             value={bloodPressure.bp_diastolic}
             maxLength={3}
             selectionColor="darkblue"
-            // defaultValue={''}
           />
           {Object.keys(error)?.length > 0 ? (
             <ErrorMessage errorMessage={error[Object.keys(error)[0]]} />
           ) : null}
-
-          <Text style={styles.label}>Date - Time</Text>
-          <DateTimePickerModal
-            maxDate={new Date()}
-            date={bloodPressure.date_entry}
-            setDate={(e: any) =>
-              setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
-            }
-          />
+          {Object.keys(error).length === 0 &&
+          bloodPressure.bp_systolic &&
+          bloodPressure.bp_diastolic ? (
+            <>
+              <Text style={styles.label}>Date - Time</Text>
+              <DateTimePickerModal
+                maxDate={new Date()}
+                date={bloodPressure.date_entry}
+                setDate={(e: any) =>
+                  setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
+                }
+              />
+            </>
+          ) : null}
         </View>
       </ScrollView>
       {showDeleteModal && (
@@ -263,11 +258,10 @@ const BloodPressure = ({ route }: any) => {
         disabled={
           bloodPressure.bp_systolic === '' ||
           bloodPressure.bp_diastolic === '' ||
-          Object.keys(error).length
+          Object.keys(error).length !== 0
         }
       />
     </TitleWithBackWhiteBgLayout>
   );
 };
-
 export default BloodPressure;

@@ -1,28 +1,27 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
-
-import { TextInput } from 'react-native-paper';
+import { TextInput, useTheme } from 'react-native-paper';
 
 import makeStyles from './styles';
 
 type Props = {
   margin?: any;
   svg?: any;
-  placeholder: string;
-  value: string;
+  placeholder?: string;
+  value: any;
   secureTextEntry?: boolean;
   onChange: any;
   onBlur?: any;
   onEyePress?: any;
   eye?: any;
-  keyboardType?: string;
+  keyboardType?: any;
   defaultValue?: string;
 };
 
 export default function (props: Props) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  console.log('ooo', props.value);
 
   return (
     <View style={[styles.container, { marginHorizontal: props.margin }]}>

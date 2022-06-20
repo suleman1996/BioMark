@@ -85,6 +85,7 @@ export default {
   VIEWCOVIDRESULTS: 'ViewCovidResults',
   SINGLECOVIDRESULT: 'SingleCovidResult',
   FAQSCREEN: 'FaqScreen',
+  PAYMENT_FAILED: 'PaymentFailed',
 
   BLOOD_SUGAR: 'BLOOD_SUGAR',
   BLOOD_PRESSURE: 'BLOOD_PRESSURE',

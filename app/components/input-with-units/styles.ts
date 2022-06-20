@@ -18,13 +18,14 @@ export const makeStyles = (colors: any, small?: boolean, textAlign?: string) =>
     },
     textInput: {
       flexDirection: 'row-reverse',
-      ...(small && { flex: 1, paddingHorizontal: 15 }),
+      ...(small && { paddingHorizontal: 15 }),
       backgroundColor: 'transparent',
       fontSize: responsiveFontSize(small ? 20 : 50),
       fontFamily: small ? fonts.mulishRegular : fonts.OpenSansBold,
       color: small ? colors.black : '#808080',
       flex: 1,
       textAlign: textAlign || 'right',
+      paddingVertical: 0,
     },
     menuTrigger: {
       flexDirection: 'row',

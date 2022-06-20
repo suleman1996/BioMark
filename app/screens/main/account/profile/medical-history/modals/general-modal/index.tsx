@@ -384,6 +384,8 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
   };
 
   const RadioBtn = ({ item }: { item: MedicalTemplateField }) => {
+    console.log('item===>', item);
+
     return (
       <>
         {item?.id == 'status' ? (
@@ -392,12 +394,13 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             options={item.options}
             isTrue={has_condition ? 'Yes' : 'No'}
             setIsTrue={async (value: any) => {
+              console.log('value===>', value);
+
               let updatedItems = [];
               const d =
                 medicalHistory.filter((el) => el.condition_id === condition_id)
                   .length > 0;
               if (d) {
-                logNow('redux', value);
                 updatedItems = medicalHistory?.map((el) =>
                   el.condition_id === condition_id
                     ? { ...el, has_condition: value == 'Yes' ? true : false }
@@ -444,7 +447,7 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
               logNow('redux', updatedItems);
             }}
           />
-        ) : item?.id == 'statusTreatment' ? (
+        ) : item?.id == 'statusTreatment' && has_condition ? (
           <GeneralRadioQuestions
             question={item.question}
             options={item.options}

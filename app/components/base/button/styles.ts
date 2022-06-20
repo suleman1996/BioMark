@@ -10,9 +10,11 @@ export const makeStyles = (colors: any) =>
       height: heightToDp(6),
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: widthToDp(2.5),
+      borderRadius: widthToDp(1.5),
       width: '100%',
       maxWidth: widthToDp(86),
+      borderWidth: 0.2,
+      borderColor: colors.inactive,
     },
     text: {
       color: colors.white,

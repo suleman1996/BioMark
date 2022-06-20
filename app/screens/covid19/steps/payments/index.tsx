@@ -1,28 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import SCREENS from 'navigation/constants';
+import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import ButtonComponent from 'components/base/button';
 import { InputWithLabel } from 'components/base';
+import ButtonComponent from 'components/base/button';
 
 import StepIndicator from 'react-native-step-indicator';
 import Feather from 'react-native-vector-icons/Feather';
 
-import { navigate } from 'services/nav-ref';
-import { heightToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
-import { makeStyles } from './styles';
 import fonts from 'assets/fonts';
-import { IAppState } from 'store/IAppState';
 import { useDispatch, useSelector } from 'react-redux';
+import { navigate } from 'services/nav-ref';
+import { paymentService } from 'services/payments';
 import { userService } from 'services/user-service/user-service';
 import { addUserContactsDetails } from 'store/auth/auth-actions';
+import { IAppState } from 'store/IAppState';
+import { getUserProfileData } from 'store/profile/profile-actions';
 import { BookTestBooking } from 'types/api';
 import { dateFormat1, getTime } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { makeStyles } from './styles';
+import Modal from 'react-native-modal';
+import WebView from 'react-native-webview';
 
 type Props = {};
 
@@ -33,6 +37,9 @@ const PaymentStep = (props: Props) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const styles = makeStyles(colors);
+  const [paymentModal, setPaymentModal] = useState(false);
+  const [paymentUrl, setPaymentUrl] = useState('');
+
   const booking = useSelector((state: IAppState) => state.covid.booking);
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
@@ -40,8 +47,15 @@ const PaymentStep = (props: Props) => {
   const dependants = useSelector(
     (state: IAppState) => state.account.allDependents
   );
+  const userDetails = useSelector(
+    (state: IAppState) => state.profile?.userProfile
+  );
   /*eslint-disable */
+  const getUserOnFocus = async () => {
+    await dispatch(getUserProfileData());
+  };
   useEffect(() => {
+    getUserOnFocus();
     userService
       .getUserContacts()
       .then((res) => {
@@ -172,12 +186,23 @@ const PaymentStep = (props: Props) => {
     );
   };
 
-  const { totalPrice = 0, currency = '' } = {
+  const {
+    totalPrice = 0,
+    currency = '',
+    countryName = '',
+    email = '',
+    name = '',
+  } = {
     totalPrice: booking.reduce(function (acc, obj) {
       return acc + obj?.amount;
     }, 0),
     currency: booking[0].currency,
+    countryName: booking[0]?.test_country_name,
+    email: userContacts.email_address,
+    name: userDetails.patient_name,
   };
+
+  console.log({ countryName: booking });
 
   const makeItems = () => {
     let items = booking.map((e) => {
@@ -200,6 +225,41 @@ const PaymentStep = (props: Props) => {
   return (
     <>
       <View style={styles.container}>
+        <Modal
+          deviceWidth={widthToDp(100)}
+          deviceHeight={heightToDp(100)}
+          onBackdropPress={() => setPaymentModal(false)}
+          isVisible={paymentModal}
+        >
+          <WebView
+            source={{ uri: paymentUrl }}
+            onMessage={(event) => {
+              alert(event.nativeEvent.data);
+            }}
+            onNavigationStateChange={(webViewState) => {
+              if (
+                webViewState.url.includes('/payment/v1/billplz/confirmation')
+              ) {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_SUCCESS,
+                });
+              } else if (
+                webViewState.url.includes('/payment/v1/stripe/success')
+              ) {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_SUCCESS,
+                });
+              } else if (
+                webViewState.url.includes('payment/v1/stripe/cancel')
+              ) {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.PAYMENT_FAILED,
+                });
+              }
+              console.log('state changed', webViewState.url);
+            }}
+          />
+        </Modal>
         <View style={styles.stepContainer}>
           <StepIndicator
             renderStepIndicator={({ position }) => {
@@ -285,21 +345,41 @@ const PaymentStep = (props: Props) => {
             <Text style={[styles.innerTitle, { marginTop: heightToDp(1) }]}>
               Choose Payment Method
             </Text>
-            <ButtonComponent
-              onPress={undefined}
-              title={'Debit/Credit Card Payment'}
-            />
+            {countryName === 'Malaysia' ? (
+              <ButtonComponent onPress={async () => {}} title={'Online'} />
+            ) : countryName == 'Singapore' ? (
+              <ButtonComponent
+                onPress={async () => {}}
+                title={'Debit/Credit Card Payment'}
+              />
+            ) : null}
           </View>
           <View style={styles.bottom2Btns}>
             <Pressable style={[styles.btn, { backgroundColor: colors.white }]}>
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable
-              onPress={() =>
-                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                  screen: SCREENS.PAYMENT_SUCCESS,
-                })
-              }
+              onPress={async () => {
+                if (countryName == 'Malaysia') {
+                  const data: any = await paymentService.openBillPlzBrowser(
+                    email,
+                    name,
+                    totalPrice,
+                    booking
+                  );
+                  console.log({ data });
+                  setPaymentUrl(data.url);
+                  setPaymentModal(true);
+                } else if (countryName == 'Singapore') {
+                  const data: any = await paymentService.openStripeBrowser(
+                    booking,
+                    email
+                  );
+                  console.log({ data });
+                  setPaymentUrl(data.url);
+                  setPaymentModal(true);
+                }
+              }}
               style={styles.btnEnable}
             >
               <Text style={[styles.btnText2]}>Next</Text>

@@ -53,7 +53,7 @@ const Covid19Home = (props: Props) => {
 
   return (
     <>
-      <TitleWithSearchBarLayout isBack title={'Covid 19'}>
+      <TitleWithSearchBarLayout isBack title={'COVID-19'}>
         <View style={styles.container}>
           <View style={styles.badgesContainer}>
             <BookTestButton />
