@@ -8,7 +8,13 @@ import {
   Image,
   Keyboard,
 } from 'react-native';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -104,25 +110,7 @@ const Index = () => {
   const [showApiError, setShowApiError] = React.useState('');
   const [showArticleWebView, setShowArticleWebView] = React.useState(false);
   const [articlesUrl, setArticlesUrl] = React.useState();
-  // const [highlights] = React.useState([
-  //   {
-  //     id: 0,
-  //     title: 'Drink Milk Everyday',
-  //     image:
-  //       'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
-  //   },
-  //   {
-  //     id: 1,
-  //     title: 'Face Mast is a Must',
-  //     image: 'https://m.media-amazon.com/images/I/415R2a9DgmL.jpg',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Dangue Fever',
-  //     image:
-  //       'https://www.morningagclips.com/wp-content/uploads/2018/09/milk-600x400.jpg',
-  //   },
-  // ]);
+
   const pan = useRef(new Animated.ValueXY()).current;
 
   useEffect(() => {
@@ -143,9 +131,10 @@ const Index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthTrackerFromStore]);
 
-  const handleHEalthTracker = () => {
+  const handleHEalthTracker = useCallback(() => {
     const tempTracker = [];
     let id = -1;
+    console.log('healthTrackerFromStore ', healthTrackerFromStore);
     Object.entries(healthTrackerFromStore).map((item) => {
       console.log('itemmm', item);
 
@@ -164,7 +153,7 @@ const Index = () => {
         });
     });
     setHealthTracker([...tempTracker]);
-  };
+  }, [healthTrackerFromStore, colors]);
 
   //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
   const handleCode = async ({ qrInput }: any) => {
@@ -212,8 +201,6 @@ const Index = () => {
   };
 
   const healthRiskCheck = (item) => {
-    console.log('HEre is the selected health risk ', item);
-
     item?.name === 'Blood Pressure' &&
       navigation.navigate(SCREENS.BLOOD_PRESSURE);
     item?.name === 'Smoking' && navigation.navigate(SCREENS.SMOKING);
@@ -315,7 +302,7 @@ const Index = () => {
             <FlatList
               data={healthTracker}
               renderItem={(item) => <RenderHealthTrack item={item} />}
-              keyExtractor={(item) => item.index}
+              keyExtractor={(item) => item.value}
               horizontal
               showsHorizontalScrollIndicator={false}
             />
@@ -329,7 +316,7 @@ const Index = () => {
                 <RenderRecordKeeping
                   svg={<Diabetes />}
                   title="Enter Diabetes Support Center"
-                  id="4y6yb5y5yb56b56y"
+                  id={dashboard?.psp_code}
                   onPress={() => navigate(SCREENS.DIABETES_CENTER)}
                 />
               )}
@@ -338,14 +325,14 @@ const Index = () => {
                 <RenderRecordKeeping
                   svg={<BP />}
                   title="Enter Hypertension Support Center"
-                  id="4y6yb5y5yb56b56y"
+                  id={dashboard?.psp_code}
                   onPress={() => navigation.navigate(HYPERTENSION)}
                 />
               )}
 
             {dashboard?.latest_result && (
               <RenderLastResult
-                title="Your Last Result"
+                title="Your Latest Result"
                 date={dashboard?.latest_result?.received}
                 onPress={() =>
                   navigate(SCREENS.RESULT_OVERVIEW, {

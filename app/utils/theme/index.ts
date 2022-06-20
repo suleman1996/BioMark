@@ -68,6 +68,9 @@ const theme = {
     bad: '#EB3342',
 
     //gradient
+    //Logs Colors
+    logsGreen: '#35B14F',
+    logsRed: '#EB3342',
   },
 
   // fonts: configureFonts({

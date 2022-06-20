@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import {
   getMedicationsTrackersAction,
+  getReduxHealthTracker,
   getReduxNewMedicationTracker,
 } from 'store/home/home-actions';
 
@@ -69,6 +70,7 @@ const Medication = ({ route }) => {
   const getMedNewTracker = useSelector(
     (state: IAppState) => state.home.getNewMedicationTracker
   );
+  const disptach = useDispatch();
 
   const updateState = (name: string, value: number | string) =>
     setMedicationTrackerState((prev) => ({ ...prev, [name]: value }));
@@ -96,6 +98,7 @@ const Medication = ({ route }) => {
   }, [getMedNewTracker]);
 
   useEffect(() => {
+    dispatch(getReduxNewMedicationTracker());
     if (!SELECTED_MEDICATION_LOG_ID) return;
     init();
   }, [SELECTED_MEDICATION_LOG_ID]);
@@ -114,6 +117,7 @@ const Medication = ({ route }) => {
         medication: body,
       });
       dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 2);
     } catch (error) {
       console.log(error);
@@ -145,6 +149,7 @@ const Medication = ({ route }) => {
       await userService.deleteMedicationTracker(SELECTED_MEDICATION_LOG_ID);
       dispatch(getReduxNewMedicationTracker());
       dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
+      dispatch(getReduxHealthTracker());
 
       navigate(SCREENS.HEALTH_PROGRESS, 2);
     } catch (error) {

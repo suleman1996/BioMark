@@ -72,9 +72,9 @@ export default function SmokingScreen() {
             ? 1
             : 0
         );
-        console.log('stop', result?.data?.smoking?.smoking_stop_at);
+        console.log('stop', result?.data?.smoking?.stick_per_day);
 
-        setDay(result?.data?.smoking?.stick_per_day);
+        setDay('' + result?.data?.smoking?.stick_per_day);
         setStopSmoke(result?.data?.smoking?.smoking_stop_at);
         setStartSmoke(result?.data?.smoking?.smoking_start_at);
         // setIsSmoking(
@@ -119,7 +119,12 @@ export default function SmokingScreen() {
       console.log('isSmoking yes no wala', value);
       if (value === 0) {
         setIsVisible(true);
-        const response = await userService.Smoking(day, 0, startSmoke, value);
+        const response = await userService.Smoking(
+          +(day || 0),
+          0,
+          startSmoke,
+          value
+        );
         console.log('smoking successful', response.data);
         navigate(SCREENS.EDIT_PROFILE);
         setIsVisible(false);
@@ -149,7 +154,7 @@ export default function SmokingScreen() {
   const onChangedSmoke = (text) => {
     console.log('tt', text);
 
-    if (NUMERIC_REGIX.test(text)) {
+    if (NUMERIC_REGIX.test(text) || text == '') {
       setDay(text);
     }
   };
@@ -269,7 +274,7 @@ export default function SmokingScreen() {
               >
                 {console.log('day', day)}
                 <TextInput
-                  value={day + ''}
+                  value={day || ''}
                   // defaultValue={'hello'}
                   onChange={(text) => onChangedSmoke(text)}
                   margin={0}

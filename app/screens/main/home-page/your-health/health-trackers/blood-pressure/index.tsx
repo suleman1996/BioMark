@@ -5,7 +5,7 @@ import { useTheme } from 'react-native-paper';
 import { MedicalInput } from 'components/higher-order';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import {
-  ButtonWithShadowContainer,
+  // ButtonWithShadowContainer,
   DateTimePickerModal,
   ErrorMessage,
 } from 'components/base';
@@ -25,14 +25,18 @@ import { AccountDeActivateModal } from 'components/ui';
 import { Tip } from 'react-native-tip';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { useDispatch } from 'react-redux';
-import { getReduxBloodPressureLogs } from 'store/home/home-actions';
+import {
+  getReduxBloodPressureLogs,
+  getReduxHealthTracker,
+} from 'store/home/home-actions';
 import { roundToDecimalPlaces } from 'utils/functions';
 import moment from 'moment';
+import GradientButton from 'components/linear-gradient-button';
 
 const BloodPressure = ({ route }: any) => {
   const SELECTED_BP_ID = route?.params?.logId;
   const { colors } = useTheme();
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const styles = makeStyles(colors);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +87,8 @@ const BloodPressure = ({ route }: any) => {
         },
         SELECTED_BP_ID
       );
-      disptach(getReduxBloodPressureLogs());
+      dispatch(getReduxBloodPressureLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err: any) {
       console.error(err);
@@ -109,7 +114,8 @@ const BloodPressure = ({ route }: any) => {
   const deleteBpLog = async () => {
     try {
       await userService.deleteBpLog(SELECTED_BP_ID);
-      disptach(getReduxBloodPressureLogs());
+      dispatch(getReduxBloodPressureLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 4);
     } catch (err) {
       console.error(err);
@@ -187,7 +193,7 @@ const BloodPressure = ({ route }: any) => {
                 body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats.."
                 bodyStyle={{ color: '#fff' }}
                 tipContainerStyle={{
-                  backgroundColor: colors.darkPrimary,
+                  backgroundColor: colors.shineBlue,
                   width: '60%',
                 }}
                 overlayOpacity={0.001}
@@ -195,7 +201,7 @@ const BloodPressure = ({ route }: any) => {
                 <Icon
                   name="ios-information-circle-outline"
                   size={responsiveFontSize(22)}
-                  color={colors.darkPrimary}
+                  color={colors.shineBlue}
                 />
               </Tip>
             </View>
@@ -240,6 +246,25 @@ const BloodPressure = ({ route }: any) => {
             </>
           ) : null}
         </View>
+        <View
+          style={{
+            position: 'absolute',
+            width: '100%',
+            bottom: 0,
+            paddingHorizontal: 20,
+          }}
+        >
+          <GradientButton
+            text={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+            color={['#2C6CFC', '#2CBDFC']}
+            onPress={saveBloodPressureLog}
+            disabled={
+              bloodPressure.bp_systolic === '' ||
+              bloodPressure.bp_diastolic === '' ||
+              Object.keys(error).length !== 0
+            }
+          />
+        </View>
       </ScrollView>
       {showDeleteModal && (
         <AccountDeActivateModal
@@ -252,7 +277,7 @@ const BloodPressure = ({ route }: any) => {
           callMe={deleteBpLog}
         />
       )}
-      <ButtonWithShadowContainer
+      {/* <ButtonWithShadowContainer
         onPress={saveBloodPressureLog}
         title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
         disabled={
@@ -260,7 +285,7 @@ const BloodPressure = ({ route }: any) => {
           bloodPressure.bp_diastolic === '' ||
           Object.keys(error).length !== 0
         }
-      />
+      /> */}
     </TitleWithBackWhiteBgLayout>
   );
 };
