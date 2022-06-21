@@ -9,8 +9,11 @@ import {
   Modal,
   ScrollView,
   Pressable,
+  Dimensions,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
 
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {
@@ -59,6 +62,7 @@ const SearchBarWithLeftScanIcon = () => {
   const [invalidError, setInvalidError] = React.useState('');
   const [actionError, setActionError] = React.useState('');
 
+  const [qrCodeModal, setQrCodeModal] = React.useState(false);
   const menuRef = useRef<any>();
 
   const [searchText, setSearchText] = React.useState('');
@@ -291,7 +295,7 @@ const SearchBarWithLeftScanIcon = () => {
             </MenuTrigger>
             <MenuOptions optionsContainerStyle={styles.popupMenu}>
               <MenuOption
-                onSelect={() => alert(`Save`)}
+                onSelect={() => setQrCodeModal(true)}
                 style={styles.singleMenuItem}
               >
                 <>
@@ -455,6 +459,7 @@ const SearchBarWithLeftScanIcon = () => {
             : undefined;
         }}
       />
+      <QrScannerPopup loading={loading} visible={qrCodeModal} />
 
       <QrInputPopup loading={loading} visible={visible}>
         <View style={{ alignItems: 'center', marginBottom: 20 }}>
@@ -544,6 +549,78 @@ const QrInputPopup = ({ visible, children, loading }: Props) => {
       <ActivityIndicator visible={loading} />
       <View style={styles.popUpBackground}>
         <View style={styles.popUpContainer}>{children}</View>
+      </View>
+    </Modal>
+  );
+};
+const QrScannerPopup = ({ visible, children, loading }: Props) => {
+  const { colors } = useTheme();
+  const styles = makeStyles(colors);
+  const [showModal, setShowModal] = React.useState(visible);
+
+  React.useEffect(() => {
+    togglePopUp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
+
+  const togglePopUp = () => {
+    if (visible) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  };
+  const onSuccess = (e) => {
+    // console.log('ettt', e.data);
+    handleCode(e.data);
+  };
+  const handleCode = async (codeQr) => {
+    try {
+      const response = await userService.barcodeCheck({
+        scanner: {
+          code: codeQr,
+          terms: 'true',
+        },
+      });
+      if (response.status == true) {
+        navigate(SCREENS.SUPPORT_SYSTEM);
+        console.log(response, 'codee---------------code------------------');
+      } else {
+        console.log('error', response);
+      }
+    } catch (err) {
+      console.log('errrrrrrrrr', err.errMsg.data);
+    }
+  };
+  return (
+    <Modal transparent visible={showModal}>
+      <ActivityIndicator visible={loading} />
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#fff',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <QRCodeScanner
+          onRead={onSuccess}
+          // flashMode={RNCamera.Constants.FlashMode.torch}
+        />
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#fff',
+            width: Dimensions.get('window').width,
+            position: 'absolute',
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => setShowModal(false)}
+        >
+          <Text style={{ padding: 16 }}>Cancel</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );

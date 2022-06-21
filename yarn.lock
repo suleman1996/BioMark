@@ -1184,7 +1184,7 @@
   dependencies:
     prop-types "~15.7.0"
 
-"@react-native-async-storage/async-storage@^1.17.3":
+"@react-native-async-storage/async-storage@^1.13.4", "@react-native-async-storage/async-storage@^1.17.3":
   version "1.17.6"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.6.tgz#ddb3520d051f71698c8a0e79e8959a7bf6d9f43b"
   integrity sha512-XXnoheQI3vQTQmjphdXNLTmtiKZeRqvI8kPQ25X5Eae7nZjdYEEGN+0z8N2qyelbUIQwKgmW0aagJk56q7DyNg==
@@ -7594,6 +7594,13 @@ react-native-calendar-strip@^2.2.6:
     prop-types "^15.6.0"
     recyclerlistview "^3.0.0"
 
+react-native-camera@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-4.2.1.tgz#caf74081f055e89d7e9b0cd5108965d808c60e90"
+  integrity sha512-+Vkql24PFYQfsPRznJCvPwJQfyzCnjlcww/iZ4Ej80bgivKjL9eU0IMQIXp4yi6XCrKi4voWXxIDPMupQZKeIQ==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-check-box@^2.1.7:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/react-native-check-box/-/react-native-check-box-2.1.7.tgz#f349d3505a13c15d19949ec4cec40c7adc4f3626"
@@ -7878,6 +7885,16 @@ react-native-pdf@^6.5.0:
   dependencies:
     crypto-js "^3.2.0"
 
+react-native-permissions@^2.0.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.2.2.tgz#3d2a63f6b7d6be52fc86e30f77412a9566283028"
+  integrity sha512-ihf4shQDSX5Oo9ChQXb9kr13mmyyNem5MaEvOpr3dCjhBOBWyEMztXm9/uPK1Qg5PsNpaYLa1KpcPZDCw87LXg==
+
+react-native-permissions@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.3.1.tgz#8a359d9c0531afcde2f642a459b48c4c1e3e8f2d"
+  integrity sha512-Ap9nVWBWJ7lyU6Ye3Qltm2V+Ut6XjDcs+6ZBmK1UUxcCoSSGx/mQg2GbMJLjlnoVtUgVHR3IhyZ0mN9DlMPRFQ==
+
 react-native-phone-number-input@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-native-phone-number-input/-/react-native-phone-number-input-2.1.0.tgz#e9743d391d438d33b91ae3d03482b291b3d20ea5"
@@ -7890,6 +7907,15 @@ react-native-popup-menu@^0.15.12:
   version "0.15.12"
   resolved "https://registry.yarnpkg.com/react-native-popup-menu/-/react-native-popup-menu-0.15.12.tgz#386852f4245f8d661a5003776989b9b55c9ce381"
   integrity sha512-33zMqHW+7rt5m2Bgg7xM8jy1guIdUCE8qJfznYYNRlIt4+fJX/rDcwmJIrkSGrvfhlhhEaG3otW6h25uFZLFfg==
+
+react-native-qrcode-scanner@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/react-native-qrcode-scanner/-/react-native-qrcode-scanner-1.5.5.tgz#0d20101712715da108742a2bbbd0397569031b01"
+  integrity sha512-il79uStkFqUvofqXJQfOL30qgQyU17MUKxj7IGHv6oT2OxIY/vutTwuPPDbsivtv0yTMHP4dGx/79oys4eAuNw==
+  dependencies:
+    "@react-native-async-storage/async-storage" "^1.13.4"
+    prop-types "^15.5.10"
+    react-native-permissions "^2.0.2"
 
 react-native-reanimated@^2.8.0:
   version "2.8.0"
