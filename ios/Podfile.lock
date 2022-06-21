@@ -91,6 +91,8 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - Permission-Camera (3.3.1):
+    - RNPermissions
   - PPpdf417 (8.0.0)
   - PromisesObjC (2.1.0)
   - RCT-Folly (2021.06.28.00-v2):
@@ -512,6 +514,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - Permission-Camera (from `../node_modules/react-native-permissions/ios/Camera`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -618,6 +621,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-Camera:
+    :path: "../node_modules/react-native-permissions/ios/Camera"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -770,6 +775,7 @@ SPEC CHECKSUMS:
   iProov: a01ee99a605be036375504e3c684fe87a9ede31c
   Jumio: 5ba2538df84aeb1cdcc630c6f3333a2fb6c9c066
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  Permission-Camera: bae27a8503530770c35aadfecbb97ec71823382a
   PPpdf417: aa644766d51a7e00b8d41c70868bba8b818f5215
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -838,6 +844,6 @@ SPEC CHECKSUMS:
   Yoga: 17cd9a50243093b547c1e539c749928dd68152da
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 9e82604c40b496bc76509e27a7a5b017eebb0ab4
+PODFILE CHECKSUM: 19d668981358e06219450cd6e5881135f43b7e36
 
 COCOAPODS: 1.11.3
