@@ -233,19 +233,22 @@ const PaymentStep = (props: Props) => {
         >
           <WebView
             source={{ uri: paymentUrl }}
-            onMessage={(event) => {
-              alert(event.nativeEvent.data);
+            onMessage={() => {
+              // alert(event.nativeEvent.data);
             }}
             onNavigationStateChange={(webViewState) => {
+              //  console.log('state changed', webViewState.url);
               if (
                 webViewState.url.includes('/payment/v1/billplz/confirmation')
               ) {
+                paymentService.saveDataAfterPayment(booking, email);
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_SUCCESS,
                 });
               } else if (
                 webViewState.url.includes('/payment/v1/stripe/success')
               ) {
+                paymentService.saveDataAfterPayment(booking, email);
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_SUCCESS,
                 });
@@ -256,7 +259,6 @@ const PaymentStep = (props: Props) => {
                   screen: SCREENS.PAYMENT_FAILED,
                 });
               }
-              console.log('state changed', webViewState.url);
             }}
           />
         </Modal>
