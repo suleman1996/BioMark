@@ -31,8 +31,10 @@ import { getReduxMedicationList } from 'store/home/home-actions';
 import AuthContext from 'utils/auth-context';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -80,7 +82,7 @@ export default function Home() {
     <View style={{ alignSelf: 'center', backgroundColor: 'white' }}>
       <View style={styles.navBar}>
         <Text style={styles.navHeading}>
-          Hello {authContext?.userData?.first_name}!
+          {t('pages.dashboard.greetings')} {authContext?.userData?.first_name}!
         </Text>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />
@@ -103,7 +105,9 @@ export default function Home() {
                   height: 140,
                 }}
               >
-                <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
+                <Text style={styles.bnHeading}>
+                  {t('pages.covid-booking.homeTitle')}
+                </Text>
                 <View style={styles.bnInner}>
                   <View style={{ width: '60%' }}>
                     <Text
@@ -115,8 +119,7 @@ export default function Home() {
                         paddingTop: 3,
                       }}
                     >
-                      Planning a COVID-19 Test for you and your Dependant? Place
-                      an appiontment with us by clicking "Book Now"
+                      {t('pages.covid-booking.homeDescription')}
                     </Text>
                   </View>
                   <View style={{ width: '35%' }}>
@@ -130,7 +133,7 @@ export default function Home() {
               <YourHealthBtn />
               <Covid19Btn />
             </View>
-            <Text style={styles.gfHeading}>Your Health Snapshot</Text>
+            <Text style={styles.gfHeading}>{t('healthSnapshot.title')}</Text>
             <View style={styles.googleFitC}>
               <ImageBackground
                 source={MyImage.healthRing}
@@ -144,7 +147,7 @@ export default function Home() {
                 <TouchableOpacity>
                   <GoogleFitButton
                     disabled={false}
-                    title="Connect with Google Fit"
+                    title={t('healthSnapshot.android.connectButton')}
                     onPress={() => console.log('pressed')}
                   />
                 </TouchableOpacity>
