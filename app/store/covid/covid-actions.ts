@@ -12,6 +12,7 @@ import {
   COVID_BOOKING_FORM,
   COVID_BOOKING,
   COVID_HOME_RESULTS,
+  COVID_SUCCESS_PAYMENT_DATA,
 } from './constants';
 
 export const addAllCovidResultsData = (data: CovidResultListResponse[]) => ({
@@ -116,5 +117,10 @@ export const getCovidHomeResultsR =
 // covid booking
 export const addCovidBooking = (data: BookTestBooking[]) => ({
   type: COVID_BOOKING,
+  payload: data,
+});
+
+export const addCovidSuccessPaymentData = (data: any) => ({
+  type: COVID_SUCCESS_PAYMENT_DATA,
   payload: data,
 });

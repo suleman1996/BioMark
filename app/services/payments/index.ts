@@ -1,5 +1,7 @@
 import Config from 'react-native-config';
 import { API_URLS } from 'services/url-constants';
+import { addCovidSuccessPaymentData } from 'store/covid/covid-actions';
+import { store } from 'store/store';
 import {
   BillplzPayment,
   BookTestBooking,
@@ -161,14 +163,12 @@ function saveDataAfterPayment(booking: BookTestBooking[], email: string) {
 
     saveCovidBookingDepandant(request)
       .then((res: any) => {
-        logNow({ resForCovidSave: res.data });
-        resolve(res.data);
+        logNow({ resForCovidSave: res });
+        resolve(res);
       })
       .catch((err) => {
         reject(err);
       });
-
-    logNow({ request });
   });
 }
 
@@ -179,6 +179,7 @@ function saveCovidBookingDepandant(request: any) {
       .then(async (response: any) => {
         try {
           logNow('SAVE COVID BOOKING  ===>', response.data);
+          await store.dispatch(addCovidSuccessPaymentData(response.data));
           resolve(response.data);
         } catch (e) {
           logNow('CATCH ERROR COVID BOOKING SAVE ==>', e);

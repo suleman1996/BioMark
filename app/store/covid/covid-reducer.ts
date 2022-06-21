@@ -4,6 +4,7 @@ import {
   COVID_BOOKING_FORM,
   COVID_BOOKING,
   COVID_HOME_RESULTS,
+  COVID_SUCCESS_PAYMENT_DATA,
 } from './constants';
 import { CovidState } from './CovidState';
 
@@ -43,6 +44,13 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         covidHomeResults: action.payload,
+      };
+    }
+
+    case COVID_SUCCESS_PAYMENT_DATA: {
+      return {
+        ...state,
+        covidSuccessPaymentData: action.payload,
       };
     }
 

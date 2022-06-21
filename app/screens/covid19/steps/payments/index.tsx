@@ -11,6 +11,8 @@ import StepIndicator from 'react-native-step-indicator';
 import Feather from 'react-native-vector-icons/Feather';
 
 import fonts from 'assets/fonts';
+import Modal from 'react-native-modal';
+import WebView from 'react-native-webview';
 import { useDispatch, useSelector } from 'react-redux';
 import { navigate } from 'services/nav-ref';
 import { paymentService } from 'services/payments';
@@ -25,8 +27,6 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { makeStyles } from './styles';
-import Modal from 'react-native-modal';
-import WebView from 'react-native-webview';
 
 type Props = {};
 
@@ -40,6 +40,8 @@ const PaymentStep = (props: Props) => {
   const [paymentModal, setPaymentModal] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState('');
 
+  const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
+
   const booking = useSelector((state: IAppState) => state.covid.booking);
   const userContacts = useSelector(
     (state: IAppState) => state.auth.userContacts
@@ -50,6 +52,7 @@ const PaymentStep = (props: Props) => {
   const userDetails = useSelector(
     (state: IAppState) => state.profile?.userProfile
   );
+
   /*eslint-disable */
   const getUserOnFocus = async () => {
     await dispatch(getUserProfileData());
@@ -220,6 +223,16 @@ const PaymentStep = (props: Props) => {
     makeItems();
   }, []);
 
+  const ifPaymentSuccessRunIt = async () => {
+    await paymentService.saveDataAfterPayment(booking, email);
+  };
+
+  useEffect(() => {
+    if (isPaymentSuccess) {
+      ifPaymentSuccessRunIt();
+    }
+  }, [isPaymentSuccess]);
+
   /*eslint-enable */
 
   return (
@@ -236,19 +249,19 @@ const PaymentStep = (props: Props) => {
             onMessage={() => {
               // alert(event.nativeEvent.data);
             }}
-            onNavigationStateChange={(webViewState) => {
-              //  console.log('state changed', webViewState.url);
+            onNavigationStateChange={async (webViewState) => {
+              console.log('state changed', webViewState.url);
               if (
                 webViewState.url.includes('/payment/v1/billplz/confirmation')
               ) {
-                paymentService.saveDataAfterPayment(booking, email);
+                setIsPaymentSuccess(true);
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_SUCCESS,
                 });
               } else if (
                 webViewState.url.includes('/payment/v1/stripe/success')
               ) {
-                paymentService.saveDataAfterPayment(booking, email);
+                setIsPaymentSuccess(true);
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_SUCCESS,
                 });

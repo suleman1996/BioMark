@@ -37,7 +37,7 @@ const Covid19Home = (props: Props) => {
 
   /*eslint-disable */
   const getCovidHomeResults = async () => {
-    await dispatch(getCovidHomeResultsR());
+    const res: any = await dispatch(getCovidHomeResultsR());
   };
 
   useEffect(() => {
@@ -76,6 +76,7 @@ const Covid19Home = (props: Props) => {
 
   return (
     <>
+      {/* <ActivityIndicator visible={isLoading} /> */}
       <TitleWithSearchBarLayout isBack title={'COVID-19'}>
         <View style={styles.container}>
           <View style={styles.badgesContainer}>
