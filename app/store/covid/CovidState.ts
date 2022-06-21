@@ -2,6 +2,7 @@ import {
   BookingFormDataResponse,
   BookTestBooking,
   CovidBookingListResponseData,
+  CovidBookingResponseData,
   CovidLatestResponse,
   CovidResultListResponse,
 } from 'types/api';
@@ -19,4 +20,9 @@ export class CovidState {
   };
   booking: BookTestBooking[] = [];
   covidHomeResults: CovidLatestResponse[] = [];
+  covidSuccessPaymentData: CovidBookingResponseData = {
+    status: false,
+    user_reference_code: '',
+    dependent_reference_codes: [],
+  };
 }
