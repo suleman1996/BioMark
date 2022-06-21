@@ -23,8 +23,10 @@ import { BackIcon } from 'assets/svgs/index';
 import makeStyles from './styles';
 import Config from 'react-native-config';
 import { TitleWithBackLayout } from 'components/layouts';
+import { useTranslation } from 'react-i18next';
 
 export default function TermsAndPrivacy({ route }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -163,7 +165,9 @@ export default function TermsAndPrivacy({ route }) {
             <TouchableOpacity>
               <BackIcon onPress={() => navigations.goBack()} />
             </TouchableOpacity>
-            <Text style={styles.signupText}>Back</Text>
+            <Text style={styles.signupText}>
+              {t('pages.signUp.buttontitle.back')}
+            </Text>
           </View>
         </View>
       )}
@@ -183,7 +187,7 @@ export default function TermsAndPrivacy({ route }) {
                 { color: privacyPolicy ? colors.inactive : colors.heading },
               ]}
             >
-              Terms & Conditions
+              {t('pages.idVerification.terms.title')}
             </Text>
           </View>
         </TouchableOpacity>
@@ -200,7 +204,7 @@ export default function TermsAndPrivacy({ route }) {
                 { color: privacyPolicy ? colors.heading : colors.inactive },
               ]}
             >
-              Privacy Policy
+              {t('pages.policies.privacyPolicy.title')}
             </Text>
           </View>
         </TouchableOpacity>
