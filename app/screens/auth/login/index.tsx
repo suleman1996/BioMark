@@ -228,20 +228,22 @@ export default function Login() {
             ) : (
               phoneNumber.length < numberCondition.min && (
                 <Text style={styles.errorMessage}>
-                  Must have {numberCondition.min}
+                  {t('pages.login.errors.phoneNumberTooShort')}
+                  {numberCondition.min}
                   {numberCondition.max !== numberCondition.min &&
-                    -numberCondition.max}{' '}
-                  characters
+                    -numberCondition.max}
+                  {t('pages.login.errors.characters')}
                 </Text>
               )
             )
           ) : (
             phoneNumber.length < numberCondition.min && (
               <Text style={styles.errorMessage}>
-                Must have {numberCondition.min}
+                {t('pages.login.errors.phoneNumberTooShort')}
+                {numberCondition.min}
                 {numberCondition.max !== numberCondition.min &&
-                  -numberCondition.max}{' '}
-                characters
+                  -numberCondition.max}
+                {t('pages.login.errors.characters')}
               </Text>
             )
           ))}
@@ -262,13 +264,12 @@ export default function Login() {
         />
         {password !== '' && password.length < 8 && (
           <Text style={styles.errorMessage}>
-            Password must be at least 8 characters long
+            {t('pages.password.passwordRules')}
           </Text>
         )}
         {!PASS_REGIX.test(password) && password.length > 7 ? (
           <Text style={styles.errorMessage}>
-            At least have one digit, one captial letter and one special
-            character.
+            {t('pages.password.passwordRules')}
           </Text>
         ) : null}
         <View style={{ alignSelf: 'center' }}>
@@ -290,11 +291,11 @@ export default function Login() {
               ? true
               : false
           }
-          title="Login"
+          title={t('pages.login.login')}
         />
         <View style={styles.orView}>
           <View style={styles.dash} />
-          <Text style={styles.orTxt}>Or</Text>
+          <Text style={styles.orTxt}>{t('pages.login.or')}</Text>
           <View style={styles.dash} />
         </View>
         <Text

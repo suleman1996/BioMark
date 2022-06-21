@@ -13,8 +13,10 @@ import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 export default function CreatePassword() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const route = useRoute();
@@ -36,7 +38,7 @@ export default function CreatePassword() {
     <>
       <ActivityIndicator visible={loading} />
       <View style={styles.container}>
-        <Header title="Reset Password" />
+        <Header title={t('pages.resetPassword.title')} />
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.body}>
             <Formik
@@ -50,12 +52,14 @@ export default function CreatePassword() {
               {({ handleChange, handleSubmit, values, errors, isValid }) => (
                 <>
                   <Text style={styles.title}>
-                    Please enter your new password.
+                    {t('pages.resetPassword.resetDescription')}
                   </Text>
 
-                  <Text style={styles.inputLablel}>New Password</Text>
+                  <Text style={styles.inputLablel}>
+                    {t('pages.password.newPassword.title')}
+                  </Text>
                   <TextInput
-                    placeholder="Enter your new password..."
+                    placeholder={t('pages.password.newPassword.placeholder')}
                     secureTextEntry={hidePassword}
                     eye={!hidePassword ? 'eye' : 'eye-off'}
                     onEyePress={() => setHidePassword(!hidePassword)}
@@ -67,11 +71,13 @@ export default function CreatePassword() {
                   )}
 
                   <Text style={[styles.inputLablel, { marginTop: 30 }]}>
-                    Confirm New Password
+                    {t('pages.password.newPasswordConfirm.title')}
                   </Text>
                   <View>
                     <TextInput
-                      placeholder="Retype your new password..."
+                      placeholder={t(
+                        'pages.password.newPasswordConfirm.placeholder'
+                      )}
                       secureTextEntry={hideConfirmPassword}
                       eye={!hideConfirmPassword ? 'eye' : 'eye-off'}
                       onEyePress={() =>

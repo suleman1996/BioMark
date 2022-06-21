@@ -144,8 +144,7 @@ export default function OtpPassword(props: Props) {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.body}>
             <Text style={styles.title}>
-              You will receive a verification code on the mobile number you
-              provided. Check your phone and enter the OTP code below.
+              {t('pages.resetPassword.otpCodeDescription')}
             </Text>
             <View style={{ height: 60 }}>
               <OtpInput
@@ -164,23 +163,30 @@ export default function OtpPassword(props: Props) {
               style={{ marginTop: 30 }}
             >
               <Text style={styles.resendText}>
-                <Text style={{ color: colors.heading }}>Not received? </Text>
+                <Text style={{ color: colors.heading }}>
+                  {t('pages.resetPassword.notReceived')}{' '}
+                </Text>
                 <Text style={{ color: colors.blue }}>
-                  Resend OTP {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+                  {t('pages.resetPassword.otpResend')} {minutes}:
+                  {seconds < 10 ? `0${seconds}` : seconds}
                 </Text>
               </Text>
             </TouchableOpacity>
             <View style={styles.floatingBtn}>
               <Text style={styles.resendText}>
-                <Text style={{ color: colors.heading }}>Having trouble? </Text>
+                <Text style={{ color: colors.heading }}>
+                  {t('pages.signUp.allSet.actions.trouble.text')}
+                </Text>
                 <TouchableWithoutFeedback onPress={() => openMessenger()}>
-                  <Text style={{ color: colors.blue }}>contact us </Text>
+                  <Text style={{ color: colors.blue }}>
+                    {t('pages.signUp.allSet.actions.trouble.link')}{' '}
+                  </Text>
                 </TouchableWithoutFeedback>
               </Text>
 
               <Button
                 onPress={() => handleOTP()}
-                title="Continue"
+                title={t('pages.resetPassword.continue')}
                 disabled={code.length < 6 ? true : false}
               />
             </View>
