@@ -57,7 +57,6 @@ const AccountScreen = () => {
       })
       .finally(() => {});
   };
-  console.log('``````````````````````````````````', authContext?.userData);
 
   return (
     <>
@@ -99,7 +98,9 @@ const AccountScreen = () => {
                   size={responsiveFontSize(25)}
                   color={colors.primary}
                 />
-                <Text style={styles.editProfile}>Edit Profile</Text>
+                <Text style={styles.editProfile}>
+                  {t('pages.more.links.editProfile')}
+                </Text>
               </Pressable>
             </View>
           </View>
