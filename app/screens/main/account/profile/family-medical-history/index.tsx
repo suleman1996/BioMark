@@ -4,6 +4,7 @@ import { ButtonWithShadowContainer } from 'components/base';
 import GeneralModalButton from 'components/higher-order/general-modal-button';
 import { TitleWithBackLayout } from 'components/layouts';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,6 +30,7 @@ import makeStyles from './styles';
 
 /* eslint-disable */
 const MedicalHistoryScreen = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -91,7 +93,7 @@ const MedicalHistoryScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Family Medical History">
+    <TitleWithBackLayout title={t('pages.medicalHistory.familyTitle')}>
       {/* modals */}
       <GeneralModalPage
         isVisible={isGenModalRef.current}
@@ -102,8 +104,7 @@ const MedicalHistoryScreen = () => {
       {/* modals */}
       <ScrollView style={styles.container}>
         <Text style={styles.label}>
-          Have you of your family members been diagnosed with the following
-          conditions?
+          {t('pages.medicalHistory.familyDiagnosis')}
         </Text>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.rowContainer}>
@@ -217,7 +218,7 @@ const MedicalHistoryScreen = () => {
           saveDataonSavePress();
           goBack();
         }}
-        title={'Save & Continue'}
+        title={t('pages.medicalHistory.continue')}
       />
     </TitleWithBackLayout>
   );

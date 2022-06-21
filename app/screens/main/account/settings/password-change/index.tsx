@@ -20,10 +20,12 @@ import { navigate } from 'services/nav-ref';
 import { ErrorResponse } from 'types/ErrorResponse';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
 const PasswordChangeScreen = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -110,10 +112,10 @@ const PasswordChangeScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isLoading} />
-      <TitleWithBackWhiteBgLayout title="Update Password">
+      <TitleWithBackWhiteBgLayout title={t('pages.password.title')}>
         <View style={styles.container}>
           <Text style={styles.textHeader}>
-            Please enter your current password
+            {t('pages.password.description')}
           </Text>
           <Formik
             innerRef={formikRef}
@@ -130,8 +132,10 @@ const PasswordChangeScreen = () => {
                 <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps>
                   <PasswordInputWithLabel
                     marginTop={1}
-                    label={'Current Password'}
-                    placeholder={'Enter your current password'}
+                    label={t('pages.password.currentPassword.title')}
+                    placeholder={t(
+                      'pages.password.currentPassword.placeholder'
+                    )}
                     isSecure={eCurrent}
                     password={values.currentPassword}
                     setHidePassword={() => setECurrent(!eCurrent)}
@@ -159,8 +163,8 @@ const PasswordChangeScreen = () => {
                   </Text>
                   <PasswordInputWithLabel
                     marginTop={0.3}
-                    label={'Enter new password'}
-                    placeholder={'Enter your new password...'}
+                    label={t('pages.password.newPassword.title')}
+                    placeholder={t('pages.password.newPassword.placeholder')}
                     isSecure={ePass}
                     password={values.password}
                     setHidePassword={() => setEPass(!ePass)}
@@ -170,10 +174,10 @@ const PasswordChangeScreen = () => {
                   <View style={styles.passValueContainer}>
                     <Text style={styles.passValue}>
                       {values.password.length < 8
-                        ? 'Low'
+                        ? t('userProfile.passwordStrength.low')
                         : values.password.length < 10
-                        ? 'Medium'
-                        : 'High'}
+                        ? t('userProfile.passwordStrength.medium')
+                        : t('userProfile.passwordStrength.high')}
                     </Text>
                     <View
                       style={[
@@ -200,8 +204,10 @@ const PasswordChangeScreen = () => {
                   )}
                   <PasswordInputWithLabel
                     marginTop={-1}
-                    label={'Confirm New Password'}
-                    placeholder={'Enter your new password again'}
+                    label={t('pages.password.newPasswordConfirm.title')}
+                    placeholder={t(
+                      'pages.password.newPasswordConfirm.placeholder'
+                    )}
                     isSecure={eConfirm}
                     password={values.confirmPassword}
                     setHidePassword={() => setEConfirm(!eConfirm)}
@@ -222,7 +228,7 @@ const PasswordChangeScreen = () => {
                       submitForm();
                       handleSubmit();
                     }}
-                    title={'Save'}
+                    title={t('pages.password.save')}
                     disabled={
                       Object.entries(errors).length === 0
                         ? values.currentPassword

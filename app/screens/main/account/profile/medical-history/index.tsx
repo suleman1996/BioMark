@@ -35,19 +35,21 @@ import { addMedicalHistoryUpdate } from 'store/profile/profile-actions';
 import { userService } from 'services/user-service/user-service';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
-
-const options = [
-  { value: '---', label: '---' },
-  { value: 'Caucasian', label: 'Caucasian' },
-  { value: 'Chinese', label: 'Chinese' },
-  { value: 'Filpino', label: 'Filpino' },
-  { value: 'Indian', label: 'Indian' },
-  { value: 'Malay', label: 'Malay' },
-  { value: 'Other / NA', label: 'Other / NA' },
-];
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable */
 const MedicalHistoryScreen = () => {
+  const { t } = useTranslation();
+
+  const options = [
+    { value: '---', label: '---' },
+    { value: 'Caucasian', label: t('common.ethnicities.caucasian') },
+    { value: 'Chinese', label: t('common.ethnicities.chinese') },
+    { value: 'Filpino', label: t('common.ethnicities.filipino') },
+    { value: 'Indian', label: t('common.ethnicities.indian') },
+    { value: 'Malay', label: t('common.ethnicities.malay') },
+    { value: 'Other / NA', label: t('common.ethnicities.na') },
+  ];
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -129,7 +131,7 @@ const MedicalHistoryScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Medical History">
+    <TitleWithBackLayout title={t('pages.medicalHistory.title')}>
       {/* modals */}
       <GeneralModalPage
         isVisible={isGenModalRef.current}
@@ -140,11 +142,13 @@ const MedicalHistoryScreen = () => {
       {/* modals */}
       <ScrollView style={styles.container}>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.label}>What's your ethnicity?</Text>
+          <Text style={styles.label}>
+            {t('pages.medicalHistory.ethnicity')}
+          </Text>
           <View style={{ marginTop: heightToDp(3.8) }}>
             <Tip
               //title=""
-              body="Your ethnicity will impact the assessment of your BMI health indicator."
+              body={t('pages.medicalHistory.ethnicityHint')}
               bodyStyle={{ color: '#fff' }}
               tipContainerStyle={{ backgroundColor: '#2f6b64', width: '60%' }}
               overlayOpacity={0.001}
@@ -167,14 +171,12 @@ const MedicalHistoryScreen = () => {
           error={
             isDropdownChanged
               ? dropdownValue === '---'
-                ? 'Please select your ethnicity'
+                ? t('pages.medicalHistory.errors.ethnicity')
                 : ''
               : ''
           }
         />
-        <Text style={styles.label}>
-          Have you ever been diagnosed with any of the following conditions?
-        </Text>
+        <Text style={styles.label}>{t('pages.medicalHistory.diagnosis')}</Text>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.rowContainer}>
             {bootstrap?.attributes?.medical_template?.personal?.map(
@@ -223,7 +225,7 @@ const MedicalHistoryScreen = () => {
           saveDataonSavePress();
           goBack();
         }}
-        title={'Save & Continue'}
+        title={t('pages.medicalHistory.continue')}
       />
     </TitleWithBackLayout>
   );
