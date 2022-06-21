@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -85,65 +86,73 @@ export default function Home() {
           <SearchBarWithLeftScanIcon />
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.midContainer}>
-          <View style={styles.bookNowC}>
-            <ImageBackground
-              source={MyImage.rectangle}
-              style={{
-                width: '100%',
-                height: 140,
-              }}
-            >
-              <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
-              <View style={styles.bnInner}>
-                <View style={{ width: '60%' }}>
-                  <Text
-                    style={{
-                      fontFamily: fonts.mulishRegular,
-                      fontSize: 13,
-                      color: 'white',
-                      lineHeight: 16.36,
-                      paddingTop: 3,
-                    }}
-                  >
-                    Planning a COVID-19 Test for you and your Dependant? Place
-                    an appiontment with us by clicking "Book Now"
-                  </Text>
+      <View
+        style={{
+          position: 'absolute',
+          zIndex: -3,
+          height: Dimensions.get('window').height,
+        }}
+      >
+        <ScrollView>
+          <View style={styles.midContainer}>
+            <View style={styles.bookNowC}>
+              <ImageBackground
+                source={MyImage.rectangle}
+                style={{
+                  width: '100%',
+                  height: 140,
+                }}
+              >
+                <Text style={styles.bnHeading}>Book your COVID-19 Test</Text>
+                <View style={styles.bnInner}>
+                  <View style={{ width: '60%' }}>
+                    <Text
+                      style={{
+                        fontFamily: fonts.mulishRegular,
+                        fontSize: 13,
+                        color: 'white',
+                        lineHeight: 16.36,
+                        paddingTop: 3,
+                      }}
+                    >
+                      Planning a COVID-19 Test for you and your Dependant? Place
+                      an appiontment with us by clicking "Book Now"
+                    </Text>
+                  </View>
+                  <View style={{ width: '35%' }}>
+                    <SmallButton title="Book Now" />
+                  </View>
                 </View>
-                <View style={{ width: '35%' }}>
-                  <SmallButton title="Book Now" />
-                </View>
-              </View>
-            </ImageBackground>
-          </View>
+              </ImageBackground>
+            </View>
 
-          <View style={styles.badgesContainer}>
-            <YourHealthBtn />
-            <Covid19Btn />
+            <View style={styles.badgesContainer}>
+              <YourHealthBtn />
+              <Covid19Btn />
+            </View>
+            <Text style={styles.gfHeading}>Your Health Snapshot</Text>
+            <View style={styles.googleFitC}>
+              <ImageBackground
+                source={MyImage.healthRing}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  paddingHorizontal: 15,
+                  justifyContent: 'center',
+                }}
+              >
+                <TouchableOpacity>
+                  <GoogleFitButton
+                    disabled={false}
+                    title="Connect with Google Fit"
+                    onPress={() => console.log('pressed')}
+                  />
+                </TouchableOpacity>
+              </ImageBackground>
+            </View>
           </View>
-          <Text style={styles.gfHeading}>Your Health Snapshot</Text>
-          <View style={styles.googleFitC}>
-            <ImageBackground
-              source={MyImage.healthRing}
-              style={{
-                height: '100%',
-                width: '100%',
-                paddingHorizontal: 15,
-                justifyContent: 'center',
-              }}
-            >
-              <TouchableOpacity>
-                <GoogleFitButton
-                  disabled={false}
-                  title="Connect with Google Fit"
-                  onPress={() => console.log('pressed')}
-                />
-              </TouchableOpacity>
-            </ImageBackground>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
       <FloatingActionButton />
     </View>
   );

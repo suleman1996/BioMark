@@ -19,13 +19,13 @@ const HealthRisk = ({ route }) => {
   const styles = makeStyles(colors);
   const navigation = useNavigation();
 
-  const listItems = route.params.item;
-  const listData = route.params.cardData;
-  const refData = route.params.refData;
-  const footNote = route.params.footNotesData;
-  const calculations = route.params.calc;
-  const color = route.params.clr;
-  const SVG = route.params.SVG;
+  const listItems = route?.params?.item;
+  const listData = route?.params?.cardData;
+  const refData = route?.params?.refData;
+  const footNote = route?.params?.footNotesData;
+  const calculations = route?.params?.calc;
+  const color = route?.params?.clr;
+  const SVG = route?.params?.SVG;
 
   const renderItem = ({ item }) => {
     return (
@@ -48,10 +48,10 @@ const HealthRisk = ({ route }) => {
       <ScrollView style={{ flex: 1 }}>
         <TitleWithBackLayout>
           <HealthCard
-            H1Text={listItems.name}
-            H2Text={listItems.card_status}
+            H1Text={listItems?.name}
+            H2Text={listItems?.card_status}
             H2TextStyle={{ color: color, fontFamily: fonts.extraBold }}
-            number={listItems.value}
+            number={listItems?.value}
             numberStyle={{
               textAlign: 'center',
               fontSize: responsiveFontSize('50'),
@@ -59,7 +59,7 @@ const HealthRisk = ({ route }) => {
               color: color,
             }}
             svg={<SVG fill={color} />}
-            description={listItems.summary}
+            description={listItems?.summary}
           />
           {route?.params?.title && (
             <View style={{ alignItems: 'center', paddingBottom: 20 }}>
@@ -69,7 +69,7 @@ const HealthRisk = ({ route }) => {
               />
             </View>
           )}
-          {Object.keys(listItems?.button_type).includes(
+          {Object?.keys(listItems?.button_type).includes(
             listItems?.button_type
           ) && (
             <Button

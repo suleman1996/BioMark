@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -32,7 +32,14 @@ const styles = (colors: any) =>
       backgroundColor: 'white',
       borderRadius: 8,
     },
-    containerBody: { flex: 1, paddingHorizontal: 15, paddingTop: 40 },
+    containerBody: {
+      flex: 1,
+      paddingHorizontal: 15,
+      paddingTop: heightToDp(15),
+      position: 'absolute',
+      zIndex: -3,
+      height: Dimensions.get('window').height,
+    },
     headingText: {
       fontFamily: fonts.mulishBold,
       fontSize: 17,

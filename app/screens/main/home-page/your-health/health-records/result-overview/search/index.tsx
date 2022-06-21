@@ -23,7 +23,7 @@ const Search = () => {
 
   const searchResult = async (search) => {
     try {
-      console.log(route?.params?.labId, search);
+      console.log('idddd', route?.params?.labId);
       const result = await userService.getSearchResult(
         route?.params?.labId,
         search
