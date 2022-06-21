@@ -5,6 +5,7 @@ import { useTheme } from 'react-native-paper';
 import RNQRGenerator from 'rn-qr-generator';
 import { CovidLatestResponse, CovidResult } from 'types/api';
 import makeStyles from './styles';
+import BioSearchIcon from 'components/svg/bio-search-icon';
 
 type Props = {
   data: CovidLatestResponse;
@@ -76,6 +77,21 @@ const QRCarousel = (props: Props) => {
     );
   };
 
+  const _renderEmptyView = () => {
+    return (
+      <View style={styles.emptyContainer}>
+        <Text style={{ textAlign: 'center' }}>
+          <BioSearchIcon width={25} height={25} />
+        </Text>
+        <Text style={styles.emptyText1}>No QR Code Yet</Text>
+        <Text style={styles.emptyText2}>QR Codes will be displayed here</Text>
+        <Text style={styles.emptyText3}>
+          When you receive your COVID results
+        </Text>
+      </View>
+    );
+  };
+
   const _onViewableItemsChanged = React.useCallback(({ changed }) => {
     //  console.log('Visible items are', viewableItems);
     console.log('Changed in this iteration, ', changed);
@@ -98,6 +114,8 @@ const QRCarousel = (props: Props) => {
           showsHorizontalScrollIndicator={false}
           renderItem={_renderSingleItem}
           data={results}
+          // data={[]}
+          ListEmptyComponent={_renderEmptyView}
         />
         <View style={styles.dotsContainerStyle}>
           {results.map((tiem, index) => {

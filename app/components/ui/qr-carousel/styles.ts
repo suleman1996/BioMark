@@ -70,6 +70,29 @@ export const makeStyles = (colors: any) =>
       color: colors.inactive,
       alignSelf: 'center',
     },
+
+    emptyContainer: {
+      width: widthToDp(100),
+      paddingTop: heightToDp(2),
+    },
+    emptyText1: {
+      fontSize: responsiveFontSize(22),
+      fontFamily: GlobalFonts.extraBold,
+      color: colors.darkPrimary,
+      alignSelf: 'center',
+    },
+    emptyText2: {
+      fontSize: responsiveFontSize(19),
+      fontFamily: GlobalFonts.light,
+      color: colors.black,
+      alignSelf: 'center',
+    },
+    emptyText3: {
+      fontSize: responsiveFontSize(19),
+      fontFamily: GlobalFonts.light,
+      color: colors.black,
+      alignSelf: 'center',
+    },
   });
 
 export default makeStyles;
