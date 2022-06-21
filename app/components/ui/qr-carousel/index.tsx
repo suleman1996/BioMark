@@ -6,6 +6,7 @@ import RNQRGenerator from 'rn-qr-generator';
 import { CovidLatestResponse, CovidResult } from 'types/api';
 import makeStyles from './styles';
 import BioSearchIcon from 'components/svg/bio-search-icon';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {
   data: CovidLatestResponse;
@@ -59,7 +60,8 @@ const QRCarousel = (props: Props) => {
       date: item.result_date?.split(' ')?.join('/')?.substring(1),
     };
     const isGreen =
-      result?.toLocaleLowerCase() == 'negative'
+      result?.toLowerCase() == 'negative' ||
+      result?.toUpperCase() == 'NOT DETECTED'
         ? { color: colors.lightGreen, fontFamily: fonts.bold }
         : { color: colors.red, fontFamily: fonts.bold };
     return (
@@ -67,8 +69,17 @@ const QRCarousel = (props: Props) => {
         <Pressable onPress={() => setCurrentDot(index)} style={styles.slide}>
           <Text style={styles.header}>Your Covid-19 Results</Text>
           <Text style={styles.subHeader}>
-            COVID19 <Text style={[styles.subHeader, isGreen]}>{result}</Text> (
-            {date})
+            COVID-19{' '}
+            <Text
+              style={[
+                styles.subHeader,
+                isGreen,
+                { fontSize: responsiveFontSize(22) },
+              ]}
+            >
+              {result}
+            </Text>{' '}
+            ({date})
           </Text>
 
           <ImageQrRenderer link={item.link} />
