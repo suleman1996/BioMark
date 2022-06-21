@@ -10,6 +10,7 @@ import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 import { Formik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,6 +28,7 @@ type Props = {
 };
 
 const AddDependantForm = (props: Props) => {
+  const { t } = useTranslation();
   const { callMe } = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -146,7 +148,9 @@ const AddDependantForm = (props: Props) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: heightToDp(10) }}
       >
-        <Text style={styles.headerText}>Enter your Dependant Details</Text>
+        <Text style={styles.headerText}>
+          {t('pages.covid.covid-dependant.title')}
+        </Text>
         <Formik
           innerRef={formikRef}
           initialValues={{
@@ -178,21 +182,21 @@ const AddDependantForm = (props: Props) => {
           }) => (
             <>
               <InputWithLabel
-                label="First Name"
+                label={t('pages.covid.covid-dependant.firstname')}
                 placeholder={''}
                 onChange={handleChange('first_name')}
                 value={values.first_name}
                 error={values.first_name ? errors.first_name : ''}
               />
               <InputWithLabel
-                label="Last Name"
+                label={t('pages.covid.covid-dependant.lastname')}
                 placeholder={''}
                 onChange={handleChange('last_name')}
                 value={values.last_name}
                 error={values.last_name ? errors.last_name : ''}
               />
               <PhoneNumberWithLabel
-                label="Mobile Number"
+                label={t('pages.phoneNumber.mobileNumber')}
                 placeholder={''}
                 disabled={false}
                 number={values.phone_number}
@@ -208,27 +212,30 @@ const AddDependantForm = (props: Props) => {
               {values.phone_number !== '' &&
                 values.phone_number.length < numberCondition.min && (
                   <Text style={styles.errorMessage}>
-                    Must have {numberCondition.min}
+                    {t('pages.login.errors.phoneNumberTooShort')}
+                    {numberCondition.min}
                     {numberCondition.max !== numberCondition.min &&
                       -numberCondition.max}{' '}
-                    characters
+                    {t('pages.login.errors.characters')}
                   </Text>
                 )}
               <InputWithLabel
                 placeholder="E.g. Sample@email.com"
-                label="Email"
+                label={t('pages.login.email')}
                 onChange={handleChange('email')}
                 value={values.email}
                 error={values.email ? errors.email : ''}
               />
-              <Text style={styles.label}>Date of Birth</Text>
+              <Text style={styles.label}>
+                {t('pages.covid.covid-dependant.dob')}
+              </Text>
               <DatePickerModal
                 date={values.birth_date}
                 setDate={(e: any) => setFieldValue('birth_date', e)}
               />
 
               <InputWithLabel
-                label="NRIC /Passport Number"
+                label={t('pages.covid.covid-dependant.ncr_passport')}
                 placeholder={''}
                 onChange={handleChange('id_number')}
                 value={values.id_number}
@@ -237,18 +244,18 @@ const AddDependantForm = (props: Props) => {
               <BoxSelector
                 onChange={(e: any) => setFieldValue('gender_id', e)}
                 value={values.gender_id}
-                label={'Gender'}
+                label={t('pages.covid.covid-dependant.gender')}
                 options={GenderEnum}
               />
               <RelationMenu
                 onChange={(e: any) => setFieldValue('dependent_type_id', e)}
-                label={'Relation'}
+                label={t('pages.covid.covid-dependant.relation')}
                 options={DependentTypeEnum}
               />
               <BoxSelector
                 onChange={(e: any) => setFieldValue('document_type', e)}
                 value={values.document_type}
-                label={'Document Type'}
+                label={t('pages.covid.covid-dependant.document_type')}
                 options={[
                   { id: 'id_card', title: 'IC' },
                   { id: 'passport', title: 'Passport' },
@@ -264,7 +271,7 @@ const AddDependantForm = (props: Props) => {
                       : false
                   }
                   onPress={() => onSubmit()}
-                  title={'Confirm'}
+                  title={t('pages.covid.covid-button.confirm')}
                 />
               </View>
             </>

@@ -27,9 +27,11 @@ import { options } from './year';
 import makeStyles from './styles';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { NUMERIC_REGIX } from 'utils/regix';
+import { useTranslation } from 'react-i18next';
 
 export default function SmokingScreen() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = makeStyles(colors);
 
   // const [value, setValue] = useState('');
@@ -161,7 +163,7 @@ export default function SmokingScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
-      <TitleWithBackLayout title="Smoking">
+      <TitleWithBackLayout title={t('pages.profile.links.smoking')}>
         <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>
             {
@@ -381,7 +383,10 @@ export default function SmokingScreen() {
             </View>
           ) : null}
         </ScrollView>
-        <ButtonWithShadowContainer title="Save" onPress={onSubmit} />
+        <ButtonWithShadowContainer
+          title={t('pages.medicalHistory.save')}
+          onPress={onSubmit}
+        />
       </TitleWithBackLayout>
     </SafeAreaView>
   );

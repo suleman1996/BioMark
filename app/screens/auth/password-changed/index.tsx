@@ -8,12 +8,13 @@ import SCREENS from 'navigation/constants';
 import { Lock } from 'assets/svgs/index';
 
 import makeStyles from './styles';
-
+import { useTranslation } from 'react-i18next';
 type Props = {
   route: any;
 };
 
 export default function PasswordChanged(props: Props) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -39,7 +40,7 @@ export default function PasswordChanged(props: Props) {
       <View style={{ marginBottom: 20 }}>
         <Lock height={100} width={100} />
       </View>
-      <Text style={styles.text}>Your Password has been changed!</Text>
+      <Text style={styles.text}>{t('common.passwordChangeSuccess')}</Text>
     </View>
   );
 }

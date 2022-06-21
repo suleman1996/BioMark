@@ -51,7 +51,7 @@ const DropdownCountryCity = ({
             flex: 1,
             borderRadius: widthToDp(2),
             maxHeight: heightToDp(6.5),
-            backgroundColor: colors.background,
+            backgroundColor: colors.inputBg,
           },
           underlineColor: '#fff',
         }}

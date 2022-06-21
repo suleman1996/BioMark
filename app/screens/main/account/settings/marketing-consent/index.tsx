@@ -16,8 +16,10 @@ import { IAppState } from 'store/IAppState';
 import { GlobalStyles } from 'utils/theme/global-styles';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const MarketingConsentScreen = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -61,7 +63,7 @@ const MarketingConsentScreen = () => {
   };
 
   return (
-    <TitleWithBackWhiteBgLayout title="Marketing Consent">
+    <TitleWithBackWhiteBgLayout title={t('pages.marketingConsent.title')}>
       <ActivityIndicator visible={isLoading} />
       <MarketingConsentModal
         callMe={() => {
@@ -73,11 +75,10 @@ const MarketingConsentScreen = () => {
       />
       <View style={styles.container}>
         <Text style={styles.headerText}>
-          BioMark would like to contact you regarding information on offers,
-          promotions and services via email and SMS.
+          {t('pages.marketingConsent.intro')}
         </Text>
         <CheckBoxWithText
-          rightText="I  would like to receive information on offers, promotions and services via email and SMS."
+          rightText={t('pages.marketingConsent.optIn')}
           isChecked={isChecked}
           setIsChecked={(value: any) => {
             if (!value) {
@@ -93,7 +94,10 @@ const MarketingConsentScreen = () => {
             styles.bottomBtnContainer,
           ]}
         >
-          <Button onPress={() => onChangeMarketing()} title={'Save'} />
+          <Button
+            onPress={() => onChangeMarketing()}
+            title={t('pages.marketingConsent.save')}
+          />
         </View>
       </View>
     </TitleWithBackWhiteBgLayout>

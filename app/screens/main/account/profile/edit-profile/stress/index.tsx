@@ -14,8 +14,10 @@ import { goBack } from 'services/nav-ref';
 import { useSelector } from 'react-redux';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const isFocus = useIsFocused();
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
 
@@ -110,7 +112,7 @@ const Index = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
-      <TitleWithBackLayout title="Stress">
+      <TitleWithBackLayout title={t('pages.profile.links.stress')}>
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <StressBar
@@ -166,7 +168,7 @@ const Index = () => {
         </View>
         <ButtonWithShadowContainer
           onPress={() => handleCreateStress()}
-          title="Save"
+          title={t('pages.medicalHistory.save')}
         />
       </TitleWithBackLayout>
     </View>

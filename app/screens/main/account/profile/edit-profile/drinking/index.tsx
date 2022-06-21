@@ -27,6 +27,7 @@ import { userService } from 'services/user-service/user-service';
 import { useSelector } from 'react-redux';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 type RenderDrinkingProps = {
   title: string;
@@ -38,6 +39,7 @@ type RenderDrinkingProps = {
 };
 
 const Drinking = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -176,7 +178,7 @@ const Drinking = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
-      <TitleWithBackLayout title="Drinking">
+      <TitleWithBackLayout title={t('pages.drinking.title')}>
         <View style={{ flex: 1, paddingHorizontal: 20 }}>
           <ScrollView style={{ flex: 1, marginBottom: 100 }}>
             <Text style={styles.label}>
@@ -363,7 +365,7 @@ const Drinking = () => {
         </View>
         <ButtonWithShadowContainer
           onPress={() => handleDrinking()}
-          title="Save"
+          title={t('pages.medicalHistory.save')}
         />
       </TitleWithBackLayout>
     </SafeAreaView>

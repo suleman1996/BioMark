@@ -15,6 +15,7 @@ type Props = {
   error?: string;
   marginTop?: number;
   label: string;
+  width?: number;
 };
 
 const DropdownMenuComponent = ({
@@ -24,6 +25,7 @@ const DropdownMenuComponent = ({
   error,
   marginTop,
   label,
+  width,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -45,7 +47,7 @@ const DropdownMenuComponent = ({
         list={options}
         inputProps={{
           style: {
-            width: '100%',
+            width: width ? widthToDp(width) : '100%',
             height: heightToDp(6),
             flex: 1,
             borderRadius: widthToDp(2),

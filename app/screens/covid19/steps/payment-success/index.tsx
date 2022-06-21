@@ -8,6 +8,10 @@ import StepIndicator from 'react-native-step-indicator';
 import ButtonComponent from 'components/base/button';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { makeStyles } from './styles';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
+import { useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
 type Props = {};
 
@@ -17,6 +21,9 @@ const PaymentSuccess = (props: Props) => {
   const {} = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const data = useSelector(
+    (state: IAppState) => state.covid.covidSuccessPaymentData
+  );
 
   return (
     <>
@@ -66,18 +73,30 @@ const PaymentSuccess = (props: Props) => {
             </Text>
             <Text style={styles.title4}>
               Your Dependant(s) Booking ID (s){' '}
-              <Text style={styles.title4inner}>
-                {`\n`}Deku Midoriya:{' '}
-                <Text style={styles.userCodeText}>CVD-FUAIWK</Text>
-              </Text>
+              {data?.dependent_reference_codes?.map((item) => {
+                return (
+                  <>
+                    <Text style={styles.title4inner}>
+                      {`\n`}
+                      {item.name}:{' '}
+                      <Text style={styles.userCodeText}>
+                        {item.reference_code}
+                      </Text>
+                    </Text>
+                  </>
+                );
+              })}
             </Text>
           </View>
           <View style={styles.bottom2Btns}>
-            <ButtonComponent onPress={undefined} title={'View Bookings'} />
+            <ButtonComponent
+              onPress={() => navigate(SCREENS.HOME)}
+              title={'View Bookings'}
+            />
             <ButtonComponent
               bg={colors.lightBlue}
               color={colors.darkPrimary}
-              onPress={undefined}
+              onPress={() => navigate(SCREENS.HOME)}
               title={'Return to Homepage'}
               marginTop={1.5}
             />
