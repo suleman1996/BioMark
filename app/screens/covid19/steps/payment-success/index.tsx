@@ -8,6 +8,8 @@ import StepIndicator from 'react-native-step-indicator';
 import ButtonComponent from 'components/base/button';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { makeStyles } from './styles';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 
 type Props = {};
 
@@ -73,11 +75,14 @@ const PaymentSuccess = (props: Props) => {
             </Text>
           </View>
           <View style={styles.bottom2Btns}>
-            <ButtonComponent onPress={undefined} title={'View Bookings'} />
+            <ButtonComponent
+              onPress={() => navigate(SCREENS.HOME)}
+              title={'View Bookings'}
+            />
             <ButtonComponent
               bg={colors.lightBlue}
               color={colors.darkPrimary}
-              onPress={undefined}
+              onPress={() => navigate(SCREENS.HOME)}
               title={'Return to Homepage'}
               marginTop={1.5}
             />

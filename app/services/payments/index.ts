@@ -11,6 +11,8 @@ import { ErrorResponse } from 'types/ErrorResponse';
 import { logNow } from 'utils/functions/log-binder';
 import client from '../client';
 
+const VOUCHER = 'BIOMARK21';
+
 function purchaseViaBillPlz(data: CreateBillplzPaymentRequest) {
   return new Promise<BillplzPayment>((resolve, reject) => {
     client
@@ -88,7 +90,7 @@ function openStripeBrowser(booking: BookTestBooking[], email: string) {
         mode: 'payment',
         pay_methods: ['card'],
         items: items,
-        voucher: 'BIOMARK21',
+        voucher: VOUCHER,
       },
     };
     newStripeSession(payload)
@@ -121,8 +123,78 @@ function newStripeSession(data: CreateStripeSessionRequest) {
   });
 }
 
+function saveDataAfterPayment(booking: BookTestBooking[], email: string) {
+  new Promise((resolve, reject) => {
+    var bookingRequest: any = [];
+
+    booking.forEach((element) => {
+      bookingRequest.push({
+        is_dependent: element.is_dependant,
+        dependent_id: element.dependent_id,
+        test_type_id: element.test_type_id,
+        schedule_id: element.schedule_id,
+        slot_id: element.slot_id,
+        test_location: element.test_location,
+        test_centre_name: element.test_centre_name,
+        test_city_name: element.test_city_name,
+        test_country_name: element.test_country_name,
+        test_centre_id: element.test_centre_id,
+        city_id: element.city_id,
+        country_id: element.country_id,
+        test_address: element.test_address,
+        test_address_details: element.test_address_details,
+        confirmation_date: new Date().toISOString(),
+        amount: element.amount,
+        total_amount: VOUCHER
+          ? element.amount - element.amount * 0.1
+          : element.amount,
+        email: email,
+        booking_status: 0,
+        voucher: VOUCHER,
+      });
+    });
+
+    const request = {
+      booking: bookingRequest,
+      email: email,
+    };
+
+    saveCovidBookingDepandant(request)
+      .then((res: any) => {
+        logNow({ resForCovidSave: res.data });
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+
+    logNow({ request });
+  });
+}
+
+function saveCovidBookingDepandant(request: any) {
+  return new Promise((resolve, reject) => {
+    client
+      .post(`${API_URLS.SAVE_COVID_BOOKING_DEPENDANT}`, request)
+      .then(async (response: any) => {
+        try {
+          logNow('SAVE COVID BOOKING  ===>', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('CATCH ERROR COVID BOOKING SAVE ==>', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('ERROR COVID BOOKING SAVE ===>.', err);
+        reject(err);
+      });
+  });
+}
+
 export const paymentService = {
   purchaseViaBillPlz,
   openBillPlzBrowser,
   openStripeBrowser,
+  saveDataAfterPayment,
 };

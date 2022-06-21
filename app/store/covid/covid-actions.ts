@@ -11,6 +11,7 @@ import {
   COVID_BOOKINGS_DATA,
   COVID_BOOKING_FORM,
   COVID_BOOKING,
+  COVID_HOME_RESULTS,
 } from './constants';
 
 export const addAllCovidResultsData = (data: CovidResultListResponse[]) => ({
@@ -74,6 +75,32 @@ export const getCovidBookingFormR =
       .then(async (res: any) => {
         // logNow('response for redux ============>', res);
         await dispatch(addCovidBookingForm(res));
+      })
+      .catch((err) => {
+        logNow(err);
+        // After developer alow below function on line 66
+        // dispatch(errorLogOut('Error logging out.'));
+      })
+      .finally(() => {
+        // After developer alow below function on line 69
+        // dispatch(loggingOut(false));
+      });
+  };
+
+// get covid home results
+
+export const addCovidHomeResults = (data: BookingFormDataResponse) => ({
+  type: COVID_HOME_RESULTS,
+  payload: data,
+});
+
+export const getCovidHomeResultsR =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await covidService
+      .getCovidHomeResults()
+      .then(async (res: any) => {
+        logNow('covid home results for redux ============>', res);
+        await dispatch(addCovidHomeResults(res));
       })
       .catch((err) => {
         logNow(err);
