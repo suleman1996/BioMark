@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { StyleProp, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
@@ -15,6 +15,7 @@ type Props = {
   fontFamily?: string;
   fontSize?: number;
   marginTop?: number;
+  style?: StyleProp<TouchableOpacity>;
 };
 
 const ButtonComponent = ({
@@ -26,6 +27,7 @@ const ButtonComponent = ({
   fontFamily,
   fontSize,
   marginTop,
+  style,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -48,7 +50,13 @@ const ButtonComponent = ({
   return (
     <TouchableOpacity
       onPress={disabled ? undefined : onPress}
-      style={[styles.container, ifDisabled, ifBg, otherStyle]}
+      style={[
+        styles.container,
+        ifDisabled,
+        ifBg,
+        otherStyle,
+        style ? style : {},
+      ]}
       disabled={disabled}
     >
       <Text

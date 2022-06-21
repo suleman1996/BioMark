@@ -134,6 +134,12 @@ export default function ExerciseScreen() {
     }
   };
 
+  console.log({
+    isExercise,
+    exerciseWeek,
+    exerciseSession,
+  });
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
@@ -303,9 +309,12 @@ export default function ExerciseScreen() {
         </ScrollView>
         <ButtonWithShadowContainer
           title="Save"
-          onPress={() => {
-            onSave();
-          }}
+          onPress={onSave}
+          disabled={
+            isExercise && isExercise !== 'false' && isExercise !== 'first'
+              ? !exerciseWeek || !exerciseSession
+              : false
+          }
         />
       </TitleWithBackLayout>
     </SafeAreaView>
