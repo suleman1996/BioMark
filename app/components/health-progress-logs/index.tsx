@@ -15,6 +15,7 @@ import Arrow from 'react-native-vector-icons/AntDesign';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
+
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 type Props = {

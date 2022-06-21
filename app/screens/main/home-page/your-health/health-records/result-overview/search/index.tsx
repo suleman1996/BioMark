@@ -23,7 +23,6 @@ const Search = () => {
 
   const searchResult = async (search) => {
     try {
-      console.log('idddd', route?.params?.labId);
       const result = await userService.getSearchResult(
         route?.params?.labId,
         search
@@ -70,6 +69,7 @@ const Search = () => {
             </TouchableOpacity>
           </View>
         </View>
+
         <ScrollView>
           {searchText !== '' &&
             searchData?.panel_card?.map((item) => (

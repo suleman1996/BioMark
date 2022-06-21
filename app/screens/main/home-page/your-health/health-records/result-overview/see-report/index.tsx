@@ -31,7 +31,7 @@ const SeeReport = () => {
     try {
       setIsVisible(true);
       const result = await userService.getResultPdf(route?.params?.resultId);
-      setPdfLink(result.data);
+      setPdfLink(result.data.replace(/\s/g, ''));
 
       //   setPdf(pspPdfLinks.link);
       setIsVisible(false);
@@ -57,9 +57,15 @@ const SeeReport = () => {
         <ActivityIndicator visible={isVisiable} />
 
         <Pdf
-          source={{ uri: `data:application/pdf;base64,${pdfLink}` }}
+          source={{
+            uri: `data:application/pdf;base64,${pdfLink}`,
+            cache: true,
+          }}
           trustAllCerts={true}
           style={styles.pdfView}
+          onError={(error) => {
+            console.log(error);
+          }}
         />
       </View>
     </TitleWithBackLayout>
