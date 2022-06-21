@@ -172,21 +172,27 @@ const UpcommingBookings = (props: Props) => {
         isVisible={isHealthDeclaration}
         data={modalData}
       />
-
+      {allUpcommingBookings?.length > 0 ? <SuggestionsText /> : null}
       <FlatList
-        ListHeaderComponent={() => <SuggestionsText />}
         renderItem={_renderItem}
         data={allUpcommingBookings}
         ListEmptyComponent={() => {
           return (
-            <>
-              <View style={{ paddingTop: heightToDp(5) }} />
+            <View
+              style={{
+                alignSelf: 'center',
+                width: '100%',
+                height: heightToDp(60),
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
               <EmptyResultComponent
                 title="No Upcomming Bookings"
                 subTitle="You have no COVID bookings scheduled yet."
                 icon={<BioBookings width={14} height={14} />}
               />
-            </>
+            </View>
           );
         }}
         ListFooterComponent={() => (
@@ -194,7 +200,14 @@ const UpcommingBookings = (props: Props) => {
         )}
       />
       <View style={styles.buttonContainer}>
-        <ButtonComponent onPress={undefined} title={'Book New COVID-19 Test'} />
+        <ButtonComponent
+          onPress={() => {
+            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+              screen: SCREENS.BOOKCOVIDTEST,
+            });
+          }}
+          title={'Book New COVID-19 Test'}
+        />
         <ButtonComponent
           bg={colors.lightBlue}
           color={colors.black}

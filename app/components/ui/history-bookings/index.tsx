@@ -117,12 +117,21 @@ const HistoryBookings = (props: Props) => {
         ListEmptyComponent={() => {
           return (
             <>
-              <View style={{ paddingTop: heightToDp(5) }} />
-              <EmptyResultComponent
-                title="No Recent Bookings"
-                subTitle={`This is where you can see your\npast COVID bookings.`}
-                icon={<BioBookings width={14} height={14} />}
-              />
+              <View
+                style={{
+                  alignSelf: 'center',
+                  width: '100%',
+                  height: heightToDp(70),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <EmptyResultComponent
+                  title="No Recent Bookings"
+                  subTitle={`This is where you can see your\npast COVID bookings.`}
+                  icon={<BioBookings width={14} height={14} />}
+                />
+              </View>
             </>
           );
         }}

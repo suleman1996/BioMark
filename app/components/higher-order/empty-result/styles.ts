@@ -6,7 +6,6 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      flex: 1,
       alignItems: 'center',
     },
     title: {
