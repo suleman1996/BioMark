@@ -29,6 +29,7 @@ import { GenderEnum } from 'enum/gender-enum';
 
 import makeStyles from './styles';
 import { getUserProfileData } from 'store/profile/profile-actions';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   route?: any;
@@ -37,6 +38,7 @@ type Props = {
 const EditDependantScreen = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const dispatch1 = useDispatch();
@@ -157,7 +159,11 @@ const EditDependantScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
-      <Header isBold={true} isColor={true} title="Edit Dependent" />
+      <Header
+        isBold={true}
+        isColor={true}
+        title={t('pages.covid.covid-dependant-card.editDependant')}
+      />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -167,7 +173,9 @@ const EditDependantScreen = (props: Props) => {
             }
           }
         >
-          <Text style={styles.headerText}>Enter your Dependant Details</Text>
+          <Text style={styles.headerText}>
+            {t('pages.covid.covid-dependant.title')}
+          </Text>
           <Formik
             innerRef={formikRef}
             enableReinitialize
@@ -201,7 +209,7 @@ const EditDependantScreen = (props: Props) => {
             }) => (
               <>
                 <InputWithLabel
-                  label="First Name"
+                  label={t('pages.covid.covid-dependant.firstname')}
                   placeholder={''}
                   onChange={handleChange('first_name')}
                   maxLength={50}
@@ -210,7 +218,7 @@ const EditDependantScreen = (props: Props) => {
                   onBlur={() => setFieldTouched('first_name')}
                 />
                 <InputWithLabel
-                  label="Last Name"
+                  label={t('pages.covid.covid-dependant.lastname')}
                   placeholder={''}
                   onChange={handleChange('last_name')}
                   maxLength={50}
@@ -219,7 +227,7 @@ const EditDependantScreen = (props: Props) => {
                   onBlur={() => setFieldTouched('last_name')}
                 />
                 <PhoneNumberWithLabel
-                  label="Mobile Number"
+                  label={t('pages.phoneNumber.mobileNumber')}
                   placeholder={''}
                   disabled={false}
                   number={values.phone_number}
@@ -243,23 +251,26 @@ const EditDependantScreen = (props: Props) => {
                     values.phone_number.length < numberCondition.min && (
                       <View style={styles.errorContainer}>
                         <Text style={styles.errorText}>
-                          Must have {numberCondition.min}
+                          {t('pages.login.errors.phoneNumberTooShort')}{' '}
+                          {numberCondition.min}
                           {numberCondition.max !== numberCondition.min &&
                             -numberCondition.max}{' '}
-                          characters
+                          {t('pages.login.errors.characters')}
                         </Text>
                       </View>
                     )
                   ))}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
-                  label="Email"
+                  label={t('pages.login.email')}
                   onChange={handleChange('email')}
                   value={values.email}
                   error={touched.email ? errors.email : ''}
                   onBlur={() => setFieldTouched('email')}
                 />
-                <Text style={styles.label}>Date of Birth</Text>
+                <Text style={styles.label}>
+                  {t('pages.covid.covid-dependant.dob')}
+                </Text>
                 <DatePickerModal
                   date={values.birth_date}
                   setDate={(e: any) => setFieldValue('birth_date', e)}
@@ -272,7 +283,7 @@ const EditDependantScreen = (props: Props) => {
                   setIsPickerShow={setIsDatePickerModal}
                 /> */}
                 <InputWithLabel
-                  label="NRIC /Passport Number"
+                  label={t('pages.covid.covid-dependant.ncr_passport')}
                   placeholder={''}
                   onChange={handleChange('id_number')}
                   maxLength={20}
@@ -283,22 +294,28 @@ const EditDependantScreen = (props: Props) => {
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('gender_id', e)}
                   value={values.gender_id}
-                  label={'Gender'}
+                  label={t('pages.covid.covid-dependant.gender')}
                   options={GenderEnum}
                 />
                 <RelationMenu
                   onChange={(e: any) => setFieldValue('dependent_type_id', e)}
-                  label={'Relation'}
+                  label={t('pages.covid.covid-dependant.relation')}
                   optionValue={values.dependent_type_id}
                   options={DependentTypeEnum}
                 />
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('document_type', e)}
                   value={values.document_type}
-                  label={'Document Type'}
+                  label={t('pages.covid.covid-dependant.document_type')}
                   options={[
-                    { id: 'id_card', title: 'IC' },
-                    { id: 'passport', title: 'Passport' },
+                    {
+                      id: 'id_card',
+                      title: t('pages.covid.covid-dependant.ic'),
+                    },
+                    {
+                      id: 'passport',
+                      title: t('pages.covid.covid-dependant.passport'),
+                    },
                   ]}
                 />
                 <View style={styles.bottomBtnContainer}>
@@ -311,7 +328,7 @@ const EditDependantScreen = (props: Props) => {
                         : false
                     }
                     onPress={() => onSubmit()}
-                    title={'Confirm'}
+                    title={t('pages.covid.covid-button.confirm')}
                   />
                 </View>
               </>

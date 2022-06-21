@@ -30,8 +30,10 @@ import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
 import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
+import { useTranslation } from 'react-i18next';
 
 const AddDependantScreen = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -159,13 +161,19 @@ const AddDependantScreen = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isLoading} />
-      <Header isBold={true} isColor={true} title="Add Dependants" />
+      <Header
+        isBold={true}
+        isColor={true}
+        title={t('pages.covid.covid-dependant-card.addDependant')}
+      />
       <View style={styles.cardContainer}>
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: heightToDp(10) }}
         >
-          <Text style={styles.headerText}>Enter your Dependant Details</Text>
+          <Text style={styles.headerText}>
+            {t('pages.covid.covid-dependant.title')}
+          </Text>
           <Formik
             innerRef={formikRef}
             initialValues={{
@@ -198,7 +206,7 @@ const AddDependantScreen = () => {
             }) => (
               <>
                 <InputWithLabel
-                  label="First Name"
+                  label={t('pages.covid.covid-dependant.firstname')}
                   placeholder={''}
                   onChange={handleChange('first_name')}
                   value={values.first_name}
@@ -207,7 +215,7 @@ const AddDependantScreen = () => {
                   maxLength={50}
                 />
                 <InputWithLabel
-                  label="Last Name"
+                  label={t('pages.covid.covid-dependant.lastname')}
                   placeholder={''}
                   onChange={handleChange('last_name')}
                   value={values.last_name}
@@ -216,7 +224,7 @@ const AddDependantScreen = () => {
                   maxLength={50}
                 />
                 <PhoneNumberWithLabel
-                  label="Mobile Number"
+                  label={t('pages.phoneNumber.mobileNumber')}
                   placeholder={''}
                   disabled={false}
                   number={values.phone_number}
@@ -242,23 +250,26 @@ const AddDependantScreen = () => {
                     values.phone_number.length < numberCondition.min && (
                       <View style={styles.errorContainer}>
                         <Text style={styles.errorText}>
-                          Must have {numberCondition.min}
+                          {t('pages.login.errors.phoneNumberTooShort')}{' '}
+                          {numberCondition.min}
                           {numberCondition.max !== numberCondition.min &&
                             -numberCondition.max}{' '}
-                          characters
+                          {t('pages.login.errors.characters')}
                         </Text>
                       </View>
                     )
                   ))}
                 <InputWithLabel
                   placeholder="E.g. Sample@email.com"
-                  label="Email"
+                  label={t('pages.login.email')}
                   onChange={handleChange('email')}
                   value={values.email}
                   error={touched.email ? errors.email : ''}
                   onBlur={() => setFieldTouched('email')}
                 />
-                <Text style={styles.label}>Date of Birth</Text>
+                <Text style={styles.label}>
+                  {t('pages.covid.covid-dependant.dob')}
+                </Text>
                 <DatePickerModal
                   date={values.birth_date}
                   setDate={(e: any) => setFieldValue('birth_date', e)}
@@ -267,16 +278,16 @@ const AddDependantScreen = () => {
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('gender_id', e)}
                   value={values.gender_id}
-                  label={'Gender'}
+                  label={t('pages.covid.covid-dependant.gender')}
                   options={GenderEnum}
                 />
                 <RelationMenu
                   onChange={(e: any) => setFieldValue('dependent_type_id', e)}
-                  label={'Relation'}
+                  label={t('pages.covid.covid-dependant.relation')}
                   options={DependentTypeEnum}
                 />
                 <InputWithLabel
-                  label="NRIC /Passport Number"
+                  label={t('pages.covid.covid-dependant.ncr_passport')}
                   placeholder={''}
                   onChange={handleChange('id_number')}
                   value={values.id_number}
@@ -287,10 +298,16 @@ const AddDependantScreen = () => {
                 <BoxSelector
                   onChange={(e: any) => setFieldValue('document_type', e)}
                   value={values.document_type}
-                  label={'Document Type'}
+                  label={t('pages.covid.covid-dependant.document_type')}
                   options={[
-                    { id: 'id_card', title: 'IC' },
-                    { id: 'passport', title: 'Passport' },
+                    {
+                      id: 'id_card',
+                      title: t('pages.covid.covid-dependant.ic'),
+                    },
+                    {
+                      id: 'passport',
+                      title: t('pages.covid.covid-dependant.passport'),
+                    },
                   ]}
                 />
                 <View style={styles.bottomBtnContainer}>
@@ -303,7 +320,7 @@ const AddDependantScreen = () => {
                         : false
                     }
                     onPress={() => onSubmit()}
-                    title={'Confirm'}
+                    title={t('pages.covid.covid-button.confirm')}
                   />
                 </View>
               </>
