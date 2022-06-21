@@ -7,13 +7,13 @@ import { GlobalFonts } from 'utils/theme/fonts';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      height: heightToDp(40),
+      height: heightToDp(50),
     },
     header: {
       fontSize: responsiveFontSize(22),
       fontFamily: GlobalFonts.semiBold,
       color: colors.darkPrimary,
-      marginTop: heightToDp(2),
+      marginTop: heightToDp(3),
     },
     subHeader: {
       fontSize: responsiveFontSize(18),
@@ -49,6 +49,7 @@ export const makeStyles = (colors: any) =>
     slide: {
       justifyContent: 'center',
       alignItems: 'center',
+      width: widthToDp(100),
     },
     text: {
       color: '#1f2d3d',

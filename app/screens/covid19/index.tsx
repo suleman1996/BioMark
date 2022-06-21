@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FlatList, Text, View } from 'react-native';
 import { TouchableRipple, useTheme } from 'react-native-paper';
@@ -13,6 +13,11 @@ import { TitleWithSearchBarLayout } from 'components/layouts';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import makeStyles from './styles';
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import { getCovidHomeResultsR } from 'store/covid/covid-actions';
+import { CovidLatestResponse } from 'types/api';
 
 type Props = {};
 
@@ -20,16 +25,34 @@ const Covid19Home = (props: Props) => {
   const {} = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const dispatch = useDispatch();
 
   const [selectedHorizontal, setSelectedHorizontal] = useState(0);
 
+  const focused = useIsFocused();
+  const covidHomeResults = useSelector(
+    (state: IAppState) => state.covid.covidHomeResults
+  );
+  // const data = [];
+
+  /*eslint-disable */
+  const getCovidHomeResults = async () => {
+    await dispatch(getCovidHomeResultsR());
+  };
+
+  useEffect(() => {
+    getCovidHomeResults();
+  }, [focused]);
+  /*eslint-enable */
+
   const horizontalListItem = ({
-    // item,
+    item,
     index,
   }: {
-    item: any;
+    item: CovidLatestResponse;
     index: number;
   }) => {
+    const { name = '' } = item;
     const ifST =
       selectedHorizontal === index
         ? { color: colors.darkPrimary }
@@ -46,7 +69,7 @@ const Covid19Home = (props: Props) => {
         }}
         style={[styles.horizontalListItem, ifSBLine]}
       >
-        <Text style={[styles.horizontalListItemText, ifST]}>Deku</Text>
+        <Text style={[styles.horizontalListItemText, ifST]}>{name}</Text>
       </TouchableRipple>
     );
   };
@@ -67,12 +90,13 @@ const Covid19Home = (props: Props) => {
           <FlatList
             style={{ flexGrow: 0 }}
             horizontal
+            showsHorizontalScrollIndicator={false}
             ListHeaderComponent={<View style={{ width: widthToDp(10) }} />}
             ListFooterComponent={<View style={{ width: widthToDp(10) }} />}
-            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+            data={covidHomeResults}
             renderItem={horizontalListItem}
           />
-          <QRCarousel />
+          <QRCarousel data={covidHomeResults[selectedHorizontal]} />
         </View>
       </TitleWithSearchBarLayout>
     </>
