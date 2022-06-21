@@ -1313,7 +1313,7 @@
             }
          },
          "diabetes": {
-            "text": "这个糖尿病风险评分是依据 American Diabetes Association（ADA）针对没有糖尿病或糖尿病前期的病史者进行的第 2 型糖尿病风险测试，作为依据。 它考虑了以下因素：",
+            "text": "这个糖尿病风险评分是依据 American Diabetes Association（ADA）针对没有糖尿病或糖尿病前期的病史者进行的第 2 型糖尿病风险测试，作为依据。它考虑了以下因素：",
             "references": "American Diabetes Association",
             "footNotes": "您的糖尿病风险评分只是一个估计值。此外，您的风险会随着时间而变化。只有验血才能确定诊断。请与您的医生讨论以获取更多信息。",
             "cards": {
@@ -1340,7 +1340,7 @@
             }
          },
          "bmi": {
-            "text": "您的身体质量指数 (BMI) 是根据您的身高和体重估算身体脂肪量的方法。  BMI 的计算法是将您的体重 (kg) 除以您的身高 (m<sup>2</sup>)。  BMI 通常误将健美运动员归类为超重，这是因为他们有高量的肌肉量。因此，它不应该用于这个群体。  以下是不同的分类：",
+            "text": "您的身体质量指数 (BMI) 是根据您的身高和体重估算身体脂肪量的方法。BMI 的计算法是将您的体重 (kg) 除以您的身高 (m<sup>2</sup>)。BMI 通常误将健美运动员归类为超重，这是因为他们有高量的肌肉量。因此，它不应该用于这个群体。以下是不同的分类：",
             "references": "1. World Health Organisation (International Association For The Study of Obesity)\n\n2. Management of Type 2 Diabetes Mellitus (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
             "cardsAsian": {
                "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
@@ -1356,7 +1356,7 @@
             }
          },
          "drinking": {
-            "text": "测量酒精单位可协助您检查酒精摄入量是否高过或处于建议限度内的方法。 测量方式所使用的酒精单位，是取决于酒精体积 (ABV) % 及摄入的饮品容量。 由于种类繁多的酒类饮品皆有不同的浓度及饮用量，您的酒精指数仅是一个估计值。",
+            "text": "测量酒精单位可协助您检查酒精摄入量是否高过或处于建议限度内的方法。测量方式所使用的酒精单位，是取决于酒精体积 (ABV) % 及摄入的饮品容量。由于种类繁多的酒类饮品皆有不同的浓度及饮用量，您的酒精指数仅是一个估计值。",
             "references": "www.drinkaware.co.uk",
             "cards": {
                "pint": "一品脱 (One pint) 啤酒 (酒精体积/ABV 3.6%) 相当于 2 个单位。",
@@ -1365,7 +1365,7 @@
             }
          },
          "smoking": {
-            "text": "吸烟年包数 (Pack-years)是透过计算每日吸烟数量及烟龄，来评量个体吸烟强度的指数。  其计算方法是以每日吸烟数量除以20为包数，再以包数乘以吸烟的年数。",
+            "text": "吸烟年包数 (Pack-years)是透过计算每日吸烟数量及烟龄，来评量个体吸烟强度的指数。其计算方法是以每日吸烟数量除以20为包数，再以包数乘以吸烟的年数。",
             "references": "American Cancer Society"
          },
          "stress": {
@@ -1373,7 +1373,7 @@
             "references": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5791241/"
          },
          "sleeping": {
-            "text": "良好的睡眠卫生可以帮助您获得优质的夜间睡眠。 睡眠卫生包括建立规律的睡眠，每天在固定时间入睡并在早上醒来、限制睡前的使用屏幕时间、避免在睡前摄入兴奋物质（咖啡因、尼古丁、酒精），将有助于加快入睡。除此之外，在睡眠时保持卧室环境阴暗及凉爽，也有助于您整夜安稳睡眠。 此睡眠建议是由美国国家睡眠基金会（National Sleep Foundation, NSF) 所推荐。\n",
+            "text": "良好的睡眠卫生可以帮助您获得优质的夜间睡眠。睡眠卫生包括建立规律的睡眠，每天在固定时间入睡并在早上醒来、限制睡前的使用屏幕时间、避免在睡前摄入兴奋物质（咖啡因、尼古丁、酒精），将有助于加快入睡。除此之外，在睡眠时保持卧室环境阴暗及凉爽，也有助于您整夜安稳睡眠。此睡眠建议是由美国国家睡眠基金会（National Sleep Foundation, NSF) 所推荐。\n",
             "references": "National Sleep Foundation, USA https://sleepshow.org/how-much-sleep/"
          }
       },
