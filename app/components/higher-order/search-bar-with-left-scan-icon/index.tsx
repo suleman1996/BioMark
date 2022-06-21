@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   Modal,
+  ScrollView,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -25,7 +26,9 @@ import SCREENS from 'navigation/constants';
 import { SearchBarLeftIcon } from 'components/svg';
 import { ActivityIndicator } from 'components';
 import { Button } from 'components/button';
-
+import { healthRiskData } from '../../../screens/main/home-page/health-risk/list-data';
+import { healthRisksColor } from 'utils/functions/your-health';
+import { useNavigation } from '@react-navigation/native';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import MyImage from 'assets/images';
@@ -35,9 +38,12 @@ import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
 import WithdrawProgram from 'components/widthdraw-from-program';
+import { useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 // import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -51,6 +57,133 @@ const SearchBarWithLeftScanIcon = () => {
 
   const menuRef = useRef<any>();
 
+  const [searchText, setSearchText] = React.useState('');
+  const [searchData, setSearchData] = React.useState([]);
+  const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+  let arr = [
+    {
+      name: 'Heart Disease',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['heart'],
+        cardData: healthRiskData['heart'].disease,
+        refData: healthRiskData['heart'].refrence,
+        footNotesData: healthRiskData['heart'].footnotes,
+        calc: healthRiskData['heart'].calculations,
+        clr: healthRisksColor(colors, healthRisk['heart']?.status),
+        SVG: healthRiskData['heart'].icon,
+      },
+    },
+    {
+      name: 'Diabetes',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['diabetes'],
+        cardData: healthRiskData['diabetes'].disease,
+        refData: healthRiskData['diabetes'].refrence,
+        footNotesData: healthRiskData['diabetes'].footnotes,
+        calc: healthRiskData['diabetes'].calculations,
+        clr: healthRisksColor(colors, healthRisk['diabetes']?.status),
+        SVG: healthRiskData['diabetes'].icon,
+      },
+    },
+    {
+      name: 'Heart Records',
+      screen: SCREENS.HEALTH_RISK,
+    },
+
+    {
+      name: 'Blood Pressure',
+      screen: ['dashboard', 'summary', 'bp'],
+    },
+    {
+      name: 'BMI',
+      screen: ['dashboard', 'summary', 'bmi'],
+    },
+    {
+      name: 'Smoking',
+      screen: ['dashboard', 'summary', 'smoking'],
+    },
+    {
+      name: 'Drinking',
+      screen: ['dashboard', 'summary', 'drinking'],
+    },
+    {
+      name: 'Stress',
+      screen: ['dashboard', 'summary', 'stress'],
+    },
+    {
+      name: 'Sleeping',
+      screen: ['dashboard', 'summary', 'sleeping'],
+    },
+  ];
+  const healthRiskCheck = (item) => {
+    item?.name === 'Blood Pressure' &&
+      navigation.navigate(SCREENS.BLOOD_PRESSURE);
+    item?.name === 'Smoking' && navigation.navigate(SCREENS.SMOKING);
+    item?.name === 'Stress' && navigation.navigate(SCREENS.STRESS);
+    item?.name === 'Sleeping' && navigation.navigate(SCREENS.SLEEP);
+    item?.name === 'Drinking' && navigation.navigate(SCREENS.DRINKING);
+    (item?.name === 'Heart Disease' ||
+      item?.name === 'Diabetes' ||
+      item?.name === 'BMI') &&
+      navigate(SCREENS.HEALTH_RISK, {
+        item: healthRisk[selectedRisk],
+        cardData: healthRiskData[selectedRisk].disease,
+        refData: healthRiskData[selectedRisk].refrence,
+        footNotesData: healthRiskData[selectedRisk].footnotes,
+        calc: healthRiskData[selectedRisk].calculations,
+        clr: healthRisksColor(colors, healthRisk[selectedRisk]?.status),
+        SVG: healthRiskData[selectedRisk].icon,
+        title:
+          item?.name === 'Heart Disease'
+            ? 'Upload Results'
+            : item?.name === 'Diabetes'
+            ? 'Update Height and Weight'
+            : 'Enter Height and Weight',
+        onPress:
+          item?.name === 'Heart Disease'
+            ? SCREENS.RESULT_UPLOAD
+            : item?.name === 'Diabetes'
+            ? SCREENS.BODY_MEASUREMENT
+            : SCREENS.BODY_MEASUREMENT,
+      });
+  };
+  const searchResult = (search) => {
+    // try {
+    //   const result = await userService.getSearchResult(5574, search);
+    //   console.log('result.data.results', result.data.results);
+
+    //   setSearchData(result.data.results);
+    // } catch (error) {
+    //   console.log('error ', error);
+    // }
+    const filteredData = arr.filter((ele) => {
+      console.log('ele', ele);
+
+      let itemLowercase = ele.name.toLowerCase();
+
+      let searchTermLowercase = search.toLowerCase();
+
+      return itemLowercase.indexOf(searchTermLowercase) > -1;
+    });
+    setSearchData(filteredData);
+    // this.setState({ DataAdapter: filteredContacts });
+  };
+  const RenderSearch = ({ item }) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(SCREENS.MORE_INFO, {
+          result_id: item?.biomarker_id,
+        })
+      }
+      style={styles.renderSearchView}
+    >
+      <Text style={{ fontFamily: fonts.regular, fontSize: 14 }}>
+        {item?.name}
+      </Text>
+    </TouchableOpacity>
+  );
   const handleCode = async () => {
     try {
       const response = await userService.barcodeCheck({
@@ -169,6 +302,12 @@ const SearchBarWithLeftScanIcon = () => {
             color={colors.primary}
           />
           <TextInput
+            onChangeText={(item) => {
+              console.log('item', item);
+
+              setSearchText(item);
+              searchResult(item);
+            }}
             textAlignVertical="center"
             style={styles.input}
             placeholder="Search Biomark app"
@@ -176,6 +315,38 @@ const SearchBarWithLeftScanIcon = () => {
             autoFocus={false}
             text
           />
+        </View>
+        <View
+          style={{
+            position: 'absolute',
+            backgroundColor: '#fff',
+            width: '100%',
+            marginTop: 55,
+          }}
+        >
+          <ScrollView>
+            {searchText !== '' &&
+              searchData?.map((item) => (
+                <TouchableOpacity
+                  onPress={() => navigate(SCREENS.HEALTH_RISK, item.params)}
+                  style={styles.renderSearchView}
+                >
+                  {console.log('item', item.screen)}
+                  <View>
+                    <Text
+                      style={{
+                        fontFamily: fonts.regular,
+                        color: colors.heading,
+                        marginVertical: 15,
+                        fontSize: 18,
+                      }}
+                    >
+                      {item?.name}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
         </View>
       </View>
       <WithdrawProgram
