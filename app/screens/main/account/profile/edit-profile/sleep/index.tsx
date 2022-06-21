@@ -17,9 +17,11 @@ import { useSelector } from 'react-redux';
 
 import makeStyles from './styles';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { useTranslation } from 'react-i18next';
 
 const Sleep = () => {
   const isFocus = useIsFocused();
+  const { t } = useTranslation();
   const sleepOptions = [
     { value: 0, label: 'less than 4 hours' },
     { value: 1, label: '4-7 hours' },
@@ -112,7 +114,7 @@ const Sleep = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
-      <TitleWithBackLayout title="Sleep">
+      <TitleWithBackLayout title={t('pages.profile.links.sleep')}>
         <View style={styles.container}>
           <Text style={styles.heading}>
             {
@@ -167,7 +169,10 @@ const Sleep = () => {
             />
           </View>
         </View>
-        <ButtonWithShadowContainer onPress={() => handleSleep()} title="Save" />
+        <ButtonWithShadowContainer
+          onPress={() => handleSleep()}
+          title={t('pages.medicalHistory.save')}
+        />
       </TitleWithBackLayout>
     </SafeAreaView>
   );

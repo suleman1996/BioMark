@@ -27,9 +27,11 @@ import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 export default function VaccinationScreen() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = makeStyles(colors);
 
   const [value, setValue] = useState<any>(0);
@@ -137,7 +139,7 @@ export default function VaccinationScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
-      <TitleWithBackLayout title="Vaccinations">
+      <TitleWithBackLayout title={t('pages.profile.links.vaccination')}>
         <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>
             {
@@ -285,7 +287,10 @@ export default function VaccinationScreen() {
           ) : null}
         </ScrollView>
       </TitleWithBackLayout>
-      <ButtonWithShadowContainer title="Save" onPress={() => onSubmit()} />
+      <ButtonWithShadowContainer
+        title={t('pages.medicalHistory.save')}
+        onPress={() => onSubmit()}
+      />
     </SafeAreaView>
   );
 }

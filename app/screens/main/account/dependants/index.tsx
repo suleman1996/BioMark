@@ -15,12 +15,14 @@ import SCREENS from 'navigation/constants';
 import makeStyles from './styles';
 import { DependentIcon } from 'components/svg';
 import { useTheme } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   navigation: any;
 };
 
 const DependantsScreen = (props: Props) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -47,20 +49,26 @@ const DependantsScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Header isBold={true} isColor={true} title="Dependant" />
+      <Header
+        isBold={true}
+        isColor={true}
+        title={t('pages.covid.covid-dependant-card.title')}
+      />
       <View style={styles.bottomBtnContainer}>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.noDependetView}>
             {data.length === 0 ? (
               <View style={styles.emptyView}>
                 <DependentIcon width={20} height={20} fill={colors.primary} />
-                <Text style={styles.name}>No Dependants Yet</Text>
+                <Text style={styles.name}>
+                  {t('pages.covid.covid-dependant-card.empty-title')}
+                </Text>
                 <Text style={styles.subHead}>
-                  No dependants to see them here
+                  {t('pages.covid.covid-dependant-card.empty-description')}
                 </Text>
                 <Button
                   onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
-                  title={'Add New Dependant'}
+                  title={t('pages.covid.covid-dependant-card.addDependant')}
                 />
               </View>
             ) : (
@@ -68,7 +76,7 @@ const DependantsScreen = (props: Props) => {
                 <DependantsList data={data} />
                 <Button
                   onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
-                  title={'Add New Dependant'}
+                  title={t('pages.covid.covid-button.add')}
                 />
               </>
             )}

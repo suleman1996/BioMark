@@ -106,5 +106,29 @@ export const makeStyles = (colors: any) =>
       fontSize: 12,
       color: colors.danger,
     },
+    renderSearchView: {
+      backgroundColor: colors.white,
+      borderRadius: 5,
+      paddingVertical: 5,
+      shadowRadius: 3.84,
+    },
+    line: { height: 0.3, backgroundColor: colors.lightBlueish },
+    viewDropDown: {
+      position: 'absolute',
+      backgroundColor: '#fff',
+      width: '100%',
+      marginTop: heightToDp(6.5),
+      borderRadius: 12,
+
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+    },
   });
 export default makeStyles;

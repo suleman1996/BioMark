@@ -24,6 +24,7 @@ import { ActivityIndicator } from 'components';
 
 import makeStyles from './styles';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { useTranslation } from 'react-i18next';
 
 const Options = [
   { label: '1', value: '1' },
@@ -48,6 +49,7 @@ const Options2 = [
 ];
 
 export default function ExerciseScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -143,7 +145,7 @@ export default function ExerciseScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ActivityIndicator visible={isVisiable} />
-      <TitleWithBackLayout title="Exercise">
+      <TitleWithBackLayout title={t('pages.summary.headers.exercise')}>
         <ScrollView style={{ flex: 1, marginBottom: 100 }}>
           <Text style={styles.label}>
             {
@@ -308,7 +310,7 @@ export default function ExerciseScreen() {
           ) : null}
         </ScrollView>
         <ButtonWithShadowContainer
-          title="Save"
+          title={t('pages.medicalHistory.save')}
           onPress={onSave}
           disabled={
             isExercise && isExercise !== 'false' && isExercise !== 'first'

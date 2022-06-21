@@ -19,9 +19,11 @@ import { addUserContactsDetails, logout } from 'store/auth/auth-actions';
 import { ErrorResponse } from 'types/ErrorResponse';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const SettingsScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = makeStyles(colors);
 
   const dispatch = useDispatch();
@@ -71,40 +73,44 @@ const SettingsScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <AccountDeActivateModal
-        headerText="Are You Sure?"
-        subHeading="Are you sure you would like to deactivate your BioMark account?"
-        buttonUpperText="Confirm"
-        buttonLowerText="Not Now"
+        headerText={t('pages.settings.dialogs.accountDeactivation.title')}
+        subHeading={t('pages.settings.dialogs.accountDeactivation.description')}
+        buttonUpperText={t(
+          'pages.settings.dialogs.accountDeactivation.buttonText'
+        )}
+        buttonLowerText={t(
+          'pages.settings.dialogs.accountDeactivation.cancelButtonText'
+        )}
         callMe={() => disableAccountCall()}
         isVisible={isVisibleDeActivateModal}
         setIsVisible={setDeActivateModal}
       />
       <ActivityIndicator visible={isLoading} />
-      <TitleWithBackWhiteBgLayout title="Settings">
+      <TitleWithBackWhiteBgLayout title={t('pages.settings.title')}>
         <View style={styles.container}>
           <SingleMenuItemWithArrow
             onPress={() => navigate(SCREENS.PASSWORD_CHANGED)}
-            title={'Password'}
+            title={t('pages.settings.links.password')}
           />
           <SingleMenuItemWithArrow
             onPress={() => navigate(SCREENS.EMAIL_CHANGE)}
-            title={'Email'}
+            title={t('pages.settings.links.email')}
           />
           <SingleMenuItemWithArrow
             onPress={() => navigate(SCREENS.PHONE_NUMBER_CHANGE)}
-            title={'Phone Number'}
+            title={t('pages.settings.links.phoneNumber')}
           />
           <SingleMenuItemWithArrow
             onPress={() => navigate(SCREENS.MARKETING_CONSENT)}
-            title={'Marketing Consent'}
+            title={t('pages.settings.links.marketingConsent')}
           />
           <SingleMenuItemWithArrow
             onPress={() => Linking.openURL('mailto:support@biomarking.com')}
-            title={'Data privacy Query'}
+            title={t('pages.settings.links.dataPrivacy')}
           />
           <SingleMenuItemWithArrow
             onPress={() => setDeActivateModal(true)}
-            title={'Account Deactivation'}
+            title={t('pages.settings.links.accountDeactivation')}
           />
         </View>
       </TitleWithBackWhiteBgLayout>

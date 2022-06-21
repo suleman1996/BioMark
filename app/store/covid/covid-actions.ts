@@ -11,6 +11,8 @@ import {
   COVID_BOOKINGS_DATA,
   COVID_BOOKING_FORM,
   COVID_BOOKING,
+  COVID_HOME_RESULTS,
+  COVID_SUCCESS_PAYMENT_DATA,
 } from './constants';
 
 export const addAllCovidResultsData = (data: CovidResultListResponse[]) => ({
@@ -86,8 +88,39 @@ export const getCovidBookingFormR =
       });
   };
 
+// get covid home results
+
+export const addCovidHomeResults = (data: BookingFormDataResponse) => ({
+  type: COVID_HOME_RESULTS,
+  payload: data,
+});
+
+export const getCovidHomeResultsR =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await covidService
+      .getCovidHomeResults()
+      .then(async (res: any) => {
+        logNow('covid home results for redux ============>', res);
+        await dispatch(addCovidHomeResults(res));
+      })
+      .catch((err) => {
+        logNow(err);
+        // After developer alow below function on line 66
+        // dispatch(errorLogOut('Error logging out.'));
+      })
+      .finally(() => {
+        // After developer alow below function on line 69
+        // dispatch(loggingOut(false));
+      });
+  };
+
 // covid booking
 export const addCovidBooking = (data: BookTestBooking[]) => ({
   type: COVID_BOOKING,
+  payload: data,
+});
+
+export const addCovidSuccessPaymentData = (data: any) => ({
+  type: COVID_SUCCESS_PAYMENT_DATA,
   payload: data,
 });
