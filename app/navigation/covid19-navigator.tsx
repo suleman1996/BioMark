@@ -41,6 +41,18 @@ const Covid19Navigator = () => {
           headerShown: true,
           headerTintColor: colors.darkPrimary,
           title: 'COVID-19 Bookings',
+          headerLeft: () => (
+            <Pressable
+              onPress={() => {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.COVID19HOME,
+                });
+              }}
+              style={{ paddingRight: widthToDp(2) }}
+            >
+              <Ionicons name="arrow-back" size={responsiveFontSize(30)} />
+            </Pressable>
+          ),
         }}
         name={SCREENS.COVID19BOOKINGS}
         component={Covid19Bookings}
@@ -115,6 +127,18 @@ const Covid19Navigator = () => {
             color: colors.darkPrimary,
           },
           title: 'COVID-19 Results',
+          headerLeft: () => (
+            <Pressable
+              onPress={() => {
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.COVID19HOME,
+                });
+              }}
+              style={{ paddingRight: widthToDp(2) }}
+            >
+              <Ionicons name="arrow-back" size={responsiveFontSize(30)} />
+            </Pressable>
+          ),
         }}
         name={SCREENS.VIEWCOVIDRESULTS}
         component={ViewCovidResults}
