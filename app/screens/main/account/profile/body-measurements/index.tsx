@@ -20,8 +20,10 @@ import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const BodyMeasurementScreen = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const [isLoading, setIsLoading] = useState(false);
@@ -136,7 +138,7 @@ const BodyMeasurementScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Body Measurements">
+    <TitleWithBackLayout title={t('pages.bodyMeasurements.title')}>
       <ActivityIndicator visible={isLoading} />
       <ScrollView style={styles.container}>
         <View
@@ -146,7 +148,7 @@ const BodyMeasurementScreen = () => {
           }}
         >
           <InputWithUnits
-            title="Height"
+            title={t('pages.bodyMeasurements.yourReadingHeight')}
             placeholder="0'0*.0"
             units={['cm', 'ft/in']}
             unit={bodyMeasurment.is_metric ? 'cm' : 'ft/in'}
@@ -167,7 +169,7 @@ const BodyMeasurementScreen = () => {
           />
 
           <InputWithUnits
-            title="Weight"
+            title={t('pages.bodyMeasurements.yourReadingWeight')}
             placeholder="0.0"
             units={['kg', 'lbs']}
             unit={bodyMeasurment.is_metric ? 'kg' : 'lbs'}
@@ -190,7 +192,7 @@ const BodyMeasurementScreen = () => {
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={onSubmit}
-        title={'Save & Continue'}
+        title={t('pages.medicalHistory.continue')}
         disabled={
           bodyMeasurment.height == '' || bodyMeasurment.weight == ''
             ? true
