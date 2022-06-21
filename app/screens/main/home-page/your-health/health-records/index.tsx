@@ -108,8 +108,13 @@ const HealthRecord = () => {
     setEndDate(date);
   };
 
-  const renderItem2 = ({ item }) => (
-    <>
+  const renderItem2 = ({ item }) => {
+    // const fullName = item?.result?.summary;
+    // console.log(item?.result?.summary.split(''));
+    // const splitOnSpace = fullName.split(' ');
+    // console.log('first', splitOnSpace[0]);
+    // console.log('second', splitOnSpace[1]);
+    return (
       <TouchableOpacity
         onPress={() => {
           item?.result?.status == 'Pending'
@@ -188,8 +193,8 @@ const HealthRecord = () => {
 
         <View style={styles.bottomView}></View>
       </TouchableOpacity>
-    </>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>

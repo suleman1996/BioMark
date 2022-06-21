@@ -24,6 +24,7 @@ import DescriptiveBtn from 'components/descriptive-btn';
 const MoreInfo = () => {
   const { colors } = useTheme();
   const route = useRoute();
+  const regexOfRemoveTags = /(<([^>]+)>)/gi;
 
   const styles = Styles(colors);
 
@@ -260,21 +261,30 @@ const MoreInfo = () => {
                   <DescriptiveBtn
                     status="normal"
                     question={`What if my ${summary?.name} is normal?`}
-                    description={summary?.description?.normal_reading}
+                    description={summary?.description?.normal_reading.replace(
+                      regexOfRemoveTags,
+                      ''
+                    )}
                   />
                 )}
                 {summary?.description?.low_reading !== null && (
                   <DescriptiveBtn
                     status="low"
                     question={`What if my ${summary?.name} is low?`}
-                    description={summary?.description?.low_reading}
+                    description={summary?.description?.low_reading.replace(
+                      regexOfRemoveTags,
+                      ''
+                    )}
                   />
                 )}
                 {summary?.description?.high_reading !== null && (
                   <DescriptiveBtn
                     status="high"
                     question={`What if my ${summary?.name} is high?`}
-                    description={summary?.description?.high_reading}
+                    description={summary?.description?.high_reading.replace(
+                      regexOfRemoveTags,
+                      ''
+                    )}
                   />
                 )}
               </View>
