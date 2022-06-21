@@ -31,7 +31,6 @@ import LatestResultCard from 'components/latest-result-card';
 import moment from 'moment';
 import fonts from 'assets/fonts';
 import { showMessage } from 'react-native-flash-message';
-import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 const HealthRecord = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,7 +38,7 @@ const HealthRecord = () => {
   const [pastResults, setPastResults] = useState([]);
   const [checked, setChecked] = React.useState('');
   const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [endDate, setEndDate] = useState(new Date());
   const [page, setPage] = useState(1);
 
   const { colors } = useTheme();
@@ -58,12 +57,15 @@ const HealthRecord = () => {
   useEffect(() => {
     dispatch(getReduxLatestResult());
     dispatch(getReduxPastResult());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     setPastResults(pastResult);
     setLatestResult(newResult);
-    // console.log('latesttttttttt-------------', latestResult);
-
+    console.log('latesttttttttt-------------', pastResult);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, pastResult]);
 
   const onConfirm = async () => {
     try {
@@ -75,7 +77,7 @@ const HealthRecord = () => {
       });
       setModalVisible(!modalVisible);
       setPastResults(result?.data);
-      // console.log('resultttt-----------------------dataaaa', result?.data);
+      console.log('resultttt-----------------------dataaaa', result?.data);
     } catch (error) {
       console.log(error);
       if (error.errMsg.status == '500') {
@@ -145,67 +147,34 @@ const HealthRecord = () => {
         )}
 
         {item?.result?.status == 'Pending' ? (
-          <View
-            style={{
-              backgroundColor: 'lightgrey',
-              flexDirection: 'row',
-              padding: 5,
-              alignItems: 'center',
-              width: widthToDp('38%'),
-              borderRadius: 15,
-              marginHorizontal: 15,
-              marginTop: 10,
-            }}
-          >
-            <View
-              style={{
-                borderRadius: 20,
-                backgroundColor: 'white',
-                width: 15,
-                height: 15,
-              }}
-            ></View>
-            <Text
-              style={{
-                marginHorizontal: 8,
-                fontFamily: fonts.OpenSansBold,
-                color: 'black',
-              }}
-            >
-              {item?.result?.status == 'Pending' ? 'Under Review' : null}
-            </Text>
+          <View style={styles.pendingView}>
+            <View style={styles.pendingView2}>
+              <View style={styles.pendingRoundView}></View>
+              <Text
+                style={{
+                  marginHorizontal: 8,
+                  fontFamily: fonts.OpenSansBold,
+                  color: 'black',
+                }}
+              >
+                {item?.result?.status == 'Pending' ? 'Under Review' : null}
+              </Text>
+            </View>
           </View>
         ) : item?.result?.status == 'Converted' ? (
-          <View
-            style={{
-              backgroundColor: 'lightgrey',
-              flexDirection: 'row',
-              padding: 5,
-              alignItems: 'center',
-              width: widthToDp('30%'),
-              borderRadius: 15,
-              marginHorizontal: 15,
-              marginTop: 10,
-              marginBottom: 10,
-            }}
-          >
-            <View
-              style={{
-                borderRadius: 20,
-                backgroundColor: colors.greenDark,
-                width: 15,
-                height: 15,
-              }}
-            ></View>
-            <Text
-              style={{
-                marginHorizontal: 8,
-                fontFamily: fonts.OpenSansBold,
-                color: 'black',
-              }}
-            >
-              {item.result.status}
-            </Text>
+          <View style={styles.pendingView}>
+            <View style={styles.pendingView2}>
+              <View style={styles.convertedRoundView}></View>
+              <Text
+                style={{
+                  marginHorizontal: 8,
+                  fontFamily: fonts.OpenSansBold,
+                  color: 'black',
+                }}
+              >
+                {item.result.status}
+              </Text>
+            </View>
           </View>
         ) : (
           <View style={styles.pastResultView2}>
@@ -248,22 +217,26 @@ const HealthRecord = () => {
           </View>
 
           <Text style={styles.latestResult}>Your Latest Results</Text>
-          <LatestResultCard
-            title="Your Latest Results"
-            name={latestResult?.name}
-            received={moment(latestResult?.received).format(
-              'hh:mm a MMMM Do, YYYY'
-            )}
-            ref_no={latestResult?.ref_no}
-            status={latestResult?.result?.status}
-            onPress={() =>
-              latestResult?.result?.status == 'Converted'
-                ? navigation.navigate(SCREENS.RESULT_OVERVIEW)
-                : null
-            }
-            // summary={latestResult?.result?.summary}
-            // doctor={latestResult?.result?.doctor}
-          />
+          {latestResult.message === 'No latest result' ? (
+            <Text style={styles.resultMessage}>{latestResult.message}</Text>
+          ) : (
+            <LatestResultCard
+              title="Your Latest Results"
+              name={latestResult?.name}
+              received={moment(latestResult?.received).format(
+                'hh:mm a MMMM Do, YYYY'
+              )}
+              ref_no={latestResult?.ref_no}
+              status={latestResult?.result?.status}
+              onPress={() =>
+                latestResult?.result?.status == 'Converted'
+                  ? navigation.navigate(SCREENS.RESULT_OVERVIEW)
+                  : null
+              }
+              summary={latestResult?.result?.summary}
+              doctor={latestResult?.result?.doctor}
+            />
+          )}
 
           <TouchableOpacity
             style={styles.uploadResult}
@@ -297,16 +270,10 @@ const HealthRecord = () => {
             touchableRadio2={() => setChecked('second')}
             onPressRadio2={() => setChecked('second')}
             status2={checked === 'second' ? 'checked' : 'unchecked'}
-            startDateText={`Date:  ${
-              startDate
-                ? moment(startDate).format('MM/DD/YYYY')
-                : 'Please select date'
-            }`}
-            endDateText={`Date:  ${
-              endDate
-                ? moment(endDate).format('MM/DD/YYYY')
-                : 'Please select end date'
-            }`}
+            startDateText={
+              startDate ? moment(startDate).format('MM/DD/YYYY') : null
+            }
+            endDateText={endDate ? moment(endDate).format('MM/DD/YYYY') : null}
             handleConfirm={handleConfirm}
             handleConfirm2={handleConfirm2}
             onPressClearFilter={() => {
@@ -326,7 +293,7 @@ const HealthRecord = () => {
             />
           )}
 
-          {pastResults.length > 0 ? (
+          {pastResults.length > 0 && page == 1 ? (
             <TouchableOpacity style={styles.uploadResult}>
               <GoogleFitButton
                 disabled={false}
@@ -334,7 +301,11 @@ const HealthRecord = () => {
                 onPress={() => setPage((prev) => prev + 1)}
               />
             </TouchableOpacity>
-          ) : null}
+          ) : pastResults?.message == 'No results' ? null : (
+            <Text style={styles.loadMoreText}>
+              You dont't have any more past results
+            </Text>
+          )}
         </ScrollView>
       </View>
     </View>

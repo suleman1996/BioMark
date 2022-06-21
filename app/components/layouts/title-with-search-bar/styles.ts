@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -28,6 +29,15 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
       backgroundColor: colors.white,
       paddingBottom: heightToDp(0.5),
+    },
+    translationView: {
+      right: 30,
+      position: 'absolute',
+    },
+    translationText: {
+      color: colors.white,
+      fontFamily: fonts.mulishBold,
+      fontSize: 20,
     },
     halfPrimary: {
       height: heightToDp(3),

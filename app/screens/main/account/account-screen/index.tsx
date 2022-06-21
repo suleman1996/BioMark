@@ -18,8 +18,10 @@ import { logNow } from 'utils/functions/log-binder';
 import Images from 'assets/images';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const AccountScreen = () => {
+  const { t } = useTranslation();
   const authContext = useContext(AuthContext);
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -55,10 +57,14 @@ const AccountScreen = () => {
       })
       .finally(() => {});
   };
+  console.log('``````````````````````````````````', authContext?.userData);
 
   return (
     <>
-      <TitleWithSearchBarLayout title={'Account'}>
+      <TitleWithSearchBarLayout
+        title={t('pages.tabController.account')}
+        translation={true}
+      >
         <View style={styles.content}>
           <View style={styles.accountScreenView}>
             <View style={[styles.image, { overflow: 'hidden' }]}>
@@ -67,7 +73,9 @@ const AccountScreen = () => {
                 onLoadEnd={() => setProfileLoader(false)}
                 source={
                   !authContext?.userData?.picture
-                    ? Images.avatar
+                    ? authContext?.userData?.gender_attribute?.id == 1
+                      ? Images.avatar
+                      : Images.femaleAvatar
                     : { uri: authContext?.userData?.picture }
                 }
                 style={styles.image}
@@ -100,7 +108,7 @@ const AccountScreen = () => {
               logOutCheck={autoLogoutCheck}
               onToggleAutoLogout={onToggleAutoLogout}
               dependentsCount={authContext?.userData?.dependent_count || 0}
-              id_verification={authContext?.userData?.id_verification || ''}
+              id_verification={authContext?.userData?.id_verification}
             />
           </View>
         </View>

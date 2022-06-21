@@ -9,7 +9,7 @@ import { ActivityIndicator } from 'components';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import DatePicker from 'components/date-picker/index';
 import GradientButton from 'components/linear-gradient-button';
-import { DropdownMenu, InputWithLabel } from 'components/base';
+import { DropdownMenu, ErrorMessage, InputWithLabel } from 'components/base';
 
 import { userService } from 'services/user-service/user-service';
 import { navigate } from 'services/nav-ref';
@@ -17,8 +17,12 @@ import { navigate } from 'services/nav-ref';
 import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
 import { useDispatch } from 'react-redux';
-import { getMedicationsTrackersAction } from 'store/home/home-actions';
+import {
+  getMedicationsTrackersAction,
+  getReduxHealthTracker,
+} from 'store/home/home-actions';
 import moment from 'moment';
+import { NUMERIC_REGIX } from 'utils/regix';
 
 const FREQUENCY_TIME_OPTIONS: any[] = [
   { label: '12AM', value: '12AM' },
@@ -51,7 +55,7 @@ type MEDICATION_TYPE = {
   disease_type: number;
   medication_list_id: number;
   unit_list_id: number;
-  dosage: number;
+  dosage: number | string;
   frequency: number | null;
   frequency_time: string[];
   start_date: any;
@@ -74,7 +78,7 @@ const MedicationForm = (props: any) => {
     disease_type: 0,
     medication_list_id: 0,
     unit_list_id: 12,
-    dosage: 0,
+    dosage: '',
     frequency: null,
     frequency_time: [],
     start_date: new Date(),
@@ -137,7 +141,7 @@ const MedicationForm = (props: any) => {
         ...medication,
         frequency: null,
         disease_type: 0,
-        dosage: 0,
+        dosage: '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -197,6 +201,7 @@ const MedicationForm = (props: any) => {
       await userService[API_FUNCTION]({ medication }, SELECTED_MEDICATION_ID);
       navigate(SCREENS.HEALTH_PROGRESS, 2);
       dispatch(getMedicationsTrackersAction(moment().format('MMM D, YYYY')));
+      dispatch(getReduxHealthTracker());
     } catch (err) {
       console.error(err);
     }
@@ -208,11 +213,22 @@ const MedicationForm = (props: any) => {
     try {
       await userService.deleteMedication(SELECTED_MEDICATION_ID);
       navigate(SCREENS.SHOW_MEDICATION, 2);
+      dispatch(getReduxHealthTracker());
     } catch (err) {
       console.error(err);
     }
   };
 
+  console.log(
+    JSON.stringify(
+      {
+        medicationOptionsData,
+        medication,
+      },
+      null,
+      2
+    )
+  );
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -262,39 +278,46 @@ const MedicationForm = (props: any) => {
               <View>
                 <Text style={styles.textStyle}>Dosage</Text>
                 {SHOW_DOSAGE_INPUT ? (
-                  <View style={styles.dosageView}>
-                    <View
-                      style={{
-                        width: '78%',
-                      }}
-                    >
-                      <InputWithLabel
-                        containerStyles={{
-                          marginTop: 0,
+                  <View>
+                    <View style={styles.dosageView}>
+                      <View
+                        style={{
+                          width: '78%',
                         }}
-                        value={medication.dosage}
-                        error={dosageRangeError}
-                        onChange={(val) => {
-                          const err =
-                            Number(val) > DOSAGE_RANGE.MAX ||
-                            Number(val) < DOSAGE_RANGE.MIN
-                              ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
-                              : '';
+                      >
+                        <InputWithLabel
+                          containerStyles={{
+                            marginTop: 0,
+                          }}
+                          value={`${medication.dosage}`}
+                          placeholder="0"
+                          onChange={(val: string) => {
+                            if (NUMERIC_REGIX.test(val) || val == '') {
+                              const err =
+                                Number(val) > DOSAGE_RANGE.MAX ||
+                                Number(val) < DOSAGE_RANGE.MIN
+                                  ? `Please input valid numbers between ${DOSAGE_RANGE.MIN} and ${DOSAGE_RANGE.MAX}.`
+                                  : '';
 
-                          updateMedication('dosage', val);
-                          setDosageRangeError(err);
+                              updateMedication('dosage', val);
+                              setDosageRangeError(err);
+                            }
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          width: '20%',
+                          // alignItems: 'center',
+                          // justifyContent: 'center',
                         }}
-                      />
+                      >
+                        <Text style={styles.unitText}>unit(s)</Text>
+                      </View>
                     </View>
-                    <View
-                      style={{
-                        width: '20%',
-                        // alignItems: 'center',
-                        // justifyContent: 'center',
-                      }}
-                    >
-                      <Text style={styles.unitText}>unit(s)</Text>
-                    </View>
+                    {dosageRangeError ? (
+                      <ErrorMessage errorMessage={dosageRangeError} />
+                    ) : null}
                   </View>
                 ) : (
                   <Text style={styles.subText}>1 pill(s)</Text>

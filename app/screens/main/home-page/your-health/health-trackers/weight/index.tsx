@@ -22,7 +22,10 @@ import { navigate } from 'services/nav-ref';
 import makeStyles from './styles';
 import { AccountDeActivateModal } from 'components/ui';
 import { useDispatch } from 'react-redux';
-import { getReduxWeightLogs } from 'store/home/home-actions';
+import {
+  getReduxHealthTracker,
+  getReduxWeightLogs,
+} from 'store/home/home-actions';
 import moment from 'moment';
 import { roundToDecimalPlaces } from 'utils/functions';
 
@@ -53,22 +56,6 @@ const Weight = ({ route }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (weightTracker.weight == '') return;
-    if (!weightTracker.is_metric) {
-      setWeightTracker((prev: any) => ({
-        ...prev,
-        weight: (Number(prev.weight) * 2.205).toFixed(1).toString(),
-      }));
-    } else {
-      setWeightTracker((prev: any) => ({
-        ...prev,
-        weight: ((Number(prev.weight) * 1) / 2.205).toFixed(1).toString(),
-      }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [weightTracker.is_metric]);
-
   const getWeightDataByID = async (id) => {
     setIsLoading(true);
     const weightData = await userService.getWeightProgress(id);
@@ -95,6 +82,7 @@ const Weight = ({ route }: any) => {
         SELECTED_WEIGHT_ID
       );
       dispatch(getReduxWeightLogs());
+      dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 0);
     } catch (err: any) {
       console.error(err);
@@ -123,21 +111,21 @@ const Weight = ({ route }: any) => {
     setWeightTracker((prev: any) => ({
       ...prev,
       is_metric: metric,
+      weight: !metric
+        ? (Number(prev.weight) * 2.20462).toFixed(1).toString()
+        : ((Number(prev.weight) * 1) / 2.20462).toFixed(1).toString(),
     }));
-    setError(
-      measurementValidator(metric, 'weight', weightTracker.weight) || ''
-    );
   };
 
   const handleChange = (value: number, key: string) => {
     setWeightTracker({ ...weightTracker, [key]: value });
-    setError(measurementValidator(weightTracker.is_metric, key, value) || '');
   };
 
   const deleteWeightLog = async () => {
     try {
       await userService.deleteWeightLog(SELECTED_WEIGHT_ID);
       dispatch(getReduxWeightLogs());
+      dispatch(getReduxHealthTracker());
 
       navigate(SCREENS.HEALTH_PROGRESS, 0);
     } catch (err) {
@@ -145,6 +133,15 @@ const Weight = ({ route }: any) => {
     }
   };
 
+  useEffect(() => {
+    setError(
+      measurementValidator(
+        weightTracker.is_metric,
+        'weight',
+        weightTracker.weight
+      ) || ''
+    );
+  }, [weightTracker]);
   return (
     <TitleWithBackWhiteBgLayout
       binIcon={SELECTED_WEIGHT_ID ? true : false}

@@ -69,6 +69,7 @@ const Index = () => {
       });
       setChartState(result.data.chart);
       setIsLoading(false);
+      setHideGraph(false);
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +88,8 @@ const Index = () => {
         weight: item?.data_value,
         unit: item?.unit_name,
         date_entry: item?.record_date,
-        color: item?.record_status == 'high' ? colors.dangerRed : colors.green,
+        color:
+          item?.record_status == 'high' ? colors.logsRed : colors.logsGreen,
       })
     );
     setLogData(arr);

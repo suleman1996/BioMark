@@ -223,7 +223,7 @@ export const getReduxHealthTracker =
       .getHealthTracker()
       .then(async (res) => {
         //
-
+        console.log('result from getHealthTracker:', { res });
         await dispatch(addAllHealthTracker(res));
       })
       .catch((err) => {

@@ -40,7 +40,7 @@ const MedicalInput = ({
   }
 
   if (textAlign) {
-    otherStyle.push({ textAlign: textAlign });
+    otherStyle.push({ textAlign: textAlign, flex: 1 });
   }
   return (
     <View style={styles.rowContainer}>

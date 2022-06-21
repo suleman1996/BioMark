@@ -8,14 +8,21 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import makeStyles from './styles';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { goBack } from 'services/nav-ref';
+import ChangeLanguage from 'components/change_language';
 
 type Props = {
   children: any;
   title: string;
   isBack?: boolean;
+  translation?: boolean;
 };
 
-const TitleWithSearchBarLayout = ({ children, title, isBack }: Props) => {
+const TitleWithSearchBarLayout = ({
+  children,
+  title,
+  isBack,
+  translation,
+}: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -33,6 +40,11 @@ const TitleWithSearchBarLayout = ({ children, title, isBack }: Props) => {
           </Pressable>
         ) : null}
         <Text style={styles.textStyle}>{title}</Text>
+        {translation ? (
+          <View style={styles.translationView}>
+            <ChangeLanguage />
+          </View>
+        ) : null}
       </View>
       <View style={styles.searchBarContainer}>
         <View style={styles.halfPrimary} />
