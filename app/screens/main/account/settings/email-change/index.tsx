@@ -20,8 +20,10 @@ import { addUserContactsDetails } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const EmailChangeScreen = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -97,7 +99,7 @@ const EmailChangeScreen = () => {
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <>
-            <TitleWithBackWhiteBgLayout title="Email">
+            <TitleWithBackWhiteBgLayout title={t('pages.email.title')}>
               <ScrollView
                 contentContainerStyle={{ flex: 1 }}
                 showsVerticalScrollIndicator={false}
@@ -105,8 +107,8 @@ const EmailChangeScreen = () => {
                 <View style={styles.container}>
                   <InputWithLabel
                     labelFontSize={25}
-                    label={'Email Address'}
-                    placeholder={'Enter your email address'}
+                    label={t('pages.email.newEmail.title')}
+                    placeholder={t('pages.email.newEmail.placeholder')}
                     value={values.email}
                     onFocus={() => formikRef.current.submitForm()}
                     onChange={handleChange('email')}
@@ -115,8 +117,8 @@ const EmailChangeScreen = () => {
                   <InputWithLabel
                     labelFontSize={25}
                     onFocus={() => formikRef.current.submitForm()}
-                    label={'Confirm Email Address'}
-                    placeholder={'Enter your email address'}
+                    label={t('pages.email.confirmEmail.title')}
+                    placeholder={t('pages.email.confirmEmail.placeholder')}
                     onChange={handleChange('confirmEmail')}
                     value={values.confirmEmail}
                     error={values.confirmEmail ? errors.confirmEmail : ''}
@@ -132,7 +134,7 @@ const EmailChangeScreen = () => {
                       submitForm();
                       handleSubmit();
                     }}
-                    title={'Save'}
+                    title={t('pages.email.save')}
                     disabled={
                       Object.entries(errors).length === 0
                         ? values.confirmEmail

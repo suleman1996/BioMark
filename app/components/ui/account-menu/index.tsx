@@ -23,10 +23,12 @@ import SCREENS from 'navigation/constants';
 import { navigate } from 'services/nav-ref';
 import { logout } from 'store/auth/auth-actions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { useTranslation } from 'react-i18next';
 
 import makeStyles from './styles';
 
 const AccountMenu = (props) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -39,19 +41,19 @@ const AccountMenu = (props) => {
     let status;
     switch (props.id_verification) {
       case 'SUCCESS':
-        status = 'verified';
+        status = t('pages.more.links.verification.verified');
         break;
       case 'PENDING':
-        status = 'pending';
+        status = t('pages.more.links.verification.pending');
         break;
       case 'DENIED':
-        status = 'notVerified';
+        status = t('pages.more.links.verification.notVerified');
         break;
       case false:
-        status = 'notVerified';
+        status = t('pages.more.links.verification.notVerified');
         break;
       default:
-        status = 'error';
+        status = t('pages.more.links.verification.error');
         break;
     }
     return status;
@@ -77,7 +79,9 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioIdentify width={5} height={3} />
-            <Text style={styles.text}>Identify Verification </Text>
+            <Text style={styles.text}>
+              {t('pages.more.links.idVerification')}
+            </Text>
           </View>
           <View style={styles.iconWithSecondText}>
             <Text style={styles.secondText}>{setVerificationText()}</Text>
@@ -102,7 +106,7 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioDependent width={5} height={5} />
-            <Text style={styles.text}>Dependants</Text>
+            <Text style={styles.text}>{t('pages.more.links.dependants')}</Text>
           </View>
           <View style={styles.iconWithSecondText}>
             <Text style={styles.secondText}>{props.dependentsCount} Users</Text>
@@ -127,7 +131,7 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioSettings width={5} height={5} />
-            <Text style={styles.text}>Settings</Text>
+            <Text style={styles.text}>{t('pages.more.links.settings')}</Text>
           </View>
           <Fontisto
             name="angle-right"
@@ -147,7 +151,9 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioNotification width={5} height={5} />
-            <Text style={styles.text}>Notifications</Text>
+            <Text style={styles.text}>
+              {t('pages.more.links.notifications')}
+            </Text>
           </View>
           <Fontisto
             name="angle-right"
@@ -165,7 +171,7 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioSupport width={5} height={5} />
-            <Text style={styles.text}>Support</Text>
+            <Text style={styles.text}>{t('pages.more.links.support')}</Text>
           </View>
           <Fontisto
             name="angle-right"
@@ -183,7 +189,7 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioAboutIcon width={5} height={5} />
-            <Text style={styles.text}>About BioMark</Text>
+            <Text style={styles.text}>{t('pages.more.links.about')}</Text>
           </View>
           <Fontisto
             name="angle-right"
@@ -209,7 +215,7 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioPolicies width={5} height={5} />
-            <Text style={styles.text}>Policies</Text>
+            <Text style={styles.text}>{t('pages.more.links.policies')}</Text>
           </View>
           <Fontisto
             name="angle-right"
@@ -226,7 +232,7 @@ const AccountMenu = (props) => {
       >
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <BioLogout width={4} height={4} />
-          <Text style={styles.text}>Logout</Text>
+          <Text style={styles.text}>{t('pages.more.links.logout')}</Text>
         </View>
       </TouchableRipple>
       {/* divider */}
@@ -238,7 +244,7 @@ const AccountMenu = (props) => {
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <BioAutoLogout width={4} height={4} />
-            <Text style={styles.text}>Auto Logout</Text>
+            <Text style={styles.text}>{t('pages.more.links.autoLogout')}</Text>
           </View>
           <Switch
             color={colors.darkPrimary}

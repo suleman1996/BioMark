@@ -4,11 +4,11 @@
       "scan": {
         "qr": "Scan QR/Barcode",
         "inputBarcode": "Input Barcode",
-        "uploadResults":"Upload Results"
+        "uploadResults": "Upload Results"
       },
-      "yourHealth":{
+      "yourHealth": {
         "label": "Your Health",
-        "suggestions":{
+        "suggestions": {
           "heartDisease": "Heart Disease",
           "diabetes": "Diabetes",
           "bloodPressure": "Blood Pressure",
@@ -19,24 +19,24 @@
           "sleeping": "Sleeping"
         }
       },
-      "healthTrackers":{
+      "healthTrackers": {
         "label": "Health Trackers",
-        "suggestions":{
+        "suggestions": {
           "bloodSugarInput": "Blood Sugar Input",
           "weightInput": "Weight Input",
           "bloodPressureInput": "Blood Pressure Input"
         }
       },
-      "recordKeeping":{
+      "recordKeeping": {
         "label": "Record Keeping",
-        "suggestions":{
+        "suggestions": {
           "healthRecords": "Health Records",
           "healthProgress": "Health Progress"
         }
       },
-      "covidBooking":{
+      "covidBooking": {
         "label": "Covid Booking",
-        "suggestions":{
+        "suggestions": {
           "bookTests": "Book Tests",
           "bookings": "Bookings",
           "dependents": "Dependents",
@@ -51,9 +51,9 @@
         "upcoming": "Upcoming",
         "history": "History"
       },
-      "healthDeclarationComplete":"Health Declaration Completed",
-      "hintText":"What appointments will be shown?",
-      "hintTextDesc":"Currently, only appointments for COVID-19 Test bookings will be shown here, in a future update we will collate all events here. Stay tuned!",
+      "healthDeclarationComplete": "Health Declaration Completed",
+      "hintText": "What appointments will be shown?",
+      "hintTextDesc": "Currently, only appointments for COVID-19 Test bookings will be shown here, in a future update we will collate all events here. Stay tuned!",
       "noUpcoming": "No Upcoming Appointments",
       "noUpcomingDesc": "You have no appointments scheduled yet.",
       "noRecent": "No Recent Appointments",
@@ -61,26 +61,26 @@
     },
     "covid-booking": {
       "title": "COVID-19 Bookings",
-      "orderId":"Booking ID",
-      "bookingId":"Booking ID",
+      "orderId": "Booking ID",
+      "bookingId": "Booking ID",
       "homeTitle": "Book your COVID-19 Test",
       "homeDescription": "Planning a COVID-19 Test for you and your Dependant? Place an appointment with us by clicking “Book Now”",
       "tabs": {
         "upcoming": "Upcoming",
         "history": "History"
       },
-      "emptyMessage":{
-      "upcomingTitle":"No Upcoming Bookings",
-      "upcomingSubTitle":"You have no COVID bookings scheduled yet.",
-      "historyTitle":"No Recent Bookings",
-      "historySubTitle":"This is where you can see your",
-      "historySubTitle1":" past COVID bookings.",
-      "covidQrTitle":"No QR codes Yet",
-      "covidQrSubTitle":"QR codes will be displayed here",
-      "covidQrSubTitle1":"when you receive your COVID Results"
+      "emptyMessage": {
+        "upcomingTitle": "No Upcoming Bookings",
+        "upcomingSubTitle": "You have no COVID bookings scheduled yet.",
+        "historyTitle": "No Recent Bookings",
+        "historySubTitle": "This is where you can see your",
+        "historySubTitle1": " past COVID bookings.",
+        "covidQrTitle": "No QR codes Yet",
+        "covidQrSubTitle": "QR codes will be displayed here",
+        "covidQrSubTitle1": "when you receive your COVID Results"
       },
-      "button":{
-        "FAQButton":"FAQ"
+      "button": {
+        "FAQButton": "FAQ"
       }
     },
     "landing": {
@@ -136,49 +136,49 @@
       "reportDate": "Report Date",
       "positiveMessage": "Please isolate and quarantine yourself.",
       "negativeMessage": "Continue to practice safe distancing.",
-      "home":{
-        "bookTests":"Book Tests",
-        "bookings":"Bookings",
-        "viewResults":"View Results",
-        "dependants":"Dependants",
-        "swipe":"Swipe to view other results",
+      "home": {
+        "bookTests": "Book Tests",
+        "bookings": "Bookings",
+        "viewResults": "View Results",
+        "dependants": "Dependants",
+        "swipe": "Swipe to view other results",
         "scan": "Scan to share latest COVID-19 Test Result"
       },
-      "results":{
-        "title":"COVID-19 Results",
+      "results": {
+        "title": "COVID-19 Results",
         "scan": "Scan to share Covid-19 Test Result",
         "noResults": "No Test Results",
-        "noResultsDesc":"You have no Test results recorded."
+        "noResultsDesc": "You have no Test results recorded."
       },
       "bookCovid": {
         "progress1": "Booking",
         "progress2": "Payment",
         "progress3": "Confirmation",
         "continue": "Continue",
-        "next":"Next",
-        "cancel":"Cancel",
+        "next": "Next",
+        "cancel": "Cancel",
         "makePayment": "Make Payment",
-        "cancelBookingProcess":"Cancel Entire Test Booking Process",
-        "cancelBookingProcessDesc":"By not proceeding you are not guranteed a test slot. Do you want to cancel?",
-        "covidICTitle":"Looks like your IC is missing",
-        "covidICDesc":"You will need to enter your IC in order to proceed with this feature of the app",
-        "covidICHint":"IC or Passport no.",
-        "testTaking":{
-         "title":"Who is taking the test?",
-         "me":"Me",
-         "dependant":"Dependants",
-         "both":"Both"
+        "cancelBookingProcess": "Cancel Entire Test Booking Process",
+        "cancelBookingProcessDesc": "By not proceeding you are not guranteed a test slot. Do you want to cancel?",
+        "covidICTitle": "Looks like your IC is missing",
+        "covidICDesc": "You will need to enter your IC in order to proceed with this feature of the app",
+        "covidICHint": "IC or Passport no.",
+        "testTaking": {
+          "title": "Who is taking the test?",
+          "me": "Me",
+          "dependant": "Dependants",
+          "both": "Both"
         },
-        "testBooking":{
+        "testBooking": {
           "testTypeQuestion": "Select a Covid Test",
           "testType1": "PCR Test",
           "testType2": "Antigen Test",
           "testLocQuestion": "Where would you like to get tested?",
           "testLoc1": "Test Centre",
           "testLoc2": "Home Test",
-          "testDependantQuestion":"Is this Covid test for you or a dependant?",
-          "testdependant1":"Myself",
-          "testdependant2":"Dependant",
+          "testDependantQuestion": "Is this Covid test for you or a dependant?",
+          "testdependant1": "Myself",
+          "testdependant2": "Dependant",
           "testCentreCountry": "Country",
           "testCentreCity": "City",
           "testCenterMap": "City Test Centers",
@@ -186,7 +186,7 @@
           "testDateQuestion": "Choose a test date",
           "testSlotMorning": "Morning timeslots",
           "testSlotAfternoon": "Afternoon timeslots",
-          "addCovid":"Add New Dependant",
+          "addCovid": "Add New Dependant",
           "countryInfoDialogTitle": "Why can’t I change Countries?",
           "countryInfoDialogDescription": "Users are limited to one country for each booking order. If you wish to book for another country you would need to start another booking order.",
           "countryInfoDialogButtonText": "Okay"
@@ -206,20 +206,20 @@
           "dquestion5": "Has your dependant attended or come in contact with someone who attended an event or went to a place associated with COVID-19 outbreak in the past 14 days?",
           "terms": "I declare all the above to be true and correct. By submitting this declaration form, I agree to the collection, use, and disclosure of my personal information for the purpose of precautionary measure against COVID-19."
         },
-        "covidHealthcare":{
-          "doLater":"Do later",
-          "submit":"Submit",
-          "covidTitle1":"Your COVID-19 test is scheduled on",
-          "covidTitle2":"at",
-          "covidTitle3":" Please provide your response to the following questions before your COVID-19 testing. A separate form must be filled for individual dependants, if any.",
-          "declarationMyself":"Health Declaration for Myself",
-          "declarationMyDependant":"Health Declaration for My Dependant",
-         "confirmation":{
-          "done":"Health Declaration Complete!",
-          "message":"Thank you for completing the declaration, do be ready at the test location for your stipulated test slot.",
-          "yourId":"Your Booking ID:",
-          "dependantId":"Your Dependant(s) Booking ID(s)"
-         }       
+        "covidHealthcare": {
+          "doLater": "Do later",
+          "submit": "Submit",
+          "covidTitle1": "Your COVID-19 test is scheduled on",
+          "covidTitle2": "at",
+          "covidTitle3": " Please provide your response to the following questions before your COVID-19 testing. A separate form must be filled for individual dependants, if any.",
+          "declarationMyself": "Health Declaration for Myself",
+          "declarationMyDependant": "Health Declaration for My Dependant",
+          "confirmation": {
+            "done": "Health Declaration Complete!",
+            "message": "Thank you for completing the declaration, do be ready at the test location for your stipulated test slot.",
+            "yourId": "Your Booking ID:",
+            "dependantId": "Your Dependant(s) Booking ID(s)"
+          }
         },
         "confirmation": {
           "done": "Payment is Successful",
@@ -229,20 +229,20 @@
           "viewBooking": "View Bookings",
           "return": "Return to Homepage"
         },
-        "bookingDialog":{
-          "yes":"Yes",
-          "no":"No",
-          "cancelBooking":"Cancel COVID Test Booking",
-          "cancelBookingTitle":"Are you sure you want to cancel? All refunds are subjected to payment processing fees.",
-          "cancelTitle":"Cancel Test Booking",
-          "cancelSubTitle":"By not proceeding you are not guranteed a test slot. Do you want to cancel?",
-          "nextAlert":"Test Slot Not Booked",
-          "nextAlertTitle":"You can’t proceed to the payment as you have not booked a test slot yet.",
-          "nextAlertButton":"Okay",
-          "delete":"Delete Dependant?",
-          "deleteTitle":"Are you sure you want to delete profiles"
+        "bookingDialog": {
+          "yes": "Yes",
+          "no": "No",
+          "cancelBooking": "Cancel COVID Test Booking",
+          "cancelBookingTitle": "Are you sure you want to cancel? All refunds are subjected to payment processing fees.",
+          "cancelTitle": "Cancel Test Booking",
+          "cancelSubTitle": "By not proceeding you are not guranteed a test slot. Do you want to cancel?",
+          "nextAlert": "Test Slot Not Booked",
+          "nextAlertTitle": "You can’t proceed to the payment as you have not booked a test slot yet.",
+          "nextAlertButton": "Okay",
+          "delete": "Delete Dependant?",
+          "deleteTitle": "Are you sure you want to delete profiles"
         },
-        "paymentError":{
+        "paymentError": {
           "header": "Payment is Unsuccessful",
           "description": "No money has been deducted from your account.<br><br>Please retry the payment process to secure your COVID test slot.",
           "retryPayment": "Retry Payment"
@@ -256,39 +256,39 @@
         "gender": "Gender",
         "relation": "Relation",
         "ncr_passport": "NRIC/Passport Number",
-        "title":"Enter your Dependant Details ",
-        "document_type":"Document Type",
-        "ic":"IC",
-        "passport":"Passport",
-        "eKYC":"eKYC",
-        "addeKYC":"Complete eKYC Verification",
-        "editeKYC":"Complete eKYC Verification"
+        "title": "Enter your Dependant Details ",
+        "document_type": "Document Type",
+        "ic": "IC",
+        "passport": "Passport",
+        "eKYC": "eKYC",
+        "addeKYC": "Complete eKYC Verification",
+        "editeKYC": "Complete eKYC Verification"
       },
       "covid-button": {
         "save": "Save Dependant",
         "add": "Add New Dependant",
         "addSelf": "Add Self",
-        "confirm":"Confirm",
-        "exist":"Add Existing Dependant"
+        "confirm": "Confirm",
+        "exist": "Add Existing Dependant"
       },
-      "covid-dependant-card":{
-       "title":"Dependants",
-       "addDependant": "Add Dependant",
-       "editDependant": "Edit Dependants",
-       "empty-title":"No Dependants Yet",
-       "empty-description":"Add dependants to see them here"
+      "covid-dependant-card": {
+        "title": "Dependants",
+        "addDependant": "Add Dependant",
+        "editDependant": "Edit Dependants",
+        "empty-title": "No Dependants Yet",
+        "empty-description": "Add dependants to see them here"
       },
-      "dependantDialog":{
-        "redoeKYC":"Redo eKYC Verification",
-        "redoeKYCTitle":"Are you sure you want to redo?"
-       },
-      "covid-booking-button":{
-       "healthDeclareButton":"Health Declaration",
-       "cancelButton":"Cancel Test",
-       "newBooking":"Book New COVID-19 Test"
+      "dependantDialog": {
+        "redoeKYC": "Redo eKYC Verification",
+        "redoeKYCTitle": "Are you sure you want to redo?"
+      },
+      "covid-booking-button": {
+        "healthDeclareButton": "Health Declaration",
+        "cancelButton": "Cancel Test",
+        "newBooking": "Book New COVID-19 Test"
       },
       "covid-info": {
-        "title":"Test Bookings - FAQ",
+        "title": "Test Bookings - FAQ",
         "footer": "Do you have further questions?<br>Write in to us at <a href='mailto:support@biomarking.com'>support@biomarking.com<a>!",
         "card1": {
           "header": "Information Regarding Tests",
@@ -456,13 +456,13 @@
       },
       "errors": {
         "firstname": "Enter first name",
-        "lastname":"Enter last name",
+        "lastname": "Enter last name",
         "age": "Enter age",
         "ncr_passport": "Enter NRIC / Passport",
         "fnameformat": "Enter valid first name",
-        "lnameformat":"Enter valid last name",
-        "ageformat":"Enter valid age",
-        "ncr_passportformat":"Enter valid  NRIC / Passport"
+        "lnameformat": "Enter valid last name",
+        "ageformat": "Enter valid age",
+        "ncr_passportformat": "Enter valid  NRIC / Passport"
       },
       "booking": {
         "title": "COVID-19 Test Bookings"
@@ -673,12 +673,12 @@
       "manuallyScanBarcode": "Manually Enter Barcode",
       "upload": "Upload"
     },
-    "healthProgress":{
+    "healthProgress": {
       "weight": "Weight",
       "bloodSugar": "Blood Sugar",
-      "medication":"Medication",
-      "hba1c":"HbA1c",
-      "bloodPressure":"Blood Pressure"
+      "medication": "Medication",
+      "hba1c": "HbA1c",
+      "bloodPressure": "Blood Pressure"
     },
     "dashboard": {
       "title": "Dashboard",
@@ -963,7 +963,7 @@
         "password": "Please provide your password",
         "noConnection": "There is no internet connection",
         "characters": " characters",
-        "phoneNumberLength":"Mobile number must consist between 4 - 13 digits",
+        "phoneNumberLength": "Mobile number must consist between 4 - 13 digits",
         "validNumber": "Please enter a valid mobile number"
       },
       "forgotPassword": "Forgot password?",
@@ -1102,7 +1102,7 @@
         "profile": "Profile",
         "editProfile": "Edit Profile",
         "notifications": "Notifications",
-        "previousNotifications":"Previous Notifications",
+        "previousNotifications": "Previous Notifications",
         "support": "Support",
         "about": "About BioMark",
         "policies": "Policies",
@@ -1851,6 +1851,5 @@
     "camera": "Our app will use camera to upload kyc documents, perform kyc using facial recognition, scan QR code for lab reports, medicines prescription to show to doctor",
     "wifi": "Our app will access Wifi to see if you have wifi connectivity for tracking your health and fitness",
     "gps": "Our app will collect GPS location of your device for booking appointment with health care professionals and identifying clinics and hospitals nearby, to show the nearby locations of clinics and hospitals where a patient can go."
-
   }
 }

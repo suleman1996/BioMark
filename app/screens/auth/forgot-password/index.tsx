@@ -15,8 +15,10 @@ import { logNow } from 'utils/functions/log-binder';
 import makeStyles from './styles';
 import { useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
+import { useTranslation } from 'react-i18next';
 
 export default function ForgotPassword() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -82,13 +84,13 @@ export default function ForgotPassword() {
     <>
       <ActivityIndicator visible={loading} />
       <View style={styles.container}>
-        <Header title="Reset Password" />
+        <Header title={t('pages.resetPassword.title')} />
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.body}>
-            <Text style={styles.title}>
-              Don't worry! We'll help you get back on track.
+            <Text style={styles.title}>{t('pages.resetPassword.intro')}</Text>
+            <Text style={styles.inputLablel}>
+              {t('pages.phoneNumber.mobileNumber')}
             </Text>
-            <Text style={styles.inputLablel}>Mobile Number</Text>
             <PhoneNumber
               countryCode={countryCode}
               setCountryCode={setCountryCode}
@@ -102,25 +104,27 @@ export default function ForgotPassword() {
               (selectCountryCode == 63 ? (
                 phoneNumber.charAt(0) == 0 ? (
                   <Text style={styles.errorMessage}>
-                    Phonenumber must not start with 0
+                    {t('pages.login.errors.phoneNumberZeroStart')}
                   </Text>
                 ) : (
                   phoneNumber.length < numberCondition.min && (
                     <Text style={styles.errorMessage}>
-                      Must have {numberCondition.min}
+                      {t('pages.login.errors.phoneNumberTooShort')}
+                      {numberCondition.min}
                       {numberCondition.max !== numberCondition.min &&
                         -numberCondition.max}{' '}
-                      characters
+                      {t('pages.login.errors.characters')}
                     </Text>
                   )
                 )
               ) : (
                 phoneNumber.length < numberCondition.min && (
                   <Text style={styles.errorMessage}>
-                    Must have {numberCondition.min}
+                    {t('pages.login.errors.phoneNumberTooShort')}
+                    {numberCondition.min}
                     {numberCondition.max !== numberCondition.min &&
                       -numberCondition.max}{' '}
-                    characters
+                    {t('pages.login.errors.characters')}
                   </Text>
                 )
               ))}
@@ -130,7 +134,7 @@ export default function ForgotPassword() {
                   phoneNumber.length >= numberCondition.min &&
                   handleForgotPassword()
                 }
-                title="Continue"
+                title={t('pages.resetPassword.continue')}
                 disabled={
                   // phoneNumber.length < numberCondition.min ? true : false
                   phoneNumber.length < 1 ? true : false

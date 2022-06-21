@@ -41,6 +41,7 @@ import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
 import makeStyles from './styles';
 export const PASS_REGIX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
 export default function Login() {
   // redux
   const { t, i18n } = useTranslation();
@@ -209,7 +210,7 @@ export default function Login() {
           <Logo height="120" width="170" />
         </View>
         <Text style={styles.heading}>{t('pages.landing.welcome')}</Text>
-        <Text style={styles.inputLablel}>Mobile Number</Text>
+        <Text style={styles.inputLablel}>{t('userProfile.mobileNumber')}</Text>
         <PhoneNumber
           countryCode={countryCode}
           setCountryCode={setCountryCode}
@@ -227,26 +228,30 @@ export default function Login() {
             ) : (
               phoneNumber.length < numberCondition.min && (
                 <Text style={styles.errorMessage}>
-                  Must have {numberCondition.min}
+                  {t('pages.login.errors.phoneNumberTooShort')}
+                  {numberCondition.min}
                   {numberCondition.max !== numberCondition.min &&
-                    -numberCondition.max}{' '}
-                  characters
+                    -numberCondition.max}
+                  {t('pages.login.errors.characters')}
                 </Text>
               )
             )
           ) : (
             phoneNumber.length < numberCondition.min && (
               <Text style={styles.errorMessage}>
-                Must have {numberCondition.min}
+                {t('pages.login.errors.phoneNumberTooShort')}
+                {numberCondition.min}
                 {numberCondition.max !== numberCondition.min &&
-                  -numberCondition.max}{' '}
-                characters
+                  -numberCondition.max}
+                {t('pages.login.errors.characters')}
               </Text>
             )
           ))}
 
         <View style={{ height: 20 }} />
-        <Text style={[styles.inputLablel, { marginTop: 20 }]}>Password</Text>
+        <Text style={[styles.inputLablel, { marginTop: 20 }]}>
+          {t('userProfile.password')}
+        </Text>
         <TextInput
           secureTextEntry={hidePassword}
           eye={hidePassword ? 'eye-off' : 'eye'}
@@ -259,13 +264,12 @@ export default function Login() {
         />
         {password !== '' && password.length < 8 && (
           <Text style={styles.errorMessage}>
-            Password must be at least 8 characters long
+            {t('pages.password.passwordRules')}
           </Text>
         )}
         {!PASS_REGIX.test(password) && password.length > 7 ? (
           <Text style={styles.errorMessage}>
-            At least have one digit, one captial letter and one special
-            character.
+            {t('pages.password.passwordRules')}
           </Text>
         ) : null}
         <View style={{ alignSelf: 'center' }}>
@@ -273,7 +277,9 @@ export default function Login() {
             style={{ marginVertical: 30 }}
             onPress={() => navigate(SCREENS.FORGOT_PASSWORD)}
           >
-            <Text style={styles.forgotPassword}>Forgot password?</Text>
+            <Text style={styles.forgotPassword}>
+              {t('pages.login.forgotPassword')}
+            </Text>
           </TouchableOpacity>
         </View>
         <Button
@@ -285,11 +291,11 @@ export default function Login() {
               ? true
               : false
           }
-          title="Login"
+          title={t('pages.login.login')}
         />
         <View style={styles.orView}>
           <View style={styles.dash} />
-          <Text style={styles.orTxt}>Or</Text>
+          <Text style={styles.orTxt}>{t('pages.login.or')}</Text>
           <View style={styles.dash} />
         </View>
         <Text
@@ -320,14 +326,14 @@ export default function Login() {
             <Text
               style={{ color: colors.black, fontFamily: fonts.mulishRegular }}
             >
-              Dont have an account?
+              {t('pages.login.newToBiomark')}
             </Text>
             <TouchableOpacity onPress={() => navigate(SCREENS.SIGNUP)}>
               <Text
                 style={{ color: colors.blue, fontFamily: fonts.mulishRegular }}
               >
                 {' '}
-                Sign up
+                {t('pages.login.signUp')}
               </Text>
             </TouchableOpacity>
           </View>

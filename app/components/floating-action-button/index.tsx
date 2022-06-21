@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { View } from 'react-native';
 import { FAB, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
@@ -36,17 +37,19 @@ const FloatingActionButton = () => {
   ];
 
   return (
-    <FAB.Group
-      fabStyle={styles.button}
-      visible={visible}
-      open={open}
-      icon="plus"
-      actions={actions}
-      onStateChange={(state) => {
-        setOpen(state.open);
-        setVisible(!state.open);
-      }}
-    />
+    <View style={{ height: '40%', marginTop: '85%' }}>
+      <FAB.Group
+        fabStyle={styles.button}
+        visible={visible}
+        open={open}
+        icon="plus"
+        actions={actions}
+        onStateChange={(state) => {
+          setOpen(state.open);
+          setVisible(!state.open);
+        }}
+      />
+    </View>
   );
 };
 

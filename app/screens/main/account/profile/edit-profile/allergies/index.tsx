@@ -4,6 +4,7 @@ import { ButtonWithShadowContainer } from 'components/base';
 import GeneralModalButton from 'components/higher-order/general-modal-button';
 import { TitleWithBackLayout } from 'components/layouts';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { RadioButton, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +31,7 @@ import { makeStyles } from './styles';
 
 /* eslint-disable */
 const AllergiesScreen = () => {
+  const { t } = useTranslation();
   const { colors }: any = useTheme();
   const styles = makeStyles(colors);
 
@@ -166,7 +168,7 @@ const AllergiesScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Allergies">
+    <TitleWithBackLayout title={t('pages.profile.links.allergies')}>
       {/* modals */}
       <GeneralModalPage
         isVisible={isGenModalRef.current}
@@ -248,7 +250,7 @@ const AllergiesScreen = () => {
           saveDataonSavePress();
           goBack();
         }}
-        title={'Save'}
+        title={t('pages.medicalHistory.save')}
       />
     </TitleWithBackLayout>
   );

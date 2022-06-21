@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -7,6 +7,8 @@ import {
   TextInput,
   Image,
   Modal,
+  ScrollView,
+  Pressable,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -25,7 +27,9 @@ import SCREENS from 'navigation/constants';
 import { SearchBarLeftIcon } from 'components/svg';
 import { ActivityIndicator } from 'components';
 import { Button } from 'components/button';
-
+import { healthRiskData } from '../../../screens/main/home-page/health-risk/list-data';
+import { healthRisksColor } from 'utils/functions/your-health';
+import { useNavigation } from '@react-navigation/native';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import MyImage from 'assets/images';
@@ -35,11 +39,17 @@ import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
 import WithdrawProgram from 'components/widthdraw-from-program';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { getHealthTrackerRisks } from 'store/home/home-actions';
 // import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const dispatch = useDispatch();
 
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -51,6 +61,185 @@ const SearchBarWithLeftScanIcon = () => {
 
   const menuRef = useRef<any>();
 
+  const [searchText, setSearchText] = React.useState('');
+  const [searchData, setSearchData] = React.useState([]);
+  const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+
+  useEffect(() => {
+    dispatch(getHealthTrackerRisks());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthRisk]);
+  let arr = [
+    {
+      name: 'Heart Disease',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['heart'],
+        cardData: healthRiskData['heart'].disease,
+        refData: healthRiskData['heart'].refrence,
+        footNotesData: healthRiskData['heart'].footnotes,
+        calc: healthRiskData['heart'].calculations,
+        clr: healthRisksColor(colors, healthRisk['heart']?.status),
+        SVG: healthRiskData['heart'].icon,
+      },
+    },
+    {
+      name: 'Diabetes',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['diabetes'],
+        cardData: healthRiskData['diabetes'].disease,
+        refData: healthRiskData['diabetes'].refrence,
+        footNotesData: healthRiskData['diabetes'].footnotes,
+        calc: healthRiskData['diabetes'].calculations,
+        clr: healthRisksColor(colors, healthRisk['diabetes']?.status),
+        SVG: healthRiskData['diabetes'].icon,
+      },
+    },
+    {
+      name: 'Boold Pressure',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['bp'],
+        cardData: healthRiskData['bp'].disease,
+        refData: healthRiskData['bp'].refrence,
+        footNotesData: healthRiskData['bp'].footnotes,
+        calc: healthRiskData['bp'].calculations,
+        clr: healthRisksColor(colors, healthRisk['bp']?.status),
+        SVG: healthRiskData['bp'].icon,
+      },
+    },
+    {
+      name: 'BMI',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['bmi'],
+        cardData: healthRiskData['bmi'].disease,
+        refData: healthRiskData['bmi'].refrence,
+        footNotesData: healthRiskData['bmi'].footnotes,
+        calc: healthRiskData['bmi'].calculations,
+        clr: healthRisksColor(colors, healthRisk['bmi']?.status),
+        SVG: healthRiskData['bmi'].icon,
+      },
+    },
+    {
+      name: 'Smoking',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['smoking'],
+        cardData: healthRiskData['smoking'].disease,
+        refData: healthRiskData['smoking'].refrence,
+        footNotesData: healthRiskData['smoking'].footnotes,
+        calc: healthRiskData['smoking'].calculations,
+        clr: healthRisksColor(colors, healthRisk['smoking']?.status),
+        SVG: healthRiskData['smoking'].icon,
+      },
+    },
+    {
+      name: 'Drinking',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['drinking'],
+        cardData: healthRiskData['drinking'].disease,
+        refData: healthRiskData['drinking'].refrence,
+        footNotesData: healthRiskData['drinking'].footnotes,
+        calc: healthRiskData['drinking'].calculations,
+        clr: healthRisksColor(colors, healthRisk['drinking']?.status),
+        SVG: healthRiskData['drinking'].icon,
+      },
+    },
+    {
+      name: 'Sleeping',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['sleeping'],
+        cardData: healthRiskData['sleeping'].disease,
+        refData: healthRiskData['sleeping'].refrence,
+        footNotesData: healthRiskData['sleeping'].footnotes,
+        calc: healthRiskData['sleeping'].calculations,
+        clr: healthRisksColor(colors, healthRisk['sleeping']?.status),
+        SVG: healthRiskData['sleeping'].icon,
+      },
+    },
+    {
+      name: 'Stress',
+      screen: SCREENS.HEALTH_RISK,
+      params: {
+        item: healthRisk['stress'],
+        cardData: healthRiskData['stress'].disease,
+        refData: healthRiskData['stress'].refrence,
+        footNotesData: healthRiskData['stress'].footnotes,
+        calc: healthRiskData['stress'].calculations,
+        clr: healthRisksColor(colors, healthRisk['stress']?.status),
+        SVG: healthRiskData['stress'].icon,
+      },
+    },
+    {
+      name: 'Heart Records',
+      screen: SCREENS.HEALTH_RECORD,
+    },
+
+    {
+      name: 'Blood Pressure',
+      screen: SCREENS.BLOOD_PRESSURE,
+    },
+    {
+      name: 'BMI',
+      screen: SCREENS.BODY_MEASUREMENT,
+    },
+    {
+      name: 'Smoking',
+      screen: SCREENS.SMOKING,
+    },
+    {
+      name: 'Drinking',
+      screen: SCREENS.DRINKING,
+    },
+    {
+      name: 'Stress',
+      screen: SCREENS.STRESS,
+    },
+    {
+      name: 'Sleeping',
+      screen: SCREENS.SLEEP,
+    },
+  ];
+
+  const searchResult = (search) => {
+    // try {
+    //   const result = await userService.getSearchResult(5574, search);
+    //   console.log('result.data.results', result.data.results);
+
+    //   setSearchData(result.data.results);
+    // } catch (error) {
+    //   console.log('error ', error);
+    // }
+    const filteredData = arr.filter((ele) => {
+      console.log('ele', ele);
+
+      let itemLowercase = ele.name.toLowerCase();
+
+      let searchTermLowercase = search.toLowerCase();
+
+      return itemLowercase.indexOf(searchTermLowercase) > -1;
+    });
+    setSearchData(filteredData);
+    // this.setState({ DataAdapter: filteredContacts });
+  };
+  const RenderSearch = ({ item }) => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate(SCREENS.MORE_INFO, {
+          result_id: item?.biomarker_id,
+        })
+      }
+      style={styles.renderSearchView}
+    >
+      <Text style={{ fontFamily: fonts.regular, fontSize: 14 }}>
+        {item?.name}
+      </Text>
+    </TouchableOpacity>
+  );
   const handleCode = async () => {
     try {
       const response = await userService.barcodeCheck({
@@ -169,6 +358,12 @@ const SearchBarWithLeftScanIcon = () => {
             color={colors.primary}
           />
           <TextInput
+            onChangeText={(item) => {
+              console.log('item', item);
+
+              setSearchText(item);
+              searchResult(item);
+            }}
             textAlignVertical="center"
             style={styles.input}
             placeholder="Search Biomark app"
@@ -176,6 +371,43 @@ const SearchBarWithLeftScanIcon = () => {
             autoFocus={false}
             text
           />
+        </View>
+        <View
+          style={[
+            styles.viewDropDown,
+            { maxHeight: searchText ? heightToDp(23) : null },
+          ]}
+        >
+          <ScrollView>
+            {searchText !== '' &&
+              searchData?.map((item) => (
+                <Pressable
+                  onPress={() => {
+                    if (item?.params) {
+                      navigate(item?.screen, item?.params);
+                    } else {
+                      navigate(item?.screen);
+                    }
+                  }}
+                  style={styles.renderSearchView}
+                >
+                  {console.log('item', item.screen)}
+                  <View>
+                    <Text
+                      style={{
+                        fontFamily: fonts.regular,
+                        color: colors.inactive,
+                        fontSize: 18,
+                        paddingLeft: 10,
+                      }}
+                    >
+                      {item?.name}
+                    </Text>
+                    <View style={styles.line} />
+                  </View>
+                </Pressable>
+              ))}
+          </ScrollView>
         </View>
       </View>
       <WithdrawProgram

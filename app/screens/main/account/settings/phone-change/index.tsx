@@ -12,8 +12,10 @@ import { IAppState } from 'store/IAppState';
 import { logNow } from 'utils/functions/log-binder';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const PhoneChangeScreen = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -40,9 +42,11 @@ const PhoneChangeScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <TitleWithBackWhiteBgLayout title="Phone Number">
+      <TitleWithBackWhiteBgLayout title={t('pages.phoneNumber.title')}>
         <View style={styles.container}>
-          <Text style={styles.phoneText}>Mobile Number</Text>
+          <Text style={styles.phoneText}>
+            {t('pages.phoneNumber.mobileNumber')}
+          </Text>
           <PhoneNumberWithLabel
             countryCode={countryCode}
             number={number}

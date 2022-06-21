@@ -105,10 +105,15 @@ export interface CovidResult {
   result: string;
   result_date: string;
 }
+
+export interface Dependent_Ref {
+  name: string;
+  reference_code: string;
+}
 export interface CovidBookingResponseData {
   status: boolean;
   user_reference_code: string;
-  dependent_reference_codes: [];
+  dependent_reference_codes: Dependent_Ref[];
 }
 export interface CancelCovidBookingResponseData {
   status: boolean;
