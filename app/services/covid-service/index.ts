@@ -3,6 +3,7 @@ import {
   BookingFormDataResponse,
   CovidBookingHealthDeclarationRequest,
   CovidBookingListResponseData,
+  CovidLatestResponse,
   CovidResponseData,
   CovidResultListResponse,
   ResultSummaryLabPDFResponse,
@@ -182,6 +183,26 @@ function getCovidTestCentersSchedules(test_centre_id: number) {
   });
 }
 
+function getCovidHomeResults() {
+  return new Promise<Array<CovidLatestResponse[]>>((resolve, reject) => {
+    client
+      .get(`${API_URLS.RESULTS_FOR_COVID_HOME}`)
+      .then(async (response: any) => {
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('get covid home results', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('get covid home results error.', err);
+        reject(err);
+      });
+  });
+}
+
 export const covidService = {
   getCovidResults,
   getCovidSingleResults,
@@ -191,4 +212,5 @@ export const covidService = {
   getBookingsForm,
   getCovidTestAndTestCenters,
   getCovidTestCentersSchedules,
+  getCovidHomeResults,
 };

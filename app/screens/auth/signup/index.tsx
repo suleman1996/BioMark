@@ -39,9 +39,11 @@ import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
 import { IC_AND_PASSPORT, NAME } from 'utils/regix';
+import { useTranslation } from 'react-i18next';
 
 export default function Signup() {
   //initial hooks define
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   //state
@@ -165,7 +167,7 @@ export default function Signup() {
           >
             <BackIcon />
           </TouchableRipple>
-          <Text style={styles.signupText}>Signup</Text>
+          <Text style={styles.signupText}>{t('pages.signUp.title')}</Text>
         </View>
         <StepIndicator
           stepCount={3}
@@ -205,9 +207,11 @@ export default function Signup() {
             }) => (
               <>
                 <View style={styles.biContainer}>
-                  <Text style={styles.heading}>Basic Information</Text>
+                  <Text style={styles.heading}>
+                    {t('pages.register.form.basicLegend')}
+                  </Text>
                   <InputWithLabel
-                    label="First Name"
+                    label={t('pages.register.form.firstName')}
                     placeholder={''}
                     containerStyles={{ paddingHorizontal: 20 }}
                     labelFontSize={15}
@@ -218,7 +222,7 @@ export default function Signup() {
                   />
 
                   <InputWithLabel
-                    label="Last Name"
+                    label={t('pages.register.form.lastName')}
                     placeholder={''}
                     containerStyles={{ paddingHorizontal: 20 }}
                     labelFontSize={15}
@@ -227,7 +231,9 @@ export default function Signup() {
                     error={touched.lName ? errors.lName : ''}
                     onBlur={() => setFieldTouched('lName')}
                   />
-                  <Text style={styles.inputLablel}>Gender</Text>
+                  <Text style={styles.inputLablel}>
+                    {t('pages.register.form.gender')}
+                  </Text>
                   <View style={styles.ChoiceBtnDOB}>
                     <FlatList
                       data={gender}
@@ -237,7 +243,9 @@ export default function Signup() {
                     />
                   </View>
 
-                  <Text style={styles.inputLablel}>Date of Birth</Text>
+                  <Text style={styles.inputLablel}>
+                    {t('pages.register.form.dateOfBirth')}
+                  </Text>
                   <View style={{ paddingHorizontal: 20 }}>
                     <DatePickerModal
                       isPickerShow={isPickerShow}
@@ -249,7 +257,7 @@ export default function Signup() {
                     />
                   </View>
                   <InputWithLabel
-                    label="Identity Card/Passport Number"
+                    label={t('pages.register.form.idNumber')}
                     placeholder={'E.g. A1234567X'}
                     containerStyles={{ paddingHorizontal: 20 }}
                     labelFontSize={15}
@@ -262,7 +270,9 @@ export default function Signup() {
                     onBlur={() => setFieldTouched('IcPnum')}
                   />
                   <View style={styles.aiContainer}>
-                    <Text style={styles.heading}>Account Information</Text>
+                    <Text style={styles.heading}>
+                      {t('pages.register.form.accountLegend')}
+                    </Text>
                     {/* <Text style={styles.inputLablel}>Mobile Number</Text>
                     <PhoneNumber
                       countryCode={countryCode}
@@ -300,7 +310,7 @@ export default function Signup() {
                       ))} */}
                     <View style={{ paddingHorizontal: 20 }}>
                       <PhoneNumberWithLabel
-                        label="Mobile Number"
+                        label={t('pages.register.form.mobile')}
                         placeholder={''}
                         disabled={false}
                         number={values.phone_number}
@@ -327,10 +337,11 @@ export default function Signup() {
                           values.phone_number.length < numberCondition.min && (
                             <View style={styles.errorContainer}>
                               <Text style={styles.errorText}>
-                                Must have {numberCondition.min}
+                                {t('pages.login.errors.phoneNumberTooShort')}
+                                {numberCondition.min}
                                 {numberCondition.max !== numberCondition.min &&
                                   -numberCondition.max}{' '}
-                                characters
+                                {t('pages.login.errors.characters')}
                               </Text>
                             </View>
                           )
@@ -338,7 +349,7 @@ export default function Signup() {
                     </View>
 
                     <InputWithLabel
-                      label="Email"
+                      label={t('pages.register.form.email')}
                       placeholder="E.g. Sample@email.com"
                       containerStyles={{ paddingHorizontal: 20 }}
                       labelFontSize={15}
@@ -347,9 +358,13 @@ export default function Signup() {
                       error={touched.email ? errors.email : ''}
                       onBlur={() => setFieldTouched('email')}
                     />
-                    <Text style={styles.inputLablel}>Password</Text>
+                    <Text style={styles.inputLablel}>
+                      {t('pages.register.form.password')}
+                    </Text>
                     <TextInput
-                      placeholder="Enter your new password..."
+                      placeholder={t(
+                        'pages.password.currentPassword.placeholder'
+                      )}
                       secureTextEntry={hidePassword}
                       eye={!hidePassword ? 'eye' : 'eye-off'}
                       onEyePress={() => setHidePassword(!hidePassword)}
@@ -371,7 +386,7 @@ export default function Signup() {
                   <View style={styles.tcText}>
                     <CheckBox checked={checked} setChecked={setChecked} />
                     <Text style={styles.tcTextStyle}>
-                      <Text>I accept the </Text>
+                      <Text>{t('pages.signUp.tos.start')} </Text>
                       <TouchableWithoutFeedback
                         onPress={() =>
                           navigate(SCREENS.TERMS_AND_PRIVACY, {
@@ -387,10 +402,10 @@ export default function Signup() {
                             // bottom: 2,
                           }}
                         >
-                          terms and conditions
+                          {t('pages.signUp.tos.tosLink')}
                         </Text>
                       </TouchableWithoutFeedback>
-                      <Text> and the </Text>
+                      <Text> {t('pages.signUp.tos.middle')} </Text>
                       <TouchableWithoutFeedback
                         onPress={() =>
                           navigate(SCREENS.TERMS_AND_PRIVACY, {
@@ -405,14 +420,14 @@ export default function Signup() {
                             textDecorationLine: 'underline',
                           }}
                         >
-                          privacy policy.
+                          {t('pages.signUp.tos.dppLink')}
                         </Text>
                       </TouchableWithoutFeedback>
                     </Text>
                   </View>
 
                   <Button
-                    title="Continue"
+                    title={t('pages.signUp.continue')}
                     disabled={
                       !isValid ||
                       values.phone_number.length < numberCondition.min

@@ -196,9 +196,9 @@ const ExisitingBookingForDependent = (props: Props) => {
     logNow(booking);
 
     const copyArray = booking;
-    const obj = testCentersBasedOnCities.find((item) => item.id == id);
+    // const obj = testCentersBasedOnCities.find((item) => item.id == id);
     copyArray[itemIndex].test_type_id = id;
-    copyArray[itemIndex].test_location = obj?.name;
+    copyArray[itemIndex].test_location = 'Test Centre';
     await dispatch(addCovidBooking(copyArray));
   };
 
@@ -456,7 +456,6 @@ const ExisitingBookingForDependent = (props: Props) => {
                   />
                 </>
               ) : null}
-
               {/* Select Test Center */}
               <View style={{ marginTop: heightToDp(1) }} />
               {testCentersBasedOnCities.length > 0 ? (
@@ -474,6 +473,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                   />
                 </>
               ) : null}
+              <View style={{ marginTop: heightToDp(1) }} />
               {testCentersBasedOnCities.filter(
                 (item) => item.id == covidTestCenterValue
               ).length > 0 ? (
@@ -512,6 +512,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <>
                   <Text style={styles.innerTitle}>Test Center</Text>
                   <DropdownMenu
+                    width={88}
                     options={testCentersBasedOnCities
                       .filter((item) => item.id == covidTestCenterValue)[0]
                       ?.clinics.map((item2) => {

@@ -25,9 +25,11 @@ import fonts from 'assets/fonts';
 import BackIcon from 'assets/svgs/back';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 import { setAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 
 export default function SignupVerification() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -142,7 +144,9 @@ export default function SignupVerification() {
         <View style={styles.signupNav}>
           <View style={styles.csNav}>
             <BackIcon onPress={() => goBack()} />
-            <Text style={styles.signupText}>Back</Text>
+            <Text style={styles.signupText}>
+              {t('pages.idVerification.backButton')}
+            </Text>
           </View>
           <StepIndicator
             stepCount={3}
@@ -155,10 +159,9 @@ export default function SignupVerification() {
         <View style={styles.OTPContainer}>
           <ScrollView style={{ marginBottom: 40 }}>
             <View>
-              <Text style={styles.heading}>Enter your OTP Code</Text>
+              <Text style={styles.heading}>{t('pages.signUp.otpTitle')}</Text>
               <Text style={styles.upperText}>
-                You will receive a verification code with the mobile number you
-                have provided. Check your phone and enter the OTP code below.
+                {t('pages.signUp.otpCodeDescription')}
               </Text>
               <View style={{ marginTop: 30, height: 50 }}>
                 <OtpInput
@@ -186,9 +189,9 @@ export default function SignupVerification() {
                     fontFamily: fonts.mulishRegular,
                   }}
                 >
-                  <Text>Not received? </Text>
+                  <Text>{t('pages.resetPassword.notReceived')} </Text>
                   <Text style={{ color: colors.blue }}>
-                    Resend OTP Code {minutes}:
+                    {t('pages.resetPassword.otpResend')} {minutes}:
                     {seconds < 10 ? `0${seconds}` : seconds}
                   </Text>
                 </Text>
@@ -200,7 +203,7 @@ export default function SignupVerification() {
               {/* <CheckBox /> */}
               <TouchableOpacity>
                 <Text style={styles.callUsTextStyle}>
-                  <Text>Having trouble? </Text>
+                  <Text>{t('pages.signUp.allSet.actions.trouble.text')} </Text>
                   <Text
                     style={{
                       color: colors.blue,
@@ -208,14 +211,14 @@ export default function SignupVerification() {
                       fontFamily: fonts.bold,
                     }}
                   >
-                    contact us
+                    {t('pages.signUp.allSet.actions.trouble.link')}
                   </Text>
                 </Text>
               </TouchableOpacity>
             </View>
             <Button
               // disabled={code.length < 6 ? true : false}
-              title="Continue"
+              title={t('pages.signUp.continue')}
               onPress={() => handleSignUP()}
             />
           </View>

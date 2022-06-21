@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -39,15 +39,17 @@ import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
 import WithdrawProgram from 'components/widthdraw-from-program';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { getHealthTrackerRisks } from 'store/home/home-actions';
 // import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
   const navigation = useNavigation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const dispatch = useDispatch();
 
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -62,6 +64,11 @@ const SearchBarWithLeftScanIcon = () => {
   const [searchText, setSearchText] = React.useState('');
   const [searchData, setSearchData] = React.useState([]);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+
+  useEffect(() => {
+    dispatch(getHealthTrackerRisks());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthRisk]);
   let arr = [
     {
       name: 'Heart Disease',
@@ -377,9 +384,9 @@ const SearchBarWithLeftScanIcon = () => {
                 <Pressable
                   onPress={() => {
                     if (item?.params) {
-                      navigate(item.screen, item?.params);
+                      navigate(item?.screen, item?.params);
                     } else {
-                      navigate(item.screen);
+                      navigate(item?.screen);
                     }
                   }}
                   style={styles.renderSearchView}
