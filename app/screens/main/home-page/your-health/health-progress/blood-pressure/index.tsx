@@ -31,8 +31,10 @@ import { graphGreyColor } from 'utils/functions/graph/graph.types';
 import { userService } from 'services/user-service/user-service';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { Tip } from 'react-native-tip';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   const chartRef = useRef();
@@ -172,7 +174,7 @@ const Index = () => {
   return (
     <>
       <HealthProgressFilter
-        option1="Updated By"
+        option1={t('pages.bloodPressureTab.filters.uploadType')}
         visible={isVisible}
         setIsVisible={setIsVisible}
         filterOption1={filterOption1}
@@ -188,13 +190,15 @@ const Index = () => {
           />
           <View style={styles.headingView}>
             <View style={{ width: '40%' }}>
-              <Text style={styles.heading}>Blood Pressure (mmHg)</Text>
+              <Text style={styles.heading}>
+                {t('pages.bloodPressureInput.title')} (mmHg)
+              </Text>
             </View>
 
             <View style={styles.rowCenter}>
               <View style={{ marginRight: 10 }}>
                 <Tip
-                  body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beaats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats."
+                  body={t('pages.bloodPressureInput.definition')}
                   bodyStyle={{ color: '#fff' }}
                   tipContainerStyle={{
                     backgroundColor: colors.shineBlue,
@@ -207,7 +211,9 @@ const Index = () => {
               </View>
               <View style={styles.rowCenter}>
                 <View style={styles.dash} />
-                <Text style={styles.sys}>SYS</Text>
+                <Text style={styles.sys}>
+                  {t('pages.bloodPressureTab.sys')}
+                </Text>
                 <Text style={styles.sys}> / </Text>
                 <View
                   style={[
@@ -217,7 +223,9 @@ const Index = () => {
                     },
                   ]}
                 />
-                <Text style={styles.sys}>DIA</Text>
+                <Text style={styles.sys}>
+                  {t('pages.bloodPressureTab.dia')}
+                </Text>
               </View>
               <TouchableOpacity
                 style={{ marginLeft: 15 }}

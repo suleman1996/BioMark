@@ -35,8 +35,10 @@ import {
 
 import makeStyles from './styles';
 import { roundToDecimalPlaces } from 'utils/functions';
+import { useTranslation } from 'react-i18next';
 
 const BloodSugar = ({ route }) => {
+  const { t } = useTranslation();
   const SELECTED_BS_ID = route?.params?.logId;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -101,13 +103,13 @@ const BloodSugar = ({ route }) => {
 
       if (+value < +range[0]) {
         showMessage({
-          message: 'Your blood sugar is below range',
+          message: t('pages.bloodSugarInput.errors.belowRange'),
           type: 'danger',
           icon: 'warning',
         });
       } else if (+value > +range[1]) {
         showMessage({
-          message: 'Your blood sugar is above range',
+          message: t('pages.bloodSugarInput.errors.aboveRange'),
           type: 'danger',
           icon: 'warning',
         });
@@ -217,7 +219,7 @@ const BloodSugar = ({ route }) => {
   return (
     <TitleWithBackWhiteBgLayout
       binIcon={SELECTED_BS_ID ? true : false}
-      title="Blood Sugar"
+      title={t('pages.bloodSugarInput.title')}
       onPressIcon={() => setShowDeleteModal(true)}
     >
       <ActivityIndicator visible={isLoading} />
@@ -229,7 +231,7 @@ const BloodSugar = ({ route }) => {
           }}
         >
           <InputWithUnits
-            title="Your Reading"
+            title={t('pages.bloodSugarInput.yourReading')}
             placeholder="0.0"
             units={['mg/dL', 'mmol/L']}
             unit={bloodSugarTracker?.unit_list_id === 1 ? 'mg/dL' : 'mmol/L'}
@@ -250,7 +252,9 @@ const BloodSugar = ({ route }) => {
           {bloodSugarTracker?.data_value && !error ? (
             <>
               <View style={styles.dropDown}>
-                <Text style={styles.textStyle}>Meal</Text>
+                <Text style={styles.textStyle}>
+                  {t('pages.bloodSugarInput.meal')}
+                </Text>
                 <DropdownMenu
                   options={options}
                   selectedValue={bloodSugarTracker.meal_type_id}
@@ -262,7 +266,9 @@ const BloodSugar = ({ route }) => {
                   }}
                 />
               </View>
-              <Text style={styles.label}>Date - Time</Text>
+              <Text style={styles.label}>
+                {t('pages.bloodSugarInput.dateTime')}
+              </Text>
               <DateTimePickerModal
                 maxDate={new Date()}
                 date={bloodSugarTracker?.record_date}
@@ -278,17 +284,23 @@ const BloodSugar = ({ route }) => {
         </View>
       </ScrollView>
       <AccountDeActivateModal
-        headerText="Blood Sugar"
-        subHeading="Are you sure you wish to delete this blood sugar log?"
-        buttonUpperText="Yes"
-        buttonLowerText="Skip"
+        headerText={t('pages.bloodSugarInput.dialogs.delete.title')}
+        subHeading={t('pages.bloodSugarInput.dialogs.delete.description')}
+        buttonUpperText={t('pages.bloodSugarInput.dialogs.delete.buttonText')}
+        buttonLowerText={t(
+          'pages.bloodSugarInput.dialogs.delete.buttonCancelText'
+        )}
         isVisible={showDeleteModal}
         setIsVisible={setShowDeleteModal}
         callMe={deleteBsLog}
       />
       <ButtonWithShadowContainer
         onPress={saveBsLog}
-        title={route?.params?.logId ? 'Save Edit' : 'Add'}
+        title={
+          route?.params?.logId
+            ? t('pages.bloodSugarInput.save')
+            : t('pages.bloodSugarInput.add')
+        }
         disabled={
           bloodSugarTracker.data_value === '0.0' ||
           bloodSugarTracker.meal_type_id == 0 ||
