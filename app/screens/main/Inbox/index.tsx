@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
-// import PagerView from 'react-native-pager-view';
+import PagerView from 'react-native-pager-view';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TitleWithSearchBarLayout } from 'components/layouts';
@@ -19,10 +19,19 @@ import {
   getAllOtherUnreadNotificationsR,
 } from 'store/notifications/notification-actions';
 import { IAppState } from 'store/IAppState';
-import { logNow } from 'utils/functions/log-binder';
 import { notificationsService } from 'services/notification-service';
 
 import makeStyles from './styles';
+import { NotificationMessage, NotificationType } from 'types/api';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
+
+import {
+  BioDoctorStethoscope,
+  BioTrend,
+  BioMedical,
+  BioMcr,
+} from 'components/svg';
 
 export default function InboxScreen() {
   const { colors } = useTheme();
@@ -97,15 +106,79 @@ export default function InboxScreen() {
   }, [currentPageOtherNoti]);
   /*eslint-enable */
 
-  // const pagerRef = useRef<any>();
+  const clickHandler = (notification: NotificationMessage) => {
+    console.log(
+      'notification?.has_pending_declaration',
+      notification?.has_pending_declaration
+    );
+
+    switch (notification.notification_type) {
+      case NotificationType.medication_reminder:
+      case NotificationType.missed_medication:
+        console.log('1');
+        navigate(SCREENS.HEALTH_PROGRESS, 1);
+        break;
+      case NotificationType.medical:
+        console.log('2');
+        navigate(SCREENS.ACCOUNT);
+
+        break;
+      case NotificationType.result:
+      case NotificationType.mcr:
+        console.log('3');
+        navigate(SCREENS.HEALTH_RECORD);
+        break;
+      case NotificationType.message:
+        console.log('4');
+        //   this.nav.navigateForward(['notification', 'doctor-message', notification.id]).then();
+        break;
+      case NotificationType.doctor:
+        console.log('5');
+        console.log('message'); // TODO not sure where to go
+        break;
+      case NotificationType.covid:
+        console.log('6');
+        navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+          screen: SCREENS.COVID19BOOKINGS,
+          params: {
+            has_pending_declaration: notification?.has_pending_declaration,
+          },
+        });
+        break;
+      case NotificationType.covid_result:
+        console.log('7');
+        // navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+        //   screen: SCREENS.COVID19HOME,
+        // });
+        break;
+    }
+  };
+  const getIcon = (type: string) => {
+    const typeMap = {
+      [NotificationType.medical]: <BioMedical />,
+      [NotificationType.medication_reminder]: <BioMedical />,
+      [NotificationType.missed_medication]: <BioMedical />,
+
+      [NotificationType.result]: <BioTrend />,
+
+      [NotificationType.doctor]: <BioDoctorStethoscope />,
+      [NotificationType.message]: <BioDoctorStethoscope />,
+
+      [NotificationType.mcr]: <BioMcr />,
+      [NotificationType.covid]: <BioMedical />,
+    };
+
+    return typeMap[type];
+  };
+  const pagerRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPage, setCurrentPage] = useState(0);
-  // const onPageScroll = (event: any) => {
-  //   const { position } = event.nativeEvent;
-  //   if (position !== currentPage) {
-  //     setCurrentPage(position);
-  //   }
-  // };
+  const onPageScroll = (event: any) => {
+    const { position } = event.nativeEvent;
+    if (position !== currentPage) {
+      setCurrentPage(position);
+    }
+  };
 
   const PreviousNotification = () => {
     return (
@@ -120,15 +193,21 @@ export default function InboxScreen() {
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
           data={allInboxNotificationsData}
-          renderItem={PreviousNotificationItem}
+          renderItem={({ item }) => (
+            <PreviousNotificationItem
+              getIcon={getIcon}
+              item={item}
+              onPress={() => clickHandler(item)}
+            />
+          )}
           ListFooterComponent={() => {
             return (
               <>
                 {isReadMoreInboxNoti && allInboxNotificationsData.length > 0 ? (
                   <Pressable
-                    // onPress={() => {
-                    //   setCurrentPageInboxNoti(currentPageInboxNoti + 1);
-                    // }}
+                    onPress={() => {
+                      setCurrentPageInboxNoti(currentPageInboxNoti + 1);
+                    }}
                     style={styles.readMoreContainer}
                   >
                     <Text style={styles.readMoreText}>Read More</Text>
@@ -143,7 +222,6 @@ export default function InboxScreen() {
   };
 
   const OtherNotification = () => {
-    logNow('others');
     return (
       <View style={styles.previousNotificationContainer}>
         <FlatList
@@ -153,16 +231,18 @@ export default function InboxScreen() {
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
           data={allOthersNotificationsData}
-          renderItem={OtherNotificationItem}
+          renderItem={({ item }) => (
+            <OtherNotificationItem getIcon={getIcon} item={item} />
+          )}
           ListFooterComponent={() => {
             return (
               <>
                 {isReadMoreOtherNoti &&
                 allOthersNotificationsData.length > 0 ? (
                   <Pressable
-                    // onPress={() => {
-                    //   setCurrentPageOtherNoti(currentPageOtherNoti + 1);
-                    // }}
+                    onPress={() => {
+                      setCurrentPageOtherNoti(currentPageOtherNoti + 1);
+                    }}
                     style={styles.readMoreContainer}
                   >
                     <Text style={styles.readMoreText}>Read More</Text>
@@ -182,7 +262,9 @@ export default function InboxScreen() {
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
           data={allOthersUnreadNotificationsData}
-          renderItem={PreviousNotificationItem}
+          renderItem={({ item }) => (
+            <PreviousNotificationItem getIcon={getIcon} item={item} />
+          )}
         />
       </View>
     );
@@ -197,11 +279,11 @@ export default function InboxScreen() {
           >
             <View style={styles.tabNameContainer}>
               <Pressable
-                onPress={() => PreviousNotification()}
-                // onPress={() => pagerRef.current.setPage(0)}
+                // onPress={() => PreviousNotification()}
+                onPress={() => pagerRef.current.setPage(0)}
                 style={[
                   styles.tab,
-                  currentPage == 0 ? { borderBottomWidth: 3 } : {},
+                  currentPage != 1 ? { borderBottomWidth: 3 } : {},
                 ]}
               >
                 <Text style={styles.tabText}>
@@ -209,8 +291,8 @@ export default function InboxScreen() {
                 </Text>
               </Pressable>
               <Pressable
-                onPress={() => OtherNotification()}
-                // onPress={() => pagerRef.current.setPage(1)}
+                //  onPress={() => OtherNotification()}
+                onPress={() => pagerRef.current.setPage(1)}
                 style={[
                   styles.tab,
                   currentPage == 1 ? { borderBottomWidth: 3 } : {},
@@ -222,7 +304,7 @@ export default function InboxScreen() {
               </Pressable>
             </View>
 
-            {/* <PagerView
+            <PagerView
               ref={pagerRef}
               onPageScroll={onPageScroll}
               style={styles.pagerView}
@@ -234,7 +316,7 @@ export default function InboxScreen() {
               <View key="1">
                 <OtherNotification />
               </View>
-            </PagerView> */}
+            </PagerView>
           </View>
         </View>
       </TitleWithSearchBarLayout>

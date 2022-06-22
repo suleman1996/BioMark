@@ -13,7 +13,7 @@ import PaymentSuccess from 'screens/covid19/steps/payment-success';
 import PaymentStep from 'screens/covid19/steps/payments';
 import ViewCovidResults from 'screens/covid19/view-results';
 import SingleCovidResult from 'screens/covid19/view-results/single-result';
-import { navigate } from 'services/nav-ref';
+import { goBack, navigate } from 'services/nav-ref';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
@@ -44,9 +44,10 @@ const Covid19Navigator = () => {
           headerLeft: () => (
             <Pressable
               onPress={() => {
-                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                  screen: SCREENS.COVID19HOME,
-                });
+                // navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                //   screen: SCREENS.COVID19HOME,
+                // });
+                goBack();
               }}
               style={{ paddingRight: widthToDp(2) }}
             >

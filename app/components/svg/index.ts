@@ -13,3 +13,7 @@ export { default as BioSupport } from './bio-support';
 export { default as Pencil } from './pencil';
 export { default as SearchBarLeftIcon } from './search-bar-left-icon';
 export { default as DependentIcon } from './bio_dependant_icon';
+export { default as BioDoctorStethoscope } from './bio-doctor-stethoscope_icon';
+export { default as BioMcr } from './bio-mcr_icon';
+export { default as BioMedical } from './bio-medical_icon';
+export { default as BioTrend } from './bio-trend_icon';
