@@ -18,6 +18,7 @@ import { CovidLatestResponse } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import makeStyles from './styles';
+import { getUserProfileData } from 'store/profile/profile-actions';
 
 type Props = {};
 
@@ -39,9 +40,13 @@ const Covid19Home = (props: Props) => {
   const getCovidHomeResults = async () => {
     const res: any = await dispatch(getCovidHomeResultsR());
   };
+  const getUserOnFocus = async () => {
+    await dispatch(getUserProfileData());
+  };
 
   useEffect(() => {
     getCovidHomeResults();
+    getUserOnFocus();
   }, [focused]);
   /*eslint-enable */
 
