@@ -28,22 +28,22 @@ const lbsToKg = () => {
 const mgMmolConversion = (value: number, toUnit: 'mg/dL' | 'mmol/L' | string) =>
   Number(toUnit == 'mg/dL' ? value * 18 : value * (1 / 18)).toFixed(2); // These values might not be accurate
 
-const measurementValidator = (is_metric, measurment, value) => {
+const measurementValidator = (is_metric, measurment, value, t) => {
   let errorr = '';
   if (value.length === 0 || value == 0)
     return measurment === 'height'
-      ? 'Please provide your height measurement'
-      : 'Please provide your weight measurement';
+      ? t('pages.bodyMeasurements.errors.missingHeight')
+      : t('pages.bodyMeasurements.errors.missingWeight');
   const WEIGHT_RANGE = {
     kg: {
       min: 0,
       max: 200,
-      errorr: 'Please enter a valid weight between 0 - 200 kg',
+      errorr: t('pages.bodyMeasurements.errors.outOfBoundariesKg'),
     },
     lbs: {
       min: 0,
       max: 440,
-      errorr: 'Please enter a valid weight between 0 - 440 lbs',
+      errorr: t('pages.bodyMeasurements.errors.outOfBoundariesLbs'),
     },
   };
 
@@ -51,12 +51,12 @@ const measurementValidator = (is_metric, measurment, value) => {
     cm: {
       min: 60,
       max: 250,
-      errorr: 'Please enter a valid height between 60 - 250 cm',
+      errorr: t('pages.bodyMeasurements.errors.outOfBoundariesMetric'),
     },
     ft: {
       min: "1'11.7",
       max: "8'2.5",
-      errorr: "Please enter a valid height between 1'11.7 - 8'2.5 ft/in",
+      errorr: t('pages.bodyMeasurements.errors.outOfBoundariesImperial'),
     },
   };
 

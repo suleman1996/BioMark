@@ -28,7 +28,6 @@ const Index = (props: Props) => {
         }}
       >
         {comp.map((ele, index) => {
-          console.log('ele', ele);
           return (
             <>
               {index !== 0 ? (

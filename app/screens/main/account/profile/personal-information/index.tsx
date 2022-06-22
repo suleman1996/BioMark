@@ -24,11 +24,13 @@ import { goBack } from 'services/nav-ref';
 import fonts from 'assets/fonts';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const PersonalInformationScreen = () => {
   const authContext = React.useContext(AuthContext);
 
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = makeStyles(colors);
 
   const [value, setValue] = useState(
@@ -113,7 +115,7 @@ const PersonalInformationScreen = () => {
               marginBottom: 30,
             }}
           >
-            Are you sure?
+            {t('userProfile.dialogs.confirm.title')}
           </Text>
 
           <Text
@@ -124,11 +126,12 @@ const PersonalInformationScreen = () => {
               marginBottom: 40,
             }}
           >
-            Are you sure you want to change your gender? Your diabetes medical
-            history will be updated to Unsure. You will need to update your
-            personal medical history again.
+            {t('userProfile.dialogs.confirm.description')}
           </Text>
-          <ButtonComponent onPress={() => handleUpdateProfile()} title="yes" />
+          <ButtonComponent
+            onPress={() => handleUpdateProfile()}
+            title={t('userProfile.dialogs.confirm.buttonText')}
+          />
           <TouchableOpacity onPress={() => setGenderWarn(false)}>
             <Text
               style={{
@@ -140,7 +143,7 @@ const PersonalInformationScreen = () => {
                 alignSelf: 'center',
               }}
             >
-              Exit
+              {t('userProfile.dialogs.confirm.buttonCancelText')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -149,24 +152,24 @@ const PersonalInformationScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout title="Personal Information">
+    <TitleWithBackLayout title={t('pages.personalInformation.title')}>
       <ActivityIndicator visible={isLoading} />
       <RenderConfirmation visible={genderWar} />
       <ScrollView style={styles.container}>
         <InputWithLabel
-          label="First Name"
+          label={t('pages.register.form.firstName')}
           onChange={(text) => setFirstName(text)}
           value={firstName}
         />
         <InputWithLabel
-          label="Last Name"
+          label={t('pages.register.form.lastName')}
           onChange={(text) => setLastName(text)}
           value={lastName}
         />
-        <Text style={styles.label}>Date of Birth</Text>
+        <Text style={styles.label}>{t('pages.register.form.dateOfBirth')}</Text>
         {/* <DatePicker width={'100%'} /> */}
         <DatePickerModal date={date} setDate={setDate} />
-        <Text style={styles.label}>Gender</Text>
+        <Text style={styles.label}>{t('pages.register.form.gender')}</Text>
         <RadioButton.Group
           onValueChange={(newValue) => {
             setValue(newValue), setGenderDisable(true);
@@ -175,11 +178,11 @@ const PersonalInformationScreen = () => {
         >
           <View style={styles.radioContainer}>
             <RadioButton.Android color={colors.darkPrimary} value="first" />
-            <Text style={styles.radioText}>Male</Text>
+            <Text style={styles.radioText}>{t('common.gender.male')}</Text>
           </View>
           <View style={styles.radioContainer}>
             <RadioButton.Android color={colors.darkPrimary} value="second" />
-            <Text style={styles.radioText}>Female</Text>
+            <Text style={styles.radioText}>{t('common.gender.female')}</Text>
           </View>
         </RadioButton.Group>
       </ScrollView>
@@ -194,7 +197,7 @@ const PersonalInformationScreen = () => {
             ? false
             : true
         }
-        title="Save & Continue"
+        title={t('pages.medicalHistory.continue')}
         onPress={() => {
           makingData();
         }}

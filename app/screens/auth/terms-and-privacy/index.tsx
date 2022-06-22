@@ -158,7 +158,10 @@ export default function TermsAndPrivacy({ route }) {
   return (
     <View style={{ height: '100%', backgroundColor: '#fff' }}>
       {header ? (
-        <TitleWithBackLayout title="Policies" style={{ flex: 0 }} />
+        <TitleWithBackLayout
+          title={t('pages.policies.title')}
+          style={{ flex: 0 }}
+        />
       ) : (
         <View style={styles.signupNav}>
           <View style={styles.csNav}>

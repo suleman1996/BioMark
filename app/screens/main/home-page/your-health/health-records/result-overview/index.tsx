@@ -36,7 +36,7 @@ const Index = () => {
   );
 
   const [showSummaryummary, setSummary] = React.useState(true);
-  const [lapid, setLapid] = React.useState(true);
+  const [results, setResults] = React.useState({ id: 0 });
   const [isInfo, setIsInfo] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   const [filterOption1] = React.useState([
@@ -74,7 +74,23 @@ const Index = () => {
     }
   };
 
-  const RenderTitle = ({ state, setState, title }) => (
+  const RenderTitle = ({ result }) => (
+    <TouchableOpacity
+      onPress={() =>
+        setResults(results.id == 0 ? { id: result?.name } : { id: 0 })
+      }
+      style={styles.titleContainer}
+    >
+      <Text style={styles.renderTitle}>{result?.name}</Text>
+      <AntDesign
+        color={colors.blue}
+        size={15}
+        name={results.id != result?.name ? 'up' : 'down'}
+      />
+    </TouchableOpacity>
+  );
+
+  const RenderSummaryTitle = ({ state, setState, title }) => (
     <TouchableOpacity
       onPress={() => setState(!state)}
       style={styles.titleContainer}
@@ -87,7 +103,7 @@ const Index = () => {
   const RenderSummary = () => (
     <View style={styles.summaryContainer}>
       <View style={{ marginHorizontal: 5 }}>
-        <RenderTitle
+        <RenderSummaryTitle
           title="Summary"
           state={showSummaryummary}
           setState={setSummary}
@@ -98,9 +114,6 @@ const Index = () => {
           <View style={styles.infoView}>
             <AntDesign color={colors.blue} name="infocirlceo" />
             <Text style={styles.infoText}>
-              {/* <Text>You have</Text>
-            <Text style={{ color: colors.heading }}> 1 out of 3 </Text>
-            <Text>That need attention</Text> */}
               {resultOverView?.result?.summary}
             </Text>
           </View>
@@ -160,13 +173,15 @@ const Index = () => {
     );
   };
 
-  const applyFilter = () => {
+  const applyFilter = (filter1) => {
+    setSelectedfilterOption1(filter1);
+
     dispatch(
       getReduxResultOverview(
         route?.params?.result
           ? route?.params?.result?.lab_id
           : route?.params?.lab_id,
-        selectedfilterOption1?.title
+        filter1?.title
       )
     );
     setIsVisible(false);
@@ -182,7 +197,8 @@ const Index = () => {
         filterOption1={filterOption1}
         selectedfilterOption1={selectedfilterOption1}
         setSelectedfilterOption1={setSelectedfilterOption1}
-        onApplyPress={() => applyFilter()}
+        onApplyPress={applyFilter}
+        values={{ selectedfilterOption1 }}
       />
       <TitleWithBackLayout
         shadow={colors.blue}
@@ -228,16 +244,12 @@ const Index = () => {
             {resultOverView?.panel?.map((result) => (
               <>
                 <FlatList
-                  ListHeaderComponent={
-                    <RenderTitle
-                      title={result?.name}
-                      state={lapid}
-                      setState={setLapid}
-                    />
-                  }
+                  ListHeaderComponent={<RenderTitle result={result} />}
                   data={result?.biomarker}
                   keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => <RenderResults item={item} />}
+                  renderItem={({ item }) =>
+                    results.id != result?.name && <RenderResults item={item} />
+                  }
                 />
                 <View style={{ height: 20 }} />
               </>

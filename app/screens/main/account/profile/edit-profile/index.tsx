@@ -36,10 +36,12 @@ import { useIsFocused } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 
 import { getUserProfileData } from 'store/profile/profile-actions';
+import { useTranslation } from 'react-i18next';
 
 let cameraIs = false;
 
 const EditProfileScreen = () => {
+  const { t } = useTranslation();
   const focused = useIsFocused();
   const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
@@ -180,7 +182,7 @@ const EditProfileScreen = () => {
   };
 
   return (
-    <TitleWithBackLayout shouldGoBack shadow={colors.blue} title="Your Profile">
+    <TitleWithBackLayout shadow={colors.blue} title="Your Profile">
       <ActivityIndicator visible={isLoading} />
       <EditProfileModal
         iconPress={() => setShowModal(false)}
@@ -219,7 +221,7 @@ const EditProfileScreen = () => {
                 fontFamily: GlobalFonts.light,
               }}
             >
-              ABOUT ME
+              {t('pages.profile.about')}
             </Text>
             <Pressable
               onPress={() => navigate(SCREENS.PERSONAL_INFORMATION)}
@@ -231,7 +233,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Personal Information</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.personalInformation')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -249,7 +253,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Body Measurement</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.bodyMeasurement')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -267,7 +273,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Medical History</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.medicalHistory')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -286,7 +294,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Vaccination</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.vaccination')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -305,7 +315,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Allergies</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.allergies')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -323,7 +335,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Family Medical History</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.familyMedicalHistory')}
+                </Text>
               </View>
 
               <Fontisto
@@ -344,7 +358,9 @@ const EditProfileScreen = () => {
                   color={colors.darkPrimary}
                 />
 
-                <Text style={styles.menuTitleText}>Smoking</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.smoking')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -363,7 +379,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Drinking</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.drinking')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -381,7 +399,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Excercise</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.exercise')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -399,7 +419,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Sleep</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.sleep')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
@@ -417,7 +439,9 @@ const EditProfileScreen = () => {
                   size={responsiveFontSize(22)}
                   color={colors.darkPrimary}
                 />
-                <Text style={styles.menuTitleText}>Stress</Text>
+                <Text style={styles.menuTitleText}>
+                  {t('pages.profile.links.stress')}
+                </Text>
               </View>
               <Fontisto
                 name="angle-right"
