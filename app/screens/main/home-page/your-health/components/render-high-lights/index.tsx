@@ -6,6 +6,8 @@ import BlurView from '../blur-view';
 const RenderHighlights = ({ item, onPress }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  // console.log('item', item.filename.url);
+
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.highlightsView}>

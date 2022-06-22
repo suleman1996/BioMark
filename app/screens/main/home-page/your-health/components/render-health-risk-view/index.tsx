@@ -13,6 +13,9 @@ const RenderHealthRiskView = ({
 }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
+  console.log('Name a selected Name ', name, ' ', selectedHealthRisk?.name);
+
   return (
     <>
       <TouchableOpacity
