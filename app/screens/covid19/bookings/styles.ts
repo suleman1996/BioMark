@@ -18,7 +18,7 @@ export const makeStyles = (colors: any) =>
       justifyContent: 'space-evenly',
     },
     horizontalListItem: {
-      paddingHorizontal: widthToDp(6),
+      paddingHorizontal: widthToDp(5),
       alignItems: 'center',
       justifyContent: 'center',
       height: heightToDp(6),

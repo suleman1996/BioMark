@@ -7,17 +7,18 @@ import BookTestButton from 'components/button/book-test';
 import TestBookinButton from 'components/button/bookings';
 import DependentButton from 'components/button/dependents';
 import ViewResultsButton from 'components/button/view-results';
-import QRCarousel from 'components/ui/qr-carousel';
 import { TitleWithSearchBarLayout } from 'components/layouts';
+import QRCarousel from 'components/ui/qr-carousel';
 
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCovidHomeResultsR } from 'store/covid/covid-actions';
+import { IAppState } from 'store/IAppState';
+import { CovidLatestResponse } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import makeStyles from './styles';
-import { useIsFocused } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { IAppState } from 'store/IAppState';
-import { getCovidHomeResultsR } from 'store/covid/covid-actions';
-import { CovidLatestResponse } from 'types/api';
+import { getUserProfileData } from 'store/profile/profile-actions';
 
 type Props = {};
 
@@ -39,9 +40,13 @@ const Covid19Home = (props: Props) => {
   const getCovidHomeResults = async () => {
     const res: any = await dispatch(getCovidHomeResultsR());
   };
+  const getUserOnFocus = async () => {
+    await dispatch(getUserProfileData());
+  };
 
   useEffect(() => {
     getCovidHomeResults();
+    getUserOnFocus();
   }, [focused]);
   /*eslint-enable */
 
@@ -88,6 +93,7 @@ const Covid19Home = (props: Props) => {
             <DependentButton />
           </View>
           <View style={{ marginTop: heightToDp(2) }} />
+          {/* <ActivityIndicator color={colors.darkPrimary} /> */}
           <FlatList
             style={{ flexGrow: 0 }}
             horizontal
