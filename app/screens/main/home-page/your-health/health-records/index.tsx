@@ -109,6 +109,8 @@ const HealthRecord = () => {
   };
 
   const renderItem2 = ({ item }) => {
+    // var str = 'hello here you';
+    // const welcomeText = str.split(' ')[0];
     // const fullName = item?.result?.summary;
     // console.log(item?.result?.summary.split(''));
     // const splitOnSpace = fullName.split(' ');
@@ -147,7 +149,9 @@ const HealthRecord = () => {
               source={require('assets/images/home/info.png')}
               style={styles.prImage}
             />
-            <Text style={styles.text6}>{item?.result?.summary}</Text>
+            <Text style={styles.text6}>
+              {item?.result?.summary.split(' ', 4)}
+            </Text>
           </View>
         )}
 
