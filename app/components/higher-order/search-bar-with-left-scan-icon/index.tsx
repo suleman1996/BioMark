@@ -73,7 +73,7 @@ const SearchBarWithLeftScanIcon = () => {
   useEffect(() => {
     dispatch(getHealthTrackerRisks());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [healthRisk]);
+  }, []);
   let arr = [
     {
       name: 'Heart Disease',
@@ -220,7 +220,7 @@ const SearchBarWithLeftScanIcon = () => {
     //   console.log('error ', error);
     // }
     const filteredData = arr.filter((ele) => {
-      console.log('ele', ele);
+      // console.log('ele', ele);
 
       let itemLowercase = ele.name.toLowerCase();
 
@@ -266,7 +266,6 @@ const SearchBarWithLeftScanIcon = () => {
       }
     } catch (err) {
       console.log('err', err);
-
       setShowModalQr(false);
       setInvalidError(err.errMsg.data.message);
       setActionError(err.errMsg.data.action);
@@ -432,6 +431,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'Already a Member'
             : invalidError == 'Code already used'
             ? 'Already a Member'
+            : invalidError == 'Scan event code first'
+            ? 'Back'
             : 'Back'
         }
         visible={modalVisible}
@@ -442,6 +443,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'Already a Member'
             : invalidError == 'Code already used'
             ? 'Already a Member'
+            : invalidError == 'Scan event code first'
+            ? 'Invalid Code'
             : undefined
         }
         text2={
@@ -451,6 +454,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'It seems like this code has already been entered.'
             : invalidError == 'Code already used'
             ? 'You are already a member of the Empower Program.You can already log your blood sugar and medications.'
+            : invalidError == 'Scan event code first'
+            ? 'Multiple invalid code entries detected.Try manually entering the code.'
             : undefined
         }
         closeModal={() => {
@@ -463,6 +468,8 @@ const SearchBarWithLeftScanIcon = () => {
             : invalidError == 'Code already used'
             ? setModalVisible(false)
             : actionError == 'sfi_member'
+            ? setModalVisible(false)
+            : invalidError == 'Scan event code first'
             ? setModalVisible(false)
             : undefined;
         }}

@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import Close from '../../assets/svgs/close';
@@ -30,28 +30,15 @@ const HealthRecordFilter = ({
   handleConfirm2,
   onPressClearFilter,
   onConifrm,
+  cancelDatePicker,
+  showDatePicker,
+  isDatePickerVisible,
+  showEndDatePicker,
+  cancelEndDatePicker,
+  isEndDatePickerVisible,
 }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
-  const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-  const showEndDatePicker = () => {
-    setEndDatePickerVisibility(true);
-  };
-
-  //start date picker
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  //end date picker
-  const hideDatePicker2 = () => {
-    setEndDatePickerVisibility(false);
-  };
 
   return (
     <Modal animationType="none" transparent={true} visible={visible}>
@@ -101,13 +88,14 @@ const HealthRecordFilter = ({
             isVisible={isDatePickerVisible}
             mode="date"
             onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
+            onCancel={cancelDatePicker}
           />
+
           <DateTimePickerModal
             isVisible={isEndDatePickerVisible}
             mode="date"
             onConfirm={handleConfirm2}
-            onCancel={hideDatePicker2}
+            onCancel={cancelEndDatePicker}
           />
           <TouchableOpacity style={styles.gradientButton}>
             <GoogleFitButton
