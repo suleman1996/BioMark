@@ -1,7 +1,7 @@
-import { View, TextInput, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import React from 'react';
 
-import { useTheme } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import Styles from './styles';
@@ -17,8 +17,6 @@ const Index = (props: Props) => {
 
   const styles = Styles(colors);
 
-  const [number, onChangeNumber] = React.useState(null);
-
   return (
     <View style={styles.container}>
       <View style={styles.searchView}>
@@ -28,13 +26,9 @@ const Index = (props: Props) => {
           }}
           style={styles.inputView}
         >
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeNumber}
-            value={number}
-            placeholder={props.placeHolder}
-            editable={false}
-          />
+          <View style={styles.input}>
+            <Text style={styles.placeHolder}>{props.placeHolder}</Text>
+          </View>
           <SearIcon style={{ marginRight: 10 }} size={18} name="search" />
         </TouchableOpacity>
       </View>

@@ -63,9 +63,14 @@ const MoreInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const RenderView = ({ width, title, color }) => (
+  const RenderView = ({ width, title, color, bgColor }) => (
     <View
-      style={{ width: width, alignItems: 'center', justifyContent: 'center' }}
+      style={{
+        width: width,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: bgColor,
+      }}
     >
       <Text
         style={{
@@ -79,9 +84,14 @@ const MoreInfo = () => {
     </View>
   );
 
-  const RenderDownload = ({ width, resultId, name }) => (
+  const RenderDownload = ({ width, resultId, name, bgColor }) => (
     <View
-      style={{ width: width, alignItems: 'center', justifyContent: 'center' }}
+      style={{
+        width: width,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: bgColor,
+      }}
     >
       <TouchableOpacity onPress={() => getPdf(resultId)}>
         <MaterialCommunityIcons
@@ -94,25 +104,61 @@ const MoreInfo = () => {
 
   const RenderTable = ({ data }) => (
     <View style={{ flexDirection: 'row' }}>
+      {console.log('xxxxx ', data)}
       <RenderDownload
         name="chart-timeline-variant"
         resultId={data?.id}
         width={50}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
       />
       <RenderView
         width={70}
         title={moment(data.date_of_test).format('MMMM D YYYY')}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        color={data?.is_abnormal_flag && colors.heading}
       />
-      <RenderView width={80} title={data.observation_value} />
-      <RenderView width={70} title={data.unit} />
-      <RenderView width={100} title={data.reference_range} />
+      <RenderView
+        width={80}
+        title={data.observation_value}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        color={data?.is_abnormal_flag && colors.heading}
+      />
+      <RenderView
+        width={70}
+        title={data.unit}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        color={data?.is_abnormal_flag && colors.heading}
+      />
+      <RenderView
+        width={100}
+        title={data.reference_range}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        color={data?.is_abnormal_flag && colors.heading}
+      />
       <RenderView
         width={110}
-        title={data?.is_abnormal_flag ? 'Abnormal' : ''}
+        title={data?.is_abnormal_flag ? 'YES' : ''}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        color={data?.is_abnormal_flag && colors.high}
       />
-      <RenderView width={120} title={data?.comment} />
-      <RenderView width={130} title={data.provider_name} />
-      <RenderDownload name="download" resultId={data?.id} width={70} />
+      <RenderView
+        width={120}
+        title={data?.comment}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        color={data?.is_abnormal_flag && colors.heading}
+      />
+      <RenderView
+        width={130}
+        title={data.provider_name}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        color={data?.is_abnormal_flag && colors.heading}
+      />
+      <RenderDownload
+        name="download"
+        resultId={data?.id}
+        width={70}
+        bgColor={data?.is_abnormal_flag && colors.abnormal}
+      />
     </View>
   );
 
