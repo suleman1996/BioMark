@@ -413,7 +413,6 @@ export default function ResultUpload() {
                 renderItem={({ item, index }) => {
                   setSplices(index);
                   setUri(item?.uri);
-                  console.log('item', item);
                   return (
                     <Pressable
                       onPress={() => {

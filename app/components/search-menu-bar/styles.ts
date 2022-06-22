@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 export const makeStyles = (colors: any) =>
@@ -45,6 +46,11 @@ export const makeStyles = (colors: any) =>
       borderRadius: 5,
       overflow: 'hidden',
       marginLeft: 5,
+    },
+    placeHolder: {
+      fontFamily: fonts.regular,
+      fontSize: 14,
+      color: colors.bg,
     },
   });
 export default makeStyles;
