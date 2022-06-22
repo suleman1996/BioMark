@@ -28,7 +28,7 @@ const lbsToKg = () => {
 const mgMmolConversion = (value: number, toUnit: 'mg/dL' | 'mmol/L' | string) =>
   Number(toUnit == 'mg/dL' ? value * 18 : value * (1 / 18)).toFixed(2); // These values might not be accurate
 
-const measurementValidator = (is_metric, measurment, value) => {
+const measurementValidator = (is_metric, measurment, value, t) => {
   let errorr = '';
   if (value.length === 0 || value == 0)
     return measurment === 'height'

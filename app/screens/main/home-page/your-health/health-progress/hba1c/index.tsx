@@ -25,8 +25,10 @@ import { Hba1CProgressChart } from 'types/api';
 import { userService } from 'services/user-service/user-service';
 import LineGraph from 'components/line-graph';
 import { Tip } from 'react-native-tip';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   const navigation = useNavigation();
@@ -155,10 +157,10 @@ const Index = () => {
           />
           <View style={styles.headingView}>
             <View style={styles.rowCenter}>
-              <Text style={styles.heading}>HbA1c (%)</Text>
+              <Text style={styles.heading}>{t('pages.hba1cTab.title')}</Text>
               <View style={{ marginLeft: 10 }}>
                 <Tip
-                  body="HbA1c (Haemoglobin A1C) is a test that reflects your average blood glucose level over the last 2 - 3 months."
+                  body={t('pages.hba1cTab.definition')}
                   bodyStyle={{ color: '#fff' }}
                   tipContainerStyle={{
                     backgroundColor: colors.shineBlue,

@@ -17,6 +17,7 @@ import { useTheme } from 'react-native-paper';
 import fonts from 'assets/fonts';
 
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   logData: [];
@@ -27,6 +28,7 @@ type Props = {
 };
 
 const Index = (props: Props) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   const navigations = useNavigation();
@@ -98,7 +100,7 @@ const Index = (props: Props) => {
         <Text
           style={{ color: colors.heading, fontFamily: fonts.OpenSansRegular }}
         >
-          LOGS
+          {t('pages.weightTab.logs')}
         </Text>
         <Arrow color={colors.heading} name={log ? 'up' : 'down'} />
       </TouchableOpacity>
@@ -117,7 +119,7 @@ const Index = (props: Props) => {
         )}
         {log &&
           (page == maxPage || !maxPage ? (
-            <Text style={styles.showMoreText}>No more data to show</Text>
+            <Text style={styles.showMoreText}>{t('common.noMore')}</Text>
           ) : (
             <TouchableOpacity onPress={() => setPage((prev) => prev + 1)}>
               <Text style={styles.showMoreText}>{props?.showMore}</Text>

@@ -65,7 +65,7 @@ const Covid19Bookings = (props: Props) => {
           style={{ flexGrow: 0 }}
           horizontal
           keyExtractor={(index) => index.toString()}
-          ListHeaderComponent={<View style={{ width: widthToDp(10) }} />}
+          ListHeaderComponent={<View style={{ width: widthToDp(6) }} />}
           ListFooterComponent={<View style={{ width: widthToDp(10) }} />}
           data={['Upcomming', 'History']}
           renderItem={horizontalListItem}

@@ -16,16 +16,18 @@ export default function DependentButton() {
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate(NESTED_ACCOUNT_NAVIGATOR, {
-            screen: SCREENS.DEPENDANTS,
-          })
-        }
-      >
-        <View style={styles.circleBtn}>
+      <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(NESTED_ACCOUNT_NAVIGATOR, {
+              screen: SCREENS.DEPENDANTS,
+            })
+          }
+          activeOpacity={0.6}
+          style={styles.circleBtn}
+        >
           <BioDependants width={7} height={7} />
-        </View>
+        </TouchableOpacity>
       </TouchableOpacity>
       <View>
         <Text style={styles.healthText}>Dependants</Text>

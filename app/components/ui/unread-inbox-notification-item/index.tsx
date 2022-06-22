@@ -13,18 +13,16 @@ type Props = {
   getIcon?: any;
 };
 
-const PreviousNotificationItem = (props: Props) => {
+const UnReadInboxNotificationItem = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-
   const { item, onPress, getIcon } = props;
-  console.log('previous Notification inbox', item);
 
   return (
     <Pressable onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          {getIcon(item.notification_type)}
+          {getIcon(item?.notification_type)}
         </View>
         <View style={styles.contentContainer}>
           <Text style={styles.contentHeaderText}>
@@ -38,4 +36,4 @@ const PreviousNotificationItem = (props: Props) => {
   );
 };
 
-export default PreviousNotificationItem;
+export default UnReadInboxNotificationItem;

@@ -779,7 +779,7 @@
           "buttonText": "Ok"
         },
         "withdraw": {
-          "title": "Are You Sure?",
+          "title": "Are You Sssure?",
           "description": "Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges.",
           "buttonText": "Yes",
           "buttonCancelText": "Cancel"
@@ -1046,8 +1046,8 @@
       "editButton": "Save Edit",
       "saveButton": "Add",
       "tapTpAdd": "Tap to set",
-      "endDate": "End date",
-      "startDate": "Start date",
+      "endDate": "End Date",
+      "startDate": "Start Date",
       "at": "At",
       "start": "Start",
       "end": "End",

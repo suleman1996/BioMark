@@ -8,26 +8,40 @@ import BioBookTest from 'components/svg/bio-book-test';
 import { navigate } from 'services/nav-ref';
 import SCREENS from '../../navigation/constants/index';
 import fonts from 'assets/fonts';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCovidBooking } from './../../store/covid/covid-actions';
+import { IAppState } from 'store/IAppState';
 
 export default function BookTestButton() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
+  const userDetails = useSelector(
+    (state: IAppState) => state.profile?.userProfile
+  );
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity
-        onPress={() => {
-          navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-            screen: SCREENS.BOOKCOVIDTEST,
-          });
-          dispatch(addCovidBooking([]));
-        }}
-      >
-        <View style={styles.circleBtn}>
+      <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity
+          onPress={() => {
+            if (userDetails.id_verification) {
+              navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                screen: SCREENS.BOOKCOVIDTEST,
+              });
+            } else {
+              navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+                screen: SCREENS.ID_VERIFICATION_START,
+                params: { sendTo: 'booktest' },
+              });
+            }
+
+            dispatch(addCovidBooking([]));
+          }}
+          activeOpacity={0.6}
+          style={styles.circleBtn}
+        >
           <BioBookTest width={7} height={7} />
-        </View>
+        </TouchableOpacity>
       </TouchableOpacity>
       <View>
         <Text style={styles.healthText}>Book Tests</Text>

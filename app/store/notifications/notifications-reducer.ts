@@ -2,6 +2,7 @@ import {
   INBOX_NOTIFICATIONS,
   INBOX_OTHERS,
   INBOX_OTHERS_UNREAD,
+  INBOX_ALL_UNREAD,
 } from './constants';
 import { NotificationState } from './NotificationState';
 
@@ -27,6 +28,12 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         allOthersUnreadNotifications: action.payload,
+      };
+    }
+    case INBOX_ALL_UNREAD: {
+      return {
+        ...state,
+        allInboxUnreadNotifications: action.payload,
       };
     }
 

@@ -56,6 +56,10 @@ const BookCovidTest = (props: Props) => {
     console.log('booking', booking);
   };
 
+  const ifNextDisabled = booking.every((item) => item.booking_status === 0)
+    ? {}
+    : { backgroundColor: colors.inputBg };
+
   return (
     <>
       <View style={styles.container}>
@@ -137,12 +141,13 @@ const BookCovidTest = (props: Props) => {
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable
+              disabled={booking.every((item) => item.booking_status == 0)}
               onPress={() =>
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_STEP,
                 })
               }
-              style={styles.btnEnable}
+              style={[styles.btnEnable, ifNextDisabled]}
             >
               <Text style={[styles.btnText2]}>Next</Text>
             </Pressable>

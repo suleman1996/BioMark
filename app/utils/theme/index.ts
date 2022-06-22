@@ -31,6 +31,8 @@ const theme = {
     fieldGrey: '#DCDCDC',
     green: 'lightgreen',
     shineBlue: '#2C6CFC',
+    selected: '#7E7E7E',
+    unSelected: '#C8C8C8',
 
     // Colors
     inputBg: '#EBEFF2',

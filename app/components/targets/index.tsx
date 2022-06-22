@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -28,11 +29,11 @@ export function BloodSugar() {
           date={target.created_at}
           content={[
             {
-              label: 'FPG (Fasting)',
+              label: t('pages.bloodSugarTargets.fasting'),
               value: `${target.value_from}-${target.value_to} ${target.unit_name}`,
             },
             {
-              label: 'PPG (Post-Meal)',
+              label: t('pages.bloodSugarTargets.postMeal'),
               value: `${target.ppg_value_from}-${target.ppg_value_to} ${target.unit_name}`,
             },
           ]}
@@ -61,7 +62,7 @@ export function HbA1c() {
           date={target.created_at}
           content={[
             {
-              label: 'Goal Percentage',
+              label: t('pages.hba1cTargets.goalPercentage'),
               value: `${target.goal_value} ${target.unit_name}`,
             },
           ]}

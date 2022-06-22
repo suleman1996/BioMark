@@ -24,7 +24,6 @@
     ]
   },
   "dependencies": {
-    "@crowdlinker/react-native-pager": "^0.2.3",
     "@invertase/react-native-apple-authentication": "^2.2.1",
     "@pietile-native-kit/expandable-view": "^1.1.1",
     "@react-native-async-storage/async-storage": "^1.17.3",
@@ -95,7 +94,7 @@
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^13.1.2",
     "react-native-modal-dropdown": "^1.0.2",
-    "react-native-pager-view": "^5.4.15",
+    "react-native-pager-view": "^5.4.24",
     "react-native-paper": "^4.12.0",
     "react-native-paper-autocomplete": "^0.11.0",
     "react-native-paper-dropdown": "^1.0.7",
