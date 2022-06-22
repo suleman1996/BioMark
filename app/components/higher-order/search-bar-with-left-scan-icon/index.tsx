@@ -220,8 +220,6 @@ const SearchBarWithLeftScanIcon = () => {
     //   console.log('error ', error);
     // }
     const filteredData = arr.filter((ele) => {
-      console.log('ele', ele);
-
       let itemLowercase = ele.name.toLowerCase();
 
       let searchTermLowercase = search.toLowerCase();
@@ -371,8 +369,6 @@ const SearchBarWithLeftScanIcon = () => {
           />
           <TextInput
             onChangeText={(item) => {
-              console.log('item', item);
-
               setSearchText(item);
               searchResult(item);
             }}

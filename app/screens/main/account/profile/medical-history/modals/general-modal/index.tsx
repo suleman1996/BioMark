@@ -316,8 +316,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
   };
 
   const RadioBtn = ({ item }: { item: MedicalTemplateField }) => {
-    console.log('item===>', item);
-
     return (
       <>
         {item?.id == 'status' ? (
