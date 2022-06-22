@@ -15,16 +15,18 @@ export default function ViewResultsButton() {
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity
-        onPress={() =>
-          navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-            screen: SCREENS.VIEWCOVIDRESULTS,
-          })
-        }
-      >
-        <View style={styles.circleBtn}>
+      <TouchableOpacity activeOpacity={0.6}>
+        <TouchableOpacity
+          onPress={() =>
+            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+              screen: SCREENS.VIEWCOVIDRESULTS,
+            })
+          }
+          activeOpacity={0.6}
+          style={styles.circleBtn}
+        >
           <BioResultsIcon width={7} height={7} />
-        </View>
+        </TouchableOpacity>
       </TouchableOpacity>
       <View>
         <Text style={styles.healthText}>View Results</Text>

@@ -19,7 +19,6 @@ import { paymentService } from 'services/payments';
 import { userService } from 'services/user-service/user-service';
 import { addUserContactsDetails } from 'store/auth/auth-actions';
 import { IAppState } from 'store/IAppState';
-import { getUserProfileData } from 'store/profile/profile-actions';
 import { BookTestBooking } from 'types/api';
 import { dateFormat1, getTime } from 'utils/functions/date-format';
 import { logNow } from 'utils/functions/log-binder';
@@ -54,11 +53,8 @@ const PaymentStep = (props: Props) => {
   );
 
   /*eslint-disable */
-  const getUserOnFocus = async () => {
-    await dispatch(getUserProfileData());
-  };
+
   useEffect(() => {
-    getUserOnFocus();
     userService
       .getUserContacts()
       .then((res) => {
