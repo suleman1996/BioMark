@@ -60,7 +60,7 @@ const RenderHealthTrack = ({ item }) => {
           { color: colors.lightGrey, fontFamily: fonts.mulishRegular },
         ]}
       >
-        {item?.item?.subTitle}
+        {item?.item?.subTitle ? item?.item?.subTitle : 'Add'}
       </Text>
     </TouchableOpacity>
   );

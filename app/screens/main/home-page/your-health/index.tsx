@@ -69,6 +69,7 @@ import RenderHighlights from './components/render-high-lights';
 import RenderHealthRisk from './components/render-health-risk';
 
 import { healthRisksColor } from 'utils/functions/your-health';
+import Paginator from 'components/paginator';
 import { useTranslation } from 'react-i18next';
 
 const Index = () => {
@@ -112,6 +113,10 @@ const Index = () => {
   const [showApiError, setShowApiError] = React.useState('');
   const [showArticleWebView, setShowArticleWebView] = React.useState(false);
   const [articlesUrl, setArticlesUrl] = React.useState();
+  const [selectedIndicator, setSelectedIndicator] = React.useState({
+    first: true,
+    second: false,
+  });
 
   const pan = useRef(new Animated.ValueXY()).current;
 
@@ -331,7 +336,21 @@ const Index = () => {
               keyExtractor={(item) => item.value}
               horizontal
               showsHorizontalScrollIndicator={false}
+              onEndReached={() =>
+                setSelectedIndicator({
+                  first: false,
+                  second: true,
+                })
+              }
+              onMomentumScrollBegin={() => {
+                setSelectedIndicator({
+                  first: true,
+                  second: false,
+                });
+              }}
+              bounces={true}
             />
+            <Paginator selectedIndicator={selectedIndicator} />
 
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
               {t('pages.dashboard.psp.recordKeeping')}
