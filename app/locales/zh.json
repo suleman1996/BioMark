@@ -418,216 +418,6 @@
          "goal": "目标",
          "errors": {
             "required": "请输入有效的 HbA1c 目标。",
-            "minMax": "请输入介于 5% 至 15% 之间的有效HbA1c目标。"
-         }
-      },
-      "bodyMeasurements": {
-         "title": "身体测量",
-         "yourReadingHeight": "身高",
-         "yourReadingWeight": "体重",
-         "errors": {
-            "missingHeight": "请输入您的身高",
-            "missingWeight": "请输入您的体重",
-            "measurementInvalidMetric": "请输入有效的身高数值 (X’XX.XX)",
-            "measurementInvalidImperial": "请输入有效的体重数值 (XXX)",
-            "outOfBoundariesMetric": "请输入介于 60 - 250 公分之间的有效身高数值。",
-            "outOfBoundariesImperial": "请输入介于 1'11.7 - 8’2.5 英尺之间的有效身高数值。",
-            "outOfBoundariesKg": "请输入介于 0 - 200 公斤的有效体重数值。",
-            "outOfBoundariesLbs": "请输入介于 0 - 440 磅之间的有效体重数值。",
-            "measurementInvalid": "请输入有效的身高数值 (XXX.XX)。"
-         }
-      },
-      "personalInformation": {
-         "title": "个人资料"
-      },
-      "cameraOptionsDialog": {
-         "title": "选项",
-         "scanBarcode": "扫描条码",
-         "manuallyScanBarcode": "手动输入条码",
-         "upload": "上传"
-      },
-      "dashboard": {
-         "title": "概要面板",
-         "healthTrackers": "健康追踪器",
-         "newMessage": "新的讯息",
-         "receivedOn": "收到日期",
-         "markAsRead": "标记为已读",
-         "yourLatestResult": "您的最新结果",
-         "updateProfile": "完成填写您的个人资料",
-         "updateProfileText": "输入您的个人资料以了解您的健康风险",
-         "uploadResult": "上传您的检验报告",
-         "bookCovid": "预约您的 COVID 检测",
-         "uploadAnotherResult": "上传另一个检验报告",
-         "labResultText": "同一平台查阅您的所有检测结果。",
-         "yourLabResultStatus": "您的健康检验状态",
-         "barcode": "条码",
-         "doctorMessage": "查阅来自医生的讯息",
-         "seeResult": "查看结果",
-         "suggestedReading": "内容重点",
-         "riskTitle": "您的健康风险",
-         "healthRecords": "健康记录",
-         "covid19": "COVID-19",
-         "healthProgress": "健康进展",
-         "healthProvider": "医疗保健机构",
-         "yourHealth": "您的健康",
-         "dialogs": {
-            "verify": {
-               "title": "查阅结果",
-               "description": "请输入您的 身份证号码 或 护照号码 以验证您的身份。",
-               "label": "身份证号码 或 护照号码",
-               "errors": {
-                  "required": "身份证号码 或 护照号码 为必填",
-                  "unsuccessful": "身份证 或 护照 验证失败。"
-               }
-            },
-            "verifyNotAvailable": {
-               "title": "验证失败",
-               "description": "身份证号码 或 护照号码 验证失败。您已达到每日尝试次数的上限。",
-               "button": "好的"
-            },
-            "unsuccessful": {
-               "title": "查阅结果",
-               "description": "身份证号码 或 护照号码 验证失败。您已达到每日尝试次数的上限。"
-            },
-            "bio-blood_sugar": {
-               "title": "设定目标范围",
-               "description": "您是否希望自行设定血糖目标范围？若您选择“跳过”，系统将使用默认范围。",
-               "buttonText": "是",
-               "buttonCancelText": "跳过"
-            },
-            "bio-hba1c": {
-               "title": "设定目标范围",
-               "description": "您是否希望自行设定HbA1c目标范围？若您选择“跳过”，系统将使用默认范围。",
-               "buttonText": "是",
-               "buttonCancelText": "跳过"
-            },
-            "bio-medication": {
-               "title": "输入用药史",
-               "description": "是否现在输入您正在使用或曾使用的药物？若选择“跳过”，将列为没有用药史。您可以随时更新此部分。",
-               "buttonText": "是",
-               "buttonCancelText": "跳过"
-            }
-         },
-         "psp": {
-            "yourActions": "请您回应",
-            "recordKeeping": "记录保存中",
-            "empower": "Empower 账号：",
-            "titles": {
-               "titleDiabetes": "进入糖尿病支援中心",
-               "titleHypertension": "进入高血压支援中心"
-            }
-         }
-      },
-      "diabetesSupport": {
-         "titles": {
-            "diabetes_title": "糖尿病支援中心",
-            "hypertension_title": "高血压支援中心"
-         },
-         "diaries": {
-            "diabetes_diary": "你的糖尿病日记",
-            "hypertension_diary": "你的高血压日记"
-         },
-         "educations": {
-            "diabetes_education": "糖尿病教学",
-            "hypertension_education": "高血压教学"
-         },
-         "withdrawText": "点击以",
-         "withdrawLink": "退出计划",
-         "dialogs": {
-            "video": {
-               "title": "观看影片",
-               "description": "观看影片将消耗大量移动数据。建议您改用 Wi-Fi。",
-               "buttonText": "是"
-            },
-            "withdraw": {
-               "title": "您是否确定？",
-               "description": "您确定退出 Empower计划吗？您将失去在 Empower 患者计划所赋予的全部特权。",
-               "buttonText": "是",
-               "buttonCancelText": "取消退出"
-            }
-         },
-         "disclaimer": {
-            "titles": {
-               "titleDiabetes": "通过签署此表格，您在此：",
-               "titleHypertension": "通过签署此表格："
-            },
-            "paragraph": "<strong>1.</strong> 同意参加针对甘精胰岛素/利西拉肽和甘精 U300 的 EMPOWER 患者计划，您的注册医生已告知您该计划。我同样同意由我的医生参加上述计划。 <br><br> <strong>2.</strong> 您确认您清楚参与该计划的第三方供应商 Sanofi-Aventis Philippines Inc. 将有权读取计划中与您相关的所有个人资料。这项过程中，所有资料将全面遵守《数据隐私法 Data Privacy Act》及相关法令，以完全保密的方式进行处理。<br><br> <strong>3.</strong> 确认您有权随时访问和更正您的个人信息。<br><br> <strong>4.</strong> 确认您将可以在不影响您原有的权利下随时退出针对甘精胰岛素/利西拉肽和甘精 U300 的EMPOWER 患者计划。您可以通过联系 My Blood Profile Technologies Corporation（一家 BioMark Pte Ltd 的子公司）退出这项计划。若您未特别要求删除所有在过程中已收集的资料，这些资料将保留在专为 EMPOWER 患者计划所建立的独立资料库中。您可以随时通过糖尿病支援中心页面上的“退出计划”链接退出 EMPOWER 患者计划。<br><br> <strong>5.</strong> 确认您知道该计划可在任何时间终止，您将在计划终止前的三十 (30) 天收到计划终止的通知。<br><br> <strong>6.</strong> 您声明您已仔细阅读针对甘精胰岛素/利西拉肽和甘精 U300 的EMPOWER 患者计划的所有相关指南及机制，并保证您将遵守此一计划下所制定的指南及机制。",
-            "paragraphHypertension": "<ul style='padding-inline-start: 20px;'>    <li>        <p><span>您同意参加甘精胰岛素/利西拉肽 (Soliqua) 或甘精胰岛素 U300 (Toujeo) 和/或厄贝沙坦氨氯地平 (Aprovasc) 的 EMPOWER 患者计划（“计划”）。您确认您已被您的注册医生告知了该计划，并同意参与其中。</span></p>    </li>    <li style='list-style-type: circle;'>        <p><span>通过注册该计划，您明确同意与Sanofi-Aventis Philippines Inc. (\"Sanofi\") 参与或与之签订合同的第三方和/或第三方供应商（统称为“第三方”）该计划收集和处理您的个人资料并根据以下目的（“目的”）执行该计划： </span></p>    </li></ul><ul>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>  1. 为您提供有关糖尿病和/或血压管理、产品处理、滴定等方面的教育，如适用。在发生药物不良反应或药物警戒事件时进行医学评估和病例处理。  </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>2. 在正确使用医疗设备方面为您提供适当的设备培训和/或甘精胰岛素/利西拉肽 (Soliqua) 或甘精胰岛素 U300 (Toujeo)注射剂。 </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>3. 每三 (3) 个月为您提供七 (7) 片厄贝沙坦/氨氯地平 (Aprovasc)，为期一 (1) 年。赛诺菲保留根据可用性和其他因素暂停提供剂量的权利。</span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>4. 定期提醒您进行定期血糖监测、定期血压监测以及医生要求的其他必要实验室检查。 </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>5. 定期向您的注册医师报告您在计划中的活动，以便进行适当的反馈和监控。</span></p></ul><ul style=\"padding-inline-start: 20px;\">    <li>        <p><span>您承认您知道该计划不是一项临床研究，与您相关的所有数据只能由参与该计划的第三方访问，并且所有数据都将按照《数据隐私法 Data Privacy Act》在完全保密的情况下进行处理以及所有相关的发行。此一数据将保存 10 年。</span></p>    </li>    <li>        <p><span> 您承认我们的护士教育者以医疗记录（“医疗记录”）格式收集的数据将收集在 My Blood Profile Technology Corp.（“BioMark”）运营的患者关系管理系统（“PRM”）中或赛诺菲为此目的保留的任何其他第三方，只能由 Nurse Educators（来自 Home Health Care Placements, Inc.（“HHCP”））、BioMark 和第三方访问。为避免发生疑问，赛诺菲不得访问个人患者记录。</span></p>    </li>    <li>        <p><span>您同意 BioMark 和护士教育者（来自 HHCP）将您的医疗记录分享给您的登记医生。</span></p>    </li>    <li>        <p><span>您承认，赛诺菲和第三方将生成和访问该计划的汇总报告，以评估该计划在支持糖尿病和/或高血压管理方面的有效性，并评估该计划进一步改进的潜力。您同样同意将您的个人数据提供给第三方 为了在进行任何进一步处理之前对其进行匿名化，该处理包括生成汇总数据。您承认赛诺菲或第三方可能会将来自本程序的汇总数据用于发布目的，例如但不限于科学论文、其他书面报告等。匿名汇总报告包含本文件中提供的数据表格以及在该计划的数字平台（例如 Biomark 应用程序）中收集的表格。您了解在处理您的个人数据的任何阶段都将保持最严格的保密和安全级别。</span></p>    </li>    <li>        <p><span>您承认您有权通过下载和更新 BioMark 应用程序或联系 0919-433-3392（Smart），随时根据您的要求访问和更正您的个人信息。 </span></p>    </li>    <li>        <p><span>您承认与护士教育者计划的教育课程有效期为一 (1) 年。超过这一年期间，患者 只要 EMPOWER 程序仍然有效，就可以使用 BioMark 应用程序和呼叫中心。</span></p>    </li>    <li>        <p><span>您承认您可以随时通过 Biomark 应用程序发送您的消息或联系 0919-433-3392（Smart）退出该计划而不会造成任何影响。您同意已从您那里收集的个人数据将在上述保留期内保留在特定计划数据库中，除非您还要求删除这些数据。</span></p>    </li>    <li>        <p><span>您承认您知道本计划可能会在任何时间终止，并且您将在终止日期前三十 (30) 日收到通知。 </span></p>    </li></ul>",
-            "checkboxLabel": "我在此确认我对上述政策的理解，并同意按照政策的条款收集、使用和揭露我的资料。",
-            "buttonLabel": "同意并继续"
-         },
-         "welcome": {
-            "titles": {
-               "titleDiabetes": "欢迎来到您的糖尿病支援中心",
-               "titleHypertension": "欢迎来到您的高血压支援中心",
-               "titleEmpower": "欢迎加入EMPOWER计划"
-            },
-            "intros": {
-               "introDiabetes": "您可以在此追踪您的血糖、药物和接触其他可帮助您管理糖尿病的资源。",
-               "introHypertension": "您可以在此追踪您的血压、药物和接触其他可帮助您管理糖尿病的资源。",
-               "introEmpower": "欢迎来到EMPOWER计划。我们的目标是在您的治疗之旅中为您提供支持！"
-            },
-            "buttonLabels": {
-               "continueDiabetes": "继续至糖尿病支援中心",
-               "continueHypertension": "继续至高血压支援中心",
-               "continueEmpower": "继续"
-            }
-         },
-         "onboarding": {
-            "next": "下一步",
-            "finish": "完成",
-            "demo": {
-               "bloodSugar": "请在此记录您的血糖值。",
-               "medication": "请在此记录您目前正在使用的药物。",
-               "HbA1c": "请在此记录您的HbA1c值。",
-               "video": "点此观看有用的影片教程。",
-               "more": "点此了解更多有关糖尿病的资讯。",
-               "moreHypertension": "点此了解更多有关高血压的资讯。",
-               "bloodPressure": "请在此记录您的血压。",
-               "weight": "请在此记录您的体重。"
-            }
-         }
-      },
-      "drinking": {
-         "title": "喝"
-      },
-      "email": {
-         "title": "电邮",
-         "save": "储存",
-         "newEmail": {
-            "title": "电邮地址",
-            "placeholder": "",
-            "errors": {
-               "required": "电邮为必填项目",
-               "email": "该电邮地址无效"
-            }
-         },
-         "confirmEmail": {
-            "title": "确认电邮地址",
-            "placeholder": "",
-            "errors": {
-               "required": "电邮为必填项目",
-               "repeatRequired": "确认电邮地址为必填项目",
-               "email": "该电邮地址无效",
-               "emailMismatch": "两次填写的电邮地址不符合"
-            }
-         }
-      },
-      "encodedResults": {
-         "filters": {
-            "title": "条件过滤一览",
-            "confirm": "确认",
-            "type": "条件过滤类型",
-            "all": "全选",
-            "abnormal": "异常"
-         },
-         "info": {
-            "title": "详细结果",
-            "source": "资料来源",
-            "reference": "转介医生或诊所",
-            "labReference": "实验室参考号",
-            "collected": "已完成样本收集",
-            "received": "已收到报告",
             "printed": "已列印报告",
             "close": "关闭"
          }
@@ -1313,7 +1103,7 @@
             }
          },
          "diabetes": {
-            "text": "这个糖尿病风险评分是依据 American Diabetes Association（ADA）针对没有糖尿病或糖尿病前期的病史者进行的第 2 型糖尿病风险测试，作为依据。 它考虑了以下因素：",
+            "text": "这个糖尿病风险评分是依据 American Diabetes Association（ADA）针对没有糖尿病或糖尿病前期的病史者进行的第 2 型糖尿病风险测试，作为依据。它考虑了以下因素：",
             "references": "American Diabetes Association",
             "footNotes": "您的糖尿病风险评分只是一个估计值。此外，您的风险会随着时间而变化。只有验血才能确定诊断。请与您的医生讨论以获取更多信息。",
             "cards": {
@@ -1340,7 +1130,7 @@
             }
          },
          "bmi": {
-            "text": "您的身体质量指数 (BMI) 是根据您的身高和体重估算身体脂肪量的方法。  BMI 的计算法是将您的体重 (kg) 除以您的身高 (m<sup>2</sup>)。  BMI 通常误将健美运动员归类为超重，这是因为他们有高量的肌肉量。因此，它不应该用于这个群体。  以下是不同的分类：",
+            "text": "您的身体质量指数 (BMI) 是根据您的身高和体重估算身体脂肪量的方法。BMI 的计算法是将您的体重 (kg) 除以您的身高 (m<sup>2</sup>)。BMI 通常误将健美运动员归类为超重，这是因为他们有高量的肌肉量。因此，它不应该用于这个群体。以下是不同的分类：",
             "references": "1. World Health Organisation (International Association For The Study of Obesity)\n\n2. Management of Type 2 Diabetes Mellitus (5th Edition) Clinical Practice Guidelines, Ministry of Health Malaysia",
             "cardsAsian": {
                "bmiUnderweight": "<18.50 kg/m<sup>2</sup>",
@@ -1356,7 +1146,7 @@
             }
          },
          "drinking": {
-            "text": "测量酒精单位可协助您检查酒精摄入量是否高过或处于建议限度内的方法。 测量方式所使用的酒精单位，是取决于酒精体积 (ABV) % 及摄入的饮品容量。 由于种类繁多的酒类饮品皆有不同的浓度及饮用量，您的酒精指数仅是一个估计值。",
+            "text": "测量酒精单位可协助您检查酒精摄入量是否高过或处于建议限度内的方法。测量方式所使用的酒精单位，是取决于酒精体积 (ABV) % 及摄入的饮品容量。由于种类繁多的酒类饮品皆有不同的浓度及饮用量，您的酒精指数仅是一个估计值。",
             "references": "www.drinkaware.co.uk",
             "cards": {
                "pint": "一品脱 (One pint) 啤酒 (酒精体积/ABV 3.6%) 相当于 2 个单位。",
@@ -1365,7 +1155,7 @@
             }
          },
          "smoking": {
-            "text": "吸烟年包数 (Pack-years)是透过计算每日吸烟数量及烟龄，来评量个体吸烟强度的指数。  其计算方法是以每日吸烟数量除以20为包数，再以包数乘以吸烟的年数。",
+            "text": "吸烟年包数 (Pack-years)是透过计算每日吸烟数量及烟龄，来评量个体吸烟强度的指数。其计算方法是以每日吸烟数量除以20为包数，再以包数乘以吸烟的年数。",
             "references": "American Cancer Society"
          },
          "stress": {
@@ -1373,7 +1163,7 @@
             "references": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5791241/"
          },
          "sleeping": {
-            "text": "良好的睡眠卫生可以帮助您获得优质的夜间睡眠。 睡眠卫生包括建立规律的睡眠，每天在固定时间入睡并在早上醒来、限制睡前的使用屏幕时间、避免在睡前摄入兴奋物质（咖啡因、尼古丁、酒精），将有助于加快入睡。除此之外，在睡眠时保持卧室环境阴暗及凉爽，也有助于您整夜安稳睡眠。 此睡眠建议是由美国国家睡眠基金会（National Sleep Foundation, NSF) 所推荐。\n",
+            "text": "良好的睡眠卫生可以帮助您获得优质的夜间睡眠。睡眠卫生包括建立规律的睡眠，每天在固定时间入睡并在早上醒来、限制睡前的使用屏幕时间、避免在睡前摄入兴奋物质（咖啡因、尼古丁、酒精），将有助于加快入睡。除此之外，在睡眠时保持卧室环境阴暗及凉爽，也有助于您整夜安稳睡眠。此睡眠建议是由美国国家睡眠基金会（National Sleep Foundation, NSF) 所推荐。\n",
             "references": "National Sleep Foundation, USA https://sleepshow.org/how-much-sleep/"
          }
       },
