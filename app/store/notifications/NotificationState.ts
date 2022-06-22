@@ -4,4 +4,5 @@ export class NotificationState {
   allInboxNotifications: NotificationMessage[] = [];
   allOthersNotifications: NotificationMessage[] = [];
   allOthersUnreadNotifications: NotificationMessage[] = [];
+  allInboxUnreadNotifications: NotificationMessage[] = [];
 }

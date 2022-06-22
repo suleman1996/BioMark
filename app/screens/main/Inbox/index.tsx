@@ -17,6 +17,7 @@ import {
   getAllOtherNotificationsR,
   addAllOtherNotifications,
   getAllOtherUnreadNotificationsR,
+  getAllInboxUnreadNotificationsR,
 } from 'store/notifications/notification-actions';
 import { IAppState } from 'store/IAppState';
 import { notificationsService } from 'services/notification-service';
@@ -32,6 +33,7 @@ import {
   BioMedical,
   BioMcr,
 } from 'components/svg';
+import UnReadInboxNotificationItem from 'components/ui/unread-inbox-notification-item';
 
 export default function InboxScreen() {
   const { colors } = useTheme();
@@ -49,6 +51,9 @@ export default function InboxScreen() {
   const allOthersUnreadNotificationsData = useSelector(
     (state: IAppState) => state.notifications.allOthersUnreadNotifications
   );
+  const allInboxUnreadNotifications = useSelector(
+    (state: IAppState) => state.notifications.allInboxUnreadNotifications
+  );
 
   const [isReadMoreInboxNoti, setIsReadMoreInboxNoti] = useState(true);
   const [currentPageInboxNoti, setCurrentPageInboxNoti] = useState(1);
@@ -58,12 +63,14 @@ export default function InboxScreen() {
 
   const dispatch = useDispatch();
   const focused = useIsFocused();
+  console.log('allInboxUnreadNotifications', allInboxUnreadNotifications);
 
   /*eslint-disable */
   const _getAllInboxData = async () => {
     await dispatch(getAllInboxNotificationsR(1));
     await dispatch(getAllOtherNotificationsR(1));
     await dispatch(getAllOtherUnreadNotificationsR());
+    await dispatch(getAllInboxUnreadNotificationsR());
   };
   useEffect(() => {
     _getAllInboxData();
@@ -147,9 +154,9 @@ export default function InboxScreen() {
         break;
       case NotificationType.covid_result:
         console.log('7');
-        // navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-        //   screen: SCREENS.COVID19HOME,
-        // });
+        navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+          screen: SCREENS.COVID19HOME,
+        });
         break;
     }
   };
@@ -183,6 +190,20 @@ export default function InboxScreen() {
   const PreviousNotification = () => {
     return (
       <View style={styles.previousNotificationContainer}>
+        {/* Unread notification for inbox */}
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ width: widthToDp(86) }}
+          keyExtractor={(item, index) => index.toString()}
+          data={allInboxUnreadNotifications}
+          renderItem={({ item }) => (
+            <UnReadInboxNotificationItem
+              getIcon={getIcon}
+              item={item}
+              onPress={() => clickHandler(item)}
+            />
+          )}
+        />
         <View style={styles.blackLine} />
         <View style={styles.headerContainer}>
           <Text style={styles.prevHeaderText}>Previous Notifications</Text>
@@ -232,7 +253,11 @@ export default function InboxScreen() {
           keyExtractor={(item, index) => index.toString()}
           data={allOthersNotificationsData}
           renderItem={({ item }) => (
-            <OtherNotificationItem getIcon={getIcon} item={item} />
+            <OtherNotificationItem
+              getIcon={getIcon}
+              item={item}
+              onPress={() => clickHandler(item)}
+            />
           )}
           ListFooterComponent={() => {
             return (
