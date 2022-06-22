@@ -1,3 +1,4 @@
+import { useRoute } from '@react-navigation/native';
 import ButtonComponent from 'components/base/button';
 import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
@@ -22,6 +23,7 @@ import { makeStyles } from './styles';
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
+  const route = useRoute();
   const {} = props;
   const { colors }: any = useTheme();
   const allUpcommingBookings = useSelector(
@@ -33,7 +35,7 @@ const UpcommingBookings = (props: Props) => {
 
   const [modalData, setModalData] = useState({});
   const [isBarModal, setIsBarModal] = useState(false);
-
+  console.log('route', route);
   const styles = makeStyles(colors);
   const _renderItem = ({ item }: { item: BookingListDataUpcoming }) => {
     const {
@@ -63,6 +65,7 @@ const UpcommingBookings = (props: Props) => {
       is_cancellable: item.is_cancellable,
       is_dependent: item.is_dependent,
     };
+
     return (
       <View style={styles.singleItemContainer}>
         <BarCodeModal
@@ -165,12 +168,16 @@ const UpcommingBookings = (props: Props) => {
       </View>
     );
   };
+
+  console.log('-----------', allUpcommingBookings);
+
   return (
     <View style={{ flex: 1 }}>
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
         isVisible={isHealthDeclaration}
         data={modalData}
+        decalrations={[modalData]}
       />
       {allUpcommingBookings?.length > 0 ? <SuggestionsText /> : null}
       <FlatList

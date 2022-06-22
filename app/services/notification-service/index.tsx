@@ -63,9 +63,29 @@ function getAlliOthersUnreadNotifications() {
       });
   });
 }
+function getAlliInboxUnreadNotifications() {
+  return new Promise<Array<NotificationMessage>>((resolve, reject) => {
+    client
+      .get(`${API_URLS.NOTIFICATIONS}/inbox/unread`)
+      .then(async (response) => {
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('unread inbox notifiction', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('unread inbox notifiction erroe', err);
+        reject(err);
+      });
+  });
+}
 
 export const notificationsService = {
   getAllinboxNotifications,
   getAlliOthersNotifications,
   getAlliOthersUnreadNotifications,
+  getAlliInboxUnreadNotifications,
 };
