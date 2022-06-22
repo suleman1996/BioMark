@@ -114,7 +114,23 @@ const Index = () => {
           <View style={styles.infoView}>
             <AntDesign color={colors.blue} name="infocirlceo" />
             <Text style={styles.infoText}>
-              {resultOverView?.result?.summary}
+              <Text>
+                {
+                  resultOverView?.result?.summary.split(
+                    /[0-9]+ out of [0-9]+/
+                  )[0]
+                }
+              </Text>
+              <Text style={{ color: colors.heading, fontWeight: 'bold' }}>
+                {resultOverView?.result?.summary.match(/[0-9]+ out of [0-9]+/)}
+              </Text>
+              <Text>
+                {
+                  resultOverView?.result?.summary.split(
+                    /[0-9]+ out of [0-9]+/
+                  )[1]
+                }
+              </Text>
             </Text>
           </View>
           <Text style={[styles.overLayHeading, { fontSize: 16 }]}>
