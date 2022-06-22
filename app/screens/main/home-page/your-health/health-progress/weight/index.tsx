@@ -28,8 +28,10 @@ import {
   graphXAxisConfig,
 } from 'utils/functions/graph/graph-utils';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   let chartRef = useRef();
@@ -165,8 +167,8 @@ const Index = () => {
   return (
     <>
       <HealthProgressFilter
-        option1="Updated By"
-        option2="Unit"
+        option1={t('pages.weightTab.filters.uploadType')}
+        option2={t('pages.weightTab.filters.unit')}
         visible={isVisible}
         setIsVisible={setIsVisible}
         filterOption1={filterOption1}
@@ -187,7 +189,7 @@ const Index = () => {
           />
           <View style={styles.headingView}>
             <Text style={styles.heading}>
-              Weight ({selectedfilterOption2.title})
+              {t('pages.healthProgress.weight')} ({selectedfilterOption2.title})
             </Text>
             <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
               <Filter fill={colors.heading} />
