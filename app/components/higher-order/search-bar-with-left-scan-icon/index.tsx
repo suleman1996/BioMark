@@ -189,10 +189,6 @@ const SearchBarWithLeftScanIcon = () => {
       screen: SCREENS.BLOOD_PRESSURE,
     },
     {
-      name: 'BMI',
-      screen: SCREENS.BODY_MEASUREMENT,
-    },
-    {
       name: 'Smoking',
       screen: SCREENS.SMOKING,
     },
