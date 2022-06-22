@@ -37,9 +37,11 @@ const HealthRecord = () => {
   const [latestResult, setLatestResult] = useState('');
   const [pastResults, setPastResults] = useState([]);
   const [checked, setChecked] = React.useState('');
-  const [startDate, setStartDate] = useState('');
+  const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(new Date());
   const [page, setPage] = useState(1);
+  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+  const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
 
   const { colors } = useTheme();
 
@@ -99,18 +101,40 @@ const HealthRecord = () => {
     }
   };
 
+  //startDate
   const handleConfirm = (date) => {
-    console.log('A date has been picked: ', date);
     setStartDate(date);
+    cancelDatePicker();
   };
+  const cancelDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  //endDate
   const handleConfirm2 = (date) => {
-    console.log('A date has been picked: ', date);
     setEndDate(date);
+    cancelEndDatePicker();
+  };
+  const cancelEndDatePicker = () => {
+    setEndDatePickerVisibility(false);
+  };
+  const showEndDatePicker = () => {
+    if (!startDate) {
+      setEndDatePickerVisibility(false);
+    } else {
+      setEndDatePickerVisibility(true);
+    }
   };
 
   const renderItem2 = ({ item }) => {
-    // const fullName = item?.result?.summary;
-    // console.log(item?.result?.summary.split(''));
+    var str = 'hello how are you';
+    const welcomeText = str.split(' ')[0];
+    const welcomeText2 = str.split(' ')[1];
+    const fullName = welcomeText + welcomeText2;
+    console.log(fullName);
     // const splitOnSpace = fullName.split(' ');
     // console.log('first', splitOnSpace[0]);
     // console.log('second', splitOnSpace[1]);
@@ -135,7 +159,7 @@ const HealthRecord = () => {
           <Text style={styles.title}>{item?.name}</Text>
         </View>
         <Text style={styles.text3}>
-          {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
+          {moment(item?.received).format('MMMM D, YYYY hh:mma')}
         </Text>
         {item.ref_no == null ? null : (
           <Text style={styles.text3}>REF: {item?.ref_no}</Text>
@@ -147,7 +171,13 @@ const HealthRecord = () => {
               source={require('assets/images/home/info.png')}
               style={styles.prImage}
             />
-            <Text style={styles.text6}>{item?.result?.summary}</Text>
+            <Text style={styles.text6}>
+              {item?.result?.summary.split(/[0-9]+ out of [0-9]+/)[0]}
+              <Text style={styles.summaryText}>
+                {item?.result?.summary.match(/[0-9]+ out of [0-9]+/)}
+              </Text>
+              {item?.result?.summary.split(/[0-9]+ out of [0-9]+/)[1]}
+            </Text>
           </View>
         )}
 
@@ -229,7 +259,7 @@ const HealthRecord = () => {
               title="Your Latest Results"
               name={latestResult?.name}
               received={moment(latestResult?.received).format(
-                'hh:mm a MMMM Do, YYYY'
+                'MMMM D, YYYY hh:mma'
               )}
               ref_no={latestResult?.ref_no}
               status={latestResult?.result?.status}
@@ -284,10 +314,16 @@ const HealthRecord = () => {
             onPressClearFilter={() => {
               setChecked(''),
                 setStartDate(''),
-                setEndDate(''),
+                setEndDate(new Date()),
                 setPastResults(pastResult);
             }}
             onConifrm={() => onConfirm()}
+            cancelDatePicker={cancelDatePicker}
+            showDatePicker={showDatePicker}
+            isDatePickerVisible={isDatePickerVisible}
+            cancelEndDatePicker={cancelEndDatePicker}
+            showEndDatePicker={showEndDatePicker}
+            isEndDatePickerVisible={isEndDatePickerVisible}
           />
 
           {!pastResults?.message && (

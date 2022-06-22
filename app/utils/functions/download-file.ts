@@ -107,10 +107,7 @@ const downloadFileBase64 = (fileUrl: string) => {
       description: 'File downloaded by download manager.',
     },
   })
-    .fetch(
-      'GET',
-      `${'https://cran.r-project.org/web/packages/BioMark/BioMark.pdf'}`
-    )
+    .fetch('GET', `${fileUrl}`)
     .then((res) => {
       console.log(res);
       // the path of downloaded file

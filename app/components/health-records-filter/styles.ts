@@ -10,7 +10,6 @@ const styles = (colors: any) =>
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 22,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalView: {
@@ -18,7 +17,6 @@ const styles = (colors: any) =>
       borderRadius: 8,
       shadowColor: '#000',
       paddingHorizontal: widthToDp(5),
-      //   marginHorizontal: widthToDp(5),
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,

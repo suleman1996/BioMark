@@ -45,6 +45,15 @@ const styles = (colors: any) =>
       padding: 5,
       marginHorizontal: 5,
       // marginTop: heightToDp(2),
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
     },
     text: {
       textAlign: 'center',
@@ -71,9 +80,18 @@ const styles = (colors: any) =>
       paddingTop: 10,
       marginTop: heightToDp(1),
       borderRadius: 10,
-      elevation: 10,
+
       marginBottom: heightToDp(1),
       marginHorizontal: 5,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
     },
     filterResultMainView: {
       backgroundColor: 'grey',
@@ -152,8 +170,8 @@ const styles = (colors: any) =>
       alignItems: 'center',
       backgroundColor: '#C9E1F2',
       padding: 4,
-      // paddingTop: heightToDp(2),
-      // paddingBottom: heightToDp(2),
+      paddingTop: heightToDp(1),
+      paddingBottom: heightToDp(1),
       marginHorizontal: widthToDp(2),
       borderRadius: 10,
       borderWidth: 1,
@@ -162,7 +180,9 @@ const styles = (colors: any) =>
     },
     text6: {
       flex: 1,
+      color: colors.heading,
       paddingHorizontal: widthToDp(1),
+      fontSize: responsiveFontSize(13),
     },
     prImage: {
       height: 20,
@@ -226,6 +246,12 @@ const styles = (colors: any) =>
       backgroundColor: colors.greenDark,
       width: 15,
       height: 15,
+    },
+    summaryText: {
+      flex: 1,
+      color: colors.heading,
+      fontFamily: fonts.OpenSansBold,
+      fontSize: responsiveFontSize(13),
     },
   });
 export default styles;

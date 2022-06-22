@@ -4,8 +4,10 @@ import { Text, useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import fonts from 'assets/fonts';
+import { useTranslation } from 'react-i18next';
 
 const RenderRecordKeeping = ({ title, id, svg, onPress }) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -27,7 +29,7 @@ const RenderRecordKeeping = ({ title, id, svg, onPress }) => {
             { fontSize: 14, fontFamily: fonts.light, marginBottom: 10 },
           ]}
         >
-          Empower ID: {id}
+          {t('pages.dashboard.psp.empower')} {id}
         </Text>
       </TouchableOpacity>
     </LinearGradient>

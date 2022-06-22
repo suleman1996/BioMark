@@ -5,6 +5,7 @@ import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import Close from '../../assets/svgs/close';
 import GradientButton from 'components/linear-gradient-button';
+import { useTranslation } from 'react-i18next';
 
 const Index = ({
   visible = false,
@@ -16,6 +17,7 @@ const Index = ({
   values,
   onApplyPress,
 }) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   const [selectedfilterOption1, setSelectedfilterOption1] = React.useState();
@@ -61,7 +63,9 @@ const Index = ({
     <View style={styles.overLay}>
       <View style={styles.filterView}>
         <View style={styles.header}>
-          <Text style={styles.headingText}>Filters</Text>
+          <Text style={styles.headingText}>
+            {t('pages.weightTab.filters.title')}
+          </Text>
           <TouchableOpacity onPress={() => setIsVisible(!visible)}>
             <Close />
           </TouchableOpacity>
@@ -84,7 +88,7 @@ const Index = ({
           />
         ))}
         <GradientButton
-          text="Apply"
+          text={t('pages.weightTab.filters.confirm')}
           color={['#2C6CFC', '#2CBDFC']}
           style={{ marginBottom: 5, marginTop: 30 }}
           onPress={() =>

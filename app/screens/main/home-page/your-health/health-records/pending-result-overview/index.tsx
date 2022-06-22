@@ -13,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getReduxPendingResultOverview,
-  getReduxPastResult,
+  // getReduxPastResult,
 } from 'store/home/home-actions';
 import { useRoute } from '@react-navigation/native';
 
@@ -48,6 +48,7 @@ const PendingResultOverview = () => {
   React.useEffect(() => {
     dispatch(getReduxPendingResultOverview(route?.params?.result?.lab_id));
     setList(pendingResult?.upload?.document_attachments);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,7 +60,7 @@ const PendingResultOverview = () => {
       );
       if (result.status == true) {
         setModalVisible(!modalVisible);
-        dispatch(getReduxPastResult());
+        // dispatch(getReduxPastResult());
         navigate(SCREENS.HEALTH_RECORD);
         console.log('delte----------------------------------', result.data);
       }
@@ -189,7 +190,6 @@ const PendingResultOverview = () => {
         <DeleteButtonContainer
           title="Delete Upload"
           onPress={() => setModalVisible(true)}
-          //   disabled={list.length <= 0 ? true : false}
         />
       </TitleWithBackLayout>
     </View>

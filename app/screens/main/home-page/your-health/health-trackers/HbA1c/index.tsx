@@ -33,8 +33,10 @@ import { ErrorMessage } from 'components/base';
 import { AccountDeActivateModal } from 'components/ui';
 import { roundToDecimalPlaces } from 'utils/functions';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 const HbA1c = ({ route }) => {
+  const { t } = useTranslation();
   const SELECTED_HBA1C_ID = route?.params?.logId;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -138,13 +140,13 @@ const HbA1c = ({ route }) => {
     setHba1cTracker((prev) => ({ ...prev, [key]: value }));
     if (+value < +latestHba1c?.goal_value) {
       showMessage({
-        message: 'Your HbA1c is below target',
+        message: t('pages.hba1cInput.errors.belowGoal'),
         type: 'danger',
         icon: 'warning',
       });
     } else if (+value > +latestHba1c?.goal_value) {
       showMessage({
-        message: 'Your HbA1c is above target',
+        message: t('pages.hba1cInput.errors.aboveGoal'),
         type: 'danger',
         icon: 'warning',
       });
@@ -156,7 +158,7 @@ const HbA1c = ({ route }) => {
 
   return (
     <TitleWithBackWhiteBgLayout
-      title="HbA1c"
+      title={t('pages.hba1cInput.title')}
       binIcon={SELECTED_HBA1C_ID ? true : false}
       onPressIcon={() => setShowDeleteModal(true)}
     >
@@ -169,7 +171,7 @@ const HbA1c = ({ route }) => {
             marginBottom: heightToDp(25),
           }}
         >
-          <Text style={styles.label}>Your Reading</Text>
+          <Text style={styles.label}>{t('pages.hba1cInput.yourReading')}</Text>
           <MedicalInput
             height={15}
             textAlign="center"
@@ -187,7 +189,7 @@ const HbA1c = ({ route }) => {
 
           {!error && hba1cTracker?.data_value ? (
             <>
-              <Text style={styles.label}>Date - Time</Text>
+              <Text style={styles.label}>{t('pages.hba1cInput.dateTime')}</Text>
               <DateTimePickerModal
                 maxDate={new Date()}
                 date={hba1cTracker.record_date}
@@ -203,17 +205,21 @@ const HbA1c = ({ route }) => {
         </View>
       </ScrollView>
       <AccountDeActivateModal
-        headerText="HbA1c"
-        subHeading="Are you sure you wish to delete this HbA1c log?"
-        buttonUpperText="Delete"
-        buttonLowerText="Skip"
+        headerText={t('pages.hba1cInput.title')}
+        subHeading={t('pages.hba1cInput.dialogs.delete.description')}
+        buttonUpperText={t('pages.hba1cInput.dialogs.delete.buttonText')}
+        buttonLowerText={t('pages.hba1cInput.dialogs.delete.buttonCancelText')}
         isVisible={showDeleteModal}
         setIsVisible={setShowDeleteModal}
         callMe={deleteHba1cLog}
       />
       <ButtonWithShadowContainer
         onPress={saveHab1cLog}
-        title={route?.params?.logId ? 'Save Edit' : 'Add'}
+        title={
+          route?.params?.logId
+            ? t('pages.hba1cInput.save')
+            : t('pages.hba1cInput.add')
+        }
         disabled={error || hba1cTracker.data_value === '' ? true : false}
       />
     </TitleWithBackWhiteBgLayout>
