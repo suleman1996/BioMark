@@ -14,10 +14,10 @@ import Styles from './styles';
 import { getMedicationsTrackersAction } from 'store/home/home-actions';
 import { IAppState } from 'store/IAppState';
 import { MedicationTracker } from 'types/api';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
 
@@ -107,7 +107,9 @@ const Index = () => {
           data={headerValue}
         />
         <View style={styles.innerContainer}>
-          <Text style={styles.headingStyle}>YOUR DAILY MEDICATION</Text>
+          <Text style={styles.headingStyle}>
+            {t('pages.medicationTab.title')}
+          </Text>
           {medicationLogs?.logs?.map((log) => (
             <>
               <MedicationLogsCard {...log} />

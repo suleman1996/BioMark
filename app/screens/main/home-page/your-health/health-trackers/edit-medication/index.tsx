@@ -10,8 +10,10 @@ import { userService } from 'services/user-service/user-service';
 import SCREENS from 'navigation/constants';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const EditMedication = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const navigation = useNavigation();
@@ -37,7 +39,7 @@ const EditMedication = () => {
 
   return (
     <TitleWithBackWhiteBgLayout
-      title="Edit Medication"
+      title={t('pages.medicationInput.titleEdit')}
       style={{ flex: 1 }}
       binIcon={false}
     >
@@ -84,7 +86,7 @@ const EditMedication = () => {
         </View>
       </View>
       <GradientButton
-        text="Continue"
+        text={t('pages.medicationList.continue')}
         disabled={!selectedMedication}
         color={['#2C6CFC', '#2CBDFC']}
         onPress={() =>

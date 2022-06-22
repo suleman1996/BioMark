@@ -32,8 +32,10 @@ import {
 import { roundToDecimalPlaces } from 'utils/functions';
 import moment from 'moment';
 import GradientButton from 'components/linear-gradient-button';
+import { useTranslation } from 'react-i18next';
 
 const BloodPressure = ({ route }: any) => {
+  const { t } = useTranslation();
   const SELECTED_BP_ID = route?.params?.logId;
   const { colors } = useTheme();
   const dispatch = useDispatch();
@@ -145,15 +147,14 @@ const BloodPressure = ({ route }: any) => {
     ) {
       setError((prev) => ({
         ...prev,
-        bp_diastolic:
-          'Please enter a valid diastolic value. Diastolic value should be less than systolic value.',
+        bp_diastolic: t('pages.bloodPressureInput.errors.bloodPressure'),
       }));
     } else {
       setError((prev) => {
         const copy = { ...prev };
         if (
           copy.bp_diastolic ==
-          'Please enter a valid diastolic value. Diastolic value should be less than systolic value.'
+          t('pages.bloodPressureInput.errors.bloodPressure')
         ) {
           const err = bloodPressureValidator(
             'bp_diastolic',
@@ -168,11 +169,11 @@ const BloodPressure = ({ route }: any) => {
         return { ...copy };
       });
     }
-  }, [bloodPressure]);
+  }, [t, bloodPressure]);
 
   return (
     <TitleWithBackWhiteBgLayout
-      title="Blood Pressure"
+      title={t('pages.bloodPressureInput.title')}
       binIcon={SELECTED_BP_ID ? true : false}
       onPressIcon={() => setShowDeleteModal(true)}
     >
@@ -185,12 +186,14 @@ const BloodPressure = ({ route }: any) => {
           }}
         >
           <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.label}>Your Reading (mmHg)</Text>
+            <Text style={styles.label}>
+              {t('pages.bloodPressureInput.yourReading')}
+            </Text>
             <View
               style={{ marginTop: heightToDp(3), marginLeft: widthToDp(4) }}
             >
               <Tip
-                body="Your blood pressure measures the pressure of the blood that is flowing in your blood vessels. The top number is your systolic reading which measures the pressure when your heart beats. The bottom number is your diastolic reading which measures the pressure when your heart relaxes in between beats.."
+                body={t('pages.bloodPressureInput.definition')}
                 bodyStyle={{ color: '#fff' }}
                 tipContainerStyle={{
                   backgroundColor: colors.shineBlue,
@@ -235,7 +238,9 @@ const BloodPressure = ({ route }: any) => {
           bloodPressure.bp_systolic &&
           bloodPressure.bp_diastolic ? (
             <>
-              <Text style={styles.label}>Date - Time</Text>
+              <Text style={styles.label}>
+                {t('pages.bloodPressureInput.dateTime')}
+              </Text>
               <DateTimePickerModal
                 maxDate={new Date()}
                 date={bloodPressure.date_entry}
@@ -268,10 +273,14 @@ const BloodPressure = ({ route }: any) => {
       </ScrollView>
       {showDeleteModal && (
         <AccountDeActivateModal
-          headerText="Blood Pressure"
-          subHeading="Are you sure you wish to delete this blood pressure log?"
-          buttonUpperText="Yes"
-          buttonLowerText="Skip"
+          headerText={t('pages.bloodPressureInput.dialogs.delete.title')}
+          subHeading={t('pages.bloodPressureInput.dialogs.delete.description')}
+          buttonUpperText={t(
+            'pages.bloodPressureInput.dialogs.delete.buttonText'
+          )}
+          buttonLowerText={t(
+            'pages.bloodPressureInput.dialogs.delete.buttonCancelText'
+          )}
           isVisible={showDeleteModal}
           setIsVisible={setShowDeleteModal}
           callMe={deleteBpLog}

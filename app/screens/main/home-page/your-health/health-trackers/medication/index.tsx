@@ -33,6 +33,7 @@ import { navigate } from 'services/nav-ref';
 
 import { makeStyles } from './styles';
 import { AccountDeActivateModal } from 'components/ui';
+import { t } from 'i18next';
 
 type RenderDosageProps = {
   title: string;
@@ -227,7 +228,11 @@ const Medication = ({ route }) => {
 
   return (
     <TitleWithBackWhiteBgLayout
-      title={SELECTED_MEDICATION_LOG_ID ? 'Medication' : 'Take Medication'}
+      title={
+        SELECTED_MEDICATION_LOG_ID
+          ? t('pages.medicationTake.titleEdit')
+          : t('pages.medicationTake.titleSave')
+      }
       binIcon={SELECTED_MEDICATION_LOG_ID}
       onPressIcon={() => setShowDeleteModal(true)}
     >
@@ -245,7 +250,9 @@ const Medication = ({ route }) => {
             <Text style={styles.medicationNameStyle}>{medicationName}</Text>
           ) : getMedNewTracker?.medication_dropdown ? (
             <View style={styles.dropDown}>
-              <Text style={styles.textStyle}>Medication</Text>
+              <Text style={styles.textStyle}>
+                {t('pages.medicationTake.titleEdit')}
+              </Text>
               <DropdownMenu
                 options={options}
                 selectedValue={medicationTrackerState.medication_log_id}
@@ -259,7 +266,9 @@ const Medication = ({ route }) => {
 
           {medicationTrackerState.medication_log_id ? (
             <>
-              <Text style={styles.textStyle}>Dosage</Text>
+              <Text style={styles.textStyle}>
+                {t('pages.medicationTake.dosage')}
+              </Text>
               {medicationListId == 4 ||
               medicationListId == 5 ||
               medicationListId == 6 ||
@@ -291,7 +300,9 @@ const Medication = ({ route }) => {
                       />
                     }
                   />
-                  <Text style={styles.textStyle}>Meal</Text>
+                  <Text style={styles.textStyle}>
+                    {t('pages.medicationTake.meal')}
+                  </Text>
                   <DropdownMenu
                     options={options2}
                     selectedValue={medicationTrackerState.meal_type}
@@ -302,7 +313,9 @@ const Medication = ({ route }) => {
                   />
                 </>
               )}
-              <Text style={styles.label}>Date - Time</Text>
+              <Text style={styles.label}>
+                {t('pages.medicationTake.dateTime')}
+              </Text>
               <DateTimePickerModal
                 date={medicationTrackerState.record_date}
                 maxDate={new Date()}
@@ -314,17 +327,23 @@ const Medication = ({ route }) => {
       </ScrollView>
       <ButtonWithShadowContainer
         onPress={onSubmit}
-        title={SELECTED_MEDICATION_LOG_ID ? 'Save Edit' : 'Take'}
+        title={
+          SELECTED_MEDICATION_LOG_ID
+            ? t('pages.medicationTake.editButton')
+            : t('pages.medicationTake.saveButton')
+        }
         disabled={validation}
       />
       <AccountDeActivateModal
         callMe={deleteMedication}
         isVisible={showDeleteModal}
         setIsVisible={setShowDeleteModal}
-        subHeading="Are you sure you want to delete this medication log?"
-        headerText="Medication"
-        buttonLowerText="No"
-        buttonUpperText="Yes"
+        subHeading={t('pages.medicationTake.dialogs.delete.description')}
+        headerText={t('pages.medicationTake.dialogs.delete.title')}
+        buttonLowerText={t(
+          'pages.medicationTake.dialogs.delete.buttonCancelText'
+        )}
+        buttonUpperText={t('pages.medicationTake.dialogs.delete.buttonText')}
       />
     </TitleWithBackWhiteBgLayout>
   );
@@ -366,7 +385,9 @@ const RenderDosage = (props: RenderDosageProps) => {
           >
             {props.quantity}
           </Text>
-          <Text style={[styles.label, { marginTop: 0 }]}>unit(s)</Text>
+          <Text style={[styles.label, { marginTop: 0 }]}>
+            {t('pages.medicationTake.units')}
+          </Text>
           <TouchableOpacity
             onPress={() =>
               props.quantity < props.maxRange &&
