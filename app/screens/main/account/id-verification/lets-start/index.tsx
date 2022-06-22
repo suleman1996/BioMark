@@ -17,7 +17,7 @@ import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import ButtonComponent from 'components/base/button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { goBack } from 'services/nav-ref';
+import { goBack, navigate } from 'services/nav-ref';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { userService } from 'services/user-service/user-service';
 import { ActivityIndicator } from 'components/';
@@ -28,7 +28,8 @@ import { useDispatch } from 'react-redux';
 
 const { JumioMobileSDK } = NativeModules;
 const DATACENTER = 'SG';
-const LetsStartIdVerfiication = () => {
+const LetsStartIdVerfiication = ({ route }: { route: any }) => {
+  const { sendTo } = route.params;
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const { ID_VERIFICATION_COMPLETE } = SCREENS;
@@ -116,7 +117,15 @@ const LetsStartIdVerfiication = () => {
         color={colors.darkGray}
         fontFamily={GlobalFonts.bold}
         fontSize={22}
-        onPress={() => goBack()}
+        onPress={() => {
+          if (sendTo && sendTo == 'booktest') {
+            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+              screen: SCREENS.BOOKCOVIDTEST,
+            });
+          } else {
+            goBack();
+          }
+        }}
         title={'Skip for now'}
       />
     </SafeAreaView>

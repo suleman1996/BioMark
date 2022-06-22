@@ -32,8 +32,10 @@ import {
 import { BloodSugarGraphFactory } from './factory';
 import { Tip } from 'react-native-tip';
 import { IAppState } from 'store/IAppState';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const chartRef = useRef();
   const lagendChartRef = useRef();
@@ -229,8 +231,8 @@ const Index = () => {
   return (
     <>
       <HealthProgressFilter
-        option1="Logs"
-        option2="Unit of Measurements"
+        option1={t('pages.bloodSugarTab.logs')}
+        option2={t('pages.bloodSugarTab.filters.unit')}
         visible={isVisible}
         setIsVisible={setIsVisible}
         filterOption1={filterOption1}
@@ -248,7 +250,7 @@ const Index = () => {
           <View style={styles.headingView}>
             <View style={styles.rowCenter}>
               <Text style={styles.heading}>
-                Blood Sugar ({selectedfilterOption2.title})
+                {t('pages.bloodSugarTab.title')} ({selectedfilterOption2.title})
               </Text>
               <View style={{ marginLeft: 10 }}>
                 <Tip
@@ -289,7 +291,7 @@ const Index = () => {
           <Text
             style={[styles.heading, { alignSelf: 'center', marginTop: 10 }]}
           >
-            Displaying Entries: {selectedfilterOption1.title}
+            {t('pages.bloodSugarTab.displaying')} {selectedfilterOption1.title}
           </Text>
           <Logs
             navigate={SCREENS.BLOOD_SUGAR}

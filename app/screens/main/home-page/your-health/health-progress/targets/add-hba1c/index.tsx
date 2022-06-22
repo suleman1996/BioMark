@@ -23,10 +23,12 @@ import { IAppState } from 'store/IAppState';
 import { hba1cValidator } from 'utils/functions/measurments';
 
 import Styles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const units: TargetUnit[] = [{ id: 3, name: '%' }];
 
 const Index = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   const navigation = useNavigation();
@@ -99,15 +101,15 @@ const Index = () => {
       <ActivityIndicator visible={loading} />
 
       <ScrollView style={styles.innerContainer}>
-        <Text style={styles.firstHeading}>Set your new Hba1c goal</Text>
+        <Text style={styles.firstHeading}>
+          {t('pages.hba1cTargetInput.title')}
+        </Text>
         <Text style={styles.subHeading}>
-          Your doctor should help you set these ranges. if you leave these
-          ranges blank we will use the default range of 6% as suggested by the
-          ADA.
+          {t('pages.hba1cTargetInput.subtitle')}
         </Text>
         <InputWithUnits
           small
-          title="Goal"
+          title={t('pages.hba1cTargetInput.goal')}
           placeholder={'0.0'}
           onChangeText={setGoalValue}
           value={goalValue}
@@ -121,7 +123,7 @@ const Index = () => {
       </ScrollView>
       <GradientButton
         onPress={onSubmit}
-        text="Save"
+        text={t('pages.bloodSugarTargetInput.save')}
         color={['#2C6CFC', '#2CBDFC']}
         disabled={!goalValue || errors.goal}
         style={styles.buttonContainer}
