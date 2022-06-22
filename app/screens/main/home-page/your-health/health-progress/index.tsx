@@ -23,8 +23,10 @@ import Styles from './styles';
 import fonts from 'assets/fonts';
 import { getReduxHealthTracker } from 'store/home/home-actions';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   const dispatch = useDispatch();
@@ -137,7 +139,9 @@ const Index = () => {
           >
             <ArrowBack fill={colors.white} />
           </TouchableOpacity>
-          <Text style={styles.navHeading}>Health Progress</Text>
+          <Text style={styles.navHeading}>
+            {t('pages.search.recordKeeping.suggestions.healthProgress')}
+          </Text>
         </View>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />

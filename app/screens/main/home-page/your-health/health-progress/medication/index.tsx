@@ -14,8 +14,10 @@ import Styles from './styles';
 import { getMedicationsTrackersAction } from 'store/home/home-actions';
 import { IAppState } from 'store/IAppState';
 import { MedicationTracker } from 'types/api';
+// import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  // const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
 

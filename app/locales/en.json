@@ -779,7 +779,7 @@
           "buttonText": "Ok"
         },
         "withdraw": {
-          "title": "Are You Sure?",
+          "title": "Are You Sssure?",
           "description": "Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges.",
           "buttonText": "Yes",
           "buttonCancelText": "Cancel"
