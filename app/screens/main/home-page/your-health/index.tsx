@@ -69,8 +69,10 @@ import RenderHighlights from './components/render-high-lights';
 import RenderHealthRisk from './components/render-health-risk';
 
 import { healthRisksColor } from 'utils/functions/your-health';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
@@ -265,7 +267,9 @@ const Index = () => {
             <TouchableOpacity onPress={() => navigation.navigate(SCREENS.HOME)}>
               <ArrowBack fill={colors.white} />
             </TouchableOpacity>
-            <Text style={styles.navHeading}>Your Health</Text>
+            <Text style={styles.navHeading}>
+              {t('pages.search.yourHealth.label')}
+            </Text>
           </View>
           <View style={styles.navSearch}>
             <SearchBarWithLeftScanIcon />
@@ -273,7 +277,9 @@ const Index = () => {
         </View>
         <View style={styles.containerBody}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <Text style={styles.headingText}>Your Health Risks</Text>
+            <Text style={styles.headingText}>
+              {t('pages.dashboard.riskTitle')}
+            </Text>
             <View style={styles.healthRiskView}>
               {Object.entries(getHealthRisksHash(healthRisk)).map(
                 ([key, value]: any) => (
@@ -316,7 +322,7 @@ const Index = () => {
               />
             ) : null}
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
-              Health Trackers
+              {t('pages.dashboard.healthTrackers')}
             </Text>
 
             <FlatList
@@ -328,14 +334,14 @@ const Index = () => {
             />
 
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
-              Record Keeping
+              {t('pages.dashboard.psp.recordKeeping')}
             </Text>
 
             {dashboard?.psp_user &&
               [2, 4].includes(dashboard?.program_detail?.program_id) && (
                 <RenderRecordKeeping
                   svg={<Diabetes />}
-                  title="Enter Diabetes Support Center"
+                  title={t('pages.dashboard.psp.titles.titleDiabetes')}
                   id={dashboard?.psp_code}
                   onPress={() => navigate(SCREENS.DIABETES_CENTER)}
                 />
@@ -344,7 +350,7 @@ const Index = () => {
               [3, 4].includes(dashboard?.program_detail?.program_id) && (
                 <RenderRecordKeeping
                   svg={<BP />}
-                  title="Enter Hypertension Support Center"
+                  title={t('pages.dashboard.psp.titles.titleHypertension')}
                   id={dashboard?.psp_code}
                   onPress={() => navigation.navigate(HYPERTENSION)}
                 />
@@ -352,7 +358,7 @@ const Index = () => {
 
             {dashboard?.latest_result && (
               <RenderLastResult
-                title="Your Latest Result"
+                title={t('pages.resultSummary.tabs.summary.latestResult')}
                 date={dashboard?.latest_result?.received}
                 onPress={() =>
                   navigate(SCREENS.RESULT_OVERVIEW, {
@@ -371,8 +377,8 @@ const Index = () => {
 
             {!dashboard?.complete_profile && (
               <RenderLastResult
-                title="Complete Your Profile"
-                date={'Fill in your profile to know your health risks'}
+                title={t('pages.dashboard.updateProfile')}
+                date={t('pages.dashboard.updateProfileText')}
                 onPress={() => navigate(SCREENS.ACCOUNT)}
                 svg={
                   <MaterialIcons
@@ -386,7 +392,7 @@ const Index = () => {
 
             <View style={styles.circleView}>
               <RenderCircle
-                title="Health Records"
+                title={t('pages.dashboard.healthRecords')}
                 Image={
                   <Image
                     style={{ height: 25, width: 25 }}
@@ -397,7 +403,7 @@ const Index = () => {
                 onPress={() => navigate(SCREENS.HEALTH_RECORD)}
               />
               <RenderCircle
-                title="Health Progress"
+                title={t('pages.dashboard.healthProgress')}
                 svg={<Progress />}
                 onPress={() => navigation.navigate(HEALTH_PROGRESS)}
               />
@@ -419,7 +425,7 @@ const Index = () => {
             ) : null}
 
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
-              Article Highlights
+              {t('pages.dashboard.suggestedReading')}
             </Text>
 
             <FlatList
@@ -453,7 +459,7 @@ const Index = () => {
                     <View style={{ alignItems: 'center', marginBottom: 20 }}>
                       <View style={styles.popUpHeader}>
                         <Text style={styles.popUpHeading}>
-                          Results Available
+                          {t('pages.dashboard.dialogs.verify.title')}
                         </Text>
                         <TouchableOpacity onPress={() => setVisible(false)}>
                           <Image
@@ -473,8 +479,7 @@ const Index = () => {
                         color: '#8493AE',
                       }}
                     >
-                      Please enter your IC or passport number to verify your
-                      identity
+                      {t('pages.dashboard.dialogs.verify.description')}
                     </Text>
 
                     <View style={{ width: '100%' }}>
@@ -486,7 +491,7 @@ const Index = () => {
                       placeholder={'Enter your IC / Passport number'}
                     /> */}
                       <InputWithLabel
-                        label="IC or Passport Number"
+                        label={t('pages.dashboard.dialogs.verify.label')}
                         placeholder={'Enter your IC / Passport number'}
                         onChange={() => {
                           handleChange('qrInput');
@@ -504,7 +509,7 @@ const Index = () => {
                         <TouchableOpacity>
                           <Button
                             onPress={() => handleSubmit()}
-                            title="Verify"
+                            title={t('common.verify')}
                             marginHorizontal={0.1}
                             marginVertical={0.1}
                             //   disabled={!isValid && errors}
