@@ -6,9 +6,11 @@ import { Covid19 } from 'assets/svgs/index';
 import fonts from 'assets/fonts';
 import SCREENS from '../../navigation/constants';
 import { navigate } from '../../services/nav-ref';
+import { useTranslation } from 'react-i18next';
 //import colors from 'assets/colors';
 
 export default function Covid19Btn({ onPress }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   return (
@@ -27,7 +29,7 @@ export default function Covid19Btn({ onPress }) {
         </TouchableOpacity>
       </View>
       <View>
-        <Text style={styles.covidText}>COVID-19</Text>
+        <Text style={styles.covidText}>{t('pages.covid.header')}</Text>
       </View>
     </View>
   );

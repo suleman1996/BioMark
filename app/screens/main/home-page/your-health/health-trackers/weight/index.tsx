@@ -28,8 +28,10 @@ import {
 } from 'store/home/home-actions';
 import moment from 'moment';
 import { roundToDecimalPlaces } from 'utils/functions';
+import { useTranslation } from 'react-i18next';
 
 const Weight = ({ route }: any) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const SELECTED_WEIGHT_ID = route?.params?.logId;
@@ -134,14 +136,16 @@ const Weight = ({ route }: any) => {
   };
 
   useEffect(() => {
+    if (weightTracker.weight == '') return;
     setError(
       measurementValidator(
         weightTracker.is_metric,
         'weight',
-        weightTracker.weight
+        weightTracker.weight,
+        t
       ) || ''
     );
-  }, [weightTracker]);
+  }, [t, weightTracker]);
   return (
     <TitleWithBackWhiteBgLayout
       binIcon={SELECTED_WEIGHT_ID ? true : false}
