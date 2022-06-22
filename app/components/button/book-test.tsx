@@ -18,6 +18,7 @@ export default function BookTestButton() {
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity
+        activeOpacity={0.6}
         onPress={() => {
           navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
             screen: SCREENS.BOOKCOVIDTEST,
@@ -25,9 +26,9 @@ export default function BookTestButton() {
           dispatch(addCovidBooking([]));
         }}
       >
-        <View style={styles.circleBtn}>
+        <TouchableOpacity activeOpacity={0.6} style={styles.circleBtn}>
           <BioBookTest width={7} height={7} />
-        </View>
+        </TouchableOpacity>
       </TouchableOpacity>
       <View>
         <Text style={styles.healthText}>Book Tests</Text>

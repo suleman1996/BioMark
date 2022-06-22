@@ -25,6 +25,11 @@ type Props = {};
 const labels = ['Booking', 'Payment', 'Confirmation'];
 
 const BookCovidTest = (props: Props) => {
+  useEffect(() => {
+    navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+      screen: SCREENS.ID_VERIFICATION_START,
+    });
+  }, []);
   const {} = props;
 
   const { colors } = useTheme();

@@ -13,15 +13,16 @@ export default function TestBookinButton() {
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity
+        activeOpacity={0.6}
         onPress={() =>
           navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
             screen: SCREENS.COVID19BOOKINGS,
           })
         }
       >
-        <View style={styles.circleBtn}>
+        <TouchableOpacity activeOpacity={0.6} style={styles.circleBtn}>
           <BioBookings width={7} height={7} />
-        </View>
+        </TouchableOpacity>
       </TouchableOpacity>
       <View>
         <Text style={styles.healthText}>Bookings</Text>
