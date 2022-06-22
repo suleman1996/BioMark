@@ -68,7 +68,7 @@ const SearchBarWithLeftScanIcon = () => {
   useEffect(() => {
     dispatch(getHealthTrackerRisks());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [healthRisk]);
+  }, []);
   let arr = [
     {
       name: 'Heart Disease',
