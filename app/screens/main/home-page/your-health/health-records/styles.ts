@@ -45,6 +45,15 @@ const styles = (colors: any) =>
       padding: 5,
       marginHorizontal: 5,
       // marginTop: heightToDp(2),
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
     },
     text: {
       textAlign: 'center',
@@ -71,9 +80,18 @@ const styles = (colors: any) =>
       paddingTop: 10,
       marginTop: heightToDp(1),
       borderRadius: 10,
-      elevation: 10,
+
       marginBottom: heightToDp(1),
       marginHorizontal: 5,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
     },
     filterResultMainView: {
       backgroundColor: 'grey',
