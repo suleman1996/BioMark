@@ -9,8 +9,10 @@ import fonts from 'assets/fonts';
 //import colors from 'assets/colors';
 
 import { YourHealth } from 'assets/svgs/index';
+import { useTranslation } from 'react-i18next';
 
 export default function YourHealthBtn() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const { YOUR_HEALTH } = SCREENS;
@@ -24,7 +26,9 @@ export default function YourHealthBtn() {
         </View>
       </TouchableOpacity>
       <View>
-        <Text style={styles.healthText}>Your Health</Text>
+        <Text style={styles.healthText}>
+          {t('pages.search.yourHealth.label')}
+        </Text>
       </View>
     </View>
   );
