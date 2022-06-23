@@ -25,7 +25,7 @@ export const checkPermissionAndDownload = async (file: string) => {
       }
     } catch (err) {
       // To handle permission related exception
-      console.log('++++' + err);
+      console.error('Storage permission error' + err);
     }
   }
 };
@@ -57,11 +57,7 @@ const downloadFile = (fileUrl: string) => {
   };
   config(options)
     .fetch('GET', FILE_URL)
-    .then((res) => {
-      // Alert after successful downloading
-      console.log('res -> ', JSON.stringify(res));
-      alert('File Downloaded Successfully.');
-    });
+    .then(() => {});
 };
 const getFileExtention = (fileUrl: string) => {
   // To get the file extension
@@ -91,7 +87,7 @@ export const checkPermissionAndDownloadBase64 = async (file: string) => {
       }
     } catch (err) {
       // To handle permission related exception
-      console.log('++++' + err);
+      console.error('Storage permission error ' + err);
     }
   }
 };
@@ -108,8 +104,7 @@ const downloadFileBase64 = (fileUrl: string) => {
     },
   })
     .fetch('GET', `${fileUrl}`)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       // the path of downloaded file
       // resp.path()
       // let base64Str = fileUrl;

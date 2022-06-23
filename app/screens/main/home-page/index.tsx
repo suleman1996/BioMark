@@ -23,7 +23,7 @@ import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 
 import FloatingActionButton from 'components/floating-action-button';
 
-import { userService } from 'services/user-service/user-service';
+import { homeServices } from 'services/home-service/index';
 import { getReduxBootstrap } from 'store/account/account-actions';
 import { getReduxMedicalDropDown } from 'store/home/home-actions';
 import { getReduxMedicationList } from 'store/home/home-actions';
@@ -65,11 +65,10 @@ export default function Home() {
 
   const userProfile = async () => {
     try {
-      const result = await userService.getUserProfile();
-      console.log('user profile ', result.data);
+      const result = await homeServices.getUserProfile();
       authContext.setUserData(result.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -79,7 +78,7 @@ export default function Home() {
   }, []);
 
   return (
-    <View style={{ alignSelf: 'center', backgroundColor: 'white' }}>
+    <View style={{ alignItems: 'center', backgroundColor: 'white', flex: 1 }}>
       <View style={styles.navBar}>
         <Text style={styles.navHeading}>
           {t('pages.dashboard.greetings')} {authContext?.userData?.first_name}!

@@ -42,8 +42,6 @@ const BloodSugarChooser = ({
 
   const menuRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [value, setValue] = useState(0);
-  // const [selectedType, setSelectedType] = useState(2);
 
   var otherStyle = [];
 

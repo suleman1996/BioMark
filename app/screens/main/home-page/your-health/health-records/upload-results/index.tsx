@@ -21,6 +21,7 @@ import { ButtonWithShadowContainer } from 'components/base';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import WithdrawProgram from 'components/widthdraw-from-program';
+import UploadSuccessModal from 'components/upload-successful-modal';
 import ShowPicModal from 'components/show-upload-pic-modal';
 import { TextInput } from 'components';
 import SCREENS from 'navigation/constants';
@@ -37,9 +38,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import Pdf from 'react-native-pdf';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { useTranslation } from 'react-i18next';
 
 // let cameraIs = false;
 export default function ResultUpload() {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [refresh, setRefreh] = useState(false);
@@ -49,8 +52,8 @@ export default function ResultUpload() {
   const [splices, setSplices] = useState();
   const [list, setList] = useState([]);
   const [showPicModal, setShowPicModal] = useState(false);
+  const [uploadSuccessModal, setUploadSuccessModal] = useState(false);
   const [uri, setUri] = useState('');
-
   const [modalData, setModalData] = useState([]);
 
   useEffect(() => {
@@ -70,19 +73,17 @@ export default function ResultUpload() {
         attachments: list,
       },
     };
-    console.log('body', body);
+
     try {
       setIsVisible(true);
       const profilePic = await userService.uploadResult(body);
       if (profilePic.status == true) {
         dispatch(getReduxPastResult());
-        navigate(SCREENS.YOUR_HEALTH);
+        setUploadSuccessModal(true);
         Keyboard.dismiss();
-        console.log('ppppppppppppppppppp', profilePic);
       }
     } catch (error) {
       setIsVisible(false);
-      console.log(error);
       if (error.errMsg.status == '500') {
         setIsVisible(false);
         showMessage({
@@ -107,17 +108,7 @@ export default function ResultUpload() {
   const imagePickerFromGallery = async () => {
     try {
       setIsVisible(true);
-      // const granted = await PermissionsAndroid.request(
-      //   PermissionsAndroid.PERMISSIONS.CAMERA,
-      //   {
-      //     title: 'App Camera Permission',
-      //     message: 'App needs access to your camera',
-      //     buttonNeutral: 'Ask Me Later',
-      //     buttonNegative: 'Cancel',
-      //     buttonPositive: 'OK',
-      //   }
-      // );
-      // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+
       let options = {
         mediaType: 'photo',
         selectionLimit: 0,
@@ -126,10 +117,8 @@ export default function ResultUpload() {
       launchImageLibrary(options, (res) => {
         if (res.didCancel) {
           setIsVisible(false);
-          console.log('User cancelled image picker');
         } else if (res.errorMessage) {
           setIsVisible(false);
-          console.log('ImagePicker Error: ', res.errorMessage);
         } else {
           setIsVisible(false);
           let body = {
@@ -150,55 +139,11 @@ export default function ResultUpload() {
           setShowModal(!showModal);
         }
       });
-      console.log('Camera permission given');
-      // } else {
-      //   setIsVisible(false);
-      //   console.log('Camera permission denied');
-      // }
     } catch (err) {
       setIsVisible(false);
       console.warn(err);
     }
   };
-  // const uploadPDF = async () => {
-  //   //Opening Document Picker for selection of one file
-  //   try {
-  //     const res = await DocumentPicker.pickSingle({
-  //       type: [DocumentPicker.types.pdf],
-  //     });
-  //     //Printing the log realted to the file
-  //     console.log('res : ', res);
-  //     // var b64 = await RNFS.readFile(res.uri, 'base64');
-  //     console.log('Data', data);
-  //     let body = {
-  //       filename: res?.name,
-  //       uri: res?.uri,
-  //       //  base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
-  //       base64: b64,
-  //       filetype: res?.type,
-  //     };
-  //     let data = list;
-  //     data.push(body);
-  //     setList(data);
-  //     setShowModal(false);
-  //     console.log('docment------------', data);
-  //     console.log('URI : ' + res.uri);
-  //     console.log('Type : ' + res.type);
-  //     console.log('File Name : ' + res.name);
-  //     console.log('File Size : ' + res.size);
-  //     //Setting the state to show single file attributes
-  //   } catch (err) {
-  //     //Handling any exception (If any)
-  //     if (DocumentPicker.isCancel(err)) {
-  //       //If user canceled the document selection
-  //       console.log('Canceled from single doc picker');
-  //     } else {
-  //       //For Unknown Error
-  //       // alert('Unknown Error: ' + JSON.stringify(err));
-  //       throw err;
-  //     }
-  //   }
-  // };
 
   const uploadPDF = async () => {
     //Opening Document Picker for selection of one file
@@ -207,13 +152,12 @@ export default function ResultUpload() {
         type: [DocumentPicker.types.pdf],
       });
       //Printing the log realted to the file
-      console.log('res : ', res);
+
       var b64 = await RNFS.readFile(res.uri, 'base64');
-      console.log('Data', data);
 
       let body = {
         filename: res?.name,
-        //  base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
+
         base64: `data:application/pdf;base64,${b64}`,
         filetype: 'pdf',
       };
@@ -221,18 +165,12 @@ export default function ResultUpload() {
       data.push(body);
       setList(data);
       setShowModal(false);
-      console.log('docment------------', data);
 
-      console.log('URI : ' + res.uri);
-      console.log('Type : ' + res.type);
-      console.log('File Name : ' + res.name);
-      console.log('File Size : ' + res.size);
       //Setting the state to show single file attributes
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
         //If user canceled the document selection
-        console.log('Canceled from single doc picker');
       } else {
         //For Unknown Error
         // alert('Unknown Error: ' + JSON.stringify(err));
@@ -263,10 +201,8 @@ export default function ResultUpload() {
         launchCamera(options, (res) => {
           if (res.didCancel) {
             setIsVisible(false);
-            console.log('User cancelled image picker');
           } else if (res.errorMessage) {
             setIsVisible(false);
-            console.log('ImagePicker Error: ', res.errorMessage);
           } else {
             setIsVisible(false);
             let body = {
@@ -287,10 +223,8 @@ export default function ResultUpload() {
             setShowModal(false);
           }
         });
-        console.log('Camera permission given');
       } else {
         setIsVisible(false);
-        console.log('Camera permission denied');
       }
     } catch (err) {
       setIsVisible(false);
@@ -302,10 +236,12 @@ export default function ResultUpload() {
       <ActivityIndicator visible={isVisiable} />
       {isPreview ? (
         <>
-          <TitleWithBackLayout title="Upload Results">
+          <TitleWithBackLayout title={t('pages.uploadResult.title')}>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
               <View style={styles.uploadView}>
-                <Text style={styles.document}>Document Name</Text>
+                <Text style={styles.document}>
+                  {t('pages.uploadResult.documentName')}
+                </Text>
               </View>
               <View
                 style={[
@@ -319,7 +255,9 @@ export default function ResultUpload() {
                 <TextInput value={document} onChange={setDocument} />
               </View>
               <View style={styles.uploadView}>
-                <Text style={styles.uploadText}>Your Uploads</Text>
+                <Text style={styles.uploadText}>
+                  {t('pages.uploadResult.uploads')}
+                </Text>
                 <Text style={styles.numberText}>
                   {list.length > 0 ? splices + 1 : '(0)'}
                 </Text>
@@ -366,38 +304,47 @@ export default function ResultUpload() {
                   />
                   <View style={styles.noteView}>
                     <Text style={styles.noteText}>
-                      Your privacy is important to us. You are in control of
-                      your health information. BioMark won’t provide your
-                      information to any third parties without your permission.
+                      {t('pages.uploadResult.privacy')}
                     </Text>
-                    <Text style={styles.noteText2}>
+                    {/* <Text style={styles.noteText2}>
                       BioMark only supports the uploading of lab results for
                       now. We reserve the right to remove documents that are not
                       related to lab results.
-                    </Text>
+                    </Text> */}
                   </View>
                 </View>
               </View>
             </ScrollView>
+            <UploadSuccessModal
+              text="Okay"
+              visible={uploadSuccessModal}
+              title="Upload Successful"
+              text2="Your upload was successful and is now under review."
+              color={['#1996D6', '#1996D6']}
+              onPress={() => {
+                dispatch(getReduxPastResult());
+                navigate(SCREENS.HEALTH_RECORD);
+                setUploadSuccessModal(false);
+              }}
+            />
             <ButtonWithShadowContainer
-              title="Save & Continue"
+              title={t('pages.uploadResult.continue')}
               disabled={document.length <= 0 ? true : false}
               onPress={() => updateResults()}
             />
           </TitleWithBackLayout>
         </>
       ) : (
-        <TitleWithBackLayout title="Upload Results">
+        <TitleWithBackLayout title={t('pages.uploadResult.title')}>
           <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
             <View style={styles.infoView}>
               <Feather color={colors.heading} name="info" size={25} />
-              <Text style={styles.text}>
-                For results with multiple pages, select Add Page to add more
-                pages.
-              </Text>
+              <Text style={styles.text}>{t('pages.uploadResult.info')}</Text>
             </View>
             <View style={styles.uploadView}>
-              <Text style={styles.uploadText}>Your Uploads</Text>
+              <Text style={styles.uploadText}>
+                {t('pages.uploadResult.uploads')}
+              </Text>
               <Text style={styles.numberText}>
                 {list.length > 0 ? splices + 1 : '0'}
               </Text>
@@ -462,11 +409,11 @@ export default function ResultUpload() {
                 }}
               />
               <WithdrawProgram
-                text="Delete"
+                text={t('pages.uploadResult.delete.buttonText')}
                 visible={modalVisible}
-                title="Are You Sure?"
-                text2="This action is final and cannot be reverted."
-                cancel="Cancel"
+                title={t('pages.uploadResult.delete.title')}
+                text2={t('pages.uploadResult.delete.description')}
+                cancel={t('pages.uploadResult.delete.buttonCancelText')}
                 cancelModal={() => setModalVisible(!modalVisible)}
                 closeModal={() => setModalVisible(!modalVisible)}
                 color={['#EB3342', '#EB3342']}
@@ -487,11 +434,13 @@ export default function ResultUpload() {
               onPress={() => setShowModal(true)}
             >
               <Feather color={colors.heading} name="plus" size={35} />
-              <Text style={styles.addPage}>Add Page</Text>
+              <Text style={styles.addPage}>
+                {t('pages.uploadResult.addPage')}
+              </Text>
             </Pressable>
             <LabResultModal
               visible={showModal}
-              title="Upload Lab Results"
+              title={t('pages.uploadResult.dialogs.upload.title')}
               closeModal={() => setShowModal(!showModal)}
               onTakePhoto={() => imagePickerFromCamera()}
               onUploadFromGallery={() => imagePickerFromGallery()}
@@ -499,7 +448,7 @@ export default function ResultUpload() {
             />
           </ScrollView>
           <ButtonWithShadowContainer
-            title="Save & Continue"
+            title={t('pages.uploadResult.continue')}
             disabled={list.length <= 0 ? true : false}
             onPress={() => setIsPreview(!isPreview)}
           />

@@ -2,6 +2,7 @@ import ExpandableView from '@pietile-native-kit/expandable-view';
 import { useIsFocused } from '@react-navigation/native';
 import { DropdownMenu } from 'components/base';
 import DropdownCountryCity from 'components/base/dropdown-country-city';
+import FakeDropdownUnSelectable from 'components/higher-order/fakeDropdownUnSelectable';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -123,16 +124,28 @@ const ExisitingBookingForDependent = (props: Props) => {
     }
   }, [testCenterValue]);
 
+  async function ifCountrySelectedBefore() {
+    const copyArray = booking;
+    if (booking[0].country_id) {
+      copyArray[itemIndex].country_id = booking[0].country_id;
+      copyArray[itemIndex].test_country_name = booking[0].test_country_name;
+      setCountryDropDown(booking[0].country_id);
+    }
+    logNow(booking);
+    await dispatch(addCovidBooking(copyArray));
+  }
+  useEffect(() => {
+    ifCountrySelectedBefore();
+  }, [focused]);
+
   // on test date change
 
   useEffect(() => {
-    console.log(testDate);
     const mSlots: any =
       testCenterSchedules?.test_centre_schedules.filter((item) => {
         return item?.schedule_date.toString() == testDate;
       })[0] ?? [];
     try {
-      console.log(mSlots);
     } catch (err) {}
     setMorningTimeSlots(mSlots?.morning_time_slots ?? []);
     setEveningTimeSlots(mSlots?.afternoon_time_slots ?? []);
@@ -210,7 +223,6 @@ const ExisitingBookingForDependent = (props: Props) => {
     const obj = testCentersBasedOnCities
       .find((item) => item.id == booking[itemIndex].test_type_id)
       ?.clinics.find((item) => item.test_centre_id == id);
-    console.log('bookingFormData ====>', obj);
     copyArray[itemIndex].test_centre_id = id;
     copyArray[itemIndex].test_centre_name = obj?.test_centre_name;
     copyArray[itemIndex].amount = obj?.test_amount;
@@ -424,19 +436,23 @@ const ExisitingBookingForDependent = (props: Props) => {
             </View>
             <Text style={styles.innerTitle}>Country</Text>
             <View style={{ position: 'relative' }}>
-              <DropdownCountryCity
-                options={bookingFormData.country_list.map((item) => {
-                  return { value: item.id, label: item.name };
-                })}
-                selectedValue={countryDropdownValue}
-                onValueChange={(value: any) => {
-                  // logNow(value);
-                  setTimeout(() => {
-                    setCountryDropDown(value);
-                    changeCountryNameAndCountryId(value);
-                  }, 1000);
-                }}
-              />
+              {booking[0].country_id && itemIndex == 1 ? (
+                <FakeDropdownUnSelectable title="Singapore" />
+              ) : (
+                <DropdownCountryCity
+                  options={bookingFormData.country_list.map((item) => {
+                    return { value: item.id, label: item.name };
+                  })}
+                  selectedValue={countryDropdownValue}
+                  onValueChange={(value: any) => {
+                    // logNow(value);
+                    setTimeout(() => {
+                      setCountryDropDown(value);
+                      changeCountryNameAndCountryId(value);
+                    }, 1000);
+                  }}
+                />
+              )}
               <View style={{ marginTop: heightToDp(1) }} />
               {/* City Select */}
               {countryDropdownValue ? (

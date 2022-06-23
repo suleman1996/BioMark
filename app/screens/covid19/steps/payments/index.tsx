@@ -201,8 +201,6 @@ const PaymentStep = (props: Props) => {
     name: userDetails.patient_name,
   };
 
-  console.log({ countryName: booking });
-
   const makeItems = () => {
     let items = booking.map((e) => {
       return {
@@ -246,7 +244,6 @@ const PaymentStep = (props: Props) => {
               // alert(event.nativeEvent.data);
             }}
             onNavigationStateChange={async (webViewState) => {
-              console.log('state changed', webViewState.url);
               if (
                 webViewState.url.includes('/payment/v1/billplz/confirmation')
               ) {
@@ -371,6 +368,7 @@ const PaymentStep = (props: Props) => {
             </Pressable>
             <Pressable
               onPress={async () => {
+                setPaymentModal(false);
                 if (countryName == 'Malaysia') {
                   const data: any = await paymentService.openBillPlzBrowser(
                     email,
@@ -378,17 +376,20 @@ const PaymentStep = (props: Props) => {
                     totalPrice,
                     booking
                   );
-                  console.log({ data });
-                  setPaymentUrl(data.url);
-                  setPaymentModal(true);
-                } else if (countryName == 'Singapore') {
+
+                  if (data.url) {
+                    setPaymentUrl(data.url);
+                    setPaymentModal(true);
+                  }
+                } else {
                   const data: any = await paymentService.openStripeBrowser(
                     booking,
                     email
                   );
-                  console.log({ data });
-                  setPaymentUrl(data.url);
-                  setPaymentModal(true);
+                  if (data.url) {
+                    setPaymentUrl(data.url);
+                    setPaymentModal(true);
+                  }
                 }
               }}
               style={styles.btnEnable}

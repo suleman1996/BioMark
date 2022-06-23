@@ -16,15 +16,12 @@ import {
 import { Formik } from 'formik';
 import { showMessage } from 'react-native-flash-message';
 import * as Yup from 'yup';
-import CountryPicker, {
-  DEFAULT_THEME,
-} from 'react-native-country-picker-modal';
-import moment from 'moment';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from 'components/button';
-import { TextInput, ActivityIndicator, CheckBox } from 'components';
+import { ActivityIndicator, CheckBox } from 'components';
 import {
   DatePickerModal,
   InputWithLabel,
@@ -58,9 +55,7 @@ export default function CreateProfile() {
   const dispatch3 = useDispatch();
 
   const [loading, setLoading] = useState(false);
-  // const [countryCode, setCountryCode] = useState('MY');
-  // const [selectCountryCode, setSelectCountryCode] = useState('60');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [gender, setGender] = useState([
     { id: 1, sex: 'Male' },
     { id: 2, sex: 'Female' },
@@ -114,13 +109,10 @@ export default function CreateProfile() {
   //functions
   const signupApi = async (values: string) => {
     setLoading(true);
-    console.log('valuess', values);
-    console.log('selectedCountryCode', selectedCountryCode);
 
     let phone = '+' + selectedCountryCode + values.phone_number;
-    console.log('phone', phone);
+
     let finialDate = dateFormat(date);
-    console.log('date', finialDate);
 
     Keyboard.dismiss();
     userService
@@ -154,11 +146,6 @@ export default function CreateProfile() {
       });
     }
   };
-
-  // const onSelect = (Country: any) => {
-  //   setCountryCode(Country.cca2);
-  //   setSelectCountryCode(Country.callingCode[0]);
-  // };
 
   const onBackPress = async () => {
     setLoading(true);
@@ -262,14 +249,7 @@ export default function CreateProfile() {
                     error={touched.lName ? errors.lName : ''}
                     onBlur={() => setFieldTouched('lName')}
                   />
-                  {/* <Text style={[styles.inputLablel, { marginTop: 20 }]}>
-                  Identity Card/Passport Number
-                </Text>
-                <TextInput
-                  placeholder="E.g.A1234567X"
-                  onChange={handleChange('IcPnum')}
-                  margin={20}
-                /> */}
+
                   <InputWithLabel
                     label="Identity Card/Passport Number"
                     placeholder={'E.g. A1234567X'}
@@ -294,7 +274,6 @@ export default function CreateProfile() {
                         setFieldValue('phone_number', e);
                       }}
                       countryCode={countryCode}
-                      // error={values.phone_number ? errors.phone_number : ''}
                       setCountryCode={setCountryCode}
                       setSelectCountryCode={setSelectedCountryCode}
                       maxLength={numberCondition.max}
@@ -345,13 +324,7 @@ export default function CreateProfile() {
 
                   <View style={styles.aiContainer}>
                     <Text style={styles.heading}>Account Information</Text>
-                    {/* <Text style={styles.inputLablel}>Email</Text>
-                  <TextInput
-                    placeholder="E.g. Sample@email.com"
-                    onChange={handleChange('email')}
-                    margin={20}
-                    keyboardType="email-address"
-                  /> */}
+
                     <InputWithLabel
                       label="Email"
                       placeholder={''}

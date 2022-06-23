@@ -156,44 +156,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             // logNow('redux', updatedItems);
           }}
         />
-        {/* {treatmentType == 'Other' ? (
-          <View
-            style={{
-              paddingHorizontal: widthToDp(4),
-              marginTop: -heightToDp(2),
-            }}
-          >
-            <InputWithLabel
-              labelFontSize={25}
-              label={''}
-              defaultValue={treatmentTypeOther}
-              onChange={async (value: any) => {
-                logNow('redux', value);
-                let updatedItems = [];
-                if (medicalHistory.length > 0) {
-                  updatedItems = medicalHistory?.map((el) =>
-                    el.condition_id === condition_id
-                      ? {
-                          ...el,
-                          medical_values: {
-                            ...el.medical_values,
-                            treatmentTypeOther: value,
-                          },
-                        }
-                      : el
-                  );
-                } else {
-                  updatedItems[0] = {
-                    condition_id: condition_id,
-                    medical_values: { treatmentTypeOther: value },
-                  };
-                }
-                await dispatch(addMedicalHistoryUpdate(updatedItems));
-                logNow('redux', updatedItems);
-              }}
-            />
-          </View>
-        ) : null} */}
       </>
     );
   };
@@ -316,8 +278,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
   };
 
   const RadioBtn = ({ item }: { item: MedicalTemplateField }) => {
-    console.log('item===>', item);
-
     return (
       <>
         {item?.id == 'status' ? (
@@ -326,8 +286,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             options={item.options}
             isTrue={has_condition ? 'Yes' : 'No'}
             setIsTrue={async (value: any) => {
-              console.log('value===>', value);
-
               let updatedItems = [];
               const d =
                 medicalHistory.filter((el) => el.condition_id === condition_id)

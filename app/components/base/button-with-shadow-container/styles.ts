@@ -8,6 +8,8 @@ export const makeStyles = (colors: any) =>
       width: '100%',
       position: 'absolute',
       // borderWidth: 2,
+      borderTopWidth: 0.5,
+      borderColor: colors.darkGray,
       backgroundColor: colors.white,
       bottom: 0,
       paddingHorizontal: widthToDp(7),

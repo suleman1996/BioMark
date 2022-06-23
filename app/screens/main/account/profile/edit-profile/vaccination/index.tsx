@@ -35,18 +35,16 @@ export default function VaccinationScreen() {
   const styles = makeStyles(colors);
 
   const [value, setValue] = useState<any>(0);
-  // const [condition, setCondition] = useState('');
+
   const [showSuggestion, setShowSuggestion] = useState(false);
   const [vaccineList, setVaccineList] = useState([]);
   const [search, setSearch] = useState('');
   const [list, setList] = useState([]);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [refresh, setRefreh] = useState(false);
-  // const numColumns = 3;
 
   const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
   useEffect(() => {
-    // console.log('Bootstrap =======>', bootstrap?.attributes?.medical_template);
     setVaccineList(
       bootstrap?.attributes?.medical_template.vaccine[0].content.fields[1]
         .options
@@ -59,19 +57,18 @@ export default function VaccinationScreen() {
     list.push(search.toString());
     setList([...list]);
     setSearch('');
-    console.log('addList', list);
   };
 
   const onSubmit = async () => {
     try {
       setIsVisible(true);
-      const response = await userService.Vaccination({
+      await userService.Vaccination({
         medical_history: {
           has_condition: value,
           vaccine_list: list.toString(),
         },
       });
-      console.log('response---------data', response.data);
+
       if (value === 1) {
         navigate(SCREENS.EDIT_PROFILE);
       } else if (value == 0) {
@@ -79,12 +76,12 @@ export default function VaccinationScreen() {
       } else if (value == 2) {
         navigate(SCREENS.EDIT_PROFILE);
       } else {
-        console.log('false');
+        null;
       }
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -98,7 +95,6 @@ export default function VaccinationScreen() {
     try {
       setIsVisible(true);
       const result = await userService.getMedicalHistory();
-      console.log('resulttttt---------', result.data.vaccine);
       const array = (result?.data?.vaccine?.vaccine_list).split(',');
       setValue(
         result?.data?.vaccine?.has_condition == '1'
@@ -113,7 +109,6 @@ export default function VaccinationScreen() {
         return element !== '';
       });
       setList(filterEmptyValues);
-      console.log('get_List', filterEmptyValues);
 
       setIsVisible(false);
     } catch (error) {
@@ -158,18 +153,8 @@ export default function VaccinationScreen() {
                 <TouchableOpacity
                   onPress={() => {
                     setValue(index);
-                    // setCondition(
-                    //   index == 0
-                    //     ? 'nooo'
-                    //     : // : index == 1
-                    //       // ? 'true'
-                    //       // : index == 2
-                    //       // ? 'false'
-                    //       // null
-                    // );
-                    // console.log(index, 'items');
+
                     index == 0 ? setList('') : index == 2 ? setList('') : null;
-                    console.log(index, 'value------');
                   }}
                   style={[
                     styles.radioContainer,
@@ -178,7 +163,7 @@ export default function VaccinationScreen() {
                     },
                   ]}
                 >
-                  <RadioButton
+                  <RadioButton.Android
                     color={index == value ? colors.white : null}
                     value={index}
                   />

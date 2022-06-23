@@ -51,10 +51,6 @@ const DiabetesModal = ({ isVisible, setIsVisible }: Props) => {
         What type of diabetes have you been diagnosed with?
       </Text>
 
-      {/* <DropdownMenu
-          options={options}
-          setSelectedDropdown={setDiagnosedWith} 
-        /> */}
       <DropdownMenu
         options={options}
         selectedValue={dDiagnosedWith}

@@ -47,7 +47,6 @@ const DatePicker = (props: Props) => {
             display={Platform.OS === 'ios' ? 'default' : 'default'}
             value={new Date(date)}
             minimumDate={new Date(1950, 0, 1)}
-            // maximumDate={new Date()}
             onChange={(d) => {
               setIsPickerShow(false),
                 d.type == 'set' &&
@@ -55,10 +54,7 @@ const DatePicker = (props: Props) => {
             }}
           />
         )}
-        <Text style={styles.dateText}>
-          {moment(date).format('MM/DD/YYYY')}
-          {/* January             |  01                         |  1990 */}
-        </Text>
+        <Text style={styles.dateText}>{moment(date).format('MM/DD/YYYY')}</Text>
       </TouchableOpacity>
     </>
   );
