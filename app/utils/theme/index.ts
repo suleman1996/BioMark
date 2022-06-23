@@ -33,6 +33,7 @@ const theme = {
     shineBlue: '#2C6CFC',
     selected: '#7E7E7E',
     unSelected: '#C8C8C8',
+    inputLarge: '#F5F5F5',
 
     // Colors
     inputBg: '#EBEFF2',
