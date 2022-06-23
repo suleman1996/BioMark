@@ -1,11 +1,8 @@
-import ButtonComponent from 'components/base/button';
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { makeStyles } from './styles';
-import { navigate } from './../../../services/nav-ref';
-import SCREENS from 'navigation/constants';
 import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import { IAppState } from 'store/IAppState';
@@ -136,19 +133,6 @@ const HistoryBookings = (props: Props) => {
           );
         }}
       />
-      <View style={styles.buttonContainer}>
-        <ButtonComponent
-          bg={colors.lightBlue}
-          color={colors.black}
-          marginTop={1.2}
-          onPress={() =>
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.FAQSCREEN,
-            })
-          }
-          title={'FAQ'}
-        />
-      </View>
     </View>
   );
 };
