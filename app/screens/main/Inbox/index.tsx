@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
@@ -201,6 +201,7 @@ export default function InboxScreen() {
       <View style={styles.previousNotificationContainer}>
         {/* Unread notification for inbox */}
         <FlatList
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -225,7 +226,7 @@ export default function InboxScreen() {
           <Text style={styles.prevHeaderText}>Previous Notifications</Text>
         </View>
         <FlatList
-          nestedScrollEnabled
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -265,7 +266,7 @@ export default function InboxScreen() {
       <View style={styles.previousNotificationContainer}>
         <FlatList
           style={{ flexGrow: 1, marginTop: heightToDp(2) }}
-          nestedScrollEnabled
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -300,7 +301,7 @@ export default function InboxScreen() {
           <Text style={styles.prevHeaderText}>Previous Notifications</Text>
         </View>
         <FlatList
-          nestedScrollEnabled
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -315,7 +316,7 @@ export default function InboxScreen() {
 
   return (
     <>
-      <TitleWithSearchBarLayout title={'Inbox'}>
+      <TitleWithSearchBarLayout title={'Inbox'} scroll={false}>
         <View style={styles.container}>
           <View
             style={{ height: heightToDp(200), paddingBottom: heightToDp(20) }}
@@ -352,19 +353,22 @@ export default function InboxScreen() {
                 </Text>
               </Pressable>
             </View>
-
-            <PagerView
-              ref={pagerRef}
-              onPageScroll={onPageScroll}
-              style={styles.pagerView}
-              initialPage={0}
-            >
-              {currentPage === 0 ? (
-                <PreviousNotification />
-              ) : (
-                <OtherNotification />
-              )}
-            </PagerView>
+            <View style={{ height: heightToDp(63) }}>
+              <ScrollView>
+                <PagerView
+                  ref={pagerRef}
+                  onPageScroll={onPageScroll}
+                  style={styles.pagerView}
+                  initialPage={0}
+                >
+                  {currentPage === 0 ? (
+                    <PreviousNotification />
+                  ) : (
+                    <OtherNotification />
+                  )}
+                </PagerView>
+              </ScrollView>
+            </View>
           </View>
         </View>
       </TitleWithSearchBarLayout>
