@@ -78,7 +78,7 @@ export default function Home() {
   }, []);
 
   return (
-    <View style={{ alignItems: 'center', backgroundColor: 'white' }}>
+    <View style={{ alignItems: 'center', backgroundColor: 'white', flex: 1 }}>
       <View style={styles.navBar}>
         <Text style={styles.navHeading}>
           {t('pages.dashboard.greetings')} {authContext?.userData?.first_name}!

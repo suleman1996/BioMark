@@ -78,7 +78,7 @@ const HealthRecordFilter = ({
             </Text>
           </TouchableOpacity>
           <Text style={styles.modalText2}>
-            {t('pages.results.filters.startDate')}e
+            {t('pages.results.filters.startDate')}
           </Text>
 
           <Pressable style={styles.datepicker} onPress={showDatePicker}>

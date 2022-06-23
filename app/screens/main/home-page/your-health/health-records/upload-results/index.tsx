@@ -21,6 +21,7 @@ import { ButtonWithShadowContainer } from 'components/base';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import WithdrawProgram from 'components/widthdraw-from-program';
+import UploadSuccessModal from 'components/upload-successful-modal';
 import ShowPicModal from 'components/show-upload-pic-modal';
 import { TextInput } from 'components';
 import SCREENS from 'navigation/constants';
@@ -51,8 +52,8 @@ export default function ResultUpload() {
   const [splices, setSplices] = useState();
   const [list, setList] = useState([]);
   const [showPicModal, setShowPicModal] = useState(false);
+  const [uploadSuccessModal, setUploadSuccessModal] = useState(false);
   const [uri, setUri] = useState('');
-
   const [modalData, setModalData] = useState([]);
 
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function ResultUpload() {
       const profilePic = await userService.uploadResult(body);
       if (profilePic.status == true) {
         dispatch(getReduxPastResult());
-        navigate(SCREENS.YOUR_HEALTH);
+        setUploadSuccessModal(true);
         Keyboard.dismiss();
       }
     } catch (error) {
@@ -314,6 +315,18 @@ export default function ResultUpload() {
                 </View>
               </View>
             </ScrollView>
+            <UploadSuccessModal
+              text="Okay"
+              visible={uploadSuccessModal}
+              title="Upload Successful"
+              text2="Your upload was successful and is now under review."
+              color={['#1996D6', '#1996D6']}
+              onPress={() => {
+                dispatch(getReduxPastResult());
+                navigate(SCREENS.HEALTH_RECORD);
+                setUploadSuccessModal(false);
+              }}
+            />
             <ButtonWithShadowContainer
               title={t('pages.uploadResult.continue')}
               disabled={document.length <= 0 ? true : false}

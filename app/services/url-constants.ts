@@ -159,6 +159,7 @@ const API_URLS = {
 
   // Tryvitals Modules
   TRYVITALS_LINK_TOKEN: '/api/v2/try_vitals/link_token',
+  BATCH_READ_UPCOMMING: '/api/v1/patient/notifications/batch_read',
 };
 
 export { API_URLS };
