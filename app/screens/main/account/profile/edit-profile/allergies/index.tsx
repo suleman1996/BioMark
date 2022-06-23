@@ -1,5 +1,5 @@
 import { useIsFocused } from '@react-navigation/native';
-// import { ModalButton } from 'components/higher-order';
+
 import { ButtonWithShadowContainer } from 'components/base';
 import GeneralModalButton from 'components/higher-order/general-modal-button';
 import { TitleWithBackLayout } from 'components/layouts';
@@ -20,13 +20,7 @@ import {
 import { AlergiesRequestBody, MedicalTemplateAttribute } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
 import GeneralModalPage from './modals/general-modal';
-// import AsthmaModal from './modals/asthma';
-// import CancerModal from './modals/cancer';
-// import DiabetesModal from './modals/diabetes';
-// import GoutModal from './modals/gout';
-// import HighBloodPressureModal from './modals/high-blood-pressure';
-// import HighCholesterolModal from './modals/high-cholesterol';
-// import OthersModal from './modals/others';
+
 import { makeStyles } from './styles';
 
 /* eslint-disable */
@@ -148,7 +142,7 @@ const AllergiesScreen = () => {
                 },
               ]}
             >
-              <RadioButton
+              <RadioButton.Android
                 color={value == item2 ? colors.white : colors.darkPrimary}
                 value={item2}
               />

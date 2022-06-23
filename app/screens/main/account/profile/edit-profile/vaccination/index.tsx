@@ -163,7 +163,7 @@ export default function VaccinationScreen() {
                     },
                   ]}
                 >
-                  <RadioButton
+                  <RadioButton.Android
                     color={index == value ? colors.white : null}
                     value={index}
                   />

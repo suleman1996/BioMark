@@ -76,66 +76,6 @@ const theme = {
     logsGreen: '#35B14F',
     logsRed: '#EB3342',
   },
-
-  // fonts: configureFonts({
-  //   web: {
-  //     regular: {
-  //       fontFamily: 'Mukta',
-  //       fontWeight: 'normal',
-  //     },
-  //     medium: {
-  //       fontFamily: 'Mukta-Medium',
-  //       fontWeight: 'normal',
-  //     },
-  //     light: {
-  //       fontFamily: 'Mukta-Light',
-  //       fontWeight: 'normal',
-  //     },
-  //     thin: {
-  //       fontFamily: 'Mukta-ExtraLight',
-  //       fontWeight: 'normal',
-  //     },
-  //   },
-  //   ios: {
-  //     regular: {
-  //       fontFamily: 'Mukta',
-  //       fontWeight: 'normal',
-  //     },
-  //     medium: {
-  //       fontFamily: 'Mukta-Medium',
-  //       fontWeight: 'normal',
-  //     },
-  //     light: {
-  //       fontFamily: 'Mukta-Light',
-  //       fontWeight: 'normal',
-  //     },
-  //     thin: {
-  //       fontFamily: 'Mukta-ExtraLight',
-  //       fontWeight: 'normal',
-  //     },
-  //     semiBold: {
-  //       fontFamily: 'Mukta-SemiBold',
-  //     },
-  //   },
-  //   android: {
-  //     regular: {
-  //       fontFamily: 'Mukta',
-  //       fontWeight: 'normal',
-  //     },
-  //     medium: {
-  //       fontFamily: 'Mukta-Medium',
-  //       fontWeight: 'normal',
-  //     },
-  //     light: {
-  //       fontFamily: 'Mukta-Light',
-  //       fontWeight: 'normal',
-  //     },
-  //     thin: {
-  //       fontFamily: 'Mukta-ExtraLight',
-  //       fontWeight: 'normal',
-  //     },
-  //   },
-  // }),
 };
 
 export default theme;

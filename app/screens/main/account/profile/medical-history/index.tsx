@@ -59,6 +59,7 @@ const MedicalHistoryScreen = () => {
   const [isDropdownChanged, setIsDropDownChanged] = useState(false);
 
   const [noneId, setNoneId] = useState();
+
   useEffect(() => {
     const id: any = bootstrap?.attributes?.medical_template?.personal?.find(
       (item) => item.name === 'None'
