@@ -17,6 +17,7 @@ import { dateFormat1, getDayName, getTime } from 'utils/functions/date-format';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import BarCodeModal from '../bar-code-modal';
+import CovidHealthDeclarationForAllUpCommingModal from '../covid-health-declaration-for-all-upcomming/index';
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
 
@@ -32,6 +33,8 @@ const UpcommingBookings = (props: Props) => {
   const [isHealthDeclaration, setIsHealthDeclaration] = useState(false);
   const [barCodeText, setBarCodeText] = useState('');
 
+  const [isHealthDeclarationAll, setIsHealthDeclarationAll] = useState(false);
+
   const [modalData, setModalData] = useState({});
   const [isBarModal, setIsBarModal] = useState(false);
 
@@ -42,7 +45,10 @@ const UpcommingBookings = (props: Props) => {
       upDateBatch(allUpcommingBookings);
     }
   }, [allUpcommingBookings]);
-
+  useEffect(() => {
+    console.log('props', props);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const upDateBatch = async (item: BookingListDataUpcoming) => {
     try {
       await covidService.batchReadForUpcomming({ data: item });
@@ -188,6 +194,12 @@ const UpcommingBookings = (props: Props) => {
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
         isVisible={isHealthDeclaration}
+        data={modalData}
+        decalrations={[modalData]}
+      />
+      <CovidHealthDeclarationForAllUpCommingModal
+        setIsVisible={setIsHealthDeclarationAll}
+        isVisible={isHealthDeclarationAll}
         data={modalData}
         decalrations={[modalData]}
       />
