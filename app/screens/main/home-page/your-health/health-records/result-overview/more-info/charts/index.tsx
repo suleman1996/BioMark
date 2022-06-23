@@ -21,8 +21,10 @@ import {
 } from 'utils/functions/graph/graph-result';
 import { getChart5GraphOptions } from 'utils/functions/graph/graph-type-5';
 import { useIsFocused } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 const Charts = ({ biomarker_id, provider }) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const chartRef = useRef();
   const lagendChartRef = useRef();
@@ -158,7 +160,8 @@ const Charts = ({ biomarker_id, provider }) => {
         />
       )}
       <Text style={styles.headingChart}>
-        Results available from {provider.length} source
+        {t('pages.summaryChart.sources1')} {provider.length}{' '}
+        {t('pages.summaryChart.sources2')}
       </Text>
       <DropDown
         mode={'flat'}
@@ -185,7 +188,7 @@ const Charts = ({ biomarker_id, provider }) => {
       {chartData?.chart_type !== 5 && (
         <>
           <Text style={[styles.headingChart, { marginVertical: 20 }]}>
-            REFERENCE RANGES
+            {t('pages.summaryChart.referenceRanges')}
           </Text>
           {chartData?.sections.map((item) => (
             <RangesView item={item} />

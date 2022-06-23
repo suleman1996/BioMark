@@ -779,7 +779,7 @@
           "buttonText": "Ok"
         },
         "withdraw": {
-          "title": "Are You Sssure?",
+          "title": "Are You Sure?",
           "description": "Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges.",
           "buttonText": "Yes",
           "buttonCancelText": "Cancel"
@@ -1253,8 +1253,8 @@
           "latestResult": "Your Latest Result",
           "referenceRange": "Reference Range: ",
           "source": "Source: ",
-          "history": "history",
-          "definition": "definition",
+          "history": "History",
+          "definition": "Definition",
           "seePDF": "See PDF",
           "description": {
             "normal": "What if my {{ name }} is normal?",

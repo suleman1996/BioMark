@@ -31,8 +31,10 @@ import LatestResultCard from 'components/latest-result-card';
 import moment from 'moment';
 import fonts from 'assets/fonts';
 import { showMessage } from 'react-native-flash-message';
+import { useTranslation } from 'react-i18next';
 
 const HealthRecord = () => {
+  const { t } = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
   const [pastResults, setPastResults] = useState([]);
@@ -235,7 +237,9 @@ const HealthRecord = () => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <ArrowBack fill={colors.white} />
           </TouchableOpacity>
-          <Text style={styles.navHeading}>Health Records</Text>
+          <Text style={styles.navHeading}>
+            {t('pages.search.recordKeeping.suggestions.healthRecords')}
+          </Text>
         </View>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />
@@ -244,19 +248,20 @@ const HealthRecord = () => {
       <View style={styles.containerBody}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.healthReports}>
-            <Text style={styles.text}>Your Health Reports</Text>
+            <Text style={styles.text}>{t('pages.results.healthReport')}</Text>
             <Text style={styles.text2}>
-              This is your health reports where you can view present and past
-              results from lab reports.
+              {t('pages.results.healthReportDesc')}
             </Text>
           </View>
 
-          <Text style={styles.latestResult}>Your Latest Results</Text>
-          {latestResult.message === 'No latest result' ? (
+          <Text style={styles.latestResult}>
+            {t('pages.results.latestResults')}
+          </Text>
+          {latestResult.message === t('pages.searchResults.noResults') ? (
             <Text style={styles.resultMessage}>{latestResult.message}</Text>
           ) : (
             <LatestResultCard
-              title="Your Latest Results"
+              title={t('pages.results.latestResults')}
               name={latestResult?.name}
               received={moment(latestResult?.received).format(
                 'MMMM D, YYYY hh:mma'
@@ -277,24 +282,28 @@ const HealthRecord = () => {
             style={styles.uploadResult}
             onPress={() => navigation.navigate(SCREENS.RESULT_UPLOAD)}
           >
-            <GoogleFitButton disabled={false} title="Upload Results" />
+            <GoogleFitButton
+              disabled={false}
+              title={t('pages.results.uploadResults')}
+            />
           </TouchableOpacity>
 
           <View style={styles.filterView}>
-            <Text style={styles.text5}>Past Results</Text>
+            <Text style={styles.text5}>{t('pages.results.pastResults')}</Text>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Filter fill={colors.heading} />
             </TouchableOpacity>
           </View>
 
           <Text style={styles.resultMessage}>
-            {pastResults?.message == 'No results' && 'No Result Found'}
+            {pastResults?.message == 'No results' &&
+              t('pages.searchResults.noResults')}
           </Text>
 
           <HealthRecordFilter
             visible={modalVisible}
-            title="Filter Results"
-            title2="Document Upload Type"
+            title={t('pages.results.filters.title')}
+            title2={t('pages.results.filters.uploadType')}
             cancelModal={() => setModalVisible(!modalVisible)}
             closeModal={() => setModalVisible(!modalVisible)}
             firstValue={'first'}
@@ -338,13 +347,13 @@ const HealthRecord = () => {
             <TouchableOpacity style={styles.uploadResult}>
               <GoogleFitButton
                 disabled={false}
-                title="Load more data"
+                title={t('pages.results.loadMoreData')}
                 onPress={() => setPage((prev) => prev + 1)}
               />
             </TouchableOpacity>
           ) : pastResults?.message == 'No results' ? null : (
             <Text style={styles.loadMoreText}>
-              You dont't have any more past results
+              {t('pages.results.noMorePastResults')}
             </Text>
           )}
         </ScrollView>
