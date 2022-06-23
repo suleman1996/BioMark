@@ -174,7 +174,8 @@ const Weight = ({ route }: any) => {
                 measurementValidator(
                   weightTracker.is_metric,
                   'weight',
-                  weightTracker.weight
+                  weightTracker.weight,
+                  t
                 ) || ''
               );
             }}
