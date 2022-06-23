@@ -20,8 +20,10 @@ import { userService } from 'services/user-service/user-service';
 import Charts from './charts';
 import { ActivityIndicator } from 'components/';
 import DescriptiveBtn from 'components/descriptive-btn';
+import { useTranslation } from 'react-i18next';
 
 const MoreInfo = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const route = useRoute();
   const regexOfRemoveTags = /(<([^>]+)>)/gi;
@@ -191,7 +193,7 @@ const MoreInfo = () => {
                 { marginLeft: 10, fontSize: summaryState ? 18 : 16 },
               ]}
             >
-              Summary
+              {t('pages.resultSummary.tabs.summary.title')}
             </Text>
           </TouchableOpacity>
           {summary?.providers?.length !== 0 && (
@@ -206,7 +208,7 @@ const MoreInfo = () => {
                   { marginLeft: 20, fontSize: chartState ? 18 : 16 },
                 ]}
               >
-                Charts
+                {t('pages.resultSummary.tabs.chart.title')}
               </Text>
             </TouchableOpacity>
           )}
@@ -241,13 +243,17 @@ const MoreInfo = () => {
                   <View style={styles.divider} />
 
                   <Text style={styles.heading}>
-                    <Text style={{ fontSize: 14 }}>Reference Range : </Text>
+                    <Text style={{ fontSize: 14 }}>
+                      {t('pages.resultSummary.tabs.summary.referenceRange')}
+                    </Text>
                     <Text style={{ fontSize: 14, fontFamily: fonts.regular }}>
                       {summary?.latest?.ref_range}
                     </Text>
                   </Text>
                   <Text style={styles.heading}>
-                    <Text style={{ fontSize: 14 }}>Source : </Text>
+                    <Text style={{ fontSize: 14 }}>
+                      {t('pages.resultSummary.tabs.summary.source')}
+                    </Text>
                     <Text style={{ fontSize: 14, fontFamily: fonts.regular }}>
                       {summary?.latest?.provider_name}
                     </Text>
@@ -259,7 +265,7 @@ const MoreInfo = () => {
                     { marginLeft: 10, color: colors.greenDark, marginTop: 10 },
                   ]}
                 >
-                  HISTORY
+                  {t('pages.resultSummary.tabs.summary.history')}
                 </Text>
                 <View style={[styles.lastResult]}>
                   <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -293,7 +299,7 @@ const MoreInfo = () => {
                         },
                       ]}
                     >
-                      DEFINITION
+                      {t('pages.resultSummary.tabs.summary.definition')}
                     </Text>
                     <View style={styles.definationView}>
                       <Text style={styles?.definationText}>
