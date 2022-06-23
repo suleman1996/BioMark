@@ -23,7 +23,6 @@ const HealthCard = (props: Props) => {
     <View style={styles.view}>
       <View style={styles.view3}>
         <View style={styles.view2}>
-          {/* <Image source={props?.image} style={styles.green} /> */}
           {props?.svg}
           <Text style={styles.diabetes}>{props?.H1Text}</Text>
         </View>

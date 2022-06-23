@@ -48,7 +48,6 @@ const Index = () => {
     } catch (error) {
       setIsLoading(false);
 
-      console.log('Error stress', error);
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
@@ -71,20 +70,19 @@ const Index = () => {
   const handleCreateStress = async () => {
     try {
       setIsLoading(true);
-      const result = await userService.createStress(
+      await userService.createStress(
         question1,
         question2,
         question3,
         question4
       );
-      console.log('here is the create  stress ', result.data);
+
       goBack();
 
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
 
-      console.log('Error stress', error);
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',

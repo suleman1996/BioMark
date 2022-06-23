@@ -15,8 +15,6 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 import makeStyles from './styles';
 
-// import { navigate } from 'services/nav-ref';
-
 const ChangeLanguage = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);

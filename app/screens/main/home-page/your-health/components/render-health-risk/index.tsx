@@ -32,8 +32,6 @@ const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
     },
   });
 
-  console.log(color);
-
   return (
     <Animated.View
       {...panResponder.panHandlers}

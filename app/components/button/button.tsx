@@ -4,8 +4,6 @@ import { useTheme } from 'react-native-paper';
 
 import { Button as PaperButton } from 'react-native-paper';
 
-// import colors from 'assets/colors';
-
 type Props = {
   marginHorizontal?: number;
   marginVertical?: number;

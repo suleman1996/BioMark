@@ -95,7 +95,6 @@ const Index = () => {
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
-  // console.log('getLabStatusData', getLabStatusData);
 
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);
@@ -127,9 +126,6 @@ const Index = () => {
     dispatch(getReduxLabResultStatus());
     dispatch(getReduxHealthFeeds());
 
-    // console.log('helthfeddddddddddddddddd', healthFeeds);
-    console.log('Here is the health tracker risk ', healthRisk);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -141,10 +137,8 @@ const Index = () => {
   const handleHEalthTracker = useCallback(() => {
     const tempTracker = [];
     let id = -1;
-    console.log('healthTrackerFromStore ', healthTrackerFromStore);
-    Object.entries(healthTrackerFromStore).map((item) => {
-      console.log('itemmm', item);
 
+    Object.entries(healthTrackerFromStore).map((item) => {
       item[1]?.name &&
         tempTracker.push({
           id: id + 1,
@@ -174,7 +168,7 @@ const Index = () => {
           identification_id: authContext?.userData?.ic_number,
         },
       });
-      // console.log('res', response);
+
       dispatch(getReduxLabResultStatus());
       if (response?.data?.message === 'Invalid request') {
         setShowApiError(
@@ -183,11 +177,10 @@ const Index = () => {
       } else {
         setVisible(false);
         setLoading(false);
-        console.log('status updated', response.data.message);
       }
     } catch (error) {
       setLoading(false);
-      console.log(error);
+
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
@@ -257,7 +250,7 @@ const Index = () => {
         4
       )
     );
-  // console.log(getHealthRisksHash());
+
   return (
     <>
       <View style={styles.container}>
@@ -455,7 +448,6 @@ const Index = () => {
                   item={item.item}
                   onPress={() => {
                     setShowArticleWebView(true), setArticlesUrl(item.item.link);
-                    // console.log('-------------------->', item.item.link);
                   }}
                 />
               )}

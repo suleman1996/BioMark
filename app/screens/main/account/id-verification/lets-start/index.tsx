@@ -56,8 +56,6 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
   // Callbacks - (Data is displayed as a warning for demo purposes)
   const emitterJumio = new NativeEventEmitter(JumioMobileSDK);
   emitterJumio.addListener('EventResult', async (EventResult) => {
-    console.log('EventResult: ' + JSON.stringify(EventResult));
-    console.log('selected_country', EventResult.credentials);
     // setIdVerification({
     //   scan_reference: id,
     //   selected_country: EventResult.credentials[0].selectedCountry,
@@ -84,7 +82,7 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
     // navigation.navigate(ID_VERIFICATION_COMPLETE);
   });
   emitterJumio.addListener('EventError', (EventError) => {
-    console.log('EventError: ' + JSON.stringify(EventError));
+    console.error('EventError: ' + JSON.stringify(EventError));
   });
 
   return (

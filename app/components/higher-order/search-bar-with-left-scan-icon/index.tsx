@@ -70,6 +70,7 @@ const SearchBarWithLeftScanIcon = () => {
     dispatch(getHealthTrackerRisks());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   let arr = [
     {
       name: 'Heart Disease',
@@ -203,14 +204,6 @@ const SearchBarWithLeftScanIcon = () => {
   ];
 
   const searchResult = (search) => {
-    // try {
-    //   const result = await userService.getSearchResult(5574, search);
-    //   console.log('result.data.results', result.data.results);
-
-    //   setSearchData(result.data.results);
-    // } catch (error) {
-    //   console.log('error ', error);
-    // }
     const filteredData = arr.filter((ele) => {
       let itemLowercase = ele.name.toLowerCase();
 
@@ -219,11 +212,9 @@ const SearchBarWithLeftScanIcon = () => {
       return itemLowercase.indexOf(searchTermLowercase) > -1;
     });
     setSearchData(filteredData);
-    // this.setState({ DataAdapter: filteredContacts });
   };
 
   const onSuccess = (e) => {
-    console.log('ettt', e.data);
     setCode('');
     handleCode(e.data);
   };
@@ -237,12 +228,10 @@ const SearchBarWithLeftScanIcon = () => {
       });
       if (response.status == true) {
         navigate(SCREENS.SUPPORT_SYSTEM);
-        console.log(response, 'codee---------------code------------------');
       } else {
-        console.log('error', response);
+        console.error('error', response);
       }
     } catch (err) {
-      console.log('err', err);
       setShowModalQr(false);
       setInvalidError(err.errMsg.data.message);
       setActionError(err.errMsg.data.action);
@@ -377,7 +366,6 @@ const SearchBarWithLeftScanIcon = () => {
                   }}
                   style={styles.renderSearchView}
                 >
-                  {console.log('item', item.screen)}
                   <View>
                     <Text
                       style={{

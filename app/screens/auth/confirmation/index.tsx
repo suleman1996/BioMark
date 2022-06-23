@@ -12,6 +12,7 @@ import { loggedIn } from 'store/auth/auth-actions';
 import { getAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
 import fonts from 'assets/fonts';
 let timer = () => {};
+
 export default function Confirmation() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -34,7 +35,6 @@ export default function Confirmation() {
   });
   const loginDispatch = async () => {
     const data = await getAuthAsyncStorage();
-    console.log('data===>', data);
 
     await dispatch(loggedIn(data));
   };

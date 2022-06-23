@@ -88,7 +88,6 @@ export default function Login() {
   }, [errorMessageLogin]);
 
   useEffect(() => {
-    console.log('locc =======>', geoLocation);
     if (geoLocation.code) {
       setCountryCode(geoLocation.code);
       let countryCodeParse = geoLocation.dial_code.replace('+', '');
@@ -110,7 +109,7 @@ export default function Login() {
     const googleCrenditial = auth.GoogleAuthProvider.credential(idToken);
     const user_sign_in = auth().signInWithCredential(googleCrenditial);
     user_sign_in.then((re) => {
-      console.log('re', re);
+      console.warn('re', re);
     });
   };
 
@@ -125,9 +124,9 @@ export default function Login() {
       { token, parameters: PROFILE_REQUEST_PARAMS },
       (error, user) => {
         if (error) {
-          console.log('login info has error: ' + error);
+          console.error('login info has error: ' + error);
         } else {
-          console.log('result:', user);
+          console.error('result:', user);
         }
       }
     );
@@ -135,7 +134,6 @@ export default function Login() {
   };
 
   const onFacebookLogin = async () => {
-    // LoginManager.logOut();
     if (Platform.OS === 'android') {
       LoginManager.setLoginBehavior('web_only');
     }
@@ -143,18 +141,17 @@ export default function Login() {
     await LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       async function (result) {
         if (result.isCancelled) {
-          console.log('Login cancelled');
+          console.warn('Login cancelled');
         } else {
           const data: any = await AccessToken.getCurrentAccessToken();
           getInfoFromToken(data?.accessToken);
-          console.log('Facebook data', data);
           const provider = 'facebook';
           Keyboard.dismiss();
           dispatch(reduxFederatedLogin(data?.accessToken, provider));
         }
       },
       function (error) {
-        console.log('Login fail with error: ' + error);
+        console.error('Login fail with error: ' + error);
       }
     );
   };
@@ -165,7 +162,6 @@ export default function Login() {
       requestedOperation: appleAuth.Operation.LOGIN,
       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
-    console.log('appleAuthRequestResponse', appleAuthRequestResponse);
 
     // get current authentication state for user
     // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
@@ -186,20 +182,13 @@ export default function Login() {
 
   const handleLogin = async () => {
     const username = `+${selectCountryCode}${phoneNumber}`;
-    console.log('username', username);
 
     Keyboard.dismiss();
     dispatch(reduxLogin(username, password));
   };
 
   return (
-    <View
-      style={
-        // [
-        styles.container
-        // { backgroundColor: .background }]
-      }
-    >
+    <View style={styles.container}>
       <ActivityIndicator visible={loggingIn} />
       <ErrorModal
         onPress={() => setLoginError(!loginError)}

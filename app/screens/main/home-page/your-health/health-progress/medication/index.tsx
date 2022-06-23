@@ -94,7 +94,7 @@ const Index = () => {
 
   useEffect(() => {
     if (!medicationsTrackers) return;
-    console.log({ medicationsTrackers });
+
     setMedicationLogs(medicationsTrackers);
   }, [medicationsTrackers]);
 

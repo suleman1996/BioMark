@@ -96,18 +96,10 @@ export const getAllInboxUnreadNotificationsR =
     await notificationsService
       .getAlliInboxUnreadNotifications()
       .then(async (res: any) => {
-        console.log('============>', res);
-
-        // logNow('response for redux ============>', res)
         await dispatch(addAllInboxUnreadNotifications(res));
       })
       .catch((err) => {
         logNow(err);
-        // After developer alow below function on line 66
-        // dispatch(errorLogOut('Error logging out.'));
       })
-      .finally(() => {
-        // After developer alow below function on line 69
-        // dispatch(loggingOut(false));
-      });
+      .finally(() => {});
   };

@@ -25,7 +25,7 @@ const ImageQrRenderer = ({ link }: { link: string }) => {
         const { uri } = response;
         setQrImg(uri);
       })
-      .catch((error) => console.log('Cannot create QR code', error));
+      .catch((error) => console.error('Cannot create QR code', error));
   }, [link]);
   return (
     <>
@@ -104,8 +104,6 @@ const QRCarousel = (props: Props) => {
   };
 
   const _onViewableItemsChanged = React.useCallback(({ changed }) => {
-    //  console.log('Visible items are', viewableItems);
-    console.log('Changed in this iteration, ', changed);
     setCurrentDot(changed[0]?.index);
   }, []);
 

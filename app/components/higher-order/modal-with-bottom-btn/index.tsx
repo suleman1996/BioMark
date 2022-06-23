@@ -34,10 +34,7 @@ const ModalWithBottomBtn = ({
   return (
     <Modal setIsVisible={setIsVisible} isVisible={isModal}>
       <View style={styles.card}>
-        <ScrollView
-          // contentContainerStyle={{ flexGrow: 0 }}
-          keyboardShouldPersistTaps="always"
-        >
+        <ScrollView keyboardShouldPersistTaps="always">
           <View style={{ paddingBottom: heightToDp(13) }}>
             {title ? <Text style={styles.title}>{title}</Text> : null}
             {children}

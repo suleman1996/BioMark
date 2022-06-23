@@ -121,7 +121,6 @@ const Medication = ({ route }) => {
       dispatch(getReduxHealthTracker());
       navigate(SCREENS.HEALTH_PROGRESS, 2);
     } catch (error) {
-      console.log(error);
       if (error?.errMsg?.status === 500) {
         showMessage({
           message: 'Internal Server Error',
@@ -154,8 +153,6 @@ const Medication = ({ route }) => {
 
       navigate(SCREENS.HEALTH_PROGRESS, 2);
     } catch (error) {
-      console.log(error);
-
       if (error?.errMsg?.status === 500) {
         showMessage({
           message: 'Internal Server Error',
@@ -224,7 +221,6 @@ const Medication = ({ route }) => {
     setValidation(false);
     setIsLoading(false);
   }, [SELECTED_MEDICATION_LOG_ID]);
-  console.log('--------------------', getMedNewTracker);
 
   return (
     <TitleWithBackWhiteBgLayout
