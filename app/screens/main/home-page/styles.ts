@@ -35,6 +35,7 @@ export const makeStyles = (colors: any) =>
       width: '100%',
       marginTop: heightToDp(13),
       paddingHorizontal: 25,
+      backgroundColor: 'white',
     },
 
     bnHeading: {

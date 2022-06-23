@@ -133,7 +133,7 @@ const BodyMeasurementScreen = () => {
     setBodyMeasurment((prev: any) => ({ ...prev, [key]: value }));
     setError((err) => ({
       ...err,
-      [key]: measurementValidator(bodyMeasurment.is_metric, key, value),
+      [key]: measurementValidator(bodyMeasurment.is_metric, key, value, t),
     }));
   };
 
@@ -162,7 +162,8 @@ const BodyMeasurementScreen = () => {
                 height: measurementValidator(
                   bodyMeasurment.is_metric,
                   'height',
-                  bodyMeasurment.height
+                  bodyMeasurment.height,
+                  t
                 ),
               });
             }}
@@ -183,7 +184,8 @@ const BodyMeasurementScreen = () => {
                 weight: measurementValidator(
                   bodyMeasurment.is_metric,
                   'weight',
-                  bodyMeasurment.weight
+                  bodyMeasurment.weight,
+                  t
                 ),
               });
             }}
