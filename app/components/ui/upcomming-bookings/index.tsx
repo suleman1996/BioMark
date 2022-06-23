@@ -1,8 +1,6 @@
-import ButtonComponent from 'components/base/button';
 import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
-import SCREENS from 'navigation/constants';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -10,7 +8,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 import { covidService } from 'services/covid-service';
-import { navigate } from 'services/nav-ref';
 import { IAppState } from 'store/IAppState';
 import { BookingListDataUpcoming } from 'types/api';
 import { dateFormat1, getDayName, getTime } from 'utils/functions/date-format';
@@ -230,27 +227,6 @@ const UpcommingBookings = (props: Props) => {
           <View style={{ paddingTop: heightToDp(20) }} />
         )}
       />
-      <View style={styles.buttonContainer}>
-        <ButtonComponent
-          onPress={() => {
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.BOOKCOVIDTEST,
-            });
-          }}
-          title={'Book New COVID-19 Test'}
-        />
-        <ButtonComponent
-          bg={colors.lightBlue}
-          color={colors.black}
-          marginTop={1.2}
-          onPress={() =>
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.FAQSCREEN,
-            })
-          }
-          title={'FAQ'}
-        />
-      </View>
     </View>
   );
 };
