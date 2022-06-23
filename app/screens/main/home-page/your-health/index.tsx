@@ -98,6 +98,7 @@ const Index = () => {
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
+  // console.log('getLabStatusData', healthRisk);
 
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);

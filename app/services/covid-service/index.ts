@@ -202,6 +202,13 @@ function getCovidHomeResults() {
       });
   });
 }
+const batchReadForUpcomming = ({ data }: Props) => {
+  console.log('data====>', data);
+
+  return client.post(API_URLS.BATCH_READ_UPCOMMING, {
+    unreadBooking: data,
+  });
+};
 
 export const covidService = {
   getCovidResults,
@@ -213,4 +220,5 @@ export const covidService = {
   getCovidTestAndTestCenters,
   getCovidTestCentersSchedules,
   getCovidHomeResults,
+  batchReadForUpcomming,
 };

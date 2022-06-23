@@ -247,7 +247,7 @@ const HealthRecord = () => {
           <Text style={styles.latestResult}>
             {t('pages.results.latestResults')}
           </Text>
-          {latestResult.message === t('pages.searchResults.noResults') ? (
+          {latestResult.message === 'No latest result' ? (
             <Text style={styles.resultMessage}>{latestResult.message}</Text>
           ) : (
             <LatestResultCard

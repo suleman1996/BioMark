@@ -54,9 +54,10 @@ const BookCovidTest = (props: Props) => {
     store.dispatch(addCovidBooking(copyArray));
   };
 
-  const ifNextDisabled = booking.every((item) => item.booking_status === 0)
-    ? {}
-    : { backgroundColor: colors.inputBg };
+  const ifNextDisabled =
+    booking.length > 0 && booking.every((item) => item.booking_status === 0)
+      ? {}
+      : { backgroundColor: colors.inputBg };
 
   return (
     <>
@@ -121,6 +122,7 @@ const BookCovidTest = (props: Props) => {
             />
           ) : null}
           <ButtonComponent
+            disabled={isDependantAdd}
             onPress={() => {
               // setIsExisting(true);
               pushOneAddSelf();
@@ -139,7 +141,10 @@ const BookCovidTest = (props: Props) => {
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable
-              disabled={booking.every((item) => item.booking_status == 0)}
+              disabled={
+                booking.length <= 0 &&
+                booking.every((item) => item.booking_status == 0)
+              }
               onPress={() =>
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_STEP,

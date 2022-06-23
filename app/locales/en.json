@@ -1307,7 +1307,7 @@
       }
     },
     "searchResults": {
-      "noResults": "No results found.",
+      "noResults": "No results.",
       "noBiomarkerResults": "No biomarker results found.",
       "cards": {
         "bioMarkers": "Biomarkers",
