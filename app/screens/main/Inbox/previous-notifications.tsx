@@ -11,6 +11,7 @@ import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { IAppState } from 'store/IAppState';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 type props = {
   isReadMoreInboxNoti?: any;
@@ -18,6 +19,7 @@ type props = {
 };
 
 export default function PreviousNotification(props: props) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   // redux state all inbox
@@ -29,7 +31,9 @@ export default function PreviousNotification(props: props) {
     <View style={styles.previousNotificationContainer}>
       <View style={styles.blackLine} />
       <View style={styles.headerContainer}>
-        <Text style={styles.prevHeaderText}>Previous Notifications</Text>
+        <Text style={styles.prevHeaderText}>
+          {t('pages.more.links.previousNotifications')}
+        </Text>
       </View>
       <FlatList
         nestedScrollEnabled
@@ -49,7 +53,9 @@ export default function PreviousNotification(props: props) {
                   // }}
                   style={styles.readMoreContainer}
                 >
-                  <Text style={styles.readMoreText}>Read More</Text>
+                  <Text style={styles.readMoreText}>
+                    {t('common.showMoree')}
+                  </Text>
                 </Pressable>
               ) : null}
             </>
