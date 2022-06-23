@@ -24,8 +24,10 @@ import RenderResults from './result-card';
 import HealthProgressFilter from 'components/health-progress-filter/index';
 import SCREENS from 'navigation/constants/index';
 import { healthRecordServices } from 'services/health-record-service';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
@@ -40,12 +42,12 @@ const Index = () => {
   const [isInfo, setIsInfo] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   const [filterOption1] = React.useState([
-    { id: 0, title: 'All' },
-    { id: 1, title: 'Abnormal' },
+    { id: 0, title: t('pages.encodedResults.filters.all') },
+    { id: 1, title: t('pages.encodedResults.filters.abnormal') },
   ]);
   const [selectedfilterOption1, setSelectedfilterOption1] = React.useState({
     id: 0,
-    title: 'All',
+    title: t('pages.encodedResults.filters.all'),
   });
   const [pdfReport, setPdfReport] = React.useState('');
 
@@ -106,7 +108,7 @@ const Index = () => {
     <View style={styles.summaryContainer}>
       <View style={{ marginHorizontal: 5 }}>
         <RenderSummaryTitle
-          title="Summary"
+          title={t('pages.resultSummary.tabs.summary.title')}
           state={showSummaryummary}
           setState={setSummary}
         />
@@ -158,20 +160,20 @@ const Index = () => {
     return (
       <View style={styles.overLay}>
         <View style={styles.overLayContainer}>
-          <RenderHeading title="Results Details" />
-          <RenderHeading title="Source" />
+          <RenderHeading title={t('pages.encodedResults.info.title')} />
+          <RenderHeading title={t('pages.encodedResults.info.source')} />
           <RenderSubheading subTitle={resultOverView?.provider} />
-          <RenderHeading title="Referring Doctor or Clinic" />
+          <RenderHeading title={t('pages.encodedResults.info.reference')} />
           <RenderSubheading subTitle={resultOverView?.result?.doctor} />
-          <RenderHeading title="Lab Reference Number" />
+          <RenderHeading title={t('pages.encodedResults.info.labReference')} />
           <RenderSubheading subTitle={resultOverView?.ref_no} />
-          <RenderHeading title="Report Received" />
+          <RenderHeading title={t('pages.encodedResults.info.received')} />
           <RenderSubheading
             subTitle={moment(resultOverView?.report_received).format(
               'MMM DD, YYYY'
             )}
           />
-          <RenderHeading title="Report Printed" />
+          <RenderHeading title={t('pages.encodedResults.info.printed')} />
           <RenderSubheading
             subTitle={moment(resultOverView?.report_printed).format(
               'MMM DD, YYYY'
@@ -183,7 +185,7 @@ const Index = () => {
               onPress={() => setIsInfo(false)}
               marginVertical={1}
               marginHorizontal={1}
-              title="Close"
+              title={t('pages.encodedResults.info.close')}
             />
           </View>
         </View>
@@ -209,7 +211,7 @@ const Index = () => {
     <View style={styles.container}>
       <ResultsDetails visible={isInfo} />
       <HealthProgressFilter
-        option1="Filter Type"
+        option1={t('pages.encodedResults.filters.type')}
         visible={isVisible}
         setIsVisible={setIsVisible}
         filterOption1={filterOption1}
@@ -220,7 +222,7 @@ const Index = () => {
       />
       <TitleWithBackLayout
         shadow={colors.blue}
-        title="Result Overview"
+        title={t('pages.labResultOverview.title')}
         isShare={true}
         isInfo={true}
         onPressInfo={setIsInfo}
@@ -257,7 +259,7 @@ const Index = () => {
                   resultId: resultOverView?.lab_id,
                 })
               }
-              title="See Report"
+              title={t('pages.labResultOverview.seeResults')}
             />
             {resultOverView?.panel?.map((result) => (
               <>

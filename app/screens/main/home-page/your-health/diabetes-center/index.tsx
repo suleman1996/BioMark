@@ -379,7 +379,7 @@ const DiabetesCenter = (props) => {
           />
 
           <WithdrawProgram
-            text={t('pages.diabetesSupport.dialogs.withdraw.title')}
+            text={t('pages.diabetesSupport.dialogs.withdraw.buttonText')}
             visible={modalVisible}
             title={t('pages.diabetesSupport.dialogs.withdraw.title')}
             text2={t('pages.diabetesSupport.dialogs.withdraw.description')}

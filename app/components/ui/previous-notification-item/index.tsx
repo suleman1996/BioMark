@@ -21,17 +21,21 @@ const PreviousNotificationItem = (props: Props) => {
 
   return (
     <Pressable onPress={onPress}>
-      <View style={styles.container}>
+      <View style={{ flexDirection: 'row' }}>
         <View style={styles.iconContainer}>
           {getIcon(item.notification_type)}
         </View>
-        <View style={styles.contentContainer}>
-          <Text style={styles.contentHeaderText}>
-            {item.notification_title}
-          </Text>
-          <Text style={styles.contentext}>{item.notification_body}</Text>
+        <View style={styles.container}>
+          <View style={styles.contentContainer}>
+            <Text style={styles.contentHeaderText}>
+              {item.notification_title}
+            </Text>
+          </View>
+          <Text style={styles.dateText}>{monthLLLDayDD(item.created_at)}</Text>
         </View>
-        <Text style={styles.dateText}>{monthLLLDayDD(item.created_at)}</Text>
+      </View>
+      <View style={styles.descriptionDataContainer}>
+        <Text style={styles.contentext}>{item.notification_body}</Text>
       </View>
     </Pressable>
   );

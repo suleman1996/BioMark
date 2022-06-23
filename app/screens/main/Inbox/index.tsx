@@ -111,7 +111,16 @@ export default function InboxScreen() {
       });
   }, [currentPageOtherNoti]);
   /*eslint-enable */
-
+  const readNotification = async (id) => {
+    try {
+      const result = await notificationsService.readInboxNotification(id);
+      console.log('id', id);
+      await dispatch(getAllInboxUnreadNotificationsR());
+      console.log('result', result.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const clickHandler = (notification: NotificationMessage) => {
     switch (notification.notification_type) {
       case NotificationType.medication_reminder:
@@ -186,11 +195,18 @@ export default function InboxScreen() {
             <UnReadInboxNotificationItem
               getIcon={getIcon}
               item={item}
-              onPress={() => clickHandler(item)}
+              onPress={() => {
+                readNotification(item?.notification_id);
+                clickHandler(item);
+              }}
             />
           )}
         />
-        <View style={styles.blackLine} />
+
+        {allInboxUnreadNotifications.length < 0 ? (
+          <View style={styles.blackLine} />
+        ) : null}
+
         <View style={styles.headerContainer}>
           <Text style={styles.prevHeaderText}>Previous Notifications</Text>
         </View>
@@ -204,7 +220,9 @@ export default function InboxScreen() {
             <PreviousNotificationItem
               getIcon={getIcon}
               item={item}
-              onPress={() => clickHandler(item)}
+              onPress={() => {
+                clickHandler(item);
+              }}
             />
           )}
           ListFooterComponent={() => {
@@ -290,18 +308,26 @@ export default function InboxScreen() {
           >
             <View style={styles.tabNameContainer}>
               <Pressable
-                onPress={() => pagerRef.current.setPage(0)}
+                // onPress={() => PreviousNotification()}
+                onPress={() => {
+                  pagerRef.current.setPage(0);
+                  setCurrentPage(0);
+                }}
                 style={[
                   styles.tab,
-                  currentPage != 1 ? { borderBottomWidth: 3 } : {},
+                  currentPage == 0 ? { borderBottomWidth: 3 } : {},
                 ]}
               >
                 <Text style={styles.tabText}>
-                  Inbox ({allInboxNotificationsData.length})
+                  Inbox ({allInboxUnreadNotifications.length})
                 </Text>
               </Pressable>
               <Pressable
-                onPress={() => pagerRef.current.setPage(1)}
+                //  onPress={() => OtherNotification()}
+                onPress={() => {
+                  pagerRef.current.setPage(1);
+                  setCurrentPage(1);
+                }}
                 style={[
                   styles.tab,
                   currentPage == 1 ? { borderBottomWidth: 3 } : {},
@@ -319,12 +345,11 @@ export default function InboxScreen() {
               style={styles.pagerView}
               initialPage={0}
             >
-              <View key="0">
+              {currentPage === 0 ? (
                 <PreviousNotification />
-              </View>
-              <View key="1">
+              ) : (
                 <OtherNotification />
-              </View>
+              )}
             </PagerView>
           </View>
         </View>

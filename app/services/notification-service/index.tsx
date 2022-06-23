@@ -69,7 +69,8 @@ function getAlliInboxUnreadNotifications() {
       .get(`${API_URLS.NOTIFICATIONS}/inbox/unread`)
       .then(async (response) => {
         try {
-          //logNow('all notification inbox success response', response.data);
+          console.log('/inbox/unread', response);
+
           resolve(response.data);
         } catch (e) {
           logNow('unread inbox notifiction', e);
@@ -82,10 +83,14 @@ function getAlliInboxUnreadNotifications() {
       });
   });
 }
+const readInboxNotification = (id) => {
+  return client.get(`${API_URLS.NOTIFICATIONS}/${id}/inbox_read`);
+};
 
 export const notificationsService = {
   getAllinboxNotifications,
   getAlliOthersNotifications,
   getAlliOthersUnreadNotifications,
   getAlliInboxUnreadNotifications,
+  readInboxNotification,
 };

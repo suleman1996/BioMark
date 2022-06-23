@@ -11,8 +11,10 @@ import CrossIcon from 'react-native-vector-icons/AntDesign';
 import fonts from 'assets/fonts';
 import SCREENS from 'navigation/constants/index';
 import { healthRecordServices } from 'services/health-record-service';
+import { useTranslation } from 'react-i18next';
 
 const Search = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const route = useRoute();
   const styles = Styles(colors);
@@ -50,7 +52,10 @@ const Search = () => {
   );
 
   return (
-    <TitleWithBackLayout shadow={colors.blue} title="Result">
+    <TitleWithBackLayout
+      shadow={colors.blue}
+      title={t('pages.resultSummary.tabs.summary.tableHeaders.result')}
+    >
       <View style={styles.container}>
         <View style={styles.searchView}>
           <View style={styles.inputView}>

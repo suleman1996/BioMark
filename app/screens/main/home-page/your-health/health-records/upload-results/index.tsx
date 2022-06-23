@@ -37,9 +37,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import Pdf from 'react-native-pdf';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { useTranslation } from 'react-i18next';
 
 // let cameraIs = false;
 export default function ResultUpload() {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [refresh, setRefreh] = useState(false);
@@ -233,10 +235,12 @@ export default function ResultUpload() {
       <ActivityIndicator visible={isVisiable} />
       {isPreview ? (
         <>
-          <TitleWithBackLayout title="Upload Results">
+          <TitleWithBackLayout title={t('pages.uploadResult.title')}>
             <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
               <View style={styles.uploadView}>
-                <Text style={styles.document}>Document Name</Text>
+                <Text style={styles.document}>
+                  {t('pages.uploadResult.documentName')}
+                </Text>
               </View>
               <View
                 style={[
@@ -250,7 +254,9 @@ export default function ResultUpload() {
                 <TextInput value={document} onChange={setDocument} />
               </View>
               <View style={styles.uploadView}>
-                <Text style={styles.uploadText}>Your Uploads</Text>
+                <Text style={styles.uploadText}>
+                  {t('pages.uploadResult.uploads')}
+                </Text>
                 <Text style={styles.numberText}>
                   {list.length > 0 ? splices + 1 : '(0)'}
                 </Text>
@@ -297,38 +303,35 @@ export default function ResultUpload() {
                   />
                   <View style={styles.noteView}>
                     <Text style={styles.noteText}>
-                      Your privacy is important to us. You are in control of
-                      your health information. BioMark won’t provide your
-                      information to any third parties without your permission.
+                      {t('pages.uploadResult.privacy')}
                     </Text>
-                    <Text style={styles.noteText2}>
+                    {/* <Text style={styles.noteText2}>
                       BioMark only supports the uploading of lab results for
                       now. We reserve the right to remove documents that are not
                       related to lab results.
-                    </Text>
+                    </Text> */}
                   </View>
                 </View>
               </View>
             </ScrollView>
             <ButtonWithShadowContainer
-              title="Save & Continue"
+              title={t('pages.uploadResult.continue')}
               disabled={document.length <= 0 ? true : false}
               onPress={() => updateResults()}
             />
           </TitleWithBackLayout>
         </>
       ) : (
-        <TitleWithBackLayout title="Upload Results">
+        <TitleWithBackLayout title={t('pages.uploadResult.title')}>
           <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
             <View style={styles.infoView}>
               <Feather color={colors.heading} name="info" size={25} />
-              <Text style={styles.text}>
-                For results with multiple pages, select Add Page to add more
-                pages.
-              </Text>
+              <Text style={styles.text}>{t('pages.uploadResult.info')}</Text>
             </View>
             <View style={styles.uploadView}>
-              <Text style={styles.uploadText}>Your Uploads</Text>
+              <Text style={styles.uploadText}>
+                {t('pages.uploadResult.uploads')}
+              </Text>
               <Text style={styles.numberText}>
                 {list.length > 0 ? splices + 1 : '0'}
               </Text>
@@ -393,11 +396,11 @@ export default function ResultUpload() {
                 }}
               />
               <WithdrawProgram
-                text="Delete"
+                text={t('pages.uploadResult.delete.buttonText')}
                 visible={modalVisible}
-                title="Are You Sure?"
-                text2="This action is final and cannot be reverted."
-                cancel="Cancel"
+                title={t('pages.uploadResult.delete.title')}
+                text2={t('pages.uploadResult.delete.description')}
+                cancel={t('pages.uploadResult.delete.buttonCancelText')}
                 cancelModal={() => setModalVisible(!modalVisible)}
                 closeModal={() => setModalVisible(!modalVisible)}
                 color={['#EB3342', '#EB3342']}
@@ -418,11 +421,13 @@ export default function ResultUpload() {
               onPress={() => setShowModal(true)}
             >
               <Feather color={colors.heading} name="plus" size={35} />
-              <Text style={styles.addPage}>Add Page</Text>
+              <Text style={styles.addPage}>
+                {t('pages.uploadResult.addPage')}
+              </Text>
             </Pressable>
             <LabResultModal
               visible={showModal}
-              title="Upload Lab Results"
+              title={t('pages.uploadResult.dialogs.upload.title')}
               closeModal={() => setShowModal(!showModal)}
               onTakePhoto={() => imagePickerFromCamera()}
               onUploadFromGallery={() => imagePickerFromGallery()}
@@ -430,7 +435,7 @@ export default function ResultUpload() {
             />
           </ScrollView>
           <ButtonWithShadowContainer
-            title="Save & Continue"
+            title={t('pages.uploadResult.continue')}
             disabled={list.length <= 0 ? true : false}
             onPress={() => setIsPreview(!isPreview)}
           />
