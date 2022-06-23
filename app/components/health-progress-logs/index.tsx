@@ -44,13 +44,12 @@ const Index = (props: Props) => {
     <TouchableRipple
       onPress={() => {
         try {
-          // console.log({ item, screen: props.navigate });
           props.onNavigate && props.onNavigate();
           setTimeout(() => {
             navigations.navigate(props.navigate, { logId: item?.id });
           }, 5);
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }}
       style={styles.renderLog}

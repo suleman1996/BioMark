@@ -1,4 +1,5 @@
 import { dependentService } from 'services/account-service/dependent-service';
+import { homeServices } from 'services/home-service';
 import { userService } from 'services/user-service/user-service';
 import { BootstrapData, GeoLocationData } from 'types/api';
 import { DependentData } from 'types/api/dependent';
@@ -40,7 +41,7 @@ export const getAllDependents =
 
 export const getReduxBootstrap =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getBootstrap()
       .then(async (res) => {
         await dispatch(addAllBootstrapDataInRedux(res));

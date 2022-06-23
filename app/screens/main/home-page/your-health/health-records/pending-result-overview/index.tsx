@@ -64,11 +64,10 @@ const PendingResultOverview = () => {
         setModalVisible(!modalVisible);
         // dispatch(getReduxPastResult());
         navigate(SCREENS.HEALTH_RECORD);
-        console.log('delte----------------------------------', result.data);
       }
     } catch (error) {
       setIsVisible(false);
-      console.log(error);
+
       if (error.errMsg.status == '500') {
         setIsVisible(false);
         showMessage({
@@ -151,8 +150,6 @@ const PendingResultOverview = () => {
                 numColumns={2}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => {
-                  console.log('itemuuu', item);
-
                   setSplices(index);
                   return (
                     <>

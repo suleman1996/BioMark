@@ -67,7 +67,7 @@ const HealthRecord = () => {
   useEffect(() => {
     setPastResults(pastResult);
     setLatestResult(newResult);
-    console.log('latesttttttttt-------------', pastResult);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pastResult]);
 
@@ -81,9 +81,7 @@ const HealthRecord = () => {
       });
       setModalVisible(!modalVisible);
       setPastResults(result?.data);
-      console.log('resultttt-----------------------dataaaa', result?.data);
     } catch (error) {
-      console.log(error);
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
@@ -132,14 +130,6 @@ const HealthRecord = () => {
   };
 
   const renderItem2 = ({ item }) => {
-    var str = 'hello how are you';
-    const welcomeText = str.split(' ')[0];
-    const welcomeText2 = str.split(' ')[1];
-    const fullName = welcomeText + welcomeText2;
-    console.log(fullName);
-    // const splitOnSpace = fullName.split(' ');
-    // console.log('first', splitOnSpace[0]);
-    // console.log('second', splitOnSpace[1]);
     return (
       <TouchableOpacity
         onPress={() => {

@@ -66,10 +66,7 @@ const EditProfileScreen = () => {
   const updateProfilePhoto = async (pic: any) => {
     try {
       setIsLoading(true);
-      const [profilePic] = await Promise.all([
-        userService.updateProfileAvatar(pic),
-      ]);
-      console.log('profile success ', profilePic.data);
+      await Promise.all([userService.updateProfileAvatar(pic)]);
 
       const result = await userService.getUserProfile();
       authContext.setUserData(result.data);
@@ -77,7 +74,7 @@ const EditProfileScreen = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
@@ -128,10 +125,8 @@ const EditProfileScreen = () => {
       };
       launchImageLibrary(options, (res) => {
         if (res.didCancel) {
-          console.log('User cancelled image picker');
           cameraIs = false;
         } else if (res.errorMessage) {
-          console.log('ImagePicker Error: ', res.errorMessage);
           cameraIs = false;
         } else {
           updateProfilePhoto(res.assets[0].base64);
@@ -164,10 +159,8 @@ const EditProfileScreen = () => {
         };
         launchCamera(options, (res) => {
           if (res.didCancel) {
-            console.log('User cancelled image picker');
             cameraIs = false;
           } else if (res.errorMessage) {
-            console.log('Camera error: ', res.errorMessage);
             cameraIs = false;
           } else {
             if (res.assets) {

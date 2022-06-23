@@ -72,7 +72,7 @@ export default function ResultUpload() {
         attachments: list,
       },
     };
-    console.log('body', body);
+
     try {
       setIsVisible(true);
       const profilePic = await userService.uploadResult(body);
@@ -80,11 +80,9 @@ export default function ResultUpload() {
         dispatch(getReduxPastResult());
         navigate(SCREENS.YOUR_HEALTH);
         Keyboard.dismiss();
-        console.log('ppppppppppppppppppp', profilePic);
       }
     } catch (error) {
       setIsVisible(false);
-      console.log(error);
       if (error.errMsg.status == '500') {
         setIsVisible(false);
         showMessage({
@@ -109,17 +107,7 @@ export default function ResultUpload() {
   const imagePickerFromGallery = async () => {
     try {
       setIsVisible(true);
-      // const granted = await PermissionsAndroid.request(
-      //   PermissionsAndroid.PERMISSIONS.CAMERA,
-      //   {
-      //     title: 'App Camera Permission',
-      //     message: 'App needs access to your camera',
-      //     buttonNeutral: 'Ask Me Later',
-      //     buttonNegative: 'Cancel',
-      //     buttonPositive: 'OK',
-      //   }
-      // );
-      // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+
       let options = {
         mediaType: 'photo',
         selectionLimit: 0,
@@ -128,10 +116,8 @@ export default function ResultUpload() {
       launchImageLibrary(options, (res) => {
         if (res.didCancel) {
           setIsVisible(false);
-          console.log('User cancelled image picker');
         } else if (res.errorMessage) {
           setIsVisible(false);
-          console.log('ImagePicker Error: ', res.errorMessage);
         } else {
           setIsVisible(false);
           let body = {
@@ -152,55 +138,11 @@ export default function ResultUpload() {
           setShowModal(!showModal);
         }
       });
-      console.log('Camera permission given');
-      // } else {
-      //   setIsVisible(false);
-      //   console.log('Camera permission denied');
-      // }
     } catch (err) {
       setIsVisible(false);
       console.warn(err);
     }
   };
-  // const uploadPDF = async () => {
-  //   //Opening Document Picker for selection of one file
-  //   try {
-  //     const res = await DocumentPicker.pickSingle({
-  //       type: [DocumentPicker.types.pdf],
-  //     });
-  //     //Printing the log realted to the file
-  //     console.log('res : ', res);
-  //     // var b64 = await RNFS.readFile(res.uri, 'base64');
-  //     console.log('Data', data);
-  //     let body = {
-  //       filename: res?.name,
-  //       uri: res?.uri,
-  //       //  base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
-  //       base64: b64,
-  //       filetype: res?.type,
-  //     };
-  //     let data = list;
-  //     data.push(body);
-  //     setList(data);
-  //     setShowModal(false);
-  //     console.log('docment------------', data);
-  //     console.log('URI : ' + res.uri);
-  //     console.log('Type : ' + res.type);
-  //     console.log('File Name : ' + res.name);
-  //     console.log('File Size : ' + res.size);
-  //     //Setting the state to show single file attributes
-  //   } catch (err) {
-  //     //Handling any exception (If any)
-  //     if (DocumentPicker.isCancel(err)) {
-  //       //If user canceled the document selection
-  //       console.log('Canceled from single doc picker');
-  //     } else {
-  //       //For Unknown Error
-  //       // alert('Unknown Error: ' + JSON.stringify(err));
-  //       throw err;
-  //     }
-  //   }
-  // };
 
   const uploadPDF = async () => {
     //Opening Document Picker for selection of one file
@@ -209,13 +151,12 @@ export default function ResultUpload() {
         type: [DocumentPicker.types.pdf],
       });
       //Printing the log realted to the file
-      console.log('res : ', res);
+
       var b64 = await RNFS.readFile(res.uri, 'base64');
-      console.log('Data', data);
 
       let body = {
         filename: res?.name,
-        //  base64: 'data:' + res?.type + ';' + 'base64' + ',' + res?.base64,
+
         base64: `data:application/pdf;base64,${b64}`,
         filetype: 'pdf',
       };
@@ -223,18 +164,12 @@ export default function ResultUpload() {
       data.push(body);
       setList(data);
       setShowModal(false);
-      console.log('docment------------', data);
 
-      console.log('URI : ' + res.uri);
-      console.log('Type : ' + res.type);
-      console.log('File Name : ' + res.name);
-      console.log('File Size : ' + res.size);
       //Setting the state to show single file attributes
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
         //If user canceled the document selection
-        console.log('Canceled from single doc picker');
       } else {
         //For Unknown Error
         // alert('Unknown Error: ' + JSON.stringify(err));
@@ -265,10 +200,8 @@ export default function ResultUpload() {
         launchCamera(options, (res) => {
           if (res.didCancel) {
             setIsVisible(false);
-            console.log('User cancelled image picker');
           } else if (res.errorMessage) {
             setIsVisible(false);
-            console.log('ImagePicker Error: ', res.errorMessage);
           } else {
             setIsVisible(false);
             let body = {
@@ -289,10 +222,8 @@ export default function ResultUpload() {
             setShowModal(false);
           }
         });
-        console.log('Camera permission given');
       } else {
         setIsVisible(false);
-        console.log('Camera permission denied');
       }
     } catch (err) {
       setIsVisible(false);

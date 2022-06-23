@@ -62,40 +62,33 @@ export default function ExerciseScreen() {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showDropDown2, setShowDropDown2] = useState(false);
   useEffect(() => {
-    console.log(bootstrap, 'bootstrap');
     handleLifeStyle();
   }, [bootstrap]);
 
   const onSave = async () => {
-    console.log('isExercise', isExercise);
-    console.log('exerciseWeek', exerciseWeek);
-    console.log('exerciseSession', exerciseSession);
     try {
       setIsVisible(true);
       if (isExercise === 'true') {
-        const response = await userService.exercise({
+        await userService.exercise({
           lifestyle: {
             is_exercise: isExercise,
             exercise_per_week: exerciseWeek,
             exercise_per_session: exerciseSession,
           },
         });
-        console.log(response.data);
       } else {
-        const response = await userService.exercise({
+        await userService.exercise({
           lifestyle: {
             is_exercise: false,
             exercise_per_week: null,
             exercise_per_session: null,
           },
         });
-        console.log(response.data);
       }
       navigate(SCREENS.EDIT_PROFILE);
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);
-      console.log(err);
     }
   };
 
@@ -113,7 +106,7 @@ export default function ExerciseScreen() {
       setExerciseWeek(result?.data?.exercise?.exercise_per_week);
       setExerciseSession(result?.data?.exercise?.exercise_per_session);
       setIsExercise(result?.data?.exercise?.is_exercise ? 'second' : 'first');
-      console.log('Exercise data', result?.data?.exercise?.is_exercise);
+
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);
@@ -135,12 +128,6 @@ export default function ExerciseScreen() {
       }
     }
   };
-
-  console.log({
-    isExercise,
-    exerciseWeek,
-    exerciseSession,
-  });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

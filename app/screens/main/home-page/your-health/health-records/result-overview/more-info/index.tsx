@@ -16,10 +16,10 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { checkPermissionAndDownloadBase64 } from 'utils/functions/download-file';
 import Styles from './styles';
 import fonts from 'assets/fonts';
-import { userService } from 'services/user-service/user-service';
 import Charts from './charts';
 import { ActivityIndicator } from 'components/';
 import DescriptiveBtn from 'components/descriptive-btn';
+import { healthRecordServices } from 'services/health-record-service';
 import { useTranslation } from 'react-i18next';
 
 const MoreInfo = () => {
@@ -37,25 +37,24 @@ const MoreInfo = () => {
 
   const moreInfoData = async () => {
     try {
-      const result = await userService.getMoreInfoResult(
+      const result = await healthRecordServices.getMoreInfoResult(
         route?.params?.result_id
       );
       setSummary(result.data);
-      console.log('success ', result.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   const getPdf = async (id) => {
     try {
       setIsLoading(true);
-      const result = await userService.getResultPdf(id);
-      // console.log('her is the download pdf  ', result.data);
+      const result = await healthRecordServices.getResultPdf(id);
+
       checkPermissionAndDownloadBase64(result.data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsLoading(false);
     }
   };
@@ -106,7 +105,6 @@ const MoreInfo = () => {
 
   const RenderTable = ({ data }) => (
     <View style={{ flexDirection: 'row' }}>
-      {console.log('xxxxx ', data)}
       <RenderDownload
         name="chart-timeline-variant"
         resultId={data?.id}

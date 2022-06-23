@@ -15,7 +15,6 @@ import Logs from 'components/health-progress-logs/index';
 
 import FloatingButton from 'components/floating-button/index';
 import Person from 'assets/svgs/Bmi';
-import { userService } from 'services/user-service/user-service';
 
 import {
   convertDataset,
@@ -29,6 +28,7 @@ import {
 } from 'utils/functions/graph/graph-utils';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { healthProgressServices } from 'services/health-progress-servive';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -82,7 +82,7 @@ const Index = () => {
   const weightGraphData = async () => {
     try {
       setIsLoading(true);
-      const result = await userService.getWeightMapData({
+      const result = await healthProgressServices.getWeightMapData({
         date: selectedValue.title,
         metric: selectedfilterOption2.id == 0,
         type: selectedfilterOption1.title.toLowerCase(),
@@ -91,7 +91,7 @@ const Index = () => {
       setIsLoading(false);
       setHideGraph(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -118,7 +118,6 @@ const Index = () => {
   }, [selectedfilterOption1, selectedfilterOption2]);
 
   React.useEffect(() => {
-    console.log('CHART STATE CHANGED');
     if (chartState) {
       const { chartOptions } = createChart(chartState);
       setTimeout(() => {
@@ -130,7 +129,6 @@ const Index = () => {
 
   // COPIED FUNCTIONS
   const createChart = (data: any) => {
-    console.log('CREATING CHART');
     const points =
       data.length === 0
         ? []
@@ -158,7 +156,6 @@ const Index = () => {
   };
 
   const onApplyFilters = (filter1, filter2) => {
-    console.log({ filter1, filter2 });
     setSelectedfilterOption1(filter1);
     setSelectedfilterOption2(filter2);
     setIsVisible(false);

@@ -18,7 +18,6 @@ const PreviousNotificationItem = (props: Props) => {
   const styles = makeStyles(colors);
 
   const { item, onPress, getIcon } = props;
-  console.log('previous Notification inbox', item);
 
   return (
     <Pressable onPress={onPress}>

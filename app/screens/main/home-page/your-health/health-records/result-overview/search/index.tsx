@@ -8,9 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import Styles from './styles';
 import CrossIcon from 'react-native-vector-icons/AntDesign';
-import { userService } from 'services/user-service/user-service';
 import fonts from 'assets/fonts';
 import SCREENS from 'navigation/constants/index';
+import { healthRecordServices } from 'services/health-record-service';
 import { useTranslation } from 'react-i18next';
 
 const Search = () => {
@@ -25,14 +25,14 @@ const Search = () => {
 
   const searchResult = async (search) => {
     try {
-      const result = await userService.getSearchResult(
+      const result = await healthRecordServices.getSearchResult(
         route?.params?.labId,
         search
       );
 
       setSearchData(result.data.results);
     } catch (error) {
-      console.log('error ', error);
+      console.error('search result error ', error);
     }
   };
 
