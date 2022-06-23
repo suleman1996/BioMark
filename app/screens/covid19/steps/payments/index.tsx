@@ -368,6 +368,7 @@ const PaymentStep = (props: Props) => {
             </Pressable>
             <Pressable
               onPress={async () => {
+                setPaymentModal(false);
                 if (countryName == 'Malaysia') {
                   const data: any = await paymentService.openBillPlzBrowser(
                     email,
@@ -376,16 +377,19 @@ const PaymentStep = (props: Props) => {
                     booking
                   );
 
-                  setPaymentUrl(data.url);
-                  setPaymentModal(true);
-                } else if (countryName == 'Singapore') {
+                  if (data.url) {
+                    setPaymentUrl(data.url);
+                    setPaymentModal(true);
+                  }
+                } else {
                   const data: any = await paymentService.openStripeBrowser(
                     booking,
                     email
                   );
-
-                  setPaymentUrl(data.url);
-                  setPaymentModal(true);
+                  if (data.url) {
+                    setPaymentUrl(data.url);
+                    setPaymentModal(true);
+                  }
                 }
               }}
               style={styles.btnEnable}
