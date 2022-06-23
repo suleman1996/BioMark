@@ -34,8 +34,10 @@ import {
   BioMcr,
 } from 'components/svg';
 import UnReadInboxNotificationItem from 'components/ui/unread-inbox-notification-item';
+import { useTranslation } from 'react-i18next';
 
 export default function InboxScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   // redux state all inbox
@@ -209,7 +211,9 @@ export default function InboxScreen() {
         ) : null}
 
         <View style={styles.headerContainer}>
-          <Text style={styles.prevHeaderText}>Previous Notifications</Text>
+          <Text style={styles.prevHeaderText}>
+            {t('pages.more.links.previousNotifications')}
+          </Text>
         </View>
         <FlatList
           scrollEnabled={false}
@@ -236,7 +240,9 @@ export default function InboxScreen() {
                     }}
                     style={styles.readMoreContainer}
                   >
-                    <Text style={styles.readMoreText}>Read More</Text>
+                    <Text style={styles.readMoreText}>
+                      {t('common.showMore')}
+                    </Text>
                   </Pressable>
                 ) : null}
               </>
@@ -275,7 +281,9 @@ export default function InboxScreen() {
                     }}
                     style={styles.readMoreContainer}
                   >
-                    <Text style={styles.readMoreText}>Read More</Text>
+                    <Text style={styles.readMoreText}>
+                      {t('common.showMore')}
+                    </Text>
                   </Pressable>
                 ) : null}
               </>
@@ -284,7 +292,9 @@ export default function InboxScreen() {
         />
         <View style={styles.blackLine} />
         <View style={styles.headerContainer}>
-          <Text style={styles.prevHeaderText}>Previous Notifications</Text>
+          <Text style={styles.prevHeaderText}>
+            {t('pages.more.links.previousNotifications')}
+          </Text>
         </View>
         <FlatList
           scrollEnabled={false}
@@ -320,7 +330,8 @@ export default function InboxScreen() {
                 ]}
               >
                 <Text style={styles.tabText}>
-                  Inbox ({allInboxUnreadNotifications.length})
+                  {t('pages.tabController.inbox')} (
+                  {allInboxUnreadNotifications.length})
                 </Text>
               </Pressable>
               <Pressable
@@ -335,7 +346,8 @@ export default function InboxScreen() {
                 ]}
               >
                 <Text style={styles.tabText}>
-                  Other ({allOthersNotificationsData.length})
+                  {t('pages.tabController.other')} (
+                  {allOthersNotificationsData.length})
                 </Text>
               </Pressable>
             </View>
