@@ -35,6 +35,7 @@ import DiabetesCenter from 'screens/main/home-page/your-health/diabetes-center';
 import VideoList from 'screens/main/home-page/your-health/diabetes-center/video-list';
 import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hypertension-diary/pdf-hypertension/index';
 import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
+import FamilyMedicalHistory from 'screens/main/account/profile/family-medical-history';
 import {
   getReduxPspModules,
   getReduxPspPdfLink,
@@ -61,6 +62,8 @@ import StressScreen from 'screens/main/account/profile/edit-profile/stress/index
 import Sleep from 'screens/main/account/profile/edit-profile/sleep';
 import Drinking from 'screens/main/account/profile/edit-profile/drinking';
 import BodyMeasurementScreen from 'screens/main/account/profile/body-measurements';
+import ExerciseScreen from 'screens/main/account/profile/edit-profile/exercise';
+import MedicalHistoryScreen from 'screens/main/account/profile/medical-history';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -98,6 +101,7 @@ const {
   SEARCH_RESULT,
   DEVICE_CONNECTION,
   BODY_MEASUREMENT,
+  MEDICAL_HISTORY,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -186,10 +190,19 @@ const AppNavigator = () => {
           <Stack.Screen name={SCREENS.STRESS} component={StressScreen} />
           <Stack.Screen name={SCREENS.SLEEP} component={Sleep} />
           <Stack.Screen name={SCREENS.DRINKING} component={Drinking} />
+          <Stack.Screen name={SCREENS.EXERCISE} component={ExerciseScreen} />
           <Stack.Screen name={BLOOD_PRESSURE} component={BloodPressure} />
+          <Stack.Screen
+            name={MEDICAL_HISTORY}
+            component={MedicalHistoryScreen}
+          />
           <Stack.Screen
             name={BODY_MEASUREMENT}
             component={BodyMeasurementScreen}
+          />
+          <Stack.Screen
+            name={SCREENS.FAMILY_MEDICAL_HISTORY}
+            component={FamilyMedicalHistory}
           />
           <Stack.Screen name={WEIGHT} component={Weight} />
           <Stack.Screen name={HBA1C} component={HbA1c} />

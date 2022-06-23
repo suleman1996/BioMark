@@ -199,7 +199,7 @@ const HypertensionDiary = (props) => {
     <>
       <TitleWithBackLayout
         isGradient={true}
-        backTo={SCREENS.YOUR_HEALTH}
+        shouldGoBack={SCREENS.YOUR_HEALTH}
         title={t('pages.diabetesSupport.titles.hypertension_title')}
       >
         <ActivityIndicator visible={isVisiable} />

@@ -71,11 +71,14 @@ import RenderHealthRisk from './components/render-health-risk';
 import { healthRisksColor } from 'utils/functions/your-health';
 import Paginator from 'components/paginator';
 import { useTranslation } from 'react-i18next';
+import { useIsFocused } from '@react-navigation/native';
 
 const Index = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+
   const authContext = useContext(AuthContext);
 
   const { colors } = useTheme();
@@ -95,6 +98,7 @@ const Index = () => {
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
+  // console.log('getLabStatusData', healthRisk);
 
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);
@@ -127,12 +131,12 @@ const Index = () => {
     dispatch(getReduxHealthFeeds());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch, isFocused]);
 
   useEffect(() => {
     handleHEalthTracker();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [healthTrackerFromStore]);
+  }, [healthTrackerFromStore, isFocused]);
 
   const handleHEalthTracker = useCallback(() => {
     const tempTracker = [];
@@ -202,7 +206,9 @@ const Index = () => {
 
   const healthRiskCheck = (item) => {
     item?.name === 'Blood Pressure' &&
-      navigation.navigate(SCREENS.BLOOD_PRESSURE);
+      navigation.navigate(SCREENS.BLOOD_PRESSURE, {
+        back: SCREENS.YOUR_HEALTH,
+      });
     item?.name === 'Smoking' && navigation.navigate(SCREENS.SMOKING);
     item?.name === 'Stress' && navigation.navigate(SCREENS.STRESS);
     item?.name === 'Sleeping' && navigation.navigate(SCREENS.SLEEP);
@@ -222,34 +228,41 @@ const Index = () => {
           item?.name === 'Heart Disease'
             ? 'Upload Results'
             : item?.name === 'Diabetes'
-            ? 'Update Height and Weight'
+            ? checkDiabtiesBtn(item.button_type)
             : 'Enter Height and Weight',
-        onPress:
-          item?.name === 'Heart Disease'
-            ? SCREENS.RESULT_UPLOAD
-            : item?.name === 'Diabetes'
-            ? SCREENS.BODY_MEASUREMENT
-            : SCREENS.BODY_MEASUREMENT,
+        onPress: checkDiabtiesBtnPress(item),
       });
   };
 
-  const getHealthRisksHash = (json: any) =>
-    JSON.parse(
-      JSON.stringify(
-        json,
-        [
-          'heart',
-          'diabetes',
-          'bp',
-          'bmi',
-          'smoking',
-          'drinking',
-          'stress',
-          'sleeping',
-        ],
-        4
-      )
-    );
+  const checkDiabtiesBtn = (btnType) => {
+    if (btnType == 'exercise') {
+      return 'Enter Exercise';
+    }
+    if (btnType == 'bmi') {
+      return 'Enter Height and Weight';
+    }
+    if (btnType == 'medical') {
+      return 'Enter Medical History';
+    }
+
+    if (btnType == 'family_medical') {
+      return 'Enter Family Medical History';
+    }
+  };
+
+  const checkDiabtiesBtnPress = (item) => {
+    if (item?.name === 'Heart Disease') {
+      return SCREENS.RESULT_UPLOAD;
+    } else if (item?.name === 'Diabetes') {
+      if (item?.button_type == 'exercise') return SCREENS.EXERCISE;
+      else if (item?.button_type == 'bmi') return SCREENS.BODY_MEASUREMENT;
+      else if (item?.button_type == 'medical') return SCREENS.MEDICAL_HISTORY;
+      else if (item?.button_type == 'family_medical')
+        return SCREENS.FAMILY_MEDICAL_HISTORY;
+    } else {
+      return SCREENS.BODY_MEASUREMENT;
+    }
+  };
 
   return (
     <>
@@ -279,18 +292,16 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(getHealthRisksHash(healthRisk)).map(
-                ([key, value]: any) => (
-                  <RenderHealthRiskView
-                    key={key}
-                    name={value?.name}
-                    onRiskPress={() => setSelectedRisk(key)}
-                    color={healthRisksColor(colors, value?.status)}
-                    Svg={healthRiskData[key].icon}
-                    status={value?.status}
-                  />
-                )
-              )}
+              {Object.entries(healthRisk).map(([key, value]: any) => (
+                <RenderHealthRiskView
+                  key={key}
+                  name={value?.name}
+                  onRiskPress={() => setSelectedRisk(key)}
+                  color={healthRisksColor(colors, value?.status)}
+                  Svg={healthRiskData[key].icon}
+                  status={value?.status}
+                />
+              ))}
             </View>
             {selectedRisk ? (
               <RenderHealthRisk
@@ -343,7 +354,9 @@ const Index = () => {
               }}
               bounces={true}
             />
-            <Paginator selectedIndicator={selectedIndicator} />
+            {healthTracker?.length > 3 && (
+              <Paginator selectedIndicator={selectedIndicator} />
+            )}
 
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
               {t('pages.dashboard.psp.recordKeeping')}
@@ -494,13 +507,6 @@ const Index = () => {
                     </Text>
 
                     <View style={{ width: '100%' }}>
-                      {/* <TextInput
-                      backgroundColor={colors.inputBg}
-                      style={styles.textInput}
-                      marginTop={10}
-                      onChange={handleChange('qrInput')}
-                      placeholder={'Enter your IC / Passport number'}
-                    /> */}
                       <InputWithLabel
                         label={t('pages.dashboard.dialogs.verify.label')}
                         placeholder={'Enter your IC / Passport number'}

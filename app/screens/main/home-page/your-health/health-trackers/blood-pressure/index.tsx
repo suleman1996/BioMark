@@ -64,6 +64,7 @@ const BloodPressure = ({ route }: any) => {
     });
     setIsLoading(false);
   };
+
   useEffect(() => {
     if (SELECTED_BP_ID) {
       getBloodPressureByID(SELECTED_BP_ID);
@@ -113,12 +114,17 @@ const BloodPressure = ({ route }: any) => {
     }
     setIsLoading(false);
   };
+
   const deleteBpLog = async () => {
     try {
       await userService.deleteBpLog(SELECTED_BP_ID);
       dispatch(getReduxBloodPressureLogs());
       dispatch(getReduxHealthTracker());
-      navigate(SCREENS.HEALTH_PROGRESS, 4);
+      {
+        route?.params?.back
+          ? navigate(route?.params?.back)
+          : navigate(SCREENS.HEALTH_PROGRESS, 4);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -286,15 +292,6 @@ const BloodPressure = ({ route }: any) => {
           callMe={deleteBpLog}
         />
       )}
-      {/* <ButtonWithShadowContainer
-        onPress={saveBloodPressureLog}
-        title={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-        disabled={
-          bloodPressure.bp_systolic === '' ||
-          bloodPressure.bp_diastolic === '' ||
-          Object.keys(error).length !== 0
-        }
-      /> */}
     </TitleWithBackWhiteBgLayout>
   );
 };

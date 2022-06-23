@@ -35,6 +35,7 @@ const styles = (colors: any) =>
     gradientButton: {
       marginTop: heightToDp(7),
       justifyContent: 'center',
+      marginBottom: heightToDp(2),
     },
     cancel: {
       textAlign: 'center',
