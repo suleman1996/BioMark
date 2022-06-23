@@ -71,6 +71,8 @@ import RenderHealthRisk from './components/render-health-risk';
 import { healthRisksColor } from 'utils/functions/your-health';
 import Paginator from 'components/paginator';
 import { useTranslation } from 'react-i18next';
+// import { parseJSON } from 'date-fns';
+// import { Color } from 'react-native-svg';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -95,7 +97,7 @@ const Index = () => {
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
-  // console.log('getLabStatusData', getLabStatusData);
+  // console.log('getLabStatusData', healthRisk);
 
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);
@@ -240,23 +242,23 @@ const Index = () => {
       });
   };
 
-  const getHealthRisksHash = (json: any) =>
-    JSON.parse(
-      JSON.stringify(
-        json,
-        [
-          'heart',
-          'diabetes',
-          'bp',
-          'bmi',
-          'smoking',
-          'drinking',
-          'stress',
-          'sleeping',
-        ],
-        4
-      )
-    );
+  // const getHealthRisksHash = (json: any) =>
+  //   JSON.parse(
+  //     JSON.stringify(
+  //       json,
+  //       [
+  //         'heart',
+  //         'diabetes',
+  //         'bp',
+  //         'bmi',
+  //         'smoking',
+  //         'drinking',
+  //         'stress',
+  //         'sleeping',
+  //       ],
+  //       8
+  //     )
+  //   );
   // console.log(getHealthRisksHash());
   return (
     <>
@@ -286,8 +288,9 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(getHealthRisksHash(healthRisk)).map(
-                ([key, value]: any) => (
+              {Object.entries(healthRisk)
+                // .sort((a, b) => a[8] - b[8])
+                .map(([key, value]: any) => (
                   <RenderHealthRiskView
                     key={key}
                     name={value?.name}
@@ -296,8 +299,7 @@ const Index = () => {
                     Svg={healthRiskData[key].icon}
                     status={value?.status}
                   />
-                )
-              )}
+                ))}
             </View>
             {selectedRisk ? (
               <RenderHealthRisk

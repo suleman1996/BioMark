@@ -204,7 +204,7 @@ const DiabetesCenter = (props) => {
 
   return (
     <TitleWithBackLayout
-      backTo={SCREENS.YOUR_HEALTH}
+      shouldGoBack={SCREENS.YOUR_HEALTH}
       isGradient={true}
       title={t('pages.diabetesSupport.titles.diabetes_title')}
     >
