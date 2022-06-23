@@ -9,7 +9,7 @@ export const makeStyles = (colors: any, small?: boolean, textAlign?: string) =>
   StyleSheet.create({
     mainView: {
       height: heightToDp(small ? 5 : 18),
-      backgroundColor: small ? colors.inputBg : colors.fieldGrey, //input bg is not accurate
+      backgroundColor: small ? colors.inputBg : colors.inputBg, //input bg is not accurate
       marginTop: heightToDp(2),
       flexDirection: 'row',
       alignItems: 'center',
