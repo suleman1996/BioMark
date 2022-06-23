@@ -13,8 +13,6 @@ import {
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import { RNCamera } from 'react-native-camera';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {
@@ -41,13 +39,11 @@ import fonts from 'assets/fonts';
 
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
-import { showMessage } from 'react-native-flash-message';
 import WithdrawProgram from 'components/widthdraw-from-program';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { getHealthTrackerRisks } from 'store/home/home-actions';
-// import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
   const navigation = useNavigation();
@@ -225,20 +221,7 @@ const SearchBarWithLeftScanIcon = () => {
     setSearchData(filteredData);
     // this.setState({ DataAdapter: filteredContacts });
   };
-  const RenderSearch = ({ item }) => (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.navigate(SCREENS.MORE_INFO, {
-          result_id: item?.biomarker_id,
-        })
-      }
-      style={styles.renderSearchView}
-    >
-      <Text style={{ fontFamily: fonts.regular, fontSize: 14 }}>
-        {item?.name}
-      </Text>
-    </TouchableOpacity>
-  );
+
   const onSuccess = (e) => {
     console.log('ettt', e.data);
     setCode('');
@@ -467,24 +450,7 @@ const SearchBarWithLeftScanIcon = () => {
         }}
       />
       <QrScannerPopup loading={loading} visible={showModalQr}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#fff',
-            width: Dimensions.get('window').width,
-            position: 'absolute',
-            top: 20,
-            right: 15,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
-          onPress={() => setShowModalQr(false)}
-        >
-          <Entypo color={'gray'} name="flash" size={25} />
-        </TouchableOpacity>
-        <QRCodeScanner
-          onRead={onSuccess}
-          // flashMode={RNCamera.Constants.FlashMode.torch}
-        />
+        <QRCodeScanner onRead={onSuccess} />
 
         <TouchableOpacity
           style={{
