@@ -22,10 +22,10 @@ import {
   getTricolorGraphOptions,
 } from 'utils/functions/graph/graph-tricolor';
 import { Hba1CProgressChart } from 'types/api';
-import { userService } from 'services/user-service/user-service';
 import LineGraph from 'components/line-graph';
 import { Tip } from 'react-native-tip';
 import { useTranslation } from 'react-i18next';
+import { healthProgressServices } from 'services/health-progress-servive';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -66,7 +66,7 @@ const Index = () => {
   const hBa1CData = async () => {
     try {
       setIsLoading(true);
-      const result = await userService.getHbA1cMapData({
+      const result = await healthProgressServices.getHbA1cMapData({
         date: selectedValue.title,
       });
       setChartState(result.data.chart);

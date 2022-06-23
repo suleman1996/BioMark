@@ -7,7 +7,6 @@ import { ResultSummaryChartPayload } from 'types/api';
 import GraphHeader from 'components/graph-header/index';
 import Styles from './styles';
 
-import { userService } from 'services/user-service/user-service';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import DropDown from 'react-native-paper-dropdown';
 import LineGraph from 'components/line-graph';
@@ -21,6 +20,7 @@ import {
 } from 'utils/functions/graph/graph-result';
 import { getChart5GraphOptions } from 'utils/functions/graph/graph-type-5';
 import { useIsFocused } from '@react-navigation/native';
+import { healthRecordServices } from 'services/health-record-service';
 
 const Charts = ({ biomarker_id, provider }) => {
   const { colors } = useTheme();
@@ -49,7 +49,7 @@ const Charts = ({ biomarker_id, provider }) => {
   const getReportChartData = async (biomarker) => {
     try {
       setIsLoading(true);
-      const result = await userService.getResultOverViewChartData(
+      const result = await healthRecordServices.getResultOverViewChartData(
         biomarker,
         selectedValue?.date,
         provider[0]?.id
@@ -165,6 +165,9 @@ const Charts = ({ biomarker_id, provider }) => {
         showDropDown={() => setShowDropDown(true)}
         onDismiss={() => setShowDropDown(false)}
         value={selectedReport}
+        setValue={(itemValue) => {
+          console.log('Here is the value ', itemValue);
+        }}
         list={reportOptions}
         inputProps={{
           style: {

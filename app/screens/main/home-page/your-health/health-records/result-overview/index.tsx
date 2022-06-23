@@ -23,7 +23,7 @@ import Pdf from 'assets/svgs/pdf';
 import RenderResults from './result-card';
 import HealthProgressFilter from 'components/health-progress-filter/index';
 import SCREENS from 'navigation/constants/index';
-import { userService } from 'services/user-service/user-service';
+import { healthRecordServices } from 'services/health-record-service';
 
 const Index = () => {
   const { colors } = useTheme();
@@ -64,7 +64,9 @@ const Index = () => {
 
   const PdfData = async () => {
     try {
-      const result = await userService.getResultPdf(resultOverView?.lab_id);
+      const result = await healthRecordServices.getResultPdf(
+        resultOverView?.lab_id
+      );
 
       setPdfReport(result.data);
 

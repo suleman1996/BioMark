@@ -16,10 +16,10 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { checkPermissionAndDownloadBase64 } from 'utils/functions/download-file';
 import Styles from './styles';
 import fonts from 'assets/fonts';
-import { userService } from 'services/user-service/user-service';
 import Charts from './charts';
 import { ActivityIndicator } from 'components/';
 import DescriptiveBtn from 'components/descriptive-btn';
+import { healthRecordServices } from 'services/health-record-service';
 
 const MoreInfo = () => {
   const { colors } = useTheme();
@@ -35,7 +35,7 @@ const MoreInfo = () => {
 
   const moreInfoData = async () => {
     try {
-      const result = await userService.getMoreInfoResult(
+      const result = await healthRecordServices.getMoreInfoResult(
         route?.params?.result_id
       );
       setSummary(result.data);
@@ -47,7 +47,7 @@ const MoreInfo = () => {
   const getPdf = async (id) => {
     try {
       setIsLoading(true);
-      const result = await userService.getResultPdf(id);
+      const result = await healthRecordServices.getResultPdf(id);
 
       checkPermissionAndDownloadBase64(result.data);
       setIsLoading(false);

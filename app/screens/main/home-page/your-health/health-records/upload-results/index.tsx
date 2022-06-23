@@ -105,17 +105,7 @@ export default function ResultUpload() {
   const imagePickerFromGallery = async () => {
     try {
       setIsVisible(true);
-      // const granted = await PermissionsAndroid.request(
-      //   PermissionsAndroid.PERMISSIONS.CAMERA,
-      //   {
-      //     title: 'App Camera Permission',
-      //     message: 'App needs access to your camera',
-      //     buttonNeutral: 'Ask Me Later',
-      //     buttonNegative: 'Cancel',
-      //     buttonPositive: 'OK',
-      //   }
-      // );
-      // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+
       let options = {
         mediaType: 'photo',
         selectionLimit: 0,

@@ -15,7 +15,6 @@ import Logs from 'components/health-progress-logs/index';
 
 import FloatingButton from 'components/floating-button/index';
 import Person from 'assets/svgs/Bmi';
-import { userService } from 'services/user-service/user-service';
 
 import {
   convertDataset,
@@ -29,6 +28,7 @@ import {
 } from 'utils/functions/graph/graph-utils';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { healthProgressServices } from 'services/health-progress-servive';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -82,7 +82,7 @@ const Index = () => {
   const weightGraphData = async () => {
     try {
       setIsLoading(true);
-      const result = await userService.getWeightMapData({
+      const result = await healthProgressServices.getWeightMapData({
         date: selectedValue.title,
         metric: selectedfilterOption2.id == 0,
         type: selectedfilterOption1.title.toLowerCase(),

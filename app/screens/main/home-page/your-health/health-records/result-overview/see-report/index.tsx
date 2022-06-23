@@ -10,9 +10,9 @@ import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 import { Button } from 'components/button';
-import { userService } from 'services/user-service/user-service';
 import { checkPermissionAndDownloadBase64 } from 'utils/functions/download-file';
 import PdfIcon from 'assets/svgs/pdf';
+import { healthRecordServices } from 'services/health-record-service';
 
 const SeeReport = () => {
   const { colors } = useTheme();
@@ -30,7 +30,9 @@ const SeeReport = () => {
   const PdfData = async () => {
     try {
       setIsVisible(true);
-      const result = await userService.getResultPdf(route?.params?.resultId);
+      const result = await healthRecordServices.getResultPdf(
+        route?.params?.resultId
+      );
       setPdfLink(result.data.replace(/\s/g, ''));
 
       //   setPdf(pspPdfLinks.link);

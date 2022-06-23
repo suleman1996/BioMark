@@ -1,3 +1,6 @@
+import { healthProgressServices } from 'services/health-progress-servive';
+import { healthRecordServices } from 'services/health-record-service';
+import { homeServices } from 'services/home-service';
 import { userService } from 'services/user-service/user-service';
 import { HIDE_LOADER, SHOW_LOADER } from 'store/events/constants';
 
@@ -219,7 +222,7 @@ export const getMedicationsTrackerCreator = (data: MedicationTracker) => ({
 
 export const getReduxHealthTracker =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getHealthTracker()
       .then(async (res) => {
         //
@@ -233,7 +236,7 @@ export const getReduxHealthTracker =
 
 export const getReduxDashboard =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getDashboard()
       .then(async (res) => {
         dispatch(addDashboard(res));
@@ -244,7 +247,7 @@ export const getReduxDashboard =
   };
 export const getReduxMedicalDropDown =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getMedicalDropDown()
       .then(async (res) => {
         await dispatch(addMedicalDropDown(res));
@@ -255,7 +258,7 @@ export const getReduxMedicalDropDown =
   };
 export const getReduxHealthFeeds =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getHealthFeeds()
       .then(async (res) => {
         await dispatch(getHealthFeeds(res));
@@ -266,7 +269,7 @@ export const getReduxHealthFeeds =
   };
 export const getReduxMedicationList =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getMedicationList()
       .then(async (res) => {
         await dispatch(addMedicalList(res));
@@ -277,7 +280,7 @@ export const getReduxMedicationList =
   };
 export const getHealthTrackerRisks =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getHealthRisks()
       .then(async (res) => {
         await dispatch(addHealthRisks(res));
@@ -335,7 +338,7 @@ export const getReduxPspHypertensionHealthTrackerData =
 
 export const getReduxLatestResult =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthRecordServices
       .getLatestResult()
       .then(async (res) => {
         await dispatch(showLatestResult(res));
@@ -347,7 +350,7 @@ export const getReduxLatestResult =
 
 export const getReduxPastResult =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthRecordServices
       .getPastResult()
       .then(async (res) => {
         await dispatch(showPastResult(res));
@@ -396,7 +399,7 @@ export const getReduxPspPdfHyperLink =
   };
 export const getReduxLabResultStatus =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await homeServices
       .getLabResultStatus()
       .then(async (res) => {
         await dispatch(addLabResultStatus(res));
@@ -409,11 +412,9 @@ export const getReduxLabResultStatus =
 export const getReduxResultOverview =
   (id, title) =>
   async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthRecordServices
       .getResultOverView(id, title)
       .then(async (res) => {
-        //
-
         await dispatch(getResultOverView(res));
       })
       .catch((err) => {
@@ -462,7 +463,7 @@ export const getLatestTargetsAction =
 export const getReduxWeightLogs =
   (params: { type: string; metric: boolean } | undefined) =>
   async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthProgressServices
       .getWeightLogs(params)
       .then(async (res) => {
         await dispatch(getWeightLogs(res, 1));
@@ -506,7 +507,7 @@ export const getReduxBloodPressurProgress =
 export const getReduxBloodSugarLogs =
   (params: { meal?: string; unit?: number } | undefined) =>
   async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthProgressServices
       .getBloodSugarLogs(params)
       .then(async (res) => {
         //
@@ -529,7 +530,7 @@ export const getReduxBloodSugarProgress =
   };
 export const getReduxHba1cLogs =
   () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthProgressServices
       .getHba1cLogs()
       .then(async (res) => {
         //
@@ -582,7 +583,7 @@ export const getHBA1CTargetsAction =
 export const getReduxBloodPressureLogs =
   (params?: { type: string } | undefined) =>
   async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthProgressServices
       .getBloodPressureLogs(params)
       .then(async (res) => {
         dispatch(getBPLogs(res));
@@ -595,7 +596,7 @@ export const getReduxBloodPressureLogs =
 export const getMedicationsTrackersAction =
   (date: string) =>
   async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
-    await userService
+    await healthProgressServices
       .getMedicationTrackers(date)
       .then(async (res) => {
         dispatch(getMedicationsTrackerCreator(res));

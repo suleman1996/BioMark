@@ -8,9 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import Styles from './styles';
 import CrossIcon from 'react-native-vector-icons/AntDesign';
-import { userService } from 'services/user-service/user-service';
 import fonts from 'assets/fonts';
 import SCREENS from 'navigation/constants/index';
+import { healthRecordServices } from 'services/health-record-service';
 
 const Search = () => {
   const { colors } = useTheme();
@@ -23,7 +23,7 @@ const Search = () => {
 
   const searchResult = async (search) => {
     try {
-      const result = await userService.getSearchResult(
+      const result = await healthRecordServices.getSearchResult(
         route?.params?.labId,
         search
       );
