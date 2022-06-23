@@ -263,24 +263,6 @@ const Index = () => {
     }
   };
 
-  // const getHealthRisksHash = (json: any) =>
-  //   JSON.parse(
-  //     JSON.stringify(
-  //       json,
-  //       [
-  //         'heart',
-  //         'diabetes',
-  //         'bp',
-  //         'bmi',
-  //         'smoking',
-  //         'drinking',
-  //         'stress',
-  //         'sleeping',
-  //       ],
-  //       4
-  //     )
-  //   );
-
   return (
     <>
       <View style={styles.container}>
@@ -371,7 +353,9 @@ const Index = () => {
               }}
               bounces={true}
             />
-            <Paginator selectedIndicator={selectedIndicator} />
+            {healthTracker?.length > 3 && (
+              <Paginator selectedIndicator={selectedIndicator} />
+            )}
 
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
               {t('pages.dashboard.psp.recordKeeping')}
