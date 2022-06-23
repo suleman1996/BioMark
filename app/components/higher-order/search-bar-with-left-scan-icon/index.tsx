@@ -177,28 +177,49 @@ const SearchBarWithLeftScanIcon = () => {
       },
     },
     {
+      name: 'Blood Sugar Input',
+      screen: SCREENS.BLOOD_PRESSURE,
+    },
+    {
+      name: 'Blood Pressure Input',
+      screen: SCREENS.BLOOD_PRESSURE,
+    },
+    {
       name: 'Heart Records',
       screen: SCREENS.HEALTH_RECORD,
     },
     {
-      name: 'Blood Pressure',
-      screen: SCREENS.BLOOD_PRESSURE,
-    },
-    {
-      name: 'Smoking',
-      screen: SCREENS.SMOKING,
-    },
-    {
-      name: 'Drinking',
-      screen: SCREENS.DRINKING,
+      name: 'Health Progress',
+      screen: SCREENS.HEALTH_PROGRESS,
     },
     {
       name: 'Stress',
       screen: SCREENS.STRESS,
     },
+
     {
-      name: 'Sleeping',
-      screen: SCREENS.SLEEP,
+      name: 'Weight Input',
+      screen: SCREENS.WEIGHT,
+    },
+    {
+      name: 'Health Declaration',
+      navigator: SCREENS.NESTED_COVID19_NAVIGATOR,
+      screen: SCREENS.COVID19BOOKINGS,
+    },
+    {
+      name: 'Results',
+      navigator: SCREENS.NESTED_COVID19_NAVIGATOR,
+      screen: SCREENS.VIEWCOVIDRESULTS,
+    },
+    {
+      name: 'Book Tests',
+      navigator: SCREENS.NESTED_COVID19_NAVIGATOR,
+      screen: SCREENS.BOOKCOVIDTEST,
+    },
+    {
+      name: 'Bookings',
+      navigator: SCREENS.NESTED_COVID19_NAVIGATOR,
+      screen: SCREENS.COVID19BOOKINGS,
     },
   ];
 
@@ -359,6 +380,8 @@ const SearchBarWithLeftScanIcon = () => {
                   onPress={() => {
                     if (item?.params) {
                       navigate(item?.screen, item?.params);
+                    } else if (item?.screen) {
+                      navigate(item?.navigator, { screen: item?.screen });
                     } else {
                       navigate(item?.screen);
                     }
