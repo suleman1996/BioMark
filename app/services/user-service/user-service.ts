@@ -2,26 +2,15 @@ import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
 
 import {
-  BootstrapData,
   GeoLocationData,
-  HealthTrackerPayload,
-  DashboardResponseData,
   MedicationSetupPayload,
-  HealthFeed,
-  RiskData,
-  MedicationListEntry,
   MedicationTrackerSetup,
   PspModule,
   PspModuleDataContents,
-  LabStatusPayload,
   MedicalResponseData,
   ShowMedication,
   MedicationEditRequest,
   MedicationUpdateResponse,
-  MedicationTracker,
-  ResultResponse,
-  EncodedResultOverviewPayload,
-  LabStatusResponse,
   NewTarget,
   CreateTargetResponse,
   CreateTargetRequest,
@@ -34,10 +23,6 @@ import {
   BloodSugarProgressEntryPayload,
   Hba1CProgressEntryPayload,
   MedicationTrackerPayload,
-  WeightProgressLogsPayload,
-  BloodSugarProgressLogsPayload,
-  Hba1CProgressLogsPayload,
-  BloodPressureProgressLogsPayload,
   SetDefaultTargetResponse,
   WeightProgressEntryRequest,
   Hba1CProgressEntryRequest,
@@ -202,9 +187,6 @@ function createProfile(
   gender: any
 ) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
-    console.log('=======>', values);
-    console.log('others', phone, finialDate, gender);
-
     client
       .post(API_URLS.CREATE_PROFILE, {
         profile: {
@@ -361,10 +343,6 @@ const Smoking = (
   });
 };
 
-const getUserProfile = () => {
-  return client.get(API_URLS.GET_PROFILE);
-};
-
 const sleeping = (hours: String) => {
   return client.post(API_URLS.SLEEPING, {
     lifestyle: {
@@ -392,10 +370,6 @@ const drinking = (
 const Vaccination = ({ medical_history }: Props) => {
   return client.post(API_URLS.VACCINATION, {
     medical_history,
-    // medical_history: {
-    //   has_condition: condition,
-    //   vaccine_list: items,
-    // },
   });
 };
 
@@ -415,13 +389,6 @@ const Allergies = ({ conditions, has_allergy }: Props) => {
     medical_history: {
       has_allergy,
       conditions,
-      // conditions: [
-      //   {
-      //     has_condition: true,
-      //     allergy_to: isMedicationModal,
-      //     allergy_type: 'item1,item2,item3,item4',
-      //   },
-      // ],
     },
   });
 };
@@ -540,7 +507,6 @@ const createBpTracker = (medical: WeightProgressEntryRequest) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log('create data', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -561,7 +527,6 @@ const updateBpTracker = (medical: WeightProgressEntryRequest, id: string) => {
         medical: medical,
       })
       .then(async ({ data }) => {
-        console.log('update data', data);
         try {
           resolve({ ...data });
         } catch (e) {
@@ -582,7 +547,6 @@ const deleteBpLog = (bp_log_id: any) => {
       .delete(`${API_URLS.CREATE_BLOOD_PRESSURE}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -596,7 +560,6 @@ const deleteBpLog = (bp_log_id: any) => {
   });
 };
 const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_BLOOD_SUGAR, {
@@ -607,7 +570,6 @@ const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log('create data', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -634,7 +596,6 @@ const updateBsTracker = (
         },
       })
       .then(async ({ data }) => {
-        console.log('update data', data);
         try {
           resolve({ ...data });
         } catch (e) {
@@ -650,14 +611,11 @@ const updateBsTracker = (
 };
 
 const deleteBsLog = (bp_log_id: any) => {
-  console.log('bp_log_id', bp_log_id);
-
   return new Promise<any>((resolve, reject) => {
     client
       .delete(`${API_URLS.CREATE_BLOOD_SUGAR}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log('deleteBsLog', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err deleteBsLog.', e);
@@ -671,7 +629,6 @@ const deleteBsLog = (bp_log_id: any) => {
   });
 };
 const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_HBA1C, {
@@ -679,7 +636,6 @@ const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log('create data', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -694,17 +650,12 @@ const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
 };
 
 const updateHba1cTracker = (medical: Hba1CProgressEntryRequest, id: string) => {
-  console.log('id', id);
-
-  console.log('medical', medical);
-
   return new Promise<Hba1CProgressEntryRequest>((resolve, reject) => {
     client
       .put(`${API_URLS.CREATE_HBA1C}/${id}`, {
         hba1c: medical,
       })
       .then(async ({ data }) => {
-        console.log('update data', data);
         try {
           resolve({ ...data });
         } catch (e) {
@@ -725,7 +676,6 @@ const deleteHba1cLog = (bp_log_id: any) => {
       .delete(`${API_URLS.CREATE_HBA1C}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -786,24 +736,6 @@ const updateProfile = (
   });
 };
 
-function getBootstrap() {
-  return new Promise<BootstrapData>((resolve, reject) => {
-    client
-      .get(API_URLS.BOOTSTRAP)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('Register user error block login1.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get profile error', err);
-        reject(err);
-      });
-  });
-}
 function geoLocation() {
   return new Promise<GeoLocationData>((resolve, reject) => {
     client
@@ -846,117 +778,8 @@ function updateUserEthnic(ethnic: string) {
   });
 }
 
-function getHealthTracker() {
-  return new Promise<HealthTrackerPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_HEALTH_TRACKER)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get HEALTH TRACKER error', err);
-        reject(err);
-      });
-  });
-}
-
-function getDashboard() {
-  return new Promise<DashboardResponseData>((resolve, reject) => {
-    client
-      .get(API_URLS.DASHBOARD)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get DASHBOARD error', err);
-        reject(err);
-      });
-  });
-}
-function getMedicalDropDown() {
-  return new Promise<MedicationSetupPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_HEALTH_DROPDOWN)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get med error', err);
-        reject(err);
-      });
-  });
-}
 // get health feeds
-function getHealthFeeds() {
-  return new Promise<HealthFeed>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_HEALTH_FEEDS)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get health feed error', err);
-        reject(err);
-      });
-  });
-}
-function getMedicationList() {
-  return new Promise<MedicationListEntry>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_MEDICATION_DROPDWON)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get med error', err);
-        reject(err);
-      });
-  });
-}
 
-function getHealthRisks() {
-  return new Promise<RiskData>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_HEALTH_RISKS)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get med error', err);
-        reject(err);
-      });
-  });
-}
 function getNewMedicationTracker() {
   return new Promise<MedicationTrackerSetup>((resolve, reject) => {
     client
@@ -1033,25 +856,6 @@ function getHypertensionHealthTracker() {
   });
 }
 
-function getLatestResult() {
-  return new Promise<EncodedResultOverviewPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.HEALTH_LATEST_RESULTS)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('latest result error', err);
-        reject(err);
-      });
-  });
-}
-
 function getLabUploadResult(id) {
   return new Promise<LabUploadPayload>((resolve, reject) => {
     client
@@ -1075,24 +879,6 @@ const deleteLabUploads = (id: number) => {
   return client.delete(API_URLS.DELETE_LAB_UPLOADS + id);
 };
 
-function getPastResult() {
-  return new Promise<LabStatusResponse>((resolve, reject) => {
-    client
-      .get(API_URLS.HEALTH_PAST_RESULTS)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('past result error', err);
-        reject(err);
-      });
-  });
-}
 function getPspPdfLink(link) {
   return new Promise<PspModuleDataContents>((resolve, reject) => {
     client
@@ -1127,25 +913,6 @@ function getPspHyperPdfLink(link) {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('pdf Hyper error', err);
-        logNow('lab status error', err);
-        reject(err);
-      });
-  });
-}
-function getLabResultStatus() {
-  return new Promise<LabStatusPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_LAB_STATUS)
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('pdf error', err);
         logNow('lab status error', err);
         reject(err);
       });
@@ -1293,31 +1060,6 @@ const deleteMedication = (medication_id) => {
   });
 };
 
-const getMedicationTrackers = (date: string) => {
-  return new Promise<MedicationTracker>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_MEDICATION_TRACKER)
-      .then(async ({ data }) => {
-        try {
-          let response;
-          data.map((item) => {
-            if (moment(item.date).format('MMM D, YYYY') === date) {
-              response = { ...item };
-            }
-          });
-          resolve({ ...response });
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get med error', err);
-        reject(err);
-      });
-  });
-};
-
 //Targets API START
 
 const getNewTarget = () => {
@@ -1419,26 +1161,6 @@ const setDefaultHba1carget = () => {
 };
 
 // Targets API END
-const getResultOverView = (id, filter) => {
-  return new Promise<ResultResponse>((resolve, reject) => {
-    client
-      .get(`${API_URLS.GET_RESULT_OVERVIEW}${id}${'/view?filter='}${filter}`)
-      .then(async (response) => {
-        try {
-          //
-
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get result overview error', err);
-        reject(err);
-      });
-  });
-};
 
 const getWeightProgress = (id) => {
   return new Promise<WeightProgressEntryPayload>((resolve, reject) => {
@@ -1523,27 +1245,6 @@ const getHBA1cChart = (params) => {
   });
 };
 
-const getWeightLogs = (
-  params: { type: string; metric: boolean } | undefined
-) => {
-  return new Promise<WeightProgressLogsPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_WEIGHT_LOGS, { params })
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get weight log error', err);
-        reject(err);
-      });
-  });
-};
-
 const getBloodSugarProgress = (id) => {
   return new Promise<BloodSugarProgressEntryPayload>((resolve, reject) => {
     client
@@ -1563,30 +1264,7 @@ const getBloodSugarProgress = (id) => {
       });
   });
 };
-const getBloodSugarLogs = (
-  params: { meal?: string; unit?: number } | undefined
-) => {
-  return new Promise<BloodSugarProgressLogsPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_BLOOD_SUGAR_LOGS, {
-        params,
-      })
-      .then(async (response) => {
-        try {
-          //
 
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get bs log error', err);
-        reject(err);
-      });
-  });
-};
 const getHba1cProgress = (id) => {
   return new Promise<Hba1CProgressEntryPayload>((resolve, reject) => {
     client
@@ -1601,27 +1279,6 @@ const getHba1cProgress = (id) => {
       })
       .catch(async (err: ErrorResponse) => {
         logNow('hba1c error', err);
-        reject(err);
-      });
-  });
-};
-
-const getHba1cLogs = () => {
-  return new Promise<Hba1CProgressLogsPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_HBA1C_LOGS)
-      .then(async (response) => {
-        try {
-          //
-
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get hb1c log error', err);
         reject(err);
       });
   });
@@ -1646,79 +1303,7 @@ const getMedicationProgress = (id) => {
   });
 };
 
-const getBloodPressureLogs = (params?: { type: string } | undefined) => {
-  return new Promise<BloodPressureProgressLogsPayload>((resolve, reject) => {
-    client
-      .get(API_URLS.GET_BLOOD_PRESSURE_LOGS, { params })
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-        } catch (e) {
-          logNow('err.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: ErrorResponse) => {
-        logNow('get weight log error', err);
-        reject(err);
-      });
-  });
-};
-
-const getMoreInfoResult = (id) => {
-  return client.get(`${API_URLS.GET_RESULT_MORE_INFO}${id}/summary`);
-};
-
-const getResultPdf = (id) => {
-  return client.get(`${API_URLS.GET_RESULT_PDF}${id}/download`);
-};
-
-const getWeightMapData = (obj) => {
-  return client.get(API_URLS.GET_WEIGHT_MAP, {
-    params: obj,
-  });
-};
-
-const getHbA1cMapData = (obj) => {
-  return client.get(API_URLS.GET_HBA1C_MAP, {
-    params: obj,
-  });
-};
-
-const getBloodPressureMapData = (obj) => {
-  return client.get(API_URLS.GET_BLOOD_PRESSURE_MAP, {
-    params: obj,
-  });
-};
-
-const getBloodSugarMapData = (obj) => {
-  return client.get(API_URLS.GET_BLOOD_SUGAR_CHART, {
-    params: obj,
-  });
-};
-const getSearchResult = (lab_id, query) => {
-  return client.get(`${API_URLS.GET_SEARCH_RESULT}`, {
-    params: {
-      lab: lab_id,
-      q: query,
-    },
-  });
-};
-
-const getResultOverViewChartData = (id, date, provider) => {
-  return client.get(
-    `${API_URLS.RESULT_OVERVIEW_CHARTDATA}${id}/chart?provider=1&date=all`,
-    {
-      params: {
-        provider: provider,
-        date: date,
-      },
-    }
-  );
-};
-
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_WEIGHT, {
@@ -1726,7 +1311,6 @@ const createWeightTracker = (medical: WeightProgressEntryRequest) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -1770,7 +1354,6 @@ const deleteWeightLog = (weight_log_id: any) => {
       .delete(`${API_URLS.CREATE_WEIGHT}/${weight_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -1800,7 +1383,6 @@ export const userService = {
   Allergies,
   bodyMeasurement,
   createProfile,
-  getUserProfile,
   sleeping,
   drinking,
   updateProfileAvatar,
@@ -1811,27 +1393,19 @@ export const userService = {
   createStress,
   getLifeStyle,
   getMedicalHistory,
-  getBootstrap,
   geoLocation,
   exercise,
   updateUserEthnic,
   getBodyMeasurements,
-  getHealthTracker,
-  getDashboard,
-  getMedicalDropDown,
-  getHealthFeeds,
   createBloodSugar,
   updateWeightTracker,
   createWeightTracker,
   createHba1c,
-  getHealthRisks,
   getJumioData,
-  getMedicationList,
   createMedication,
   getNewMedicationTracker,
   getPspModules,
   getPspPdfLink,
-  getLabResultStatus,
   labStatusVerify,
   deleteMedicationTracker,
   getNewMedicationFormData,
@@ -1839,10 +1413,6 @@ export const userService = {
   saveMedication,
   updateMedication,
   deleteMedication,
-  getMedicationTrackers,
-  getResultOverView,
-  getLatestResult,
-  getPastResult,
   getNewTarget,
   createNewTarget,
   getLatestTargets,
@@ -1856,10 +1426,6 @@ export const userService = {
   getBloodSugarProgress,
   getHba1cProgress,
   getMedicationProgress,
-  getWeightLogs,
-  getBloodSugarLogs,
-  getHba1cLogs,
-  getBloodPressureLogs,
   withdraw,
   getFilterResult,
   setDefaultBloodSugarTarget,
@@ -1876,18 +1442,10 @@ export const userService = {
   deleteHba1cLog,
   barcodeCheck,
   uploadResult,
-  getMoreInfoResult,
   getLabUploadResult,
   deleteLabUploads,
-  getResultPdf,
-  getBloodSugarMapData,
-  getWeightMapData,
   getBloodPressureChart,
-  getHbA1cMapData,
   getHBA1cChart,
-  getBloodPressureMapData,
-  getSearchResult,
   Terms,
-  getResultOverViewChartData,
   jumioCallBack,
 };

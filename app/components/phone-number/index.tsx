@@ -6,8 +6,6 @@ import CountryPicker, {
   DEFAULT_THEME,
 } from 'react-native-country-picker-modal';
 
-// import colors from 'assets/colors';
-
 import makeStyles from './styles';
 import fonts from 'assets/fonts';
 

@@ -46,14 +46,12 @@ const BookCovidTest = (props: Props) => {
     let copyArray = booking;
     copyArray.push({ is_dependant: true });
     store.dispatch(addCovidBooking(copyArray));
-    console.log('booking', booking);
   };
 
   const pushOneAddSelf = async () => {
     let copyArray = booking;
     copyArray.push({ is_dependant: false, dependent_id: 0 });
     store.dispatch(addCovidBooking(copyArray));
-    console.log('booking', booking);
   };
 
   const ifNextDisabled = booking.every((item) => item.booking_status === 0)

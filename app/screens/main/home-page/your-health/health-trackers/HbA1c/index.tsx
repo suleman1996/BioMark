@@ -72,7 +72,7 @@ const HbA1c = ({ route }) => {
     setIsLoading(true);
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const hba1cData = await userService.getHba1cProgress(id);
-    console.log('hba1cData', hba1cData);
+
     setHba1cTracker({
       data_value: roundToDecimalPlaces(hba1cData?.data_value, 2),
       unit_list_id: hba1cData?.unit_list_id,
@@ -82,8 +82,6 @@ const HbA1c = ({ route }) => {
     setIsLoading(false);
   };
   const saveHab1cLog = async () => {
-    console.log('hba1cTracker', hba1cTracker);
-
     setIsLoading(true);
     if (!hasHBA1cTarget) {
       await userService.setDefaultBloodSugarTarget();
@@ -136,7 +134,6 @@ const HbA1c = ({ route }) => {
   };
 
   const onChangeHba1c = (key, value) => {
-    console.log(latestHba1c?.goal_value);
     setHba1cTracker((prev) => ({ ...prev, [key]: value }));
     if (+value < +latestHba1c?.goal_value) {
       showMessage({

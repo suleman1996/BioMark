@@ -18,7 +18,6 @@ import Target from 'react-native-vector-icons/MaterialCommunityIcons';
 import Info from 'react-native-vector-icons/AntDesign';
 import BloodSugar from '../../../../../../assets/svgs/diabtes';
 import LineGraph from '../../../../../../components/line-graph/index';
-import { userService } from 'services/user-service/user-service';
 import {
   BloodSugarProgressChart,
   defaultBloodSugarProgressChartFilters,
@@ -33,6 +32,7 @@ import { BloodSugarGraphFactory } from './factory';
 import { Tip } from 'react-native-tip';
 import { IAppState } from 'store/IAppState';
 import { useTranslation } from 'react-i18next';
+import { healthProgressServices } from 'services/health-progress-servive';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -92,17 +92,17 @@ const Index = () => {
   const bloodSugarGraphData = async () => {
     try {
       setIsLoading(true);
-      const result = await userService.getBloodSugarMapData({
+      const result = await healthProgressServices.getBloodSugarMapData({
         date: selectedValue.title,
         meal: selectedfilterOption1.title,
         unit: selectedfilterOption2.id,
       });
-      console.log({ result: result.data.chart.data });
+
       setChartState(result.data.chart);
       setIsLoading(false);
       setHideGraph(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

@@ -23,7 +23,7 @@ import Pdf from 'assets/svgs/pdf';
 import RenderResults from './result-card';
 import HealthProgressFilter from 'components/health-progress-filter/index';
 import SCREENS from 'navigation/constants/index';
-import { userService } from 'services/user-service/user-service';
+import { healthRecordServices } from 'services/health-record-service';
 import { useTranslation } from 'react-i18next';
 
 const Index = () => {
@@ -59,20 +59,22 @@ const Index = () => {
           : route?.params?.lab_id
       )
     );
-    console.log('Result OverView Redux ', resultOverView);
+
     PdfData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const PdfData = async () => {
     try {
-      const result = await userService.getResultPdf(resultOverView?.lab_id);
+      const result = await healthRecordServices.getResultPdf(
+        resultOverView?.lab_id
+      );
 
       setPdfReport(result.data);
 
       //   setPdf(pspPdfLinks.link);
     } catch (err) {
-      console.log('Pdf report error ', err);
+      console.error('Pdf report error ', err);
     }
   };
 

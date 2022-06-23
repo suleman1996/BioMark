@@ -49,20 +49,15 @@ const MedicalInput = ({
         placeholderTextColor={colors.smoke}
         style={[styles.textFieldStyle, otherStyle]}
         theme={{ colors: { text: colors.smoke } }}
-        // onChangeText={onChangeText}
-        // onChange={(e) => console.log('onchange', e)}
         onChangeText={(e) => onChangeText(e)}
         value={value}
-        // defaultValue={defaultValue}
         autoFocus={false}
         underlineColor="transparent"
         activeUnderlineColor="transparent"
         borderBottomWidth={0}
         keyboardType="numeric"
         selectionColor={selectionColor}
-        // maxLength={maxLength}
       />
-      {/* <Text style={styles.label}>%</Text> */}
     </View>
   );
 };

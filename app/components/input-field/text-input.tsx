@@ -21,7 +21,6 @@ type Props = {
 export default function (props: Props) {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  console.log('ooo', props.value);
 
   return (
     <View style={[styles.container, { marginHorizontal: props.margin }]}>

@@ -3,7 +3,7 @@ import React from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import Close from '../../assets/svgs/close';
-// import GradientButton from 'components/linear-gradient-button';
+
 import { RadioButton } from 'react-native-paper';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
