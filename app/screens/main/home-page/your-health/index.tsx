@@ -233,23 +233,23 @@ const Index = () => {
       });
   };
 
-  const getHealthRisksHash = (json: any) =>
-    JSON.parse(
-      JSON.stringify(
-        json,
-        [
-          'heart',
-          'diabetes',
-          'bp',
-          'bmi',
-          'smoking',
-          'drinking',
-          'stress',
-          'sleeping',
-        ],
-        4
-      )
-    );
+  // const getHealthRisksHash = (json: any) =>
+  //   JSON.parse(
+  //     JSON.stringify(
+  //       json,
+  //       [
+  //         'heart',
+  //         'diabetes',
+  //         'bp',
+  //         'bmi',
+  //         'smoking',
+  //         'drinking',
+  //         'stress',
+  //         'sleeping',
+  //       ],
+  //       4
+  //     )
+  //   );
 
   return (
     <>
@@ -279,18 +279,16 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(getHealthRisksHash(healthRisk)).map(
-                ([key, value]: any) => (
-                  <RenderHealthRiskView
-                    key={key}
-                    name={value?.name}
-                    onRiskPress={() => setSelectedRisk(key)}
-                    color={healthRisksColor(colors, value?.status)}
-                    Svg={healthRiskData[key].icon}
-                    status={value?.status}
-                  />
-                )
-              )}
+              {Object.entries(healthRisk).map(([key, value]: any) => (
+                <RenderHealthRiskView
+                  key={key}
+                  name={value?.name}
+                  onRiskPress={() => setSelectedRisk(key)}
+                  color={healthRisksColor(colors, value?.status)}
+                  Svg={healthRiskData[key].icon}
+                  status={value?.status}
+                />
+              ))}
             </View>
             {selectedRisk ? (
               <RenderHealthRisk
@@ -494,13 +492,6 @@ const Index = () => {
                     </Text>
 
                     <View style={{ width: '100%' }}>
-                      {/* <TextInput
-                      backgroundColor={colors.inputBg}
-                      style={styles.textInput}
-                      marginTop={10}
-                      onChange={handleChange('qrInput')}
-                      placeholder={'Enter your IC / Passport number'}
-                    /> */}
                       <InputWithLabel
                         label={t('pages.dashboard.dialogs.verify.label')}
                         placeholder={'Enter your IC / Passport number'}
