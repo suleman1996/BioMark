@@ -15,8 +15,7 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { userService } from 'services/user-service/user-service';
 import { useSelector } from 'react-redux';
-import { navigate } from 'services/nav-ref';
-import SCREENS from 'navigation/constants';
+import { useNavigation } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 import fonts from 'assets/fonts';
 
@@ -51,6 +50,7 @@ const Options2 = [
 export default function ExerciseScreen() {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const navigation = useNavigation();
   const styles = makeStyles(colors);
 
   const [value, setValue] = useState('');
@@ -85,7 +85,7 @@ export default function ExerciseScreen() {
           },
         });
       }
-      navigate(SCREENS.EDIT_PROFILE);
+      navigation.goBack();
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);

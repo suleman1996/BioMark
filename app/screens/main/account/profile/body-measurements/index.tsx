@@ -16,15 +16,15 @@ import {
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
 
-import { navigate } from 'services/nav-ref';
-import SCREENS from 'navigation/constants';
-
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 
 const BodyMeasurementScreen = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const navigation = useNavigation();
+
   const styles = makeStyles(colors);
   const [isLoading, setIsLoading] = useState(false);
   const [bodyMeasurment, setBodyMeasurment] = useState({
@@ -100,7 +100,8 @@ const BodyMeasurementScreen = () => {
           ...bodyMeasurment,
         },
       });
-      navigate(SCREENS.EDIT_PROFILE);
+      // navigate(SCREENS.EDIT_PROFILE);
+      navigation.goBack();
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -174,7 +175,7 @@ const BodyMeasurementScreen = () => {
             placeholder="0.0"
             units={['kg', 'lbs']}
             unit={bodyMeasurment.is_metric ? 'kg' : 'lbs'}
-            value={bodyMeasurment.weight.toString()}
+            value={bodyMeasurment?.weight?.toString()}
             onChangeText={(val: any) => handleChange(val, 'weight')}
             onUnitChange={handleUnitChange}
             error={error.weight}

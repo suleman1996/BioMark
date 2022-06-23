@@ -13,7 +13,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { showMessage } from 'react-native-flash-message';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
@@ -21,8 +21,7 @@ import { ButtonWithShadowContainer } from 'components/base';
 
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { navigate } from 'services/nav-ref';
-import SCREENS from 'navigation/constants';
+
 import { userService } from 'services/user-service/user-service';
 import { useSelector } from 'react-redux';
 
@@ -42,7 +41,7 @@ const Drinking = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-
+  const navigation = useNavigation();
   const isFocus = useIsFocused();
 
   const [value, setValue] = React.useState('');
@@ -68,7 +67,7 @@ const Drinking = () => {
       try {
         setIsVisible(true);
         await userService.drinking(isDrinking, beer, wine, spirits);
-        navigate(SCREENS.EDIT_PROFILE);
+        navigation.goBack();
 
         setIsVisible(false);
       } catch (error) {
