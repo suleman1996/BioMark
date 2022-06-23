@@ -21,7 +21,7 @@ export const makeStyles = (colors: any) =>
     pagerView: {
       width: widthToDp(92),
       height: '100%',
-      flexGrow: 1,
+
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: heightToDp(1.5),
@@ -49,7 +49,7 @@ export const makeStyles = (colors: any) =>
       borderWidth: 1.2,
       borderColor: colors.gray,
       borderRadius: widthToDp(4),
-      flex: 1,
+
       alignItems: 'center',
     },
     othersNotificationContainer: {
