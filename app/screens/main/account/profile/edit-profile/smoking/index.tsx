@@ -53,10 +53,6 @@ export default function SmokingScreen() {
 
   useEffect(() => {
     //  handleLifeStyle();
-    console.log(
-      'bootSt',
-      bootstrap?.attributes?.medical_template.smoking[0].content.fields
-    );
   }, [isFocus, bootstrap]);
 
   useEffect(() => {
@@ -64,7 +60,7 @@ export default function SmokingScreen() {
       try {
         setIsVisible(true);
         const result = await userService.getLifeStyle();
-        console.log('hahah ', result);
+
         setValue(
           result?.data?.smoking?.is_smoking == 'No'
             ? 2
@@ -74,21 +70,11 @@ export default function SmokingScreen() {
             ? 1
             : 0
         );
-        console.log('stop', result?.data?.smoking?.stick_per_day);
 
         setDay('' + result?.data?.smoking?.stick_per_day);
         setStopSmoke(result?.data?.smoking?.smoking_stop_at);
         setStartSmoke(result?.data?.smoking?.smoking_start_at);
-        // setIsSmoking(
-        //   result?.data?.smoking?.is_smoking == 'No'
-        //     ? 2
-        //     : result?.data?.smoking?.is_smoking == 'Yes'
-        //     ? 0
-        //     : result?.data?.smoking?.is_smoking == 'I used to'
-        //     ? 1
-        //     : 0
-        // );
-        console.log('smoking data', result.data.smoking);
+
         setIsVisible(false);
       } catch (error) {
         setIsVisible(false);
@@ -115,47 +101,31 @@ export default function SmokingScreen() {
 
   const onSubmit = async () => {
     try {
-      console.log('day', day);
-      console.log('stopSmoke', stopSmoke);
-      console.log('startSmoke', startSmoke);
-      console.log('isSmoking yes no wala', value);
       if (value === 0) {
         setIsVisible(true);
-        const response = await userService.Smoking(
-          +(day || 0),
-          0,
-          startSmoke,
-          value
-        );
-        console.log('smoking successful', response.data);
+        await userService.Smoking(+(day || 0), 0, startSmoke, value);
+
         navigate(SCREENS.EDIT_PROFILE);
         setIsVisible(false);
       } else if (value === 1) {
         setIsVisible(true);
-        const response = await userService.Smoking(
-          day,
-          stopSmoke,
-          startSmoke,
-          value
-        );
-        console.log('smoking successful', response.data);
+        await userService.Smoking(day, stopSmoke, startSmoke, value);
+
         navigate(SCREENS.EDIT_PROFILE);
         setIsVisible(false);
       } else {
         setIsVisible(true);
-        const response = await userService.Smoking(0, 0, 0, value);
-        console.log('smoking successful', response.data);
+        await userService.Smoking(0, 0, 0, value);
+
         navigate(SCREENS.EDIT_PROFILE);
         setIsVisible(false);
       }
     } catch (err) {
       setIsVisible(false);
-      console.log(err);
+      console.error(err);
     }
   };
   const onChangedSmoke = (text) => {
-    console.log('tt', text);
-
     if (NUMERIC_REGIX.test(text) || text == '') {
       setDay(text);
     }
@@ -274,7 +244,6 @@ export default function SmokingScreen() {
                   { borderWidth: day ? 1 : null, borderRadius: day ? 5 : null },
                 ]}
               >
-                {console.log('day', day)}
                 <TextInput
                   value={day || ''}
                   // defaultValue={'hello'}

@@ -201,8 +201,6 @@ const PaymentStep = (props: Props) => {
     name: userDetails.patient_name,
   };
 
-  console.log({ countryName: booking });
-
   const makeItems = () => {
     let items = booking.map((e) => {
       return {
@@ -246,7 +244,6 @@ const PaymentStep = (props: Props) => {
               // alert(event.nativeEvent.data);
             }}
             onNavigationStateChange={async (webViewState) => {
-              console.log('state changed', webViewState.url);
               if (
                 webViewState.url.includes('/payment/v1/billplz/confirmation')
               ) {
@@ -378,7 +375,7 @@ const PaymentStep = (props: Props) => {
                     totalPrice,
                     booking
                   );
-                  console.log({ data });
+
                   setPaymentUrl(data.url);
                   setPaymentModal(true);
                 } else if (countryName == 'Singapore') {
@@ -386,7 +383,7 @@ const PaymentStep = (props: Props) => {
                     booking,
                     email
                   );
-                  console.log({ data });
+
                   setPaymentUrl(data.url);
                   setPaymentModal(true);
                 }

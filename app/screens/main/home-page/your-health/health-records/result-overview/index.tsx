@@ -57,7 +57,7 @@ const Index = () => {
           : route?.params?.lab_id
       )
     );
-    console.log('Result OverView Redux ', resultOverView);
+
     PdfData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -70,7 +70,7 @@ const Index = () => {
 
       //   setPdf(pspPdfLinks.link);
     } catch (err) {
-      console.log('Pdf report error ', err);
+      console.error('Pdf report error ', err);
     }
   };
 

@@ -6,7 +6,6 @@ import { useTheme } from 'react-native-paper';
 import SCREENS from '../../navigation/constants/index';
 
 import fonts from 'assets/fonts';
-//import colors from 'assets/colors';
 
 import { YourHealth } from 'assets/svgs/index';
 import { useTranslation } from 'react-i18next';

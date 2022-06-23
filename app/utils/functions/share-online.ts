@@ -8,9 +8,9 @@ export const sharePdfFile = async (base64Data: any) => {
   };
   Share.open(options)
     .then((res) => {
-      console.log(res);
+      console.error(res);
     })
     .catch((err) => {
-      err && console.log(err);
+      err && console.error(err);
     });
 };

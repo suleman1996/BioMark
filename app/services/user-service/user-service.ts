@@ -202,9 +202,6 @@ function createProfile(
   gender: any
 ) {
   return new Promise<RegisterUserSuccessResponse>((resolve, reject) => {
-    console.log('=======>', values);
-    console.log('others', phone, finialDate, gender);
-
     client
       .post(API_URLS.CREATE_PROFILE, {
         profile: {
@@ -540,7 +537,6 @@ const createBpTracker = (medical: WeightProgressEntryRequest) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log('create data', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -561,7 +557,6 @@ const updateBpTracker = (medical: WeightProgressEntryRequest, id: string) => {
         medical: medical,
       })
       .then(async ({ data }) => {
-        console.log('update data', data);
         try {
           resolve({ ...data });
         } catch (e) {
@@ -582,7 +577,6 @@ const deleteBpLog = (bp_log_id: any) => {
       .delete(`${API_URLS.CREATE_BLOOD_PRESSURE}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -596,7 +590,6 @@ const deleteBpLog = (bp_log_id: any) => {
   });
 };
 const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_BLOOD_SUGAR, {
@@ -607,7 +600,6 @@ const createBsTracker = (medical: BloodSugarProgressEntryPayload) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log('create data', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -634,7 +626,6 @@ const updateBsTracker = (
         },
       })
       .then(async ({ data }) => {
-        console.log('update data', data);
         try {
           resolve({ ...data });
         } catch (e) {
@@ -650,14 +641,11 @@ const updateBsTracker = (
 };
 
 const deleteBsLog = (bp_log_id: any) => {
-  console.log('bp_log_id', bp_log_id);
-
   return new Promise<any>((resolve, reject) => {
     client
       .delete(`${API_URLS.CREATE_BLOOD_SUGAR}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log('deleteBsLog', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err deleteBsLog.', e);
@@ -671,7 +659,6 @@ const deleteBsLog = (bp_log_id: any) => {
   });
 };
 const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_HBA1C, {
@@ -679,7 +666,6 @@ const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log('create data', data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -694,17 +680,12 @@ const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
 };
 
 const updateHba1cTracker = (medical: Hba1CProgressEntryRequest, id: string) => {
-  console.log('id', id);
-
-  console.log('medical', medical);
-
   return new Promise<Hba1CProgressEntryRequest>((resolve, reject) => {
     client
       .put(`${API_URLS.CREATE_HBA1C}/${id}`, {
         hba1c: medical,
       })
       .then(async ({ data }) => {
-        console.log('update data', data);
         try {
           resolve({ ...data });
         } catch (e) {
@@ -725,7 +706,6 @@ const deleteHba1cLog = (bp_log_id: any) => {
       .delete(`${API_URLS.CREATE_HBA1C}/${bp_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -1718,7 +1698,6 @@ const getResultOverViewChartData = (id, date, provider) => {
 };
 
 const createWeightTracker = (medical: WeightProgressEntryRequest) => {
-  console.log(medical);
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
       .post(API_URLS.CREATE_WEIGHT, {
@@ -1726,7 +1705,6 @@ const createWeightTracker = (medical: WeightProgressEntryRequest) => {
       })
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);
@@ -1770,7 +1748,6 @@ const deleteWeightLog = (weight_log_id: any) => {
       .delete(`${API_URLS.CREATE_WEIGHT}/${weight_log_id}`)
       .then(async ({ data }) => {
         try {
-          console.log(data);
           resolve({ ...data });
         } catch (e) {
           logNow('err.', e);

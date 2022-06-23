@@ -86,7 +86,7 @@ const Index = () => {
       setIsLoading(false);
       setHideGraph(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

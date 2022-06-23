@@ -68,7 +68,7 @@ const SeeReport = () => {
           trustAllCerts={true}
           style={styles.pdfView}
           onError={(error) => {
-            console.log(error);
+            console.error(error);
           }}
         />
       </View>

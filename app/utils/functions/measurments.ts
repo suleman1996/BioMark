@@ -69,7 +69,7 @@ const measurementValidator = (is_metric, measurment, value, t) => {
           : WEIGHT_RANGE.kg.errorr;
     } else if (measurment === 'height') {
       //CM
-      console.log('From CM', value, typeof value);
+
       errorr =
         Height_RANGE.cm.min < value && value <= Height_RANGE.cm.max
           ? ''
@@ -78,13 +78,6 @@ const measurementValidator = (is_metric, measurment, value, t) => {
   } else {
     // LBS
     if (measurment === 'weight') {
-      console.log(
-        WEIGHT_RANGE.lbs.min,
-        value,
-        WEIGHT_RANGE.lbs.max,
-        '-=------>',
-        WEIGHT_RANGE.lbs.min < Number(value) <= WEIGHT_RANGE.lbs.max
-      );
       errorr =
         WEIGHT_RANGE.lbs.min < value && value <= WEIGHT_RANGE.lbs.max
           ? ''
@@ -103,8 +96,6 @@ const measurementValidator = (is_metric, measurment, value, t) => {
 };
 
 const bloodPressureValidator = (measurment, value) => {
-  console.log('measu', measurment);
-
   let errorr = '';
   if (value.length === 0 || value == 0)
     return measurment === 'bp_systolic'

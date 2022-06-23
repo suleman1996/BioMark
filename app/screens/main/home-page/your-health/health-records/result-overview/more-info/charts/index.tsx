@@ -56,9 +56,8 @@ const Charts = ({ biomarker_id, provider }) => {
       );
       setChartData(result.data);
       setIsLoading(false);
-      console.log('chart data ', result.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -166,9 +165,6 @@ const Charts = ({ biomarker_id, provider }) => {
         showDropDown={() => setShowDropDown(true)}
         onDismiss={() => setShowDropDown(false)}
         value={selectedReport}
-        setValue={(itemValue) => {
-          console.log('Here is the value ', itemValue);
-        }}
         list={reportOptions}
         inputProps={{
           style: {

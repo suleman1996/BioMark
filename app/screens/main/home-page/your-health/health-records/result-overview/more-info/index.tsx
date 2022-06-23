@@ -39,9 +39,8 @@ const MoreInfo = () => {
         route?.params?.result_id
       );
       setSummary(result.data);
-      console.log('success ', result.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -49,11 +48,11 @@ const MoreInfo = () => {
     try {
       setIsLoading(true);
       const result = await userService.getResultPdf(id);
-      // console.log('her is the download pdf  ', result.data);
+
       checkPermissionAndDownloadBase64(result.data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsLoading(false);
     }
   };
@@ -104,7 +103,6 @@ const MoreInfo = () => {
 
   const RenderTable = ({ data }) => (
     <View style={{ flexDirection: 'row' }}>
-      {console.log('xxxxx ', data)}
       <RenderDownload
         name="chart-timeline-variant"
         resultId={data?.id}

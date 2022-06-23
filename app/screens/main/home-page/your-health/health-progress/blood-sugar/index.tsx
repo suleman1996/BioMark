@@ -97,12 +97,12 @@ const Index = () => {
         meal: selectedfilterOption1.title,
         unit: selectedfilterOption2.id,
       });
-      console.log({ result: result.data.chart.data });
+
       setChartState(result.data.chart);
       setIsLoading(false);
       setHideGraph(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

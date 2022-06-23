@@ -91,7 +91,7 @@ const Index = () => {
       setIsLoading(false);
       setHideGraph(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -118,7 +118,6 @@ const Index = () => {
   }, [selectedfilterOption1, selectedfilterOption2]);
 
   React.useEffect(() => {
-    console.log('CHART STATE CHANGED');
     if (chartState) {
       const { chartOptions } = createChart(chartState);
       setTimeout(() => {
@@ -130,7 +129,6 @@ const Index = () => {
 
   // COPIED FUNCTIONS
   const createChart = (data: any) => {
-    console.log('CREATING CHART');
     const points =
       data.length === 0
         ? []
@@ -158,7 +156,6 @@ const Index = () => {
   };
 
   const onApplyFilters = (filter1, filter2) => {
-    console.log({ filter1, filter2 });
     setSelectedfilterOption1(filter1);
     setSelectedfilterOption2(filter2);
     setIsVisible(false);

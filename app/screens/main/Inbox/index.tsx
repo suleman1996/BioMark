@@ -63,7 +63,6 @@ export default function InboxScreen() {
 
   const dispatch = useDispatch();
   const focused = useIsFocused();
-  console.log('allInboxUnreadNotifications', allInboxUnreadNotifications);
 
   /*eslint-disable */
   const _getAllInboxData = async () => {
@@ -114,37 +113,25 @@ export default function InboxScreen() {
   /*eslint-enable */
 
   const clickHandler = (notification: NotificationMessage) => {
-    console.log(
-      'notification?.has_pending_declaration',
-      notification?.has_pending_declaration
-    );
-
     switch (notification.notification_type) {
       case NotificationType.medication_reminder:
       case NotificationType.missed_medication:
-        console.log('1');
         navigate(SCREENS.HEALTH_PROGRESS, 1);
         break;
       case NotificationType.medical:
-        console.log('2');
         navigate(SCREENS.ACCOUNT);
 
         break;
       case NotificationType.result:
       case NotificationType.mcr:
-        console.log('3');
         navigate(SCREENS.HEALTH_RECORD);
         break;
       case NotificationType.message:
-        console.log('4');
         //   this.nav.navigateForward(['notification', 'doctor-message', notification.id]).then();
         break;
       case NotificationType.doctor:
-        console.log('5');
-        console.log('message'); // TODO not sure where to go
         break;
       case NotificationType.covid:
-        console.log('6');
         navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
           screen: SCREENS.COVID19BOOKINGS,
           params: {
@@ -153,7 +140,6 @@ export default function InboxScreen() {
         });
         break;
       case NotificationType.covid_result:
-        console.log('7');
         navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
           screen: SCREENS.COVID19HOME,
         });
@@ -304,7 +290,6 @@ export default function InboxScreen() {
           >
             <View style={styles.tabNameContainer}>
               <Pressable
-                // onPress={() => PreviousNotification()}
                 onPress={() => pagerRef.current.setPage(0)}
                 style={[
                   styles.tab,
@@ -316,7 +301,6 @@ export default function InboxScreen() {
                 </Text>
               </Pressable>
               <Pressable
-                //  onPress={() => OtherNotification()}
                 onPress={() => pagerRef.current.setPage(1)}
                 style={[
                   styles.tab,

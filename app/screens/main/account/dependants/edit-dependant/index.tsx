@@ -78,7 +78,7 @@ const EditDependantScreen = (props: Props) => {
         logNow('single dependent response', res);
         setDependentData(res);
         const phoneNumber: any = parsePhoneNumber(res.dependent_mobile_number);
-        console.log('hhhhhhh', phoneNumber);
+
         setCountryCode(phoneNumber?.country);
         setSelectedCountryCode(phoneNumber?.countryCallingCode);
         setNationalNumber(phoneNumber?.nationalNumber);

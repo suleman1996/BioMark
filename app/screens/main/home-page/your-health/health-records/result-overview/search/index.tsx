@@ -30,7 +30,7 @@ const Search = () => {
 
       setSearchData(result.data.results);
     } catch (error) {
-      console.log('error ', error);
+      console.error('search result error ', error);
     }
   };
 

@@ -27,7 +27,6 @@ const DropdownMenuWithQuestion = ({
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const [dropdown, setDropdown] = useState([]);
-  console.log('selectedValue', selectedValue);
 
   useEffect(() => {
     let arr = [];
@@ -41,15 +40,6 @@ const DropdownMenuWithQuestion = ({
     <View style={styles.parent}>
       <Text style={GlobalStyles(colors).question}>{question}</Text>
       <View style={styles.container}>
-        {/* <Picker
-          mode="dropdown"
-          selectedValue={selectedValue}
-          onValueChange={(item) => onValueChange(item)}
-        >
-          {options?.map((item: any, index: number) => {
-            return <Picker.Item key={index} label={item} value={item} />;
-          })}
-        </Picker> */}
         <TextInputDropdown
           onChangeText={(item) => onValueChange(item)}
           value={selectedValue ? selectedValue : dropdown[0]?.value}
