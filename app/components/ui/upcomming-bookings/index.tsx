@@ -3,12 +3,13 @@ import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
 import SCREENS from 'navigation/constants';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
+import { covidService } from 'services/covid-service';
 import { navigate } from 'services/nav-ref';
 import { IAppState } from 'store/IAppState';
 import { BookingListDataUpcoming } from 'types/api';
@@ -35,6 +36,21 @@ const UpcommingBookings = (props: Props) => {
   const [isBarModal, setIsBarModal] = useState(false);
 
   const styles = makeStyles(colors);
+
+  useEffect(() => {
+    if (allUpcommingBookings) {
+      upDateBatch(allUpcommingBookings);
+    }
+  }, [allUpcommingBookings]);
+
+  const upDateBatch = async (item: BookingListDataUpcoming) => {
+    try {
+      await covidService.batchReadForUpcomming({ data: item });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const _renderItem = ({ item }: { item: BookingListDataUpcoming }) => {
     const {
       patient_name = '',
