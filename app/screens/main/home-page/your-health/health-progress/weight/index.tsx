@@ -1,4 +1,4 @@
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View, BackHandler } from 'react-native';
 import React, { useRef } from 'react';
 
 import Styles from './styles';
@@ -29,6 +29,8 @@ import {
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { healthProgressServices } from 'services/health-progress-servive';
+import { navigate } from 'services/nav-ref';
+// import HealthRecord from '../../health-records';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -46,6 +48,10 @@ const Index = () => {
   const [chartState, setChartState] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [hideGraph, setHideGraph] = React.useState(false);
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+  });
 
   const [headerValue] = React.useState([
     { id: 0, title: '1D', complete: '1 Day' },
@@ -159,6 +165,12 @@ const Index = () => {
     setSelectedfilterOption1(filter1);
     setSelectedfilterOption2(filter2);
     setIsVisible(false);
+  };
+
+  const handleBackButtonClick = () => {
+    navigate(SCREENS.YOUR_HEALTH);
+    // BackHandler.exitApp();
+    return true;
   };
 
   return (
