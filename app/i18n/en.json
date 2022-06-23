@@ -244,7 +244,7 @@
         },
         "paymentError": {
           "header": "Payment is Unsuccessful",
-          "description": "No money has been deducted from your account.<br><br>Please retry the payment process to secure your COVID test slot.",
+          "description": "No money has been deducted from your account.Please retry the payment process to secure your COVID test slot.",
           "retryPayment": "Retry Payment"
         }
       },
@@ -289,12 +289,12 @@
       },
       "covid-info": {
         "title": "Test Bookings - FAQ",
-        "footer": "Do you have further questions?<br>Write in to us at <a href='mailto:support@biomarking.com'>support@biomarking.com<a>!",
+        "footer": "Do you have further questions?Write in to us at <a href='mailto:support@biomarking.com'>support@biomarking.com<a>!",
         "card1": {
           "header": "Information Regarding Tests",
           "item1": {
             "question": "1. What is a COVID 19 PCR test and what is it for?",
-            "body": "PCR stands for ‘polymerase chain reaction’. It is a method that is used to detect and accurately identify genetic material from any organism. The COVID-19 PCR test is currently the preferred test for COVID-19 detection because of its speed, accuracy and success rate- hence is widely used as the testing method of choice for pre-departure travel, work and social responsibility purposes. It is considered the gold-standard (best-in-class) for detection of COVID-19.<br><br>Most COVID-19 PCR test results will be ready within a few hours. However we recommend that you ask the staff at your selected test center/clinic for a more precise time frame."
+            "body": "PCR stands for ‘polymerase chain reaction’. It is a method that is used to detect and accurately identify genetic material from any organism. The COVID-19 PCR test is currently the preferred test for COVID-19 detection because of its speed, accuracy and success rate- hence is widely used as the testing method of choice for pre-departure travel, work and social responsibility purposes. It is considered the gold-standard (best-in-class) for detection of COVID-19.Most COVID-19 PCR test results will be ready within a few hours. However we recommend that you ask the staff at your selected test center/clinic for a more precise time frame."
           },
           "item2": {
             "question": "2. What is Antigen testing?",
@@ -326,7 +326,7 @@
           },
           "item9": {
             "question": "9. I need to get a COVID-19 PCR test urgently, are there any expedited options?",
-            "body": "Participating clinics that can do urgent swab tests will be indicated in the app/website during booking for your convenience. You may also select the express PCR test to receive your results within about 6 hours.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities. "
+            "body": "Participating clinics that can do urgent swab tests will be indicated in the app/website during booking for your convenience. You may also select the express PCR test to receive your results within about 6 hours.For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities. "
           },
           "item10": {
             "question": "10. Can I do a home-testing instead of going to the test center?",
@@ -338,7 +338,7 @@
           },
           "item12": {
             "question": "12. Are there any subsidies/claims available for the COVID-19 tests?",
-            "body": "We apologise that BioMark, with the test centers, clinics and laboratories that provide the COVID-19 tests through the BioMark platforms currently do not have any arrangements for subsidies.<br><br>However, we do provide a receipt upon completion and confirmation of successful payment which may be requested by your company/insurer for this purpose. Please verify any ability for subsidies or claims with your company/insurer beforehand."
+            "body": "We apologise that BioMark, with the test centers, clinics and laboratories that provide the COVID-19 tests through the BioMark platforms currently do not have any arrangements for subsidies.However, we do provide a receipt upon completion and confirmation of successful payment which may be requested by your company/insurer for this purpose. Please verify any ability for subsidies or claims with your company/insurer beforehand."
           }
         },
         "card2": {
@@ -357,7 +357,7 @@
           },
           "item16": {
             "question": "16. How will I know if my booking was made successfully?",
-            "body": "You will receive a confirmation email with your appointment details and/or receipt upon payment verification by your financial services provider.<br><br>You can also refer to your booking details under the COVID-19 Bookings section in our BioMark patient app."
+            "body": "You will receive a confirmation email with your appointment details and/or receipt upon payment verification by your financial services provider.You can also refer to your booking details under the COVID-19 Bookings section in our BioMark patient app."
           },
           "item17": {
             "question": "17. What happens if I did not receive any confirmation email? ",
@@ -365,7 +365,7 @@
           },
           "item18": {
             "question": "18. What should I do to prepare for my COVID-19 test?",
-            "body": "A notification will be sent out for you to complete a health declaration form within 24 hours from your test date. Please fill up the form with information that is as accurate as possible.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities."
+            "body": "A notification will be sent out for you to complete a health declaration form within 24 hours from your test date. Please fill up the form with information that is as accurate as possible.For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities."
           },
           "item19": {
             "question": "19. What documents do I need to bring for my appointment?",
@@ -392,7 +392,7 @@
           "header": "Results",
           "item24": {
             "question": "24. How do I retrieve my COVID-19 PCR test results and how long will it take?",
-            "body": "Your COVID-19 PCR test results will be available in our BioMark App usually within 24-48 hours after the swab. The healthcare provider which you engaged to conduct the swab will also contact you in the event that your COVID-19 PCR test results return positive.<br><br>You will also be notified via email and receive a push notification from the app when your results are ready to view. "
+            "body": "Your COVID-19 PCR test results will be available in our BioMark App usually within 24-48 hours after the swab. The healthcare provider which you engaged to conduct the swab will also contact you in the event that your COVID-19 PCR test results return positive.You will also be notified via email and receive a push notification from the app when your results are ready to view. "
           },
           "item25": {
             "question": "25. Will I get a PDF result?",
@@ -400,15 +400,15 @@
           },
           "item26": {
             "question": "26. Can I use the resulting QR code at the airport?",
-            "body": "We are using an encrypted QR code standard which is used to secure and verify your test result. The QR code is a secure certificate of your COVID-19 result.<br><br>When travelling abroad, the QR code can be shown to foreign travel authorities, who may scan the QR code with any reader (e.g. normal phone camera) to verify the authenticity of the digitally authenticated and endorsed QR code."
+            "body": "We are using an encrypted QR code standard which is used to secure and verify your test result. The QR code is a secure certificate of your COVID-19 result.When travelling abroad, the QR code can be shown to foreign travel authorities, who may scan the QR code with any reader (e.g. normal phone camera) to verify the authenticity of the digitally authenticated and endorsed QR code."
           },
           "item27": {
             "question": "27. What happens if my COVID-19 PCR test result is inconclusive?",
-            "body": "There might be instances that COVID-19 PCR swab test results are inconclusive. If your COVID-19 PCR test result is inconclusive, you might have to undergo a repeat test and it is chargeable. BioMark will not be held responsible for any losses, expenses, or costs involved, should this result affect your flight departure.<br><br>The healthcare provider which you engaged to conduct the test will contact you if a repeat test is necessary."
+            "body": "There might be instances that COVID-19 PCR swab test results are inconclusive. If your COVID-19 PCR test result is inconclusive, you might have to undergo a repeat test and it is chargeable. BioMark will not be held responsible for any losses, expenses, or costs involved, should this result affect your flight departure.The healthcare provider which you engaged to conduct the test will contact you if a repeat test is necessary."
           },
           "item28": {
             "question": "28. What happens if my COVID-19 PCR test result is positive? ",
-            "body": "If your COVID-19 PCR test results are positive, you should isolate yourself from family members, monitor your temperature and symptoms and also notify your close contact of your COVID-19 positive status. Please also refer to your country’s guidelines on home quarantine and isolation for COVID-19.<br><br>If you are taking a PCR test for the purpose of pre-departure travel, kindly inform the relevant authorities that you would be unfit to fly. "
+            "body": "If your COVID-19 PCR test results are positive, you should isolate yourself from family members, monitor your temperature and symptoms and also notify your close contact of your COVID-19 positive status. Please also refer to your country’s guidelines on home quarantine and isolation for COVID-19.If you are taking a PCR test for the purpose of pre-departure travel, kindly inform the relevant authorities that you would be unfit to fly. "
           }
         },
         "card4": {
@@ -419,7 +419,7 @@
           },
           "item30": {
             "question": "30. Will I get a refund if I were to cancel my booking?",
-            "body": "Bookings that are cancelled 24 hours before the appointment timing will not be entitled to any refunds. You will also not be allowed to cancel your booking after you have been swabbed.<br><br>Appointment cancellation is also not allowed if the booking is made within 24 hours of the selected appointment time.<br><br>Do note that refunds are subjected to payment processing fees"
+            "body": "Bookings that are cancelled 24 hours before the appointment timing will not be entitled to any refunds. You will also not be allowed to cancel your booking after you have been swabbed.Appointment cancellation is also not allowed if the booking is made within 24 hours of the selected appointment time.Do note that refunds are subjected to payment processing fees"
           },
           "item31": {
             "question": "31. Are clinics allowed to cancel/make changes to my appointment? ",
@@ -431,14 +431,14 @@
           },
           "item33": {
             "question": "33. Why is the refund not showing up on my bank statement after 10 business days?",
-            "body": "If the cancellation is processed not long after the payment was made, the refund may be processed as a reversal. In which case, the original charge will drop off the bank statement altogether, as if it never occurred.<br><br>Check your bank statement and look for the original charge. If you do not see the charge on your bank statement, the payment was reversed and the refund is complete."
+            "body": "If the cancellation is processed not long after the payment was made, the refund may be processed as a reversal. In which case, the original charge will drop off the bank statement altogether, as if it never occurred.Check your bank statement and look for the original charge. If you do not see the charge on your bank statement, the payment was reversed and the refund is complete."
           }
         },
         "card5": {
           "header": "General Information",
           "item34": {
             "question": "34. What is the Coronavirus Disease (COVID-19)?",
-            "body": "According to the World Health Organization (WHO), Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.<br><br>COVID-19 symptoms can include common cold symptoms, shortness of breath and in some cases, severe lung infection. Most people develop mild symptoms that can be treated with medication recommended by a doctor based on the patient’s clinical condition. However, severe cases may require hospital care where a patient may receive a combination of treatments."
+            "body": "According to the World Health Organization (WHO), Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.COVID-19 symptoms can include common cold symptoms, shortness of breath and in some cases, severe lung infection. Most people develop mild symptoms that can be treated with medication recommended by a doctor based on the patient’s clinical condition. However, severe cases may require hospital care where a patient may receive a combination of treatments."
           },
           "item35": {
             "question": "35. How many variants of the coronavirus are there?",
@@ -790,7 +790,7 @@
           "titleDiabetes": "By signing this form, you hereby:",
           "titleHypertension": "By signing this form:"
         },
-        "paragraph": "<strong>1.</strong> Agree to participate in the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 for which you were informed by your enrolling physician. I likewise agree to be enrolled in the said Program by my physician. <br><br> <strong>2.</strong> Acknowledge that you are aware that all data related to you will be accessible only to the third party provider of Sanofi-Aventis Philippines Inc. involved in the program and all data will be handled with full confidentiality in compliance with the Data Privacy Act and all related issuances.<br><br> <strong>3.</strong> Acknowledge that you have the right to access and correct your personal information at any time upon your request.<br><br> <strong>4.</strong> Acknowledge that you can withdraw from the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 at any time without any prejudice by contacting My Blood Profile Technologies Corporation, a subsidiary of BioMark Pte Ltd, and that already collected data will remain in the specific EMPOWER Patient Program database, unless you request also for these data to be deleted. You can withdraw from the EMPOWER Patient Program at any time by clicking the “Withdraw from Program” link on the Diabetes Support Center page.<br><br> <strong>5.</strong> Acknowledge that you are aware that this program may be discontinued at any given time and that you will be notified thirty (30) days prior the discontinuation date.<br><br> <strong>6.</strong> Declare that you have carefully read the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Gargine U300 guidelines/mechanics and warrant that you will abide with such guidelines/mechanics.<br><br>",
+        "paragraph": "<strong>1.</strong> Agree to participate in the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 for which you were informed by your enrolling physician. I likewise agree to be enrolled in the said Program by my physician.  <strong>2.</strong> Acknowledge that you are aware that all data related to you will be accessible only to the third party provider of Sanofi-Aventis Philippines Inc. involved in the program and all data will be handled with full confidentiality in compliance with the Data Privacy Act and all related issuances. <strong>3.</strong> Acknowledge that you have the right to access and correct your personal information at any time upon your request. <strong>4.</strong> Acknowledge that you can withdraw from the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 at any time without any prejudice by contacting My Blood Profile Technologies Corporation, a subsidiary of BioMark Pte Ltd, and that already collected data will remain in the specific EMPOWER Patient Program database, unless you request also for these data to be deleted. You can withdraw from the EMPOWER Patient Program at any time by clicking the “Withdraw from Program” link on the Diabetes Support Center page. <strong>5.</strong> Acknowledge that you are aware that this program may be discontinued at any given time and that you will be notified thirty (30) days prior the discontinuation date. <strong>6.</strong> Declare that you have carefully read the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Gargine U300 guidelines/mechanics and warrant that you will abide with such guidelines/mechanics.",
         "paragraphHypertension": "<ul style='padding-inline-start: 20px;'>    <li>        <p><span>You agree to participate in the EMPOWER Patient Program for Insulin            Glargine/Lixisenatide (Soliqua) or Insulin Glargine U300 (Toujeo), and/or Irbesartan +            Amlodipine (Aprovasc) (the “Program”). You confirm that you were informed of this            Program, and agree to be enrolled therein, by your enrolling physician.            </span></p>    </li>    <li style='list-style-type: circle;'>        <p><span>By enrolling in the Program, you expressly give consent to third parties, and/or third party            providers that sanofi-aventis Philippines Inc. (\"Sanofi\") engages or contracts with            (collectively, \"Third Party/ies\") that are involved in the Program to collect and process            your personal information and to conduct the Program in accordance with the following            purposes (“Purposes”):            </span></p>    </li></ul><ul>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>        1. Provide you education on diabetes and/or hypertension management, product        handling, titration etc., as may be applicable. Medical assessment and case        processing in the event of adverse drug reaction or Pharmacovigilance events.            </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>2. Give you proper device training in terms of proper and correct usage of medical        devices and/or the Insulin Glargine/Lixisenatide (Soliqua) or Insulin Glargine U300        (Toujeo) solostar pen.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>3. You may be provided with seven (7) pieces of Irbesartan/Amlodipine (Aprovasc)        every three (3) months for a period of one (1) year. Sanofi reserves the right to        suspend the provision of doses, depending on availability and other factors.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>4. Provide you with regular reminder on regular blood glucose monitoring, regular        blood pressure monitoring, other necessary laboratory test your doctor will        require.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>5. Provide your enrolling physician with regular report on your activities in the        Program for proper information feedback and monitoring.            </span></p></ul><ul style=\"padding-inline-start: 20px;\">    <li>        <p><span>You acknowledge that you are aware that the Program is not a clinical study and all data            related to you will be accessible only to Third Party/ies involved in the Program, and all            data will be handled with full confidentiality in compliance with the Data Privacy Act and            all related issuances. Such data will be stored for a period of 10 years.            </span></p>    </li>    <li>        <p><span>You acknowledge that data collected by our Nurse Educator in the format of medical            record/s (“Medical Record”) will be collected in a patient relationship management            system (“PRM”) operated by My Blood Profile Technology Corp. (“BioMark”) or any other            Third Party/ies retained by Sanofi for the purpose, accessible only by Nurse Educators            (from Home Health Care Placements, Inc. (“HHCP”)), BioMark and Third Party/ies. For the            avoidance of doubt, Sanofi shall have no access to individual patient records.            </span></p>    </li>    <li>        <p><span>You agree that your Medical Record will be shared by BioMark and Nurse Educators (from            HHCP) to your enrolling physician.            </span></p>    </li>    <li>        <p><span>You acknowledge that aggregated reports from the Program will be generated and            accessible to Sanofi and Third Party/ies for purposes of assessing the Program's            effectiveness to support in diabetes and/or hypertension management, and in evaluating            the Program's potential for further improvements. You likewise agree that your personal            data will be provided to Third Party/ies for the purpose of anonymizing the same before            any further processing will be done, which processing includes the generation of            aggregated data. You acknowledge that aggregated data from the Program may be used            for publication purposes by Sanofi or Third Party/ies, such as, but not limited to, scientific            papers, other written reports, etc. Aggregated reports that are anonymized consist of            data provided in this form and those collected in the Program’s digital platforms (such as            the Biomark Application). You understand that the strictest level of confidentiality and            security will be maintained at any stage of the processing of your personal data.            </span></p>    </li>    <li>        <p><span>You acknowledge that you have the right to access and correct your personal information            at any time upon your request by downloading and updating the BioMark Application or            by contacting 0919-433-3392 (Smart).            </span></p>    </li>    <li>        <p><span>You acknowledge that the planned education session with Nurse Educators is good for            one (1) year. Beyond this one-year period, the patient can avail of the BioMark application            and call center, as long as the EMPOWER program is still active.            </span></p>    </li>    <li>        <p><span>You acknowledge that you can withdraw from the Program at any time without prejudice            by sending your message through the Biomark App or by contacting 0919-433-3392            (Smart). You agree that personal data already collected from you will remain in the            specific Program database for the retention period mentioned above, unless you request            also for these data to be deleted.            </span></p>    </li>    <li>        <p><span>You acknowledge that you are aware that this Program may be discontinued at any given            time and that you will be notified thirty (30) days prior the discontinuation date.            </span></p>    </li></ul>",
         "checkboxLabel": "I hereby confirm my understanding of the above policy and my consent to the collection, use and disclosure of my information in accordance to the terms of the policy.",
         "buttonLabel": "Accept & Continue"
@@ -1656,7 +1656,7 @@
     "uploadResult": {
       "title": "Upload Results",
       "info": "For results with multiple pages, select Add Page to add more pages.",
-      "privacy": "Your privacy is important to us. You are in control of your health information. BioMark won’t provide your information to any third parties without your permission. <br><br> BioMark only supports the uploading of lab results for now. We reserve the right to remove documents that are not related to lab results.",
+      "privacy": "Your privacy is important to us. You are in control of your health information. BioMark won’t provide your information to any third parties without your permission.  BioMark only supports the uploading of lab results for now. We reserve the right to remove documents that are not related to lab results.",
       "uploads": "Your Uploads",
       "documentName": "Document Name",
       "addPage": "Add Page",
