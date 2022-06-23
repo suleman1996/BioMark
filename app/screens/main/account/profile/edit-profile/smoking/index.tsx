@@ -14,7 +14,7 @@ import DropDown from 'react-native-paper-dropdown';
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { TextInput } from 'components';
 
 import { userService } from 'services/user-service/user-service';
@@ -33,9 +33,8 @@ export default function SmokingScreen() {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const styles = makeStyles(colors);
+  const navigation = useNavigation();
 
-  // const [value, setValue] = useState('');
-  // const [isSmoking, setIsSmoking] = useState('');
   const [value, setValue] = useState(2);
   const [day, setDay] = useState();
   const [stopSmoke, setStopSmoke] = useState('');
@@ -70,8 +69,12 @@ export default function SmokingScreen() {
             ? 1
             : 0
         );
+        if (result?.data?.smoking?.stick_per_day == null) {
+          setDay('');
+        } else {
+          setDay('' + result?.data?.smoking?.stick_per_day);
+        }
 
-        setDay('' + result?.data?.smoking?.stick_per_day);
         setStopSmoke(result?.data?.smoking?.smoking_stop_at);
         setStartSmoke(result?.data?.smoking?.smoking_start_at);
 
@@ -117,7 +120,7 @@ export default function SmokingScreen() {
         setIsVisible(true);
         await userService.Smoking(0, 0, 0, value);
 
-        navigate(SCREENS.EDIT_PROFILE);
+        navigation.goBack();
         setIsVisible(false);
       }
     } catch (err) {
@@ -261,26 +264,6 @@ export default function SmokingScreen() {
                 }
               </Text>
               <View style={styles.container2}>
-                {/* <Picker
-                  itemStyle={{ fontFamily: 'Rubik-Regular' }}
-                  style={{
-                    color: colors.black,
-                    fontFamily: fonts.regular,
-                  }}
-                  selectedValue={startSmoke + ''}
-                  onValueChange={(itemValue) => setStartSmoke(itemValue)}
-                >
-                  {options?.map((item, index) => {
-                    return (
-                      <Picker.Item
-                        style={{ color: colors.darkGray }}
-                        key={index}
-                        label={item.title}
-                        value={item.title}
-                      />
-                    );
-                  })}
-                </Picker> */}
                 <DropDown
                   mode={'flat'}
                   visible={showDropDown}
@@ -311,22 +294,6 @@ export default function SmokingScreen() {
                     }
                   </Text>
                   <View style={styles.container2}>
-                    {/* <Picker
-                      style={{ color: colors.black, fontFamily: fonts.regular }}
-                      selectedValue={stopSmoke + ''}
-                      onValueChange={(itemValue) => setStopSmoke(itemValue)}
-                    >
-                      {options2?.map((item, index) => {
-                        return (
-                          <Picker.Item
-                            style={{ color: colors.darkGray }}
-                            key={index}
-                            label={item.title}
-                            value={item.title}
-                          />
-                        );
-                      })}
-                    </Picker> */}
                     <DropDown
                       mode={'flat'}
                       visible={showDropDown2}

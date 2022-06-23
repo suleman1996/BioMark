@@ -4,14 +4,12 @@ import { useTheme } from 'react-native-paper';
 
 import DropDown from 'react-native-paper-dropdown';
 import { showMessage } from 'react-native-flash-message';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 
 import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { ActivityIndicator } from 'components';
 
-import { navigate } from 'services/nav-ref';
-import SCREENS from 'navigation/constants';
 import { userService } from 'services/user-service/user-service';
 import { useSelector } from 'react-redux';
 
@@ -21,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 
 const Sleep = () => {
   const isFocus = useIsFocused();
+  const navigation = useNavigation();
   const { t } = useTranslation();
   const sleepOptions = [
     { value: 0, label: 'less than 4 hours' },
@@ -50,7 +49,8 @@ const Sleep = () => {
       setIsVisible(true);
       await userService.sleeping(indexNumber);
 
-      navigate(SCREENS.EDIT_PROFILE);
+      // navigate(SCREENS.EDIT_PROFILE);
+      navigation.goBack();
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);

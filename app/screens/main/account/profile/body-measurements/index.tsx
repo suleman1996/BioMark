@@ -175,7 +175,7 @@ const BodyMeasurementScreen = () => {
             placeholder="0.0"
             units={['kg', 'lbs']}
             unit={bodyMeasurment.is_metric ? 'kg' : 'lbs'}
-            value={bodyMeasurment.weight.toString()}
+            value={bodyMeasurment?.weight?.toString()}
             onChangeText={(val: any) => handleChange(val, 'weight')}
             onUnitChange={handleUnitChange}
             error={error.weight}
