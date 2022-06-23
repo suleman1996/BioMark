@@ -23,7 +23,7 @@ type Props = {
 const SingleCovidResult = (props: Props) => {
   const { route } = props;
   const id = route?.params?.id;
-  console.log(id);
+
   const { colors }: any = useTheme();
   const styles = makeStyles(colors);
 
@@ -33,7 +33,6 @@ const SingleCovidResult = (props: Props) => {
   const getData = async () => {
     covidService.getCovidSingleResults(id).then((res) => {
       setData(res);
-      console.log(res);
     });
   };
 
@@ -70,7 +69,7 @@ const SingleCovidResult = (props: Props) => {
         const { uri } = response;
         setQrImg(uri);
       })
-      .catch((error) => console.log('Cannot create QR code', error));
+      .catch((error) => console.warn('Cannot create QR code', error));
   }, [testQr]);
 
   const SingleResult = () => {
@@ -150,7 +149,6 @@ const SingleCovidResult = (props: Props) => {
         <ButtonComponent
           onPress={() => {
             covidService.getCovidResultDownload(id).then((res) => {
-              console.log(res);
               sharePdfFile(res);
             });
             logNow(`${API_URLS.COVID_GET_RESUTLS_DOWNLOAD_V1}/${id}/download`);

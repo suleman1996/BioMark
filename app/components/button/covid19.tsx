@@ -7,7 +7,6 @@ import fonts from 'assets/fonts';
 import SCREENS from '../../navigation/constants';
 import { navigate } from '../../services/nav-ref';
 import { useTranslation } from 'react-i18next';
-//import colors from 'assets/colors';
 
 export default function Covid19Btn({ onPress }) {
   const { t } = useTranslation();

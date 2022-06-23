@@ -112,7 +112,7 @@ export default function SignupVerification() {
 
       let uniqueId = DeviceInfo.getUniqueId();
       dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
-      console.log('resData', resData);
+
       await setAuthAsyncStorage(resData);
       navigate(SCREENS.CONFIRMATION);
       setLoading(false);

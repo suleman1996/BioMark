@@ -8,8 +8,10 @@ import {
 import React from 'react';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -29,8 +31,6 @@ const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
       ).start();
     },
   });
-
-  console.log(color);
 
   return (
     <Animated.View
@@ -61,10 +61,10 @@ const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
           {healthRisk?.description}
           <TouchableWithoutFeedback onPress={onPress}>
             <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
-              Tap here{' '}
+              {t('pages.summary.buttons.common.tapHere')}
             </Text>
           </TouchableWithoutFeedback>
-          to complete your information
+          {t('pages.summary.buttons.common.completeInfo')}
         </Text>
       ) : null}
     </Animated.View>

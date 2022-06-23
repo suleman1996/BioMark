@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
 import Close from '../../assets/svgs/close';
-// import GradientButton from 'components/linear-gradient-button';
+
 import { RadioButton } from 'react-native-paper';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GoogleFitButton } from 'components/button';
+import { useTranslation } from 'react-i18next';
 
 const HealthRecordFilter = ({
   title,
@@ -30,28 +31,16 @@ const HealthRecordFilter = ({
   handleConfirm2,
   onPressClearFilter,
   onConifrm,
+  cancelDatePicker,
+  showDatePicker,
+  isDatePickerVisible,
+  showEndDatePicker,
+  cancelEndDatePicker,
+  isEndDatePickerVisible,
 }) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
-  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
-  const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-  const showEndDatePicker = () => {
-    setEndDatePickerVisibility(true);
-  };
-
-  //start date picker
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  //end date picker
-  const hideDatePicker2 = () => {
-    setEndDatePickerVisibility(false);
-  };
 
   return (
     <Modal animationType="none" transparent={true} visible={visible}>
@@ -72,7 +61,9 @@ const HealthRecordFilter = ({
               onPress={onPressRadio1}
               color={colors.heading}
             />
-            <Text style={styles.radiotext}>Uplaoded By Me</Text>
+            <Text style={styles.radiotext}>
+              {t('pages.results.filters.uploadedByMe')}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.radioview} onPress={touchableRadio2}>
@@ -82,16 +73,22 @@ const HealthRecordFilter = ({
               onPress={onPressRadio2}
               color={colors.heading}
             />
-            <Text style={styles.radiotext}>Sent By Doctor</Text>
+            <Text style={styles.radiotext}>
+              {t('pages.results.filters.sentByDoctor')}
+            </Text>
           </TouchableOpacity>
-          <Text style={styles.modalText2}>Start Date</Text>
+          <Text style={styles.modalText2}>
+            {t('pages.results.filters.startDate')}e
+          </Text>
 
           <Pressable style={styles.datepicker} onPress={showDatePicker}>
             <Text style={styles.datePickerText}>{startDateText}</Text>
             <Icon name="calendar-month-outline" size={30} />
           </Pressable>
 
-          <Text style={styles.modalText2}>End Date</Text>
+          <Text style={styles.modalText2}>
+            {t('pages.results.filters.endDate')}
+          </Text>
           <Pressable style={styles.datepicker} onPress={showEndDatePicker}>
             <Text style={styles.datePickerText}>{endDateText}</Text>
             <Icon name="calendar-month-outline" size={30} />
@@ -101,23 +98,26 @@ const HealthRecordFilter = ({
             isVisible={isDatePickerVisible}
             mode="date"
             onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
+            onCancel={cancelDatePicker}
           />
+
           <DateTimePickerModal
             isVisible={isEndDatePickerVisible}
             mode="date"
             onConfirm={handleConfirm2}
-            onCancel={hideDatePicker2}
+            onCancel={cancelEndDatePicker}
           />
           <TouchableOpacity style={styles.gradientButton}>
             <GoogleFitButton
               disabled={false}
-              title="Confirm"
+              title={t('pages.results.filters.confirm')}
               onPress={onConifrm}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.clear} onPress={onPressClearFilter}>
-            <Text style={styles.clearText}>Clear Filters</Text>
+            <Text style={styles.clearText}>
+              {t('pages.results.filters.clearFilters')}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.cancel} onPress={cancelModal}>

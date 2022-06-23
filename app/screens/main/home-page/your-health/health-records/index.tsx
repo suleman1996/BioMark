@@ -31,15 +31,19 @@ import LatestResultCard from 'components/latest-result-card';
 import moment from 'moment';
 import fonts from 'assets/fonts';
 import { showMessage } from 'react-native-flash-message';
+import { useTranslation } from 'react-i18next';
 
 const HealthRecord = () => {
+  const { t } = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
   const [pastResults, setPastResults] = useState([]);
   const [checked, setChecked] = React.useState('');
-  const [startDate, setStartDate] = useState('');
+  const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(new Date());
   const [page, setPage] = useState(1);
+  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+  const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
 
   const { colors } = useTheme();
 
@@ -63,7 +67,7 @@ const HealthRecord = () => {
   useEffect(() => {
     setPastResults(pastResult);
     setLatestResult(newResult);
-    console.log('latesttttttttt-------------', pastResult);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pastResult]);
 
@@ -77,9 +81,7 @@ const HealthRecord = () => {
       });
       setModalVisible(!modalVisible);
       setPastResults(result?.data);
-      console.log('resultttt-----------------------dataaaa', result?.data);
     } catch (error) {
-      console.log(error);
       if (error.errMsg.status == '500') {
         showMessage({
           message: 'Internal Server Error',
@@ -99,21 +101,35 @@ const HealthRecord = () => {
     }
   };
 
+  //startDate
   const handleConfirm = (date) => {
-    console.log('A date has been picked: ', date);
     setStartDate(date);
+    cancelDatePicker();
   };
+  const cancelDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  //endDate
   const handleConfirm2 = (date) => {
-    console.log('A date has been picked: ', date);
     setEndDate(date);
+    cancelEndDatePicker();
+  };
+  const cancelEndDatePicker = () => {
+    setEndDatePickerVisibility(false);
+  };
+  const showEndDatePicker = () => {
+    if (!startDate) {
+      setEndDatePickerVisibility(false);
+    } else {
+      setEndDatePickerVisibility(true);
+    }
   };
 
   const renderItem2 = ({ item }) => {
-    // const fullName = item?.result?.summary;
-    // console.log(item?.result?.summary.split(''));
-    // const splitOnSpace = fullName.split(' ');
-    // console.log('first', splitOnSpace[0]);
-    // console.log('second', splitOnSpace[1]);
     return (
       <TouchableOpacity
         onPress={() => {
@@ -135,7 +151,7 @@ const HealthRecord = () => {
           <Text style={styles.title}>{item?.name}</Text>
         </View>
         <Text style={styles.text3}>
-          {moment(item?.received).format('hh:mm a MMMM Do, YYYY')}
+          {moment(item?.received).format('MMMM D, YYYY hh:mma')}
         </Text>
         {item.ref_no == null ? null : (
           <Text style={styles.text3}>REF: {item?.ref_no}</Text>
@@ -147,7 +163,13 @@ const HealthRecord = () => {
               source={require('assets/images/home/info.png')}
               style={styles.prImage}
             />
-            <Text style={styles.text6}>{item?.result?.summary}</Text>
+            <Text style={styles.text6}>
+              {item?.result?.summary.split(/[0-9]+ out of [0-9]+/)[0]}
+              <Text style={styles.summaryText}>
+                {item?.result?.summary.match(/[0-9]+ out of [0-9]+/)}
+              </Text>
+              {item?.result?.summary.split(/[0-9]+ out of [0-9]+/)[1]}
+            </Text>
           </View>
         )}
 
@@ -205,7 +227,9 @@ const HealthRecord = () => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <ArrowBack fill={colors.white} />
           </TouchableOpacity>
-          <Text style={styles.navHeading}>Health Records</Text>
+          <Text style={styles.navHeading}>
+            {t('pages.search.recordKeeping.suggestions.healthRecords')}
+          </Text>
         </View>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />
@@ -214,22 +238,23 @@ const HealthRecord = () => {
       <View style={styles.containerBody}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.healthReports}>
-            <Text style={styles.text}>Your Health Reports</Text>
+            <Text style={styles.text}>{t('pages.results.healthReport')}</Text>
             <Text style={styles.text2}>
-              This is your health reports where you can view present and past
-              results from lab reports.
+              {t('pages.results.healthReportDesc')}
             </Text>
           </View>
 
-          <Text style={styles.latestResult}>Your Latest Results</Text>
-          {latestResult.message === 'No latest result' ? (
+          <Text style={styles.latestResult}>
+            {t('pages.results.latestResults')}
+          </Text>
+          {latestResult.message === t('pages.searchResults.noResults') ? (
             <Text style={styles.resultMessage}>{latestResult.message}</Text>
           ) : (
             <LatestResultCard
-              title="Your Latest Results"
+              title={t('pages.results.latestResults')}
               name={latestResult?.name}
               received={moment(latestResult?.received).format(
-                'hh:mm a MMMM Do, YYYY'
+                'MMMM D, YYYY hh:mma'
               )}
               ref_no={latestResult?.ref_no}
               status={latestResult?.result?.status}
@@ -247,24 +272,28 @@ const HealthRecord = () => {
             style={styles.uploadResult}
             onPress={() => navigation.navigate(SCREENS.RESULT_UPLOAD)}
           >
-            <GoogleFitButton disabled={false} title="Upload Results" />
+            <GoogleFitButton
+              disabled={false}
+              title={t('pages.results.uploadResults')}
+            />
           </TouchableOpacity>
 
           <View style={styles.filterView}>
-            <Text style={styles.text5}>Past Results</Text>
+            <Text style={styles.text5}>{t('pages.results.pastResults')}</Text>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Filter fill={colors.heading} />
             </TouchableOpacity>
           </View>
 
           <Text style={styles.resultMessage}>
-            {pastResults?.message == 'No results' && 'No Result Found'}
+            {pastResults?.message == 'No results' &&
+              t('pages.searchResults.noResults')}
           </Text>
 
           <HealthRecordFilter
             visible={modalVisible}
-            title="Filter Results"
-            title2="Document Upload Type"
+            title={t('pages.results.filters.title')}
+            title2={t('pages.results.filters.uploadType')}
             cancelModal={() => setModalVisible(!modalVisible)}
             closeModal={() => setModalVisible(!modalVisible)}
             firstValue={'first'}
@@ -284,10 +313,16 @@ const HealthRecord = () => {
             onPressClearFilter={() => {
               setChecked(''),
                 setStartDate(''),
-                setEndDate(''),
+                setEndDate(new Date()),
                 setPastResults(pastResult);
             }}
             onConifrm={() => onConfirm()}
+            cancelDatePicker={cancelDatePicker}
+            showDatePicker={showDatePicker}
+            isDatePickerVisible={isDatePickerVisible}
+            cancelEndDatePicker={cancelEndDatePicker}
+            showEndDatePicker={showEndDatePicker}
+            isEndDatePickerVisible={isEndDatePickerVisible}
           />
 
           {!pastResults?.message && (
@@ -302,13 +337,13 @@ const HealthRecord = () => {
             <TouchableOpacity style={styles.uploadResult}>
               <GoogleFitButton
                 disabled={false}
-                title="Load more data"
+                title={t('pages.results.loadMoreData')}
                 onPress={() => setPage((prev) => prev + 1)}
               />
             </TouchableOpacity>
           ) : pastResults?.message == 'No results' ? null : (
             <Text style={styles.loadMoreText}>
-              You dont't have any more past results
+              {t('pages.results.noMorePastResults')}
             </Text>
           )}
         </ScrollView>

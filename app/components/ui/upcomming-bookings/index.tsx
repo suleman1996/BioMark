@@ -63,6 +63,7 @@ const UpcommingBookings = (props: Props) => {
       is_cancellable: item.is_cancellable,
       is_dependent: item.is_dependent,
     };
+
     return (
       <View style={styles.singleItemContainer}>
         <BarCodeModal
@@ -165,12 +166,14 @@ const UpcommingBookings = (props: Props) => {
       </View>
     );
   };
+
   return (
     <View style={{ flex: 1 }}>
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
         isVisible={isHealthDeclaration}
         data={modalData}
+        decalrations={[modalData]}
       />
       {allUpcommingBookings?.length > 0 ? <SuggestionsText /> : null}
       <FlatList

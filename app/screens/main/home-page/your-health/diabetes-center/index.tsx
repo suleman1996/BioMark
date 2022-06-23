@@ -33,6 +33,7 @@ import { getReduxPspModules } from 'store/home/home-actions';
 import Config from 'react-native-config';
 import { showMessage } from 'react-native-flash-message';
 import GradientButton from 'components/linear-gradient-button';
+import { useTranslation } from 'react-i18next';
 
 const openMessenger = () => {
   Linking.openURL(Config.MESSENGER_URL);
@@ -50,6 +51,7 @@ const DiabetesCenter = (props) => {
   const [barCodeData, setBarCodeData] = React.useState('');
   const dispatch = useDispatch();
 
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
 
@@ -70,8 +72,7 @@ const DiabetesCenter = (props) => {
   useEffect(() => {
     PspModuleData();
     handleHEalthTracker();
-    console.log('Health diabetes api =======>', hell);
-    console.log('dashborad api result', dashboard);
+
     setBarCodeData(dashboard?.program_detail?.barcode);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,7 +89,7 @@ const DiabetesCenter = (props) => {
       setPdfData(pspModuleData.pdf);
       setVideo(pspModuleData.video);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -154,7 +155,6 @@ const DiabetesCenter = (props) => {
 
   const renderItem = ({ item }) => (
     <>
-      {console.log(item, '---------------item-------------------')}
       <ImageBackground
         resizeMode="stretch"
         source={{ uri: item.thumbnail }}
@@ -185,7 +185,7 @@ const DiabetesCenter = (props) => {
           bm_program_id: 2,
         },
       });
-      console.log(response.data, 'withdrawwwwwwwwwwwwwwwwwwwwwww');
+
       setModalVisible(!modalVisible);
       navigate(SCREENS.YOUR_HEALTH);
       setIsVisible(false);
@@ -196,7 +196,6 @@ const DiabetesCenter = (props) => {
       });
       setIsVisible(false);
       setModalVisible(!modalVisible);
-      console.log('error response', err.errMsg.data.message);
     }
   };
 
@@ -204,7 +203,7 @@ const DiabetesCenter = (props) => {
     <TitleWithBackLayout
       backTo={SCREENS.YOUR_HEALTH}
       isGradient={true}
-      title="Diabetes Support Center"
+      title={t('pages.diabetesSupport.titles.diabetes_title')}
     >
       <ActivityIndicator visible={isVisiable} />
       {/* <View style={styles.containerBody}> */}
@@ -212,7 +211,7 @@ const DiabetesCenter = (props) => {
         <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
           {showDemo !== 5 && <View style={styles.demoContainer}></View>}
           <Text style={[styles.headingText, { marginVertical: 10 }]}>
-            YOUR DIABETES DIARY
+            {t('pages.diabetesSupport.diaries.diabetes_diary')}
           </Text>
           <View style={{ marginHorizontal: 15 }}>
             <FlatList
@@ -284,7 +283,7 @@ const DiabetesCenter = (props) => {
             )}
           </View>
           <Text style={[styles.headingText, { marginVertical: 10 }]}>
-            DIABETES EDUCATION
+            {t('pages.diabetesSupport.educations.diabetes_education')}
           </Text>
           {/* {showDemo === 3 && (
             <View
@@ -380,11 +379,13 @@ const DiabetesCenter = (props) => {
           />
 
           <WithdrawProgram
-            text="Yes"
+            text={t('pages.diabetesSupport.dialogs.withdraw.buttonText')}
             visible={modalVisible}
-            title="Are You Sure?"
-            text2="Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges."
-            cancel="Cancel"
+            title={t('pages.diabetesSupport.dialogs.withdraw.title')}
+            text2={t('pages.diabetesSupport.dialogs.withdraw.description')}
+            cancel={t(
+              'pages.diabetesSupport.dialogs.withdraw.buttonCancelText'
+            )}
             cancelModal={() => setModalVisible(!modalVisible)}
             closeModal={() => setModalVisible(!modalVisible)}
             onPress={() => onWithdraw()}
@@ -393,7 +394,7 @@ const DiabetesCenter = (props) => {
 
           <View style={styles.bottomTextView}>
             <Text style={[styles.bottomText, { color: colors.heading }]}>
-              Tap to{' '}
+              {t('pages.diabetesSupport.withdrawText')}{' '}
             </Text>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
               <Text
@@ -402,7 +403,7 @@ const DiabetesCenter = (props) => {
                   { color: colors.blue, textDecorationLine: 'underline' },
                 ]}
               >
-                Withdraw from Program
+                {t('pages.diabetesSupport.withdrawLink')}
               </Text>
             </TouchableOpacity>
           </View>
@@ -416,22 +417,28 @@ const DiabetesCenter = (props) => {
           <View style={styles.demobottomView}>
             <View style={styles.demoTextView}>
               {showDemo === 0 && (
-                <Text style={styles.demoText}>Log your blood sugar here.</Text>
+                <Text style={styles.demoText}>
+                  {t('pages.diabetesSupport.onboarding.demo.bloodSugar')}
+                </Text>
               )}
               {showDemo === 1 && (
-                <Text style={styles.demoText}>Log your medication here.</Text>
+                <Text style={styles.demoText}>
+                  {t('pages.diabetesSupport.onboarding.demo.medication')}
+                </Text>
               )}
               {showDemo === 2 && (
-                <Text style={styles.demoText}>Log your HbA1c here.</Text>
+                <Text style={styles.demoText}>
+                  {t('pages.diabetesSupport.onboarding.demo.BbA1c')}
+                </Text>
               )}
               {showDemo === 3 && (
                 <Text style={styles.demoText}>
-                  View helpful video tutorials here.
+                  {t('pages.diabetesSupport.onboarding.demo.video')}
                 </Text>
               )}
               {showDemo === 4 && (
                 <Text style={styles.demoText}>
-                  Learn more about diabetes here.
+                  {t('pages.diabetesSupport.onboarding.demo.more')}
                 </Text>
               )}
             </View>

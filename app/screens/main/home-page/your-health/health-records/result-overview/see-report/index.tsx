@@ -10,11 +10,13 @@ import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
 import { ActivityIndicator } from 'components';
 import { Button } from 'components/button';
-import { userService } from 'services/user-service/user-service';
 import { checkPermissionAndDownloadBase64 } from 'utils/functions/download-file';
 import PdfIcon from 'assets/svgs/pdf';
+import { healthRecordServices } from 'services/health-record-service';
+import { useTranslation } from 'react-i18next';
 
 const SeeReport = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = Styles(colors);
   const route = useRoute();
@@ -30,7 +32,9 @@ const SeeReport = () => {
   const PdfData = async () => {
     try {
       setIsVisible(true);
-      const result = await userService.getResultPdf(route?.params?.resultId);
+      const result = await healthRecordServices.getResultPdf(
+        route?.params?.resultId
+      );
       setPdfLink(result.data.replace(/\s/g, ''));
 
       //   setPdf(pspPdfLinks.link);
@@ -41,7 +45,10 @@ const SeeReport = () => {
   };
 
   return (
-    <TitleWithBackLayout shadow={colors.blue} title="Result Overview">
+    <TitleWithBackLayout
+      shadow={colors.blue}
+      title={t('pages.pdfViewer.title')}
+    >
       <View style={styles.miniHeader}>
         <Text style={styles.miniHeaderText}>
           Received on {moment(route?.params.date).format('MMM DD, YYYY')}
@@ -49,9 +56,13 @@ const SeeReport = () => {
       </View>
 
       <Button
-        title="Download Report Result"
+        title={t('pages.pdfViewer.download')}
         svg={<PdfIcon fill={colors.white} />}
-        onPress={() => checkPermissionAndDownloadBase64(pdfLink)}
+        onPress={() =>
+          checkPermissionAndDownloadBase64(
+            `data:application/pdf;base64,${pdfLink}`
+          )
+        }
       />
       <View style={{ flex: 1 }}>
         <ActivityIndicator visible={isVisiable} />
@@ -64,7 +75,7 @@ const SeeReport = () => {
           trustAllCerts={true}
           style={styles.pdfView}
           onError={(error) => {
-            console.log(error);
+            console.error(error);
           }}
         />
       </View>

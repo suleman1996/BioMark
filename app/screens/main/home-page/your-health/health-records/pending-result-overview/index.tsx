@@ -13,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getReduxPendingResultOverview,
-  getReduxPastResult,
+  // getReduxPastResult,
 } from 'store/home/home-actions';
 import { useRoute } from '@react-navigation/native';
 
@@ -29,8 +29,10 @@ import SCREENS from 'navigation/constants';
 import { showMessage } from 'react-native-flash-message';
 import { navigate } from 'services/nav-ref';
 import Pdf from 'react-native-pdf';
+import { useTranslation } from 'react-i18next';
 
 const PendingResultOverview = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const route = useRoute();
   const styles = Styles(colors);
@@ -48,6 +50,7 @@ const PendingResultOverview = () => {
   React.useEffect(() => {
     dispatch(getReduxPendingResultOverview(route?.params?.result?.lab_id));
     setList(pendingResult?.upload?.document_attachments);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,13 +62,12 @@ const PendingResultOverview = () => {
       );
       if (result.status == true) {
         setModalVisible(!modalVisible);
-        dispatch(getReduxPastResult());
+        // dispatch(getReduxPastResult());
         navigate(SCREENS.HEALTH_RECORD);
-        console.log('delte----------------------------------', result.data);
       }
     } catch (error) {
       setIsVisible(false);
-      console.log(error);
+
       if (error.errMsg.status == '500') {
         setIsVisible(false);
         showMessage({
@@ -94,7 +96,7 @@ const PendingResultOverview = () => {
 
       <TitleWithBackLayout
         shadow={colors.blue}
-        title="Result Overview"
+        title={t('pages.labResultOverview.title')}
         deleteIcon={() => setModalVisible(true)}
       >
         <View style={[styles.container, { paddingHorizontal: 10 }]}>
@@ -133,7 +135,9 @@ const PendingResultOverview = () => {
             </View>
 
             <View style={styles.uploadView}>
-              <Text style={styles.uploadText}>Your Uploads</Text>
+              <Text style={styles.uploadText}>
+                {t('pages.labResultOverview.youUploads')}
+              </Text>
               <Text style={styles.numberText}>
                 {list?.length > 0 ? splices + 1 : '0'}
               </Text>
@@ -146,8 +150,6 @@ const PendingResultOverview = () => {
                 numColumns={2}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => {
-                  console.log('itemuuu', item);
-
                   setSplices(index);
                   return (
                     <>
@@ -174,11 +176,13 @@ const PendingResultOverview = () => {
             </View>
 
             <WithdrawProgram
-              text="Yes"
+              text={t('pages.labResultOverview.dialogs.delete.buttonText')}
               visible={modalVisible}
-              title="Are You Sure?"
-              text2="Are you sure you want to delete this test result? This action can’t be undone."
-              cancel="Cancel"
+              title={t('pages.labResultOverview.dialogs.delete.title')}
+              text2={t('pages.labResultOverview.dialogs.delete.description')}
+              cancel={t(
+                'pages.labResultOverview.dialogs.delete.buttonCancelText'
+              )}
               cancelModal={() => setModalVisible(!modalVisible)}
               closeModal={() => setModalVisible(!modalVisible)}
               color={['#1B96D8', '#1B96D8']}
@@ -187,9 +191,8 @@ const PendingResultOverview = () => {
           </ScrollView>
         </View>
         <DeleteButtonContainer
-          title="Delete Upload"
+          title={t('pages.labResultOverview.deleteUpload')}
           onPress={() => setModalVisible(true)}
-          //   disabled={list.length <= 0 ? true : false}
         />
       </TitleWithBackLayout>
     </View>

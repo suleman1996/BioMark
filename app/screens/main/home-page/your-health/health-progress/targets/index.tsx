@@ -20,8 +20,10 @@ import { ArrowBack } from 'assets/svgs';
 import AddGradient from 'assets/svgs/add-gradient';
 
 import makeStyles from './styles';
+import { useTranslation } from 'react-i18next';
 
 export default function InboxScreen({ route }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const navigation = useNavigation();
@@ -39,7 +41,6 @@ export default function InboxScreen({ route }) {
   };
 
   useEffect(() => {
-    console.log(route.params.key);
     if (!route.params.key) return;
     pagerRef.current.setPage(route.params.key);
   }, [route.params.key]);
@@ -53,7 +54,7 @@ export default function InboxScreen({ route }) {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <ArrowBack fill={colors.white} />
           </TouchableOpacity>
-          <Text style={styles.navHeading}>Targets</Text>
+          <Text style={styles.navHeading}>{t('pages.targets.title')}</Text>
         </View>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />
@@ -80,7 +81,7 @@ export default function InboxScreen({ route }) {
                   : { color: colors.darkPrimary },
               ]}
             >
-              Blood Sugar
+              {t('pages.bloodSugarTab.title')}
             </Text>
           </Pressable>
           <Pressable
@@ -98,7 +99,7 @@ export default function InboxScreen({ route }) {
                   : { color: colors.darkPrimary },
               ]}
             >
-              HbA1c
+              {t('pages.hba1cInput.title')}
             </Text>
           </Pressable>
         </View>
@@ -127,7 +128,6 @@ export default function InboxScreen({ route }) {
       <TouchableOpacity
         style={styles.fixedIconView}
         onPress={() => {
-          console.log(123);
           if (currentPage === 0) {
             navigation.navigate(ADD_BLOOD_SUGAR);
           } else {

@@ -13,8 +13,6 @@ import {
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import { RNCamera } from 'react-native-camera';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {
@@ -41,13 +39,11 @@ import fonts from 'assets/fonts';
 
 import makeStyles from './styles';
 import { navigate } from 'services/nav-ref';
-import { showMessage } from 'react-native-flash-message';
 import WithdrawProgram from 'components/widthdraw-from-program';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { getHealthTrackerRisks } from 'store/home/home-actions';
-// import { navigate } from 'services/nav-ref';
 
 const SearchBarWithLeftScanIcon = () => {
   const navigation = useNavigation();
@@ -74,6 +70,7 @@ const SearchBarWithLeftScanIcon = () => {
     dispatch(getHealthTrackerRisks());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   let arr = [
     {
       name: 'Heart Disease',
@@ -189,10 +186,6 @@ const SearchBarWithLeftScanIcon = () => {
       screen: SCREENS.BLOOD_PRESSURE,
     },
     {
-      name: 'BMI',
-      screen: SCREENS.BODY_MEASUREMENT,
-    },
-    {
       name: 'Smoking',
       screen: SCREENS.SMOKING,
     },
@@ -211,14 +204,6 @@ const SearchBarWithLeftScanIcon = () => {
   ];
 
   const searchResult = (search) => {
-    // try {
-    //   const result = await userService.getSearchResult(5574, search);
-    //   console.log('result.data.results', result.data.results);
-
-    //   setSearchData(result.data.results);
-    // } catch (error) {
-    //   console.log('error ', error);
-    // }
     const filteredData = arr.filter((ele) => {
       let itemLowercase = ele.name.toLowerCase();
 
@@ -227,24 +212,9 @@ const SearchBarWithLeftScanIcon = () => {
       return itemLowercase.indexOf(searchTermLowercase) > -1;
     });
     setSearchData(filteredData);
-    // this.setState({ DataAdapter: filteredContacts });
   };
-  const RenderSearch = ({ item }) => (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.navigate(SCREENS.MORE_INFO, {
-          result_id: item?.biomarker_id,
-        })
-      }
-      style={styles.renderSearchView}
-    >
-      <Text style={{ fontFamily: fonts.regular, fontSize: 14 }}>
-        {item?.name}
-      </Text>
-    </TouchableOpacity>
-  );
+
   const onSuccess = (e) => {
-    console.log('ettt', e.data);
     setCode('');
     handleCode(e.data);
   };
@@ -258,13 +228,10 @@ const SearchBarWithLeftScanIcon = () => {
       });
       if (response.status == true) {
         navigate(SCREENS.SUPPORT_SYSTEM);
-        console.log(response, 'codee---------------code------------------');
       } else {
-        console.log('error', response);
+        console.error('error', response);
       }
     } catch (err) {
-      console.log('err', err);
-
       setShowModalQr(false);
       setInvalidError(err.errMsg.data.message);
       setActionError(err.errMsg.data.action);
@@ -399,7 +366,6 @@ const SearchBarWithLeftScanIcon = () => {
                   }}
                   style={styles.renderSearchView}
                 >
-                  {console.log('item', item.screen)}
                   <View>
                     <Text
                       style={{
@@ -428,6 +394,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'Already a Member'
             : invalidError == 'Code already used'
             ? 'Already a Member'
+            : invalidError == 'Scan event code first'
+            ? 'Back'
             : 'Back'
         }
         visible={modalVisible}
@@ -438,6 +406,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'Already a Member'
             : invalidError == 'Code already used'
             ? 'Already a Member'
+            : invalidError == 'Scan event code first'
+            ? 'Invalid Code'
             : undefined
         }
         text2={
@@ -447,6 +417,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'It seems like this code has already been entered.'
             : invalidError == 'Code already used'
             ? 'You are already a member of the Empower Program.You can already log your blood sugar and medications.'
+            : invalidError == 'Scan event code first'
+            ? 'Multiple invalid code entries detected.Try manually entering the code.'
             : undefined
         }
         closeModal={() => {
@@ -460,28 +432,13 @@ const SearchBarWithLeftScanIcon = () => {
             ? setModalVisible(false)
             : actionError == 'sfi_member'
             ? setModalVisible(false)
+            : invalidError == 'Scan event code first'
+            ? setModalVisible(false)
             : undefined;
         }}
       />
       <QrScannerPopup loading={loading} visible={showModalQr}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#fff',
-            width: Dimensions.get('window').width,
-            position: 'absolute',
-            top: 20,
-            right: 15,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
-          onPress={() => setShowModalQr(false)}
-        >
-          <Entypo color={'gray'} name="flash" size={25} />
-        </TouchableOpacity>
-        <QRCodeScanner
-          onRead={onSuccess}
-          // flashMode={RNCamera.Constants.FlashMode.torch}
-        />
+        <QRCodeScanner onRead={onSuccess} />
 
         <TouchableOpacity
           style={{

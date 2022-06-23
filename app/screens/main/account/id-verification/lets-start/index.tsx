@@ -1,7 +1,6 @@
 import {
   Image,
   Pressable,
-  StyleSheet,
   Text,
   View,
   NativeModules,
@@ -12,25 +11,25 @@ import { useTheme } from 'react-native-paper';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Images from 'assets/images';
-import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import ButtonComponent from 'components/base/button';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack, navigate } from 'services/nav-ref';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { userService } from 'services/user-service/user-service';
 import { ActivityIndicator } from 'components/';
 import SCREENS from 'navigation/constants';
 import { useNavigation } from '@react-navigation/native';
 import { WORK_FLOW_EXECUTION_ID } from 'store/account/constants';
 import { useDispatch } from 'react-redux';
-
+import Styles from './styles';
 const { JumioMobileSDK } = NativeModules;
 const DATACENTER = 'SG';
 const LetsStartIdVerfiication = ({ route }: { route: any }) => {
-  const { sendTo } = route.params;
+  const sendTo = route?.params?.sendTo;
   const { colors } = useTheme();
+  const styles = Styles(colors);
   const dispatch = useDispatch();
   const { ID_VERIFICATION_COMPLETE } = SCREENS;
   const navigation = useNavigation();
@@ -57,8 +56,6 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
   // Callbacks - (Data is displayed as a warning for demo purposes)
   const emitterJumio = new NativeEventEmitter(JumioMobileSDK);
   emitterJumio.addListener('EventResult', async (EventResult) => {
-    console.log('EventResult: ' + JSON.stringify(EventResult));
-    console.log('selected_country', EventResult.credentials);
     // setIdVerification({
     //   scan_reference: id,
     //   selected_country: EventResult.credentials[0].selectedCountry,
@@ -85,7 +82,7 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
     // navigation.navigate(ID_VERIFICATION_COMPLETE);
   });
   emitterJumio.addListener('EventError', (EventError) => {
-    console.log('EventError: ' + JSON.stringify(EventError));
+    console.error('EventError: ' + JSON.stringify(EventError));
   });
 
   return (
@@ -133,38 +130,3 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
 };
 
 export default LetsStartIdVerfiication;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text1: {
-    fontFamily: GlobalFonts.extraBold,
-    fontSize: responsiveFontSize(40),
-    color: Colors.darkPrimary,
-  },
-  text2: {
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(22),
-    color: Colors.black,
-    paddingHorizontal: widthToDp(10),
-    textAlign: 'center',
-  },
-  image: {
-    width: widthToDp(75),
-  },
-  backBtnContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'absolute',
-    top: 10,
-    left: 10,
-  },
-  backText: {
-    fontFamily: GlobalFonts.light,
-    fontSize: responsiveFontSize(25),
-    color: Colors.darkPrimary,
-  },
-});

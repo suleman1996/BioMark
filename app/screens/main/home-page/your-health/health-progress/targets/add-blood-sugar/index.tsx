@@ -26,8 +26,10 @@ import {
 import { IAppState } from 'store/IAppState';
 
 import Styles from './styles';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const { colors } = useTheme();
   const styles = Styles(colors);
@@ -169,12 +171,10 @@ const Index = () => {
       <TitleWithBackWhiteBgLayout>
         <ScrollView style={styles.innerContainer}>
           <Text style={styles.firstHeading}>
-            Set your new target blood sugar ranges
+            {t('pages.bloodSugarTargetInput.title')}
           </Text>
           <Text style={styles.subHeading}>
-            Your doctor should help you set these ranges. if you leave these
-            ranges blank we will use the default range of 80-130 mg/dL for
-            fasting and 80-180 mg/dL for after meals as suggested by the ADA.
+            {t('pages.bloodSugarTargetInput.subtitle')}
           </Text>
           <View
             style={{
@@ -182,10 +182,12 @@ const Index = () => {
               alignItems: 'center',
             }}
           >
-            <Text style={styles.secondHeading}>Fasting (FPG)</Text>
+            <Text style={styles.secondHeading}>
+              {t('pages.bloodSugarTargetInput.fasting')}
+            </Text>
             <Tip
               //title=""
-              body="FPG (Fasting Plasma Glucose) is the measure of your blood sugar level after fasting or not having anything to eat or drink for at least 8 hours. This test is usually done first thing in the morning, before breakfast."
+              body={t('pages.bloodSugarTargetInput.fastingDefinition')}
               bodyStyle={{ color: '#fff' }}
               tipContainerStyle={{
                 backgroundColor: colors.shineBlue,
@@ -208,7 +210,7 @@ const Index = () => {
           </View>
           <InputWithUnits
             small
-            title="From"
+            title={t('pages.bloodSugarTargetInput.from')}
             placeholder={'0'}
             value={state.fromfpg}
             onChangeText={(value: string) => updateState('fromfpg', value)}
@@ -221,7 +223,7 @@ const Index = () => {
           />
           <InputWithUnits
             small
-            title="To"
+            title={t('pages.bloodSugarTargetInput.to')}
             placeholder={'0'}
             value={state.tofpg}
             onChangeText={(value: string) => updateState('tofpg', value)}
@@ -239,10 +241,12 @@ const Index = () => {
               marginTop: 30,
             }}
           >
-            <Text style={styles.secondHeading}>After Meal (PPG)</Text>
+            <Text style={styles.secondHeading}>
+              {t('pages.bloodSugarTargetInput.afterMeal')}
+            </Text>
             <Tip
               //title=""
-              body="PPG (Postprandial Plasma Glucose) is the measure of your blood sugar level after a meal. Measuring PPG can keep track of blood sugar spikes, which can determine if your mealtime insulin is working."
+              body={t('pages.bloodSugarTargetInput.afterMealDefinition')}
               bodyStyle={{ color: '#fff' }}
               tipContainerStyle={{
                 backgroundColor: colors.shineBlue,
@@ -265,7 +269,7 @@ const Index = () => {
           </View>
           <InputWithUnits
             small
-            title="From"
+            title={t('pages.bloodSugarTargetInput.from')}
             placeholder={'0'}
             value={state.fromppg}
             onChangeText={(value: string) => updateState('fromppg', value)}
@@ -278,7 +282,7 @@ const Index = () => {
           />
           <InputWithUnits
             small
-            title="To"
+            title={t('pages.bloodSugarTargetInput.to')}
             placeholder={'0'}
             value={state.toppg}
             onChangeText={(value: string) => updateState('toppg', value)}
@@ -291,7 +295,7 @@ const Index = () => {
           />
         </ScrollView>
         <GradientButton
-          text="Save"
+          text={t('pages.bloodSugarTargetInput.save')}
           onPress={onSubmit}
           color={['#2C6CFC', '#2CBDFC']}
           style={styles.buttonContainer}

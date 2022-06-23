@@ -23,6 +23,7 @@ import {
 } from 'store/home/home-actions';
 import moment from 'moment';
 import { NUMERIC_REGIX } from 'utils/regix';
+import { useTranslation } from 'react-i18next';
 
 const FREQUENCY_TIME_OPTIONS: any[] = [
   { label: '12AM', value: '12AM' },
@@ -63,6 +64,7 @@ type MEDICATION_TYPE = {
 };
 
 const MedicationForm = (props: any) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
@@ -219,16 +221,6 @@ const MedicationForm = (props: any) => {
     }
   };
 
-  console.log(
-    JSON.stringify(
-      {
-        medicationOptionsData,
-        medication,
-      },
-      null,
-      2
-    )
-  );
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -238,7 +230,9 @@ const MedicationForm = (props: any) => {
             binIcon={SELECTED_MEDICATION_ID ? true : false}
             onPressIcon={() => setShowDeleteModal(true)}
             title={
-              SELECTED_MEDICATION_ID ? 'Edit Medication' : 'Add New Medication'
+              SELECTED_MEDICATION_ID
+                ? t('pages.medicationInput.titleEdit')
+                : t('pages.medicationInput.titleSave')
             }
           >
             <View style={styles.container}>
@@ -249,7 +243,7 @@ const MedicationForm = (props: any) => {
               ) : (
                 <View style={styles.dropDownMenu}>
                   <DropdownMenu
-                    label="Medication"
+                    label={t('pages.medicationTake.titleEdit')}
                     options={medicationOptionsData.medication_list}
                     selectedValue={medication.medication_list_id}
                     onValueChange={(text: any) => {
@@ -276,7 +270,9 @@ const MedicationForm = (props: any) => {
                 </View>
               )}
               <View>
-                <Text style={styles.textStyle}>Dosage</Text>
+                <Text style={styles.textStyle}>
+                  {t('pages.medicationTake.dosage')}
+                </Text>
                 {SHOW_DOSAGE_INPUT ? (
                   <View>
                     <View style={styles.dosageView}>
@@ -312,7 +308,9 @@ const MedicationForm = (props: any) => {
                           // justifyContent: 'center',
                         }}
                       >
-                        <Text style={styles.unitText}>unit(s)</Text>
+                        <Text style={styles.unitText}>
+                          {t('pages.medicationTake.units')}
+                        </Text>
                       </View>
                     </View>
                     {dosageRangeError ? (
@@ -324,7 +322,9 @@ const MedicationForm = (props: any) => {
                 )}
               </View>
               <View style={styles.dropDownMenu}>
-                <Text style={styles.textStyle}>Frequency of Dosage</Text>
+                <Text style={styles.textStyle}>
+                  {t('pages.medicationInput.frequency')}
+                </Text>
                 {DOSAGE_RANGE.MAX > 1 || DOSAGE_RANGE.MAX === 0 ? (
                   <View style={styles.dropDownMenu}>
                     <DropdownMenu
@@ -359,7 +359,7 @@ const MedicationForm = (props: any) => {
 
               <View>
                 <DatePicker
-                  label="Start Date"
+                  label={t('pages.medicationInput.startDate')}
                   isPickerShow={isPickerShow}
                   setIsPickerShow={setIsPickerShow}
                   date={medication.start_date}
@@ -371,7 +371,7 @@ const MedicationForm = (props: any) => {
               </View>
               <View>
                 <DatePicker
-                  label="End Date"
+                  label={t('pages.medicationInput.endDate')}
                   isPickerShow={isPickerShow}
                   setIsPickerShow={setIsPickerShow}
                   date={medication.end_date}
@@ -384,10 +384,16 @@ const MedicationForm = (props: any) => {
             </View>
             {showDeleteModal && (
               <AccountDeActivateModal
-                headerText="Medication"
-                subHeading="Are you sure you wish to delete this medication?"
-                buttonUpperText="Yes"
-                buttonLowerText="Skip"
+                headerText={t('pages.medicationInput.dialogs.delete.title')}
+                subHeading={t(
+                  'pages.medicationInput.dialogs.delete.description'
+                )}
+                buttonUpperText={t(
+                  'pages.medicationInput.dialogs.delete.buttonText'
+                )}
+                buttonLowerText={t(
+                  'pages.medicationInput.dialogs.delete.buttonCancelText'
+                )}
                 isVisible={showDeleteModal}
                 setIsVisible={setShowDeleteModal}
                 callMe={deleteMedication}
@@ -397,7 +403,7 @@ const MedicationForm = (props: any) => {
         </ScrollView>
         {SELECTED_MEDICATION_ID ? (
           <GradientButton
-            text="Save Edit"
+            text={t('pages.medicationInput.editButton')}
             color={['#2C6CFC', '#2CBDFC']}
             disabled={!BUTTON_DISABLED}
             style={styles.gradientButton}
@@ -405,7 +411,7 @@ const MedicationForm = (props: any) => {
           />
         ) : (
           <GradientButton
-            text="Add"
+            text={t('pages.medicationInput.saveButton')}
             color={
               BUTTON_DISABLED
                 ? ['#2C6CFC', '#2CBDFC']

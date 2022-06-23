@@ -44,6 +44,7 @@ import GradientButton from 'components/linear-gradient-button';
 import { navigate } from 'services/nav-ref';
 import WithdrawProgram from 'components/widthdraw-from-program';
 import { showMessage } from 'react-native-flash-message';
+import { useTranslation } from 'react-i18next';
 // import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 const openMessenger = () => {
   Linking.openURL(Config.MESSENGER_URL);
@@ -52,6 +53,8 @@ const openMessenger = () => {
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 const HypertensionDiary = (props) => {
+  const { t } = useTranslation();
+
   const { colors } = useTheme();
   const styles = Styles(colors);
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -153,10 +156,7 @@ const HypertensionDiary = (props) => {
           bm_program_id: 3,
         },
       });
-      console.log(
-        response.data,
-        'withdraw---------hypertension---------------'
-      );
+
       setModalVisible(!modalVisible);
       navigate(SCREENS.YOUR_HEALTH);
       setIsVisible(false);
@@ -167,7 +167,6 @@ const HypertensionDiary = (props) => {
       });
       setIsVisible(false);
       setModalVisible(!modalVisible);
-      console.log('error response', err.errMsg.data.message);
     }
   };
 
@@ -201,7 +200,7 @@ const HypertensionDiary = (props) => {
       <TitleWithBackLayout
         isGradient={true}
         backTo={SCREENS.YOUR_HEALTH}
-        title="Hypertension Support Center"
+        title={t('pages.diabetesSupport.titles.hypertension_title')}
       >
         <ActivityIndicator visible={isVisiable} />
 
@@ -210,7 +209,7 @@ const HypertensionDiary = (props) => {
             {showDemo !== 5 && <View style={styles.demoContainer}></View>}
             <View>
               <Text style={[styles.headingText, { marginVertical: 10 }]}>
-                YOUR HYPERTENSION DAIRY
+                {t('pages.diabetesSupport.diaries.hypertension_diary')}
               </Text>
               <View
                 style={{
@@ -333,7 +332,7 @@ const HypertensionDiary = (props) => {
                 )}
               </View>
               <Text style={[styles.headingText, { marginVertical: 10 }]}>
-                HYPERTENSION EDUCATION
+                {t('pages.diabetesSupport.educations.hypertension_education')}
               </Text>
 
               <View
@@ -415,23 +414,27 @@ const HypertensionDiary = (props) => {
               <View style={styles.demoTextView}>
                 {showDemo === 0 && (
                   <Text style={styles.demoText}>
-                    Log your blood pressure here.
+                    {t('pages.diabetesSupport.onboarding.demo.bloodPressure')}
                   </Text>
                 )}
                 {showDemo === 1 && (
-                  <Text style={styles.demoText}>Log your medication here.</Text>
+                  <Text style={styles.demoText}>
+                    {t('pages.diabetesSupport.onboarding.demo.medication')}
+                  </Text>
                 )}
                 {showDemo === 2 && (
-                  <Text style={styles.demoText}>Log your weight here.</Text>
+                  <Text style={styles.demoText}>
+                    {t('pages.diabetesSupport.onboarding.demo.weight')}
+                  </Text>
                 )}
                 {showDemo === 3 && (
                   <Text style={styles.demoText}>
-                    View helpful video tutorials here.
+                    {t('pages.diabetesSupport.onboarding.demo.video')}
                   </Text>
                 )}
                 {showDemo === 4 && (
                   <Text style={styles.demoText}>
-                    Learn more about hypertension here.
+                    {t('pages.diabetesSupport.onboarding.demo.more')}
                   </Text>
                 )}
               </View>

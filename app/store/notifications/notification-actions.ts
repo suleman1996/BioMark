@@ -5,6 +5,7 @@ import {
   INBOX_NOTIFICATIONS,
   INBOX_OTHERS,
   INBOX_OTHERS_UNREAD,
+  INBOX_ALL_UNREAD,
 } from './constants';
 
 export const addAllInboxNotifications = (data: NotificationMessage[]) => ({
@@ -81,4 +82,24 @@ export const getAllOtherUnreadNotificationsR =
         // After developer alow below function on line 69
         // dispatch(loggingOut(false));
       });
+  };
+
+export const addAllInboxUnreadNotifications = (
+  data: NotificationMessage[]
+) => ({
+  type: INBOX_ALL_UNREAD,
+  payload: data,
+});
+
+export const getAllInboxUnreadNotificationsR =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await notificationsService
+      .getAlliInboxUnreadNotifications()
+      .then(async (res: any) => {
+        await dispatch(addAllInboxUnreadNotifications(res));
+      })
+      .catch((err) => {
+        logNow(err);
+      })
+      .finally(() => {});
   };

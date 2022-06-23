@@ -316,8 +316,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
   };
 
   const RadioBtn = ({ item }: { item: MedicalTemplateField }) => {
-    console.log('item===>', item);
-
     return (
       <>
         {item?.id == 'status' ? (
@@ -326,8 +324,6 @@ const GeneralModalPage = ({ isVisible, setIsVisible, qData }: Props) => {
             options={item.options}
             isTrue={has_condition ? 'Yes' : 'No'}
             setIsTrue={async (value: any) => {
-              console.log('value===>', value);
-
               let updatedItems = [];
               const d =
                 medicalHistory.filter((el) => el.condition_id === condition_id)

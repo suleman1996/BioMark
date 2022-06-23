@@ -8,6 +8,7 @@ export const makeStyles = (colors: any) =>
     container: {
       flex: 1,
       borderColor: colors.danger,
+      backgroundColor: 'white',
       flexDirection: 'column',
       color: colors.blue,
     },

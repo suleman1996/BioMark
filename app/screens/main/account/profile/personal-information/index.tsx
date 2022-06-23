@@ -71,7 +71,6 @@ const PersonalInformationScreen = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
 
       if (error?.errMsg?.status == 500) {
         showMessage({

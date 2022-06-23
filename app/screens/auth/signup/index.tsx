@@ -93,7 +93,6 @@ export default function Signup() {
     // setLoading(true);
     Keyboard.dismiss();
     const username = `+${selectCountryCode}${values?.phone_number}`;
-    console.log('username', username);
 
     const newDate = moment(date).format('YYYY-MM-DD');
     const password = values.password;

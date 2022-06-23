@@ -41,20 +41,19 @@ const Sleep = () => {
 
   React.useEffect(() => {
     handleLifeStyle();
-    console.log(bootstrap, 'bootstrapppppp');
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocus, bootstrap]);
 
   const handleSleep = async () => {
     try {
       setIsVisible(true);
-      const result = await userService.sleeping(indexNumber);
-      console.log('Sleep success ', result.data);
+      await userService.sleeping(indexNumber);
+
       navigate(SCREENS.EDIT_PROFILE);
       setIsVisible(false);
     } catch (error) {
       setIsVisible(false);
-      console.log('Api error ', error);
 
       if (error.errMsg.status == '500') {
         showMessage({
@@ -79,7 +78,7 @@ const Sleep = () => {
     try {
       setIsVisible(true);
       const result = await userService.getLifeStyle();
-      console.log('lifeStyle success ', result.data);
+
       result.data?.sleep?.sleep_duration == 'less than 4 hours' &&
         setSelectedSleep(sleepOptions[0].value);
       result.data?.sleep?.sleep_duration == '4-7 hours' &&

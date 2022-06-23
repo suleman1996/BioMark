@@ -64,14 +64,15 @@ const AccountMenu = (props) => {
       <TouchableRipple
         onPress={() => {
           if (
-            props.id_verification == 'DENIED' ||
-            props.id_verification == false
+            props?.id_verification == 'DENIED' ||
+            props?.id_verification == false ||
+            props?.id_verification == 'error'
           ) {
             navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
               screen: SCREENS.ID_VERIFICATION_START,
             });
           } else {
-            console.log('error', props.id_verification);
+            console.error('error', props.id_verification);
           }
         }}
         style={styles.singleItem}
@@ -109,7 +110,11 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>{t('pages.more.links.dependants')}</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            <Text style={styles.secondText}>{props.dependentsCount} Users</Text>
+            {props.dependentsCount >= 0 && (
+              <Text style={styles.secondText}>
+                {props.dependentsCount} Users
+              </Text>
+            )}
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
