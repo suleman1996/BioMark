@@ -126,13 +126,11 @@ const ExisitingBookingForDependent = (props: Props) => {
   // on test date change
 
   useEffect(() => {
-    console.log(testDate);
     const mSlots: any =
       testCenterSchedules?.test_centre_schedules.filter((item) => {
         return item?.schedule_date.toString() == testDate;
       })[0] ?? [];
     try {
-      console.log(mSlots);
     } catch (err) {}
     setMorningTimeSlots(mSlots?.morning_time_slots ?? []);
     setEveningTimeSlots(mSlots?.afternoon_time_slots ?? []);
@@ -210,7 +208,6 @@ const ExisitingBookingForDependent = (props: Props) => {
     const obj = testCentersBasedOnCities
       .find((item) => item.id == booking[itemIndex].test_type_id)
       ?.clinics.find((item) => item.test_centre_id == id);
-    console.log('bookingFormData ====>', obj);
     copyArray[itemIndex].test_centre_id = id;
     copyArray[itemIndex].test_centre_name = obj?.test_centre_name;
     copyArray[itemIndex].amount = obj?.test_amount;

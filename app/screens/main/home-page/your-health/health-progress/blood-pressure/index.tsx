@@ -28,10 +28,10 @@ import {
   graphXAxisConfig,
 } from 'utils/functions/graph/graph-utils';
 import { graphGreyColor } from 'utils/functions/graph/graph.types';
-import { userService } from 'services/user-service/user-service';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { Tip } from 'react-native-tip';
 import { useTranslation } from 'react-i18next';
+import { healthProgressServices } from 'services/health-progress-servive';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -78,7 +78,7 @@ const Index = () => {
   const bloodPressureGraphData = async () => {
     try {
       setIsLoading(true);
-      const result = await userService.getBloodPressureMapData({
+      const result = await healthProgressServices.getBloodPressureMapData({
         date: selectedValue.title,
         type: selectedfilterOption1.title.toLowerCase(),
       });
@@ -86,7 +86,7 @@ const Index = () => {
       setIsLoading(false);
       setHideGraph(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

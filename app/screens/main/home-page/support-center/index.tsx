@@ -22,15 +22,15 @@ const SupportCenter = () => {
 
   const termsCondition = async () => {
     try {
-      const response = await userService.Terms({
+      await userService.Terms({
         module: {
           terms: checked,
         },
       });
-      console.log(response, 'termsssssssssssssssssssss---------------');
+
       navigate(SCREENS.EMPOWER_PROGRAM);
     } catch (err) {
-      console.log('errrrrrrrrr', err.errMsg);
+      console.error('Terms and condition error ', err.errMsg);
       // showMessage({
       //   message: err.errMsg.error,
       //   type: 'danger',

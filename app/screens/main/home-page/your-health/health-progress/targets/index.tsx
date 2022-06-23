@@ -41,7 +41,6 @@ export default function InboxScreen({ route }) {
   };
 
   useEffect(() => {
-    console.log(route.params.key);
     if (!route.params.key) return;
     pagerRef.current.setPage(route.params.key);
   }, [route.params.key]);
@@ -129,7 +128,6 @@ export default function InboxScreen({ route }) {
       <TouchableOpacity
         style={styles.fixedIconView}
         onPress={() => {
-          console.log(123);
           if (currentPage === 0) {
             navigation.navigate(ADD_BLOOD_SUGAR);
           } else {

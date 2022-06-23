@@ -19,25 +19,6 @@ const TimeSlots = (props: Props) => {
   const { colors }: any = useTheme();
   const styles = makeStyles(colors);
 
-  // useEffect(() => {
-  //   try{
-  //     slots.map(item => {
-  //       const t = getZonedTime(testDate, item.slot_time);
-  //       console.log('time is',t);
-  //     })
-  //   }catch(err){
-
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   try {
-  //     slots.map((item) => {
-  //       console.log(isZonedTiimeIsPast(testDate, item.slot_time));
-  //     });
-  //   } catch (err) {}
-  // }, []);
-
   const ifSelected = (id: number) => {
     return time == id
       ? { backgroundColor: colors.primary }

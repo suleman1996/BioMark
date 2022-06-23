@@ -41,8 +41,6 @@ const HealthRisk = ({ route }) => {
     );
   };
 
-  // console.log(RISK_BTNS[listItems?.button_type]);
-
   return (
     <SafeAreaView style={styles.safeareaview}>
       <ScrollView style={{ flex: 1 }}>

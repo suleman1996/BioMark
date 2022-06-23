@@ -7,8 +7,6 @@ import Pdf from 'react-native-pdf';
 const ShowPicModal = ({ visible, modalData, onClose }) => {
   const { colors } = useTheme();
   const styles = Styles(colors);
-  //   const navigation = useNavigation();
-  console.log('modalData', modalData?.uri);
 
   return (
     <Modal animationType="none" transparent={true} visible={visible}>

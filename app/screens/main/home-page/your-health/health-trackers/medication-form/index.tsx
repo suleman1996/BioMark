@@ -221,16 +221,6 @@ const MedicationForm = (props: any) => {
     }
   };
 
-  console.log(
-    JSON.stringify(
-      {
-        medicationOptionsData,
-        medication,
-      },
-      null,
-      2
-    )
-  );
   return (
     <>
       <ActivityIndicator visible={loading} />

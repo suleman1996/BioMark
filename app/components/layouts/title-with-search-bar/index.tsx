@@ -9,12 +9,14 @@ import makeStyles from './styles';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { goBack } from 'services/nav-ref';
 import ChangeLanguage from 'components/change_language';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 type Props = {
   children: any;
   title: string;
   isBack?: boolean;
   translation?: boolean;
+  scroll?: boolean;
 };
 
 const TitleWithSearchBarLayout = ({
@@ -22,6 +24,7 @@ const TitleWithSearchBarLayout = ({
   title,
   isBack,
   translation,
+  scroll,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -50,9 +53,13 @@ const TitleWithSearchBarLayout = ({
         <View style={styles.halfPrimary} />
         <SearchBarWithLeftScanIcon />
       </View>
-      <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
-        {children}
-      </ScrollView>
+      {scroll === false ? (
+        <View style={{ marginTop: heightToDp(5) }}>{children}</View>
+      ) : (
+        <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
+          {children}
+        </ScrollView>
+      )}
     </View>
   );
 };

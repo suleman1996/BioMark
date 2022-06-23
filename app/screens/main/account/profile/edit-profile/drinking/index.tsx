@@ -56,7 +56,6 @@ const Drinking = () => {
 
   React.useEffect(() => {
     handleLifeStyle();
-    // console.log('Bootstrap =======>', bootstrap);
   }, [isFocus, bootstrap]);
 
   const handleDrinking = async () => {
@@ -68,13 +67,7 @@ const Drinking = () => {
     } else {
       try {
         setIsVisible(true);
-        const result = await userService.drinking(
-          isDrinking,
-          beer,
-          wine,
-          spirits
-        );
-        console.log('Drinking success ', result.data);
+        await userService.drinking(isDrinking, beer, wine, spirits);
         navigate(SCREENS.EDIT_PROFILE);
 
         setIsVisible(false);

@@ -156,10 +156,7 @@ const HypertensionDiary = (props) => {
           bm_program_id: 3,
         },
       });
-      console.log(
-        response.data,
-        'withdraw---------hypertension---------------'
-      );
+
       setModalVisible(!modalVisible);
       navigate(SCREENS.YOUR_HEALTH);
       setIsVisible(false);
@@ -170,7 +167,6 @@ const HypertensionDiary = (props) => {
       });
       setIsVisible(false);
       setModalVisible(!modalVisible);
-      console.log('error response', err.errMsg.data.message);
     }
   };
 

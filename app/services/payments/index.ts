@@ -52,7 +52,7 @@ function openBillPlzBrowser(
       amount: amount,
       description: desc,
     };
-    //  console.log({payload: payload})
+
     purchaseViaBillPlz({
       payment: {
         email: payload.email,

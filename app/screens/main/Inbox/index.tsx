@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
@@ -63,7 +63,6 @@ export default function InboxScreen() {
 
   const dispatch = useDispatch();
   const focused = useIsFocused();
-  console.log('allInboxUnreadNotifications', allInboxUnreadNotifications);
 
   /*eslint-disable */
   const _getAllInboxData = async () => {
@@ -112,39 +111,36 @@ export default function InboxScreen() {
       });
   }, [currentPageOtherNoti]);
   /*eslint-enable */
-
+  const readNotification = async (id) => {
+    try {
+      const result = await notificationsService.readInboxNotification(id);
+      console.log('id', id);
+      await dispatch(getAllInboxUnreadNotificationsR());
+      console.log('result', result.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const clickHandler = (notification: NotificationMessage) => {
-    console.log(
-      'notification?.has_pending_declaration',
-      notification?.has_pending_declaration
-    );
-
     switch (notification.notification_type) {
       case NotificationType.medication_reminder:
       case NotificationType.missed_medication:
-        console.log('1');
         navigate(SCREENS.HEALTH_PROGRESS, 1);
         break;
       case NotificationType.medical:
-        console.log('2');
         navigate(SCREENS.ACCOUNT);
 
         break;
       case NotificationType.result:
       case NotificationType.mcr:
-        console.log('3');
         navigate(SCREENS.HEALTH_RECORD);
         break;
       case NotificationType.message:
-        console.log('4');
         //   this.nav.navigateForward(['notification', 'doctor-message', notification.id]).then();
         break;
       case NotificationType.doctor:
-        console.log('5');
-        console.log('message'); // TODO not sure where to go
         break;
       case NotificationType.covid:
-        console.log('6');
         navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
           screen: SCREENS.COVID19BOOKINGS,
           params: {
@@ -153,7 +149,6 @@ export default function InboxScreen() {
         });
         break;
       case NotificationType.covid_result:
-        console.log('7');
         navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
           screen: SCREENS.COVID19HOME,
         });
@@ -192,6 +187,7 @@ export default function InboxScreen() {
       <View style={styles.previousNotificationContainer}>
         {/* Unread notification for inbox */}
         <FlatList
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -200,16 +196,23 @@ export default function InboxScreen() {
             <UnReadInboxNotificationItem
               getIcon={getIcon}
               item={item}
-              onPress={() => clickHandler(item)}
+              onPress={() => {
+                readNotification(item?.notification_id);
+                clickHandler(item);
+              }}
             />
           )}
         />
-        <View style={styles.blackLine} />
+
+        {allInboxUnreadNotifications.length < 0 ? (
+          <View style={styles.blackLine} />
+        ) : null}
+
         <View style={styles.headerContainer}>
           <Text style={styles.prevHeaderText}>Previous Notifications</Text>
         </View>
         <FlatList
-          nestedScrollEnabled
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -218,7 +221,9 @@ export default function InboxScreen() {
             <PreviousNotificationItem
               getIcon={getIcon}
               item={item}
-              onPress={() => clickHandler(item)}
+              onPress={() => {
+                clickHandler(item);
+              }}
             />
           )}
           ListFooterComponent={() => {
@@ -247,7 +252,7 @@ export default function InboxScreen() {
       <View style={styles.previousNotificationContainer}>
         <FlatList
           style={{ flexGrow: 1, marginTop: heightToDp(2) }}
-          nestedScrollEnabled
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -282,7 +287,7 @@ export default function InboxScreen() {
           <Text style={styles.prevHeaderText}>Previous Notifications</Text>
         </View>
         <FlatList
-          nestedScrollEnabled
+          scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
@@ -297,7 +302,7 @@ export default function InboxScreen() {
 
   return (
     <>
-      <TitleWithSearchBarLayout title={'Inbox'}>
+      <TitleWithSearchBarLayout title={'Inbox'} scroll={false}>
         <View style={styles.container}>
           <View
             style={{ height: heightToDp(200), paddingBottom: heightToDp(20) }}
@@ -305,19 +310,25 @@ export default function InboxScreen() {
             <View style={styles.tabNameContainer}>
               <Pressable
                 // onPress={() => PreviousNotification()}
-                onPress={() => pagerRef.current.setPage(0)}
+                onPress={() => {
+                  pagerRef.current.setPage(0);
+                  setCurrentPage(0);
+                }}
                 style={[
                   styles.tab,
-                  currentPage != 1 ? { borderBottomWidth: 3 } : {},
+                  currentPage == 0 ? { borderBottomWidth: 3 } : {},
                 ]}
               >
                 <Text style={styles.tabText}>
-                  Inbox ({allInboxNotificationsData.length})
+                  Inbox ({allInboxUnreadNotifications.length})
                 </Text>
               </Pressable>
               <Pressable
                 //  onPress={() => OtherNotification()}
-                onPress={() => pagerRef.current.setPage(1)}
+                onPress={() => {
+                  pagerRef.current.setPage(1);
+                  setCurrentPage(1);
+                }}
                 style={[
                   styles.tab,
                   currentPage == 1 ? { borderBottomWidth: 3 } : {},
@@ -328,20 +339,22 @@ export default function InboxScreen() {
                 </Text>
               </Pressable>
             </View>
-
-            <PagerView
-              ref={pagerRef}
-              onPageScroll={onPageScroll}
-              style={styles.pagerView}
-              initialPage={0}
-            >
-              <View key="0">
-                <PreviousNotification />
-              </View>
-              <View key="1">
-                <OtherNotification />
-              </View>
-            </PagerView>
+            <View style={{ height: heightToDp(63) }}>
+              <ScrollView>
+                <PagerView
+                  ref={pagerRef}
+                  onPageScroll={onPageScroll}
+                  style={styles.pagerView}
+                  initialPage={0}
+                >
+                  {currentPage === 0 ? (
+                    <PreviousNotification />
+                  ) : (
+                    <OtherNotification />
+                  )}
+                </PagerView>
+              </ScrollView>
+            </View>
           </View>
         </View>
       </TitleWithSearchBarLayout>

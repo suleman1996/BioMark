@@ -72,7 +72,7 @@ const AccountMenu = (props) => {
               screen: SCREENS.ID_VERIFICATION_START,
             });
           } else {
-            console.log('error', props.id_verification);
+            console.error('error', props.id_verification);
           }
         }}
         style={styles.singleItem}

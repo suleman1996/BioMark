@@ -72,8 +72,7 @@ const DiabetesCenter = (props) => {
   useEffect(() => {
     PspModuleData();
     handleHEalthTracker();
-    console.log('Health diabetes api =======>', hell);
-    console.log('dashborad api result', dashboard);
+
     setBarCodeData(dashboard?.program_detail?.barcode);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,7 +89,7 @@ const DiabetesCenter = (props) => {
       setPdfData(pspModuleData.pdf);
       setVideo(pspModuleData.video);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -156,7 +155,6 @@ const DiabetesCenter = (props) => {
 
   const renderItem = ({ item }) => (
     <>
-      {console.log(item, '---------------item-------------------')}
       <ImageBackground
         resizeMode="stretch"
         source={{ uri: item.thumbnail }}
@@ -187,7 +185,7 @@ const DiabetesCenter = (props) => {
           bm_program_id: 2,
         },
       });
-      console.log(response.data, 'withdrawwwwwwwwwwwwwwwwwwwwwww');
+
       setModalVisible(!modalVisible);
       navigate(SCREENS.YOUR_HEALTH);
       setIsVisible(false);
@@ -198,7 +196,6 @@ const DiabetesCenter = (props) => {
       });
       setIsVisible(false);
       setModalVisible(!modalVisible);
-      console.log('error response', err.errMsg.data.message);
     }
   };
 
@@ -382,7 +379,7 @@ const DiabetesCenter = (props) => {
           />
 
           <WithdrawProgram
-            text={t('pages.diabetesSupport.dialogs.withdraw.title')}
+            text={t('pages.diabetesSupport.dialogs.withdraw.buttonText')}
             visible={modalVisible}
             title={t('pages.diabetesSupport.dialogs.withdraw.title')}
             text2={t('pages.diabetesSupport.dialogs.withdraw.description')}
