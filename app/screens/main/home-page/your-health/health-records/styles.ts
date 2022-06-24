@@ -37,6 +37,7 @@ const styles = (colors: any) =>
       paddingHorizontal: 10,
       paddingTop: 40,
       backgroundColor: 'white',
+      zIndex: -3,
     },
     healthReports: {
       backgroundColor: '#C9E1F2',
