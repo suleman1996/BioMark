@@ -62,7 +62,9 @@ const HealthRisk = ({ route }) => {
           {route?.params?.title && (
             <View style={{ alignItems: 'center', paddingBottom: 20 }}>
               <ButtonComponent
-                onPress={() => navigation.navigate(route?.params?.onPress)}
+                onPress={() =>
+                  navigation.navigate(route?.params?.onPress, { back: 'back' })
+                }
                 title={route?.params?.title}
               />
             </View>

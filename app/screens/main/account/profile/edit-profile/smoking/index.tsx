@@ -18,9 +18,7 @@ import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { TextInput } from 'components';
 
 import { userService } from 'services/user-service/user-service';
-import { navigate } from 'services/nav-ref';
 import { showMessage } from 'react-native-flash-message';
-import SCREENS from 'navigation/constants';
 import { useSelector } from 'react-redux';
 
 import { options } from './year';
@@ -108,13 +106,13 @@ export default function SmokingScreen() {
         setIsVisible(true);
         await userService.Smoking(+(day || 0), 0, startSmoke, value);
 
-        navigate(SCREENS.EDIT_PROFILE);
+        navigation.goBack();
         setIsVisible(false);
       } else if (value === 1) {
         setIsVisible(true);
         await userService.Smoking(day, stopSmoke, startSmoke, value);
 
-        navigate(SCREENS.EDIT_PROFILE);
+        navigation.goBack();
         setIsVisible(false);
       } else {
         setIsVisible(true);
