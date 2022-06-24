@@ -154,11 +154,8 @@ const BookCovidTest = (props: Props) => {
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable
-              disabled={!booking.every((item) => item?.booking_status == 0)}
+              disabled={booking.every((item) => item?.booking_status !== 0)}
               onPress={() => {
-                logNow({
-                  booking: booking.every((item) => item?.booking_status == 0),
-                });
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_STEP,
                 });
