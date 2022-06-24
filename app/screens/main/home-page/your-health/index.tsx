@@ -86,7 +86,7 @@ const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
 
-  const { HYPERTENSION } = SCREENS;
+  const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
 
   // Redux Store data
   const healthTrackerFromStore = useSelector(
@@ -443,8 +443,7 @@ const Index = () => {
               <RenderCircle
                 title={t('pages.dashboard.healthProgress')}
                 svg={<Progress />}
-                // onPress={() => navigation.navigate(HEALTH_PROGRESS)}
-                onPress={() => console.log('hahah ', healthRiskColor)}
+                onPress={() => navigation.navigate(HEALTH_PROGRESS)}
               />
             </View>
             {getLabStatusData ? (
