@@ -7,21 +7,13 @@ import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Tip } from 'react-native-tip';
-// import { ModalButton } from 'components/higher-order';
+
 import { DropdownMenu, ButtonWithShadowContainer } from 'components/base';
 import { TitleWithBackLayout } from 'components/layouts';
 
-// import AsthmaModal from './modals/asthma';
-// import CancerModal from './modals/cancer';
-// import DiabetesModal from './modals/diabetes';
-// import GoutModal from './modals/gout';
-// import HighBloodPressureModal from './modals/high-blood-pressure';
-// import HighCholesterolModal from './modals/high-cholesterol';
-// import OthersModal from './modals/others';
-
 import makeStyles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { goBack } from 'services/nav-ref';
+
 import { IAppState } from 'store/IAppState';
 import { MedicalTemplateAttribute } from 'types/api';
 import GeneralModalPage from './modals/general-modal';
@@ -36,10 +28,14 @@ import { userService } from 'services/user-service/user-service';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { useTranslation } from 'react-i18next';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import SCREENS from 'navigation/constants/index';
 
 /* eslint-disable */
 const MedicalHistoryScreen = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation();
+  const route = useRoute();
 
   const options = [
     { value: '---', label: '---' },
@@ -224,7 +220,10 @@ const MedicalHistoryScreen = () => {
       <ButtonWithShadowContainer
         onPress={() => {
           saveDataonSavePress();
-          goBack();
+
+          route?.params?.back
+            ? navigation.navigate(SCREENS.HOME)
+            : navigation.goBack();
         }}
         title={t('pages.medicalHistory.continue')}
       />
