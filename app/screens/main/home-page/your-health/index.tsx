@@ -205,6 +205,8 @@ const Index = () => {
   };
 
   const healthRiskCheck = (item) => {
+    // console.log('xxx ', item);
+
     item?.name === 'Blood Pressure' &&
       navigation.navigate(SCREENS.BLOOD_PRESSURE, {
         back: SCREENS.YOUR_HEALTH,

@@ -12,18 +12,20 @@ import {
   feetToCm,
   measurementValidator,
 } from 'utils/functions/measurments';
+import SCREENS from 'navigation/constants/index';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { userService } from 'services/user-service/user-service';
 
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const BodyMeasurementScreen = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const navigation = useNavigation();
+  const route = useRoute();
 
   const styles = makeStyles(colors);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,7 +103,11 @@ const BodyMeasurementScreen = () => {
         },
       });
       // navigate(SCREENS.EDIT_PROFILE);
-      navigation.goBack();
+      {
+        route?.params?.back
+          ? navigation.navigate(SCREENS.YOUR_HEALTH)
+          : navigation.goBack();
+      }
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);

@@ -9,6 +9,9 @@ import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
 import { BookingListData } from 'types/api';
 import { dateFormat1, getTime } from 'utils/functions/date-format';
+import ButtonComponent from 'components/base/button';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 type Props = {};
 
 const HistoryBookings = (props: Props) => {
@@ -133,6 +136,19 @@ const HistoryBookings = (props: Props) => {
           );
         }}
       />
+      <View style={styles.buttonContainer}>
+        <ButtonComponent
+          bg={colors.lightBlue}
+          color={colors.black}
+          marginTop={1.2}
+          onPress={() =>
+            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+              screen: SCREENS.FAQSCREEN,
+            })
+          }
+          title={'FAQ'}
+        />
+      </View>
     </View>
   );
 };
