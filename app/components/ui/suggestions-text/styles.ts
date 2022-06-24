@@ -10,15 +10,16 @@ export const makeStyles = (colors: any) =>
       width: widthToDp(88),
       marginHorizontal: widthToDp(6),
       marginTop: heightToDp(2),
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems: 'center',
       padding: widthToDp(4),
       backgroundColor: colors.inputBg,
       borderRadius: widthToDp(2),
+      flexDirection: 'row',
     },
     text: {
       fontFamily: GlobalFonts.semiBold,
-      fontSize: responsiveFontSize(20),
+      fontSize: responsiveFontSize(16),
     },
   });
 

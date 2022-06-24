@@ -15,9 +15,10 @@ import { TitleWithBackLayout } from 'components/layouts';
 import { ButtonWithShadowContainer } from 'components/base';
 import { userService } from 'services/user-service/user-service';
 import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 import fonts from 'assets/fonts';
+import SCREENS from 'navigation/constants/index';
 
 import { ActivityIndicator } from 'components';
 
@@ -50,6 +51,7 @@ const Options2 = [
 export default function ExerciseScreen() {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const route = useRoute();
   const navigation = useNavigation();
   const styles = makeStyles(colors);
 
@@ -85,7 +87,12 @@ export default function ExerciseScreen() {
           },
         });
       }
-      navigation.goBack();
+
+      {
+        route?.params?.back
+          ? navigation.navigate(SCREENS.YOUR_HEALTH)
+          : navigation.goBack();
+      }
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);

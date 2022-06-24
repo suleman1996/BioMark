@@ -9,7 +9,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { default as useStateRef } from 'react-usestateref';
-import { goBack } from 'services/nav-ref';
+
 import { profileServices } from 'services/profile-services';
 import { IAppState } from 'store/IAppState';
 import {
@@ -18,21 +18,19 @@ import {
 } from 'store/profile/profile-actions';
 import { MedicalTemplateAttribute } from 'types/api';
 import { logNow } from 'utils/functions/log-binder';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import GeneralModalPage from './modals/general-modal';
-// import AsthmaModal from './modals/asthma';
-// import CancerModal from './modals/cancer';
-// import DiabetesModal from './modals/diabetes';
-// import GoutModal from './modals/gout';
-// import HighBloodPressureModal from './modals/high-blood-pressure';
-// import HighCholesterolModal from './modals/high-cholesterol';
-// import OthersModal from './modals/others';
+
 import makeStyles from './styles';
+import SCREENS from 'navigation/constants/index';
 
 /* eslint-disable */
 const MedicalHistoryScreen = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const route = useRoute();
+  const navigation = useNavigation();
 
   const focused = useIsFocused();
   const dispatch = useDispatch();
@@ -216,7 +214,9 @@ const MedicalHistoryScreen = () => {
       <ButtonWithShadowContainer
         onPress={() => {
           saveDataonSavePress();
-          goBack();
+          route?.params?.back
+            ? navigation.navigate(SCREENS.HOME)
+            : navigation.goBack();
         }}
         title={t('pages.medicalHistory.continue')}
       />

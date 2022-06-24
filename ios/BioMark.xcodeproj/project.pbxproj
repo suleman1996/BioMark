@@ -672,7 +672,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 50.22.27;
+				MARKETING_VERSION = 50.22.28;
 				PRODUCT_BUNDLE_IDENTIFIER = com.biomark.patientios;
 				PRODUCT_NAME = BioMark;
 				SWIFT_OBJC_BRIDGING_HEADER = "BioMark-Bridging-Header.h";
@@ -698,7 +698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 50.22.27;
+				MARKETING_VERSION = 50.22.28;
 				PRODUCT_BUNDLE_IDENTIFIER = com.biomark.patientios;
 				PRODUCT_NAME = BioMark;
 				SWIFT_OBJC_BRIDGING_HEADER = "BioMark-Bridging-Header.h";

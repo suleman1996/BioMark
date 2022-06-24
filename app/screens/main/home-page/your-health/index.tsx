@@ -12,10 +12,11 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
-
+import _ from 'lodash';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
@@ -205,6 +206,8 @@ const Index = () => {
   };
 
   const healthRiskCheck = (item) => {
+    // console.log('xxx ', item);
+
     item?.name === 'Blood Pressure' &&
       navigation.navigate(SCREENS.BLOOD_PRESSURE, {
         back: SCREENS.YOUR_HEALTH,
@@ -264,6 +267,14 @@ const Index = () => {
     }
   };
 
+  const keys = useMemo(() => {
+    const newKeys = Object.entries(healthRisk);
+    const temp = _.cloneDeep(newKeys[newKeys.length - 1]);
+    newKeys[newKeys.length - 1] = newKeys[newKeys.length - 2];
+    newKeys[newKeys.length - 2] = temp;
+    return newKeys;
+  }, [healthRisk]);
+
   return (
     <>
       <View style={styles.container}>
@@ -292,7 +303,7 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(healthRisk).map(([key, value]: any) => (
+              {keys.map(([key, value]: any) => (
                 <RenderHealthRiskView
                   key={key}
                   name={value?.name}
