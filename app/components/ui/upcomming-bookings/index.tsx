@@ -203,7 +203,9 @@ const UpcommingBookings = (props: Props) => {
         data={modalData}
         decalrations={[modalData]}
       />
-      {allUpcommingBookings?.length > 0 ? <SuggestionsText /> : null}
+      {allUpcommingBookings?.length > 0 ? (
+        <SuggestionsText icon={true} />
+      ) : null}
       <FlatList
         renderItem={_renderItem}
         data={allUpcommingBookings}
