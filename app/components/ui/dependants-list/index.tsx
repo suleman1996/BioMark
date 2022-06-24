@@ -18,12 +18,14 @@ import makeStyles from './styles';
 import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   data: DependentData[];
 };
 
 const DependantsList = (props: Props) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -109,7 +111,9 @@ const DependantsList = (props: Props) => {
           </View>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={styles.relationText}>Relation: </Text>
+          <Text style={styles.relationText}>
+            {t('pages.covid.covid-dependant.relation')}:{' '}
+          </Text>
           <Text style={styles.relationWithText}>{relation}</Text>
         </View>
       </View>
