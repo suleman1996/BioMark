@@ -73,6 +73,8 @@ import Paginator from 'components/paginator';
 import { useTranslation } from 'react-i18next';
 import { useIsFocused } from '@react-navigation/native';
 
+import { fromResponse } from 'screens/main/home-page/your-health/components/render-health-risk-view/service';
+
 const Index = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -84,7 +86,7 @@ const Index = () => {
   const { colors } = useTheme();
   const styles = Styles(colors);
 
-  const { HYPERTENSION, HEALTH_PROGRESS } = SCREENS;
+  const { HYPERTENSION } = SCREENS;
 
   // Redux Store data
   const healthTrackerFromStore = useSelector(
@@ -99,7 +101,7 @@ const Index = () => {
     (state: IAppState) => state.home.getLabStatusData
   );
   // console.log('getLabStatusData', healthRisk);
-
+  const [healthRiskColor, setHealthRiskColor] = React.useState([]);
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);
   const [stepIndicatorIcons] = React.useState([
@@ -135,6 +137,7 @@ const Index = () => {
 
   useEffect(() => {
     handleHEalthTracker();
+    setHealthRiskColor(fromResponse(healthRisk));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthTrackerFromStore, isFocused]);
 
@@ -266,6 +269,14 @@ const Index = () => {
     }
   };
 
+  const handleHealthTrackerColor = (value) => {
+    for (let i = 0; i < healthRiskColor.length; i++) {
+      if (healthRiskColor[i].name == value) {
+        return healthRiskColor[i].statusColor;
+      }
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -299,7 +310,7 @@ const Index = () => {
                   key={key}
                   name={value?.name}
                   onRiskPress={() => setSelectedRisk(key)}
-                  color={healthRisksColor(colors, value?.status)}
+                  color={handleHealthTrackerColor(value?.name)}
                   Svg={healthRiskData[key].icon}
                   status={value?.status}
                 />
@@ -432,7 +443,8 @@ const Index = () => {
               <RenderCircle
                 title={t('pages.dashboard.healthProgress')}
                 svg={<Progress />}
-                onPress={() => navigation.navigate(HEALTH_PROGRESS)}
+                // onPress={() => navigation.navigate(HEALTH_PROGRESS)}
+                onPress={() => console.log('hahah ', healthRiskColor)}
               />
             </View>
             {getLabStatusData ? (

@@ -1,3 +1,4 @@
+// import { fromResponse } from 'screens/main/home-page/your-health/components/render-health-risk-view/service';
 import { healthProgressServices } from 'services/health-progress-servive';
 import { healthRecordServices } from 'services/health-record-service';
 import { homeServices } from 'services/home-service';
@@ -283,6 +284,7 @@ export const getHealthTrackerRisks =
     await homeServices
       .getHealthRisks()
       .then(async (res) => {
+        // console.log(fromResponse(res));
         await dispatch(addHealthRisks(res));
       })
       .catch((err) => {
