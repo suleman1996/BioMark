@@ -539,7 +539,6 @@ const Index = () => {
                             title={t('common.verify')}
                             marginHorizontal={0.1}
                             marginVertical={0.1}
-                            //   disabled={!isValid && errors}
                             disabled={!isValid && errors ? true : false}
                           />
                         </TouchableOpacity>
