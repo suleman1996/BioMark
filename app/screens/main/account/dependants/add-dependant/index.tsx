@@ -28,9 +28,9 @@ import { GenderEnum } from 'enum/gender-enum';
 
 import makeStyles from './styles';
 import { IAppState } from 'store/IAppState';
-import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
 import { useTranslation } from 'react-i18next';
+import { profileServices } from 'services/profile-services';
 
 const AddDependantScreen = () => {
   const { t } = useTranslation();
@@ -71,9 +71,8 @@ const AddDependantScreen = () => {
 
   const userProfile = async () => {
     try {
-      const result = await userService.getUserProfile();
-
-      authContext.setUserData(result.data);
+      const result = await profileServices.getUserProfile();
+      authContext.setUserData(result);
     } catch (error) {}
   };
 

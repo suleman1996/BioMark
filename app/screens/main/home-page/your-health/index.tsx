@@ -12,11 +12,10 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
-import _ from 'lodash';
+
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
@@ -74,6 +73,8 @@ import Paginator from 'components/paginator';
 import { useTranslation } from 'react-i18next';
 import { useIsFocused } from '@react-navigation/native';
 
+import { fromResponse } from 'screens/main/home-page/your-health/components/render-health-risk-view/service';
+
 const Index = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -100,7 +101,7 @@ const Index = () => {
     (state: IAppState) => state.home.getLabStatusData
   );
   // console.log('getLabStatusData', healthRisk);
-
+  const [healthRiskColor, setHealthRiskColor] = React.useState([]);
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);
   const [stepIndicatorIcons] = React.useState([
@@ -136,6 +137,7 @@ const Index = () => {
 
   useEffect(() => {
     handleHEalthTracker();
+    setHealthRiskColor(fromResponse(healthRisk));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthTrackerFromStore, isFocused]);
 
@@ -161,7 +163,6 @@ const Index = () => {
     setHealthTracker([...tempTracker]);
   }, [healthTrackerFromStore, colors]);
 
-  //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
   const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
 
@@ -206,8 +207,6 @@ const Index = () => {
   };
 
   const healthRiskCheck = (item) => {
-    // console.log('xxx ', item);
-
     item?.name === 'Blood Pressure' &&
       navigation.navigate(SCREENS.BLOOD_PRESSURE, {
         back: SCREENS.YOUR_HEALTH,
@@ -267,13 +266,13 @@ const Index = () => {
     }
   };
 
-  const keys = useMemo(() => {
-    const newKeys = Object.entries(healthRisk);
-    const temp = _.cloneDeep(newKeys[newKeys.length - 1]);
-    newKeys[newKeys.length - 1] = newKeys[newKeys.length - 2];
-    newKeys[newKeys.length - 2] = temp;
-    return newKeys;
-  }, [healthRisk]);
+  const handleHealthTrackerColor = (value) => {
+    for (let i = 0; i < healthRiskColor.length; i++) {
+      if (healthRiskColor[i].name == value) {
+        return healthRiskColor[i].statusColor;
+      }
+    }
+  };
 
   return (
     <>
@@ -303,12 +302,12 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {keys.map(([key, value]: any) => (
+              {Object.entries(healthRisk).map(([key, value]: any) => (
                 <RenderHealthRiskView
                   key={key}
                   name={value?.name}
                   onRiskPress={() => setSelectedRisk(key)}
-                  color={healthRisksColor(colors, value?.status)}
+                  color={handleHealthTrackerColor(value?.name)}
                   Svg={healthRiskData[key].icon}
                   status={value?.status}
                 />

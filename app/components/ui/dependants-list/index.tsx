@@ -15,9 +15,9 @@ import { DependentData } from 'types/api/dependent';
 import { logNow } from 'utils/functions/log-binder';
 
 import makeStyles from './styles';
-import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { profileServices } from 'services/profile-services';
 
 type Props = {
   data: DependentData[];
@@ -36,9 +36,9 @@ const DependantsList = (props: Props) => {
 
   const userProfile = async () => {
     try {
-      const result = await userService.getUserProfile();
+      const result = await profileServices.getUserProfile();
 
-      authContext.setUserData(result.data);
+      authContext.setUserData(result);
     } catch (error) {}
   };
   const deleteSingleDependent = () => {
