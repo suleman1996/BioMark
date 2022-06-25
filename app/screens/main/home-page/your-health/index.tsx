@@ -12,10 +12,11 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
-
+import _ from 'lodash';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
@@ -266,13 +267,13 @@ const Index = () => {
     }
   };
 
-  const handleHealthTrackerColor = (value) => {
-    for (let i = 0; i < healthRiskColor.length; i++) {
-      if (healthRiskColor[i].name == value) {
-        return healthRiskColor[i].statusColor;
-      }
-    }
-  };
+  const keys = useMemo(() => {
+    const newKeys = Object.entries(healthRisk);
+    const temp = _.cloneDeep(newKeys[newKeys.length - 1]);
+    newKeys[newKeys.length - 1] = newKeys[newKeys.length - 2];
+    newKeys[newKeys.length - 2] = temp;
+    return newKeys;
+  }, [healthRisk]);
 
   return (
     <>
@@ -302,7 +303,7 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(healthRisk).map(([key, value]: any) => (
+              {keys.map(([key, value]: any) => (
                 <RenderHealthRiskView
                   key={key}
                   name={value?.name}

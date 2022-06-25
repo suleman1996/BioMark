@@ -8,10 +8,11 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import fonts from 'assets/fonts';
 import ButtonComponent from 'components/base/button';
-import { goBack } from 'services/nav-ref';
+import { goBack, navigate } from 'services/nav-ref';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { makeStyles } from './styles';
+import SCREENS from 'navigation/constants/index';
 
 type Props = {};
 
@@ -97,7 +98,7 @@ const PaymentFailed = (props: Props) => {
             <ButtonComponent
               bg={colors.lightBlue}
               color={colors.darkPrimary}
-              onPress={undefined}
+              onPress={() => navigate(SCREENS.HOME)}
               title={'Return to Homepage'}
               marginTop={1.5}
             />
