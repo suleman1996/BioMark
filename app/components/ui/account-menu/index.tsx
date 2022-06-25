@@ -110,7 +110,7 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>{t('pages.more.links.dependants')}</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            {props.dependentsCount >= 0 && (
+            {props.dependentsCount > 0 && (
               <Text style={styles.secondText}>
                 {props.dependentsCount} Users
               </Text>
