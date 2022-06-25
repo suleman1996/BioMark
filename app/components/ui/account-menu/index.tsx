@@ -38,6 +38,8 @@ const AccountMenu = (props) => {
   };
 
   const setVerificationText = () => {
+    console.log('eeer', props.id_verification);
+
     let status;
     switch (props.id_verification) {
       case 'SUCCESS':
@@ -64,15 +66,14 @@ const AccountMenu = (props) => {
       <TouchableRipple
         onPress={() => {
           if (
-            props?.id_verification == 'DENIED' ||
-            props?.id_verification == false ||
-            props?.id_verification == 'error'
+            props?.id_verification == 'pending' ||
+            props?.id_verification == 'verified'
           ) {
+            console.error('error', props.id_verification);
+          } else {
             navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
               screen: SCREENS.ID_VERIFICATION_START,
             });
-          } else {
-            console.error('error', props.id_verification);
           }
         }}
         style={styles.singleItem}

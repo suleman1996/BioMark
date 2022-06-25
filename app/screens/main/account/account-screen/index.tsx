@@ -32,6 +32,7 @@ const AccountScreen = () => {
   useEffect(() => {
     getAutoLogout();
   }, []);
+  console.log('authContext', authContext);
 
   const onToggleAutoLogout = async () => {
     setAutoLogoutCheck(!autoLogoutCheck);

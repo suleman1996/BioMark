@@ -72,8 +72,7 @@ const AddDependantScreen = () => {
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
-
-      authContext.setUserData(result.data);
+      authContext.setUserData(result);
     } catch (error) {}
   };
 
