@@ -380,7 +380,7 @@ const SearchBarWithLeftScanIcon = () => {
                   onPress={() => {
                     if (item?.params) {
                       navigate(item?.screen, item?.params);
-                    } else if (item?.screen) {
+                    } else if (item?.navigator) {
                       navigate(item?.navigator, { screen: item?.screen });
                     } else {
                       navigate(item?.screen);
