@@ -12,11 +12,10 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
-import _ from 'lodash';
+
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
@@ -164,7 +163,6 @@ const Index = () => {
     setHealthTracker([...tempTracker]);
   }, [healthTrackerFromStore, colors]);
 
-  //   const [yourHealthRisk, setYourHealthRisk] = React.useState(false);
   const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
 
@@ -209,8 +207,6 @@ const Index = () => {
   };
 
   const healthRiskCheck = (item) => {
-    // console.log('xxx ', item);
-
     item?.name === 'Blood Pressure' &&
       navigation.navigate(SCREENS.BLOOD_PRESSURE, {
         back: SCREENS.YOUR_HEALTH,
@@ -270,13 +266,13 @@ const Index = () => {
     }
   };
 
-  const keys = useMemo(() => {
-    const newKeys = Object.entries(healthRisk);
-    const temp = _.cloneDeep(newKeys[newKeys.length - 1]);
-    newKeys[newKeys.length - 1] = newKeys[newKeys.length - 2];
-    newKeys[newKeys.length - 2] = temp;
-    return newKeys;
-  }, [healthRisk]);
+  const handleHealthTrackerColor = (value) => {
+    for (let i = 0; i < healthRiskColor.length; i++) {
+      if (healthRiskColor[i].name == value) {
+        return healthRiskColor[i].statusColor;
+      }
+    }
+  };
 
   return (
     <>
@@ -306,7 +302,7 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {keys.map(([key, value]: any) => (
+              {Object.entries(healthRisk).map(([key, value]: any) => (
                 <RenderHealthRiskView
                   key={key}
                   name={value?.name}
