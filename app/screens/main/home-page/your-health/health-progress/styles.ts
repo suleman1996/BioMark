@@ -53,6 +53,7 @@ const styles = (colors: any) =>
       flex: 1,
       paddingHorizontal: 15,
       paddingTop: heightToDp(4),
+      zIndex: -3,
     },
     headingText: {
       fontFamily: fonts.bold,
