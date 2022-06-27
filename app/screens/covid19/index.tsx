@@ -19,10 +19,12 @@ import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import makeStyles from './styles';
 import { getUserProfileData } from 'store/profile/profile-actions';
+import { useTranslation } from 'react-i18next';
 
 type Props = {};
 
 const Covid19Home = (props: Props) => {
+  const { t } = useTranslation();
   const {} = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -82,7 +84,7 @@ const Covid19Home = (props: Props) => {
   return (
     <>
       {/* <ActivityIndicator visible={isLoading} /> */}
-      <TitleWithSearchBarLayout isBack title={'COVID-19'}>
+      <TitleWithSearchBarLayout isBack title={t('pages.covid.header')}>
         <View style={styles.container}>
           <View style={styles.badgesContainer}>
             <BookTestButton />
