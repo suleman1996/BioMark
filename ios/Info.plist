@@ -34,6 +34,8 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
+	<key>UIUserInterfaceStyle</key>
+    <string>Light</string>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
