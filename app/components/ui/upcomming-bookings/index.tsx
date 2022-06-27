@@ -20,12 +20,14 @@ import CovidHealthDeclarationForAllUpCommingModal from '../covid-health-declarat
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
 import SCREENS from 'navigation/constants/index';
+import { useRoute } from '@react-navigation/native';
 
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
   const {} = props;
   const { colors }: any = useTheme();
+  const route = useRoute();
   const allUpcommingBookings = useSelector(
     (state: IAppState) => state.covid.allBookingsData.upcoming
   );
@@ -46,7 +48,10 @@ const UpcommingBookings = (props: Props) => {
     }
   }, [allUpcommingBookings]);
   useEffect(() => {
-    console.log('props', props);
+    console.log('route', route?.params?.has_pending_declaration);
+    if (route?.params?.has_pending_declaration) {
+      setIsHealthDeclarationAll(true);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const upDateBatch = async (item: BookingListDataUpcoming) => {
@@ -202,6 +207,7 @@ const UpcommingBookings = (props: Props) => {
         isVisible={isHealthDeclarationAll}
         data={modalData}
         decalrations={[modalData]}
+        allUpcommingBookings={allUpcommingBookings}
       />
       {allUpcommingBookings?.length > 0 ? (
         <SuggestionsText icon={true} />

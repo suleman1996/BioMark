@@ -43,8 +43,8 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
     },
     titleText: {
-      fontSize: responsiveFontSize(20),
-      fontFamily: GlobalFonts.bold,
+      fontSize: responsiveFontSize(14),
+      fontFamily: GlobalFonts.regular,
       color: colors.darkPrimary,
     },
     statusText: {
