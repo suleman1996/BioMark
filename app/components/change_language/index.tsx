@@ -36,7 +36,6 @@ const ChangeLanguage = () => {
     try {
       const response = await userService.setLanguage(lang);
       userProfile();
-      console.log('Res', response);
     } catch (err) {
       console.error(err);
     }
@@ -45,8 +44,6 @@ const ChangeLanguage = () => {
     try {
       const result = await profileServices.getUserProfile();
       authContext.setUserData(result);
-      console.log('profile', result);
-
       i18next.changeLanguage(result?.app_lang);
     } catch (error) {
       console.error(error);
