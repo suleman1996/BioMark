@@ -30,28 +30,14 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
   const {
     patient_name = '',
     booking_id = '',
-    // booking_test_type = '',
-    // test_centre_name = '',
     booking_schedule_date = '',
     booking_slot_time = '',
-    // test_country_name = '',
-    // test_city_name = '',
-    // declaration_enabled = false,
-    // // declaration_complete = false,
-    // is_cancellable = false,
     is_dependent = false,
   } = {
     patient_name: item.patient_name,
     booking_id: item.reference_code,
-    // booking_test_type: item.booking_test_type,
-    // test_centre_name: item.test_centre_name,
     booking_schedule_date: item?.booking_schedule?.toString(),
     booking_slot_time: item.booking_slot_time,
-    // test_country_name: item.test_country_name,
-    // test_city_name: item.test_city_name,
-    // declaration_enabled: item.declaration_enabled,
-    // declaration_complete: item.declaration_complete,
-    // is_cancellable: item.is_cancellable,
     is_dependent: item.is_dependent,
   };
   const { colors } = useTheme();
@@ -70,9 +56,6 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
   const qu4 = false ? qData.question4 : qData.dquestion4;
   const qu5 = false ? qData.question5 : qData.dquestion5;
 
-  const id = item.id;
-
-  let [terms, setTerms] = useState<any>(null);
   const termsDesc = qData.terms;
 
   const [isDeclared, setIsDeclared] = useState(false);
