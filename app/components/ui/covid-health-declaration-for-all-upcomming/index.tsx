@@ -26,8 +26,6 @@ type Props = {
 
 const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
   const { setIsVisible, isVisible, data, allUpcommingBookings } = props;
-  console.log('allUpcomming', allUpcommingBookings);
-
   const item = data;
   const {
     patient_name = '',
@@ -81,9 +79,6 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
   const [isDecCompleted, setIsDecCompleted] = useState(false);
   const [filterdData, setFilterdData] = useState([]);
   const [formData, setFormData] = useState([]);
-
-  // 3. Generate QRCode
-  console.log('form', formData);
 
   useEffect(() => {
     let arr = [];
