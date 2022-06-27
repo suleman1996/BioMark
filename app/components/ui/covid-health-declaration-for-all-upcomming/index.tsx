@@ -91,11 +91,11 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
       if (!ele?.declaration_complete && ele?.declaration_enabled) {
         arr.push({
           id: ele.id,
-          q1: false,
-          q2: false,
-          q3: false,
-          q4: false,
-          q5: false,
+          q1: null,
+          q2: null,
+          q3: null,
+          q4: null,
+          q5: null,
           terms: false,
         });
       }
@@ -129,6 +129,22 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
       .catch((err) => {
         // setIsVisible(false);
       });
+  };
+  const validationForm = () => {
+    formData.map((ele) => {
+      if (
+        ele.q1 == null ||
+        ele.q2 == null ||
+        ele.q3 == null ||
+        ele.q4 == null ||
+        ele.q5 == null ||
+        ele.terms == false
+      ) {
+        setIsDeclared(false);
+      } else {
+        setIsDeclared(true);
+      }
+    });
   };
   /*eslint-enable */
 
@@ -227,6 +243,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q1 = true;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                   color={colors.darkPrimary}
                                 />
@@ -246,6 +263,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q1 = false;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                   color={colors.darkPrimary}
                                 />
@@ -268,6 +286,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q2 = true;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>Yes</Text>
@@ -287,6 +306,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q2 = false;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>No</Text>
@@ -308,6 +328,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q3 = true;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>Yes</Text>
@@ -327,6 +348,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q3 = false;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>No</Text>
@@ -348,6 +370,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q4 = true;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>Yes</Text>
@@ -364,9 +387,10 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                   onPress={() => {
                                     setFormData((prev) => {
                                       const newVal = [...prev];
-                                      newVal[index].q4 = true;
+                                      newVal[index].q4 = false;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>No</Text>
@@ -390,6 +414,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q5 = true;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>Yes</Text>
@@ -409,6 +434,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                                       newVal[index].q5 = false;
                                       return newVal;
                                     });
+                                    validationForm();
                                   }}
                                 />
                                 <Text style={styles.radioText}>No</Text>
@@ -423,13 +449,14 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                             >
                               <CheckBoxWithText
                                 rightText={termsDesc}
-                                isChecked={terms}
+                                isChecked={formData[index].terms}
                                 setIsChecked={(value: any) => {
                                   setFormData((prev) => {
                                     const newVal = [...prev];
-                                    newVal[index].q5 = value;
+                                    newVal[index].terms = value;
                                     return newVal;
                                   });
+                                  validationForm();
                                 }}
                               />
                             </View>
@@ -460,7 +487,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                     sendDataToServer();
                   }
                 }}
-                // disabled={!isDeclared}
+                disabled={!isDeclared}
                 style={isDeclared ? styles.btnEnable : styles.btnDisable}
               >
                 <Text style={[styles.btnText2]}>Submit</Text>
