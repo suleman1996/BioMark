@@ -437,7 +437,9 @@ const ExisitingBookingForDependent = (props: Props) => {
             <Text style={styles.innerTitle}>Country</Text>
             <View style={{ position: 'relative' }}>
               {booking[0].country_id && itemIndex == 1 ? (
-                <FakeDropdownUnSelectable title="Singapore" />
+                <FakeDropdownUnSelectable
+                  title={booking[0]?.test_country_name || ''}
+                />
               ) : (
                 <DropdownCountryCity
                   options={bookingFormData.country_list.map((item) => {
