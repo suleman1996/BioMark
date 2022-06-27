@@ -39,7 +39,6 @@ const DependantsList = (props: Props) => {
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
-
       authContext.setUserData(result);
     } catch (error) {}
   };

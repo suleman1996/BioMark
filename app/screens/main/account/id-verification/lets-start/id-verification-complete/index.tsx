@@ -30,7 +30,7 @@ const IdVerfiicationComplete = (props: Props) => {
     try {
       const result = await profileServices.getUserProfile();
 
-      authContext.setUserData(result);
+      authContext.setUserData(result?.data);
     } catch (error) {}
   };
   useEffect(async () => {
