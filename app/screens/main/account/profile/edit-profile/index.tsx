@@ -37,6 +37,7 @@ import { useDispatch } from 'react-redux';
 
 import { getUserProfileData } from 'store/profile/profile-actions';
 import { useTranslation } from 'react-i18next';
+import { profileServices } from 'services/profile-services';
 
 let cameraIs = false;
 
@@ -68,8 +69,8 @@ const EditProfileScreen = () => {
       setIsLoading(true);
       await Promise.all([userService.updateProfileAvatar(pic)]);
 
-      const result = await userService.getUserProfile();
-      authContext.setUserData(result.data);
+      const result = await profileServices.getUserProfile();
+      authContext.setUserData(result);
 
       setIsLoading(false);
     } catch (error) {

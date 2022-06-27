@@ -2,7 +2,6 @@ import ButtonComponent from 'components/base/button';
 import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
-import SCREENS from 'navigation/constants';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -17,8 +16,10 @@ import { dateFormat1, getDayName, getTime } from 'utils/functions/date-format';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import BarCodeModal from '../bar-code-modal';
+import CovidHealthDeclarationForAllUpCommingModal from '../covid-health-declaration-for-all-upcomming/index';
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
+import SCREENS from 'navigation/constants/index';
 
 type Props = {};
 
@@ -32,6 +33,8 @@ const UpcommingBookings = (props: Props) => {
   const [isHealthDeclaration, setIsHealthDeclaration] = useState(false);
   const [barCodeText, setBarCodeText] = useState('');
 
+  const [isHealthDeclarationAll, setIsHealthDeclarationAll] = useState(false);
+
   const [modalData, setModalData] = useState({});
   const [isBarModal, setIsBarModal] = useState(false);
 
@@ -42,7 +45,10 @@ const UpcommingBookings = (props: Props) => {
       upDateBatch(allUpcommingBookings);
     }
   }, [allUpcommingBookings]);
-
+  useEffect(() => {
+    console.log('props', props);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const upDateBatch = async (item: BookingListDataUpcoming) => {
     try {
       await covidService.batchReadForUpcomming({ data: item });
@@ -191,7 +197,15 @@ const UpcommingBookings = (props: Props) => {
         data={modalData}
         decalrations={[modalData]}
       />
-      {allUpcommingBookings?.length > 0 ? <SuggestionsText /> : null}
+      <CovidHealthDeclarationForAllUpCommingModal
+        setIsVisible={setIsHealthDeclarationAll}
+        isVisible={isHealthDeclarationAll}
+        data={modalData}
+        decalrations={[modalData]}
+      />
+      {allUpcommingBookings?.length > 0 ? (
+        <SuggestionsText icon={true} />
+      ) : null}
       <FlatList
         renderItem={_renderItem}
         data={allUpcommingBookings}

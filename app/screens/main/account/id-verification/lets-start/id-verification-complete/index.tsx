@@ -17,6 +17,7 @@ import SCREENS from 'navigation/constants';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from 'utils/auth-context';
 import { userService } from 'services/user-service/user-service';
+import { profileServices } from 'services/profile-services';
 type Props = {};
 
 const IdVerfiicationComplete = (props: Props) => {
@@ -27,9 +28,9 @@ const IdVerfiicationComplete = (props: Props) => {
   const authContext = useContext(AuthContext);
   const userProfile = async () => {
     try {
-      const result = await userService.getUserProfile();
+      const result = await profileServices.getUserProfile();
 
-      authContext.setUserData(result.data);
+      authContext.setUserData(result);
     } catch (error) {}
   };
   useEffect(async () => {

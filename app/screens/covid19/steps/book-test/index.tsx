@@ -113,6 +113,17 @@ const BookCovidTest = (props: Props) => {
             disabled={isDependantAdd}
             title={'Add New Dependant'}
           />
+          {!isDependantAdd ? null : (
+            <ButtonComponent
+              disabled={isDependantAdd}
+              onPress={() => {
+                // setIsExisting(true);
+                pushOneAddSelf();
+              }}
+              marginTop={1}
+              title={'Add Self'}
+            />
+          )}
           {/* Add Dependant Form */}
           {isDependantAdd ? (
             <AddDependantForm
@@ -121,15 +132,17 @@ const BookCovidTest = (props: Props) => {
               }}
             />
           ) : null}
-          <ButtonComponent
-            disabled={isDependantAdd}
-            onPress={() => {
-              // setIsExisting(true);
-              pushOneAddSelf();
-            }}
-            marginTop={1}
-            title={'Add Self'}
-          />
+          {isDependantAdd ? null : (
+            <ButtonComponent
+              disabled={isDependantAdd}
+              onPress={() => {
+                // setIsExisting(true);
+                pushOneAddSelf();
+              }}
+              marginTop={1}
+              title={'Add Self'}
+            />
+          )}
           <View style={{ marginTop: heightToDp(12) }} />
           <View style={styles.bottom2Btns}>
             <Pressable
@@ -141,15 +154,12 @@ const BookCovidTest = (props: Props) => {
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable
-              disabled={
-                booking.length <= 0 &&
-                booking.every((item) => item.booking_status == 0)
-              }
-              onPress={() =>
+              disabled={booking.every((item) => item?.booking_status !== 0)}
+              onPress={() => {
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_STEP,
-                })
-              }
+                });
+              }}
               style={[styles.btnEnable, ifNextDisabled]}
             >
               <Text style={[styles.btnText2]}>Next</Text>

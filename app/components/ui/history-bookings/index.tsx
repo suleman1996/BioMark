@@ -1,17 +1,17 @@
-import ButtonComponent from 'components/base/button';
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { makeStyles } from './styles';
-import { navigate } from './../../../services/nav-ref';
-import SCREENS from 'navigation/constants';
 import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
 import { BookingListData } from 'types/api';
 import { dateFormat1, getTime } from 'utils/functions/date-format';
+import ButtonComponent from 'components/base/button';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants/index';
 type Props = {};
 
 const HistoryBookings = (props: Props) => {
