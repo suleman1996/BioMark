@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { CheckBoxWithText, Modal } from 'components/base';
 import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
@@ -24,7 +25,9 @@ type Props = {
 };
 
 const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
-  const { setIsVisible, isVisible, data } = props;
+  const { setIsVisible, isVisible, data, allUpcommingBookings } = props;
+  console.log('allUpcomming', allUpcommingBookings);
+
   const item = data;
   const {
     patient_name = '',
@@ -70,41 +73,54 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
   const qu5 = false ? qData.question5 : qData.dquestion5;
 
   const id = item.id;
-  let [q1, setQ1] = useState<any>(null);
-  let [q2, setQ2] = useState<any>(null);
-  let [q3, setQ3] = useState<any>(null);
-  let [q4, setQ4] = useState<any>(null);
-  let [q5, setQ5] = useState<any>(null);
+
   let [terms, setTerms] = useState<any>(null);
   const termsDesc = qData.terms;
 
   const [isDeclared, setIsDeclared] = useState(false);
   const [isDecCompleted, setIsDecCompleted] = useState(false);
+  const [filterdData, setFilterdData] = useState([]);
+  const [formData, setFormData] = useState([]);
 
   // 3. Generate QRCode
+  console.log('form', formData);
 
   useEffect(() => {
-    const isEnabled =
-      q1 !== null &&
-      q2 !== null &&
-      q3 !== null &&
-      q4 !== null &&
-      q5 !== null &&
-      terms !== null &&
-      terms !== false
-        ? true
-        : false;
-    setIsDeclared(isEnabled);
-  }, [q1, q2, q3, q4, q5, terms]);
+    let arr = [];
+    allUpcommingBookings.map((ele) => {
+      if (!ele?.declaration_complete && ele?.declaration_enabled) {
+        arr.push({
+          id: ele.id,
+          q1: false,
+          q2: false,
+          q3: false,
+          q4: false,
+          q5: false,
+          terms: false,
+        });
+      }
+    });
+    setFormData(arr);
+    /*eslint-disable */
+  }, []);
+  useEffect(() => {
+    let arr = [];
+    allUpcommingBookings.map((ele) => {
+      if (!ele?.declaration_complete && ele?.declaration_enabled) {
+        arr.push(ele);
+      }
+    });
+    setFilterdData(arr);
+    /*eslint-disable */
+  }, []);
 
-  /*eslint-disable */
   const getAllBookingsData = async () => {
     await dispatch(getAllBookingsDataR());
   };
 
   const sendDataToServer = async () => {
     covidService
-      .updateHealthDeclaration({ id, q1, q2, q3, q4, q5, terms })
+      .updateMultiPleHealthDeclaration(formData)
       .then(() => {
         setIsVisible(false);
         getAllBookingsData();
@@ -142,207 +158,314 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                   constData.covidTitle3
                 }`}
               </Text>
-
-              <View style={styles.cardParent}>
-                <View style={styles.parent}>
-                  <Pressable
-                    onPress={() => {
-                      setIsCardOpen(!isCardOpen);
-                    }}
-                    style={styles.cardContainer}
-                  >
-                    <Text style={styles.titleText}>
-                      {is_dependent ? patient_name : 'You'}
-                    </Text>
-                    <View style={styles.bookingStatusContainer}>
-                      {isCardOpen ? null : (
-                        <Text
-                          style={[
-                            styles.statusText,
-                            isDeclared ? { color: colors.lightGreen } : {},
-                          ]}
-                        >
-                          {isDeclared ? 'Declared' : 'Not Declared'}
-                        </Text>
-                      )}
-
-                      <Entypo
-                        size={responsiveFontSize(30)}
-                        name={
-                          true ? 'chevron-small-down' : 'chevron-small-right'
-                        }
-                      />
-                    </View>
-                  </Pressable>
-                  {isCardOpen ? <View style={styles.headerLine} /> : null}
-                  <ExpandableView
-                    keyboardShouldPersistTaps="always"
-                    showsVerticalScrollIndicator={false}
-                    show={isCardOpen}
-                  >
-                    <View
-                    // style={{ height: heightToDp(40) }}
-                    // nestedScrollEnabled
-                    // showsVerticalScrollIndicator={false}
-                    >
-                      <View style={styles.expendedContainer}>
-                        <Text style={styles.innerTitle}>{headerTitle}</Text>
-                        <Text style={styles.q}>{qu1}</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q1 ? 'checked' : 'unchecked'}
-                              onPress={() => setQ1(true)}
-                              color={colors.darkPrimary}
-                            />
-                            <Text style={styles.radioText}>Yes</Text>
-                          </View>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q1 == false ? 'checked' : 'unchecked'}
-                              onPress={() => setQ1(false)}
-                              color={colors.darkPrimary}
-                            />
-                            <Text style={styles.radioText}>No</Text>
-                          </View>
+              {filterdData?.map((ele, index) => (
+                <>
+                  <View style={styles.cardParent}>
+                    <View style={styles.parent}>
+                      <Pressable
+                        onPress={() => {
+                          setIsCardOpen(!isCardOpen);
+                        }}
+                        style={styles.cardContainer}
+                      >
+                        <View>
+                          <Text style={styles.titleText}>
+                            {ele?.patient_name}
+                          </Text>
+                          <Text style={styles.titleText}>
+                            {ele?.reference_code}
+                          </Text>
                         </View>
+                        <View style={styles.bookingStatusContainer}>
+                          {isCardOpen ? null : (
+                            <Text
+                              style={[
+                                styles.statusText,
+                                isDeclared ? { color: colors.lightGreen } : {},
+                              ]}
+                            >
+                              {isDeclared ? 'Declared' : 'Not Declared'}
+                            </Text>
+                          )}
 
-                        <Text style={styles.q}>{qu2}</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q2 ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ2(true)}
-                            />
-                            <Text style={styles.radioText}>Yes</Text>
-                          </View>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q2 == false ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ2(false)}
-                            />
-                            <Text style={styles.radioText}>No</Text>
-                          </View>
-                        </View>
-
-                        <Text style={styles.q}>{qu3}</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q3 ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ3(true)}
-                            />
-                            <Text style={styles.radioText}>Yes</Text>
-                          </View>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q3 == false ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ3(false)}
-                            />
-                            <Text style={styles.radioText}>No</Text>
-                          </View>
-                        </View>
-
-                        <Text style={styles.q}>{qu4}</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q4 ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ4(true)}
-                            />
-                            <Text style={styles.radioText}>Yes</Text>
-                          </View>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q4 == false ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ4(false)}
-                            />
-                            <Text style={styles.radioText}>No</Text>
-                          </View>
-                        </View>
-
-                        <Text style={styles.q}>{qu5}</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q5 ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ5(true)}
-                            />
-                            <Text style={styles.radioText}>Yes</Text>
-                          </View>
-                          <View style={styles.radio}>
-                            <RadioButton
-                              value={'Yes'}
-                              status={q5 == false ? 'checked' : 'unchecked'}
-                              color={colors.darkPrimary}
-                              onPress={() => setQ5(false)}
-                            />
-                            <Text style={styles.radioText}>No</Text>
-                          </View>
-                        </View>
-
-                        <View
-                          style={{
-                            marginTop: heightToDp(2),
-                            width: widthToDp(75),
-                          }}
-                        >
-                          <CheckBoxWithText
-                            rightText={termsDesc}
-                            isChecked={terms}
-                            setIsChecked={(value: any) => {
-                              setTerms(value);
-                            }}
+                          <Entypo
+                            size={responsiveFontSize(30)}
+                            name={
+                              true
+                                ? 'chevron-small-down'
+                                : 'chevron-small-right'
+                            }
                           />
                         </View>
-                      </View>
+                      </Pressable>
+                      {isCardOpen ? <View style={styles.headerLine} /> : null}
+                      <ExpandableView
+                        keyboardShouldPersistTaps="always"
+                        showsVerticalScrollIndicator={false}
+                        show={!isCardOpen}
+                      >
+                        <View
+                        // style={{ height: heightToDp(40) }}
+                        // nestedScrollEnabled
+                        // showsVerticalScrollIndicator={false}
+                        >
+                          <View style={styles.expendedContainer}>
+                            <Text style={styles.innerTitle}>{headerTitle}</Text>
+                            <Text style={styles.q}>{qu1}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q1 == true
+                                      ? 'checked'
+                                      : 'unchecked'
+                                  }
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q1 = true;
+                                      return newVal;
+                                    });
+                                  }}
+                                  color={colors.darkPrimary}
+                                />
+                                <Text style={styles.radioText}>Yes</Text>
+                              </View>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q1 == false
+                                      ? 'checked'
+                                      : 'unchecked'
+                                  }
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q1 = false;
+                                      return newVal;
+                                    });
+                                  }}
+                                  color={colors.darkPrimary}
+                                />
+                                <Text style={styles.radioText}>No</Text>
+                              </View>
+                            </View>
+
+                            <Text style={styles.q}>{qu2}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q2 ? 'checked' : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q2 = true;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>Yes</Text>
+                              </View>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q2 == false
+                                      ? 'checked'
+                                      : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q2 = false;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>No</Text>
+                              </View>
+                            </View>
+
+                            <Text style={styles.q}>{qu3}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q3 ? 'checked' : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q3 = true;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>Yes</Text>
+                              </View>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q3 == false
+                                      ? 'checked'
+                                      : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q3 = false;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>No</Text>
+                              </View>
+                            </View>
+
+                            <Text style={styles.q}>{qu4}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q4 ? 'checked' : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q4 = true;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>Yes</Text>
+                              </View>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q4 == false
+                                      ? 'checked'
+                                      : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q4 = true;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>No</Text>
+                              </View>
+                            </View>
+
+                            <Text style={styles.q}>{qu5}</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q5 == true
+                                      ? 'checked'
+                                      : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q5 = true;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>Yes</Text>
+                              </View>
+                              <View style={styles.radio}>
+                                <RadioButton
+                                  value={'Yes'}
+                                  status={
+                                    formData[index].q5 == false
+                                      ? 'checked'
+                                      : 'unchecked'
+                                  }
+                                  color={colors.darkPrimary}
+                                  onPress={() => {
+                                    setFormData((prev) => {
+                                      const newVal = [...prev];
+                                      newVal[index].q5 = false;
+                                      return newVal;
+                                    });
+                                  }}
+                                />
+                                <Text style={styles.radioText}>No</Text>
+                              </View>
+                            </View>
+
+                            <View
+                              style={{
+                                marginTop: heightToDp(2),
+                                width: widthToDp(75),
+                              }}
+                            >
+                              <CheckBoxWithText
+                                rightText={termsDesc}
+                                isChecked={terms}
+                                setIsChecked={(value: any) => {
+                                  setFormData((prev) => {
+                                    const newVal = [...prev];
+                                    newVal[index].q5 = value;
+                                    return newVal;
+                                  });
+                                }}
+                              />
+                            </View>
+                          </View>
+                        </View>
+                      </ExpandableView>
                     </View>
-                  </ExpandableView>
-                </View>
-                <View style={styles.bottom2Btns}>
-                  <Pressable
-                    onPress={() =>
-                      navigate(SCREENS.MAIN_NAVIGATOR, {
-                        screen: SCREENS.HOME,
-                      })
-                    }
-                    style={[styles.btn, { backgroundColor: colors.white }]}
-                  >
-                    <Text style={[styles.btnText]}>Do later</Text>
-                  </Pressable>
-                  <Pressable
-                    onPress={() => {
-                      if (isCardOpen) {
-                        setIsCardOpen(false);
-                      } else {
-                        sendDataToServer();
-                      }
-                      //
-                    }}
-                    disabled={!isDeclared}
-                    style={isDeclared ? styles.btnEnable : styles.btnDisable}
-                  >
-                    <Text style={[styles.btnText2]}>Submit</Text>
-                  </Pressable>
-                </View>
-              </View>
+                  </View>
+                </>
+              ))}
             </ScrollView>
+            <View style={styles.bottom2Btns}>
+              <Pressable
+                onPress={() =>
+                  navigate(SCREENS.MAIN_NAVIGATOR, {
+                    screen: SCREENS.HOME,
+                  })
+                }
+                style={[styles.btn, { backgroundColor: colors.white }]}
+              >
+                <Text style={[styles.btnText]}>Do later</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  if (isCardOpen) {
+                    setIsCardOpen(false);
+                  } else {
+                    sendDataToServer();
+                  }
+                }}
+                // disabled={!isDeclared}
+                style={isDeclared ? styles.btnEnable : styles.btnDisable}
+              >
+                <Text style={[styles.btnText2]}>Submit</Text>
+              </Pressable>
+            </View>
           </View>
         </Modal>
       </>
