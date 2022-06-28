@@ -11,6 +11,7 @@ import {
 import { useTheme } from 'react-native-paper';
 
 import { useDispatch } from 'react-redux';
+import i18next from 'i18next';
 
 import fonts from 'assets/fonts';
 import MyImage from 'assets/images';
@@ -68,6 +69,9 @@ export default function Home() {
     try {
       const result = await profileServices.getUserProfile();
       authContext.setUserData(result);
+      console.log('result', result);
+
+      i18next.changeLanguage(result?.app_lang);
     } catch (error) {
       console.error(error);
     }

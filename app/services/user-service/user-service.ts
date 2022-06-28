@@ -1366,6 +1366,15 @@ const deleteWeightLog = (weight_log_id: any) => {
       });
   });
 };
+const setLanguage = (lang: String) => {
+  console.log('lang===>', lang);
+
+  return client.post(API_URLS.SET_LANGUAGE, {
+    profile: {
+      app_lang: lang,
+    },
+  });
+};
 
 export const userService = {
   login,
@@ -1448,4 +1457,5 @@ export const userService = {
   getHBA1cChart,
   Terms,
   jumioCallBack,
+  setLanguage,
 };
