@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import fonts from 'assets/fonts';
-import { heightToDp } from 'utils/functions/responsive-d-imensions';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
