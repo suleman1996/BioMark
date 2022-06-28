@@ -10,7 +10,6 @@ import { useTheme } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useDispatch, useSelector } from 'react-redux';
 import { covidService } from 'services/covid-service';
-import { getAllDependents } from 'store/account/account-actions';
 import {
   addCovidBooking,
   getCovidBookingFormR,
@@ -106,7 +105,6 @@ const ExisitingBookingForDependent = (props: Props) => {
     (state: IAppState) => state.covid.bookingForm
   );
   useEffect(() => {
-    dispatch(getAllDependents());
     dispatch(getCovidBookingFormR());
   }, [focused]);
 
@@ -417,7 +415,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                     />
                   }
                 />
-                <Text style={styles.innerTitle}>Test Center</Text>
+                <Text style={styles.innerTitle}>Test Centre</Text>
               </View>
               <View style={styles.btnContainer}>
                 <CircleBtn
@@ -528,7 +526,7 @@ const ExisitingBookingForDependent = (props: Props) => {
               <View style={{ marginTop: heightToDp(1) }} />
               {covidTestCenterValue ? (
                 <>
-                  <Text style={styles.innerTitle}>Test Center</Text>
+                  <Text style={styles.innerTitle}>Test Centre</Text>
                   <DropdownMenu
                     width={88}
                     options={testCentersBasedOnCities

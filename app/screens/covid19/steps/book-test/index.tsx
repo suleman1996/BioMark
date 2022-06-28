@@ -12,13 +12,15 @@ import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 import TopBarWithBackText from 'components/higher-order/topBarWithBackText/index';
 import CancelBookingTestModal from 'components/ui/cancelBookingTestModal/index';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
 import { addCovidBooking } from 'store/covid/covid-actions';
 import { IAppState } from 'store/IAppState';
 import { store } from 'store/store';
 import { logNow } from 'utils/functions/log-binder';
 import makeStyles from './styles';
+import { useIsFocused } from '@react-navigation/native';
+import { getAllDependents } from 'store/account/account-actions';
 
 type Props = {};
 
@@ -29,9 +31,17 @@ const BookCovidTest = (props: Props) => {
 
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const focused = useIsFocused();
+  const dispatch = useDispatch();
   const [isDependantAdd, setIsDependantAdd] = useState(false);
 
   const [isCancelModal, setIsCancelModal] = useState(false);
+
+  /*eslint-disable */
+  useEffect(() => {
+    dispatch(getAllDependents());
+  }, [focused]);
+  /*eslint-enable */
 
   // booking array is
   const booking = useSelector((state: IAppState) => state.covid.booking);
