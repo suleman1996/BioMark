@@ -74,6 +74,7 @@ export const makeStyles = (colors: any) =>
     emptyContainer: {
       width: widthToDp(100),
       paddingTop: heightToDp(2),
+      alignItems: 'center',
     },
     emptyText1: {
       fontSize: responsiveFontSize(22),
@@ -90,6 +91,7 @@ export const makeStyles = (colors: any) =>
     emptyText3: {
       fontSize: responsiveFontSize(19),
       fontFamily: GlobalFonts.light,
+      marginTop: -heightToDp(0.5),
       color: colors.black,
       alignSelf: 'center',
     },

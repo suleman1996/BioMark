@@ -92,7 +92,7 @@ const QRCarousel = (props: Props) => {
     return (
       <View style={styles.emptyContainer}>
         <Text style={{ textAlign: 'center' }}>
-          <BioSearchIcon width={25} height={25} />
+          <BioSearchIcon width={27} height={27} />
         </Text>
         <Text style={styles.emptyText1}>No QR Code Yet</Text>
         <Text style={styles.emptyText2}>QR Codes will be displayed here</Text>
@@ -138,10 +138,14 @@ const QRCarousel = (props: Props) => {
           })}
         </View>
       </View>
-      <Text style={styles.bottomText1}>Swipe to view other results</Text>
-      <Text style={styles.bottomText2}>
-        Scan to share latest Covid-19 Test Result
-      </Text>
+      {results.length > 0 ? (
+        <>
+          <Text style={styles.bottomText1}>Swipe to view other results</Text>
+          <Text style={styles.bottomText2}>
+            Scan to share latest Covid-19 Test Result
+          </Text>
+        </>
+      ) : null}
     </>
   );
 };

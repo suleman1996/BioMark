@@ -112,6 +112,7 @@ const API_URLS = {
   COVID_MULTIPLE_HEALTH_DECLARATION:
     '/api/v1/patient/covid/multi_health_declaration',
   GET_MEDICATION_TRACKER_BY_ID: '/api/v1/patient/psp/trackers/medication/',
+  UPDATE_USER_IC: '/api/v1/patient/covid/update_user_ic',
 
   // Psp Modules
   PSP_GET_MODULES: '/api/v1/patient/psp/modules',

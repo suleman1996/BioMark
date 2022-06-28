@@ -8,18 +8,19 @@ import makeStyles from './styles';
 
 type Props = {
   title: string;
+  onPress: any;
 };
 const FakeDropdownUnSelectable = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const { title } = props;
+  const { title, onPress } = props;
 
   if (title) {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>{title}</Text>
-        <Pressable>
+        <Pressable onPress={onPress}>
           <Icon
             name="ios-information-circle-outline"
             size={responsiveFontSize(35)}
