@@ -9,6 +9,8 @@ import {
   ResultSummaryLabPDFResponse,
   TestCenterResponse,
   TestCentreScheduleResponse,
+  UpdateICRequest,
+  UpdateICResponseData,
 } from 'types/api';
 import { ErrorResponse } from 'types/ErrorResponse';
 import { logNow } from 'utils/functions/log-binder';
@@ -118,6 +120,52 @@ function updateHealthDeclaration(
       });
   });
 }
+function updateMultiPleHealthDeclaration(
+  request: CovidBookingHealthDeclarationRequest
+) {
+  console.log('request', request);
+
+  return new Promise<Array<CovidBookingListResponseData>>((resolve, reject) => {
+    client
+      .post(`${API_URLS.COVID_MULTIPLE_HEALTH_DECLARATION}`, {
+        booking: request,
+      })
+      .then(async (response: any) => {
+        console.log('resMulti', response);
+
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('covid get results block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('covid get results error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
+function updateUserIcNumber(request: UpdateICRequest) {
+  return new Promise<UpdateICResponseData>((resolve, reject) => {
+    client
+      .post(`${API_URLS.UPDATE_USER_IC}`, request)
+      .then(async (response: any) => {
+        try {
+          resolve(response);
+        } catch (e) {
+          logNow('update user ic response.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('update user ic error.', err);
+        reject(err);
+      });
+  });
+}
 
 function getBookingsForm() {
   return new Promise<Array<BookingFormDataResponse>>((resolve, reject) => {
@@ -221,4 +269,6 @@ export const covidService = {
   getCovidTestCentersSchedules,
   getCovidHomeResults,
   batchReadForUpcomming,
+  updateUserIcNumber,
+  updateMultiPleHealthDeclaration,
 };

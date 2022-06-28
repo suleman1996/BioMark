@@ -109,7 +109,10 @@ const API_URLS = {
   DELETE_MEDICATION_TRACKER: '/api/v1/patient/psp/trackers/medication/',
   GET_BOOKINGS: '/api/v1/patient/covid/get_bookings',
   COVID_HEALTH_DECLARATION: '/api/v1/patient/covid/health_declaration',
+  COVID_MULTIPLE_HEALTH_DECLARATION:
+    '/api/v1/patient/covid/multi_health_declaration',
   GET_MEDICATION_TRACKER_BY_ID: '/api/v1/patient/psp/trackers/medication/',
+  UPDATE_USER_IC: '/api/v1/patient/covid/update_user_ic',
 
   // Psp Modules
   PSP_GET_MODULES: '/api/v1/patient/psp/modules',
@@ -160,6 +163,7 @@ const API_URLS = {
   // Tryvitals Modules
   TRYVITALS_LINK_TOKEN: '/api/v2/try_vitals/link_token',
   BATCH_READ_UPCOMMING: '/api/v1/patient/notifications/batch_read',
+  SET_LANGUAGE: '/api/v1/patient/profiles/set_lang',
 };
 
 export { API_URLS };

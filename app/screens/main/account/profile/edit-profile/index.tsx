@@ -200,7 +200,9 @@ const EditProfileScreen = () => {
                 onLoadEnd={() => setProfileLoader(false)}
                 source={
                   !authContext?.userData?.picture
-                    ? Images.avatar
+                    ? authContext?.userData?.gender_attribute?.id == 1
+                      ? Images.avatar
+                      : Images.femaleAvatar
                     : { uri: authContext?.userData?.picture }
                 }
                 style={styles.image}

@@ -29,6 +29,9 @@ export default function BookTestButton() {
                 screen: SCREENS.BOOKCOVIDTEST,
               });
             } else {
+              navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                screen: SCREENS.BOOKCOVIDTEST,
+              });
               navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
                 screen: SCREENS.ID_VERIFICATION_START,
                 params: { sendTo: 'booktest' },

@@ -206,7 +206,7 @@ const AddDependantForm = (props: Props) => {
                 countryCode={countryCode}
                 // error={values.phone_number ? errors.phone_number : ''}
                 setCountryCode={setCountryCode}
-                setselectedCountryCode={setSelectedCountryCode}
+                setSelectCountryCode={setSelectedCountryCode}
                 maxLength={numberCondition.max}
               />
               {values.phone_number !== '' &&

@@ -48,6 +48,7 @@ export const makeStyles = (colors: any) =>
     dependantConatiner: {
       flexDirection: 'row',
       alignItems: 'center',
+      width: widthToDp(86),
       justifyContent: 'space-between',
       borderColor: colors.inputBg,
       borderWidth: 2,
