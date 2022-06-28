@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
 import {
   ImageBackground,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  Platform,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -33,6 +35,8 @@ import AuthContext from 'utils/auth-context';
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { userService } from 'services/user-service/user-service';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -63,13 +67,19 @@ export default function Home() {
     getMedicationList();
   }, []);
   /*eslint-enable*/
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    let fcm = await AsyncStorage.getItem('fcm');
+    registerDevice(fcm);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const registerDevice = async (fcm) => {
+    await userService.deviceRegisterAction(fcm, Platform.OS);
+  };
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
       authContext.setUserData(result);
-      console.log('result', result);
-
       i18next.changeLanguage(result?.app_lang);
     } catch (error) {
       console.error(error);
