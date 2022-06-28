@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1078990823809-8us2qk3drov66qh0p59b743v8nj5p77a.apps.googleusercontent.com</string>
+	<string>1037776969336-ps7ft8or8qls60jvari2n718cn4td55b.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1078990823809-8us2qk3drov66qh0p59b743v8nj5p77a</string>
+	<string>com.googleusercontent.apps.1037776969336-ps7ft8or8qls60jvari2n718cn4td55b</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1037776969336-25q48n1u3c58t7grto86neb26d6cjh8c.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDpusz5TL1H1-v3D82KLbdf1TmEOCkqIr8</string>
+	<string>AIzaSyAU4FmyWPmBS5jTvNPuLpt9QHdThwR9YCs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1078990823809</string>
+	<string>1037776969336</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.sprintx.BioMark</string>
+	<string>com.biomark.biomark-dp-lite</string>
 	<key>PROJECT_ID</key>
-	<string>biomark-ac00b</string>
+	<string>biomark-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>biomark-ac00b.appspot.com</string>
+	<string>biomark-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1078990823809:ios:a50b91853bed344e73c880</string>
+	<string>1:1037776969336:ios:7b864a576d2d324cbc178d</string>
+	<key>DATABASE_URL</key>
+	<string>https://biomark-app.firebaseio.com</string>
 </dict>
 </plist>
