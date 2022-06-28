@@ -392,7 +392,7 @@ const ExisitingBookingForDependent = (props: Props) => {
           <View style={styles.expendedContainer}>
             {!booking[itemIndex].is_dependant ? null : (
               <>
-                <Text style={styles.innerTitle}>Choose a Dependent</Text>
+                <Text style={styles.innerTitle}>Choose a Dependant</Text>
                 <FlatList
                   renderItem={_renderItemForDependants}
                   data={dependants}
