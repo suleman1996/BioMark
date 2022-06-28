@@ -125,7 +125,7 @@ export default function Home() {
                       {t('pages.covid-booking.homeDescription')}
                     </Text>
                   </View>
-                  <View style={{ width: '35%' }}>
+                  <View>
                     <SmallButton title="Book Now" />
                   </View>
                 </View>
