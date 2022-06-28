@@ -14,7 +14,7 @@ type Props = {
   onValueChange: (text: string) => void;
   error?: string;
   marginTop?: number;
-  label: string;
+  label?: string;
   width?: number;
 };
 

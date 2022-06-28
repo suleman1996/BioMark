@@ -86,7 +86,7 @@ const BookCovidTest = (props: Props) => {
         >
           {/* {isExistingBtn && !isDependantAdd ? ( */}
           {[...booking].map((item, index) => (
-            <View>
+            <View key={index}>
               <ExisitingBookingForDependent
                 setOpendedBooking={setOpendedBooking}
                 openedBooking={openedBooking}
