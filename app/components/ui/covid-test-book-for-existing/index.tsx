@@ -10,10 +10,7 @@ import { useTheme } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useDispatch, useSelector } from 'react-redux';
 import { covidService } from 'services/covid-service';
-import {
-  addCovidBooking,
-  getCovidBookingFormR,
-} from 'store/covid/covid-actions';
+import { addCovidBooking } from 'store/covid/covid-actions';
 import { IAppState } from 'store/IAppState';
 import {
   TestCenterResponse,
@@ -104,9 +101,6 @@ const ExisitingBookingForDependent = (props: Props) => {
   const bookingFormData = useSelector(
     (state: IAppState) => state.covid.bookingForm
   );
-  useEffect(() => {
-    dispatch(getCovidBookingFormR());
-  }, [focused]);
 
   // update test centers
   useEffect(() => {

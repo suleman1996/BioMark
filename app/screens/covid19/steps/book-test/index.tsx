@@ -14,13 +14,17 @@ import TopBarWithBackText from 'components/higher-order/topBarWithBackText/index
 import CancelBookingTestModal from 'components/ui/cancelBookingTestModal/index';
 import { useDispatch, useSelector } from 'react-redux';
 import AddDependantForm from 'screens/main/account/dependants/add-depandant-form';
-import { addCovidBooking } from 'store/covid/covid-actions';
+import {
+  addCovidBooking,
+  getCovidBookingFormR,
+} from 'store/covid/covid-actions';
 import { IAppState } from 'store/IAppState';
 import { store } from 'store/store';
 import { logNow } from 'utils/functions/log-binder';
 import makeStyles from './styles';
 import { useIsFocused } from '@react-navigation/native';
 import { getAllDependents } from 'store/account/account-actions';
+import ICMissingModal from 'components/ui/ic-missing-modal';
 
 type Props = {};
 
@@ -37,14 +41,20 @@ const BookCovidTest = (props: Props) => {
 
   const [isCancelModal, setIsCancelModal] = useState(false);
 
+  const [isICModal, setIsICModal] = useState(false);
+
   /*eslint-disable */
   useEffect(() => {
     dispatch(getAllDependents());
+    dispatch(getCovidBookingFormR());
   }, [focused]);
   /*eslint-enable */
 
   // booking array is
   const booking = useSelector((state: IAppState) => state.covid.booking);
+  const bookingFormData = useSelector(
+    (state: IAppState) => state.covid.bookingForm
+  );
   const bookState = useSelector((state: IAppState) => state.covid);
   useEffect(() => {
     logNow('Changed');
@@ -76,6 +86,7 @@ const BookCovidTest = (props: Props) => {
           setIsVisible={setIsCancelModal}
           isVisible={isCancelModal}
         />
+        <ICMissingModal setIsVisible={setIsICModal} isVisible={isICModal} />
         <View style={styles.stepContainer}>
           <TopBarWithBackText
             onBackPress={() => {
@@ -107,13 +118,15 @@ const BookCovidTest = (props: Props) => {
 
           {/* ) : null} */}
 
-          <ButtonComponent
-            onPress={() => {
-              // setIsExisting(true);
-              pushOneMoreToBooking();
-            }}
-            title={'Add Existing Dependant'}
-          />
+          {booking.some((item) => item.is_dependant == true) ? null : (
+            <ButtonComponent
+              onPress={() => {
+                // setIsExisting(true);
+                pushOneMoreToBooking();
+              }}
+              title={'Add Existing Dependant'}
+            />
+          )}
 
           <ButtonComponent
             onPress={() => {
@@ -142,12 +155,17 @@ const BookCovidTest = (props: Props) => {
               }}
             />
           ) : null}
-          {isDependantAdd ? null : (
+          {isDependantAdd ||
+          booking.some((item) => item.is_dependant == false) ? null : (
             <ButtonComponent
               disabled={isDependantAdd}
               onPress={() => {
+                if (bookingFormData.has_user_ic) {
+                  pushOneAddSelf();
+                } else {
+                  setIsICModal(true);
+                }
                 // setIsExisting(true);
-                pushOneAddSelf();
               }}
               marginTop={1}
               title={'Add Self'}
