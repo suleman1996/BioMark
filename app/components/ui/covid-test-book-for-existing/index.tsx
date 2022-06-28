@@ -23,6 +23,7 @@ import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
 import CircleBtn from '../../button/circleBtn';
+import CountryNotChangeDialog from '../country-not-changable-dialog';
 import { responsiveFontSize } from './../../../utils/functions/responsive-text';
 import CalenderStrip from './../../higher-order/calender-strip/index';
 import TimeSlots from './../time-slots/index';
@@ -46,6 +47,7 @@ type Props = {
 
 const ExisitingBookingForDependent = (props: Props) => {
   const booking = useSelector((state: IAppState) => state.covid.booking);
+  const [isCountryDialog, setIsCountryDialog] = useState(false);
 
   const { setOpendedBooking, openedBooking, itemIndex } = props;
   function openAndCloseBooking(index: number) {
@@ -343,6 +345,10 @@ const ExisitingBookingForDependent = (props: Props) => {
 
   return (
     <View style={styles.parent}>
+      <CountryNotChangeDialog
+        setIsVisible={setIsCountryDialog}
+        isVisible={isCountryDialog}
+      />
       <Pressable onPress={onPress} style={styles.container}>
         <Text style={styles.titleText}>
           {sDName
@@ -428,8 +434,9 @@ const ExisitingBookingForDependent = (props: Props) => {
             </View>
             <Text style={styles.innerTitle}>Country</Text>
             <View style={{ position: 'relative' }}>
-              {booking[0].country_id && itemIndex == 1 ? (
+              {booking[0].country_id && booking.length > 1 ? (
                 <FakeDropdownUnSelectable
+                  onPress={() => setIsCountryDialog(true)}
                   title={booking[0]?.test_country_name || ''}
                 />
               ) : (
