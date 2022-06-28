@@ -698,7 +698,7 @@
       "barcode": "Barcode ",
       "doctorMessage": "View Doctor Message",
       "seeResult": "See Results",
-      "suggestedReading": "Article Highlights",
+      "suggestedReading": "Articles Highlights",
       "riskTitle": "Your Health Risks",
       "healthRecords": "Health Records",
       "covid19": "COVID-19",
@@ -1250,7 +1250,7 @@
       "tabs": {
         "summary": {
           "title": "Summary",
-          "latestResult": "Your Latest Result",
+          "latestResult": "Your Latest Results",
           "referenceRange": "Reference Range: ",
           "source": "Source: ",
           "history": "History",

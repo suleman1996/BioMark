@@ -1,8 +1,14 @@
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Pressable,
+} from 'react-native';
 import React, { useState } from 'react';
 
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-import { useTheme, TouchableRipple } from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import { ArrowBack } from 'assets/svgs';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { FloatingAction } from 'react-native-floating-action';
@@ -55,14 +61,14 @@ const Index = () => {
         ? { borderBottomWidth: 3 }
         : { borderBottomWidth: 0 };
     return (
-      <TouchableRipple
+      <Pressable
         onPress={() => {
           setSelectedHorizontal(index);
         }}
         style={[styles.horizontalListItem, ifSBLine]}
       >
         <Text style={styles.horizontalListItemText}>{item?.title}</Text>
-      </TouchableRipple>
+      </Pressable>
     );
   };
 
