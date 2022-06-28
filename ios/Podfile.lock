@@ -470,7 +470,7 @@ PODS:
     - Firebase/Auth (= 8.15.0)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (15.1.0):
+  - RNFBMessaging (15.1.1):
     - Firebase/Messaging (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -864,7 +864,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: aad3c663b25752a52bf8fce93f2354001dd185aa
   RNFBApp: 9646e09d041ea159b84584865212e4cf33acd179
   RNFBAuth: af943e3ba071b5f4d18896c31e6cba3a77b1fa08
-  RNFBMessaging: 22c802dc8ccd3e390f038ca96aebf8e996cbf9cf
+  RNFBMessaging: e67ce2a6aee26741b89dd61d08d578beb4e95e32
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092

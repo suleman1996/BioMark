@@ -54,6 +54,7 @@ const BoxSelector = ({
         <FlatList
           style={styles.container}
           horizontal
+          scrollEnabled={false}
           data={options}
           renderItem={({ item, index }) => (
             <Pressable

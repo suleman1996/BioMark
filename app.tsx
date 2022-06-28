@@ -22,6 +22,7 @@ import messaging from '@react-native-firebase/messaging';
 import { LogBox } from 'react-native';
 import PushNotification, { Importance } from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
@@ -57,6 +58,8 @@ const App = () => {
       const fcmTokenn = await messaging().getToken();
       //  setFcmToken(fcmTokenn);
       console.log('Here is the fcm token', Platform.OS, '', fcmTokenn);
+      await AsyncStorage.setItem('fcm', fcmTokenn);
+
       // console.log(‘Authorization status:’, authStatus);
     }
   }
@@ -117,25 +120,7 @@ const App = () => {
      */
     requestPermissions: true,
   });
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log('A new FCM message arrived! for', remoteMessage);
-      //  alert('giiii');
-      PushNotificationIOS.addNotificationRequest({
-        channelId: 'channel-id',
-        foreground: true,
-        userInteraction: true,
-        autoCancel: true,
-        // bigText: ‘notification.data.body’,
-        title: remoteMessage.notification.title,
-        message: remoteMessage.notification.body,
-        // subText: ‘notification.data.body’,
-        // actions: ‘[“Yes”, “No”]’,
-      });
-    });
 
-    return unsubscribe;
-  }, []);
   return (
     <ErrorBoundary>
       <Provider store={store}>
