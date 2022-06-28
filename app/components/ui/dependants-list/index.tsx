@@ -17,6 +17,7 @@ import { logNow } from 'utils/functions/log-binder';
 import makeStyles from './styles';
 import AuthContext from 'utils/auth-context';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
 
 type Props = {
@@ -24,6 +25,7 @@ type Props = {
 };
 
 const DependantsList = (props: Props) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
@@ -37,7 +39,6 @@ const DependantsList = (props: Props) => {
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
-
       authContext.setUserData(result);
     } catch (error) {}
   };
@@ -109,7 +110,9 @@ const DependantsList = (props: Props) => {
           </View>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={styles.relationText}>Relation: </Text>
+          <Text style={styles.relationText}>
+            {t('pages.covid.covid-dependant.relation')}:{' '}
+          </Text>
           <Text style={styles.relationWithText}>{relation}</Text>
         </View>
       </View>

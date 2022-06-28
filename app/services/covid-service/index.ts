@@ -120,6 +120,33 @@ function updateHealthDeclaration(
       });
   });
 }
+function updateMultiPleHealthDeclaration(
+  request: CovidBookingHealthDeclarationRequest
+) {
+  console.log('request', request);
+
+  return new Promise<Array<CovidBookingListResponseData>>((resolve, reject) => {
+    client
+      .post(`${API_URLS.COVID_MULTIPLE_HEALTH_DECLARATION}`, {
+        booking: request,
+      })
+      .then(async (response: any) => {
+        console.log('resMulti', response);
+
+        try {
+          //logNow('all notification inbox success response', response.data);
+          resolve(response.data);
+        } catch (e) {
+          logNow('covid get results block login1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('covid get results error response 2.', err);
+        reject(err);
+      });
+  });
+}
 
 function updateUserIcNumber(request: UpdateICRequest) {
   return new Promise<UpdateICResponseData>((resolve, reject) => {
@@ -243,4 +270,5 @@ export const covidService = {
   getCovidHomeResults,
   batchReadForUpcomming,
   updateUserIcNumber,
+  updateMultiPleHealthDeclaration,
 };

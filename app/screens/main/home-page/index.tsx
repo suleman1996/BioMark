@@ -10,6 +10,7 @@ import {
 import { useTheme } from 'react-native-paper';
 
 import { useDispatch } from 'react-redux';
+import i18next from 'i18next';
 
 import fonts from 'assets/fonts';
 import MyImage from 'assets/images';
@@ -23,7 +24,6 @@ import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 
 import FloatingActionButton from 'components/floating-action-button';
 
-import { homeServices } from 'services/home-service/index';
 import { getReduxBootstrap } from 'store/account/account-actions';
 import { getReduxMedicalDropDown } from 'store/home/home-actions';
 import { getReduxMedicationList } from 'store/home/home-actions';
@@ -32,6 +32,7 @@ import AuthContext from 'utils/auth-context';
 
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
+import { profileServices } from 'services/profile-services';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -65,8 +66,11 @@ export default function Home() {
 
   const userProfile = async () => {
     try {
-      const result = await homeServices.getUserProfile();
+      const result = await profileServices.getUserProfile();
       authContext.setUserData(result);
+      console.log('result', result);
+
+      i18next.changeLanguage(result?.app_lang);
     } catch (error) {
       console.error(error);
     }
