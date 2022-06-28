@@ -528,7 +528,7 @@
           "title": "HbA1c",
           "description": "Are you sure you wish to delete this HbA1c log?",
           "buttonText": "Delete",
-          "buttonCancelText": "Skip"
+          "buttonCancelText": "No"
         }
       }
     },
@@ -555,7 +555,7 @@
           "title": "Blood Pressure",
           "description": "Are you sure you wish to delete this blood pressure log?",
           "buttonText": "Yes",
-          "buttonCancelText": "Skip"
+          "buttonCancelText": "No"
         }
       }
     },
@@ -598,7 +598,7 @@
           "title": "Blood Sugar",
           "description": "Are you sure you wish to delete this blood sugar log?",
           "buttonText": "Yes",
-          "buttonCancelText": "Skip"
+          "buttonCancelText": "No"
         },
         "fastingClose": {
           "title": "You are almost there!",
@@ -1056,7 +1056,7 @@
           "title": "Medication",
           "description": "Are you sure you wish to delete this medication?",
           "buttonText": "Yes",
-          "buttonCancelText": "Skip"
+          "buttonCancelText": "No"
         }
       },
       "errors": {
@@ -1085,7 +1085,7 @@
           "title": "Medication",
           "description": "Are you sure you wish to delete this medication log?",
           "buttonText": "Yes",
-          "buttonCancelText": "Skip"
+          "buttonCancelText": "No"
         }
       },
       "errors": {
@@ -1727,7 +1727,7 @@
           "title": "Weight",
           "description": "Are you sure you wish to delete this weight log?",
           "buttonText": "Yes",
-          "buttonCancelText": "Skip"
+          "buttonCancelText": "No"
         }
       }
     }
