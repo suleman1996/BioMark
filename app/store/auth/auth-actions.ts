@@ -1,8 +1,4 @@
-import { Platform } from 'react-native';
-import DeviceInfo from 'react-native-device-info';
-
 import { userService } from 'services/user-service/user-service';
-import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import { LoginErrorResponse, LoginResponse } from 'types/auth/LoginResponse';
 import { UserContacts } from 'types/UserContacts';
 import { logNow } from 'utils/functions/log-binder';
@@ -84,8 +80,6 @@ export const reduxLogin =
             expiresIin,
           })
         );
-        let uniqueId = DeviceInfo.getUniqueId();
-        await dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
       })
       .catch((err: LoginErrorResponse) => {
         logNow('User auth login redux action error block', err);
@@ -116,8 +110,6 @@ export const reduxFederatedLogin =
             expiresIin,
           })
         );
-        let uniqueId = DeviceInfo.getUniqueId();
-        await dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
       })
       .catch((err: LoginErrorResponse) => {
         logNow('User auth login redux action error block', err);
@@ -125,29 +117,6 @@ export const reduxFederatedLogin =
       })
       .finally(async () => {
         dispatch(loggingIn(false));
-      });
-  };
-export const reduxDeviceRegister =
-  (device_token: string, device_type: string) =>
-  (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    userService
-      .deviceRegisterAction(device_token, device_type)
-      .then(async (res: DeviceRegister) => {
-        logNow('MOB==>', res);
-        const message = res?.message;
-
-        await dispatch(
-          deviceReg({
-            message,
-          })
-        );
-      })
-      .catch((err: LoginErrorResponse) => {
-        logNow('err', err);
-        dispatch(errorLogIn(err.errMsg.data.message));
-      })
-      .finally(async () => {
-        //dispatch(loggingIn(false));
       });
   };
 
