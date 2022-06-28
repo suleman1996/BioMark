@@ -10,11 +10,7 @@ import { useTheme } from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useDispatch, useSelector } from 'react-redux';
 import { covidService } from 'services/covid-service';
-import { getAllDependents } from 'store/account/account-actions';
-import {
-  addCovidBooking,
-  getCovidBookingFormR,
-} from 'store/covid/covid-actions';
+import { addCovidBooking } from 'store/covid/covid-actions';
 import { IAppState } from 'store/IAppState';
 import {
   TestCenterResponse,
@@ -27,6 +23,7 @@ import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
 import CircleBtn from '../../button/circleBtn';
+import CountryNotChangeDialog from '../country-not-changable-dialog';
 import { responsiveFontSize } from './../../../utils/functions/responsive-text';
 import CalenderStrip from './../../higher-order/calender-strip/index';
 import TimeSlots from './../time-slots/index';
@@ -50,6 +47,7 @@ type Props = {
 
 const ExisitingBookingForDependent = (props: Props) => {
   const booking = useSelector((state: IAppState) => state.covid.booking);
+  const [isCountryDialog, setIsCountryDialog] = useState(false);
 
   const { setOpendedBooking, openedBooking, itemIndex } = props;
   function openAndCloseBooking(index: number) {
@@ -105,10 +103,6 @@ const ExisitingBookingForDependent = (props: Props) => {
   const bookingFormData = useSelector(
     (state: IAppState) => state.covid.bookingForm
   );
-  useEffect(() => {
-    dispatch(getAllDependents());
-    dispatch(getCovidBookingFormR());
-  }, [focused]);
 
   // update test centers
   useEffect(() => {
@@ -351,6 +345,10 @@ const ExisitingBookingForDependent = (props: Props) => {
 
   return (
     <View style={styles.parent}>
+      <CountryNotChangeDialog
+        setIsVisible={setIsCountryDialog}
+        isVisible={isCountryDialog}
+      />
       <Pressable onPress={onPress} style={styles.container}>
         <Text style={styles.titleText}>
           {sDName
@@ -392,7 +390,7 @@ const ExisitingBookingForDependent = (props: Props) => {
           <View style={styles.expendedContainer}>
             {!booking[itemIndex].is_dependant ? null : (
               <>
-                <Text style={styles.innerTitle}>Choose a Dependent</Text>
+                <Text style={styles.innerTitle}>Choose a Dependant</Text>
                 <FlatList
                   renderItem={_renderItemForDependants}
                   data={dependants}
@@ -411,20 +409,20 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <CircleBtn
                   icon={
                     <Entypo
-                      size={responsiveFontSize(50)}
+                      size={responsiveFontSize(45)}
                       name="squared-plus"
                       color={colors.white}
                     />
                   }
                 />
-                <Text style={styles.innerTitle}>Test Center</Text>
+                <Text style={styles.innerTitle}>Test Centre</Text>
               </View>
               <View style={styles.btnContainer}>
                 <CircleBtn
                   disabled={true}
                   icon={
                     <Entypo
-                      size={responsiveFontSize(50)}
+                      size={responsiveFontSize(45)}
                       name="home"
                       color={colors.darkGray}
                     />
@@ -436,8 +434,9 @@ const ExisitingBookingForDependent = (props: Props) => {
             </View>
             <Text style={styles.innerTitle}>Country</Text>
             <View style={{ position: 'relative' }}>
-              {booking[0].country_id && itemIndex == 1 ? (
+              {booking[0].country_id && booking.length > 1 ? (
                 <FakeDropdownUnSelectable
+                  onPress={() => setIsCountryDialog(true)}
                   title={booking[0]?.test_country_name || ''}
                 />
               ) : (
@@ -528,7 +527,7 @@ const ExisitingBookingForDependent = (props: Props) => {
               <View style={{ marginTop: heightToDp(1) }} />
               {covidTestCenterValue ? (
                 <>
-                  <Text style={styles.innerTitle}>Test Center</Text>
+                  <Text style={styles.innerTitle}>Test Centre</Text>
                   <DropdownMenu
                     width={88}
                     options={testCentersBasedOnCities
