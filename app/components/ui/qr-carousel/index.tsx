@@ -138,10 +138,14 @@ const QRCarousel = (props: Props) => {
           })}
         </View>
       </View>
-      <Text style={styles.bottomText1}>Swipe to view other results</Text>
-      <Text style={styles.bottomText2}>
-        Scan to share latest Covid-19 Test Result
-      </Text>
+      {results.length > 0 ? (
+        <>
+          <Text style={styles.bottomText1}>Swipe to view other results</Text>
+          <Text style={styles.bottomText2}>
+            Scan to share latest Covid-19 Test Result
+          </Text>
+        </>
+      ) : null}
     </>
   );
 };
