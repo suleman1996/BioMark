@@ -409,7 +409,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <CircleBtn
                   icon={
                     <Entypo
-                      size={responsiveFontSize(50)}
+                      size={responsiveFontSize(45)}
                       name="squared-plus"
                       color={colors.white}
                     />
@@ -422,7 +422,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                   disabled={true}
                   icon={
                     <Entypo
-                      size={responsiveFontSize(50)}
+                      size={responsiveFontSize(45)}
                       name="home"
                       color={colors.darkGray}
                     />
