@@ -120,6 +120,17 @@ const App = () => {
      */
     requestPermissions: true,
   });
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      PushNotification.localNotification({
+        message: remoteMessage.notification.body,
+        title: remoteMessage.notification.title,
+        bigPictureUrl: remoteMessage.notification.android.imageUrl,
+        smallIcon: remoteMessage.notification.android.imageUrl,
+      });
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <ErrorBoundary>
