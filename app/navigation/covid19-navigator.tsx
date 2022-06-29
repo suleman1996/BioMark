@@ -167,6 +167,20 @@ const Covid19Navigator = () => {
             color: colors.darkPrimary,
           },
           title: 'FAQ',
+
+          headerLeft: () => (
+            <Pressable
+              onPress={() => {
+                // navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                //   screen: SCREENS.COVID19HOME,
+                // });
+                goBack();
+              }}
+              style={{ paddingRight: widthToDp(2) }}
+            >
+              <Ionicons name="arrow-back" size={responsiveFontSize(30)} />
+            </Pressable>
+          ),
         }}
         name={SCREENS.FAQSCREEN}
         component={FaqScreen}
