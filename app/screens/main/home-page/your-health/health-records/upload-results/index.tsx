@@ -141,7 +141,7 @@ export default function ResultUpload() {
               filetype: asset?.type,
             });
           });
-          console.log('new response', res);
+
           // data.push(body);
           setList(data);
           setShowModal(!showModal);
