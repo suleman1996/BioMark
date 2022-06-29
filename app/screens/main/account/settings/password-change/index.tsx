@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, Text, View, SafeAreaView } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  SafeAreaView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import * as Yup from 'yup';
@@ -69,11 +75,6 @@ const PasswordChangeScreen = () => {
       .then((res) => {
         logNow('res', res);
         goToPassChangedScreen();
-
-        // showMessage({
-        //   message: 'Password changed successfully',
-        //   type: 'success',
-        // });
       })
       .catch((err: ErrorResponse) => {
         setIsLoading(false);
@@ -87,27 +88,11 @@ const PasswordChangeScreen = () => {
             currentPassword: err.errMsg.data.message,
           });
         }
-
-        // showMessage({
-        //   message: err.errMsg.data.message,
-        //   type: 'danger',
-        // });
       })
       .finally(() => {
         // setIsLoading(false);
       });
   };
-
-  // const ResetPassSchema = Yup.object({
-  //   currentPassword: Yup.string()
-  //     .required('Password is required')
-  //     .min(7, 'Too short'),
-  //   password: Yup.string().required('Password is required').min(7, 'Too short'),
-  //   confirmPassword: Yup.string()
-  //     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-  //     .required('Confirm Password is required')
-  //     .min(7, 'Too short'),
-  // });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -117,130 +102,135 @@ const PasswordChangeScreen = () => {
           <Text style={styles.textHeader}>
             {t('pages.password.description')}
           </Text>
-          <Formik
-            innerRef={formikRef}
-            initialValues={{
-              currentPassword: '',
-              password: '',
-              confirmPassword: '',
-            }}
-            onSubmit={resetPassword}
-            validationSchema={UpdatePassSchema}
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
           >
-            {({ handleChange, handleSubmit, errors, values }) => (
-              <>
-                <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps>
-                  <PasswordInputWithLabel
-                    marginTop={1}
-                    label={t('pages.password.currentPassword.title')}
-                    placeholder={t(
-                      'pages.password.currentPassword.placeholder'
-                    )}
-                    isSecure={eCurrent}
-                    password={values.currentPassword}
-                    setHidePassword={() => setECurrent(!eCurrent)}
-                    hidePassword={eCurrent}
-                    onChange={handleChange('currentPassword')}
-                  />
-                  {errors.currentPassword && (
-                    <ErrorText
-                      text={
-                        values.currentPassword ? errors.currentPassword : ''
-                      }
+            <Formik
+              innerRef={formikRef}
+              initialValues={{
+                currentPassword: '',
+                password: '',
+                confirmPassword: '',
+              }}
+              onSubmit={resetPassword}
+              validationSchema={UpdatePassSchema}
+            >
+              {({ handleChange, handleSubmit, errors, values }) => (
+                <>
+                  <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps>
+                    <PasswordInputWithLabel
+                      marginTop={1}
+                      label={t('pages.password.currentPassword.title')}
+                      placeholder={t(
+                        'pages.password.currentPassword.placeholder'
+                      )}
+                      isSecure={eCurrent}
+                      password={values.currentPassword}
+                      setHidePassword={() => setECurrent(!eCurrent)}
+                      hidePassword={eCurrent}
+                      onChange={handleChange('currentPassword')}
                     />
-                  )}
-                  <Text
-                    style={[
-                      styles.textHeader,
-                      {
-                        marginTop: heightToDp(5),
-                        letterSpacing: -0.1,
-                        lineHeight: responsiveFontSize(25),
-                      },
-                    ]}
-                  >
-                    {PASS_TEXT}
-                  </Text>
-                  <PasswordInputWithLabel
-                    marginTop={0.3}
-                    label={t('pages.password.newPassword.title')}
-                    placeholder={t('pages.password.newPassword.placeholder')}
-                    isSecure={ePass}
-                    password={values.password}
-                    setHidePassword={() => setEPass(!ePass)}
-                    hidePassword={ePass}
-                    onChange={handleChange('password')}
-                  />
-                  <View style={styles.passValueContainer}>
-                    <Text style={styles.passValue}>
-                      {values.password.length < 8
-                        ? t('userProfile.passwordStrength.low')
-                        : values.password.length < 10
-                        ? t('userProfile.passwordStrength.medium')
-                        : t('userProfile.passwordStrength.high')}
-                    </Text>
-                    <View
+                    {errors.currentPassword && (
+                      <ErrorText
+                        text={
+                          values.currentPassword ? errors.currentPassword : ''
+                        }
+                      />
+                    )}
+                    <Text
                       style={[
-                        styles.passValueProgress,
+                        styles.textHeader,
                         {
-                          width:
-                            values.password.length < 15
-                              ? '0%'
-                              : values.password.length < 35
-                              ? '20%'
-                              : values.password.length < 50
-                              ? '35%'
-                              : '45%',
+                          marginTop: heightToDp(5),
+                          letterSpacing: -0.1,
+                          lineHeight: responsiveFontSize(25),
                         },
                       ]}
+                    >
+                      {PASS_TEXT}
+                    </Text>
+                    <PasswordInputWithLabel
+                      marginTop={0.3}
+                      label={t('pages.password.newPassword.title')}
+                      placeholder={t('pages.password.newPassword.placeholder')}
+                      isSecure={ePass}
+                      password={values.password}
+                      setHidePassword={() => setEPass(!ePass)}
+                      hidePassword={ePass}
+                      onChange={handleChange('password')}
                     />
-                  </View>
-                  {errors.password && (
-                    <View style={{ paddingBottom: heightToDp(3) }}>
-                      <ErrorText
-                        text={values.password ? errors.password : ''}
+                    <View style={styles.passValueContainer}>
+                      <Text style={styles.passValue}>
+                        {values.password.length < 8
+                          ? t('userProfile.passwordStrength.low')
+                          : values.password.length < 10
+                          ? t('userProfile.passwordStrength.medium')
+                          : t('userProfile.passwordStrength.high')}
+                      </Text>
+                      <View
+                        style={[
+                          styles.passValueProgress,
+                          {
+                            width:
+                              values.password.length < 15
+                                ? '0%'
+                                : values.password.length < 35
+                                ? '20%'
+                                : values.password.length < 50
+                                ? '35%'
+                                : '45%',
+                          },
+                        ]}
                       />
                     </View>
-                  )}
-                  <PasswordInputWithLabel
-                    marginTop={-1}
-                    label={t('pages.password.newPasswordConfirm.title')}
-                    placeholder={t(
-                      'pages.password.newPasswordConfirm.placeholder'
+                    {errors.password && (
+                      <View style={{ paddingBottom: heightToDp(3) }}>
+                        <ErrorText
+                          text={values.password ? errors.password : ''}
+                        />
+                      </View>
                     )}
-                    isSecure={eConfirm}
-                    password={values.confirmPassword}
-                    setHidePassword={() => setEConfirm(!eConfirm)}
-                    hidePassword={eConfirm}
-                    onChange={handleChange('confirmPassword')}
-                  />
-                  {errors.confirmPassword && (
-                    <ErrorText
-                      text={
-                        values.confirmPassword ? errors.confirmPassword : ''
+                    <PasswordInputWithLabel
+                      marginTop={-1}
+                      label={t('pages.password.newPasswordConfirm.title')}
+                      placeholder={t(
+                        'pages.password.newPasswordConfirm.placeholder'
+                      )}
+                      isSecure={eConfirm}
+                      password={values.confirmPassword}
+                      setHidePassword={() => setEConfirm(!eConfirm)}
+                      hidePassword={eConfirm}
+                      onChange={handleChange('confirmPassword')}
+                    />
+                    {errors.confirmPassword && (
+                      <ErrorText
+                        text={
+                          values.confirmPassword ? errors.confirmPassword : ''
+                        }
+                      />
+                    )}
+                  </ScrollView>
+                  <View style={GlobalStyles(colors).bottomBtnWithShadow}>
+                    <Button
+                      onPress={() => {
+                        submitForm();
+                        handleSubmit();
+                      }}
+                      title={t('pages.password.save')}
+                      disabled={
+                        Object.entries(errors).length === 0
+                          ? values.currentPassword
+                            ? false
+                            : true
+                          : true
                       }
                     />
-                  )}
-                </ScrollView>
-                <View style={GlobalStyles(colors).bottomBtnWithShadow}>
-                  <Button
-                    onPress={() => {
-                      submitForm();
-                      handleSubmit();
-                    }}
-                    title={t('pages.password.save')}
-                    disabled={
-                      Object.entries(errors).length === 0
-                        ? values.currentPassword
-                          ? false
-                          : true
-                        : true
-                    }
-                  />
-                </View>
-              </>
-            )}
-          </Formik>
+                  </View>
+                </>
+              )}
+            </Formik>
+          </KeyboardAvoidingView>
         </View>
       </TitleWithBackWhiteBgLayout>
     </SafeAreaView>

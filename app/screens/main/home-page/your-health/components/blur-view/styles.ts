@@ -1,5 +1,6 @@
 import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -13,8 +14,8 @@ export const makeStyles = (colors: any) =>
       paddingHorizontal: 10,
     },
     highlightstext: {
-      fontFamily: fonts.regular,
-      fontSize: 14,
+      fontFamily: fonts.mulishRegular,
+      fontSize: RFValue(12),
       color: colors.white,
     },
   });

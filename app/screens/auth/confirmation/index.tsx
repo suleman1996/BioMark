@@ -18,7 +18,8 @@ export default function Confirmation() {
   const styles = makeStyles(colors);
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
   const dispatch = useDispatch();
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(60);
+
   const startTimer = () => {
     timer = setTimeout(() => {
       if (timeLeft <= 0) {

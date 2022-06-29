@@ -64,7 +64,7 @@ const ChangeLanguage = () => {
         >
           <MenuTrigger styles={menuStyle}>
             <Text style={styles.languageIcon}>
-              {authContext?.userData?.app_lang}
+              {authContext?.userData?.app_lang?.toUpperCase()}
             </Text>
           </MenuTrigger>
           <MenuOptions optionsContainerStyle={styles.popupMenu}>

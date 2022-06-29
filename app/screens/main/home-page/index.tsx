@@ -29,6 +29,7 @@ import FloatingActionButton from 'components/floating-action-button';
 import { getReduxBootstrap } from 'store/account/account-actions';
 import { getReduxMedicalDropDown } from 'store/home/home-actions';
 import { getReduxMedicationList } from 'store/home/home-actions';
+import SCREENS from 'navigation/constants/index';
 
 import AuthContext from 'utils/auth-context';
 
@@ -37,6 +38,8 @@ import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userService } from 'services/user-service/user-service';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { navigate } from 'services/nav-ref';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -126,9 +129,9 @@ export default function Home() {
                     <Text
                       style={{
                         fontFamily: fonts.mulishRegular,
-                        fontSize: 13,
+                        fontSize: RFValue(13),
                         color: 'white',
-                        lineHeight: 16.36,
+                        lineHeight: 16.32,
                         paddingTop: 3,
                       }}
                     >
@@ -136,7 +139,14 @@ export default function Home() {
                     </Text>
                   </View>
                   <View>
-                    <SmallButton title="Book Now" />
+                    <SmallButton
+                      title="Book Now"
+                      onPress={() => {
+                        navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                          screen: SCREENS.BOOKCOVIDTEST,
+                        });
+                      }}
+                    />
                   </View>
                 </View>
               </ImageBackground>
@@ -160,7 +170,11 @@ export default function Home() {
                 <TouchableOpacity>
                   <GoogleFitButton
                     disabled={false}
-                    title={t('healthSnapshot.android.connectButton')}
+                    title={
+                      Platform.OS == 'android'
+                        ? t('healthSnapshot.android.connectButton')
+                        : t('healthSnapshot.ios.connectButton')
+                    }
                     onPress={() => console.log('pressed')}
                   />
                 </TouchableOpacity>

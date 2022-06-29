@@ -38,14 +38,14 @@ const AuthNavigator = () => {
       />
       <Stack.Screen name={SCREENS.SIGNUP} component={Signup} />
       <Stack.Screen
+        name={SCREENS.TERMS_AND_PRIVACY}
+        component={TermsAndPrivacy}
+      />
+      <Stack.Screen
         name={SCREENS.SIGNUP_VERIFICATION}
         component={SignupVerification}
       />
       <Stack.Screen name={SCREENS.CONFIRMATION} component={Confirmation} />
-      <Stack.Screen
-        name={SCREENS.TERMS_AND_PRIVACY}
-        component={TermsAndPrivacy}
-      />
     </Stack.Navigator>
   );
 };

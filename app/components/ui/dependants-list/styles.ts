@@ -2,8 +2,8 @@ import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -37,25 +37,25 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
     },
     headerTitle: {
-      fontSize: responsiveFontSize(20),
+      fontSize: RFValue(15),
       fontFamily: GlobalFonts.bold,
       color: colors.darkPrimary,
       width: widthToDp(55),
     },
     editText: {
-      fontSize: responsiveFontSize(15),
+      fontSize: RFValue(13),
       fontFamily: fonts.mulishRegular,
       color: colors.darkPrimary,
       textDecorationLine: 'underline',
       borderBottomColor: colors.darkPrimary,
     },
     relationText: {
-      fontSize: responsiveFontSize(20),
+      fontSize: RFValue(17),
       fontFamily: GlobalFonts.bold,
       color: colors.darkPrimary,
     },
     relationWithText: {
-      fontSize: responsiveFontSize(22),
+      fontSize: RFValue(17),
       fontFamily: GlobalFonts.light,
       color: colors.darkPrimary,
     },
