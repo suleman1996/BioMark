@@ -100,8 +100,15 @@ export default function Login() {
   const onGoogleLogin = async () => {
     GoogleSignin.signOut();
     GoogleSignin.configure({
+      scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       webClientId: Config.WEB_CLIENT_ID,
       offlineAccess: true,
+      hostedDomain: '',
+      loginHint: '',
+      forceConsentPrompt: true,
+      accountName: '',
+      iosClientId:
+        '1078990823809-8us2qk3drov66qh0p59b743v8nj5p77a.apps.googleusercontent.com',
     });
 
     const { idToken } = await GoogleSignin.signIn();
