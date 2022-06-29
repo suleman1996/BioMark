@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
 // import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
+import fonts from 'assets/fonts';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -16,37 +17,37 @@ export const makeStyles = (colors: any) =>
     },
     whoIsText: {
       fontFamily: GlobalFonts.bold,
-      fontSize: responsiveFontSize(20),
+      fontSize: RFValue(17),
       color: colors.darkPrimary,
     },
     bookingId: {
-      fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(18),
+      fontFamily: fonts.regular,
+      fontSize: RFValue(15),
       color: colors.darkPrimary,
     },
     idText: {
-      fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(18),
+      fontFamily: fonts.mulishLight,
+      fontSize: RFValue(15),
       color: colors.inactive,
     },
     locationText: {
-      fontFamily: GlobalFonts.regular,
-      fontSize: responsiveFontSize(19),
+      fontFamily: fonts.mulishSemiBold,
+      fontSize: RFValue(15),
       color: colors.black,
     },
     dateandtimeText: {
-      fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(19),
+      fontFamily: fonts.mulishRegular,
+      fontSize: RFValue(15),
       color: colors.darkPrimary,
     },
     cityNameText: {
-      fontFamily: GlobalFonts.extraLight,
-      fontSize: responsiveFontSize(20),
+      fontFamily: fonts.mulishRegular,
+      fontSize: RFValue(13),
       color: colors.darkPrimary,
     },
     cancelledText: {
-      fontFamily: GlobalFonts.extraLight,
-      fontSize: responsiveFontSize(20),
+      fontFamily: fonts.mulishRegular,
+      fontSize: RFValue(13),
       color: colors.red,
     },
     button: {
@@ -81,8 +82,8 @@ export const makeStyles = (colors: any) =>
       marginRight: widthToDp(1),
     },
     confirmedText: {
-      fontFamily: GlobalFonts.extraLight,
-      fontSize: responsiveFontSize(17),
+      fontFamily: fonts.mulishSemiBold,
+      fontSize: RFValue(13),
       color: colors.inactive,
     },
     readyContainer: {

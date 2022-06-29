@@ -40,6 +40,7 @@ import { Apple, Facebook, Google } from 'assets/svgs/index';
 import Logo from 'assets/svgs/appLogo';
 
 import makeStyles from './styles';
+import { RFValue } from 'react-native-responsive-fontsize';
 export const PASS_REGIX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -292,7 +293,7 @@ export default function Login() {
           style={{
             alignSelf: 'center',
             fontFamily: fonts.regular,
-            fontSize: 16,
+            fontSize: RFValue(15),
             color: colors.black,
           }}
         >
@@ -314,13 +315,21 @@ export default function Login() {
         <View style={{ alignSelf: 'center' }}>
           <View style={styles.noAccountTxt}>
             <Text
-              style={{ color: colors.black, fontFamily: fonts.mulishRegular }}
+              style={{
+                color: colors.black,
+                fontFamily: fonts.mulishRegular,
+                fontSize: RFValue(15),
+              }}
             >
               {t('pages.login.newToBiomark')}
             </Text>
             <TouchableOpacity onPress={() => navigate(SCREENS.SIGNUP)}>
               <Text
-                style={{ color: colors.blue, fontFamily: fonts.mulishRegular }}
+                style={{
+                  color: colors.blue,
+                  fontFamily: fonts.bold,
+                  fontSize: RFValue(15),
+                }}
               >
                 {' '}
                 {t('pages.login.signUp')}

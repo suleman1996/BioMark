@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import fonts from 'assets/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -16,7 +17,7 @@ const styles = (colors: any) =>
     },
     heading: {
       fontFamily: fonts.bold,
-      fontSize: 16,
+      fontSize: RFValue(17),
       color: colors.heading,
     },
     rowCenter: { flexDirection: 'row', alignItems: 'center' },

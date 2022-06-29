@@ -3,12 +3,13 @@ import { StyleSheet } from 'react-native';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     heading: {
-      fontFamily: GlobalFonts.semiBold,
-      fontSize: responsiveFontSize(18),
+      fontFamily: GlobalFonts.extraBold,
+      fontSize: RFValue(18),
       color: colors.heading,
     },
     container: {
