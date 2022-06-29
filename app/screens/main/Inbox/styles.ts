@@ -21,17 +21,17 @@ export const makeStyles = (colors: any) =>
     pagerView: {
       width: widthToDp(92),
       height: '100%',
-
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: heightToDp(1.5),
-      marginBottom: heightToDp(10),
+
       // flex: 1
     },
     tabNameContainer: {
       width: widthToDp(92),
       flexDirection: 'row',
       paddingTop: heightToDp(2),
+      backgroundColor: colors.white,
     },
     tab: {
       marginRight: widthToDp(3),
@@ -49,7 +49,6 @@ export const makeStyles = (colors: any) =>
       borderWidth: 1.2,
       borderColor: colors.gray,
       borderRadius: widthToDp(4),
-
       alignItems: 'center',
     },
     othersNotificationContainer: {
