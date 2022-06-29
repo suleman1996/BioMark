@@ -39,6 +39,7 @@ const styles = (colors: any) =>
       position: 'absolute',
       zIndex: -3,
       height: Dimensions.get('window').height,
+      paddingBottom: heightToDp(10),
     },
     headingText: {
       fontFamily: fonts.mulishBold,
