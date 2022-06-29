@@ -81,11 +81,16 @@ const Covid19Home = (props: Props) => {
     );
   };
 
+  const ifDataInCaraousalThenHeight =
+    covidHomeResults[selectedHorizontal]?.results.length == 0
+      ? { paddingBottom: 0 }
+      : {};
+
   return (
     <>
       {/* <ActivityIndicator visible={isLoading} /> */}
       <TitleWithSearchBarLayout isBack title={t('pages.covid.header')}>
-        <View style={styles.container}>
+        <View style={[styles.container, ifDataInCaraousalThenHeight]}>
           <View style={styles.badgesContainer}>
             <BookTestButton />
             <TestBookinButton />
@@ -101,7 +106,7 @@ const Covid19Home = (props: Props) => {
             horizontal
             showsHorizontalScrollIndicator={false}
             ListHeaderComponent={<View style={{ width: widthToDp(10) }} />}
-            ListFooterComponent={<View style={{ width: widthToDp(10) }} />}
+            // ListFooterComponent={<View style={{ width: widthToDp(5) }} />}
             data={covidHomeResults}
             renderItem={horizontalListItem}
           />

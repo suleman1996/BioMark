@@ -32,7 +32,6 @@ import {
   Hba1CProgressChartDataResponse,
 } from 'types/api';
 import { AutoLogoutRes } from 'types/auth/AutoLogoutRes';
-import { DeviceRegister } from 'types/auth/DeviceRegisterResponse';
 import {
   ForgotPasswordErrorResponse,
   ForgotPasswordSuccessResponse,
@@ -98,30 +97,40 @@ function federatedlogin(access_token: string, provider: string) {
       });
   });
 }
-function deviceRegisterAction(device_token: string, device_type: string) {
-  return new Promise<DeviceRegister>((resolve, reject) => {
-    client
-      .post(API_URLS.MOBILE_REGISTER, {
-        device: {
-          device_token,
-          device_type,
-        },
-      })
-      .then(async (response) => {
-        try {
-          resolve(response.data);
-          logNow('userService reg', response);
-        } catch (e) {
-          logNow('User login service error block login1.', e);
-          reject(e);
-        }
-      })
-      .catch(async (err: LoginErrorResponse) => {
-        logNow('User login service error block login.', err);
-        reject(err);
-      });
+// function deviceRegisterAction(device_token: string, device_type: string) {
+//   return new Promise<DeviceRegister>((resolve, reject) => {
+//     client
+//       .post(API_URLS.MOBILE_REGISTER, {
+//         device: {
+//           device_token,
+//           device_type,
+//         },
+//       })
+//       .then(async (response) => {
+//         try {
+//           resolve(response.data);
+//           logNow('userService reg', response);
+//         } catch (e) {
+//           logNow('User login service error block login1.', e);
+//           reject(e);
+//         }
+//       })
+//       .catch(async (err: LoginErrorResponse) => {
+//         logNow('User login service error block login.', err);
+//         reject(err);
+//       });
+//   });
+// }
+const deviceRegisterAction = (device_token: string, device_type: string) => {
+  console.log('device_token', device_token);
+
+  return client.post(API_URLS.MOBILE_REGISTER, {
+    device: {
+      device_token,
+      device_type,
+    },
   });
-}
+};
 
 function forgotPassword(username: string) {
   return new Promise<ForgotPasswordSuccessResponse>((resolve, reject) => {

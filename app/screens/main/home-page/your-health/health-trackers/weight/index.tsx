@@ -200,7 +200,7 @@ const Weight = ({ route }: any) => {
           headerText="Weight"
           subHeading="Are you sure you wish to delete this weight log?"
           buttonUpperText="Yes"
-          buttonLowerText="Skip"
+          buttonLowerText="No"
           isVisible={showDeleteModal}
           setIsVisible={setShowDeleteModal}
           callMe={deleteWeightLog}

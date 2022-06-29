@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Platform,
-} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import DeviceInfo from 'react-native-device-info';
-import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
 import StepIndicator from 'react-native-step-indicator';
@@ -17,7 +9,6 @@ import { Button } from 'components/button';
 import { OtpInput, ActivityIndicator } from 'components';
 
 import { resendAccountCode, signupAccountConfirm } from 'services/auth-service';
-import { reduxDeviceRegister } from 'store/auth/auth-actions';
 import { navigate, goBack } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 
@@ -33,7 +24,6 @@ export default function SignupVerification() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const dispatch = useDispatch();
   const labels = ['Personal Details', 'Verification', 'Confirmation']; //signup navigation labels
 
   let initialMinutes = 1;
@@ -109,9 +99,6 @@ export default function SignupVerification() {
           code: code,
         },
       });
-
-      let uniqueId = DeviceInfo.getUniqueId();
-      dispatch(reduxDeviceRegister(uniqueId, Platform.OS));
 
       await setAuthAsyncStorage(resData);
       navigate(SCREENS.CONFIRMATION);
