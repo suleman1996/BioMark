@@ -9,6 +9,7 @@ import fonts from 'assets/fonts';
 
 import { YourHealth } from 'assets/svgs/index';
 import { useTranslation } from 'react-i18next';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default function YourHealthBtn() {
   const { t } = useTranslation();
@@ -52,7 +53,7 @@ const makeStyles = (colors: any) =>
     },
     healthText: {
       fontFamily: fonts.bold,
-      fontSize: 15,
+      fontSize: RFValue(15),
       color: colors.heading,
     },
   });

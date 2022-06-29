@@ -24,7 +24,6 @@ export const makeStyles = (colors: any) =>
     },
     title: {
       marginLeft: 5,
-
       fontSize: 16,
     },
   });

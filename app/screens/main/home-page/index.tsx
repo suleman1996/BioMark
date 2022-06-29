@@ -37,6 +37,7 @@ import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userService } from 'services/user-service/user-service';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -126,9 +127,9 @@ export default function Home() {
                     <Text
                       style={{
                         fontFamily: fonts.mulishRegular,
-                        fontSize: 13,
+                        fontSize: RFValue(13),
                         color: 'white',
-                        lineHeight: 16.36,
+                        lineHeight: 16.32,
                         paddingTop: 3,
                       }}
                     >

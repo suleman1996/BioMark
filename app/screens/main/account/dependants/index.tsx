@@ -52,6 +52,7 @@ const DependantsScreen = (props: Props) => {
       <Header
         isBold={true}
         isColor={true}
+        titleStyle={{ fontSize: 20 }}
         title={t('pages.covid.covid-dependant-card.title')}
       />
       <View style={styles.bottomBtnContainer}>

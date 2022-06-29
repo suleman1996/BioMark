@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
+import fonts from 'assets/fonts';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -16,8 +18,8 @@ const styles = (colors: any) =>
       color: colors.darkPrimary,
     },
     text2: {
-      fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(22),
+      fontFamily: fonts.mulishRegular,
+      fontSize: RFValue(15),
       color: colors.black,
       paddingHorizontal: widthToDp(10),
       textAlign: 'center',
@@ -33,8 +35,8 @@ const styles = (colors: any) =>
       left: 10,
     },
     backText: {
-      fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(25),
+      fontFamily: fonts.mulishRegular,
+      fontSize: RFValue(17),
       color: colors.darkPrimary,
     },
   });
