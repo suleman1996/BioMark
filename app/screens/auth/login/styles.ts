@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 // import colors from 'assets/colors';
 import fonts from 'assets/fonts';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -30,12 +31,12 @@ const makeStyles = (colors: any) =>
     forgotPassword: {
       fontFamily: fonts.mulishRegular,
       color: colors.blue,
-      fontSize: 14,
+      fontSize: RFValue(13),
     },
     orTxt: {
       marginHorizontal: 20,
       fontFamily: fonts.mulishRegular,
-      fontSize: 14,
+      fontSize: RFValue(15),
       color: colors.black,
     },
     dash: { height: 0.5, backgroundColor: colors.blue, width: '40%' },
@@ -59,6 +60,7 @@ const makeStyles = (colors: any) =>
       fontFamily: fonts.mulishRegular,
       fontSize: 16,
       flexDirection: 'row',
+      alignItems: 'baseline',
     },
     errorMessage: {
       fontFamily: fonts.regular,

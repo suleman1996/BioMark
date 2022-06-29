@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -13,7 +14,7 @@ const styles = (colors: any) =>
     },
     headingStyle: {
       fontFamily: fonts.mulishBold,
-      fontSize: 18,
+      fontSize: RFValue(17),
       color: colors.heading,
     },
     medicationBox: {

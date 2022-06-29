@@ -14,6 +14,7 @@ type Props = {
   title: string;
   isColor: boolean;
   isBold: boolean;
+  titleStyle?: any;
 };
 
 export default function Header(props: Props) {
@@ -37,6 +38,7 @@ export default function Header(props: Props) {
           <Text
             style={[
               styles.title,
+              props.titleStyle,
               {
                 color: props.isColor ? colors.heading : colors.black,
                 fontFamily: props.isBold ? fonts.bold : fonts.regular,
