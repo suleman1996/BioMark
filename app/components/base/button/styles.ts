@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { GlobalFonts } from 'utils/theme/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import fonts from 'assets/fonts';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -18,8 +18,8 @@ export const makeStyles = (colors: any) =>
     },
     text: {
       color: colors.white,
-      fontFamily: GlobalFonts.medium,
-      fontSize: responsiveFontSize(18),
+      fontFamily: fonts.semiBold,
+      fontSize: responsiveFontSize(19),
     },
   });
 

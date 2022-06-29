@@ -22,6 +22,7 @@ type Props = {
   containerStyles: any;
   maxLength?: number;
   keyboardType?: any;
+  labelStyle?: any;
 };
 
 const InputWithLabel = ({
@@ -36,6 +37,7 @@ const InputWithLabel = ({
   onBlur,
   containerStyles,
   maxLength,
+  labelStyle,
   keyboardType,
 }: Props) => {
   const { colors } = useTheme();
@@ -48,7 +50,9 @@ const InputWithLabel = ({
   return (
     <>
       <View style={[styles.container, containerStyles]}>
-        {label && <Text style={[styles.label, ifLabelSize]}>{label}</Text>}
+        {label && (
+          <Text style={[styles.label, labelStyle, ifLabelSize]}>{label}</Text>
+        )}
         <InputField
           onFocus={onFocus}
           placeholder={placeholder}

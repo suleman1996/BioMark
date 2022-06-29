@@ -28,13 +28,13 @@ export const makeStyles = (colors: any) =>
       marginBottom: 20,
     },
     signupText: {
-      fontFamily: fonts.regular,
-      fontSize: 15,
-      color: colors.black,
+      fontFamily: fonts.mulishRegular,
+      fontSize: 17,
+      color: colors.heading,
       marginLeft: 10,
     },
     stepIndicator: {
-      labelSize: 12,
+      labelSize: 13,
       stepStrokeWidth: 0,
       stepIndicatorSize: 40,
       currentStepIndicatorSize: 40,
@@ -61,7 +61,7 @@ export const makeStyles = (colors: any) =>
     },
     heading: {
       fontFamily: fonts.extraBold,
-      fontSize: 20,
+      fontSize: 19,
       marginHorizontal: 20,
       color: colors.heading,
       marginTop: 5,
@@ -70,7 +70,7 @@ export const makeStyles = (colors: any) =>
     inputLablel: {
       marginHorizontal: 20,
       marginTop: 20,
-      fontFamily: fonts.semiBold,
+      fontFamily: fonts.mulishSemiBold,
       color: colors.heading,
       fontSize: 15,
     },
@@ -98,8 +98,8 @@ export const makeStyles = (colors: any) =>
     },
     tcTextStyle: {
       marginTop: 20,
-      fontSize: 17,
-      fontFamily: fonts.regular,
+      fontSize: 15,
+      fontFamily: fonts.mulishRegular,
       color: colors.black,
     },
 
