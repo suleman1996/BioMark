@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import fonts from 'assets/fonts';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -40,7 +41,7 @@ export const makeStyles = (colors: any) =>
 
     bnHeading: {
       fontFamily: fonts.bold,
-      fontSize: 20,
+      fontSize: RFValue(18),
       color: colors.white,
       paddingTop: 10,
       paddingHorizontal: 10,
@@ -89,7 +90,7 @@ export const makeStyles = (colors: any) =>
 
     gfHeading: {
       fontFamily: fonts.bold,
-      fontSize: 20,
+      fontSize: RFValue(19),
       color: colors.heading,
       marginTop: 15,
     },

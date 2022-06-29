@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -15,7 +16,7 @@ const styles = (colors: any) =>
     },
     navHeading: {
       fontFamily: fonts.bold,
-      fontSize: 18,
+      fontSize: RFValue(20),
       color: colors.white,
       paddingLeft: 21,
       paddingTop: 10,
@@ -58,15 +59,15 @@ const styles = (colors: any) =>
     },
     text: {
       textAlign: 'center',
-      fontSize: responsiveFontSize(20),
+      fontSize: RFValue(20),
       color: colors.primary,
-      fontFamily: fonts.OpenSansBold,
+      fontFamily: fonts.extraBold,
     },
     text2: {
       textAlign: 'center',
       marginTop: heightToDp(1),
       color: colors.black,
-      fontSize: responsiveFontSize(14),
+      fontSize: RFValue(13),
       fontFamily: fonts.mulishRegular,
       marginBottom: heightToDp(3),
     },
@@ -163,8 +164,8 @@ const styles = (colors: any) =>
     },
     text5: {
       color: colors.primary,
-      fontFamily: fonts.OpenSansBold,
-      fontSize: responsiveFontSize(18),
+      fontFamily: fonts.extraBold,
+      fontSize: RFValue(20),
     },
     pastResultView: {
       flexDirection: 'row',
@@ -209,9 +210,9 @@ const styles = (colors: any) =>
       marginTop: heightToDp(2),
     },
     latestResult: {
-      fontSize: responsiveFontSize(20),
+      fontSize: RFValue(20),
       color: colors.primary,
-      fontFamily: fonts.OpenSansBold,
+      fontFamily: fonts.extraBold,
       marginTop: heightToDp(3),
     },
     loadMoreText: {

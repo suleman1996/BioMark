@@ -7,6 +7,7 @@ import fonts from 'assets/fonts';
 import SCREENS from '../../navigation/constants';
 import { navigate } from '../../services/nav-ref';
 import { useTranslation } from 'react-i18next';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default function Covid19Btn({ onPress }) {
   const { t } = useTranslation();
@@ -53,7 +54,7 @@ const makeStyles = (colors: any) =>
     },
     covidText: {
       fontFamily: fonts.bold,
-      fontSize: 15,
+      fontSize: RFValue(15),
       color: colors.heading,
     },
   });
