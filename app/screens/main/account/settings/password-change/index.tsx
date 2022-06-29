@@ -19,8 +19,6 @@ import SCREENS from 'navigation/constants';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalStyles } from 'utils/theme/global-styles';
-
 import { settingsService } from 'services/account-service/settings-service';
 import { navigate } from 'services/nav-ref';
 import { ErrorResponse } from 'types/ErrorResponse';
@@ -102,23 +100,23 @@ const PasswordChangeScreen = () => {
           <Text style={styles.textHeader}>
             {t('pages.password.description')}
           </Text>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={{ flex: 1 }}
-          >
-            <Formik
-              innerRef={formikRef}
-              initialValues={{
-                currentPassword: '',
-                password: '',
-                confirmPassword: '',
-              }}
-              onSubmit={resetPassword}
-              validationSchema={UpdatePassSchema}
+          <ScrollView>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+              style={{ flex: 1 }}
             >
-              {({ handleChange, handleSubmit, errors, values }) => (
-                <>
-                  <ScrollView style={{ flex: 1 }} keyboardShouldPersistTaps>
+              <Formik
+                innerRef={formikRef}
+                initialValues={{
+                  currentPassword: '',
+                  password: '',
+                  confirmPassword: '',
+                }}
+                onSubmit={resetPassword}
+                validationSchema={UpdatePassSchema}
+              >
+                {({ handleChange, handleSubmit, errors, values }) => (
+                  <>
                     <PasswordInputWithLabel
                       marginTop={1}
                       label={t('pages.password.currentPassword.title')}
@@ -210,27 +208,28 @@ const PasswordChangeScreen = () => {
                         }
                       />
                     )}
-                  </ScrollView>
-                  <View style={GlobalStyles(colors).bottomBtnWithShadow}>
-                    <Button
-                      onPress={() => {
-                        submitForm();
-                        handleSubmit();
-                      }}
-                      title={t('pages.password.save')}
-                      disabled={
-                        Object.entries(errors).length === 0
-                          ? values.currentPassword
-                            ? false
+
+                    <View style={styles.bottomBtnContainer}>
+                      <Button
+                        onPress={() => {
+                          submitForm();
+                          handleSubmit();
+                        }}
+                        title={t('pages.password.save')}
+                        disabled={
+                          Object.entries(errors).length === 0
+                            ? values.currentPassword
+                              ? false
+                              : true
                             : true
-                          : true
-                      }
-                    />
-                  </View>
-                </>
-              )}
-            </Formik>
-          </KeyboardAvoidingView>
+                        }
+                      />
+                    </View>
+                  </>
+                )}
+              </Formik>
+            </KeyboardAvoidingView>
+          </ScrollView>
         </View>
       </TitleWithBackWhiteBgLayout>
     </SafeAreaView>

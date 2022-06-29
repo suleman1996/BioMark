@@ -19,7 +19,7 @@ export const makeStyles = (colors: any) =>
       paddingBottom: heightToDp(2),
       ...GlobalStyles(colors).shadow,
       borderBottomWidth: heightToDp(0.1),
-      borderColor: colors.darkGray,
+      borderColor: colors.gray,
     },
     titleContainer: {
       paddingVertical: heightToDp(1),
