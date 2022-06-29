@@ -112,6 +112,7 @@ const Index = () => {
   ]);
 
   const [selectedRisk, setSelectedRisk] = useState('');
+  const [selectedHealthRisk, setSelectedHealthRisk] = useState('');
 
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -303,14 +304,19 @@ const Index = () => {
             </Text>
             <View style={styles.healthRiskView}>
               {Object.entries(healthRisk).map(([key, value]: any) => (
-                <RenderHealthRiskView
-                  key={key}
-                  name={value?.name}
-                  onRiskPress={() => setSelectedRisk(key)}
-                  color={handleHealthTrackerColor(value?.name)}
-                  Svg={healthRiskData[key].icon}
-                  status={value?.status}
-                />
+                <>
+                  <RenderHealthRiskView
+                    key={key}
+                    name={value?.name}
+                    onRiskPress={() => {
+                      setSelectedRisk(key), setSelectedHealthRisk(value);
+                    }}
+                    color={handleHealthTrackerColor(value?.name)}
+                    Svg={healthRiskData[key].icon}
+                    status={value?.status}
+                    selectedHealthRisk={selectedHealthRisk}
+                  />
+                </>
               ))}
             </View>
             {selectedRisk ? (

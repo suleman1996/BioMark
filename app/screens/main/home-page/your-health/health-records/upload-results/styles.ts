@@ -35,7 +35,7 @@ export const makeStyles = (colors: any) =>
     },
     imageView: {
       height: heightToDp(22),
-      width: widthToDp(40),
+      width: widthToDp(38),
       backgroundColor: colors.fieldGrey,
       marginHorizontal: widthToDp(10),
       marginTop: heightToDp(2),
@@ -48,7 +48,6 @@ export const makeStyles = (colors: any) =>
       width: widthToDp(38),
       backgroundColor: colors.fieldGrey,
       marginLeft: widthToDp(10),
-
       marginTop: heightToDp(2),
       borderRadius: 8,
       alignItems: 'flex-end',

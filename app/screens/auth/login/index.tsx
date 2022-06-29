@@ -36,7 +36,8 @@ import { IAppState } from 'store/IAppState';
 import { useTranslation } from 'react-i18next';
 
 import fonts from 'assets/fonts';
-import { Logo, Apple, Facebook, Google } from 'assets/svgs/index';
+import { Apple, Facebook, Google } from 'assets/svgs/index';
+import Logo from 'assets/svgs/appLogo';
 
 import makeStyles from './styles';
 import { RFValue } from 'react-native-responsive-fontsize';

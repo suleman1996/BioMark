@@ -170,7 +170,11 @@ export default function Home() {
                 <TouchableOpacity>
                   <GoogleFitButton
                     disabled={false}
-                    title={t('healthSnapshot.android.connectButton')}
+                    title={
+                      Platform.OS == 'android'
+                        ? t('healthSnapshot.android.connectButton')
+                        : t('healthSnapshot.ios.connectButton')
+                    }
                     onPress={() => console.log('pressed')}
                   />
                 </TouchableOpacity>

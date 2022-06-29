@@ -637,6 +637,7 @@ const deleteBsLog = (bp_log_id: any) => {
       });
   });
 };
+
 const createHba1cTracker = (medical: WeightProgressEntryRequest) => {
   return new Promise<MedicationUpdateResponse>((resolve, reject) => {
     client
