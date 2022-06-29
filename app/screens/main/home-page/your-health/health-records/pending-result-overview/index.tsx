@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   ImageBackground,
+  Pressable,
 } from 'react-native';
 import React, { useState } from 'react';
 
@@ -30,6 +31,7 @@ import { showMessage } from 'react-native-flash-message';
 import { navigate } from 'services/nav-ref';
 import Pdf from 'react-native-pdf';
 import { useTranslation } from 'react-i18next';
+import ShowPicModal from 'components/show-upload-pic-modal';
 
 const PendingResultOverview = () => {
   const { t } = useTranslation();
@@ -42,17 +44,21 @@ const PendingResultOverview = () => {
   const [splices, setSplices] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [isVisiable, setIsVisible] = React.useState(false);
+  const [showPicModal, setShowPicModal] = useState(false);
+  const [modalData, setModalData] = useState([]);
 
   const pendingResult = useSelector(
     (state: IAppState) => state.home.getPendingResultOverviewData
   );
-
   React.useEffect(() => {
     dispatch(getReduxPendingResultOverview(route?.params?.result?.lab_id));
-    setList(pendingResult?.upload?.document_attachments);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    setList(pendingResult?.upload?.document_attachments);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingResult?.upload?.document_attachments]);
 
   const onPressDelete = async () => {
     try {
@@ -126,7 +132,10 @@ const PendingResultOverview = () => {
               </View>
             </View>
           </View>
-          <ScrollView>
+          <ScrollView
+            contentContainerStyle={{ paddingBottom: 100 }}
+            showsVerticalScrollIndicator={false}
+          >
             <View style={styles.topView4}>
               <Feather name="info" color="red" size={20} />
               <Text style={styles.topViewText4}>
@@ -152,7 +161,12 @@ const PendingResultOverview = () => {
                 renderItem={({ item, index }) => {
                   setSplices(index);
                   return (
-                    <>
+                    <Pressable
+                      onPress={() => {
+                        setShowPicModal(true);
+                        setModalData(item);
+                      }}
+                    >
                       {item?.file_type === 'pdf' ? (
                         <Pdf
                           source={{
@@ -169,11 +183,16 @@ const PendingResultOverview = () => {
                           style={styles.imageView2}
                         ></ImageBackground>
                       )}
-                    </>
+                    </Pressable>
                   );
                 }}
               />
             </View>
+            <ShowPicModal
+              visible={showPicModal}
+              modalData={modalData}
+              onClose={() => setShowPicModal(false)}
+            />
 
             <WithdrawProgram
               text={t('pages.labResultOverview.dialogs.delete.buttonText')}
