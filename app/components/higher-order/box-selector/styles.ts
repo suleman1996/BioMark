@@ -20,7 +20,7 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#fff',
-      width: widthToDp(25),
+      width: widthToDp(24.5),
       marginRight: widthToDp(3),
       marginVertical: 3,
       borderRadius: widthToDp(2),
