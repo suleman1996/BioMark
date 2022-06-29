@@ -1,8 +1,8 @@
 import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import { widthToDp } from 'utils/functions/responsive-dimensions';
-import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 
 export const makeStyles = (colors: any) =>
@@ -25,7 +25,7 @@ export const makeStyles = (colors: any) =>
     text: {
       color: colors.darkPrimary,
       fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(20),
+      fontSize: RFValue(15),
       paddingLeft: widthToDp(3),
     },
     divider: {

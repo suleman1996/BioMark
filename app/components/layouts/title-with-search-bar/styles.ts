@@ -9,6 +9,7 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       width: widthToDp(100),
+      backgroundColor: colors.white,
     },
     iconContainer: {
       paddingRight: widthToDp(2),

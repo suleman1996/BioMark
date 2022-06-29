@@ -73,6 +73,12 @@ export default function ResultUpload() {
         attachments: list,
       },
     };
+    // console.log(list.map((e) => Object.keys(e)));
+    // console.log(
+    //   list.map((e) =>
+    //     Object.keys(e).map((key) => (key == 'base64' ? null : e[key]))
+    //   )
+    // );
 
     try {
       setIsVisible(true);
@@ -83,6 +89,7 @@ export default function ResultUpload() {
         Keyboard.dismiss();
       }
     } catch (error) {
+      console.log(error);
       setIsVisible(false);
       if (error.errMsg.status == '500') {
         setIsVisible(false);
@@ -105,14 +112,17 @@ export default function ResultUpload() {
       }
     }
   };
+
   const imagePickerFromGallery = async () => {
     try {
       setIsVisible(true);
-
       let options = {
         mediaType: 'photo',
-        selectionLimit: 0,
+        selectionLimit: 40,
         includeBase64: true,
+        maxWidth: 500,
+        maxHeight: 500,
+        quality: 0.5,
       };
       launchImageLibrary(options, (res) => {
         if (res.didCancel) {
@@ -121,20 +131,18 @@ export default function ResultUpload() {
           setIsVisible(false);
         } else {
           setIsVisible(false);
-          let body = {
-            filename: res?.assets[0]?.fileName,
-            uri: res?.assets[0]?.uri,
-            base64:
-              'data:' +
-              res?.assets[0]?.type +
-              ';' +
-              'base64' +
-              ',' +
-              res?.assets[0]?.base64,
-            filetype: res?.assets[0]?.type,
-          };
-          let data = list;
-          data.push(body);
+          let data = [...list];
+          res?.assets?.forEach((asset) => {
+            data.push({
+              filename: asset?.fileName,
+              uri: asset?.uri,
+              base64:
+                'data:' + asset?.type + ';' + 'base64' + ',' + asset?.base64,
+              filetype: asset?.type,
+            });
+          });
+
+          // data.push(body);
           setList(data);
           setShowModal(!showModal);
         }
@@ -146,15 +154,12 @@ export default function ResultUpload() {
   };
 
   const uploadPDF = async () => {
-    //Opening Document Picker for selection of one file
     try {
       const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf],
       });
       //Printing the log realted to the file
-
       var b64 = await RNFS.readFile(res.uri, 'base64');
-
       let body = {
         filename: res?.name,
 
@@ -165,7 +170,6 @@ export default function ResultUpload() {
       data.push(body);
       setList(data);
       setShowModal(false);
-
       //Setting the state to show single file attributes
     } catch (err) {
       //Handling any exception (If any)
@@ -351,13 +355,26 @@ export default function ResultUpload() {
             </View>
             <View>
               <FlatList
-                data={list}
+                data={[...list, { id: 'add-new' }]}
                 horizontal={false}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
                 extraData={refresh}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) => {
+                  if (item.id == 'add-new') {
+                    return (
+                      <Pressable
+                        style={styles.imageView}
+                        onPress={() => setShowModal(true)}
+                      >
+                        <Feather color={colors.heading} name="plus" size={35} />
+                        <Text style={styles.addPage}>
+                          {t('pages.uploadResult.addPage')}
+                        </Text>
+                      </Pressable>
+                    );
+                  }
                   setSplices(index);
                   setUri(item?.uri);
                   return (
@@ -408,36 +425,30 @@ export default function ResultUpload() {
                   );
                 }}
               />
-              <WithdrawProgram
-                text={t('pages.uploadResult.delete.buttonText')}
-                visible={modalVisible}
-                title={t('pages.uploadResult.delete.title')}
-                text2={t('pages.uploadResult.delete.description')}
-                cancel={t('pages.uploadResult.delete.buttonCancelText')}
-                cancelModal={() => setModalVisible(!modalVisible)}
-                closeModal={() => setModalVisible(!modalVisible)}
-                color={['#EB3342', '#EB3342']}
-                onPress={() => {
-                  list.splice(splices, 1);
-                  setRefreh(!refresh);
-                  setModalVisible(false);
-                }}
-              />
-              <ShowPicModal
-                visible={showPicModal}
-                modalData={modalData}
-                onClose={() => setShowPicModal(false)}
-              />
             </View>
-            <Pressable
-              style={styles.imageView}
-              onPress={() => setShowModal(true)}
-            >
-              <Feather color={colors.heading} name="plus" size={35} />
-              <Text style={styles.addPage}>
-                {t('pages.uploadResult.addPage')}
-              </Text>
-            </Pressable>
+            <WithdrawProgram
+              text={t('pages.hba1cInput.dialogs.delete.buttonText')}
+              visible={modalVisible}
+              title={t('pages.labResultOverview.dialogs.delete.title')}
+              text2={t('pages.uploadResult.dialogs.delete.description')}
+              cancel={t(
+                'pages.labResultOverview.dialogs.delete.buttonCancelText'
+              )}
+              cancelModal={() => setModalVisible(!modalVisible)}
+              closeModal={() => setModalVisible(!modalVisible)}
+              color={['#EB3342', '#EB3342']}
+              onPress={() => {
+                list.splice(splices, 1);
+                setRefreh(!refresh);
+                setModalVisible(false);
+              }}
+            />
+            <ShowPicModal
+              visible={showPicModal}
+              modalData={modalData}
+              onClose={() => setShowPicModal(false)}
+            />
+
             <LabResultModal
               visible={showModal}
               title={t('pages.uploadResult.dialogs.upload.title')}

@@ -66,6 +66,7 @@ const styles = (colors: any) =>
     },
     radiotext: {
       fontFamily: fonts.mulishRegular,
+      color: colors.heading,
       fontSize: responsiveFontSize(17),
     },
     datepicker: {

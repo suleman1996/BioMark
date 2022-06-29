@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -15,7 +16,7 @@ const styles = (colors: any) =>
     },
     navHeading: {
       fontFamily: fonts.bold,
-      fontSize: 18,
+      fontSize: RFValue(20),
       color: colors.white,
       paddingLeft: 21,
       paddingTop: 10,
@@ -39,10 +40,11 @@ const styles = (colors: any) =>
       position: 'absolute',
       zIndex: -3,
       height: Dimensions.get('window').height,
+      paddingBottom: heightToDp(10),
     },
     headingText: {
-      fontFamily: fonts.mulishBold,
-      fontSize: 17,
+      fontFamily: fonts.semiBold,
+      fontSize: RFValue(19),
       color: colors.heading,
     },
     healthRiskView: {

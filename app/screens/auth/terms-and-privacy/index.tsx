@@ -165,8 +165,8 @@ export default function TermsAndPrivacy({ route }) {
       ) : (
         <View style={styles.signupNav}>
           <View style={styles.csNav}>
-            <TouchableOpacity>
-              <BackIcon onPress={() => navigations.goBack()} />
+            <TouchableOpacity onPress={() => navigations.goBack()}>
+              <BackIcon />
             </TouchableOpacity>
             <Text style={styles.signupText}>
               {t('pages.signUp.buttontitle.back')}
