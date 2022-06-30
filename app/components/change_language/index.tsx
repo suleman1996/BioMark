@@ -10,6 +10,8 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { profileServices } from 'services/profile-services';
 import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
@@ -45,6 +47,7 @@ const ChangeLanguage = () => {
       const result = await profileServices.getUserProfile();
       authContext.setUserData(result);
       i18next.changeLanguage(result?.app_lang);
+      await AsyncStorage.setItem('laguage', result?.app_lang);
     } catch (error) {
       console.error(error);
     }
