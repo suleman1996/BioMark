@@ -1,6 +1,4 @@
-import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
-
 import {
   GeoLocationData,
   MedicationSetupPayload,
@@ -314,8 +312,6 @@ function saveAutoLogout(auto_logout: boolean) {
 }
 
 async function logout() {
-  let uniqueId = DeviceInfo.getUniqueId();
-
   client
     .post(API_URLS.LOG_OUT, {
       session: {
