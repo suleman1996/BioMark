@@ -38,13 +38,14 @@ const PaymentStep = (props: Props) => {
   const styles = makeStyles(colors);
   const [paymentModal, setPaymentModal] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
 
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
 
   const booking = useSelector((state: IAppState) => state.covid.booking);
-  const userContacts = useSelector(
-    (state: IAppState) => state.auth.userContacts
-  );
+  // const userContacts = useSelector(
+  //   (state: IAppState) => state.auth.userContacts
+  // );
   const dependants = useSelector(
     (state: IAppState) => state.account.allDependents
   );
@@ -58,6 +59,7 @@ const PaymentStep = (props: Props) => {
     userService
       .getUserContacts()
       .then((res) => {
+        setEmailAddress(res.email_address);
         dispatch(addUserContactsDetails(res));
       })
       .catch(() => {})
@@ -197,7 +199,7 @@ const PaymentStep = (props: Props) => {
     }, 0),
     currency: booking[0].currency,
     countryName: booking[0]?.test_country_name,
-    email: userContacts.email_address,
+    email: emailAddress,
     name: userDetails.patient_name,
   };
 
@@ -345,9 +347,9 @@ const PaymentStep = (props: Props) => {
               labelFontSize={18}
               label={'Email address'}
               placeholder={'Enter your email address'}
-              value={userContacts.email_address}
+              value={emailAddress}
               onFocus={() => undefined}
-              onChange={undefined}
+              onChange={setEmailAddress}
               defaultValue={undefined}
             />
             <Text style={[styles.innerTitle, { marginTop: heightToDp(1) }]}>

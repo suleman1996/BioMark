@@ -478,7 +478,7 @@ const ExisitingBookingForDependent = (props: Props) => {
               {testCentersBasedOnCities.length > 0 ? (
                 <>
                   <Text style={styles.innerTitle}>Select a covid Test</Text>
-                  <DropdownMenu
+                  <DropdownCountryCity
                     options={testCentersBasedOnCities.map((item) => {
                       return { label: item.name, value: item.id };
                     })}
@@ -488,6 +488,16 @@ const ExisitingBookingForDependent = (props: Props) => {
                       changeTestCenterTypeAndName(value);
                     }}
                   />
+                  {/* <DropdownMenu
+                    options={testCentersBasedOnCities.map((item) => {
+                      return { label: item.name, value: item.id };
+                    })}
+                    selectedValue={covidTestCenterValue}
+                    onValueChange={(value: any) => {
+                      setCovidTestCenter(value);
+                      changeTestCenterTypeAndName(value);
+                    }}
+                  /> */}
                 </>
               ) : null}
               <View style={{ marginTop: heightToDp(1) }} />
@@ -499,9 +509,10 @@ const ExisitingBookingForDependent = (props: Props) => {
 
                   {testCentersBasedOnCities
                     .filter((item) => item.id == covidTestCenterValue)[0]
-                    ?.clinics?.map((item2) => {
+                    ?.clinics?.map((item2, index2) => {
                       return (
                         <MapView
+                          key={index2}
                           style={{
                             width: widthToDp(88),
                             height: heightToDp(20),
