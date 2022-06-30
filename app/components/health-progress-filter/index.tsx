@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import React from 'react';
 
 import Styles from './styles';
@@ -16,6 +16,7 @@ const Index = ({
   filterOption2,
   values,
   onApplyPress,
+  filterModalClose,
 }) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -60,7 +61,7 @@ const Index = ({
     return null;
   }
   return (
-    <View style={styles.overLay}>
+    <Pressable style={styles.overLay} onPress={filterModalClose}>
       <View style={styles.filterView}>
         <View style={styles.header}>
           <Text style={styles.headingText}>
@@ -96,7 +97,7 @@ const Index = ({
           }
         />
       </View>
-    </View>
+    </Pressable>
   );
 };
 

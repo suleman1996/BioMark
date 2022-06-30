@@ -74,7 +74,7 @@ const AppointmentScreen = (props: Props) => {
             keyExtractor={(index) => index.toString()}
             ListHeaderComponent={<View style={{ width: widthToDp(6) }} />}
             ListFooterComponent={<View style={{ width: widthToDp(10) }} />}
-            data={['Upcomming', 'History']}
+            data={['Upcoming', 'History']}
             renderItem={horizontalListItem}
           />
 

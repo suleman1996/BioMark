@@ -26,6 +26,7 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { makeStyles } from './styles';
+import { ActivityIndicator } from 'components/';
 
 type Props = {};
 
@@ -36,15 +37,19 @@ const PaymentStep = (props: Props) => {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const styles = makeStyles(colors);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const [paymentModal, setPaymentModal] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
 
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
 
   const booking = useSelector((state: IAppState) => state.covid.booking);
-  const userContacts = useSelector(
-    (state: IAppState) => state.auth.userContacts
-  );
+  // const userContacts = useSelector(
+  //   (state: IAppState) => state.auth.userContacts
+  // );
   const dependants = useSelector(
     (state: IAppState) => state.account.allDependents
   );
@@ -58,6 +63,7 @@ const PaymentStep = (props: Props) => {
     userService
       .getUserContacts()
       .then((res) => {
+        setEmailAddress(res.email_address);
         dispatch(addUserContactsDetails(res));
       })
       .catch(() => {})
@@ -197,7 +203,7 @@ const PaymentStep = (props: Props) => {
     }, 0),
     currency: booking[0].currency,
     countryName: booking[0]?.test_country_name,
-    email: userContacts.email_address,
+    email: emailAddress,
     name: userDetails.patient_name,
   };
 
@@ -231,6 +237,7 @@ const PaymentStep = (props: Props) => {
 
   return (
     <>
+      <ActivityIndicator visible={isLoading} />
       <View style={styles.container}>
         <Modal
           deviceWidth={widthToDp(100)}
@@ -247,6 +254,7 @@ const PaymentStep = (props: Props) => {
               if (
                 webViewState.url.includes('/payment/v1/billplz/confirmation')
               ) {
+                setIsLoading(false);
                 setIsPaymentSuccess(true);
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_SUCCESS,
@@ -254,6 +262,7 @@ const PaymentStep = (props: Props) => {
               } else if (
                 webViewState.url.includes('/payment/v1/stripe/success')
               ) {
+                setIsLoading(false);
                 setIsPaymentSuccess(true);
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_SUCCESS,
@@ -261,9 +270,12 @@ const PaymentStep = (props: Props) => {
               } else if (
                 webViewState.url.includes('payment/v1/stripe/cancel')
               ) {
+                setIsLoading(false);
                 navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                   screen: SCREENS.PAYMENT_FAILED,
                 });
+              } else {
+                setIsLoading(false);
               }
             }}
           />
@@ -345,9 +357,9 @@ const PaymentStep = (props: Props) => {
               labelFontSize={18}
               label={'Email address'}
               placeholder={'Enter your email address'}
-              value={userContacts.email_address}
+              value={emailAddress}
               onFocus={() => undefined}
-              onChange={undefined}
+              onChange={setEmailAddress}
               defaultValue={undefined}
             />
             <Text style={[styles.innerTitle, { marginTop: heightToDp(1) }]}>
@@ -370,6 +382,7 @@ const PaymentStep = (props: Props) => {
               onPress={async () => {
                 setPaymentModal(false);
                 if (countryName == 'Malaysia') {
+                  setIsLoading(true);
                   const data: any = await paymentService.openBillPlzBrowser(
                     email,
                     name,
@@ -382,6 +395,7 @@ const PaymentStep = (props: Props) => {
                     setPaymentModal(true);
                   }
                 } else {
+                  setIsLoading(true);
                   const data: any = await paymentService.openStripeBrowser(
                     booking,
                     email
