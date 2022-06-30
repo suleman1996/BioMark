@@ -10,9 +10,10 @@ const styles = (colors: any) =>
       // padding: 15,
     },
     heading: {
-      fontFamily: fonts.bold,
+      fontFamily: fonts.regular,
       fontSize: 18,
       color: colors.heading,
+      fontWeight: '500',
     },
     innerContainer: {
       flex: 1,

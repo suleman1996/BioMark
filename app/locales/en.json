@@ -1534,7 +1534,7 @@
       },
       "buttons": {
         "common": {
-          "tapHere": "Tap here ",
+          "tapHere": " Tap here ",
           "moreInfo": "for more information.",
           "completeInfo": "to complete your information."
         },

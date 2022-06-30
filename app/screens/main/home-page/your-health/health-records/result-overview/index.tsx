@@ -162,24 +162,46 @@ const Index = () => {
       <Pressable style={styles.overLay} onPress={() => setIsInfo(false)}>
         <View style={styles.overLayContainer}>
           <RenderHeading title={t('pages.encodedResults.info.title')} />
-          <RenderHeading title={t('pages.encodedResults.info.source')} />
-          <RenderSubheading subTitle={resultOverView?.provider} />
-          <RenderHeading title={t('pages.encodedResults.info.reference')} />
-          <RenderSubheading subTitle={resultOverView?.result?.doctor} />
-          <RenderHeading title={t('pages.encodedResults.info.labReference')} />
-          <RenderSubheading subTitle={resultOverView?.ref_no} />
-          <RenderHeading title={t('pages.encodedResults.info.received')} />
-          <RenderSubheading
-            subTitle={moment(resultOverView?.report_received).format(
-              'MMM DD, YYYY'
-            )}
-          />
-          <RenderHeading title={t('pages.encodedResults.info.printed')} />
-          <RenderSubheading
-            subTitle={moment(resultOverView?.report_printed).format(
-              'MMM DD, YYYY'
-            )}
-          />
+          {resultOverView?.provider !== '' && (
+            <>
+              <RenderHeading title={t('pages.encodedResults.info.source')} />
+              <RenderSubheading subTitle={resultOverView?.provider} />
+            </>
+          )}
+          {resultOverView?.result?.doctor !== '' && (
+            <>
+              <RenderHeading title={t('pages.encodedResults.info.reference')} />
+              <RenderSubheading subTitle={resultOverView?.result?.doctor} />
+            </>
+          )}
+          {resultOverView?.ref_no !== '' && (
+            <>
+              <RenderHeading
+                title={t('pages.encodedResults.info.labReference')}
+              />
+              <RenderSubheading subTitle={resultOverView?.ref_no} />
+            </>
+          )}
+          {resultOverView?.report_received !== '' && (
+            <>
+              <RenderHeading title={t('pages.encodedResults.info.received')} />
+              <RenderSubheading
+                subTitle={moment(resultOverView?.report_received).format(
+                  'MMM DD, YYYY'
+                )}
+              />
+            </>
+          )}
+          {resultOverView?.report_printed !== '' && (
+            <>
+              <RenderHeading title={t('pages.encodedResults.info.printed')} />
+              <RenderSubheading
+                subTitle={moment(resultOverView?.report_printed).format(
+                  'MMM DD, YYYY'
+                )}
+              />
+            </>
+          )}
 
           <View style={{ marginTop: 20 }}>
             <Button

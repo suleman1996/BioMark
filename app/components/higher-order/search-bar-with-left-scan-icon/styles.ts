@@ -129,6 +129,7 @@ export const makeStyles = (colors: any) =>
       shadowRadius: 3.84,
 
       elevation: 5,
+      zIndex: 1000,
     },
   });
 export default makeStyles;

@@ -28,7 +28,7 @@ import TickMedicationIcon from 'assets/svgs/tick-medication-icon';
 import Styles from './styles';
 import fonts from 'assets/fonts';
 import { getReduxHealthTracker } from 'store/home/home-actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 const Index = () => {
@@ -38,16 +38,30 @@ const Index = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const [healthProgress] = useState([
-    { id: 0, title: 'Weight' },
-    { id: 1, title: 'Blood Sugar' },
-    { id: 2, title: 'Medication' },
-    { id: 3, title: 'HbA1c' },
-    { id: 4, title: 'Blood Pressure' },
-  ]);
+
+  const [healthProgress, setHealthProgress] = useState([]);
   const [selectedHorizontal, setSelectedHorizontal] = useState(
     route?.params ? route?.params : 0
   );
+  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
+
+  React.useEffect(() => {
+    dashboard?.psp_user
+      ? setHealthProgress([
+          { id: 0, title: 'Weight' },
+          { id: 1, title: 'Blood Sugar' },
+          { id: 2, title: 'Medication' },
+          { id: 3, title: 'HbA1c' },
+          { id: 4, title: 'Blood Pressure' },
+        ])
+      : setHealthProgress([
+          { id: 0, title: 'Weight' },
+          { id: 1, title: 'Blood Sugar' },
+          { id: 4, title: 'Blood Pressure' },
+        ]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const horizontalListItem = ({
     item,
@@ -63,7 +77,7 @@ const Index = () => {
     return (
       <Pressable
         onPress={() => {
-          setSelectedHorizontal(index);
+          setSelectedHorizontal(item.id);
         }}
         style={[styles.horizontalListItem, ifSBLine]}
       >
