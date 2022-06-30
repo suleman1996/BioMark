@@ -30,6 +30,7 @@ import { GenderEnum } from 'enum/gender-enum';
 import makeStyles from './styles';
 import { getUserProfileData } from 'store/profile/profile-actions';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 type Props = {
   route?: any;
@@ -345,20 +346,19 @@ export default EditDependantScreen;
 const AddDependentSchema = Yup.object({
   first_name: Yup.string()
     // .matches(/^[A-Za-z ]*$/, 'Please enter valid first name')
-    .required('Firstname is required'),
+    .required(i18next.t('userProfile.errors.firstNameRequired')),
   last_name: Yup.string()
     // .matches(/^[A-Za-z ]*$/, 'Please enter valid last name')
-    .required('Firstname is required'),
+    .required(i18next.t('userProfile.errors.lastNameRequired')),
   document_type: Yup.string().required(''),
   dependent_type_id: Yup.string().required(''),
   id_number: Yup.string()
     // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
-    .required('NRIC / Passport is required'),
+    .required(i18next.t('userProfile.errors.icNumberRequired')),
   // birth_date: Yup.string().required(''),
-  email: Yup.string()
-    .email('Enter valid email address')
-    .required('Email is required'),
+  email: Yup.string().email(i18next.t('userProfile.errors.emailFormat')),
+  // .required('Email is required'),
   phone_number: Yup.string()
-    .matches(Regex.numberReg, 'Enter valid phone number')
-    .required('Please provide your phone number'),
+    .matches(Regex.numberReg, i18next.t('pages.login.errors.validNumber'))
+    .required(i18next.t('pages.login.errors.phoneNumberRequired')),
 });

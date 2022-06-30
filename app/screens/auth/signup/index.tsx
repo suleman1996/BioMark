@@ -441,20 +441,20 @@ export default function Signup() {
 const ResetPassSchema = Yup.object({
   fName: Yup.string()
     .required(i18next.t('userProfile.errors.firstNameRequired'))
-    .matches(NAME, 'Name should only contain latin letters'),
+    .matches(NAME, i18next.t('userProfile.errors.nameFormat')),
   lName: Yup.string()
-    .required('Please provide your last name')
-    .matches(NAME, 'Name should only contain latin letters'),
+    .required(i18next.t('userProfile.errors.lastNameRequired'))
+    .matches(NAME, i18next.t('userProfile.errors.nameFormat')),
 
   IcPnum: Yup.string(),
   // .required('Please provide Identity Card/Passport Number'),
   phone_number: Yup.string(),
   // .matches(Regex.minNum, 'Enter valid phone number')
   // .required('Please provide your phone number'),
-  email: Yup.string().email('Enter valid email address'),
+  email: Yup.string().email(i18next.t('userProfile.errors.emailFormat')),
   // .required('Email is required'),
   password: Yup.string()
-    .required('Please type your new password')
+    .required(i18next.t('userProfile.errors.passwordRequired'))
     .min(8)
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,

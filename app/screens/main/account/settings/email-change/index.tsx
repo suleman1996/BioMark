@@ -21,6 +21,7 @@ import { IAppState } from 'store/IAppState';
 
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 const EmailChangeScreen = () => {
   const { t } = useTranslation();
@@ -157,13 +158,15 @@ export default EmailChangeScreen;
 
 const ResetPassSchema = Yup.object({
   email: Yup.string()
-    .email('Invalid email format')
-    .required('Required')
+    .email(i18next.t('userProfile.errors.emailFormat'))
+    .required(i18next.t('userProfile.errors.emailRequired'))
     .lowercase(),
   confirmEmail: Yup.string()
-    .email('Invalid email format')
-    .required('Required')
-    .oneOf([Yup.ref('email'), null], 'Email does not match')
-    .required('Confirm email is required')
+    .email(i18next.t('userProfile.errors.emailFormat'))
+    .required(i18next.t('pages.email.confirmEmail.errors.repeatRequired'))
+    .oneOf(
+      [Yup.ref('email'), null],
+      i18next.t('pages.email.confirmEmail.errors.emailMismatch')
+    )
     .lowercase(),
 });

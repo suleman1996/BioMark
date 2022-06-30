@@ -13,6 +13,7 @@ import { dateFormat1 } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 import BioEmptyTestResult from 'components/svg/bio-empty-test-result';
+import { t } from 'i18next';
 
 type Props = {};
 
@@ -54,7 +55,8 @@ const ViewCovidResults = (props: Props) => {
         <View style={styles.header}>
           <Text style={styles.whoText}>{item.name}</Text>
           <Text style={styles.header2}>
-            Booking ID -{' '}
+            {t('pages.covid-booking.bookingId')}
+            {' -'}
             <Text style={styles.testCodeText}>{item.order_id}</Text>
           </Text>
         </View>
@@ -82,9 +84,11 @@ const ViewCovidResults = (props: Props) => {
             return (
               <View style={styles.emptyResult}>
                 <BioEmptyTestResult width={22} height={22} />
-                <Text style={styles.emptyTxt1}>No Test Results</Text>
+                <Text style={styles.emptyTxt1}>
+                  {t('pages.covid.results.noResults')}
+                </Text>
                 <Text style={styles.emptyTxt2}>
-                  You have no Test results recorded.
+                  {t('pages.covid.results.noResultsDesc')}
                 </Text>
               </View>
             );
