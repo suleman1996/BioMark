@@ -9,7 +9,7 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
     },
     title: {
-      fontFamily: fonts.extraBold,
+      fontFamily: fonts.semiBold,
       color: colors.darkPrimary,
       fontSize: RFValue(20),
       paddingTop: heightToDp(2),

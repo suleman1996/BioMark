@@ -218,7 +218,7 @@ const UpcommingBookings = (props: Props) => {
               style={{
                 alignSelf: 'center',
                 width: '100%',
-                height: heightToDp(55),
+                height: heightToDp(50),
                 alignItems: 'center',
                 justifyContent: 'center',
               }}

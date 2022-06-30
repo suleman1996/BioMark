@@ -31,6 +31,8 @@ import { IAppState } from 'store/IAppState';
 import AuthContext from 'utils/auth-context';
 import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
 
 const AddDependantScreen = () => {
   const { t } = useTranslation();
@@ -223,6 +225,11 @@ const AddDependantScreen = () => {
                   maxLength={50}
                 />
                 <PhoneNumberWithLabel
+                  labelStyle={{
+                    fontSize: responsiveFontSize(18),
+                    fontFamily: GlobalFonts.medium,
+                    color: colors.darkPrimary,
+                  }}
                   label={t('pages.phoneNumber.mobileNumber')}
                   placeholder={''}
                   disabled={false}
@@ -259,6 +266,7 @@ const AddDependantScreen = () => {
                     )
                   ))}
                 <InputWithLabel
+                  labelStyle={{ fontSize: responsiveFontSize(18) }}
                   placeholder="E.g. Sample@email.com"
                   label={t('pages.login.email')}
                   onChange={handleChange('email')}

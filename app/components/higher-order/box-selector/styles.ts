@@ -36,7 +36,7 @@ export const makeStyles = (colors: any) =>
       elevation: 3,
     },
     label: {
-      fontSize: responsiveFontSize(22),
+      fontSize: responsiveFontSize(18),
       color: colors.darkPrimary,
       fontFamily: GlobalFonts.medium,
     },

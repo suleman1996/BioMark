@@ -18,7 +18,7 @@ export const makeStyles = (colors: any) =>
       flex: 1,
     },
     name: {
-      fontSize: responsiveFontSize(25),
+      fontSize: responsiveFontSize(23),
       fontFamily: GlobalFonts.bold,
       color: colors.darkPrimary,
       textAlign: 'center',
