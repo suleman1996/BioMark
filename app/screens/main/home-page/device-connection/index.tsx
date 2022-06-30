@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native';
+import { Alert, SafeAreaView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import WebView from 'react-native-webview';
 
@@ -30,6 +30,9 @@ const DeviceConnection = () => {
   const url = `https://link.tryvital.io/?token=${linkToken}&env=sandbox&region=eu&isMobile=true`;
 
   const handleMessage = (event: any) => {
+    if (event.nativeEvent.data === 'LINK_EVENT::SUCCESS') {
+      Alert.alert('Device connected successfully...!!!');
+    }
     if (event.nativeEvent.data === 'LINK_EVENT::CLOSE') {
       navigation.goBack();
     }
