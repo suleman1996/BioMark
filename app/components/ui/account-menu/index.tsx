@@ -66,8 +66,8 @@ const AccountMenu = (props) => {
       <TouchableRipple
         onPress={() => {
           if (
-            props?.id_verification == 'pending' ||
-            props?.id_verification == 'verified'
+            props?.id_verification == 'PENDING' ||
+            props?.id_verification == 'SUCCESS'
           ) {
             console.error('error', props.id_verification);
           } else {
@@ -87,11 +87,14 @@ const AccountMenu = (props) => {
           </View>
           <View style={styles.iconWithSecondText}>
             <Text style={styles.secondText}>{setVerificationText()}</Text>
-            <Fontisto
-              name="angle-right"
-              size={responsiveFontSize(22)}
-              color={colors.darkPrimary}
-            />
+            {props?.id_verification == 'PENDING' ||
+            props?.id_verification == 'SUCCESS' ? null : (
+              <Fontisto
+                name="angle-right"
+                size={responsiveFontSize(22)}
+                color={colors.darkPrimary}
+              />
+            )}
           </View>
         </>
       </TouchableRipple>

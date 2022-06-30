@@ -1,4 +1,3 @@
-import ButtonComponent from 'components/base/button';
 import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
@@ -9,7 +8,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 import { covidService } from 'services/covid-service';
-import { navigate } from 'services/nav-ref';
 import { IAppState } from 'store/IAppState';
 import { BookingListDataUpcoming } from 'types/api';
 import { dateFormat1, getDayName, getTime } from 'utils/functions/date-format';
@@ -19,7 +17,6 @@ import BarCodeModal from '../bar-code-modal';
 import CovidHealthDeclarationForAllUpCommingModal from '../covid-health-declaration-for-all-upcomming/index';
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
-import SCREENS from 'navigation/constants/index';
 import { useRoute } from '@react-navigation/native';
 
 type Props = {};
@@ -209,9 +206,9 @@ const UpcommingBookings = (props: Props) => {
         decalrations={[modalData]}
         allUpcommingBookings={allUpcommingBookings}
       />
-      {allUpcommingBookings?.length > 0 ? (
-        <SuggestionsText icon={true} />
-      ) : null}
+
+      <SuggestionsText icon={true} />
+
       <FlatList
         renderItem={_renderItem}
         data={allUpcommingBookings}
@@ -221,7 +218,7 @@ const UpcommingBookings = (props: Props) => {
               style={{
                 alignSelf: 'center',
                 width: '100%',
-                height: heightToDp(48),
+                height: heightToDp(55),
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -238,27 +235,6 @@ const UpcommingBookings = (props: Props) => {
           <View style={{ paddingTop: heightToDp(20) }} />
         )}
       />
-      <View style={styles.buttonContainer}>
-        <ButtonComponent
-          onPress={() => {
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.BOOKCOVIDTEST,
-            });
-          }}
-          title={'Book New COVID-19 Test'}
-        />
-        <ButtonComponent
-          bg={colors.lightBlue}
-          color={colors.black}
-          marginTop={1.2}
-          onPress={() =>
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.FAQSCREEN,
-            })
-          }
-          title={'FAQ'}
-        />
-      </View>
     </View>
   );
 };

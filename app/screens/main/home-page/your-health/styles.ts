@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { Dimensions, StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -39,8 +40,8 @@ const styles = (colors: any) =>
       paddingTop: heightToDp(15),
       position: 'absolute',
       zIndex: -3,
-      height: Dimensions.get('window').height,
-      paddingBottom: heightToDp(10),
+      height: Dimensions.get('window').height * 1,
+      paddingBottom: Platform.OS == 'ios' ? heightToDp(8) : null,
     },
     headingText: {
       fontFamily: fonts.semiBold,

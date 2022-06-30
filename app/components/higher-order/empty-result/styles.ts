@@ -11,13 +11,13 @@ export const makeStyles = (colors: any) =>
     title: {
       fontFamily: fonts.extraBold,
       color: colors.darkPrimary,
-      fontSize: RFValue(25),
+      fontSize: RFValue(20),
       paddingTop: heightToDp(2),
     },
     subTitle: {
       fontFamily: fonts.light,
       color: colors.black,
-      fontSize: RFValue(19),
+      fontSize: RFValue(15),
       textAlign: 'center',
     },
   });
