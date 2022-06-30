@@ -1,5 +1,3 @@
-import { Platform } from 'react-native';
-import { Dimensions, StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -35,13 +33,13 @@ const styles = (colors: any) =>
       borderRadius: 8,
     },
     containerBody: {
-      flex: 1,
       paddingHorizontal: 15,
-      paddingTop: heightToDp(15),
-      position: 'absolute',
-      zIndex: -3,
-      height: Dimensions.get('window').height * 1,
-      paddingBottom: Platform.OS == 'ios' ? heightToDp(8) : null,
+      paddingTop: heightToDp(5),
+      // position: 'absolute',
+      zIndex: -1,
+      // height: Dimensions.get('window').height * 1,
+      // marginBottom: Platform.OS == 'ios' ? heightToDp(8) : null,
+      flex: 1,
     },
     headingText: {
       fontFamily: fonts.semiBold,
