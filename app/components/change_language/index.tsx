@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import i18next from 'i18next';
 import React, { useContext, useEffect, useRef } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import {

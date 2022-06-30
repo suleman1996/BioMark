@@ -99,7 +99,6 @@ const PendingResultOverview = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator visible={isVisiable ? !modalVisible : isVisiable} />
-
       <TitleWithBackLayout
         shadow={colors.blue}
         title={t('pages.labResultOverview.title')}
