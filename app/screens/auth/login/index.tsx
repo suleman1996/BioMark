@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {
   Keyboard,
@@ -41,6 +42,8 @@ import Logo from 'assets/svgs/appLogo';
 
 import makeStyles from './styles';
 import { RFValue } from 'react-native-responsive-fontsize';
+import i18next from 'i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const PASS_REGIX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -96,7 +99,14 @@ export default function Login() {
       setSelectCountryCode(countryCodeParse);
     }
   }, [geoLocation]);
-
+  useEffect(async () => {
+    let lang = await AsyncStorage.getItem('laguage');
+    if (lang) {
+      i18next.changeLanguage(lang);
+    } else {
+      i18next.changeLanguage('en');
+    }
+  }, []);
   const onGoogleLogin = async () => {
     GoogleSignin.signOut();
     GoogleSignin.configure({

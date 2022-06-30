@@ -82,6 +82,8 @@ export default function Home() {
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
+      console.log('result', result);
+
       authContext.setUserData(result);
       i18next.changeLanguage(result?.app_lang);
     } catch (error) {
