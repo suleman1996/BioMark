@@ -58,11 +58,7 @@ const SeeReport = () => {
       <Button
         title={t('pages.pdfViewer.download')}
         svg={<PdfIcon fill={colors.white} />}
-        onPress={() =>
-          checkPermissionAndDownloadBase64(
-            `data:application/pdf;base64,${pdfLink}`
-          )
-        }
+        onPress={() => checkPermissionAndDownloadBase64(pdfLink)}
       />
       <View style={{ flex: 1 }}>
         <ActivityIndicator visible={isVisiable} />

@@ -180,6 +180,7 @@ const Index = () => {
         filterOption1={filterOption1}
         values={{ selectedfilterOption1 }}
         onApplyPress={onApplyFilters}
+        filterModalClose={() => setIsVisible(false)}
       />
       <View style={styles.container}>
         <ScrollView>

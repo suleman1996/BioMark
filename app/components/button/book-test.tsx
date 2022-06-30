@@ -11,8 +11,10 @@ import fonts from 'assets/fonts';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCovidBooking } from './../../store/covid/covid-actions';
 import { IAppState } from 'store/IAppState';
+import { useTranslation } from 'react-i18next';
 
 export default function BookTestButton() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ export default function BookTestButton() {
         </TouchableOpacity>
       </TouchableOpacity>
       <View>
-        <Text style={styles.healthText}>Book Tests</Text>
+        <Text style={styles.healthText}>{t('pages.covid.home.bookTests')}</Text>
       </View>
     </View>
   );

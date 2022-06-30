@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider, useTheme } from 'react-native-paper';
 import FlashMessage from 'react-native-flash-message';
 import { MenuProvider } from 'react-native-popup-menu';
 import { Provider } from 'react-redux';
@@ -26,6 +26,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
+  const { colors } = useTheme();
 
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState({});
@@ -150,7 +151,7 @@ const App = () => {
               />
               <SafeAreaView
                 edges={['top']}
-                style={{ flex: 1, backgroundColor: '#fff' }}
+                style={{ flex: 1, backgroundColor: '#1B96D8' }}
               >
                 <TipProvider />
                 <BiomarkNavigation />

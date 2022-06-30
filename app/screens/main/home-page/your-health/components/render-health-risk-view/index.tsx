@@ -17,18 +17,23 @@ const RenderHealthRiskView = ({
   const authContext = useContext(AuthContext);
 
   return (
-    <>
+    <View
+      style={{
+        opacity:
+          selectedHealthRisk == ''
+            ? 1
+            : name == selectedHealthRisk?.name
+            ? 1
+            : 0.3,
+        flexDirection: 'row',
+      }}
+    >
       <TouchableOpacity
         onPress={onRiskPress}
         style={[
           styles.renderHealthRisk,
           {
-            backgroundColor:
-              selectedHealthRisk == ''
-                ? color
-                : name == selectedHealthRisk?.name
-                ? color
-                : colors.unSelectedHealthRisk,
+            backgroundColor: color,
           },
         ]}
       >
@@ -44,8 +49,9 @@ const RenderHealthRiskView = ({
               : styles.dot
             : styles.notDot
         }
+        // style={status == 'none' ? styles.dot : styles.notDot}
       />
-    </>
+    </View>
   );
 };
 export default RenderHealthRiskView;

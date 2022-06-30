@@ -18,6 +18,7 @@ import { widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { GlobalFonts } from 'utils/theme/fonts';
 import SCREENS from './constants';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const Stack = createNativeStackNavigator();
 
@@ -126,6 +127,7 @@ const Covid19Navigator = () => {
           headerTitleStyle: {
             fontFamily: GlobalFonts.light,
             color: colors.darkPrimary,
+            fontSize: RFValue(20),
           },
           title: 'COVID-19 Results',
           headerLeft: () => (

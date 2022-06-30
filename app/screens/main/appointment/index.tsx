@@ -5,8 +5,8 @@ import { TouchableRipple, useTheme } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { logNow } from 'utils/functions/log-binder';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
-import HistoryBookings from './../../../components/ui/history-bookings/index';
-import UpcommingBookings from './../../../components/ui/upcomming-bookings/index';
+import HistoryBookings from '../appointment/history-bookings/index';
+import UpcommingBookings from '../appointment/upcomming-bookings/index';
 import makeStyles from './styles';
 import { getAllBookingsDataR } from 'store/covid/covid-actions';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
@@ -74,7 +74,7 @@ const AppointmentScreen = (props: Props) => {
             keyExtractor={(index) => index.toString()}
             ListHeaderComponent={<View style={{ width: widthToDp(6) }} />}
             ListFooterComponent={<View style={{ width: widthToDp(10) }} />}
-            data={['Upcomming', 'History']}
+            data={['Upcoming', 'History']}
             renderItem={horizontalListItem}
           />
 

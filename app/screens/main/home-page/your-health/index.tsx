@@ -14,8 +14,9 @@ import React, {
   useEffect,
   useRef,
   useState,
+  useMemo,
 } from 'react';
-
+import _ from 'lodash';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
@@ -74,6 +75,7 @@ import { useTranslation } from 'react-i18next';
 import { useIsFocused } from '@react-navigation/native';
 
 import { fromResponse } from 'screens/main/home-page/your-health/components/render-health-risk-view/service';
+import i18next from 'i18next';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -275,6 +277,14 @@ const Index = () => {
     }
   };
 
+  const keys = useMemo(() => {
+    const newKeys = Object.entries(healthRisk);
+    const temp = _.cloneDeep(newKeys[newKeys.length - 1]);
+    newKeys[newKeys.length - 1] = newKeys[newKeys.length - 2];
+    newKeys[newKeys.length - 2] = temp;
+    return newKeys;
+  }, [healthRisk]);
+
   return (
     <>
       <View style={styles.container}>
@@ -303,7 +313,7 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(healthRisk).map(([key, value]: any) => (
+              {keys.map(([key, value]: any) => (
                 <>
                   <RenderHealthRiskView
                     key={key}
@@ -564,5 +574,7 @@ const Index = () => {
 };
 export default Index;
 const QRschemma = Yup.object({
-  qrInput: Yup.string().required('IC or Passport are required'),
+  qrInput: Yup.string().required(
+    i18next.t('pages.dashboard.dialogs.verify.errors.required')
+  ),
 });

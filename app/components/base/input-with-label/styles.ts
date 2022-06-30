@@ -9,7 +9,7 @@ export const makeStyles = (colors: any) =>
       marginTop: heightToDp(2),
     },
     label: {
-      fontSize: responsiveFontSize(22),
+      fontSize: responsiveFontSize(18),
       fontFamily: GlobalFonts.medium,
       color: colors.darkPrimary,
     },

@@ -13,30 +13,21 @@ import { BookingListDataUpcoming } from 'types/api';
 import { dateFormat1, getDayName, getTime } from 'utils/functions/date-format';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import BarCodeModal from '../bar-code-modal';
-import CovidHealthDeclarationForAllUpCommingModal from '../covid-health-declaration-for-all-upcomming/index';
-import SuggestionsText from '../suggestions-text';
+import BarCodeModal from 'components/ui/bar-code-modal';
+import SuggestionsText from 'components/ui/suggestions-text';
 import { makeStyles } from './styles';
-import { useRoute } from '@react-navigation/native';
-import { t } from 'i18next';
-import ButtonComponent from 'components/base/button';
-import { navigate } from 'services/nav-ref';
-import SCREENS from 'navigation/constants';
 
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
   const {} = props;
   const { colors }: any = useTheme();
-  const route = useRoute();
   const allUpcommingBookings = useSelector(
     (state: IAppState) => state.covid.allBookingsData.upcoming
   );
 
   const [isHealthDeclaration, setIsHealthDeclaration] = useState(false);
   const [barCodeText, setBarCodeText] = useState('');
-
-  const [isHealthDeclarationAll, setIsHealthDeclarationAll] = useState(false);
 
   const [modalData, setModalData] = useState({});
   const [isBarModal, setIsBarModal] = useState(false);
@@ -48,13 +39,7 @@ const UpcommingBookings = (props: Props) => {
       upDateBatch(allUpcommingBookings);
     }
   }, [allUpcommingBookings]);
-  useEffect(() => {
-    console.log('route', route?.params?.has_pending_declaration);
-    if (route?.params?.has_pending_declaration) {
-      setIsHealthDeclarationAll(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   const upDateBatch = async (item: BookingListDataUpcoming) => {
     try {
       await covidService.batchReadForUpcomming({ data: item });
@@ -111,10 +96,7 @@ const UpcommingBookings = (props: Props) => {
             {is_dependent ? patient_name : 'You'}
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={styles.bookingId}>
-              {t('pages.covid-booking.bookingId')}
-              {' -'}
-            </Text>
+            <Text style={styles.bookingId}>Booking ID -</Text>
             <Text style={styles.idText}>{booking_id}</Text>
           </View>
         </View>
@@ -161,7 +143,7 @@ const UpcommingBookings = (props: Props) => {
             <View style={styles.completeDecContainer}>
               <AntDesign name="checkcircle" color={colors.primary} />
               <Text style={styles.completeDecText}>
-                {t('pages.appointment.healthDeclarationComplete')}
+                Health Declaration Completed
               </Text>
             </View>
           ) : (
@@ -178,9 +160,7 @@ const UpcommingBookings = (props: Props) => {
                   : { backgroundColor: colors.fieldGrey },
               ]}
             >
-              <Text style={styles.dateandtimeText}>
-                {t('pages.search.covidBooking.suggestions.healthDeclaration')}
-              </Text>
+              <Text style={styles.dateandtimeText}>Health Declaration</Text>
             </Pressable>
           )}
 
@@ -192,7 +172,7 @@ const UpcommingBookings = (props: Props) => {
             ]}
           >
             <Text style={[styles.dateandtimeText, { color: colors.darkGray }]}>
-              {t('pages.covid.covid-booking-button.cancelButton')}
+              Cancel Test
             </Text>
           </Pressable>
         </View>
@@ -208,14 +188,6 @@ const UpcommingBookings = (props: Props) => {
         data={modalData}
         decalrations={[modalData]}
       />
-      <CovidHealthDeclarationForAllUpCommingModal
-        setIsVisible={setIsHealthDeclarationAll}
-        isVisible={isHealthDeclarationAll}
-        data={modalData}
-        decalrations={[modalData]}
-        allUpcommingBookings={allUpcommingBookings}
-      />
-
       <SuggestionsText icon={true} />
 
       <FlatList
@@ -227,7 +199,7 @@ const UpcommingBookings = (props: Props) => {
               style={{
                 alignSelf: 'center',
                 width: '100%',
-                height: heightToDp(50),
+                height: heightToDp(55),
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -244,27 +216,6 @@ const UpcommingBookings = (props: Props) => {
           <View style={{ paddingTop: heightToDp(20) }} />
         )}
       />
-      <View style={styles.buttonContainer}>
-        <ButtonComponent
-          onPress={() => {
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.BOOKCOVIDTEST,
-            });
-          }}
-          title={'Book New COVID-19 Test'}
-        />
-        <ButtonComponent
-          bg={colors.lightBlue}
-          color={colors.black}
-          marginTop={1.2}
-          onPress={() =>
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.FAQSCREEN,
-            })
-          }
-          title={'FAQ'}
-        />
-      </View>
     </View>
   );
 };
