@@ -187,6 +187,7 @@ const Index = () => {
           selectedfilterOption1,
           selectedfilterOption2,
         }}
+        filterModalClose={() => setIsVisible(false)}
       />
 
       <View style={styles.container}>

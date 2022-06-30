@@ -222,12 +222,11 @@ const styles = (colors: any) =>
       color: colors.fieldGrey,
     },
     topView3: {
-      // backgroundColor: 'red',
       flexDirection: 'row',
       padding: 5,
       alignItems: 'center',
       borderRadius: 15,
-      marginHorizontal: 10,
+      // marginHorizontal: 10,
       marginTop: 10,
     },
     topRoundView: {

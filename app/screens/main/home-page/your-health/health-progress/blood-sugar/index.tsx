@@ -239,6 +239,7 @@ const Index = () => {
         filterOption2={filterOption2}
         onApplyPress={onApplyFilters}
         values={{ selectedfilterOption1, selectedfilterOption2 }}
+        filterModalClose={() => setIsVisible(false)}
       />
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
