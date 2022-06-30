@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -32,7 +33,7 @@ const styles = (colors: any) =>
     },
     navHeading: {
       fontFamily: fonts.extraBold,
-      fontSize: 22,
+      fontSize: RFValue(20),
       color: colors.white,
       paddingLeft: 10,
       paddingTop: 10,

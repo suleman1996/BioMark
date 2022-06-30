@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { useIsFocused } from '@react-navigation/native';
-import PagerView from 'react-native-pager-view';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TitleWithSearchBarLayout } from 'components/layouts';
@@ -174,15 +173,8 @@ export default function InboxScreen() {
 
     return typeMap[type];
   };
-  const pagerRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPage, setCurrentPage] = useState(0);
-  const onPageScroll = (event: any) => {
-    const { position } = event.nativeEvent;
-    if (position !== currentPage) {
-      setCurrentPage(position);
-    }
-  };
 
   const PreviousNotification = () => {
     return (
@@ -315,13 +307,15 @@ export default function InboxScreen() {
       <TitleWithSearchBarLayout title={'Inbox'} scroll={false}>
         <View style={styles.container}>
           <View
-            style={{ height: heightToDp(200), paddingBottom: heightToDp(20) }}
+            style={{
+              height: heightToDp(200),
+              //  paddingBottom: heightToDp(20),
+            }}
           >
             <View style={styles.tabNameContainer}>
               <Pressable
                 // onPress={() => PreviousNotification()}
                 onPress={() => {
-                  pagerRef.current.setPage(0);
                   setCurrentPage(0);
                 }}
                 style={[
@@ -337,7 +331,6 @@ export default function InboxScreen() {
               <Pressable
                 //  onPress={() => OtherNotification()}
                 onPress={() => {
-                  pagerRef.current.setPage(1);
                   setCurrentPage(1);
                 }}
                 style={[
@@ -353,18 +346,18 @@ export default function InboxScreen() {
             </View>
             <View style={{ height: heightToDp(63) }}>
               <ScrollView>
-                <PagerView
-                  ref={pagerRef}
-                  onPageScroll={onPageScroll}
+                <View
+                  //ref={pagerRef}
+                  //onPageScroll={onPageScroll}
                   style={styles.pagerView}
-                  initialPage={0}
+                  //initialPage={0}
                 >
                   {currentPage === 0 ? (
                     <PreviousNotification />
                   ) : (
                     <OtherNotification />
                   )}
-                </PagerView>
+                </View>
               </ScrollView>
             </View>
           </View>

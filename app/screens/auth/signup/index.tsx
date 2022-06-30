@@ -40,6 +40,7 @@ import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
 import { IC_AND_PASSPORT, NAME } from 'utils/regix';
 import { useTranslation } from 'react-i18next';
+import fonts from 'assets/fonts';
 
 export default function Signup() {
   //initial hooks define
@@ -211,9 +212,13 @@ export default function Signup() {
                   </Text>
                   <InputWithLabel
                     label={t('pages.register.form.firstName')}
+                    labelStyle={{
+                      fontFamily: fonts.mulishSemiBold,
+                      color: colors.heading,
+                      fontSize: 15,
+                    }}
                     placeholder={''}
                     containerStyles={{ paddingHorizontal: 20 }}
-                    labelFontSize={15}
                     onChange={handleChange('fName')}
                     value={values.fName}
                     error={touched.fName ? errors.fName : ''}
@@ -224,7 +229,11 @@ export default function Signup() {
                     label={t('pages.register.form.lastName')}
                     placeholder={''}
                     containerStyles={{ paddingHorizontal: 20 }}
-                    labelFontSize={15}
+                    labelStyle={{
+                      fontFamily: fonts.mulishSemiBold,
+                      color: colors.heading,
+                      fontSize: 15,
+                    }}
                     onChange={handleChange('lName')}
                     value={values.lName}
                     error={touched.lName ? errors.lName : ''}
@@ -259,7 +268,11 @@ export default function Signup() {
                     label={t('pages.register.form.idNumber')}
                     placeholder={'E.g. A1234567X'}
                     containerStyles={{ paddingHorizontal: 20 }}
-                    labelFontSize={15}
+                    labelStyle={{
+                      fontFamily: fonts.mulishSemiBold,
+                      color: colors.heading,
+                      fontSize: 15,
+                    }}
                     onChange={(value) => {
                       if (IC_AND_PASSPORT.test(value))
                         setFieldValue('IcPnum', value);
@@ -272,44 +285,15 @@ export default function Signup() {
                     <Text style={styles.heading}>
                       {t('pages.register.form.accountLegend')}
                     </Text>
-                    {/* <Text style={styles.inputLablel}>Mobile Number</Text>
-                    <PhoneNumber
-                      countryCode={countryCode}
-                      setCountryCode={setCountryCode}
-                      phoneNumber={phoneNumber}
-                      setPhoneNumber={setPhoneNumber}
-                      setSelectCountryCode={setSelectCountryCode}
-                      maxLength={numberCondition.max}
-                    />
-                    {(phoneNumber !== '' || errors.password) &&
-                      (selectCountryCode == 63 ? (
-                        phoneNumber.charAt(0) == 0 ? (
-                          <Text style={styles.errorMessage}>
-                            Phonenumber must not start with 0
-                          </Text>
-                        ) : (
-                          phoneNumber.length < numberCondition.min && (
-                            <Text style={styles.errorMessage}>
-                              Must have {numberCondition.min}
-                              {numberCondition.max !== numberCondition.min &&
-                                -numberCondition.max}{' '}
-                              characters
-                            </Text>
-                          )
-                        )
-                      ) : (
-                        phoneNumber.length < numberCondition.min && (
-                          <Text style={styles.errorMessage}>
-                            Must have {numberCondition.min}
-                            {numberCondition.max !== numberCondition.min &&
-                              -numberCondition.max}{' '}
-                            characters
-                          </Text>
-                        )
-                      ))} */}
+
                     <View style={{ paddingHorizontal: 20 }}>
                       <PhoneNumberWithLabel
                         label={t('pages.register.form.mobile')}
+                        labelStyle={{
+                          fontFamily: fonts.mulishSemiBold,
+                          color: colors.heading,
+                          fontSize: 15,
+                        }}
                         placeholder={''}
                         disabled={false}
                         number={values.phone_number}
@@ -351,7 +335,11 @@ export default function Signup() {
                       label={t('pages.register.form.email')}
                       placeholder="E.g. Sample@email.com"
                       containerStyles={{ paddingHorizontal: 20 }}
-                      labelFontSize={15}
+                      labelStyle={{
+                        fontFamily: fonts.mulishSemiBold,
+                        color: colors.heading,
+                        fontSize: 15,
+                      }}
                       onChange={handleChange('email')}
                       value={values.email}
                       error={touched.email ? errors.email : ''}
@@ -396,7 +384,8 @@ export default function Signup() {
                         <Text
                           style={{
                             color: colors.blue,
-                            fontSize: 17,
+                            fontSize: 15,
+                            fontFamily: fonts.mulishRegular,
                             textDecorationLine: 'underline',
                             // bottom: 2,
                           }}
@@ -415,7 +404,8 @@ export default function Signup() {
                         <Text
                           style={{
                             color: colors.blue,
-                            fontSize: 17,
+                            fontSize: 15,
+                            fontFamily: fonts.mulishRegular,
                             textDecorationLine: 'underline',
                           }}
                         >
@@ -455,13 +445,13 @@ const ResetPassSchema = Yup.object({
     .required('Please provide your last name')
     .matches(NAME, 'Name should only contain latin letters'),
 
-  IcPnum: Yup.string().required('Please provide Identity Card/Passport Number'),
-  phone_number: Yup.string()
-    // .matches(Regex.minNum, 'Enter valid phone number')
-    .required('Please provide your phone number'),
-  email: Yup.string()
-    .email('Enter valid email address')
-    .required('Email is required'),
+  IcPnum: Yup.string(),
+  // .required('Please provide Identity Card/Passport Number'),
+  phone_number: Yup.string(),
+  // .matches(Regex.minNum, 'Enter valid phone number')
+  // .required('Please provide your phone number'),
+  email: Yup.string().email('Enter valid email address'),
+  // .required('Email is required'),
   password: Yup.string()
     .required('Please type your new password')
     .min(8)

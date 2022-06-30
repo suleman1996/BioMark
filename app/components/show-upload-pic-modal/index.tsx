@@ -22,7 +22,9 @@ const ShowPicModal = ({ visible, modalData, onClose }) => {
             />
           ) : (
             <Image
-              source={{ uri: modalData?.uri }}
+              source={{
+                uri: modalData?.uri ? modalData?.uri : modalData?.document?.url,
+              }}
               style={{ height: 300, width: 250 }}
             />
           )}

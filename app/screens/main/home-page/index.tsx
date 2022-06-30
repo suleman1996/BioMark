@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
 import {
   ImageBackground,
@@ -6,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  Platform,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -27,12 +29,17 @@ import FloatingActionButton from 'components/floating-action-button';
 import { getReduxBootstrap } from 'store/account/account-actions';
 import { getReduxMedicalDropDown } from 'store/home/home-actions';
 import { getReduxMedicationList } from 'store/home/home-actions';
+import SCREENS from 'navigation/constants/index';
 
 import AuthContext from 'utils/auth-context';
 
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { userService } from 'services/user-service/user-service';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { navigate } from 'services/nav-ref';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -63,13 +70,19 @@ export default function Home() {
     getMedicationList();
   }, []);
   /*eslint-enable*/
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    let fcm = await AsyncStorage.getItem('fcm');
+    registerDevice(fcm);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const registerDevice = async (fcm) => {
+    await userService.deviceRegisterAction(fcm, Platform.OS);
+  };
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
       authContext.setUserData(result);
-      console.log('result', result);
-
       i18next.changeLanguage(result?.app_lang);
     } catch (error) {
       console.error(error);
@@ -116,17 +129,24 @@ export default function Home() {
                     <Text
                       style={{
                         fontFamily: fonts.mulishRegular,
-                        fontSize: 13,
+                        fontSize: RFValue(13),
                         color: 'white',
-                        lineHeight: 16.36,
+                        lineHeight: 16.32,
                         paddingTop: 3,
                       }}
                     >
                       {t('pages.covid-booking.homeDescription')}
                     </Text>
                   </View>
-                  <View style={{ width: '35%' }}>
-                    <SmallButton title="Book Now" />
+                  <View>
+                    <SmallButton
+                      title="Book Now"
+                      onPress={() => {
+                        navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                          screen: SCREENS.BOOKCOVIDTEST,
+                        });
+                      }}
+                    />
                   </View>
                 </View>
               </ImageBackground>
@@ -150,7 +170,11 @@ export default function Home() {
                 <TouchableOpacity>
                   <GoogleFitButton
                     disabled={false}
-                    title={t('healthSnapshot.android.connectButton')}
+                    title={
+                      Platform.OS == 'android'
+                        ? t('healthSnapshot.android.connectButton')
+                        : t('healthSnapshot.ios.connectButton')
+                    }
                     onPress={() => console.log('pressed')}
                   />
                 </TouchableOpacity>

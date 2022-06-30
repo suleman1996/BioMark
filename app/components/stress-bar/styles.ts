@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import { GlobalFonts } from 'utils/theme/fonts';
 
@@ -6,7 +7,7 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     title: {
       fontFamily: GlobalFonts.bold,
-      fontSize: 14,
+      fontSize: RFValue(13),
       color: colors.heading,
       marginTop: 20,
     },
@@ -42,7 +43,7 @@ export const makeStyles = (colors: any) =>
     },
     headingText: {
       fontFamily: GlobalFonts.regular,
-      fontSize: 11,
+      fontSize: RFValue(10),
       color: colors.heading,
       fontWeight: 'bold',
     },
