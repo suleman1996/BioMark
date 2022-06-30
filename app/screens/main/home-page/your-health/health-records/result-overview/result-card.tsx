@@ -24,7 +24,9 @@ const Card = ({ item }: Props) => {
         styles.radio,
         {
           backgroundColor:
-            item?.findings == 'high' ? colors.white : colors.lightGreen,
+            item?.findings == 'high' || item?.findings == 'low'
+              ? colors.white
+              : colors.lightGreen,
           shadowColor: colors.lightGreen,
         },
       ]}
@@ -40,18 +42,27 @@ const Card = ({ item }: Props) => {
         styles.moreView,
         {
           borderColor:
-            item?.findings == 'high' ? colors.pureRed : colors.lightGreen,
+            item?.findings == 'high' || item?.findings == 'low'
+              ? colors.pureRed
+              : colors.lightGreen,
         },
       ]}
     >
       <Filter
-        fill={item?.findings == 'high' ? colors.pureRed : colors.heading}
+        fill={
+          item?.findings == 'high' || item?.findings == 'low'
+            ? colors.pureRed
+            : colors.heading
+        }
       />
       <Text
         style={[
           styles.moreText,
           {
-            color: item?.findings == 'high' ? colors.pureRed : colors.heading,
+            color:
+              item?.findings == 'high' || item?.findings == 'low'
+                ? colors.pureRed
+                : colors.heading,
           },
         ]}
       >
@@ -74,7 +85,10 @@ const Card = ({ item }: Props) => {
         style={[
           styles.resultViewHeader,
           {
-            backgroundColor: item?.findings == 'high' ? colors.pureRed : '#fff',
+            backgroundColor:
+              item?.findings == 'high' || item?.findings == 'low'
+                ? colors.pureRed
+                : '#fff',
           },
         ]}
       >
@@ -86,7 +100,10 @@ const Card = ({ item }: Props) => {
             style={[
               styles.resultViewHeaderTitle,
               {
-                color: item?.findings == 'high' ? colors.white : colors.heading,
+                color:
+                  item?.findings == 'high' || item?.findings == 'low'
+                    ? colors.white
+                    : colors.heading,
               },
             ]}
           >
@@ -97,7 +114,12 @@ const Card = ({ item }: Props) => {
           <Text
             style={[
               styles.resultViewHeaderSubTitle,
-              { color: item?.findings == 'high' ? colors.white : colors.bg },
+              {
+                color:
+                  item?.findings == 'high' || item?.findings == 'low'
+                    ? colors.white
+                    : colors.bg,
+              },
             ]}
           >
             {item?.value} {item?.unit}
@@ -111,7 +133,9 @@ const Card = ({ item }: Props) => {
               styles.resultViewBody,
               {
                 backgroundColor:
-                  item?.findings == 'high' ? colors.dangerBg : colors.white,
+                  item?.findings == 'high' || item?.findings == 'low'
+                    ? colors.dangerBg
+                    : colors.white,
               },
             ]}
           >
@@ -122,7 +146,9 @@ const Card = ({ item }: Props) => {
               styles.resultViewFooter,
               {
                 backgroundColor:
-                  item?.findings == 'high' ? colors.dangerBg : colors.white,
+                  item?.findings == 'high' || item?.findings == 'low'
+                    ? colors.dangerBg
+                    : colors.white,
               },
             ]}
           >
