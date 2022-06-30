@@ -59,7 +59,7 @@ const styles = (colors: any) =>
     },
     text: {
       textAlign: 'center',
-      fontSize: RFValue(20),
+      fontSize: RFValue(18),
       color: colors.primary,
       fontFamily: fonts.extraBold,
     },
@@ -67,7 +67,7 @@ const styles = (colors: any) =>
       textAlign: 'center',
       marginTop: heightToDp(1),
       color: colors.black,
-      fontSize: RFValue(13),
+      fontSize: RFValue(12),
       fontFamily: fonts.mulishRegular,
       marginBottom: heightToDp(3),
     },
@@ -119,8 +119,8 @@ const styles = (colors: any) =>
     text3: {
       flex: 1,
       fontSize: responsiveFontSize(15),
-      marginHorizontal: 8,
-      color: colors.grey,
+      marginHorizontal: widthToDp(13),
+      color: colors.darkGray,
     },
     roundView: {
       flexDirection: 'row',
@@ -165,7 +165,7 @@ const styles = (colors: any) =>
     text5: {
       color: colors.primary,
       fontFamily: fonts.extraBold,
-      fontSize: RFValue(20),
+      fontSize: RFValue(18),
     },
     pastResultView: {
       flexDirection: 'row',
@@ -210,7 +210,7 @@ const styles = (colors: any) =>
       marginTop: heightToDp(2),
     },
     latestResult: {
-      fontSize: RFValue(20),
+      fontSize: RFValue(18),
       color: colors.primary,
       fontFamily: fonts.extraBold,
       marginTop: heightToDp(3),

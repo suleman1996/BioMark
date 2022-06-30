@@ -18,6 +18,7 @@ import CovidHealthDeclarationForAllUpCommingModal from '../covid-health-declarat
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
 import { useRoute } from '@react-navigation/native';
+import { t } from 'i18next';
 import ButtonComponent from 'components/base/button';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
@@ -110,7 +111,10 @@ const UpcommingBookings = (props: Props) => {
             {is_dependent ? patient_name : 'You'}
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={styles.bookingId}>Booking ID -</Text>
+            <Text style={styles.bookingId}>
+              {t('pages.covid-booking.bookingId')}
+              {' -'}
+            </Text>
             <Text style={styles.idText}>{booking_id}</Text>
           </View>
         </View>
@@ -157,7 +161,7 @@ const UpcommingBookings = (props: Props) => {
             <View style={styles.completeDecContainer}>
               <AntDesign name="checkcircle" color={colors.primary} />
               <Text style={styles.completeDecText}>
-                Health Declaration Completed
+                {t('pages.appointment.healthDeclarationComplete')}
               </Text>
             </View>
           ) : (
@@ -174,7 +178,9 @@ const UpcommingBookings = (props: Props) => {
                   : { backgroundColor: colors.fieldGrey },
               ]}
             >
-              <Text style={styles.dateandtimeText}>Health Declaration</Text>
+              <Text style={styles.dateandtimeText}>
+                {t('pages.search.covidBooking.suggestions.healthDeclaration')}
+              </Text>
             </Pressable>
           )}
 
@@ -186,7 +192,7 @@ const UpcommingBookings = (props: Props) => {
             ]}
           >
             <Text style={[styles.dateandtimeText, { color: colors.darkGray }]}>
-              Cancel Test
+              {t('pages.covid.covid-booking-button.cancelButton')}
             </Text>
           </Pressable>
         </View>
@@ -221,7 +227,7 @@ const UpcommingBookings = (props: Props) => {
               style={{
                 alignSelf: 'center',
                 width: '100%',
-                height: heightToDp(55),
+                height: heightToDp(50),
                 alignItems: 'center',
                 justifyContent: 'center',
               }}

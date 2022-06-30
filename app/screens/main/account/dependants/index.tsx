@@ -69,7 +69,7 @@ const DependantsScreen = (props: Props) => {
                 </Text>
                 <Button
                   onPress={() => navigate(SCREENS.ADD_DEPENDANTS)}
-                  title={t('pages.covid.covid-dependant-card.addDependant')}
+                  title={t('pages.covid.bookCovid.testBooking.addCovid')}
                 />
               </View>
             ) : (

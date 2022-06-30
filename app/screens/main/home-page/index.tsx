@@ -127,7 +127,7 @@ export default function Home() {
                   {t('pages.covid-booking.homeTitle')}
                 </Text>
                 <View style={styles.bnInner}>
-                  <View style={{ width: '60%' }}>
+                  <View style={{ width: '65%' }}>
                     <Text
                       style={{
                         fontFamily: fonts.mulishRegular,
