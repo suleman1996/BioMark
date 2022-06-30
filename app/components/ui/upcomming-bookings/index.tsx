@@ -18,6 +18,9 @@ import CovidHealthDeclarationForAllUpCommingModal from '../covid-health-declarat
 import SuggestionsText from '../suggestions-text';
 import { makeStyles } from './styles';
 import { useRoute } from '@react-navigation/native';
+import ButtonComponent from 'components/base/button';
+import { navigate } from 'services/nav-ref';
+import SCREENS from 'navigation/constants';
 
 type Props = {};
 
@@ -235,6 +238,27 @@ const UpcommingBookings = (props: Props) => {
           <View style={{ paddingTop: heightToDp(20) }} />
         )}
       />
+      <View style={styles.buttonContainer}>
+        <ButtonComponent
+          onPress={() => {
+            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+              screen: SCREENS.BOOKCOVIDTEST,
+            });
+          }}
+          title={'Book New COVID-19 Test'}
+        />
+        <ButtonComponent
+          bg={colors.lightBlue}
+          color={colors.black}
+          marginTop={1.2}
+          onPress={() =>
+            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+              screen: SCREENS.FAQSCREEN,
+            })
+          }
+          title={'FAQ'}
+        />
+      </View>
     </View>
   );
 };
