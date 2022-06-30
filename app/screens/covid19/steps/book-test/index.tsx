@@ -44,6 +44,9 @@ const BookCovidTest = (props: Props) => {
   const [isICModal, setIsICModal] = useState(false);
 
   /*eslint-disable */
+  const dependants = useSelector(
+    (state: IAppState) => state.account.allDependents
+  );
   useEffect(() => {
     dispatch(getAllDependents());
     dispatch(getCovidBookingFormR());
@@ -106,27 +109,31 @@ const BookCovidTest = (props: Props) => {
           contentContainerStyle={styles.scrollView}
         >
           {/* {isExistingBtn && !isDependantAdd ? ( */}
-          {[...booking].map((item, index) => (
-            <View key={index}>
-              <ExisitingBookingForDependent
-                setOpendedBooking={setOpendedBooking}
-                openedBooking={openedBooking}
-                itemIndex={index}
-              />
-            </View>
-          ))}
+          {[...booking].map((item, index) => {
+            return (
+              <View key={index}>
+                <ExisitingBookingForDependent
+                  setOpendedBooking={setOpendedBooking}
+                  openedBooking={openedBooking}
+                  itemIndex={index}
+                />
+              </View>
+            );
+          })}
 
           {/* ) : null} */}
 
-          {booking.some((item) => item.is_dependant == true) ? null : (
-            <ButtonComponent
-              onPress={() => {
-                // setIsExisting(true);
-                pushOneMoreToBooking();
-              }}
-              title={'Add Existing Dependant'}
-            />
-          )}
+          {booking.some((item) => item.is_dependant == true)
+            ? null
+            : dependants.length > 0 && (
+                <ButtonComponent
+                  onPress={() => {
+                    // setIsExisting(true);
+                    pushOneMoreToBooking();
+                  }}
+                  title={'Add Existing Dependant'}
+                />
+              )}
 
           <ButtonComponent
             onPress={() => {

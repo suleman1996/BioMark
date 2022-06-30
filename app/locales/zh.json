@@ -1,16 +1,70 @@
 {
    "pages": {
-      "signup": "Sign up",
-      "appointment": {
-         "title": "预约",
-         "tabs": {
-            "upcoming": "来临的预约",
-            "history": "历史记录"
-         }
-      },
+      "search": {
+         "scan": {
+           "qr": "Scan QR/Barcode",
+           "inputBarcode": "Input Barcode",
+           "uploadResults": "Upload Results"
+         },
+         "yourHealth": {
+            "label": "Your Health",
+            "suggestions": {
+              "heartDisease": "Heart Disease",
+              "diabetes": "Diabetes",
+              "bloodPressure": "Blood Pressure",
+              "bmi": "BMI",
+              "smoking": "Smoking",
+              "drinking": "Drinking",
+              "stress": "Stress",
+              "sleeping": "Sleeping"
+            }
+          },
+          "healthTrackers": {
+            "label": "Health Trackers",
+            "suggestions": {
+              "bloodSugarInput": "Blood Sugar Input",
+              "weightInput": "Weight Input",
+              "bloodPressureInput": "Blood Pressure Input"
+            }
+          },
+          "recordKeeping": {
+            "label": "Record Keeping",
+            "suggestions": {
+              "healthRecords": "Health Records",
+              "healthProgress": "Health Progress"
+            }
+          },
+          "covidBooking": {
+            "label": "Covid Booking",
+            "suggestions": {
+              "bookTests": "Book Tests",
+              "bookings": "Bookings",
+              "dependents": "Dependents",
+              "healthDeclaration": "Health Declaration",
+              "results": "Results"
+            }
+          }
+        },
+        "appointment": {
+          "title": "Appointment",
+          "tabs": {
+            "upcoming": "Upcoming",
+            "history": "History"
+          },
+          "healthDeclarationComplete": "Health Declaration Completed",
+          "hintText": "What appointments will be shown?",
+          "hintTextDesc": "Currently, only appointments for COVID-19 Test bookings will be shown here, in a future update we will collate all events here. Stay tuned!",
+          "noUpcoming": "No Upcoming Appointments",
+          "noUpcomingDesc": "You have no appointments scheduled yet.",
+          "noRecent": "No Recent Appointments",
+          "noRecentDesc": "This is where you can see your past appointment bookings."
+        },
       "covid-booking": {
          "title": "COVID-19 相关预约",
          "orderId": "订单编号",
+         "bookingId": "Booking ID",
+         "homeTitle": "Book your COVID-19 Test",
+         "homeDescription": "Planning a COVID-19 Test for you and your Dependant? Place an appointment with us by clicking “Book Now”",
          "tabs": {
             "upcoming": "即将到来的",
             "history": "历史记录"
@@ -32,6 +86,7 @@
       "landing": {
          "signup": "用户注册",
          "login": "用户登入",
+         "welcome": "Welcome Back!",
          "board1": {
             "image": "/assets/images/temperature-measure.svg",
             "title": "欢迎来到Biomark",
@@ -81,15 +136,33 @@
          "reportDate": "报告日期",
          "positiveMessage": "请进行自我隔离。",
          "negativeMessage": "时刻与他人保持安全距离。",
+         "home": {
+            "bookTests": "Book Tests",
+            "bookings": "Bookings",
+            "viewResults": "View Results",
+            "dependants": "Dependants",
+            "swipe": "Swipe to view other results",
+            "scan": "Scan to share latest COVID-19 Test Result"
+          },
+          "results": {
+            "title": "COVID-19 Results",
+            "scan": "Scan to share Covid-19 Test Result",
+            "noResults": "No Test Results",
+            "noResultsDesc": "You have no Test results recorded."
+          },
          "bookCovid": {
             "progress1": "预约",
             "progress2": "申报",
             "progress3": "付款",
-            "progress4": "确认",
             "continue": "继续",
             "next": "下一步",
             "cancel": "取消",
             "makePayment": "进行付款",
+            "cancelBookingProcess": "Cancel Entire Test Booking Process",
+            "cancelBookingProcessDesc": "By not proceeding you are not guranteed a test slot. Do you want to cancel?",
+            "covidICTitle": "Looks like your IC is missing",
+            "covidICDesc": "You will need to enter your IC in order to proceed with this feature of the app",
+            "covidICHint": "IC or Passport no.",
             "testTaking": {
                "title": "谁将进行检测？",
                "me": "我",
@@ -108,13 +181,19 @@
                "testdependant2": "家属",
                "testCentreCountry": "国家",
                "testCentreCity": "城市",
+               "testCenterMap": "City Test Centers",
                "testCentre": "检测中心",
                "testDateQuestion": "选择日期",
                "testSlotMorning": "上午时段",
                "testSlotAfternoon": "下午时段",
-               "addCovid": "增加新的家属资料"
+               "addCovid": "增加新的家属资料",
+               "countryInfoDialogTitle": "Why can’t I change Countries?",
+               "countryInfoDialogDescription": "Users are limited to one country for each booking order. If you wish to book for another country you would need to start another booking order.",
+               "countryInfoDialogButtonText": "Okay"
             },
             "declaration": {
+              "declarationHeaderUser": "Health Declaration for Myself",
+              "declarationHeaderDependant": "Health Declaration for My Dependant",
                "question1": "在过去14天内，您是否曾出现发烧、喉咙痛、干咳、鼻塞、疲惫、头疼、气喘的症状？",
                "question2": "在过去14天内，您是否到访其他国家？",
                "question3": "在过去14天内，您否曾与正在进行COVID-19隔离的人士有近距离接触？",
@@ -162,12 +241,19 @@
                "nextAlertButton": "好的",
                "delete": "删除家属资料？",
                "deleteTitle": "您是否确定删除家属资料？"
-            }
+            },
+            "paymentError": {
+               "header": "Payment is Unsuccessful",
+               "description": "No money has been deducted from your account.<br><br>Please retry the payment process to secure your COVID test slot.",
+               "retryPayment": "Retry Payment"
+             }
          },
          "covid-dependant": {
             "firstname": "名字",
             "lastname": "姓氏",
             "age": "年龄",
+            "dob": "Date of Birth",
+            "gender": "Gender",
             "relation": "关系",
             "ncr_passport": "身份证/护照号码",
             "title": "输入您的家属资料",
@@ -185,6 +271,13 @@
             "confirm": "确认",
             "exist": "加入已储存的家属"
          },
+         "covid-dependant-card": {
+            "title": "Dependants",
+            "addDependant": "Add Dependant",
+            "editDependant": "Edit Dependants",
+            "empty-title": "No Dependants Yet",
+            "empty-description": "Add dependants to see them here"
+          },
          "dependantDialog": {
             "redoeKYC": "重新进行eKYC验证",
             "redoeKYCTitle": "您是否确定重新进行？"
@@ -196,36 +289,170 @@
          },
          "covid-info": {
             "title": "检测预约 - 常见问答",
+            "footer": "Do you have further questions?<br>Write in to us at <a href='mailto:support@biomarking.com'>support@biomarking.com<a>!",
             "card1": {
-               "question": "我需要什么文件以进行COVID-19检测？",
-               "answer": {
-                  "answer1": "身份证号码 / 出生证明（15岁以下）或 就业签证 / 工作许可证（非公民）",
-                  "answer2": "护照",
-                  "answer3": "航班详情（如有，可接受电子版）"
+               "header": "Information Regarding Tests",
+               "item1": {
+                 "question": "1. What is a COVID 19 PCR test and what is it for?",
+                 "body": "PCR stands for ‘polymerase chain reaction’. It is a method that is used to detect and accurately identify genetic material from any organism. The COVID-19 PCR test is currently the preferred test for COVID-19 detection because of its speed, accuracy and success rate- hence is widely used as the testing method of choice for pre-departure travel, work and social responsibility purposes. It is considered the gold-standard (best-in-class) for detection of COVID-19.<br><br>Most COVID-19 PCR test results will be ready within a few hours. However we recommend that you ask the staff at your selected test center/clinic for a more precise time frame."
+               },
+               "item2": {
+                 "question": "2. What is Antigen testing?",
+                 "body": "An antigen test detects coronavirus proteins in the mouth and throat. It works by mixing the sample with a solution that unleashes specific viral proteins. However, it takes a shorter time to generate a result as compared to a PCR test. Antigen tests typically take 15-30mins to generate a result and are generally deemed to be less accurate than PCR tests."
+               },
+               "item3": {
+                 "question": "3. What is Serology testing?",
+                 "body": "Serology is also called the Antibody test that looks for the presence of antibodies. Antibodies are typically detected in the blood of people who are tested after infection and they show an immune response to the infection. It is important for detecting previous infections in people who had few or no symptoms."
+               },
+               "item4": {
+                 "question": "4. What are the types of COVID-19 tests available?",
+                 "body": "A comprehensive range of COVID-19 tests are offered on our platform, including COVID-19 PCR, antigen, and serology tests. However, different clinics may have different tests available, and you will be able to see what each clinic offers during the booking process."
+               },
+               "item5": {
+                 "question": "5. How will the COVID-19 PCR test be performed?",
+                 "body": "The test will be performed at the desired clinic by a healthcare professional (Doctor/Nurse). The COVID-19 PCR test is conducted by using a swab to collect respiratory samples found in your nose and your throat. A swab is a soft tip on a long flexible stick that goes into your nose. The sample is collected then sealed and sent to the laboratory for testing."
+               },
+               "item6": {
+                 "question": "6. Where can I get tested?",
+                 "body": "BioMark's partner test centers and clinics are listed in the app/website and displayed in a map for your convenience. "
+               },
+               "item7": {
+                 "question": "7. Is BioMark a MOH-approved COVID-19 test provider?",
+                 "body": "BioMark is only the facilitator to connect patients to healthcare providers to get tested for COVID-19. The healthcare providers providing the COVID-19 swab tests would be MOH-approved according to the guidelines of their respective country."
+               },
+               "item8": {
+                 "question": "8. Who is eligible for the COVID-19 tests? Am I eligible?",
+                 "body": "Suspected cases, quarantined, and under investigation are eligible to book a COVID-19 Test. For those with signs and symptoms prior to your clinic visit, kindly indicate it in your health declaration. A COVID-19 test can be used for anyone regardless of age. COVID-19 tests are not limited to travellers, but it can also be for people who would like to find out if they have COVID-19."
+               },
+               "item9": {
+                 "question": "9. I need to get a COVID-19 PCR test urgently, are there any expedited options?",
+                 "body": "Participating clinics that can do urgent swab tests will be indicated in the app/website during booking for your convenience. You may also select the express PCR test to receive your results within about 6 hours.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities. "
+               },
+               "item10": {
+                 "question": "10. Can I do a home-testing instead of going to the test center?",
+                 "body": "Yes. We have home testing available. Simply select ‘Home Test’ when you are making a booking and provide the relevant information as requested. We will be in contact with you after you have made your booking to organize appropriately."
+               },
+               "item11": {
+                 "question": "11. How much are the COVID-19 tests?",
+                 "body": "Test centers and clinics may choose to price their tests differently. When you make a booking on the app, the price should be displayed for you as you choose your tests."
+               },
+               "item12": {
+                 "question": "12. Are there any subsidies/claims available for the COVID-19 tests?",
+                 "body": "We apologise that BioMark, with the test centers, clinics and laboratories that provide the COVID-19 tests through the BioMark platforms currently do not have any arrangements for subsidies.<br><br>However, we do provide a receipt upon completion and confirmation of successful payment which may be requested by your company/insurer for this purpose. Please verify any ability for subsidies or claims with your company/insurer beforehand."
                }
             },
             "card2": {
-               "question": "我将如何获得我的检测结果？",
-               "answer": {
-                  "answer1": "您将通过本应用程式获取您的检测结果。若准备搭乘航班，请提早一天进行检测。"
-               }
-            },
-            "card3": {
-               "question": "我在进行 COVID-19 检测前需要如何准备？",
-               "answer": {
-                  "answer1": "系统将在您的检测日前24小时送出一份健康声明报表，您需要在检测前完成该健康声明，并于检测当日准备所需的资料及文件。"
-               }
-            },
-            "card4": {
-               "question": "我有其他疑问！",
-               "answer": {
-                  "answer1": "任何询问可致电",
-                  "telNo": "1234 5353",
-                  "email": "Biomark@email.com",
-                  "middle_text": "或将您的疑问发送至我们的电邮与我们取得联系",
-                  "dot": "."
-               }
-            }
+               "header": "Bookings and Payment",
+               "item13": {
+                  "question": "13. Why do I need to verify my identity?",
+                  "body": "Identity verification is a faster alternative compared to in-person identity verification and removes your need to wait at patient registration counters."
+               },
+               "item14": {
+                  "question": "14. Who are considered Dependants and how can I make a booking for them?",
+                  "body": "You will be able to make bookings for yourself and others (eg. spouse, child, siblings, parents, grandparents, guardian, or others) via the app. Click on “Add New Dependant” and fill in the Dependant’s details to book an appointment for them."
+                },
+                "item15": {
+                  "question": "15. Can I book a COVID-19 test for other countries?",
+                  "body": "We currently support COVID-19 bookings in Singapore and Malaysia. You will be able to book a COVID-19 test in Singapore from Malaysia, and vice versa."
+                },
+                "item16": {
+                  "question": "16. How will I know if my booking was made successfully?",
+                  "body": "You will receive a confirmation email with your appointment details and/or receipt upon payment verification by your financial services provider.<br><br>You can also refer to your booking details under the COVID-19 Bookings section in our BioMark patient app."
+                },
+                "item17": {
+                  "question": "17. What happens if I did not receive any confirmation email? ",
+                  "body": "If the confirmation email does not show up in the inbox, kindly check your spam folder or contact us at <a href='mailto:support@biomarking.com'>support@biomarking.com</a> with your name and booking details so that we can resend the information to you."
+                },
+                "item18": {
+                  "question": "18. What should I do to prepare for my COVID-19 test?",
+                  "body": "A notification will be sent out for you to complete a health declaration form within 24 hours from your test date. Please fill up the form with information that is as accurate as possible.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities."
+                },
+                "item19": {
+                  "question": "19. What documents do I need to bring for my appointment?",
+                  "body": "Please bring your identity card and also have a copy of your appointment confirmation on hand. It is important that the copy of your appointment confirmation should display the confirmation number in the event that verification is required."
+                },
+                "item20": {
+                  "question": "20. What are the supported methods of payment?",
+                  "body": "Only e-payment is available currently via VISA, Mastercard. We are working to provide more payment options in the near future for your convenience."
+                },
+                "item21": {
+                  "question": "21. What payment provider is BioMark using and can it be trusted?",
+                  "body": "We engage trusted payment gateways to facilitate the payments for us. For Singapore, we are using Stripe as our payment partner and Billplz for Malaysia payments. Our payment partners process billions of dollars in payments annually and has best-in-class, bank grade security."
+                },
+                "item22": {
+                  "question": "22. What should I do if I miss my appointment?",
+                  "body": "Kindly contact us at <a href='mailto:support@biomarking.com'>support@biomarking.com</a> if you need to reschedule your appointment."
+                },
+                "item23": {
+                  "question": "23. Can I walk into any BioMark participating PCR swab clinic for a test without making an appointment?",
+                  "body": "It is up to each clinic’s discretion whether they accept walk-ins. BioMark will not be responsible for any miscommunication if the patient chooses to walk in instead of making a booking via the website/app. It is highly recommended to make a booking before heading down to the clinic."
+                }
+               },
+               "card3": {
+                  "header": "Results",
+                  "item24": {
+                    "question": "24. How do I retrieve my COVID-19 PCR test results and how long will it take?",
+                    "body": "Your COVID-19 PCR test results will be available in our BioMark App usually within 24-48 hours after the swab. The healthcare provider which you engaged to conduct the swab will also contact you in the event that your COVID-19 PCR test results return positive.<br><br>You will also be notified via email and receive a push notification from the app when your results are ready to view. "
+                  },
+                  "item25": {
+                    "question": "25. Will I get a PDF result?",
+                    "body": "You will receive a PDF result attached to your email notification or via the app once your results are ready to view."
+                  },
+                  "item26": {
+                    "question": "26. Can I use the resulting QR code at the airport?",
+                    "body": "We are using an encrypted QR code standard which is used to secure and verify your test result. The QR code is a secure certificate of your COVID-19 result.<br><br>When travelling abroad, the QR code can be shown to foreign travel authorities, who may scan the QR code with any reader (e.g. normal phone camera) to verify the authenticity of the digitally authenticated and endorsed QR code."
+                  },
+                  "item27": {
+                    "question": "27. What happens if my COVID-19 PCR test result is inconclusive?",
+                    "body": "There might be instances that COVID-19 PCR swab test results are inconclusive. If your COVID-19 PCR test result is inconclusive, you might have to undergo a repeat test and it is chargeable. BioMark will not be held responsible for any losses, expenses, or costs involved, should this result affect your flight departure.<br><br>The healthcare provider which you engaged to conduct the test will contact you if a repeat test is necessary."
+                  },
+                  "item28": {
+                    "question": "28. What happens if my COVID-19 PCR test result is positive? ",
+                    "body": "If your COVID-19 PCR test results are positive, you should isolate yourself from family members, monitor your temperature and symptoms and also notify your close contact of your COVID-19 positive status. Please also refer to your country’s guidelines on home quarantine and isolation for COVID-19.<br><br>If you are taking a PCR test for the purpose of pre-departure travel, kindly inform the relevant authorities that you would be unfit to fly. "
+                  }
+                },
+                "card4": {
+                  "header": "Refunds and Cancellations/Changes",
+                  "item29": {
+                    "question": "29. How do I change/cancel my booking?",
+                    "body": "For cancellation or rescheduling of appointments, kindly email to <a href='mailto:support@biomarking.com'>support@biomarking.com</a> with your reason for changing the appointment."
+                  },
+                  "item30": {
+                    "question": "30. Will I get a refund if I were to cancel my booking?",
+                    "body": "Bookings that are cancelled 24 hours before the appointment timing will not be entitled to any refunds. You will also not be allowed to cancel your booking after you have been swabbed.<br><br>Appointment cancellation is also not allowed if the booking is made within 24 hours of the selected appointment time.<br><br>Do note that refunds are subjected to payment processing fees"
+                  },
+                  "item31": {
+                    "question": "31. Are clinics allowed to cancel/make changes to my appointment? ",
+                    "body": "Clinics are not allowed to cancel the appointment but may propose to reschedule the appointment, subject to your consent. Clinics have also been advised to reschedule only if it falls within the travel time and will not lead to any negative repercussions on flight departure."
+                  },
+                  "item32": {
+                    "question": "32. When will I get my refunds? ",
+                    "body": "If your cancellation is entitled to a refund,  the refund will show up on the bank account you used to pay for the transaction within 5-10 business days (depending on the bank’s processing time)."
+                  },
+                  "item33": {
+                    "question": "33. Why is the refund not showing up on my bank statement after 10 business days?",
+                    "body": "If the cancellation is processed not long after the payment was made, the refund may be processed as a reversal. In which case, the original charge will drop off the bank statement altogether, as if it never occurred.<br><br>Check your bank statement and look for the original charge. If you do not see the charge on your bank statement, the payment was reversed and the refund is complete."
+                  }
+                },
+                "card5": {
+                  "header": "General Information",
+                  "item34": {
+                    "question": "34. What is the Coronavirus Disease (COVID-19)?",
+                    "body": "According to the World Health Organization (WHO), Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.<br><br>COVID-19 symptoms can include common cold symptoms, shortness of breath and in some cases, severe lung infection. Most people develop mild symptoms that can be treated with medication recommended by a doctor based on the patient’s clinical condition. However, severe cases may require hospital care where a patient may receive a combination of treatments."
+                  },
+                  "item35": {
+                    "question": "35. How many variants of the coronavirus are there?",
+                    "body": "Variants of a virus occurs when there is a change (mutation) to the virus’s genes. Mutation of viruses are neither new nor unexpected. As of now, many variants have emerged in different parts of the world, but the variants of concern for SARS-CoV-2 as listed by the WHO include the Delta variant and the Omicron variant."
+                  },
+                  "item36": {
+                    "question": "36. What is the Delta variant?",
+                    "body": "The Delta variant was first identified in late 2020s in India and identified to be more than twice as contagious as the previous variants. Some data also suggests that the Delta variant  has a higher probability of causing severe illness in unvaccinated people, as compared to the previous variants. However, if infected, the amount of viral genetic material may go down faster in fully vaccinated people when compared to unvaccinated people."
+                  },
+                  "item37": {
+                    "question": "37. What is the Omicron variant and can it be detected?",
+                    "body": "WHO describes the Omicron variant as a variant of concern based on the evidence of several mutations which affects the way it behaves. The variant was first detected in an outbreak at a University town in South Africa with a younger demographic. There is currently insufficient information about the variant in terms of how serious it is and its transmissibility. Studies are underway to understand more about this variant. But the presence of the Omicron variant can still be detected through COVID-19 tests, which is available for booking on the BioMark Platform. It is best to consult with a physician if you are concerned that you may have Covid."
+                  }
+                }
          },
          "errors": {
             "firstname": "输入您的名字",
@@ -418,10 +645,232 @@
          "goal": "目标",
          "errors": {
             "required": "请输入有效的 HbA1c 目标。",
-            "printed": "已列印报告",
-            "close": "关闭"
+            "minMax": "Please enter a valid HbA1c target between 5% and 15%"
          }
       },
+      "bodyMeasurements": {
+         "title": "Body Measurements",
+         "yourReadingHeight": "Height",
+         "yourReadingWeight": "Weight",
+         "errors": {
+           "missingHeight": "Please provide your height measurement",
+           "missingWeight": "Please provide your weight measurement",
+           "measurementInvalidMetric": "Please enter a valid measurement (X'XX.XX)",
+           "measurementInvalidImperial": "Please enter a valid measurement (XXX)",
+           "outOfBoundariesMetric": "Please enter a valid height between 60 - 250 cm",
+           "outOfBoundariesImperial": "Please enter a valid height between 1'11.7 - 8'2.5 ft/in",
+           "outOfBoundariesKg": "Please enter a valid weight between 0 - 200 kg",
+           "outOfBoundariesLbs": "Please enter a valid weight between 0 - 440 lbs",
+           "measurementInvalid": "Please enter a valid measurement (XXX.XX)"
+         }
+       },
+       "personalInformation": {
+         "title": "Personal Information"
+       },
+       "cameraOptionsDialog": {
+         "title": "Options",
+         "scanBarcode": "Scan Barcode",
+         "manuallyScanBarcode": "Manually Enter Barcode",
+         "upload": "Upload"
+       },
+       "healthProgress": {
+         "weight": "Weight",
+         "bloodSugar": "Blood Sugar",
+         "medication": "Medication",
+         "hba1c": "HbA1c",
+         "bloodPressure": "Blood Pressure"
+       },
+       "dashboard": {
+         "title": "Dashboard",
+         "healthTrackers": "Health Trackers", 
+         "greetings": "Hello",
+         "newMessage": "New Message",
+         "receivedOn": "Received on ",
+         "markAsRead": "Mark As Read",
+         "yourLatestResult": "Your Latest Result",
+         "updateProfile": "Complete Your Profile",
+         "updateProfileText": "Fill in your profile to know your health risks",
+         "uploadResult": "Upload Your Lab Results",
+         "bookCovid": "Book a Covid Test",
+         "uploadAnotherResult": "Upload Another Lab Result",
+         "labResultText": "Keep track of your results in one place.",
+         "yourLabResultStatus": "Your Lab Result Status",
+         "barcode": "Barcode ",
+         "doctorMessage": "View Doctor Message",
+         "seeResult": "See Results",
+         "suggestedReading": "Articles Highlights",
+         "riskTitle": "Your Health Risks",
+         "healthRecords": "Health Records",
+         "covid19": "COVID-19",
+         "bookings": "Bookings",
+         "healthProgress": "Health Progress",
+         "healthProvider": "Healthcare Providers",
+         "yourHealth": "Your Health",
+         "accessCode": "Do you have an Access Code?",
+         "accessCodeDesc": "You can enter your code at the button beside.",
+         "accessCodeHint": "What is an access code?",
+         "dialogs": {
+           "verify": {
+             "title": "Results Available",
+             "description": "Please enter your IC or passport number to verify your identity.",
+             "label": "IC or Passport Number",
+             "errors": {
+               "required": "IC or Passport are required",
+               "unsuccessful": "IC or Passport verification unsuccessful."
+             }
+           },
+           "verifyNotAvailable": {
+             "title": "Validation is unsuccessful",
+             "description": "IC or passport number validation is unsuccessful. You have reached the daily number of tries.",
+             "button": "OK"
+           },
+           "unsuccessful": {
+             "title": "Results Available",
+             "description": "IC or Passport number validation is unsuccessful. You have reached the daily number of tries."
+           },
+           "bio-blood_sugar": {
+             "title": "Set Target Ranges",
+             "description": "Would you like to set your target ranges for blood sugar? If you select 'skip', default ranges will be used.",
+             "buttonText": "Yes",
+             "buttonCancelText": "Skip"
+           },
+           "bio-hba1c": {
+             "title": "Set Target Ranges",
+             "description": "Would you like to set your target ranges for HbA1c? If you select 'skip', default ranges will be used.",
+             "buttonText": "Yes",
+             "buttonCancelText": "Skip"
+           },
+           "bio-medication": {
+             "title": "Set Medication",
+             "description": "Would you like to set your medication now? If you select 'skip', no medication will be entered. You can update this at any time.",
+             "buttonText": "Yes",
+             "buttonCancelText": "Skip"
+           }
+         },
+         "psp": {
+           "yourActions": "For Your Actions",
+           "recordKeeping": "Record Keeping",
+           "empower": "Empower ID:",
+           "titles": {
+             "titleDiabetes": "Enter Diabetes Support Center",
+             "titleHypertension": "Enter Hypertension Support Center"
+           }
+         }
+       },
+       "diabetesSupport": {
+         "titles": {
+           "diabetes_title": "Diabetes Support Center",
+           "hypertension_title": "Hypertension Support Center"
+         },
+         "diaries": {
+           "diabetes_diary": "Your Diabetes Diary",
+           "hypertension_diary": "Your Hypertension Diary"
+         },
+         "educations": {
+           "diabetes_education": "Diabetes Education",
+           "hypertension_education": "Hypertension Education"
+         },
+         "withdrawText": "Tap to",
+         "withdrawLink": "Withdraw from Program",
+         "dialogs": {
+           "video": {
+             "title": "Streaming Video",
+             "description": "This will consume more data. We suggest using your wifi instead.",
+             "buttonText": "Ok"
+           },
+           "withdraw": {
+             "title": "Are You Sure?",
+             "description": "Are you sure you want to withdraw from the Empower Program? You will lose access to all your Empower Program privileges.",
+             "buttonText": "Yes",
+             "buttonCancelText": "Cancel"
+           }
+         },
+         "disclaimer": {
+           "titles": {
+             "titleDiabetes": "By signing this form, you hereby:",
+             "titleHypertension": "By signing this form:"
+           },
+           "paragraph": "<strong>1.</strong> Agree to participate in the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 for which you were informed by your enrolling physician. I likewise agree to be enrolled in the said Program by my physician. <br><br> <strong>2.</strong> Acknowledge that you are aware that all data related to you will be accessible only to the third party provider of Sanofi-Aventis Philippines Inc. involved in the program and all data will be handled with full confidentiality in compliance with the Data Privacy Act and all related issuances.<br><br> <strong>3.</strong> Acknowledge that you have the right to access and correct your personal information at any time upon your request.<br><br> <strong>4.</strong> Acknowledge that you can withdraw from the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Glargine U300 at any time without any prejudice by contacting My Blood Profile Technologies Corporation, a subsidiary of BioMark Pte Ltd, and that already collected data will remain in the specific EMPOWER Patient Program database, unless you request also for these data to be deleted. You can withdraw from the EMPOWER Patient Program at any time by clicking the “Withdraw from Program” link on the Diabetes Support Center page.<br><br> <strong>5.</strong> Acknowledge that you are aware that this program may be discontinued at any given time and that you will be notified thirty (30) days prior the discontinuation date.<br><br> <strong>6.</strong> Declare that you have carefully read the EMPOWER Patient Program for Insulin Glargine/Lixisenatide and Gargine U300 guidelines/mechanics and warrant that you will abide with such guidelines/mechanics.<br><br>",
+           "paragraphHypertension": "<ul style='padding-inline-start: 20px;'>    <li>        <p><span>You agree to participate in the EMPOWER Patient Program for Insulin            Glargine/Lixisenatide (Soliqua) or Insulin Glargine U300 (Toujeo), and/or Irbesartan +            Amlodipine (Aprovasc) (the “Program”). You confirm that you were informed of this            Program, and agree to be enrolled therein, by your enrolling physician.            </span></p>    </li>    <li style='list-style-type: circle;'>        <p><span>By enrolling in the Program, you expressly give consent to third parties, and/or third party            providers that sanofi-aventis Philippines Inc. (\"Sanofi\") engages or contracts with            (collectively, \"Third Party/ies\") that are involved in the Program to collect and process            your personal information and to conduct the Program in accordance with the following            purposes (“Purposes”):            </span></p>    </li></ul><ul>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>        1. Provide you education on diabetes and/or hypertension management, product        handling, titration etc., as may be applicable. Medical assessment and case        processing in the event of adverse drug reaction or Pharmacovigilance events.            </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>2. Give you proper device training in terms of proper and correct usage of medical        devices and/or the Insulin Glargine/Lixisenatide (Soliqua) or Insulin Glargine U300        (Toujeo) solostar pen.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>3. You may be provided with seven (7) pieces of Irbesartan/Amlodipine (Aprovasc)        every three (3) months for a period of one (1) year. Sanofi reserves the right to        suspend the provision of doses, depending on availability and other factors.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>4. Provide you with regular reminder on regular blood glucose monitoring, regular        blood pressure monitoring, other necessary laboratory test your doctor will        require.        </span></p>    <p style='margin-left: 108pt;'><span style='margin-left: 55px;'>5. Provide your enrolling physician with regular report on your activities in the        Program for proper information feedback and monitoring.            </span></p></ul><ul style=\"padding-inline-start: 20px;\">    <li>        <p><span>You acknowledge that you are aware that the Program is not a clinical study and all data            related to you will be accessible only to Third Party/ies involved in the Program, and all            data will be handled with full confidentiality in compliance with the Data Privacy Act and            all related issuances. Such data will be stored for a period of 10 years.            </span></p>    </li>    <li>        <p><span>You acknowledge that data collected by our Nurse Educator in the format of medical            record/s (“Medical Record”) will be collected in a patient relationship management            system (“PRM”) operated by My Blood Profile Technology Corp. (“BioMark”) or any other            Third Party/ies retained by Sanofi for the purpose, accessible only by Nurse Educators            (from Home Health Care Placements, Inc. (“HHCP”)), BioMark and Third Party/ies. For the            avoidance of doubt, Sanofi shall have no access to individual patient records.            </span></p>    </li>    <li>        <p><span>You agree that your Medical Record will be shared by BioMark and Nurse Educators (from            HHCP) to your enrolling physician.            </span></p>    </li>    <li>        <p><span>You acknowledge that aggregated reports from the Program will be generated and            accessible to Sanofi and Third Party/ies for purposes of assessing the Program's            effectiveness to support in diabetes and/or hypertension management, and in evaluating            the Program's potential for further improvements. You likewise agree that your personal            data will be provided to Third Party/ies for the purpose of anonymizing the same before            any further processing will be done, which processing includes the generation of            aggregated data. You acknowledge that aggregated data from the Program may be used            for publication purposes by Sanofi or Third Party/ies, such as, but not limited to, scientific            papers, other written reports, etc. Aggregated reports that are anonymized consist of            data provided in this form and those collected in the Program’s digital platforms (such as            the Biomark Application). You understand that the strictest level of confidentiality and            security will be maintained at any stage of the processing of your personal data.            </span></p>    </li>    <li>        <p><span>You acknowledge that you have the right to access and correct your personal information            at any time upon your request by downloading and updating the BioMark Application or            by contacting 0919-433-3392 (Smart).            </span></p>    </li>    <li>        <p><span>You acknowledge that the planned education session with Nurse Educators is good for            one (1) year. Beyond this one-year period, the patient can avail of the BioMark application            and call center, as long as the EMPOWER program is still active.            </span></p>    </li>    <li>        <p><span>You acknowledge that you can withdraw from the Program at any time without prejudice            by sending your message through the Biomark App or by contacting 0919-433-3392            (Smart). You agree that personal data already collected from you will remain in the            specific Program database for the retention period mentioned above, unless you request            also for these data to be deleted.            </span></p>    </li>    <li>        <p><span>You acknowledge that you are aware that this Program may be discontinued at any given            time and that you will be notified thirty (30) days prior the discontinuation date.            </span></p>    </li></ul>",
+           "checkboxLabel": "I hereby confirm my understanding of the above policy and my consent to the collection, use and disclosure of my information in accordance to the terms of the policy.",
+           "buttonLabel": "Accept & Continue"
+         },
+         "welcome": {
+           "titles": {
+             "titleDiabetes": "Welcome to your Diabetes Support Center",
+             "titleHypertension": "Welcome to your Hypertension Support Center",
+             "titleEmpower": "Welcome to the Empower Program"
+           },
+           "intros": {
+             "introDiabetes": "Here you can track your blood sugar, medications, and access resources to help you manage your diabetes.",
+             "introHypertension": "Here you can track your Blood Pressure, Medication and access resources to help you manage your hypertension.",
+             "introEmpower": "Welcome to the Empower Program. Our goal is to empower you in your treatment journey!"
+           },
+           "buttonLabels": {
+             "continueDiabetes": "Continue to Diabetes Center",
+             "continueHypertension": "Continue to Hypertension Center",
+             "continueEmpower": "Continue"
+           }
+         },
+         "onboarding": {
+           "next": "Next",
+           "finish": "Finish",
+           "demo": {
+             "bloodSugar": "Log your blood sugar here.",
+             "medication": "Log your medication here.",
+             "HbA1c": "Log your HbA1c here.",
+             "video": "View helpful video tutorials here.",
+             "more": "Learn more about diabetes here.",
+             "moreHypertension": "Learn more about hypertension here.",
+             "bloodPressure": "Log your blood pressure here.",
+             "weight": "Log your weight here."
+           }
+         }
+       },
+       "drinking": {
+         "title": "Drinking"
+       },
+       "email": {
+         "title": "Email",
+         "save": "Save",
+         "newEmail": {
+           "title": "Email Address",
+           "placeholder": "",
+           "errors": {
+             "required": "Email required",
+             "email": "Not a valid email address"
+           }
+         },
+         "confirmEmail": {
+           "title": "Confirm Email Address",
+           "placeholder": "",
+           "errors": {
+             "required": "Email required",
+             "repeatRequired": "Email confirmation required",
+             "email": "Not a valid email address",
+             "emailMismatch": "Emails does not match"
+           }
+         }
+       },
+       "encodedResults": {
+         "filters": {
+           "title": "Filter Overview",
+           "confirm": "Confirm",
+           "type": "Filter type",
+           "all": "All",
+           "abnormal": "Abnormal"
+         },
+         "info": {
+           "title": "Results Details",
+           "source": "Source",
+           "reference": "Referring Doctor or Clinic",
+           "labReference": "Lab Reference Number",
+           "collected": "Sample Collected",
+           "received": "Report Received",
+           "printed": "Report Printed",
+           "close": "Close"
+         }
+       },
       "healthRisks": {
          "title": "您的健康风险是什么？",
          "description1": "为了让我们能有效评估您的健康风险，请告诉我们更多关于您的资料。",
@@ -513,7 +962,9 @@
             "phoneNumberTooShort": "必须含有",
             "password": "请输入您的密码",
             "noConnection": "您的互联网连接已离线",
-            "characters": "字符"
+            "characters": "字符",
+            "phoneNumberLength": "Mobile number must consist between 4 - 13 digits",
+            "validNumber": "Please enter a valid mobile number"
          },
          "forgotPassword": "忘记密码？",
          "newToBiomark": "注册一个新账号",
@@ -649,7 +1100,9 @@
          "title": "更多的",
          "links": {
             "profile": "个人资料",
+            "editProfile": "Edit Profile", 
             "notifications": "通知",
+            "previousNotifications": "Previous Notifications",
             "support": "支持",
             "about": "关于 BioMark",
             "policies": "政策",
@@ -658,10 +1111,12 @@
             "autoLogout": "自动登出",
             "idVerification": "身份验证",
             "dependants": "家属",
+            "search": "Search Biomark app",
             "verification": {
                "notVerified": "为认证",
                "pending": "等待认证",
-               "verified": "已认证"
+               "verified": "已认证",
+               "error": "Verification error. Please resubmit details"
             }
          }
       },
@@ -750,8 +1205,17 @@
          "title": "进步"
       },
       "pspDashboard": {
-         "title": "糖尿病支援中心"
-      },
+         "title": "Diabetes Support Center"
+       },
+      "hint": {
+         "dialogs": {
+           "code": {
+             "title": "What is an Access Code?",
+             "description": "This should be the code you received through SMS.",
+             "buttonText": "Enter Code"
+           }
+         }
+       },
       "qrCode": {
          "dialogs": {
             "midas": {
@@ -1084,6 +1548,8 @@
             "bmi": "更新身高和体重",
             "smoking": "回答吸烟问题",
             "drinking": "回答饮酒问题",
+            "sleeping": "Update Sleeping Hours",
+            "stress": "Answer Stress Questions",
             "ethnic": "更新种族",
             "notFound": ""
          },
@@ -1180,6 +1646,7 @@
          "more": "更多",
          "home": "主页",
          "inbox": "信箱",
+         "other": "Other",
          "appointment": "预约",
          "account": "账户"
       },
@@ -1265,6 +1732,23 @@
          }
       }
    },
+   "healthSnapshot": {
+      "title": "Your Health Snapshot",
+      "widgets": "Health Snapshot Widgets",
+      "editGoals": "Edit Target Goals",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "ios": {
+        "connectButton": "Connect with Apple Health",
+        "modalTitle": "Link with Apple Health",
+        "modalBody": "Connect with Apple Health to see all your health data on the BioMark app. This lets you see all your health data in one place."
+      },
+      "android": {
+        "connectButton": "Connect with Google Fit",
+        "modalTitle": "Link with Google Fit",
+        "modalBody": "Connect with Google Fit to see all your health data on the BioMark app. This lets you see all your health data in one place."
+      }
+    },
    "userProfile": {
       "mobileNumber": "手机号码",
       "password": "密码",
@@ -1294,6 +1778,7 @@
          "dobRequired": "名字只能包含拉丁字母",
          "minAge": "您必须年满 18 岁才能进行注册",
          "icNumberRequired": "输入您的身份证号码",
+         "icFormat": "Invalid IC Number",
          "emailRequired": "输入您的电邮",
          "emailFormat": "请输入有效的电邮地址"
       },
@@ -1356,5 +1841,15 @@
       "wentOffline": "您的互联网连接已离线",
       "wentOnline": "您重新连线了！",
       "offlineNotification": "您的设备正在离线操作"
-   }
-}
+   },
+   "prominentDisclosure": {
+      "title": "Disclosure",
+      "okText": "Allow",
+      "cancelText": "Cancel",
+      "healthApp": "Our app will track the physical activities to track your health, monitoring your body weight, blood pressure, heart rate, workout intensity, sleep, stress levels",
+      "storage": "Our app will require access to storage for uploading the profile picture, lab results, medical reports",
+      "camera": "Our app will use camera to upload kyc documents, perform kyc using facial recognition, scan QR code for lab reports, medicines prescription to show to doctor",
+      "wifi": "Our app will access Wifi to see if you have wifi connectivity for tracking your health and fitness",
+      "gps": "Our app will collect GPS location of your device for booking appointment with health care professionals and identifying clinics and hospitals nearby, to show the nearby locations of clinics and hospitals where a patient can go."
+    }
+  }

@@ -254,12 +254,36 @@ export default function InboxScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ width: widthToDp(86) }}
           keyExtractor={(item, index) => index.toString()}
-          data={allOthersNotificationsData}
+          data={allOthersUnreadNotificationsData}
           renderItem={({ item }) => (
             <OtherNotificationItem
               getIcon={getIcon}
               item={item}
-              onPress={() => clickHandler(item)}
+              onPress={() => {
+                clickHandler(item);
+              }}
+            />
+          )}
+        />
+        <View style={styles.blackLine} />
+        <View style={styles.headerContainer}>
+          <Text style={styles.prevHeaderText}>
+            {t('pages.more.links.previousNotifications')}
+          </Text>
+        </View>
+        <FlatList
+          scrollEnabled={false}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ width: widthToDp(86) }}
+          keyExtractor={(item, index) => index.toString()}
+          data={allOthersNotificationsData}
+          renderItem={({ item }) => (
+            <PreviousNotificationItem
+              getIcon={getIcon}
+              item={item}
+              onPress={() => {
+                clickHandler(item);
+              }}
             />
           )}
           ListFooterComponent={() => {
@@ -281,22 +305,6 @@ export default function InboxScreen() {
               </>
             );
           }}
-        />
-        <View style={styles.blackLine} />
-        <View style={styles.headerContainer}>
-          <Text style={styles.prevHeaderText}>
-            {t('pages.more.links.previousNotifications')}
-          </Text>
-        </View>
-        <FlatList
-          scrollEnabled={false}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ width: widthToDp(86) }}
-          keyExtractor={(item, index) => index.toString()}
-          data={allOthersUnreadNotificationsData}
-          renderItem={({ item }) => (
-            <PreviousNotificationItem getIcon={getIcon} item={item} />
-          )}
         />
       </View>
     );
@@ -340,7 +348,7 @@ export default function InboxScreen() {
               >
                 <Text style={styles.tabText}>
                   {t('pages.tabController.other')} (
-                  {allOthersNotificationsData.length})
+                  {allOthersUnreadNotificationsData.length})
                 </Text>
               </Pressable>
             </View>

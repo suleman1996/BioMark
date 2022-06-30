@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  Pressable,
 } from 'react-native';
 import React from 'react';
 
@@ -158,7 +159,7 @@ const Index = () => {
       return null;
     }
     return (
-      <View style={styles.overLay}>
+      <Pressable style={styles.overLay} onPress={() => setIsInfo(false)}>
         <View style={styles.overLayContainer}>
           <RenderHeading title={t('pages.encodedResults.info.title')} />
           {resultOverView?.provider !== '' && (
@@ -211,7 +212,7 @@ const Index = () => {
             />
           </View>
         </View>
-      </View>
+      </Pressable>
     );
   };
 
@@ -241,6 +242,7 @@ const Index = () => {
         setSelectedfilterOption1={setSelectedfilterOption1}
         onApplyPress={applyFilter}
         values={{ selectedfilterOption1 }}
+        filterModalClose={() => setIsVisible(false)}
       />
       <TitleWithBackLayout
         shadow={colors.blue}

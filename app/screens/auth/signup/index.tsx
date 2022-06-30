@@ -41,6 +41,7 @@ import { useSelector } from 'react-redux';
 import { IC_AND_PASSPORT, NAME } from 'utils/regix';
 import { useTranslation } from 'react-i18next';
 import fonts from 'assets/fonts';
+import i18next from 'i18next';
 
 export default function Signup() {
   //initial hooks define
@@ -439,7 +440,7 @@ export default function Signup() {
 
 const ResetPassSchema = Yup.object({
   fName: Yup.string()
-    .required('Please provide your first name')
+    .required(i18next.t('userProfile.errors.firstNameRequired'))
     .matches(NAME, 'Name should only contain latin letters'),
   lName: Yup.string()
     .required('Please provide your last name')

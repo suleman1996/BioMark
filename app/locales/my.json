@@ -1,16 +1,70 @@
- {
-
+ { 
    "pages": {
+      "search": {
+         "scan": {
+           "qr": "Scan QR/Barcode",
+           "inputBarcode": "Input Barcode",
+           "uploadResults": "Upload Results"
+         },
+         "yourHealth": {
+           "label": "Your Health",
+           "suggestions": {
+             "heartDisease": "Heart Disease",
+             "diabetes": "Diabetes",
+             "bloodPressure": "Blood Pressure",
+             "bmi": "BMI",
+             "smoking": "Smoking",
+             "drinking": "Drinking",
+             "stress": "Stress",
+             "sleeping": "Sleeping"
+           }
+         },
+         "healthTrackers": {
+           "label": "Health Trackers",
+           "suggestions": {
+             "bloodSugarInput": "Blood Sugar Input",
+             "weightInput": "Weight Input",
+             "bloodPressureInput": "Blood Pressure Input"
+           }
+         },
+         "recordKeeping": {
+           "label": "Record Keeping",
+           "suggestions": {
+             "healthRecords": "Health Records",
+             "healthProgress": "Health Progress"
+           }
+         },
+         "covidBooking": {
+           "label": "Covid Booking",
+           "suggestions": {
+             "bookTests": "Book Tests",
+             "bookings": "Bookings",
+             "dependents": "Dependents",
+             "healthDeclaration": "Health Declaration",
+             "results": "Results"
+           }
+         }
+       },
       "appointment": {
          "title": "Temujanji",
          "tabs": {
             "upcoming": "Akan datang",
             "history": "Sejarah"
-         }
-      },
+         },
+         "healthDeclarationComplete": "Health Declaration Completed",
+         "hintText": "What appointments will be shown?",
+         "hintTextDesc": "Currently, only appointments for COVID-19 Test bookings will be shown here, in a future update we will collate all events here. Stay tuned!",
+         "noUpcoming": "No Upcoming Appointments",
+         "noUpcomingDesc": "You have no appointments scheduled yet.",
+         "noRecent": "No Recent Appointments",
+         "noRecentDesc": "This is where you can see your past appointment bookings."
+      }, 
       "covid-booking": {
          "title": "Tempahan Ujian COVID-19",
          "orderId": "Order ID",
+         "bookingId": "Booking ID",
+         "homeTitle": "Book your COVID-19 Test",
+         "homeDescription": "Planning a COVID-19 Test for you and your Dependant? Place an appointment with us by clicking “Book Now”",
          "tabs": {
             "upcoming": "Akan datang",
             "history": "Sejarah"
@@ -32,6 +86,7 @@
       "landing": {
          "signup": "Daftar Baru",
          "login": "Log Masuk",
+         "welcome": "Welcome Back!",
          "board1": {
             "image": "/assets/images/temperature-measure.svg",
             "title": "Selamat datang ke BioMark",
@@ -81,15 +136,33 @@
          "reportDate": "Tarikh Laporan",
          "positiveMessage": "Sila lakukan pengasingan dan kuarantin kendiri",
          "negativeMessage": "Teruskan mengamalkan penjarakan sosial",
+         "home": {
+            "bookTests": "Book Tests",
+            "bookings": "Bookings",
+            "viewResults": "View Results",
+            "dependants": "Dependants",
+            "swipe": "Swipe to view other results",
+            "scan": "Scan to share latest COVID-19 Test Result"
+          },
+          "results": {
+            "title": "COVID-19 Results",
+            "scan": "Scan to share Covid-19 Test Result",
+            "noResults": "No Test Results",
+            "noResultsDesc": "You have no Test results recorded."
+          },
          "bookCovid": {
             "progress1": "Tempah",
             "progress2": "Pengisytiharan",
             "progress3": "Bayaran",
-            "progress4": "Pengesahan",
             "continue": "Teruskan",
             "next": "Seterusnya",
             "cancel": "Batal",
             "makePayment": "Membuat Bayaran",
+            "cancelBookingProcess": "Cancel Entire Test Booking Process",
+            "cancelBookingProcessDesc": "By not proceeding you are not guranteed a test slot. Do you want to cancel?",
+            "covidICTitle": "Looks like your IC is missing",
+            "covidICDesc": "You will need to enter your IC in order to proceed with this feature of the app",
+            "covidICHint": "IC or Passport no.",
             "testTaking": {
                "title": "Siapakah yang mengambil ujian?",
                "me": "Anda",
@@ -108,13 +181,19 @@
                "testdependant2": "Tanggungan",
                "testCentreCountry": "Negara",
                "testCentreCity": "Bandar",
+               "testCenterMap": "City Test Centers",
                "testCentre": "Fasiliti Ujian",
                "testDateQuestion": "Pilih Tarikh Ujian",
                "testSlotMorning": "Slot Pagi",
                "testSlotAfternoon": "Slot Petang",
-               "addCovid": "Tambah Tanggungan"
+               "addCovid": "Tambah Tanggungan",
+               "countryInfoDialogTitle": "Why can’t I change Countries?",
+               "countryInfoDialogDescription": "Users are limited to one country for each booking order. If you wish to book for another country you would need to start another booking order.",
+               "countryInfoDialogButtonText": "Okay"
             },
             "declaration": {
+               "declarationHeaderUser": "Health Declaration for Myself",
+               "declarationHeaderDependant": "Health Declaration for My Dependant",
                "question1": "Adakah anda mengalami sebarang simptom seperti demam, sakit tekak, batuk kering, hidung berair, lesu, sakit kepala, dan sesak nafas sejak 14 hari yang lepas?",
                "question2": "Adakah anda pernah mengembara ke luar negara sejak 14 hari yang lepas?",
                "question3": "Adakah anda mempunyai kontak rapat dengan sesiapa yang sedang melakukan kuarantin kendiri sejak 14 hari yang lepas?",
@@ -162,12 +241,19 @@
                "nextAlertButton": "Okay",
                "delete": "Padam Tanggungan?",
                "deleteTitle": "Adakah anda pasti mahu memadamkan profil"
-            }
+            },
+            "paymentError": {
+               "header": "Payment is Unsuccessful",
+               "description": "No money has been deducted from your account.<br><br>Please retry the payment process to secure your COVID test slot.",
+               "retryPayment": "Retry Payment"
+             }
          },
          "covid-dependant": {
             "firstname": "Nama Pertama",
             "lastname": "Name Terakhir",
             "age": "Umur",
+            "dob": "Date of Birth",
+            "gender": "Gender",
             "relation": "Perhubungan",
             "ncr_passport": "NRIC/ Nombor Passport",
             "title": "Masukan butiran tanggungan anda",
@@ -185,6 +271,13 @@
             "confirm": "Sahkan",
             "exist": "Tambah Tanggungan Sedia Ada"
          },
+         "covid-dependant-card": {
+            "title": "Dependants",
+            "addDependant": "Add Dependant",
+            "editDependant": "Edit Dependants",
+            "empty-title": "No Dependants Yet",
+            "empty-description": "Add dependants to see them here"
+          },
          "dependantDialog": {
             "redoeKYC": "Lakukan Verifikasi eKYC semula?",
             "redoeKYCTitle": "Adakah anda pasti untuk melakukan semula?"
@@ -196,36 +289,170 @@
          },
          "covid-info": {
             "title": "Soalan Lazim untuk Tempah Ujian COVID-19",
+            "footer": "Do you have further questions?<br>Write in to us at <a href='mailto:support@biomarking.com'>support@biomarking.com<a>!",
             "card1": {
-               "question": "Apakah dokumen yang diperlukan untuk melakukan ujian COVID-19?",
-               "answer": {
-                  "answer1": "Kad Pengenalan / Sijil Kelahiran (jika <15 tahun) atau pass pekerjaan / permit kerja (untuk pendatang asing)",
-                  "answer2": "Pasport",
-                  "answer3": "Butiran penerbangan (jika berkenaan sahaja, salinan digital diterima)"
+               "header": "Information Regarding Tests",
+               "item1": {
+                 "question": "1. What is a COVID 19 PCR test and what is it for?",
+                 "body": "PCR stands for ‘polymerase chain reaction’. It is a method that is used to detect and accurately identify genetic material from any organism. The COVID-19 PCR test is currently the preferred test for COVID-19 detection because of its speed, accuracy and success rate- hence is widely used as the testing method of choice for pre-departure travel, work and social responsibility purposes. It is considered the gold-standard (best-in-class) for detection of COVID-19.<br><br>Most COVID-19 PCR test results will be ready within a few hours. However we recommend that you ask the staff at your selected test center/clinic for a more precise time frame."
+               },
+               "item2": {
+                 "question": "2. What is Antigen testing?",
+                 "body": "An antigen test detects coronavirus proteins in the mouth and throat. It works by mixing the sample with a solution that unleashes specific viral proteins. However, it takes a shorter time to generate a result as compared to a PCR test. Antigen tests typically take 15-30mins to generate a result and are generally deemed to be less accurate than PCR tests."
+               },
+               "item3": {
+                 "question": "3. What is Serology testing?",
+                 "body": "Serology is also called the Antibody test that looks for the presence of antibodies. Antibodies are typically detected in the blood of people who are tested after infection and they show an immune response to the infection. It is important for detecting previous infections in people who had few or no symptoms."
+               },
+               "item4": {
+                 "question": "4. What are the types of COVID-19 tests available?",
+                 "body": "A comprehensive range of COVID-19 tests are offered on our platform, including COVID-19 PCR, antigen, and serology tests. However, different clinics may have different tests available, and you will be able to see what each clinic offers during the booking process."
+               },
+               "item5": {
+                 "question": "5. How will the COVID-19 PCR test be performed?",
+                 "body": "The test will be performed at the desired clinic by a healthcare professional (Doctor/Nurse). The COVID-19 PCR test is conducted by using a swab to collect respiratory samples found in your nose and your throat. A swab is a soft tip on a long flexible stick that goes into your nose. The sample is collected then sealed and sent to the laboratory for testing."
+               },
+               "item6": {
+                 "question": "6. Where can I get tested?",
+                 "body": "BioMark's partner test centers and clinics are listed in the app/website and displayed in a map for your convenience. "
+               },
+               "item7": {
+                 "question": "7. Is BioMark a MOH-approved COVID-19 test provider?",
+                 "body": "BioMark is only the facilitator to connect patients to healthcare providers to get tested for COVID-19. The healthcare providers providing the COVID-19 swab tests would be MOH-approved according to the guidelines of their respective country."
+               },
+               "item8": {
+                 "question": "8. Who is eligible for the COVID-19 tests? Am I eligible?",
+                 "body": "Suspected cases, quarantined, and under investigation are eligible to book a COVID-19 Test. For those with signs and symptoms prior to your clinic visit, kindly indicate it in your health declaration. A COVID-19 test can be used for anyone regardless of age. COVID-19 tests are not limited to travellers, but it can also be for people who would like to find out if they have COVID-19."
+               },
+               "item9": {
+                 "question": "9. I need to get a COVID-19 PCR test urgently, are there any expedited options?",
+                 "body": "Participating clinics that can do urgent swab tests will be indicated in the app/website during booking for your convenience. You may also select the express PCR test to receive your results within about 6 hours.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities. "
+               },
+               "item10": {
+                 "question": "10. Can I do a home-testing instead of going to the test center?",
+                 "body": "Yes. We have home testing available. Simply select ‘Home Test’ when you are making a booking and provide the relevant information as requested. We will be in contact with you after you have made your booking to organize appropriately."
+               },
+               "item11": {
+                 "question": "11. How much are the COVID-19 tests?",
+                 "body": "Test centers and clinics may choose to price their tests differently. When you make a booking on the app, the price should be displayed for you as you choose your tests."
+               },
+               "item12": {
+                 "question": "12. Are there any subsidies/claims available for the COVID-19 tests?",
+                 "body": "We apologise that BioMark, with the test centers, clinics and laboratories that provide the COVID-19 tests through the BioMark platforms currently do not have any arrangements for subsidies.<br><br>However, we do provide a receipt upon completion and confirmation of successful payment which may be requested by your company/insurer for this purpose. Please verify any ability for subsidies or claims with your company/insurer beforehand."
                }
-            },
-            "card2": {
-               "question": "Bagaimana saya akan mendapat keputusan ujian COVID-19 saya?",
-               "answer": {
-                  "answer1": "Anda akan dimaklumkan melalui aplikasi ini apabila keputusan ujian COVID-10 anda siap . Pastikan anda memberi masa sekurangnya sehari sebelum penerbangan anda."
+             },
+             "card2": {
+               "header": "Bookings and Payment",
+               "item13": {
+                 "question": "13. Why do I need to verify my identity?",
+                 "body": "Identity verification is a faster alternative compared to in-person identity verification and removes your need to wait at patient registration counters."
+               },
+               "item14": {
+                 "question": "14. Who are considered Dependants and how can I make a booking for them?",
+                 "body": "You will be able to make bookings for yourself and others (eg. spouse, child, siblings, parents, grandparents, guardian, or others) via the app. Click on “Add New Dependant” and fill in the Dependant’s details to book an appointment for them."
+               },
+               "item15": {
+                 "question": "15. Can I book a COVID-19 test for other countries?",
+                 "body": "We currently support COVID-19 bookings in Singapore and Malaysia. You will be able to book a COVID-19 test in Singapore from Malaysia, and vice versa."
+               },
+               "item16": {
+                 "question": "16. How will I know if my booking was made successfully?",
+                 "body": "You will receive a confirmation email with your appointment details and/or receipt upon payment verification by your financial services provider.<br><br>You can also refer to your booking details under the COVID-19 Bookings section in our BioMark patient app."
+               },
+               "item17": {
+                 "question": "17. What happens if I did not receive any confirmation email? ",
+                 "body": "If the confirmation email does not show up in the inbox, kindly check your spam folder or contact us at <a href='mailto:support@biomarking.com'>support@biomarking.com</a> with your name and booking details so that we can resend the information to you."
+               },
+               "item18": {
+                 "question": "18. What should I do to prepare for my COVID-19 test?",
+                 "body": "A notification will be sent out for you to complete a health declaration form within 24 hours from your test date. Please fill up the form with information that is as accurate as possible.<br><br>For travellers taking COVID-19 PCR tests for pre-departure purposes, please note that you are responsible for checking that your appointment and testing window is in line with the destination country’s regulations. We will not be liable for rejection of test results due to failed compliance of guidelines provided by the airline or authorities."
+               },
+               "item19": {
+                 "question": "19. What documents do I need to bring for my appointment?",
+                 "body": "Please bring your identity card and also have a copy of your appointment confirmation on hand. It is important that the copy of your appointment confirmation should display the confirmation number in the event that verification is required."
+               },
+               "item20": {
+                 "question": "20. What are the supported methods of payment?",
+                 "body": "Only e-payment is available currently via VISA, Mastercard. We are working to provide more payment options in the near future for your convenience."
+               },
+               "item21": {
+                 "question": "21. What payment provider is BioMark using and can it be trusted?",
+                 "body": "We engage trusted payment gateways to facilitate the payments for us. For Singapore, we are using Stripe as our payment partner and Billplz for Malaysia payments. Our payment partners process billions of dollars in payments annually and has best-in-class, bank grade security."
+               },
+               "item22": {
+                 "question": "22. What should I do if I miss my appointment?",
+                 "body": "Kindly contact us at <a href='mailto:support@biomarking.com'>support@biomarking.com</a> if you need to reschedule your appointment."
+               },
+               "item23": {
+                 "question": "23. Can I walk into any BioMark participating PCR swab clinic for a test without making an appointment?",
+                 "body": "It is up to each clinic’s discretion whether they accept walk-ins. BioMark will not be responsible for any miscommunication if the patient chooses to walk in instead of making a booking via the website/app. It is highly recommended to make a booking before heading down to the clinic."
                }
-            },
-            "card3": {
-               "question": "Apakah persediaan saya perlu lakukan sebelum melakukan ujian COVID-19 saya?",
-               "answer": {
-                  "answer1": "Anda akan dimaklumkan untuk mengisi borang pengisytiharan kesihatan melalui aplikasi ini dalam masa 24 jam sebelum tarikh ujian anda. Pastikan anda bersedia dengan semua dokumen yang diperlukan sebelum ujian."
+             },
+             "card3": {
+               "header": "Results",
+               "item24": {
+                 "question": "24. How do I retrieve my COVID-19 PCR test results and how long will it take?",
+                 "body": "Your COVID-19 PCR test results will be available in our BioMark App usually within 24-48 hours after the swab. The healthcare provider which you engaged to conduct the swab will also contact you in the event that your COVID-19 PCR test results return positive.<br><br>You will also be notified via email and receive a push notification from the app when your results are ready to view. "
+               },
+               "item25": {
+                 "question": "25. Will I get a PDF result?",
+                 "body": "You will receive a PDF result attached to your email notification or via the app once your results are ready to view."
+               },
+               "item26": {
+                 "question": "26. Can I use the resulting QR code at the airport?",
+                 "body": "We are using an encrypted QR code standard which is used to secure and verify your test result. The QR code is a secure certificate of your COVID-19 result.<br><br>When travelling abroad, the QR code can be shown to foreign travel authorities, who may scan the QR code with any reader (e.g. normal phone camera) to verify the authenticity of the digitally authenticated and endorsed QR code."
+               },
+               "item27": {
+                 "question": "27. What happens if my COVID-19 PCR test result is inconclusive?",
+                 "body": "There might be instances that COVID-19 PCR swab test results are inconclusive. If your COVID-19 PCR test result is inconclusive, you might have to undergo a repeat test and it is chargeable. BioMark will not be held responsible for any losses, expenses, or costs involved, should this result affect your flight departure.<br><br>The healthcare provider which you engaged to conduct the test will contact you if a repeat test is necessary."
+               },
+               "item28": {
+                 "question": "28. What happens if my COVID-19 PCR test result is positive? ",
+                 "body": "If your COVID-19 PCR test results are positive, you should isolate yourself from family members, monitor your temperature and symptoms and also notify your close contact of your COVID-19 positive status. Please also refer to your country’s guidelines on home quarantine and isolation for COVID-19.<br><br>If you are taking a PCR test for the purpose of pre-departure travel, kindly inform the relevant authorities that you would be unfit to fly. "
                }
-            },
-            "card4": {
-               "question": "Saya perlukan lebih bantuan!",
-               "answer": {
-                  "answer1": "Untuk pertanyaan lebih lanjut, sila hubungi",
-                  "telNo": "1234 5353",
-                  "email": "Biomark@email.com",
-                  "middle_text": "atau emelkan kepada",
-                  "dot": "."
+             },
+             "card4": {
+               "header": "Refunds and Cancellations/Changes",
+               "item29": {
+                 "question": "29. How do I change/cancel my booking?",
+                 "body": "For cancellation or rescheduling of appointments, kindly email to <a href='mailto:support@biomarking.com'>support@biomarking.com</a> with your reason for changing the appointment."
+               },
+               "item30": {
+                 "question": "30. Will I get a refund if I were to cancel my booking?",
+                 "body": "Bookings that are cancelled 24 hours before the appointment timing will not be entitled to any refunds. You will also not be allowed to cancel your booking after you have been swabbed.<br><br>Appointment cancellation is also not allowed if the booking is made within 24 hours of the selected appointment time.<br><br>Do note that refunds are subjected to payment processing fees"
+               },
+               "item31": {
+                 "question": "31. Are clinics allowed to cancel/make changes to my appointment? ",
+                 "body": "Clinics are not allowed to cancel the appointment but may propose to reschedule the appointment, subject to your consent. Clinics have also been advised to reschedule only if it falls within the travel time and will not lead to any negative repercussions on flight departure."
+               },
+               "item32": {
+                 "question": "32. When will I get my refunds? ",
+                 "body": "If your cancellation is entitled to a refund,  the refund will show up on the bank account you used to pay for the transaction within 5-10 business days (depending on the bank’s processing time)."
+               },
+               "item33": {
+                 "question": "33. Why is the refund not showing up on my bank statement after 10 business days?",
+                 "body": "If the cancellation is processed not long after the payment was made, the refund may be processed as a reversal. In which case, the original charge will drop off the bank statement altogether, as if it never occurred.<br><br>Check your bank statement and look for the original charge. If you do not see the charge on your bank statement, the payment was reversed and the refund is complete."
                }
-            }
+             },
+             "card5": {
+               "header": "General Information",
+               "item34": {
+                 "question": "34. What is the Coronavirus Disease (COVID-19)?",
+                 "body": "According to the World Health Organization (WHO), Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.<br><br>COVID-19 symptoms can include common cold symptoms, shortness of breath and in some cases, severe lung infection. Most people develop mild symptoms that can be treated with medication recommended by a doctor based on the patient’s clinical condition. However, severe cases may require hospital care where a patient may receive a combination of treatments."
+               },
+               "item35": {
+                 "question": "35. How many variants of the coronavirus are there?",
+                 "body": "Variants of a virus occurs when there is a change (mutation) to the virus’s genes. Mutation of viruses are neither new nor unexpected. As of now, many variants have emerged in different parts of the world, but the variants of concern for SARS-CoV-2 as listed by the WHO include the Delta variant and the Omicron variant."
+               },
+               "item36": {
+                 "question": "36. What is the Delta variant?",
+                 "body": "The Delta variant was first identified in late 2020s in India and identified to be more than twice as contagious as the previous variants. Some data also suggests that the Delta variant  has a higher probability of causing severe illness in unvaccinated people, as compared to the previous variants. However, if infected, the amount of viral genetic material may go down faster in fully vaccinated people when compared to unvaccinated people."
+               },
+               "item37": {
+                 "question": "37. What is the Omicron variant and can it be detected?",
+                 "body": "WHO describes the Omicron variant as a variant of concern based on the evidence of several mutations which affects the way it behaves. The variant was first detected in an outbreak at a University town in South Africa with a younger demographic. There is currently insufficient information about the variant in terms of how serious it is and its transmissibility. Studies are underway to understand more about this variant. But the presence of the Omicron variant can still be detected through COVID-19 tests, which is available for booking on the BioMark Platform. It is best to consult with a physician if you are concerned that you may have Covid."
+               }
+             }
          },
          "errors": {
             "firstname": "Masukkan nama pertama",
@@ -446,9 +673,17 @@
          "manuallyScanBarcode": "Masukkan Kod Bar Secara Manual",
          "upload": "Muat Naik"
       },
+      "healthProgress": {
+         "weight": "Weight",
+         "bloodSugar": "Blood Sugar",
+         "medication": "Medication",
+         "hba1c": "HbA1c",
+         "bloodPressure": "Blood Pressure"
+       },
       "dashboard": {
          "title": "Skrin Utama",
          "healthTrackers": "Pengesan Kesihatan",
+         "greetings": "Hello",
          "newMessage": "Mesej Baru",
          "receivedOn": "Diterima pada",
          "markAsRead": "Tandakan Sudah Dibaca",
@@ -467,9 +702,13 @@
          "riskTitle": "RIsiko Kesihatan Anda",
          "healthRecords": "Rekod Kesihatan",
          "covid19": "COVID-19",
+         "bookings": "Bookings",
          "healthProgress": "Kesihatan",
          "healthProvider": "Petugas Kesihatan",
          "yourHealth": "Kesihatan Anda",
+         "accessCode": "Do you have an Access Code?",
+         "accessCodeDesc": "You can enter your code at the button beside.",
+         "accessCodeHint": "What is an access code?",
          "dialogs": {
             "verify": {
                "title": "Keputusan Ujian Sedia",
@@ -723,7 +962,9 @@
             "phoneNumberTooShort": "Mesti ada",
             "password": "Sila berikan kata laluan anda",
             "noConnection": "Tiada sambungan internet",
-            "characters": "ayat"
+            "characters": "ayat",
+            "phoneNumberLength": "Mobile number must consist between 4 - 13 digits",
+            "validNumber": "Please enter a valid mobile number"
          },
          "forgotPassword": "Lupa kata laluan?",
          "newToBiomark": "Tidak mempunyai akaun?",
@@ -859,7 +1100,9 @@
          "title": "Lagi",
          "links": {
             "profile": "Profil",
+            "editProfile": "Edit Profile", 
             "notifications": "Notifikasi",
+            "previousNotifications": "Previous Notifications",
             "support": "Sokongan",
             "about": "Tentang BioMark",
             "policies": "Polisi",
@@ -868,10 +1111,12 @@
             "autoLogout": "Auto Log Keluar",
             "idVerification": "Verifikasi Identiti",
             "dependants": "Tanggungan",
+            "search": "Search Biomark app",
             "verification": {
                "notVerified": "Belum Disahkan",
                "pending": "Pengesahan Belum Selesai",
-               "verified": "Disahkan"
+               "verified": "Disahkan",
+               "error": "Verification error. Please resubmit details"
             }
          }
       },
@@ -962,6 +1207,15 @@
       "pspDashboard": {
          "title": "Pusat Sokongan Diabetes"
       },
+      "hint": {
+         "dialogs": {
+           "code": {
+             "title": "What is an Access Code?",
+             "description": "This should be the code you received through SMS.",
+             "buttonText": "Enter Code"
+           }
+         }
+       },
       "qrCode": {
          "dialogs": {
             "midas": {
@@ -1294,6 +1548,8 @@
             "bmi": "Kemaskini Tinggi dan Berat",
             "smoking": "Jawab Soalan Merokok",
             "drinking": "Jawab Soalan Minum Arak",
+            "sleeping": "Update Sleeping Hours",
+            "stress": "Answer Stress Questions",
             "ethnic": "Kemaskini Kaum",
             "notFound": ""
          },
@@ -1390,6 +1646,7 @@
          "more": "Lagi",
          "home": "Rumah",
          "inbox": "Peti Masuk",
+         "other": "Other",
          "appointment": "Temujanji",
          "account": "Akaun"
       },
@@ -1475,6 +1732,23 @@
          }
       }
    },
+   "healthSnapshot": {
+      "title": "Your Health Snapshot",
+      "widgets": "Health Snapshot Widgets",
+      "editGoals": "Edit Target Goals",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "ios": {
+        "connectButton": "Connect with Apple Health",
+        "modalTitle": "Link with Apple Health",
+        "modalBody": "Connect with Apple Health to see all your health data on the BioMark app. This lets you see all your health data in one place."
+      },
+      "android": {
+        "connectButton": "Connect with Google Fit",
+        "modalTitle": "Link with Google Fit",
+        "modalBody": "Connect with Google Fit to see all your health data on the BioMark app. This lets you see all your health data in one place."
+      }
+    },
    "userProfile": {
       "mobileNumber": "Nombor Telefon (H)",
       "password": "Kata Laluan",
@@ -1504,6 +1778,7 @@
          "dobRequired": "Sila masukkan tarikh lahir anda",
          "minAge": "Anda mestilah berumur 18 tahun ke atas untuk mendaftar",
          "icNumberRequired": "Sila masukkan nombor kad pengenalan anda",
+         "icFormat": "Invalid IC Number",
          "emailRequired": "Sila masukkan alamat emel anda",
          "emailFormat": "Sila berikan alamat emel yang tepat"
       },
@@ -1566,5 +1841,15 @@
       "wentOffline": "Anda tidak mempunyai sambungan internet",
       "wentOnline": "Anda sudah mempunyai sambungan internet!",
       "offlineNotification": "Peranti anda sedang berfungsi tanpa sambungan internet."
-   }
+   },
+   "prominentDisclosure": {
+      "title": "Disclosure",
+      "okText": "Allow",
+      "cancelText": "Cancel",
+      "healthApp": "Our app will track the physical activities to track your health, monitoring your body weight, blood pressure, heart rate, workout intensity, sleep, stress levels",
+      "storage": "Our app will require access to storage for uploading the profile picture, lab results, medical reports",
+      "camera": "Our app will use camera to upload kyc documents, perform kyc using facial recognition, scan QR code for lab reports, medicines prescription to show to doctor",
+      "wifi": "Our app will access Wifi to see if you have wifi connectivity for tracking your health and fitness",
+      "gps": "Our app will collect GPS location of your device for booking appointment with health care professionals and identifying clinics and hospitals nearby, to show the nearby locations of clinics and hospitals where a patient can go."
+    }
 }

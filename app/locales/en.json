@@ -682,7 +682,7 @@
     },
     "dashboard": {
       "title": "Dashboard",
-      "healthTrackers": "Health Trackers",
+      "healthTrackers": "Health Trackers", 
       "greetings": "Hello",
       "newMessage": "New Message",
       "receivedOn": "Received on ",

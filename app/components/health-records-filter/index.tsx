@@ -37,6 +37,7 @@ const HealthRecordFilter = ({
   showEndDatePicker,
   cancelEndDatePicker,
   isEndDatePickerVisible,
+  onModalClose,
 }) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -44,7 +45,7 @@ const HealthRecordFilter = ({
 
   return (
     <Modal animationType="none" transparent={true} visible={visible}>
-      <View style={styles.centeredView}>
+      <Pressable style={styles.centeredView} onPress={onModalClose}>
         <View style={styles.modalView}>
           <View style={styles.modalView2}>
             <Text style={styles.modalText}>{title}</Text>
@@ -124,7 +125,7 @@ const HealthRecordFilter = ({
             <Text style={styles.cancelText}>{cancel}</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </Pressable>
     </Modal>
   );
 };
