@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { RFValue } from 'react-native-responsive-fontsize';
