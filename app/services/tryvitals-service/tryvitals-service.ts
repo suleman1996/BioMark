@@ -48,9 +48,7 @@ const getDevicesData = () => {
   return new Promise<tryvitalResponses.DeviceDataResponse>(
     (resolve, reject) => {
       axios
-        .get(
-          `https://6f683d2786fc.ap.ngrok.io/${API_URLS.TRYVITAL_DEVICE_DATA}`
-        )
+        .get(API_URLS.TRYVITAL_DEVICE_DATA)
         .then(async (response) => resolve(response.data))
         .catch(async (err: tryvitalResponses.DeviceDataErrorResponse) => {
           logNow('No device data found', err);
