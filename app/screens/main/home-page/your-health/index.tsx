@@ -325,6 +325,7 @@ const Index = () => {
                     Svg={healthRiskData[key].icon}
                     status={value?.status}
                     selectedHealthRisk={selectedHealthRisk}
+                    btnType={value?.button_type}
                   />
                 </>
               ))}

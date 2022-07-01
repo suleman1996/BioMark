@@ -11,6 +11,7 @@ const RenderHealthRiskView = ({
   onRiskPress,
   name,
   status,
+  btnType,
 }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -28,6 +29,14 @@ const RenderHealthRiskView = ({
         flexDirection: 'row',
       }}
     >
+      {console.log(
+        'age ',
+        authContext?.userData?.age,
+        name === 'Diabetes' &&
+          (authContext?.userData?.age < 30 ||
+            authContext?.userData?.age > 74) &&
+          btnType == 'none'
+      )}
       <TouchableOpacity
         onPress={onRiskPress}
         style={[
@@ -42,9 +51,7 @@ const RenderHealthRiskView = ({
       <View
         style={
           status == 'none'
-            ? name === 'Heart Disease' &&
-              (authContext?.userData?.age < 30 ||
-                authContext?.userData?.age > 74)
+            ? name === 'Diabetes' && btnType == 'none'
               ? styles.notDot
               : styles.dot
             : styles.notDot

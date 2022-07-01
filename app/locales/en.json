@@ -682,7 +682,7 @@
     },
     "dashboard": {
       "title": "Dashboard",
-      "healthTrackers": "Health Trackers", 
+      "healthTrackers": "Health Trackers",
       "greetings": "Hello",
       "newMessage": "New Message",
       "receivedOn": "Received on ",
@@ -1534,7 +1534,7 @@
       },
       "buttons": {
         "common": {
-          "tapHere": " Tap here ",
+          "tapHere": "Tap here ",
           "moreInfo": "for more information.",
           "completeInfo": "to complete your information."
         },
