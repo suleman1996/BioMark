@@ -49,7 +49,6 @@ const UpcommingBookings = (props: Props) => {
     }
   }, [allUpcommingBookings]);
   useEffect(() => {
-    console.log('route', route?.params?.has_pending_declaration);
     if (route?.params?.has_pending_declaration) {
       setIsHealthDeclarationAll(true);
     }

@@ -92,10 +92,7 @@ export const checkPermissionAndDownloadBase64 = async (file: string) => {
   }
 };
 const downloadFileBase64 = (fileUrl: string) => {
-  console.log('fileUrl', fileUrl);
   var name = Math.floor(Date.now() / 1000);
-  console.log('name', name);
-
   const { dirs } = ReactNativeBlobUtil.fs;
   const dirToSave =
     Platform.OS == 'ios'
