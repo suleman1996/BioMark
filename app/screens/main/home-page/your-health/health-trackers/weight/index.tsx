@@ -29,6 +29,7 @@ import {
 import moment from 'moment';
 import { roundToDecimalPlaces } from 'utils/functions';
 import { useTranslation } from 'react-i18next';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const Weight = ({ route }: any) => {
   const { t } = useTranslation();
@@ -161,6 +162,7 @@ const Weight = ({ route }: any) => {
           }}
         >
           <InputWithUnits
+            labelStyle={{ fontSize: RFValue(17) }}
             title="Your Reading"
             placeholder="0.0"
             units={['kg', 'lbs']}

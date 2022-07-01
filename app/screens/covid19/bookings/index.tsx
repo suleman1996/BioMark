@@ -9,6 +9,7 @@ import HistoryBookings from './../../../components/ui/history-bookings/index';
 import UpcommingBookings from './../../../components/ui/upcomming-bookings/index';
 import makeStyles from './styles';
 import { getAllBookingsDataR } from 'store/covid/covid-actions';
+import { t } from 'i18next';
 
 type Props = {};
 
@@ -67,7 +68,10 @@ const Covid19Bookings = (props: Props) => {
           keyExtractor={(index) => index.toString()}
           ListHeaderComponent={<View style={{ width: widthToDp(6) }} />}
           ListFooterComponent={<View style={{ width: widthToDp(10) }} />}
-          data={['Upcoming', 'History']}
+          data={[
+            t('pages.appointment.tabs.upcoming'),
+            t('pages.appointment.tabs.history'),
+          ]}
           renderItem={horizontalListItem}
         />
 

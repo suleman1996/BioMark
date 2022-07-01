@@ -14,6 +14,7 @@ import SCREENS from 'navigation/constants';
 
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 export default function CreatePassword() {
   const { t } = useTranslation();
@@ -113,7 +114,7 @@ export default function CreatePassword() {
 
 const ResetPassSchema = Yup.object({
   password: Yup.string()
-    .required('Password is required')
+    .required(i18next.t('pages.password.newPassword.errors.required'))
     .min(8, 'Must be 8 characters long.')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -121,8 +122,11 @@ const ResetPassSchema = Yup.object({
     ),
 
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Confirm Password is required')
+    .oneOf(
+      [Yup.ref('password'), null],
+      i18next.t('pages.password.newPasswordConfirm.errors.passwordMismatch')
+    )
+    .required(i18next.t('pages.password.newPasswordConfirm.errors.required'))
     .min(7, 'Too short')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,

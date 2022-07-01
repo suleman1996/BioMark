@@ -81,7 +81,7 @@ export const makeStyles = (colors: any) =>
     },
     emptyTxt1: {
       fontSize: responsiveFontSize(25),
-      fontFamily: GlobalFonts.extraBold,
+      fontFamily: GlobalFonts.semiBold,
       color: colors.darkPrimary,
     },
     emptyTxt2: {

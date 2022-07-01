@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 import { DependentTypeEnum } from 'enum/dependent-type-enum';
 import { GenderEnum } from 'enum/gender-enum';
 import { Formik } from 'formik';
+import i18next from 'i18next';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
@@ -66,21 +67,21 @@ const AddDependantForm = (props: Props) => {
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
       // .matches(Regex.alphabets, 'Please enter valid first name')
-      .required('Firstname is required'),
+      .required(i18next.t('userProfile.errors.firstNameRequired')),
     last_name: Yup.string()
       // .matches(Regex.alphabets, 'Please enter valid last name')
-      .required('lastname is required'),
+      .required(i18next.t('userProfile.errors.lastNameRequired')),
     // phone_number: Yup.string()
     //   // .matches(Regex.minNum, 'Enter valid phone number')
     //   .required('Please provide your phone number')
     //   .min(min)
     //   .max(max),
     email: Yup.string()
-      .email('Enter valid email address')
-      .required('Email is required'),
+      .email(i18next.t('userProfile.errors.emailFormat'))
+      .required(i18next.t('userProfile.errors.emailRequired')),
     id_number: Yup.string()
       // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
-      .required('Enter valid NRIC / Passport'),
+      .required(i18next.t('userProfile.errors.icNumberRequired')),
     document_type: Yup.string().required(''),
     dependent_type_id: Yup.string().required(''),
     // birth_date: Yup.string().required(''),

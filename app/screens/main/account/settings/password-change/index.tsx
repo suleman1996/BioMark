@@ -25,6 +25,7 @@ import { ErrorResponse } from 'types/ErrorResponse';
 
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
@@ -237,22 +238,25 @@ const PasswordChangeScreen = () => {
 };
 const UpdatePassSchema = Yup.object({
   currentPassword: Yup.string()
-    .required('Please type your new password')
+    .required(i18next.t('pages.password.currentPasswrod.title'))
     .min(8)
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       'Atleast have one digit, one captial letter and one special character.'
     ),
   password: Yup.string()
-    .required('Please type your new password')
+    .required(i18next.t('pages.password.newPassword.description'))
     .min(8)
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       'Atleast have one digit, one captial letter and one special character.'
     ),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Please type your new password')
+    .oneOf(
+      [Yup.ref('password'), null],
+      i18next.t('pages.password.newPasswordConfirm.errors.passwordMismatch')
+    )
+    .required(i18next.t('pages.password.newPassword.title'))
     .min(8)
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,

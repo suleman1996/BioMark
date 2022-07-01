@@ -31,6 +31,9 @@ import { IAppState } from 'store/IAppState';
 import AuthContext from 'utils/auth-context';
 import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
+import { GlobalFonts } from 'utils/theme/fonts';
+import { responsiveFontSize } from 'utils/functions/responsive-text';
+import i18next from 'i18next';
 
 const AddDependantScreen = () => {
   const { t } = useTranslation();
@@ -79,21 +82,20 @@ const AddDependantScreen = () => {
   const AddDependentSchema = Yup.object({
     first_name: Yup.string()
       // .matches(Regex.alphabets, 'Please enter valid first name')
-      .required('Firstname is required'),
+      .required(i18next.t('userProfile.errors.firstNameRequired')),
     last_name: Yup.string()
       // .matches(Regex.alphabets, 'Please enter valid last name')
-      .required('lastname is required'),
+      .required(i18next.t('userProfile.errors.lastNameRequired')),
     phone_number: Yup.string()
       // .matches(Regex.minNum, 'Enter valid phone number')
-      .required('Please provide your phone number'),
+      .required(i18next.t('pages.login.errors.phoneNumberRequired')),
     // .min(min)
     // .max(max),
-    email: Yup.string()
-      .email('Enter valid email address')
-      .required('Email is required'),
+    email: Yup.string().email(i18next.t('userProfile.errors.emailFormat')),
+    // .required('Email is required'),
     id_number: Yup.string()
       // .matches(Regex.numAndString, 'Enter valid NRIC / Passport')
-      .required('Enter valid NRIC / Passport'),
+      .required(i18next.t('userProfile.errors.icNumberRequired')),
     document_type: Yup.string().required(''),
     dependent_type_id: Yup.string().required(''),
     // birth_date: Yup.string().required(''),
@@ -223,6 +225,11 @@ const AddDependantScreen = () => {
                   maxLength={50}
                 />
                 <PhoneNumberWithLabel
+                  labelStyle={{
+                    fontSize: responsiveFontSize(18),
+                    fontFamily: GlobalFonts.medium,
+                    color: colors.darkPrimary,
+                  }}
                   label={t('pages.phoneNumber.mobileNumber')}
                   placeholder={''}
                   disabled={false}
@@ -259,6 +266,7 @@ const AddDependantScreen = () => {
                     )
                   ))}
                 <InputWithLabel
+                  labelStyle={{ fontSize: responsiveFontSize(18) }}
                   placeholder="E.g. Sample@email.com"
                   label={t('pages.login.email')}
                   onChange={handleChange('email')}

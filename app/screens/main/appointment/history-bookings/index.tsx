@@ -12,7 +12,6 @@ import { dateFormat1, getTime } from 'utils/functions/date-format';
 import ButtonComponent from 'components/base/button';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants/index';
-import { t } from 'i18next';
 type Props = {};
 
 const HistoryBookings = (props: Props) => {
@@ -82,10 +81,7 @@ const HistoryBookings = (props: Props) => {
         >
           <Text style={styles.whoIsText}>{patient_name}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={styles.bookingId}>
-              {t('pages.covid-booking.bookingId')}
-              {' -'}
-            </Text>
+            <Text style={styles.bookingId}>Booking ID -</Text>
             <Text style={styles.idText}>{booking_id}</Text>
           </View>
         </View>

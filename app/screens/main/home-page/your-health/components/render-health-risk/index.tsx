@@ -9,6 +9,7 @@ import React from 'react';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
+import fonts from 'assets/fonts';
 
 const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
   const { t } = useTranslation();
@@ -60,7 +61,12 @@ const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
         <Text style={styles.descriptionHealthRisk}>
           {healthRisk?.description}
           <TouchableWithoutFeedback onPress={onPress}>
-            <Text style={[{ fontWeight: 'bold', color: colors.heading }]}>
+            <Text
+              style={[
+                { fontFamily: fonts.mulishExtraBold, color: colors.heading },
+              ]}
+            >
+              {' '}
               {t('pages.summary.buttons.common.tapHere')}
             </Text>
           </TouchableWithoutFeedback>

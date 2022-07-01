@@ -23,7 +23,7 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
     },
     text: {
-      color: colors.darkPrimary,
+      color: colors.darBlue,
       fontFamily: GlobalFonts.light,
       fontSize: RFValue(15),
       paddingLeft: widthToDp(3),
