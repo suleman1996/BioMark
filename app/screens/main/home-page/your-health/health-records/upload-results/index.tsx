@@ -73,13 +73,6 @@ export default function ResultUpload() {
         attachments: list,
       },
     };
-    // console.log(list.map((e) => Object.keys(e)));
-    // console.log(
-    //   list.map((e) =>
-    //     Object.keys(e).map((key) => (key == 'base64' ? null : e[key]))
-    //   )
-    // );
-
     try {
       setIsVisible(true);
       const profilePic = await userService.uploadResult(body);

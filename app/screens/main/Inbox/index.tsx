@@ -114,10 +114,8 @@ export default function InboxScreen() {
   /*eslint-enable */
   const readNotification = async (id) => {
     try {
-      const result = await notificationsService.readInboxNotification(id);
-      console.log('id', id);
+      await notificationsService.readInboxNotification(id);
       await dispatch(getAllInboxUnreadNotificationsR());
-      console.log('result', result.data);
     } catch (err) {
       console.error(err);
     }
