@@ -21,7 +21,7 @@ export const makeStyles = (colors: any) =>
       shadowRadius: 2.22,
       elevation: 3,
       paddingHorizontal: 15,
-      height: Dimensions.get('window').height * 0.9,
+      height: Dimensions.get('window').height * 0.8,
     },
     title: {
       fontFamily: fonts.regular,

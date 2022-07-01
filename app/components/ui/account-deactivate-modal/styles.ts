@@ -30,7 +30,7 @@ export const makeStyles = (colors: any) =>
       fontFamily: fonts.mulishLight,
       fontSize: responsiveFontSize(18),
       color: colors.darBlue,
-      lineHeight: responsiveFontSize(30),
+      lineHeight: responsiveFontSize(24),
       marginTop: heightToDp(3),
       marginBottom: heightToDp(3),
     },
