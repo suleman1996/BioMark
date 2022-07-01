@@ -119,7 +119,7 @@ const styles = (colors: any) =>
     text3: {
       flex: 1,
       fontSize: responsiveFontSize(15),
-      marginHorizontal: widthToDp(13),
+      marginHorizontal: 8,
       color: colors.darkGray,
     },
     roundView: {

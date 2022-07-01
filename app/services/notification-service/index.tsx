@@ -29,8 +29,6 @@ function getAlliOthersNotifications(page: number = 1) {
     client
       .get(`${API_URLS.NOTIFICATIONS}/other?page=${page}`)
       .then(async (response) => {
-        console.log('response==>', response);
-
         try {
           //logNow('all notification inbox success response', response.data);
           resolve(response.data);
@@ -71,8 +69,6 @@ function getAlliInboxUnreadNotifications() {
       .get(`${API_URLS.NOTIFICATIONS}/inbox/unread`)
       .then(async (response) => {
         try {
-          console.log('/inbox/unread', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('unread inbox notifiction', e);

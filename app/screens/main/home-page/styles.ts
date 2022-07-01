@@ -68,32 +68,6 @@ export const makeStyles = (colors: any) =>
       justifyContent: 'space-evenly',
     },
 
-    googleFitC: {
-      backgroundColor: colors.white,
-      width: '100%',
-      flex: 1,
-      borderRadius: 8,
-      height: 170,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginVertical: 5,
-      paddingHorizontal: 10,
-      shadowColor: colors.black,
-      shadowOffset: {
-        width: 0,
-        height: 1,
-      },
-      shadowOpacity: 0.2,
-      shadowRadius: 1.41,
-      elevation: 2,
-    },
-
-    gfHeading: {
-      fontFamily: fonts.bold,
-      fontSize: RFValue(19),
-      color: colors.heading,
-      marginTop: 15,
-    },
     //bottom nav bar
     bottomNavBar: {
       borderWidth: 2,

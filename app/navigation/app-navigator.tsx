@@ -37,14 +37,14 @@ import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hyp
 import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
 import FamilyMedicalHistory from 'screens/main/account/profile/family-medical-history';
 import {
-  getReduxPspModules,
-  getReduxPspPdfLink,
-  getReduxLatestResult,
-  getReduxPastResult,
+  // getReduxPspModules,
+  // getReduxPspPdfLink,
+  // getReduxLatestResult,
+  // getReduxPastResult,
   getReduxPspHypertensionHealthTrackerData,
-  getReduxPspHyperModules,
-  getReduxPspPdfHyperLink,
-  getReduxPendingResultOverview,
+  // getReduxPspHyperModules,
+  // getReduxPspPdfHyperLink,
+  // getReduxPendingResultOverview,
   getLatestTargetsAction,
   getNewTargetAction,
 } from 'store/home/home-actions';
@@ -64,6 +64,7 @@ import Drinking from 'screens/main/account/profile/edit-profile/drinking';
 import BodyMeasurementScreen from 'screens/main/account/profile/body-measurements';
 import ExerciseScreen from 'screens/main/account/profile/edit-profile/exercise';
 import MedicalHistoryScreen from 'screens/main/account/profile/medical-history';
+import ManageDevice from 'screens/main/home-page/manage-device';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -102,6 +103,7 @@ const {
   DEVICE_CONNECTION,
   BODY_MEASUREMENT,
   MEDICAL_HISTORY,
+  MANAGE_DEVICE,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -109,16 +111,16 @@ const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
   const hasProfile = auth.hasProfile ? true : false;
 
-  useEffect((link: string, id: number) => {
+  useEffect(() => {
     getHasProfileAsyncStorage();
-    dispatch(getReduxPspModules());
-    dispatch(getReduxPspPdfLink(link));
-    dispatch(getReduxPspPdfHyperLink(link));
-    dispatch(getReduxLatestResult());
-    dispatch(getReduxPastResult());
+    // dispatch(getReduxPspModules());
+    // dispatch(getReduxPspPdfLink(link));
+    // dispatch(getReduxPspPdfHyperLink(link));
+    // dispatch(getReduxLatestResult());
+    // dispatch(getReduxPastResult());
     dispatch(getReduxPspHypertensionHealthTrackerData());
-    dispatch(getReduxPspHyperModules());
-    dispatch(getReduxPendingResultOverview(id));
+    // dispatch(getReduxPspHyperModules());
+    // dispatch(getReduxPendingResultOverview(id));
     dispatch(getLatestTargetsAction());
     dispatch(getNewTargetAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -227,6 +229,7 @@ const AppNavigator = () => {
           />
           <Stack.Screen name={SEE_REPORT} component={SeeResult} />
           <Stack.Screen name={DEVICE_CONNECTION} component={DeviceConnection} />
+          <Stack.Screen name={MANAGE_DEVICE} component={ManageDevice} />
         </>
       ) : (
         <>
