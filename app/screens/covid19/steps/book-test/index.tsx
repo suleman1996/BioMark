@@ -25,6 +25,7 @@ import makeStyles from './styles';
 import { useIsFocused } from '@react-navigation/native';
 import { getAllDependents } from 'store/account/account-actions';
 import ICMissingModal from 'components/ui/ic-missing-modal';
+import { t } from 'i18next';
 
 type Props = {};
 
@@ -131,7 +132,7 @@ const BookCovidTest = (props: Props) => {
                     // setIsExisting(true);
                     pushOneMoreToBooking();
                   }}
-                  title={'Add Existing Dependant'}
+                  title={t('pages.covid.covid-button.exist')}
                 />
               )}
 
@@ -141,7 +142,7 @@ const BookCovidTest = (props: Props) => {
             }}
             marginTop={1}
             disabled={isDependantAdd}
-            title={'Add New Dependant'}
+            title={t('pages.covid.covid-button.add')}
           />
           {!isDependantAdd ? null : (
             <ButtonComponent
@@ -175,7 +176,7 @@ const BookCovidTest = (props: Props) => {
                 // setIsExisting(true);
               }}
               marginTop={1}
-              title={'Add Self'}
+              title={t('pages.covid.covid-button.addSelf')}
             />
           )}
           <View style={{ marginTop: heightToDp(12) }} />
@@ -186,7 +187,9 @@ const BookCovidTest = (props: Props) => {
                 setIsCancelModal(true);
               }}
             >
-              <Text style={[styles.btnText]}>Cancel</Text>
+              <Text style={[styles.btnText]}>
+                {t('pages.covid.bookCovid.cancel')}
+              </Text>
             </Pressable>
             <Pressable
               disabled={booking.every((item) => item?.booking_status !== 0)}
@@ -197,7 +200,10 @@ const BookCovidTest = (props: Props) => {
               }}
               style={[styles.btnEnable, ifNextDisabled]}
             >
-              <Text style={[styles.btnText2]}>Next</Text>
+              <Text style={[styles.btnText2]}>
+                {' '}
+                {t('pages.covid.bookCovid.next')}
+              </Text>
             </Pressable>
           </View>
         </ScrollView>

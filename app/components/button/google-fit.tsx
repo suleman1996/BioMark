@@ -35,6 +35,6 @@ export default function GoogleFitButton(props: Props) {
 const styles = StyleSheet.create({
   btnContainer: {},
   btn: {
-    borderRadius: 8,
+    borderRadius: 99,
   },
 });

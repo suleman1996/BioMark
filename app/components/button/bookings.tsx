@@ -1,5 +1,6 @@
 import fonts from 'assets/fonts';
 import BioBookings from 'components/svg/bio-bookings';
+import { t } from 'i18next';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -26,7 +27,7 @@ export default function TestBookinButton() {
         </TouchableOpacity>
       </TouchableOpacity>
       <View>
-        <Text style={styles.healthText}>Bookings</Text>
+        <Text style={styles.healthText}>{t('pages.covid.home.bookings')}</Text>
       </View>
     </View>
   );

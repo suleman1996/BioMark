@@ -7,6 +7,7 @@ import { useTheme } from 'react-native-paper';
 import BioDependants from 'components/svg/bio-dependants';
 import SCREENS from '../../navigation/constants/index';
 import fonts from 'assets/fonts';
+import { t } from 'i18next';
 
 export default function DependentButton() {
   const { colors } = useTheme();
@@ -30,7 +31,9 @@ export default function DependentButton() {
         </TouchableOpacity>
       </TouchableOpacity>
       <View>
-        <Text style={styles.healthText}>Dependants</Text>
+        <Text style={styles.healthText}>
+          {t('pages.covid.home.dependants')}
+        </Text>
       </View>
     </View>
   );

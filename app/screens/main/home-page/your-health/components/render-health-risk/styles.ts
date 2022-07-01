@@ -26,7 +26,7 @@ export const makeStyles = (colors: any) =>
       fontSize: 12,
     },
     descriptionHealthRisk: {
-      fontFamily: fonts.light,
+      fontFamily: fonts.regular,
       color: colors.heading,
       marginTop: 10,
     },

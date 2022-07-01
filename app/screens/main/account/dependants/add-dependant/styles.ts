@@ -25,7 +25,7 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(21),
     },
     label: {
-      fontSize: responsiveFontSize(22),
+      fontSize: responsiveFontSize(18),
       fontFamily: GlobalFonts.medium,
       color: colors.darkPrimary,
       marginTop: heightToDp(2),
