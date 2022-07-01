@@ -10,7 +10,7 @@ export const makeStyles = (colors: any) =>
     },
     body: {
       // flex: 1,
-      height: Dimensions.get('window').height * 0.9,
+      height: Dimensions.get('window').height * 0.8,
       margin: 10,
       borderRadius: 10,
       backgroundColor: colors.white,
