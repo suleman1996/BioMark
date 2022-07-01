@@ -123,7 +123,12 @@ const BookCovidTest = (props: Props) => {
 
           {/* ) : null} */}
 
-          {booking.some((item) => item.is_dependant == true)
+          {dependants.every(
+            (item) =>
+              item.id ==
+              booking.find((item2) => item2.dependent_id == item.id)
+                ?.dependent_id
+          )
             ? null
             : dependants.length > 0 && (
                 <ButtonComponent
