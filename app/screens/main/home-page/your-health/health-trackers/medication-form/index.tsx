@@ -112,13 +112,15 @@ const MedicationForm = (props: any) => {
       DOSAGE_RANGE.MAX === 0 ||
       SELECTED_MEDICATION_ID) &&
     medication.dosage !== '1.0';
+
   const BUTTON_DISABLED =
     (SHOW_DISEASE_LIST ? medication.disease_type : true) &&
     medication.medication_list_id &&
     medication.unit_list_id &&
     (DOSAGE_RANGE.MAX > 1 ? medication.dosage : 1) &&
     medication.frequency &&
-    medication.frequency_time.length > 0;
+    medication.frequency_time.length > 0 &&
+    !dosageRangeError;
 
   useLayoutEffect(() => {
     if (SELECTED_MEDICATION_ID) {
