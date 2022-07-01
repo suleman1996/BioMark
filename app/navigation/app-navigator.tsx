@@ -64,6 +64,7 @@ import Drinking from 'screens/main/account/profile/edit-profile/drinking';
 import BodyMeasurementScreen from 'screens/main/account/profile/body-measurements';
 import ExerciseScreen from 'screens/main/account/profile/edit-profile/exercise';
 import MedicalHistoryScreen from 'screens/main/account/profile/medical-history';
+import ManageDevice from 'screens/main/home-page/manage-device';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -102,6 +103,7 @@ const {
   DEVICE_CONNECTION,
   BODY_MEASUREMENT,
   MEDICAL_HISTORY,
+  MANAGE_DEVICE,
 } = SCREENS;
 
 const AppNavigator = () => {
@@ -227,6 +229,7 @@ const AppNavigator = () => {
           />
           <Stack.Screen name={SEE_REPORT} component={SeeResult} />
           <Stack.Screen name={DEVICE_CONNECTION} component={DeviceConnection} />
+          <Stack.Screen name={MANAGE_DEVICE} component={ManageDevice} />
         </>
       ) : (
         <>
