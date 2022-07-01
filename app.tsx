@@ -101,10 +101,8 @@ const App = () => {
                     : 'dark-content'
                 }
               />
-              <SafeAreaView
-                edges={['top']}
-                style={{ flex: 1, backgroundColor: '#1B96D8' }}
-              >
+              <SafeAreaView style={{ flex: 0, backgroundColor: '#1B96D8' }} />
+              <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
                 <TipProvider />
                 <BiomarkNavigation />
               </SafeAreaView>

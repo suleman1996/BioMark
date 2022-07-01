@@ -1,5 +1,7 @@
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
+
+import { showMessage } from 'react-native-flash-message';
 // const fileUrl =
 //   'https://www.techup.co.in/wp-content/uploads/2020/01/techup_logo_72-scaled.jpg';
 export const checkPermissionAndDownload = async (file: string) => {
@@ -117,7 +119,11 @@ const downloadFileBase64 = (fileUrl: string) => {
       .then((res) => {
         console.log('res', res);
 
-        alert('Download Sucessful');
+        // alert('Download Sucessful');
+        showMessage({
+          message: 'File downloaded successfully',
+          type: 'success',
+        });
       })
       .catch((e) => {
         console.log(e);
