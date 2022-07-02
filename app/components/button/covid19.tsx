@@ -8,14 +8,24 @@ import SCREENS from '../../navigation/constants';
 import { navigate } from '../../services/nav-ref';
 import { useTranslation } from 'react-i18next';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { useSelector } from 'react-redux';
+import { IAppState } from './../../store/IAppState';
 
 export default function Covid19Btn({ onPress }) {
   const { t } = useTranslation();
-  const { colors } = useTheme();
+  const { colors }: any = useTheme();
   const styles = makeStyles(colors);
+  const booking_count = useSelector(
+    (state: IAppState) => state.notifications.allAppointmentCounts
+  );
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <View style={styles.circleBtn}>
+        {booking_count.booking_result_count > 0 ? (
+          <View style={styles.redDot} />
+        ) : null}
+
         <TouchableOpacity
           onPress={() =>
             onPress
@@ -56,5 +66,14 @@ const makeStyles = (colors: any) =>
       fontFamily: fonts.bold,
       fontSize: RFValue(15),
       color: colors.heading,
+    },
+    redDot: {
+      width: widthToDp(2.4),
+      height: widthToDp(2.4),
+      backgroundColor: colors.red,
+      borderRadius: widthToDp(1.2),
+      position: 'absolute',
+      right: 3,
+      top: 3,
     },
   });

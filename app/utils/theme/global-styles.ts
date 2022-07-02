@@ -53,4 +53,13 @@ export const GlobalStyles: any = (colors: any) => ({
     borderWidth: 1,
     borderColor: colors.lightPrimary,
   },
+  redDot: {
+    width: widthToDp(2.4),
+    height: widthToDp(2.4),
+    backgroundColor: colors.red,
+    borderRadius: widthToDp(1.2),
+    position: 'absolute',
+    right: 3,
+    top: 3,
+  },
 });
