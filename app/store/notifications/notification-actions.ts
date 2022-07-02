@@ -1,11 +1,13 @@
 import { notificationsService } from 'services/notification-service';
 import { NotificationMessage } from 'types/api';
+import { Appointment } from 'types/api/appointment';
 import { logNow } from 'utils/functions/log-binder';
 import {
   INBOX_NOTIFICATIONS,
   INBOX_OTHERS,
   INBOX_OTHERS_UNREAD,
   INBOX_ALL_UNREAD,
+  APPOINTMENT_COUNTS,
 } from './constants';
 
 export const addAllInboxNotifications = (data: NotificationMessage[]) => ({
@@ -102,4 +104,29 @@ export const getAllInboxUnreadNotificationsR =
         logNow(err);
       })
       .finally(() => {});
+  };
+
+// GET APPOINTMENTS COUNTS
+export const addAllAppointmentCounts = (data: Appointment) => ({
+  type: APPOINTMENT_COUNTS,
+  payload: data,
+});
+
+export const getAllApointmentsCountsR =
+  () => async (dispatch: (arg0: { type: string; payload?: any }) => void) => {
+    await notificationsService
+      .getAllAppointmentsCounts()
+      .then(async (res: any) => {
+        logNow('addAllAppointmentCounts============>', res);
+        await dispatch(addAllAppointmentCounts(res));
+      })
+      .catch((err) => {
+        logNow(err);
+        // After developer alow below function on line 66
+        // dispatch(errorLogOut('Error logging out.'));
+      })
+      .finally(() => {
+        // After developer alow below function on line 69
+        // dispatch(loggingOut(false));
+      });
   };

@@ -41,8 +41,9 @@ const TimeSlots = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      {slots?.map((item) => (
+      {slots?.map((item, index) => (
         <Pressable
+          key={index.toString()}
           disabled={isBtnDisable(item.status, item.slot_time)}
           onPress={() => {
             setTime(item.id);
