@@ -36,12 +36,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userService } from 'services/user-service/user-service';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { navigate } from 'services/nav-ref';
+import { useIsFocused } from '@react-navigation/native';
+import { getAllApointmentsCountsR } from 'store/notifications/notification-actions';
 
 export default function Home() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-
+  const focused = useIsFocused();
   const authContext = useContext(AuthContext);
 
   // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
@@ -65,6 +67,13 @@ export default function Home() {
     getMedicalDropDown();
     getMedicationList();
   }, []);
+
+  const getAppointsmentsCounts = async () => {
+    await dispatch(getAllApointmentsCountsR());
+  };
+  useEffect(() => {
+    getAppointsmentsCounts();
+  }, [focused]);
   /*eslint-enable*/
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {

@@ -90,7 +90,11 @@ const PaymentSuccess = (props: Props) => {
           </View>
           <View style={styles.bottom2Btns}>
             <ButtonComponent
-              onPress={() => navigate(SCREENS.HOME)}
+              onPress={() =>
+                navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                  screen: SCREENS.COVID19BOOKINGS,
+                })
+              }
               title={'View Bookings'}
             />
             <ButtonComponent
