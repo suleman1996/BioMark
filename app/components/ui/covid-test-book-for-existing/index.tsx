@@ -429,7 +429,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                   }
                 />
                 <Text style={styles.innerTitle}>Home Test</Text>
-                <Text style={styles.innerSmallTxt}>Comming soon</Text>
+                <Text style={styles.innerSmallTxt}>Coming soon</Text>
               </View>
             </View>
             <Text style={styles.innerTitle}>Country</Text>

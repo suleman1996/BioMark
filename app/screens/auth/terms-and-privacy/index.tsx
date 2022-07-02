@@ -165,7 +165,10 @@ export default function TermsAndPrivacy({ route }) {
       ) : (
         <View style={styles.signupNav}>
           <View style={styles.csNav}>
-            <TouchableOpacity onPress={() => navigations.goBack()}>
+            <TouchableOpacity
+              style={{ padding: 10 }}
+              onPress={() => navigations.goBack()}
+            >
               <BackIcon />
             </TouchableOpacity>
             <Text style={styles.signupText}>

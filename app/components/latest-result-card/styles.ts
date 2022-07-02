@@ -67,6 +67,7 @@ const styles = (colors: any) =>
     },
     text6: {
       flex: 1,
+      fontFamily: fonts.bold,
       paddingHorizontal: widthToDp(1),
       fontSize: responsiveFontSize(14),
     },

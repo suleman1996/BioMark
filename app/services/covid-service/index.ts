@@ -123,16 +123,12 @@ function updateHealthDeclaration(
 function updateMultiPleHealthDeclaration(
   request: CovidBookingHealthDeclarationRequest
 ) {
-  console.log('request', request);
-
   return new Promise<Array<CovidBookingListResponseData>>((resolve, reject) => {
     client
       .post(`${API_URLS.COVID_MULTIPLE_HEALTH_DECLARATION}`, {
         booking: request,
       })
       .then(async (response: any) => {
-        console.log('resMulti', response);
-
         try {
           //logNow('all notification inbox success response', response.data);
           resolve(response.data);
@@ -251,8 +247,6 @@ function getCovidHomeResults() {
   });
 }
 const batchReadForUpcomming = ({ data }: Props) => {
-  console.log('data====>', data);
-
   return client.post(API_URLS.BATCH_READ_UPCOMMING, {
     unreadBooking: data,
   });

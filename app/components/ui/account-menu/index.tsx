@@ -130,6 +130,27 @@ const AccountMenu = (props) => {
       {/* divider */}
       <View style={styles.divider} />
       <TouchableRipple
+        onPress={() => navigate(SCREENS.MANAGE_DEVICE)}
+        style={styles.singleItem}
+      >
+        <>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <BioDependent width={5} height={5} />
+            <Text style={styles.text}>Devices</Text>
+          </View>
+          <View style={styles.iconWithSecondText}>
+            <Text style={styles.secondText}>X devices</Text>
+            <Fontisto
+              name="angle-right"
+              size={responsiveFontSize(22)}
+              color={colors.darkPrimary}
+            />
+          </View>
+        </>
+      </TouchableRipple>
+      {/* divider */}
+      <View style={styles.divider} />
+      <TouchableRipple
         onPress={() =>
           navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
             screen: SCREENS.SETTINGS,

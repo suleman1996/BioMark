@@ -102,7 +102,6 @@ const Index = () => {
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
-  // console.log('getLabStatusData', healthRisk);
   const [healthRiskColor, setHealthRiskColor] = React.useState([]);
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);
@@ -140,9 +139,14 @@ const Index = () => {
 
   useEffect(() => {
     handleHEalthTracker();
-    setHealthRiskColor(fromResponse(healthRisk));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthTrackerFromStore, isFocused]);
+
+  useEffect(() => {
+    setHealthRiskColor(fromResponse(healthRisk));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthRisk, isFocused]);
 
   const handleHEalthTracker = useCallback(() => {
     const tempTracker = [];
@@ -241,17 +245,17 @@ const Index = () => {
 
   const checkDiabtiesBtn = (btnType) => {
     if (btnType == 'exercise') {
-      return 'Enter Exercise';
+      return 'Complete Exercise';
     }
     if (btnType == 'bmi') {
       return 'Enter Height and Weight';
     }
     if (btnType == 'medical') {
-      return 'Enter Medical History';
+      return 'Complete Medical History';
     }
 
     if (btnType == 'family_medical') {
-      return 'Enter Family Medical History';
+      return 'Complete Family Medical History';
     }
   };
 
@@ -325,6 +329,7 @@ const Index = () => {
                     Svg={healthRiskData[key].icon}
                     status={value?.status}
                     selectedHealthRisk={selectedHealthRisk}
+                    btnType={value?.button_type}
                   />
                 </>
               ))}
@@ -340,19 +345,15 @@ const Index = () => {
                         refData: healthRiskData[selectedRisk].refrence,
                         footNotesData: healthRiskData[selectedRisk].footnotes,
                         calc: healthRiskData[selectedRisk].calculations,
-                        clr: healthRisksColor(
-                          colors,
-                          healthRisk[selectedRisk]?.status
+                        clr: handleHealthTrackerColor(
+                          healthRisk[selectedRisk]?.name
                         ),
                         SVG: healthRiskData[selectedRisk].icon,
                       })
                 }
                 healthRisk={healthRisk[selectedRisk]}
                 Svg={healthRiskData[selectedRisk].icon}
-                color={healthRisksColor(
-                  colors,
-                  healthRisk[selectedRisk]?.status
-                )}
+                color={handleHealthTrackerColor(healthRisk[selectedRisk]?.name)}
                 pan={pan}
               />
             ) : null}

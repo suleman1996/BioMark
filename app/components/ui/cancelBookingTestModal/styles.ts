@@ -29,7 +29,7 @@ export const makeStyles = (colors: any) =>
       color: colors.lightDark,
       fontFamily: GlobalFonts.light,
       paddingHorizontal: widthToDp(1.5),
-      lineHeight: 20,
+      lineHeight: 24,
       textAlign: 'center',
     },
     bottom2Btns: {
