@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import fonts from 'assets/fonts';
 
 export const makeStyles = (colors: any) =>
@@ -8,7 +8,7 @@ export const makeStyles = (colors: any) =>
       backgroundColor: colors.white,
     },
     body: {
-      // flex: 1,
+      flex: 1,
       margin: 10,
       borderRadius: 10,
       backgroundColor: colors.white,
@@ -21,7 +21,6 @@ export const makeStyles = (colors: any) =>
       shadowRadius: 2.22,
       elevation: 3,
       paddingHorizontal: 15,
-      height: Dimensions.get('window').height * 0.8,
     },
     title: {
       fontFamily: fonts.regular,
