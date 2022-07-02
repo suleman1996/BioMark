@@ -479,7 +479,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <>
                   <Text style={styles.innerTitle}>Select a covid Test</Text>
                   <DropdownCountryCity
-                    options={testCentersBasedOnCities.map((item) => {
+                    options={testCentersBasedOnCities?.map((item) => {
                       return { label: item.name, value: item.id };
                     })}
                     selectedValue={covidTestCenterValue}
