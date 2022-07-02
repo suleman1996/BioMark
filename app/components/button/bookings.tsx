@@ -17,10 +17,15 @@ export default function TestBookinButton() {
     (state: IAppState) => state.notifications.allAppointmentCounts
   );
 
+  const hasNoti =
+    booking_count.covid_booking_count > 0
+      ? { borderColor: colors.darkPrimary, borderWidth: 1 }
+      : {};
+
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
       <TouchableOpacity activeOpacity={0.6}>
-        {booking_count.booking_result_count > 0 ? (
+        {booking_count.covid_booking_count > 0 ? (
           <View style={styles.redDot} />
         ) : null}
         <TouchableOpacity
@@ -30,7 +35,7 @@ export default function TestBookinButton() {
             })
           }
           activeOpacity={0.6}
-          style={styles.circleBtn}
+          style={[styles.circleBtn, hasNoti]}
         >
           <BioBookings width={7} height={7} />
         </TouchableOpacity>

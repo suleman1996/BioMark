@@ -19,10 +19,17 @@ export default function Covid19Btn({ onPress }) {
   const booking_count = useSelector(
     (state: IAppState) => state.notifications.allAppointmentCounts
   );
+  const hasNoti =
+    booking_count.booking_result_count > 0 ||
+    booking_count.covid_booking_count > 0
+      ? { borderColor: colors.darkPrimary, borderWidth: 0.7 }
+      : {};
+
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <View style={styles.circleBtn}>
-        {booking_count.booking_result_count > 0 ? (
+      <View style={[styles.circleBtn, hasNoti]}>
+        {booking_count.booking_result_count > 0 ||
+        booking_count.covid_booking_count > 0 ? (
           <View style={styles.redDot} />
         ) : null}
 

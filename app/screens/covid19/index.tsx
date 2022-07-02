@@ -20,6 +20,7 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import makeStyles from './styles';
 import { getUserProfileData } from 'store/profile/profile-actions';
 import { useTranslation } from 'react-i18next';
+import { getAllApointmentsCountsR } from 'store/notifications/notification-actions';
 
 type Props = {};
 
@@ -46,9 +47,13 @@ const Covid19Home = (props: Props) => {
     await dispatch(getUserProfileData());
   };
 
+  const getAppointsmentsCounts = async () => {
+    await dispatch(getAllApointmentsCountsR());
+  };
   useEffect(() => {
     getCovidHomeResults();
     getUserOnFocus();
+    getAppointsmentsCounts();
   }, [focused]);
   /*eslint-enable */
 
