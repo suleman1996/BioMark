@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
 import {
+  Dimensions,
   ImageBackground,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
-  Dimensions,
   Platform,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -16,13 +15,10 @@ import i18next from 'i18next';
 
 import fonts from 'assets/fonts';
 import MyImage from 'assets/images';
-import {
-  Covid19Btn,
-  GoogleFitButton,
-  SmallButton,
-  YourHealthBtn,
-} from 'components/button';
+
+import { Covid19Btn, SmallButton, YourHealthBtn } from 'components/button';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
+import HealthSnapshot from './health-snapshot/index';
 
 import FloatingActionButton from 'components/floating-action-button';
 
@@ -82,6 +78,8 @@ export default function Home() {
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
+      console.log('result', result);
+
       authContext.setUserData(result);
       i18next.changeLanguage(result?.app_lang);
     } catch (error) {
@@ -125,7 +123,7 @@ export default function Home() {
                   {t('pages.covid-booking.homeTitle')}
                 </Text>
                 <View style={styles.bnInner}>
-                  <View style={{ width: '60%' }}>
+                  <View style={{ width: '65%' }}>
                     <Text
                       style={{
                         fontFamily: fonts.mulishRegular,
@@ -156,30 +154,8 @@ export default function Home() {
               <YourHealthBtn />
               <Covid19Btn />
             </View>
-            <Text style={styles.gfHeading}>{t('healthSnapshot.title')}</Text>
-            <View style={styles.googleFitC}>
-              <ImageBackground
-                source={MyImage.healthRing}
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  paddingHorizontal: 15,
-                  justifyContent: 'center',
-                }}
-              >
-                <TouchableOpacity>
-                  <GoogleFitButton
-                    disabled={false}
-                    title={
-                      Platform.OS == 'android'
-                        ? t('healthSnapshot.android.connectButton')
-                        : t('healthSnapshot.ios.connectButton')
-                    }
-                    onPress={() => console.log('pressed')}
-                  />
-                </TouchableOpacity>
-              </ImageBackground>
-            </View>
+            <HealthSnapshot />
+            <View style={{ paddingBottom: '50%' }} />
           </View>
         </ScrollView>
       </View>

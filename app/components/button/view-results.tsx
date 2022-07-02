@@ -8,6 +8,7 @@ import BioResultsIcon from 'components/svg/bio-results-icon';
 import { navigate } from './../../services/nav-ref';
 import SCREENS from '../../navigation/constants/index';
 import fonts from 'assets/fonts';
+import { t } from 'i18next';
 
 export default function ViewResultsButton() {
   const { colors } = useTheme();
@@ -29,7 +30,9 @@ export default function ViewResultsButton() {
         </TouchableOpacity>
       </TouchableOpacity>
       <View>
-        <Text style={styles.healthText}>View Results</Text>
+        <Text style={styles.healthText}>
+          {t('pages.covid.home.viewResults')}
+        </Text>
       </View>
     </View>
   );

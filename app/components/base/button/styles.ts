@@ -7,7 +7,7 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       backgroundColor: colors.primary,
-      height: heightToDp(6),
+      height: heightToDp(5.5),
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: widthToDp(1.5),
@@ -19,7 +19,7 @@ export const makeStyles = (colors: any) =>
     text: {
       color: colors.white,
       fontFamily: fonts.semiBold,
-      fontSize: responsiveFontSize(19),
+      fontSize: responsiveFontSize(18),
     },
   });
 

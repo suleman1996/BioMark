@@ -27,14 +27,14 @@ export const makeStyles = (colors: any) =>
       color: colors.darkGray,
     },
     contentHeaderText: {
-      fontFamily: GlobalFonts.regular,
+      fontFamily: GlobalFonts.bold,
       fontSize: responsiveFontSize(20),
       color: colors.darkPrimary,
       marginTop: -4,
     },
     contentext: {
-      fontFamily: GlobalFonts.regular,
-      fontSize: responsiveFontSize(16),
+      fontFamily: GlobalFonts.bold,
+      fontSize: responsiveFontSize(15),
       color: colors.darkPrimary,
     },
   });

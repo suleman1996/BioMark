@@ -69,8 +69,6 @@ function getAlliInboxUnreadNotifications() {
       .get(`${API_URLS.NOTIFICATIONS}/inbox/unread`)
       .then(async (response) => {
         try {
-          console.log('/inbox/unread', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('unread inbox notifiction', e);

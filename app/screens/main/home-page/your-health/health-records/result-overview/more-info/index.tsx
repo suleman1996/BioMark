@@ -64,18 +64,17 @@ const MoreInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const RenderView = ({ width, title, color, bgColor }) => (
+  const RenderView = ({ width, title, color, bgColor, font }) => (
     <View
       style={{
         width: width,
-        alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: bgColor,
       }}
     >
       <Text
         style={{
-          fontFamily: fonts.bold,
+          fontFamily: font ? font : fonts.regular,
           color: color ? color : colors.bg,
           fontSize: 14,
         }}
@@ -108,70 +107,125 @@ const MoreInfo = () => {
       <RenderDownload
         name="chart-timeline-variant"
         resultId={data?.id}
-        width={50}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        width={60}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
       />
       <RenderView
         width={70}
         title={moment(data.date_of_test).format('MMMM D YYYY')}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
-        color={data?.is_abnormal_flag && colors.heading}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
+        color={colors.heading}
       />
       <RenderView
         width={80}
         title={data.observation_value}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
-        color={data?.is_abnormal_flag && colors.heading}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
+        color={colors.heading}
       />
       <RenderView
         width={70}
         title={data.unit}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
-        color={data?.is_abnormal_flag && colors.heading}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
+        color={colors.heading}
       />
       <RenderView
         width={100}
         title={data.reference_range}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
-        color={data?.is_abnormal_flag && colors.heading}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
+        color={colors.heading}
       />
       <RenderView
         width={110}
-        title={data?.is_abnormal_flag ? 'YES' : ''}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
-        color={data?.is_abnormal_flag && colors.high}
+        title={data?.is_abnormal_flag || data?.finding == 'low' ? 'YES' : ''}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
+        color={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.high
+        }
       />
       <RenderView
         width={120}
         title={data?.comment}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
-        color={data?.is_abnormal_flag && colors.heading}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
+        color={colors.heading}
       />
       <RenderView
         width={130}
         title={data.provider_name}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
-        color={data?.is_abnormal_flag && colors.heading}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
+        color={colors.heading}
       />
       <RenderDownload
         name="download"
         resultId={data?.id}
         width={70}
-        bgColor={data?.is_abnormal_flag && colors.abnormal}
+        bgColor={
+          (data?.is_abnormal_flag || data?.finding == 'low') && colors.abnormal
+        }
       />
     </View>
   );
 
   const RenderTableHeader = () => (
     <View style={{ flexDirection: 'row' }}>
-      <RenderView color={colors.black} width={50} />
-      <RenderView color={colors.black} width={70} title="Date" />
-      <RenderView color={colors.black} width={80} title="Result" />
-      <RenderView color={colors.black} width={70} title="Unit" />
-      <RenderView color={colors.black} width={100} title="Ref. Range" />
-      <RenderView color={colors.black} width={110} title="Abnormal" />
-      <RenderView color={colors.black} width={120} title="Comments" />
-      <RenderView color={colors.black} width={130} title="Lab Source" />
+      <RenderView color={colors.black} width={60} />
+      <RenderView
+        color={colors.black}
+        font={fonts.bold}
+        width={70}
+        title="Date"
+      />
+      <RenderView
+        color={colors.black}
+        font={fonts.bold}
+        width={80}
+        title="Result"
+      />
+      <RenderView
+        color={colors.black}
+        font={fonts.bold}
+        width={70}
+        title="Unit"
+      />
+      <RenderView
+        color={colors.black}
+        font={fonts.bold}
+        width={100}
+        title="Ref. Range"
+      />
+      <RenderView
+        color={colors.black}
+        font={fonts.bold}
+        width={110}
+        title="Abnormal"
+      />
+      <RenderView
+        color={colors.black}
+        font={fonts.bold}
+        width={120}
+        title="Comments"
+      />
+      <RenderView
+        color={colors.black}
+        font={fonts.bold}
+        width={130}
+        title="Lab Source"
+      />
     </View>
   );
 
@@ -228,14 +282,28 @@ const MoreInfo = () => {
                     style={{
                       fontFamily: fonts.regular,
                       fontSize: 11,
-                      color: colors.blue,
+                      color: colors.heading,
                     }}
                   >
                     {moment(summary?.latest?.date_of_test).format(
                       'MMMM D YYYY'
                     )}
                   </Text>
-                  <Text style={[styles.heading, { alignSelf: 'center' }]}>
+                  <Text
+                    style={[
+                      styles.heading,
+                      {
+                        alignSelf: 'center',
+                        color:
+                          summary?.latest?.finding == 'low' ||
+                          summary?.latest?.finding == 'high'
+                            ? colors.red
+                            : summary?.latest?.finding == 'normal'
+                            ? colors.greenDark
+                            : colors.heading,
+                      },
+                    ]}
+                  >
                     {summary?.latest?.value} {summary?.latest?.unit}
                   </Text>
                   <View style={styles.divider} />
@@ -244,7 +312,7 @@ const MoreInfo = () => {
                     <Text style={{ fontSize: 14 }}>
                       {t('pages.resultSummary.tabs.summary.referenceRange')}
                     </Text>
-                    <Text style={{ fontSize: 14, fontFamily: fonts.regular }}>
+                    <Text style={{ fontSize: 14, fontFamily: fonts.light }}>
                       {summary?.latest?.ref_range}
                     </Text>
                   </Text>
@@ -252,7 +320,7 @@ const MoreInfo = () => {
                     <Text style={{ fontSize: 14 }}>
                       {t('pages.resultSummary.tabs.summary.source')}
                     </Text>
-                    <Text style={{ fontSize: 14, fontFamily: fonts.regular }}>
+                    <Text style={{ fontSize: 14, fontFamily: fonts.light }}>
                       {summary?.latest?.provider_name}
                     </Text>
                   </Text>

@@ -85,6 +85,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>Privacy - Location always and when In Use Usage Description</key>
+	<string>BioMark would like to use your location</string>
 	<key>NSCameraUsageDescription</key>
 	<string>BioMark would like to use your camera</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

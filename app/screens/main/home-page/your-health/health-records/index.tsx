@@ -42,6 +42,7 @@ const HealthRecord = () => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState(new Date());
   const [page, setPage] = useState(1);
+  const [noMore, setNoMore] = useState(false);
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
   const [isEndDatePickerVisible, setEndDatePickerVisibility] = useState(false);
 
@@ -67,9 +68,13 @@ const HealthRecord = () => {
   useEffect(() => {
     setPastResults(pastResult);
     setLatestResult(newResult);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, pastResult]);
+  }, [pastResult]);
+
+  useEffect(() => {
+    if (page !== 1) onConfirm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const onConfirm = async () => {
     try {
@@ -79,8 +84,13 @@ const HealthRecord = () => {
         start: startDate,
         end: endDate,
       });
-      setModalVisible(!modalVisible);
-      setPastResults(result?.data);
+      setModalVisible(false);
+      if (result?.data?.message === 'No results') {
+        setNoMore(true);
+        return;
+      }
+      setPastResults([...pastResults, ...result?.data]);
+      // setPastResults(result?.data);
     } catch (error) {
       if (error.errMsg.status == '500') {
         showMessage({
@@ -148,16 +158,18 @@ const HealthRecord = () => {
             source={require('assets/images/home/pad.png')}
             style={{ height: 30, width: 30 }}
           />
-          <Text style={styles.title}>{item?.name}</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.title}>{item?.name}</Text>
+            <Text style={styles.text3}>
+              {moment(item?.received).format('MMMM D, YYYY hh:mma')}
+            </Text>
+            {item.ref_no == null ? null : (
+              <Text style={styles.text3}>REF: {item?.ref_no}</Text>
+            )}
+          </View>
         </View>
-        <Text style={styles.text3}>
-          {moment(item?.received).format('MMMM D, YYYY hh:mma')}
-        </Text>
-        {item.ref_no == null ? null : (
-          <Text style={styles.text3}>REF: {item?.ref_no}</Text>
-        )}
 
-        {item.result.summary && (
+        {item?.result?.summary && (
           <View style={styles.pastResultView}>
             <Image
               source={require('assets/images/home/info.png')}
@@ -280,7 +292,11 @@ const HealthRecord = () => {
 
           <View style={styles.filterView}>
             <Text style={styles.text5}>{t('pages.results.pastResults')}</Text>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible(true), setPastResults([]);
+              }}
+            >
               <Filter fill={colors.heading} />
             </TouchableOpacity>
           </View>
@@ -323,6 +339,7 @@ const HealthRecord = () => {
             cancelEndDatePicker={cancelEndDatePicker}
             showEndDatePicker={showEndDatePicker}
             isEndDatePickerVisible={isEndDatePickerVisible}
+            onModalClose={() => setModalVisible(false)}
           />
 
           {!pastResults?.message && (
@@ -333,12 +350,14 @@ const HealthRecord = () => {
             />
           )}
 
-          {pastResults.length > 0 && page == 1 ? (
+          {!noMore ? (
             <TouchableOpacity style={styles.uploadResult}>
               <GoogleFitButton
                 disabled={false}
                 title={t('pages.results.loadMoreData')}
-                onPress={() => setPage((prev) => prev + 1)}
+                onPress={() => {
+                  setPage((prev) => prev + 1);
+                }}
               />
             </TouchableOpacity>
           ) : pastResults?.message == 'No results' ? null : (

@@ -16,7 +16,7 @@ export const makeStyles = (colors: any) =>
       width: '100%',
     },
     label: {
-      fontSize: responsiveFontSize(22),
+      fontSize: responsiveFontSize(18),
       color: colors.darkPrimary,
       fontFamily: GlobalFonts.medium,
     },

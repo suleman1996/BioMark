@@ -70,8 +70,6 @@ const EditProfileScreen = () => {
       await Promise.all([userService.updateProfileAvatar(pic)]);
 
       const result = await profileServices.getUserProfile();
-      console.log('res', result);
-
       authContext.setUserData(result?.data);
 
       setIsLoading(false);

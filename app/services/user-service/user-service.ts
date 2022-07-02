@@ -1,6 +1,4 @@
-import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
-
 import {
   GeoLocationData,
   MedicationSetupPayload,
@@ -122,8 +120,6 @@ function federatedlogin(access_token: string, provider: string) {
 //   });
 // }
 const deviceRegisterAction = (device_token: string, device_type: string) => {
-  console.log('device_token', device_token);
-
   return client.post(API_URLS.MOBILE_REGISTER, {
     device: {
       device_token,
@@ -314,8 +310,6 @@ function saveAutoLogout(auto_logout: boolean) {
 }
 
 async function logout() {
-  let uniqueId = DeviceInfo.getUniqueId();
-
   client
     .post(API_URLS.LOG_OUT, {
       session: {
@@ -1377,8 +1371,6 @@ const deleteWeightLog = (weight_log_id: any) => {
   });
 };
 const setLanguage = (lang: String) => {
-  console.log('lang===>', lang);
-
   return client.post(API_URLS.SET_LANGUAGE, {
     profile: {
       app_lang: lang,

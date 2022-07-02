@@ -14,8 +14,9 @@ import React, {
   useEffect,
   useRef,
   useState,
+  useMemo,
 } from 'react';
-
+import _ from 'lodash';
 import { useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { navigate } from 'services/nav-ref';
@@ -74,6 +75,7 @@ import { useTranslation } from 'react-i18next';
 import { useIsFocused } from '@react-navigation/native';
 
 import { fromResponse } from 'screens/main/home-page/your-health/components/render-health-risk-view/service';
+import i18next from 'i18next';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -100,7 +102,6 @@ const Index = () => {
   const getLabStatusData = useSelector(
     (state: IAppState) => state.home.getLabStatusData
   );
-  // console.log('getLabStatusData', healthRisk);
   const [healthRiskColor, setHealthRiskColor] = React.useState([]);
   // States
   const [healthTracker, setHealthTracker] = React.useState([]);
@@ -138,9 +139,14 @@ const Index = () => {
 
   useEffect(() => {
     handleHEalthTracker();
-    setHealthRiskColor(fromResponse(healthRisk));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthTrackerFromStore, isFocused]);
+
+  useEffect(() => {
+    setHealthRiskColor(fromResponse(healthRisk));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [healthRisk, isFocused]);
 
   const handleHEalthTracker = useCallback(() => {
     const tempTracker = [];
@@ -239,17 +245,17 @@ const Index = () => {
 
   const checkDiabtiesBtn = (btnType) => {
     if (btnType == 'exercise') {
-      return 'Enter Exercise';
+      return 'Complete Exercise';
     }
     if (btnType == 'bmi') {
       return 'Enter Height and Weight';
     }
     if (btnType == 'medical') {
-      return 'Enter Medical History';
+      return 'Complete Medical History';
     }
 
     if (btnType == 'family_medical') {
-      return 'Enter Family Medical History';
+      return 'Complete Family Medical History';
     }
   };
 
@@ -274,6 +280,14 @@ const Index = () => {
       }
     }
   };
+
+  const keys = useMemo(() => {
+    const newKeys = Object.entries(healthRisk);
+    const temp = _.cloneDeep(newKeys[newKeys.length - 1]);
+    newKeys[newKeys.length - 1] = newKeys[newKeys.length - 2];
+    newKeys[newKeys.length - 2] = temp;
+    return newKeys;
+  }, [healthRisk]);
 
   return (
     <>
@@ -303,7 +317,7 @@ const Index = () => {
               {t('pages.dashboard.riskTitle')}
             </Text>
             <View style={styles.healthRiskView}>
-              {Object.entries(healthRisk).map(([key, value]: any) => (
+              {keys.map(([key, value]: any) => (
                 <>
                   <RenderHealthRiskView
                     key={key}
@@ -315,6 +329,7 @@ const Index = () => {
                     Svg={healthRiskData[key].icon}
                     status={value?.status}
                     selectedHealthRisk={selectedHealthRisk}
+                    btnType={value?.button_type}
                   />
                 </>
               ))}
@@ -330,19 +345,15 @@ const Index = () => {
                         refData: healthRiskData[selectedRisk].refrence,
                         footNotesData: healthRiskData[selectedRisk].footnotes,
                         calc: healthRiskData[selectedRisk].calculations,
-                        clr: healthRisksColor(
-                          colors,
-                          healthRisk[selectedRisk]?.status
+                        clr: handleHealthTrackerColor(
+                          healthRisk[selectedRisk]?.name
                         ),
                         SVG: healthRiskData[selectedRisk].icon,
                       })
                 }
                 healthRisk={healthRisk[selectedRisk]}
                 Svg={healthRiskData[selectedRisk].icon}
-                color={healthRisksColor(
-                  colors,
-                  healthRisk[selectedRisk]?.status
-                )}
+                color={handleHealthTrackerColor(healthRisk[selectedRisk]?.name)}
                 pan={pan}
               />
             ) : null}
@@ -564,5 +575,7 @@ const Index = () => {
 };
 export default Index;
 const QRschemma = Yup.object({
-  qrInput: Yup.string().required('IC or Passport are required'),
+  qrInput: Yup.string().required(
+    i18next.t('pages.dashboard.dialogs.verify.errors.required')
+  ),
 });

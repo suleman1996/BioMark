@@ -1,5 +1,7 @@
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
+
+import { showMessage } from 'react-native-flash-message';
 // const fileUrl =
 //   'https://www.techup.co.in/wp-content/uploads/2020/01/techup_logo_72-scaled.jpg';
 export const checkPermissionAndDownload = async (file: string) => {
@@ -92,28 +94,39 @@ export const checkPermissionAndDownloadBase64 = async (file: string) => {
   }
 };
 const downloadFileBase64 = (fileUrl: string) => {
-  ReactNativeBlobUtil.config({
-    addAndroidDownloads: {
-      useDownloadManager: true, // <-- this is the only thing required
-      // Optional, override notification setting (default to true)
-      notification: true,
-      // Optional, but recommended since android DownloadManager will fail when
-      // the url does not contains a file extension, by default the mime type will be text/plain
-      mime: 'application/pdf',
-      description: 'File downloaded by download manager.',
-    },
-  })
-    .fetch('GET', `${fileUrl}`)
-    .then(() => {
-      // the path of downloaded file
-      // resp.path()
-      // let base64Str = fileUrl;
-      let pdfLocation =
-        ReactNativeBlobUtil.fs.dirs.DocumentDir + '/' + 'test.pdf';
-      ReactNativeBlobUtil.fs.writeFile(
-        pdfLocation,
-        ReactNativeBlobUtil.base64.encode(fileUrl),
-        'base64'
-      );
+  var name = Math.floor(Date.now() / 1000);
+  const { dirs } = ReactNativeBlobUtil.fs;
+  const dirToSave =
+    Platform.OS == 'ios'
+      ? dirs.DocumentDir + '/' + name + '.pdf'
+      : dirs.DownloadDir + '/' + name + '.pdf';
+  if (Platform.OS === 'ios') {
+    ReactNativeBlobUtil.fs.writeFile(dirToSave, fileUrl, 'base64');
+    ReactNativeBlobUtil.ios.previewDocument(dirToSave);
+  } else {
+    ReactNativeBlobUtil.config({
+      fileCache: true,
+      addAndroidDownloads: {
+        useDownloadManager: true,
+        notification: true,
+        mediaScannable: true,
+        title: name + '.pdf',
+        path: dirToSave,
+      },
     });
+    ReactNativeBlobUtil.fs
+      .createFile(dirToSave, fileUrl, 'base64')
+      .then((res) => {
+        console.log('res', res);
+
+        // alert('Download Sucessful');
+        showMessage({
+          message: 'File downloaded successfully',
+          type: 'success',
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 };

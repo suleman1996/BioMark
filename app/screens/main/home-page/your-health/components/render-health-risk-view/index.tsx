@@ -1,8 +1,7 @@
 import { View, TouchableOpacity } from 'react-native';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
-import AuthContext from 'utils/auth-context';
 
 const RenderHealthRiskView = ({
   Svg,
@@ -11,24 +10,29 @@ const RenderHealthRiskView = ({
   onRiskPress,
   name,
   status,
+  btnType,
 }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const authContext = useContext(AuthContext);
 
   return (
-    <>
+    <View
+      style={{
+        opacity:
+          selectedHealthRisk == ''
+            ? 1
+            : name == selectedHealthRisk?.name
+            ? 1
+            : 0.3,
+        flexDirection: 'row',
+      }}
+    >
       <TouchableOpacity
         onPress={onRiskPress}
         style={[
           styles.renderHealthRisk,
           {
-            backgroundColor:
-              selectedHealthRisk == ''
-                ? color
-                : name == selectedHealthRisk?.name
-                ? color
-                : colors.unSelectedHealthRisk,
+            backgroundColor: color,
           },
         ]}
       >
@@ -37,15 +41,14 @@ const RenderHealthRiskView = ({
       <View
         style={
           status == 'none'
-            ? name === 'Heart Disease' &&
-              (authContext?.userData?.age < 30 ||
-                authContext?.userData?.age > 74)
+            ? name === 'Diabetes' && btnType == 'none'
               ? styles.notDot
               : styles.dot
             : styles.notDot
         }
+        // style={status == 'none' ? styles.dot : styles.notDot}
       />
-    </>
+    </View>
   );
 };
 export default RenderHealthRiskView;

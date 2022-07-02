@@ -410,11 +410,9 @@ const ResetPassSchema = Yup.object({
     .required('Please provide your last name')
     .matches(NAME, 'Name should only contain latin letters'),
 
-  IcPnum: Yup.string().required('Please provide Identity Card/Passport Number'),
+  IcPnum: Yup.string(),
   phone_number: Yup.string()
     // .matches(Regex.minNum, 'Enter valid phone number')
     .required('Please provide your phone number'),
-  email: Yup.string()
-    .email('Enter valid email address')
-    .required('Email is required'),
+  email: Yup.string().email('Enter valid email address'),
 });
