@@ -87,7 +87,6 @@ export default function Home() {
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
-      console.log('result', result);
 
       authContext.setUserData(result);
       i18next.changeLanguage(result?.app_lang);
@@ -150,7 +149,7 @@ export default function Home() {
                       title="Book Now"
                       onPress={() => {
                         navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                          screen: SCREENS.BOOKCOVIDTEST,
+                          screen: SCREENS.COVID19HOME,
                         });
                       }}
                     />

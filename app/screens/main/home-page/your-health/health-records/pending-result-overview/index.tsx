@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import React, { useState } from 'react';
 
@@ -21,7 +22,6 @@ import { useRoute } from '@react-navigation/native';
 import Styles from './styles';
 import { TitleWithBackLayout } from 'components/layouts';
 import moment from 'moment';
-import { ActivityIndicator } from 'components';
 
 import DeleteButtonContainer from 'components/base/delete-button-with-container';
 import WithdrawProgram from 'components/widthdraw-from-program';
@@ -32,6 +32,7 @@ import { navigate } from 'services/nav-ref';
 import Pdf from 'react-native-pdf';
 import { useTranslation } from 'react-i18next';
 import ShowPicModal from 'components/show-upload-pic-modal';
+import { ActivityIndicator as ActivityLoader } from 'components';
 
 const PendingResultOverview = () => {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ const PendingResultOverview = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [showPicModal, setShowPicModal] = useState(false);
+  const [imageLoad, setImageLoad] = useState(false);
   const [modalData, setModalData] = useState([]);
 
   const pendingResult = useSelector(
@@ -98,7 +100,7 @@ const PendingResultOverview = () => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator visible={isVisiable ? !modalVisible : isVisiable} />
+      <ActivityLoader visible={isVisiable ? !modalVisible : isVisiable} />
       <TitleWithBackLayout
         shadow={colors.blue}
         title={t('pages.labResultOverview.title')}
@@ -176,11 +178,26 @@ const PendingResultOverview = () => {
                           style={styles.imageView2}
                         />
                       ) : (
-                        <ImageBackground
-                          imageStyle={{ borderRadius: 8 }}
-                          source={{ uri: item?.document?.url }}
-                          style={styles.imageView2}
-                        ></ImageBackground>
+                        <View
+                          style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <ActivityIndicator
+                            style={{ position: 'absolute', zIndex: 100 }}
+                            size="small"
+                            color={colors.heading}
+                            animating={imageLoad}
+                          />
+                          <ImageBackground
+                            imageStyle={{ borderRadius: 8 }}
+                            source={{ uri: item?.document?.url }}
+                            style={styles.imageView2}
+                            onLoadStart={() => setImageLoad(true)}
+                            onLoad={() => setImageLoad(false)}
+                          />
+                        </View>
                       )}
                     </Pressable>
                   );
