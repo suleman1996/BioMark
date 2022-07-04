@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { useTheme } from 'react-native-paper';
+import { TouchableRipple, useTheme } from 'react-native-paper';
 import SCREENS from '../../navigation/constants/index';
 
 import fonts from 'assets/fonts';
@@ -10,6 +10,7 @@ import fonts from 'assets/fonts';
 import { YourHealth } from 'assets/svgs/index';
 import { useTranslation } from 'react-i18next';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 export default function YourHealthBtn() {
   const { t } = useTranslation();
@@ -20,11 +21,16 @@ export default function YourHealthBtn() {
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate(YOUR_HEALTH)}>
-        <View style={styles.circleBtn}>
+      <View style={styles.circleBtn}>
+        <TouchableRipple
+          onPress={() => navigation.navigate(YOUR_HEALTH)}
+          style={styles.btn}
+          rippleColor={'rgba(0,128,128,0.05)'}
+        >
           <YourHealth />
-        </View>
-      </TouchableOpacity>
+        </TouchableRipple>
+      </View>
+
       <View>
         <Text style={styles.healthText}>
           {t('pages.search.yourHealth.label')}
@@ -39,8 +45,8 @@ const makeStyles = (colors: any) =>
     circleBtn: {
       backgroundColor: 'white',
       borderRadius: 300,
-      paddingHorizontal: 15,
-      paddingVertical: 15,
+      width: widthToDp(14),
+      height: widthToDp(14),
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -50,10 +56,19 @@ const makeStyles = (colors: any) =>
       shadowRadius: 16.0,
       elevation: 3,
       marginBottom: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      overflow: 'hidden',
     },
     healthText: {
       fontFamily: fonts.bold,
       fontSize: RFValue(15),
       color: colors.heading,
+    },
+    btn: {
+      width: widthToDp(14),
+      height: widthToDp(14),
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });

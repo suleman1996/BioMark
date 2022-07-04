@@ -105,7 +105,7 @@ export default function Home() {
     <View style={{ alignItems: 'center', backgroundColor: 'white', flex: 1 }}>
       <View style={styles.navBar}>
         <Text style={styles.navHeading}>
-          {t('pages.dashboard.greetings')} {authContext?.userData?.first_name}!
+          {t('pages.dashboard.greetings')} {authContext?.userData?.first_name}
         </Text>
         <View style={styles.navSearch}>
           <SearchBarWithLeftScanIcon />
