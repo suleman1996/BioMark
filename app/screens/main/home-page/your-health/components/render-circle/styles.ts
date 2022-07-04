@@ -1,5 +1,5 @@
 import fonts from 'assets/fonts';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
 
@@ -45,7 +45,7 @@ export const makeStyles = (colors: any) =>
       marginBottom: 5,
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
+      overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
     healthText: {
       fontFamily: fonts.bold,

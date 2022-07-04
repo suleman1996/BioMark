@@ -44,6 +44,7 @@ import { navigate } from 'services/nav-ref';
 import { useIsFocused } from '@react-navigation/native';
 import { getAllApointmentsCountsR } from 'store/notifications/notification-actions';
 import { IAppState } from 'store/IAppState';
+import { addCovidBooking } from 'store/covid/covid-actions';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -57,7 +58,9 @@ export default function Home() {
   const dispatchMedDropDown = useDispatch();
   const dispatchMedicationList = useDispatch();
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
-
+  const userDetails = useSelector(
+    (state: IAppState) => state.profile?.userProfile
+  );
   /*eslint-disable*/
   const getReduxBoot = async () => {
     await dispatch(getReduxBootstrap());
@@ -177,9 +180,18 @@ export default function Home() {
                     <SmallButton
                       title="Book Now"
                       onPress={() => {
-                        navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                          screen: SCREENS.COVID19HOME,
-                        });
+                        if (userDetails.id_verification) {
+                          navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+                            screen: SCREENS.BOOKCOVIDTEST,
+                          });
+                        } else {
+                          navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
+                            screen: SCREENS.ID_VERIFICATION_START,
+                            params: { sendTo: 'booktest' },
+                          });
+                        }
+
+                        dispatch(addCovidBooking([]));
                       }}
                     />
                   </View>
