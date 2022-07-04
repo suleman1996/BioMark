@@ -8,7 +8,7 @@ export const formatBarData = (
   data: { value: number | string; label: string }[]
 ) =>
   data.map((point) => ({
-    value: point.value,
+    value: parseValue(point.value),
     label: point.label,
     frontColor: 'white',
     gradientColor: '#1B96D8',
@@ -25,3 +25,6 @@ export const formatPieData = (
     value: activity.percent,
     color: COLORS[index],
   }));
+
+const parseValue = (value: number | string) =>
+  typeof value == 'string' ? parseFloat(value.replace(':', '.')) : value;

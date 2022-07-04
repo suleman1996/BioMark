@@ -35,9 +35,7 @@ const VitalsMenu = () => {
   ];
 
   useEffect(() => {
-    TryvitalsService.getDevicesData().then((response) =>
-      setData(response.data)
-    );
+    TryvitalsService.getDevicesData().then((response) => setData(response));
   }, []);
 
   return (
@@ -59,7 +57,7 @@ const VitalsMenu = () => {
           ))}
         </View>
       </ScrollView>
-      {Object.keys(data).length > 0 ? (
+      {data && Object.keys(data).length > 0 ? (
         <>
           <View style={styles.graphContainer}>
             {graphType == 1 && (

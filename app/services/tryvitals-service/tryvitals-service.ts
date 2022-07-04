@@ -1,4 +1,3 @@
-import axios from 'axios';
 import * as tryvitalResponses from 'types/auth/TryvitalsResponse';
 import { logNow } from 'utils/functions/log-binder';
 import client from '../client';
@@ -47,7 +46,7 @@ const linkToken = () => {
 const getDevicesData = () => {
   return new Promise<tryvitalResponses.DeviceDataResponse>(
     (resolve, reject) => {
-      axios
+      client
         .get(API_URLS.TRYVITAL_DEVICE_DATA)
         .then(async (response) => resolve(response.data))
         .catch(async (err: tryvitalResponses.DeviceDataErrorResponse) => {
