@@ -59,6 +59,8 @@ import {
   getReduxHealthTracker,
   getReduxLabResultStatus,
   getReduxHealthFeeds,
+  getReduxLatestResult,
+  getReduxPastResult,
 } from 'store/home/home-actions';
 import RenderHealthRiskView from './components/render-health-risk-view/index';
 import QrInputPopup from './components/qr-input-popup';
@@ -136,7 +138,7 @@ const Index = () => {
     dispatch(getReduxHealthFeeds());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, isFocused]);
+  }, [isFocused]);
 
   useEffect(() => {
     handleHEalthTracker();
@@ -451,7 +453,11 @@ const Index = () => {
                   />
                 }
                 // svg={<Health />}
-                onPress={() => navigate(SCREENS.HEALTH_RECORD)}
+                onPress={() => {
+                  dispatch(getReduxLatestResult());
+                  dispatch(getReduxPastResult());
+                  navigate(SCREENS.HEALTH_RECORD);
+                }}
               />
               <RenderCircle
                 title={t('pages.dashboard.healthProgress')}
