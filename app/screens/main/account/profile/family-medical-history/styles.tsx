@@ -1,8 +1,8 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
-import { GlobalFonts } from 'utils/theme/fonts';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -13,8 +13,8 @@ export const makeStyles = (colors: any) =>
       paddingTop: heightToDp(3),
     },
     label: {
-      fontSize: responsiveFontSize(22),
-      fontFamily: GlobalFonts.medium,
+      fontSize: responsiveFontSize(18),
+      fontFamily: fonts.mulishSemiBold,
       color: colors.darkPrimary,
       marginTop: heightToDp(3),
     },

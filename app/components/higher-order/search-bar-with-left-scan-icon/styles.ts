@@ -32,9 +32,10 @@ export const makeStyles = (colors: any) =>
     },
     input: {
       width: widthToDp(70),
-      fontSize: responsiveFontSize(20),
+      fontSize: responsiveFontSize(16),
       color: '#3D3D3D',
       marginHorizontal: 10,
+      paddingVertical: 3,
       fontFamily: fonts.mulishRegular,
     },
     inputContainer: {
@@ -112,7 +113,7 @@ export const makeStyles = (colors: any) =>
       paddingVertical: 5,
       shadowRadius: 3.84,
     },
-    line: { height: 0.3, backgroundColor: colors.lightBlueish },
+    line: { height: 1, backgroundColor: colors.lightBlueish },
     viewDropDown: {
       position: 'absolute',
       backgroundColor: '#fff',

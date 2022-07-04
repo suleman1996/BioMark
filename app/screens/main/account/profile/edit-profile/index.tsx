@@ -38,6 +38,7 @@ import { useDispatch } from 'react-redux';
 import { getUserProfileData } from 'store/profile/profile-actions';
 import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 let cameraIs = false;
 
@@ -215,6 +216,7 @@ const EditProfileScreen = () => {
                 fontSize: responsiveFontSize(20),
                 color: colors.darkPrimary,
                 fontFamily: GlobalFonts.light,
+                paddingHorizontal: widthToDp(3),
               }}
             >
               {t('pages.profile.about')}

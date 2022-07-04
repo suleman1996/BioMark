@@ -363,6 +363,7 @@ const SearchBarWithLeftScanIcon = () => {
             style={styles.input}
             placeholder="Search Biomark app"
             placeholderStyle={styles.input}
+            placeholderTextColor={colors.disabled}
             autoFocus={false}
             text
           />
@@ -391,15 +392,18 @@ const SearchBarWithLeftScanIcon = () => {
                   <View>
                     <Text
                       style={{
-                        fontFamily: fonts.regular,
+                        fontFamily: fonts.mulishRegular,
                         color: colors.inactive,
-                        fontSize: 18,
+                        fontSize: 15,
                         paddingLeft: 10,
+                        borderBottomColor: colors.disabled,
+                        borderBottomWidth: 0.5,
+                        paddingVertical: 5,
                       }}
                     >
                       {item?.name}
                     </Text>
-                    <View style={styles.line} />
+                    {/* <View style={styles.line} /> */}
                   </View>
                 </Pressable>
               ))}
