@@ -11,7 +11,7 @@ export const makeStyles = (colors: any) =>
       height: heightToDp(7),
       marginTop: heightToDp(1.5),
       backgroundColor: colors.white,
-      borderRadius: widthToDp(2),
+      borderRadius: widthToDp(1),
       alignItems: 'center',
       justifyContent: 'center',
       shadowColor: '#000',
@@ -24,7 +24,7 @@ export const makeStyles = (colors: any) =>
       elevation: 2,
     },
     label: {
-      fontSize: responsiveFontSize(17),
+      fontSize: responsiveFontSize(16),
       fontFamily: GlobalFonts.regular,
       color: colors.gray,
     },

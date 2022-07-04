@@ -11,7 +11,7 @@ export const makeStyles = (colors: any) =>
       backgroundColor: colors.white,
       height: heightToDp(150),
       alignItems: 'center',
-      paddingTop: heightToDp(2),
+      // paddingTop: heightToDp(2),
     },
     parent: {
       borderColor: colors.inputBg,

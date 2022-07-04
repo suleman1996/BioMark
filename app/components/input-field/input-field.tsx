@@ -76,6 +76,7 @@ const makeStyles = (colors: any) =>
     },
     textFieldStyle: {
       fontSize: responsiveFontSize(17),
+      // alignContent: 'center',
       width: '100%',
       color: '#3D3D3D',
       fontFamily: fonts.regular,

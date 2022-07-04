@@ -116,10 +116,10 @@
       "title": "System Under Maintenance",
       "definition": "BioMark App is not available at the moment. Please come again later."
     },
-    "clinics":{
-      "title":"Klinik",
-      "description":"Segera Datang"
-    }, 
+    "clinics": {
+      "title": "Klinik",
+      "description": "Segera Datang"
+    },
     "covid": {
       "header": "COVID-19",
       "title": "View Previous COVID-19 Test Results",
@@ -699,16 +699,16 @@
       "doctorMessage": "Lihat Pesan Dokter",
       "seeResult": "Lihat Hasil",
       "suggestedReading": "Pembacaan Disarankan",
-       "riskTitle": "risiko kesehatan Anda",
-       "healthRecords": "Health Records",
-       "covid19": "COVID-19",
-       "bookings": "Bookings",
-       "healthProgress": "Health Progress",
-       "healthProvider": "Healthcare Providers",
-       "yourHealth": "Your Health",
-       "accessCode": "Do you have an Access Code?",
-       "accessCodeDesc": "You can enter your code at the button beside.",
-       "accessCodeHint": "What is an access code?",
+      "riskTitle": "risiko kesehatan Anda",
+      "healthRecords": "Health Records",
+      "covid19": "COVID-19",
+      "bookings": "Bookings",
+      "healthProgress": "Health Progress",
+      "healthProvider": "Healthcare Providers",
+      "yourHealth": "Your Health",
+      "accessCode": "Do you have an Access Code?",
+      "accessCodeDesc": "You can enter your code at the button beside.",
+      "accessCodeHint": "What is an access code?",
       "dialogs": {
         "verify": {
           "title": "Hasil Tersedia",
@@ -757,8 +757,8 @@
         }
       }
     },
-    "diabetesSupport": { 
-     "titles": {
+    "diabetesSupport": {
+      "titles": {
         "diabetes_title": "Diabetes Support Center",
         "hypertension_title": "Hypertension Support Center"
       },
@@ -881,10 +881,10 @@
       "statusList": "Masukkan nama…",
       "conditions": "Masukkan kondisi…",
       "medications": "Masukkan pengobatan…",
-      "dismissDialog":{
+      "dismissDialog": {
         "title": "Apakah Anda Yakin?",
-        "description":"Dengan mengkonfirmasi tindakan ini, Anda akan melewati pertanyaan-pertanyaan yang membantu kami menilai risiko kesehatan Anda dan akan dibawa ke dashbor.",
-        "buttonText":"Ya"
+        "description": "Dengan mengkonfirmasi tindakan ini, Anda akan melewati pertanyaan-pertanyaan yang membantu kami menilai risiko kesehatan Anda dan akan dibawa ke dashbor.",
+        "buttonText": "Ya"
       }
     },
     "labResultOverview": {
@@ -1009,24 +1009,24 @@
         },
         "listAllergies": {
           "Medication": {
-            "label":"Silakan daftar pengobatan ini",
-            "placeholder":"Masukkan pengobatan"
+            "label": "Silakan daftar pengobatan ini",
+            "placeholder": "Masukkan pengobatan"
           },
           "Food": {
-            "label":"Silakan cantumkan makanan ini",
-            "placeholder":"Masukkan makanan"
+            "label": "Silakan cantumkan makanan ini",
+            "placeholder": "Masukkan makanan"
           },
           "Animal": {
-            "label":"Silakan masukkan binatang ini",
-            "placeholder":"Masukkan binatang"
+            "label": "Silakan masukkan binatang ini",
+            "placeholder": "Masukkan binatang"
           },
           "Environment": {
-            "label":"Silakan masukkan alergen lingkungan ini",
-            "placeholder":"Masukkan alergen lingkungan"
+            "label": "Silakan masukkan alergen lingkungan ini",
+            "placeholder": "Masukkan alergen lingkungan"
           },
           "Other": {
-            "label":"Silakan cantumkan alergi ini",
-            "placeholder":"Masukkan alergi"
+            "label": "Silakan cantumkan alergi ini",
+            "placeholder": "Masukkan alergi"
           }
         }
       },
@@ -1100,7 +1100,7 @@
       "title": "Lebih Lanjut",
       "links": {
         "profile": "Profil",
-        "editProfile": "Edit Profile", 
+        "editProfile": "Edit Profile",
         "notifications": "Notifikasi",
         "previousNotifications": "Previous Notifications",
         "support": "Dukungan",
@@ -1109,7 +1109,7 @@
         "settings": "Pengaturan",
         "logout": "Log Keluar",
         "autoLogout": "Log Keluar Otomatis",
-        "idVerification":"Identity Verification",
+        "idVerification": "Identity Verification",
         "dependants": "Dependants",
         "search": "Search Biomark app",
         "verification": {
@@ -1117,7 +1117,7 @@
           "pending": "Pending",
           "verified": "Verified",
           "error": "Verification error. Please resubmit details"
-        } 
+        }
       }
     },
     "notification": {
@@ -1137,7 +1137,7 @@
         "placeholder": "Masukkan kata sandi Anda saat ini...",
         "errors": {
           "required": "Kata sandi saat ini diperlukan",
-          "invalidCurrent":"Kata sandi saat ini yang Anda masukkan salah."
+          "invalidCurrent": "Kata sandi saat ini yang Anda masukkan salah."
         }
       },
       "newPassword": {
@@ -1157,12 +1157,12 @@
           "invalid": "Kata Sandi tidak valid"
         }
       },
-      "resetLimit":{
+      "resetLimit": {
         "title": "Tidak dapat memproses permintaan Anda",
-        "error":{
+        "error": {
           "limit": "Batas percobaan terlampau, silakan ulangi lagi setelah beberapa saat."
         },
-        "buttonText":"Tutup"
+        "buttonText": "Tutup"
       }
     },
     "pdfViewer": {
@@ -1223,7 +1223,7 @@
           "description": "Kode berhasil dipindai. Silakan klik ‘Lanjut’ untuk meneruskan.",
           "buttonText": "Berikutnya"
         },
-        "doctor" : {
+        "doctor": {
           "title": "Berhubung ke",
           "titlePSP": "Persetujuan",
           "descriptionPSP": "Dengan mengklik \"Setuju\", Saya menyetujui untuk berbagi informasi pribadi dengan Penyedia Kesehatan yang ditunjukkan dalam formulir pendaftaran Program Pasien Empower, termasuk informasi profil saya dan informasi tracker kesehatan saya untuk tujuan penerimaan layanan kesehatan.",
@@ -1301,7 +1301,7 @@
         "clearFilters": "Bersihkan Saringan",
         "uploadType": "Jenis Dokumen Diunggah",
         "uploadedByMe": "Diunggah Oleh Saya",
-        "sentByDoctor" : "Dikirim OLeh Dokter",
+        "sentByDoctor": "Dikirim OLeh Dokter",
         "startDate": "Tanggal Mulai",
         "endDate": "Tanggal Akhir"
       }
@@ -1313,7 +1313,7 @@
         "bioMarkers": "Biomarker",
         "panel": "Panel",
         "result": "Hasil",
-        "yourdoctor" : "Dokter"
+        "yourdoctor": "Dokter"
       }
     },
     "settings": {
@@ -1379,7 +1379,7 @@
         "tosLink": "Ketentuan Layanan",
         "dppLink": "Kebijakan Privasi Data"
       },
-     "buttontitle": {
+      "buttontitle": {
         "privacy": "Privacy details",
         "back": "Back"
       },
@@ -1648,7 +1648,7 @@
       "inbox": "Inbox",
       "other": "Other",
       "appointment": "Appointment",
-      "account": "Account id"
+      "account": "Akun"
     },
     "targets": {
       "title": "Target"
@@ -1683,13 +1683,13 @@
         "fail": {
           "title": "Gagal Mengunggah",
           "description": "Silakan periksa koneksi Anda dan coba unggah berkas kembali. Jika ini gagal, silakan hubungi kami.",
-   "buttonText": "Oke"
+          "buttonText": "Oke"
         }
       }
     },
-    "uploadAvatar":{
-      "dialogs":{
-        "upload":{
+    "uploadAvatar": {
+      "dialogs": {
+        "upload": {
           "title": "Ubah Gambar Profil"
         }
       }

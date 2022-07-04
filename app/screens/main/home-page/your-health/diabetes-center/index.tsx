@@ -70,11 +70,13 @@ const DiabetesCenter = (props) => {
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
 
   useEffect(() => {
+    dispatch(getReduxPspModules());
+  }, []);
+
+  useEffect(() => {
     PspModuleData();
     handleHEalthTracker();
-
     setBarCodeData(dashboard?.program_detail?.barcode);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     if (props?.route?.params?.showDemo) {
       setShowDemo(0);

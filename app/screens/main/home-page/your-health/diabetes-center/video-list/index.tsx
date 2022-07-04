@@ -21,6 +21,11 @@ const VideoList = ({ route }) => {
   const item = route.params.code;
 
   useEffect(() => {
+    dispatch(getReduxPspPdfLink(item.code));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     videoData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -29,7 +34,6 @@ const VideoList = ({ route }) => {
     try {
       setIsVisible(true);
       dispatch(getReduxPspPdfLink(item.code));
-
       setVideoLink(pspVideoLinks.link);
       setIsVisible(false);
     } catch (err) {
