@@ -39,7 +39,7 @@ const Index = () => {
   );
 
   const [showSummaryummary, setSummary] = React.useState(true);
-  const [results, setResults] = React.useState({ id: 0 });
+
   const [isInfo, setIsInfo] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   const [filterOption1] = React.useState([
@@ -78,22 +78,6 @@ const Index = () => {
       console.error('Pdf report error ', err);
     }
   };
-
-  const RenderTitle = ({ result }) => (
-    <TouchableOpacity
-      onPress={() =>
-        setResults(results.id == 0 ? { id: result?.name } : { id: 0 })
-      }
-      style={styles.titleContainer}
-    >
-      <Text style={styles.renderTitle}>{result?.name}</Text>
-      <AntDesign
-        color={colors.blue}
-        size={15}
-        name={results.id != result?.name ? 'up' : 'down'}
-      />
-    </TouchableOpacity>
-  );
 
   const RenderSummaryTitle = ({ state, setState, title }) => (
     <TouchableOpacity
@@ -288,14 +272,12 @@ const Index = () => {
             {resultOverView?.panel?.map((result) => (
               <>
                 <FlatList
-                  ListHeaderComponent={<RenderTitle result={result} />}
                   data={result?.biomarker}
                   keyExtractor={(item) => item.id}
-                  renderItem={({ item }) =>
-                    results.id != result?.name && <RenderResults item={item} />
-                  }
+                  renderItem={({ item }) => (
+                    <RenderResults result={result} item={item} />
+                  )}
                 />
-                <View style={{ height: 20 }} />
               </>
             ))}
           </ScrollView>

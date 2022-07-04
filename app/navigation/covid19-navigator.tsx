@@ -39,15 +39,12 @@ const Covid19Navigator = () => {
       />
       <Stack.Screen
         options={{
-          headerShown: true,
+          headerShown: false,
           headerTintColor: colors.darkPrimary,
           title: 'COVID-19 Bookings',
           headerLeft: () => (
             <Pressable
               onPress={() => {
-                // navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                //   screen: SCREENS.COVID19HOME,
-                // });
                 goBack();
               }}
               style={{ paddingRight: widthToDp(2) }}
@@ -122,7 +119,7 @@ const Covid19Navigator = () => {
 
       <Stack.Screen
         options={{
-          headerShown: true,
+          headerShown: false,
           headerTintColor: colors.darkPrimary,
           headerTitleStyle: {
             fontFamily: GlobalFonts.light,

@@ -14,6 +14,7 @@ import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 import BioEmptyTestResult from 'components/svg/bio-empty-test-result';
 import { t } from 'i18next';
+import PlaneHeader from 'components/plane-header';
 
 type Props = {};
 
@@ -76,10 +77,12 @@ const ViewCovidResults = (props: Props) => {
   return (
     <>
       <View style={styles.container}>
+        <PlaneHeader title="COVID-19 Results" />
         <FlatList
           showsVerticalScrollIndicator={false}
           data={data}
           renderItem={singleFlatListItem}
+          style={{ marginTop: 10 }}
           ListEmptyComponent={() => {
             return (
               <View style={styles.emptyResult}>

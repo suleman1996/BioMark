@@ -29,6 +29,12 @@ const Search = () => {
         route?.params?.labId,
         search
       );
+      console.log(
+        'Here is the search results data',
+        result.data,
+        ' ',
+        route?.params?.labId
+      );
 
       setSearchData(result.data.results);
     } catch (error) {
@@ -40,13 +46,27 @@ const Search = () => {
     <TouchableOpacity
       onPress={() =>
         navigation.navigate(SCREENS.MORE_INFO, {
-          result_id: item?.biomarker_id,
+          result_id: item?.biomarker_id ? item?.biomarker_id : item?.id,
         })
       }
       style={styles.renderSearchView}
     >
       <Text style={{ fontFamily: fonts.regular, fontSize: 14 }}>
         {item?.name}
+      </Text>
+    </TouchableOpacity>
+  );
+
+  const RenderSearchPanel = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => {
+        setSearchData({ biomarker_card: [...item.biomarkers] }),
+          setSearchText(item.header_name);
+      }}
+      style={styles.renderSearchView}
+    >
+      <Text style={{ fontFamily: fonts.regular, fontSize: 14 }}>
+        {item?.header_name}
       </Text>
     </TouchableOpacity>
   );
@@ -76,24 +96,22 @@ const Search = () => {
         </View>
 
         <ScrollView>
-          {searchText !== '' &&
-            searchData?.panel_card?.map((item) => (
-              <>
-                <Text
-                  style={{
-                    fontFamily: fonts.regular,
-                    color: colors.heading,
-                    marginVertical: 15,
-                    fontSize: 18,
-                  }}
-                >
-                  {item?.header_name}
-                </Text>
-                {searchData?.biomarker_card?.map((lable) => (
-                  <RenderSearch item={lable} />
-                ))}
-              </>
-            ))}
+          {searchText !== '' && (
+            <>
+              {searchData?.biomarker_card?.length > 0 && (
+                <Text style={styles.searchHeadingTExt}>BIOMARKERS</Text>
+              )}
+              {searchData?.biomarker_card?.map((lable) => (
+                <RenderSearch item={lable} />
+              ))}
+              {searchData?.panel_card?.length > 0 && (
+                <Text style={styles.searchHeadingTExt}>PANEL</Text>
+              )}
+              {searchData?.panel_card?.map((lable) => (
+                <RenderSearchPanel item={lable} />
+              ))}
+            </>
+          )}
         </ScrollView>
       </View>
     </TitleWithBackLayout>
