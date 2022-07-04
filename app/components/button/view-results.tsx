@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TouchableRipple, useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import BioResultsIcon from 'components/svg/bio-results-icon';
 
@@ -70,7 +70,7 @@ const makeStyles = (colors: any) =>
       marginBottom: 5,
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
+      overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
     healthText: {
       fontFamily: fonts.bold,
