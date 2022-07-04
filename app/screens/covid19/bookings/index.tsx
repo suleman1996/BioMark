@@ -10,6 +10,7 @@ import UpcommingBookings from './../../../components/ui/upcomming-bookings/index
 import makeStyles from './styles';
 import { getAllBookingsDataR } from 'store/covid/covid-actions';
 import { t } from 'i18next';
+import PlaneHeader from 'components/plane-header';
 
 type Props = {};
 
@@ -62,6 +63,7 @@ const Covid19Bookings = (props: Props) => {
   return (
     <>
       <View style={styles.container}>
+        <PlaneHeader title="COVID-19 Bookings" />
         <FlatList
           style={{ flexGrow: 0 }}
           horizontal

@@ -7,16 +7,32 @@ import { useTheme } from 'react-native-paper';
 import Styles from './styles';
 import Filter from 'assets/svgs/filter';
 import SCREENS from 'navigation/constants/index';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 type Props = {};
 
-const Card = ({ item }: Props) => {
+const Card = ({ item, result }: Props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
   const styles = Styles(colors);
 
   const [show, setShow] = React.useState(false);
+  const [dropdown, setDropDown] = React.useState(true);
+
+  const RenderTitle = ({ data }) => (
+    <TouchableOpacity
+      onPress={() => setDropDown(!dropdown)}
+      style={styles.titleContainer}
+    >
+      <Text style={styles.renderTitle}>{data?.name}</Text>
+      <AntDesign
+        color={colors.blue}
+        size={15}
+        name={dropdown ? 'up' : 'down'}
+      />
+    </TouchableOpacity>
+  );
 
   const RenderRadio = () => (
     <View
@@ -72,91 +88,96 @@ const Card = ({ item }: Props) => {
   );
 
   const RenderResults = () => (
-    <View
-      style={[
-        styles.resultView,
-        {
-          backgroundColor: colors.white,
-        },
-      ]}
-    >
-      <TouchableOpacity
-        onPress={() => setShow(!show)}
-        style={[
-          styles.resultViewHeader,
-          {
-            backgroundColor:
-              item?.findings == 'high' || item?.findings == 'low'
-                ? colors.pureRed
-                : '#fff',
-          },
-        ]}
-      >
-        <View style={styles.resultViewHeaderLeft}>
-          <RenderRadio />
-        </View>
-        <View style={styles.resultViewHeaderCenter}>
-          <Text
+    <>
+      <RenderTitle data={result} />
+      {dropdown ? (
+        <View
+          style={[
+            styles.resultView,
+            {
+              backgroundColor: colors.white,
+            },
+          ]}
+        >
+          <TouchableOpacity
+            onPress={() => setShow(!show)}
             style={[
-              styles.resultViewHeaderTitle,
-              {
-                color:
-                  item?.findings == 'high' || item?.findings == 'low'
-                    ? colors.white
-                    : colors.heading,
-              },
-            ]}
-          >
-            {item?.name}
-          </Text>
-        </View>
-        <View style={styles.resultViewHeaderRight}>
-          <Text
-            style={[
-              styles.resultViewHeaderSubTitle,
-              {
-                color:
-                  item?.findings == 'high' || item?.findings == 'low'
-                    ? colors.white
-                    : colors.bg,
-              },
-            ]}
-          >
-            {item?.value} {item?.unit}
-          </Text>
-        </View>
-      </TouchableOpacity>
-      {show && (
-        <>
-          <View
-            style={[
-              styles.resultViewBody,
+              styles.resultViewHeader,
               {
                 backgroundColor:
                   item?.findings == 'high' || item?.findings == 'low'
-                    ? colors.dangerBg
-                    : colors.white,
+                    ? colors.pureRed
+                    : '#fff',
               },
             ]}
           >
-            <Text style={styles.bodyText}>{item?.definition}</Text>
-          </View>
-          <View
-            style={[
-              styles.resultViewFooter,
-              {
-                backgroundColor:
-                  item?.findings == 'high' || item?.findings == 'low'
-                    ? colors.dangerBg
-                    : colors.white,
-              },
-            ]}
-          >
-            <RenderMoreInfo resultId={item?.biomarker_id} />
-          </View>
-        </>
-      )}
-    </View>
+            <View style={styles.resultViewHeaderLeft}>
+              <RenderRadio />
+            </View>
+            <View style={styles.resultViewHeaderCenter}>
+              <Text
+                style={[
+                  styles.resultViewHeaderTitle,
+                  {
+                    color:
+                      item?.findings == 'high' || item?.findings == 'low'
+                        ? colors.white
+                        : colors.heading,
+                  },
+                ]}
+              >
+                {item?.name}
+              </Text>
+            </View>
+            <View style={styles.resultViewHeaderRight}>
+              <Text
+                style={[
+                  styles.resultViewHeaderSubTitle,
+                  {
+                    color:
+                      item?.findings == 'high' || item?.findings == 'low'
+                        ? colors.white
+                        : colors.bg,
+                  },
+                ]}
+              >
+                {item?.value} {item?.unit}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          {show && (
+            <>
+              <View
+                style={[
+                  styles.resultViewBody,
+                  {
+                    backgroundColor:
+                      item?.findings == 'high' || item?.findings == 'low'
+                        ? colors.dangerBg
+                        : colors.white,
+                  },
+                ]}
+              >
+                <Text style={styles.bodyText}>{item?.definition}</Text>
+              </View>
+              <View
+                style={[
+                  styles.resultViewFooter,
+                  {
+                    backgroundColor:
+                      item?.findings == 'high' || item?.findings == 'low'
+                        ? colors.dangerBg
+                        : colors.white,
+                  },
+                ]}
+              >
+                <RenderMoreInfo resultId={item?.biomarker_id} />
+              </View>
+            </>
+          )}
+        </View>
+      ) : null}
+    </>
   );
   return <RenderResults />;
 };

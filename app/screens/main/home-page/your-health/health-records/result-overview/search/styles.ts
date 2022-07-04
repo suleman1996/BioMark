@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import fonts from 'assets/fonts';
 
 const styles = (colors: any) =>
   StyleSheet.create({
@@ -52,6 +53,12 @@ const styles = (colors: any) =>
       elevation: 5,
       justifyContent: 'center',
       margin: 4,
+    },
+    searchHeadingTExt: {
+      fontFamily: fonts.regular,
+      color: colors.heading,
+      marginVertical: 15,
+      fontSize: 18,
     },
   });
 export default styles;

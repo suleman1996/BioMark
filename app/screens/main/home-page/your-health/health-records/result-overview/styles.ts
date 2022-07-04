@@ -38,6 +38,8 @@ const styles = (colors: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      marginHorizontal: 10,
+      marginVertical: 10,
     },
     infoView: {
       width: '100%',
