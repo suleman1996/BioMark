@@ -33,7 +33,7 @@ const styles = (colors: any) =>
     },
     navHeading: {
       fontFamily: fonts.extraBold,
-      fontSize: RFValue(20),
+      fontSize: RFValue(18),
       color: colors.white,
       paddingLeft: 10,
       paddingTop: 10,
@@ -69,7 +69,7 @@ const styles = (colors: any) =>
     },
     horizontalListItemText: {
       fontFamily: fonts.semiBold,
-      fontSize: responsiveFontSize(20),
+      fontSize: responsiveFontSize(18),
       color: colors.darkPrimary,
     },
   });

@@ -335,7 +335,9 @@ export default function Signup() {
                     <InputWithLabel
                       label={t('pages.register.form.email')}
                       placeholder="E.g. Sample@email.com"
-                      containerStyles={{ paddingHorizontal: 20 }}
+                      containerStyles={{
+                        paddingHorizontal: 20,
+                      }}
                       labelStyle={{
                         fontFamily: fonts.mulishSemiBold,
                         color: colors.heading,
@@ -353,6 +355,7 @@ export default function Signup() {
                       placeholder={t(
                         'pages.password.currentPassword.placeholder'
                       )}
+                      containerStyle={{ borderRadius: 8 }}
                       secureTextEntry={hidePassword}
                       eye={!hidePassword ? 'eye' : 'eye-off'}
                       onEyePress={() => setHidePassword(!hidePassword)}

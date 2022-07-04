@@ -171,18 +171,32 @@ const PersonalInformationScreen = () => {
         <Text style={styles.label}>{t('pages.register.form.gender')}</Text>
         <RadioButton.Group
           onValueChange={(newValue) => {
+            console.log(newValue);
+
             setValue(newValue), setGenderDisable(true);
           }}
           value={value}
         >
-          <View style={styles.radioContainer}>
-            <RadioButton.Android color={colors.darkPrimary} value="first" />
-            <Text style={styles.radioText}>{t('common.gender.male')}</Text>
-          </View>
-          <View style={styles.radioContainer}>
-            <RadioButton.Android color={colors.darkPrimary} value="second" />
-            <Text style={styles.radioText}>{t('common.gender.female')}</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              setValue('first'), setGenderDisable(true);
+            }}
+          >
+            <View style={styles.radioContainer}>
+              <RadioButton.Android color={colors.darkPrimary} value="first" />
+              <Text style={styles.radioText}>{t('common.gender.male')}</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setValue('second'), setGenderDisable(true);
+            }}
+          >
+            <View style={styles.radioContainer}>
+              <RadioButton.Android color={colors.darkPrimary} value="second" />
+              <Text style={styles.radioText}>{t('common.gender.female')}</Text>
+            </View>
+          </TouchableOpacity>
         </RadioButton.Group>
       </ScrollView>
       <Button

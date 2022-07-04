@@ -16,6 +16,7 @@ type Props = {
   eye?: any;
   keyboardType?: any;
   defaultValue?: string;
+  containerStyle?: any;
 };
 
 export default function (props: Props) {
@@ -23,7 +24,13 @@ export default function (props: Props) {
   const styles = makeStyles(colors);
 
   return (
-    <View style={[styles.container, { marginHorizontal: props.margin }]}>
+    <View
+      style={[
+        styles.container,
+        props.containerStyle,
+        { marginHorizontal: props.margin },
+      ]}
+    >
       <TextInput
         placeholder={props?.placeholder}
         value={props?.value}
