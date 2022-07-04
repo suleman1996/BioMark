@@ -58,7 +58,7 @@ const Sleep = (props: SleepProps) => {
   const { data, display7Days } = props;
 
   return (
-    <View style={{ alignItems: 'center' }}>
+    <View style={{ marginTop: 20, alignItems: 'center' }}>
       {data && Object.keys(data).length > 0 ? (
         display7Days ? (
           <BarChart

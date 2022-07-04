@@ -40,7 +40,7 @@ const Pedometer = (props: Props) => {
         ) : (
           <CircularProgress
             value={data?.one_day}
-            radius={110}
+            radius={100}
             maxValue={data?.one_day * 1.25}
             progressValueColor="#2A1252"
             progressValueFontSize={28}
