@@ -23,8 +23,12 @@ export default function PdfDiabetesSupportCenter({ route }) {
   const pspPdfLinks = useSelector(
     (state: IAppState) => state.home.PspDataContents
   );
-
   const item = route.params.code;
+
+  useEffect(() => {
+    dispatch(getReduxPspPdfLink(item.item.code));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     PdfData();
@@ -35,7 +39,6 @@ export default function PdfDiabetesSupportCenter({ route }) {
     try {
       setIsVisible(true);
       await dispatch(getReduxPspPdfLink(item.item.code));
-
       setPdf(pspPdfLinks.link);
       setIsVisible(false);
     } catch (err) {

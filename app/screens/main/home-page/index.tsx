@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import i18next from 'i18next';
 
 import fonts from 'assets/fonts';
@@ -23,7 +23,12 @@ import HealthSnapshot from './health-snapshot/index';
 import FloatingActionButton from 'components/floating-action-button';
 
 import { getReduxBootstrap } from 'store/account/account-actions';
-import { getReduxMedicalDropDown } from 'store/home/home-actions';
+import {
+  getReduxMedicalDropDown,
+  getReduxDashboard,
+  getReduxHealthTracker,
+  getReduxPspModules,
+} from 'store/home/home-actions';
 import { getReduxMedicationList } from 'store/home/home-actions';
 import SCREENS from 'navigation/constants/index';
 
@@ -38,6 +43,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { navigate } from 'services/nav-ref';
 import { useIsFocused } from '@react-navigation/native';
 import { getAllApointmentsCountsR } from 'store/notifications/notification-actions';
+import { IAppState } from 'store/IAppState';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -50,6 +56,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const dispatchMedDropDown = useDispatch();
   const dispatchMedicationList = useDispatch();
+  const dashboard = useSelector((state: IAppState) => state.home.dashboard);
 
   /*eslint-disable*/
   const getReduxBoot = async () => {
@@ -61,6 +68,28 @@ export default function Home() {
   const getMedicationList = async () => {
     await dispatchMedicationList(getReduxMedicationList());
   };
+
+  useEffect(() => {
+    if (
+      dashboard?.psp_user &&
+      [2, 4].includes(dashboard?.program_detail?.program_id)
+    ) {
+      navigate(SCREENS.DIABETES_CENTER);
+    } else if (
+      dashboard?.psp_user &&
+      [3, 4].includes(dashboard?.program_detail?.program_id)
+    ) {
+      navigate(SCREENS.HYPERTENSION);
+    } else {
+      navigate(SCREENS.YOUR_HEALTH);
+    }
+  }, [dashboard?.psp_user]);
+
+  useEffect(() => {
+    dispatch(getReduxHealthTracker());
+    dispatch(getReduxDashboard());
+    dispatch(getReduxPspModules());
+  }, []);
 
   useEffect(() => {
     getReduxBoot();

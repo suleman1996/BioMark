@@ -37,14 +37,14 @@ import PdfHypertensionSupportCenter from 'screens/main/home-page/your-health/hyp
 import VideoHypertensionList from 'screens/main/home-page/your-health/hypertension-diary/video';
 import FamilyMedicalHistory from 'screens/main/account/profile/family-medical-history';
 import {
-  // getReduxPspModules,
-  // getReduxPspPdfLink,
-  // getReduxLatestResult,
-  // getReduxPastResult,
+  getReduxPspModules,
+  getReduxPspPdfLink,
+  getReduxLatestResult,
+  getReduxPastResult,
   getReduxPspHypertensionHealthTrackerData,
-  // getReduxPspHyperModules,
-  // getReduxPspPdfHyperLink,
-  // getReduxPendingResultOverview,
+  getReduxPspHyperModules,
+  getReduxPspPdfHyperLink,
+  getReduxPendingResultOverview,
   getLatestTargetsAction,
   getNewTargetAction,
 } from 'store/home/home-actions';
@@ -111,16 +111,16 @@ const AppNavigator = () => {
   const auth = useSelector((state: IAppState) => state.auth);
   const hasProfile = auth.hasProfile ? true : false;
 
-  useEffect(() => {
+  useEffect((link: string, id: number) => {
     getHasProfileAsyncStorage();
-    // dispatch(getReduxPspModules());
-    // dispatch(getReduxPspPdfLink(link));
-    // dispatch(getReduxPspPdfHyperLink(link));
-    // dispatch(getReduxLatestResult());
-    // dispatch(getReduxPastResult());
+    dispatch(getReduxPspModules());
+    dispatch(getReduxPspPdfLink(link));
+    dispatch(getReduxPspPdfHyperLink(link));
+    dispatch(getReduxLatestResult());
+    dispatch(getReduxPastResult());
     dispatch(getReduxPspHypertensionHealthTrackerData());
-    // dispatch(getReduxPspHyperModules());
-    // dispatch(getReduxPendingResultOverview(id));
+    dispatch(getReduxPspHyperModules());
+    dispatch(getReduxPendingResultOverview(id));
     dispatch(getLatestTargetsAction());
     dispatch(getNewTargetAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
