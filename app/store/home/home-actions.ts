@@ -284,7 +284,6 @@ export const getHealthTrackerRisks =
     await homeServices
       .getHealthRisks()
       .then(async (res) => {
-        // console.log(fromResponse(res));
         await dispatch(addHealthRisks(res));
       })
       .catch((err) => {

@@ -40,8 +40,6 @@ const MoreInfo = () => {
       const result = await healthRecordServices.getMoreInfoResult(
         route?.params?.result_id
       );
-      console.log('xxxxxxxxxxxx ', result.data);
-
       setSummary(result.data);
     } catch (error) {
       console.error(error);
@@ -106,7 +104,6 @@ const MoreInfo = () => {
 
   const RenderTable = ({ data }) => (
     <View style={{ flexDirection: 'row' }}>
-      {console.log({ data })}
       <RenderDownload
         name="chart-timeline-variant"
         resultId={data?.id}

@@ -96,6 +96,7 @@ const API_URLS = {
   BILLPLZ: '/payment/v1/billplz',
   SAVE_COVID_BOOKING_DEPENDANT: '/api/v1/patient/covid/booking',
   RESULTS_FOR_COVID_HOME: '/api/v2/patient/results/covid/latest',
+  GET_COVID_NOTIFICATIONS_COUNTS: '/api/v1/patient/appointment',
 
   // stripe
   STRIPE: '/payment/v1/stripe',
@@ -161,7 +162,10 @@ const API_URLS = {
   GET_BLOOD_SUGAR_CHART: '/api/v1/patient/psp/trackers/blood_sugar/chart',
 
   // Tryvitals Modules
-  TRYVITALS_LINK_TOKEN: '/api/v2/try_vitals/link_token',
+  TRYVITAL_LINK_TOKEN: '/api/v2/try_vitals/link_token',
+  TRYVITAL_CONNECTED_DEVICES: '/api/v2/try_vitals',
+  TRYVITAL_DISCONNECT_DEVICE: '/api/v2/try_vitals/disconnect_device',
+  TRYVITAL_DEVICE_DATA: 'api/v2/vitals_serializers/serialized_data',
   BATCH_READ_UPCOMMING: '/api/v1/patient/notifications/batch_read',
   SET_LANGUAGE: '/api/v1/patient/profiles/set_lang',
 };

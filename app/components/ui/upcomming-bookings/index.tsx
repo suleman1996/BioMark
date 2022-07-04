@@ -49,7 +49,6 @@ const UpcommingBookings = (props: Props) => {
     }
   }, [allUpcommingBookings]);
   useEffect(() => {
-    console.log('route', route?.params?.has_pending_declaration);
     if (route?.params?.has_pending_declaration) {
       setIsHealthDeclarationAll(true);
     }
@@ -233,7 +232,7 @@ const UpcommingBookings = (props: Props) => {
               }}
             >
               <EmptyResultComponent
-                title="No Upcomming Bookings"
+                title="No Upcoming Bookings"
                 subTitle="You have no COVID bookings scheduled yet."
                 icon={<BioBookings width={14} height={14} />}
               />

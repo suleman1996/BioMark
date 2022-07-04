@@ -56,7 +56,7 @@ const PaymentStep = (props: Props) => {
   const userDetails = useSelector(
     (state: IAppState) => state.profile?.userProfile
   );
-
+  const [onLineBtn, setOnLineBtn] = useState(false);
   /*eslint-disable */
 
   useEffect(() => {
@@ -366,7 +366,15 @@ const PaymentStep = (props: Props) => {
               Choose Payment Method
             </Text>
             {countryName === 'Malaysia' ? (
-              <ButtonComponent onPress={async () => {}} title={'Online'} />
+              <ButtonComponent
+                onPress={async () => {
+                  setOnLineBtn(!onLineBtn);
+                }}
+                title={'Online'}
+                style={{
+                  backgroundColor: onLineBtn ? '#1B96D8' : 'lightgray',
+                }}
+              />
             ) : countryName == 'Singapore' ? (
               <ButtonComponent
                 onPress={async () => {}}
@@ -379,6 +387,7 @@ const PaymentStep = (props: Props) => {
               <Text style={[styles.btnText]}>Cancel</Text>
             </Pressable>
             <Pressable
+              disabled={!onLineBtn}
               onPress={async () => {
                 setPaymentModal(false);
                 if (countryName == 'Malaysia') {
@@ -406,7 +415,10 @@ const PaymentStep = (props: Props) => {
                   }
                 }
               }}
-              style={styles.btnEnable}
+              style={[
+                styles.btnEnable,
+                { backgroundColor: onLineBtn ? '#1B96D8' : 'lightgray' },
+              ]}
             >
               <Text style={[styles.btnText2]}>Next</Text>
             </Pressable>

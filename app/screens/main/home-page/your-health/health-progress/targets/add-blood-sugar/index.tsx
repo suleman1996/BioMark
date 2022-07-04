@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Tip } from 'react-native-tip';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Info from 'react-native-vector-icons/AntDesign';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { InputWithUnits, ActivityIndicator } from 'components';
 import GradientButton from 'components/linear-gradient-button';
@@ -24,11 +24,12 @@ import {
   getLatestTargetsAction,
 } from 'store/home/home-actions';
 import { IAppState } from 'store/IAppState';
+import SCREENS from 'navigation/constants';
 
 import Styles from './styles';
 import { useTranslation } from 'react-i18next';
 
-const Index = () => {
+const Index = ({ route }) => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { colors } = useTheme();
@@ -42,7 +43,6 @@ const Index = () => {
     toppg: '',
     selectedType: 0,
   });
-
   const updateState = (name: string, value: string | number) =>
     setState((prev) => ({ ...prev, [name]: value }));
 
@@ -116,7 +116,12 @@ const Index = () => {
         message: result,
         type: 'success',
       });
-      navigation.goBack();
+      if (route?.params?.fromEmptyValue) {
+        navigation.navigate(SCREENS.BLOOD_SUGAR);
+      } else {
+        navigation.goBack();
+      }
+
       return;
     }
     showMessage({
@@ -176,7 +181,7 @@ const Index = () => {
           <Text style={styles.subHeading}>
             {t('pages.bloodSugarTargetInput.subtitle')}
           </Text>
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -207,7 +212,7 @@ const Index = () => {
                 />
               </View>
             </Tip>
-          </View>
+          </View> */}
           <InputWithUnits
             small
             title={t('pages.bloodSugarTargetInput.from')}
@@ -258,13 +263,7 @@ const Index = () => {
                 marginLeft: 10,
               }}
             >
-              <View style={{ height: 20, width: 20 }}>
-                <Icon
-                  name="ios-information-circle-outline"
-                  size={18}
-                  color={colors.blue}
-                />
-              </View>
+              <Info name="infocirlceo" size={18} color={colors.blue} />
             </Tip>
           </View>
           <InputWithUnits

@@ -17,11 +17,18 @@ import {
   HomeIcon,
   InboxIcon,
 } from 'assets/svgs/index';
+import { StyleSheet, View } from 'react-native';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { useSelector } from 'react-redux';
+import { IAppState } from 'store/IAppState';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   const { colors } = useTheme();
+  const booking_count = useSelector(
+    (state: IAppState) => state.notifications.allAppointmentCounts
+  );
 
   return (
     <Tab.Navigator
@@ -56,7 +63,15 @@ const BottomTabNavigator = () => {
         name={SCREENS.APPOINTMENT}
         component={AppointmentScreen}
         options={{
-          tabBarIcon: ({ color }) => <AppointmentIcon fill={color} />,
+          tabBarIcon: ({ color }) => (
+            <View>
+              {booking_count?.booking_result_count > 0 ||
+              booking_count?.covid_booking_count > 0 ? (
+                <View style={styles.redDot} />
+              ) : null}
+              <AppointmentIcon fill={color} />
+            </View>
+          ),
         }}
       />
       <Tab.Screen
@@ -69,5 +84,16 @@ const BottomTabNavigator = () => {
     </Tab.Navigator>
   );
 };
-
+const styles = StyleSheet.create({
+  redDot: {
+    width: widthToDp(2.4),
+    height: widthToDp(2.4),
+    backgroundColor: 'red',
+    borderRadius: widthToDp(1.2),
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 3,
+  },
+});
 export default BottomTabNavigator;

@@ -3,6 +3,7 @@ import { NotificationMessage } from 'types/api';
 import { ErrorResponse } from 'types/ErrorResponse';
 import { logNow } from 'utils/functions/log-binder';
 import client from '../client';
+import { Appointment } from 'types/api/appointment';
 
 function getAllinboxNotifications(page: number = 1) {
   return new Promise<Array<NotificationMessage>>((resolve, reject) => {
@@ -29,8 +30,6 @@ function getAlliOthersNotifications(page: number = 1) {
     client
       .get(`${API_URLS.NOTIFICATIONS}/other?page=${page}`)
       .then(async (response) => {
-        console.log('response==>', response);
-
         try {
           //logNow('all notification inbox success response', response.data);
           resolve(response.data);
@@ -71,8 +70,6 @@ function getAlliInboxUnreadNotifications() {
       .get(`${API_URLS.NOTIFICATIONS}/inbox/unread`)
       .then(async (response) => {
         try {
-          console.log('/inbox/unread', response);
-
           resolve(response.data);
         } catch (e) {
           logNow('unread inbox notifiction', e);
@@ -85,6 +82,26 @@ function getAlliInboxUnreadNotifications() {
       });
   });
 }
+
+function getAllAppointmentsCounts() {
+  return new Promise<Appointment>((resolve, reject) => {
+    client
+      .get(`${API_URLS.GET_COVID_NOTIFICATIONS_COUNTS}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('get all appointment counts', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('error in all appointment counts', err);
+        reject(err);
+      });
+  });
+}
+
 const readInboxNotification = (id) => {
   return client.get(`${API_URLS.NOTIFICATIONS}/${id}/inbox_read`);
 };
@@ -95,4 +112,5 @@ export const notificationsService = {
   getAlliOthersUnreadNotifications,
   getAlliInboxUnreadNotifications,
   readInboxNotification,
+  getAllAppointmentsCounts,
 };

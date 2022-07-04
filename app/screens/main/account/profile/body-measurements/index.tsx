@@ -48,7 +48,7 @@ const BodyMeasurementScreen = () => {
       setBodyMeasurment((prev) => ({
         ...prev,
         weight: Number((prev.weight * 2.205).toFixed(1)),
-        height: cmToFeet(prev.height),
+        height: !isNaN(+prev.height) ? cmToFeet(prev.height) : prev.height,
       }));
     } else {
       setBodyMeasurment((prev) => ({
@@ -64,14 +64,22 @@ const BodyMeasurementScreen = () => {
       setIsLoading(true);
       const { height_attr, weight_attr, is_metric }: any =
         await userService.getBodyMeasurements();
+      console.log(
+        'heigh ',
+        height_attr,
+        ' Weight ',
+        weight_attr,
+        ' is_metric ',
+        is_metric
+      );
 
-      if (is_metric) {
-        setBodyMeasurment({
-          height: height_attr,
-          weight: weight_attr,
-          is_metric,
-        });
-      }
+      // if (is_metric) {
+      setBodyMeasurment({
+        height: height_attr,
+        weight: weight_attr,
+        is_metric,
+      });
+      // }
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);

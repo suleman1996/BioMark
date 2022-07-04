@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
 import {
+  Dimensions,
   ImageBackground,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
-  Dimensions,
   Platform,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -16,13 +15,10 @@ import i18next from 'i18next';
 
 import fonts from 'assets/fonts';
 import MyImage from 'assets/images';
-import {
-  Covid19Btn,
-  GoogleFitButton,
-  SmallButton,
-  YourHealthBtn,
-} from 'components/button';
+
+import { Covid19Btn, SmallButton, YourHealthBtn } from 'components/button';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
+import HealthSnapshot from './health-snapshot/index';
 
 import FloatingActionButton from 'components/floating-action-button';
 
@@ -40,12 +36,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userService } from 'services/user-service/user-service';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { navigate } from 'services/nav-ref';
+import { useIsFocused } from '@react-navigation/native';
+import { getAllApointmentsCountsR } from 'store/notifications/notification-actions';
 
 export default function Home() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-
+  const focused = useIsFocused();
   const authContext = useContext(AuthContext);
 
   // const bootstrap = useSelector((state: IAppState) => state.account.bootstrap);
@@ -69,6 +67,13 @@ export default function Home() {
     getMedicalDropDown();
     getMedicationList();
   }, []);
+
+  const getAppointsmentsCounts = async () => {
+    await dispatch(getAllApointmentsCountsR());
+  };
+  useEffect(() => {
+    getAppointsmentsCounts();
+  }, [focused]);
   /*eslint-enable*/
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
@@ -158,30 +163,8 @@ export default function Home() {
               <YourHealthBtn />
               <Covid19Btn />
             </View>
-            <Text style={styles.gfHeading}>{t('healthSnapshot.title')}</Text>
-            <View style={styles.googleFitC}>
-              <ImageBackground
-                source={MyImage.healthRing}
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  paddingHorizontal: 15,
-                  justifyContent: 'center',
-                }}
-              >
-                <TouchableOpacity>
-                  <GoogleFitButton
-                    disabled={false}
-                    title={
-                      Platform.OS == 'android'
-                        ? t('healthSnapshot.android.connectButton')
-                        : t('healthSnapshot.ios.connectButton')
-                    }
-                    onPress={() => console.log('pressed')}
-                  />
-                </TouchableOpacity>
-              </ImageBackground>
-            </View>
+            <HealthSnapshot />
+            <View style={{ paddingBottom: '50%' }} />
           </View>
         </ScrollView>
       </View>

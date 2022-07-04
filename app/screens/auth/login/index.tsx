@@ -270,16 +270,16 @@ export default function Login() {
           onChange={setPassword}
           margin={20}
         />
-        {password !== '' && password.length < 8 && (
+        {/* {password !== '' && password.length < 8 && (
           <Text style={styles.errorMessage}>
             {t('pages.password.passwordRules')}
           </Text>
-        )}
-        {!PASS_REGIX.test(password) && password.length > 7 ? (
+        )} */}
+        {/* {!PASS_REGIX.test(password) && password.length > 7 ? (
           <Text style={styles.errorMessage}>
             {t('pages.password.passwordRules')}
           </Text>
-        ) : null}
+        ) : null} */}
         <View style={{ alignSelf: 'center' }}>
           <TouchableOpacity
             style={{ marginVertical: 30 }}
@@ -293,11 +293,7 @@ export default function Login() {
         <Button
           onPress={() => handleLogin()}
           disabled={
-            phoneNumber.length < numberCondition.min ||
-            password.length < 8 ||
-            !PASS_REGIX.test(password)
-              ? true
-              : false
+            phoneNumber.length < numberCondition.min || password.length < 8
           }
           title={t('pages.login.login')}
         />

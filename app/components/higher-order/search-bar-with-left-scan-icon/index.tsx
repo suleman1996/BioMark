@@ -425,7 +425,7 @@ const SearchBarWithLeftScanIcon = () => {
           invalidError == 'Invalid code'
             ? 'Invalid Code'
             : actionError == 'sfi_member'
-            ? 'Already a Member'
+            ? 'Code Already Entered'
             : invalidError == 'Code already used'
             ? 'Already a Member'
             : invalidError == 'Scan event code first'

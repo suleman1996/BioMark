@@ -429,7 +429,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                   }
                 />
                 <Text style={styles.innerTitle}>Home Test</Text>
-                <Text style={styles.innerSmallTxt}>Comming soon</Text>
+                <Text style={styles.innerSmallTxt}>Coming soon</Text>
               </View>
             </View>
             <Text style={styles.innerTitle}>Country</Text>
@@ -479,7 +479,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <>
                   <Text style={styles.innerTitle}>Select a covid Test</Text>
                   <DropdownCountryCity
-                    options={testCentersBasedOnCities.map((item) => {
+                    options={testCentersBasedOnCities?.map((item) => {
                       return { label: item.name, value: item.id };
                     })}
                     selectedValue={covidTestCenterValue}
@@ -507,32 +507,34 @@ const ExisitingBookingForDependent = (props: Props) => {
                 <>
                   <Text style={styles.innerTitle}>City Test Centers</Text>
 
-                  {testCentersBasedOnCities
-                    .filter((item) => item.id == covidTestCenterValue)[0]
-                    ?.clinics?.map((item2, index2) => {
-                      return (
-                        <MapView
-                          key={index2}
-                          style={{
-                            width: widthToDp(88),
-                            height: heightToDp(20),
-                          }}
-                          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-                          region={{
-                            latitude: parseFloat(
-                              item2.test_centre_lat.toString()
-                            ),
-                            longitude: parseFloat(
-                              item2.test_centre_long.toString()
-                            ),
-                            latitudeDelta: 0.015,
-                            longitudeDelta: 0.0121,
-                          }}
-                        >
-                          <MapMarkerRender item={item2} />
-                        </MapView>
-                      );
-                    })}
+                  {[
+                    testCentersBasedOnCities.filter(
+                      (item) => item.id == covidTestCenterValue
+                    )[0]?.clinics[0],
+                  ]?.map((item2, index2) => {
+                    return (
+                      <MapView
+                        key={index2}
+                        style={{
+                          width: widthToDp(88),
+                          height: heightToDp(20),
+                        }}
+                        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+                        region={{
+                          latitude: parseFloat(
+                            item2.test_centre_lat.toString()
+                          ),
+                          longitude: parseFloat(
+                            item2.test_centre_long.toString()
+                          ),
+                          latitudeDelta: 0.015,
+                          longitudeDelta: 0.0121,
+                        }}
+                      >
+                        <MapMarkerRender item={item2} />
+                      </MapView>
+                    );
+                  })}
                 </>
               ) : null}
               <View style={{ marginTop: heightToDp(1) }} />
