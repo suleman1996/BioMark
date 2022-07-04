@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TouchableRipple, useTheme } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import BioBookTest from 'components/svg/bio-book-test';
 
@@ -33,9 +33,6 @@ export default function BookTestButton() {
                 screen: SCREENS.BOOKCOVIDTEST,
               });
             } else {
-              navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-                screen: SCREENS.BOOKCOVIDTEST,
-              });
               navigate(SCREENS.NESTED_ACCOUNT_NAVIGATOR, {
                 screen: SCREENS.ID_VERIFICATION_START,
                 params: { sendTo: 'booktest' },
@@ -76,7 +73,7 @@ const makeStyles = (colors: any) =>
       marginBottom: 5,
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
+      overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
     healthText: {
       fontFamily: fonts.bold,

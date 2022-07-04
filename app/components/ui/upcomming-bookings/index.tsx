@@ -232,7 +232,7 @@ const UpcommingBookings = (props: Props) => {
               }}
             >
               <EmptyResultComponent
-                title="No Upcoming Bookings"
+                title="No Upcoming Appointments"
                 subTitle="You have no COVID bookings scheduled yet."
                 icon={<BioBookings width={14} height={14} />}
               />

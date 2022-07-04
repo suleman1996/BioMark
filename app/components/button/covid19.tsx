@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { TouchableRipple, useTheme } from 'react-native-paper';
 
 import { Covid19 } from 'assets/svgs/index';
@@ -71,7 +71,7 @@ const makeStyles = (colors: any) =>
       marginBottom: 5,
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
+      overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
     covidText: {
       fontFamily: fonts.bold,
