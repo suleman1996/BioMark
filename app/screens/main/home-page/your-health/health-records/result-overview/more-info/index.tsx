@@ -422,5 +422,4 @@ const MoreInfo = () => {
     </TitleWithBackLayout>
   );
 };
-
 export default MoreInfo;
