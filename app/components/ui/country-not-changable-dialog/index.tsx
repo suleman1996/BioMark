@@ -1,5 +1,6 @@
 import { Modal } from 'components/base';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const CountryNotChangeDialog = (props: Props) => {
+  const { t } = useTranslation();
   const { setIsVisible, isVisible } = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -19,12 +21,12 @@ const CountryNotChangeDialog = (props: Props) => {
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
-        <Text style={styles.title}>Why can't I change Countries?</Text>
+        <Text style={styles.title}>
+          {t('pages.covid.bookCovid.testBooking.countryInfoDialogTitle')}
+        </Text>
         <View style={{ height: heightToDp(2) }} />
         <Text style={styles.desc}>
-          Users are limited to one country for each booking order. If you wish
-          to book for another country you would need to start another booking
-          order.
+          {t('pages.covid.bookCovid.testBooking.countryInfoDialogDescription')}
         </Text>
         <View style={{ height: heightToDp(2) }} />
 
@@ -35,7 +37,11 @@ const CountryNotChangeDialog = (props: Props) => {
             }}
             style={styles.btnEnable}
           >
-            <Text style={[styles.btnText2]}>Okey</Text>
+            <Text style={[styles.btnText2]}>
+              {t(
+                'pages.covid.bookCovid.testBooking.countryInfoDialogButtonText'
+              )}
+            </Text>
           </Pressable>
         </View>
       </View>

@@ -5,12 +5,14 @@ import { useTheme } from 'react-native-paper';
 import makeStyles from './styles';
 import { navigate } from './../../../services/nav-ref';
 import SCREENS from 'navigation/constants';
+import { useTranslation } from 'react-i18next';
 type Props = {
   setIsVisible: any;
   isVisible: boolean;
 };
 
 const CancelBookingTestModal = (props: Props) => {
+  const { t } = useTranslation();
   const { setIsVisible, isVisible } = props;
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -21,11 +23,10 @@ const CancelBookingTestModal = (props: Props) => {
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
         <Text style={styles.title}>
-          Cancel Entire Test Booking {`\n`} Process
+          {t('pages.covid.bookCovid.cancelBookingProcess')}
         </Text>
         <Text style={styles.desc}>
-          By not proceeding you are not guranteed a test slot. Do you want to
-          cancel?
+          {t('pages.covid.bookCovid.cancelBookingProcessDesc')}
         </Text>
 
         <View style={styles.bottom2Btns}>
@@ -37,7 +38,9 @@ const CancelBookingTestModal = (props: Props) => {
             }
             style={[styles.btn, { backgroundColor: colors.white }]}
           >
-            <Text style={[styles.btnText]}>Yes</Text>
+            <Text style={[styles.btnText]}>
+              {t('pages.covid.bookCovid.bookingDialog.yes')}
+            </Text>
           </Pressable>
           <Pressable
             onPress={() => {
@@ -45,7 +48,9 @@ const CancelBookingTestModal = (props: Props) => {
             }}
             style={styles.btnEnable}
           >
-            <Text style={[styles.btnText2]}>No</Text>
+            <Text style={[styles.btnText2]}>
+              {t('pages.covid.bookCovid.bookingDialog.no')}
+            </Text>
           </Pressable>
         </View>
       </View>
