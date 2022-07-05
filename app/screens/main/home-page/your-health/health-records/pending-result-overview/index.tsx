@@ -169,14 +169,28 @@ const PendingResultOverview = () => {
                       }}
                     >
                       {item?.file_type === 'pdf' ? (
-                        <Pdf
-                          source={{
-                            uri: item?.document?.url,
-                            cache: true,
-                          }}
-                          trustAllCerts={true}
-                          style={styles.imageView2}
-                        />
+                        <>
+                          <Pdf
+                            source={{
+                              uri: item?.document?.url,
+                              cache: true,
+                            }}
+                            trustAllCerts={false}
+                            onLoadComplete={(numberOfPages) => {
+                              console.log(`Number of pages: ${numberOfPages}`);
+                            }}
+                            onPageChanged={(page) => {
+                              console.log(`Current page: ${page}`);
+                            }}
+                            onError={(error) => {
+                              console.log(error);
+                            }}
+                            onPressLink={(uri) => {
+                              console.log(`Link pressed: ${uri}`);
+                            }}
+                            style={styles.imageView2}
+                          />
+                        </>
                       ) : (
                         <View
                           style={{
