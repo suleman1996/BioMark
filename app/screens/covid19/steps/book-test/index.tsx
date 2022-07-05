@@ -136,6 +136,7 @@ const BookCovidTest = (props: Props) => {
                   onPress={() => {
                     // setIsExisting(true);
                     pushOneMoreToBooking();
+                    setOpendedBooking(0);
                   }}
                   title={t('pages.covid.covid-button.exist')}
                 />

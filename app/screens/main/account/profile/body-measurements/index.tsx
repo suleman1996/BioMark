@@ -30,8 +30,8 @@ const BodyMeasurementScreen = () => {
   const styles = makeStyles(colors);
   const [isLoading, setIsLoading] = useState(false);
   const [bodyMeasurment, setBodyMeasurment] = useState({
-    height: '0',
-    weight: 0,
+    height: '',
+    weight: '',
     is_metric: true,
   });
   const [error, setError] = useState({
@@ -44,6 +44,7 @@ const BodyMeasurementScreen = () => {
   }, []);
 
   useEffect(() => {
+    if (!bodyMeasurment.height || !bodyMeasurment.weight) return;
     if (!bodyMeasurment.is_metric) {
       setBodyMeasurment((prev) => ({
         ...prev,
