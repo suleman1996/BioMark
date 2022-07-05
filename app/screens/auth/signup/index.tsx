@@ -64,7 +64,7 @@ export default function Signup() {
   const [selectedGender, setSelectedGender] = useState('');
   const [numberCondition, setNumberCondition] = useState({ min: 8, max: 11 });
   const [checked, setChecked] = React.useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date('jan-01-1990'));
   const [isPickerShow, setIsPickerShow] = useState(false);
   const geoLocation = useSelector(
     (state: IAppState) => state.account.geolocation
@@ -262,7 +262,7 @@ export default function Signup() {
                       date={date}
                       setDate={setDate}
                       maximumDate={new Date()}
-                      minimumDate={new Date('Dec 31 1922')}
+                      minimumDate={date}
                     />
                   </View>
                   <InputWithLabel

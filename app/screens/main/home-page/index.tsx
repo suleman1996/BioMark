@@ -58,9 +58,6 @@ export default function Home() {
   const dispatchMedDropDown = useDispatch();
   const dispatchMedicationList = useDispatch();
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
-  const userDetails = useSelector(
-    (state: IAppState) => state.profile?.userProfile
-  );
   /*eslint-disable*/
   const getReduxBoot = async () => {
     await dispatch(getReduxBootstrap());
@@ -83,8 +80,6 @@ export default function Home() {
       [3, 4].includes(dashboard?.program_detail?.program_id)
     ) {
       navigate(SCREENS.HYPERTENSION);
-    } else {
-      navigate(SCREENS.YOUR_HEALTH);
     }
   }, [dashboard?.psp_user]);
 
@@ -108,18 +103,18 @@ export default function Home() {
   }, [focused]);
   /*eslint-enable*/
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    let fcm = await AsyncStorage.getItem('fcm');
-    registerDevice(fcm);
+  useEffect(() => {
+    registerDevice();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const registerDevice = async (fcm) => {
-    await userService.deviceRegisterAction(fcm, Platform.OS);
+  const registerDevice = async () => {
+    let fcm = await AsyncStorage.getItem('fcm');
+    let temp = await userService.deviceRegisterAction(fcm, Platform.OS);
+    console.log('tem', temp);
   };
   const userProfile = async () => {
     try {
       const result = await profileServices.getUserProfile();
-
       authContext.setUserData(result);
       i18next.changeLanguage(result?.app_lang);
     } catch (error) {
@@ -180,7 +175,15 @@ export default function Home() {
                     <SmallButton
                       title="Book Now"
                       onPress={() => {
-                        if (userDetails.id_verification) {
+                        console.log(
+                          'userDee',
+                          authContext?.userData?.id_verification
+                        );
+
+                        if (
+                          authContext?.userData?.id_verification == 'PENDING' ||
+                          authContext?.userData?.id_verification == 'SUCCESS'
+                        ) {
                           navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
                             screen: SCREENS.BOOKCOVIDTEST,
                           });

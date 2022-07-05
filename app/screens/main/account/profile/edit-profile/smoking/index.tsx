@@ -96,7 +96,7 @@ export default function SmokingScreen() {
             ? 0
             : result?.data?.smoking?.is_smoking == 'I used to'
             ? 1
-            : 0
+            : 2
         );
         if (result?.data?.smoking?.stick_per_day == null) {
           setDay('');

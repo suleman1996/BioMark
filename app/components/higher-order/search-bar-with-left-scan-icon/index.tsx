@@ -396,14 +396,12 @@ const SearchBarWithLeftScanIcon = () => {
                         color: colors.inactive,
                         fontSize: 15,
                         paddingLeft: 10,
-                        borderBottomColor: colors.disabled,
-                        borderBottomWidth: 0.5,
                         paddingVertical: 5,
                       }}
                     >
                       {item?.name}
                     </Text>
-                    {/* <View style={styles.line} /> */}
+                    <View style={styles.line} />
                   </View>
                 </Pressable>
               ))}
