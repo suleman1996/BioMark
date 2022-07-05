@@ -107,7 +107,7 @@ export const makeStyles = (colors: any) =>
     fixedIconView: {
       position: 'absolute',
       right: 0,
-      bottom: 0,
+      bottom: 20,
       marginRight: 20,
       marginBottom: 20,
     },
