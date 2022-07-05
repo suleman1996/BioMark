@@ -83,8 +83,6 @@ export default function Home() {
       [3, 4].includes(dashboard?.program_detail?.program_id)
     ) {
       navigate(SCREENS.HYPERTENSION);
-    } else {
-      navigate(SCREENS.YOUR_HEALTH);
     }
   }, [dashboard?.psp_user]);
 
