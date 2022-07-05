@@ -1,3 +1,4 @@
+import fonts from 'assets/fonts';
 import { StyleSheet } from 'react-native';
 
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -48,7 +49,6 @@ export const makeStyles = (colors: any) =>
     menuContainer: {
       flex: 1,
       width: '100%',
-      paddingHorizontal: widthToDp(3),
       marginTop: heightToDp(2),
       marginBottom: heightToDp(3),
     },
@@ -57,15 +57,19 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
       justifyContent: 'space-between',
       marginTop: heightToDp(1),
+      borderBottomWidth: 0.5,
+      borderBottomColor: colors.blue,
     },
     menuTitleAndIcon: {
       flexDirection: 'row',
       alignItems: 'center',
+      paddingHorizontal: widthToDp(3),
     },
     menuTitleText: {
-      fontSize: responsiveFontSize(22),
-      fontFamily: GlobalFonts.light,
+      fontSize: responsiveFontSize(16),
+      fontFamily: fonts.mulishRegular,
       marginLeft: widthToDp(4),
+      paddingBottom: heightToDp(1),
     },
     editView: {
       position: 'absolute',

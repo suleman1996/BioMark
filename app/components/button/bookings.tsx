@@ -2,8 +2,9 @@ import fonts from 'assets/fonts';
 import BioBookings from 'components/svg/bio-bookings';
 import { t } from 'i18next';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { TouchableRipple, useTheme } from 'react-native-paper';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { useSelector } from 'react-redux';
 import { navigate } from 'services/nav-ref';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
@@ -24,22 +25,23 @@ export default function TestBookinButton() {
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity activeOpacity={0.6}>
-        {booking_count.covid_booking_count > 0 ? (
-          <View style={styles.redDot} />
-        ) : null}
-        <TouchableOpacity
+      {booking_count.booking_result_count > 0 ||
+      booking_count.covid_booking_count > 0 ? (
+        <View style={styles.redDot} />
+      ) : null}
+      <View style={[styles.circleBtn, hasNoti]}>
+        <TouchableRipple
+          style={styles.btn}
+          rippleColor={'rgba(0,128,128,0.05)'}
           onPress={() =>
             navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
               screen: SCREENS.COVID19BOOKINGS,
             })
           }
-          activeOpacity={0.6}
-          style={[styles.circleBtn, hasNoti]}
         >
           <BioBookings width={7} height={7} />
-        </TouchableOpacity>
-      </TouchableOpacity>
+        </TouchableRipple>
+      </View>
       <View>
         <Text style={styles.healthText}>{t('pages.covid.home.bookings')}</Text>
       </View>
@@ -52,8 +54,8 @@ const makeStyles = (colors: any) =>
     circleBtn: {
       backgroundColor: 'white',
       borderRadius: 300,
-      paddingHorizontal: 15,
-      paddingVertical: 15,
+      width: widthToDp(14),
+      height: widthToDp(14),
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -61,12 +63,15 @@ const makeStyles = (colors: any) =>
       },
       shadowOpacity: 0.58,
       shadowRadius: 16.0,
-      elevation: 10,
+      elevation: 3,
       marginBottom: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
     healthText: {
       fontFamily: fonts.bold,
-      fontSize: 15,
+      fontSize: RFValue(15),
       color: colors.heading,
     },
     redDot: {
@@ -78,5 +83,12 @@ const makeStyles = (colors: any) =>
       right: 3,
       top: 3,
       zIndex: 1000,
+      elevation: 13,
+    },
+    btn: {
+      width: widthToDp(14),
+      height: widthToDp(14),
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });

@@ -66,8 +66,8 @@ const Index = (props: Props) => {
           <Text
             style={{
               color: item?.color ? item?.color : colors.heading,
-              fontFamily: fonts.mulishExtraBold,
-              fontSize: responsiveFontSize(18),
+              fontFamily: fonts.mulishBold,
+              fontSize: responsiveFontSize(17),
             }}
           >
             {item?.weight} {item?.unit}
@@ -83,7 +83,7 @@ const Index = (props: Props) => {
             style={{
               color: colors.heading,
               fontFamily: fonts.mulishRegular,
-              fontSize: responsiveFontSize(15),
+              fontSize: responsiveFontSize(12),
             }}
           >
             {moment(item?.date_entry).format('hh:mm a MMMM Do, YYYY')}

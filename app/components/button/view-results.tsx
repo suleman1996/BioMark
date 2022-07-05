@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useTheme } from 'react-native-paper';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { TouchableRipple, useTheme } from 'react-native-paper';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import BioResultsIcon from 'components/svg/bio-results-icon';
 
@@ -12,6 +12,7 @@ import { t } from 'i18next';
 import { IAppState } from 'store/IAppState';
 import { useSelector } from 'react-redux';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default function ViewResultsButton() {
   const { colors } = useTheme();
@@ -20,28 +21,28 @@ export default function ViewResultsButton() {
     (state: IAppState) => state.notifications.allAppointmentCounts
   );
   const hasNoti =
-    booking_count.booking_result_count > 0
+    booking_count.covid_booking_count > 0
       ? { borderColor: colors.darkPrimary, borderWidth: 1 }
       : {};
-
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-      <TouchableOpacity activeOpacity={0.6}>
-        {booking_count.booking_result_count > 0 ? (
-          <View style={styles.redDot} />
-        ) : null}
-        <TouchableOpacity
+      {booking_count.booking_result_count > 0 ||
+      booking_count.covid_booking_count > 0 ? (
+        <View style={styles.redDot} />
+      ) : null}
+      <View style={[styles.circleBtn, hasNoti]}>
+        <TouchableRipple
           onPress={() =>
             navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
               screen: SCREENS.VIEWCOVIDRESULTS,
             })
           }
-          activeOpacity={0.6}
-          style={[styles.circleBtn, hasNoti]}
+          style={styles.btn}
+          rippleColor={'rgba(0,128,128,0.05)'}
         >
           <BioResultsIcon width={7} height={7} />
-        </TouchableOpacity>
-      </TouchableOpacity>
+        </TouchableRipple>
+      </View>
       <View>
         <Text style={styles.healthText}>
           {t('pages.covid.home.viewResults')}
@@ -56,8 +57,8 @@ const makeStyles = (colors: any) =>
     circleBtn: {
       backgroundColor: 'white',
       borderRadius: 300,
-      paddingHorizontal: 15,
-      paddingVertical: 15,
+      width: widthToDp(14),
+      height: widthToDp(14),
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -65,12 +66,15 @@ const makeStyles = (colors: any) =>
       },
       shadowOpacity: 0.58,
       shadowRadius: 16.0,
-      elevation: 10,
+      elevation: 3,
       marginBottom: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
     healthText: {
       fontFamily: fonts.bold,
-      fontSize: 15,
+      fontSize: RFValue(15),
       color: colors.heading,
     },
     redDot: {
@@ -79,8 +83,15 @@ const makeStyles = (colors: any) =>
       backgroundColor: colors.red,
       borderRadius: widthToDp(1.2),
       position: 'absolute',
-      right: 3,
+      left: widthToDp(13.3),
       top: 3,
       zIndex: 1000,
+      elevation: 13,
+    },
+    btn: {
+      width: widthToDp(14),
+      height: widthToDp(14),
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });

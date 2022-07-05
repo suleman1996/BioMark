@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { TouchableRipple, useTheme } from 'react-native-paper';
 
 import { Covid19 } from 'assets/svgs/index';
 import fonts from 'assets/fonts';
@@ -27,13 +27,14 @@ export default function Covid19Btn({ onPress }) {
 
   return (
     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+      {booking_count.booking_result_count > 0 ||
+      booking_count.covid_booking_count > 0 ? (
+        <View style={styles.redDot} />
+      ) : null}
       <View style={[styles.circleBtn, hasNoti]}>
-        {booking_count.booking_result_count > 0 ||
-        booking_count.covid_booking_count > 0 ? (
-          <View style={styles.redDot} />
-        ) : null}
-
-        <TouchableOpacity
+        <TouchableRipple
+          style={styles.btn}
+          rippleColor={'rgba(0,128,128,0.05)'}
           onPress={() =>
             onPress
               ? onPress()
@@ -43,7 +44,7 @@ export default function Covid19Btn({ onPress }) {
           }
         >
           <Covid19 />
-        </TouchableOpacity>
+        </TouchableRipple>
       </View>
       <View>
         <Text style={styles.covidText}>{t('pages.covid.header')}</Text>
@@ -57,8 +58,8 @@ const makeStyles = (colors: any) =>
     circleBtn: {
       backgroundColor: 'white',
       borderRadius: 300,
-      paddingHorizontal: 15,
-      paddingVertical: 15,
+      width: widthToDp(14),
+      height: widthToDp(14),
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -68,6 +69,9 @@ const makeStyles = (colors: any) =>
       shadowRadius: 16.0,
       elevation: 3,
       marginBottom: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
     covidText: {
       fontFamily: fonts.bold,
@@ -82,5 +86,13 @@ const makeStyles = (colors: any) =>
       position: 'absolute',
       right: 3,
       top: 3,
+      zIndex: 1000,
+      elevation: 13,
+    },
+    btn: {
+      width: widthToDp(14),
+      height: widthToDp(14),
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
