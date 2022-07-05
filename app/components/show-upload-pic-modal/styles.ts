@@ -11,6 +11,7 @@ const styles = () =>
       alignItems: 'center',
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       marginLeft: 0,
+      position: 'absolute',
     },
     modalView: {
       backgroundColor: 'white',
