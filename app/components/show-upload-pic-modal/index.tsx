@@ -1,4 +1,5 @@
-import { View, Modal, Image, Pressable } from 'react-native';
+import { View, Image } from 'react-native';
+import Modal from 'react-native-modal';
 import React from 'react';
 import Styles from './styles';
 import { useTheme } from 'react-native-paper';
@@ -10,12 +11,12 @@ const ShowPicModal = ({ visible, modalData, onClose }) => {
 
   return (
     <Modal
-      onRequestClose={onClose}
       animationType="none"
       transparent={true}
       visible={visible}
+      onBackdropPress={onClose}
     >
-      <Pressable onPress={onClose} style={styles.centeredView}>
+      <View onPress={onClose} style={styles.centeredView}>
         <View style={styles.modalView}>
           {modalData?.file_type === 'pdf' ? (
             <Pdf
@@ -28,7 +29,7 @@ const ShowPicModal = ({ visible, modalData, onClose }) => {
               onError={(error) => {
                 console.error(error);
               }}
-              style={{ height: 300, width: 250 }}
+              style={{ flex: 1, width: 350 }}
             />
           ) : (
             <Image
@@ -39,7 +40,7 @@ const ShowPicModal = ({ visible, modalData, onClose }) => {
             />
           )}
         </View>
-      </Pressable>
+      </View>
     </Modal>
   );
 };
