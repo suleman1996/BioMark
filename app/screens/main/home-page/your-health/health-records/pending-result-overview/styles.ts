@@ -189,11 +189,12 @@ const styles = (colors: any) =>
     imageView2: {
       height: heightToDp(22),
       width: widthToDp(38),
-      backgroundColor: colors.fieldGrey,
+      // backgroundColor: colors.fieldGrey,
       marginHorizontal: widthToDp(5),
       marginTop: heightToDp(2),
       borderRadius: 8,
-      alignItems: 'flex-end',
+      // alignItems: 'flex-end',
+      flex: 1,
     },
     topView: {
       backgroundColor: 'white',
