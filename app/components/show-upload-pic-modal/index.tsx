@@ -9,15 +9,25 @@ const ShowPicModal = ({ visible, modalData, onClose }) => {
   const styles = Styles(colors);
 
   return (
-    <Modal animationType="none" transparent={true} visible={visible}>
-      <Pressable style={styles.centeredView} onPress={onClose}>
+    <Modal
+      onRequestClose={onClose}
+      animationType="none"
+      transparent={true}
+      visible={visible}
+    >
+      <Pressable onPress={onClose} style={styles.centeredView}>
         <View style={styles.modalView}>
-          {modalData?.filetype === 'pdf' ? (
+          {modalData?.file_type === 'pdf' ? (
             <Pdf
               source={{
-                uri: modalData.base64,
+                uri: modalData.base64
+                  ? modalData.base64
+                  : modalData?.document?.url,
               }}
-              trustAllCerts={true}
+              trustAllCerts={false}
+              onError={(error) => {
+                console.error(error);
+              }}
               style={{ height: 300, width: 250 }}
             />
           ) : (

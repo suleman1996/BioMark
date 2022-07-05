@@ -55,6 +55,7 @@ const DatePickerModal = (props: Props) => {
         accentColor={colors.primary}
         maximumDate={maximumDate}
         minimumDate={minimumDate}
+        date={date}
       />
     </View>
   );
