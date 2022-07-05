@@ -1,15 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 const styles = () =>
   StyleSheet.create({
     // modal
     centeredView: {
-      flex: 1,
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 22,
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      marginLeft: 0,
     },
     modalView: {
       backgroundColor: 'white',
