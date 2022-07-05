@@ -16,12 +16,11 @@ const styles = () =>
       borderRadius: 8,
       shadowColor: '#000',
       paddingHorizontal: widthToDp(5),
-      marginHorizontal: widthToDp(5),
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
-      paddingTop: heightToDp(5),
-      paddingBottom: heightToDp(5),
+      paddingTop: heightToDp(2),
+      paddingBottom: heightToDp(2),
     },
   });
 export default styles;
