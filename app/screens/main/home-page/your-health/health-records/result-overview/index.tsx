@@ -70,6 +70,7 @@ const Index = () => {
       const result = await healthRecordServices.getResultPdf(
         resultOverView?.lab_id
       );
+      console.log('pdfReport ', result.data);
 
       setPdfReport(result.data);
 
@@ -238,7 +239,7 @@ const Index = () => {
         onSharePress={async () => {
           await onShare({
             title: 'Sharing pdf file from BioMark',
-            message: 'Please take a look at this file',
+            // message: 'Please take a look at this file',
             url: `data:application/pdf;base64,${pdfReport}`,
           });
         }}

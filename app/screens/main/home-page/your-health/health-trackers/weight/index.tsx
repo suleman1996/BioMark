@@ -164,7 +164,9 @@ const Weight = ({ route }: any) => {
           <InputWithUnits
             labelStyle={{ fontSize: RFValue(17) }}
             title="Your Reading"
-            placeholder="0.0"
+            placeholder={
+              route?.params?.data ? route?.params?.data.toString() : '0.00'
+            }
             units={['kg', 'lbs']}
             unit={weightTracker.is_metric ? 'kg' : 'lbs'}
             value={weightTracker.weight.toString()}
