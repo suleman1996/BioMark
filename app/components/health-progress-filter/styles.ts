@@ -47,6 +47,17 @@ const styles = (colors: any) =>
       width: 15,
       borderRadius: 7.5,
       marginRight: 5,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: 5,
+      borderWidth: 2,
+      backgroundColor: colors.white,
+    },
+    innerRadio: {
+      height: 7,
+      width: 7,
+      backgroundColor: colors.heading,
+      borderRadius: 3.5,
     },
   });
 export default styles;
