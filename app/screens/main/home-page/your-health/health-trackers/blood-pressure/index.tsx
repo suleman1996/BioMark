@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { MedicalInput } from 'components/higher-order';
@@ -265,16 +265,40 @@ const BloodPressure = ({ route }: any) => {
             paddingHorizontal: 20,
           }}
         >
-          <GradientButton
-            text={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-            color={['#2C6CFC', '#2CBDFC']}
-            onPress={saveBloodPressureLog}
-            disabled={
-              bloodPressure.bp_systolic === '' ||
-              bloodPressure.bp_diastolic === '' ||
-              Object.keys(error).length !== 0
-            }
-          />
+          {bloodPressure.bp_systolic.length > 0 &&
+          bloodPressure.bp_diastolic.length > 0 ? (
+            <GradientButton
+              text={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+              color={['#2C6CFC', '#2CBDFC']}
+              onPress={saveBloodPressureLog}
+              disabled={
+                bloodPressure.bp_systolic === '' ||
+                bloodPressure.bp_diastolic === '' ||
+                Object.keys(error).length !== 0
+              }
+            />
+          ) : (
+            <TouchableOpacity
+              onPress={saveBloodPressureLog}
+              disabled={true}
+              style={{
+                height: 50,
+                borderRadius: 8,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#F0F0F0',
+              }}
+            >
+              <Text
+                style={{
+                  color: colors.smoke,
+                  fontSize: responsiveFontSize(15),
+                }}
+              >
+                {SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
       {showDeleteModal && (

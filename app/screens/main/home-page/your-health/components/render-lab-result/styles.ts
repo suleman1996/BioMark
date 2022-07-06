@@ -14,7 +14,6 @@ export const makeStyles = (colors: any) =>
       },
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
-
       elevation: 5,
       borderRadius: 10,
       marginHorizontal: 5,

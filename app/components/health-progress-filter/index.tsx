@@ -53,6 +53,7 @@ const Index = ({
           },
         ]}
       />
+
       <Text>{item?.title}</Text>
     </TouchableOpacity>
   );

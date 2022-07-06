@@ -13,7 +13,8 @@ export const makeStyles = () =>
     rightText: {
       fontFamily: GlobalFonts.light,
       fontSize: responsiveFontSize(20),
-      marginLeft: widthToDp(4),
+      textAlign: 'justify',
+      marginLeft: widthToDp(2),
       lineHeight: responsiveFontSize(30),
     },
     checkbox: {

@@ -14,10 +14,10 @@ export const makeStyles = (colors: any) =>
     },
     headerText: {
       fontSize: responsiveFontSize(23),
-      fontFamily: GlobalFonts.extraLight,
+      fontFamily: GlobalFonts.light,
       color: colors.darkPrimary,
-      letterSpacing: -0.1,
-      lineHeight: heightToDp(3.5),
+      // letterSpacing: -0.1,
+      // lineHeight: heightToDp(3.5),
     },
     checkbox: {
       transform: [{ scaleX: 1.8 }, { scaleY: 1.8 }],
