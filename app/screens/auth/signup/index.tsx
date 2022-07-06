@@ -262,7 +262,7 @@ export default function Signup() {
                       date={date}
                       setDate={setDate}
                       maximumDate={new Date()}
-                      minimumDate={date}
+                      minimumDate={new Date('jan-01-1990')}
                     />
                   </View>
                   <InputWithLabel

@@ -196,9 +196,7 @@ export default function InboxScreen() {
           )}
         />
 
-        {allInboxUnreadNotifications.length < 0 ? (
-          <View style={styles.blackLine} />
-        ) : null}
+        <View style={[styles.blackLine, { marginTop: heightToDp(2) }]} />
 
         <View style={styles.headerContainer}>
           <Text style={styles.prevHeaderText}>
@@ -238,6 +236,9 @@ export default function InboxScreen() {
               </>
             );
           }}
+          ListEmptyComponent={() => (
+            <Text style={styles.emptyListText}> {t('common.noMore')}</Text>
+          )}
         />
       </View>
     );
@@ -263,7 +264,17 @@ export default function InboxScreen() {
             />
           )}
         />
-        <View style={styles.blackLine} />
+        <View
+          style={[
+            styles.blackLine,
+            {
+              marginTop:
+                allOthersUnreadNotificationsData.length > 0
+                  ? heightToDp(3)
+                  : null,
+            },
+          ]}
+        />
         <View style={styles.headerContainer}>
           <Text style={styles.prevHeaderText}>
             {t('pages.more.links.previousNotifications')}
@@ -303,6 +314,9 @@ export default function InboxScreen() {
               </>
             );
           }}
+          ListEmptyComponent={() => (
+            <Text style={styles.emptyListText}> {t('common.noMore')}</Text>
+          )}
         />
       </View>
     );
@@ -326,7 +340,7 @@ export default function InboxScreen() {
                 }}
                 style={[
                   styles.tab,
-                  currentPage == 0 ? { borderBottomWidth: 3 } : {},
+                  currentPage == 0 ? { borderBottomWidth: 2 } : {},
                 ]}
               >
                 <Text style={styles.tabText}>
@@ -341,7 +355,7 @@ export default function InboxScreen() {
                 }}
                 style={[
                   styles.tab,
-                  currentPage == 1 ? { borderBottomWidth: 3 } : {},
+                  currentPage == 1 ? { borderBottomWidth: 2 } : {},
                 ]}
               >
                 <Text style={styles.tabText}>

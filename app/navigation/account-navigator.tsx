@@ -25,8 +25,8 @@ import VaccinationScreen from 'screens/main/account/profile/edit-profile/vaccina
 import AllergiesScreen from 'screens/main/account/profile/edit-profile/allergies';
 import DrinkingScreen from 'screens/main/account/profile/edit-profile/drinking';
 import SCREENS from './constants';
-import LetsStartIdVerfiication from 'screens/main/account/id-verification/lets-start';
-import IdVerfiicationComplete from 'screens/main/account/id-verification/lets-start/id-verification-complete/index';
+import LetsStartIdVerfiication from 'screens/main/account/id-verification/lets-start/index';
+import IdVerfiicationComplete from 'screens/main/account/id-verification/id-verification-complete/index';
 
 const Stack = createNativeStackNavigator();
 

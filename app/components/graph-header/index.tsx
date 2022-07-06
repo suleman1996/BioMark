@@ -31,10 +31,10 @@ const Index = (props: Props) => {
         end={{ x: 1, y: 0.25 }}
         colors={[
           props.selectedValue?.title == title?.title
-            ? '#2C6CFC'
+            ? colors.blue
             : colors.lightBlue,
           props.selectedValue?.title == title?.title
-            ? '#2CBDFC'
+            ? colors.blue
             : colors.lightBlue,
         ]}
       >
