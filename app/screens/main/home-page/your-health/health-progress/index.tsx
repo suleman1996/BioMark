@@ -63,15 +63,9 @@ const Index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const horizontalListItem = ({
-    item,
-    index,
-  }: {
-    item: any;
-    index: number;
-  }) => {
+  const horizontalListItem = ({ item }: { item: any }) => {
     const ifSBLine =
-      selectedHorizontal === index
+      selectedHorizontal === item.id
         ? { borderBottomWidth: 3 }
         : { borderBottomWidth: 0 };
     return (
@@ -198,9 +192,9 @@ const Index = () => {
           }}
           overlayColor={colors.opacityBlackDark}
           // color={colors.shineBlue}
-          buttonSize={53}
-          distanceToEdge={35}
-          actionsPaddingTopBottom={5}
+          buttonSize={55}
+          distanceToEdge={22}
+          actionsPaddingTopBottom={2}
           floatingIcon={<PillMedicationIcon />}
         />
       )}

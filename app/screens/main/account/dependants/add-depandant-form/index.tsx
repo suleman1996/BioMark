@@ -231,8 +231,10 @@ const AddDependantForm = (props: Props) => {
                 {t('pages.covid.covid-dependant.dob')}
               </Text>
               <DatePickerModal
-                date={values.birth_date}
+                date={new Date(values.birth_date)}
                 setDate={(e: any) => setFieldValue('birth_date', e)}
+                maximumDate={new Date()}
+                minimumDate={new Date('jan-01-1990')}
               />
 
               <InputWithLabel

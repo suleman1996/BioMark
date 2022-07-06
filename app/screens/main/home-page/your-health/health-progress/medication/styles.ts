@@ -13,8 +13,8 @@ const styles = (colors: any) =>
       marginVertical: 10,
     },
     headingStyle: {
-      fontFamily: fonts.mulishBold,
-      fontSize: RFValue(17),
+      fontFamily: fonts.extraBold,
+      fontSize: RFValue(18),
       color: colors.heading,
     },
     medicationBox: {

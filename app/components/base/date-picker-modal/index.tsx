@@ -50,7 +50,9 @@ const DatePickerModal = (props: Props) => {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
-        onConfirm={(value) => handleConfirm(value.toISOString())}
+        onConfirm={(value) => {
+          handleConfirm(new Date(value.toISOString()));
+        }}
         onCancel={hideDatePicker}
         accentColor={colors.primary}
         maximumDate={maximumDate}

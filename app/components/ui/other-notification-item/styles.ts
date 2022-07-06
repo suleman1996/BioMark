@@ -30,8 +30,8 @@ export const makeStyles = (colors: any) =>
     },
     contentHeaderText: {
       fontFamily: GlobalFonts.bold,
-      lineHeight: heightToDp(3),
-      fontSize: responsiveFontSize(20),
+      lineHeight: heightToDp(2.9),
+      fontSize: responsiveFontSize(21),
       color: colors.darkPrimary,
       marginTop: -4,
     },
@@ -39,6 +39,7 @@ export const makeStyles = (colors: any) =>
       fontFamily: GlobalFonts.bold,
       fontSize: responsiveFontSize(15),
       color: colors.darkPrimary,
+      lineHeight: heightToDp(2.5),
     },
   });
 export default makeStyles;

@@ -37,7 +37,6 @@ const RenderHealthTrack = ({ item }) => {
       <TouchableOpacity
         onPress={() => {
           if (item?.item?.title === 'Blood Sugar') {
-            console.log('item', item.item.value);
             if (item?.item?.value === '-') {
               setShowModal(true);
             } else {
@@ -46,7 +45,7 @@ const RenderHealthTrack = ({ item }) => {
           } else if (item?.item?.title === 'Blood Pressure') {
             navigation.navigate(SCREENS.BLOOD_PRESSURE);
           } else if (item?.item?.title === 'Weight') {
-            navigation.navigate(SCREENS.WEIGHT);
+            navigation.navigate(SCREENS.WEIGHT, { data: item?.item?.value });
           } else if (item?.item?.title === 'HbA1c') {
             navigation.navigate(SCREENS.HBA1C);
           } else if (item?.item?.title === 'Medication') {

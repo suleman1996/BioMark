@@ -42,7 +42,7 @@ export const makeStyles = (colors: any) =>
     tabText: {
       fontFamily: GlobalFonts.bold,
       color: colors.darkPrimary,
-      fontSize: responsiveFontSize(22),
+      fontSize: responsiveFontSize(18),
     },
     previousNotificationContainer: {
       width: widthToDp(92),
@@ -61,15 +61,14 @@ export const makeStyles = (colors: any) =>
     },
     blackLine: {
       width: widthToDp(86),
-      height: heightToDp(0.15),
+      height: heightToDp(0.05),
       backgroundColor: colors.black,
-      marginTop: heightToDp(2),
-      marginBottom: heightToDp(2),
+      marginBottom: heightToDp(1),
     },
     prevHeaderText: {
       color: colors.darkPrimary,
       fontFamily: GlobalFonts.bold,
-      fontSize: responsiveFontSize(23),
+      fontSize: responsiveFontSize(21),
     },
     headerContainer: {
       width: widthToDp(86),
@@ -83,6 +82,11 @@ export const makeStyles = (colors: any) =>
       color: colors.darkPrimary,
       fontFamily: GlobalFonts.light,
       fontSize: responsiveFontSize(23),
+    },
+    emptyListText: {
+      color: colors.disable,
+      fontFamily: fonts.mulishRegular,
+      paddingBottom: 5,
     },
   });
 export default makeStyles;

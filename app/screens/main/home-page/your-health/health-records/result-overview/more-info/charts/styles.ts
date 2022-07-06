@@ -27,7 +27,7 @@ const styles = (colors: any) =>
       color: colors.greenDark,
       marginVertical: 5,
     },
-    rangesView: { flexDirection: 'row', marginVertical: 3 },
+    rangesView: { flexDirection: 'row' },
     rangesTitleView: {
       paddingHorizontal: 15,
       borderRadius: 12,

@@ -15,6 +15,7 @@ const styles = (colors: any) =>
       borderRadius: 10,
       backgroundColor: colors.white,
       marginVertical: 10,
+      marginHorizontal: 10,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,

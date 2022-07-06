@@ -272,7 +272,11 @@ const MoreInfo = () => {
                 <Text
                   style={[
                     styles.heading,
-                    { marginLeft: 10, color: colors.greenDark },
+                    {
+                      marginLeft: 10,
+                      color: colors.greenDark,
+                      fontFamily: fonts.OpenSansBold,
+                    },
                   ]}
                 >
                   YOUR LAST RESULT
@@ -294,6 +298,7 @@ const MoreInfo = () => {
                       styles.heading,
                       {
                         alignSelf: 'center',
+                        fontFamily: fonts.OpenSansBold,
                         color:
                           summary?.latest?.finding == 'low' ||
                           summary?.latest?.finding == 'high'
@@ -309,15 +314,19 @@ const MoreInfo = () => {
                   <View style={styles.divider} />
 
                   <Text style={styles.heading}>
-                    <Text style={{ fontSize: 14 }}>
+                    <Text
+                      style={{ fontSize: 14, fontFamily: fonts.OpenSansBold }}
+                    >
                       {t('pages.resultSummary.tabs.summary.referenceRange')}
                     </Text>
-                    <Text style={{ fontSize: 14, fontFamily: fonts.light }}>
+                    <Text style={{ fontSize: 14, fontFamily: fonts.open }}>
                       {summary?.latest?.ref_range}
                     </Text>
                   </Text>
                   <Text style={styles.heading}>
-                    <Text style={{ fontSize: 14 }}>
+                    <Text
+                      style={{ fontSize: 14, fontFamily: fonts.OpenSansBold }}
+                    >
                       {t('pages.resultSummary.tabs.summary.source')}
                     </Text>
                     <Text style={{ fontSize: 14, fontFamily: fonts.light }}>
@@ -328,7 +337,12 @@ const MoreInfo = () => {
                 <Text
                   style={[
                     styles.heading,
-                    { marginLeft: 10, color: colors.greenDark, marginTop: 10 },
+                    {
+                      marginLeft: 10,
+                      color: colors.greenDark,
+                      marginTop: 10,
+                      fontFamily: fonts.OpenSansBold,
+                    },
                   ]}
                 >
                   {t('pages.resultSummary.tabs.summary.history')}
