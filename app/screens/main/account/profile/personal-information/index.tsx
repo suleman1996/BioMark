@@ -171,8 +171,6 @@ const PersonalInformationScreen = () => {
         <Text style={styles.label}>{t('pages.register.form.gender')}</Text>
         <RadioButton.Group
           onValueChange={(newValue) => {
-            console.log(newValue);
-
             setValue(newValue), setGenderDisable(true);
           }}
           value={value}
