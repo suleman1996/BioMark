@@ -120,12 +120,19 @@ function federatedlogin(access_token: string, provider: string) {
 //   });
 // }
 const deviceRegisterAction = (device_token: string, device_type: string) => {
-  return client.post(API_URLS.MOBILE_REGISTER, {
-    device: {
-      device_token,
-      device_type,
-    },
-  });
+  console.log('device_token', device_token);
+  console.log('device_type', device_type);
+
+  return client
+    .post(API_URLS.MOBILE_REGISTER, {
+      device: {
+        device_token,
+        device_type,
+      },
+    })
+    .catch(async (err: ForgotPasswordErrorResponse) => {
+      console.log('errRegister', err);
+    });
 };
 
 function forgotPassword(username: string) {

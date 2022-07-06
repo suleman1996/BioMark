@@ -11,10 +11,11 @@ const styles = (colors: any) =>
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: '#FAFAFA',
     },
     text1: {
-      fontFamily: GlobalFonts.extraBold,
-      fontSize: responsiveFontSize(40),
+      fontFamily: GlobalFonts.bold,
+      fontSize: responsiveFontSize(35),
       color: colors.darkPrimary,
     },
     text2: {
