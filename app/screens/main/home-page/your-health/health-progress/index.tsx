@@ -63,15 +63,9 @@ const Index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const horizontalListItem = ({
-    item,
-    index,
-  }: {
-    item: any;
-    index: number;
-  }) => {
+  const horizontalListItem = ({ item }: { item: any }) => {
     const ifSBLine =
-      selectedHorizontal === index
+      selectedHorizontal === item.id
         ? { borderBottomWidth: 3 }
         : { borderBottomWidth: 0 };
     return (
