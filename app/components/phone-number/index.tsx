@@ -15,6 +15,7 @@ type Props = {
   setSelectCountryCode: any;
   countryCode: any;
   maxLength: any;
+  textInputColor?: any;
   phoneNumber: string;
   setPhoneNumber: any;
   placeholder: string;
@@ -74,6 +75,7 @@ export default function (props: Props) {
           {
             width: width ? width : '80%',
           },
+          props.textInputColor,
         ]}
         value={props.phoneNumber}
         keyboardType={'number-pad'}

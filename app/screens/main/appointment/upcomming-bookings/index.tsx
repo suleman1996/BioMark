@@ -16,10 +16,12 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import BarCodeModal from 'components/ui/bar-code-modal';
 import SuggestionsText from 'components/ui/suggestions-text';
 import { makeStyles } from './styles';
+import { useTranslation } from 'react-i18next';
 
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
+  const { t } = useTranslation();
   const {} = props;
   const { colors }: any = useTheme();
   const allUpcommingBookings = useSelector(
@@ -205,8 +207,10 @@ const UpcommingBookings = (props: Props) => {
               }}
             >
               <EmptyResultComponent
-                title="No Upcomming Bookings"
-                subTitle="You have no COVID bookings scheduled yet."
+                title={t('pages.covid-booking.emptyMessage.upcomingTitle')}
+                subTitle={t(
+                  'pages.covid-booking.emptyMessage.upcomingSubTitle'
+                )}
                 icon={<BioBookings width={14} height={14} />}
               />
             </View>

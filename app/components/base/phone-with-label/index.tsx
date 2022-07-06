@@ -20,6 +20,7 @@ type Props = {
   onBlur?: any;
   maxLength?: number;
   labelStyle?: any;
+  textInputColor?: any;
 };
 
 const PhoneNumberWithLabel = ({
@@ -35,6 +36,7 @@ const PhoneNumberWithLabel = ({
   onBlur,
   labelStyle,
   maxLength,
+  textInputColor,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -54,6 +56,7 @@ const PhoneNumberWithLabel = ({
             placeholder={placeholder}
             maxLength={maxLength}
             onBlur={onBlur}
+            textInputColor={textInputColor}
           />
         </View>
         {error ? (

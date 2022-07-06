@@ -22,6 +22,7 @@ import { IAppState } from 'store/IAppState';
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import fonts from 'assets/fonts';
 
 const EmailChangeScreen = () => {
   const { t } = useTranslation();
@@ -107,7 +108,8 @@ const EmailChangeScreen = () => {
               >
                 <View style={styles.container}>
                   <InputWithLabel
-                    labelFontSize={25}
+                    labelStyle={{ fontFamily: fonts.bold }}
+                    labelFontSize={24}
                     label={t('pages.email.newEmail.title')}
                     placeholder={t('pages.email.newEmail.placeholder')}
                     value={values.email}
@@ -116,7 +118,8 @@ const EmailChangeScreen = () => {
                     error={values.email ? errors.email : ''}
                   />
                   <InputWithLabel
-                    labelFontSize={25}
+                    labelStyle={{ fontFamily: fonts.bold }}
+                    labelFontSize={24}
                     onFocus={() => formikRef.current.submitForm()}
                     label={t('pages.email.confirmEmail.title')}
                     placeholder={t('pages.email.confirmEmail.placeholder')}

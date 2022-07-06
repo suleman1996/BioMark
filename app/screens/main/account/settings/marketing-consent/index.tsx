@@ -79,6 +79,8 @@ const MarketingConsentScreen = () => {
         </Text>
         <CheckBoxWithText
           rightText={t('pages.marketingConsent.optIn')}
+          checkBoxView={styles.checkBoxView}
+          textStyle={styles.checkTextStyle}
           isChecked={isChecked}
           setIsChecked={(value: any) => {
             if (!value) {

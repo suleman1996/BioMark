@@ -192,9 +192,9 @@ const Index = () => {
           }}
           overlayColor={colors.opacityBlackDark}
           // color={colors.shineBlue}
-          buttonSize={53}
-          distanceToEdge={35}
-          actionsPaddingTopBottom={5}
+          buttonSize={55}
+          distanceToEdge={22}
+          actionsPaddingTopBottom={2}
           floatingIcon={<PillMedicationIcon />}
         />
       )}

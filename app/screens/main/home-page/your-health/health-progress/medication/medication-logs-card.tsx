@@ -57,7 +57,8 @@ const MedicationLogsCard = ({
               <Text style={styles.medicineText}>{medication}</Text>
             </View>
             <Text style={styles.medicineText}>
-              {dosage} {unit}
+              {dosage}
+              {'  '} {unit}
             </Text>
           </View>
         </View>
@@ -79,7 +80,8 @@ const MedicationLogsCard = ({
               <Text style={styles.medicineTextSuccess}>{medication}</Text>
             </View>
             <Text style={styles.medicineTextSuccess}>
-              {dosage} {unit}
+              {dosage}
+              {'  '} {unit}
             </Text>
           </View>
         </View>
