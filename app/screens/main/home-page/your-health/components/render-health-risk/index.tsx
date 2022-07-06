@@ -44,6 +44,7 @@ const RenderHealthRisk = ({ onPress, Svg, pan, color, healthRisk }) => {
           justifyContent: 'space-between',
         }}
       >
+        {console.log('healthRisk ', healthRisk)}
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Svg fill={color} />
 

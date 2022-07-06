@@ -31,23 +31,27 @@ const Onboarding = () => {
           bounces={false}
         />
       </View>
-      <View style={styles.buttonView}>
+      <View style={styles.buttonViewOut}>
         <View style={[styles.buttonView, { marginBottom: 10 }]}>
           <ButtonComponent
+            style={styles.buttonSelf}
             title="Sign up"
             onPress={() => {
               navigations.navigate(SCREENS.SIGNUP), setIsOnboarding(false);
             }}
           />
         </View>
-        <ButtonComponent
-          title="Login"
-          onPress={() => {
-            navigations.replace(SCREENS.LOGIN), setIsOnboarding(false);
-          }}
-          color={colors.black}
-          bg={colors.lightBlue}
-        />
+        <View style={[styles.buttonView, { marginBottom: 10 }]}>
+          <ButtonComponent
+            style={styles.buttonSelf}
+            title="Login"
+            onPress={() => {
+              navigations.replace(SCREENS.LOGIN), setIsOnboarding(false);
+            }}
+            color={colors.black}
+            bg={colors.lightBlue}
+          />
+        </View>
       </View>
     </View>
   );
