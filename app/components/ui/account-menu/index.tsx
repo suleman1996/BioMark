@@ -261,7 +261,7 @@ const AccountMenu = (props) => {
         style={styles.singleItem}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <BioLogout width={4} height={4} />
+          <BioLogout width={4.5} height={4.5} />
           <Text style={styles.text}>{t('pages.more.links.logout')}</Text>
         </View>
       </TouchableRipple>
@@ -273,7 +273,7 @@ const AccountMenu = (props) => {
       >
         <>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <BioAutoLogout width={4} height={4} />
+            <BioAutoLogout width={4.5} height={4.5} />
             <Text style={styles.text}>{t('pages.more.links.autoLogout')}</Text>
           </View>
           <Switch
