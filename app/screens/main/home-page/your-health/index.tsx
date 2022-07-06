@@ -77,7 +77,6 @@ import { useTranslation } from 'react-i18next';
 import { useIsFocused } from '@react-navigation/native';
 
 import { fromResponse } from 'screens/main/home-page/your-health/components/render-health-risk-view/service';
-import i18next from 'i18next';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -582,6 +581,6 @@ const Index = () => {
 export default Index;
 const QRschemma = Yup.object({
   qrInput: Yup.string().required(
-    i18next.t('pages.dashboard.dialogs.verify.errors.required')
+    "  i18next.t('pages.dashboard.dialogs.verify.errors.required')"
   ),
 });

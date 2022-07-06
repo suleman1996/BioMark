@@ -46,7 +46,7 @@ const MedicalInput = ({
     <View style={styles.rowContainer}>
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor={colors.smoke}
+        placeholderTextColor={colors.greyish}
         style={[styles.textFieldStyle, otherStyle]}
         theme={{ colors: { text: colors.smoke } }}
         onChangeText={(e) => onChangeText(e)}

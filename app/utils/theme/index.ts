@@ -62,6 +62,7 @@ const theme = {
     dangerBg: '#EA4C5920',
     abnormal: '#FFEAF2',
     unSelectedHealthRisk: '#D9DFEB50',
+    greyish: '#8393B6',
 
     // health risk status color
 
