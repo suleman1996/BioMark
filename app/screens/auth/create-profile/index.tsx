@@ -72,7 +72,7 @@ export default function CreateProfile() {
 
   const [selectedGender, setSelectedGender] = useState('');
   const [checked, setChecked] = React.useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date('jan-01-1990'));
   const [isPickerShow, setIsPickerShow] = useState(false);
 
   const [countryCode, setCountryCode] = useState('');
@@ -319,6 +319,8 @@ export default function CreateProfile() {
                       setIsPickerShow={setIsPickerShow}
                       date={date}
                       setDate={setDate}
+                      maximumDate={new Date()}
+                      minimumDate={new Date('jan-01-1990')}
                     />
                   </View>
 
