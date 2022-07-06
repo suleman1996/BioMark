@@ -14,7 +14,7 @@ const Device = ({ device, setModalVisible, setDeleteDevice }) => {
     <View style={styles.box}>
       <Image
         source={{
-          uri: 'https://storage.googleapis.com/vital-assets/fitbit.png',
+          uri: device.logo,
         }}
         style={styles.image}
       />
