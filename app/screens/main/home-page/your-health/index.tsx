@@ -174,7 +174,6 @@ const Index = () => {
 
   const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
-
     try {
       setLoading(true);
       const response = await userService.labStatusVerify({
@@ -511,7 +510,7 @@ const Index = () => {
                 onSubmit={(values) => handleCode(values)}
                 validationSchema={QRschemma}
               >
-                {({ handleChange, handleSubmit, errors, isValid }) => (
+                {({ handleChange, handleSubmit, errors, isValid, values }) => (
                   <QrInputPopup loading={loading} visible={visible}>
                     <View style={{ alignItems: 'center', marginBottom: 20 }}>
                       <View style={styles.popUpHeader}>
@@ -543,10 +542,7 @@ const Index = () => {
                       <InputWithLabel
                         label={t('pages.dashboard.dialogs.verify.label')}
                         placeholder={'Enter your IC / Passport number'}
-                        onChange={() => {
-                          handleChange('qrInput');
-                          setShowApiError('');
-                        }}
+                        onChange={handleChange('qrInput')}
                         error={
                           errors.qrInput
                             ? errors.qrInput
@@ -563,7 +559,11 @@ const Index = () => {
                             marginHorizontal={0.1}
                             marginVertical={0.1}
                             //   disabled={!isValid && errors}
-                            disabled={!isValid && errors ? true : false}
+                            disabled={
+                              !isValid || !values.qrInput || !errors
+                                ? true
+                                : false
+                            }
                           />
                         </TouchableOpacity>
                       </View>
