@@ -89,12 +89,12 @@ const BodyMeasurementScreen = () => {
           message: 'Internal Server Error',
           type: 'danger',
         });
-      } else if (err.errMsg.status == false) {
-        showMessage({
-          message: err.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
+        // } else if (err.errMsg.status == false) {
+        //   showMessage({
+        //     message: err.errMsg.data.error,
+        //     type: 'danger',
+        //   });
+        // } else {
         showMessage({
           message: err.errMsg,
           type: 'danger',
@@ -165,7 +165,7 @@ const BodyMeasurementScreen = () => {
         >
           <InputWithUnits
             title={t('pages.bodyMeasurements.yourReadingHeight')}
-            placeholder="0'0*.0"
+            placeholder="0.0"
             units={['cm', 'ft/in']}
             unit={bodyMeasurment.is_metric ? 'cm' : 'ft/in'}
             value={bodyMeasurment.height}

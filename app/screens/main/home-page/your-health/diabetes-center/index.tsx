@@ -187,7 +187,6 @@ const DiabetesCenter = (props) => {
           bm_program_id: 2,
         },
       });
-
       setModalVisible(!modalVisible);
       navigate(SCREENS.YOUR_HEALTH);
       setIsVisible(false);

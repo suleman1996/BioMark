@@ -112,7 +112,7 @@ const styles = (colors: any) =>
     title: {
       flex: 1,
       fontSize: responsiveFontSize(20),
-      marginHorizontal: 8,
+      marginHorizontal: widthToDp(2),
       color: colors.heading,
       fontFamily: fonts.OpenSansBold,
     },

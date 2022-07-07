@@ -47,6 +47,7 @@ export const makeStyles = (colors: any) =>
     },
 
     OBcontainer: {
+      backgroundColor: colors.primaryGray,
       flex: 0.9,
       justifyContent: 'center',
       alignItems: 'center',
@@ -56,9 +57,17 @@ export const makeStyles = (colors: any) =>
       height: '100%',
       alignItems: 'center',
     },
-    buttonView: {
+    buttonViewOut: {
+      paddingHorizontal: 60,
+      backgroundColor: colors.primaryGray,
       width: '100%',
+    },
+    buttonView: {
+      backgroundColor: colors.primaryGray,
       alignItems: 'center',
+    },
+    buttonSelf: {
+      height: 45,
     },
   });
 export default makeStyles;

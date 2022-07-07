@@ -16,7 +16,7 @@ export const makeStyles = (colors: any) =>
     textHeader: {
       fontFamily: GlobalFonts.light,
       color: colors.darkPrimary,
-      fontSize: responsiveFontSize(22),
+      fontSize: responsiveFontSize(21),
     },
     bottomBtnContainer: {
       marginBottom: heightToDp(4),

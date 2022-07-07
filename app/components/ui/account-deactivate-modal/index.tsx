@@ -47,7 +47,7 @@ const AccountDeActivateModal = (props: Props) => {
           onPress={() => setIsVisible(false)}
           title={buttonLowerText}
           disabled={false}
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 10, borderWidth: 0 }}
         />
       </View>
     </Modal>

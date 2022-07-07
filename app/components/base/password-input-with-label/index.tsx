@@ -17,6 +17,7 @@ type Props = {
   hidePassword: boolean;
   onChange: any;
   marginTop?: number;
+  labelStyle?: any;
 };
 
 const PasswordInputWithLabel = ({
@@ -28,6 +29,7 @@ const PasswordInputWithLabel = ({
   hidePassword,
   onChange,
   marginTop,
+  labelStyle,
 }: Props) => {
   let otherStyles = [];
 
@@ -40,7 +42,7 @@ const PasswordInputWithLabel = ({
 
   return (
     <View style={[styles.container, otherStyles]}>
-      <Text style={[styles.inputLabel]}>{label}</Text>
+      <Text style={[styles.inputLabel, labelStyle]}>{label}</Text>
       <TextInput
         placeholder={placeholder}
         secureTextEntry={isSecure}

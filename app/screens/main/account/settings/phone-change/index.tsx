@@ -48,6 +48,7 @@ const PhoneChangeScreen = () => {
             {t('pages.phoneNumber.mobileNumber')}
           </Text>
           <PhoneNumberWithLabel
+            textInputColor={{ color: colors.lightGrey }}
             countryCode={countryCode}
             number={number}
             disabled={true}

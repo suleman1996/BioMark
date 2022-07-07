@@ -20,6 +20,7 @@ import { ErrorResponse } from 'types/ErrorResponse';
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import fonts from 'assets/fonts';
 
 const PASS_TEXT = `Your new password must be at least 8 characters, include a symbol, a capital letter and a number.`;
 
@@ -113,6 +114,7 @@ const PasswordChangeScreen = () => {
                 {({ handleChange, handleSubmit, errors, values }) => (
                   <>
                     <PasswordInputWithLabel
+                      labelStyle={{ fontFamily: fonts.bold }}
                       marginTop={1}
                       label={t('pages.password.currentPassword.title')}
                       placeholder={t(
@@ -144,6 +146,7 @@ const PasswordChangeScreen = () => {
                       {PASS_TEXT}
                     </Text>
                     <PasswordInputWithLabel
+                      labelStyle={{ fontFamily: fonts.bold }}
                       marginTop={0.3}
                       label={t('pages.password.newPassword.title')}
                       placeholder={t('pages.password.newPassword.placeholder')}
@@ -185,6 +188,7 @@ const PasswordChangeScreen = () => {
                       </View>
                     )}
                     <PasswordInputWithLabel
+                      labelStyle={{ fontFamily: fonts.bold }}
                       marginTop={-1}
                       label={t('pages.password.newPasswordConfirm.title')}
                       placeholder={t(

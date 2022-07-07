@@ -167,7 +167,7 @@ const PersonalInformationScreen = () => {
         />
         <Text style={styles.label}>{t('pages.register.form.dateOfBirth')}</Text>
         {/* <DatePicker width={'100%'} /> */}
-        <DatePickerModal date={date} setDate={setDate} />
+        <DatePickerModal date={new Date(date)} setDate={setDate} />
         <Text style={styles.label}>{t('pages.register.form.gender')}</Text>
         <RadioButton.Group
           onValueChange={(newValue) => {

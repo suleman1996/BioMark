@@ -7,7 +7,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     textFieldStyle: {
-      fontSize: responsiveFontSize(40),
+      fontSize: responsiveFontSize(50),
       width: '60%',
       color: colors.blue,
       backgroundColor: colors.gray,
