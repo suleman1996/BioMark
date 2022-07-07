@@ -61,20 +61,24 @@ const Sleep = (props: SleepProps) => {
     <View style={{ marginTop: 20, alignItems: 'center' }}>
       {data && Object.keys(data).length > 0 ? (
         display7Days ? (
-          <BarChart
-            width={Dimensions.get('window').width * 0.7}
-            barWidth={25}
-            noOfSections={5}
-            barBorderRadius={4}
-            showGradient
-            data={formatBarData(data?.seven_days)}
-            hideRules
-            xAxisLabelTextStyle={styles.xAxisLabel}
-            yAxisTextStyle={styles.yAxisLabel}
-            initialSpacing={5}
-            isAnimated={true}
-          />
-        ) : (
+          data?.seven_days.length > 0 ? (
+            <BarChart
+              width={Dimensions.get('window').width * 0.7}
+              barWidth={25}
+              noOfSections={5}
+              barBorderRadius={4}
+              showGradient
+              data={formatBarData(data?.seven_days)}
+              hideRules
+              xAxisLabelTextStyle={styles.xAxisLabel}
+              yAxisTextStyle={styles.yAxisLabel}
+              initialSpacing={5}
+              isAnimated={true}
+            />
+          ) : (
+            <NoData />
+          )
+        ) : data?.one_day ? (
           <>
             <PieChart
               donut
@@ -94,6 +98,8 @@ const Sleep = (props: SleepProps) => {
               ))}
             </View>
           </>
+        ) : (
+          <NoData />
         )
       ) : (
         <NoData />

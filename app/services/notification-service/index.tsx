@@ -25,6 +25,25 @@ function getAllinboxNotifications(page: number = 1) {
   });
 }
 
+function getAllInsights(page: number = 1) {
+  return new Promise<Array<NotificationMessage>>((resolve, reject) => {
+    client
+      .get(`${API_URLS.INSIGHTS}?page=${page}`)
+      .then(async (response) => {
+        try {
+          resolve(response.data);
+        } catch (e) {
+          logNow('all insights error block login 1.', e);
+          reject(e);
+        }
+      })
+      .catch(async (err: ErrorResponse) => {
+        logNow('all insights inbox error response 2.', err);
+        reject(err);
+      });
+  });
+}
+
 function getAlliOthersNotifications(page: number = 1) {
   return new Promise<Array<NotificationMessage>>((resolve, reject) => {
     client
@@ -113,4 +132,5 @@ export const notificationsService = {
   getAlliInboxUnreadNotifications,
   readInboxNotification,
   getAllAppointmentsCounts,
+  getAllInsights,
 };

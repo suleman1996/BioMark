@@ -1647,6 +1647,7 @@
          "home": "Rumah",
          "inbox": "Peti Masuk",
          "other": "Other",
+         "insights": "Insights",
          "appointment": "Temujanji",
          "account": "Akaun"
       },
@@ -1836,6 +1837,7 @@
       "verify": "Sahkan",
       "showMore": "Tunjukkan lagi",
       "noMore": "Tiada rekod untuk ditunjuk",
+      "noMoreInsights": "Tiada lagi cerapan untuk ditunjukkan",
       "passwordChangeSuccessBack": "Kembali ke Tetapan",
       "passwordChangeSuccess": "Kata laluan anda sudah diubah!",
       "wentOffline": "Anda tidak mempunyai sambungan internet",

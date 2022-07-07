@@ -1647,6 +1647,7 @@
       "home": "Home",
       "inbox": "Inbox",
       "other": "Other",
+      "insights": "Insights",
       "appointment": "Appointment",
       "account": "Akun"
     },
@@ -1836,6 +1837,7 @@
     "verify": "Verifikasi",
     "showMore": "Tampakan Lebih Banyak",
     "noMore": "Tidak ada lagi catatan untuk ditampilkan",
+    "noMoreInsights": "Tidak ada lagi wawasan untuk ditampilkan",
     "passwordChangeSuccessBack": "Kembali ke Pengaturan",
     "passwordChangeSuccess": "Kata sandi Anda telah diubah!",
     "wentOffline": "Koneksi internet Anda terputus",

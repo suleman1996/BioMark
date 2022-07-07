@@ -12,6 +12,7 @@ const API_URLS = {
   MOBILE_REGISTER: '/api/v1/patient/devices',
   BOOTSTRAP: '/api/v1/patient/bootstrapper',
   NOTIFICATIONS: '/api/v1/patient/notifications',
+  INSIGHTS: '/api/v2/try_vitals/list_notifications',
 
   GET_PROFILE: '/api/v1/patient/profiles',
   CREATE_PROFILE: 'api/v2/patient/profiles',

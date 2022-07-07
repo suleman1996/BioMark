@@ -6,6 +6,7 @@ export class NotificationState {
   allOthersNotifications: NotificationMessage[] = [];
   allOthersUnreadNotifications: NotificationMessage[] = [];
   allInboxUnreadNotifications: NotificationMessage[] = [];
+  allInsights: NotificationMessage[] = [];
   allAppointmentCounts: Appointment = {
     covid_booking_count: 0,
     total_count: 0,

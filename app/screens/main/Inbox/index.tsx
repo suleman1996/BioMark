@@ -56,6 +56,10 @@ export default function InboxScreen() {
     (state: IAppState) => state.notifications.allInboxUnreadNotifications
   );
 
+  const allInsights = useSelector(
+    (state: IAppState) => state.notifications.allInsights
+  );
+
   const [isReadMoreInboxNoti, setIsReadMoreInboxNoti] = useState(true);
   const [currentPageInboxNoti, setCurrentPageInboxNoti] = useState(1);
 
@@ -322,6 +326,37 @@ export default function InboxScreen() {
     );
   };
 
+  const Insights = () => {
+    return (
+      <View style={styles.previousNotificationContainer}>
+        <FlatList
+          style={{
+            flexGrow: 1,
+            marginTop: heightToDp(2),
+          }}
+          scrollEnabled={false}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ width: widthToDp(86) }}
+          keyExtractor={(_, index) => index.toString()}
+          data={allInsights}
+          renderItem={({ item }) => (
+            <OtherNotificationItem
+              getIcon={getIcon}
+              item={item}
+              onPress={() => {}}
+            />
+          )}
+          ListEmptyComponent={() => (
+            <Text style={styles.emptyListText}>
+              {' '}
+              {t('common.noMoreInsights')}
+            </Text>
+          )}
+        />
+      </View>
+    );
+  };
+
   return (
     <>
       <TitleWithSearchBarLayout title={'Inbox'} scroll={false}>
@@ -363,6 +398,19 @@ export default function InboxScreen() {
                   {allOthersUnreadNotificationsData.length})
                 </Text>
               </Pressable>
+              <Pressable
+                onPress={() => {
+                  setCurrentPage(2);
+                }}
+                style={[
+                  styles.tab,
+                  currentPage == 2 ? { borderBottomWidth: 2 } : {},
+                ]}
+              >
+                <Text style={styles.tabText}>
+                  {t('pages.tabController.insights')} ({allInsights.length})
+                </Text>
+              </Pressable>
             </View>
             <View style={{ height: heightToDp(63) }}>
               <ScrollView>
@@ -372,11 +420,9 @@ export default function InboxScreen() {
                   style={styles.pagerView}
                   //initialPage={0}
                 >
-                  {currentPage === 0 ? (
-                    <PreviousNotification />
-                  ) : (
-                    <OtherNotification />
-                  )}
+                  {currentPage === 0 && <PreviousNotification />}
+                  {currentPage === 1 && <OtherNotification />}
+                  {currentPage === 2 && <Insights />}
                 </View>
               </ScrollView>
             </View>

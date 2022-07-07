@@ -1647,6 +1647,7 @@
       "home": "Home",
       "inbox": "Inbox",
       "other": "Other",
+      "insights": "Insights",
       "appointment": "Appointment",
       "account": "Account"
     },
@@ -1836,6 +1837,7 @@
     "verify": "Verify",
     "showMore": "Show More",
     "noMore": "No more logs to show",
+    "noMoreInsights": "No more insights to show",
     "passwordChangeSuccessBack": "Back to Settings",
     "passwordChangeSuccess": "Your password has been changed!",
     "wentOffline": "Your internet connection went offline",

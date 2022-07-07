@@ -14,7 +14,7 @@ export default NoData;
 const styles = StyleSheet.create({
   noDataContainer: {
     width: '100%',
-    height: 300,
+    height: 250,
     justifyContent: 'center',
   },
   noData: {

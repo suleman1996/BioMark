@@ -4,6 +4,7 @@ import {
   INBOX_OTHERS_UNREAD,
   INBOX_ALL_UNREAD,
   APPOINTMENT_COUNTS,
+  INSIGHTS,
 } from './constants';
 import { NotificationState } from './NotificationState';
 
@@ -42,6 +43,13 @@ export default function (state = INITIAL_STATE, action: any) {
       return {
         ...state,
         allAppointmentCounts: action.payload,
+      };
+    }
+
+    case INSIGHTS: {
+      return {
+        ...state,
+        allInsights: action.payload,
       };
     }
 
