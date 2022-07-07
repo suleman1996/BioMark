@@ -1,11 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  ScrollView,
-  Text,
-  View,
-  SafeAreaView,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { ScrollView, Text, View, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import * as Yup from 'yup';
@@ -94,18 +88,18 @@ const PasswordChangeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <>
       <ActivityIndicator visible={isLoading} />
       <TitleWithBackWhiteBgLayout title={t('pages.password.title')}>
-        <View style={styles.container}>
-          <Text style={styles.textHeader}>
-            {t('pages.password.description')}
-          </Text>
-          <ScrollView>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-              style={{ flex: 1 }}
-            >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1 }}
+        >
+          <View style={styles.container}>
+            <Text style={styles.textHeader}>
+              {t('pages.password.description')}
+            </Text>
+            <ScrollView>
               <Formik
                 innerRef={formikRef}
                 initialValues={{
@@ -229,11 +223,11 @@ const PasswordChangeScreen = () => {
                   </>
                 )}
               </Formik>
-            </KeyboardAvoidingView>
-          </ScrollView>
-        </View>
+            </ScrollView>
+          </View>
+        </KeyboardAvoidingView>
       </TitleWithBackWhiteBgLayout>
-    </SafeAreaView>
+    </>
   );
 };
 const UpdatePassSchema = Yup.object({

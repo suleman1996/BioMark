@@ -7,7 +7,6 @@ import { GlobalFonts } from 'utils/theme/fonts';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      width: widthToDp(100),
       paddingHorizontal: widthToDp(6),
       paddingVertical: heightToDp(2),
       flex: 1,
