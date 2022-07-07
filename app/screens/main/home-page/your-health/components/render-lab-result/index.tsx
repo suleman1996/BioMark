@@ -5,6 +5,7 @@ import makeStyles from './styles';
 import LabResultProgressBar from 'components/lab-result-pregress-bar/index';
 import { SmallButton } from 'components/button';
 import { useTranslation } from 'react-i18next';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 const RendreLabResult = ({ item, setVisible, stepIndicatorIcons }) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -34,7 +35,7 @@ const RendreLabResult = ({ item, setVisible, stepIndicatorIcons }) => {
             style={{
               width: '40%',
               alignSelf: 'center',
-              paddingVertical: 10,
+              paddingVertical: heightToDp(0.5),
             }}
           >
             <SmallButton

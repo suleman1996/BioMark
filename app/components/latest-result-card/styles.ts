@@ -57,8 +57,9 @@ const styles = (colors: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: '#C9E1F2',
-      paddingTop: heightToDp(1.5),
-      paddingBottom: heightToDp(1.5),
+      padding: 4,
+      paddingTop: heightToDp(1),
+      paddingBottom: heightToDp(1),
       marginHorizontal: widthToDp(2),
       borderRadius: 10,
       borderWidth: 1,
@@ -67,9 +68,9 @@ const styles = (colors: any) =>
     },
     text6: {
       flex: 1,
-      fontFamily: fonts.bold,
       paddingHorizontal: widthToDp(1),
       fontSize: responsiveFontSize(14),
+      color: colors.heading,
     },
     prImage: {
       height: 20,
@@ -106,6 +107,12 @@ const styles = (colors: any) =>
       shadowRadius: 3.84,
 
       elevation: 5,
+    },
+    summaryText: {
+      flex: 1,
+      color: colors.heading,
+      fontFamily: fonts.OpenSansBold,
+      fontSize: responsiveFontSize(13),
     },
   });
 export default styles;

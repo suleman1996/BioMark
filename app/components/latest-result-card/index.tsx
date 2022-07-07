@@ -38,7 +38,13 @@ const LatestResultCard = (Props: props) => {
               source={require('../../assets/images/home/info.png')}
               style={styles.prImage}
             />
-            <Text style={styles.text6}>{Props.summary}</Text>
+            <Text style={styles.text6}>
+              {Props.summary.split(/[0-9]+ out of [0-9]+/)[0]}
+              <Text style={styles.summaryText}>
+                {Props.summary.match(/[0-9]+ out of [0-9]+/)}
+              </Text>
+              {Props.summary.split(/[0-9]+ out of [0-9]+/)[1]}
+            </Text>
           </View>
         )}
 
@@ -55,7 +61,6 @@ const LatestResultCard = (Props: props) => {
         {Props.status && (
           <View
             style={{
-              // backgroundColor: 'lightgrey',
               flexDirection: 'row',
               padding: 5,
               alignItems: 'center',

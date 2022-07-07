@@ -26,6 +26,7 @@ import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { useTranslation } from 'react-i18next';
 
 import makeStyles from './styles';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 const AccountMenu = (props) => {
   const { t } = useTranslation();
@@ -84,9 +85,28 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>
               {t('pages.more.links.idVerification')}
             </Text>
+            {console.log(' setVerificationText()', setVerificationText())}
+            <Text
+              numberOfLines={2}
+              style={[
+                styles.secondText,
+                setVerificationText() ==
+                'Verification error. Please resubmit details'
+                  ? {
+                      width: widthToDp(35),
+                      paddingRight: 0,
+
+                      textAlign: 'left',
+                      paddingLeft: widthToDp(2),
+                      fontSize: responsiveFontSize(12),
+                    }
+                  : null,
+              ]}
+            >
+              {setVerificationText()}
+            </Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            <Text style={styles.secondText}>{setVerificationText()}</Text>
             {props?.id_verification == 'PENDING' ||
             props?.id_verification == 'SUCCESS' ? null : (
               <Fontisto

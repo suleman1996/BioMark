@@ -9,8 +9,7 @@ export const makeStyles = (colors: any) =>
     container: {
       width: widthToDp(92),
       backgroundColor: colors.white,
-      borderRadius: widthToDp(3),
-
+      borderRadius: widthToDp(2),
       paddingHorizontal: widthToDp(4),
       paddingVertical: heightToDp(2),
       alignItems: 'flex-start',
@@ -31,8 +30,8 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(18),
       color: colors.darBlue,
       lineHeight: responsiveFontSize(24),
-      marginTop: heightToDp(3),
-      marginBottom: heightToDp(3),
+      marginTop: heightToDp(6),
+      marginBottom: heightToDp(6),
     },
   });
 
