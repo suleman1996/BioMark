@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { MedicalInput } from 'components/higher-order';
@@ -183,139 +189,150 @@ const BloodPressure = ({ route }: any) => {
       binIcon={SELECTED_BP_ID ? true : false}
       onPressIcon={() => setShowDeleteModal(true)}
     >
-      <ActivityIndicator visible={isLoading} />
-      <ScrollView style={styles.container}>
-        <View
-          style={{
-            paddingHorizontal: widthToDp(4),
-            marginBottom: heightToDp(25),
-          }}
-        >
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.label}>
-              {t('pages.bloodPressureInput.yourReading')}
-            </Text>
-            <View
-              style={{ marginTop: heightToDp(3), marginLeft: widthToDp(4) }}
-            >
-              <Tip
-                body={t('pages.bloodPressureInput.definition')}
-                bodyStyle={{ color: '#fff' }}
-                tipContainerStyle={{
-                  backgroundColor: colors.shineBlue,
-                  width: '60%',
-                }}
-                overlayOpacity={0.001}
-              >
-                <Icon
-                  name="ios-information-circle-outline"
-                  size={responsiveFontSize(22)}
-                  color={colors.shineBlue}
-                />
-              </Tip>
-            </View>
-          </View>
-          <MedicalInput
-            height={15}
-            textAlign="center"
-            placeholder={'High (SYS)'}
-            onChangeText={(val) => {
-              onChangeBloodPressure('bp_systolic', val);
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <ActivityIndicator visible={isLoading} />
+        <ScrollView style={styles.container}>
+          <View
+            style={{
+              paddingHorizontal: widthToDp(4),
+              marginBottom: heightToDp(25),
             }}
-            value={bloodPressure.bp_systolic}
-            maxLength={3}
-            selectionColor="darkblue"
-          />
-          <MedicalInput
-            height={15}
-            textAlign="center"
-            placeholder={'Low (DIA)'}
-            onChangeText={(val) => {
-              onChangeBloodPressure('bp_diastolic', val);
-            }}
-            value={bloodPressure.bp_diastolic}
-            maxLength={3}
-            selectionColor="darkblue"
-          />
-          {Object.keys(error)?.length > 0 ? (
-            <ErrorMessage errorMessage={error[Object.keys(error)[0]]} />
-          ) : null}
-          {Object.keys(error).length === 0 &&
-          bloodPressure.bp_systolic &&
-          bloodPressure.bp_diastolic ? (
-            <>
+          >
+            <View style={{ flexDirection: 'row' }}>
               <Text style={styles.label}>
-                {t('pages.bloodPressureInput.dateTime')}
+                {t('pages.bloodPressureInput.yourReading')}
               </Text>
-              <DateTimePickerModal
-                maxDate={new Date()}
-                date={bloodPressure.date_entry}
-                setDate={(e: any) =>
-                  setBloodPressure((tracker) => ({ ...tracker, date_entry: e }))
+              <View
+                style={{ marginTop: heightToDp(3), marginLeft: widthToDp(4) }}
+              >
+                <Tip
+                  body={t('pages.bloodPressureInput.definition')}
+                  bodyStyle={{ color: '#fff' }}
+                  tipContainerStyle={{
+                    backgroundColor: colors.shineBlue,
+                    width: '60%',
+                  }}
+                  overlayOpacity={0.001}
+                >
+                  <Icon
+                    name="ios-information-circle-outline"
+                    size={responsiveFontSize(22)}
+                    color={colors.shineBlue}
+                  />
+                </Tip>
+              </View>
+            </View>
+            <MedicalInput
+              height={15}
+              textAlign="center"
+              placeholder={'High (SYS)'}
+              onChangeText={(val) => {
+                onChangeBloodPressure('bp_systolic', val);
+              }}
+              value={bloodPressure.bp_systolic}
+              maxLength={3}
+              selectionColor="darkblue"
+            />
+            <MedicalInput
+              height={15}
+              textAlign="center"
+              placeholder={'Low (DIA)'}
+              onChangeText={(val) => {
+                onChangeBloodPressure('bp_diastolic', val);
+              }}
+              value={bloodPressure.bp_diastolic}
+              maxLength={3}
+              selectionColor="darkblue"
+            />
+            {Object.keys(error)?.length > 0 ? (
+              <ErrorMessage errorMessage={error[Object.keys(error)[0]]} />
+            ) : null}
+            {Object.keys(error).length === 0 &&
+            bloodPressure.bp_systolic &&
+            bloodPressure.bp_diastolic ? (
+              <>
+                <Text style={styles.label}>
+                  {t('pages.bloodPressureInput.dateTime')}
+                </Text>
+                <DateTimePickerModal
+                  maxDate={new Date()}
+                  date={bloodPressure.date_entry}
+                  setDate={(e: any) =>
+                    setBloodPressure((tracker) => ({
+                      ...tracker,
+                      date_entry: e,
+                    }))
+                  }
+                />
+              </>
+            ) : null}
+          </View>
+          <View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              bottom: 0,
+              paddingHorizontal: 20,
+              marginBottom: 20,
+            }}
+          >
+            {bloodPressure.bp_systolic.length > 0 &&
+            bloodPressure.bp_diastolic.length > 0 ? (
+              <GradientButton
+                text={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+                color={['#2C6CFC', '#2CBDFC']}
+                onPress={saveBloodPressureLog}
+                disabled={
+                  bloodPressure.bp_systolic === '' ||
+                  bloodPressure.bp_diastolic === '' ||
+                  Object.keys(error).length !== 0
                 }
               />
-            </>
-          ) : null}
-        </View>
-        <View
-          style={{
-            position: 'absolute',
-            width: '100%',
-            bottom: 0,
-            paddingHorizontal: 20,
-          }}
-        >
-          {bloodPressure.bp_systolic.length > 0 &&
-          bloodPressure.bp_diastolic.length > 0 ? (
-            <GradientButton
-              text={SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-              color={['#2C6CFC', '#2CBDFC']}
-              onPress={saveBloodPressureLog}
-              disabled={
-                bloodPressure.bp_systolic === '' ||
-                bloodPressure.bp_diastolic === '' ||
-                Object.keys(error).length !== 0
-              }
-            />
-          ) : (
-            <TouchableOpacity
-              onPress={saveBloodPressureLog}
-              disabled={true}
-              style={{
-                height: 50,
-                borderRadius: 8,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#F0F0F0',
-              }}
-            >
-              <Text
+            ) : (
+              <TouchableOpacity
+                onPress={saveBloodPressureLog}
+                disabled={true}
                 style={{
-                  color: colors.smoke,
-                  fontSize: responsiveFontSize(15),
+                  height: 50,
+                  borderRadius: 8,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#F0F0F0',
                 }}
               >
-                {SELECTED_BP_ID ? 'Save Edit' : 'Add'}
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
-      </ScrollView>
-      {showDeleteModal && (
-        <AccountDeActivateModal
-          headerText={t('pages.bloodPressureInput.dialogs.delete.title')}
-          subHeading={t('pages.bloodPressureInput.dialogs.delete.description')}
-          buttonUpperText={t(
-            'pages.bloodPressureInput.dialogs.delete.buttonText'
-          )}
-          buttonLowerText={t(
-            'pages.bloodPressureInput.dialogs.delete.buttonCancelText'
-          )}
-          isVisible={showDeleteModal}
-          setIsVisible={setShowDeleteModal}
-          callMe={deleteBpLog}
-        />
-      )}
+                <Text
+                  style={{
+                    color: colors.smoke,
+                    fontSize: responsiveFontSize(15),
+                  }}
+                >
+                  {SELECTED_BP_ID ? 'Save Edit' : 'Add'}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </ScrollView>
+        {showDeleteModal && (
+          <AccountDeActivateModal
+            headerText={t('pages.bloodPressureInput.dialogs.delete.title')}
+            subHeading={t(
+              'pages.bloodPressureInput.dialogs.delete.description'
+            )}
+            buttonUpperText={t(
+              'pages.bloodPressureInput.dialogs.delete.buttonText'
+            )}
+            buttonLowerText={t(
+              'pages.bloodPressureInput.dialogs.delete.buttonCancelText'
+            )}
+            isVisible={showDeleteModal}
+            setIsVisible={setShowDeleteModal}
+            callMe={deleteBpLog}
+          />
+        )}
+      </KeyboardAvoidingView>
     </TitleWithBackWhiteBgLayout>
   );
 };
