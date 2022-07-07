@@ -26,7 +26,6 @@ import HealthProgressFilter from 'components/health-progress-filter/index';
 import SCREENS from 'navigation/constants/index';
 import { healthRecordServices } from 'services/health-record-service';
 import { useTranslation } from 'react-i18next';
-import { navigate } from 'services/nav-ref';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -244,7 +243,7 @@ const Index = () => {
             url: `data:application/pdf;base64,${pdfReport}`,
           });
         }}
-        shouldGoBack={() => navigate(SCREENS.YOUR_HEALTH)}
+        shouldGoBack
       >
         <View style={styles.miniHeader}>
           <Text style={styles.miniHeaderText}>

@@ -41,56 +41,62 @@ const Index = (props: Props) => {
   );
 
   const RenderLog = ({ item }) => (
-    <TouchableRipple
-      onPress={() => {
-        try {
-          props.onNavigate && props.onNavigate();
-          setTimeout(() => {
-            navigations.navigate(props.navigate, { logId: item?.id });
-          }, 5);
-        } catch (error) {
-          console.error(error);
-        }
-      }}
-      style={styles.renderLog}
-    >
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
+    <>
+      <TouchableRipple
+        onPress={() => {
+          try {
+            props.onNavigate && props.onNavigate();
+            setTimeout(() => {
+              navigations.navigate(props.navigate, { logId: item?.id });
+            }, 5);
+          } catch (error) {
+            console.error(error);
+          }
         }}
+        style={styles.renderLog}
       >
-        <View>
-          <Text
-            style={{
-              color: item?.color ? item?.color : colors.heading,
-              fontFamily: fonts.mulishBold,
-              fontSize: responsiveFontSize(17),
-            }}
-          >
-            {item?.weight} {item?.unit}
-          </Text>
-        </View>
         <View
           style={{
-            width: '60%',
-            alignItems: 'flex-end',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
           }}
         >
-          <Text
+          <View>
+            <Text
+              style={{
+                color: item?.color
+                  ? item?.color
+                  : item?.unit === 'mg/dL'
+                  ? colors.greenDark
+                  : colors.heading,
+                fontFamily: fonts.mulishBold,
+                fontSize: responsiveFontSize(17),
+              }}
+            >
+              {item?.weight} {item?.unit}
+            </Text>
+          </View>
+          <View
             style={{
-              color: colors.heading,
-              fontFamily: fonts.mulishRegular,
-              fontSize: responsiveFontSize(12),
+              width: '60%',
+              alignItems: 'flex-end',
             }}
           >
-            {moment(item?.date_entry).format('hh:mm a MMMM Do, YYYY')}
-          </Text>
+            <Text
+              style={{
+                color: colors.heading,
+                fontFamily: fonts.mulishRegular,
+                fontSize: responsiveFontSize(12),
+              }}
+            >
+              {moment(item?.date_entry).format('hh:mm a MMMM Do, YYYY')}
+            </Text>
+          </View>
         </View>
-      </View>
-    </TouchableRipple>
+      </TouchableRipple>
+    </>
   );
 
   return (
