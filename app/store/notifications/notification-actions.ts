@@ -8,10 +8,16 @@ import {
   INBOX_OTHERS_UNREAD,
   INBOX_ALL_UNREAD,
   APPOINTMENT_COUNTS,
+  INSIGHTS,
 } from './constants';
 
 export const addAllInboxNotifications = (data: NotificationMessage[]) => ({
   type: INBOX_NOTIFICATIONS,
+  payload: data,
+});
+
+export const addAllInsights = (data: NotificationMessage[]) => ({
+  type: INSIGHTS,
   payload: data,
 });
 
@@ -26,13 +32,12 @@ export const getAllInboxNotificationsR =
       })
       .catch((err) => {
         logNow(err);
-        // After developer alow below function on line 66
-        // dispatch(errorLogOut('Error logging out.'));
-      })
-      .finally(() => {
-        // After developer alow below function on line 69
-        // dispatch(loggingOut(false));
       });
+
+    await notificationsService
+      .getAllInsights(page)
+      .then(async (res: any) => await dispatch(addAllInsights(res)))
+      .catch((err) => logNow(err));
   };
 
 export const addAllOtherNotifications = (data: NotificationMessage[]) => ({

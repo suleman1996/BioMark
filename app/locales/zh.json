@@ -1647,6 +1647,7 @@
          "home": "主页",
          "inbox": "信箱",
          "other": "Other",
+         "insights": "Insights",
          "appointment": "预约",
          "account": "账户"
       },
@@ -1836,6 +1837,7 @@
       "verify": "认证",
       "showMore": "显示更多",
       "noMore": "已无更多系统记录",
+      "noMoreInsights": "没有更多见解可显示",
       "passwordChangeSuccessBack": "返回设定",
       "passwordChangeSuccess": "您的密码已被更改！",
       "wentOffline": "您的互联网连接已离线",
