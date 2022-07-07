@@ -32,6 +32,7 @@ import moment from 'moment';
 import fonts from 'assets/fonts';
 import { showMessage } from 'react-native-flash-message';
 import { useTranslation } from 'react-i18next';
+import { navigate } from 'services/nav-ref';
 
 const HealthRecord = () => {
   const { t } = useTranslation();
@@ -236,7 +237,7 @@ const HealthRecord = () => {
         <View
           style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 20 }}
         >
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigate(SCREENS.YOUR_HEALTH)}>
             <ArrowBack fill={colors.white} />
           </TouchableOpacity>
           <Text style={styles.navHeading}>

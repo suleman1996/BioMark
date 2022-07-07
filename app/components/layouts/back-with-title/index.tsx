@@ -61,7 +61,7 @@ const TitleWithBackLayout = ({
             <Pressable
               hitSlop={hitSlop.one}
               onPress={() =>
-                shouldGoBack ? navigate(SCREENS.YOUR_HEALTH) : goBack()
+                shouldGoBack ? navigate(SCREENS.HEALTH_RECORD) : goBack()
               }
             >
               <MaterialIcons
