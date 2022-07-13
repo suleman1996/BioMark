@@ -250,10 +250,7 @@ const UpdatePassSchema = Yup.object({
       'Atleast have one digit, one captial letter and one special character.'
     ),
   confirmPassword: Yup.string()
-    .oneOf(
-      [Yup.ref('password'), null],
-      i18next.t('pages.password.newPasswordConfirm.errors.passwordMismatch')
-    )
+    .oneOf([Yup.ref('password'), null], 'New Password does not match.')
     .required(i18next.t('pages.password.newPassword.title'))
     .min(8)
     .matches(
