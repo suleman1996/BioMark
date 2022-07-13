@@ -8,8 +8,18 @@ export const makeStyles = () =>
       flexDirection: 'row',
       alignItems: 'center',
     },
-    img: {
-      marginRight: 8,
+    imgContentContainer: {
+      flexDirection: 'row',
+      marginRight: 12,
+      borderRadius: 20,
+    },
+    imgContent: {
+      alignSelf: 'center',
+      paddingRight: 5,
+      color: 'white',
+      fontSize: 15,
+      fontFamily: 'mulish',
+      fontWeight: '400',
     },
     toggleContainer: {
       flex: 1,
