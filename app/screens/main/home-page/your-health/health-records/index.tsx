@@ -274,7 +274,7 @@ const HealthRecord = () => {
               onPress={() =>
                 latestResult?.result?.status == 'Converted'
                   ? navigation.navigate(SCREENS.RESULT_OVERVIEW)
-                  : null
+                  : navigation.navigate(SCREENS.RESULT_OVERVIEW)
               }
               summary={latestResult?.result?.summary}
               doctor={latestResult?.result?.doctor}
