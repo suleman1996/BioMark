@@ -320,7 +320,7 @@ export default function CreateProfile() {
                       date={date}
                       setDate={setDate}
                       maximumDate={new Date()}
-                      minimumDate={new Date('jan-01-1990')}
+                      minimumDate={new Date('jan-01-1922')}
                     />
                   </View>
 

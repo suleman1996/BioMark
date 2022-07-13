@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Linking,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useRoute } from '@react-navigation/native';
 import { showMessage } from 'react-native-flash-message';
@@ -18,6 +24,7 @@ import BackIcon from 'assets/svgs/back';
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
 import { setAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
+import Config from 'react-native-config';
 
 export default function SignupVerification() {
   const { t } = useTranslation();
@@ -188,20 +195,20 @@ export default function SignupVerification() {
           <View style={{}}>
             <View style={styles.callUsText}>
               {/* <CheckBox /> */}
-              <TouchableOpacity>
-                <Text style={styles.callUsTextStyle}>
-                  <Text>{t('pages.signUp.allSet.actions.trouble.text')} </Text>
-                  <Text
-                    style={{
-                      color: colors.blue,
-                      fontSize: 15,
-                      fontFamily: fonts.bold,
-                    }}
-                  >
-                    {t('pages.signUp.allSet.actions.trouble.link')}
-                  </Text>
+
+              <Text style={styles.callUsTextStyle}>
+                <Text>{t('pages.signUp.allSet.actions.trouble.text')} </Text>
+                <Text
+                  style={{
+                    color: colors.blue,
+                    fontSize: 15,
+                    fontFamily: fonts.bold,
+                  }}
+                  onPress={() => Linking.openURL(Config.MESSENGER_URL)}
+                >
+                  {t('pages.signUp.allSet.actions.trouble.link')}
                 </Text>
-              </TouchableOpacity>
+              </Text>
             </View>
             <Button
               // disabled={code.length < 6 ? true : false}
