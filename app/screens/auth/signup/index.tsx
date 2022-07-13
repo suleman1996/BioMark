@@ -5,7 +5,6 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
   KeyboardAvoidingView,
   Platform,
@@ -198,7 +197,6 @@ export default function Signup() {
               errors,
               handleChange,
               // handleSubmit,
-              // setFieldTouched,
               values,
               // isSubmitting,
               isValid,
@@ -262,7 +260,7 @@ export default function Signup() {
                       date={date}
                       setDate={setDate}
                       maximumDate={new Date()}
-                      minimumDate={new Date('jan-01-1990')}
+                      minimumDate={new Date('jan-01-1922')}
                     />
                   </View>
                   <InputWithLabel
@@ -378,44 +376,41 @@ export default function Signup() {
                     <CheckBox checked={checked} setChecked={setChecked} />
                     <Text style={styles.tcTextStyle}>
                       <Text>{t('pages.signUp.tos.start')} </Text>
-                      <TouchableWithoutFeedback
+
+                      <Text
+                        style={{
+                          color: colors.blue,
+                          fontSize: 15,
+                          fontFamily: fonts.mulishRegular,
+                          textDecorationLine: 'underline',
+                          // bottom: 2,
+                        }}
                         onPress={() =>
                           navigate(SCREENS.TERMS_AND_PRIVACY, {
                             privacyPolicy: false,
                           })
                         }
                       >
-                        <Text
-                          style={{
-                            color: colors.blue,
-                            fontSize: 15,
-                            fontFamily: fonts.mulishRegular,
-                            textDecorationLine: 'underline',
-                            // bottom: 2,
-                          }}
-                        >
-                          {t('pages.signUp.tos.tosLink')}
-                        </Text>
-                      </TouchableWithoutFeedback>
+                        {t('pages.signUp.tos.tosLink')}
+                      </Text>
+
                       <Text> {t('pages.signUp.tos.middle')} </Text>
-                      <TouchableWithoutFeedback
+
+                      <Text
+                        style={{
+                          color: colors.blue,
+                          fontSize: 15,
+                          fontFamily: fonts.mulishRegular,
+                          textDecorationLine: 'underline',
+                        }}
                         onPress={() =>
                           navigate(SCREENS.TERMS_AND_PRIVACY, {
                             privacyPolicy: true,
                           })
                         }
                       >
-                        <Text
-                          style={{
-                            color: colors.blue,
-                            fontSize: 15,
-                            fontFamily: fonts.mulishRegular,
-                            textDecorationLine: 'underline',
-                          }}
-                        >
-                          {t('pages.signUp.tos.dppLink')}
-                        </Text>
-                      </TouchableWithoutFeedback>
+                        {t('pages.signUp.tos.dppLink')}
+                      </Text>
                     </Text>
                   </View>
 

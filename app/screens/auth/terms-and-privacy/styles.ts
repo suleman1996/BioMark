@@ -71,7 +71,6 @@ export const makeStyles = (colors: any) =>
       fontSize: 15,
     },
     lableView: {
-      marginHorizontal: 20,
       borderBottomColor: colors.heading,
     },
     ChoiceBtnDOB: {

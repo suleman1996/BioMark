@@ -15,6 +15,7 @@ import SCREENS from 'navigation/constants';
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import { BioDangerWhite } from 'components/svg';
 
 export default function CreatePassword() {
   const { t } = useTranslation();
@@ -26,6 +27,8 @@ export default function CreatePassword() {
   const [loading, setLoading] = useState(false);
 
   const resetPassword = async ({ password }) => {
+    console.log('password', password);
+
     setLoading(true);
 
     navigate(SCREENS.PASSWORD_OTP, {
@@ -50,7 +53,15 @@ export default function CreatePassword() {
               onSubmit={resetPassword}
               validationSchema={ResetPassSchema}
             >
-              {({ handleChange, handleSubmit, values, errors, isValid }) => (
+              {({
+                handleChange,
+                handleSubmit,
+                values,
+                errors,
+                isValid,
+                setFieldTouched,
+                touched,
+              }) => (
                 <>
                   <Text style={styles.title}>
                     {t('pages.resetPassword.resetDescription')}
@@ -60,16 +71,23 @@ export default function CreatePassword() {
                     {t('pages.password.newPassword.title')}
                   </Text>
                   <TextInput
-                    placeholder={t('pages.password.newPassword.placeholder')}
+                    placeholder={t(
+                      'pages.password.currentPassword.placeholder'
+                    )}
+                    containerStyle={{ borderRadius: 8 }}
                     secureTextEntry={hidePassword}
                     eye={!hidePassword ? 'eye' : 'eye-off'}
                     onEyePress={() => setHidePassword(!hidePassword)}
                     onChange={handleChange('password')}
-                    margin={0}
+                    //  margin={20}
+                    onBlur={() => setFieldTouched('password')}
                   />
-                  {errors.password && (
-                    <Text style={styles.errorMessage}>{errors.password}</Text>
-                  )}
+                  {touched.password && errors.password ? (
+                    <View style={styles.errorContainer}>
+                      <BioDangerWhite width={3.5} height={3.5} />
+                      <Text style={styles.errorText}>{errors.password}</Text>
+                    </View>
+                  ) : null}
 
                   <Text style={[styles.inputLablel, { marginTop: 30 }]}>
                     {t('pages.password.newPasswordConfirm.title')}
@@ -77,21 +95,26 @@ export default function CreatePassword() {
                   <View>
                     <TextInput
                       placeholder={t(
-                        'pages.password.newPasswordConfirm.placeholder'
+                        'pages.password.currentPassword.placeholder'
                       )}
+                      containerStyle={{ borderRadius: 8 }}
                       secureTextEntry={hideConfirmPassword}
                       eye={!hideConfirmPassword ? 'eye' : 'eye-off'}
                       onEyePress={() =>
                         setConfirmHidePassword(!hideConfirmPassword)
                       }
                       onChange={handleChange('confirmPassword')}
-                      margin={0}
+                      //  margin={20}
+                      onBlur={() => setFieldTouched('confirmPassword')}
                     />
-                    {errors.confirmPassword && (
-                      <Text style={styles.errorMessage}>
-                        {errors.confirmPassword}
-                      </Text>
-                    )}
+                    {touched.confirmPassword && errors.confirmPassword ? (
+                      <View style={styles.errorContainer}>
+                        <BioDangerWhite width={3.5} height={3.5} />
+                        <Text style={styles.errorText}>
+                          {errors.confirmPassword}
+                        </Text>
+                      </View>
+                    ) : null}
                   </View>
                   <View style={styles.floatingBtn}>
                     <Button
