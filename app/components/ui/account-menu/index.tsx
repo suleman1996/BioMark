@@ -85,7 +85,8 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>
               {t('pages.more.links.idVerification')}
             </Text>
-            {console.log(' setVerificationText()', setVerificationText())}
+          </View>
+          <View style={styles.iconWithSecondText}>
             <Text
               numberOfLines={2}
               style={[
@@ -105,8 +106,7 @@ const AccountMenu = (props) => {
             >
               {setVerificationText()}
             </Text>
-          </View>
-          <View style={styles.iconWithSecondText}>
+
             {props?.id_verification == 'PENDING' ||
             props?.id_verification == 'SUCCESS' ? null : (
               <Fontisto
