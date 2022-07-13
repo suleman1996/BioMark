@@ -44,7 +44,7 @@ export default function BookTestButton() {
           style={styles.btn}
           rippleColor={'rgba(0,128,128,0.05)'}
         >
-          <BioBookTest width={7} height={7} />
+          <BioBookTest width={10} height={10} />
         </TouchableRipple>
       </View>
 
@@ -60,8 +60,8 @@ const makeStyles = (colors: any) =>
     circleBtn: {
       backgroundColor: 'white',
       borderRadius: 300,
-      width: widthToDp(14),
-      height: widthToDp(14),
+      width: widthToDp(18),
+      height: widthToDp(18),
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
