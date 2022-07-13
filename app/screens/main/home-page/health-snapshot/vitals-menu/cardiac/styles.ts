@@ -1,11 +1,15 @@
 import { StyleSheet } from 'react-native';
 
-export const makeStyles = (colors: any) =>
+export const makeStyles = () =>
   StyleSheet.create({
-    dataPoint: {
-      color: colors.inActive,
-      fontSize: 12,
-      marginBottom: 6,
+    yAxisLabel: {
+      fontSize: 10,
+      color: '#8493AE',
+    },
+    xAxisLabel: {
+      fontSize: 10,
+      color: '#8493AE',
+      marginLeft: 8,
     },
   });
 
