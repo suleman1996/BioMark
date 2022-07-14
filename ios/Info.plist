@@ -94,6 +94,10 @@
 	<string>BioMark would like to your microphone (for videos)</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>BioMark would like access to your photo gallery</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Biomark will use your location for notifying the nearby doctor</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Biomark will use your location for notifying the nearby doctor</string>
 	<key>Privacy – Camera Usage Description	</key>
 	<string>BioMark needs Camera Access Permission</string>
 	<key>Privacy – Photo Library Additions Usage Description</key>

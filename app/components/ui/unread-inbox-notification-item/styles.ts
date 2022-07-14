@@ -28,13 +28,13 @@ export const makeStyles = (colors: any) =>
     },
     contentHeaderText: {
       fontFamily: GlobalFonts.bold,
-      fontSize: responsiveFontSize(20),
+      fontSize: responsiveFontSize(25),
       color: colors.darkPrimary,
       marginTop: -4,
     },
     contentext: {
       fontFamily: GlobalFonts.bold,
-      fontSize: responsiveFontSize(15),
+      fontSize: responsiveFontSize(20),
       color: colors.darkPrimary,
     },
   });

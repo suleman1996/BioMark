@@ -44,6 +44,12 @@ const BodyMeasurementScreen = () => {
   }, []);
 
   useEffect(() => {
+    console.log('METRIC CHANGED');
+    if (bodyMeasurment.dont_run) {
+      console.log(bodyMeasurment.dont_run);
+      setBodyMeasurment((prev) => ({ ...prev, dont_run: false }));
+      return;
+    }
     if (!bodyMeasurment.height || !bodyMeasurment.weight) return;
     if (!bodyMeasurment.is_metric) {
       setBodyMeasurment((prev) => ({
@@ -74,13 +80,12 @@ const BodyMeasurementScreen = () => {
         is_metric
       );
 
-      // if (is_metric) {
       setBodyMeasurment({
         height: height_attr,
         weight: weight_attr,
         is_metric,
+        dont_run: is_metric ? false : true,
       });
-      // }
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -152,7 +157,7 @@ const BodyMeasurementScreen = () => {
       [key]: measurementValidator(bodyMeasurment.is_metric, key, value, t),
     }));
   };
-
+  console.log(bodyMeasurment);
   return (
     <TitleWithBackLayout title={t('pages.bodyMeasurements.title')}>
       <ActivityIndicator visible={isLoading} />

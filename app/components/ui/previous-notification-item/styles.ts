@@ -27,16 +27,16 @@ export const makeStyles = (colors: any) =>
     },
     contentHeaderText: {
       fontFamily: GlobalFonts.regular,
-      fontSize: responsiveFontSize(20),
+      fontSize: responsiveFontSize(25),
       color: colors.darkPrimary,
     },
     contentext: {
       fontFamily: GlobalFonts.regular,
-      fontSize: responsiveFontSize(15),
+      fontSize: responsiveFontSize(20),
       color: colors.darkPrimary,
     },
     descriptionDataContainer: {
-      width: widthToDp(83),
+      width: widthToDp(80),
       paddingLeft: widthToDp(8.5),
     },
   });

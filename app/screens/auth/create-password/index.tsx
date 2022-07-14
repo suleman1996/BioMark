@@ -145,10 +145,8 @@ const ResetPassSchema = Yup.object({
     ),
 
   confirmPassword: Yup.string()
-    .oneOf(
-      [Yup.ref('password'), null],
-      i18next.t('pages.password.newPasswordConfirm.errors.passwordMismatch')
-    )
+    .oneOf([Yup.ref('password'), null], 'New Password does not match.')
+
     .required(i18next.t('pages.password.newPasswordConfirm.errors.required'))
     .min(7, 'Too short')
     .matches(

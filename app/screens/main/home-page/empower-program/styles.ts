@@ -16,6 +16,7 @@ export const makeStyles = (colors: any) =>
       fontSize: responsiveFontSize(28),
       // marginTop: heightToDp(10),
       fontFamily: fonts.RobotoBold,
+      paddingHorizontal: 10,
     },
     text2: {
       textAlign: 'center',
@@ -24,6 +25,7 @@ export const makeStyles = (colors: any) =>
       marginHorizontal: widthToDp(4),
       marginTop: heightToDp(5),
       fontFamily: fonts.OpenSansRegular,
+      paddingHorizontal: 10,
     },
     gradientButton: {
       marginTop: heightToDp(15),

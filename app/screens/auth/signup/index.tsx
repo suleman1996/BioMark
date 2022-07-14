@@ -8,6 +8,7 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
 } from 'react-native';
 import { useTheme, TouchableRipple } from 'react-native-paper';
 
@@ -41,6 +42,7 @@ import { IC_AND_PASSPORT, NAME } from 'utils/regix';
 import { useTranslation } from 'react-i18next';
 import fonts from 'assets/fonts';
 import i18next from 'i18next';
+import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 export default function Signup() {
   //initial hooks define
@@ -377,7 +379,7 @@ export default function Signup() {
                     <Text style={styles.tcTextStyle}>
                       <Text>{t('pages.signUp.tos.start')} </Text>
 
-                      <Text
+                      {/* <Text
                         style={{
                           color: colors.blue,
                           fontSize: 15,
@@ -392,11 +394,36 @@ export default function Signup() {
                         }
                       >
                         {t('pages.signUp.tos.tosLink')}
-                      </Text>
+                      </Text> */}
+                      <Pressable
+                        onPress={() =>
+                          navigate(SCREENS.TERMS_AND_PRIVACY, {
+                            privacyPolicy: false,
+                          })
+                        }
+                      >
+                        {({ pressed }) => (
+                          <Text
+                            style={[
+                              {
+                                textDecorationLine: pressed
+                                  ? 'underline'
+                                  : 'none',
+                                color: colors.blue,
+                                fontSize: 15,
+                                fontFamily: fonts.mulishRegular,
+                                top: heightToDp(0.26),
+                              },
+                            ]}
+                          >
+                            {t('pages.signUp.tos.tosLink')}
+                          </Text>
+                        )}
+                      </Pressable>
 
                       <Text> {t('pages.signUp.tos.middle')} </Text>
 
-                      <Text
+                      {/* <Text
                         style={{
                           color: colors.blue,
                           fontSize: 15,
@@ -410,7 +437,32 @@ export default function Signup() {
                         }
                       >
                         {t('pages.signUp.tos.dppLink')}
-                      </Text>
+                      </Text> */}
+                      <Pressable
+                        onPress={() =>
+                          navigate(SCREENS.TERMS_AND_PRIVACY, {
+                            privacyPolicy: true,
+                          })
+                        }
+                      >
+                        {({ pressed }) => (
+                          <Text
+                            style={[
+                              {
+                                textDecorationLine: pressed
+                                  ? 'underline'
+                                  : 'none',
+                                color: colors.blue,
+                                fontSize: 15,
+                                fontFamily: fonts.mulishRegular,
+                                top: heightToDp(0.26),
+                              },
+                            ]}
+                          >
+                            {t('pages.signUp.tos.dppLink')}
+                          </Text>
+                        )}
+                      </Pressable>
                     </Text>
                   </View>
 
