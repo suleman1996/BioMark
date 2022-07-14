@@ -56,7 +56,7 @@ export default {
   DEVICE_CONNECTION: 'DEVICE_CONNECTION',
   MANAGE_DEVICE: 'MANAGE_DEVICE',
   INBOX: 'Inbox',
-  APPOINTMENT: 'Appointment',
+  APPOINTMENT: 'Bookings',
 
   //Health Progress
   HEALTH_PROGRESS: 'HEALTH_PROGRESS',

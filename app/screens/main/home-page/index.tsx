@@ -16,7 +16,7 @@ import i18next from 'i18next';
 import fonts from 'assets/fonts';
 import MyImage from 'assets/images';
 
-import { Covid19Btn, SmallButton, YourHealthBtn } from 'components/button';
+import { BookingBtn, SmallButton, YourHealthBtn } from 'components/button';
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
 import HealthSnapshot from './health-snapshot/index';
 
@@ -204,7 +204,7 @@ export default function Home() {
 
             <View style={styles.badgesContainer}>
               <YourHealthBtn />
-              <Covid19Btn />
+              <BookingBtn />
             </View>
             <HealthSnapshot />
             <View style={{ paddingBottom: '50%' }} />

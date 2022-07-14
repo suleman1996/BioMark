@@ -105,6 +105,11 @@ const VitalsMenu = () => {
             {graphType == 6 && <Endocrine display7Days={isWeekly} />}
             {graphType == 7 && <Lungs display7Days={isWeekly} />}
           </View>
+          <View style={{ alignSelf: 'flex-start', marginBottom: 10 }}>
+            <Text style={{ fontFamily: 'mulish', fontWeight: '400' }}>
+              Source Device: {data.device}
+            </Text>
+          </View>
           <View style={styles.toggleContainer}>
             <Button
               color={isWeekly ? colors.primary : colors.white}
