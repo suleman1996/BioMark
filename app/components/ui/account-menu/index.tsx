@@ -5,7 +5,7 @@ import { useTheme } from 'react-native-paper';
 import Config from 'react-native-config';
 import { Switch, TouchableRipple } from 'react-native-paper';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   BioAboutIcon,
@@ -27,11 +27,16 @@ import { useTranslation } from 'react-i18next';
 
 import makeStyles from './styles';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
+import { IAppState } from 'store/IAppState';
 
 const AccountMenu = (props) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
+  const devices = useSelector(
+    (state: IAppState) => state.tryvital.connectedDevices
+  );
 
   const dispatch = useDispatch();
   const openMessenger = () => {
@@ -159,7 +164,9 @@ const AccountMenu = (props) => {
             <Text style={styles.text}>Devices</Text>
           </View>
           <View style={styles.iconWithSecondText}>
-            <Text style={styles.secondText}>X devices</Text>
+            <Text style={styles.secondText}>
+              {devices.length > 0 ? devices.length : 'No'} device(s)
+            </Text>
             <Fontisto
               name="angle-right"
               size={responsiveFontSize(22)}
