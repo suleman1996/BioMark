@@ -24,6 +24,7 @@ import makeStyles from './styles';
 import Config from 'react-native-config';
 import { TitleWithBackLayout } from 'components/layouts';
 import { useTranslation } from 'react-i18next';
+import { widthToDp } from 'utils/functions/responsive-dimensions';
 
 export default function TermsAndPrivacy({ route }) {
   const { t } = useTranslation();
@@ -184,7 +185,10 @@ export default function TermsAndPrivacy({ route }) {
           <View
             style={[
               styles.lableView,
-              { borderBottomWidth: privacyPolicy ? null : 2 },
+              {
+                borderBottomWidth: privacyPolicy ? null : 2,
+                marginLeft: widthToDp(3),
+              },
             ]}
           >
             <Text

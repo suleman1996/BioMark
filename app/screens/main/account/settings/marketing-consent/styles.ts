@@ -9,12 +9,13 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      paddingHorizontal: widthToDp(8),
+      paddingLeft: widthToDp(8),
+      paddingRight: widthToDp(5),
       paddingTop: heightToDp(2),
       backgroundColor: colors.white,
     },
     headerText: {
-      fontSize: responsiveFontSize(23),
+      fontSize: responsiveFontSize(19),
       fontFamily: GlobalFonts.light,
       color: colors.darkPrimary,
       // letterSpacing: -0.1,
@@ -30,9 +31,10 @@ export const makeStyles = (colors: any) =>
     },
     checkTextStyle: {
       fontFamily: fonts.mulishRegular,
-      color: fonts.lightGrey,
+      color: colors.lightGrey,
       fontSize: 17,
       lineHeight: 22,
+      marginHorizontal: widthToDp(4),
     },
     bottomBtnContainer: {
       position: 'absolute',
@@ -41,6 +43,10 @@ export const makeStyles = (colors: any) =>
       alignItems: 'center',
       justifyContent: 'center',
       paddingHorizontal: widthToDp(4),
+    },
+    tcText: {
+      flexDirection: 'row',
+      justifyContent: 'center',
     },
   });
 export default makeStyles;

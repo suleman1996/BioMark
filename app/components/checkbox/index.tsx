@@ -9,6 +9,9 @@ import Styles from './styles';
 type Props = {
   checked: boolean;
   setChecked: any;
+  style?: any;
+  checkSizeHeight?: number;
+  checkSizeWidth?: number;
 };
 
 const CheckBox = (props: Props) => {
@@ -18,9 +21,15 @@ const CheckBox = (props: Props) => {
   return (
     <TouchableOpacity
       onPress={() => props.setChecked(!props.checked)}
-      style={[styles.checkbox, { borderColor: colors.blue }]}
+      style={[styles.checkbox, { borderColor: colors.blue }, props.style]}
     >
-      {props.checked && <Check height={16} width={16} fill={colors.blue} />}
+      {props.checked && (
+        <Check
+          height={props.checkSizeHeight ? props.checkSizeHeight : 16}
+          width={props.checkSizeWidth ? props.checkSizeWidth : 16}
+          fill={colors.blue}
+        />
+      )}
     </TouchableOpacity>
   );
 };
