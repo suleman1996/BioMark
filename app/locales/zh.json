@@ -63,8 +63,8 @@
          "title": "COVID-19 相关预约",
          "orderId": "订单编号",
          "bookingId": "Booking ID",
-         "homeTitle": "Book your COVID-19 Test",
-         "homeDescription": "Planning a COVID-19 Test for you and your Dependant? Place an appointment with us by clicking “Book Now”",
+         "homeTitle": "Book your Appointment",
+         "homeDescription": "Planning a booking for you and your Dependant? Place an appointment with us by clicking “Book Now”",
          "tabs": {
             "upcoming": "即将到来的",
             "history": "历史记录"
@@ -120,6 +120,9 @@
          "title": "诊所",
          "description": "即将推出"
       },
+      "booking": {
+         "header": "预订"
+       },
       "covid": {
          "header": "COVID-19",
          "title": "查阅您的 COVID-19 检测记录",

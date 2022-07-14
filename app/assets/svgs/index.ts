@@ -3,6 +3,7 @@ export { default as AccountIcon } from './account-icon';
 export { default as ArrowBack } from './arrow-back';
 export { default as AppointmentIcon } from './appointmen-icon';
 export { default as BackIcon } from './back';
+export { default as BookingIcon } from './booking';
 export { default as CaloriesIcon } from './calories';
 export { default as CardiacIcon } from './cardiac';
 export { default as Covid19 } from './covid-19';

@@ -63,8 +63,8 @@
       "title": "COVID-19 Bookings",
       "orderId": "Booking ID",
       "bookingId": "Booking ID",
-      "homeTitle": "Book your COVID-19 Test",
-      "homeDescription": "Planning a COVID-19 Test for you and your Dependant? Place an appointment with us by clicking “Book Now”",
+      "homeTitle": "Appointment",
+      "homeDescription": "Planning a booking for you and your Dependant? Place an appointment with us by clicking “Book Now”",
       "tabs": {
         "upcoming": "Upcoming",
         "history": "History"
@@ -119,6 +119,9 @@
     "clinics": {
       "title": "Klinik",
       "description": "Segera Datang"
+    },
+    "booking": {
+      "header": "Bookings"
     },
     "covid": {
       "header": "COVID-19",
