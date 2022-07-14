@@ -272,10 +272,13 @@ const EditDependantScreen = (props: Props) => {
                 <Text style={styles.label}>
                   {t('pages.covid.covid-dependant.dob')}
                 </Text>
-                <DatePickerModal
-                  date={new Date(values.birth_date)}
-                  setDate={(e: any) => setFieldValue('birth_date', e)}
-                />
+                {values.birth_date ? (
+                  <DatePickerModal
+                    date={new Date(values.birth_date)}
+                    setDate={(e: any) => setFieldValue('birth_date', e)}
+                  />
+                ) : null}
+
                 {/* <DatePickerModal
                   width={'100%'}
                   date={new Date('Jan-01-1990')}
