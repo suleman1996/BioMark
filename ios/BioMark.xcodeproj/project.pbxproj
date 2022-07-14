@@ -674,7 +674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 50.22.50;
+				MARKETING_VERSION = 50.22.51;
 				PRODUCT_BUNDLE_IDENTIFIER = com.biomark.patientios;
 				PRODUCT_NAME = BioMark;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -703,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 50.22.50;
+				MARKETING_VERSION = 50.22.51;
 				PRODUCT_BUNDLE_IDENTIFIER = com.biomark.patientios;
 				PRODUCT_NAME = BioMark;
 				PROVISIONING_PROFILE_SPECIFIER = "";
