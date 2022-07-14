@@ -18,6 +18,7 @@ const DeviceConnection = () => {
   useEffect(() => {
     TryvitalsService.linkToken()
       .then((resp) => {
+        console.log(resp);
         if (!resp['link_token']) navigation.goBack();
 
         setLinkToken(resp['link_token']);

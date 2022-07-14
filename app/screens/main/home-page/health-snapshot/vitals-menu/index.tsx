@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Button } from 'react-native-paper';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 
 import makeStyles from './styles';
-import IMAGES from 'assets/images';
 import Pedometer from './pedometer';
 import Cardiac from './cardiac';
 import Endocrine from './endocrine';
@@ -12,6 +11,15 @@ import Sleep from './sleep';
 import Lungs from './lungs';
 import Exercise from './exercise';
 import Calories from './calories';
+import {
+  PedometerIcon,
+  ExerciseIcon,
+  CaloriesIcon,
+  SleepIcon,
+  EndocrineIcon,
+  CardiacIcon,
+  LungIcon,
+} from 'assets/svgs';
 
 import { TryvitalsService } from 'services/tryvitals-service/tryvitals-service';
 import NoData from '../components/no-data';
@@ -25,34 +33,55 @@ const VitalsMenu = () => {
   const styles = makeStyles();
 
   const categories = [
-    { id: 1, img: IMAGES.exerciseIcon, selectedImg: IMAGES.pedometerIcon },
-    { id: 2, img: IMAGES.moonIcon, selectedImg: IMAGES.moonIcon2 },
-    { id: 3, img: IMAGES.exerciseIcon, selectedImg: IMAGES.exerciseIcon2 },
-    { id: 4, img: IMAGES.exerciseIcon, selectedImg: IMAGES.caloriesIcon },
-    { id: 5, img: IMAGES.heartIcon, selectedImg: IMAGES.heartIcon2 },
-    { id: 6, img: IMAGES.dropIcon, selectedImg: IMAGES.dropIcon2 },
-    { id: 7, img: IMAGES.lungIcon, selectedImg: IMAGES.lungIcon2 },
+    'Pedometer',
+    'Sleep',
+    'Exercise',
+    'Calories',
+    'Cardiac',
+    'Endocrine',
+    'Lungs',
   ];
 
+  const iconColor = (index: number) =>
+    graphType == index + 1 ? '#FFFFFF' : '#8493AE';
+
   useEffect(() => {
-    TryvitalsService.getDevicesData().then((response) => setData(response));
+    TryvitalsService.getDevicesData().then((response) => {
+      console.log(response);
+      setData(response);
+    });
   }, []);
 
   return (
     <>
-      <ScrollView horizontal={true}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <View style={styles.options}>
           {categories.map((cat, i) => (
             <TouchableOpacity
               onPress={() => {
-                setGraphType(cat.id);
+                setGraphType(i + 1);
                 setIsWeekly(false);
               }}
             >
-              <Image
-                style={styles.img}
-                source={graphType == i + 1 ? cat.selectedImg : cat.img}
-              />
+              <View
+                style={[
+                  styles.imgContentContainer,
+                  {
+                    backgroundColor: graphType == i + 1 ? '#1B96D8' : '#F2F4F7',
+                  },
+                ]}
+              >
+                {i == 0 && <PedometerIcon color={iconColor(i)} />}
+                {i == 1 && <SleepIcon color={iconColor(i)} />}
+                {i == 2 && <ExerciseIcon color={iconColor(i)} />}
+                {i == 3 && <CaloriesIcon color={iconColor(i)} />}
+                {i == 4 && <CardiacIcon color={iconColor(i)} />}
+                {i == 5 && <EndocrineIcon color={iconColor(i)} />}
+                {i == 6 && <LungIcon color={iconColor(i)} />}
+                {graphType == i + 1 && (
+                  <Text style={styles.imgContent}>{cat}</Text>
+                )}
+              </View>
             </TouchableOpacity>
           ))}
         </View>
@@ -75,6 +104,11 @@ const VitalsMenu = () => {
             {graphType == 5 && <Cardiac display7Days={isWeekly} />}
             {graphType == 6 && <Endocrine display7Days={isWeekly} />}
             {graphType == 7 && <Lungs display7Days={isWeekly} />}
+          </View>
+          <View style={{ alignSelf: 'flex-start', marginBottom: 10 }}>
+            <Text style={{ fontFamily: 'mulish', fontWeight: '400' }}>
+              Source Device: {data.device}
+            </Text>
           </View>
           <View style={styles.toggleContainer}>
             <Button

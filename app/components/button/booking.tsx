@@ -1,26 +1,28 @@
-import fonts from 'assets/fonts';
-import BioBookings from 'components/svg/bio-bookings';
-import { t } from 'i18next';
 import React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { TouchableRipple, useTheme } from 'react-native-paper';
+
+import { BookingIcon } from 'assets/svgs/index';
+import fonts from 'assets/fonts';
+// import SCREENS from '../../navigation/constants';
+// import { navigate } from '../../services/nav-ref';
+import { useTranslation } from 'react-i18next';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { useSelector } from 'react-redux';
-import { navigate } from 'services/nav-ref';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
-import SCREENS from '../../navigation/constants/index';
+import { useSelector } from 'react-redux';
 import { IAppState } from './../../store/IAppState';
 
-export default function TestBookinButton() {
-  const { colors } = useTheme();
+export default function BookingBtn() {
+  const { t } = useTranslation();
+  const { colors }: any = useTheme();
   const styles = makeStyles(colors);
   const booking_count = useSelector(
     (state: IAppState) => state.notifications.allAppointmentCounts
   );
-
   const hasNoti =
+    booking_count.booking_result_count > 0 ||
     booking_count.covid_booking_count > 0
-      ? { borderColor: colors.darkPrimary, borderWidth: 1 }
+      ? { borderColor: colors.darkPrimary, borderWidth: 0.7 }
       : {};
 
   return (
@@ -34,16 +36,20 @@ export default function TestBookinButton() {
           style={styles.btn}
           rippleColor={'rgba(0,128,128,0.05)'}
           onPress={() =>
-            navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
-              screen: SCREENS.COVID19BOOKINGS,
-            })
+            // onPress
+            //   ? onPress()
+            //   : navigate(SCREENS.NESTED_COVID19_NAVIGATOR, {
+            //       screen: SCREENS.COVID19HOME,
+            //     })
+            {}
           }
         >
-          <BioBookings width={10} height={10} />
+          <BookingIcon />
         </TouchableRipple>
       </View>
-      <View>
-        <Text style={styles.healthText}>{t('pages.covid.home.bookings')}</Text>
+      <View style={{ alignItems: 'center' }}>
+        <Text style={styles.covidText}>{t('pages.booking.header')}</Text>
+        <Text style={styles.covidTextnotification}>Coming Soon</Text>
       </View>
     </View>
   );
@@ -54,8 +60,8 @@ const makeStyles = (colors: any) =>
     circleBtn: {
       backgroundColor: 'white',
       borderRadius: 300,
-      width: widthToDp(18),
-      height: widthToDp(18),
+      width: widthToDp(14),
+      height: widthToDp(14),
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -69,10 +75,14 @@ const makeStyles = (colors: any) =>
       alignItems: 'center',
       overflow: Platform.OS == 'ios' ? 'visible' : 'hidden',
     },
-    healthText: {
+    covidText: {
       fontFamily: fonts.bold,
       fontSize: RFValue(15),
       color: colors.heading,
+    },
+    covidTextnotification: {
+      fontSize: RFValue(8),
+      color: colors.grey,
     },
     redDot: {
       width: widthToDp(2.4),

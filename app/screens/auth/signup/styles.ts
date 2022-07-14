@@ -97,7 +97,7 @@ export const makeStyles = (colors: any) =>
       marginHorizontal: 30,
     },
     tcTextStyle: {
-      marginTop: 20,
+      marginTop: 10,
       fontSize: 15,
       fontFamily: fonts.mulishRegular,
       color: colors.black,

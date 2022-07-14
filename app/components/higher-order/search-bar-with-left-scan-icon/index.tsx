@@ -247,11 +247,13 @@ const SearchBarWithLeftScanIcon = () => {
         },
       });
       if (response.status == true) {
+        console.log(response, 'response----------------');
         navigate(SCREENS.SUPPORT_SYSTEM);
       } else {
         console.error('error', response);
       }
     } catch (err) {
+      console.log(err, 'errorrrrrrrrrrrrrrr');
       setShowModalQr(false);
       setInvalidError(err.errMsg.data.message);
       setActionError(err.errMsg.data.action);
@@ -420,6 +422,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'Already a Member'
             : invalidError == 'Scan event code first'
             ? 'Back'
+            : actionError == 'barcode'
+            ? 'Contact Us'
             : 'Back'
         }
         visible={modalVisible}
@@ -432,6 +436,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'Already a Member'
             : invalidError == 'Scan event code first'
             ? 'Invalid Code'
+            : actionError == 'barcode'
+            ? 'Invalid Code'
             : undefined
         }
         text2={
@@ -443,6 +449,8 @@ const SearchBarWithLeftScanIcon = () => {
             ? 'You are already a member of the Empower Program.You can already log your blood sugar and medications.'
             : invalidError == 'Scan event code first'
             ? 'Multiple invalid code entries detected.Try manually entering the code.'
+            : actionError == 'barcode'
+            ? 'Please contact us if you are having trouble accessing your results.'
             : undefined
         }
         closeModal={() => {
@@ -458,6 +466,12 @@ const SearchBarWithLeftScanIcon = () => {
             ? setModalVisible(false)
             : invalidError == 'Scan event code first'
             ? setModalVisible(false)
+            : undefined;
+        }}
+        cancel={actionError == 'barcode' ? 'Back' : undefined}
+        cancelModal={() => {
+          actionError == 'barcode'
+            ? setModalVisible(false) || setCode('')
             : undefined;
         }}
       />
@@ -517,6 +531,7 @@ const SearchBarWithLeftScanIcon = () => {
             <Button
               onPress={() => {
                 setVisible(false);
+                setCode('');
                 handleCode();
               }}
               title="Save Code"
