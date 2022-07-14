@@ -1,14 +1,17 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { Alert, SafeAreaView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import WebView from 'react-native-webview';
 
 import { TryvitalsService } from 'services/tryvitals-service/tryvitals-service';
 import makeStyles from './styles';
+import { setDeviceChanged } from 'store/tryvital/tryvital-actions';
 
 const DeviceConnection = () => {
   const { colors } = useTheme();
+  const dispatch = useDispatch();
   const styles = makeStyles(colors);
 
   const navigation = useNavigation();
@@ -35,6 +38,7 @@ const DeviceConnection = () => {
       Alert.alert('Device connected successfully...!!!');
     }
     if (event.nativeEvent.data === 'LINK_EVENT::CLOSE') {
+      dispatch(setDeviceChanged(true));
       navigation.goBack();
     }
   };

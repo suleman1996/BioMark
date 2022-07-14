@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'react-native-paper';
@@ -11,11 +11,15 @@ import SCREENS from 'navigation/constants';
 import MyImage from 'assets/images';
 import makeStyles from './styles';
 
-const HealthSnapshot = () => {
+type Props = {
+  device_connected: boolean;
+};
+
+const HealthSnapshot = (props: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
-  const [connected] = useState(false);
+  const { device_connected } = props;
 
   const navigation = useNavigation();
 
@@ -25,10 +29,12 @@ const HealthSnapshot = () => {
       <View
         style={[
           styles.container,
-          connected ? styles.containerC : styles.containerNC,
+          device_connected ? styles.containerNC : styles.containerC,
         ]}
       >
-        {connected ? (
+        {device_connected ? (
+          <VitalsMenu />
+        ) : (
           <ImageBackground
             source={MyImage.healthRing}
             style={{
@@ -44,8 +50,6 @@ const HealthSnapshot = () => {
               onPress={() => navigation.navigate(SCREENS.DEVICE_CONNECTION)}
             />
           </ImageBackground>
-        ) : (
-          <VitalsMenu />
         )}
       </View>
     </View>
