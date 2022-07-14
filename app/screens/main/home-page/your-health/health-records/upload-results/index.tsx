@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import {
@@ -10,6 +11,7 @@ import {
   FlatList,
   ScrollView,
   Keyboard,
+  Platform,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { showMessage } from 'react-native-flash-message';
@@ -39,6 +41,7 @@ import { IAppState } from 'store/IAppState';
 import Pdf from 'react-native-pdf';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { useTranslation } from 'react-i18next';
+import { PERMISSIONS, check, request } from 'react-native-permissions';
 
 // let cameraIs = false;
 export default function ResultUpload() {
@@ -176,52 +179,104 @@ export default function ResultUpload() {
     }
   };
 
+  const permissionAndroid = async () => {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: 'App Camera Permission',
+        message: 'App needs access to your camera',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      let options = {
+        mediaType: 'photo',
+        selectionLimit: 0,
+        includeBase64: true,
+      };
+      launchCamera(options, (res) => {
+        if (res.didCancel) {
+          setIsVisible(false);
+        } else if (res.errorMessage) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(false);
+          let body = {
+            filename: res?.assets[0]?.fileName,
+            uri: res?.assets[0]?.uri,
+            base64:
+              'data:' +
+              res?.assets[0]?.type +
+              ';' +
+              'base64' +
+              ',' +
+              res?.assets[0]?.base64,
+            filetype: res?.assets[0]?.type,
+          };
+          let data = list;
+          data.push(body);
+          setList(data);
+          setShowModal(false);
+        }
+      });
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const permissionIos = async () => {
+    setIsVisible(false);
+    const res = await check(PERMISSIONS.IOS.CAMERA);
+
+    if (res === 'granted') {
+      let options = {
+        mediaType: 'photo',
+        selectionLimit: 0,
+        includeBase64: true,
+      };
+      launchCamera(options, (res) => {
+        if (res.didCancel) {
+          setIsVisible(false);
+        } else if (res.errorMessage) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(false);
+          let body = {
+            filename: res?.assets[0]?.fileName,
+            uri: res?.assets[0]?.uri,
+            base64:
+              'data:' +
+              res?.assets[0]?.type +
+              ';' +
+              'base64' +
+              ',' +
+              res?.assets[0]?.base64,
+            filetype: res?.assets[0]?.type,
+          };
+          let data = list;
+          data.push(body);
+          setList(data);
+          setShowModal(false);
+        }
+      });
+    } else if (res === 'denied') {
+      const res2 = await request(PERMISSIONS.IOS.CAMERA);
+      res2 === 'granted' ? permissionIos() : setIsVisible(false);
+      console.log('check again results ', res2);
+    }
+  };
+
   const imagePickerFromCamera = async () => {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     try {
       setIsVisible(true);
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: 'App Camera Permission',
-          message: 'App needs access to your camera',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        let options = {
-          mediaType: 'photo',
-          selectionLimit: 0,
-          includeBase64: true,
-        };
-        launchCamera(options, (res) => {
-          if (res.didCancel) {
-            setIsVisible(false);
-          } else if (res.errorMessage) {
-            setIsVisible(false);
-          } else {
-            setIsVisible(false);
-            let body = {
-              filename: res?.assets[0]?.fileName,
-              uri: res?.assets[0]?.uri,
-              base64:
-                'data:' +
-                res?.assets[0]?.type +
-                ';' +
-                'base64' +
-                ',' +
-                res?.assets[0]?.base64,
-              filetype: res?.assets[0]?.type,
-            };
-            let data = list;
-            data.push(body);
-            setList(data);
-            setShowModal(false);
-          }
-        });
+
+      if (Platform.OS === 'android') {
+        permissionAndroid();
       } else {
-        setIsVisible(false);
+        permissionIos();
       }
     } catch (err) {
       setIsVisible(false);
@@ -303,11 +358,6 @@ export default function ResultUpload() {
                     <Text style={styles.noteText}>
                       {t('pages.uploadResult.privacy')}
                     </Text>
-                    {/* <Text style={styles.noteText2}>
-                      BioMark only supports the uploading of lab results for
-                      now. We reserve the right to remove documents that are not
-                      related to lab results.
-                    </Text> */}
                   </View>
                 </View>
               </View>

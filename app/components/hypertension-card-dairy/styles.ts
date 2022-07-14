@@ -36,7 +36,7 @@ export const makeStyles = (colors: any) =>
       textAlign: 'center',
     },
     healthTrackerValueText: {
-      fontWeight: fonts.mulishSemiBold,
+      fontFamily: fonts.mulishSemiBold,
       fontSize: 15,
       color: colors.danger,
       textAlign: 'center',
