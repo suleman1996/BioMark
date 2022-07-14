@@ -88,6 +88,7 @@ const HypertensionDiary = (props) => {
   const [video, setVideo] = React.useState([]);
   const [isVisiable, setIsVisible] = React.useState(false);
   const [barCodeData, setBarCodeData] = React.useState('');
+  const [refresh, setRefresh] = React.useState(false);
 
   useEffect(() => {
     dispatch(getReduxPspHypertensionHealthTrackerData());
@@ -100,12 +101,13 @@ const HypertensionDiary = (props) => {
     setbloodPressureData(trackerData.blood_pressure);
     setMedicationData(trackerData.medication);
     setWeightData(trackerData.weight);
+    setRefresh(!refresh);
     if (props?.route?.params?.showDemo) {
       setShowDemo(0);
     } else {
       setShowDemo(5);
     }
-  }, []);
+  }, [refresh]);
 
   const [healthTracker] = React.useState([
     {
