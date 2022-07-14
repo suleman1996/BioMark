@@ -5,8 +5,8 @@ import { useTheme } from 'react-native-paper';
 import { goBack } from 'services/nav-ref';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ActivityIndicator } from 'components';
-import { CheckBoxWithText, Button } from 'components/base';
+import { ActivityIndicator, CheckBox } from 'components';
+import { Button } from 'components/base';
 import { TitleWithBackWhiteBgLayout } from 'components/layouts';
 import { MarketingConsentModal } from 'components/ui';
 
@@ -17,6 +17,7 @@ import { GlobalStyles } from 'utils/theme/global-styles';
 
 import makeStyles from './styles';
 import { useTranslation } from 'react-i18next';
+import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 
 const MarketingConsentScreen = () => {
   const { t } = useTranslation();
@@ -77,19 +78,41 @@ const MarketingConsentScreen = () => {
         <Text style={styles.headerText}>
           {t('pages.marketingConsent.intro')}
         </Text>
-        <CheckBoxWithText
+        {/* <CheckBoxWithText
           rightText={t('pages.marketingConsent.optIn')}
           checkBoxView={styles.checkBoxView}
           textStyle={styles.checkTextStyle}
           isChecked={isChecked}
           setIsChecked={(value: any) => {
             if (!value) {
-              setIsMModal(true);
+              setIsMModal(true); 
             } else {
               setIsChecked(value);
             }
           }}
-        />
+        /> */}
+        <View style={styles.tcText}>
+          <View
+            style={{ marginLeft: widthToDp(5), marginTop: heightToDp(0.8) }}
+          >
+            <CheckBox
+              checked={isChecked}
+              setChecked={(value: any) => {
+                if (!value) {
+                  setIsMModal(true);
+                } else {
+                  setIsChecked(value);
+                }
+              }}
+              style={{ width: 35, height: 35 }}
+              checkSizeHeight={23}
+              checkSizeWidth={23}
+            />
+          </View>
+          <Text style={styles.checkTextStyle}>
+            {t('pages.marketingConsent.optIn')}
+          </Text>
+        </View>
         <View
           style={[
             GlobalStyles(colors).bottomBtnWithShadow,
