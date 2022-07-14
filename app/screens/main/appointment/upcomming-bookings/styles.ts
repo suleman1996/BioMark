@@ -45,8 +45,8 @@ export const makeStyles = (colors: any) =>
       color: colors.darkPrimary,
     },
     button: {
-      paddingHorizontal: widthToDp(5),
-      paddingVertical: widthToDp(2),
+      paddingHorizontal: widthToDp(4),
+      paddingVertical: widthToDp(1),
       borderColor: colors.darkPrimary,
       borderWidth: 1,
       borderRadius: widthToDp(3),

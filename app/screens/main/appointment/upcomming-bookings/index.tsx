@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
@@ -137,34 +138,35 @@ const UpcommingBookings = (props: Props) => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: heightToDp(1),
+            justifyContent: 'flex-end',
+            // marginTop: heightToDp(1),
           }}
         >
-          {declaration_complete ? (
-            <View style={styles.completeDecContainer}>
-              <AntDesign name="checkcircle" color={colors.primary} />
-              <Text style={styles.completeDecText}>
-                Health Declaration Completed
-              </Text>
-            </View>
-          ) : (
-            <Pressable
-              disabled={!declaration_enabled}
-              onPress={() => {
-                setIsHealthDeclaration(true);
-                setModalData(item);
-              }}
-              style={[
-                styles.button,
-                declaration_enabled
-                  ? {}
-                  : { backgroundColor: colors.fieldGrey },
-              ]}
-            >
-              <Text style={styles.dateandtimeText}>Health Declaration</Text>
-            </Pressable>
-          )}
+          {
+            declaration_complete ? (
+              <View style={styles.completeDecContainer}>
+                <AntDesign name="checkcircle" color={colors.primary} />
+                <Text style={styles.completeDecText}>
+                  Health Declaration Completed
+                </Text>
+              </View>
+            ) : null
+            // <Pressable
+            //   disabled={!declaration_enabled}
+            //   onPress={() => {
+            //     setIsHealthDeclaration(true);
+            //     setModalData(item);
+            //   }}
+            //   style={[
+            //     styles.button,
+            //     declaration_enabled
+            //       ? {}
+            //       : { backgroundColor: colors.fieldGrey },
+            //   ]}
+            // >
+            //   <Text style={styles.dateandtimeText}>Health Declaration</Text>
+            // </Pressable>
+          }
 
           <Pressable
             disabled={!is_cancellable}
@@ -173,7 +175,14 @@ const UpcommingBookings = (props: Props) => {
               !is_cancellable ? {} : { backgroundColor: colors.fieldGrey },
             ]}
           >
-            <Text style={[styles.dateandtimeText, { color: colors.darkGray }]}>
+            <Text
+              style={[
+                styles.dateandtimeText,
+                !is_cancellable
+                  ? { color: colors.danger }
+                  : { color: colors.darkGrey },
+              ]}
+            >
               Cancel Test
             </Text>
           </Pressable>
