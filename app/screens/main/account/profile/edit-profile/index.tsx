@@ -39,7 +39,7 @@ import { getUserProfileData } from 'store/profile/profile-actions';
 import { useTranslation } from 'react-i18next';
 import { profileServices } from 'services/profile-services';
 import { widthToDp } from 'utils/functions/responsive-dimensions';
-
+var pkg = require('../../../../../../package.json');
 let cameraIs = false;
 
 const EditProfileScreen = () => {
@@ -71,7 +71,9 @@ const EditProfileScreen = () => {
       await Promise.all([userService.updateProfileAvatar(pic)]);
 
       const result = await profileServices.getUserProfile();
-      authContext.setUserData(result?.data);
+      console.log('ress', result);
+
+      authContext.setUserData(result);
 
       setIsLoading(false);
     } catch (error) {
@@ -456,7 +458,9 @@ const EditProfileScreen = () => {
             fontFamily: GlobalFonts.light,
           }}
         >
-          v0.2.9
+          {Platform.OS == 'ios'
+            ? 'v' + pkg.iosVersion
+            : 'v' + pkg.androidVersion}
         </Text>
       </ScrollView>
     </TitleWithBackLayout>
