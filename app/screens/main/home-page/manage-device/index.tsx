@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, TouchableOpacity, Image, Modal } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
@@ -11,39 +12,38 @@ import makeStyles from './styles';
 import MyImage from 'assets/images';
 import Device from './box';
 import { TryvitalsService } from 'services/tryvitals-service/tryvitals-service';
-import { ConnectedDevicesResponse } from 'types/auth/TryvitalsResponse';
+import { setDeviceChanged } from 'store/tryvital/tryvital-actions';
+import { IAppState } from 'store/IAppState';
 
 const ManageDevice = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [deleteDevice, setDeleteDevice] = useState({});
-  const [devices, setDevices] = useState<Array<ConnectedDevicesResponse>>([]);
+
+  const devices = useSelector(
+    (state: IAppState) => state.tryvital.connectedDevices
+  );
 
   const { colors } = useTheme();
   const styles = makeStyles(colors);
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    TryvitalsService.connectedDevices().then((response) =>
-      setDevices(response)
-    );
-  }, []);
+  const dispatch = useDispatch();
 
   const OpenLogCloseSign = () => {
-    setModalVisible2(true);
-    setModalVisible(false);
+    TryvitalsService.disconnectDevice({ provider: deleteDevice.slug })
+      .then(() => {
+        setModalVisible2(true);
+        setModalVisible(false);
+        dispatch(setDeviceChanged(true));
+      })
+      .catch(() => {
+        setModalVisible(false);
+      });
   };
 
-  const unLinkDevice = () => {
-    TryvitalsService.disconnectDevice({ provider: deleteDevice.name }).then(
-      () => {
-        let result = devices.filter((d) => d.id !== deleteDevice.id);
-        setDevices(result);
-        setModalVisible2(false);
-      }
-    );
-  };
+  const unLinkDevice = () => setModalVisible2(false);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
@@ -23,6 +24,7 @@ import {
 
 import { TryvitalsService } from 'services/tryvitals-service/tryvitals-service';
 import NoData from '../components/no-data';
+import { IAppState } from 'store/IAppState';
 
 const VitalsMenu = () => {
   const [graphType, setGraphType] = useState(1);
@@ -31,6 +33,10 @@ const VitalsMenu = () => {
 
   const { colors } = useTheme();
   const styles = makeStyles();
+
+  const deviceChanged = useSelector(
+    (state: IAppState) => state.tryvital.deviceChanged
+  );
 
   const categories = [
     'Pedometer',
@@ -45,12 +51,26 @@ const VitalsMenu = () => {
   const iconColor = (index: number) =>
     graphType == index + 1 ? '#FFFFFF' : '#8493AE';
 
-  useEffect(() => {
+  const updateDevicesData = () => {
     TryvitalsService.getDevicesData().then((response) => {
       console.log(response);
       setData(response);
     });
+  };
+
+  useEffect(() => {
+    const timeout = setInterval(() => {
+      updateDevicesData();
+    }, 10000);
+
+    return () => {
+      clearInterval(timeout);
+    };
   }, []);
+
+  useEffect(() => {
+    updateDevicesData();
+  }, [deviceChanged]);
 
   return (
     <>
