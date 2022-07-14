@@ -45,6 +45,11 @@ import { useIsFocused } from '@react-navigation/native';
 import { getAllApointmentsCountsR } from 'store/notifications/notification-actions';
 import { IAppState } from 'store/IAppState';
 import { addCovidBooking } from 'store/covid/covid-actions';
+import {
+  setConnectedDevices,
+  setDeviceChanged,
+} from 'store/tryvital/tryvital-actions';
+import { TryvitalsService } from 'services/tryvitals-service/tryvitals-service';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -58,6 +63,9 @@ export default function Home() {
   const dispatchMedDropDown = useDispatch();
   const dispatchMedicationList = useDispatch();
   const dashboard = useSelector((state: IAppState) => state.home.dashboard);
+  const deviceChanged = useSelector(
+    (state: IAppState) => state.tryvital.deviceChanged
+  );
   /*eslint-disable*/
   const getReduxBoot = async () => {
     await dispatch(getReduxBootstrap());
@@ -117,6 +125,10 @@ export default function Home() {
       const result = await profileServices.getUserProfile();
       authContext.setUserData(result);
       i18next.changeLanguage(result?.app_lang);
+      await TryvitalsService.connectedDevices().then((response) =>
+        dispatch(setConnectedDevices(response))
+      );
+      dispatch(setDeviceChanged(false));
     } catch (error) {
       console.error(error);
     }
@@ -125,7 +137,7 @@ export default function Home() {
   useEffect(() => {
     userProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [deviceChanged]);
 
   return (
     <View style={{ alignItems: 'center', backgroundColor: 'white', flex: 1 }}>
@@ -206,7 +218,9 @@ export default function Home() {
               <YourHealthBtn />
               <BookingBtn />
             </View>
-            <HealthSnapshot />
+            <HealthSnapshot
+              device_connected={authContext?.userData?.connected_device}
+            />
             <View style={{ paddingBottom: '50%' }} />
           </View>
         </ScrollView>
