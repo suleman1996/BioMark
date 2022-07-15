@@ -6,7 +6,7 @@ PODS:
   - AppAuth/ExternalUserAgent (1.5.0):
     - AppAuth/Core
   - boost (1.76.0)
-  - BVLinearGradient (2.6.0):
+  - BVLinearGradient (2.6.2):
     - React-Core
   - DoubleConversion (1.1.6)
   - FBAEMKit (13.2.0):
@@ -134,7 +134,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - Permission-Camera (3.3.1):
+  - Permission-Camera (3.5.0):
     - RNPermissions
   - PPpdf417 (8.0.0)
   - PromisesObjC (2.1.0)
@@ -387,7 +387,7 @@ PODS:
     - React-Core
   - react-native-maps (0.31.1):
     - React-Core
-  - react-native-pager-view (5.4.24):
+  - react-native-pager-view (5.4.25):
     - React-Core
   - react-native-pdf (6.5.0):
     - React-Core
@@ -404,7 +404,7 @@ PODS:
     - react-native-video/Video (= 5.2.0)
   - react-native-video/Video (5.2.0):
     - React-Core
-  - react-native-webview (11.22.4):
+  - react-native-webview (11.22.7):
     - React-Core
   - React-perflogger (0.68.1)
   - React-RCTActionSheet (0.68.1):
@@ -473,7 +473,7 @@ PODS:
     - React-perflogger (= 0.68.1)
   - ReactNativeART (1.2.0):
     - React
-  - RNAppleAuthentication (2.2.1):
+  - RNAppleAuthentication (2.2.2):
     - React-Core
   - RNCAsyncStorage (1.17.7):
     - React-Core
@@ -499,12 +499,12 @@ PODS:
   - RNGoogleSignin (7.2.2):
     - GoogleSignIn (~> 6.1.0)
     - React-Core
-  - RNPermissions (3.3.1):
+  - RNPermissions (3.5.0):
     - React-Core
   - RNQrGenerator (1.2.0):
     - React
     - ZXingObjC
-  - RNReanimated (2.9.0):
+  - RNReanimated (2.9.1):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -531,12 +531,12 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.14.0):
+  - RNScreens (3.15.0):
     - React-Core
     - React-RCTImage
-  - RNShare (7.6.4):
+  - RNShare (7.6.6):
     - React-Core
-  - RNSVG (12.3.0):
+  - RNSVG (12.4.0):
     - React-Core
   - RNVectorIcons (9.2.0):
     - React-Core
@@ -787,7 +787,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  BVLinearGradient: a957cb66102ba876529540b7ca96b91763da0001
+  BVLinearGradient: 34a999fda29036898a09c6a6b728b0b4189e1a44
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBAEMKit: c2b2895363b7e57192013d1dc49fdf498b28624c
   FBLazyVector: 2c76493a346ef8cacf1f442926a39f805fffec1f
@@ -815,7 +815,7 @@ SPEC CHECKSUMS:
   iProov: a01ee99a605be036375504e3c684fe87a9ede31c
   Jumio: 5ba2538df84aeb1cdcc630c6f3333a2fb6c9c066
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  Permission-Camera: bae27a8503530770c35aadfecbb97ec71823382a
+  Permission-Camera: 4f113f7e3f02d2e65030de8284dfc17f1d237a9a
   PPpdf417: aa644766d51a7e00b8d41c70868bba8b818f5215
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -840,12 +840,12 @@ SPEC CHECKSUMS:
   react-native-image-picker: cffb727cf2f59bd5c0408e30b3dbe0b935f88835
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
-  react-native-pager-view: 95d0418c3c74279840abec6926653d32447bafb6
+  react-native-pager-view: da490aa1f902c9a5aeecf0909cc975ad0e92e53e
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b
   react-native-progress-view: 9e6b6a5305a9115c2157ae3b8852081aba0aab7c
   react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28
-  react-native-webview: a1ed211d50a5047a4fe54e07140991e277cd66e6
+  react-native-webview: 227ba9205abb8579116b69ea5774d9744267c65a
   React-perflogger: 30ab8d6db10e175626069e742eead3ebe8f24fd5
   React-RCTActionSheet: 4b45da334a175b24dabe75f856b98fed3dfd6201
   React-RCTAnimation: d6237386cb04500889877845b3e9e9291146bc2e
@@ -859,7 +859,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7285b499d0339104b2813a1f58ad1ada4adbd6c0
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
   ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
-  RNAppleAuthentication: dab41edef916715148ce94a7dd04041a01590ddc
+  RNAppleAuthentication: 0571c08da8c327ae2afc0261b48b4a515b0286a6
   RNCAsyncStorage: d81ee5c3db1060afd49ea7045ad460eff82d2b7d
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
   RNCPushNotificationIOS: 87b8d16d3ede4532745e05b03c42cff33a36cc45
@@ -869,12 +869,12 @@ SPEC CHECKSUMS:
   RNFBMessaging: e67ce2a6aee26741b89dd61d08d578beb4e95e32
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
-  RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
+  RNPermissions: e5b6373c08831dc4b6b13a2b798143fac20bb100
   RNQrGenerator: 34beaf1996de4a2f2122c7019dccd1717b22d8d7
-  RNReanimated: f8544cbf23b39b63bb2adb378d66dd11735662bd
-  RNScreens: 4830eb40e0793b38849965cd27f4f3a7d7bc65c1
-  RNShare: 4406f61af043027b695c3a0b8f39e2c2bdacde12
-  RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
+  RNReanimated: 5c8c17e26787fd8984cd5accdc70fef2ca70aafd
+  RNScreens: 4a1af06327774490d97342c00aee0c2bafb497b7
+  RNShare: d56424e3926cbc239db1cc1c168adcb051aad50b
+  RNSVG: 3dd44d99d1c18e1342aee4bfa53ab3f6a8c4865f
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
