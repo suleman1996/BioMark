@@ -18,7 +18,7 @@ import MyImage from 'assets/images';
 
 import {
   BookingBtn,
-  // Covid19Btn,
+  Covid19Btn,
   SmallButton,
   YourHealthBtn,
 } from 'components/button';
@@ -111,6 +111,7 @@ export default function Home() {
   const getAppointsmentsCounts = async () => {
     await dispatch(getAllApointmentsCountsR());
   };
+
   useEffect(() => {
     getAppointsmentsCounts();
   }, [focused]);
@@ -222,7 +223,7 @@ export default function Home() {
             <View style={styles.badgesContainer}>
               <YourHealthBtn />
               <BookingBtn />
-              {/* <Covid19Btn /> */}
+              <Covid19Btn />
             </View>
             <HealthSnapshot
               device_connected={authContext?.userData?.connected_device}

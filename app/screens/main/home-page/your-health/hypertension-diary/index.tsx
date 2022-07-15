@@ -101,7 +101,7 @@ const HypertensionDiary = (props) => {
     setbloodPressureData(trackerData.blood_pressure);
     setMedicationData(trackerData.medication);
     setWeightData(trackerData.weight);
-    setRefresh(!refresh);
+    setRefresh(true);
     if (props?.route?.params?.showDemo) {
       setShowDemo(0);
     } else {
