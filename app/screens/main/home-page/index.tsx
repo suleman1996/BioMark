@@ -111,6 +111,7 @@ export default function Home() {
   const getAppointsmentsCounts = async () => {
     await dispatch(getAllApointmentsCountsR());
   };
+
   useEffect(() => {
     getAppointsmentsCounts();
   }, [focused]);
