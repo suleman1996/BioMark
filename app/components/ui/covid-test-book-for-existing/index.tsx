@@ -575,8 +575,8 @@ const ExisitingBookingForDependent = (props: Props) => {
             ) : null}
 
             {/* shift chooser */}
-
-            {morningTimeSlots.length > 0 ? (
+            {console.log('testDate', testDate)}
+            {morningTimeSlots.length > 0 && testDate ? (
               <>
                 <Text style={styles.innerTitle}>Morning timeslots</Text>
                 <TimeSlots
