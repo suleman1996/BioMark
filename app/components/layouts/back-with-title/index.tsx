@@ -27,6 +27,8 @@ type Props = {
   onSharePress: any;
   deleteIcon: any;
   shouldGoBack?: boolean;
+  pressdeleteIcon?: any;
+  iconName?: string;
 };
 
 const TitleWithBackLayout = ({
@@ -41,6 +43,8 @@ const TitleWithBackLayout = ({
   onSharePress,
   deleteIcon,
   shouldGoBack,
+  pressdeleteIcon,
+  iconName,
 }: Props) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
@@ -75,8 +79,8 @@ const TitleWithBackLayout = ({
                 <MaterialCommunityIcons
                   color={colors.white}
                   size={responsiveFontSize(35)}
-                  name="delete"
-                  onPress={deleteIcon}
+                  name={iconName}
+                  onPress={pressdeleteIcon}
                 />
               )}
             </View>

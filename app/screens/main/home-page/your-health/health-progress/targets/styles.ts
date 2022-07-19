@@ -9,12 +9,13 @@ export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: colors.white,
     },
     navBar: {
       backgroundColor: colors.blue,
       height: 80,
       width: '100%',
-      marginBottom: 15,
+      marginBottom: 18,
     },
     navHeading: {
       fontFamily: fonts.bold,
@@ -62,15 +63,15 @@ export const makeStyles = (colors: any) =>
       //   width: widthToDp(90),
       flexDirection: 'row',
       paddingHorizontal: 20,
-      paddingTop: heightToDp(2),
+      paddingTop: heightToDp(1),
       //   width: '100%',
     },
     tab: {
       marginRight: 2,
       paddingHorizontal: widthToDp(3),
       alignItems: 'center',
-      borderColor: colors.lightDark,
-      backgroundColor: colors.targetsTab,
+      borderColor: colors.heading,
+      backgroundColor: colors.white,
       borderRadius: 5,
       borderBottomRightRadius: 0,
       borderBottomLeftRadius: 0,

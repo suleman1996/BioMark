@@ -172,26 +172,26 @@ export default function OtpPassword(props: Props) {
                 </Text>
               </Text>
             </TouchableOpacity>
-            <View style={styles.floatingBtn}>
-              <Text style={styles.resendText}>
-                <Text style={{ color: colors.heading }}>
-                  {t('pages.signUp.allSet.actions.trouble.text')}
-                </Text>
-                <TouchableWithoutFeedback onPress={() => openMessenger()}>
-                  <Text style={{ color: colors.blue }}>
-                    {t('pages.signUp.allSet.actions.trouble.link')}{' '}
-                  </Text>
-                </TouchableWithoutFeedback>
-              </Text>
-
-              <Button
-                onPress={() => handleOTP()}
-                title={t('pages.resetPassword.continue')}
-                disabled={code.length < 6 ? true : false}
-              />
-            </View>
           </View>
         </TouchableWithoutFeedback>
+        <View style={styles.floatingBtn}>
+          <Text style={styles.resendText}>
+            <Text style={{ color: colors.heading }}>
+              {t('pages.signUp.allSet.actions.trouble.text')}
+            </Text>
+            <TouchableWithoutFeedback onPress={() => openMessenger()}>
+              <Text style={{ color: colors.blue }}>
+                {t('pages.signUp.allSet.actions.trouble.link')}{' '}
+              </Text>
+            </TouchableWithoutFeedback>
+          </Text>
+
+          <Button
+            onPress={() => handleOTP()}
+            title={t('pages.resetPassword.continue')}
+            disabled={code.length < 6 ? true : false}
+          />
+        </View>
       </View>
     </>
   );

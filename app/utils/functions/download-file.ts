@@ -1,7 +1,8 @@
-import { Alert, PermissionsAndroid, Platform } from 'react-native';
+import { Alert, PermissionsAndroid, Platform, Linking } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
-
+import { Launch } from 'react-native-openanything';
 import { showMessage } from 'react-native-flash-message';
+
 // const fileUrl =
 //   'https://www.techup.co.in/wp-content/uploads/2020/01/techup_logo_72-scaled.jpg';
 export const checkPermissionAndDownload = async (file: string) => {
@@ -118,12 +119,18 @@ const downloadFileBase64 = (fileUrl: string) => {
       .createFile(dirToSave, fileUrl, 'base64')
       .then((res) => {
         console.log('res', res);
-
         // alert('Download Sucessful');
         showMessage({
           message: 'File downloaded successfully',
           type: 'success',
         });
+        console.log(dirToSave);
+
+        Launch(res).then((Reps) => {
+          console.log(Reps);
+        });
+        ReactNativeBlobUtil.android.actionViewIntent(res, 'application/pdf');
+        Linking.openURL(res);
       })
       .catch((e) => {
         console.log(e);

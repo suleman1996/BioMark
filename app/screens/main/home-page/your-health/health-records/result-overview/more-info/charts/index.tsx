@@ -66,9 +66,18 @@ const Charts = ({ biomarker_id, provider }) => {
   React.useEffect(() => {
     getReportChartData(biomarker_id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartData, chartRef.current]);
+
+  React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedValue, focused]);
 
   useEffect(() => {
+    console.log('helloooooooo start');
+    console.log(!!chartData);
+    console.log(!!chartRef);
+    console.log('helloooooooo end');
+
     if (chartData && chartRef.current) {
       if (chartData?.chart_type === 5) {
         const chartOptions = createChart5(chartData);
@@ -84,7 +93,7 @@ const Charts = ({ biomarker_id, provider }) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartData]);
+  }, [chartData, chartRef.current]);
 
   const createGraph = (chart: ResultSummaryChartPayload) => {
     const graphData = createResultGraph(chart);
