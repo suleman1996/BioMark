@@ -36,7 +36,6 @@ const SeeReport = () => {
         route?.params?.resultId
       );
       setPdfLink(result.data.replace(/\s/g, ''));
-
       //   setPdf(pspPdfLinks.link);
       setIsVisible(false);
     } catch (err) {
@@ -78,5 +77,4 @@ const SeeReport = () => {
     </TitleWithBackLayout>
   );
 };
-
 export default SeeReport;
