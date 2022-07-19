@@ -253,7 +253,7 @@ const SearchBarWithLeftScanIcon = () => {
         console.error('error', response);
       }
     } catch (err) {
-      console.log('errorrrrrrrrrrrrrrr', err.errMsg.data.message);
+      console.log('errorrrrrrrrrrrrrrr', err);
       setShowModalQr(false);
       setInvalidError(err.errMsg.data.message);
       setActionError(err.errMsg.data.action);
