@@ -407,7 +407,7 @@ const Index = () => {
                   onPress={() => navigation.navigate(HYPERTENSION)}
                 />
               )}
-
+            {console.log('dash', getLabStatusData)}
             {dashboard?.latest_result && (
               <RenderLastResult
                 title={t('pages.resultSummary.tabs.summary.latestResult')}

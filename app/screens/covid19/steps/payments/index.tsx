@@ -289,7 +289,7 @@ const PaymentStep = (props: Props) => {
                     style={{
                       fontFamily: fonts.medium,
                       color: 'white',
-                      fontSize: responsiveFontSize(22),
+                      fontSize: responsiveFontSize(19),
                     }}
                   >
                     2
@@ -372,8 +372,9 @@ const PaymentStep = (props: Props) => {
                 }}
                 title={'Online'}
                 style={{
-                  backgroundColor: onLineBtn ? '#1B96D8' : 'lightgray',
+                  backgroundColor: onLineBtn ? '#1B96D8' : '#fff',
                 }}
+                color={onLineBtn ? '#fff' : '#1B96D8'}
               />
             ) : countryName == 'Singapore' ? (
               <ButtonComponent
