@@ -60,7 +60,6 @@ const Index = () => {
           : route?.params?.lab_id
       )
     );
-
     PdfData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -71,9 +70,7 @@ const Index = () => {
         resultOverView?.lab_id
       );
       console.log('pdfReport ', result.data);
-
       setPdfReport(result.data);
-
       //   setPdf(pspPdfLinks.link);
     } catch (err) {
       console.error('Pdf report error ', err);
@@ -276,9 +273,9 @@ const Index = () => {
                 <FlatList
                   data={result?.biomarker}
                   keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => (
-                    <RenderResults result={result} item={item} />
-                  )}
+                  renderItem={({ item }) => {
+                    return <RenderResults result={result} item={item} />;
+                  }}
                 />
               </>
             ))}
@@ -288,5 +285,4 @@ const Index = () => {
     </View>
   );
 };
-
 export default Index;

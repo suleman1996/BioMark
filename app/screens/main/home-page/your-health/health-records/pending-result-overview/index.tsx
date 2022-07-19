@@ -49,6 +49,8 @@ const PendingResultOverview = () => {
   const [imageLoad, setImageLoad] = useState(false);
   const [modalData, setModalData] = useState([]);
 
+  // let item = route.params.result;
+
   const pendingResult = useSelector(
     (state: IAppState) => state.home.getPendingResultOverviewData
   );
@@ -104,7 +106,16 @@ const PendingResultOverview = () => {
       <TitleWithBackLayout
         shadow={colors.blue}
         title={t('pages.labResultOverview.title')}
-        deleteIcon={() => setModalVisible(true)}
+        pressdeleteIcon={() => {
+          setModalVisible(true);
+        }}
+        deleteIcon
+        iconName={
+          item?.result?.status == 'For Deletion' ||
+          item?.result?.status == 'Format Not Supported'
+            ? 'delete'
+            : undefined
+        }
       >
         <View style={[styles.container, { paddingHorizontal: 10 }]}>
           <View style={styles.topView}>
@@ -122,14 +133,17 @@ const PendingResultOverview = () => {
                     'hh:mm a MMMM Do, YYYY'
                   )}
                 </Text>
-                <View style={styles.topView3}>
-                  <View style={styles.topView5}>
-                    <View style={styles.topRoundView}></View>
-                    <Text style={styles.topViewText3}>
-                      {pendingResult?.upload?.app_tag_name}
-                    </Text>
+
+                {item?.result?.status == 'Pending' ? (
+                  <View style={styles.topView3}>
+                    <View style={styles.topView5}>
+                      <View style={styles.topRoundView}></View>
+                      <Text style={styles.topViewText3}>
+                        {pendingResult?.upload?.app_tag_name}
+                      </Text>
+                    </View>
                   </View>
-                </View>
+                ) : null}
               </View>
             </View>
           </View>
@@ -138,7 +152,13 @@ const PendingResultOverview = () => {
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.topView4}>
-              <Feather name="info" color="red" size={20} />
+              <Feather
+                name={
+                  item?.result?.status == 'In Progress' ? undefined : 'info'
+                }
+                color="red"
+                size={20}
+              />
               <Text style={styles.topViewText4}>
                 {pendingResult?.upload?.document_caption}
               </Text>
@@ -239,10 +259,13 @@ const PendingResultOverview = () => {
             />
           </ScrollView>
         </View>
-        <DeleteButtonContainer
-          title={t('pages.labResultOverview.deleteUpload')}
-          onPress={() => setModalVisible(true)}
-        />
+        {item?.result?.status == 'For Deletion' ||
+        item?.result?.status == 'Format Not Supported' ? (
+          <DeleteButtonContainer
+            title={t('pages.labResultOverview.deleteUpload')}
+            onPress={() => setModalVisible(true)}
+          />
+        ) : undefined}
       </TitleWithBackLayout>
     </View>
   );

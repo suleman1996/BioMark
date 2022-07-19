@@ -144,7 +144,10 @@ const HealthRecord = () => {
     return (
       <TouchableOpacity
         onPress={() => {
-          item?.result?.status == 'Pending'
+          item?.result?.status == 'Pending' ||
+          item?.result?.status == 'In Progress' ||
+          item?.result?.status == 'For Deletion' ||
+          item?.result?.status == 'Format Not Supported'
             ? navigation.navigate(SCREENS.PENDING_RESULT_OVERVIEW, {
                 result: item,
               })
@@ -198,6 +201,53 @@ const HealthRecord = () => {
                 }}
               >
                 {item?.result?.status == 'Pending' ? 'Under Review' : null}
+              </Text>
+            </View>
+          </View>
+        ) : item?.result?.status == 'In Progress' ? (
+          <View style={styles.pendingView}>
+            <View style={styles.pendingView2}>
+              <View style={styles.inProgressRoundView}></View>
+              <Text
+                style={{
+                  marginHorizontal: 8,
+                  fontFamily: fonts.OpenSansBold,
+                  color: 'black',
+                }}
+              >
+                {item?.result?.status == 'In Progress' ? 'In Progress' : null}
+              </Text>
+            </View>
+          </View>
+        ) : item?.result?.status == 'For Deletion' ? (
+          <View style={styles.pendingView}>
+            <View style={styles.forDeletionView2}>
+              <View style={styles.forDeletionRoundView}></View>
+              <Text
+                style={{
+                  marginHorizontal: 8,
+                  fontFamily: fonts.OpenSansBold,
+                  color: '#EFEFF0',
+                }}
+              >
+                {item?.result?.status == 'For Deletion' ? 'For Deletion' : null}
+              </Text>
+            </View>
+          </View>
+        ) : item?.result?.status == 'Format Not Supported' ? (
+          <View style={styles.pendingView}>
+            <View style={styles.notSupportedView2}>
+              <View style={styles.notSupportedRoundView}></View>
+              <Text
+                style={{
+                  marginHorizontal: 8,
+                  fontFamily: fonts.OpenSansBold,
+                  color: 'black',
+                }}
+              >
+                {item?.result?.status == 'Format Not Supported'
+                  ? 'Not Supported'
+                  : null}
               </Text>
             </View>
           </View>
