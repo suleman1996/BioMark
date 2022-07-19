@@ -253,7 +253,7 @@ const SearchBarWithLeftScanIcon = () => {
         console.error('error', response);
       }
     } catch (err) {
-      console.log(err, 'errorrrrrrrrrrrrrrr');
+      console.log('errorrrrrrrrrrrrrrr', err);
       setShowModalQr(false);
       setInvalidError(err.errMsg.data.message);
       setActionError(err.errMsg.data.action);
@@ -410,6 +410,7 @@ const SearchBarWithLeftScanIcon = () => {
           </ScrollView>
         </View>
       </View>
+      {console.log('invalidError', invalidError)}
       <WithdrawProgram
         text={
           invalidError == 'Invalid code'
@@ -419,7 +420,7 @@ const SearchBarWithLeftScanIcon = () => {
             : actionError == 'sfi_member'
             ? 'Already a Member'
             : invalidError == 'Code already used'
-            ? 'Already a Member'
+            ? 'Back'
             : invalidError == 'Scan event code first'
             ? 'Back'
             : actionError == 'barcode'
@@ -433,7 +434,7 @@ const SearchBarWithLeftScanIcon = () => {
             : actionError == 'sfi_member'
             ? 'Code Already Entered'
             : invalidError == 'Code already used'
-            ? 'Already a Member'
+            ? 'Code Already Entered.'
             : invalidError == 'Scan event code first'
             ? 'Invalid Code'
             : actionError == 'barcode'
@@ -446,7 +447,7 @@ const SearchBarWithLeftScanIcon = () => {
             : actionError == 'sfi_member'
             ? 'It seems like this code has already been entered.'
             : invalidError == 'Code already used'
-            ? 'You are already a member of the Empower Program.You can already log your blood sugar and medications.'
+            ? 'It seems like this code has already been entered'
             : invalidError == 'Scan event code first'
             ? 'Multiple invalid code entries detected.Try manually entering the code.'
             : actionError == 'barcode'
