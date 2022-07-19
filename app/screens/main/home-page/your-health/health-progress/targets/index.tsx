@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  Pressable,
+  // Pressable,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -63,28 +63,55 @@ export default function InboxScreen({ route }) {
       <LinearGradient
         start={{ x: 0, y: 0.75 }}
         end={{ x: 1, y: 0.25 }}
-        colors={['#2C6CFC', '#2CBDFC']}
+        colors={['white', 'white']}
       >
         <View style={styles.tabNameContainer}>
-          <Pressable
+          {/* <Pressable
             onPress={() => pagerRef.current.setPage(0)}
             style={[
               styles.tab,
               currentPage == 0 ? { borderBottomWidth: 3 } : {},
             ]}
-          >
-            <Text
+          > */}
+          {currentPage == 0 ? (
+            <View
               style={[
-                styles.tabText,
-                currentPage == 0
-                  ? { color: colors.shineBlue }
-                  : { color: colors.darkPrimary },
+                styles.tab,
+                currentPage == 0 ? { borderBottomWidth: 3 } : {},
               ]}
             >
-              {t('pages.bloodSugarTab.title')}
-            </Text>
-          </Pressable>
-          <Pressable
+              <Text
+                style={[
+                  styles.tabText,
+                  currentPage == 0
+                    ? { color: colors.heading }
+                    : { color: colors.white },
+                ]}
+              >
+                {t('pages.bloodSugarTab.title')}
+              </Text>
+            </View>
+          ) : (
+            <View
+              style={[
+                styles.tab,
+                currentPage == 1 ? { borderBottomWidth: 3 } : {},
+              ]}
+            >
+              <Text
+                style={[
+                  styles.tabText,
+                  currentPage == 1
+                    ? { color: colors.heading }
+                    : { color: colors.white },
+                ]}
+              >
+                {t('pages.hba1cInput.title')}
+              </Text>
+            </View>
+          )}
+          {/* </Pressable> */}
+          {/* <Pressable
             onPress={() => pagerRef.current.setPage(1)}
             style={[
               styles.tab,
@@ -95,13 +122,13 @@ export default function InboxScreen({ route }) {
               style={[
                 styles.tabText,
                 currentPage == 1
-                  ? { color: colors.shineBlue }
-                  : { color: colors.darkPrimary },
+                  ? { color: colors.heading }
+                  : { color: colors.white },
               ]}
             >
               {t('pages.hba1cInput.title')}
             </Text>
-          </Pressable>
+          </Pressable> */}
         </View>
       </LinearGradient>
       <View style={styles.lowerContainer}>

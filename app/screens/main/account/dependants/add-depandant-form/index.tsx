@@ -234,7 +234,7 @@ const AddDependantForm = (props: Props) => {
                 date={new Date(values.birth_date)}
                 setDate={(e: any) => setFieldValue('birth_date', e)}
                 maximumDate={new Date()}
-                minimumDate={new Date('jan-01-1990')}
+                minimumDate={new Date('jan-01-1960')}
               />
 
               <InputWithLabel

@@ -9,6 +9,7 @@ const makeStyles = (colors: any) =>
       backgroundColor: colors.white,
     },
     body: {
+      // height: '100%',
       flex: 1,
       margin: 10,
       borderRadius: 10,
