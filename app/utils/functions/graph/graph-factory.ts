@@ -422,7 +422,7 @@ export const createGraph5 = (chartData: ResultSummaryChartPayload) => {
   const dataset = chartData.results
     .map((point) => +point.observation_value)
     .reverse();
-
+  console.log('LABELS --------------------- ', labels);
   return {
     labels,
     dataset,
