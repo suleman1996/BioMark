@@ -2,7 +2,6 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { StyleSheet } from 'react-native';
-import fonts from 'assets/fonts';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -19,7 +18,6 @@ export const makeStyles = (colors: any) =>
     },
     contentContainer: {
       width: widthToDp(60),
-      paddingTop: heightToDp(1),
       paddingLeft: widthToDp(4),
       paddingRight: widthToDp(6),
     },
@@ -29,15 +27,14 @@ export const makeStyles = (colors: any) =>
       color: colors.darkGray,
     },
     contentHeaderText: {
-      fontFamily: fonts.bold,
-      fontSize: responsiveFontSize(30),
-      lineHeight: 35,
+      fontFamily: GlobalFonts.regular,
+      fontSize: responsiveFontSize(20),
       color: colors.darkPrimary,
       marginTop: -4,
     },
     contentext: {
-      fontFamily: fonts.semiBold,
-      fontSize: responsiveFontSize(25),
+      fontFamily: GlobalFonts.regular,
+      fontSize: responsiveFontSize(16),
       color: colors.darkPrimary,
     },
   });

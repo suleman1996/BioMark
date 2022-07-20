@@ -2,7 +2,6 @@ import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { StyleSheet } from 'react-native';
-import fonts from 'assets/fonts';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -18,28 +17,26 @@ export const makeStyles = (colors: any) =>
     },
     contentContainer: {
       width: widthToDp(70),
-      paddingTop: heightToDp(1),
       paddingLeft: widthToDp(4),
-      paddingRight: widthToDp(10),
+      paddingRight: widthToDp(6),
     },
     dateText: {
       fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(20),
+      fontSize: responsiveFontSize(15),
       color: colors.darkGray,
     },
     contentHeaderText: {
-      fontFamily: fonts.bold,
-      fontSize: responsiveFontSize(30),
-      lineHeight: 35,
+      fontFamily: GlobalFonts.regular,
+      fontSize: responsiveFontSize(20),
       color: colors.darkPrimary,
     },
     contentext: {
-      fontFamily: fonts.regular,
-      fontSize: responsiveFontSize(25),
+      fontFamily: GlobalFonts.regular,
+      fontSize: responsiveFontSize(15),
       color: colors.darkPrimary,
     },
     descriptionDataContainer: {
-      width: widthToDp(80),
+      width: widthToDp(83),
       paddingLeft: widthToDp(8.5),
     },
   });

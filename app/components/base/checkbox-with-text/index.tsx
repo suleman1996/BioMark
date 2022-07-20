@@ -21,7 +21,7 @@ const CheckBoxWithText = (props: Props) => {
 
   const { isChecked, setIsChecked, rightText, textComponent } = props;
   return (
-    <View style={(styles.container, props.checkBoxView)}>
+    <View style={[styles.container, props.checkBoxView]}>
       <CheckBox
         checkBoxColor={colors.primary}
         style={styles.checkbox}
