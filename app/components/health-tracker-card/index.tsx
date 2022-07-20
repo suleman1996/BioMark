@@ -88,6 +88,7 @@ const RenderHealthTrack = ({ item }) => {
         )}
         isVisible={showModal}
         setIsVisible={setShowModal}
+        skipToProceed={true}
         callMe={handleNavigation}
       />
     </>
