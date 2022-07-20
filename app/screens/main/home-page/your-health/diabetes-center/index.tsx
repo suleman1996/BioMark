@@ -87,10 +87,13 @@ const DiabetesCenter = (props) => {
 
   const PspModuleData = () => {
     try {
+      setIsVisible(true);
       dispatch(getReduxPspModules());
       setPdfData(pspModuleData.pdf);
       setVideo(pspModuleData.video);
+      setIsVisible(false);
     } catch (err) {
+      setIsVisible(false);
       console.error(err);
     }
   };

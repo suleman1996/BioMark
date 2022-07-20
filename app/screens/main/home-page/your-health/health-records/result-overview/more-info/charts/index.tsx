@@ -47,26 +47,32 @@ const Charts = ({ biomarker_id, provider }) => {
   const [selectedReport] = React.useState(reportOptions[0]?.value);
   const [chartData, setChartData] = React.useState();
   const [isLoading, setIsLoading] = React.useState();
+  const [render, setRender] = React.useState(0);
 
   const getReportChartData = async (biomarker) => {
     try {
-      setIsLoading(true);
+      setIsLoading(render !== 0);
       const result = await healthRecordServices.getResultOverViewChartData(
         biomarker,
         selectedValue?.date,
         provider[0]?.id
       );
+      console.log(result.data);
       setChartData(result.data);
       setIsLoading(false);
+      if (render === 0) {
+        setRender(1);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   React.useEffect(() => {
+    console.log('123123123123', biomarker_id);
     getReportChartData(biomarker_id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartData, chartRef.current]);
+  }, [biomarker_id, render, selectedValue]);
 
   React.useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,6 +92,10 @@ const Charts = ({ biomarker_id, provider }) => {
         }, 10);
       } else {
         const { chartOptions, legendChartOptions } = createGraph(chartData);
+        console.log('YOYOYOYOYOYO', {
+          chartOptions,
+          legendChartOptions,
+        });
         setTimeout(() => {
           chartRef?.current?.setOption(chartOptions);
           lagendChartRef?.current?.setOption(legendChartOptions);
@@ -93,7 +103,7 @@ const Charts = ({ biomarker_id, provider }) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartData, chartRef.current]);
+  }, [chartData, focused, chartRef]);
 
   const createGraph = (chart: ResultSummaryChartPayload) => {
     const graphData = createResultGraph(chart);

@@ -14,9 +14,10 @@ import ExpandableView from '@pietile-native-kit/expandable-view';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { dateFormat1, getTime } from 'utils/functions/date-format';
 import { covidService } from 'services/covid-service';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllBookingsDataR } from 'store/covid/covid-actions';
 import HealthDeclartionCompleted from 'components/ui/health-declaration-completed';
+import { IAppState } from 'store/IAppState';
 
 type Props = {
   setIsVisible: any;
@@ -25,7 +26,10 @@ type Props = {
 };
 
 const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
-  const { setIsVisible, isVisible, data, allUpcommingBookings } = props;
+  const allUpcommingBookings = useSelector(
+    (state: IAppState) => state.covid.allBookingsData.upcoming
+  );
+  const { setIsVisible, isVisible, data } = props;
   const item = data;
   const {
     patient_name = '',
@@ -42,6 +46,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
   };
   const { colors } = useTheme();
   const dispatch = useDispatch();
+  const [isRender, setIsRender] = useState(false);
   const styles = makeStyles(colors);
   const [isCardOpen, setIsCardOpen] = useState(false);
 
@@ -62,7 +67,11 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
   const [isDecCompleted, setIsDecCompleted] = useState(false);
   const [filterdData, setFilterdData] = useState([]);
   const [formData, setFormData] = useState([]);
-
+  useEffect(() => {
+    dispatch(getAllBookingsDataR());
+    setIsRender(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isRender]);
   useEffect(() => {
     let arr = [];
     allUpcommingBookings.map((ele) => {

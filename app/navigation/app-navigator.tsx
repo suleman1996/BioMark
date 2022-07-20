@@ -65,6 +65,7 @@ import BodyMeasurementScreen from 'screens/main/account/profile/body-measurement
 import ExerciseScreen from 'screens/main/account/profile/edit-profile/exercise';
 import MedicalHistoryScreen from 'screens/main/account/profile/medical-history';
 import ManageDevice from 'screens/main/home-page/manage-device';
+import { getAllBookingsDataR } from 'store/covid/covid-actions';
 
 const Stack = createNativeStackNavigator();
 const {
@@ -123,6 +124,7 @@ const AppNavigator = () => {
     dispatch(getReduxPendingResultOverview(id));
     dispatch(getLatestTargetsAction());
     dispatch(getNewTargetAction());
+    dispatch(getAllBookingsDataR());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

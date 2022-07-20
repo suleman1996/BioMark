@@ -18,7 +18,11 @@ export const makeStyles = (colors: any) =>
       marginRight: widthToDp(2),
       marginBottom: heightToDp(1),
     },
-    singleTimeItemText: {},
+    singleTimeItemText: {
+      textAlign: 'center',
+      width: widthToDp(19),
+      fontSize: 12,
+    },
   });
 
 export default makeStyles;

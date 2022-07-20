@@ -101,7 +101,7 @@ const AccountMenu = (props) => {
                   ? {
                       width: widthToDp(35),
                       paddingRight: 0,
-
+                      color: colors.danger,
                       textAlign: 'left',
                       paddingLeft: widthToDp(2),
                       fontSize: responsiveFontSize(12),

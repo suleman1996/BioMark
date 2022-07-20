@@ -212,7 +212,7 @@ const UpcommingBookings = (props: Props) => {
         isVisible={isHealthDeclarationAll}
         data={modalData}
         decalrations={[modalData]}
-        allUpcommingBookings={allUpcommingBookings}
+        //  allUpcommingBookings={allUpcommingBookings}
       />
 
       <SuggestionsText icon={true} />

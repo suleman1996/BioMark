@@ -2,7 +2,7 @@
   "name": "biomark",
   "version": "0.0.1",
   "private": true,
-  "iosVersion": "50.22.53",
+  "iosVersion": "50.22.54",
   "androidVersion": "0.0.1",
   "scripts": {
     "android": "react-native run-android",

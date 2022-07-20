@@ -412,7 +412,12 @@ export default function InboxScreen() {
                 </Text>
               </Pressable>
             </View>
-            <View style={{ height: heightToDp(63) }}>
+            <View
+              style={{
+                height: heightToDp(75),
+                paddingBottom: 15,
+              }}
+            >
               <ScrollView>
                 <View
                   //ref={pagerRef}

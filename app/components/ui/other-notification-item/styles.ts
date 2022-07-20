@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { responsiveFontSize } from 'utils/functions/responsive-text';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
 import { GlobalFonts } from 'utils/theme/fonts';
-import fonts from 'assets/fonts';
 
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
@@ -30,17 +29,16 @@ export const makeStyles = (colors: any) =>
       color: colors.darkGray,
     },
     contentHeaderText: {
-      fontFamily: fonts.bold,
-      lineHeight: 35,
-      fontSize: responsiveFontSize(30),
+      fontFamily: GlobalFonts.bold,
+      lineHeight: heightToDp(3),
+      fontSize: responsiveFontSize(20),
       color: colors.darkPrimary,
-      // marginTop: -4,
+      marginTop: -4,
     },
     contentext: {
-      fontFamily: fonts.bold,
-      fontSize: responsiveFontSize(25),
+      fontFamily: GlobalFonts.bold,
+      fontSize: responsiveFontSize(15),
       color: colors.darkPrimary,
-      // lineHeight: heightToDp(2.5),
     },
   });
 export default makeStyles;
