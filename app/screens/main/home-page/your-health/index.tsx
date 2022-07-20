@@ -358,6 +358,7 @@ const Index = () => {
                 pan={pan}
               />
             ) : null}
+
             <Text style={[styles.headingText, { marginVertical: 20 }]}>
               {t('pages.dashboard.healthTrackers')}
             </Text>
