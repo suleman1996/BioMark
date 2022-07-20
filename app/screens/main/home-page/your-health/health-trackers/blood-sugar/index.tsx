@@ -232,10 +232,14 @@ const BloodSugar = ({ route }) => {
         >
           <InputWithUnits
             title={t('pages.bloodSugarInput.yourReading')}
-            placeholder="0.0"
+            placeholder={bloodSugarTracker?.unit_list_id === 1 ? '0.0' : '0.00'}
             units={['mg/dL', 'mmol/L']}
             unit={bloodSugarTracker?.unit_list_id === 1 ? 'mg/dL' : 'mmol/L'}
-            value={bloodSugarTracker?.data_value}
+            value={
+              bloodSugarTracker?.data_value == 0.0
+                ? ''
+                : bloodSugarTracker?.data_value
+            }
             onChangeText={(val: any) => handleChange(val, 'data_value')}
             onUnitChange={handleUnitChange}
             error={error || ''}
