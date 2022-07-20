@@ -378,8 +378,14 @@ const PaymentStep = (props: Props) => {
               />
             ) : countryName == 'Singapore' ? (
               <ButtonComponent
-                onPress={async () => {}}
+                onPress={async () => {
+                  setOnLineBtn(!onLineBtn);
+                }}
                 title={'Debit/Credit Card Payment'}
+                style={{
+                  backgroundColor: onLineBtn ? '#1B96D8' : '#fff',
+                }}
+                color={onLineBtn ? '#fff' : '#1B96D8'}
               />
             ) : null}
           </View>

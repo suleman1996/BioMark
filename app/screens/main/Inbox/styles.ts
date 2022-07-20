@@ -50,6 +50,7 @@ export const makeStyles = (colors: any) =>
       borderColor: colors.gray,
       borderRadius: widthToDp(4),
       alignItems: 'center',
+      marginBottom: 5,
     },
     othersNotificationContainer: {
       width: widthToDp(92),
@@ -58,6 +59,7 @@ export const makeStyles = (colors: any) =>
       borderRadius: widthToDp(4),
       flex: 1,
       alignItems: 'center',
+      marginBottom: 5,
     },
     blackLine: {
       width: widthToDp(86),
