@@ -3,7 +3,6 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  FlatList,
   Pressable,
 } from 'react-native';
 import React from 'react';
@@ -69,7 +68,7 @@ const Index = () => {
       const result = await healthRecordServices.getResultPdf(
         resultOverView?.lab_id
       );
-      console.log('pdfReport ', result.data);
+
       setPdfReport(result.data);
       //   setPdf(pspPdfLinks.link);
     } catch (err) {
@@ -270,13 +269,7 @@ const Index = () => {
             />
             {resultOverView?.panel?.map((result) => (
               <>
-                <FlatList
-                  data={result?.biomarker}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => {
-                    return <RenderResults result={result} item={item} />;
-                  }}
-                />
+                <RenderResults result={result} />
               </>
             ))}
           </ScrollView>

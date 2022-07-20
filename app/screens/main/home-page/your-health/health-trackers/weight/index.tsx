@@ -86,6 +86,7 @@ const Weight = ({ route }: any) => {
       );
       dispatch(getReduxWeightLogs());
       dispatch(getReduxHealthTracker());
+
       navigate(SCREENS.HEALTH_PROGRESS, 0);
     } catch (err: any) {
       console.error(err);

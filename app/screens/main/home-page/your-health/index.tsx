@@ -168,6 +168,7 @@ const Index = () => {
               : colors.lightYellow,
         });
     });
+
     setHealthTracker([...tempTracker]);
   }, [healthTrackerFromStore, colors]);
 
@@ -364,7 +365,7 @@ const Index = () => {
             <FlatList
               data={healthTracker}
               renderItem={(item) => <RenderHealthTrack item={item} />}
-              keyExtractor={(item) => item.value}
+              keyExtractor={(item) => item.title}
               horizontal
               showsHorizontalScrollIndicator={false}
               onEndReached={() =>
@@ -407,7 +408,7 @@ const Index = () => {
                   onPress={() => navigation.navigate(HYPERTENSION)}
                 />
               )}
-            {console.log('dash', getLabStatusData)}
+
             {dashboard?.latest_result && (
               <RenderLastResult
                 title={t('pages.resultSummary.tabs.summary.latestResult')}

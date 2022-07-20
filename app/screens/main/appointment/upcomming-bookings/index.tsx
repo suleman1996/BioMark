@@ -3,7 +3,13 @@ import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,6 +24,8 @@ import BarCodeModal from 'components/ui/bar-code-modal';
 import SuggestionsText from 'components/ui/suggestions-text';
 import { makeStyles } from './styles';
 import { useTranslation } from 'react-i18next';
+
+import moment from 'moment';
 
 type Props = {};
 
@@ -142,43 +150,28 @@ const UpcommingBookings = (props: Props) => {
             // marginTop: heightToDp(1),
           }}
         >
-          {
-            declaration_complete ? (
-              <View style={styles.completeDecContainer}>
-                <AntDesign name="checkcircle" color={colors.primary} />
-                <Text style={styles.completeDecText}>
-                  Health Declaration Completed
-                </Text>
-              </View>
-            ) : null
-            // <Pressable
-            //   disabled={!declaration_enabled}
-            //   onPress={() => {
-            //     setIsHealthDeclaration(true);
-            //     setModalData(item);
-            //   }}
-            //   style={[
-            //     styles.button,
-            //     declaration_enabled
-            //       ? {}
-            //       : { backgroundColor: colors.fieldGrey },
-            //   ]}
-            // >
-            //   <Text style={styles.dateandtimeText}>Health Declaration</Text>
-            // </Pressable>
-          }
+          {declaration_complete ? (
+            <View style={styles.completeDecContainer}>
+              <AntDesign name="checkcircle" color={colors.primary} />
+              <Text style={styles.completeDecText}>
+                Health Declaration Completed
+              </Text>
+            </View>
+          ) : null}
 
           <Pressable
-            disabled={!is_cancellable}
+            disabled={moment(booking_schedule_date).isAfter(new Date())}
             style={[
               styles.button,
-              !is_cancellable ? {} : { backgroundColor: colors.fieldGrey },
+              moment(booking_schedule_date).isAfter(new Date())
+                ? {}
+                : { backgroundColor: colors.fieldGrey },
             ]}
           >
             <Text
               style={[
                 styles.dateandtimeText,
-                !is_cancellable
+                moment(booking_schedule_date).isAfter(new Date())
                   ? { color: colors.danger }
                   : { color: colors.darkGrey },
               ]}
