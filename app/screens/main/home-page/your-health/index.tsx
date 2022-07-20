@@ -223,9 +223,7 @@ const Index = () => {
     item?.name === 'Stress' && navigation.navigate(SCREENS.STRESS);
     item?.name === 'Sleeping' && navigation.navigate(SCREENS.SLEEP);
     item?.name === 'Drinking' && navigation.navigate(SCREENS.DRINKING);
-    (item?.name === 'Heart Disease' ||
-      item?.name === 'Diabetes' ||
-      item?.name === 'BMI') &&
+    (item?.name === 'Diabetes' || item?.name === 'BMI') &&
       navigate(SCREENS.HEALTH_RISK, {
         item: healthRisk[selectedRisk],
         cardData: healthRiskData[selectedRisk].disease,
@@ -242,6 +240,35 @@ const Index = () => {
             : 'Enter Height and Weight',
         onPress: checkDiabtiesBtnPress(item),
       });
+    item?.name === 'Heart Disease' && checkHeartDiseaseBtn(item);
+  };
+
+  const checkHeartDiseaseBtn = (value) => {
+    let array = [
+      { button_type: 'bp', navigate: SCREENS.BLOOD_PRESSURE },
+      { button_type: 'bmi', navigate: SCREENS.BODY_MEASUREMENT },
+      {
+        button_type: 'family_medical',
+        navigate: SCREENS.FAMILY_MEDICAL_HISTORY,
+      },
+      { button_type: 'hw', navigate: SCREENS.BODY_MEASUREMENT },
+      { button_type: 'smoking', navigate: SCREENS.SMOKING },
+      { button_type: 'stress', navigate: SCREENS.STRESS },
+      { button_type: 'smoking', navigate: SCREENS.SMOKING },
+      { button_type: 'drinking', navigate: SCREENS.DRINKING },
+      { button_type: 'sleep', navigate: SCREENS.sleep },
+      {
+        button_type: 'medical',
+        navigate: SCREENS.MEDICAL_HISTORY,
+        back: 'home',
+      },
+    ];
+
+    array.map(
+      (item) =>
+        item.button_type == value.button_type &&
+        navigation.navigate(item.navigate, { params: item?.back })
+    );
   };
 
   const checkDiabtiesBtn = (btnType) => {
