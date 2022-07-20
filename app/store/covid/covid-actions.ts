@@ -50,6 +50,8 @@ export const getAllBookingsDataR =
     await covidService
       .getBookingsData()
       .then(async (res: any) => {
+        console.log('res', res);
+
         // logNow('response for redux ============>', res);
         await dispatch(addAllBookingsData(res));
       })

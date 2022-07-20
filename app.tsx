@@ -42,6 +42,7 @@ const App = () => {
     if (enabled) {
       const fcmTokenn = await messaging().getToken();
       await AsyncStorage.setItem('fcm', fcmTokenn);
+      console.log('fcm', fcmTokenn);
     }
   }
   messaging().setBackgroundMessageHandler(async (remoteMessage) => {});
