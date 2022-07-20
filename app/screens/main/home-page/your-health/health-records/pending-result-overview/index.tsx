@@ -49,7 +49,7 @@ const PendingResultOverview = () => {
   const [imageLoad, setImageLoad] = useState(false);
   const [modalData, setModalData] = useState([]);
 
-  // let item = route.params.result;
+  const items = route.params.result;
 
   const pendingResult = useSelector(
     (state: IAppState) => state.home.getPendingResultOverviewData
@@ -111,8 +111,8 @@ const PendingResultOverview = () => {
         }}
         deleteIcon
         iconName={
-          item?.result?.status == 'For Deletion' ||
-          item?.result?.status == 'Format Not Supported'
+          items?.result?.status == 'For Deletion' ||
+          items?.result?.status == 'Format Not Supported'
             ? 'delete'
             : undefined
         }
@@ -134,7 +134,7 @@ const PendingResultOverview = () => {
                   )}
                 </Text>
 
-                {item?.result?.status == 'Pending' ? (
+                {items?.result?.status == 'Pending' ? (
                   <View style={styles.topView3}>
                     <View style={styles.topView5}>
                       <View style={styles.topRoundView}></View>
@@ -154,7 +154,7 @@ const PendingResultOverview = () => {
             <View style={styles.topView4}>
               <Feather
                 name={
-                  item?.result?.status == 'In Progress' ? undefined : 'info'
+                  items?.result?.status == 'In Progress' ? undefined : 'info'
                 }
                 color="red"
                 size={20}
@@ -259,8 +259,8 @@ const PendingResultOverview = () => {
             />
           </ScrollView>
         </View>
-        {item?.result?.status == 'For Deletion' ||
-        item?.result?.status == 'Format Not Supported' ? (
+        {items?.result?.status == 'For Deletion' ||
+        items?.result?.status == 'Format Not Supported' ? (
           <DeleteButtonContainer
             title={t('pages.labResultOverview.deleteUpload')}
             onPress={() => setModalVisible(true)}
