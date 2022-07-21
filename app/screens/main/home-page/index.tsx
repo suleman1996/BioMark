@@ -83,6 +83,8 @@ export default function Home() {
   };
 
   useEffect(() => {
+    console.log(dashboard, 'dashboardddddddddddddddd---------');
+
     if (
       dashboard?.psp_user &&
       [2, 4].includes(dashboard?.program_detail?.program_id)

@@ -1,7 +1,7 @@
-import { Alert, PermissionsAndroid, Platform, Linking } from 'react-native';
+import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import ReactNativeBlobUtil from 'react-native-blob-util';
-import { Launch } from 'react-native-openanything';
-import { showMessage } from 'react-native-flash-message';
+// import { Launch } from 'react-native-openanything';
+// import { showMessage } from 'react-native-flash-message';
 
 // const fileUrl =
 //   'https://www.techup.co.in/wp-content/uploads/2020/01/techup_logo_72-scaled.jpg';
@@ -95,6 +95,8 @@ export const checkPermissionAndDownloadBase64 = async (file: string) => {
   }
 };
 const downloadFileBase64 = (fileUrl: string) => {
+  console.log('fileUrl', fileUrl);
+
   var name = Math.floor(Date.now() / 1000);
   const { dirs } = ReactNativeBlobUtil.fs;
   const dirToSave =
@@ -105,35 +107,22 @@ const downloadFileBase64 = (fileUrl: string) => {
     ReactNativeBlobUtil.fs.writeFile(dirToSave, fileUrl, 'base64');
     ReactNativeBlobUtil.ios.previewDocument(dirToSave);
   } else {
-    ReactNativeBlobUtil.config({
+    const { config, fs } = ReactNativeBlobUtil;
+    let PictureDir = fs.dirs.DownloadDir; // this is the pictures directory. You can check the available directories in the wiki.
+    let options = {
       fileCache: true,
       addAndroidDownloads: {
-        useDownloadManager: true,
+        useDownloadManager: true, // setting it to true will use the device's native download manager and will be shown in the notification bar.
         notification: true,
-        mediaScannable: true,
-        title: name + '.pdf',
-        path: dirToSave,
+        path: PictureDir + '/file_' + name + '.pdf', // this is the path where your downloaded file will live in
+        description: 'Downloading image.',
       },
-    });
-    ReactNativeBlobUtil.fs
-      .createFile(dirToSave, fileUrl, 'base64')
+    };
+    config(options)
+      .fetch('GET', fileUrl)
       .then((res) => {
-        console.log('res', res);
-        // alert('Download Sucessful');
-        showMessage({
-          message: 'File downloaded successfully',
-          type: 'success',
-        });
-        console.log(dirToSave);
-
-        Launch(res).then((Reps) => {
-          console.log(Reps);
-        });
-        ReactNativeBlobUtil.android.actionViewIntent(res, 'application/pdf');
-        Linking.openURL(res);
-      })
-      .catch((e) => {
-        console.log(e);
+        console.log('re', res);
+        // do some magic here
       });
   }
 };

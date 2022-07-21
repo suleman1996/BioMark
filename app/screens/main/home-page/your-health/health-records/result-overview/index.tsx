@@ -25,6 +25,7 @@ import HealthProgressFilter from 'components/health-progress-filter/index';
 import SCREENS from 'navigation/constants/index';
 import { healthRecordServices } from 'services/health-record-service';
 import { useTranslation } from 'react-i18next';
+import ReactNativeBlobUtil from 'react-native-blob-util';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -69,7 +70,8 @@ const Index = () => {
         resultOverView?.lab_id
       );
 
-      setPdfReport(result.data);
+      // setPdfReport(result.data);
+      convertBase64(result.data);
       //   setPdf(pspPdfLinks.link);
     } catch (err) {
       console.error('Pdf report error ', err);
@@ -211,6 +213,28 @@ const Index = () => {
     setIsVisible(false);
   };
 
+  const convertBase64 = (link) => {
+    const fs = ReactNativeBlobUtil.fs;
+    let imagePath = null;
+    ReactNativeBlobUtil.config({
+      fileCache: true,
+    })
+      .fetch('GET', link)
+      // the image is now dowloaded to device's storage
+      .then((resp) => {
+        // the image path you can use it directly with Image component
+        imagePath = resp.path();
+        return resp.readFile('base64');
+      })
+      .then((base64Data) => {
+        // here's base64 encoded image
+        // console.log(base64Data);
+        setPdfReport(base64Data);
+        // remove the file from storage
+        return fs.unlink(imagePath);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <ResultsDetails visible={isInfo} />
@@ -231,11 +255,9 @@ const Index = () => {
         isShare={true}
         isInfo={true}
         onPressInfo={setIsInfo}
-        // onSharePress={() => onShare(pdfReport)}
         onSharePress={async () => {
           await onShare({
             title: 'Sharing pdf file from BioMark',
-            // message: 'Please take a look at this file',
             url: `data:application/pdf;base64,${pdfReport}`,
           });
         }}
