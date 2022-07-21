@@ -85,25 +85,35 @@ const AccountMenu = (props) => {
         style={styles.singleItem}
       >
         <>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <BioIdentify width={5} height={3} />
-            <Text style={styles.text}>
-              {t('pages.more.links.idVerification')}
-            </Text>
-          </View>
-          <View style={styles.iconWithSecondText}>
+          <View
+            style={[
+              setVerificationText() ==
+              'Verification error. Please resubmit details'
+                ? { flexDirection: 'column' }
+                : {
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '95%',
+                  },
+            ]}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <BioIdentify width={5} height={3} />
+              <Text style={styles.text}>
+                {t('pages.more.links.idVerification')}
+              </Text>
+            </View>
             <Text
-              numberOfLines={2}
+              numberOfLines={1}
               style={[
                 styles.secondText,
                 setVerificationText() ==
                 'Verification error. Please resubmit details'
                   ? {
-                      width: widthToDp(35),
-                      paddingRight: 0,
+                      lineHeight: 12,
                       color: colors.danger,
-                      textAlign: 'left',
-                      paddingLeft: widthToDp(2),
+                      paddingLeft: widthToDp(8),
                       fontSize: responsiveFontSize(12),
                     }
                   : null,
@@ -111,7 +121,8 @@ const AccountMenu = (props) => {
             >
               {setVerificationText()}
             </Text>
-
+          </View>
+          <View style={styles.iconWithSecondText}>
             {props?.id_verification == 'PENDING' ||
             props?.id_verification == 'SUCCESS' ? null : (
               <Fontisto

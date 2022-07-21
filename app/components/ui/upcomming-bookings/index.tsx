@@ -2,7 +2,13 @@ import EmptyResultComponent from 'components/higher-order/empty-result';
 import BioBookings from 'components/svg/bio-bookings';
 import CovidHealthDeclarationModal from 'components/ui/covid-health-declaration/index';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  Text,
+  // TouchableOpacity,
+  View,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -22,6 +28,7 @@ import { t } from 'i18next';
 import ButtonComponent from 'components/base/button';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
+import DeleteModalComponent from 'components/higher-order/delete-modal';
 
 type Props = {};
 
@@ -37,6 +44,7 @@ const UpcommingBookings = (props: Props) => {
   const [barCodeText, setBarCodeText] = useState('');
 
   const [isHealthDeclarationAll, setIsHealthDeclarationAll] = useState(false);
+  const [isCancelModal, setCancelModal] = useState(false);
 
   const [modalData, setModalData] = useState({});
   const [isBarModal, setIsBarModal] = useState(false);
@@ -185,12 +193,24 @@ const UpcommingBookings = (props: Props) => {
 
           <Pressable
             disabled={!is_cancellable}
+            onPress={() => {
+              setCancelModal(true);
+            }}
             style={[
               styles.button,
-              !is_cancellable ? {} : { backgroundColor: colors.fieldGrey },
+              !is_cancellable
+                ? { backgroundColor: colors.fieldGrey }
+                : { backgroundColor: colors.white },
             ]}
           >
-            <Text style={[styles.dateandtimeText, { color: colors.darkGray }]}>
+            <Text
+              style={[
+                styles.dateandtimeText,
+                !is_cancellable
+                  ? { color: colors.darkGrey }
+                  : { color: colors.danger },
+              ]}
+            >
               {t('pages.covid.covid-booking-button.cancelButton')}
             </Text>
           </Pressable>
@@ -201,6 +221,15 @@ const UpcommingBookings = (props: Props) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <DeleteModalComponent
+        isVisible={isCancelModal}
+        setIsVisible={setCancelModal}
+        heading={'cancel COVID Test Booking'}
+        subHeading={
+          'Are you sure you want ti cancel? All refunds are subjected to payment processing fees.'
+        }
+        callMe={undefined}
+      />
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
         isVisible={isHealthDeclaration}

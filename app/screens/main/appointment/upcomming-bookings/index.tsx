@@ -7,7 +7,7 @@ import {
   FlatList,
   Pressable,
   Text,
-  TouchableOpacity,
+  // TouchableOpacity,
   View,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -24,6 +24,7 @@ import BarCodeModal from 'components/ui/bar-code-modal';
 import SuggestionsText from 'components/ui/suggestions-text';
 import { makeStyles } from './styles';
 import { useTranslation } from 'react-i18next';
+import DeleteModalComponent from 'components/higher-order/delete-modal';
 
 import moment from 'moment';
 
@@ -41,6 +42,8 @@ const UpcommingBookings = (props: Props) => {
   const [barCodeText, setBarCodeText] = useState('');
 
   const [modalData, setModalData] = useState({});
+  const [isCancelModal, setCancelModal] = useState(false);
+
   const [isBarModal, setIsBarModal] = useState(false);
 
   const styles = makeStyles(colors);
@@ -160,7 +163,10 @@ const UpcommingBookings = (props: Props) => {
           ) : null}
 
           <Pressable
-            disabled={moment(booking_schedule_date).isAfter(new Date())}
+            disabled={!moment(booking_schedule_date).isAfter(new Date())}
+            onPress={() => {
+              setCancelModal(true);
+            }}
             style={[
               styles.button,
               moment(booking_schedule_date).isAfter(new Date())
@@ -186,6 +192,15 @@ const UpcommingBookings = (props: Props) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <DeleteModalComponent
+        isVisible={isCancelModal}
+        setIsVisible={setCancelModal}
+        heading={'cancel COVID Test Booking'}
+        subHeading={
+          'Are you sure you want ti cancel? All refunds are subjected to payment processing fees.'
+        }
+        callMe={undefined}
+      />
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
         isVisible={isHealthDeclaration}
