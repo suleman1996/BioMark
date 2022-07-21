@@ -91,13 +91,17 @@ const HypertensionDiary = (props) => {
   const [refresh, setRefresh] = React.useState(false);
 
   useEffect(() => {
+    dispatch(getReduxPspHyperModules());
+    dispatch(getReduxPspHypertensionHealthTrackerData());
+  }, []);
+
+  useEffect(() => {
     dispatch(getReduxPspHypertensionHealthTrackerData());
     dispatch(getReduxPspHyperModules());
 
     setVideo(hyperModuleData.video);
     setPdfData(hyperModuleData.pdf);
     setBarCodeData(dashboard?.program_detail?.barcode);
-    // alert(JSON.stringify(hyperModuleData.pdf));
     setbloodPressureData(trackerData.blood_pressure);
     setMedicationData(trackerData.medication);
     setWeightData(trackerData.weight);
