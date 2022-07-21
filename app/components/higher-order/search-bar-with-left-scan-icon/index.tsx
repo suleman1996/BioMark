@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -22,6 +22,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AuthContext from 'utils/auth-context';
 
 import { userService } from 'services/user-service/user-service';
 import SCREENS from 'navigation/constants';
@@ -44,6 +45,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { getHealthTrackerRisks } from 'store/home/home-actions';
+import ResultModal from 'screens/main/home-page/your-health/components/result-modal';
 
 const SearchBarWithLeftScanIcon = () => {
   const navigation = useNavigation();
@@ -51,6 +53,7 @@ const SearchBarWithLeftScanIcon = () => {
   const styles = makeStyles(colors);
   const dispatch = useDispatch();
 
+  const authContext = useContext(AuthContext);
   const [visible, setVisible] = React.useState(false);
   const [showModalQr, setShowModalQr] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -65,6 +68,10 @@ const SearchBarWithLeftScanIcon = () => {
   const [searchText, setSearchText] = React.useState('');
   const [searchData, setSearchData] = React.useState([]);
   const healthRisk = useSelector((state: IAppState) => state.home.healthRisks);
+
+  const [loadingResult, setLoadingResult] = React.useState(false);
+  const [visibleResult, setVisibleResult] = React.useState(false);
+  const [showApiError, setShowApiError] = React.useState('');
 
   useEffect(() => {
     dispatch(getHealthTrackerRisks());
@@ -246,11 +253,11 @@ const SearchBarWithLeftScanIcon = () => {
           terms: 'true',
         },
       });
-      if (response.status == true) {
+      if (response.data.title === 'Your results are available!') {
+        setVisibleResult(true);
+      } else {
         console.log(response, 'response----------------');
         navigate(SCREENS.SUPPORT_SYSTEM);
-      } else {
-        console.error('error', response);
       }
     } catch (err) {
       console.log('errorrrrrrrrrrrrrrr', err);
@@ -438,7 +445,7 @@ const SearchBarWithLeftScanIcon = () => {
             : invalidError == 'Scan event code first'
             ? 'Invalid Code'
             : actionError == 'barcode'
-            ? 'Invalid Code'
+            ? 'You are already connected to this barcode.'
             : undefined
         }
         text2={
@@ -451,7 +458,7 @@ const SearchBarWithLeftScanIcon = () => {
             : invalidError == 'Scan event code first'
             ? 'Multiple invalid code entries detected.Try manually entering the code.'
             : actionError == 'barcode'
-            ? 'Please contact us if you are having trouble accessing your results.'
+            ? 'Track your results and understand your risks of developing chronic diseases.'
             : undefined
         }
         closeModal={() => {
@@ -546,6 +553,15 @@ const SearchBarWithLeftScanIcon = () => {
           </View>
         </View>
       </QrInputPopup>
+      <ResultModal
+        loading={loadingResult}
+        visible={visibleResult}
+        setVisible={setVisibleResult}
+        showApiError={showApiError}
+        setLoading={setLoadingResult}
+        setShowApiError={setShowApiError}
+        authContext={authContext}
+      />
     </>
   );
 };
