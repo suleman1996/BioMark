@@ -141,7 +141,7 @@ const ResetPassSchema = Yup.object({
     .min(8, 'Must be 8 characters long.')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'At least have a Capital letter, a digit and a special character.'
+      'Atleast have one digit, one captial letter and one special character.'
     ),
 
   confirmPassword: Yup.string()
