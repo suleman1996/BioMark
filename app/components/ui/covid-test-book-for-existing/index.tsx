@@ -367,7 +367,7 @@ const ExisitingBookingForDependent = (props: Props) => {
             ]}
           >
             {booking[itemIndex].booking_status == 0
-              ? 'Declared'
+              ? 'Booked Test Slot'
               : 'Not Booked Yet'}
           </Text>
           <Entypo
@@ -547,7 +547,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                       .filter((item) => item.id == covidTestCenterValue)[0]
                       ?.clinics.map((item2) => {
                         return {
-                          label: `${item2.currency} ${item2.test_amount} - ${item2.test_centre_address}`,
+                          label: `${item2.currency} ${item2.test_amount} - ${item2.test_centre_name}`,
                           value: item2.test_centre_id,
                         };
                       })}
