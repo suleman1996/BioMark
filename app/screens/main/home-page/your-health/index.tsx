@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Animated,
   Image,
-  Keyboard,
 } from 'react-native';
 import React, {
   useCallback,
@@ -24,7 +23,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommu
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 
 import { SearchBarWithLeftScanIcon } from 'components/higher-order';
-import { Button } from 'components/button';
+
 import { ArrowBack } from 'assets/svgs';
 import WebView from 'components/article-webview';
 
@@ -32,7 +31,6 @@ import RenderHealthTrack from '../../../../components/health-tracker-card/index'
 
 import { healthRiskData } from '../health-risk/list-data';
 
-import * as Yup from 'yup';
 import Styles from './styles';
 import SCREENS from 'navigation/constants/index';
 
@@ -44,15 +42,11 @@ import BP from '../../../../assets/svgs/bP';
 import Progress from '../../../../assets/svgs/Progress';
 import Processing from '../../../../assets/svgs/report-processing';
 import ReportView from '../../../../assets/svgs/report-viewing';
-import fonts from 'assets/fonts';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'store/IAppState';
-import MyImage from 'assets/images';
-import { Formik } from 'formik';
-import { userService } from 'services/user-service/user-service';
 import AuthContext from 'utils/auth-context';
-import { showMessage } from 'react-native-flash-message';
-import { InputWithLabel } from 'components/base';
+
 import {
   getHealthTrackerRisks,
   getReduxDashboard,
@@ -63,7 +57,6 @@ import {
   getReduxPastResult,
 } from 'store/home/home-actions';
 import RenderHealthRiskView from './components/render-health-risk-view/index';
-import QrInputPopup from './components/qr-input-popup';
 import RenderRecordKeeping from './components/render-record-keeping';
 import RenderLastResult from './components/render-last-result';
 import RendreLabResult from './components/render-lab-result';
@@ -77,6 +70,7 @@ import { useTranslation } from 'react-i18next';
 import { useIsFocused } from '@react-navigation/native';
 
 import { fromResponse } from 'screens/main/home-page/your-health/components/render-health-risk-view/service';
+import ResultModal from './components/result-modal';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -171,48 +165,6 @@ const Index = () => {
 
     setHealthTracker([...tempTracker]);
   }, [healthTrackerFromStore, colors]);
-
-  const handleCode = async ({ qrInput }: any) => {
-    Keyboard.dismiss();
-    try {
-      setLoading(true);
-      const response = await userService.labStatusVerify({
-        result: {
-          barcode: qrInput,
-          identification_id: authContext?.userData?.ic_number,
-        },
-      });
-
-      dispatch(getReduxLabResultStatus());
-      if (response?.data?.message === 'Invalid request') {
-        setShowApiError(
-          'IC or passport number validation is unsucessful. Please check and try again'
-        );
-      } else {
-        setVisible(false);
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-
-      if (error.errMsg.status == '500') {
-        showMessage({
-          message: 'Internal Server Error',
-          type: 'danger',
-        });
-      } else if (error.errMsg.status == false) {
-        showMessage({
-          message: error.errMsg.data.error,
-          type: 'danger',
-        });
-      } else {
-        showMessage({
-          message: error.errMsg,
-          type: 'danger',
-        });
-      }
-    }
-  };
 
   const healthRiskCheck = (item) => {
     item?.name === 'Blood Pressure' &&
@@ -528,78 +480,15 @@ const Index = () => {
               showsHorizontalScrollIndicator={false}
               ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
             />
-
-            <TouchableOpacity style={styles.singleMenuItem}>
-              {/* popup Modal */}
-              <Formik
-                initialValues={{
-                  qrInput: '',
-                }}
-                onSubmit={(values) => handleCode(values)}
-                validationSchema={QRschemma}
-              >
-                {({ handleChange, handleSubmit, errors, isValid, values }) => (
-                  <QrInputPopup loading={loading} visible={visible}>
-                    <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                      <View style={styles.popUpHeader}>
-                        <Text style={styles.popUpHeading}>
-                          {t('pages.dashboard.dialogs.verify.title')}
-                        </Text>
-                        <TouchableOpacity onPress={() => setVisible(false)}>
-                          <Image
-                            source={MyImage.closeIcon}
-                            style={{
-                              height: 15,
-                              width: 15,
-                            }}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    <Text
-                      style={{
-                        fontFamily: fonts.regular,
-                        fontSize: 17,
-                        color: '#8493AE',
-                      }}
-                    >
-                      {t('pages.dashboard.dialogs.verify.description')}
-                    </Text>
-
-                    <View style={{ width: '100%' }}>
-                      <InputWithLabel
-                        label={t('pages.dashboard.dialogs.verify.label')}
-                        placeholder={'Enter your IC / Passport number'}
-                        onChange={handleChange('qrInput')}
-                        error={
-                          errors.qrInput
-                            ? errors.qrInput
-                            : showApiError
-                            ? showApiError
-                            : ''
-                        }
-                      />
-                      <View style={{ marginTop: 40 }}>
-                        <TouchableOpacity>
-                          <Button
-                            onPress={() => handleSubmit()}
-                            title={t('common.verify')}
-                            marginHorizontal={0.1}
-                            marginVertical={0.1}
-                            //   disabled={!isValid && errors}
-                            disabled={
-                              !isValid || !values.qrInput || !errors
-                                ? true
-                                : false
-                            }
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </QrInputPopup>
-                )}
-              </Formik>
-            </TouchableOpacity>
+            <ResultModal
+              loading={loading}
+              visible={visible}
+              setVisible={setVisible}
+              showApiError={showApiError}
+              setLoading={setLoading}
+              setShowApiError={setShowApiError}
+              authContext={authContext}
+            />
           </ScrollView>
         </View>
       </View>
@@ -608,8 +497,3 @@ const Index = () => {
   );
 };
 export default Index;
-const QRschemma = Yup.object({
-  qrInput: Yup.string().required(
-    "  i18next.t('pages.dashboard.dialogs.verify.errors.required')"
-  ),
-});
