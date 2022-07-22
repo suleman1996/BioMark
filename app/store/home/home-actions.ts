@@ -68,6 +68,7 @@ import {
   GET_PENDING_RESULT_OVERVIEW,
   GET_MEDICATION_TRACKER,
   GET_HEALTH_FEEDS,
+  HANDLE_LOGOUT,
 } from './constants';
 
 export const addAllHealthTracker = (data: HealthTrackerPayload) => ({
@@ -218,6 +219,11 @@ export const getHBA1CTargetsCreator = (
 
 export const getMedicationsTrackerCreator = (data: MedicationTracker) => ({
   type: GET_MEDICATION_TRACKER,
+  payload: data,
+});
+
+export const logoutDashboard = (data) => ({
+  type: HANDLE_LOGOUT,
   payload: data,
 });
 

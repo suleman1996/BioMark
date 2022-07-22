@@ -25,8 +25,10 @@ import SuggestionsText from 'components/ui/suggestions-text';
 import { makeStyles } from './styles';
 import { useTranslation } from 'react-i18next';
 import DeleteModalComponent from 'components/higher-order/delete-modal';
-
+import { userService } from 'services/user-service/user-service';
+import { ActivityIndicator } from 'components';
 import moment from 'moment';
+import { showMessage } from 'react-native-flash-message';
 
 type Props = {};
 
@@ -40,10 +42,10 @@ const UpcommingBookings = (props: Props) => {
 
   const [isHealthDeclaration, setIsHealthDeclaration] = useState(false);
   const [barCodeText, setBarCodeText] = useState('');
-
+  const [appointmentId, setAppointmentId] = useState('');
   const [modalData, setModalData] = useState({});
   const [isCancelModal, setCancelModal] = useState(false);
-
+  const [isVisiable, setIsVisible] = React.useState(false);
   const [isBarModal, setIsBarModal] = useState(false);
 
   const styles = makeStyles(colors);
@@ -62,7 +64,27 @@ const UpcommingBookings = (props: Props) => {
     }
   };
 
+  const deleteBooking = async () => {
+    try {
+      setIsVisible(true);
+      const response = await userService.deleteBooking({
+        id: appointmentId,
+      });
+      if (response.data.status == true) {
+        console.log(response, 'response cancel');
+      }
+      setIsVisible(false);
+    } catch (err) {
+      showMessage({
+        message: err.errMsg.data.message,
+        type: 'danger',
+      });
+      setIsVisible(false);
+    }
+  };
+
   const _renderItem = ({ item }: { item: BookingListDataUpcoming }) => {
+    setAppointmentId(item.id);
     const {
       patient_name = '',
       booking_id = '',
@@ -192,6 +214,7 @@ const UpcommingBookings = (props: Props) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <ActivityIndicator visible={isVisiable} />
       <DeleteModalComponent
         isVisible={isCancelModal}
         setIsVisible={setCancelModal}
@@ -199,7 +222,7 @@ const UpcommingBookings = (props: Props) => {
         subHeading={
           'Are you sure you want ti cancel? All refunds are subjected to payment processing fees.'
         }
-        callMe={undefined}
+        callMe={deleteBooking}
       />
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
@@ -242,3 +265,6 @@ const UpcommingBookings = (props: Props) => {
 };
 
 export default UpcommingBookings;
+function useDispatch() {
+  throw new Error('Function not implemented.');
+}
