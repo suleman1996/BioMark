@@ -96,22 +96,53 @@ const HypertensionDiary = (props) => {
   }, []);
 
   useEffect(() => {
-    dispatch(getReduxPspHypertensionHealthTrackerData());
-    dispatch(getReduxPspHyperModules());
-
-    setVideo(hyperModuleData.video);
-    setPdfData(hyperModuleData.pdf);
-    setBarCodeData(dashboard?.program_detail?.barcode);
-    setbloodPressureData(trackerData.blood_pressure);
-    setMedicationData(trackerData.medication);
-    setWeightData(trackerData.weight);
-    setRefresh(true);
+    const pspHyperModuleData = async () => {
+      try {
+        setIsVisible(true);
+        await dispatch(getReduxPspHypertensionHealthTrackerData());
+        await dispatch(getReduxPspHyperModules());
+        await setVideo(hyperModuleData.video);
+        await setPdfData(hyperModuleData.pdf);
+        setBarCodeData(dashboard?.program_detail?.barcode);
+        setbloodPressureData(trackerData.blood_pressure);
+        setMedicationData(trackerData.medication);
+        setWeightData(trackerData.weight);
+        setIsVisible(false);
+      } catch (err) {
+        setIsVisible(false);
+        console.error(err);
+      }
+    };
+    pspHyperModuleData();
     if (props?.route?.params?.showDemo) {
       setShowDemo(0);
     } else {
       setShowDemo(5);
     }
-  }, [refresh]);
+    // dispatch(getReduxPspHypertensionHealthTrackerData());
+    // pspHyperModuleData();
+    // dispatch(getReduxPspHyperModules());
+    // setVideo(hyperModuleData.video);
+    // setPdfData(hyperModuleData.pdf);
+    // setBarCodeData(dashboard?.program_detail?.barcode);
+    // setbloodPressureData(trackerData.blood_pressure);
+    // setMedicationData(trackerData.medication);
+    // setWeightData(trackerData.weight);
+    // setRefresh(true);
+  }, [hyperModuleData.video, hyperModuleData.pdf]);
+
+  // const pspHyperModuleData = () => {
+  //   try {
+  //     setIsVisible(true);
+  //     dispatch(getReduxPspHyperModules());
+  //     setVideo(hyperModuleData.video);
+  //     setPdfData(hyperModuleData.pdf);
+  //     setIsVisible(false);
+  //   } catch (err) {
+  //     setIsVisible(false);
+  //     console.error(err);
+  //   }
+  // };
 
   const [healthTracker] = React.useState([
     {

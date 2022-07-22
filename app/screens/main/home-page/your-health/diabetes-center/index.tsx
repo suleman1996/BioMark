@@ -83,7 +83,7 @@ const DiabetesCenter = (props) => {
     } else {
       setShowDemo(5);
     }
-  }, []);
+  }, [pspModuleData.pdf, pspModuleData.video]);
 
   const PspModuleData = () => {
     try {

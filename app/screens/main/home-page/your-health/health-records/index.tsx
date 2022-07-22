@@ -38,6 +38,7 @@ const HealthRecord = () => {
   const { t } = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
+  const [latestResultItem, setLatestResultItem] = useState('');
   const [pastResults, setPastResults] = useState([]);
   const [checked, setChecked] = React.useState('');
   const [startDate, setStartDate] = useState();
@@ -141,6 +142,7 @@ const HealthRecord = () => {
   };
 
   const renderItem2 = ({ item }) => {
+    setLatestResultItem(item);
     return (
       <TouchableOpacity
         onPress={() => {
@@ -323,8 +325,12 @@ const HealthRecord = () => {
               status={latestResult?.result?.status}
               onPress={() =>
                 latestResult?.result?.status == 'Converted'
-                  ? navigation.navigate(SCREENS.RESULT_OVERVIEW)
-                  : navigation.navigate(SCREENS.RESULT_OVERVIEW)
+                  ? navigation.navigate(SCREENS.RESULT_OVERVIEW, {
+                      result: latestResultItem,
+                    })
+                  : navigation.navigate(SCREENS.RESULT_OVERVIEW, {
+                      result: latestResultItem,
+                    })
               }
               summary={latestResult?.result?.summary}
               doctor={latestResult?.result?.doctor}
