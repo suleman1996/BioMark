@@ -35,12 +35,14 @@ const SeeReport = () => {
       const result = await healthRecordServices.getResultPdf(
         route?.params?.resultId
       );
-      console.log(result?.data, 'resultttttttttttttttttttt');
+      console.log('HEre is the pdf report ', result.data);
+
       setPdfLink(result.data);
       //   setPdf(pspPdfLinks.link);
       setIsVisible(false);
     } catch (err) {
       setIsVisible(false);
+      console.log('pdf data error ', err);
     }
   };
 
@@ -71,7 +73,7 @@ const SeeReport = () => {
           trustAllCerts={false}
           style={styles.pdfView}
           onError={(error) => {
-            console.log('eee', error);
+            console.log('Pdf view error', error);
           }}
         />
       </View>
