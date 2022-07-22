@@ -220,17 +220,14 @@ const Index = () => {
       fileCache: true,
     })
       .fetch('GET', link)
-      // the image is now dowloaded to device's storage
+
       .then((resp) => {
-        // the image path you can use it directly with Image component
         imagePath = resp.path();
         return resp.readFile('base64');
       })
       .then((base64Data) => {
-        // here's base64 encoded image
-        // console.log(base64Data);
         setPdfReport(base64Data);
-        // remove the file from storage
+
         return fs.unlink(imagePath);
       });
   };

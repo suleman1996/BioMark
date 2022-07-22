@@ -515,6 +515,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                     return (
                       <MapView
                         key={index2}
+                        showsUserLocation={false}
                         style={{
                           width: widthToDp(88),
                           height: heightToDp(20),

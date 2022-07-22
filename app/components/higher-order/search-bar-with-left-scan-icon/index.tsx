@@ -46,6 +46,7 @@ import { IAppState } from 'store/IAppState';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 import { getHealthTrackerRisks } from 'store/home/home-actions';
 import ResultModal from 'screens/main/home-page/your-health/components/result-modal';
+import CloseModal from './close-modal/index';
 
 const SearchBarWithLeftScanIcon = () => {
   const navigation = useNavigation();
@@ -62,6 +63,10 @@ const SearchBarWithLeftScanIcon = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const [invalidError, setInvalidError] = React.useState('');
   const [actionError, setActionError] = React.useState('');
+
+  const [showCloseModal, setShowCloseModal] = React.useState(false);
+  const [showCloseModalHeading, setShowCloseModalHeading] = React.useState('');
+  const [showCloseModalText, setShowCloseModalText] = React.useState('');
 
   const menuRef = useRef<any>();
 
@@ -255,6 +260,14 @@ const SearchBarWithLeftScanIcon = () => {
       });
       if (response.data.title === 'Your results are available!') {
         setVisibleResult(true);
+      } else if (
+        response.data.title ===
+        'Your results are being reviewed by your doctor.'
+      ) {
+        setVisible(false);
+        setShowCloseModalHeading('Review In Progress');
+        setShowCloseModalText(response.data.title);
+        setShowCloseModal(true);
       } else {
         console.log(response, 'response----------------');
         navigate(SCREENS.SUPPORT_SYSTEM);
@@ -482,6 +495,14 @@ const SearchBarWithLeftScanIcon = () => {
             ? setModalVisible(false) || setCode('')
             : undefined;
         }}
+      />
+      <CloseModal
+        headerText={showCloseModalHeading}
+        subHeading={showCloseModalText}
+        buttonUpperText={'Close'}
+        isVisible={showCloseModal}
+        setIsVisible={setShowCloseModal}
+        // callMe={deleteBsLog}
       />
       <QrScannerPopup loading={loading} visible={showModalQr}>
         <QRCodeScanner onRead={onSuccess} />
