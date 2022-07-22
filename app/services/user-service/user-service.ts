@@ -480,6 +480,10 @@ const getFilterResult = ({ type, start, end, page }) => {
   });
 };
 
+const deleteBooking = (obj) => {
+  return client.post(API_URLS.delete_BOOKING, obj);
+};
+
 // .get(`${API_URLS.PDF_GET_HYPER_LINK}${link}${'?program=3'}`)
 
 const getMedicalHistory = () => {
@@ -1467,4 +1471,5 @@ export const userService = {
   Terms,
   jumioCallBack,
   setLanguage,
+  deleteBooking,
 };
