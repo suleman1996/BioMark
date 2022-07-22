@@ -31,6 +31,7 @@ import {
   GET_PENDING_RESULT_OVERVIEW,
   GET_MEDICATION_TRACKER,
   GET_HEALTH_FEEDS,
+  HANDLE_LOGOUT,
 } from './constants';
 
 const INITIAL_STATE = new HomeState();
@@ -229,7 +230,12 @@ export default function (state = INITIAL_STATE, action: any) {
         medicationTrackers: action.payload,
       };
     }
-
+    case HANDLE_LOGOUT: {
+      return {
+        ...state,
+        dashboard: action.payload,
+      };
+    }
     default:
       return state;
   }

@@ -17,6 +17,7 @@ import {
   MARKETING,
 } from './constants';
 import { resetAuthAsyncStorage } from 'services/async-storage/auth-async-storage';
+import { logoutDashboard } from 'store/home/home-actions';
 
 export const loggingIn = (logging: boolean) => ({
   type: AUTH_LOGGING_IN,
@@ -142,15 +143,18 @@ export const logout =
       .logout()
       .then(() => {
         dispatch(loggedOut());
+        dispatch(logoutDashboard(''));
       })
       .catch(() => {
         // After developer alow below function on line 66
         // dispatch(errorLogOut('Error logging out.'));
         dispatch(loggedOut());
+        dispatch(logoutDashboard(''));
       })
       .finally(() => {
         // After developer alow below function on line 69
         // dispatch(loggingOut(false));
         dispatch(loggedOut());
+        dispatch(logoutDashboard(''));
       });
   };

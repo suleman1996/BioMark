@@ -98,6 +98,7 @@ const API_URLS = {
   SAVE_COVID_BOOKING_DEPENDANT: '/api/v1/patient/covid/booking',
   RESULTS_FOR_COVID_HOME: '/api/v2/patient/results/covid/latest',
   GET_COVID_NOTIFICATIONS_COUNTS: '/api/v1/patient/appointment',
+  delete_BOOKING: '/api/v1/patient/covid/cancel_booking',
 
   // stripe
   STRIPE: '/payment/v1/stripe',

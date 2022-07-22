@@ -90,10 +90,10 @@ const HypertensionDiary = (props) => {
   const [barCodeData, setBarCodeData] = React.useState('');
   const [refresh, setRefresh] = React.useState(false);
 
-  useEffect(() => {
-    dispatch(getReduxPspHyperModules());
-    dispatch(getReduxPspHypertensionHealthTrackerData());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getReduxPspHyperModules());
+  //   dispatch(getReduxPspHypertensionHealthTrackerData());
+  // }, []);
 
   useEffect(() => {
     const pspHyperModuleData = async () => {
