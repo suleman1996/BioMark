@@ -64,7 +64,7 @@ const App = () => {
     },
     onAction: function (notification) {},
     onRegistrationError: function (err) {
-      console.error(err.message, err);
+      console.log('err', err.message, err);
     },
     permissions: {
       alert: true,

@@ -146,6 +146,7 @@ const CovidTestBookForPersonal = (props: Props) => {
               <>
                 <Text style={styles.innerTitle}>City Test Centers</Text>
                 <MapView
+                  showsUserLocation={false}
                   style={{ width: widthToDp(88), height: heightToDp(20) }}
                   provider={PROVIDER_GOOGLE} // remove if not using Google Maps
                   region={{
