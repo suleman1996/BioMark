@@ -154,17 +154,25 @@ const Index = () => {
           title: item[1]?.name,
           value: item[1]?.value,
           subTitle: item[1]?.unit,
-          color:
-            item[1]?.card_status == 'none'
-              ? colors.blue
-              : item[1]?.card_status == 'high'
-              ? colors.dangerRed
-              : colors.lightYellow,
+          color: handleHealthTrackerBorderColor(item[1]?.card_status),
         });
     });
 
     setHealthTracker([...tempTracker]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [healthTrackerFromStore, colors]);
+
+  const handleHealthTrackerBorderColor = (status) => {
+    if (status == 'none') {
+      return colors.blue;
+    } else if (status == 'elevated') {
+      return '#FBC230';
+    } else if (status == 'normal') {
+      return '#54CB83';
+    } else if (status == 'high' || status == 'low') {
+      return '#EB3342';
+    }
+  };
 
   const healthRiskCheck = (item) => {
     item?.name === 'Blood Pressure' &&
