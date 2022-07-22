@@ -43,7 +43,7 @@ export const makeStyles = (colors: any) =>
       bottom: 0,
       left: 0,
       right: 0,
-      paddingVertical: 15,
+      // paddingVertical: 10,
     },
     errorMessage: {
       fontFamily: fonts.regular,
@@ -53,7 +53,7 @@ export const makeStyles = (colors: any) =>
     },
     errorContainer: {
       width: '100%',
-      paddingVertical: heightToDp(0.3),
+      paddingVertical: heightToDp(0.1),
       paddingHorizontal: widthToDp(4),
       backgroundColor: colors.red,
       borderBottomLeftRadius: widthToDp(2),
@@ -64,7 +64,7 @@ export const makeStyles = (colors: any) =>
     errorText: {
       color: colors.white,
       fontFamily: GlobalFonts.light,
-      fontSize: responsiveFontSize(14),
+      fontSize: responsiveFontSize(12),
       paddingLeft: widthToDp(3),
     },
   });

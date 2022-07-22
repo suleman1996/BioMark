@@ -35,7 +35,8 @@ const SeeReport = () => {
       const result = await healthRecordServices.getResultPdf(
         route?.params?.resultId
       );
-      setPdfLink(result.data.replace(/\s/g, ''));
+      console.log(result?.data, 'resultttttttttttttttttttt');
+      setPdfLink(result.data);
       //   setPdf(pspPdfLinks.link);
       setIsVisible(false);
     } catch (err) {
@@ -61,16 +62,16 @@ const SeeReport = () => {
       />
       <View style={{ flex: 1 }}>
         <ActivityIndicator visible={isVisiable} />
-
         <Pdf
           source={{
-            uri: `data:application/pdf;base64,${pdfLink}`,
+            uri: pdfLink,
+            // uri: `data:application/pdf;base64,${pdfLink}`,
             cache: true,
           }}
-          trustAllCerts={true}
+          trustAllCerts={false}
           style={styles.pdfView}
           onError={(error) => {
-            console.error(error);
+            console.log('eee', error);
           }}
         />
       </View>

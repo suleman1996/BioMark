@@ -24,7 +24,6 @@ const styles = (colors: any) =>
       height: Dimensions.get('window').height,
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
-
       elevation: 5,
     },
   });
