@@ -199,7 +199,7 @@ const UpcommingBookings = (props: Props) => {
         subHeading={
           'Are you sure you want ti cancel? All refunds are subjected to payment processing fees.'
         }
-        callMe={undefined}
+        callMe={() => console.log('Call Me')}
       />
       <CovidHealthDeclarationModal
         setIsVisible={setIsHealthDeclaration}
