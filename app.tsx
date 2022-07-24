@@ -45,11 +45,16 @@ const App = () => {
       console.log('fcm', fcmTokenn);
     }
   }
-  messaging().setBackgroundMessageHandler(async (remoteMessage) => {});
+
+  messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+    console.log('remoteMessage', remoteMessage);
+  });
   PushNotification.configure({
     onRegister: function (token) {},
 
     onNotification: function (notification) {
+      console.log('notification', notification);
+
       // Platform.OS === ‘android’ &&
       PushNotification.localNotification({
         channelId: 'channel-id',
@@ -76,11 +81,11 @@ const App = () => {
   });
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      console.log('remoteMessage', remoteMessage);
+
       PushNotification.localNotification({
         message: remoteMessage.notification.body,
         title: remoteMessage.notification.title,
-        bigPictureUrl: remoteMessage.notification.android.imageUrl,
-        smallIcon: remoteMessage.notification.android.imageUrl,
       });
     });
     return unsubscribe;

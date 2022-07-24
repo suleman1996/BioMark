@@ -1,4 +1,6 @@
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
+#import <RNCPushNotificationIOS.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -15,8 +17,7 @@
 #import <ReactCommon/RCTTurboModuleManager.h>
 #import <React/RCTLinkingManager.h>
 #import <react/config/ReactNativeConfig.h>
-#import <UserNotifications/UserNotifications.h>
-#import <RNCPushNotificationIOS.h>
+
 
 
 @interface AppDelegate () <RCTCxxBridgeDelegate, RCTTurboModuleManagerDelegate> {
@@ -32,6 +33,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  center.delegate = self;
   [GMSServices provideAPIKey:@"AIzaSyB0vqR1C9YwrwnoD0cKxK18QYxdizw7f70"]; 
   [FIRApp configure];
   [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -61,9 +64,12 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-  center.delegate = self;
+
   return YES;
+}
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
+{
+  completionHandler(UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge);
 }
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
@@ -129,21 +135,7 @@
 {
   return [RCTLinkingManager application:application openURL:url options:options];
 }
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-  ...
-  // Define UNUserNotificationCenter
-  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-  center.delegate = self;
 
-  return YES;
-}
-
-//Called when a notification is delivered to a foreground app.
--(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
-{
-  completionHandler(UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge);
-}
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {

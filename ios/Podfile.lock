@@ -387,6 +387,8 @@ PODS:
     - React-Core
   - react-native-maps (0.31.1):
     - React-Core
+  - react-native-notifications (4.3.1):
+    - React-Core
   - react-native-pager-view (5.4.25):
     - React-Core
   - react-native-pdf (6.5.0):
@@ -580,6 +582,7 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-jumio-mobilesdk (from `../node_modules/react-native-jumio-mobilesdk`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-pdf (from `../node_modules/react-native-pdf`)
   - "react-native-progress-view (from `../node_modules/@react-native-community/progress-view`)"
@@ -709,6 +712,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-jumio-mobilesdk"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-notifications:
+    :path: "../node_modules/react-native-notifications"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
   react-native-pdf:
@@ -840,6 +845,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: cffb727cf2f59bd5c0408e30b3dbe0b935f88835
   react-native-jumio-mobilesdk: 28698bebf0f6886b4e68e93a2b972c84cdf623d9
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
+  react-native-notifications: 33ec77006f7987bb22de8f1665889abc633b9196
   react-native-pager-view: da490aa1f902c9a5aeecf0909cc975ad0e92e53e
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b
   react-native-progress-view: 9e6b6a5305a9115c2157ae3b8852081aba0aab7c
