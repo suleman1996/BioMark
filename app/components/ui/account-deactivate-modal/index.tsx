@@ -4,9 +4,6 @@ import { useTheme } from 'react-native-paper';
 
 import { Button, Modal } from 'components/base';
 import { BioCloseGray } from 'components/svg';
-import SCREENS from 'navigation/constants';
-
-import { useNavigation } from '@react-navigation/native';
 
 import makeStyles from './styles';
 
@@ -14,6 +11,7 @@ type Props = {
   isVisible: boolean;
   setIsVisible: any;
   callMe: any;
+  callMeSkip: any;
   headerText: string;
   subHeading: string;
   buttonUpperText: string;
@@ -30,12 +28,11 @@ const AccountDeActivateModal = (props: Props) => {
     headerText,
     buttonUpperText,
     buttonLowerText,
-    skipToProceed,
+    callMeSkip,
   } = props;
 
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const navigation = useNavigation();
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <View style={styles.container}>
@@ -50,11 +47,7 @@ const AccountDeActivateModal = (props: Props) => {
         <Button
           bg={'transparent'}
           color={'gray'}
-          onPress={() => {
-            skipToProceed
-              ? navigation.navigate(SCREENS.BLOOD_SUGAR)
-              : setIsVisible(false);
-          }}
+          onPress={callMeSkip}
           title={buttonLowerText}
           disabled={false}
           style={{ marginTop: 10, borderWidth: 0 }}

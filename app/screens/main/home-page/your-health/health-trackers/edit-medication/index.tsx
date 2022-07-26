@@ -49,7 +49,7 @@ const EditMedication = () => {
             value={selectedMedication}
             onValueChange={(newValue) => setSelectedMedication(newValue)}
           >
-            {medicationList.map(({ medication_record_id, name }) => (
+            {medicationList?.map(({ medication_record_id, name }) => (
               <TouchableOpacity
                 onPress={() => setSelectedMedication(medication_record_id)}
                 style={{

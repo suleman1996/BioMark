@@ -104,8 +104,27 @@ const downloadFileBase64 = (fileUrl: string) => {
       ? dirs.DocumentDir + '/' + name + '.pdf'
       : dirs.DownloadDir + '/' + name + '.pdf';
   if (Platform.OS === 'ios') {
-    ReactNativeBlobUtil.fs.writeFile(dirToSave, fileUrl, 'base64');
-    ReactNativeBlobUtil.ios.previewDocument(dirToSave);
+    // ReactNativeBlobUtil.fs.writeFile(dirToSave, fileUrl, 'base64');
+    // ReactNativeBlobUtil.ios.previewDocument(dirToSave);
+    const configOptions = Platform.select({
+      ios: {
+        fileCache: true,
+        title: name + '.pdf',
+        path: dirToSave,
+        appendExt: 'pdf',
+      },
+    });
+    ReactNativeBlobUtil.config(configOptions)
+      .fetch('GET', fileUrl, {})
+      .then((res) => {
+        if (Platform.OS === 'ios') {
+          ReactNativeBlobUtil.fs.writeFile(dirToSave, res.data, 'base64');
+          ReactNativeBlobUtil.ios.previewDocument(dirToSave);
+        }
+      })
+      .catch((e) => {
+        Alert.alert(e.message);
+      });
   } else {
     const { config, fs } = ReactNativeBlobUtil;
     let PictureDir = fs.dirs.DownloadDir; // this is the pictures directory. You can check the available directories in the wiki.

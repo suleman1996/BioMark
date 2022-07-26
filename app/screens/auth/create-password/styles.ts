@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import fonts from 'assets/fonts';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -8,12 +8,12 @@ import { GlobalFonts } from 'utils/theme/fonts';
 export const makeStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      height: '100%',
+      flex: 1,
       backgroundColor: colors.white,
     },
     body: {
+      //  height: Dimensions.get('window').height * 0.8,
       flex: 1,
-      height: Dimensions.get('window').height * 0.8,
       margin: 10,
       borderRadius: 10,
       backgroundColor: colors.white,
@@ -43,7 +43,7 @@ export const makeStyles = (colors: any) =>
       bottom: 0,
       left: 0,
       right: 0,
-      // paddingVertical: 10,
+      paddingVertical: 10,
     },
     errorMessage: {
       fontFamily: fonts.regular,
