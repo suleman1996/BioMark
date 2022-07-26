@@ -259,16 +259,19 @@ const SearchBarWithLeftScanIcon = () => {
         },
       });
       if (response.data.title === 'Your results are available!') {
+        setShowModalQr(false);
         setVisibleResult(true);
       } else if (
         response.data.title ===
         'Your results are being reviewed by your doctor.'
       ) {
+        setShowModalQr(false);
         setVisible(false);
         setShowCloseModalHeading('Review In Progress');
         setShowCloseModalText(response.data.title);
         setShowCloseModal(true);
       } else {
+        setShowModalQr(false);
         console.log(response, 'response----------------');
         navigate(SCREENS.SUPPORT_SYSTEM);
       }

@@ -116,6 +116,7 @@ export default function CreatePassword() {
                       </View>
                     ) : null}
                   </View>
+
                   <View style={styles.floatingBtn}>
                     <Button
                       onPress={handleSubmit}

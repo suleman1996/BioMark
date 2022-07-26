@@ -441,7 +441,7 @@ const ExisitingBookingForDependent = (props: Props) => {
                 />
               ) : (
                 <DropdownCountryCity
-                  options={bookingFormData.country_list.map((item) => {
+                  options={bookingFormData.country_list?.map((item) => {
                     return { value: item.id, label: item.name };
                   })}
                   selectedValue={countryDropdownValue}

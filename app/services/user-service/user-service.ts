@@ -952,18 +952,18 @@ const getNewMedicationFormData = () => {
       .get(API_URLS.GET_NEW_MEDICATION_DATA)
       .then(async ({ data }) => {
         try {
-          const medication_list: any = data.medication_list.map((item) => ({
+          const medication_list: any = data.medication_list?.map((item) => ({
             ...item,
             value: item.id,
             label: item.name,
-            disease_list: item.disease_list.map((d) => ({
+            disease_list: item.disease_list?.map((d) => ({
               ...d,
               value: d.id,
               label: d.name,
             })),
           }));
 
-          const frequency_list: any = data.frequency_list.map((item) => ({
+          const frequency_list: any = data.frequency_list?.map((item) => ({
             ...item,
             value: item.id,
             label: item.name,
