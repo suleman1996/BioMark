@@ -14,6 +14,7 @@ import { userService } from 'services/user-service/user-service';
 import { useDispatch } from 'react-redux';
 import { getReduxLabResultStatus } from 'store/home/home-actions';
 import { showMessage } from 'react-native-flash-message';
+
 const ResultModal = ({
   loading,
   visible,
@@ -27,6 +28,7 @@ const ResultModal = ({
   const { t } = useTranslation();
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+
   const handleCode = async ({ qrInput }: any) => {
     Keyboard.dismiss();
     try {
@@ -37,6 +39,7 @@ const ResultModal = ({
           identification_id: authContext?.userData?.ic_number,
         },
       });
+      console.log('Her eis the ic phno api ', result.data);
 
       dispatch(getReduxLabResultStatus());
       if (response?.data?.message === 'Invalid request') {
@@ -68,9 +71,9 @@ const ResultModal = ({
       }
     }
   };
+
   return (
     <TouchableOpacity style={styles.singleMenuItem}>
-      {/* popup Modal */}
       <Formik
         initialValues={{
           qrInput: '',
