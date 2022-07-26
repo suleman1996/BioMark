@@ -13,7 +13,7 @@ import {
 import { useTheme } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { covidService } from 'services/covid-service';
 import { IAppState } from 'store/IAppState';
 import { BookingListDataUpcoming } from 'types/api';
@@ -29,10 +29,12 @@ import { userService } from 'services/user-service/user-service';
 import { ActivityIndicator } from 'components';
 import moment from 'moment';
 import { showMessage } from 'react-native-flash-message';
+import { getAllBookingsDataR } from 'store/covid/covid-actions';
 
 type Props = {};
 
 const UpcommingBookings = (props: Props) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const {} = props;
   const { colors }: any = useTheme();
@@ -70,9 +72,7 @@ const UpcommingBookings = (props: Props) => {
       const response = await userService.deleteBooking({
         id: appointmentId,
       });
-      if (response.data.status == true) {
-        console.log(response, 'response cancel');
-      }
+      await dispatch(getAllBookingsDataR());
       setIsVisible(false);
     } catch (err) {
       showMessage({
@@ -235,6 +235,7 @@ const UpcommingBookings = (props: Props) => {
       <FlatList
         renderItem={_renderItem}
         data={allUpcommingBookings}
+        keyExtractor={(item) => item.id}
         ListEmptyComponent={() => {
           return (
             <View
@@ -265,6 +266,6 @@ const UpcommingBookings = (props: Props) => {
 };
 
 export default UpcommingBookings;
-function useDispatch() {
-  throw new Error('Function not implemented.');
-}
+// function useDispatch() {
+//   throw new Error('Function not implemented.');
+// }

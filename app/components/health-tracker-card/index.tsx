@@ -26,10 +26,10 @@ const RenderHealthTrack = ({ item }) => {
   }, [dispatch]);
 
   const handleNavigation = () => {
+    setShowModal(false);
     navigation.navigate(SCREENS.ADD_BLOOD_SUGAR, {
       fromEmptyValue: true,
     });
-    setShowModal(false);
   };
 
   return (
@@ -88,7 +88,10 @@ const RenderHealthTrack = ({ item }) => {
         )}
         isVisible={showModal}
         setIsVisible={setShowModal}
-        skipToProceed={true}
+        callMeSkip={() => {
+          setShowModal(false);
+          navigation.navigate(SCREENS.BLOOD_SUGAR);
+        }}
         callMe={handleNavigation}
       />
     </>
