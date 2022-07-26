@@ -39,7 +39,7 @@ const ResultModal = ({
           identification_id: authContext?.userData?.ic_number,
         },
       });
-      console.log('Her eis the ic phno api ', result.data);
+      console.log('Her is the ic phno api ', result.data);
 
       dispatch(getReduxLabResultStatus());
       if (response?.data?.message === 'Invalid request') {

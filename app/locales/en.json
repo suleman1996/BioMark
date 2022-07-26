@@ -1660,7 +1660,8 @@
     "uploadResult": {
       "title": "Upload Results",
       "info": "For results with multiple pages, select Add Page to add more pages.",
-      "privacy": "Your privacy is important to us. You are in control of your health information. BioMark won’t provide your information to any third parties without your permission. <br><br> BioMark only supports the uploading of lab results for now. We reserve the right to remove documents that are not related to lab results.",
+      "privacy": "Your privacy is important to us. You are in control of your health information. BioMark won’t provide your information to any third parties without your permission.",
+      "privacyp2": "BioMark only supports the uploading of lab results for now. We reserve the right to remove documents that are not related to lab results.",
       "uploads": "Your Uploads",
       "documentName": "Document Name",
       "addPage": "Add Page",
