@@ -348,16 +348,23 @@ export default function ResultUpload() {
               </View>
               <View style={styles.note}>
                 <View style={{ flexDirection: 'row' }}>
-                  <Feather
-                    color={colors.heading}
-                    name="info"
-                    size={22}
-                    style={{ marginTop: 10 }}
-                  />
-                  <View style={styles.noteView}>
-                    <Text style={styles.noteText}>
-                      {t('pages.uploadResult.privacy')}
-                    </Text>
+                  <View style={{ width: '10%' }}>
+                    <Feather
+                      color={colors.heading}
+                      name="info"
+                      size={22}
+                      style={{ marginTop: 10 }}
+                    />
+                  </View>
+                  <View style={{ width: '90%' }}>
+                    <View style={styles.noteView}>
+                      <Text style={styles.noteText}>
+                        {t('pages.uploadResult.privacy')}
+                      </Text>
+                      <Text style={[styles.noteText, { marginTop: 20 }]}>
+                        {t('pages.uploadResult.privacyp2')}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>

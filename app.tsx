@@ -79,6 +79,7 @@ const App = () => {
     popInitialNotification: true,
     requestPermissions: true,
   });
+
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
       console.log('remoteMessage', remoteMessage);

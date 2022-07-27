@@ -142,6 +142,8 @@ const HealthRecord = () => {
   };
 
   const renderItem2 = ({ item }) => {
+    console.log('Check ', item);
+
     setLatestResultItem(item);
     return (
       <TouchableOpacity
