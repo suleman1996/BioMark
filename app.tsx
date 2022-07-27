@@ -55,7 +55,6 @@ const App = () => {
     onNotification: function (notification) {
       console.log('notification', notification);
 
-      // Platform.OS === ‘android’ &&
       PushNotification.localNotification({
         channelId: 'channel-id',
         foreground: true,

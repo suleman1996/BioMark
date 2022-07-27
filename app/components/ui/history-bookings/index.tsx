@@ -53,9 +53,7 @@ const HistoryBookings = (props: Props) => {
       booking_slot_time = '',
       test_country_name = '',
       test_city_name = '',
-      // declaration_enabled = false,
-      // declaration_complete = false,
-      // is_cancellable = false,
+
       booking_status = '',
     } = {
       patient_name: item.patient_name,
@@ -66,9 +64,7 @@ const HistoryBookings = (props: Props) => {
       booking_slot_time: item.booking_slot_time,
       test_country_name: item.test_country_name,
       test_city_name: item.test_city_name,
-      // declaration_enabled: item.declaration_enabled,
-      // declaration_complete: item.declaration_complete,
-      // is_cancellable: item.is_cancellable,
+
       booking_status: item.booking_status,
     };
     return (
