@@ -41,10 +41,10 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
   const GetJumioData = async () => {
     setIsLoading(true);
     const result = await userService.getJumioData();
-    setId(result.data.workflowExecution.id);
+    setId(result?.data?.workflowExecution?.id);
     dispatch({
       type: WORK_FLOW_EXECUTION_ID,
-      payload: result.data.workflowExecution.id,
+      payload: result?.data?.workflowExecution?.id,
     });
     startJumio(result?.data?.sdk?.token);
     setIsLoading(false);
@@ -66,9 +66,9 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
     // });
     navigation.navigate(ID_VERIFICATION_COMPLETE, {
       scan_reference: id,
-      selected_country: EventResult.credentials[0].selectedCountry,
-      id_number: EventResult.credentials[0].idNumber,
-      document_type: EventResult.credentials[0].selectedDocumentType,
+      selected_country: EventResult?.credentials[0]?.selectedCountry,
+      id_number: EventResult?.credentials[0]?.idNumber,
+      document_type: EventResult?.credentials[0]?.selectedDocumentType,
       t_and_c_status: true,
     });
 
@@ -83,7 +83,7 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
     // navigation.navigate(ID_VERIFICATION_COMPLETE);
   });
   emitterJumio.addListener('EventError', (EventError) => {
-    console.error('EventError: ' + JSON.stringify(EventError));
+    console.log('EventError', EventError);
   });
 
   return (
