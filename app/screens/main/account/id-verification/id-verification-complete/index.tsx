@@ -33,8 +33,12 @@ const IdVerfiicationComplete = (props: Props) => {
       authContext.setUserData(result?.data);
     } catch (error) {}
   };
+
   useEffect(async () => {
+    console.log('THIS IS JUMIO CALLBACK', data);
     const result = await userService.jumioCallBack(data);
+    console.log('result', result);
+
     userProfile();
   }, []);
 

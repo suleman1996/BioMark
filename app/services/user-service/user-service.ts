@@ -45,6 +45,7 @@ import { logNow } from 'utils/functions/log-binder';
 import { setAuthAsyncStorage } from '../async-storage/auth-async-storage';
 import client from '../client';
 import { API_URLS } from '../url-constants';
+import { store } from 'store/store';
 
 function login(username: string, password: string) {
   return new Promise<LoginResponse>((resolve, reject) => {
@@ -937,11 +938,22 @@ function getPspHyperPdfLink(link) {
 const getJumioData = () => {
   return client.get(API_URLS.GET_JUMIO_DATA);
 };
+
 const jumioCallBack = (id_verification) => {
+  console.log(
+    'jgfjkewgjkfvsejbcvjsebj',
+    store.getState()?.account?.executionId
+  );
+
+  const executionId = store.getState()?.account?.executionId;
+  console.log('this is execution id', {
+    id_verification: { ...id_verification, scan_reference: executionId },
+  });
   return client.post(API_URLS.JUMIO_CALLBACK, {
-    id_verification: id_verification,
+    id_verification: { ...id_verification, scan_reference: executionId },
   });
 };
+
 const deleteMedicationTracker = async (id: number) => {
   return await client.delete(API_URLS.DELETE_MEDICATION_TRACKER + id);
 };
