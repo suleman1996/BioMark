@@ -92,7 +92,9 @@ const VitalsMenu = () => {
                 ]}
               >
                 {i == 0 && <PedometerIcon color={iconColor(i)} />}
-                {i == 1 && <SleepIcon color={iconColor(i)} />}
+                {i == 1 && (
+                  <SleepIcon color={iconColor(i)} width={32} height={32} />
+                )}
                 {i == 2 && <ExerciseIcon color={iconColor(i)} />}
                 {i == 3 && <CaloriesIcon color={iconColor(i)} />}
                 {i == 4 && <CardiacIcon color={iconColor(i)} />}
