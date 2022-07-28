@@ -7,6 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 
+import * as Sentry from '@sentry/react-native';
 import { Provider as PaperProvider, useTheme } from 'react-native-paper';
 import FlashMessage from 'react-native-flash-message';
 import { MenuProvider } from 'react-native-popup-menu';
@@ -23,6 +24,12 @@ import { LogBox } from 'react-native';
 import PushNotification, { Importance } from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+Sentry.init({
+  dsn: 'https://c95a60065a104840a4dd794f3afc3860@o1118311.ingest.sentry.io/6603171',
+
+  tracesSampleRate: 1.0,
+});
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'light';
@@ -122,4 +129,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Sentry.wrap(App);
