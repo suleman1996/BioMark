@@ -534,12 +534,18 @@ PODS:
   - RNScreens (3.15.0):
     - React-Core
     - React-RCTImage
+  - RNSentry (4.2.1):
+    - React-Core
+    - Sentry (= 7.22.0)
   - RNShare (7.6.6):
     - React-Core
   - RNSVG (12.4.0):
     - React-Core
   - RNVectorIcons (9.2.0):
     - React-Core
+  - Sentry (7.22.0):
+    - Sentry/Core (= 7.22.0)
+  - Sentry/Core (7.22.0)
   - Socket.IO-Client-Swift (16.0.1):
     - Starscream (~> 4.0)
   - Starscream (4.0.4)
@@ -613,6 +619,7 @@ DEPENDENCIES:
   - RNQrGenerator (from `../node_modules/rn-qr-generator`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -646,6 +653,7 @@ SPEC REPOS:
     - nanopb
     - PPpdf417
     - PromisesObjC
+    - Sentry
     - Socket.IO-Client-Swift
     - Starscream
     - ZXingObjC
@@ -775,6 +783,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNShare:
     :path: "../node_modules/react-native-share"
   RNSVG:
@@ -873,9 +883,11 @@ SPEC CHECKSUMS:
   RNQrGenerator: 34beaf1996de4a2f2122c7019dccd1717b22d8d7
   RNReanimated: 5c8c17e26787fd8984cd5accdc70fef2ca70aafd
   RNScreens: 4a1af06327774490d97342c00aee0c2bafb497b7
+  RNSentry: 42328a31577f64d188282b43f1f11b284c38c159
   RNShare: d56424e3926cbc239db1cc1c168adcb051aad50b
   RNSVG: 3dd44d99d1c18e1342aee4bfa53ab3f6a8c4865f
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  Sentry: 30b51086ca9aac23337880152e95538f7e177f7f
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   Yoga: 17cd9a50243093b547c1e539c749928dd68152da
