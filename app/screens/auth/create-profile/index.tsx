@@ -1,7 +1,7 @@
 /* eslint-disable eslint-comments/no-unused-disable */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   FlatList,
   Keyboard,
@@ -46,10 +46,31 @@ import { dateFormat } from 'utils/functions/date-format';
 import { navigate } from 'services/nav-ref';
 import SCREENS from 'navigation/constants';
 import { IC_AND_PASSPORT, NAME } from 'utils/regix';
+import { useTranslation } from 'react-i18next';
 
 export default function CreateProfile() {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
+  const { t } = useTranslation();
+  const ResetPassSchema = useMemo(
+    () =>
+      Yup.object({
+        fName: Yup.string()
+          .required(t('userProfile.errors.firstNameRequired'))
+          .matches(NAME, t('userProfile.errors.nameFormat')),
+        lName: Yup.string()
+          .required(t('userProfile.errors.lastNameRequired'))
+          .matches(NAME, t('userProfile.errors.nameFormat')),
+
+        IcPnum: Yup.string(),
+        phone_number: Yup.string()
+          // .matches(Regex.minNum, 'Enter valid phone number')
+          .required('Please provide your phone number'),
+        email: Yup.string().email('Enter valid email address'),
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const dispatch = useDispatch();
   const dispatch3 = useDispatch();
@@ -403,18 +424,3 @@ export default function CreateProfile() {
     </>
   );
 }
-
-const ResetPassSchema = Yup.object({
-  fName: Yup.string()
-    .required('Please provide your first name')
-    .matches(NAME, 'Name should only contain latin letters'),
-  lName: Yup.string()
-    .required('Please provide your last name')
-    .matches(NAME, 'Name should only contain latin letters'),
-
-  IcPnum: Yup.string(),
-  phone_number: Yup.string()
-    // .matches(Regex.minNum, 'Enter valid phone number')
-    .required('Please provide your phone number'),
-  email: Yup.string().email('Enter valid email address'),
-});

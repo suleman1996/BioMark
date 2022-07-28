@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Images from 'assets/images';
 import { heightToDp, widthToDp } from 'utils/functions/responsive-dimensions';
@@ -36,12 +36,24 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [id, setId] = useState('');
+
+  useEffect(() => {
+    const emitterJumio = new NativeEventEmitter(JumioMobileSDK);
+    emitterJumio.addListener('EventResult', successfulVerification);
+    emitterJumio.addListener('EventError', (EventError) => {
+      console.log('EventError', EventError);
+    });
+    return () => {
+      emitterJumio.removeAllListeners('EventResult');
+      emitterJumio.removeAllListeners('EventError');
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const GetJumioData = async () => {
     setIsLoading(true);
     const result = await userService.getJumioData();
-    setId(result?.data?.workflowExecution?.id);
+    console.log('getJumio', result.data.workflowExecution.id);
     dispatch({
       type: WORK_FLOW_EXECUTION_ID,
       payload: result?.data?.workflowExecution?.id,
@@ -54,37 +66,15 @@ const LetsStartIdVerfiication = ({ route }: { route: any }) => {
     JumioMobileSDK.initialize(authorizationToken, DATACENTER);
     JumioMobileSDK.start();
   };
-  // Callbacks - (Data is displayed as a warning for demo purposes)
-  const emitterJumio = new NativeEventEmitter(JumioMobileSDK);
-  emitterJumio.addListener('EventResult', async (EventResult) => {
-    // setIdVerification({
-    //   scan_reference: id,
-    //   selected_country: EventResult.credentials[0].selectedCountry,
-    //   id_number: EventResult.credentials[0].idNumber,
-    //   document_type: EventResult.credentials[0].selectedDocumentType,
-    //   t_and_c_status: true,
-    // });
+
+  const successfulVerification = async (EventResult) => {
     navigation.navigate(ID_VERIFICATION_COMPLETE, {
-      scan_reference: id,
       selected_country: EventResult?.credentials[0]?.selectedCountry,
       id_number: EventResult?.credentials[0]?.idNumber,
       document_type: EventResult?.credentials[0]?.selectedDocumentType,
       t_and_c_status: true,
     });
-
-    // let id_verification = {
-    //   scan_reference: id,
-    //   selected_country: selected_country,
-    //   id_number: id_number,
-    //   document_type: document_type,
-    //   t_and_c_status: t_and_c_status,
-    // };
-    // const result = await userService.jumioCallBack();
-    // navigation.navigate(ID_VERIFICATION_COMPLETE);
-  });
-  emitterJumio.addListener('EventError', (EventError) => {
-    console.log('EventError', EventError);
-  });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
