@@ -96,6 +96,15 @@ const HypertensionDiary = (props) => {
   // }, []);
 
   useEffect(() => {
+    console.log(props?.route?.params?.showDemo, 'showDemo');
+    if (props?.route?.params?.showDemo) {
+      setShowDemo(0);
+    } else {
+      setShowDemo(5);
+    }
+  }, []);
+
+  useEffect(() => {
     const pspHyperModuleData = async () => {
       try {
         setIsVisible(true);
@@ -114,11 +123,11 @@ const HypertensionDiary = (props) => {
       }
     };
     pspHyperModuleData();
-    if (props?.route?.params?.showDemo) {
-      setShowDemo(0);
-    } else {
-      setShowDemo(5);
-    }
+    // if (props?.route?.params?.showDemo) {
+    //   setShowDemo(0);
+    // } else {
+    //   setShowDemo(5);
+    // }
     // dispatch(getReduxPspHypertensionHealthTrackerData());
     // pspHyperModuleData();
     // dispatch(getReduxPspHyperModules());

@@ -39,11 +39,7 @@ const EmpowerProgram = () => {
             text="Continue to Diabetes Center"
             color={['#2C6CFC', '#2CBDFC']}
             style={styles.gradientButton2}
-            onPress={() =>
-              navigate(SCREENS.DIABETES_SUPPORT_CENTER, {
-                showDemo: true,
-              })
-            }
+            onPress={() => navigate(SCREENS.DIABETES_SUPPORT_CENTER)}
           />
         </View>
       </ScrollView>

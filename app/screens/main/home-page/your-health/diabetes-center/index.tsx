@@ -41,7 +41,7 @@ const openMessenger = () => {
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
-const DiabetesCenter = (props) => {
+const DiabetesCenter = (props, route) => {
   const [isVisiable, setIsVisible] = React.useState(false);
   const [showDemo, setShowDemo] = React.useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -74,15 +74,19 @@ const DiabetesCenter = (props) => {
   }, []);
 
   useEffect(() => {
-    PspModuleData();
-    handleHEalthTracker();
-    setBarCodeData(dashboard?.program_detail?.barcode);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(props?.route?.params?.showDemo, 'showDemo');
     if (props?.route?.params?.showDemo) {
       setShowDemo(0);
     } else {
       setShowDemo(5);
     }
+  }, []);
+
+  useEffect(() => {
+    PspModuleData();
+    handleHEalthTracker();
+    setBarCodeData(dashboard?.program_detail?.barcode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pspModuleData.pdf, pspModuleData.video]);
 
   const PspModuleData = () => {
