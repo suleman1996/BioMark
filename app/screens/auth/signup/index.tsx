@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   FlatList,
   Keyboard,
@@ -41,7 +41,6 @@ import { useSelector } from 'react-redux';
 import { IC_AND_PASSPORT, NAME } from 'utils/regix';
 import { useTranslation } from 'react-i18next';
 import fonts from 'assets/fonts';
-import i18next from 'i18next';
 import { heightToDp } from 'utils/functions/responsive-dimensions';
 
 export default function Signup() {
@@ -69,6 +68,35 @@ export default function Signup() {
   const [isPickerShow, setIsPickerShow] = useState(false);
   const geoLocation = useSelector(
     (state: IAppState) => state.account.geolocation
+  );
+
+  const ResetPassSchema = useMemo(
+    () =>
+      Yup.object({
+        fName: Yup.string()
+          .required(t('userProfile.errors.firstNameRequired'))
+          .matches(NAME, t('userProfile.errors.nameFormat')),
+        lName: Yup.string()
+          .required(t('userProfile.errors.lastNameRequired'))
+          .matches(NAME, t('userProfile.errors.nameFormat')),
+
+        IcPnum: Yup.string(),
+        // .required('Please provide Identity Card/Passport Number'),
+        phone_number: Yup.string(),
+        // .matches(Regex.minNum, 'Enter valid phone number')
+        // .required('Please provide your phone number'),
+        email: Yup.string().email(t('userProfile.errors.emailFormat')),
+        // .required('Email is required'),
+        password: Yup.string()
+          .required(t('userProfile.errors.passwordRequired'))
+          .min(8)
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+            'Atleast have one digit, one captial letter and one special character.'
+          ),
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   //fuctions
@@ -487,27 +515,3 @@ export default function Signup() {
     </>
   );
 }
-
-const ResetPassSchema = Yup.object({
-  fName: Yup.string()
-    .required(i18next.t('userProfile.errors.firstNameRequired'))
-    .matches(NAME, i18next.t('userProfile.errors.nameFormat')),
-  lName: Yup.string()
-    .required(i18next.t('userProfile.errors.lastNameRequired'))
-    .matches(NAME, i18next.t('userProfile.errors.nameFormat')),
-
-  IcPnum: Yup.string(),
-  // .required('Please provide Identity Card/Passport Number'),
-  phone_number: Yup.string(),
-  // .matches(Regex.minNum, 'Enter valid phone number')
-  // .required('Please provide your phone number'),
-  email: Yup.string().email(i18next.t('userProfile.errors.emailFormat')),
-  // .required('Email is required'),
-  password: Yup.string()
-    .required(i18next.t('userProfile.errors.passwordRequired'))
-    .min(8)
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Atleast have one digit, one captial letter and one special character.'
-    ),
-});

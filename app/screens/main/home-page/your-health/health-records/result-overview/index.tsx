@@ -52,6 +52,13 @@ const Index = () => {
   });
   const [pdfReport, setPdfReport] = React.useState('');
 
+  console.log(
+    'result ',
+    route?.params?.result
+      ? route?.params?.result?.lab_id
+      : route?.params?.lab_id
+  );
+
   React.useEffect(() => {
     dispatch(
       getReduxResultOverview(
@@ -258,7 +265,7 @@ const Index = () => {
             url: `data:application/pdf;base64,${pdfReport}`,
           });
         }}
-        shouldGoBack
+        // shouldGoBack
       >
         <View style={styles.miniHeader}>
           <Text style={styles.miniHeaderText}>

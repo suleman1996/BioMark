@@ -255,11 +255,7 @@ const CovidHealthDeclarationForAllUpCommingModal = (props: Props) => {
                           showsVerticalScrollIndicator={false}
                           show={(a && b) || (!a && b)}
                         >
-                          <View
-                          // style={{ height: heightToDp(40) }}
-                          // nestedScrollEnabled
-                          // showsVerticalScrollIndicator={false}
-                          >
+                          <View>
                             <View style={styles.expendedContainer}>
                               <Text style={styles.innerTitle}>
                                 {headerTitle}
