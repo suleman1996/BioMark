@@ -54,6 +54,7 @@ const PendingResultOverview = () => {
   const pendingResult = useSelector(
     (state: IAppState) => state.home.getPendingResultOverviewData
   );
+
   React.useEffect(() => {
     dispatch(getReduxPendingResultOverview(route?.params?.result?.lab_id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,7 +113,8 @@ const PendingResultOverview = () => {
         deleteIcon
         iconName={
           items?.result?.status == 'For Deletion' ||
-          items?.result?.status == 'Format Not Supported'
+          items?.result?.status == 'Format Not Supported' ||
+          items?.result?.status == 'Error Found'
             ? 'delete'
             : undefined
         }
@@ -134,12 +136,13 @@ const PendingResultOverview = () => {
                   )}
                 </Text>
 
-                {items?.result?.status == 'Pending' ? (
+                {items?.result?.status == 'Pending' ||
+                items?.result?.status == 'Error Found' ? (
                   <View style={styles.topView3}>
                     <View style={styles.topView5}>
-                      <View style={styles.topRoundView}></View>
+                      <View style={styles.topRoundView} />
                       <Text style={styles.topViewText3}>
-                        {pendingResult?.upload?.app_tag_name}
+                        {pendingResult?.upload?.document_status_name}
                       </Text>
                     </View>
                   </View>
@@ -151,25 +154,26 @@ const PendingResultOverview = () => {
             contentContainerStyle={{ paddingBottom: 100 }}
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.topView4}>
-              <Feather
-                name={
-                  items?.result?.status == 'In Progress' ? undefined : 'info'
-                }
-                color="red"
-                size={20}
-              />
-              <Text style={styles.topViewText4}>
-                {pendingResult?.upload?.document_caption}
-              </Text>
-            </View>
-
+            {pendingResult?.upload?.document_caption && (
+              <View style={styles.topView4}>
+                <Feather
+                  name={
+                    items?.result?.status == 'In Progress' ? undefined : 'info'
+                  }
+                  color="red"
+                  size={20}
+                />
+                <Text style={styles.topViewText4}>
+                  {pendingResult?.upload?.document_caption}
+                </Text>
+              </View>
+            )}
             <View style={styles.uploadView}>
               <Text style={styles.uploadText}>
                 {t('pages.labResultOverview.youUploads')}
               </Text>
               <Text style={styles.numberText}>
-                {list?.length > 0 ? splices + 1 : '0'}
+                ({list?.length > 0 ? splices + 1 : '0'})
               </Text>
             </View>
 
@@ -260,7 +264,8 @@ const PendingResultOverview = () => {
           </ScrollView>
         </View>
         {items?.result?.status == 'For Deletion' ||
-        items?.result?.status == 'Format Not Supported' ? (
+        items?.result?.status == 'Format Not Supported' ||
+        items?.result?.status == 'Error Found' ? (
           <DeleteButtonContainer
             title={t('pages.labResultOverview.deleteUpload')}
             onPress={() => setModalVisible(true)}

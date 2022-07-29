@@ -38,7 +38,7 @@ const HealthRecord = () => {
   const { t } = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [latestResult, setLatestResult] = useState('');
-  const [latestResultItem, setLatestResultItem] = useState('');
+
   const [pastResults, setPastResults] = useState([]);
   const [checked, setChecked] = React.useState('');
   const [startDate, setStartDate] = useState();
@@ -142,16 +142,14 @@ const HealthRecord = () => {
   };
 
   const renderItem2 = ({ item }) => {
-    console.log('Check ', item);
-
-    setLatestResultItem(item);
     return (
       <TouchableOpacity
         onPress={() => {
           item?.result?.status == 'Pending' ||
           item?.result?.status == 'In Progress' ||
           item?.result?.status == 'For Deletion' ||
-          item?.result?.status == 'Format Not Supported'
+          item?.result?.status == 'Format Not Supported' ||
+          item?.result?.status == 'Error Found'
             ? navigation.navigate(SCREENS.PENDING_RESULT_OVERVIEW, {
                 result: item,
               })
@@ -270,6 +268,26 @@ const HealthRecord = () => {
               </Text>
             </View>
           </View>
+        ) : item?.result?.status == 'Error Found' ? (
+          <View style={styles.pendingView}>
+            <View style={styles.pendingView2}>
+              <View
+                style={[
+                  styles.convertedRoundView,
+                  { backgroundColor: colors.danger },
+                ]}
+              ></View>
+              <Text
+                style={{
+                  marginHorizontal: 8,
+                  fontFamily: fonts.OpenSansBold,
+                  color: 'black',
+                }}
+              >
+                {item.result.status}
+              </Text>
+            </View>
+          </View>
         ) : (
           <View style={styles.pastResultView2}>
             <Image
@@ -328,10 +346,10 @@ const HealthRecord = () => {
               onPress={() =>
                 latestResult?.result?.status == 'Converted'
                   ? navigation.navigate(SCREENS.RESULT_OVERVIEW, {
-                      result: latestResultItem,
+                      result: latestResult?.lab_id,
                     })
                   : navigation.navigate(SCREENS.RESULT_OVERVIEW, {
-                      result: latestResultItem,
+                      result: latestResult?.lab_id,
                     })
               }
               summary={latestResult?.result?.summary}

@@ -62,7 +62,6 @@ const App = () => {
     onNotification: function (notification) {
       console.log('notification', notification);
 
-      // Platform.OS === ‘android’ &&
       PushNotification.localNotification({
         channelId: 'channel-id',
         foreground: true,
@@ -119,10 +118,10 @@ const App = () => {
               <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
                 <TipProvider />
                 <BiomarkNavigation />
+                <FlashMessage floating position="top" />
               </SafeAreaView>
             </MenuProvider>
           </AuthContext.Provider>
-          <FlashMessage floating position="top" />
         </PaperProvider>
       </Provider>
     </ErrorBoundary>

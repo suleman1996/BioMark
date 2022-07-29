@@ -71,11 +71,7 @@ const AddDependantForm = (props: Props) => {
     last_name: Yup.string()
       // .matches(Regex.alphabets, 'Please enter valid last name')
       .required(i18next.t('userProfile.errors.lastNameRequired')),
-    // phone_number: Yup.string()
-    //   // .matches(Regex.minNum, 'Enter valid phone number')
-    //   .required('Please provide your phone number')
-    //   .min(min)
-    //   .max(max),
+
     email: Yup.string()
       .email(i18next.t('userProfile.errors.emailFormat'))
       .required(i18next.t('userProfile.errors.emailRequired')),

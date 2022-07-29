@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { TouchableRipple, useTheme } from 'react-native-paper';
 import { hideMessage, showMessage } from 'react-native-flash-message';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IAppState } from 'store/IAppState';
 import {
+  getBloodSugarTargetsAction,
   getReduxBloodSugarLogs,
   getReduxDashboard,
   getReduxHealthTracker,
@@ -65,6 +66,11 @@ const BloodSugar = ({ route }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getBloodSugarTargetsAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     setBloodSugarTracker((prev: any) => ({
       ...prev,
       data_value: mgMmolConversion(
@@ -78,6 +84,7 @@ const BloodSugar = ({ route }) => {
   useEffect(() => {
     //According to Issue 76 in https://docs.google.com/spreadsheets/d/1MfJWtiXKDeaRkD7utJ51CMwg275E15NQex2VGHNc2SA/edit#gid=416167280
     //These errors was supposed to be displayed.
+
     if (
       bloodSugarTracker?.data_value &&
       bloodSugarTracker?.meal_type_id &&
@@ -107,12 +114,14 @@ const BloodSugar = ({ route }) => {
           type: 'danger',
           icon: 'warning',
         });
+        console.log('belowRange');
       } else if (+value > +range[1]) {
         showMessage({
           message: t('pages.bloodSugarInput.errors.aboveRange'),
           type: 'danger',
           icon: 'warning',
         });
+        console.log('aboveRange');
       } else {
         hideMessage();
       }
@@ -216,6 +225,7 @@ const BloodSugar = ({ route }) => {
       ) || ''
     );
   };
+
   return (
     <TitleWithBackWhiteBgLayout
       binIcon={SELECTED_BS_ID ? true : false}
